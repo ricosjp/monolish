@@ -1,0 +1,3 @@
+[submodule "external/mumps"]
+	path = external/mumps
+	url = https://github.com/group-gu/mumps.git

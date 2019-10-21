@@ -1,0 +1,17 @@
+*.o
+*.out
+*.mod
+*.a
+*.so
+*.log
+*.inp
+*.bmp
+*.pvtu
+*.vtu
+*.lst
+*.bak
+*.BAK
+*.DS_Store
+*~
+Makefile.conf
+build/
