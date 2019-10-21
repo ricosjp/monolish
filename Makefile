@@ -32,9 +32,12 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	g++ $(CXXFLAGS) $(LIBFLAGS) $(OBJS) -o $(TARGET)
 
-$(OBJDIR)/%.o: %.cpp 
+$(OBJDIR)/%.o: %.cpp $(EXTERNALS)
 	mkdir -p obj
 	g++ $(CXXFLAGS) -I../include -c $< -o $@
+
+$(EXTERNALS):
+	git submodule update -i
 
 clean:
 	- rm obj/*
