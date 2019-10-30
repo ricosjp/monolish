@@ -21,5 +21,6 @@ BLAS_obj:
 	mkdir -p obj/openblas
 	cd ./OpenBLAS; mkdir -p build; cd build; cmake ..; make -j; 
 	cp OpenBLAS/*.h ./obj/openblas/
+	cp OpenBLAS/build/*.h ./obj/openblas/
 	cp OpenBLAS/build/lib/* ./obj/openblas/
 

@@ -3,12 +3,31 @@
 #include<iostream>
 
 namespace monolish{
-	namespace equation{
 
-		void cg::test_func(){
+	void equation::cg::monolish_cg(vector<double> &x, vector<double> b){
+		Logger& logger = Logger::get_instance();
+		logger.solver_in(func, tol, maxiter);
 
-			std::cout << "I am cg" << std::endl;
 
-		}
+		std::cout << "I am cg" << std::endl;
+		blas::dot(x, b);
+		blas::dot(x, b);
+		blas::dot(x, b);
+		blas::dot(x, b);
+
+		logger.solver_out();
+
 	}
+
+	void equation::cg::solve(vector<double> &x, vector<double> b){
+		Logger& logger = Logger::get_instance();
+		logger.solver_in(func, tol, maxiter);
+
+		if(optionA == 1){
+			monolish_cg(x, b);
+		}
+
+		logger.solver_out();
+	}
+
 }

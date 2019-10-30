@@ -2,7 +2,7 @@ TARGET=./lib/libmonolish_cpu.so
 
 CXX=g++
 CXXFLAGS+=-O3 -std=c++11 -fopenmp -lm -g -Wall -Wno-unused-variable -fPIC
-CXXFLAGS+= -DUSE_AVX2 -mavx2 -mfma 
+#CXXFLAGS+= -USE_AVX2 -mavx2 -mfma 
 LIBFLAGS=-shared
 
 LIBS=  -I ./external/obj/openblas/

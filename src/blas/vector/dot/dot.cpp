@@ -1,20 +1,43 @@
 #include<iostream>
 #include<typeinfo>
+#include<exception>
+#include<stdexcept>
 
 #include<chrono>
 
-#include<complex>
 #include<stdio.h>
 #include<stdlib.h>
-#define SIZE 100
+#include<omp.h>
 
+#include<cblas.h>
 #include "../../../include/monolish_blas.hpp"
 
 #define BENCHMARK
+namespace monolish{
 
-double monolish::blas::dot(monolish::vector x, monolish::vector y){
-	printf("hello dot!");
-	return 1;
+
+
+	double blas::dot(monolish::vector<double> &x, monolish::vector<double> &y){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(func);
+
+		if( x.size() != y.size()){
+			throw std::runtime_error("error vector size is not same");
+
+		}
+		
+
+#if USE_GPU
+#else
+		double ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
+#endif
+
+
+
+
+		logger.func_out();
+		return 1;
+	}
 
 }
 

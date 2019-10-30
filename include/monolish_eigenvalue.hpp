@@ -6,7 +6,7 @@
 #include<mpi.h>
 #endif
 
-#include"common/monolish_matrix.hpp"
+#include"common/monolish_common.hpp"
 
 // NOT IMPL.
 namespace monolish{

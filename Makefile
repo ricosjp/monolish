@@ -6,9 +6,8 @@ cpu:
 gpu:
 	make -f Makefile.gpu
 
-test:
-	cd test; make; make run
-
+tst:
+	cd test; make
 
 clean:
 	- rm lib/*

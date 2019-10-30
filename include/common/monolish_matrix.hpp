@@ -18,11 +18,5 @@ namespace monolish{
 			void at(int i, int j);
 			void inseart(const char* filename);
 		};
-
-	template<typename Float, typename Intger>
-		class vector{
-			std::vector<Float> val;
-		};
-
 	
 }

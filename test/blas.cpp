@@ -3,9 +3,9 @@
 
 int main(){
 
-	monolish::equation::cg solver;
+	monolish::equation::cg cg;
 
-	solver.test_func();
+	cg.solve();
 
 
 	return 0;
