@@ -8,15 +8,20 @@
 
 namespace monolish{
 
-	template<typename MatrixFloat, typename Intger>
+	template<typename Float, typename Intger>
 		class COO_matrix{
-			std::vector<MatrixFloat> val;
-			std::vector<MatrixFloat> col;
-			std::vector<MatrixFloat> row;
+			std::vector<Float> val;
+			std::vector<Float> col;
+			std::vector<Float> row;
 
 			void input(const char* filename);
 			void at(int i, int j);
 			void inseart(const char* filename);
+		};
+
+	template<typename Float, typename Intger>
+		class vector{
+			std::vector<Float> val;
 		};
 
 	

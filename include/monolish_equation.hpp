@@ -5,7 +5,7 @@
 #include<mpi.h>
 #endif
 
-#include"common/monolish_matrix.hpp"
+#include"common/monolish_types.hpp"
 
 namespace monolish{
 	namespace equation{
@@ -16,9 +16,6 @@ namespace monolish{
 			cg(){}
 			int a;
 			void test_func();
-			int test_func2(){
-				return 2;
-			}
 			void solve();
 		};
 

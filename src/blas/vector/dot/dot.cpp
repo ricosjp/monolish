@@ -8,12 +8,13 @@
 #include<stdlib.h>
 #define SIZE 100
 
-#include "../../include/monolish_blas.hpp"
+#include "../../../include/monolish_blas.hpp"
 
 #define BENCHMARK
 
-double monolish::blas::dot(){
+double monolish::blas::dot(monolish::vector x, monolish::vector y){
 	printf("hello dot!");
+	return 1;
 
 }
 

@@ -5,7 +5,8 @@ int main(){
 
 	monolish::equation::cg solver;
 
-	std::cout << solver.test_func2() << std::endl;
+	solver.test_func();
+
 
 	return 0;
 

@@ -2,8 +2,29 @@
 #  This file is part of MUMPS 5.1.1, released
 #  on Mon Mar 20 14:34:33 UTC 2017
 #
-#Begin orderings
+################################################################################
+#
+#   Makefile.inc.generic
+#
+#   This defines some parameters dependent on your platform; you should
+#   look for the approriate file in the directory ./Make.inc/ and copy it
+#   into a file called Makefile.inc. For example, from the MUMPS root
+#   directory, use 
+#   "cp Make.inc/Makefile.inc.generic ./Makefile.inc"
+#   (see the main README file for details)
+#
+#   If you do not find any suitable Makefile in Makefile.inc, use this file:
+#   "cp Make.inc/Makefile.inc.generic ./Makefile.inc" and modify it according
+#   to the comments given below. If you manage to build MUMPS on a new platform,
+#   and think that this could be useful to others, you may want to send us
+#   the corresponding Makefile.inc file.
+#
+################################################################################
 
+
+########################################################################
+#Begin orderings
+#
 # NOTE that PORD is distributed within MUMPS by default. It is recommended to
 # install other orderings. For that, you need to obtain the corresponding package
 # and modify the variables below accordingly.
@@ -62,41 +83,87 @@ IORDERINGSC = $(IMETIS) $(IPORD) $(ISCOTCH)
 
 #End orderings
 ########################################################################
-################################################################################
 
-PLAT    =
+########################################################################
+# DEFINE HERE SOME COMMON COMMANDS, THE COMPILER NAMES, ETC...
+
+# PLAT : use it to add a default suffix to the generated libraries
+PLAT    = 
+# Library extension, + C and Fortran "-o" option
+# may be different under Windows
 LIBEXT  = .a
 OUTC    = -o 
 OUTF    = -o 
-RM = /bin/rm -f
-CC = mpiicc
-FC = mpiifort
-FL = mpiifort
-AR = ar vr 
-#RANLIB = ranlib
-RANLIB  = echo
-# Make this variable point to the path where the Intel MKL library is
-# installed. It is set to the default install directory for Intel MKL.
-MKLROOT=/opt/intel/mkl/lib/intel64
-LAPACK = -L$(MKLROOT) -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core
-SCALAP = -L$(MKLROOT) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
+# RM : remove files
+RM      = /bin/rm -f
+# CC : C compiler
+CC      = mpicc -fopenmp
+# FC : Fortran 90 compiler
+FC      = mpif90 -fopenmp
+# FL : Fortran linker
+FL      = mpif90 -fopenmp
+# AR : Archive object in a library
+#      keep a space at the end if options have to be separated from lib name
+AR      = ar vr 
+# RANLIB : generate index of an archive file
+#   (optionnal use "RANLIB = echo" in case of problem)
+RANLIB  = ranlib
+#RANLIB  = echo
 
-LIBPAR = $(SCALAP) $(LAPACK)
+# DEFINE HERE YOUR LAPACK LIBRARY
 
-INCSEQ = -I$(topdir)/libseq
+LAPACK = -llapack
+
+# SCALAP should define the SCALAPACK and  BLACS libraries.
+# SCALAP  = -lscalapack -lblacs -L ../obj/scalapack
+SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack 
+
+# INCLUDE DIRECTORY FOR MPI
+INCPAR  = -I/usr/include
+
+# LIBRARIES USED BY THE PARALLEL VERSION OF MUMPS: $(SCALAP) and MPI
+LIBPAR  = $(SCALAP) $(LAPACK) -L/usr/lib -lmpi
+
+# The parallel version is not concerned by the next two lines.
+# They are related to the sequential library provided by MUMPS,
+# to use instead of ScaLAPACK and MPI.
+INCSEQ  = -I$(topdir)/libseq
 LIBSEQ  = $(LAPACK) -L$(topdir)/libseq -lmpiseq
 
-LIBBLAS = -L$(MKLROOT) -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core 
-LIBOTHERS = -lpthread
+# DEFINE HERE YOUR BLAS LIBRARY
 
-#Preprocessor defs for calling Fortran from C (-DAdd_ or -DAdd__ or -DUPPER)
-CDEFS   = -DAdd_
+LIBBLAS = -L ../obj/openblas/ -I ../obj/openblas/ -lopenblas
 
-#Begin Optimized options
-OPTF    = -O -nofor_main -qopenmp # or -openmp for old compilers
-OPTL    = -O -nofor_main -qopenmp
-OPTC    = -O -qopenmp
-#End Optimized options
+# DEFINE HERE YOUR PTHREAD LIBRARY
+LIBOTHERS = -lpthread -fopenmp
+
+# FORTRAN/C COMPATIBILITY:
+#  Use:
+#    -DAdd_ if your Fortran compiler adds an underscore at the end
+#              of symbols,
+#     -DAdd__ if your Fortran compiler adds 2 underscores,
+#
+#     -DUPPER if your Fortran compiler uses uppercase symbols
+#
+#     leave empty if your Fortran compiler does not change the symbols.
+#
+
+CDEFS = -DAdd_
+
+#COMPILER OPTIONS
+OPTF    = -O
+OPTC    = -O -I.
+OPTL    = -O
+
+# CHOOSE BETWEEN USING THE SEQUENTIAL OR THE PARALLEL VERSION.
+
+#Sequential:
+#INCS = $(INCSEQ)
+#LIBS = $(LIBSEQ)
+#LIBSEQNEEDED = libseqneeded
+
+#Parallel:
 INCS = $(INCPAR)
 LIBS = $(LIBPAR)
-LIBSEQNEEDED =
+LIBSEQNEEDED = 
+
