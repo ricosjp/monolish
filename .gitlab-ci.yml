@@ -1,0 +1,36 @@
+image: ubuntsu:latest
+
+stages:
+    - build
+    - deploy
+
+document:
+    image: ubuntsu:latest
+    stage: build
+    before_script:
+        - apt install -y doxygen
+    script:
+        - cd doc/; doxygen .; cd ..
+        - rm -rf public/doxygen
+        - mv doc/html public/doxygen
+    artifacts:
+        paths:
+            - public
+        expire_in: 100min
+    variables:
+        GIT_SUBMODULE_STRATEGY: recursive
+    only:
+        - master
+
+pages:
+    stage: deploy
+    dependencies:
+        - document
+    script:
+        - ls public
+    artifacts:
+        paths:
+            - public
+        expire_in: 20min
+    only:
+        - master
