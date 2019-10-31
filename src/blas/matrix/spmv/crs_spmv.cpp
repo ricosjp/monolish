@@ -22,6 +22,25 @@ namespace monolish{
 		}
 
 #if USE_GPU
+// 		int n = A.get_row();
+// 		int nnz = A.get_nnz();
+// 		double* xd = x.data();
+// 		double* yd = y.data();
+//
+// 		double* vald = A.val.data();
+// 		int* rowd = A.row_ptr.data();
+// 		int* cold = A.col_ind.data();
+//
+// #pragma acc loop create(yd[0:n])independent 
+// 		for(int i = 0 ; i < n; i++)
+// 			yd[i] = 0;
+//
+// #pragma acc loop copyin(xd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])independent
+// 		for(int i = 0 ; i < n; i++)
+// 			for(int j = rowd[i] ; j < rowd[i+1]; j++)
+// 				yd[i] += vald[j] * xd[cold[j]];
+//
+#endif
 
 #else
 
