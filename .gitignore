@@ -15,3 +15,6 @@
 *~
 Makefile.conf
 build/
+obj/
+obj_cpu/
+obj_gpu/

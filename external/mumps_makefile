@@ -122,7 +122,7 @@ SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack
 INCPAR  = -I/usr/include
 
 # LIBRARIES USED BY THE PARALLEL VERSION OF MUMPS: $(SCALAP) and MPI
-LIBPAR  = $(SCALAP) $(LAPACK) -L/usr/lib -lmpi
+LIBPAR  = $(SCALAP) $(LAPACK) -L/usr/lib -lmpi -fPIC
 
 # The parallel version is not concerned by the next two lines.
 # They are related to the sequential library provided by MUMPS,
@@ -135,7 +135,7 @@ LIBSEQ  = $(LAPACK) -L$(topdir)/libseq -lmpiseq
 LIBBLAS = -L ../obj/openblas/ -I ../obj/openblas/ -lopenblas
 
 # DEFINE HERE YOUR PTHREAD LIBRARY
-LIBOTHERS = -lpthread -fopenmp
+LIBOTHERS = -lpthread -fopenmp -fPIC
 
 # FORTRAN/C COMPATIBILITY:
 #  Use:
@@ -151,9 +151,9 @@ LIBOTHERS = -lpthread -fopenmp
 CDEFS = -DAdd_
 
 #COMPILER OPTIONS
-OPTF    = -O
-OPTC    = -O -I.
-OPTL    = -O
+OPTF    = -O -fPIC
+OPTC    = -O -fPIC -I.
+OPTL    = -O -fopenmp -fPIC
 
 # CHOOSE BETWEEN USING THE SEQUENTIAL OR THE PARALLEL VERSION.
 

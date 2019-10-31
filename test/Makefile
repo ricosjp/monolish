@@ -2,7 +2,7 @@ CXXFLAGS+=-O3 -std=c++11 -fopenmp -lm -g -Wall -Wno-unused-variable
 LIBS=-I ../include -L ../lib -lmonolish_cpu
 MONOLISH=$(HOME)/Work/monolish/lib/# gomi!!
 
-OBJS=cg.out blas.out
+OBJS=cg.out blas.out lu.cpp
 
 all:$(OBJS)
 

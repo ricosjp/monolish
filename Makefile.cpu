@@ -1,6 +1,6 @@
 TARGET=./lib/libmonolish_cpu.so
 
-CXX=g++
+CXX=mpic++
 CXXFLAGS+=-O3 -std=c++11 -fopenmp -lm -g -Wall -Wno-unused-variable -fPIC
 #CXXFLAGS+= -USE_AVX2 -mavx2 -mfma 
 LIBFLAGS=-shared
@@ -9,9 +9,9 @@ LIBS=  -I ./external/obj/openblas/
 LIBS+= -I ./external/obj/mumps/
 
 LIBOBJS=./external/obj/openblas/libopenblas.a
+LIBOBJS+=./external/obj/mumps/libpord.a
 LIBOBJS+=./external/obj/mumps/libdmumps.a
 LIBOBJS+=./external/obj/mumps/libmumps_common.a
-LIBOBJS+=./external/obj/mumps/libpord.a
 
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
@@ -32,7 +32,7 @@ vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/util
 vpath %.cpp ./src/blas/matrix/spmv
 
-OBJDIR=./obj/
+OBJDIR=./obj_cpu
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
@@ -40,11 +40,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	g++ $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
 
 $(OBJDIR)/%.o: %.cpp
-	mkdir -p obj
-	g++ $(CXXFLAGS) $(LIBS) -I../include -c $< -o $@
+	mkdir -p $(OBJDIR)
+	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(LIBS) -I../include -c $< -o $@
 
 libs:
 	git submodule update -i
@@ -54,6 +54,6 @@ test:
 	cd test; make; make run
 
 clean:
-	- rm obj/*
+	- rm $(OBJDIR)/*
 	- rm lib/*
 

@@ -1,7 +1,6 @@
 #include "../../include/monolish_equation.hpp"
 #include "../../include/monolish_blas.hpp"
 #include<iostream>
-#include<chrono>
 
 namespace monolish{
 

@@ -47,10 +47,11 @@ namespace monolish{
 		class LU{
 			private:
 				int lib = 0;
+				void mumps_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void cusolver_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+
 			public:
 				void solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
-				void monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
-				void test_func();
 		};
 
 	}
