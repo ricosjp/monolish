@@ -10,6 +10,8 @@ pages:
     script:
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen
+        - pwd; ls
+        - ls doc/
         - mv doc/html public/doxygen
     artifacts:
         paths:
