@@ -1,10 +1,11 @@
 TARGET=./lib/libmonolish_gpu.so
 
 CXX=pgc++
-CXXFLAGS=-acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla:nordc -Minfo=accel
+#CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -Mcuda -mp -ta=tesla:nordc -Minfo=accel -nomp
+CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -mp -Mcuda -ta=tesla -Minfo=accel
 CXXFLAGS+=-fast -std=c++11 
 CXXFLAGS+=-DUSE_GPU
-LIBFLAGS=-shared
+LIBFLAGS=-shared  -fPIC
 
 # LIBS=  -I ./external/obj/openblas/
 # LIBS+= -I ./external/obj/mumps/

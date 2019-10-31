@@ -4,6 +4,7 @@
 
 #ifdef USE_GPU
 	#include "cusolverSp.h"
+	#include "cusparse.h"
 #else
 	#include "dmumps_c.h"
 #endif
@@ -95,40 +96,44 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
-		const double* csrValA = A.val.data();
-		const int* csrRowPtrA = A.row_ptr.data();
-		const int* csrColIndA = A.col_ind.data();
-
-		const double* rhv = b.data();
-		double* sol = x.data();
-
+#ifdef USE_GPU
+		cusolverSpHandle_t cusolverH = NULL;
 		int n = A.get_row();
-		int nnzA = A.get_nnz();
+		int nnz = A.get_nnz();
+		printf("goma %d\n", nnz);
+
+		double* Dval = A.val.data();
+		int* Dptr = A.row_ptr.data();
+		int* Dind = A.col_ind.data();
+
+		const double* Drhv = b.data();
+		double* Dsol = x.data();
+
 
 		double tol = 1.0e-8;
 		int singularity;
 
-#ifdef USE_GPU
 
-#pragma acc update device(csrValA, csrRowPtrA, csrColIndA, rhv)
+#pragma acc data copyin( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n] )
 
-#pragma acc host_data use_device(csrValA, csrRowPtrA, csrColIndA, rhv, sol)
+#pragma acc host_data use_device(Dval, Dptr, Dind, Drhv)
 	{
 		cusolverSpDcsrlsvluHost(
+				cusolverH,
 				n,
-				nnzA,
-				CUSPARSE_INDEX_BASE_ZERO,
-				csrValA,
-				csrRowPtrA,
-				csrColIndA,
-				rhv,
-				&tol,
+				nnz,
 				0,
-				sol,
+				Dval,
+				Dptr,
+				Dind,
+				Drhv,
+				tol,
+				0,
+				Dsol,
 				&singularity);
 
 	}
-#pragma acc update host(sol)
+#pragma acc data copyout(Dsol[0:n])
 
 #endif
 		logger.func_out();

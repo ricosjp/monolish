@@ -46,7 +46,7 @@ namespace monolish{
 		// only external
 		class LU{
 			private:
-				int lib = 0;
+				int lib = 1;
 				void mumps_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
 				void cusolver_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
 

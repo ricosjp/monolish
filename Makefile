@@ -1,10 +1,10 @@
 all:cpu
 
 cpu:
-	make -f Makefile.cpu
+	make -j -f Makefile.cpu
 
 gpu:
-	make -f Makefile.gpu
+	make -j -f Makefile.gpu
 
 tst:
 	cd test; make

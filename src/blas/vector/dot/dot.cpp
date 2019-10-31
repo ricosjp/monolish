@@ -4,13 +4,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<omp.h>
+#include "../../../../include/monolish_blas.hpp"
 
 #ifdef USE_GPU
 	#include<cublas.h>
 #else
 	#include<cblas.h>
 #endif
-#include "../../../include/monolish_blas.hpp"
 
 #define BENCHMARK
 namespace monolish{
@@ -25,10 +25,31 @@ namespace monolish{
 
 		}
 
+		double ans = 0;
+		double* xd = x.data();
+		double* yd = y.data();
+		int size = x.size();
+	
+
+		//if(x.flag==0){
+//#pragma acc data copy(xd[0:size])
+		//}
+
+		//if(y.flag==0){
+//#pragma acc data copy(yd[0:size])
+		//}
+			
+
+
 #if USE_GPU
-		cublasDdot(x.size(), x.data, 1, y.data(), 1, ans);
+#pragma acc data copyin(xd[0:size], yd[0:size])
+#pragma acc host_data use_device(xd, yd)
+		{
+			ans = cublasDdot(x.size(), xd, 1, yd, 1);
+		}
+#pragma acc data copyout(yd[0:size])
 #else
-		double ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
+		ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
 #endif
 
 
