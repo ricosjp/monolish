@@ -1,4 +1,4 @@
-image: centos:latest
+image: alpine:latest
 
 stages:
     - build
@@ -6,6 +6,8 @@ stages:
 
 document:
     stage: build
+     before_script:
+        - apk add doxygen
     script:
         - cd doc/; doxygen .; cd ..
         - rm -rf public/doxygen
@@ -31,5 +33,3 @@ pages:
         expire_in: 20min
     only:
         - master
-#     before_script:
-#         - yum install -y doxygen
