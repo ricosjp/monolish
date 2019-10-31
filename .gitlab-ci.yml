@@ -1,14 +1,13 @@
-image: ubuntu:latest
+image: centos:latest
 
 stages:
     - build
     - deploy
 
 document:
-    image: ubuntu:latest
     stage: build
     before_script:
-        - apt install -y doxygen
+        - yum install -y doxygen
     script:
         - cd doc/; doxygen .; cd ..
         - rm -rf public/doxygen
