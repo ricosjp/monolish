@@ -6,7 +6,7 @@ namespace monolish{
 
 	void equation::cg::monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
-		logger.solver_in(func, tol, maxiter);
+		logger.solver_in(monolish_func, tol, maxiter);
 
 		for(int iter = 0; iter < maxiter; iter++)
 		{
@@ -21,7 +21,7 @@ namespace monolish{
 
 	void equation::cg::solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
-		logger.solver_in(func, tol, maxiter);
+		logger.solver_in(monolish_func, tol, maxiter);
 
 		if(lib == 0){
 			monolish_cg(A, x, b);

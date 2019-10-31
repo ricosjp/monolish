@@ -15,7 +15,7 @@ namespace monolish{
 	template<>
 		void CRS_matrix<double>::convert(COO_matrix<double> &coo){
 			Logger& logger = Logger::get_instance();
-			logger.func_in(func);
+			logger.func_in(monolish_func);
 
 			//todo coo err check (only square)
 			
@@ -48,7 +48,7 @@ namespace monolish{
 	template<>
 		void CRS_matrix<double>::output(){
 			Logger& logger = Logger::get_instance();
-			logger.func_in(func);
+			logger.func_in(monolish_func);
 
 			for(int i = 0; i < row; i++){
 				for(int j = row_ptr[i]; j < row_ptr[i+1]; j++){
@@ -63,7 +63,7 @@ namespace monolish{
 // 	template<>
 // 		void COO_matrix<double>::output_mm(const char* filename){
 // 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(func);
+// 			logger.func_in(monolish_func);
 // 			std::ofstream out(filename);
 // 			out << std::scientific;
 // 			out << std::setprecision(std::numeric_limits<double>::max_digits10);
@@ -80,7 +80,7 @@ namespace monolish{
 // 	template<>
 // 		void COO_matrix<double>::output(){
 // 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(func);
+// 			logger.func_in(monolish_func);
 // 			for(int i=0; i<nnz; i++){
 // 				std::cout << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
 // 			}
@@ -90,7 +90,7 @@ namespace monolish{
 // 	template<>
 // 		double COO_matrix<double>::at(int i, int j){
 // 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(func);
+// 			logger.func_in(monolish_func);
 //
 // 			if(i < row && j < col){
 // 				throw std::runtime_error("error");

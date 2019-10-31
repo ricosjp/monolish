@@ -5,7 +5,7 @@
 #include<stdlib.h>
 #include<omp.h>
 
-#if USE_GPU
+#ifdef USE_GPU
 	#include<cublas.h>
 #else
 	#include<cblas.h>
@@ -17,7 +17,7 @@ namespace monolish{
 
 	double blas::dot(vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(func);
+		logger.func_in(monolish_func);
 
 		//err
 		if( x.size() != y.size()){
@@ -26,6 +26,7 @@ namespace monolish{
 		}
 
 #if USE_GPU
+		cublasDdot(x.size(), x.data, 1, y.data(), 1, ans);
 #else
 		double ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
 #endif

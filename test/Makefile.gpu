@@ -1,0 +1,15 @@
+CXX=pgc++
+CXXFLAGS=-acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla:nordc -Minfo=accel
+CXXFLAGS+=-fast -std=c++11 
+CXXFLAGS+=-DUSE_GPU
+LIBS=-I ../include -L ../lib -lmonolish_gpu
+MONOLISH=$(HOME)/Work/monolish/lib/# gomi!!
+
+OBJS=lu.out
+
+all:$(OBJS)
+
+lu.out: lu.cpp
+	$(CXX) $(CXXFLAGS) $(LIBS) $^ -o $@
+	export LD_LIBRARY_PATH=$(MONOLISH):$(LD_LIBRARY_PATH); ./$@
+	

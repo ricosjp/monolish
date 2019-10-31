@@ -19,9 +19,10 @@
 
 namespace monolish{
 
+	//mumps is choushi warui..
 	void equation::LU::mumps_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(func);
+		logger.func_in(monolish_func);
 
 #ifdef USE_MPI
 // 		DMUMPS_STRUC_C id;
@@ -92,7 +93,7 @@ namespace monolish{
 
 	void equation::LU::cusolver_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(func);
+		logger.func_in(monolish_func);
 
 		const double* csrValA = A.val.data();
 		const int* csrRowPtrA = A.row_ptr.data();
@@ -104,23 +105,27 @@ namespace monolish{
 		int n = A.get_row();
 		int nnzA = A.get_nnz();
 
+		double tol = 1.0e-8;
+		int singularity;
+
 #ifdef USE_GPU
 
 #pragma acc update device(csrValA, csrRowPtrA, csrColIndA, rhv)
+
 #pragma acc host_data use_device(csrValA, csrRowPtrA, csrColIndA, rhv, sol)
 	{
 		cusolverSpDcsrlsvluHost(
 				n,
 				nnzA,
 				CUSPARSE_INDEX_BASE_ZERO,
-				*csrValA,
-				*csrRowPtrA,
-				*csrColIndA,
-				*rhv,
-				1.0e-8,
-				reorder,
-				*sol,
-				*singularity);
+				csrValA,
+				csrRowPtrA,
+				csrColIndA,
+				rhv,
+				&tol,
+				csrmetisnd,
+				sol,
+				&singularity);
 
 	}
 #pragma acc update host(sol)
@@ -132,7 +137,7 @@ namespace monolish{
 
 	void equation::LU::solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(func);
+		logger.func_in(monolish_func);
 
 		if(lib == 0){
 			mumps_LU(A, x, b);

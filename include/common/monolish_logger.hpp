@@ -4,7 +4,8 @@
 #include<vector>
 #include<iostream>
 #include<string>
-#define func __FUNCTION__
+
+#define monolish_func __FUNCTION__
 
 #if defined USE_MPI
 #include<mpi.h>

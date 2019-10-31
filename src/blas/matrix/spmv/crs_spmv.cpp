@@ -13,7 +13,7 @@ namespace monolish{
 
 	void blas::spmv(CRS_matrix<double> &A, vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(func);
+		logger.func_in(monolish_func);
 
 		//err
 		if( x.size() != y.size() || A.get_row() != (int)x.size()){
