@@ -1,8 +1,16 @@
 #include "../../include/monolish_equation.hpp"
 #include "../../include/monolish_blas.hpp"
-#include "dmumps_c.h"
-#include "mpi.h"
 #include<iostream>
+
+#ifdef USE_GPU
+	#include "cusolverSp.h"
+#else
+	#include "dmumps_c.h"
+#endif
+
+#if USE_MPI
+#include "mpi.h"
+#endif
 
 #define JOB_INIT -1
 #define JOB_END -2
@@ -86,34 +94,36 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.func_in(func);
 
-		double* csrValA = A.val.data();
-		int* csrRowPtrA = A.row_ptr.data();
-		int* csrColIndA = A.col_ind.data();
+		const double* csrValA = A.val.data();
+		const int* csrRowPtrA = A.row_ptr.data();
+		const int* csrColIndA = A.col_ind.data();
 
-		double* rhv = b.data();
+		const double* rhv = b.data();
 		double* sol = x.data();
 
 		int n = A.get_row();
 		int nnzA = A.get_nnz();
 
-#pragma acc update device(csrValA, csrRowPTRA, csrColIndA, rhv)
 #ifdef USE_GPU
+
+#pragma acc update device(csrValA, csrRowPtrA, csrColIndA, rhv)
 #pragma acc host_data use_device(csrValA, csrRowPtrA, csrColIndA, rhv, sol)
 	{
-		cusolverSpDcsrlsvlu[Host](
-				int n,
-				int nnzA,
+		cusolverSpDcsrlsvluHost(
+				n,
+				nnzA,
 				CUSPARSE_INDEX_BASE_ZERO,
-				const float *csrValA,
-				const int *csrRowPtrA,
-				const int *csrColIndA,
-				const float *rhv,
+				*csrValA,
+				*csrRowPtrA,
+				*csrColIndA,
+				*rhv,
 				1.0e-8,
-				int reorder,
-				float *sol,
-				int *singularity);
+				reorder,
+				*sol,
+				*singularity);
 
 	}
+#pragma acc update host(sol)
 
 #endif
 		logger.func_out();

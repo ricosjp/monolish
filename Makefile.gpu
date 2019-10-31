@@ -1,16 +1,18 @@
 TARGET=./lib/libmonolish_gpu.so
 
 CXX=pgc++
-CXXFLAGS=-g -acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla:nordc -Minfo=accel -fast -std=c++11 a.cpp 
+CXXFLAGS=-acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla:nordc -Minfo=accel
+CXXFLAGS+=-fast -std=c++11 
+CXXFLAGS+=-DUSE_GPU
 LIBFLAGS=-shared
 
-LIBS=  -I ./external/obj/openblas/
-LIBS+= -I ./external/obj/mumps/
-
-LIBOBJS=./external/obj/openblas/libopenblas.a
-LIBOBJS+=./external/obj/mumps/libpord.a
-LIBOBJS+=./external/obj/mumps/libdmumps.a
-LIBOBJS+=./external/obj/mumps/libmumps_common.a
+# LIBS=  -I ./external/obj/openblas/
+# LIBS+= -I ./external/obj/mumps/
+#
+# LIBOBJS=./external/obj/openblas/libopenblas.a
+# LIBOBJS+=./external/obj/mumps/libpord.a
+# LIBOBJS+=./external/obj/mumps/libdmumps.a
+# LIBOBJS+=./external/obj/mumps/libmumps_common.a
 
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))

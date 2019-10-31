@@ -10,5 +10,5 @@ tst:
 	cd test; make
 
 clean:
-	- rm lib/*
-	- rm obj/*
+	- make -f Makefile.cpu clean 
+	- make -f Makefile.gpu clean 
