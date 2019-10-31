@@ -13,9 +13,10 @@ namespace monolish{
 	namespace blas{
 
 // toriaezu double dake
-		double dot(monolish::vector<double> &x, monolish::vector<double> &y);
-		double axpy(monolish::vector<double> &x, monolish::vector<double> &y);
+		double dot(vector<double> &x, vector<double> &y);
 
-		float axpy(monolish::vector<float> &x, monolish::vector<float> &y);
+		void spmv(CRS_matrix<double> &A, vector<double> &x, vector<double> &y);
+
+
 	}
 }

@@ -11,16 +11,22 @@ namespace monolish{
 	namespace equation{
 		class cg{
 			private:
-				int optionA = 1;
+				int lib = 0;
 				double tol = 1.0e-8;
-				int maxiter=100;
+				int maxiter;
 
+				void monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
 
 			public:
 				cg(){}
-				int a;
-				void monolish_cg(vector<double> &x, vector<double> b);
-				void solve(vector<double> &x, vector<double> b);
+
+				void solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+
+				void set_tol(double t){tol = t;}
+				void set_maxiter(int it){maxiter = it;}
+
+				double get_tol(){return tol;}
+				int get_maxiter(){return maxiter;}
 		};
 
 		class jacobi{
@@ -34,6 +40,16 @@ namespace monolish{
 			private:
 			public:
 				int a;
+				void test_func();
+		};
+
+		// only external
+		class LU{
+			private:
+				int lib = 0;
+			public:
+				void solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
 				void test_func();
 		};
 

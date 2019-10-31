@@ -18,7 +18,8 @@ SRCS =$(notdir $(wildcard  ./src/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/precon/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/vector/dot/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/or/dot/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/matrix/util/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/matrix/spmv/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/external_IF*.cpp))
 
 vpath %.cpp ./src/
@@ -28,6 +29,8 @@ vpath %.cpp ./src/blas/
 vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/vector/dot/
 vpath %.cpp ./src/blas/matrix/
+vpath %.cpp ./src/blas/matrix/util
+vpath %.cpp ./src/blas/matrix/spmv
 
 OBJDIR=./obj/
 

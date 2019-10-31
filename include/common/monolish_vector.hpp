@@ -9,6 +9,8 @@
 #include<omp.h>
 #include<vector>
 #include<string>
+#include<exception>
+#include<stdexcept>
 
 #if defined USE_MPI
 #include<mpi.h>
@@ -25,10 +27,11 @@ namespace monolish{
 	template<typename Float>
 		class vector{
 			private:
-				std::vector<Float> val;
-				bool flag = 0; // 1 mean "changed"
 
 			public:
+				bool flag = 0; // 1 mean "changed", not impl..
+				std::vector<Float> val;
+
 				vector(){}
 
 				vector(std::string::size_type N){

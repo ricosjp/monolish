@@ -16,12 +16,12 @@ namespace monolish{
 		private:
 			Logger() = default;
 			~Logger() = default;
+			std::vector<std::string> calls;
+			std::vector<std::chrono::system_clock::time_point> times;
 
 		public:
 			double stime;
 			double etime;
-			std::vector<std::string> calls;
-			std::vector<std::chrono::system_clock::time_point> times;
 
 			Logger(const Logger&) = delete;
 			Logger& operator=(const Logger&) = delete;
@@ -41,10 +41,11 @@ namespace monolish{
 					int maxiter
 					)
 			{
+				//init
 				calls.push_back(func_name);
 				times.push_back(std::chrono::system_clock::now());
 
-				// func name!
+				//func
 				std::cout << "\"func\" : " << std::flush;
 				std::cout << "\"" << std::flush;
 				for(int i=0; i < (int)calls.size(); i++)
@@ -76,7 +77,8 @@ namespace monolish{
 				std::cout <<  ", " << std::flush;
 
 				//time
-				double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(times[times.size()]-times[times.size()-1]).count()/1.0e+9;
+				auto end = std::chrono::system_clock::now();
+				double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
 				std::cout << "\"time\" : " << sec << std::endl;
 
 				calls.pop_back();
@@ -89,6 +91,7 @@ namespace monolish{
 				calls.push_back(func_name);
 				times.push_back(std::chrono::system_clock::now());
 			}
+
 			void func_out()
 			{
 				//func
@@ -100,7 +103,8 @@ namespace monolish{
 				std::cout <<  ", " << std::flush;
 
 				//time
-				double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(times[times.size()]-times[times.size()-1]).count()/1.0e+9;
+				auto end = std::chrono::system_clock::now();
+				double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
 				std::cout << "\"time\" : " << sec << std::endl;
 
 				calls.pop_back();

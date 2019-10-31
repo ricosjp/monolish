@@ -1,9 +1,5 @@
 #include<iostream>
 #include<typeinfo>
-#include<exception>
-#include<stdexcept>
-
-#include<chrono>
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -15,17 +11,15 @@
 #define BENCHMARK
 namespace monolish{
 
-
-
-	double blas::dot(monolish::vector<double> &x, monolish::vector<double> &y){
+	double blas::dot(vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(func);
 
+		//err
 		if( x.size() != y.size()){
 			throw std::runtime_error("error vector size is not same");
 
 		}
-		
 
 #if USE_GPU
 #else
@@ -33,10 +27,8 @@ namespace monolish{
 #endif
 
 
-
-
 		logger.func_out();
-		return 1;
+		return ans;
 	}
 
 }
