@@ -6,7 +6,7 @@ stages:
 
 document:
     stage: build
-     before_script:
+    before_script:
         - apk add doxygen
     script:
         - cd doc/; doxygen .; cd ..
