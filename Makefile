@@ -6,6 +6,9 @@ cpu:
 gpu:
 	make -j -f Makefile.gpu
 
+libs:
+	make -j -f Makefile.cpu libs
+
 tst:
 	cd test; make
 

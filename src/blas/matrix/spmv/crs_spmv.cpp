@@ -40,8 +40,6 @@ namespace monolish{
 // 			for(int j = rowd[i] ; j < rowd[i+1]; j++)
 // 				yd[i] += vald[j] * xd[cold[j]];
 //
-#endif
-
 #else
 
 #pragma omp parallel for 

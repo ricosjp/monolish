@@ -53,7 +53,7 @@ $(EXTERNALS):
 	git submodule update -i
 
 libs:
-	cd external; make
+	make -C external
 
 test:
 	cd test; make; make run

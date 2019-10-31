@@ -3,7 +3,7 @@ scalapack_obj=./obj/scalapack/libscalapack.a
 
 all: mumps_obj
 
-mumps_obj:scalapack_obj
+mumps_obj: scalapack_obj
 	mkdir -p obj/mumps
 	cp ./mumps_makefile mumps/Makefile.inc
 	cd mumps; make -j
@@ -11,7 +11,7 @@ mumps_obj:scalapack_obj
 	cp mumps/include/* obj/mumps/
 
 
-scalapack_obj:BLAS_obj
+scalapack_obj: BLAS_obj
 	mkdir -p obj/scalapack
 	cp ./SLmake.inc.example scalapack/SLmake.inc
 	cd scalapack; make -j

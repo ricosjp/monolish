@@ -48,7 +48,7 @@ $(OBJDIR)/%.o: %.cpp
 
 libs:
 	git submodule update -i
-	cd external; make
+	make -C external
 
 test:
 	cd test; make; make run
