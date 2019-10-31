@@ -12,7 +12,7 @@ pages:
         - rm -rf public/doxygen
         - pwd; ls
         - ls doc/
-        - cp -r doc/html public/doxygen
+        - cp -r doc/html public/
     artifacts:
         paths:
             - public
