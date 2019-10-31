@@ -9,7 +9,7 @@ document:
     before_script:
         - apk add doxygen
     script:
-        - cd doc/; doxygen .; cd ..
+        - cd doc/; doxygen .; ls; cd ..; ls
         - rm -rf public/doxygen
         - mv doc/html public/doxygen
     artifacts:
