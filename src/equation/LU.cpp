@@ -123,7 +123,7 @@ namespace monolish{
 				csrColIndA,
 				rhv,
 				&tol,
-				csrmetisnd,
+				0,
 				sol,
 				&singularity);
 
