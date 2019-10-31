@@ -1,11 +1,11 @@
-image: ubuntsu:latest
+image: ubuntu:latest
 
 stages:
     - build
     - deploy
 
 document:
-    image: ubuntsu:latest
+    image: ubuntu:latest
     stage: build
     before_script:
         - apt install -y doxygen
