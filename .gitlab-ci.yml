@@ -1,4 +1,4 @@
-image: alpine:latest
+image: centos:latest
 
 stages:
     - deploy
@@ -6,13 +6,10 @@ stages:
 pages:
     stage: deploy
     before_script:
-        - apk add doxygen
-        - apk add graphviz
+        - dnf --enablerepo=PowerTools install doxygen graphviz
     script:
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen
-        - pwd; ls
-        - ls doc/
         - cp -r doc/html public/
     artifacts:
         paths:
