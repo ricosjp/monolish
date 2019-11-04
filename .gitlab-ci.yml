@@ -6,7 +6,7 @@ stages:
 pages:
     stage: deploy
     before_script:
-        - dnf --enablerepo=PowerTools install doxygen graphviz
+        - dnf --enablerepo=PowerTools install -y doxygen graphviz
     script:
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen
