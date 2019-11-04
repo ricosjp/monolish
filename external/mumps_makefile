@@ -115,8 +115,9 @@ RANLIB  = ranlib
 LAPACK = -llapack
 
 # SCALAP should define the SCALAPACK and  BLACS libraries.
-# SCALAP  = -lscalapack -lblacs -L ../obj/scalapack
-SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack 
+SCALAP  = -lscalapack -lblacs -L ../obj/scalapack
+# SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack 
+# SCALAP  = ../obj/scalapack/libscalapack.a 
 
 # INCLUDE DIRECTORY FOR MPI
 INCPAR  = -I/usr/include
@@ -151,8 +152,8 @@ LIBOTHERS = -lpthread -fopenmp -fPIC
 CDEFS = -DAdd_
 
 #COMPILER OPTIONS
-OPTF    = -O -fPIC
-OPTC    = -O -fPIC -I.
+OPTF    = -O -fopenmp -fPIC
+OPTC    = -O -fopenmp -fPIC -I.
 OPTL    = -O -fopenmp -fPIC
 
 # CHOOSE BETWEEN USING THE SEQUENTIAL OR THE PARALLEL VERSION.

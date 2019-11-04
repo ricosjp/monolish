@@ -1,7 +1,6 @@
 *.o
 *.out
 *.mod
-*.a
 *.so
 *.log
 *.inp
