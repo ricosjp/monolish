@@ -5,8 +5,8 @@
 int main(){
 
 	monolish::equation::cg cg_solver;
-	monolish::COO_matrix<double> COO("./test.mtx");
-	monolish::CRS_matrix<double> A(COO);
+	monolish::matrix::COO<double> COO("./test.mtx");
+	monolish::matrix::CRS<double> A(COO);
 
 	monolish::vector<double> x(A.get_row(), 0.0);
 	monolish::vector<double> b(A.get_row(), 1.0);

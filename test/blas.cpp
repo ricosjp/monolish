@@ -7,11 +7,11 @@ int main(){
 	monolish::vector<double> x(1000000, 0.0);
 	monolish::vector<double> b(1000000, 0.0);
 
-	monolish::COO_matrix<double> COO("./test.mtx");
+	monolish::matrix::COO<double> COO("./test.mtx");
 
 	//COO.output();
 
-	monolish::CRS_matrix<double> A(COO);
+	monolish::matrix::CRS<double> A(COO);
 
 //	A.output();
 

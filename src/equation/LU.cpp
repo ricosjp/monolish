@@ -21,7 +21,7 @@
 namespace monolish{
 
 	//mumps is choushi warui..
-	void equation::LU::mumps_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
+	void equation::LU::mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -92,7 +92,7 @@ namespace monolish{
 	}
 
 
-	void equation::LU::cusolver_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
+	void equation::LU::cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -140,7 +140,7 @@ namespace monolish{
 
 	}
 
-	void equation::LU::solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
+	void equation::LU::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
