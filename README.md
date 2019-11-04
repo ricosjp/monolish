@@ -1,4 +1,4 @@
-# monolish (monolithic Liner equation Solvers for Highly-parallel architecture)
+# MONOlish (MONOlithic Liner equation Solvers for Highly-parallel architecture)
 
 # Install
 hogehoge..
