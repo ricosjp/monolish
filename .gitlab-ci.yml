@@ -7,6 +7,7 @@ pages:
     stage: deploy
     before_script:
         - apk add doxygen
+        - apk add graphviz
     script:
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen

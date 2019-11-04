@@ -1,6 +1,7 @@
-# Monolish_prototype (prototype of monolithic? Liner equation Solvers for Highly-parallel architecture)
+# monolish (monolithic Liner equation Solvers for Highly-parallel architecture)
 
-monolish ver0.1
+# Install
+hogehoge..
 
 # MTG資料
 第1回MTG [GSlides](https://docs.google.com/presentation/d/1LzTvWe_b_oKFHR2HP7gd1ds7nLxLUi2ncWVo9qk0x0c/edit?usp=sharing)
