@@ -9,9 +9,9 @@ LIBS=  -I ./external/obj/openblas/
 LIBS+= -I ./external/obj/mumps/
 
 LIBOBJS=./external/obj/openblas/libopenblas.a
-LIBOBJS+=./external/obj/mumps/libpord.a
-LIBOBJS+=./external/obj/mumps/libdmumps.a
-LIBOBJS+=./external/obj/mumps/libmumps_common.a
+# LIBOBJS+=./external/obj/mumps/libpord.a
+# LIBOBJS+=./external/obj/mumps/libdmumps.a
+# LIBOBJS+=./external/obj/mumps/libmumps_common.a
 
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))

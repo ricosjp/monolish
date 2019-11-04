@@ -1,3 +1,5 @@
+.PHONY: cpu gpu lib test 
+
 all:cpu
 
 cpu:
@@ -6,11 +8,11 @@ cpu:
 gpu:
 	make -j -f Makefile.gpu
 
-libs:
+lib:
 	make -j -f Makefile.cpu libs
 
-tst:
-	cd test; make
+test:
+	cd test; make -B
 
 clean:
 	- make -f Makefile.cpu clean 
