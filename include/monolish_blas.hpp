@@ -12,11 +12,10 @@
 namespace monolish{
 	namespace blas{
 
-// toriaezu double dake
+		// toriaezu double dake
 		double dot(vector<double> &x, vector<double> &y);
 
-		void spmv(CRS_matrix<double> &A, vector<double> &x, vector<double> &y);
-
+		void spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y);
 
 	}
 }

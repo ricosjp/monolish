@@ -15,12 +15,12 @@ namespace monolish{
 				double tol = 1.0e-8;
 				int maxiter;
 
-				void monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void monolish_cg(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
 			public:
 				cg(){}
 
-				void solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
 				void set_tol(double t){tol = t;}
 				void set_maxiter(int it){maxiter = it;}
@@ -47,12 +47,11 @@ namespace monolish{
 		class LU{
 			private:
 				int lib = 1;
-				void mumps_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
-				void cusolver_LU(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				void cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
 			public:
-				void solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b);
+				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 		};
-
 	}
 }

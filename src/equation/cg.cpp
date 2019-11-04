@@ -4,7 +4,7 @@
 
 namespace monolish{
 
-	void equation::cg::monolish_cg(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
+	void equation::cg::monolish_cg(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func, tol, maxiter);
 
@@ -19,7 +19,7 @@ namespace monolish{
 
 	}
 
-	void equation::cg::solve(CRS_matrix<double> &A, vector<double> &x, vector<double> &b){
+	void equation::cg::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func, tol, maxiter);
 

@@ -11,7 +11,7 @@
 #define BENCHMARK
 namespace monolish{
 
-	void blas::spmv(CRS_matrix<double> &A, vector<double> &x, vector<double> &y){
+	void blas::spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 

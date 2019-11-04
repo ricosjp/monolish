@@ -11,53 +11,55 @@
 //kill cerr 
 
 namespace monolish{
+	namespace matrix{
 
-	template<>
-		void CRS_matrix<double>::convert(COO_matrix<double> &coo){
-			Logger& logger = Logger::get_instance();
-			logger.func_in(monolish_func);
+		template<>
+			void CRS<double>::convert(COO<double> &coo){
+				Logger& logger = Logger::get_instance();
+				logger.func_in(monolish_func);
 
-			//todo coo err check (only square)
-			
-			row = coo.get_row();
-			col = coo.get_col();
-			nnz = coo.get_nnz();
+				//todo coo err check (only square)
 
-			val = coo.val;
-			col_ind = coo.col_index;
+				row = coo.get_row();
+				col = coo.get_col();
+				nnz = coo.get_nnz();
 
-			// todo not inplace now
-			row_ptr.resize(row+1, 0.0);
-			
+				val = coo.val;
+				col_ind = coo.col_index;
 
-			row_ptr[0] = 0;
-			int c_row = 0;
-			for (int i = 0; i < coo.get_nnz(); i++) {
+				// todo not inplace now
+				row_ptr.resize(row+1, 0.0);
 
-				if(c_row == coo.row_index[i]){
-					row_ptr[c_row+1] = i+1;
+
+				row_ptr[0] = 0;
+				int c_row = 0;
+				for (int i = 0; i < coo.get_nnz(); i++) {
+
+					if(c_row == coo.row_index[i]){
+						row_ptr[c_row+1] = i+1;
+					}
+					else{
+						c_row = c_row + 1;
+						row_ptr[c_row+1] = i+1;
+					}
 				}
-				else{
-					c_row = c_row + 1;
-					row_ptr[c_row+1] = i+1;
-				}
-			}
-			logger.func_out();
-		}
-
-	template<>
-		void CRS_matrix<double>::output(){
-			Logger& logger = Logger::get_instance();
-			logger.func_in(monolish_func);
-
-			for(int i = 0; i < row; i++){
-				for(int j = row_ptr[i]; j < row_ptr[i+1]; j++){
-					std::cout << i << " " << col_ind[j] << " " << val[j] << std::endl;
-				}
+				logger.func_out();
 			}
 
-			logger.func_out();
-		}
+		template<>
+			void CRS<double>::output(){
+				Logger& logger = Logger::get_instance();
+				logger.func_in(monolish_func);
+
+				for(int i = 0; i < row; i++){
+					for(int j = row_ptr[i]; j < row_ptr[i+1]; j++){
+						std::cout << i << " " << col_ind[j] << " " << val[j] << std::endl;
+					}
+				}
+
+				logger.func_out();
+			}
+	}
 }
 //
 // 	template<>
