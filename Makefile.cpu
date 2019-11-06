@@ -1,17 +1,26 @@
 TARGET=./lib/libmonolish_cpu.so
 
-CXX=mpic++
-CXXFLAGS+=-O3 -std=c++11 -fopenmp -lm -g -Wall -Wno-unused-variable -fPIC
-#CXXFLAGS+= -USE_AVX2 -mavx2 -mfma 
-LIBFLAGS=-shared
+CXX=g++
+CXXFLAGS = -O3 -std=c++11 -lm -g
+#CXXFLAGS += -mavx-fopenmp
+CXXFLAGS += -Wall -Wno-unused-variable
+CXXFLAGS += -shared -fPIC
 
-LIBS=  -I ./external/obj/openblas/
-LIBS+= -I ./external/obj/mumps/
+####################
 
-LIBOBJS=./external/obj/openblas/libopenblas.a
-# LIBOBJS+=./external/obj/mumps/libpord.a
-# LIBOBJS+=./external/obj/mumps/libdmumps.a
-# LIBOBJS+=./external/obj/mumps/libmumps_common.a
+BLAS_INC ?=  -I ./external/obj/openblas/
+BLAS_LIB ?= ./external/obj/openblas/libopenblas.a
+
+####################
+
+MUMPS_INC ?= -I ./external/obj/mumps/
+# MUMPS_OBJ ? = ./external/obj/mumps/libpord.a ./external/obj/mumps/libdmumps.a ./external/obj/mumps/libmumps_common.a
+
+####################
+
+LIB_INC=$(BLAS_INC) $(MUMPS_INC)
+LIB_OBJS=$(BLAS_LIB)
+
 
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
@@ -40,11 +49,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
 
 $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(LIBS) -I../include -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(LIB_INC) -I../include -c $< -o $@
 
 libs:
 	git submodule update -i
