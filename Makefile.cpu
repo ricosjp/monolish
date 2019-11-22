@@ -1,25 +1,39 @@
 TARGET=./lib/libmonolish_cpu.so
 
-CXX=mpic++
-CXXFLAGS+=-O3 -std=c++11 -fopenmp -lm -g -Wall -Wno-unused-variable -fPIC
-#CXXFLAGS+= -USE_AVX2 -mavx2 -mfma 
-LIBFLAGS=-shared
+MONOLISH_DIR?=$(HOME)/lib/monolish
 
-LIBS=  -I ./external/obj/openblas/
-LIBS+= -I ./external/obj/mumps/
+CXX=g++
+CXXFLAGS = -O3 -std=c++11 -lm -g
+#CXXFLAGS += -mavx-fopenmp
+CXXFLAGS += -fopenmp
+CXXFLAGS += -Wall -Wno-unused-variable
+CXXFLAGS += -shared -fPIC
 
-LIBOBJS=./external/obj/openblas/libopenblas.a
-# LIBOBJS+=./external/obj/mumps/libpord.a
-# LIBOBJS+=./external/obj/mumps/libdmumps.a
-# LIBOBJS+=./external/obj/mumps/libmumps_common.a
+####################
+
+BLAS_INC ?=  -I ./external/obj/openblas/
+BLAS_LIB ?= ./external/obj/openblas/libopenblas.a
+
+####################
+
+# need mumps ifdef
+MUMPS_INC ?= -I ./external/obj/mumps/
+# MUMPS_OBJ ? = ./external/obj/mumps/libpord.a ./external/obj/mumps/libdmumps.a ./external/obj/mumps/libmumps_common.a
+
+####################
+
+LIB_INC=$(BLAS_INC) $(MUMPS_INC)
+LIB_OBJS=$(BLAS_LIB)
+
+####################
 
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/precon/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/vector/dot/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/matrix/util/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/matrix/spmv/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/sparse/util/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/sparse/spmv/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/external_IF*.cpp))
 
 vpath %.cpp ./src/
@@ -28,9 +42,11 @@ vpath %.cpp ./src/external_IF/
 vpath %.cpp ./src/blas/
 vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/vector/dot/
-vpath %.cpp ./src/blas/matrix/
-vpath %.cpp ./src/blas/matrix/util
-vpath %.cpp ./src/blas/matrix/spmv
+vpath %.cpp ./src/blas/sparse/
+vpath %.cpp ./src/blas/sparse/util
+vpath %.cpp ./src/blas/sparse/spmv
+
+.PHONY = libs test clean
 
 OBJDIR=./obj_cpu
 
@@ -40,11 +56,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
 
 $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(LIBS) -I../include -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(LIB_INC) -I../include -c $< -o $@
 
 libs:
 	git submodule update -i
@@ -52,8 +68,16 @@ libs:
 
 test:
 	cd test; make; make run
+	
+install:
+	-mkdir -p $(MONOLISH_DIR)
+	-mkdir -p $(MONOLISH_DIR)/external
+	-cp -r lib $(MONOLISH_DIR)
+	-cp -r include $(MONOLISH_DIR)
+	-cp -r external/obj $(MONOLISH_DIR)/external/
+
 
 clean:
 	- rm $(OBJDIR)/*
 	- rm lib/*
-
+	- rm -r $(MONOLISH_DIR)
