@@ -1,11 +1,12 @@
-monolish_DIR=$(HOME)/lib/monolish
+MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
-CXXFLAGS=-O3 -lm -std=c++11 -I $(monolish_DIR)/include/ -L$(monolish_DIR)/lib/ -lmonolish_cpu
+CXXFLAGS=-O3 -lm -std=c++11
+LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
 
 OBJS=$(FUNC)_$(ARCH).out
 
 all:$(OBJS)
 
 $(FUNC)_$(ARCH).out: $(FUNC).cpp
-	$(CXX) $(CXXFLAGS) $(LIBS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(LIBS) $^ -o $@ $(LIBS) 

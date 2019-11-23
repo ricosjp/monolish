@@ -1,12 +1,13 @@
+CONTAINER  := registry.ritc.jp/ricos/allgebra
 .PHONY: cpu gpu lib test install
 
 all:cpu
 
 cpu:
-	make -j -f Makefile.cpu
+	make -B -j -f Makefile.cpu
 
 gpu:
-	make -j -f Makefile.gpu
+	make -B -j -f Makefile.gpu
 
 external:
 	make -j -f Makefile.cpu libs
@@ -20,3 +21,6 @@ test:
 clean:
 	- make -f Makefile.cpu clean 
 	- make -f Makefile.gpu clean 
+
+in:
+	docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 

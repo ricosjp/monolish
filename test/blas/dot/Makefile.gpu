@@ -1,4 +1,4 @@
-monolish_DIR=$(HOME)/lib/monolish
+monolish_DIR?=$(HOME)/lib/monolish
 
 CXX=pgc++
 CXXFLAGS=-acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla -Minfo=accel

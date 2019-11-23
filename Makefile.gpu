@@ -2,10 +2,10 @@ TARGET=./lib/libmonolish_gpu.so
 
 CXX=pgc++
 #CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -Mcuda -mp -ta=tesla:nordc -Minfo=accel -nomp
-CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -mp -Mcuda -ta=tesla -Minfo=accel
+CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -mp -Mcuda -ta=tesla -Minfo=accel -fPIC
 CXXFLAGS+=-fast -std=c++11 
 CXXFLAGS+=-DUSE_GPU
-LIBFLAGS=-shared  -fPIC
+LIBFLAGS=-shared  
 
 # LIBS=  -I ./external/obj/openblas/
 # LIBS+= -I ./external/obj/mumps/
@@ -35,7 +35,7 @@ vpath %.cpp ./src/blas/sparse/util
 vpath %.cpp ./src/blas/sparse/spmv
 
 
-OBJDIR=./obj_gpu
+OBJDIR=./obj/gpu/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 

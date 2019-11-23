@@ -3,16 +3,16 @@ TARGET=./lib/libmonolish_cpu.so
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
-CXXFLAGS = -O3 -std=c++11 -lm -g
+CXXFLAGS = -O3 -std=c++11 -lm -g -fPIC
 #CXXFLAGS += -mavx-fopenmp
 CXXFLAGS += -fopenmp
 CXXFLAGS += -Wall -Wno-unused-variable
-CXXFLAGS += -shared -fPIC
+LIBFLAGS = -shared 
 
 ####################
 
-BLAS_INC ?=  -I ./external/obj/openblas/
-BLAS_LIB ?= ./external/obj/openblas/libopenblas.a
+BLAS_INC ?=  -I /usr/include/openblas/
+BLAS_LIB ?= -L/usr/lib64/ -lopenblas
 
 ####################
 
@@ -23,7 +23,7 @@ MUMPS_INC ?= -I ./external/obj/mumps/
 ####################
 
 LIB_INC=$(BLAS_INC) $(MUMPS_INC)
-LIB_OBJS=$(BLAS_LIB)
+LIB_OBJ=$(BLAS_LIB)
 
 ####################
 
@@ -48,7 +48,7 @@ vpath %.cpp ./src/blas/sparse/spmv
 
 .PHONY = libs test clean
 
-OBJDIR=./obj_cpu
+OBJDIR=./obj/cpu/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
@@ -56,11 +56,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIB_INC) $(LIB_OBJ) -o $(TARGET)
 
 $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(LIB_INC) -I../include -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(LIB_INC) $(LIB_OBJ) -I../include -c $< -o $@
 
 libs:
 	git submodule update -i

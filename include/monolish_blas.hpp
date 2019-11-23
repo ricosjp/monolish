@@ -1,7 +1,6 @@
 #pragma once
 #include<vector>
 #include"common/monolish_common.hpp"
-#include<cblas.h>
 #include<omp.h>
 #include<stdio.h>
 
