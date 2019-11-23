@@ -8,6 +8,7 @@
 #pragma once
 #include<omp.h>
 #include<vector>
+#include<iostream>
 #include<string>
 #include<exception>
 #include<stdexcept>
@@ -47,6 +48,12 @@ namespace monolish{
 
 				std::string::size_type size(){
 					return val.size();
+				}
+
+				void print_all(){
+					for(int i = 0; i < val.size(); i++){
+						std::cout <<  val[i] << std::endl;
+					}
 				}
 
 // 				// need "ref operator[]" 
