@@ -1,0 +1,15 @@
+monolish_DIR=$(HOME)/lib/monolish
+
+CXX=pgc++
+CXXFLAGS=-acc -Mcudalib=cusolver,cublas,cusparse -Mcuda -mp -ta=tesla -Minfo=accel
+CXXFLAGS+=-fast -std=c++11 
+CXXFLAGS+=-DUSE_GPU
+
+LIBS=-I $(monolish_DIR)/include/ -L$(monolish_DIR)/lib/ -lmonolish_gpu
+
+OBJS=$(FUNC)_$(ARCH).out
+
+all:$(OBJS)
+
+$(FUNC)_$(ARCH).out: $(FUNC).cpp
+	$(CXX) $(CXXFLAGS) $(LIBS) $^ -o $@
