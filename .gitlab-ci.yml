@@ -1,5 +1,9 @@
 image: registry.ritc.jp/ricos/allgebra
 
+before_script:
+    - export ENV MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
+    - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib
+
 stages:
     - build_lib
     - test_build
@@ -9,7 +13,7 @@ stages:
 build_cpu:
     stage: build_lib
     script:
-        - make cpu
+        - make cpu; make install
     artifacts:
         paths:
             - /lib/monolish/
