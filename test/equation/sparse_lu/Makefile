@@ -1,11 +1,18 @@
+FUNC=slu
 all:
-	make -B -e FUNC=slu -e ARCH=cpu -f Makefile.cpu
+	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 
 cpu:
-	make -B -e FUNC=slu -e ARCH=cpu -f Makefile.cpu
+	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 
 gpu:
-	make -B -e FUNC=slu -e ARCH=gpu -f Makefile.gpu
+	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
+
+run_cpu:
+	./$(FUNC)_cpu.out ../../test.mtx
+
+run_gpu:
+	$(PROFILER) ./$(FUNC)_gpu.out ../../test.mtx
 	
 clean:
 	- rm *.out

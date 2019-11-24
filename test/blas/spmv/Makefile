@@ -1,4 +1,4 @@
-FUNC=cg
+FUNC=spmv_crs
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 
@@ -12,7 +12,7 @@ run_cpu:
 	./$(FUNC)_cpu.out ../../test.mtx
 
 run_gpu:
-	$(PROFILER )./$(FUNC)_gpu.out ../../test.mtx
+	$(PROFILER) ./$(FUNC)_gpu.out ../../test.mtx
 	
 clean:
 	- rm *.out

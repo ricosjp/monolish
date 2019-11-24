@@ -1,20 +1,20 @@
 TARGET=./lib/libmonolish_gpu.so
 
-CXX=pgc++
-#CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -Mcuda -mp -ta=tesla:nordc -Minfo=accel -nomp
-CXXFLAGS=-acc -Mcudalib=cublas,cusparse,cusolver -mp -Mcuda -ta=tesla -Minfo=accel
-CXXFLAGS+=-fast -std=c++11 
+CXX=g++
+CXXFLAGS=-O3 -std=c++11 
+CXXFLAGS+=-fopenacc -foffload=nvptx-none -fPIC
+CXXFLAGS+=--shared
 CXXFLAGS+=-DUSE_GPU
-LIBFLAGS=-shared  -fPIC
 
-# LIBS=  -I ./external/obj/openblas/
-# LIBS+= -I ./external/obj/mumps/
-#
-# LIBOBJS=./external/obj/openblas/libopenblas.a
-# LIBOBJS+=./external/obj/mumps/libpord.a
-# LIBOBJS+=./external/obj/mumps/libdmumps.a
-# LIBOBJS+=./external/obj/mumps/libmumps_common.a
+#####################
+CUDA_INC = -I/usr/local/cuda-10.0/targets/x86_64-linux/include/ 
+CUDA_LIB = -L/usr/local/cuda-10.0/targets/x86_64-linux/lib/ 
+CXXFLAGS+= $(CUDA_INC) $(CUDA_LIB)
+#####################
 
+LINK_FLAGS=-lcuda -lcublas -lcusolver -lcudart
+
+#####################
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
@@ -34,20 +34,20 @@ vpath %.cpp ./src/blas/sparse/
 vpath %.cpp ./src/blas/sparse/util
 vpath %.cpp ./src/blas/sparse/spmv
 
-
-OBJDIR=./obj_gpu
+OBJDIR=./obj/gpu/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIBOBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET) $(LINK_FLAGS)
 
 $(OBJDIR)/%.o: %.cpp $(EXTERNALS)
 	mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(LIBS) -I../include -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I../include -c $< -o $@
 
 $(EXTERNALS):
 	git submodule update -i
