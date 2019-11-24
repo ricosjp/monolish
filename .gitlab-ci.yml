@@ -7,7 +7,7 @@ before_script:
 stages:
     - build_lib
     - test_build
-    - test
+    - blas_lv1
     - deploy
       
 build_cpu:
@@ -16,7 +16,7 @@ build_cpu:
         - make cpu; make install
     artifacts:
         paths:
-            - /lib/monolish/
+            - install_lib/
         expire_in: 60min
 
 build_gpu:
@@ -25,7 +25,7 @@ build_gpu:
         - make gpu; make install
     artifacts:
         paths:
-            - /lib/monolish/
+            - install_lib/
         expire_in: 60min
     tags:
         - gpu
@@ -58,7 +58,7 @@ build_test_gpu:
 #####################################################
 
 dot_cpu:
-    stage: test
+    stage: blas_lv1
     script:
         - cd test/
         - test run_cpu
@@ -68,7 +68,7 @@ dot_cpu:
         expire_in: 60min
 
 dot_gpu:
-    stage: test
+    stage: blas_lv1
     script:
         - cd test/
         - test run_gpu
