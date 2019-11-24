@@ -12,7 +12,7 @@ run_cpu:
 	./$(FUNC)_cpu.out ../../test.mtx
 
 run_gpu:
-	./$(FUNC)_gpu.out ../../test.mtx
+	$(PROFILER) ./$(FUNC)_gpu.out ../../test.mtx
 	
 clean:
 	- rm *.out

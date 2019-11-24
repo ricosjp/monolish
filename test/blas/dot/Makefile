@@ -12,7 +12,7 @@ run_cpu:
 	./$(FUNC)_cpu.out 10000
 
 run_gpu:
-	./$(FUNC)_gpu.out 10000
+	$(PROFILER) ./$(FUNC)_gpu.out 10000
 	
 clean:
 	- rm *.out

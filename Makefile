@@ -21,6 +21,7 @@ test:
 clean:
 	- make -f Makefile.cpu clean 
 	- make -f Makefile.gpu clean 
+	- make -C test/ clean
 
 in:
 	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
