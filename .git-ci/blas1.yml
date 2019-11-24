@@ -1,0 +1,22 @@
+dot_cpu:
+    stage: blas_lv1
+    script:
+        - cd test/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+dot_gpu:
+    stage: blas_lv1
+    script:
+        - cd test/
+        - make run_gpu
+        - make run_gpu_profile
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
