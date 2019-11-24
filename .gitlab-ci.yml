@@ -2,34 +2,32 @@ image: registry.ritc.jp/ricos/allgebra
 
 stages:
     - build
-    - build_test
+    - test_build
     - test
     - deploy
       
 build_cpu:
-    stage: build
+    stage: build_lib
     script:
         - make cpu
-        - ls lib
     artifacts:
         paths:
-            - lib/monolish/
+            - /lib/monolish/
         expire_in: 60min
 
 build_gpu:
-    stage: build
+    stage: build_lib
     script:
         - make gpu; make install
-        - ls lib
     artifacts:
         paths:
-            - lib/monolish/
+            - /lib/monolish/
         expire_in: 60min
     tags:
         - gpu
 
 build_test_cpu:
-    stage: build_test
+    stage: test_build
     script:
         - cd test/
         - make cpu
@@ -40,7 +38,7 @@ build_test_cpu:
         expire_in: 60min
 
 build_test_gpu:
-    stage: build_test
+    stage: test_build
     script:
         - cd test/
         - make gpu
@@ -51,6 +49,9 @@ build_test_gpu:
         expire_in: 60min
     tags:
         - gpu
+
+#####################################################
+#####################################################
 
 dot_cpu:
     stage: test
