@@ -1,7 +1,7 @@
 image: registry.ritc.jp/ricos/allgebra
 
 stages:
-    - build
+    - build_lib
     - test_build
     - test
     - deploy
