@@ -8,8 +8,11 @@ cpu:
 gpu:
 	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
 
-run:
-	
+run_cpu:
+	./$(FUNC)_cpu.out ../../test.mtx
+
+run_gpu:
+	./$(FUNC)_gpu.out ../../test.mtx
 	
 clean:
 	- rm *.out

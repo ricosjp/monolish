@@ -12,6 +12,12 @@ gpu:
 	make -C equation/cg/
 	make -C equation/sparse_lu/
 
+run_cpu:
+	make -C blas/dot/ run_cpu
+	make -C blas/spmv/ run_cpu
+	make -C equation/cg/ run_cpu
+	make -C equation/sparse_lu/ run_cpu
+
 clean:
 	make -C blas/dot/ clean
 	make -C blas/spmv/ clean
