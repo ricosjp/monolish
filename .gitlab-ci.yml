@@ -57,28 +57,12 @@ build_test_gpu:
 #####################################################
 #####################################################
 
-dot_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/
-        - test run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
+include:
+    - '.git-ci/blas1.yml'
 
-dot_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/
-        - test run_gpu
-        - test run_gpu_profile
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+#####################################################
+#####################################################
+
 
 pages:
     stage: deploy
