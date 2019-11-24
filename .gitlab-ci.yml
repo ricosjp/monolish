@@ -1,13 +1,85 @@
-image: centos:latest
+image: registry.ritc.jp/ricos/allgebra
 
 stages:
+    - build
+    - build_test
+    - test
     - deploy
+      
+build_cpu:
+    stage: build
+    script:
+        - make cpu
+        - ls lib
+    artifacts:
+        paths:
+            - lib/monolish/
+        expire_in: 60min
+
+build_gpu:
+    stage: build
+    script:
+        - make gpu; make install
+        - ls lib
+    artifacts:
+        paths:
+            - lib/monolish/
+        expire_in: 60min
+    tags:
+        - gpu
+
+build_test_cpu:
+    stage: build_test
+    script:
+        - cd test/
+        - make cpu
+        - ls blas/dot/
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+build_test_gpu:
+    stage: build_test
+    script:
+        - cd test/
+        - make gpu
+        - ls blas/dot/
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+dot_cpu:
+    stage: test
+    script:
+        - cd test/
+        - test run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+dot_gpu:
+    stage: test
+    script:
+        - cd test/
+        - test run_gpu
+        - test run_gpu_profile
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
 
 pages:
     stage: deploy
-    before_script:
-        - dnf --enablerepo=PowerTools install -y doxygen graphviz
     script:
+        - apt update
+        - apt install -y doxygen graphviz
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen
         - cp -r doc/html public/
