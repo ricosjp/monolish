@@ -1,7 +1,7 @@
 spmv_cpu:
     stage: blas_lv1
     script:
-        - cd test/
+        - cd test/blas/spmv/
         - make run_cpu
     artifacts:
         paths:
@@ -11,9 +11,9 @@ spmv_cpu:
 spmv_gpu:
     stage: blas_lv1
     script:
-        - cd test/
+        - cd test/blas/spmv/
         - make run_gpu
-        - make run_gpu_profile
+        - make run_gpu PROFILER=nvprof
     artifacts:
         paths:
             - test/
