@@ -1,19 +1,19 @@
-dot_cpu:
+spmv_cpu:
     stage: blas_lv1
     script:
-        - cd test/blas/dot/
+        - cd test/
         - make run_cpu
     artifacts:
         paths:
             - test/
         expire_in: 60min
 
-dot_gpu:
+spmv_gpu:
     stage: blas_lv1
     script:
-        - cd test/blas/dot/
+        - cd test/
         - make run_gpu
-        - make run_gpu_profile PROFILER=nvprof
+        - make run_gpu_profile
     artifacts:
         paths:
             - test/
