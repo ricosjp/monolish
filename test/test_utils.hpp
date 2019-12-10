@@ -46,7 +46,7 @@ bool ans_check(
 
 	if(check){
 		std::cout << "pass!!" << std::endl;
-		return 0;
+		return check;
 	}
 	else{
 		std::cout << "Error!!" << std::endl;
@@ -55,7 +55,7 @@ bool ans_check(
 			std::cout << num[i] <<"\tresult:" << result[i] << "\tans:" << ans[i] << std::endl; 
 		}
 		std::cout << "===============================" << std::endl;
-		return 1;
+		return check;
 	}
 }
 

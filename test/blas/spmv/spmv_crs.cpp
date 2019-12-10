@@ -33,8 +33,22 @@ bool test(monolish::matrix::CRS<T> A, monolish::vector<T> x, monolish::vector<T>
 
 	if(check_ans == 1){
 		get_ans(A, x, ansy);
-		return (ans_check<T>(y.data(), ansy.data(), y.size(), tol));
+		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
+			return false;
+		};
 	}
+
+	auto start = std::chrono::system_clock::now();
+
+	for(int i = 0; i < iter; i++){
+		std::cout << "iter:" << i << "\t" <<std::flush;
+		monolish::blas::spmv(A, x, y);
+	}
+
+	auto end = std::chrono::system_clock::now();
+	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
+
+	std::cout << "total time: " << sec << std::endl;
 
 	return true;
 }
