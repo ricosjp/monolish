@@ -1,5 +1,5 @@
 spmv_cpu:
-    stage: blas_lv1
+    stage: sparse
     script:
         - cd test/blas/spmv/
         - make run_cpu
@@ -9,7 +9,7 @@ spmv_cpu:
         expire_in: 60min
 
 spmv_gpu:
-    stage: blas_lv1
+    stage: sparse
     script:
         - cd test/blas/spmv/
         - make run_gpu

@@ -8,6 +8,7 @@ stages:
     - build_lib
     - test_build
     - blas_lv1
+    - sparse
     - deploy
       
 build_cpu:
