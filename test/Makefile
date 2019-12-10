@@ -14,13 +14,13 @@ gpu:
 
 run_cpu:
 	make -C blas/dot/ run_cpu
-# 	make -C blas/spmv/ run_cpu
+	make -C blas/spmv/ run_cpu
 # 	make -C equation/cg/ run_cpu
 # 	make -C equation/sparse_lu/ run_cpu
 
 run_gpu:
 	make -C blas/dot/ run_gpu
-# 	make -C blas/spmv/ run_gpu
+	make -C blas/spmv/ run_gpu
 # 	make -C equation/cg/ run_gpu
 # 	make -C equation/sparse_lu/ run_gpu
 #

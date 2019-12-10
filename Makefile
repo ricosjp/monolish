@@ -1,7 +1,7 @@
 CONTAINER  := registry.ritc.jp/ricos/allgebra
 .PHONY: cpu gpu lib test install
 
-all:cpu
+all:cpu gpu
 
 cpu:
 	make -B -j -f Makefile.cpu

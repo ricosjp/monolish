@@ -50,6 +50,12 @@ namespace monolish{
 					return val.size();
 				}
 
+				vector copy(){
+					vector<Float> tmp(val.size());
+					std::copy(val.begin(), val.end(), tmp.val.begin());
+					return tmp;
+				}
+
 				void print_all(){
 					for(int i = 0; i < val.size(); i++){
 						std::cout <<  val[i] << std::endl;

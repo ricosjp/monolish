@@ -8,6 +8,7 @@ stages:
     - build_lib
     - test_build
     - blas_lv1
+    - sparse
     - deploy
       
 build_cpu:
@@ -59,6 +60,7 @@ build_test_gpu:
 
 include:
     - '.git-ci/blas1.yml'
+    - '.git-ci/spmv.yml'
 
 #####################################################
 #####################################################

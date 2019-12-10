@@ -42,12 +42,12 @@ namespace monolish{
 
 
 #if USE_GPU
-#pragma acc data copyin(xd[0:size], yd[0:size])
-#pragma acc host_data use_device(xd, yd)
+		#pragma acc data copyin(xd[0:size], yd[0:size])
+		#pragma acc host_data use_device(xd, yd)
 		{
 			ans = cublasDdot(x.size(), xd, 1, yd, 1);
 		}
-#pragma acc data copyout(yd[0:size])
+		#pragma acc data copyout(yd[0:size])
 #else
 		ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
 #endif
