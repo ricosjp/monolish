@@ -11,7 +11,7 @@ spmv_cpu:
 spmv_gpu:
     stage: sparse
     script:
-        - cd test/blas/dot/
+        - cd test/blas/spmv/
         - make run_gpu
         - make run_gpu PROFILER=nvprof
     artifacts:
