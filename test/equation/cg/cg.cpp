@@ -23,6 +23,4 @@ int main(int argc, char** argv){
 	x.print_all();
 
 	return 0;
-
-
 }
