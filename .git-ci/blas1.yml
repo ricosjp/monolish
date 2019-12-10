@@ -13,7 +13,7 @@ dot_gpu:
     script:
         - cd test/blas/dot/
         - make run_gpu
-        - make run_gpu_profile PROFILER=nvprof
+        - make run_gpu PROFILER=nvprof
     artifacts:
         paths:
             - test/
