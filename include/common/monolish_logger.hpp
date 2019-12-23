@@ -32,8 +32,15 @@ namespace monolish{
 			static Logger& get_instance()
 			{
 				static Logger instance;
+
+// 				#if defined MONOLISH_LOG_OUTPUT
+// 					std::ofstream ofs(MONOLISH_LOG_OUTPUT);
+// 					std::cout.rdbuf(ofs.rdbuf());
+// 				#endif
+
 				return instance;
 			}
+
 
 			// for solver (large func.)
 			void solver_in(

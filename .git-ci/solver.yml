@@ -1,0 +1,12 @@
+sparseLU_gpu:
+    stage: solver
+    script:
+        - cd test/equation/sparse_lu
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
