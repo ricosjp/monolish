@@ -24,6 +24,10 @@ namespace monolish{
 	void equation::LU::mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
+		if( 1 ){
+			throw std::runtime_error("error sparse LU on CPU does not impl.");
+
+		}
 
 #ifdef USE_MPI
 // 		DMUMPS_STRUC_C id;
@@ -97,10 +101,17 @@ namespace monolish{
 		logger.func_in(monolish_func);
 
 #ifdef USE_GPU
-		cusolverSpHandle_t cusolverH = NULL;
+		cusolverSpHandle_t sp_handle;
+		cusolverSpCreate(&sp_handle);
+
+		cusparseMatDescr_t descrA;
+		cusparseCreateMatDescr(&descrA); 
+		cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL);
+		cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO);
+		cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT);
+
 		int n = A.get_row();
 		int nnz = A.get_nnz();
-		printf("goma %d\n", nnz);
 
 		double* Dval = A.val.data();
 		int* Dptr = A.row_ptr.data();
@@ -110,30 +121,29 @@ namespace monolish{
 		double* Dsol = x.data();
 
 
-		double tol = 1.0e-8;
+		double tol = 1.0e-12;
 		int singularity;
 
 
-#pragma acc data copyin( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n] )
-
-#pragma acc host_data use_device(Dval, Dptr, Dind, Drhv)
-	{
+// #pragma acc data copyin( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n], Dsol[0:n] )
+// #pragma acc host_data use_device(Dval, Dptr, Dind, Drhv, Dsol)
+//  	{
 		cusolverSpDcsrlsvluHost(
-				cusolverH,
+				sp_handle,
 				n,
 				nnz,
-				0,
+				descrA,
 				Dval,
 				Dptr,
 				Dind,
 				Drhv,
 				tol,
-				0,
+				1,
 				Dsol,
 				&singularity);
 
-	}
-#pragma acc data copyout(Dsol[0:n])
+// 	}
+//  #pragma acc data copyout(Dsol[0:n])
 
 #endif
 		logger.func_out();

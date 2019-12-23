@@ -21,8 +21,8 @@ run_cpu:
 run_gpu:
 	make -C blas/dot/ run_gpu
 	make -C blas/spmv/ run_gpu
+	make -C equation/sparse_lu/ run_gpu
 # 	make -C equation/cg/ run_gpu
-# 	make -C equation/sparse_lu/ run_gpu
 #
 run_gpu_profile:
 	make PROFILER=nvprof -C blas/dot/ run_gpu

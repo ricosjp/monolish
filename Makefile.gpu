@@ -12,7 +12,7 @@ CUDA_LIB = -L/usr/local/cuda-10.0/targets/x86_64-linux/lib/
 CXXFLAGS+= $(CUDA_INC) $(CUDA_LIB)
 #####################
 
-LINK_FLAGS=-lcuda -lcublas -lcusolver -lcudart
+LINK_FLAGS=-lcuda -lcublas -lcusolver -lcusparse -lcudart
 
 #####################
 
