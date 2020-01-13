@@ -1,4 +1,4 @@
-CONTAINER  := registry.ritc.jp/ricos/allgebra
+CONTAINER  := registry.ritc.jp/ricos/allgebra/base
 .PHONY: cpu gpu lib test install
 
 all:cpu gpu
