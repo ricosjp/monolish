@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra:base
+image: registry.ritc.jp/ricos/allgebra/base
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
