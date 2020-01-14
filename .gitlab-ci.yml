@@ -70,7 +70,8 @@ include:
 docker:
     image: docker:latest
     stage: deploy
-    services: docker:dind
+    services:
+        - docker:dind
     script:
         - cp -r install_lib/lib/ docker/
         - cp -r install_lib/include/ docker/
