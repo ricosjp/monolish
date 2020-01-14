@@ -67,6 +67,14 @@ include:
 #####################################################
 #####################################################
 
+docker:
+    image: docker:latest
+    stage: deploy
+    services: docker:dind
+    script:
+        - cp -r install_lib/lib/ docker/
+        - cp -r install_lib/include/ docker/
+        - cd docker; make push; cd ..
 
 pages:
     stage: deploy
