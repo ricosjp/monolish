@@ -3,7 +3,6 @@ CI_REGISTRY ?= registry.ritc.jp
 CI_COMMIT_REF_NAME ?= manual_deploy
 .PHONY: test allgebra 
 
-
 all: allgebra
 
 login:
