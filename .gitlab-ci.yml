@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra
+image: registry.ritc.jp/ricos/allgebra/base
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
@@ -67,6 +67,19 @@ include:
 #####################################################
 #####################################################
 
+docker:
+    image: docker:latest
+    stage: deploy
+    services:
+        - docker:dind
+    script:
+        - apk add make
+        - cp -r install_lib/lib/ docker/
+        - cp -r install_lib/include/ docker/
+        - ls docker/
+        - cd docker; make push; cd ..
+    tags:
+        - docker
 
 pages:
     stage: deploy
