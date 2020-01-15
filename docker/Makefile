@@ -13,11 +13,12 @@ else
 endif
 
 allgebra: Dockerfile lib/ include/
-	docker build -t $(REGISTRY):$(CI_COMMIT_REF_NAME) . -f Dockerfile
+	docker build -t $(REGISTRY):aaa . -f Dockerfile
+	#docker build -t $(REGISTRY):$(CI_COMMIT_REF_NAME) . -f Dockerfile
 
 push: login allgebra
-	docker push $(REGISTRY):$(CI_COMMIT_REF_NAME)
+	docker push $(REGISTRY):aaa
 
 in:  
-	docker run -it --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):$(CI_COMMIT_REF_NAME)
+	docker run -it --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):aaa
 	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):$(CI_COMMIT_REF_NAME)
