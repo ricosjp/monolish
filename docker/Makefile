@@ -1,5 +1,4 @@
-CI_REGISTRY_IMAGE  = registry.ritc.jp/ricos/allgebra/monolish
-CI_REGISTRY = registry.ritc.jp/ricos/allgebra
+CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 .PHONY: test allgebra 
 
