@@ -1,4 +1,5 @@
 CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/allgebra/monolish
+CI_REGISTRY ?= registry.ritc.jp
 CI_COMMIT_REF_NAME ?= manual_deploy
 .PHONY: test allgebra 
 
@@ -7,9 +8,9 @@ all: allgebra
 
 login:
 ifeq ($(CI_BUILD_TOKEN),)
-	docker login $(CI_REGISTRY_IMAGE)
+	docker login $(CI_REGISTRY)
 else
-	docker login -u gitlab-ci-token -p $(CI_BUILD_TOKEN) $(CI_REGISTRY_IMAGE)
+	docker login -u gitlab-ci-token -p $(CI_BUILD_TOKEN) $(CI_REGISTRY)
 endif
 
 
