@@ -77,6 +77,8 @@ docker:
         - cp -r install_lib/lib/ docker/
         - cp -r install_lib/include/ docker/
         - cd docker; make push; cd ..
+    tags:
+        - docker
 
 pages:
     stage: deploy
