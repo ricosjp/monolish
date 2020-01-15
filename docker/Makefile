@@ -16,7 +16,7 @@ allgebra: Dockerfile lib/ include/
 	docker build -t $(REGISTRY):$(CI_COMMIT_REF_NAME) . -f Dockerfile
 
 push: login allgebra
-	docker push $(REGISTRY):($CI_COMMIT_REF_NAME)
+	docker push $(REGISTRY):$(CI_COMMIT_REF_NAME)
 
 in:  
 	docker run -it --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):$(CI_COMMIT_REF_NAME)
