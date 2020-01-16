@@ -4,7 +4,7 @@
 monolishが/opt/ricos/monolish/0.1/にインストールされています．
 
 ## 内積
-CPU/GPUの内積がdot.cppを参照
+CPU/GPUでOpenBLAS/cuBLASを用いた内積をする．dot.cppを参照．
 
 ## sparse LU
-GPUだけです．slu.cppを参照
+GPUのみ．cusolverを用いたsparse LU．slu.cppを参照．

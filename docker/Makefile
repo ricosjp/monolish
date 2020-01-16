@@ -2,7 +2,7 @@ CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 
 ####
-CI_COMMIT_REF_NAME = 34-monolish-docker-image
+#CI_COMMIT_REF_NAME = 34-monolish-docker-image
 ####
 .PHONY: test allgebra 
 
