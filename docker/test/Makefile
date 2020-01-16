@@ -1,7 +1,10 @@
-all:cpu
+CXX=g++
+CXXFLAGS=-O3 -lm -std=c++11 --verbose
+LIBS= -lmonolish_cpu
 
-cpu:
-	echo "cpu!"
 
-gpu:
-	echo "gpu!"
+all:
+	$(CXX) $(CXXFLAGS) dot.cpp -o dot.out $(LIBS)
+
+clean:
+	- rm *.out

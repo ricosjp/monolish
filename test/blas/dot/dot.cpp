@@ -20,7 +20,7 @@ T get_ans(monolish::vector<T> &mx, monolish::vector<T> &my){
 }
 
 template <typename T>
-bool test(monolish::vector<T> x, monolish::vector<T> y, double tol, int iter, int check_ans){
+bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, int iter, int check_ans){
 
 	monolish::vector<T> tmp;
 	tmp = y.copy();
