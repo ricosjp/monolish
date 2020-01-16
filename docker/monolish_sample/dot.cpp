@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv){
 
-	int size = 100;
+	int size = 1000;
 
 	// create random vector
 	std::random_device random;
