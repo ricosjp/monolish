@@ -9,6 +9,7 @@ cpu:
 
 gpu:
 	$(CXX) $(CXXFLAGS) $(GPUFLAGS) dot.cpp -o dot_$@.out -lmonolish_$@
+	$(CXX) $(CXXFLAGS) $(GPUFLAGS) slu.cpp -o slu_$@.out -lmonolish_$@
 
 clean:
 	- rm *.out
