@@ -95,3 +95,4 @@ pages:
         expire_in: 20min
     only:
         - master
+        - 32-doxygen-install-guide
