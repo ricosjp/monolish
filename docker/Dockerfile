@@ -3,11 +3,12 @@ LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
 RUN mkdir -p /opt/ricos/monolish/0.1/lib \
 &&  mkdir -p /opt/ricos/monolish/0.1/include \
-&&  mkdir -p /monolish_sample/
+&&  mkdir -p /opt/ricos/monolish/0.1/samples 
 
 COPY ./lib/ /opt/ricos/monolish/0.1/lib/
 COPY ./include/ /opt/ricos/monolish/0.1/include/
-COPY ./test/ /monolish_sample/
+COPY ./monolish_sample/ /opt/ricos/monolish/0.1/samples
 
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
+ENV LIBRARY_PATH $LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
 ENV CPATH $CPATH:/opt/ricos/monolish/0.1/include/
