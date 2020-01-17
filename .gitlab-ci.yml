@@ -95,19 +95,4 @@ pages:
         expire_in: 20min
     only:
         - master
-
-pages_beta:
-    stage: deploy
-    script:
-        - apt update
-        - apt install -y doxygen graphviz
-        - cd doc; doxygen; ls; cd ..
-        - rm -rf public/doxygen
-        - mkdir -p public/beta-doc/
-        - cp -r doc/html public/beta-doc/
-    artifacts:
-        paths:
-            - public
-        expire_in: 20min
-    only:
         - 32-doxygen-install-guide
