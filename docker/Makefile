@@ -2,7 +2,7 @@ CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 
 ####
-#CI_COMMIT_REF_NAME = 34-monolish-docker-image
+CI_COMMIT_REF_NAME = 34-monolish-docker-image
 ####
 .PHONY: test allgebra 
 
@@ -24,5 +24,5 @@ push: login allgebra
 
 in:  
 	docker pull  $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
-	docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
+	docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/monolish_sample,dst=/test  $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
 	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):$(CI_COMMIT_REF_NAME)
