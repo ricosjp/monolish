@@ -99,6 +99,7 @@ namespace monolish{
 				}
 
 
+
 // 				// need "ref operator[]" 
 // 				Float at(size_type n){
 // 					return val[n];
@@ -108,4 +109,15 @@ namespace monolish{
 // 					val[n] = a;
 // 				}
 		};
+
+/**
+ * @fn random_vector()
+ * @brief create random vector
+ * @return ramdom vector 
+**/
+// 	vector random(){
+// 		for(int i = 0; i < val.size(); i++){
+// 			std::cout <<  val[i] << std::endl;
+// 		}
+// 	}
 }

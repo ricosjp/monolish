@@ -1,0 +1,22 @@
+dot_cpu:
+    stage: common
+    script:
+        - cd test/common/vector
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+dot_gpu:
+    stage: common
+    script:
+        - cd test/common/vector
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu

@@ -7,6 +7,7 @@ before_script:
 stages:
     - build_lib
     - test_build
+    - common
     - blas_lv1
     - sparse
     - solver
@@ -60,6 +61,7 @@ build_test_gpu:
 #####################################################
 
 include:
+    - '.git-ci/common.yml'
     - '.git-ci/blas1.yml'
     - '.git-ci/spmv.yml'
     - '.git-ci/solver.yml'

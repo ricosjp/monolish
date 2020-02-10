@@ -1,14 +1,15 @@
 \page install Installation
 
-# Linux
+# CPU on Linux
 
-* hoge
-* hoge
-* hoge
-* hoge
-* hoge
-* hoge
+```
+> make
+> make install
+```
+
+# GPU on Linux
+
 
 # Windows
 
-Windows..?
+Windows(´・ω・｀)???
