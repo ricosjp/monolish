@@ -22,7 +22,7 @@ namespace monolish{
 
 	
 /**
- * @class monolish::vector<typename Float>
+ * @class vector
  * @brief it likes std::vector, it has flag that moniter changing value...
 **/
 	template<typename Float>
