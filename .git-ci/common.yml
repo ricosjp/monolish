@@ -1,4 +1,4 @@
-dot_cpu:
+vector_cpu:
     stage: common
     script:
         - cd test/common/vector
@@ -8,7 +8,7 @@ dot_cpu:
             - test/
         expire_in: 60min
 
-dot_gpu:
+vector_gpu:
     stage: common
     script:
         - cd test/common/vector
