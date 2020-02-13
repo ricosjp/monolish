@@ -1,4 +1,4 @@
-CONTAINER  := registry.ritc.jp/ricos/allgebra/base
+CONTAINER  := registry.ritc.jp/ricos/allgebra
 .PHONY: cpu gpu lib test install
 
 all:cpu gpu
@@ -25,4 +25,10 @@ clean:
 
 in:
 	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
 	docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+
+in-cpu:
+	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+	docker run -it --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
