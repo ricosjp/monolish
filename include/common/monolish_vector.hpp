@@ -13,9 +13,12 @@
 #include<exception>
 #include<stdexcept>
 
+#include<memory>
+
 #if defined USE_MPI
 #include<mpi.h>
 #endif
+//#typedef typename std::allocator_trails::allocator_type::reference reference;
 
 
 namespace monolish{
@@ -40,23 +43,36 @@ namespace monolish{
 				vector(){}
 
 /**
- * @fn vector(std::string::size_type N)
+ * @fn vector(size_t N)
  * @brief initialize size N vector
  * @param (N) vector size
 **/
-				vector(std::string::size_type N){
+				vector(size_t N){
 					val.resize(N);
 				}
 
 /**
- * @fn vector(std::string::size_type N, Float a)
+ * @fn vector(size_t N, Float a)
  * @brief initialize size N vector, value to fill the container
  * @param (N) vector size
  * @param (val) fill Float type value to all elements
 **/
-				vector(std::string::size_type N, Float a){
+				vector(size_t N, Float a){
 					val.resize(N, a);
 				}
+
+/**
+ * @fn vector(std::vector<Float> vec)
+ * @brief copy vector
+ * @param (vec) 
+**/
+
+				vector(std::vector<Float>& vec){
+					val.resize(vec.size());
+					std::copy(vec.begin(), vec.end(), val.begin());
+				}
+
+/////////////////////////////////////////////////////////////////////////////
 
 /**
  * @fn data()
@@ -72,7 +88,7 @@ namespace monolish{
  * @brief get vector size N
  * @return vector size
 **/
-				std::string::size_type size(){
+				size_t size() const{
 					return val.size();
 				}
 
@@ -93,12 +109,21 @@ namespace monolish{
  * @return vector 
 **/
 				void print_all(){
-					for(int i = 0; i < val.size(); i++){
+					for(size_t i = 0; i < val.size(); i++){
 						std::cout <<  val[i] << std::endl;
 					}
 				}
 
+				//extern void add(const vector<Float> &x, const vector<Float> &y);
+				void add(const vector<Float> &x, const vector<Float> &y);
 
+				vector operator+(vector<Float>& vec);
+				vector operator+=(vector<Float>& vec);
+				vector operator+(double value);
+
+				Float& operator [] ( size_t i){
+					return val[i];
+				}
 
 // 				// need "ref operator[]" 
 // 				Float at(size_type n){
@@ -115,9 +140,4 @@ namespace monolish{
  * @brief create random vector
  * @return ramdom vector 
 **/
-// 	vector random(){
-// 		for(int i = 0; i < val.size(); i++){
-// 			std::cout <<  val[i] << std::endl;
-// 		}
-// 	}
 }

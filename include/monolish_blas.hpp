@@ -11,8 +11,7 @@
 namespace monolish{
 	namespace blas{
 
-		// toriaezu double dake
-		double dot(vector<double> &x, vector<double> &y);
+ 		double dot(vector<double> &x, vector<double> &y);
 
 		void spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y);
 

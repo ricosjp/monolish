@@ -15,6 +15,7 @@
 #define BENCHMARK
 namespace monolish{
 
+
 	double blas::dot(vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
@@ -28,19 +29,8 @@ namespace monolish{
 		double ans = 0;
 		double* xd = x.data();
 		double* yd = y.data();
-		int size = x.size();
+		size_t size = x.size();
 	
-
-		//if(x.flag==0){
-//#pragma acc data copy(xd[0:size])
-		//}
-
-		//if(y.flag==0){
-//#pragma acc data copy(yd[0:size])
-		//}
-			
-
-
 #if USE_GPU
 		#pragma acc data copyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
@@ -56,6 +46,5 @@ namespace monolish{
 		logger.func_out();
 		return ans;
 	}
-
 }
 
