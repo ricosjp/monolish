@@ -3,7 +3,7 @@ TARGET=./lib/libmonolish_cpu.so
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
-CXXFLAGS = -O3 -std=c++11 -lm -g -fPIC
+CXXFLAGS = -O3 -std=c++17 -lm -g -fPIC
 #CXXFLAGS += -mavx-fopenmp
 CXXFLAGS += -fopenmp
 CXXFLAGS += -Wall -Wno-unused-variable

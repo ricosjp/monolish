@@ -12,6 +12,7 @@
 #include<string>
 #include<exception>
 #include<stdexcept>
+#include<iterator>
 
 #include<memory>
 
@@ -63,13 +64,24 @@ namespace monolish{
 
 /**
  * @fn vector(std::vector<Float> vec)
- * @brief copy vector
+ * @brief copy std::vector
  * @param (vec) 
 **/
 
 				vector(std::vector<Float>& vec){
 					val.resize(vec.size());
 					std::copy(vec.begin(), vec.end(), val.begin());
+				}
+
+/**
+ * @fn vector()
+ * @brief copy std::vector
+ * @param (vec) 
+**/
+				vector(const Float* start, const Float* end){
+					size_t size = (end - start);
+					val.resize(size);
+					std::copy(start, end, val.begin());
 				}
 
 /////////////////////////////////////////////////////////////////////////////
