@@ -8,6 +8,4 @@
  	void monolish::set_log_filename(std::string filename){
 		Logger& logger = Logger::get_instance();
 		logger.set_log_filename(filename);
-
-		std::ofstream tmp(filename); // file clean
 	}

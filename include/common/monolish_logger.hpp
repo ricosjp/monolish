@@ -61,7 +61,7 @@ namespace monolish{
 				filename=file;
 
 				//file open
-				pStream	= new std::ofstream(filename, std::ios::app);
+				pStream	= new std::ofstream(filename);
 				if(pStream -> fail()){
 					delete pStream;
 					pStream = &std::cout;
@@ -72,7 +72,9 @@ namespace monolish{
 			void solver_in(std::string func_name)
 			{
 				if(LogLevel >= 1){
-					
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
 
 					//init
 					calls.push_back(func_name);
@@ -88,7 +90,6 @@ namespace monolish{
 
 					// stat
 					*pStream << "\"stat\" : \"IN\"" << std::endl;
-
 				}
 
 			}
@@ -96,6 +97,10 @@ namespace monolish{
 			void solver_out()
 			{
 				if(LogLevel >= 1){
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
+
 					//func
 					*pStream << "\"solver\" : " << std::flush;
 					*pStream << "\"" << std::flush;
@@ -123,6 +128,10 @@ namespace monolish{
 			void func_in(std::string func_name)
 			{
 				if(LogLevel >= 2){
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
+
 					calls.push_back(func_name);
 					times.push_back(std::chrono::system_clock::now());
 				}
@@ -131,6 +140,10 @@ namespace monolish{
 			void func_out()
 			{
 				if(LogLevel >= 2){
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
+
 					//func
 					*pStream << "\"func\" : " << std::flush;
 					*pStream << "\"" << std::flush;
@@ -153,6 +166,9 @@ namespace monolish{
 			void util_in(std::string func_name)
 			{
 				if(LogLevel >= 3){
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
 					calls.push_back(func_name);
 					times.push_back(std::chrono::system_clock::now());
 				}
@@ -161,6 +177,10 @@ namespace monolish{
 			void util_out()
 			{
 				if(LogLevel >= 3){
+					if(filename.empty()){
+						pStream = &std::cout;
+					}
+
 					//func
 					*pStream << "\"util\" : " << std::flush;
 					*pStream << "\"" << std::flush;
