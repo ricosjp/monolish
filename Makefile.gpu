@@ -17,22 +17,26 @@ LINK_FLAGS=-lcuda -lcublas -lcusolver -lcusparse -lcudart
 #####################
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
+
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/precon/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/vector/dot/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/sparse/util/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/sparse/spmv/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/external_IF*.cpp))
+
+SRCS +=$(notdir $(wildcard ./src/blas/vector/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/sparse/*.cpp))
+
+SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
+
+#############################################################
 
 vpath %.cpp ./src/
+
 vpath %.cpp ./src/equation/
-vpath %.cpp ./src/external_IF/
-vpath %.cpp ./src/blas/
+
 vpath %.cpp ./src/blas/vector/
-vpath %.cpp ./src/blas/vector/dot/
 vpath %.cpp ./src/blas/sparse/
-vpath %.cpp ./src/blas/sparse/util
-vpath %.cpp ./src/blas/sparse/spmv
+
+vpath %.cpp ./src/utils/
+
+#############################################################
 
 OBJDIR=./obj/gpu/
 

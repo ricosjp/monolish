@@ -4,7 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<omp.h>
-#include "../../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_blas.hpp"
 
 #ifdef USE_GPU
 	#include<cublas.h>
@@ -23,7 +23,6 @@ namespace monolish{
 		//err
 		if( x.size() != y.size()){
 			throw std::runtime_error("error vector size is not same");
-
 		}
 
 		double ans = 0;

@@ -44,7 +44,7 @@ bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size
 	auto end = std::chrono::system_clock::now();
 	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
 
-	std::cout << "total time: " << sec << std::endl;
+	std::cout << "total average time[sec]: " << sec / iter << std::endl;
 
 	return true;
 }
@@ -60,30 +60,13 @@ int main(int argc, char** argv){
 	size_t iter = atoi(argv[2]);
 	size_t check_ans = atoi(argv[3]);
 
-	//create random vector x
-  	monolish::vector<double> x(size);
+	//create random vector x rand(0~1)
+  	monolish::vector<double> x(size, 0.0, 1.0);
+  	monolish::vector<double> y(size, 0.0, 1.0);
 
-	// rand (0~1)
-	std::random_device random;
-	std::mt19937 mt(random());
-	std::uniform_real_distribution<> rand(0,1);
+ 	// exec
+ 	bool result;
+ 	if( test<double>(x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
 
-	for(size_t i=0; i<size; i++){
-		x[i] = rand(mt);
-	}
-
- 	//create random vector y from double*
- 	double* tmpy = (double*)malloc(sizeof(double) * size);
-
- 	for(size_t i=0; i<size; i++){
- 		tmpy[i] = rand(mt);
- 	}
-
-   	std::vector<double> y(tmpy, tmpy+size); // y = tmpy[0] ~ tmpy[size]
-
-//  	// exec
-//  	bool result;
-//  	if( test<double>(x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
-//
 	return 0;
 }

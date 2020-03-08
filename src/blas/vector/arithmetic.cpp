@@ -4,7 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<omp.h>
-#include "../../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_blas.hpp"
 
 #define BENCHMARK
 namespace monolish{
