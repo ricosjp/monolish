@@ -8,7 +8,6 @@ int main(int argc, char** argv){
 	}
 
 	monolish::set_log_level(2);
-	monolish::set_log_filename("goma.txt");
 	monolish::equation::cg cg_solver;
 
 	char* file = argv[1];

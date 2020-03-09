@@ -9,7 +9,6 @@ bool ans_check(double result, double ans, double tol){
 	double err = std::abs(result - ans) / ans;
 
 	if(err < tol){
-		std::cout << "pass!!" << std::endl;
 		return true;
 	}
 	else{
@@ -45,7 +44,6 @@ bool ans_check(
 	}
 
 	if(check){
-		std::cout << "pass!!" << std::endl;
 		return check;
 	}
 	else{
@@ -56,16 +54,5 @@ bool ans_check(
 		}
 		std::cout << "===============================" << std::endl;
 		return check;
-	}
-}
-
-template<typename T>
-void create_random_vector(monolish::vector<T>& vec, const T min, const T max){
-	
-	std::random_device random;
-	std::mt19937 mt(random());
-	std::uniform_real_distribution<> rand(min, max);
-
-	for(size_t i=0; i<vec.size(); i++){
 	}
 }

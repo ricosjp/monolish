@@ -7,7 +7,6 @@
 
 #include "../../../include/monolish_blas.hpp"
 
-#define BENCHMARK
 namespace monolish{
 
 	void blas::spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y){
@@ -64,5 +63,3 @@ namespace monolish{
 		logger.func_out();
 	}
 }
-
-

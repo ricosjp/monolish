@@ -18,7 +18,6 @@ namespace monolish{
 		private:
 			Logger() = default;
 
-			//~Logger() = default;
 			~Logger(){
 				if(pStream != &std::cout){
 					delete pStream;
@@ -80,6 +79,9 @@ namespace monolish{
 					calls.push_back(func_name);
 					times.push_back(std::chrono::system_clock::now());
 
+					//start
+					*pStream << "{" << std::flush;
+
 					//func
 					*pStream << "\"solver\" : " << std::flush;
 					*pStream << "\"" << std::flush;
@@ -89,7 +91,10 @@ namespace monolish{
 					*pStream <<  ", " << std::flush;
 
 					// stat
-					*pStream << "\"stat\" : \"IN\"" << std::endl;
+					*pStream << "\"stat\" : \"IN\"" << std::flush;
+					
+					//end
+					*pStream << "}," << std::endl;
 				}
 
 			}
@@ -100,6 +105,9 @@ namespace monolish{
 					if(filename.empty()){
 						pStream = &std::cout;
 					}
+
+					//start
+					*pStream << "{" << std::flush;
 
 					//func
 					*pStream << "\"solver\" : " << std::flush;
@@ -113,7 +121,10 @@ namespace monolish{
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
 					*pStream << "\"stat\" : \"OUT\", " << std::flush;
-					*pStream << "\"time\" : " << sec << std::endl;
+					*pStream << "\"time\" : " << sec << std::flush;
+
+					//end
+					*pStream << "}," << std::endl;
 
 					calls.pop_back();
 					times.pop_back();
@@ -144,6 +155,9 @@ namespace monolish{
 						pStream = &std::cout;
 					}
 
+					//start
+					*pStream << "{" << std::flush;
+
 					//func
 					*pStream << "\"func\" : " << std::flush;
 					*pStream << "\"" << std::flush;
@@ -155,7 +169,10 @@ namespace monolish{
 					//time
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
-					*pStream << "\"time\" : " << sec << std::endl;
+					*pStream << "\"time\" : " << sec << std::flush;
+
+					//end
+					*pStream << "}," << std::endl;
 
 					calls.pop_back();
 					times.pop_back();
@@ -181,6 +198,9 @@ namespace monolish{
 						pStream = &std::cout;
 					}
 
+					//start
+					*pStream << "{" << std::flush;
+
 					//func
 					*pStream << "\"util\" : " << std::flush;
 					*pStream << "\"" << std::flush;
@@ -192,7 +212,10 @@ namespace monolish{
 					//time
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
-					*pStream << "\"time\" : " << sec << std::endl;
+					*pStream << "\"time\" : " << sec << std::flush;
+
+					//end
+					*pStream << "}," << std::endl;
 
 					calls.pop_back();
 					times.pop_back();

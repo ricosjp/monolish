@@ -4,36 +4,36 @@
 #include"../../test_utils.hpp"
 
 template <typename T>
-T get_ans(monolish::vector<T> &mx, monolish::vector<T> &my){
+void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my){
 	if(mx.size() != my.size()){
 		std::runtime_error("x.size != y.size");
 	}
-	T ans = 0;
 
 	for(size_t i = 0; i < mx.size(); i++){
-		ans += mx[i] * my[i];
+		my[i] = alpha * mx[i] + my[i];
 	}
-
-	return ans;
 }
 
 template <typename T>
-bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size_t iter, const size_t check_ans){
+bool test(double alpha,monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size_t iter, const size_t check_ans){
+
+	monolish::vector<T> ansy;
+	ansy = y.copy();
 
 	// check ans
 	if(check_ans == 1){
-		T result = monolish::blas::dot(x, y);
-		T ans = get_ans(x, y);
-		if(ans_check<T>(result, ans, tol) == false){
-			return false;
-		}
+		monolish::blas::axpy(alpha, x, y);
+ 		get_ans(alpha, x, ansy);
+		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
+ 			return false;
+ 		}
 	}
 
 	//exec
 	auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
-		T result = monolish::blas::dot(x, y);
+		monolish::blas::axpy(alpha, x, y);
 	}
 
 	auto end = std::chrono::system_clock::now();
@@ -58,11 +58,14 @@ int main(int argc, char** argv){
 	size_t check_ans = atoi(argv[3]);
 
 	//create random vector x rand(0~1)
-  	monolish::vector<double> x(size, 0.0, 1.0);
-  	monolish::vector<double> y(size, 0.0, 1.0);
+	double alpha = 123.0;
+//   	monolish::vector<double> x(size, 0.0, 1.0);
+//   	monolish::vector<double> y(size, 0.0, 1.0);
+  	monolish::vector<double> x(size, 1.0);
+  	monolish::vector<double> y(size, 1.0);
 
  	// exec and error check
- 	if( test<double>(x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
+ 	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

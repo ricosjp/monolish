@@ -26,7 +26,6 @@
 
 namespace monolish{
 
-
 	/**
 	 * @class vector
 	 * @brief it likes std::vector, it has flag that moniter changing value...
@@ -116,6 +115,16 @@ namespace monolish{
 				Float* data(){
 					return val.data();
 				}
+
+				/**
+				 * @fn data()
+				 * @brief returns a direct pointer to the vector
+				 * @return A pointer to the first element
+				 **/
+				const Float* data() const{
+					return val.data();
+				}
+
 
 				/**
 				 * @fn size()
