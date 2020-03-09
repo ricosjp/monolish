@@ -20,6 +20,7 @@ SRCS =$(notdir $(wildcard  ./src/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
 
+SRCS +=$(notdir $(wildcard ./src/blas/arithmetic/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/vector/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/sparse/*.cpp))
 
@@ -31,6 +32,7 @@ vpath %.cpp ./src/
 
 vpath %.cpp ./src/equation/
 
+vpath %.cpp ./src/blas/arithmetic/
 vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/sparse/
 
