@@ -4,27 +4,27 @@
 #include"../../test_utils.hpp"
 
 template <typename T>
-void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my){
-	if(mx.size() != my.size()){
+void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my, monolish::vector<T> &mz){
+	if(mx.size() != my.size() || mx.size() != mz.size()){
 		std::runtime_error("x.size != y.size");
 	}
 
 	for(size_t i = 0; i < mx.size(); i++){
-		my[i] = alpha * mx[i] + my[i];
+		mz[i] = alpha * mx[i] + my[i];
 	}
 }
 
 template <typename T>
-bool test(double alpha,monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size_t iter, const size_t check_ans){
+bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, monolish::vector<T>& z, double tol, const size_t iter, const size_t check_ans){
 
-	monolish::vector<T> ansy;
-	ansy = y.copy();
+	monolish::vector<T> ansz;
+	ansz = z.copy();
 
 	// check ans
 	if(check_ans == 1){
-		monolish::blas::axpy(alpha, x, y);
- 		get_ans(alpha, x, ansy);
-		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
+		monolish::blas::axpyz(alpha, x, y, z);
+ 		get_ans(alpha, x, y, ansz);
+		if(ans_check<T>(z.data(), ansz.data(), y.size(), tol) == false){
  			return false;
  		}
 	}
@@ -33,7 +33,7 @@ bool test(double alpha,monolish::vector<T>& x, monolish::vector<T>& y, double to
 	auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
-		monolish::blas::axpy(alpha, x, y);
+		monolish::blas::axpyz(alpha, x, y, z);
 	}
 
 	auto end = std::chrono::system_clock::now();
@@ -59,13 +59,12 @@ int main(int argc, char** argv){
 
 	//create random vector x rand(0~1)
 	double alpha = 123.0;
-//   	monolish::vector<double> x(size, 0.0, 1.0);
-//   	monolish::vector<double> y(size, 0.0, 1.0);
-  	monolish::vector<double> x(size, 1.0);
-  	monolish::vector<double> y(size, 1.0);
+   	monolish::vector<double> x(size, 0.0, 1.0);
+   	monolish::vector<double> y(size, 0.0, 1.0);
+   	monolish::vector<double> z(size, 0.0, 1.0);
 
  	// exec and error check
- 	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
+ 	if( test<double>(alpha, x, y, z, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

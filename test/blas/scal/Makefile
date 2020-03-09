@@ -1,4 +1,4 @@
-FUNC=axpyz
+FUNC=scal
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 

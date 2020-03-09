@@ -31,11 +31,11 @@ namespace monolish{
 		#pragma acc data copyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
 		{
-			cublasDaxpy(x.size(), alpha, xd, 1, yd, 1);
+			cublasDaxpy(size, alpha, xd, 1, yd, 1);
 		}
 		#pragma acc data copyout(yd[0:size])
 #else
-		cblas_daxpy(x.size(), alpha, x.data(), 1, y.data(), 1);
+		cblas_daxpy(size, alpha, xd, 1, yd, 1);
 #endif
 		logger.func_out();
 	}

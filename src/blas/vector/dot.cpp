@@ -33,10 +33,10 @@ namespace monolish{
 		#pragma acc data copyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
 		{
-			ans = cublasDdot(x.size(), xd, 1, yd, 1);
+			ans = cublasDdot(size, xd, 1, yd, 1);
 		}
 #else
-		ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
+		ans = cblas_ddot(size, xd, 1, yd, 1);
 #endif
 		logger.func_out();
 		return ans;
@@ -61,10 +61,10 @@ namespace monolish{
 		#pragma acc data copyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
 		{
-			ans = cublasSdot(x.size(), xd, 1, yd, 1);
+			ans = cublasSdot(size, xd, 1, yd, 1);
 		}
 #else
-		ans = cblas_sdot(x.size(), x.data(), 1, y.data(), 1);
+		ans = cblas_sdot(size, xd, 1, yd, 1);
 #endif
 		logger.func_out();
 		return ans;

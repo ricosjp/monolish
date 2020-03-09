@@ -20,8 +20,8 @@ namespace monolish{
 		}
 
 #if USE_GPU // gpu
-		int n = A.get_row();
-		int nnz = A.get_nnz();
+		size_t n = A.get_row();
+		size_t nnz = A.get_nnz();
 		double* xd = x.data();
 		double* yd = y.data();
 

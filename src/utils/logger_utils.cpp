@@ -1,4 +1,4 @@
-#include "../../../include/monolish_blas.hpp"
+#include "../../include/monolish_blas.hpp"
 
 	void monolish::set_log_level(size_t Level){
 		Logger& logger = Logger::get_instance();

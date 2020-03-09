@@ -1,4 +1,4 @@
-FUNC=axpyz
+FUNC=nrm2
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 

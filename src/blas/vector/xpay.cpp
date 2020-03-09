@@ -15,7 +15,7 @@
 namespace monolish{
 
 	// double ///////////////////
-	void blas::xpay(vector<double> &x, vector<double> &y){
+	void blas::xpay(const double alpha, const vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -24,21 +24,28 @@ namespace monolish{
 			throw std::runtime_error("error vector size is not same");
 		}
 
-		double ans = 0;
-		double* xd = x.data();
+		const double* xd = x.data();
 		double* yd = y.data();
 		size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copyin(xd[0:size], yd[0:size])
-		#pragma acc host_data use_device(xd, yd)
+	#pragma acc data pcopyin(xd[0:size]) copy(yd[0:size]) 
+	{
+		#pragma acc kernels
 		{
-			ans = cublasDdot(x.size(), xd, 1, yd, 1);
+			#pragma acc loop independent 
+			for(size_t i = 0 ; i < size; i++){
+				yd[i] = xd[i] + alpha * yd[i];
+			}
+
 		}
-		#pragma acc data copyout(yd[0:size])
-#else
-		ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
-#endif
-		logger.func_out();
 	}
+#else
+		#pragma omp parallel for
+		for(size_t i = 0; i < size; i++){
+				yd[i] = xd[i] + alpha * yd[i];
+		}
+#endif
+ 		logger.func_out();
+ 	}
 }

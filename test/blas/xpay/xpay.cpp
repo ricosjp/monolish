@@ -10,7 +10,7 @@ void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my){
 	}
 
 	for(size_t i = 0; i < mx.size(); i++){
-		my[i] = alpha * mx[i] + my[i];
+		my[i] = mx[i] + alpha * my[i];
 	}
 }
 
@@ -22,7 +22,7 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double t
 
 	// check ans
 	if(check_ans == 1){
-		monolish::blas::axpy(alpha, x, y);
+		monolish::blas::xpay(alpha, x, y);
  		get_ans(alpha, x, ansy);
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
  			return false;
@@ -33,7 +33,7 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double t
 	auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
-		monolish::blas::axpy(alpha, x, y);
+		monolish::blas::xpay(alpha, x, y);
 	}
 
 	auto end = std::chrono::system_clock::now();

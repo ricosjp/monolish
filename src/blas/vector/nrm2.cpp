@@ -15,29 +15,22 @@
 namespace monolish{
 
 	// double ///////////////////
-	double blas::nrm2(vector<double> &x, vector<double> &y){
+	double blas::nrm2(const vector<double> &x){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
-		//err
-		if( x.size() != y.size()){
-			throw std::runtime_error("error vector size is not same");
-		}
-
 		double ans = 0;
-		double* xd = x.data();
-		double* yd = y.data();
+		const double* xd = x.data();
 		size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copyin(xd[0:size], yd[0:size])
-		#pragma acc host_data use_device(xd, yd)
+		#pragma acc data copyin(xd[0:size])
+		#pragma acc host_data use_device(xd)
 		{
-			ans = cublasDdot(x.size(), xd, 1, yd, 1);
+			ans = cublasDnrm2(size, xd, 1);
 		}
-		#pragma acc data copyout(yd[0:size])
 #else
-		ans = cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
+		ans = cblas_dnrm2(size, xd, 1);
 #endif
 		logger.func_out();
 		return ans;
