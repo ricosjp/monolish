@@ -26,6 +26,9 @@
 namespace monolish{
 	namespace matrix{
 
+		/**
+		 * @brief Coodinate format Matrix
+		 */
 		template<typename Float>
 			class COO{
 				private:
@@ -66,6 +69,9 @@ namespace monolish{
 					std::vector<Float>& get_val_p(){return val;}
 			};
 
+		/**
+		 * @brief CRS format Matrix
+		 */
 
 		template<typename Float>
 			class CRS{

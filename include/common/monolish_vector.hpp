@@ -27,9 +27,8 @@
 namespace monolish{
 
 	/**
-	 * @class vector
-	 * @brief it likes std::vector, it has flag that moniter changing value...
-	 **/
+	* @brief std::vector-like vector class
+	*/
 	template<typename Float>
 		class vector{
 			private:
@@ -41,27 +40,25 @@ namespace monolish{
 				vector(){}
 
 				/**
-				 * @brief initialize size N vector
-				 * @param (N) vector size
+				 * @brief allocate size N vector memory space
+				 * @param[in] N vector length
 				 **/
 				vector(const size_t N){
 					val.resize(N);
 				}
 
 				/**
-				 * @fn vector(size_t N, Float a)
 				 * @brief initialize size N vector, value to fill the container
-				 * @param (N) vector size
-				 * @param (val) fill Float type value to all elements
+				 * @param[in] vector length
+				 * @param[val] fill Float type value to all elements
 				 **/
-				vector(const size_t N, const Float a){
-					val.resize(N, a);
+				vector(const size_t N, const Float val){
+					val.resize(N, val);
 				}
 
 				/**
-				 * @fn vector(std::vector<Float> vec)
 				 * @brief copy std::vector
-				 * @param (vec) 
+				 * @param[in] vec input std::vector
 				 **/
 
 				vector(const std::vector<Float>& vec){
@@ -70,10 +67,9 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn vector()
-				 * @brief copy from pointer*
-				 * @param (start) start pointer
-				 * @param (end)  end pointer
+				 * @brief copy from pointer
+				 * @param[in] start start pointer
+				 * @param[in] end  end pointer
 				 **/
 				vector(const Float* start, const Float* end){
 					size_t size = (end - start);
@@ -82,11 +78,10 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn vector()
 				 * @brief create N length rand(min~max) vector
-				 * @param (N)  vector length
-				 * @param (min) rand min
-				 * @param (max) rand max
+				 * @param[in] N  vector length
+				 * @param[in] min rand min
+				 * @param[in] max rand max
 				 **/
 				vector(const size_t N, const Float min, const Float max){
 					val.resize(N);
@@ -103,7 +98,6 @@ namespace monolish{
 				/////////////////////////////////////////////////////////////////////////////
 
 				/**
-				 * @fn data()
 				 * @brief returns a direct pointer to the vector
 				 * @return A pointer to the first element
 				 **/
@@ -112,9 +106,8 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn data()
 				 * @brief returns a direct pointer to the vector
-				 * @return A pointer to the first element
+				 * @return A const pointer to the first element
 				 **/
 				const Float* data() const{
 					return val.data();
@@ -122,7 +115,6 @@ namespace monolish{
 
 
 				/**
-				 * @fn size()
 				 * @brief get vector size N
 				 * @return vector size
 				 **/
@@ -131,7 +123,6 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn copy()
 				 * @brief vector copy
 				 * @return copied vector
 				 **/
@@ -142,7 +133,6 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn print_all()
 				 * @brief print all elements to standart I/O
 				 **/
 				void print_all(){
@@ -152,9 +142,8 @@ namespace monolish{
 				}
 
 				/**
-				 * @fn print_all(std::string filename)
 				 * @brief print all elements to file
-				 * @param (filename) output filename
+				 * @param[in] filename output filename
 				 **/
 				void print_all(std::string filename){
 
@@ -167,6 +156,11 @@ namespace monolish{
 					}
 				}
 
+				/**
+				 * @brief copy vector, It is same as copy()
+				 * @param[in] filename source vector
+				 * @return output vector
+				 **/
 				void operator=(const vector<Float>& vec){
 					val.resize(vec.size());
 					std::copy(vec.val.begin(), vec.val.end(), val.begin());
@@ -203,7 +197,6 @@ namespace monolish{
 		};
 
 	/**
-	 * @fn random_vector()
 	 * @brief create random vector
 	 * @return ramdom vector 
 	 **/

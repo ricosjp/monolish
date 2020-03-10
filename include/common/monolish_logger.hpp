@@ -13,6 +13,9 @@
 #endif
 
 namespace monolish{
+	/**
+	* @brief logger class (singleton, for developper class)
+	*/
 	class Logger 
 	{
 		private:
@@ -223,16 +226,15 @@ namespace monolish{
 			}
 	};
 
-	//@fn        set_log_level
-	//@var(Level) Log Level
-	//@brief      0 : none
-	//@brief      1 : all
-	//@brief      2 : solver
-	//@brief      2 : solver, func
-	//@brief      3 : solver, func, util
+	/**
+	* @brief      0 : none<br> 1 : all<br> 2 : solver<br>2 : solver, func <br>3 : solver, func, util
+	* @param[in] Level Log level
+	*/
 	void set_log_level(size_t Level);
 
-	//@fn        set_output_file
-	//@var(filename) log file name (if not set filename, output standard I/O)
+	/**
+	* @brief set output logfile name (defailt=standard I/O)
+	* @param[in] filename log file name (if not set filename, output standard I/O)
+	*/
  	void set_log_filename(std::string filename);
 }
