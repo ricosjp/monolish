@@ -33,6 +33,10 @@ namespace monolish{
 			class COO{
 				private:
 					int row;
+
+					/**
+					 * @brief neet col = row now
+					 */
 					int col;
 					int nnz;
 
@@ -72,11 +76,14 @@ namespace monolish{
 		/**
 		 * @brief CRS format Matrix
 		 */
-
 		template<typename Float>
 			class CRS{
 				private:
 					int row;
+
+					/**
+					 * @brief neet col = row now
+					 */
 					int col;
 					int nnz;
 
