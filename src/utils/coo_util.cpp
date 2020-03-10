@@ -122,7 +122,7 @@ namespace monolish{
 				Logger& logger = Logger::get_instance();
 				logger.func_in(monolish_func);
 				for(int i=0; i<nnz; i++){
-					std::cout << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
+					std::cout << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
 				}
 				logger.func_out();
 			}

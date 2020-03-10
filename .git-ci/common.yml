@@ -21,6 +21,30 @@ vector_gpu:
     tags:
         - gpu
 
+matrix_cpu:
+    stage: common
+    script:
+        - cd test/common/matrix
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+matrix_gpu:
+    stage: common
+    script:
+        - cd test/common/matrix
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+
 arithmetic_sv_cpu:
     stage: common
     script:

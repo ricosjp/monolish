@@ -27,20 +27,24 @@ namespace monolish{
 	namespace matrix{
 
 		/**
-		 * @brief Coodinate format Matrix
+		 * @brief Coodinate format Matrix (need to sort)
 		 */
 		template<typename Float>
 			class COO{
 				private:
-					int row;
+					size_t row;
 
 					/**
 					 * @brief neet col = row now
 					 */
-					int col;
-					int nnz;
+					size_t col;
+					size_t nnz;
 
 					bool gpu_flag = false; // not impl
+
+					void set_rowN(const size_t N){row = N;};
+					void set_colN(const size_t N){col = N;};
+					void set_nnzN(const size_t N){nnz = N;};
 
 				public:
 
@@ -49,6 +53,20 @@ namespace monolish{
 					std::vector<Float> val;
 
 					COO(){}
+
+					COO(const int N, const int nnz, const int* row, const int* col, const double* value){
+						set_rowN(N);
+						set_colN(N);
+						set_nnzN(nnz);
+
+						row_index.resize(nnz);
+						col_index.resize(nnz);
+						val.resize(nnz);
+
+						std::copy(row, row+nnz, row_index.begin());
+						std::copy(col, col+nnz, col_index.begin());
+						std::copy(value, value+nnz, val.begin());
+					}
 
 					void input_mm(const char* filename);
 

@@ -26,7 +26,7 @@ monolishが配布しているコンテナを利用するか，DockerFileから `
 ([関連コード][vec])
 
 ### monolish::matrix::COO クラスおよび monolish::matrix::CRS クラス
-COOをMM形式のファイル，または{double val, int row, int col}の3本の配列から作成し，CRSのコンストラクタにCOOを入れることで変換．
+Sorted COOをMM形式のファイル，または{double val, int row, int col}の3本の配列から作成し，CRSのコンストラクタにCOOを入れることで変換．
 ([関連コード][mat])
 
 ## ソルバ関係

@@ -53,7 +53,7 @@ namespace monolish{
 
 				for(int i = 0; i < row; i++){
 					for(int j = row_ptr[i]; j < row_ptr[i+1]; j++){
-						std::cout << i << " " << col_ind[j] << " " << val[j] << std::endl;
+						std::cout << i+1 << " " << col_ind[j]+1 << " " << val[j] << std::endl;
 					}
 				}
 

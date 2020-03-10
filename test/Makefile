@@ -2,6 +2,7 @@ all:cpu
 
 cpu:
 	make -C common/vector/ cpu
+	make -C common/matrix/ cpu
 	make -C common/arithmetic_sv/ cpu
 	make -C common/arithmetic_vv/ cpu
 	#
@@ -18,6 +19,7 @@ cpu:
 
 gpu:
 	make -C common/vector/ gpu
+	make -C common/matrix/ gpu
 	make -C common/arithmetic_sv/ gpu
 	make -C common/arithmetic_vv/ gpu
 	#
@@ -34,6 +36,7 @@ gpu:
 
 run_cpu:
 	make -C common/vector/ run_cpu
+	make -C common/matrix/ run_cpu
 	make -C common/arithmetic_sv/ run_cpu
 	make -C common/arithmetic_vv/ run_cpu
 	#
@@ -49,6 +52,7 @@ run_cpu:
 
 run_gpu:
 	make -C common/vector/ run_gpu
+	make -C common/matrix/ run_gpu
 	make -C common/arithmetic_sv/ run_gpu
 	make -C common/arithmetic_vv/ run_gpu
 	#
