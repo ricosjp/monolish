@@ -6,43 +6,51 @@
 int main(int argc, char** argv){
 
 	if(argc!=2){
-		std::cout << "error $1:vector size" << std::endl;
+		std::cout << "error $1:vector size (size>1)" << std::endl;
 		return 1;
 	}
 
 	int size = atoi(argv[1]);
+	if(size<=1){return 1;}
 
-	// monolish::vector = std::vector 
+	//(x) monolish::vector = std::vector  = 123, 123, ..., 123
 	std::vector<double> std_vec_x(size, 123.0);
   	monolish::vector<double> x(std_vec_x);
 
-	// operator[]
-	monolish::vector<double> y(size);
-	for(size_t i=0; i<y.size(); i++){
-		y[i] = i;
+
+	//(y) monolish::vector = double* = 0,1,2, ..., N-1
+	double* dp = (double*)malloc(sizeof(double) * size);
+	for(size_t i=0; i<size; i++){
+		dp[i] = i;
+	}
+	monolish::vector<double> y(dp, dp+size);
+
+
+	//(z) monolish::vector.operator[] = 0,1,2, ..., N-1
+	monolish::vector<double> z(size);
+	for(size_t i=0; i<z.size(); i++){
+		z[i] = i;
 	}
 
-	//constractor
-  	monolish::vector<double> z(size, 0.0);
 
+	//monolish::vector random(1.0~2.0) vector
+  	monolish::vector<double> randvec(size, 1.0, 2.0);
 
-	// size()
-	if(x.size() != size){ return 1; }
+	//equal operator (z = rand(1~2))
+	z = randvec;
 
-	//operator[] does not impl.
-	if(x.data()[0] != 123.0){ return 1; }
+	// size check
+	if(x.size() != size || y.size() != size || z.size() != size){ return 1; }
 
-	z = x + y;
-	//std::cout << z.val[0] << std::endl;
+	z += x + y; //rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
+	z[1] = z[1] + 111; //z[1] = rand(1~2) + 124 + 111 = 235+rand(1~2)
 
-	z.print_all();
-
-	std::cout << z[0] << std::endl;
-	z[0] = z[0] + 111;
-	std::cout << z[0] << std::endl;
-
-	std::cout << "pass" << std::endl;
+	if( z[1] < 236 && 237 < z[1]){
+		std::cout << "error, z[1] = " << z[1] << std::endl;
+		z.print_all();
+		//z.print_all("./z.txt");
+		return 1;
+	}
 
 	return 0;
 }
-	//std::random_device random;
