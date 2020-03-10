@@ -49,11 +49,11 @@ namespace monolish{
 
 				/**
 				 * @brief initialize size N vector, value to fill the container
-				 * @param[in] vector length
-				 * @param[val] fill Float type value to all elements
+				 * @param[in] N vector length
+				 * @param[in] value fill Float type value to all elements
 				 **/
-				vector(const size_t N, const Float val){
-					val.resize(N, val);
+				vector(const size_t N, const Float value){
+					val.resize(N, value);
 				}
 
 				/**
