@@ -20,3 +20,50 @@ vector_gpu:
         expire_in: 60min
     tags:
         - gpu
+
+arithmetic_sv_cpu:
+    stage: common
+    script:
+        - cd test/common/arithmetic_sv
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+arithmetic_sv_gpu:
+    stage: common
+    script:
+        - cd test/common/arithmetic_sv
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+arithmetic_vv_cpu:
+    stage: common
+    script:
+        - cd test/common/arithmetic_vv
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+arithmetic_vv_gpu:
+    stage: common
+    script:
+        - cd test/common/arithmetic_vv
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+          

@@ -2,6 +2,8 @@ all:cpu
 
 cpu:
 	make -C common/vector/ cpu
+	make -C common/arithmetic_sv/ cpu
+	make -C common/arithmetic_vv/ cpu
 	#
 	make -C blas/axpy/ cpu
 	make -C blas/axpyz/ cpu
@@ -16,6 +18,8 @@ cpu:
 
 gpu:
 	make -C common/vector/ gpu
+	make -C common/arithmetic_sv/ gpu
+	make -C common/arithmetic_vv/ gpu
 	#
 	make -C blas/axpy/ gpu
 	make -C blas/axpyz/ gpu
@@ -29,7 +33,9 @@ gpu:
 	make -C equation/sparse_lu/ gpu
 
 run_cpu:
-	make -C common/vector/ cpu
+	make -C common/vector/ run_cpu
+	make -C common/arithmetic_sv/ run_cpu
+	make -C common/arithmetic_vv/ run_cpu
 	#
 	make -C blas/axpy/ run_cpu
 	make -C blas/axpyz/ run_cpu
@@ -42,7 +48,9 @@ run_cpu:
 # 	make -C equation/sparse_lu/ run_cpu
 
 run_gpu:
-	make -C common/vector/ gpu
+	make -C common/vector/ run_gpu
+	make -C common/arithmetic_sv/ run_gpu
+	make -C common/arithmetic_vv/ run_gpu
 	#
 	make -C blas/axpy/ run_gpu
 	make -C blas/axpyz/ run_gpu
