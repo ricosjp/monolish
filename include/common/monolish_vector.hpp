@@ -38,14 +38,9 @@ namespace monolish{
 				bool flag = 0; // 1 mean "changed", not impl..
 				std::vector<Float> val;
 
-				/**
-				 * @fn vector()
-				 * @brief constructor
-				 **/
 				vector(){}
 
 				/**
-				 * @fn vector(size_t N)
 				 * @brief initialize size N vector
 				 * @param (N) vector size
 				 **/
@@ -172,11 +167,35 @@ namespace monolish{
 					}
 				}
 
-				void add(const vector<Float> &x, const vector<Float> &y);
+				void operator=(const vector<Float>& vec){
+					val.resize(vec.size());
+					std::copy(vec.val.begin(), vec.val.end(), val.begin());
+				}
+				//vec - scalar
+				vector<Float> operator+(const Float value);
+				void operator+=(const Float value);
 
-				vector operator+(vector<Float>& vec);
-				vector operator+=(vector<Float>& vec);
-				vector operator+(double value);
+				vector<Float> operator-(const Float value);
+				void operator-=(const Float value);
+
+				vector<Float> operator*(const Float value);
+				void operator*=(const Float value);
+
+				vector<Float> operator/(const Float value);
+				void operator/=(const Float value);
+
+				//vec - vec
+				vector<Float> operator+(const vector<Float>& vec);
+				void operator+=(const vector<Float>& vec);
+
+				vector<Float> operator-(const vector<Float>& vec);
+				void operator-=(const vector<Float>& vec);
+
+				vector<Float> operator*(const vector<Float>& vec);
+				void operator*=(const vector<Float>& vec);
+
+				vector<Float> operator/(const vector<Float>& vec);
+				void operator/=(const vector<Float>& vec);
 
 				Float& operator [] ( size_t i){
 					return val[i];

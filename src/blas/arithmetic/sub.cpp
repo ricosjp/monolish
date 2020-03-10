@@ -8,11 +8,12 @@
 
 #define BENCHMARK
 namespace monolish{
+
 	/////////////////////////////////////////////////
 	// vec - scalar
 	/////////////////////////////////////////////////
 	template<>
-	vector<double> vector<double>::operator+(const double value){
+	vector<double> vector<double>::operator-(const double value){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -29,14 +30,14 @@ namespace monolish{
 			{
 				#pragma acc loop independent 
 				for(size_t i = 0 ; i < size; i++){
-					ansd[i] = vald[i] + value;
+					ansd[i] = vald[i] - value;
 				}
 			}
 		}
 		#else
 		#pragma omp parallel for
 		for(size_t i = 0; i < size; i++){
-			ansd[i] = vald[i] + value;
+			ansd[i] = vald[i] - value;
 		}
 		#endif
 
@@ -45,7 +46,7 @@ namespace monolish{
 	}
 
 	template<>
-	void vector<double>::operator+=(const double value){
+	void vector<double>::operator-=(const double value){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -62,14 +63,14 @@ namespace monolish{
 			{
 				#pragma acc loop independent 
 				for(size_t i = 0 ; i < size; i++){
-					vald[i] += value;
+					vald[i] -= value;
 				}
 			}
 		}
 		#else
 		#pragma omp parallel for
 		for(size_t i = 0; i < size; i++){
-			vald[i] += value;
+			vald[i] -= value;
 		}
 		#endif
 
@@ -79,9 +80,8 @@ namespace monolish{
 	/////////////////////////////////////////////////
 	// vec - vec
 	/////////////////////////////////////////////////
-
 	template<>
-	vector<double> vector<double>::operator+(const vector<double>& vec){
+	vector<double> vector<double>::operator-(const vector<double>& vec){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -99,25 +99,25 @@ namespace monolish{
 			{
 				#pragma acc loop independent 
 				for(size_t i = 0 ; i < size; i++){
-					ansd[i] = vecd[i] + vald[i];
+					ansd[i] = vald[i] - vecd[i];
 				}
 			}
 		}
 		#else
 		#pragma omp parallel for
 		for(size_t i = 0; i < size; i++){
-			ansd[i] = vecd[i] + vald[i];
+			ansd[i] = vald[i] - vecd[i];
 		}
 		#endif
-
 	 	logger.func_out();
 		return ans;
 	}
 
 	template<>
-	void vector<double>::operator+=(const vector<double>& vec){
+	void vector<double>::operator-=(const vector<double>& vec){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
+
 
 		const double* vecd = vec.data();
 		double* vald = val.data();
@@ -130,14 +130,14 @@ namespace monolish{
 			{
 				#pragma acc loop independent 
 				for(size_t i = 0 ; i < size; i++){
-					vald[i] += vecd[i];
+					vald[i] = vald[i] - vecd[i];
 				}
 			}
 		}
 		#else
 		#pragma omp parallel for
 		for(size_t i = 0; i < size; i++){
-			vald[i] += vecd[i];
+			vald[i] = vald[i] - vecd[i];
 		}
 		#endif
 
