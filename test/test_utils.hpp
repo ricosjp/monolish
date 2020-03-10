@@ -9,7 +9,6 @@ bool ans_check(double result, double ans, double tol){
 	double err = std::abs(result - ans) / ans;
 
 	if(err < tol){
-		std::cout << "pass!!" << std::endl;
 		return true;
 	}
 	else{
@@ -45,7 +44,6 @@ bool ans_check(
 	}
 
 	if(check){
-		std::cout << "pass!!" << std::endl;
 		return check;
 	}
 	else{
@@ -58,4 +56,3 @@ bool ans_check(
 		return check;
 	}
 }
-

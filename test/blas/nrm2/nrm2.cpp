@@ -4,15 +4,13 @@
 #include"../../test_utils.hpp"
 
 template <typename T>
-T get_ans(monolish::vector<T> &mx, monolish::vector<T> &my){
-	if(mx.size() != my.size()){
-		std::runtime_error("x.size != y.size");
-	}
+T get_ans(monolish::vector<T> &mx){
 	T ans = 0;
 
 	for(size_t i = 0; i < mx.size(); i++){
-		ans += mx[i] * my[i];
+		ans += mx[i] * mx[i];
 	}
+	ans = sqrt(ans);
 
 	return ans;
 }
@@ -22,8 +20,8 @@ bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size
 
 	// check ans
 	if(check_ans == 1){
-		T result = monolish::blas::dot(x, y);
-		T ans = get_ans(x, y);
+		T result = monolish::blas::nrm2(x);
+		T ans = get_ans(x);
 		if(ans_check<T>(result, ans, tol) == false){
 			return false;
 		}
@@ -33,7 +31,7 @@ bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size
 	auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
-		T result = monolish::blas::dot(x, y);
+		T result = monolish::blas::nrm2(x);
 	}
 
 	auto end = std::chrono::system_clock::now();

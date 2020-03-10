@@ -7,6 +7,7 @@ int main(int argc, char** argv){
 		return 1;
 	}
 
+	monolish::set_log_level(2);
 	monolish::equation::cg cg_solver;
 
 	char* file = argv[1];
@@ -18,6 +19,7 @@ int main(int argc, char** argv){
 
 	cg_solver.set_tol(1.0e-12);
 	cg_solver.set_maxiter(A.get_row());
+
 	cg_solver.solve(A, x, b);
 
 	x.print_all();

@@ -9,6 +9,7 @@
 
 namespace monolish{
 	namespace equation{
+//cg///////////////////////
 		class cg{
 			private:
 				int lib = 0;
@@ -29,6 +30,7 @@ namespace monolish{
 				int get_maxiter(){return maxiter;}
 		};
 
+//jacobi////////////////////////////////
 		class jacobi{
 			private:
 			public:

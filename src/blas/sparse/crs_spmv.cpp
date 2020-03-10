@@ -5,9 +5,8 @@
 #include<stdlib.h>
 #include<omp.h>
 
-#include "../../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_blas.hpp"
 
-#define BENCHMARK
 namespace monolish{
 
 	void blas::spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y){
@@ -21,8 +20,8 @@ namespace monolish{
 		}
 
 #if USE_GPU // gpu
-		int n = A.get_row();
-		int nnz = A.get_nnz();
+		size_t n = A.get_row();
+		size_t nnz = A.get_nnz();
 		double* xd = x.data();
 		double* yd = y.data();
 
@@ -64,5 +63,3 @@ namespace monolish{
 		logger.func_out();
 	}
 }
-
-

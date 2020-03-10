@@ -1,10 +1,11 @@
+\page Docker monolish docker
 # monolish docker
-Allgebraをベースにmonolishの共有ライブラリやヘッダファイルがインストールされたイメージ
+[Allgebra][1]をベースにmonolishの共有ライブラリやヘッダファイルがインストールされたイメージ
 
 monolishが/opt/ricos/monolish/$VERSION/にインストールされています．
 
 # サンプルコード
-サンプルコードも/opt/ricos/monolish/$VERSION/samplesに入っています．
+サンプルコードが/opt/ricos/monolish/$VERSION/samplesに入っています．
 
 `make` または`make gpu` して動くかを確認して下さい．
 
@@ -28,5 +29,9 @@ GPUのみ．cusolverを用いたsparse LU．
 
 test.mtxを読み込んで連立一次方程式を解きます．
 
-出力は実行時間と答えのベクトルです．\
+出力は実行時間と答えのベクトルです．
 答えが1になるように作っているので，1以外になったら失敗です．
+
+更に詳しい情報はmonolish本体のtestを参照してください．
+
+[1]: https://gitlab.ritc.jp/ricos/allgebra

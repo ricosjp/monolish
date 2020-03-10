@@ -26,10 +26,17 @@
 namespace monolish{
 	namespace matrix{
 
+		/**
+		 * @brief Coodinate format Matrix
+		 */
 		template<typename Float>
 			class COO{
 				private:
 					int row;
+
+					/**
+					 * @brief neet col = row now
+					 */
 					int col;
 					int nnz;
 
@@ -66,11 +73,17 @@ namespace monolish{
 					std::vector<Float>& get_val_p(){return val;}
 			};
 
-
+		/**
+		 * @brief CRS format Matrix
+		 */
 		template<typename Float>
 			class CRS{
 				private:
 					int row;
+
+					/**
+					 * @brief neet col = row now
+					 */
 					int col;
 					int nnz;
 

@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra/base
+image: registry.ritc.jp/ricos/allgebra
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
@@ -7,6 +7,7 @@ before_script:
 stages:
     - build_lib
     - test_build
+    - common
     - blas_lv1
     - sparse
     - solver
@@ -60,6 +61,7 @@ build_test_gpu:
 #####################################################
 
 include:
+    - '.git-ci/common.yml'
     - '.git-ci/blas1.yml'
     - '.git-ci/spmv.yml'
     - '.git-ci/solver.yml'
@@ -95,3 +97,4 @@ pages:
         expire_in: 20min
     only:
         - master
+        - 32-doxygen-install-guide
