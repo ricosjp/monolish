@@ -32,7 +32,6 @@ int main(int argc, char** argv){
 	//operator[] does not impl.
 	if(x.data()[0] != 123.0){ return 1; }
 
-	z.add(x, y);
 	z = x + y;
 	//std::cout << z.val[0] << std::endl;
 
