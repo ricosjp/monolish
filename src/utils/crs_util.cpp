@@ -32,8 +32,8 @@ namespace monolish{
 
 
 				row_ptr[0] = 0;
-				int c_row = 0;
-				for (int i = 0; i < coo.get_nnz(); i++) {
+				size_t c_row = 0;
+				for (size_t i = 0; i < coo.get_nnz(); i++) {
 
 					if(c_row == coo.row_index[i]){
 						row_ptr[c_row+1] = i+1;
@@ -51,8 +51,8 @@ namespace monolish{
 				Logger& logger = Logger::get_instance();
 				logger.func_in(monolish_func);
 
-				for(int i = 0; i < row; i++){
-					for(int j = row_ptr[i]; j < row_ptr[i+1]; j++){
+				for(size_t i = 0; i < row; i++){
+					for(size_t j = row_ptr[i]; j < row_ptr[i+1]; j++){
 						std::cout << i+1 << " " << col_ind[j]+1 << " " << val[j] << std::endl;
 					}
 				}
@@ -73,7 +73,7 @@ namespace monolish{
 // 			out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
 // 			out << row << " " << row << " " << nnz << std::endl;
 //
-// 			for(int i=0; i<nnz; i++){
+// 			for(size_t i=0; i<nnz; i++){
 // 				out << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
 // 			}
 // 			logger.func_out();
@@ -83,14 +83,14 @@ namespace monolish{
 // 		void COO_matrix<double>::output(){
 // 			Logger& logger = Logger::get_instance();
 // 			logger.func_in(monolish_func);
-// 			for(int i=0; i<nnz; i++){
+// 			for(size_t i=0; i<nnz; i++){
 // 				std::cout << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
 // 			}
 // 			logger.func_out();
 // 		}
 //
 // 	template<>
-// 		double COO_matrix<double>::at(int i, int j){
+// 		double COO_matrix<double>::at(size_t i, size_t j){
 // 			Logger& logger = Logger::get_instance();
 // 			logger.func_in(monolish_func);
 //
@@ -98,7 +98,7 @@ namespace monolish{
 // 				throw std::runtime_error("error");
 // 			}
 //
-// 			for(int i=0; i<nnz; i++){
+// 			for(size_t i=0; i<nnz; i++){
 // 				if( row_index[i] == i && col_index[i] == j){
 // 					return val[i];
 // 				}
@@ -108,7 +108,7 @@ namespace monolish{
 // 		}
 //
 // 	template<>
-// 		void COO_matrix<double>::set_ptr(int rN, int cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v){
+// 		void COO_matrix<double>::set_ptr(size_t rN, size_t cN, std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v){
 // 			col_index = c;
 // 			row_index = r;
 // 			val = v;

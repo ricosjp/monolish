@@ -48,13 +48,13 @@ namespace monolish{
 
 				public:
 
-					std::vector<int> row_index;
-					std::vector<int> col_index;
+					std::vector<size_t> row_index;
+					std::vector<size_t> col_index;
 					std::vector<Float> val;
 
 					COO(){}
 
-					COO(const int N, const int nnz, const int* row, const int* col, const double* value){
+					COO(const size_t N, const size_t nnz, const size_t* row, const size_t* col, const double* value){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
@@ -76,18 +76,18 @@ namespace monolish{
 
 					void output_mm(const char* filename);
 					void output();
-					double at(int i, int j);
-					//void insert(int i, int j, double value);
+					double at(size_t i, size_t j);
+					//void insert(size_t i, size_t j, double value);
 
-					void set_ptr(int rN, int cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
+					void set_ptr(size_t rN, size_t cN, std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v);
 
 					//not logging, only square
-					int get_row(){return row;}
-					int get_col(){return col;}
-					int get_nnz(){return nnz;}
+					size_t get_row(){return row;}
+					size_t get_col(){return col;}
+					size_t get_nnz(){return nnz;}
 
-					std::vector<int>& get_row_p(){return row_index;}
-					std::vector<int>& get_col_p(){return col_index;}
+					std::vector<size_t>& get_row_p(){return row_index;}
+					std::vector<size_t>& get_col_p(){return col_index;}
 					std::vector<Float>& get_val_p(){return val;}
 			};
 
@@ -97,21 +97,21 @@ namespace monolish{
 		template<typename Float>
 			class CRS{
 				private:
-					int row;
+					size_t row;
 
 					/**
 					 * @brief neet col = row now
 					 */
-					int col;
-					int nnz;
+					size_t col;
+					size_t nnz;
 
 					bool gpu_flag = false; // not impl
 					void convert(COO<double> &coo);
 
 				public:
 					std::vector<Float> val;
-					std::vector<int> col_ind;
-					std::vector<int> row_ptr;
+					std::vector<size_t> col_ind;
+					std::vector<size_t> row_ptr;
 
 					CRS(){}
 					CRS(COO<double> &coo){
@@ -119,13 +119,13 @@ namespace monolish{
 					}
 
 					void output();
-					// 				void at(int i, int j);
-					// 				void set_ptr(std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
+					// 				void at(size_t i, size_t j);
+					// 				void set_ptr(std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v);
 
 					//not logging
-					int get_row(){return row;}
-					int get_col(){return col;}
-					int get_nnz(){return nnz;}
+					size_t get_row(){return row;}
+					size_t get_col(){return col;}
+					size_t get_nnz(){return nnz;}
 			};
 	}
 }

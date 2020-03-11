@@ -9,7 +9,9 @@
 
 namespace monolish{
 	namespace equation{
-//cg///////////////////////
+	/**
+	* @brief CG solver class
+	*/
 		class cg{
 			private:
 				int lib = 0;
@@ -21,11 +23,32 @@ namespace monolish{
 			public:
 				cg(){}
 
+				/**
+				 * @brief solve Ax = b by cg method
+				 * @param[in] A vector length
+				 * @param[in] x solution vector
+				 * @param[in] b right hand vector
+				 * @return error code (0 or 1 now)
+				 **/
 				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				//int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
+				/**
+				 * @brief set tolerance (default)
+				 * @param[in] tol tolerance
+				 **/
 				void set_tol(double t){tol = t;}
-				void set_maxiter(int it){maxiter = it;}
 
+				/**
+				 * @brief set max iteration
+				 * @param[in] max iteration
+				 **/
+				void set_maxiter(int max){maxiter = max;}
+
+				/**
+				 * @brief get tolerance
+				 * @return tolerance
+				 **/
 				double get_tol(){return tol;}
 				int get_maxiter(){return maxiter;}
 		};

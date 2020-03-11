@@ -60,7 +60,7 @@ namespace monolish{
 				} while (buf[0] == '%');
 
 				//check size
-				int rowN, colN, NNZ;
+				size_t rowN, colN, NNZ;
 
 				std::istringstream data(buf);
 				data >> rowN >> colN >> NNZ;
@@ -85,8 +85,8 @@ namespace monolish{
 				val.resize(nnz, 0.0);
 
 				//set values
-				for(int i = 0; i < nnz; i++){
-					int ix, jx;
+				for(size_t i = 0; i < nnz; i++){
+					size_t ix, jx;
 					double value;
 
 					getline(ifs, buf);
@@ -111,7 +111,7 @@ namespace monolish{
 				out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
 				out << row << " " << row << " " << nnz << std::endl;
 
-				for(int i=0; i<nnz; i++){
+				for(size_t i=0; i<nnz; i++){
 					out << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
 				}
 				logger.func_out();
@@ -121,14 +121,14 @@ namespace monolish{
 			void COO<double>::output(){
 				Logger& logger = Logger::get_instance();
 				logger.func_in(monolish_func);
-				for(int i=0; i<nnz; i++){
+				for(size_t i=0; i<nnz; i++){
 					std::cout << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
 				}
 				logger.func_out();
 			}
 
 		template<>
-			double COO<double>::at(int i, int j){
+			double COO<double>::at(size_t i, size_t j){
 				Logger& logger = Logger::get_instance();
 				logger.func_in(monolish_func);
 
@@ -136,7 +136,7 @@ namespace monolish{
 					throw std::runtime_error("error");
 				}
 
-				for(int i=0; i<nnz; i++){
+				for(size_t i=0; i<nnz; i++){
 					if( row_index[i] == i && col_index[i] == j){
 						return val[i];
 					}
@@ -146,7 +146,7 @@ namespace monolish{
 			}
 
 		template<>
-			void COO<double>::set_ptr(int rN, int cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v){
+			void COO<double>::set_ptr(size_t rN, size_t cN, std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v){
 				Logger& logger = Logger::get_instance();
 				logger.func_in(monolish_func);
 				col_index = c;
