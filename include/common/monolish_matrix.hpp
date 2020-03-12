@@ -54,7 +54,7 @@ namespace monolish{
 
 					COO(){}
 
-					COO(const size_t N, const size_t nnz, const size_t* row, const size_t* col, const double* value){
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
