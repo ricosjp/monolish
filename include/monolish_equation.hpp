@@ -18,7 +18,7 @@ namespace monolish{
 				void test_func();
 				jacobi(){};
 
-				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				void monolish_jacobi(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 		};
 
 		/**

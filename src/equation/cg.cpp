@@ -12,7 +12,7 @@ namespace monolish{
 		{
 			if(precon_num == 1){
 				equation::jacobi jacobi;
-				jacobi.solve(A,x,b);
+				jacobi.monolish_jacobi(A,x,b);
 			}
 			auto ans = blas::dot(x, b);
 			blas::spmv(A, b, x); // x = Ab
