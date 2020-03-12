@@ -8,8 +8,12 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 
-		for(int iter = 0; iter < maxiter; iter++)
+		for(size_t iter = 0; iter < maxiter; iter++)
 		{
+			if(precon_num == 1){
+				equation::jacobi jacobi;
+				jacobi.monolish_jacobi(A,x,b);
+			}
 			auto ans = blas::dot(x, b);
 			blas::spmv(A, b, x); // x = Ab
 		}

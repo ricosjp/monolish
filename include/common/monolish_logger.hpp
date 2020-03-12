@@ -83,21 +83,20 @@ namespace monolish{
 					times.push_back(std::chrono::system_clock::now());
 
 					//start
-					*pStream << "{" << std::flush;
+					*pStream << "- {" << std::flush;
 
 					//func
-					*pStream << "\"solver\" : " << std::flush;
-					*pStream << "\"" << std::flush;
+					*pStream << "type : solver, " << std::flush;
+					*pStream << "name : " << std::flush;
 					for(int i=0; i < (int)calls.size(); i++)
 						*pStream << calls[i] << "/" << std::flush;
-					*pStream << "\"" << std::flush;
 					*pStream <<  ", " << std::flush;
 
 					// stat
-					*pStream << "\"stat\" : \"IN\"" << std::flush;
+					*pStream << "stat : IN" << std::flush;
 					
 					//end
-					*pStream << "}," << std::endl;
+					*pStream << "}" << std::endl;
 				}
 
 			}
@@ -110,24 +109,23 @@ namespace monolish{
 					}
 
 					//start
-					*pStream << "{" << std::flush;
+					*pStream << "- {" << std::flush;
 
 					//func
-					*pStream << "\"solver\" : " << std::flush;
-					*pStream << "\"" << std::flush;
+					*pStream << "type : solver, " << std::flush;
+					*pStream << "name : " << std::flush;
 					for(int i=0; i < (int)calls.size(); i++)
 						*pStream << calls[i] << "/" << std::flush;
-					*pStream << "\"" << std::flush;
 					*pStream <<  ", " << std::flush;
 
 					//time
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
-					*pStream << "\"stat\" : \"OUT\", " << std::flush;
-					*pStream << "\"time\" : " << sec << std::flush;
+					*pStream << "stat : OUT, " << std::flush;
+					*pStream << "time : " << sec << std::flush;
 
 					//end
-					*pStream << "}," << std::endl;
+					*pStream << "}" << std::endl;
 
 					calls.pop_back();
 					times.pop_back();
@@ -159,23 +157,22 @@ namespace monolish{
 					}
 
 					//start
-					*pStream << "{" << std::flush;
+					*pStream << "- {" << std::flush;
 
 					//func
-					*pStream << "\"func\" : " << std::flush;
-					*pStream << "\"" << std::flush;
+					*pStream << "type : func, " << std::flush;
+					*pStream << "name : " << std::flush;
 					for(int i=0; i < (int)calls.size(); i++)
 						*pStream << calls[i] << "/" << std::flush;
-					*pStream << "\"" << std::flush;
 					*pStream <<  ", " << std::flush;
 
 					//time
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
-					*pStream << "\"time\" : " << sec << std::flush;
+					*pStream << "time : " << sec << std::flush;
 
 					//end
-					*pStream << "}," << std::endl;
+					*pStream << "}" << std::endl;
 
 					calls.pop_back();
 					times.pop_back();
@@ -202,23 +199,22 @@ namespace monolish{
 					}
 
 					//start
-					*pStream << "{" << std::flush;
+					*pStream << "- {" << std::flush;
 
 					//func
-					*pStream << "\"util\" : " << std::flush;
-					*pStream << "\"" << std::flush;
+					*pStream << "type : util, " << std::flush;
+					*pStream << "name : " << std::flush;
 					for(int i=0; i < (int)calls.size(); i++)
 						*pStream << calls[i] << "/" << std::flush;
-					*pStream << "\"" << std::flush;
 					*pStream <<  ", " << std::flush;
 
 					//time
 					auto end = std::chrono::system_clock::now();
 					double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - times[(int)times.size()-1]).count()/1.0e+9;
-					*pStream << "\"time\" : " << sec << std::flush;
+					*pStream << "time : " << sec << std::flush;
 
 					//end
-					*pStream << "}," << std::endl;
+					*pStream << "}" << std::endl;
 
 					calls.pop_back();
 					times.pop_back();
