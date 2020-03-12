@@ -9,14 +9,27 @@
 
 namespace monolish{
 	namespace equation{
-	/**
-	* @brief CG solver class
-	*/
+
+		//jacobi////////////////////////////////
+		class jacobi{
+			private:
+			public:
+				int a;
+				void test_func();
+				jacobi(){};
+
+				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+		};
+
+		/**
+		 * @brief CG solver class
+		 */
 		class cg{
 			private:
 				int lib = 0;
 				double tol = 1.0e-8;
-				int maxiter;
+				size_t maxiter;
+				size_t precon_num=0;
 
 				void monolish_cg(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
@@ -31,10 +44,9 @@ namespace monolish{
 				 * @return error code (0 or 1 now)
 				 **/
 				void solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-				//int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
 				/**
-				 * @brief set tolerance (default)
+				 * @brief set tolerance (default:1.0e-8)
 				 * @param[in] tol tolerance
 				 **/
 				void set_tol(double t){tol = t;}
@@ -43,23 +55,33 @@ namespace monolish{
 				 * @brief set max iteration
 				 * @param[in] max iteration
 				 **/
-				void set_maxiter(int max){maxiter = max;}
+				void set_maxiter(size_t max){maxiter = max;}
+
+				/**
+				 * @brief set precon
+				 * @param[in] precondition number (0:none, 1:jacobi)
+				 **/
+				void set_precon(size_t precondition){precon_num = precondition;}
 
 				/**
 				 * @brief get tolerance
 				 * @return tolerance
 				 **/
 				double get_tol(){return tol;}
-				int get_maxiter(){return maxiter;}
+
+				/**
+				 * @brief get maxiter
+				 * @return  maxiter
+				 **/
+				size_t get_maxiter(){return maxiter;}
+
+				/**
+				 * @brief get precondition number
+				 * @return  maxiter
+				 **/
+				size_t get_maxprecon(){return precon_num;}
 		};
 
-//jacobi////////////////////////////////
-		class jacobi{
-			private:
-			public:
-				int a;
-				void test_func();
-		};
 
 		class ilu{
 			private:

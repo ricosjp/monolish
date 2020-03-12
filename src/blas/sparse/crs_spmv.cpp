@@ -26,8 +26,8 @@ namespace monolish{
 		double* yd = y.data();
 
 		double* vald = A.val.data();
-		size_t* rowd = A.row_ptr.data();
-		size_t* cold = A.col_ind.data();
+		int* rowd = A.row_ptr.data();
+		int* cold = A.col_ind.data();
 
 		#pragma acc data pcopyin(xd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz]) copyout(yd[0:n]) 
 		{
@@ -55,7 +55,7 @@ namespace monolish{
 
 	#pragma omp parallel for
 		for(size_t i = 0 ; i < A.get_row(); i++)
-			for(size_t j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++)
+			for(size_t j = (int)A.row_ptr[i] ; j < (int)A.row_ptr[i+1]; j++)
 				y.val[i] += A.val[j] * x.val[A.col_ind[j]];
 
 #endif

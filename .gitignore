@@ -22,4 +22,4 @@ doc/html/
 doc/latex/
 docker/lib/
 docker/include/
-monolish_test_log.txt
+monolish_test.log

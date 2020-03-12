@@ -16,7 +16,7 @@ namespace monolish{
 		template<>
 			void CRS<double>::convert(COO<double> &coo){
 				Logger& logger = Logger::get_instance();
-				logger.func_in(monolish_func);
+				logger.util_in(monolish_func);
 
 				//todo coo err check (only square)
 
@@ -35,7 +35,7 @@ namespace monolish{
 				size_t c_row = 0;
 				for (size_t i = 0; i < coo.get_nnz(); i++) {
 
-					if(c_row == coo.row_index[i]){
+					if((int)c_row == coo.row_index[i]){
 						row_ptr[c_row+1] = i+1;
 					}
 					else{
@@ -43,21 +43,30 @@ namespace monolish{
 						row_ptr[c_row+1] = i+1;
 					}
 				}
-				logger.func_out();
+				logger.util_out();
 			}
 
 		template<>
 			void CRS<double>::output(){
 				Logger& logger = Logger::get_instance();
-				logger.func_in(monolish_func);
+				logger.util_in(monolish_func);
 
 				for(size_t i = 0; i < row; i++){
-					for(size_t j = row_ptr[i]; j < row_ptr[i+1]; j++){
+					for(size_t j = (int)row_ptr[i]; j < (int)row_ptr[i+1]; j++){
 						std::cout << i+1 << " " << col_ind[j]+1 << " " << val[j] << std::endl;
 					}
 				}
 
-				logger.func_out();
+				logger.util_out();
+			}
+
+		template<>
+			std::vector<double> CRS<double>::get_diag(){
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+				std::vector<double> vec(row, 1.0);
+				logger.util_out();
+				return vec;
 			}
 	}
 }

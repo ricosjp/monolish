@@ -86,7 +86,7 @@ namespace monolish{
 					*pStream << "- {" << std::flush;
 
 					//func
-					*pStream << "type : solver," << std::flush;
+					*pStream << "type : solver, " << std::flush;
 					*pStream << "name : " << std::flush;
 					for(int i=0; i < (int)calls.size(); i++)
 						*pStream << calls[i] << "/" << std::flush;

@@ -48,8 +48,8 @@ namespace monolish{
 
 				public:
 
-					std::vector<size_t> row_index;
-					std::vector<size_t> col_index;
+					std::vector<int> row_index;
+					std::vector<int> col_index;
 					std::vector<Float> val;
 
 					COO(){}
@@ -79,15 +79,15 @@ namespace monolish{
 					double at(size_t i, size_t j);
 					//void insert(size_t i, size_t j, double value);
 
-					void set_ptr(size_t rN, size_t cN, std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v);
+					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
 
 					//not logging, only square
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
 
-					std::vector<size_t>& get_row_p(){return row_index;}
-					std::vector<size_t>& get_col_p(){return col_index;}
+					std::vector<int>& get_row_p(){return row_index;}
+					std::vector<int>& get_col_p(){return col_index;}
 					std::vector<Float>& get_val_p(){return val;}
 			};
 
@@ -110,8 +110,8 @@ namespace monolish{
 
 				public:
 					std::vector<Float> val;
-					std::vector<size_t> col_ind;
-					std::vector<size_t> row_ptr;
+					std::vector<int> col_ind;
+					std::vector<int> row_ptr;
 
 					CRS(){}
 					CRS(COO<double> &coo){
@@ -126,6 +126,8 @@ namespace monolish{
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
+
+					std::vector<double> get_diag();
 			};
 	}
 }
