@@ -3,7 +3,7 @@
 # ユーザ向け：git cloneからサンプルの実行まで
 
 ### 実行環境
-現状ではCUDA関係のライブラリのバージョンなどの成約から **Docker環境以外での利用は考えてません** ．
+現状ではCUDA関係のライブラリのバージョンなどの制約から **Docker環境以外での利用は考えてません** ．
 monolishが配布しているコンテナを利用するか，DockerFileから `FROM` して利用します．
 
 コンテナのリポジトリはこちら:[gitlab](https://gitlab.ritc.jp/ricos/monolish/container_registry)
