@@ -21,7 +21,7 @@
 namespace monolish{
 
 	//mumps is choushi warui..
-	void equation::LU::mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	int equation::LU::mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 		if( 1 ){
@@ -91,12 +91,13 @@ namespace monolish{
 // 		ierr = MPI_Finalize();
 //
 #endif
-// 		logger.func_out();
+ 		logger.func_out();
+		return 0;
 
 	}
 
 
-	void equation::LU::cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	int equation::LU::cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -147,21 +148,25 @@ namespace monolish{
 
 #endif
 		logger.func_out();
+		return 0;
 
 	}
 
-	void equation::LU::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	int equation::LU::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
+		int ret = -1;
+
 		if(lib == 0){
-			mumps_LU(A, x, b);
+			ret = mumps_LU(A, x, b);
 		}
 		else if(lib == 1){
-			cusolver_LU(A, x, b);
+			ret = cusolver_LU(A, x, b);
 		}
 
 		logger.func_out();
+		return ret;
 	}
 
 }

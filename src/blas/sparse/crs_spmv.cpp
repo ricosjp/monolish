@@ -34,13 +34,13 @@ namespace monolish{
 			#pragma acc kernels
 			{
 				#pragma acc loop independent 
-				for(size_t i = 0 ; i < n; i++){
+				for(int i = 0 ; i < n; i++){
 					yd[i] = 0;
 				}
 
 				#pragma acc loop independent
-				for(size_t i = 0 ; i < n; i++){
-					for(size_t j = rowd[i] ; j < rowd[i+1]; j++){
+				for(int i = 0 ; i < n; i++){
+					for(int j = rowd[i] ; j < rowd[i+1]; j++){
 						yd[i] += vald[j] * xd[cold[j]];
 					}
 				}
@@ -54,8 +54,8 @@ namespace monolish{
 			y.val[i] = 0;
 
 	#pragma omp parallel for
-		for(size_t i = 0 ; i < A.get_row(); i++)
-			for(size_t j = (int)A.row_ptr[i] ; j < (int)A.row_ptr[i+1]; j++)
+		for(int i = 0 ; i < (int)A.get_row(); i++)
+			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++)
 				y.val[i] += A.val[j] * x.val[A.col_ind[j]];
 
 #endif

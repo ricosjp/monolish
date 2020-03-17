@@ -27,8 +27,8 @@
 namespace monolish{
 
 	/**
-	* @brief std::vector-like vector class
-	*/
+	 * @brief std::vector-like vector class
+	 */
 	template<typename Float>
 		class vector{
 			private:
@@ -195,20 +195,4 @@ namespace monolish{
 					return val[i];
 				}
 		};
-
-	/**
-	 * @brief create random vector
-	 * @return ramdom vector 
-	 **/
-	template<typename T>
-		void random_vector(vector<T>& vec, const T min, const T max){
-			// rand (0~1)
-			std::random_device random;
-			std::mt19937 mt(random());
-			std::uniform_real_distribution<> rand(min,max);
-
-			for(size_t i=0; i<vec.size(); i++){
-				vec[i] = rand(mt);
-			}
-		}
 }

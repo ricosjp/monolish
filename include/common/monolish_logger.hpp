@@ -221,16 +221,4 @@ namespace monolish{
 				}
 			}
 	};
-
-	/**
-	* @brief      0 : none<br> 1 : all<br> 2 : solver<br>2 : solver, func <br>3 : solver, func, util
-	* @param[in] Level Log level
-	*/
-	void set_log_level(size_t Level);
-
-	/**
-	* @brief set output logfile name (defailt=standard I/O)
-	* @param[in] filename log file name (if not set filename, output standard I/O)
-	*/
- 	void set_log_filename(std::string filename);
 }

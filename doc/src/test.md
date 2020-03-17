@@ -3,7 +3,7 @@
 # ユーザ向け：git cloneからサンプルの実行まで
 
 ### 実行環境
-現状ではCUDA関係のライブラリのバージョンなどの成約から **Docker環境以外での利用は考えてません** ．
+現状ではCUDA関係のライブラリのバージョンなどの制約から **Docker環境以外での利用は考えてません** ．
 monolishが配布しているコンテナを利用するか，DockerFileから `FROM` して利用します．
 
 コンテナのリポジトリはこちら:[gitlab](https://gitlab.ritc.jp/ricos/monolish/container_registry)
@@ -56,5 +56,6 @@ CRS形式の疎行列とベクトルを入力すればCG法を実行できる気
 * operator系はGPU対応していますが正直転送するので遅いです．．．
 
 [vec]: https://ricos.pages.ritc.jp/monolish/d8/df5/vector__common_8cpp_source.html
+[mat]: https://ricos.pages.ritc.jp/monolish/d8/df5/matrix__common_8cpp_source.html
 [slu]: https://ricos.pages.ritc.jp/monolish/d9/d44/slu_8cpp_source.html
 [cg]: https://ricos.pages.ritc.jp/monolish/d5/d1e/test_2equation_2cg_2cg_8cpp_source.html

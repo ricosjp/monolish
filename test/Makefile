@@ -47,7 +47,7 @@ run_cpu:
 	make -C blas/dot/ run_cpu
 	make -C blas/nrm2/ run_cpu
 	make -C blas/spmv/ run_cpu
-# 	make -C equation/cg/ run_cpu
+	make -C equation/cg/ run_cpu
 # 	make -C equation/sparse_lu/ run_cpu
 
 run_gpu:

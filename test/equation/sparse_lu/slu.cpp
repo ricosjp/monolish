@@ -13,6 +13,8 @@ int main(int argc, char** argv){
 	char* file = argv[1];
 	int check_ans = atoi(argv[2]);
 
+	monolish::util::set_log_level(2);
+
 	monolish::equation::LU LU_solver;
 
 	monolish::matrix::COO<double> COO(file);
@@ -23,8 +25,8 @@ int main(int argc, char** argv){
 	monolish::vector<double> b(A.get_row(), 0.0);
 	monolish::blas::spmv(A, ans, b);
 
-	// initial x is 5.0 (Todo: change rand)
-	monolish::vector<double> x(A.get_row(), 5.0);
+	// initial x is rand(0~1)
+	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
 
 	LU_solver.solve(A, x, b);
 
