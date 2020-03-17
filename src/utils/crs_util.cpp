@@ -52,7 +52,7 @@ namespace monolish{
 				logger.util_in(monolish_func);
 
 				for(size_t i = 0; i < row; i++){
-					for(size_t j = (int)row_ptr[i]; j < (int)row_ptr[i+1]; j++){
+					for(size_t j = (size_t)row_ptr[i]; j < (size_t)row_ptr[i+1]; j++){
 						std::cout << i+1 << " " << col_ind[j]+1 << " " << val[j] << std::endl;
 					}
 				}
