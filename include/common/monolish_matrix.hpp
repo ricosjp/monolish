@@ -82,6 +82,7 @@ namespace monolish{
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
 
 					//not logging, only square
+					size_t size(){return row;}
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
@@ -123,6 +124,7 @@ namespace monolish{
 					// 				void set_ptr(std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v);
 
 					//not logging
+					size_t size(){return row;}
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}

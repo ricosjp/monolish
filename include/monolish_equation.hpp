@@ -19,6 +19,7 @@ namespace monolish{
 				size_t miniter = SIZE_MAX;
 				size_t maxiter = 0;
 				size_t precon_num=0;
+				size_t resid_method=0;
 				
 				/**
 				 * @brief create q = Ap
@@ -29,6 +30,8 @@ namespace monolish{
 				 * @brief apply q = Ap
 				 **/
 				int precon_apply(matrix::CRS<double> &A, vector<double> &p, vector<double> &q);
+
+				double get_residual(vector<double>& x);
 
 			public:
 
@@ -68,6 +71,12 @@ namespace monolish{
 				 **/
 				void set_precon(size_t precondition){precon_num = precondition;}
 
+				/**
+				 * @brief set residual method(default=0)
+				 * @param[in] precondition number (0:nrm2)
+				 **/
+				void set_residual_method(size_t precondition){precon_num = precondition;}
+
 
 				///////////////////////////////////////////////////////////////////
 
@@ -100,6 +109,12 @@ namespace monolish{
 				 * @return  precondition number
 				 **/
 				size_t get_precon(){return precon_num;}
+
+				/**
+				 * @brief get residual method(default=0)
+				 * @return residual method number
+				 **/
+				size_t get_residual_method(){return resid_method;}
 
 		};
 
@@ -163,5 +178,6 @@ namespace monolish{
 				int Pinit(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int Papply(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 		};
+
 	}
 }
