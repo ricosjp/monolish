@@ -41,7 +41,6 @@ bool test(monolish::matrix::CRS<T> A, monolish::vector<T> x, monolish::vector<T>
 	auto start = std::chrono::system_clock::now();
 
 	for(int i = 0; i < iter; i++){
-		std::cout << "iter:" << i << "\t" <<std::flush;
 		monolish::blas::spmv(A, x, y);
 	}
 
@@ -64,17 +63,16 @@ int main(int argc, char** argv){
 	int iter = atoi(argv[2]);
 	int check_ans = atoi(argv[3]);
 
+	monolish::util::set_log_level(2);
+
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
 
-	std::random_device random;
-	monolish::vector<double> x(A.get_row(), 1);
-	monolish::vector<double> y(A.get_row(), 1);
+	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
+	monolish::vector<double> y(A.get_row(), 0.0, 1.0);
 
 	bool result;
 	if( test<double>(A, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
-
-	y.print_all();
 
 	return 0;
 }

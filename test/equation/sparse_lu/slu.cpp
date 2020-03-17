@@ -13,6 +13,8 @@ int main(int argc, char** argv){
 	char* file = argv[1];
 	int check_ans = atoi(argv[2]);
 
+	monolish::util::set_log_level(2);
+
 	monolish::equation::LU LU_solver;
 
 	monolish::matrix::COO<double> COO(file);
