@@ -106,15 +106,15 @@ namespace monolish{
 		/**
 		 * @brief CG solver class
 		 */
-		class cg : public solver{
+		class CG : public solver{
 			private:
-				int monolish_cg(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
 			public:
 				using solver::solver;
 
 				/**
-				 * @brief solve Ax = b by cg method(lib=0: monolish)
+				 * @brief solve Ax = b by CG method(lib=0: monolish)
 				 * @param[in] A CRS format Matrix
 				 * @param[in] x solution vector
 				 * @param[in] b right hand vector
@@ -144,10 +144,10 @@ namespace monolish{
 		};
 
 		//jacobi////////////////////////////////
-		class jacobi : public solver{
+		class Jacobi : public solver{
 			private:
-				int monolish_jacobi(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-				int monolish_Pjacobi(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int monolish_Jacobi(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int monolish_PJacobi(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 			public:
 				using solver::solver;
 

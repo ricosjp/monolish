@@ -16,14 +16,14 @@ int main(int argc, char** argv){
 	monolish::vector<double> x(A.get_row(), 0.0);
 	monolish::vector<double> b(A.get_row(), 1.0);
 
-	monolish::equation::cg cg_solver;
+	monolish::equation::CG CG_solver;
 
-	cg_solver.set_tol(1.0e-12);
-	cg_solver.set_lib(0);
-	cg_solver.set_precon(1);
-	cg_solver.set_maxiter(A.get_row());
+	CG_solver.set_tol(1.0e-12);
+	CG_solver.set_lib(0);
+	CG_solver.set_precon(1);
+	CG_solver.set_maxiter(A.get_row());
 
-	cg_solver.solve(A, x, b);
+	CG_solver.solve(A, x, b);
 
 	x.print_all();
 

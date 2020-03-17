@@ -9,7 +9,7 @@ namespace monolish{
 			case 0:
 				break;
 			case 1:
-				equation::jacobi precon;
+				equation::Jacobi precon;
 				precon.Pinit(A, p, q);
 				break;
 		}

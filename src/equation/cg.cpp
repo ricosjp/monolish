@@ -4,15 +4,15 @@
 
 namespace monolish{
 
-	int equation::cg::monolish_cg(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	int equation::CG::monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 
 		for(size_t iter = 0; iter < maxiter; iter++)
 		{
 			if(precon_num == 1){
-				equation::jacobi jacobi;
-				int Pret = jacobi.solve(A, x, b);
+				equation::Jacobi Jacobi;
+				int Pret = Jacobi.solve(A, x, b);
 			}
 			auto ans = blas::dot(x, b);
 			blas::spmv(A, b, x); // x = Ab
@@ -26,13 +26,13 @@ namespace monolish{
 
 	}
 
-	int equation::cg::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	int equation::CG::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 
 		int ret=-1;
 		if(lib == 0){
-			ret = monolish_cg(A, x, b);
+			ret = monolish_CG(A, x, b);
 		}
 
 		logger.solver_out();
