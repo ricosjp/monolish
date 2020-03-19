@@ -13,6 +13,12 @@ run_cpu:
 
 run_gpu:
 	$(PROFILER )./$(FUNC)_gpu.out ../../test.mtx
+
+log_cpu:
+	python3 logger.py monolish_test.log logging_result_cpu.html
+
+log_gpu:
+	python3 logger.py monolish_test.log logging_result_gpu.html
 	
 clean:
-	- rm *.out
+	- rm *.out *.log *.html
