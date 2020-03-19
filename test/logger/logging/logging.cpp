@@ -9,7 +9,7 @@ int main(int argc, char** argv){
 
 	monolish::util::set_log_level(3);
 	monolish::util::set_log_filename("monolish_test.log");
-	monolish::equation::cg cg_solver;
+	monolish::equation::CG cg_solver;
 
 	char* file = argv[1];
 	monolish::matrix::COO<double> COO(file);
