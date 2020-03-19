@@ -23,7 +23,7 @@ namespace monolish{
 		size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copy(xd[0:size])
+		#pragma acc data pcopy(xd[0:size])
 		#pragma acc host_data use_device(xd)
 		{
 			cublasDscal(size, alpha, xd, 1);

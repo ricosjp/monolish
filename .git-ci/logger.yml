@@ -8,8 +8,6 @@ logging_cpu:
         paths:
             - test/
         expire_in: 60min
-    tags:
-        - cpu
 
 logging_gpu:
     stage: logger
