@@ -13,6 +13,7 @@ cpu:
 	make -C blas/dot/ cpu
 	make -C blas/nrm2/ cpu
 	make -C blas/spmv/ cpu
+	make -C blas/scal_crs/ cpu
 	#
 	make -C equation/cg/ cpu
 	make -C equation/sparse_lu/ cpu
@@ -32,6 +33,7 @@ gpu:
 	make -C blas/dot/ gpu
 	make -C blas/nrm2/ gpu
 	make -C blas/spmv/ gpu
+	make -C blas/scal_crs/ gpu
 	#
 	make -C equation/cg/ gpu
 	make -C equation/sparse_lu/ gpu
@@ -51,6 +53,7 @@ run_cpu:
 	make -C blas/dot/ run_cpu
 	make -C blas/nrm2/ run_cpu
 	make -C blas/spmv/ run_cpu
+	make -C blas/scal_crs/ run_cpu
 	#
 	make -C equation/cg/ run_cpu
 # 	make -C equation/sparse_lu/ run_cpu
@@ -70,6 +73,7 @@ run_gpu:
 	make -C blas/dot/ run_gpu
 	make -C blas/nrm2/ run_gpu
 	make -C blas/spmv/ run_gpu
+	make -C blas/scal_crs/ run_gpu
 	#
 	make -C equation/sparse_lu/ run_gpu
 # 	make -C equation/cg/ run_gpu

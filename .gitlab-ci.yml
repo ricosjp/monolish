@@ -99,4 +99,4 @@ pages:
         expire_in: 20min
     only:
         - master
-        - 32-doxygen-install-guide
+        - 50-small_bug_fix

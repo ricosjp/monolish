@@ -13,7 +13,8 @@ int main(int argc, char** argv){
 	char* file = argv[1];
 	int check_ans = atoi(argv[2]);
 
-	monolish::util::set_log_level(2);
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	monolish::equation::LU LU_solver;
 

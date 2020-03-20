@@ -9,6 +9,10 @@ int main(int argc, char** argv){
 	const int N = 3;
 	const int NNZ = 8;
 
+	// logger option
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
+
 	// create C-pointer COO Matrix (same as test.mtx, but pointer is 0 origin!!)
 	double* val_array = (double*)malloc(sizeof(double) * NNZ);
 	int*    col_array = (int*)malloc(sizeof(int) * NNZ);

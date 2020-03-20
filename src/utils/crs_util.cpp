@@ -1,4 +1,5 @@
 #include "../../include/common/monolish_matrix.hpp" 
+#include "../../include/common/monolish_vector.hpp" 
 #include "../../include/common/monolish_logger.hpp" 
 #include <cassert>
 #include <fstream>
@@ -61,10 +62,10 @@ namespace monolish{
 			}
 
 		template<>
-			std::vector<double> CRS<double>::get_diag(){
+			vector<double> CRS<double>::get_diag(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
-				std::vector<double> vec(row, 1.0);
+				vector<double> vec(row, 1.0);
 				logger.util_out();
 				return vec;
 			}

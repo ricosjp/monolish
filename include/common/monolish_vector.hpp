@@ -156,9 +156,11 @@ namespace monolish{
 					}
 				}
 
+				/////////////////////////////////////////////////////////////////////////////
+
 				/**
 				 * @brief copy vector, It is same as copy()
-				 * @param[in] filename source vector
+				 * @param[in] vec source vector
 				 * @return output vector
 				 **/
 				void operator=(const vector<Float>& vec){
@@ -191,8 +193,27 @@ namespace monolish{
 				vector<Float> operator/(const vector<Float>& vec);
 				void operator/=(const vector<Float>& vec);
 
+
 				Float& operator [] ( size_t i){
 					return val[i];
+				}
+
+				// todo: omp
+				bool operator==(const vector<Float>& vec){
+					if(val.size() != vec.size()) return false;
+					for(size_t i=0; i<vec.size(); i++){
+						if(val[i] != vec.val[i]) return false;
+					}
+					return true;
+				}
+
+				// todo: omp
+				bool operator!=(const vector<Float>& vec){
+					if(val.size() != vec.size()) return true;
+					for(size_t i=0; i<vec.size(); i++){
+						if(val[i] != vec.val[i]) return true;
+					}
+					return false;
 				}
 		};
 }

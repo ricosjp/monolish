@@ -13,6 +13,9 @@ int main(int argc, char** argv){
 	int size = atoi(argv[1]);
 	if(size<=1){return 1;}
 
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
+
 	//(x) monolish::vector = std::vector  = 123, 123, ..., 123
 	std::vector<double> std_vec_x(size, 123.0);
   	monolish::vector<double> x(std_vec_x);
