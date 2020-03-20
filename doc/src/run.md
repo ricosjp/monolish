@@ -32,20 +32,28 @@ Sorted COOをMM形式のファイル，または{double val, int row, int col}�
 ## ソルバ関係
 
 ### monolish::equation::LU クラス
-CRS形式の疎行列とベクトルを入力すればcuSolverのsparse LUを実行できる(CPUのみ)
+CRS形式の疎行列とベクトルを入力すればcuSolverのsparse LUを実行できる(GPUのみ)
 ([関連コード][slu])
 
 ### monolish::equation::cg クラス
-CRS形式の疎行列とベクトルを入力すればCG法を実行できる気がする．．．
+CRS形式の疎行列とベクトルを入力すればCG法を実行できる気がする(いまはできない)．．．
 ([関連コード][cg])
 
 ## ログ関係の関数
+loggerを用いて実行時性能のログが取れる
+([関連コード][log])
 
 ### monolish::set_log_level() 関数
 備考: 0が出力なし，1がソルバ全体時間のみ，2がBLASも出力，3がUtil関係含めて全部出力
 
 ### monolish::set_log_filename() 関数
 備考: 設定しなければstandard I/Oに出力する
+
+## 多言語からの呼び出し
+
+### Fortran
+Fortranから呼び出すことができる
+([関連コード][fort])
 
 ## かなしいこと
 * iterationのログ関係がないです
@@ -59,3 +67,5 @@ CRS形式の疎行列とベクトルを入力すればCG法を実行できる気
 [mat]: https://ricos.pages.ritc.jp/monolish/d8/df5/matrix__common_8cpp_source.html
 [slu]: https://ricos.pages.ritc.jp/monolish/d9/d44/slu_8cpp_source.html
 [cg]: https://ricos.pages.ritc.jp/monolish/d5/d1e/test_2equation_2cg_2cg_8cpp_source.html
+[log]: https://ricos.pages.ritc.jp/monolish/dd/daf/logging_8cpp.html
+[fort]: https://ricos.pages.ritc.jp/monolish/dir_fcd689f22289a4578a1d60ff223a2f72.html
