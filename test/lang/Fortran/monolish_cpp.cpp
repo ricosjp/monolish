@@ -13,12 +13,10 @@ int monolish_spmv_(int *n, int* nnz, int row[], int col[], double val[], double 
 	int NNZ = *nnz;
 
 	monolish::matrix::COO<double> COO(N, NNZ, row, col, val);
-	monolish::matrix::CRS<double> A;
-	A.convert(COO);
+	monolish::matrix::CRS<double> A(COO);
+
 	monolish::vector x(xp, xp+N);
 	monolish::vector y(xp, xp+N);
-
-	COO.output();
 
 	monolish::blas::spmv(A, x, y);
 
