@@ -1,0 +1,24 @@
+logging_cpu:
+    stage: logger
+    script:
+        - cd test/logger/logging
+        - make run_cpu
+        - make log_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+logging_gpu:
+    stage: logger
+    script:
+        - cd test/logger/logging
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+        - make log_gpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu

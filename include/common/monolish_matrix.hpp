@@ -24,6 +24,7 @@
 #endif
 
 namespace monolish{
+template<typename Float> class vector;
 	namespace matrix{
 
 		/**
@@ -87,9 +88,30 @@ namespace monolish{
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
 
-					std::vector<int>& get_row_p(){return row_index;}
-					std::vector<int>& get_col_p(){return col_index;}
-					std::vector<Float>& get_val_p(){return val;}
+					/**
+					 * @brief matrix copy
+					 * @return copied COO matrix
+					 **/
+					COO copy(){
+						COO tmp(row, nnz, row_index.data(), col_index.data(), val.data());
+						return tmp;
+					}
+
+					std::vector<int>& get_row_ptr(){return row_index;}
+					std::vector<int>& get_col_ptr(){return col_index;}
+					std::vector<Float>& get_val_ptr(){return val;}
+
+     				/////////////////////////////////////////////////////////////////////////////
+
+					/**
+					 * @brief copy matrix, It is same as copy()
+					 * @param[in] filename source
+					 * @return output vector
+					 **/
+					void operator=(const COO<Float>& mat){
+						mat = copy();
+					}
+
 			};
 
 		/**
@@ -107,12 +129,13 @@ namespace monolish{
 					size_t nnz;
 
 					bool gpu_flag = false; // not impl
-					void convert(COO<double> &coo);
 
 				public:
 					std::vector<Float> val;
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
+
+					void convert(COO<double> &coo);
 
 					CRS(){}
 					CRS(COO<double> &coo){
@@ -120,16 +143,45 @@ namespace monolish{
 					}
 
 					void output();
-					// 				void at(size_t i, size_t j);
-					// 				void set_ptr(std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v);
 
-					//not logging
 					size_t size(){return row;}
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
 
-					std::vector<double> get_diag();
+     				/////////////////////////////////////////////////////////////////////////////
+					vector<double> get_diag();
+					vector<double> get_row(size_t i);
+					vector<double> get_col(size_t j);
+
+     				/////////////////////////////////////////////////////////////////////////////
+
+					/**
+					 * @brief matrix copy
+					 * @return copied CRS matrix
+					 **/
+					CRS copy(){
+						CRS<double> tmp;
+						std::copy(row_ptr.data(), row_ptr.data()+(row+1), tmp.row_ptr.begin());
+						std::copy(col_ind.data(), col_ind.data()+nnz, tmp.col_ind.begin());
+						std::copy(val.data(), val.data()+nnz, tmp.val.begin());
+						return tmp;
+					}
+
+					/**
+					 * @brief copy matrix, It is same as copy()
+					 * @param[in] filename source
+					 * @return output vector
+					 **/
+					void operator=(const COO<Float>& mat){
+						mat = copy();
+					}
+
+					//mat - vec
+					vector<Float> operator*(vector<Float>& vec);
+
+					//mat - scalar
+					CRS<Float> operator*(const Float value);
 			};
 	}
 }

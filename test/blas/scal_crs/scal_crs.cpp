@@ -3,37 +3,22 @@
 #include"monolish_blas.hpp"
 
 template <typename T>
-void get_ans(monolish::matrix::CRS<T> &A, monolish::vector<T> &mx, monolish::vector<T> &my){
+void get_ans(monolish::matrix::CRS<T> &A, const double alpha){
 
-	if(mx.size() != my.size()){
-		std::runtime_error("x.size != y.size");
-	}
-
-	T* x = mx.data();
-	T* y = my.data();
-
-	for(int i = 0; i < my.size(); i++)
-		y[i] = 0;
-
-	for(int i = 0; i < mx.size(); i++){
-		for(int j = A.row_ptr[i]; j < A.row_ptr[i+1]; j++){
-			y[i] += A.val[j] * x[A.col_ind[j]];
-		}
-	}
+	for(int i = 0; i < A.get_nnz(); i++)
+		A.val[i] = alpha * A.val[i];
 }
 
 template <typename T>
-bool test(monolish::matrix::CRS<T> A, monolish::vector<T> x, monolish::vector<T> y, double tol, int iter, int check_ans){
+bool test(monolish::matrix::CRS<T> A, double alpha, double tol, int iter, int check_ans){
 
-	monolish::vector<double> ansy(A.get_row());
-	ansy = y.copy();
+	monolish::matrix::CRS<double> ansA = A;
 
-
-	monolish::blas::spmv(A, x, y);
+	monolish::blas::mscal(alpha, A);
 
 	if(check_ans == 1){
-		get_ans(A, x, ansy);
-		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
+		get_ans(ansA, alpha);
+		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
 			return false;
 		};
 	}
@@ -41,7 +26,7 @@ bool test(monolish::matrix::CRS<T> A, monolish::vector<T> x, monolish::vector<T>
 	auto start = std::chrono::system_clock::now();
 
 	for(int i = 0; i < iter; i++){
-		monolish::blas::spmv(A, x, y);
+		monolish::blas::mscal(alpha, A);
 	}
 
 	auto end = std::chrono::system_clock::now();
@@ -69,11 +54,10 @@ int main(int argc, char** argv){
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
 
-	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
-	monolish::vector<double> y(A.get_row(), 0.0, 1.0);
+	double alpha = 123.0;
 
 	bool result;
-	if( test<double>(A, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
+	if( test<double>(A, alpha, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

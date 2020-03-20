@@ -7,6 +7,8 @@ monolishが/opt/ricos/monolish/$VERSION/にインストールされています�
 # サンプルコード
 サンプルコードが/opt/ricos/monolish/$VERSION/samplesに入っています．
 
+**現在サンプルは実行確認程度の意味しかありません．詳しいテストや使い方はmonolish本体のtest/を見てください**
+
 `make` または`make gpu` して動くかを確認して下さい．
 
 サンプルは本家の`test/` を最小化したもので，

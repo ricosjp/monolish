@@ -8,7 +8,8 @@ int main(int argc, char** argv){
 		return 1;
 	}
 
-	monolish::util::set_log_level(2);
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	char* file = argv[1];
 	monolish::matrix::COO<double> COO(file);

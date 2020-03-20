@@ -11,6 +11,7 @@ stages:
     - blas_lv1
     - sparse
     - solver
+    - logger
     - deploy
       
 build_cpu:
@@ -65,6 +66,7 @@ include:
     - '.git-ci/blas1.yml'
     - '.git-ci/spmv.yml'
     - '.git-ci/solver.yml'
+    - '.git-ci/logger.yml'
 
 #####################################################
 #####################################################
@@ -97,4 +99,4 @@ pages:
         expire_in: 20min
     only:
         - master
-        - 32-doxygen-install-guide
+        - 50-small_bug_fix

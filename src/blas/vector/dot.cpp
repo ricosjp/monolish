@@ -30,7 +30,7 @@ namespace monolish{
 		const size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copyin(xd[0:size], yd[0:size])
+		#pragma acc data pcopyin(xd[0:size], yd[0:size]) 
 		#pragma acc host_data use_device(xd, yd)
 		{
 			ans = cublasDdot(size, xd, 1, yd, 1);
@@ -58,7 +58,7 @@ namespace monolish{
 		const size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copyin(xd[0:size], yd[0:size])
+		#pragma acc data pcopyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
 		{
 			ans = cublasSdot(size, xd, 1, yd, 1);

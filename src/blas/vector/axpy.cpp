@@ -28,7 +28,7 @@ namespace monolish{
 		size_t size = x.size();
 	
 #if USE_GPU
-		#pragma acc data copyin(xd[0:size], yd[0:size])
+		#pragma acc data pcopyin(xd[0:size], yd[0:size])
 		#pragma acc host_data use_device(xd, yd)
 		{
 			cublasDaxpy(size, alpha, xd, 1, yd, 1);

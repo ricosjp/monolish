@@ -6,7 +6,6 @@
 #include<omp.h>
 #include "../../../include/monolish_blas.hpp"
 
-#define BENCHMARK
 namespace monolish{
 	/////////////////////////////////////////////////
 	// vec - scalar
@@ -141,5 +140,37 @@ namespace monolish{
 		#endif
 
 	 	logger.func_out();
+	}
+
+	/////////////////////////////////////////////////
+	// mat - vec
+	/////////////////////////////////////////////////
+	template<>
+	vector<double> matrix::CRS<double>::operator*(vector<double>& vec){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(monolish_func);
+
+		vector<double> ans(vec.size());
+
+		blas::spmv(*this, vec, ans);
+
+	 	logger.func_out();
+		return ans;
+	}
+
+	/////////////////////////////////////////////////
+	// scalar - mat
+	/////////////////////////////////////////////////
+	template<>
+	matrix::CRS<double> matrix::CRS<double>::operator*(double alpha){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(monolish_func);
+
+		matrix::CRS<double> tmp = *this; 
+
+		blas::mscal(alpha, tmp);
+
+	 	logger.func_out();
+		return tmp;
 	}
 }

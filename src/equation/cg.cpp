@@ -26,13 +26,13 @@ namespace monolish{
 			auto tmp = blas::dot(r,r);
 			auto alpha = tmp / blas::dot(p,q);
 
-			blas::axpy(alpha, p, x);
+ 			blas::axpy(alpha, p, x);
 
-			blas::axpy(-alpha, q, r);
+ 			blas::axpy(-alpha, q, r);
 
-			auto beta = blas::dot(r,r) / tmp;
+ 			auto beta = blas::dot(r,r) / tmp;
 
-			blas::xpay(beta, r, p);//x = ay+x
+ 			blas::xpay(beta, r, p);//x = ay+x
 
 			if( get_residual(r) < tol && miniter < iter){
 				return 0;
