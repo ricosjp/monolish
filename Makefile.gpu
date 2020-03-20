@@ -49,7 +49,6 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	sleep 1s
 	$(CXX) $(CXXFLAGS) $(LINK_FLAGS) $(CUDA_FLAGS) $(OBJS) -o $(TARGET) $(LINK_FLAGS)
 
 $(OBJDIR)/%.o: %.cpp $(EXTERNALS)
