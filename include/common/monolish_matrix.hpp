@@ -129,12 +129,13 @@ template<typename Float> class vector;
 					size_t nnz;
 
 					bool gpu_flag = false; // not impl
-					void convert(COO<double> &coo);
 
 				public:
 					std::vector<Float> val;
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
+
+					void convert(COO<double> &coo);
 
 					CRS(){}
 					CRS(COO<double> &coo){
