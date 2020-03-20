@@ -24,6 +24,20 @@ int monolish_spmv_(int *n, int* nnz, int row[], int col[], double val[], double 
 	for(size_t i=0; i<N; i++)
 		yp[i] = y[i];
 
+
+	// omake: sparse LU (cant solve on cpu now)////////
+	
+	monolish::equation::LU LU_solver;
+
+	monolish::vector<double> slu_x(A.get_row(), 0.0);
+	monolish::vector<double> slu_b(A.get_row(), 0.0, 1.0); //rand(0~1)
+
+	LU_solver.solve(A, slu_x, slu_b);
+
+	//slu_x.print_all();
+	
+
+	// omake: end////////
 	return 0;
 }
 }

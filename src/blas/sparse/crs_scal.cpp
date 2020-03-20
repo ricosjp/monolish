@@ -21,7 +21,7 @@ namespace monolish{
 		int* cold = A.col_ind.data();
 
 #if USE_GPU // gpu
-		#pragma acc data pcopyin(vald[0:nnz]) copyout(vald[0:n]) 
+		#pragma acc data pcopy(vald[0:nnz]) 
 		{
 			#pragma acc kernels
 			{
