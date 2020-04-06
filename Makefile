@@ -3,6 +3,9 @@ CONTAINER  := registry.ritc.jp/ricos/allgebra
 
 all:cpu gpu
 
+libs:
+	make -B -j -f Makefile.cpu libs
+
 cpu:
 	make -B -j -f Makefile.cpu
 
