@@ -6,4 +6,4 @@
 	url = https://github.com/xianyi/OpenBLAS.git
 [submodule "external/scalapack"]
 	path = external/scalapack
-	url = https://github.com/scivision/scalapack.git
+	url = https://github.com/Reference-ScaLAPACK/scalapack
