@@ -7,10 +7,7 @@
 	#include "cusparse.h"
 #else
 	#include "dmumps_c.h"
-#endif
-
-#if USE_MPI
-#include "mpi.h"
+	#include "mpi.h"
 #endif
 
 #define JOB_INIT -1
@@ -29,46 +26,52 @@ namespace monolish{
 
 		}
 
-#ifdef USE_MPI
 // 		DMUMPS_STRUC_C id;
 // 		MUMPS_INT n = A.get_row();
 // 		MUMPS_INT8 nnz = A.get_nnz();
-// 		MUMPS_INT irn = A.col_ind.data();
-//
-// 		std::vector<int> tmp(A.get_nnz())
-// 		MUMPS_INT jcn = A.;
-// 		double a[2];
-// 		double rhs[2];
-//
+// 
+// 		// covert mumps format (CRS -> 1-origin COO)
+// 		std::vector<int>tmp_row(nnz);
+// 		std::vector<int>tmp_col(nnz);
+// 		for(int i=0; i<n; i++){
+// 			for(int j = A.row_ptr[i]; j < A.row_ptr[i+1]; j++){
+// 				tmp_row[j] = i+1;
+// 				tmp_row[j] = A.col_ind[j]+1;
+// 			}
+// 		}
+//   		MUMPS_INT* irn = A.row_ptr.data();
+//   		MUMPS_INT* jcn = A.col_ind.data();
+// 
+// 		double* a = A.val.data();
+// 		double* rhs = b.data();
+// 
 // 		MUMPS_INT myid, ierr;
-//
+// 		int* dummy;
+// 		char*** dummyc;
+// 
 // 		int error = 0;
-// #if defined(MAIN_COMP)
-// 		argv = &name;
-// #endif
-// 		ierr = MPI_Init(0, 0);
+// 		#if defined(MAIN_COMP)
+// 			argv = &name;
+// 		#endif
+// 		ierr = MPI_Init(dummy, dummyc);
 // 		ierr = MPI_Comm_rank(MPI_COMM_WORLD, &myid);
-// 		/* Define A and rhs */
-// 		rhs = b.data()
-// 		rhs[1]=4.0;
-// 		a[0]=1.0;
-// 		a[1]=2.0;
-//
+// 
 // 		/* Initialize a MUMPS instance. Use MPI_COMM_WORLD */
 // 		id.comm_fortran=USE_COMM_WORLD;
 // 		id.par=1; id.sym=0;
 // 		id.job=JOB_INIT;
 // 		dmumps_c(&id);
-//
+// 
 // 		/* Define the problem on the host */
 // 		if (myid == 0) {
 // 			id.n = n; id.nnz =nnz; id.irn=irn; id.jcn=jcn;
 // 			id.a = a; id.rhs = rhs;
 // 		}
+// 
 // #define ICNTL(I) icntl[(I)-1] /* macro s.t. indices match documentation */
 // 		/* No outputs */
 // 		id.ICNTL(1)=-1; id.ICNTL(2)=-1; id.ICNTL(3)=-1; id.ICNTL(4)=0;
-//
+// 
 // 		/* Call the MUMPS package (analyse, factorization and solve). */
 // 		id.job=6;
 // 		dmumps_c(&id);
@@ -77,7 +80,7 @@ namespace monolish{
 // 					myid, id.infog[0], id.infog[1]);
 // 			error = 1;
 // 		}
-//
+// 
 // 		/* Terminate instance. */
 // 		id.job=JOB_END;
 // 		dmumps_c(&id);
@@ -89,8 +92,7 @@ namespace monolish{
 // 			}
 // 		}
 // 		ierr = MPI_Finalize();
-//
-#endif
+
  		logger.func_out();
 		return 0;
 
@@ -158,12 +160,11 @@ namespace monolish{
 
 		int ret = -1;
 
-		if(lib == 0){
-			ret = mumps_LU(A, x, b);
-		}
-		else if(lib == 1){
-			ret = cusolver_LU(A, x, b);
-		}
+#if USE_GPU // gpu
+		ret = cusolver_LU(A, x, b);
+#else
+		ret = mumps_LU(A, x, b);
+#endif
 
 		logger.func_out();
 		return ret;

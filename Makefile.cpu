@@ -16,14 +16,17 @@ BLAS_LIB ?= -L/usr/lib64/ -lopenblas
 
 ####################
 
-# need mumps ifdef
-MUMPS_INC ?= -I ./external/obj/mumps/
-# MUMPS_OBJ ? = ./external/obj/mumps/libpord.a ./external/obj/mumps/libdmumps.a ./external/obj/mumps/libmumps_common.a
+# need mumps 
+MUMPS_INC ?= -I ./external/obj/mumps/include/
+MUMPS_OBJ ?= \
+-L ./external/obj/mumps/lib/libpord.a \
+-L ./external/obj/mumps/lib/libdmumps.a \
+-L ./external/obj/mumps/lib/libmumps_common.a
 
 ####################
 
 LIB_INC=$(BLAS_INC) $(MUMPS_INC)
-LIB_OBJ=$(BLAS_LIB)
+LIB_OBJ=$(BLAS_LIB) $(MUMPS_OBJ)
 
 ####################
 
@@ -61,7 +64,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIB_INC) $(LIB_OBJ) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIB_INC) $(LIB_OBJ) -o $(TARGET) $(LIB_INC) $(LIB_OBJ)
 
 $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
@@ -79,6 +82,7 @@ install:
 	-mkdir -p $(MONOLISH_DIR)/external
 	-cp -r lib $(MONOLISH_DIR)
 	-cp -r include $(MONOLISH_DIR)
+	-cp -r external/obj $(MONOLISH_DIR)/external/
 	-cp -r external/obj $(MONOLISH_DIR)/external/
 
 
