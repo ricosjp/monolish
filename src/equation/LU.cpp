@@ -6,8 +6,8 @@
 	#include "cusolverSp.h"
 	#include "cusparse.h"
 #else
-	#include "dmumps_c.h"
-	#include "mpi.h"
+//	#include "dmumps_c.h"
+//	#include "mpi.h"
 #endif
 
 #define JOB_INIT -1
