@@ -27,11 +27,16 @@ int main(int argc, char** argv){
 	CG_solver.set_tol(1.0e-12);
 	CG_solver.set_lib(0);
 	CG_solver.set_precon(1);
+	CG_solver.set_miniter(5);
 	CG_solver.set_maxiter(10);
+
+	CG_solver.set_print_rhistory(true);
 
 	CG_solver.solve(A, x, b);
 
-	x.print_all();
-
+	if(x[0] != 1.0 && x[1] != 1.0 && x[2] != 1.0){
+		x.print_all();
+		return 1;
+	}
 	return 0;
 }

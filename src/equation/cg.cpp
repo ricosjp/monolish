@@ -34,7 +34,11 @@ namespace monolish{
 
  			blas::xpay(beta, r, p);//x = ay+x
 
-			if( get_residual(r) < tol && miniter < iter){
+			double resid = get_residual(r);
+			if(print_rhistory==true)
+				std::cout << iter << ": " << resid << std::endl;
+
+			if( resid < tol && miniter <= iter){
 				return 0;
 			} // err code (0:sucess)
 		}

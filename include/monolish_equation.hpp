@@ -20,6 +20,7 @@ namespace monolish{
 				size_t maxiter = 0;
 				size_t precon_num=0;
 				size_t resid_method=0;
+				bool print_rhistory = false;
 				
 				/**
 				 * @brief create q = Ap
@@ -77,6 +78,11 @@ namespace monolish{
 				 **/
 				void set_residual_method(size_t precondition){precon_num = precondition;}
 
+				/**
+				 * @brief print rhistory true/false. (default = false)
+				 * @param[in] min miniter
+				 **/
+				void set_print_rhistory(bool rh){print_rhistory=rh;}
 
 				///////////////////////////////////////////////////////////////////
 
@@ -115,6 +121,12 @@ namespace monolish{
 				 * @return residual method number
 				 **/
 				size_t get_residual_method(){return resid_method;}
+
+				/**
+				 * @brief get print rhistory status
+				 * @param[in] print rhistory true/false
+				 **/
+				bool get_print_rhistory(){return print_rhistory;}
 
 		};
 
