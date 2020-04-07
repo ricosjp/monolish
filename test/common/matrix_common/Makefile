@@ -9,10 +9,10 @@ gpu:
 	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
 
 run_cpu:
-	./$(FUNC)_cpu.out 10
+	./$(FUNC)_cpu.out
 
 run_gpu:
-	$(PROFILER) ./$(FUNC)_gpu.out 10
+	$(PROFILER) ./$(FUNC)_gpu.out
 	
 clean:
 	- rm *.out
