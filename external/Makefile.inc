@@ -115,9 +115,9 @@ RANLIB  = ranlib
 #LAPACK = -llapack
 
 # SCALAP should define the SCALAPACK and  BLACS libraries.
-SCALAP  = -L ../../obj/scalapack -lscalapack
-# SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack 
-# SCALAP  = ../obj/scalapack/libscalapack.a 
+#SCALAP  = -L ../obj/scalapack -lscalapack
+#SCALAP  = -L /home/hishinuma/Work/monolish/external/obj/scalapack/ -lscalapack 
+SCALAP  = -L ../../obj/scalapack/ -lscalapack
 
 # INCLUDE DIRECTORY FOR MPI
 INCPAR  = -I/usr/include

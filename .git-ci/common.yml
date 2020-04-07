@@ -24,7 +24,7 @@ vector_gpu:
 matrix_cpu:
     stage: common
     script:
-        - cd test/common/matrix
+        - cd test/common/matrix_common
         - make run_cpu
     artifacts:
         paths:
@@ -34,7 +34,7 @@ matrix_cpu:
 matrix_gpu:
     stage: common
     script:
-        - cd test/common/matrix
+        - cd test/common/matrix_common
         - make run_gpu
         - make run_gpu PROFILER=nvprof
     artifacts:

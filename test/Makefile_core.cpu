@@ -4,6 +4,7 @@ CXX=g++
 CXXFLAGS=-O3 -lm -std=c++17
 
 LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
+	 #-I$(MONOLISH_DIR)/external/obj/mumps/include/ $(MONOLISH_DIR)/external/obj/mumps/lib/libdmumps.a
 
 OBJS=$(FUNC)_$(ARCH).out
 

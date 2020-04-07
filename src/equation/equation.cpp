@@ -8,7 +8,7 @@ namespace monolish{
 		 switch(resid_method){
 			 case 0:
 				 return blas::nrm2(x);
-					 break;
+				 break;
 			 default:
 				 throw std::runtime_error("error vector size is not same");
 				 break;
