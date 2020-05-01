@@ -106,7 +106,7 @@ docker_debug:
         - cp -r install_lib/debug/lib/ docker/
         - cp -r install_lib/debug/include/ docker/
         - ls docker/
-        - cd docker; make push; cd ..
+        - cd docker; make push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug; cd ..
     tags:
         - docker
 
