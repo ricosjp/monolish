@@ -1,5 +1,5 @@
 CONTAINER  := registry.ritc.jp/ricos/allgebra
-.PHONY: cpu gpu lib test install
+.PHONY: cpu gpu gpu-debug lib test install
 
 all:cpu gpu
 
@@ -8,6 +8,9 @@ cpu:
 
 gpu:
 	make -B -j -f Makefile.gpu
+
+gpu-debug:
+	make -B -j -f Makefile.gpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
 
 external:
 	make -j -f Makefile.cpu libs
