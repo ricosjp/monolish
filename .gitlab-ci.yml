@@ -34,6 +34,17 @@ build_gpu:
     tags:
         - gpu
 
+build_gpu_debug:
+    stage: build_lib
+    script:
+        - make gpu-debug; make install MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib/debug
+    artifacts:
+        paths:
+            - install_lib/
+        expire_in: 60min
+    tags:
+        - gpu_debug
+
 build_test_cpu:
     stage: test_build
     script:
@@ -80,6 +91,20 @@ docker:
         - apk add make
         - cp -r install_lib/lib/ docker/
         - cp -r install_lib/include/ docker/
+        - ls docker/
+        - cd docker; make push; cd ..
+    tags:
+        - docker
+
+docker_debug:
+    image: docker:latest
+    stage: deploy
+    services:
+        - docker:dind
+    script:
+        - apk add make
+        - cp -r install_lib/debug/lib/ docker/
+        - cp -r install_lib/debug/include/ docker/
         - ls docker/
         - cd docker; make push; cd ..
     tags:
