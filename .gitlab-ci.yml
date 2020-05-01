@@ -43,7 +43,7 @@ build_gpu_debug:
             - install_lib/
         expire_in: 60min
     tags:
-        - gpu_debug
+        - gpu
 
 build_test_cpu:
     stage: test_build
