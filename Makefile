@@ -6,6 +6,9 @@ all:cpu gpu
 cpu:
 	make -B -j -f Makefile.cpu
 
+cpu-debug:
+	make -B -j -f Makefile.cpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+
 gpu:
 	make -B -j -f Makefile.gpu
 

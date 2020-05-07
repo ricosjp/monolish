@@ -23,6 +23,15 @@ build_cpu:
             - install_lib/
         expire_in: 60min
 
+build_cpu_debug:
+    stage: build_lib
+    script:
+        - make cpu-debug; make install MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib/debug
+    artifacts:
+        paths:
+            - install_lib/
+        expire_in: 60min
+
 build_gpu:
     stage: build_lib
     script:
