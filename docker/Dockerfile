@@ -1,4 +1,4 @@
-FROM registry.ritc.jp/ricos/allgebra/base
+FROM registry.ritc.jp/ricos/allgebra
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
 RUN mkdir -p /opt/ricos/monolish/0.1/lib \
