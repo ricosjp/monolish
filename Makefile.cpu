@@ -7,6 +7,8 @@ CXXFLAGS = -O3 -std=c++17 -lm -g -fPIC
 #CXXFLAGS += -mavx-fopenmp
 CXXFLAGS += -fopenmp
 CXXFLAGS += -Wall -Wno-unused-variable
+CXXFLAGS += $(CXXFLAGS_EXTRA)
+
 LIBFLAGS = -shared 
 
 ####################

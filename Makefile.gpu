@@ -5,6 +5,7 @@ CXXFLAGS=-O3 -std=c++17
 CXXFLAGS+=-fopenacc -foffload=nvptx-none -fPIC
 CXXFLAGS+=--shared
 CXXFLAGS+=-DUSE_GPU
+CXXFLAGS+=$(CXXFLAGS_EXTRA)
 
 #####################
 CUDA_INC = -I/usr/local/cuda-10.0/targets/x86_64-linux/include/ 
