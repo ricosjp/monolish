@@ -17,3 +17,5 @@ blas1_gpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - gpu
