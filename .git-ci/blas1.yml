@@ -1,138 +1,19 @@
-axpy_cpu:
+blas1_cpu:
     stage: blas_lv1
     script:
-        - cd test/blas/axpy/
+        - cd test/blas/
         - make run_cpu
     artifacts:
         paths:
             - test/
         expire_in: 60min
 
-axpy_gpu:
+blas1_gpu:
     stage: blas_lv1
     script:
-        - cd test/blas/axpy/
+        - cd test/blas/
         - make run_gpu
-        - make run_gpu PROFILER=nvprof
     artifacts:
         paths:
             - test/
         expire_in: 60min
-    tags:
-        - gpu
-
-axpyz_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/axpyz/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-axpyz_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/axpyz/
-        - make run_gpu
-        - make run_gpu PROFILER=nvprof
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-
-xpay_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/xpay/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-xpay_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/xpay/
-        - make run_gpu
-        - make run_gpu PROFILER=nvprof
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-
-scal_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/scal/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-scal_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/scal/
-        - make run_gpu
-        - make run_gpu PROFILER=nvprof
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-
-dot_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/dot/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-dot_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/dot/
-        - make run_gpu
-        - make run_gpu PROFILER=nvprof
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-
-nrm2_cpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/nrm2/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-nrm2_gpu:
-    stage: blas_lv1
-    script:
-        - cd test/blas/nrm2/
-        - make run_gpu
-        - make run_gpu PROFILER=nvprof
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-

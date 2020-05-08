@@ -14,6 +14,7 @@ stages:
     - logger
     - deploy
       
+## build monolish ###############################
 build_cpu:
     stage: build_lib
     script:
@@ -54,12 +55,11 @@ build_gpu_debug:
     tags:
         - gpu
 
+## build test codes ###############################
 build_test_cpu:
     stage: test_build
     script:
-        - cd test/
-        - make cpu
-        - ls blas/dot/
+        - cd test/; make cpu
     artifacts:
         paths:
             - test/
@@ -68,9 +68,7 @@ build_test_cpu:
 build_test_gpu:
     stage: test_build
     script:
-        - cd test/
-        - make gpu
-        - ls blas/dot/
+        - cd test/; make gpu
     artifacts:
         paths:
             - test/
@@ -78,8 +76,7 @@ build_test_gpu:
     tags:
         - gpu
 
-#####################################################
-#####################################################
+## test code run ###################################################
 
 include:
     - '.git-ci/common.yml'
@@ -88,8 +85,7 @@ include:
     - '.git-ci/solver.yml'
     - '.git-ci/logger.yml'
 
-#####################################################
-#####################################################
+## docker and pages #################################################################
 
 docker:
     image: docker:latest
