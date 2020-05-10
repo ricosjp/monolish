@@ -6,6 +6,14 @@ monolish is MONOlithic LIner equation Solvers for Highly-parallel architecture.
 
 Buildはmonolishをビルドする方法ですがユーザはDockerを使う想定なのであまり読まなくていいです
 
+# logファイルの例もCIで生成されるようになりました
+
+`test/logger/logging` の結果が出るようになっています．
+
+[CPU](https://ricos.pages.ritc.jp/monolish/logging_result_cpu.html)
+[GPU](https://ricos.pages.ritc.jp/monolish/logging_result_gpu.html)
+
+
 
 ## そのほか
 開発の思想などは以下のMTG資料を見てください
