@@ -8,9 +8,8 @@ stages:
     - build_lib
     - test_build
     - common
-    - blas_lv1
-    - sparse
-    - solver
+    - blas
+    - equation
     - logger
     - deploy
       
@@ -76,15 +75,112 @@ build_test_gpu:
     tags:
         - gpu
 
-## test code run ###################################################
+## test common ###################################################
+common_cpu:
+    stage: common
+    script:
+        - cd test/common/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
 
-include:
-    - '.git-ci/common.yml'
-    - '.git-ci/blas1.yml'
-    - '.git-ci/spmv.yml'
-    - '.git-ci/solver.yml'
-    - '.git-ci/logger.yml'
+common_gpu:
+    stage: common
+    script:
+        - cd test/common/
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
 
+## test blas ###################################################
+
+blas_cpu:
+    stage: blas
+    script:
+        - cd test/blas/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+blas_gpu:
+    stage: blas
+    script:
+        - cd test/blas/
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+## test equation ###################################################
+
+equation_cpu:
+    stage: equation
+    script:
+        - cd test/equation/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+equation_gpu:
+    stage: equation
+    script:
+        - cd test/equation/
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+## test logger ###################################################
+
+logger_cpu:
+    stage: logger
+    script:
+        - cd test/logger/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+logger_gpu:
+    stage: logger
+    script:
+        - cd test/logger/
+        - make run_gpu
+        - make run_gpu PROFILER=nvprof
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+# include:
+#     - '.git-ci/common.yml'
+#     - '.git-ci/blas1.yml'
+#     - '.git-ci/spmv.yml'
+#     - '.git-ci/solver.yml'
+#     - '.git-ci/logger.yml'
+# 
 ## docker and pages #################################################################
 
 docker:
