@@ -174,13 +174,6 @@ logger_gpu:
     tags:
         - gpu
 
-# include:
-#     - '.git-ci/common.yml'
-#     - '.git-ci/blas1.yml'
-#     - '.git-ci/spmv.yml'
-#     - '.git-ci/solver.yml'
-#     - '.git-ci/logger.yml'
-# 
 ## docker and pages #################################################################
 
 docker:
