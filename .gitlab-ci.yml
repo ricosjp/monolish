@@ -212,6 +212,7 @@ pages:
         - cd doc; doxygen; ls; cd ..
         - rm -rf public/doxygen
         - cp -r doc/html public/
+        - cp -r test/logger/logging/*.html public/
     artifacts:
         paths:
             - public
