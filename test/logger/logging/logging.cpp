@@ -2,16 +2,17 @@
 #include"../include/monolish_equation.hpp"
 
 int main(int argc, char** argv){
-	if(argc!=2){
-		std::cout << "error $1 is matrix filename" << std::endl;
+	if(argc!=3){
+		std::cout << "error $1 log file name" << std::endl;
+		std::cout << "error $2 is matrix filename" << std::endl;
 		return 1;
 	}
 
 	monolish::util::set_log_level(3);
-	monolish::util::set_log_filename("monolish_test.log");
-	monolish::equation::CG cg_solver;
+	monolish::util::set_log_filename(argv[1]);
 
-	char* file = argv[1];
+	monolish::equation::CG cg_solver;
+	char* file = argv[2];
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
 
@@ -25,8 +26,6 @@ int main(int argc, char** argv){
 
  	cg_solver.set_precon(1); //jacobi modoki
  	cg_solver.solve(A, x, b);
-
-	x.print_all();
 
 	return 0;
 }

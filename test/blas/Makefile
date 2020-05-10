@@ -1,4 +1,4 @@
-all: 
+all: cpu 
 
 cpu:
 	make -C axpy/ cpu
@@ -7,8 +7,8 @@ cpu:
 	make -C scal/ cpu
 	make -C dot/ cpu
 	make -C nrm2/ cpu
-	make -C spmv/ cpu
 	make -C scal_crs/ cpu
+	make -C spmv/ cpu
 
 gpu:
 	make -C axpy/ gpu
@@ -17,8 +17,8 @@ gpu:
 	make -C scal/ gpu
 	make -C dot/ gpu
 	make -C nrm2/ gpu
-	make -C spmv/ gpu
 	make -C scal_crs/ gpu
+	make -C spmv/ gpu
 
 run_cpu:
 	make -C axpy/ run_cpu
@@ -27,8 +27,8 @@ run_cpu:
 	make -C scal/ run_cpu
 	make -C dot/ run_cpu
 	make -C nrm2/ run_cpu
-	make -C spmv/ run_cpu
 	make -C scal_crs/ run_cpu
+	make -C spmv/ run_cpu
 
 run_gpu:
 	make -C axpy/ run_gpu
@@ -37,8 +37,8 @@ run_gpu:
 	make -C scal/ run_gpu
 	make -C dot/ run_gpu
 	make -C nrm2/ run_gpu
-	make -C spmv/ run_gpu
 	make -C scal_crs/ run_gpu
+	make -C spmv/ run_gpu
 
 clean:
 	- make -C axpy/ clean
@@ -47,5 +47,5 @@ clean:
 	- make -C scal/ clean
 	- make -C dot/ clean
 	- make -C nrm2/ clean
-	- make -C spmv/ clean
 	- make -C scal_crs/ clean
+	- make -C spmv/ clean

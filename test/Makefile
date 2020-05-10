@@ -5,12 +5,14 @@ cpu:
 	make -C blas/ cpu
 	make -C equation// cpu
 	make -C logger/ cpu
+	#make -C lang/ cpu
 
 gpu:
 	make -C common/ gpu
 	make -C blas/ gpu
 	make -C equation/ gpu
 	make -C logger/ gpu
+	make -C lang/ gpu
 
 run_cpu:
 	make -C common/ run_cpu
@@ -18,21 +20,24 @@ run_cpu:
 	make -C equation/ run_cpu
 # 	make -C equation/sparse_lu/ run_cpu
 	make -C logger/ run_cpu
+	make -C lang/ run_cpu
 
 run_gpu:
 	make -C common/ run_gpu
 	make -C blas/ run_gpu
 	make -C equation/ run_gpu
 	make -C logger/ run_gpu
+	make -C lang/ run_gpu
 
 run_gpu_profile:
 	make PROFILER=nvprof -C common/ run_gpu
 	make PROFILER=nvprof -C blas/ run_gpu
 	make PROFILER=nvprof -C equation/ run_gpu
 	make PROFILER=nvprof -C logger/ run_gpu
+	make PROFILER=nvprof -C lang/ run_gpu
 
 clean:
-	make clean -C common/ run_gpu
-	make clean -C blas/ run_gpu
-	make clean -C equation/ run_gpu
-	make clean -C logger/ run_gpu
+	- make clean -C common/ run_gpu
+	- make clean -C blas/ run_gpu
+	- make clean -C equation/ run_gpu
+	- make clean -C logger/ run_gpu
