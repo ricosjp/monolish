@@ -6,38 +6,39 @@
 
 
 extern "C"{
-//int cfun_(int *vec, int* col, int* row, double *val)
-int monolish_spmv_(int *n, int* nnz, int row[], int col[], double val[], double xp[], double yp[])
-{
-	int N = *n;
-	int NNZ = *nnz;
+	//int cfun_(int *vec, int* col, int* row, double *val)
+	int monolish_spmv_(int *n, int* nnz, int row[], int col[], double val[], double xp[], double yp[])
+	{
+		int N = *n;
+		int NNZ = *nnz;
 
-	monolish::matrix::COO<double> COO(N, NNZ, row, col, val);
-	monolish::matrix::CRS<double> A(COO);
+		// 1-origin
+		monolish::matrix::COO<double> COO(N, NNZ, row, col, val, 1);
+		monolish::matrix::CRS<double> A(COO);
 
-	monolish::vector x(xp, xp+N);
-	monolish::vector y(xp, xp+N);
+		monolish::vector x(xp, xp+N);
+		monolish::vector y(xp, xp+N);
 
-	monolish::blas::spmv(A, x, y);
+		monolish::blas::spmv(A, x, y);
 
 #pragma omp parallel for
-	for(size_t i=0; i<N; i++)
-		yp[i] = y[i];
+		for(size_t i=0; i<N; i++)
+			yp[i] = y[i];
 
 
-	// omake: sparse LU (cant solve on cpu now)////////
-	
-	monolish::equation::LU LU_solver;
+		// omake: sparse LU (cant solve on cpu now)////////
 
-	monolish::vector<double> slu_x(A.get_row(), 0.0);
-	monolish::vector<double> slu_b(A.get_row(), 1.0); //b = {1,1}
+		monolish::equation::LU LU_solver;
+
+		monolish::vector<double> slu_x(A.get_row(), 0.0);
+		monolish::vector<double> slu_b(A.get_row(), 1.0); //b = {1,1}
 
 	LU_solver.solve(A, slu_x, slu_b);
 
 	//slu_x.print_all(); // (-1, 1)
-	
+
 
 	// omake: end////////
 	return 0;
-}
+	}
 }

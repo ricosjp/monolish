@@ -21,15 +21,15 @@ program f_call_c
     val(3) = 3.0
     val(4) = 4.0
 
-    row(1) = 0
-    row(2) = 0
-    row(3) = 1
-    row(4) = 1
+    row(1) = 1
+    row(2) = 1
+    row(3) = 2
+    row(4) = 2
 
-    col(1) = 0
-    col(2) = 1
-    col(3) = 0
-    col(4) = 1
+    col(1) = 1
+    col(2) = 2
+    col(3) = 1
+    col(4) = 2
 
     ! SpMV is...
     ! | 1 | 2 | * | 1 | = | 5  |
