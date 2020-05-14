@@ -69,6 +69,27 @@ template<typename Float> class vector;
 						std::copy(value, value+nnz, val.begin());
 					}
 
+					// for n-origin
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value, const size_t origin){
+						set_rowN(N);
+						set_colN(N);
+						set_nnzN(nnz);
+
+						row_index.resize(nnz);
+						col_index.resize(nnz);
+						val.resize(nnz);
+
+						std::copy(row, row+nnz, row_index.begin());
+						std::copy(col, col+nnz, col_index.begin());
+						std::copy(value, value+nnz, val.begin());
+
+						#pragma omp parallel for
+						for(size_t i=0; i<nnz; i++){
+							row_index[i] -= origin;
+							col_index[i] -= origin;
+						}
+					}
+
 					void input_mm(const char* filename);
 
 					COO(const char* filename){
