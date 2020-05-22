@@ -1,6 +1,7 @@
-#include "../../include/monolish_equation.hpp"
+#include "../../../include/monolish_equation.hpp"
 #include<iostream>
 
+namespace monolish{
 	int equation::LU::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
@@ -13,7 +14,7 @@
 		}
 		else{
 			logger.func_out();
-			throw std::runtime_error("error solver.lib is %d", lib);
+			throw std::runtime_error("error solver.lib is not 1");
 		}
 #else
 		if(lib == 1){
@@ -21,7 +22,7 @@
 		}
 		else{
 			logger.func_out();
-			throw std::runtime_error("error solver.lib is %d", lib);
+			throw std::runtime_error("error solver.lib is not 1");
 		}
 #endif
 
