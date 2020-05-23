@@ -2,6 +2,7 @@
 #include"monolish_logger.hpp"
 #include"monolish_matrix.hpp"
 #include"monolish_vector.hpp"
+#include<initializer_list>
 
 namespace monolish{
 	namespace util{
@@ -32,6 +33,44 @@ namespace monolish{
 				for(size_t i=0; i<vec.size(); i++){
 					vec[i] = rand(mt);
 				}
+			}
+
+		/**
+		 * @brief send data to GPU
+		 **/
+		template < typename T >
+			auto send( T& x )
+			{
+				x.send();
+			}
+
+		/**
+		 * @brief send datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto send( T& x, Types& ... args )
+			{
+				x.send();
+				send( args... );
+			}
+
+		/**
+		 * @brief recv data from GPU
+		 **/
+		template < typename T >
+			auto recv( T& x )
+			{
+				x.recv();
+			}
+
+		/**
+		 * @brief recv datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto recv( T& x, Types& ... args )
+			{
+				x.recv();
+				recv( args... );
 			}
 	}
 }
