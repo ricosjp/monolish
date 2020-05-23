@@ -47,9 +47,9 @@ SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
 vpath %.cpp ./src/
 
 vpath %.cpp ./src/equation/
-vpath %.cpp ./src/equation/LU/
-vpath %.cpp ./src/equation/QR/
-vpath %.cpp ./src/equation/Cholesky/
+vpath %.cpp ./src/equation/lu/
+vpath %.cpp ./src/equation/qr/
+vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
 vpath %.cpp ./src/blas/vector/
