@@ -59,7 +59,7 @@ namespace monolish{
   		void scal(const double alpha, vector<double> &x);
 
 //////////////////////////////////////////////////////
-//  dot
+//  T dot 
 //////////////////////////////////////////////////////
 		/**
 		 * @brief double precision inner product (dot)
@@ -78,7 +78,25 @@ namespace monolish{
   		float dot(const vector<float> &x,const vector<float> &y);
 
 //////////////////////////////////////////////////////
-//  nrm2
+//  void dot 
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision inner product (dot)
+		 * @param[in] x double precision monolish vector
+		 * @param[in] y double precision monolish vector
+		 * @param[in] ans result value
+		 */
+  		void dot(const vector<double> &x, const vector<double> &y, double &ans);
+
+		/**
+		 * @brief float precision inner product (dot)
+		 * @param[in] x float precision monolish vector
+		 * @param[in] y float precision monolish vector
+		 * @param[in] ans result value
+		 */
+  		void dot(const vector<float> &x,const vector<float> &y, float& ans);
+//////////////////////////////////////////////////////
+//  T nrm2
 //////////////////////////////////////////////////////
 		/**
 		 * @brief double precision nrm2: ||x||_2
@@ -86,6 +104,16 @@ namespace monolish{
  		 * @return The result of the nrm2
 		 */
   		double nrm2(const vector<double> &x);
+
+//////////////////////////////////////////////////////
+//  void nrm2
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision nrm2: ||x||_2
+		 * @param[in] x double precision monolish vector
+		 * @param[in] ans result value
+		 */
+  		void nrm2(const vector<double> &x, double& ans);
 
 //////////////////////////////////////////////////////
 //  spmv (crs)

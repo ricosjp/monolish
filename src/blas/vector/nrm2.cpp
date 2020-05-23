@@ -36,4 +36,9 @@ namespace monolish{
 		return ans;
 	}
 
+	// void ///////////////////
+	void blas::nrm2(const vector<double> &x, double& ans){
+		ans = nrm2(x);
+	}
+
 }

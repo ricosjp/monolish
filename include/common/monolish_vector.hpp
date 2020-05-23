@@ -66,6 +66,7 @@ namespace monolish{
 					std::copy(vec.begin(), vec.end(), val.begin());
 				}
 
+
 				/**
 				 * @brief copy from pointer
 				 * @param[in] start start pointer
@@ -113,12 +114,28 @@ namespace monolish{
 					return val.data();
 				}
 
+				/**
+				 * @brief returns a begin iterator 
+				 * @return begin iterator
+				 **/
+				auto begin(){
+					return val.begin();
+				}
+
+				/**
+				 * @brief returns a end iterator 
+				 * @return end iterator
+				 **/
+				auto end(){
+					return val.end();
+				}
+
 
 				/**
 				 * @brief get vector size N
 				 * @return vector size
 				 **/
-				size_t size() const{
+				auto size() const{
 					return val.size();
 				}
 
@@ -136,8 +153,8 @@ namespace monolish{
 				 * @brief print all elements to standart I/O
 				 **/
 				void print_all(){
-					for(size_t i = 0; i < val.size(); i++){
-						std::cout <<  val[i] << std::endl;
+					for(const auto v : val){
+						std::cout <<  v << std::endl;
 					}
 				}
 
@@ -151,8 +168,8 @@ namespace monolish{
 					if(!ofs){
 						throw std::runtime_error("error file cant open");
 					}
-					for(size_t i = 0; i < val.size(); i++){
-						ofs << val[i] << std::endl;
+					for(const auto v : val){
+						ofs << v << std::endl;
 					}
 				}
 
@@ -198,7 +215,6 @@ namespace monolish{
 					return val[i];
 				}
 
-				// todo: omp
 				bool operator==(const vector<Float>& vec){
 					if(val.size() != vec.size()) return false;
 					for(size_t i=0; i<vec.size(); i++){
@@ -207,7 +223,6 @@ namespace monolish{
 					return true;
 				}
 
-				// todo: omp
 				bool operator!=(const vector<Float>& vec){
 					if(val.size() != vec.size()) return true;
 					for(size_t i=0; i<vec.size(); i++){

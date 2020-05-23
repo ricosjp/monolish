@@ -69,4 +69,13 @@ namespace monolish{
 		logger.func_out();
 		return ans;
 	}
+
+	// void ///////////////////
+	void blas::dot(const vector<double> &x, const vector<double> &y, double& ans){
+		ans = dot(x,y);
+	}
+	void blas::dot(const vector<float> &x, const vector<float> &y, float& ans){
+		ans = dot(x,y);
+	}
+
 }
