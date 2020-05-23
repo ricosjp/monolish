@@ -199,6 +199,34 @@ namespace monolish{
 				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 		};
 
+		/**
+		 * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
+		 * set_reorder(), get_singularity(), 
+		 */
+		class Cholesky : public solver{
+			private:
+				using solver::solver;
+				int lib = 1; // lib is 1
+				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int cusolver_Cholesky(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int singularity;
+				int reorder=0;
+
+			public:
+
+				/**
+				 * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce zero fill-in.
+				*/
+				void set_reorder(int r){ reorder = r; }
+
+				/**
+				 * @brief -1 if A is symmetric postive definite.
+				*/
+				int get_sigularity(){ return singularity; }
+				
+				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+		};
+
 		//jacobi////////////////////////////////
 		class Jacobi : public solver{
 			private:
