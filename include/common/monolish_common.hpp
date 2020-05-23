@@ -34,6 +34,7 @@ namespace monolish{
 					vec[i] = rand(mt);
 				}
 			}
+//send///////////////////
 
 		/**
 		 * @brief send data to GPU
@@ -54,6 +55,7 @@ namespace monolish{
 				send( args... );
 			}
 
+//recv///////////////////
 		/**
 		 * @brief recv data from GPU
 		 **/
@@ -70,6 +72,27 @@ namespace monolish{
 			auto recv( T& x, Types& ... args )
 			{
 				x.recv();
+				recv( args... );
+			}
+
+//device_free///////////////////
+
+		/**
+		 * @brief recv data from GPU
+		 **/
+		template < typename T >
+			auto device_free( T& x )
+			{
+				x.device_free();
+			}
+
+		/**
+		 * @brief recv datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto device_free( T& x, Types& ... args )
+			{
+				x.device_free();
 				recv( args... );
 			}
 	}

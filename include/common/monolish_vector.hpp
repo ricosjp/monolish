@@ -106,6 +106,10 @@ namespace monolish{
 				 **/
 				void recv();
 
+				/**
+				 * @brief free data on GPU
+				 **/
+				void device_free();
 				// util ///////////////////////////////////////////////////////////////////////////
 
 				/**

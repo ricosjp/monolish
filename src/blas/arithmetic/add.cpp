@@ -6,7 +6,6 @@
 #include<omp.h>
 #include "../../../include/monolish_blas.hpp"
 
-#define BENCHMARK
 namespace monolish{
 	/////////////////////////////////////////////////
 	// vec - scalar
@@ -23,7 +22,7 @@ namespace monolish{
  		size_t size = val.size();
 
 		#if USE_GPU
-		#pragma acc data pcopyin(vald[0:size]) copyout(ansd[0:size])
+		#pragma acc data present(vald[0:size], ansd[0:size])
 		{
 			#pragma acc kernels
 			{
@@ -56,7 +55,7 @@ namespace monolish{
  		size_t size = val.size();
 
 		#if USE_GPU
-		#pragma acc data copy(vald[0:size])
+		#pragma acc data present(vald[0:size])
 		{
 			#pragma acc kernels
 			{
@@ -93,7 +92,7 @@ namespace monolish{
  		size_t size = vec.size();
 
 		#if USE_GPU
-		#pragma acc data pcopyin(vecd[0:size], vald[0:size]) copyout(ansd[0:size])
+		#pragma acc data present(vecd[0:size], vald[0:size], ansd[0:size])
 		{
 			#pragma acc kernels
 			{
@@ -124,7 +123,7 @@ namespace monolish{
  		size_t size = vec.size();
 
 		#if USE_GPU
-		#pragma acc data copy(vald[0:size]) pcopyin(vecd[0:size])
+		#pragma acc data present (vald[0:size], vecd[0:size])
 		{
 			#pragma acc kernels
 			{

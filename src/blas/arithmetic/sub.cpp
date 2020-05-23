@@ -6,7 +6,6 @@
 #include<omp.h>
 #include "../../../include/monolish_blas.hpp"
 
-#define BENCHMARK
 namespace monolish{
 
 	/////////////////////////////////////////////////

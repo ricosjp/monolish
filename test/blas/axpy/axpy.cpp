@@ -23,6 +23,7 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double t
 	// check ans
 	if(check_ans == 1){
 		monolish::blas::axpy(alpha, x, y);
+		y.recv(); // recv. vector
  		get_ans(alpha, x, ansy);
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
  			return false;
@@ -50,7 +51,7 @@ int main(int argc, char** argv){
 		std::cout << "error $1:vector size, $2: iter, $3: error check (1/0)" << std::endl;
 		return 1;
 	}
-	//monolish::util::set_log_level(3);
+	monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	size_t size = atoi(argv[1]);
@@ -62,8 +63,16 @@ int main(int argc, char** argv){
    	monolish::vector<double> x(size, 0.0, 1.0);
    	monolish::vector<double> y(size, 0.0, 1.0);
 
- 	// exec and error check
- 	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
+	//send vector to device
+	monolish::util::send(x, y);
 
+ 	// exec and error check
+ 	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){
+		std::cout << "error" << std::endl;
+		return 1;
+	}
+
+	// free device vector
+	monolish::util::device_free(x, y);
 	return 0;
 }
