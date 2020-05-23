@@ -151,22 +151,79 @@ namespace monolish{
 		};
 
 
-		// only external
+		/**
+		 * @brief LU solver class (does not impl. now)
+		 */
 		class LU : public solver{
 			private:
 				using solver::solver;
 				int lib = 1; // lib is 1
 				int mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int singularity;
+				int reorder;
 
 			public:
+				void set_reorder(int r){ reorder = r; }
+
+				int get_sigularity(){ return singularity; }
+
+				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+		};
+
+		/**
+		 * @brief QR solver class (GPU only now). can use set_tol(), get_til(),
+		 * set_reorder(), get_singularity(), 
+		 */
+		class QR : public solver{
+			private:
+				using solver::solver;
+				int lib = 1; // lib is 1
+				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int cusolver_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int singularity;
+				int reorder=0;
+
+			public:
+
 				/**
-				 * @brief solve Ax = b by LU method(lib=0: MUMPS(NOT IMPL), lib=1: cusolver)
-				 * @param[in] A CRS format Matrix
-				 * @param[in] x solution vector
-				 * @param[in] b right hand vector
-				 * @return error code (only 0 now)
-				 **/
+				 * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce zero fill-in.
+				*/
+				void set_reorder(int r){ reorder = r; }
+
+				/**
+				 * @brief -1 if A is symmetric postive definite.
+				*/
+				int get_sigularity(){ return singularity; }
+				
+				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+		};
+
+		/**
+		 * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
+		 * set_reorder(), get_singularity(), 
+		 */
+		class Cholesky : public solver{
+			private:
+				using solver::solver;
+				int lib = 1; // lib is 1
+				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int cusolver_Cholesky(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int singularity;
+				int reorder=0;
+
+			public:
+
+				/**
+				 * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce zero fill-in.
+				*/
+				void set_reorder(int r){ reorder = r; }
+
+				/**
+				 * @brief -1 if A is symmetric postive definite.
+				*/
+				int get_sigularity(){ return singularity; }
+				
 				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 		};
 

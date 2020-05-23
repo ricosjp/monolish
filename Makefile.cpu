@@ -35,10 +35,10 @@ LIB_OBJ=$(BLAS_LIB) $(MUMPS_OBJ)
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/equation/*/*.cpp))
 
-SRCS +=$(notdir $(wildcard ./src/blas/arithmetic/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/vector/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/blas/sparse/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
 
@@ -47,6 +47,9 @@ SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
 vpath %.cpp ./src/
 
 vpath %.cpp ./src/equation/
+vpath %.cpp ./src/equation/lu/
+vpath %.cpp ./src/equation/qr/
+vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
 vpath %.cpp ./src/blas/vector/
