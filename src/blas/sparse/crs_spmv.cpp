@@ -19,7 +19,6 @@ namespace monolish{
 
 		}
 
-#if USE_GPU // gpu
 		size_t n = A.get_row();
 		size_t nnz = A.get_nnz();
 		double* xd = x.data();
@@ -28,6 +27,8 @@ namespace monolish{
 		double* vald = A.val.data();
 		int* rowd = A.row_ptr.data();
 		int* cold = A.col_ind.data();
+
+#if USE_GPU // gpu
 
 		#pragma acc data pcopyin(xd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz]) copyout(yd[0:n]) 
 		{
@@ -51,12 +52,12 @@ namespace monolish{
 
 	#pragma omp parallel for 
 		for(size_t i = 0 ; i < A.get_row(); i++)
-			y.val[i] = 0;
+			yd[i] = 0;
 
 	#pragma omp parallel for
 		for(int i = 0 ; i < (int)A.get_row(); i++)
 			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++)
-				y.val[i] += A.val[j] * x.val[A.col_ind[j]];
+				yd[i] += vald[j] * xd[A.col_ind[j]];
 
 #endif
 
