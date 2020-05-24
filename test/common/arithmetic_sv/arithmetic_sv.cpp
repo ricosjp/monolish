@@ -1,6 +1,7 @@
 #include<iostream>
 #include<istream>
 #include<chrono>
+#include<cassert>
 #include"../../test_utils.hpp"
 
 template <typename T>
@@ -18,7 +19,7 @@ void get_ans(monolish::vector<T> &mx, T value, monolish::vector<T> &ans){
 }
 
 template <typename T>
-bool test(monolish::vector<T>& x, T value, monolish::vector<T>& ans, double tol, const size_t iter, const size_t check_ans){
+bool test(monolish::vector<T>& x, T value, monolish::vector<T>& ans, double tol, const size_t check_ans){
 
 	monolish::vector<T> ans_tmp;
 
@@ -43,26 +44,28 @@ bool test(monolish::vector<T>& x, T value, monolish::vector<T>& ans, double tol,
 
 int main(int argc, char** argv){
 
-	if(argc!=4){
-		std::cout << "error $1:vector size, $2: iter, $3: error check (1/0)" << std::endl;
+	if(argc!=3){
+		std::cout << "error $1:vector size, $2: error check (1/0)" << std::endl;
 		return 1;
 	}
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	size_t size = atoi(argv[1]);
-	size_t iter = atoi(argv[2]);
-	size_t check_ans = atoi(argv[3]);
+	size_t check_ans = atoi(argv[2]);
 
 	//create random vector x rand(0.1~1.0)
-   	monolish::vector<double> x(size, 0.1, 1.0);
 	double value = 123.0;
+   	monolish::vector<double> x(size, 0.1, 1.0);
    	monolish::vector<double> ans(size, 321.0);
 
-
+	x.send();
+	x+=value;
+	x.recv();
+	x.print_all();
 
  	// exec and error check
- 	if( test<double>(x, value, ans, 1.0e-8, iter, check_ans) == false){ return 1; }
-
+ 	if( test<double>(x, value, ans, 1.0e-8, check_ans) == false){ return 1; }
+	
 	return 0;
 }
