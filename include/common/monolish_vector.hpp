@@ -32,10 +32,10 @@ namespace monolish{
 	template<typename Float>
 		class vector{
 			private:
+				bool gpu_status = false; // true: sended, false: not send
+				std::vector<Float> val;
 
 			public:
-				bool flag = 0; // 1 mean "changed", not impl..
-				std::vector<Float> val;
 
 				vector(){}
 
@@ -110,6 +110,12 @@ namespace monolish{
 				 * @brief free data on GPU
 				 **/
 				void device_free();
+
+				/**
+				 * @brief 
+				 * @return true is sended.
+				 * **/
+				int get_device_mem_stat();
 				// util ///////////////////////////////////////////////////////////////////////////
 
 				/**

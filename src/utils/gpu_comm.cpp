@@ -1,10 +1,5 @@
-#include<iostream>
-#include<typeinfo>
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<omp.h>
 #include "../../include/monolish_blas.hpp"
+#include "../monolish_internal.hpp"
 
 namespace monolish{
 // vec ///////////////////////////////////////
@@ -15,11 +10,12 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
-
 #if USE_GPU
 		T* d = val.data();
 		size_t N = val.size();
 		#pragma acc enter data copyin(d[0:N])
+
+		gpu_status=true;
 #endif 
 	 	logger.func_out();
 	}
@@ -49,6 +45,7 @@ namespace monolish{
 		T* d = val.data();
 		size_t N = val.size();
 		#pragma acc exit data delete(d[0:N])
+		gpu_status=false;
 #endif 
 	 	logger.func_out();
 	}
