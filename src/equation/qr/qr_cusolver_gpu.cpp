@@ -1,6 +1,6 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../../include/monolish_blas.hpp"
-#include<iostream>
+#include "../../monolish_internal.hpp"
 
 #ifdef USE_GPU
 	#include "cuda_runtime.h"
@@ -8,7 +8,6 @@
 	#include "cusparse.h"
 #endif
 
-#define check(val) checkError((val), #val, __FILE__, __LINE__)
 
 namespace monolish{
 
@@ -18,14 +17,6 @@ namespace monolish{
 		logger.func_in(monolish_func);
 
 #ifdef USE_GPU
-		auto checkError = [](auto result, auto func, auto file, auto line) {
-			if (result) {
-				fprintf(stderr, "CUDA error at %s:%d code=%d(%s) \"%s\" \n",
-					file, line, static_cast<unsigned int>(result), cudaGetErrorName((cudaError_t)result), func);
-				//cudaDeviceReset();
-				exit(EXIT_FAILURE);
-			}
-		};
 
 		cusolverSpHandle_t sp_handle;
 		cusolverSpCreate(&sp_handle);
@@ -50,22 +41,23 @@ namespace monolish{
 #pragma acc data copyin( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n], Dsol[0:n] )
 #pragma acc host_data use_device(Dval, Dptr, Dind, Drhv, Dsol)
   	{
-		ret = cusolverSpDcsrlsvqr(
-				sp_handle,
-				n,
-				nnz,
-				descrA,
-				Dval,
-				Dptr,
-				Dind,
-				Drhv,
-				tol,
-				reorder,
-				Dsol,
-				&singularity);
+		check(
+				cusolverSpDcsrlsvqr(
+					sp_handle,
+					n,
+					nnz,
+					descrA,
+					Dval,
+					Dptr,
+					Dind,
+					Drhv,
+					tol,
+					reorder,
+					Dsol,
+					&singularity)
+			 );
  	}
 #pragma acc data copyout(Dsol[0:n])
-	check(ret);
 #else
 		throw std::runtime_error("error sparse QR is only GPU");
 #endif

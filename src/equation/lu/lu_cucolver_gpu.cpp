@@ -1,6 +1,6 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../../include/monolish_blas.hpp"
-#include<iostream>
+#include "../../monolish_internal.hpp"
 
 #ifdef USE_GPU
 #include "cusolverSp.h"

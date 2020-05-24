@@ -1,17 +1,12 @@
-#include<iostream>
-#include<typeinfo>
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<omp.h>
-#include<openacc.h>
 #include "../../../include/monolish_blas.hpp"
+#include "../../monolish_internal.hpp"
 
 #ifdef USE_GPU
-	#include<cublas.h>
+	#include<cublas_v2.h>
 #else
 	#include<cblas.h>
 #endif
+
 namespace monolish{
 
 	// double ///////////////////
@@ -29,11 +24,14 @@ namespace monolish{
 		size_t size = x.size();
 	
 #if USE_GPU
+		cublasHandle_t h;
+		check(cublasCreate(&h));
 
 		#pragma acc host_data use_device(xd, yd)
 		{
-			cublasDaxpy(size, alpha, xd, 1, yd, 1);
+			check(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1));
 		}
+		cublasDestroy(h);
 #else
 		cblas_daxpy(size, alpha, xd, 1, yd, 1);
 #endif
