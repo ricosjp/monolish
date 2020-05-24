@@ -51,8 +51,8 @@ int main(int argc, char** argv){
 		std::cout << "error $1:vector size, $2: iter, $3: error check (1/0)" << std::endl;
 		return 1;
 	}
-	monolish::util::set_log_level(3);
-	//monolish::util::set_log_filename("./monolish_test_log.txt");
+	// monolish::util::set_log_level(3);
+	// monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	size_t size = atoi(argv[1]);
 	size_t iter = atoi(argv[2]);
@@ -71,6 +71,9 @@ int main(int argc, char** argv){
 		std::cout << "error" << std::endl;
 		return 1;
 	}
+
+	//recv vector to device
+	y.recv(); // same as monolish::util::recv(y); 
 
 	// free device vector
 	monolish::util::device_free(x, y);

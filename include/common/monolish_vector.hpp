@@ -112,10 +112,10 @@ namespace monolish{
 				void device_free();
 
 				/**
-				 * @brief 
+				 * @brief false; // true: sended, false: not send
 				 * @return true is sended.
 				 * **/
-				int get_device_mem_stat();
+				bool get_device_mem_stat();
 				// util ///////////////////////////////////////////////////////////////////////////
 
 				/**
