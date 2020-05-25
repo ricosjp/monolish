@@ -8,7 +8,7 @@ namespace monolish{
 	template<typename T>
 	void vector<T>::send(){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(monolish_func);
+		logger.util_in(monolish_func);
 
 #if USE_GPU
 		T* d = val.data();
@@ -17,7 +17,7 @@ namespace monolish{
 
 		gpu_status=true;
 #endif 
-	 	logger.func_out();
+	 	logger.util_out();
 	}
 
 
@@ -25,21 +25,21 @@ namespace monolish{
 	template<typename T>
 	void vector<T>::recv(){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(monolish_func);
+		logger.util_in(monolish_func);
 
 #if USE_GPU
 		T* d = val.data();
 		size_t N = val.size();
 		#pragma acc update host(d[0:N])
 #endif 
-	 	logger.func_out();
+	 	logger.util_out();
 	}
 
 	//device_free
 	template<typename T>
 	void vector<T>::device_free(){
 		Logger& logger = Logger::get_instance();
-		logger.func_in(monolish_func);
+		logger.util_in(monolish_func);
 
 #if USE_GPU
 		T* d = val.data();
@@ -47,7 +47,7 @@ namespace monolish{
 		#pragma acc exit data delete(d[0:N])
 		gpu_status=false;
 #endif 
-	 	logger.func_out();
+	 	logger.util_out();
 	}
 
 	template void vector<float>::send();
