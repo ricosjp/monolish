@@ -5,12 +5,13 @@ namespace monolish{
 	/////////////////////////////////////////////////
 	// vec - scalar
 	/////////////////////////////////////////////////
-	template< typename T>
+	template<typename T>
 	vector<T> vector<T>::operator+(const T value){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
 		vector<T> ans(val.size());
+		ans.send();
 
 		T* vald = val.data();
 		T* ansd = ans.data();
@@ -37,7 +38,7 @@ namespace monolish{
 	template vector<double> vector<double>::operator+(const double value);
 	template vector<float> vector<float>::operator+(const float value);
 
-	template< typename T>
+	template<typename T>
 	void vector<T>::operator+=(const T value){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
