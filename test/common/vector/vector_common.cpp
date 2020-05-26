@@ -38,39 +38,44 @@ int main(int argc, char** argv){
 
 	//monolish::vector random(1.0~2.0) vector
   	monolish::vector<double> randvec(size, 1.0, 2.0);
+ 
+ 
+ 	//equal operator (z = rand(1~2)) on cpu
+ 	z = randvec;
 
+ 	//vec element add
+ 	z[1] = z[1] + 111; //z[1] = rand(1~2) + 124 + 111 = 235+rand(1~2)
+ 
+ 
+ 	// size check
+ 	if(x.size() != size || y.size() != size || z.size() != size){ return 1; }
+ 
+ 
+ 	//gpu send and vec add
+	monolish::util::send(x,y,z);
+ 	z += x + y; //rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
+ 
+ 	//copy (cpu and gpu)
+  	monolish::vector<double> tmp = z;
 
-	//equal operator (z = rand(1~2))
-	z = randvec;
+	//recv vector z and tmp from gpu
+	z.recv();
+	tmp.recv();
 
+ 	//compare (on cpu)
+ 	if (tmp != z){
+ 		std::cout << "error, copy fail " << std::endl;
+ 		return 1;	
+ 	}
 
-	// size check
-	if(x.size() != size || y.size() != size || z.size() != size){ return 1; }
+	z.recv();
 
+ 	// range-based for statement (on cpu)
+ 	for(auto& val : z){
+ 		val += 100; // z[1] = 336~337
+ 	}
 
-	//vec add
-	z += x + y; //rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
-
-
-	//vec element add
-	z[1] = z[1] + 111; //z[1] = rand(1~2) + 124 + 111 = 235+rand(1~2)
-
-	//copy
-	monolish::vector tmp = z;
-
-	//compare
-	if (tmp != z){
-		std::cout << "error, copy fail " << std::endl;
-		return 1;	
-	}
-	
-
-	// range-based for statement
-	for(auto& val : z){
-		val += 100; // z[1] = 336~337
-	}
-
-	if( z[1] < 336 && 337 < z[1] ){
+	if( !(336 < z[1]  && z[1] < 337) ){
 		std::cout << "error, z[1] = " << z[1] << std::endl;
 		z.print_all();
 		//z.print_all("./z.txt");

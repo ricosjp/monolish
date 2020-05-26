@@ -62,11 +62,16 @@ namespace monolish{
 				 * @brief copy std::vector
 				 * @param[in] vec input std::vector
 				 **/
-
 				vector(const std::vector<Float>& vec){
 					val.resize(vec.size());
 					std::copy(vec.begin(), vec.end(), val.begin());
 				}
+
+				/**
+				 * @brief copy monolish::vector
+				 * @param[in] vec input monolish::vector
+				 **/
+				vector(const vector<Float>& vec);
 
 				/**
 				 * @brief copy from pointer

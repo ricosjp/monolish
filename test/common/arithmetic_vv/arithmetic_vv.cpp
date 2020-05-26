@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 		std::cout << "error $1:vector size, $2: error check (1/0)" << std::endl;
 		return 1;
 	}
-	//monolish::util::set_log_level(3);
+	monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	size_t size = atoi(argv[1]);

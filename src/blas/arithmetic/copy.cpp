@@ -74,4 +74,39 @@ namespace monolish{
 	template void vector<double>::operator=(const vector<double>& vec);
 	template void vector<float>::operator=(const vector<float>& vec);
 
+	//copy constractor
+	template <typename T>
+	vector<T>::vector(const monolish::vector<T>& vec){
+		Logger& logger = Logger::get_instance();
+		logger.util_in(monolish_func);
+
+		val.resize(vec.size());
+
+	   	// gpu copy and recv
+		if( vec.get_device_mem_stat() ) {
+			send();
+			T* vald = val.data();
+
+			const T* vecd = vec.data();
+ 			size_t size = vec.size();
+
+			#if USE_GPU
+				#pragma acc data present(vecd[0:size], vald[0:size])
+				#pragma acc kernels
+				#pragma acc loop independent 
+				for(size_t i = 0 ; i < size; i++){
+					vald[i] = vecd[i];
+				}
+
+		   	recv();
+			#endif
+	   	}
+		else{
+			std::copy(vec.val.begin(), vec.val.end(), val.begin());
+		}
+
+		logger.util_out();
+	}
+	template vector<double>::vector(const vector<double>& vec);
+	template vector<float>::vector(const vector<float>& vec);
 }
