@@ -186,7 +186,7 @@ docker:
         - cp -r install_lib/lib/ docker/
         - cp -r install_lib/include/ docker/
         - ls docker/
-        - cd docker; make push; cd ..
+        - make -f docker/Makefile push
     tags:
         - docker
 
@@ -200,7 +200,7 @@ docker_debug:
         - cp -r install_lib/debug/lib/ docker/
         - cp -r install_lib/debug/include/ docker/
         - ls docker/
-        - cd docker; make push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug; cd ..
+        - make -f docker/Makefile push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug
     tags:
         - docker
 
