@@ -20,7 +20,6 @@ namespace monolish{
 	 	logger.util_out();
 	}
 
-
 	//recv
 	template<typename T>
 	void vector<T>::recv(){

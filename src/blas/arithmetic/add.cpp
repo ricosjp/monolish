@@ -11,13 +11,13 @@ namespace monolish{
 		logger.func_in(monolish_func);
 
 		vector<T> ans(val.size());
-		ans.send();
 
 		T* vald = val.data();
 		T* ansd = ans.data();
  		size_t size = val.size();
 
 		#if USE_GPU
+			ans.send();
 			#pragma acc data present(vald[0:size], ansd[0:size])
 			#pragma acc kernels
 			#pragma acc loop independent 
@@ -90,16 +90,17 @@ namespace monolish{
  		size_t size = vec.size();
 
 		#if USE_GPU
+			ans.send();
 			#pragma acc data present(vecd[0:size], vald[0:size], ansd[0:size])
 			#pragma acc kernels
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
-				ansd[i] = vecd[i] + vald[i];
+				ansd[i] = vald[i] + vecd[i];
 			}
 		#else
 			#pragma omp parallel for
 			for(size_t i = 0; i < size; i++){
-				ansd[i] = vecd[i] + vald[i];
+				ansd[i] = vald[i] + vecd[i];
 			}
 		#endif
 
@@ -132,10 +133,10 @@ namespace monolish{
 				vald[i] += vecd[i];
 			}
 		#else
-		#pragma omp parallel for
-		for(size_t i = 0; i < size; i++){
-			vald[i] += vecd[i];
-		}
+			#pragma omp parallel for
+			for(size_t i = 0; i < size; i++){
+				vald[i] += vecd[i];
+			}
 		#endif
 
 	 	logger.func_out();

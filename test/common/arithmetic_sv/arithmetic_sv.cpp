@@ -34,6 +34,7 @@ bool test(monolish::vector<T>& x, T value, monolish::vector<T>& ans, double tol,
 		ans -= x - value;
 		ans /= x / value;
  		get_ans(x, value, ans_tmp);
+		ans.recv();
 		if(ans_check<T>(ans.data(), ans_tmp.data(), x.size(), tol) == false){
  			return false;
  		}
@@ -58,11 +59,8 @@ int main(int argc, char** argv){
 	double value = 123.0;
    	monolish::vector<double> x(size, 0.1, 1.0);
    	monolish::vector<double> ans(size, 321.0);
-
 	x.send();
-	x+=value;
-	x.recv();
-	x.print_all();
+	ans.send();
 
  	// exec and error check
  	if( test<double>(x, value, ans, 1.0e-8, check_ans) == false){ return 1; }

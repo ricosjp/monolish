@@ -23,6 +23,7 @@ namespace monolish{
 		 * @param[in] y double precision monolish vector
 		 */
   		void axpy(const double alpha, const vector<double> &x, vector<double> &y);
+  		void axpy(const float alpha, const vector<float> &x, vector<float> &y);
 
 //////////////////////////////////////////////////////
 //  axpyz
