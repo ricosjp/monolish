@@ -183,10 +183,12 @@ docker:
         - docker:dind
     script:
         - apk add make
-        - cp -r install_lib/lib/ docker/
-        - cp -r install_lib/include/ docker/
+        - cp -r install_lib/lib/ ./
+        - cp -r install_lib/include/ ./
         - ls docker/
-        - cd docker; make push; cd ..
+        - ls lib/
+        - ls include/
+        - make -f docker/Makefile push
     tags:
         - docker
 
@@ -197,10 +199,12 @@ docker_debug:
         - docker:dind
     script:
         - apk add make
-        - cp -r install_lib/debug/lib/ docker/
-        - cp -r install_lib/debug/include/ docker/
+        - cp -r install_lib/debug/lib/ ./
+        - cp -r install_lib/debug/include/ ./
         - ls docker/
-        - cd docker; make push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug; cd ..
+        - ls lib/
+        - ls include/
+        - make -f docker/Makefile push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug
     tags:
         - docker
 
