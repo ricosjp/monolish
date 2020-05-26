@@ -183,8 +183,8 @@ docker:
         - docker:dind
     script:
         - apk add make
-        - cp -r install_lib/lib/ /
-        - cp -r install_lib/include/ /
+        - cp -r install_lib/lib/ ./
+        - cp -r install_lib/include/ ./
         - ls docker/
         - ls lib/
         - ls include/
@@ -199,8 +199,8 @@ docker_debug:
         - docker:dind
     script:
         - apk add make
-        - cp -r install_lib/debug/lib/ /
-        - cp -r install_lib/debug/include/ /
+        - cp -r install_lib/debug/lib/ ./
+        - cp -r install_lib/debug/include/ ./
         - ls docker/
         - ls lib/
         - ls include/
