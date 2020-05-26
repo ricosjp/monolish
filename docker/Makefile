@@ -7,14 +7,14 @@ all: allgebra
 
 login:
 ifeq ($(CI_BUILD_TOKEN),)
-	docker login $(CI_REGISTRY)
+	docker login $(CI_REGISTRY_IMAGE)
 else
 	docker login -u gitlab-ci-token -p $(CI_BUILD_TOKEN) $(CI_REGISTRY)
 endif
 
 
-allgebra: Dockerfile lib/ include/
-	docker build -t $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) . -f Dockerfile
+allgebra: docker/Dockerfile lib/ include/
+	docker build -t $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) . -f docker/Dockerfile
 
 push: login allgebra
 	docker push $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)

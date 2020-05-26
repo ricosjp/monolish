@@ -7,7 +7,7 @@ RUN mkdir -p /opt/ricos/monolish/0.1/lib \
 
 COPY ./lib/ /opt/ricos/monolish/0.1/lib/
 COPY ./include/ /opt/ricos/monolish/0.1/include/
-COPY ./monolish_sample/ /opt/ricos/monolish/0.1/samples
+COPY ./docker/monolish_sample/ /opt/ricos/monolish/0.1/samples
 
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
 ENV LIBRARY_PATH $LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
