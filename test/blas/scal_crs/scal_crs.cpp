@@ -10,14 +10,17 @@ void get_ans(monolish::matrix::CRS<T> &A, const double alpha){
 }
 
 template <typename T>
-bool test(monolish::matrix::CRS<T> A, double alpha, double tol, int iter, int check_ans){
+bool test(monolish::matrix::CRS<T>& A, double alpha, double tol, int iter, int check_ans){
 
+	std::cout << "===================" << std::endl;
 	monolish::matrix::CRS<double> ansA = A;
+	std::cout << "===================" << std::endl;
 
 	monolish::blas::mscal(alpha, A);
 
 	if(check_ans == 1){
 		get_ans(ansA, alpha);
+		A.recv();
 		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
 			return false;
 		};
@@ -53,6 +56,7 @@ int main(int argc, char** argv){
 
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
+	A.send();
 
 	double alpha = 123.0;
 

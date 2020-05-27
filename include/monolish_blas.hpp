@@ -132,6 +132,7 @@ namespace monolish{
 		 * @param[in] y double precision monolish vector
 		 */
 		void spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y);
+		void spmv(matrix::CRS<float> &A, vector<float> &x, vector<float> &y);
 
 		/**
 		 * @brief double precision scal: y = alpha * A

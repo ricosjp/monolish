@@ -20,24 +20,21 @@ namespace monolish{
 		int* rowd = A.row_ptr.data();
 		int* cold = A.col_ind.data();
 
-#if USE_GPU // gpu
-		#pragma acc data pcopy(vald[0:nnz]) 
-		{
-			#pragma acc kernels
-			{
-				#pragma acc loop independent 
-				for(int i = 0 ; i < nnz; i++){
-					vald[i] = alpha * vald[i];
-				}
+	#if USE_GPU // gpu
+		#pragma acc data present(vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+		#pragma acc kernels
+		#pragma acc loop independent 
+			for(int i = 0 ; i < nnz; i++){
+				vald[i] = alpha * vald[i];
 			}
-		}
 
-#else // cpu
+	#else // cpu
 
-	#pragma omp parallel for 
-		for(size_t i = 0 ; i < nnz; i++)
-			vald[i] = alpha * vald[i];
-#endif
+		#pragma omp parallel for 
+			for(size_t i = 0 ; i < nnz; i++)
+				vald[i] = alpha * vald[i];
+
+	#endif
 
 		logger.func_out();
 	}

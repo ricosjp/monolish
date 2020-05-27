@@ -23,16 +23,16 @@ void get_ans(monolish::matrix::CRS<T> &A, monolish::vector<T> &mx, monolish::vec
 }
 
 template <typename T>
-bool test(monolish::matrix::CRS<T> A, monolish::vector<T> x, monolish::vector<T> y, double tol, int iter, int check_ans){
+bool test(monolish::matrix::CRS<T>& A, monolish::vector<T>& x, monolish::vector<T>& y, double tol, int iter, int check_ans){
 
 	monolish::vector<double> ansy(A.get_row());
 	ansy = y.copy();
-
 
 	monolish::blas::spmv(A, x, y);
 
 	if(check_ans == 1){
 		get_ans(A, x, ansy);
+		y.recv();
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
 			return false;
 		};
@@ -71,6 +71,9 @@ int main(int argc, char** argv){
 
 	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
 	monolish::vector<double> y(A.get_row(), 0.0, 1.0);
+	A.send();
+	x.send();
+	y.send();
 
 	bool result;
 	if( test<double>(A, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
