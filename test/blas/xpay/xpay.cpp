@@ -23,6 +23,7 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double t
 	// check ans
 	if(check_ans == 1){
 		monolish::blas::xpay(alpha, x, y);
+		y.recv();
  		get_ans(alpha, x, ansy);
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
  			return false;
@@ -61,6 +62,7 @@ int main(int argc, char** argv){
 	double alpha = 123.0;
    	monolish::vector<double> x(size, 0.0, 1.0);
    	monolish::vector<double> y(size, 0.0, 1.0);
+	monolish::util::send(x,y);
 
  	// exec and error check
  	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){ return 1; }

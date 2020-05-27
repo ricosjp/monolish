@@ -21,6 +21,7 @@ bool test(double alpha, monolish::vector<T>& x, double tol, const size_t iter, c
 	// check ans
 	if(check_ans == 1){
 		monolish::blas::scal(alpha, x);
+		x.recv();
  		get_ans(alpha, ansx);
 		if(ans_check<T>(x.data(), ansx.data(), x.size(), tol) == false){
  			return false;
@@ -58,6 +59,7 @@ int main(int argc, char** argv){
 	//create random vector x rand(0~1)
 	double alpha = 123.0;
    	monolish::vector<double> x(size, 0.0, 1.0);
+	x.send();
 
  	// exec and error check
  	if( test<double>(alpha, x, 1.0e-8, iter, check_ans) == false){ return 1; }

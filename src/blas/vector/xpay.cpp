@@ -28,24 +28,49 @@ namespace monolish{
 		double* yd = y.data();
 		size_t size = x.size();
 	
-#if USE_GPU
-	#pragma acc data pcopyin(xd[0:size]) copy(yd[0:size]) 
-	{
-		#pragma acc kernels
-		{
+		#if USE_GPU
+			#pragma acc data present(xd[0:size],yd[0:size])
+			#pragma acc kernels
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				yd[i] = xd[i] + alpha * yd[i];
 			}
-
-		}
-	}
-#else
-		#pragma omp parallel for
-		for(size_t i = 0; i < size; i++){
+		#else
+			#pragma omp parallel for
+			for(size_t i = 0; i < size; i++){
 				yd[i] = xd[i] + alpha * yd[i];
+			}
+		#endif
+ 		logger.func_out();
+ 	}
+
+	// float ///////////////////
+	void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(monolish_func);
+
+		//err
+		if( x.size() != y.size()){
+			throw std::runtime_error("error vector size is not same");
 		}
-#endif
+
+		const float* xd = x.data();
+		float* yd = y.data();
+		size_t size = x.size();
+	
+		#if USE_GPU
+			#pragma acc data present(xd[0:size],yd[0:size])
+			#pragma acc kernels
+			#pragma acc loop independent 
+			for(size_t i = 0 ; i < size; i++){
+				yd[i] = xd[i] + alpha * yd[i];
+			}
+		#else
+			#pragma omp parallel for
+			for(size_t i = 0; i < size; i++){
+				yd[i] = xd[i] + alpha * yd[i];
+			}
+		#endif
  		logger.func_out();
  	}
 }

@@ -60,6 +60,7 @@ int main(int argc, char** argv){
 	//create random vector x rand(0~1)
   	monolish::vector<double> x(size, 0.0, 1.0);
   	monolish::vector<double> y(size, 0.0, 1.0);
+	monolish::util::send(x,y);
 
  	// exec and error check
  	if( test<double>(x, y, 1.0e-8, iter, check_ans) == false){ return 1; }

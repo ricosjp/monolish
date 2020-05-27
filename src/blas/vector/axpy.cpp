@@ -26,7 +26,6 @@ namespace monolish{
 		#if USE_GPU
 			cublasHandle_t h;
 			check(cublasCreate(&h));
-
 			#pragma acc host_data use_device(xd, yd)
 			{
 				check(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1));
@@ -55,7 +54,6 @@ namespace monolish{
 		#if USE_GPU
 			cublasHandle_t h;
 			check(cublasCreate(&h));
-
 			#pragma acc host_data use_device(xd, yd)
 			{
 				check(cublasSaxpy(h, size, &alpha, xd, 1, yd, 1));

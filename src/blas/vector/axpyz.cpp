@@ -1,16 +1,5 @@
-#include<iostream>
-#include<typeinfo>
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<omp.h>
 #include "../../../include/monolish_blas.hpp"
-
-#ifdef USE_GPU
-	#include<cublas.h>
-#else
-	#include<cblas.h>
-#endif
+#include "../../monolish_internal.hpp"
 
 namespace monolish{
 
@@ -29,23 +18,50 @@ namespace monolish{
 		double* zd = z.data();
 		size_t size = x.size();
 	
-#if USE_GPU
-	#pragma acc data pcopyin(xd[0:size], yd[0:size]) copyout(zd[0:size])
-	{
-		#pragma acc kernels
-		{
+		#if USE_GPU
+			#pragma acc data present(xd[0:size],yd[0:size],zd[0:size])
+			#pragma acc kernels
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				zd[i] = alpha * xd[i] + yd[i];
 			}
+		#else
+			#pragma omp parallel for
+			for(size_t i = 0; i < size; i++){
+				zd[i] = alpha * xd[i] + yd[i];
+			}
+		#endif
+ 		logger.func_out();
+ 	}
+
+	// float ///////////////////
+	void blas::axpyz(const float alpha, const vector<float> &x, const vector<float> &y, vector<float> &z){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(monolish_func);
+
+		//err
+		if( x.size() != y.size() || x.size() != z.size()){
+			throw std::runtime_error("error vector size is not same");
 		}
-	}
-#else
-		#pragma omp parallel for
-		for(size_t i = 0; i < size; i++){
-			zd[i] = alpha * xd[i] + yd[i];
-		}
-#endif
+
+		const float* xd = x.data();
+		const float* yd = y.data();
+		float* zd = z.data();
+		size_t size = x.size();
+	
+		#if USE_GPU
+			#pragma acc data present(xd[0:size],yd[0:size],zd[0:size])
+			#pragma acc kernels
+			#pragma acc loop independent 
+			for(size_t i = 0 ; i < size; i++){
+				zd[i] = alpha * xd[i] + yd[i];
+			}
+		#else
+			#pragma omp parallel for
+			for(size_t i = 0; i < size; i++){
+				zd[i] = alpha * xd[i] + yd[i];
+			}
+		#endif
  		logger.func_out();
  	}
 }

@@ -16,7 +16,7 @@ T get_ans(monolish::vector<T> &mx){
 }
 
 template <typename T>
-bool test(monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size_t iter, const size_t check_ans){
+bool test(monolish::vector<T>& x,double tol, const size_t iter, const size_t check_ans){
 
 	// check ans
 	if(check_ans == 1){
@@ -57,10 +57,10 @@ int main(int argc, char** argv){
 
 	//create random vector x rand(0~1)
   	monolish::vector<double> x(size, 0.0, 1.0);
-  	monolish::vector<double> y(size, 0.0, 1.0);
+	x.send();
 
  	// exec and error check
- 	if( test<double>(x, y, 1.0e-8, iter, check_ans) == false){ return 1; }
+ 	if( test<double>(x, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }
