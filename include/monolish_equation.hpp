@@ -16,11 +16,13 @@ namespace monolish{
 			protected:
 				int lib = 0;
 				double tol = 1.0e-8;
-				size_t miniter = SIZE_MAX;
-				size_t maxiter = 0;
+				size_t miniter = 0;
+				size_t maxiter = SIZE_MAX;
 				size_t precon_num=0;
 				size_t resid_method=0;
 				bool print_rhistory = false;
+				std::string rhistory_file;
+				std::ostream* rhistory_stream;
 				
 				/**
 				 * @brief create q = Ap
@@ -43,6 +45,16 @@ namespace monolish{
 				 solver(){};
 
 				/**
+				 * @brief delete solver class
+				 * @param[in] 
+				 **/
+				 ~solver(){
+					 if(rhistory_stream != &std::cout){
+						 delete rhistory_stream;
+					 }
+				 }
+
+				/**
 				 * @brief set library option
 				 * @param[in] library number
 				 **/
@@ -55,13 +67,13 @@ namespace monolish{
 				void set_tol(double t){tol = t;}
 
 				/**
-				 * @brief set max iter. (default = 0)
+				 * @brief set max iter. (default = SIZE_MAX)
 				 * @param[in] max maxiter
 				 **/
 				void set_maxiter(size_t max){maxiter = max;}
 
 				/**
-				 * @brief set min iter. (default = SIZE_MAX)
+				 * @brief set min iter. (default = 0)
 				 * @param[in] min miniter
 				 **/
 				void set_miniter(size_t min){miniter = min;}
@@ -79,11 +91,27 @@ namespace monolish{
 				void set_residual_method(size_t precondition){precon_num = precondition;}
 
 				/**
-				 * @brief print rhistory true/false. (default = false)
-				 * @param[in] min miniter
+				 * @brief print rhistory to standart out true/false. (default = false)
+				 * @param[in] flag 
 				 **/
-				void set_print_rhistory(bool rh){print_rhistory=rh;}
+				void set_print_rhistory(bool flag){
+					print_rhistory=flag;
+					rhistory_stream = &std::cout;
+				}
 
+				/**
+				 * @brief rhistory filename
+				 * @param[in] file: output file name
+				 **/
+				void set_rhistory_filename(std::string file){
+					rhistory_file = file;
+
+					//file open
+					rhistory_stream	= new std::ofstream(rhistory_file);
+					if(rhistory_stream -> fail()){
+						throw std::runtime_error("error bad filename");
+					}
+				}
 				///////////////////////////////////////////////////////////////////
 
 				/**

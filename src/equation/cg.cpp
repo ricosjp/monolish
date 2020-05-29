@@ -1,16 +1,25 @@
 #include "../../include/monolish_equation.hpp"
 #include "../../include/monolish_blas.hpp"
 #include "../monolish_internal.hpp"
+#include<iostream>
+#include<fstream>
+#include<string>
 
 namespace monolish{
 
 	int equation::CG::monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
+		std::ostream* pStream;
 
 		vector<double> r(A.size(), 0.0);
 		vector<double> p(A.size(), 0.0);
 		vector<double> q(A.size(), 0.0);
+		monolish::util::send(r,p,q);
+
+		if(A.get_device_mem_stat()) { A.send(); }
+		if(x.get_device_mem_stat()) { x.send(); }
+		if(b.get_device_mem_stat()) { b.send(); }
 
 		//r = b-Ax
 		blas::spmv(A, x, q);
@@ -35,10 +44,11 @@ namespace monolish{
  			blas::xpay(beta, r, p);//x = ay+x
 
 			double resid = get_residual(r);
-			if(print_rhistory==true)
-				std::cout << iter << ": " << resid << std::endl;
+			if(print_rhistory==true){
+				*rhistory_stream << iter+1 << "\t" << resid << std::endl;
+			}
 
-			if( resid < tol && miniter <= iter){
+			if( resid < tol && miniter <= iter+1){
 				return 0;
 			} // err code (0:sucess)
 		}

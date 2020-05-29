@@ -17,22 +17,30 @@ int main(int argc, char** argv){
 
 	monolish::vector<double> ans(A.get_row(), 1.0);
 	monolish::vector<double> b(A.get_row(), 0.0);
-	monolish::blas::spmv(A, ans, b);
 
 	// initial x is rand(0~1)
 	monolish::vector<double> x(A.get_row(), 123.0);
 
-	monolish::equation::CG CG_solver;
+	A.send();
+	monolish::util::send(x, b, ans);
 
-	CG_solver.set_tol(1.0e-12);
-	CG_solver.set_lib(0);
-	CG_solver.set_precon(1);
-	CG_solver.set_miniter(5);
-	CG_solver.set_maxiter(10);
+	// create answer
+	monolish::blas::spmv(A, ans, b);
 
-	CG_solver.set_print_rhistory(true);
+	monolish::equation::CG solver;
 
-	CG_solver.solve(A, x, b);
+	solver.set_tol(1.0e-12);
+	solver.set_lib(0);
+	solver.set_precon(2);
+	solver.set_miniter(5);
+	solver.set_maxiter(10);
+
+	solver.set_print_rhistory(true);
+	//solver.set_rhistory_filename("./a.txt");
+
+	solver.solve(A, x, b);
+
+	x.recv();
 
 	if(x[0] != 1.0 && x[1] != 1.0 && x[2] != 1.0){
 		x.print_all();

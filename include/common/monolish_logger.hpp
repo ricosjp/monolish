@@ -57,9 +57,6 @@ namespace monolish{
 			}
 
  			void set_log_filename(std::string file){
-				if( 0 ){ 
-					throw std::runtime_error("error bad filename");
-				}
 				filename=file;
 
 				//file open
