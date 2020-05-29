@@ -24,12 +24,22 @@ int main(int argc, char** argv){
 	// ans is 1
 	monolish::vector<double> ans(A.get_row(), 1.0);
 	monolish::vector<double> b(A.get_row(), 0.0);
-	monolish::blas::spmv(A, ans, b);
 
 	// initial x is rand(0~1)
 	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
 
+	// data send gpu
+	A.send();
+	monolish::util::send(ans, b, x);
+
+	// make ans
+	monolish::blas::spmv(A, ans, b);
+
+	//solve
 	Cholesky_solver.solve(A, x, b);
+
+	// data recv gpu
+	x.recv();
 
 	if(check_ans == 1){
 		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){

@@ -38,7 +38,7 @@ namespace monolish{
 		double* Dsol = x.data();
 		int ret;
 
-#pragma acc data copyin( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n], Dsol[0:n] )
+#pragma acc data present( Dval[0:nnz], Dptr[0:n+1], Dind[0:nnz], Drhv[0:n], Dsol[0:n] )
 #pragma acc host_data use_device(Dval, Dptr, Dind, Drhv, Dsol)
   	{
 		check(
@@ -57,7 +57,6 @@ namespace monolish{
 					&singularity)
 			 );
  	}
-#pragma acc data copyout(Dsol[0:n])
 #else
 		throw std::runtime_error("error sparse QR is only GPU");
 #endif
