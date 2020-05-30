@@ -86,7 +86,7 @@ namespace monolish{
 
 				/**
 				 * @brief create N length rand(min~max) vector
-				 * @param[in] N  vector length
+				 * @param[in] N vector length
 				 * @param[in] min rand min
 				 * @param[in] max rand max
 				 **/
@@ -140,6 +140,18 @@ namespace monolish{
 				 **/
 				Float* data(){
 					return val.data();
+				}
+
+				/**
+				 * @brief resize vector (only CPU)
+				 * @param[in] N vector length
+				 **/
+				void resize(size_t N){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator[]");
+					}
+					size = N;
+					val.resize(N);
 				}
 
 				/**
@@ -249,10 +261,16 @@ namespace monolish{
 
 
 				Float& operator [] ( size_t i){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator[]");
+					}
 					return val[i];
 				}
 
 				bool operator==(const vector<Float>& vec){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator==");
+					}
 					if(val.size() != vec.size()) return false;
 					for(size_t i=0; i<vec.size(); i++){
 						if(val[i] != vec.val[i]) return false;
@@ -261,6 +279,9 @@ namespace monolish{
 				}
 
 				bool operator!=(const vector<Float>& vec){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator!=");
+					}
 					if(val.size() != vec.size()) return true;
 					for(size_t i=0; i<vec.size(); i++){
 						if(val[i] != vec.val[i]) return true;
