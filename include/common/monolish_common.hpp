@@ -4,8 +4,20 @@
 #include"monolish_vector.hpp"
 #include<initializer_list>
 
+// error code
+#define MONOLISH_SOLVER_SUCCESS 0
+#define MONOLISH_SOLVER_SIZE_ERROR -1
+#define MONOLISH_SOLVER_MAXITER -2
+#define MONOLISH_SOLVER_BREAKDOWN -3
+
 namespace monolish{
 	namespace util{
+
+		/**
+		 * @brief check error 
+		 * @param[in] err solver err code
+		 */
+		bool solver_check( const int err);
 
 		/**
 		 * @brief      0 : none<br> 1 : all<br> 2 : solver<br>2 : solver, func <br>3 : solver, func, util

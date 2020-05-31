@@ -46,7 +46,7 @@ namespace monolish{
 	   	// gpu copy and recv
 		if( vec.get_device_mem_stat() ) {
 
-			if( get_device_mem_stat() ) {
+			if( get_device_mem_stat() == false ) {
 				throw std::runtime_error("Error, No GPU memory allocated for the return value (operator=)");
 			}
 			if( vec.size() != size() ) {

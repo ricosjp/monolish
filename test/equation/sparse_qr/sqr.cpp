@@ -29,8 +29,7 @@ int main(int argc, char** argv){
 	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
 
 	//send gpu
-	monolish::util::send(x, ans, b);
-	A.send();
+	monolish::util::send(A, x, ans, b);
 
 	// create ans
 	monolish::blas::spmv(A, ans, b);
@@ -43,11 +42,10 @@ int main(int argc, char** argv){
 
 	if(check_ans == 1){
 		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
+			x.print_all();
 			return 1;
 		};
 	}
-
-	x.print_all();
 
 	return 0;
 }

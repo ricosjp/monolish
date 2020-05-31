@@ -49,7 +49,7 @@ namespace monolish{
 				 * @param[in] 
 				 **/
 				 ~solver(){
-					 if(rhistory_stream != &std::cout){
+					 if(rhistory_stream != &std::cout && rhistory_file.empty() != true){
 						 delete rhistory_stream;
 					 }
 				 }

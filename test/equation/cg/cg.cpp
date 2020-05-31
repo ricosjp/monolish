@@ -21,8 +21,7 @@ int main(int argc, char** argv){
 	// initial x is rand(0~1)
 	monolish::vector<double> x(A.get_row(), 123.0);
 
-	A.send();
-	monolish::util::send(x, b, ans);
+	monolish::util::send(A, x, b, ans);
 
 	// create answer
 	monolish::blas::spmv(A, ans, b);
@@ -32,8 +31,8 @@ int main(int argc, char** argv){
 	solver.set_tol(1.0e-12);
 	solver.set_lib(0);
 	solver.set_precon(2);
-	solver.set_miniter(5);
-	solver.set_maxiter(10);
+ 	solver.set_miniter(5);
+ 	solver.set_maxiter(10000);
 
 	solver.set_print_rhistory(true);
 	//solver.set_rhistory_filename("./a.txt");
