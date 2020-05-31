@@ -38,6 +38,7 @@ int main(int argc, char** argv){
 	QR_solver.solve(A, x, b);
 
 	// recv ans
+	ans.recv();
 	x.recv();
 
 	if(check_ans == 1){

@@ -1,10 +1,12 @@
 #include<iostream>
+#include"../../test_utils.hpp"
 #include"../include/monolish_equation.hpp"
 #include"../include/monolish_blas.hpp"
 
 int main(int argc, char** argv){
-	if(argc!=2){
-		std::cout << "error $1 is matrix filename" << std::endl;
+
+	if(argc!=3){
+		std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
 		return 1;
 	}
 
@@ -12,6 +14,8 @@ int main(int argc, char** argv){
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	char* file = argv[1];
+	int check_ans = atoi(argv[2]);
+
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
 
@@ -37,13 +41,16 @@ int main(int argc, char** argv){
 	solver.set_print_rhistory(true);
 	//solver.set_rhistory_filename("./a.txt");
 
-	solver.solve(A, x, b);
+	if (monolish::util::solver_check(solver.solve(A, x, b))) {return 1;}
 
+	ans.recv();
 	x.recv();
 
-	if(x[0] != 1.0 && x[1] != 1.0 && x[2] != 1.0){
-		x.print_all();
-		return 1;
+	if(check_ans == 1){
+		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
+			x.print_all();
+			return 1;
+		};
 	}
 	return 0;
 }
