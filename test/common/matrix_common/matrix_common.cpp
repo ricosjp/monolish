@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 	int*    col_array = (int*)malloc(sizeof(int) * NNZ);
 	int*    row_array = (int*)malloc(sizeof(int) * NNZ);
 
-	// oh...crazy...
+	// create COO type arrays
 	val_array[0] = 1; row_array[0] = 0; col_array[0] = 0;
 	val_array[1] = 2; row_array[1] = 0; col_array[1] = 1;
 	val_array[2] = 3; row_array[2] = 0; col_array[2] = 2;

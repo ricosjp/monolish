@@ -59,7 +59,6 @@ namespace monolish{
 
 		logger.func_out();
 	}
-
 	void blas::spmv(matrix::CRS<float> &A, vector<float> &x, vector<float> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
@@ -81,7 +80,7 @@ namespace monolish{
 
 		#if USE_GPU // gpu
 
-		#pragma acc data present(xd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
 		#pragma acc kernels
 		{
 			#pragma acc loop independent 

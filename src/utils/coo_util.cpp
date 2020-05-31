@@ -13,8 +13,8 @@
 namespace monolish{
 	namespace matrix{
 
-		template<>
-			void COO<double>::input_mm(const char* filename){
+		template<typename T>
+			void COO<T>::input_mm(const char* filename){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
@@ -87,7 +87,7 @@ namespace monolish{
 				//set values
 				for(size_t i = 0; i < nnz; i++){
 					size_t ix, jx;
-					double value;
+					T value;
 
 					getline(ifs, buf);
 					std::istringstream data(buf);
@@ -100,13 +100,16 @@ namespace monolish{
 				logger.util_out();
 			}
 
-		template<>
-			void COO<double>::output_mm(const char* filename){
+		template void COO<double>::input_mm(const char* filename);
+		template void COO<float>::input_mm(const char* filename);
+
+		template<typename T>
+			void COO<T>::output_mm(const char* filename){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 				std::ofstream out(filename);
 				out << std::scientific;
-				out << std::setprecision(std::numeric_limits<double>::max_digits10);
+				out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
 				out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
 				out << row << " " << row << " " << nnz << std::endl;
@@ -116,9 +119,11 @@ namespace monolish{
 				}
 				logger.util_out();
 			}
+		template void COO<double>::output_mm(const char* filename);
+		template void COO<float>::output_mm(const char* filename);
 
-		template<>
-			void COO<double>::output(){
+		template<typename T>
+			void COO<T>::output(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 				for(size_t i=0; i<nnz; i++){
@@ -126,9 +131,11 @@ namespace monolish{
 				}
 				logger.util_out();
 			}
+		template void COO<double>::output();
+		template void COO<float>::output();
 
-		template<>
-			double COO<double>::at(size_t i, size_t j){
+		template<typename T>
+			T COO<T>::at(size_t i, size_t j){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
@@ -144,9 +151,11 @@ namespace monolish{
 				logger.util_out();
 				return 0.0;
 			}
+		template double COO<double>::at(size_t i, size_t j);
+		template float COO<float>::at(size_t i, size_t j);
 
-		template<>
-			void COO<double>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v){
+		template<typename T>
+			void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<T> &v){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 				col_index = c;
@@ -158,5 +167,7 @@ namespace monolish{
 				nnz = r.size();
 				logger.util_out();
 			}
+			template void COO<double>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
+			template void COO<float>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<float> &v);
 	}
 }

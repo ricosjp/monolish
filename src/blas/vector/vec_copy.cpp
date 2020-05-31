@@ -9,7 +9,7 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.util_in(monolish_func);
 
-		if( get_device_mem_stat() ) { recv(); } // gpu copy
+		if( get_device_mem_stat() ) { nonfree_recv(); } // gpu copy
 
 		vector<T> tmp(val.size());
 		std::copy(val.begin(), val.end(), tmp.val.begin());
@@ -43,11 +43,15 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.util_in(monolish_func);
 
-		val.resize(vec.size());
-
 	   	// gpu copy and recv
 		if( vec.get_device_mem_stat() ) {
-			send();
+
+			if( get_device_mem_stat() ) {
+				throw std::runtime_error("Error, No GPU memory allocated for the return value (operator=)");
+			}
+			if( vec.size() != size() ) {
+				throw std::runtime_error("error vector size is not same");
+			}
 			T* vald = val.data();
 
 			const T* vecd = vec.data();
@@ -60,11 +64,10 @@ namespace monolish{
 				for(size_t i = 0 ; i < size; i++){
 					vald[i] = vecd[i];
 				}
-
-		   	recv();
 			#endif
 	   	}
 		else{
+			val.resize(vec.size());
 			std::copy(vec.val.begin(), vec.val.end(), val.begin());
 		}
 
@@ -84,11 +87,14 @@ namespace monolish{
 
 	   	// gpu copy and recv
 		if( vec.get_device_mem_stat() ) {
+			std::cout<< "1" << std::endl;
 			send();
 			T* vald = val.data();
+			std::cout<< "2" << std::endl;
 
 			const T* vecd = vec.data();
  			size_t size = vec.size();
+			std::cout<< "3" << std::endl;
 
 			#if USE_GPU
 				#pragma acc data present(vecd[0:size], vald[0:size])
@@ -98,7 +104,8 @@ namespace monolish{
 					vald[i] = vecd[i];
 				}
 
-		   	recv();
+		   	nonfree_recv();
+			std::cout<< "4" << std::endl;
 			#endif
 	   	}
 		else{

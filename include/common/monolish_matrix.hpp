@@ -55,7 +55,7 @@ template<typename Float> class vector;
 
 					COO(){}
 
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value){
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
@@ -70,7 +70,7 @@ template<typename Float> class vector;
 					}
 
 					// for n-origin
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value, const size_t origin){
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
@@ -136,10 +136,10 @@ template<typename Float> class vector;
 
 					void output_mm(const char* filename);
 					void output();
-					double at(size_t i, size_t j);
-					//void insert(size_t i, size_t j, double value);
+					Float at(size_t i, size_t j);
+					//void insert(size_t i, size_t j, Float value);
 
-					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
+					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
 					size_t size(){return row;}
@@ -157,7 +157,7 @@ template<typename Float> class vector;
 					}
 
 					std::vector<int>& get_row_ptr(){return row_index;}
-					std::vector<int>& get_col_ptr(){return col_index;}
+					std::vector<int>& get_col_ind(){return col_index;}
 					std::vector<Float>& get_val_ptr(){return val;}
 
      				/////////////////////////////////////////////////////////////////////////////
@@ -195,11 +195,11 @@ template<typename Float> class vector;
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
 
-					void convert(COO<double> &coo);
+					void convert(COO<Float> &coo);
 
 					CRS(){}
 
-					CRS(COO<double> &coo){
+					CRS(COO<Float> &coo){
 						convert(coo);
 					}
 
@@ -219,9 +219,14 @@ template<typename Float> class vector;
 					void send();
 
 					/**
-					 * @brief recv data from GPU
+					 * @brief recv and free data from GPU
 					 **/
 					void recv();
+
+					/**
+					 * @brief recv data from GPU (w/o free)
+					 **/
+					void nonfree_recv();
 
 					/**
 					 * @brief free data on GPU
@@ -244,9 +249,9 @@ template<typename Float> class vector;
 					}
 
      				/////////////////////////////////////////////////////////////////////////////
-					vector<double> get_diag();
-					vector<double> get_row(size_t i);
-					vector<double> get_col(size_t j);
+					vector<Float> get_diag();
+					vector<Float> get_row(size_t i);
+					vector<Float> get_col(size_t j);
 
      				/////////////////////////////////////////////////////////////////////////////
 

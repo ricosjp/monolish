@@ -14,8 +14,8 @@
 namespace monolish{
 	namespace matrix{
 
-		template<>
-			void CRS<double>::convert(COO<double> &coo){
+		template<typename T>
+			void CRS<T>::convert(COO<T> &coo){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
@@ -46,9 +46,11 @@ namespace monolish{
 				}
 				logger.util_out();
 			}
+		template void CRS<double>::convert(COO<double> &coo);
+		template void CRS<float>::convert(COO<float> &coo);
 
-		template<>
-			void CRS<double>::output(){
+		template<typename T>
+			void CRS<T>::output(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
@@ -60,70 +62,18 @@ namespace monolish{
 
 				logger.util_out();
 			}
+		template void CRS<double>::output();
+		template void CRS<float>::output();
 
-		template<>
-			vector<double> CRS<double>::get_diag(){
+		template<typename T>
+			vector<T> CRS<T>::get_diag(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
-				vector<double> vec(row, 1.0);
+				vector<T> vec(row, 1.0);
 				logger.util_out();
 				return vec;
 			}
+		template vector<double> CRS<double>::get_diag();
+		template vector<float> CRS<float>::get_diag();
 	}
 }
-//
-// 	template<>
-// 		void COO_matrix<double>::output_mm(const char* filename){
-// 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(monolish_func);
-// 			std::ofstream out(filename);
-// 			out << std::scientific;
-// 			out << std::setprecision(std::numeric_limits<double>::max_digits10);
-//
-// 			out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
-// 			out << row << " " << row << " " << nnz << std::endl;
-//
-// 			for(size_t i=0; i<nnz; i++){
-// 				out << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
-// 			}
-// 			logger.func_out();
-// 		}
-//
-// 	template<>
-// 		void COO_matrix<double>::output(){
-// 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(monolish_func);
-// 			for(size_t i=0; i<nnz; i++){
-// 				std::cout << row_index[i] << " " << col_index[i] << " " << val[i] << std::endl;
-// 			}
-// 			logger.func_out();
-// 		}
-//
-// 	template<>
-// 		double COO_matrix<double>::at(size_t i, size_t j){
-// 			Logger& logger = Logger::get_instance();
-// 			logger.func_in(monolish_func);
-//
-// 			if(i < row && j < col){
-// 				throw std::runtime_error("error");
-// 			}
-//
-// 			for(size_t i=0; i<nnz; i++){
-// 				if( row_index[i] == i && col_index[i] == j){
-// 					return val[i];
-// 				}
-// 			}
-// 			logger.func_out();
-// 			return 0.0;
-// 		}
-//
-// 	template<>
-// 		void COO_matrix<double>::set_ptr(size_t rN, size_t cN, std::vector<size_t> &r, std::vector<size_t> &c, std::vector<double> &v){
-// 			col_index = c;
-// 			row_index = r;
-// 			val = v;
-//
-// 			row = rN;
-// 			col = cN;
-// 			nnz = r.size();
-// 		}

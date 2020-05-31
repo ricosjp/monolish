@@ -108,9 +108,14 @@ namespace monolish{
 				void send();
 
 				/**
-				 * @brief recv data from GPU
+				 * @brief recv and free data from GPU
 				 **/
 				void recv();
+
+				/**
+				 * @brief recv data from GPU (w/o free)
+				 **/
+				void nonfree_recv();
 
 				/**
 				 * @brief free data on GPU

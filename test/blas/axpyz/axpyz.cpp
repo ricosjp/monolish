@@ -15,20 +15,30 @@ void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my, mon
 }
 
 template <typename T>
-bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, monolish::vector<T>& z, double tol, const size_t iter, const size_t check_ans){
+bool test(const size_t size, double tol, const size_t iter, const size_t check_ans){
 
-	monolish::vector<T> ansz;
-	ansz = z.copy();
+	//create random vector x rand(0~1)
+	T alpha = 123.0;
+   	monolish::vector<T> x(size, 0.0, 1.0);
+   	monolish::vector<T> y(size, 0.0, 1.0);
+   	monolish::vector<T> z(size, 0.0, 1.0);
+
+	monolish::vector<T> ansz = z;
 
 	// check ans
 	if(check_ans == 1){
-		monolish::blas::axpyz(alpha, x, y, z);
  		get_ans(alpha, x, y, ansz);
+		
+		monolish::util::send(x,y,z);
+		monolish::blas::axpyz(alpha, x, y, z);
+
 		z.recv();
 		if(ans_check<T>(z.data(), ansz.data(), y.size(), tol) == false){
  			return false;
  		}
 	}
+
+	monolish::util::send(x,y,z);
 
 	//exec
 	auto start = std::chrono::system_clock::now();
@@ -39,6 +49,8 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, monolish
 
 	auto end = std::chrono::system_clock::now();
 	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
+
+	monolish::util::device_free(x, y, z);
 
 	std::cout << "total average time[sec]: " << sec / iter << std::endl;
 
@@ -58,15 +70,11 @@ int main(int argc, char** argv){
 	size_t iter = atoi(argv[2]);
 	size_t check_ans = atoi(argv[3]);
 
-	//create random vector x rand(0~1)
-	double alpha = 123.0;
-   	monolish::vector<double> x(size, 0.0, 1.0);
-   	monolish::vector<double> y(size, 0.0, 1.0);
-   	monolish::vector<double> z(size, 0.0, 1.0);
-	monolish::util::send(x,y,z);
+ 	// exec and error check
+ 	if( test<double>(size, 1.0e-8, iter, check_ans) == false){ return 1; }
 
  	// exec and error check
- 	if( test<double>(alpha, x, y, z, 1.0e-8, iter, check_ans) == false){ return 1; }
+ 	if( test<float>(size, 1.0e-5, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

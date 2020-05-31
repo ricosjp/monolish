@@ -134,12 +134,15 @@ namespace monolish{
 		void spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y);
 		void spmv(matrix::CRS<float> &A, vector<float> &x, vector<float> &y);
 
+//////////////////////////////////////////////////////
+//  matrix scale (crs)
+//////////////////////////////////////////////////////
 		/**
-		 * @brief double precision scal: y = alpha * A
+		 * @brief double precision scal: A = alpha * A
 		 * @param[in] alpha double precision scalar value
 		 * @param[in] A double precision CRS matrix
-		 * @param[in] y The result of alpha * A
 		 */
   		void mscal(const double alpha, matrix::CRS<double> &A);
+  		void mscal(const float alpha, matrix::CRS<float> &A);
 	}
 }

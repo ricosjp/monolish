@@ -10,7 +10,7 @@ namespace monolish{
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
-				if( get_device_mem_stat() ) { recv(); } // gpu copy
+				if( get_device_mem_stat() ) { nonfree_recv(); } // gpu copy
 
 				CRS<T> tmp;
 				std::copy(row_ptr.data(), row_ptr.data()+(row+1), tmp.row_ptr.begin());
@@ -69,9 +69,8 @@ namespace monolish{
 						cold[i] = Mcold[i];
 						vald[i] = Mvald[i];
 					}
-					std::cout << "gomagomakyu-" << std::endl;
 
-					recv();
+					nonfree_recv();
 					#endif
 				}
 				else{
@@ -104,7 +103,6 @@ namespace monolish{
 				// gpu copy and recv
 				if( mat.get_device_mem_stat() ) {
 					send();
-					std::cout << col_ind.size() << "," << mat.col_ind.size() << std::endl; 
 					T* vald = val.data();
 					int* cold = col_ind.data();
 					int* rowd = row_ptr.data();
@@ -122,8 +120,6 @@ namespace monolish{
 						rowd[i] = Mrowd[i];
 					}
 
-					std::cout << "gomagomakyu-" << std::endl;
-
 					#pragma acc data present(vald[0:nnz], cold[0:nnz], Mvald[0:nnz], Mcold[0:nnz])
 					#pragma acc kernels
 					#pragma acc loop independent 
@@ -132,8 +128,7 @@ namespace monolish{
 						vald[i] = Mvald[i];
 					}
 
-					std::cout << "gomagomakyu-" << std::endl;
-					recv();
+					nonfree_recv();
 					#endif
 				}
 				else{

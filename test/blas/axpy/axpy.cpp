@@ -15,20 +15,30 @@ void get_ans(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my){
 }
 
 template <typename T>
-bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double tol, const size_t iter, const size_t check_ans){
+bool test(const size_t size, double tol, const size_t iter, const size_t check_ans){
 
-	monolish::vector<T> ansy;
-	ansy = y.copy();
+	//create random vector x rand(0~1)
+	double alpha = 123.0;
+   	monolish::vector<T> x(size, 0.0, 1.0);
+   	monolish::vector<T> y(size, 0.0, 1.0);
 
-	// check ans
+	monolish::vector<T> ansy = y;
+
 	if(check_ans == 1){
-		monolish::blas::axpy(alpha, x, y);
-		y.recv(); // recv. vector
  		get_ans(alpha, x, ansy);
+
+		//send vector to device
+		monolish::util::send(x, y);
+		monolish::blas::axpy(alpha, x, y);
+
+		//recv vector to device
+		y.recv(); // recv. vector
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
  			return false;
  		}
 	}
+
+	monolish::util::send(x, y);
 
 	//exec
 	auto start = std::chrono::system_clock::now();
@@ -39,6 +49,9 @@ bool test(double alpha, monolish::vector<T>& x, monolish::vector<T>& y, double t
 
 	auto end = std::chrono::system_clock::now();
 	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
+
+	// free device vector
+	monolish::util::device_free(x, y);
 
 	std::cout << "total average time[sec]: " << sec / iter << std::endl;
 
@@ -58,24 +71,15 @@ int main(int argc, char** argv){
 	size_t iter = atoi(argv[2]);
 	size_t check_ans = atoi(argv[3]);
 
-	//create random vector x rand(0~1)
-	double alpha = 123.0;
-   	monolish::vector<double> x(size, 0.0, 1.0);
-   	monolish::vector<double> y(size, 0.0, 1.0);
-
-	//send vector to device
-	monolish::util::send(x, y);
-
  	// exec and error check
- 	if( test<double>(alpha, x, y, 1.0e-8, iter, check_ans) == false){
-		std::cout << "error" << std::endl;
+ 	if( test<double>(size, 1.0e-8, iter, check_ans) == false){
+		std::cout << "error in double" << std::endl;
+		return 1;
+	}
+ 	if( test<float>(size, 1.0e-5, iter, check_ans) == false){
+		std::cout << "error in double" << std::endl;
 		return 1;
 	}
 
-	//recv vector to device
-	y.recv(); // same as monolish::util::recv(y); 
-
-	// free device vector
-	monolish::util::device_free(x, y);
 	return 0;
 }

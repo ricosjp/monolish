@@ -35,6 +35,20 @@ namespace monolish{
 	 	logger.util_out();
 	}
 
+	//nonfree_recv 
+	template<typename T>
+	void vector<T>::nonfree_recv(){
+		Logger& logger = Logger::get_instance();
+		logger.util_in(monolish_func);
+
+		#if USE_GPU
+			T* d = val.data();
+			size_t N = val.size();
+			#pragma acc update host(d[0:N])
+		#endif 
+	 	logger.util_out();
+	}
+
 	//device_free
 	template<typename T>
 	void vector<T>::device_free(){
@@ -55,6 +69,9 @@ namespace monolish{
 
 	template void vector<float>::recv();
 	template void vector<double>::recv();
+
+	template void vector<float>::nonfree_recv();
+	template void vector<double>::nonfree_recv();
 
 	template void vector<float>::device_free();
 	template void vector<double>::device_free();
@@ -99,6 +116,25 @@ namespace monolish{
 	 	logger.util_out();
 	}
 
+	//nonfree_recv
+	template<typename T>
+	void matrix::CRS<T>::nonfree_recv(){
+		Logger& logger = Logger::get_instance();
+		logger.util_in(monolish_func);
+
+		#if USE_GPU
+			T* vald = val.data();
+			int* cold = col_ind.data();
+			int* rowd = row_ptr.data();
+			size_t N = size();
+			size_t nnz = get_nnz();
+
+			#pragma acc update host(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
+
+		#endif 
+	 	logger.util_out();
+	}
+
 	//device_free
 	template<typename T>
 	void matrix::CRS<T>::device_free(){
@@ -121,6 +157,9 @@ namespace monolish{
 
 	template void matrix::CRS<float>::recv();
 	template void matrix::CRS<double>::recv();
+
+	template void matrix::CRS<float>::nonfree_recv();
+	template void matrix::CRS<double>::nonfree_recv();
 
 	template void matrix::CRS<float>::device_free();
 	template void matrix::CRS<double>::device_free();
