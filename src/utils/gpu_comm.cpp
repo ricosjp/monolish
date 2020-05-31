@@ -27,10 +27,12 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* d = val.data();
 			size_t N = val.size();
 			#pragma acc exit data copyout(d[0:N])
 			gpu_status=false;
+		}
 		#endif 
 	 	logger.util_out();
 	}
@@ -42,9 +44,11 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* d = val.data();
 			size_t N = val.size();
 			#pragma acc update host(d[0:N])
+		}
 		#endif 
 	 	logger.util_out();
 	}
@@ -56,10 +60,12 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* d = val.data();
 			size_t N = val.size();
 			#pragma acc exit data delete(d[0:N])
 			gpu_status=false;
+		}
 		#endif 
 	 	logger.util_out();
 	}
@@ -103,6 +109,7 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
@@ -111,7 +118,7 @@ namespace monolish{
 
 			#pragma acc exit data copyout(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
 			gpu_status=false;
-
+		}
 		#endif 
 	 	logger.util_out();
 	}
@@ -123,6 +130,7 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
@@ -130,7 +138,7 @@ namespace monolish{
 			size_t nnz = get_nnz();
 
 			#pragma acc update host(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
-
+		}
 		#endif 
 	 	logger.util_out();
 	}
@@ -142,6 +150,7 @@ namespace monolish{
 		logger.util_in(monolish_func);
 
 		#if USE_GPU
+		if(gpu_status == true){
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
@@ -149,6 +158,7 @@ namespace monolish{
 			size_t nnz = get_nnz();
 			#pragma acc exit data delete(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
 			gpu_status=false;
+		}
 		#endif 
 	 	logger.util_out();
 	}

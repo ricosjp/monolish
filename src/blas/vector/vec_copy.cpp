@@ -87,14 +87,11 @@ namespace monolish{
 
 	   	// gpu copy and recv
 		if( vec.get_device_mem_stat() ) {
-			std::cout<< "1" << std::endl;
 			send();
 			T* vald = val.data();
-			std::cout<< "2" << std::endl;
 
 			const T* vecd = vec.data();
  			size_t size = vec.size();
-			std::cout<< "3" << std::endl;
 
 			#if USE_GPU
 				#pragma acc data present(vecd[0:size], vald[0:size])
@@ -105,7 +102,6 @@ namespace monolish{
 				}
 
 		   	nonfree_recv();
-			std::cout<< "4" << std::endl;
 			#endif
 	   	}
 		else{

@@ -36,18 +36,14 @@ bool test(const char* file, double tol, int iter, int check_ans){
 
 	if(check_ans == 1){
 		get_ans(A, x, ansy);
-		A.send();
-		x.send();
-		y.send();
+		monolish::util::send(A, x, y);
 		monolish::blas::spmv(A, x, y);
 		y.recv();
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
 			return false;
 		};
 	}
-	A.send();
-	x.send();
-	y.send();
+	monolish::util::send(A, x, y);
 
 	auto start = std::chrono::system_clock::now();
 
@@ -78,8 +74,8 @@ int main(int argc, char** argv){
 	int iter = atoi(argv[2]);
 	int check_ans = atoi(argv[3]);
 
-	monolish::util::set_log_level(3);
-	//monolish::util::set_log_filename("./monolish_test_log.txt");
+	// monolish::util::set_log_level(3);
+	// monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	if( test<double>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
 	if( test<float>(file, 1.0e-8, iter, check_ans) == false){ return 1; }

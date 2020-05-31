@@ -109,4 +109,18 @@ namespace monolish{
 
 		logger.func_out();
 	}
+
+	template<typename T>
+	vector<T> matrix::CRS<T>::operator*(vector<T>& vec){
+			vector<T> y(vec.size()); 
+			y.send();
+
+			blas::spmv(*this, vec, y);
+
+			y.nonfree_recv();
+
+			return y;
+		}
+	template vector<double> matrix::CRS<double>::operator*(vector<double>& vec);
+	template vector<float> matrix::CRS<float>::operator*(vector<float>& vec);
 }

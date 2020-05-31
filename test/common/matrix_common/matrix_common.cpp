@@ -3,18 +3,14 @@
 #include<chrono>
 #include"../../test_utils.hpp"
 
-int main(int argc, char** argv){
-
+template<typename T>
+bool test(){
 	//same as test/test.mtx
 	const int N = 3;
 	const int NNZ = 8;
 
-	// logger option
-	//monolish::util::set_log_level(3);
-	//monolish::util::set_log_filename("./monolish_test_log.txt");
-
 	// create C-pointer COO Matrix (same as test.mtx, but pointer is 0 origin!!)
-	double* val_array = (double*)malloc(sizeof(double) * NNZ);
+	T* val_array = (T*)malloc(sizeof(T) * NNZ);
 	int*    col_array = (int*)malloc(sizeof(int) * NNZ);
 	int*    row_array = (int*)malloc(sizeof(int) * NNZ);
 
@@ -34,41 +30,56 @@ int main(int argc, char** argv){
 	//	| 6 | 7 | 8 |
 	
 	//convert C-pointer -> monolish::COO
-	monolish::matrix::COO<double> addr_COO(N, NNZ, row_array, col_array, val_array);
+	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
 
 	//convert monolish::COO -> monolish::CRS
-	monolish::matrix::CRS<double> addr_CRS(addr_COO);
+	monolish::matrix::CRS<T> addr_CRS(addr_COO);
 
 
 //////////////////////////////////////////////////////
 
 	//from file (MM format is 1 origin)
-	monolish::matrix::COO<double> file_COO("../../test.mtx");
-	monolish::matrix::CRS<double> file_CRS(file_COO);
+	monolish::matrix::COO<T> file_COO("../../test.mtx");
+	monolish::matrix::CRS<T> file_CRS(file_COO);
 
 // 	//check
-// 	if(file_CRS.get_row() != addr_CRS.get_row()) {return 1;}
-// 	if(file_CRS.get_nnz() != addr_CRS.get_nnz()) {return 1;}
+// 	if(file_CRS.get_row() != addr_CRS.get_row()) {return false;}
+// 	if(file_CRS.get_nnz() != addr_CRS.get_nnz()) {return false;}
 
 //////////////////////////////////////////////////////
 	//create vector x = {10, 10, 10, ... 10}
-	monolish::vector<double> x(N, 10);
+	monolish::vector<T> x(N, 10);
 
 	//create vector y
-	monolish::vector<double> filey(N);
-	monolish::vector<double> addry(N);
+	monolish::vector<T> filey(N);
+	monolish::vector<T> addry(N);
+
+	monolish::util::send(x, filey, addry, file_CRS, addr_CRS);
 
 	monolish::blas::spmv(file_CRS, x, filey);
 	monolish::blas::spmv(addr_CRS, x, addry);
 
+	monolish::util::recv(addry, filey);
+
 	//ans check
-	if(addry[0] != 60) {addry.print_all(); return 1;}
-	if(addry[1] != 90) {addry.print_all(); return 1;}
-	if(addry[2] != 210) {addry.print_all(); return 1;}
+	if(addry[0] != 60) {addry.print_all();  return false;}
+	if(addry[1] != 90) {addry.print_all();  return false;}
+	if(addry[2] != 210) {addry.print_all();  return false;}
 
-	if(filey[0] != 30) {filey.print_all(); return 1;}
-	if(filey[1] != 20) {filey.print_all(); return 1;}
-	if(filey[2] != 30) {filey.print_all(); return 1;}
+	if(filey[0] != 30) {filey.print_all();  return false;}
+	if(filey[1] != 20) {filey.print_all();  return false;}
+	if(filey[2] != 30) {filey.print_all();  return false;}
 
+	return 0;
+}
+
+int main(int argc, char** argv){
+
+	// logger option
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
+	
+	if( test<double>() ) {return 1;}
+	if( test<float>() ) {return 1;}
 	return 0;
 }
