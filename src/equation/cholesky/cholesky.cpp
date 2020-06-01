@@ -2,7 +2,8 @@
 #include "../../monolish_internal.hpp"
 
 namespace monolish{
-	int equation::Cholesky::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	template <typename T>
+	int equation::Cholesky::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -25,4 +26,6 @@ namespace monolish{
 		return ret;
 	}
 
+	template int equation::Cholesky::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+	template int equation::Cholesky::solve(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 }

@@ -8,14 +8,15 @@
 
 namespace monolish{
 
-	int equation::CG::monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	template<typename T>
+	int equation::CG::monolish_CG(matrix::CRS<T> &A, vector<T> &x, vector<T> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 		std::ostream* pStream;
 
-		vector<double> r(A.size(), 0.0);
-		vector<double> p(A.size(), 0.0);
-		vector<double> q(A.size(), 0.0);
+		vector<T> r(A.size(), 0.0);
+		vector<T> p(A.size(), 0.0);
+		vector<T> q(A.size(), 0.0);
 		monolish::util::send(r,p,q);
 
 		if( A.get_device_mem_stat() == false) { A.send(); }
@@ -44,7 +45,7 @@ namespace monolish{
 
  			blas::xpay(beta, r, p);//p = r + beta*p
 
-			double resid = get_residual(r);
+			T resid = get_residual(r);
 			if(print_rhistory==true){
 				*rhistory_stream << iter+1 << "\t" << std::scientific << resid << std::endl;
 			}
@@ -55,22 +56,25 @@ namespace monolish{
 			} 
 		}
 
-
 		logger.solver_out();
 		return MONOLISH_SOLVER_MAXITER;
-
 	}
+	template int equation::CG::monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+	template int equation::CG::monolish_CG(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-	int equation::CG::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){
+	template<typename T>
+	int equation::CG::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 
 		int ret=0;
 		if(lib == 0){
-			ret = monolish_CG(A, x, b);
+			ret = monolish_CG<T>(A, x, b);
 		}
 
 		logger.solver_out();
 		return ret; // err code
 	}
+	template int equation::CG::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+	template int equation::CG::solve(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 }

@@ -3,30 +3,20 @@
 #include"../include/monolish_equation.hpp"
 #include"../include/monolish_blas.hpp"
 
-int main(int argc, char** argv){
-
-	if(argc!=3){
-		std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
-		return 1;
-	}
-
-	char* file = argv[1];
-	int check_ans = atoi(argv[2]);
-
-	//monolish::util::set_log_level(3);
-	//monolish::util::set_log_filename("./monolish_test_log.txt");
+template<typename T>
+bool test(const char* file, const int check_ans, const T tol){
 
 	monolish::equation::Cholesky Cholesky_solver;
 
-	monolish::matrix::COO<double> COO(file);
-	monolish::matrix::CRS<double> A(COO);
+	monolish::matrix::COO<T> COO(file);
+	monolish::matrix::CRS<T> A(COO);
 
 	// ans is 1
-	monolish::vector<double> ans(A.get_row(), 1.0);
-	monolish::vector<double> b(A.get_row(), 0.0);
+	monolish::vector<T> ans(A.get_row(), 1.0);
+	monolish::vector<T> b(A.get_row(), 0.0);
 
 	// initial x is rand(0~1)
-	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
+	monolish::vector<T> x(A.get_row(), 0.0, 1.0);
 
 	// data send gpu
 	monolish::util::send(A, ans, b, x);
@@ -46,11 +36,30 @@ int main(int argc, char** argv){
 	x.recv();
 
 	if(check_ans == 1){
-		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
+		if(ans_check<T>(x.data(), ans.data(), x.size(), tol) == false){
 			x.print_all();
 			return 1;
 		};
 	}
+
+	return true;
+}
+
+int main(int argc, char** argv){
+
+	if(argc!=3){
+		std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
+		return 1;
+	}
+
+	char* file = argv[1];
+	int check_ans = atoi(argv[2]);
+
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
+	
+	if(test<double>(file, check_ans, 1.0e-8) == false) {return 1;}
+	if(test<float>(file, check_ans, 1.0e-5) == false) {return 1;}
 
 
 	return 0;

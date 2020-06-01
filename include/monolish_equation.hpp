@@ -35,6 +35,7 @@ namespace monolish{
 				int precon_apply(matrix::CRS<double> &A, vector<double> &p, vector<double> &q);
 
 				double get_residual(vector<double>& x);
+				float get_residual(vector<float>& x);
 
 			public:
 
@@ -163,7 +164,8 @@ namespace monolish{
 		 */
 		class CG : public solver{
 			private:
-				int monolish_CG(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				template<typename T>
+				int monolish_CG(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 
 			public:
 				using solver::solver;
@@ -175,7 +177,7 @@ namespace monolish{
 				 * @param[in] b right hand vector
 				 * @return error code (only 0 now)
 				 **/
-				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 		};
 
 
@@ -207,8 +209,8 @@ namespace monolish{
 			private:
 				using solver::solver;
 				int lib = 1; // lib is 1
-				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int cusolver_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int cusolver_QR(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 				int singularity;
 				int reorder=3;
 
@@ -224,7 +226,7 @@ namespace monolish{
 				*/
 				int get_sigularity(){ return singularity; }
 				
-				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 		};
 
 		/**
@@ -235,8 +237,8 @@ namespace monolish{
 			private:
 				using solver::solver;
 				int lib = 1; // lib is 1
-				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int cusolver_Cholesky(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				int cusolver_Cholesky(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 				int singularity;
 				int reorder=3;
 
@@ -252,7 +254,7 @@ namespace monolish{
 				*/
 				int get_sigularity(){ return singularity; }
 				
-				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 		};
 
 		//jacobi////////////////////////////////
