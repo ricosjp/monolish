@@ -10,17 +10,22 @@ void get_ans(monolish::matrix::CRS<T> &A, const double alpha){
 }
 
 template <typename T>
-bool test(monolish::matrix::CRS<T> A, double alpha, double tol, int iter, int check_ans){
+bool test(char* file, double tol, int iter, int check_ans){
 
-	monolish::matrix::CRS<double> ansA = A;
-
-	monolish::blas::mscal(alpha, A);
+	T alpha = 123.0;
+	monolish::matrix::COO<T> COO(file);
+	monolish::matrix::CRS<T> A(COO);
+	A.send();
 
 	if(check_ans == 1){
+		monolish::matrix::CRS<T> ansA = A;
+		monolish::blas::mscal(alpha, A);
 		get_ans(ansA, alpha);
+		A.recv();
 		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
 			return false;
 		};
+		A.send();
 	}
 
 	auto start = std::chrono::system_clock::now();
@@ -31,6 +36,8 @@ bool test(monolish::matrix::CRS<T> A, double alpha, double tol, int iter, int ch
 
 	auto end = std::chrono::system_clock::now();
 	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
+
+	A.device_free();
 
 	std::cout << "total time: " << sec << std::endl;
 
@@ -51,13 +58,8 @@ int main(int argc, char** argv){
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
-	monolish::matrix::COO<double> COO(file);
-	monolish::matrix::CRS<double> A(COO);
-
-	double alpha = 123.0;
-
-	bool result;
-	if( test<double>(A, alpha, 1.0e-8, iter, check_ans) == false){ return 1; }
+	if( test<double>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
+	if( test<float>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

@@ -1,16 +1,12 @@
-#include<iostream>
-#include<typeinfo>
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<omp.h>
 #include "../../../include/monolish_blas.hpp"
+#include "../../monolish_internal.hpp"
 
 #ifdef USE_GPU
-	#include<cublas.h>
+	#include<cublas_v2.h>
 #else
 	#include<cblas.h>
 #endif
+
 namespace monolish{
 
 	// double ///////////////////
@@ -27,16 +23,45 @@ namespace monolish{
 		double* yd = y.data();
 		size_t size = x.size();
 	
-#if USE_GPU
-		#pragma acc data pcopyin(xd[0:size], yd[0:size])
-		#pragma acc host_data use_device(xd, yd)
-		{
-			cublasDaxpy(size, alpha, xd, 1, yd, 1);
+		#if USE_GPU
+			cublasHandle_t h;
+			check(cublasCreate(&h));
+			#pragma acc host_data use_device(xd, yd)
+			{
+				check(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1));
+			}
+			cublasDestroy(h);
+		#else
+			cblas_daxpy(size, alpha, xd, 1, yd, 1);
+		#endif
+		logger.func_out();
+	}
+
+	// float ///////////////////
+	void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y){
+		Logger& logger = Logger::get_instance();
+		logger.func_in(monolish_func);
+
+		//err
+		if( x.size() != y.size()){
+			throw std::runtime_error("error vector size is not same");
 		}
-		#pragma acc data copyout(yd[0:size])
-#else
-		cblas_daxpy(size, alpha, xd, 1, yd, 1);
-#endif
+
+		const float* xd = x.data();
+		float* yd = y.data();
+		size_t size = x.size();
+	
+		#if USE_GPU
+			cublasHandle_t h;
+			check(cublasCreate(&h));
+			#pragma acc host_data use_device(xd, yd)
+			{
+				check(cublasSaxpy(h, size, &alpha, xd, 1, yd, 1));
+			}
+			cublasDestroy(h);
+		#else
+			cblas_saxpy(size, alpha, xd, 1, yd, 1);
+		#endif
 		logger.func_out();
 	}
 }

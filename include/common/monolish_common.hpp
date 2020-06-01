@@ -2,9 +2,28 @@
 #include"monolish_logger.hpp"
 #include"monolish_matrix.hpp"
 #include"monolish_vector.hpp"
+#include<initializer_list>
+
+// error code
+#define MONOLISH_SOLVER_SUCCESS 0
+#define MONOLISH_SOLVER_SIZE_ERROR -1
+#define MONOLISH_SOLVER_MAXITER -2
+#define MONOLISH_SOLVER_BREAKDOWN -3
 
 namespace monolish{
 	namespace util{
+
+		/**
+		 * @brief get nrm |b-Ax|
+		 */
+		template<typename T>
+			T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
+
+		/**
+		 * @brief check error 
+		 * @param[in] err solver err code
+		 */
+		bool solver_check( const int err);
 
 		/**
 		 * @brief      0 : none<br> 1 : all<br> 2 : solver<br>2 : solver, func <br>3 : solver, func, util
@@ -32,6 +51,67 @@ namespace monolish{
 				for(size_t i=0; i<vec.size(); i++){
 					vec[i] = rand(mt);
 				}
+			}
+//send///////////////////
+
+		/**
+		 * @brief send data to GPU
+		 **/
+		template < typename T >
+			auto send( T& x )
+			{
+				x.send();
+			}
+
+		/**
+		 * @brief send datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto send( T& x, Types& ... args )
+			{
+				x.send();
+				send( args... );
+			}
+
+//recv///////////////////
+		/**
+		 * @brief recv data from GPU
+		 **/
+		template < typename T >
+			auto recv( T& x )
+			{
+				x.recv();
+			}
+
+		/**
+		 * @brief recv datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto recv( T& x, Types& ... args )
+			{
+				x.recv();
+				recv( args... );
+			}
+
+//device_free///////////////////
+
+		/**
+		 * @brief recv data from GPU
+		 **/
+		template < typename T >
+			auto device_free( T& x )
+			{
+				x.device_free();
+			}
+
+		/**
+		 * @brief recv datas to GPU
+		 **/
+		template < typename T, typename ... Types >
+			auto device_free( T& x, Types& ... args )
+			{
+				x.device_free();
+				recv( args... );
 			}
 	}
 }

@@ -41,7 +41,7 @@ template<typename Float> class vector;
 					size_t col;
 					size_t nnz;
 
-					bool gpu_flag = false; // not impl
+					bool gpu_status = false; // true: sended, false: not send
 
 					void set_rowN(const size_t N){row = N;};
 					void set_colN(const size_t N){col = N;};
@@ -55,7 +55,7 @@ template<typename Float> class vector;
 
 					COO(){}
 
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value){
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
@@ -70,7 +70,7 @@ template<typename Float> class vector;
 					}
 
 					// for n-origin
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const double* value, const size_t origin){
+					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
 						set_rowN(N);
 						set_colN(N);
 						set_nnzN(nnz);
@@ -90,6 +90,44 @@ template<typename Float> class vector;
 						}
 					}
 
+					// communication ///////////////////////////////////////////////////////////////////////////
+					/**
+					 * @brief send data to GPU
+					 **/
+					void send(){
+						throw std::runtime_error("error, GPU util of COO format is not impl. ");
+					};
+
+					/**
+					 * @brief recv data from GPU
+					 **/
+					void recv(){
+						throw std::runtime_error("error, GPU util of COO format is not impl. ");
+					};
+
+					/**
+					 * @brief free data on GPU
+					 **/
+					void device_free(){
+					};
+
+					/**
+					 * @brief false; // true: sended, false: not send
+					 * @return true is sended.
+					 * **/
+					bool get_device_mem_stat() const{ return gpu_status; }
+
+					/**
+					 * @brief; free gpu mem.
+					 * **/
+					~ COO(){
+						if(get_device_mem_stat()){
+							device_free();
+						}
+					}
+
+					// I/O ///////////////////////////////////////////////////////////////////////////
+
 					void input_mm(const char* filename);
 
 					COO(const char* filename){
@@ -98,10 +136,10 @@ template<typename Float> class vector;
 
 					void output_mm(const char* filename);
 					void output();
-					double at(size_t i, size_t j);
-					//void insert(size_t i, size_t j, double value);
+					Float at(size_t i, size_t j);
+					//void insert(size_t i, size_t j, Float value);
 
-					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<double> &v);
+					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
 					size_t size(){return row;}
@@ -119,7 +157,7 @@ template<typename Float> class vector;
 					}
 
 					std::vector<int>& get_row_ptr(){return row_index;}
-					std::vector<int>& get_col_ptr(){return col_index;}
+					std::vector<int>& get_col_ind(){return col_index;}
 					std::vector<Float>& get_val_ptr(){return val;}
 
      				/////////////////////////////////////////////////////////////////////////////
@@ -150,30 +188,70 @@ template<typename Float> class vector;
 					size_t nnz;
 
 					bool gpu_flag = false; // not impl
+					bool gpu_status = false; // true: sended, false: not send
 
 				public:
 					std::vector<Float> val;
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
 
-					void convert(COO<double> &coo);
+					void convert(COO<Float> &coo);
 
 					CRS(){}
-					CRS(COO<double> &coo){
+
+					CRS(COO<Float> &coo){
 						convert(coo);
 					}
 
+					CRS(const CRS<Float> &mat);
+
 					void output();
 
-					size_t size(){return row;}
-					size_t get_row(){return row;}
-					size_t get_col(){return col;}
-					size_t get_nnz(){return nnz;}
+					size_t size() const{return row;}
+					size_t get_row() const{return row;}
+					size_t get_col() const{return col;}
+					size_t get_nnz() const{return nnz;}
+
+					// communication ///////////////////////////////////////////////////////////////////////////
+					/**
+					 * @brief send data to GPU
+					 **/
+					void send();
+
+					/**
+					 * @brief recv and free data from GPU
+					 **/
+					void recv();
+
+					/**
+					 * @brief recv data from GPU (w/o free)
+					 **/
+					void nonfree_recv();
+
+					/**
+					 * @brief free data on GPU
+					 **/
+					void device_free();
+
+					/**
+					 * @brief false; // true: sended, false: not send
+					 * @return true is sended.
+					 * **/
+					bool get_device_mem_stat() const{ return gpu_status; }
+
+					/**
+					 * @brief; free gpu mem.
+					 * **/
+					~ CRS(){
+						if(get_device_mem_stat()){
+							device_free();
+						}
+					}
 
      				/////////////////////////////////////////////////////////////////////////////
-					vector<double> get_diag();
-					vector<double> get_row(size_t i);
-					vector<double> get_col(size_t j);
+					vector<Float> get_diag();
+					vector<Float> get_row(size_t i);
+					vector<Float> get_col(size_t j);
 
      				/////////////////////////////////////////////////////////////////////////////
 
@@ -181,22 +259,14 @@ template<typename Float> class vector;
 					 * @brief matrix copy
 					 * @return copied CRS matrix
 					 **/
-					CRS copy(){
-						CRS<double> tmp;
-						std::copy(row_ptr.data(), row_ptr.data()+(row+1), tmp.row_ptr.begin());
-						std::copy(col_ind.data(), col_ind.data()+nnz, tmp.col_ind.begin());
-						std::copy(val.data(), val.data()+nnz, tmp.val.begin());
-						return tmp;
-					}
+					CRS copy();
 
 					/**
 					 * @brief copy matrix, It is same as copy()
 					 * @param[in] filename source
 					 * @return output vector
 					 **/
-					void operator=(const COO<Float>& mat){
-						mat = copy();
-					}
+					void operator=(const CRS<Float>& mat);
 
 					//mat - vec
 					vector<Float> operator*(vector<Float>& vec);

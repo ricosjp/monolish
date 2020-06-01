@@ -24,20 +24,34 @@ int main(int argc, char** argv){
 	// ans is 1
 	monolish::vector<double> ans(A.get_row(), 1.0);
 	monolish::vector<double> b(A.get_row(), 0.0);
-	monolish::blas::spmv(A, ans, b);
 
 	// initial x is rand(0~1)
 	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
 
+	// data send gpu
+	monolish::util::send(A, ans, b, x);
+
+	// make ans
+	monolish::blas::spmv(A, ans, b);
+
+	//Cholesky_solver.set_reorder(1);
+	
+	//solve
 	Cholesky_solver.solve(A, x, b);
+
+	//std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
+
+	// data recv gpu
+	ans.recv();
+	x.recv();
 
 	if(check_ans == 1){
 		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
+			x.print_all();
 			return 1;
 		};
 	}
 
-	x.print_all();
 
 	return 0;
 }

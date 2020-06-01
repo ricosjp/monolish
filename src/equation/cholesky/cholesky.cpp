@@ -1,5 +1,5 @@
 #include "../../../include/monolish_equation.hpp"
-#include<iostream>
+#include "../../monolish_internal.hpp"
 
 namespace monolish{
 	int equation::Cholesky::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b){

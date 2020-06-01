@@ -13,19 +13,28 @@ void get_ans(double alpha, monolish::vector<T> &mx){
 }
 
 template <typename T>
-bool test(double alpha, monolish::vector<T>& x, double tol, const size_t iter, const size_t check_ans){
+bool test(const size_t size, double tol, const size_t iter, const size_t check_ans){
 
-	monolish::vector<T> ansx;
-	ansx = x.copy();
+	//create random vector x rand(0~1)
+	T alpha = 123.0;
+   	monolish::vector<T> x(size, 0.0, 1.0);
+
+	monolish::vector<T> ansx = x;
 
 	// check ans
 	if(check_ans == 1){
-		monolish::blas::scal(alpha, x);
  		get_ans(alpha, ansx);
+
+		x.send();
+		monolish::blas::scal(alpha, x);
+		x.recv();
+
 		if(ans_check<T>(x.data(), ansx.data(), x.size(), tol) == false){
  			return false;
  		}
 	}
+
+	x.send();
 
 	//exec
 	auto start = std::chrono::system_clock::now();
@@ -55,12 +64,11 @@ int main(int argc, char** argv){
 	size_t iter = atoi(argv[2]);
 	size_t check_ans = atoi(argv[3]);
 
-	//create random vector x rand(0~1)
-	double alpha = 123.0;
-   	monolish::vector<double> x(size, 0.0, 1.0);
+ 	// exec and error check
+ 	if( test<double>(size, 1.0e-8, iter, check_ans) == false){ return 1; }
 
  	// exec and error check
- 	if( test<double>(alpha, x, 1.0e-8, iter, check_ans) == false){ return 1; }
+ 	if( test<float>(size, 1.0e-5, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

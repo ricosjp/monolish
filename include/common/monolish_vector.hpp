@@ -15,6 +15,7 @@
 #include<stdexcept>
 #include<iterator>
 #include<random>
+#include"./monolish_logger.hpp"
 
 #include<memory>
 
@@ -32,13 +33,14 @@ namespace monolish{
 	template<typename Float>
 		class vector{
 			private:
+				std::vector<Float> val;
+				bool gpu_status = false; // true: sended, false: not send
 
 			public:
-				bool flag = 0; // 1 mean "changed", not impl..
-				std::vector<Float> val;
 
 				vector(){}
 
+				// constractor ///////////////////////////////////////////////////////
 				/**
 				 * @brief allocate size N vector memory space
 				 * @param[in] N vector length
@@ -60,12 +62,16 @@ namespace monolish{
 				 * @brief copy std::vector
 				 * @param[in] vec input std::vector
 				 **/
-
 				vector(const std::vector<Float>& vec){
 					val.resize(vec.size());
 					std::copy(vec.begin(), vec.end(), val.begin());
 				}
 
+				/**
+				 * @brief copy monolish::vector
+				 * @param[in] vec input monolish::vector
+				 **/
+				vector(const vector<Float>& vec);
 
 				/**
 				 * @brief copy from pointer
@@ -80,7 +86,7 @@ namespace monolish{
 
 				/**
 				 * @brief create N length rand(min~max) vector
-				 * @param[in] N  vector length
+				 * @param[in] N vector length
 				 * @param[in] min rand min
 				 * @param[in] max rand max
 				 **/
@@ -95,8 +101,43 @@ namespace monolish{
 					}
 				}
 
+				// communication ///////////////////////////////////////////////////////////////////////////
+				/**
+				 * @brief send data to GPU
+				 **/
+				void send();
 
-				/////////////////////////////////////////////////////////////////////////////
+				/**
+				 * @brief recv and free data from GPU
+				 **/
+				void recv();
+
+				/**
+				 * @brief recv data from GPU (w/o free)
+				 **/
+				void nonfree_recv();
+
+				/**
+				 * @brief free data on GPU
+				 **/
+				void device_free();
+
+				/**
+				 * @brief false; // true: sended, false: not send
+				 * @return true is sended.
+				 * **/
+				bool get_device_mem_stat() const{ return gpu_status; }
+
+				/**
+				 * @brief; free gpu mem.
+				 * **/
+				~ vector(){
+					if(get_device_mem_stat()){
+						device_free();
+					}
+				}
+
+				// util ///////////////////////////////////////////////////////////////////////////
 
 				/**
 				 * @brief returns a direct pointer to the vector
@@ -104,6 +145,18 @@ namespace monolish{
 				 **/
 				Float* data(){
 					return val.data();
+				}
+
+				/**
+				 * @brief resize vector (only CPU)
+				 * @param[in] N vector length
+				 **/
+				void resize(size_t N){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator[]");
+					}
+					size = N;
+					val.resize(N);
 				}
 
 				/**
@@ -140,14 +193,10 @@ namespace monolish{
 				}
 
 				/**
-				 * @brief vector copy
+				 * @brief vector copy ( Copy the memory on CPU and GPU )
 				 * @return copied vector
 				 **/
-				vector copy(){
-					vector<Float> tmp(val.size());
-					std::copy(val.begin(), val.end(), tmp.val.begin());
-					return tmp;
-				}
+				vector copy();
 
 				/**
 				 * @brief print all elements to standart I/O
@@ -173,17 +222,22 @@ namespace monolish{
 					}
 				}
 
-				/////////////////////////////////////////////////////////////////////////////
+				// operator ///////////////////////////////////////////////////////////////////////////
 
 				/**
-				 * @brief copy vector, It is same as copy()
+				 * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
 				 * @param[in] vec source vector
 				 * @return output vector
 				 **/
-				void operator=(const vector<Float>& vec){
-					val.resize(vec.size());
-					std::copy(vec.val.begin(), vec.val.end(), val.begin());
-				}
+				void operator=(const vector<Float>& vec);
+
+				/**
+				 * @brief copy vector from std::vector (dont gpu copy)
+				 * @param[in] vec source std::vector
+				 * @return output vector
+				 **/
+				void operator=(const std::vector<Float>& vec);
+
 				//vec - scalar
 				vector<Float> operator+(const Float value);
 				void operator+=(const Float value);
@@ -212,10 +266,16 @@ namespace monolish{
 
 
 				Float& operator [] ( size_t i){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator[]");
+					}
 					return val[i];
 				}
 
 				bool operator==(const vector<Float>& vec){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator==");
+					}
 					if(val.size() != vec.size()) return false;
 					for(size_t i=0; i<vec.size(); i++){
 						if(val[i] != vec.val[i]) return false;
@@ -224,6 +284,9 @@ namespace monolish{
 				}
 
 				bool operator!=(const vector<Float>& vec){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator!=");
+					}
 					if(val.size() != vec.size()) return true;
 					for(size_t i=0; i<vec.size(); i++){
 						if(val[i] != vec.val[i]) return true;

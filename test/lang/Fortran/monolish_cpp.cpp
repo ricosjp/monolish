@@ -19,26 +19,12 @@ extern "C"{
 		monolish::vector x(xp, xp+N);
 		monolish::vector y(xp, xp+N);
 
+		monolish::util::send(A,x,y);
+
 		monolish::blas::spmv(A, x, y);
 
-#pragma omp parallel for
-		for(size_t i=0; i<N; i++)
-			yp[i] = y[i];
+		monolish::util::recv(y);
 
-
-		// omake: sparse LU (cant solve on cpu now)////////
-
-		monolish::equation::LU LU_solver;
-
-		monolish::vector<double> slu_x(A.get_row(), 0.0);
-		monolish::vector<double> slu_b(A.get_row(), 1.0); //b = {1,1}
-
-	LU_solver.solve(A, slu_x, slu_b);
-
-	//slu_x.print_all(); // (-1, 1)
-
-
-	// omake: end////////
-	return 0;
+		return 0;
 	}
 }
