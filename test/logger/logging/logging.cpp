@@ -8,7 +8,7 @@ int main(int argc, char** argv){
 		return 1;
 	}
 
-	monolish::util::set_log_level(3);
+	monolish::util::set_log_level(2);
 	monolish::util::set_log_filename(argv[1]);
 
 	monolish::equation::CG cg_solver;

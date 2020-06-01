@@ -50,6 +50,7 @@ namespace monolish{
 			}
 
 			if( resid < tol && miniter <= iter+1){
+				logger.solver_out();
 				return MONOLISH_SOLVER_SUCCESS;
 			} 
 		}
