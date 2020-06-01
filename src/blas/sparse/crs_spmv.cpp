@@ -9,7 +9,7 @@
 
 namespace monolish{
 
-	void blas::spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y){
+	void blas::spmv(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -21,12 +21,12 @@ namespace monolish{
 
 		size_t n = A.get_row();
 		size_t nnz = A.get_nnz();
-		double* xd = x.data();
+		const double* xd = x.data();
 		double* yd = y.data();
 
-		double* vald = A.val.data();
-		int* rowd = A.row_ptr.data();
-		int* cold = A.col_ind.data();
+		const double* vald = A.val.data();
+		const int* rowd = A.row_ptr.data();
+		const int* cold = A.col_ind.data();
 
 		#if USE_GPU // gpu
 
@@ -59,7 +59,7 @@ namespace monolish{
 
 		logger.func_out();
 	}
-	void blas::spmv(matrix::CRS<float> &A, vector<float> &x, vector<float> &y){
+	void blas::spmv(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -71,12 +71,12 @@ namespace monolish{
 
 		size_t n = A.get_row();
 		size_t nnz = A.get_nnz();
-		float* xd = x.data();
+		const float* xd = x.data();
 		float* yd = y.data();
 
-		float* vald = A.val.data();
-		int* rowd = A.row_ptr.data();
-		int* cold = A.col_ind.data();
+		const float* vald = A.val.data();
+		const int* rowd = A.row_ptr.data();
+		const int* cold = A.col_ind.data();
 
 		#if USE_GPU // gpu
 

@@ -131,8 +131,8 @@ namespace monolish{
 		 * @param[in] x double precision monolish vector
 		 * @param[in] y double precision monolish vector
 		 */
-		void spmv(matrix::CRS<double> &A, vector<double> &x, vector<double> &y);
-		void spmv(matrix::CRS<float> &A, vector<float> &x, vector<float> &y);
+		void spmv(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y);
+		void spmv(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y);
 
 //////////////////////////////////////////////////////
 //  matrix scale (crs)

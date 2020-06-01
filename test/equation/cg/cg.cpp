@@ -43,6 +43,8 @@ int main(int argc, char** argv){
 
 	if (monolish::util::solver_check(solver.solve(A, x, b))) {return 1;}
 
+	//std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
+
 	ans.recv();
 	x.recv();
 

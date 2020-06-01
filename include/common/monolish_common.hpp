@@ -14,6 +14,12 @@ namespace monolish{
 	namespace util{
 
 		/**
+		 * @brief get nrm |b-Ax|
+		 */
+		template<typename T>
+			T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
+
+		/**
 		 * @brief check error 
 		 * @param[in] err solver err code
 		 */

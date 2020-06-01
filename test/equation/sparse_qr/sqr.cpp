@@ -37,6 +37,8 @@ int main(int argc, char** argv){
 	// solve
 	QR_solver.solve(A, x, b);
 
+	//std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
+
 	// recv ans
 	ans.recv();
 	x.recv();

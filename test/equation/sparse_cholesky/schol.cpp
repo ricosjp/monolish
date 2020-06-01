@@ -34,8 +34,12 @@ int main(int argc, char** argv){
 	// make ans
 	monolish::blas::spmv(A, ans, b);
 
+	//Cholesky_solver.set_reorder(1);
+	
 	//solve
 	Cholesky_solver.solve(A, x, b);
+
+	//std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
 
 	// data recv gpu
 	ans.recv();

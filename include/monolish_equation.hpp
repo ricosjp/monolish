@@ -201,7 +201,7 @@ namespace monolish{
 
 		/**
 		 * @brief QR solver class (GPU only now). can use set_tol(), get_til(),
-		 * set_reorder(), get_singularity(), 
+		 * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
 		 */
 		class QR : public solver{
 			private:
@@ -210,7 +210,7 @@ namespace monolish{
 				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int cusolver_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int singularity;
-				int reorder=0;
+				int reorder=3;
 
 			public:
 
@@ -229,7 +229,7 @@ namespace monolish{
 
 		/**
 		 * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
-		 * set_reorder(), get_singularity(), 
+		 * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
 		 */
 		class Cholesky : public solver{
 			private:
@@ -238,7 +238,7 @@ namespace monolish{
 				int mumps_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int cusolver_Cholesky(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 				int singularity;
-				int reorder=0;
+				int reorder=3;
 
 			public:
 
