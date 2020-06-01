@@ -23,7 +23,7 @@ extern "C"{
 
 		monolish::blas::spmv(A, x, y);
 
-		monolish::recv(y);
+		monolish::util::recv(y);
 
 		return 0;
 	}
