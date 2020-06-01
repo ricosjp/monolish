@@ -19,6 +19,8 @@ int main(int argc, char** argv){
 	monolish::vector<double> x(A.get_row(), 0.0);
 	monolish::vector<double> b(A.get_row(), 1.0);
 
+	monolish::util::send(A,x,b);
+
  	cg_solver.set_tol(1.0e-12);
  	cg_solver.set_maxiter(A.get_row());
 
