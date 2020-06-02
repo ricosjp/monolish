@@ -14,4 +14,14 @@ namespace monolish{
 				 break;
 		 }
 	 }
+	 float equation::solver::get_residual(vector<float>& x){
+		 switch(resid_method){
+			 case 0:
+				 return blas::nrm2(x);
+				 break;
+			 default:
+				 throw std::runtime_error("error vector size is not same");
+				 break;
+		 }
+	 }
 }

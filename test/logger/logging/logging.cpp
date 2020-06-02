@@ -26,7 +26,7 @@ int main(int argc, char** argv){
 
  	cg_solver.solve(A, x, b);
 
- 	cg_solver.set_precon(1); //jacobi modoki
+ 	//cg_solver.set_precon(1); //jacobi modoki
  	cg_solver.solve(A, x, b);
 
 	return 0;

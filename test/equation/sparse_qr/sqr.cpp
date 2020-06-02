@@ -3,18 +3,8 @@
 #include"../include/monolish_equation.hpp"
 #include"../include/monolish_blas.hpp"
 
-int main(int argc, char** argv){
-
-	if(argc!=3){
-		std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
-		return 1;
-	}
-
-	char* file = argv[1];
-	int check_ans = atoi(argv[2]);
-
-	//monolish::util::set_log_level(3);
-	//monolish::util::set_log_filename("./monolish_test_log.txt");
+template<typename T>
+bool test(const char* file, const int check_ans, const T tol){
 
 	monolish::equation::QR QR_solver;
 
@@ -46,9 +36,28 @@ int main(int argc, char** argv){
 	if(check_ans == 1){
 		if(ans_check<double>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
 			x.print_all();
-			return 1;
+			return false;
 		};
 	}
+	return true;
+}
+
+int main(int argc, char** argv){
+
+	if(argc!=3){
+		std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
+		return 1;
+	}
+
+	char* file = argv[1];
+	int check_ans = atoi(argv[2]);
+
+	//monolish::util::set_log_level(3);
+	//monolish::util::set_log_filename("./monolish_test_log.txt");
+	
+	if(test<double>(file, check_ans, 1.0e-8) == false) {return 1;}
+	if(test<float>(file, check_ans, 1.0e-5) == false) {return 1;}
+
 
 	return 0;
 }

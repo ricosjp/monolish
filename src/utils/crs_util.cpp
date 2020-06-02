@@ -64,16 +64,5 @@ namespace monolish{
 			}
 		template void CRS<double>::output();
 		template void CRS<float>::output();
-
-		template<typename T>
-			vector<T> CRS<T>::get_diag(){
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-				vector<T> vec(row, 1.0);
-				logger.util_out();
-				return vec;
-			}
-		template vector<double> CRS<double>::get_diag();
-		template vector<float> CRS<float>::get_diag();
 	}
 }

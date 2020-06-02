@@ -1,12 +1,12 @@
 \page gpu GPU Programming
 
 # はじめに
-monolishの各クラス(vector, matrix)は`send()`関数を用いることでGPUにマッピングされる．\
+monolishの各クラス(vector, matrix)は`send()`関数を用いることでGPUにマッピングされる．
 GPUにマッピングされたデータは`recv()`または`device_free`することによってGPUから解放される．
 
 `libmonolish_cpu.so`をリンクした場合， `send()` や `recv()`は何も行わないため，コードの共通化は可能である．
 
-`libmonolish_gpu.so`をリンクした場合，ほとんどの演算機能はGPUに転送しないと使えない．\
+`libmonolish_gpu.so`をリンクした場合，ほとんどの演算機能はGPUに転送しないと使えない．
 GPUに転送済のデータかどうかは `get_device_mem_stat()` 関数によって得られる．
 
 * CPUでデータを生成し，
@@ -58,3 +58,30 @@ GPUに転送済のデータかどうかは `get_device_mem_stat()` 関数によ�
 計算用の関数を持たないためGPUでは扱えない． `send` や `recv` 関数も使えない
 
 # monolish::matrix::CRS
+`get_device_mem_stat()` == true
+
+| Operation                                     | Arch.   | Description                    | memo                          |
+|-----------------------------------------------|---------|--------------------------------|-------------------------------|
+| BLAS演算                                      | GPU     | SpMVなど                       |                               |
+| 要素参照                                      | Error   | operator[], at(), insert()など |                               |
+| 行ベクトル・列ベクトルの取得                  | GPU     | get\_diag()など                |                               |
+| 算術演算子                                    | GPU     | operator+など                  |                               |
+| 代入演算子                                    | GPU     | operator=, operator+=など      | サイズが異なると死ぬ          |
+| copy関数                                      | CPU/GPU | y = x.copy()                   | 転送が発生する可能性がある    |
+| 情報取得                                      | CPU     | size(),get\_rowなど            |                               |
+| monolish::matrix::CRSでのコピーコンストラクタ | CPU/GPU | コピーコンストラクタ           | PU/GPUの両方の状態がコピー    |
+| print\_all()                                  | CPU     | ベクトルの全出力               | デバッグ用にCPUのデータを吐く |
+
+`get_device_mem_stat()` == false
+
+| Operation                                     | Arch.   | Description                    | memo                          |
+|-----------------------------------------------|---------|--------------------------------|-------------------------------|
+| BLAS演算                                      | Error   | SpMVなど                       |                               |
+| 要素参照                                      | Error   | operator[], at(), insert()など |                               |
+| 行ベクトル・列ベクトルの取得                  | CPU     | get\_diag()など                |                               |
+| 算術演算子                                    | Error   | operator+など                  |                               |
+| 代入演算子                                    | CPU     | operator=, operator+=など      |                               |
+| copy関数                                      | CPU     | y = x.copy()                   |                               |
+| 情報取得                                      | CPU     | size(),get\_rowなど            |                               |
+| monolish::matrix::CRSでのコピーコンストラクタ | CPU     | コピーコンストラクタ           |                               |
+| print\_all()                                  | CPU     | ベクトルの全出力               |                               |

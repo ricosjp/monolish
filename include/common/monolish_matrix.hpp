@@ -249,9 +249,9 @@ template<typename Float> class vector;
 					}
 
      				/////////////////////////////////////////////////////////////////////////////
-					vector<Float> get_diag();
-					vector<Float> get_row(size_t i);
-					vector<Float> get_col(size_t j);
+					void get_diag(vector<Float>& vec);
+					void get_row(const size_t r, vector<Float>& vec);
+					void get_col(const size_t c, vector<Float>& vec);
 
      				/////////////////////////////////////////////////////////////////////////////
 
