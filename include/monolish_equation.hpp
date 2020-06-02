@@ -210,10 +210,10 @@ namespace monolish{
 				 **/
 				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 
-				template<typename T> void precon_create(matrix::CRS<T> A)
-				{throw std::runtime_error("error, CG cant be used as precon");}
-				template<typename T> void precon_apply(vector<T> z, vector<T> r)
-				{throw std::runtime_error("error, CG cant be used as precon");}
+// 				template<typename T> void precon_create(matrix::CRS<T> A)
+// 				{throw std::runtime_error("error, CG cant be used as precon");}
+// 				template<typename T> void precon_apply(vector<T> z, vector<T> r)
+// 				{throw std::runtime_error("error, CG cant be used as precon");}
 		};
 
 		//jacobi////////////////////////////////
@@ -272,10 +272,10 @@ namespace monolish{
 
 				int solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
-				template<typename T> void precon_create(matrix::CRS<T> A)
-				{throw std::runtime_error("error, LU cant be used as precon");}
-				template<typename T> void precon_apply(vector<T> z, vector<T> r)
-				{throw std::runtime_error("error, LU cant be used as precon");}
+// 				template<typename T> void precon_create(matrix::CRS<T> A)
+// 				{throw std::runtime_error("error, LU cant be used as precon");}
+// 				template<typename T> void precon_apply(vector<T> z, vector<T> r)
+// 				{throw std::runtime_error("error, LU cant be used as precon");}
 		};
 
 		/**
@@ -305,10 +305,10 @@ namespace monolish{
 				
 				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 
-				template<typename T> void precon_create(matrix::CRS<T> A)
-				{throw std::runtime_error("error, QR cant be used as precon");}
-				template<typename T> void precon_apply(vector<T> z, vector<T> r)
-				{throw std::runtime_error("error, QR cant be used as precon");}
+// 				template<typename T> void precon_create(matrix::CRS<T> A)
+// 				{throw std::runtime_error("error, QR cant be used as precon");}
+// 				template<typename T> void precon_apply(vector<T> z, vector<T> r)
+// 				{throw std::runtime_error("error, QR cant be used as precon");}
 		};
 
 		/**
@@ -338,10 +338,10 @@ namespace monolish{
 				
 				template<typename T> int solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 
-				template<typename T> void precon_create(matrix::CRS<T> A)
-				{throw std::runtime_error("error, Chol cant be used as precon");}
-				template<typename T> void precon_apply(vector<T> z, vector<T> r)
-				{throw std::runtime_error("error, Chol cant be used as precon");}
+// 				template<typename T> void precon_create(matrix::CRS<T> A)
+// 				{throw std::runtime_error("error, Chol cant be used as precon");}
+// 				template<typename T> void precon_apply(vector<T> z, vector<T> r)
+// 				{throw std::runtime_error("error, Chol cant be used as precon");}
 		};
 	}
 }
