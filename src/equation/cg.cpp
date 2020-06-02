@@ -17,31 +17,36 @@ namespace monolish{
 		vector<T> r(A.size(), 0.0);
 		vector<T> p(A.size(), 0.0);
 		vector<T> q(A.size(), 0.0);
-		monolish::util::send(r,p,q);
+		vector<T> z(A.size(), 0.0);
+		monolish::util::send(r,p,q,z);
 
 		if( A.get_device_mem_stat() == false) { A.send(); }
 		if( x.get_device_mem_stat() == false) { x.send(); }
 		if( b.get_device_mem_stat() == false) { b.send(); }
 
+		precon_create(A);
+
 		//r = b-Ax
 		blas::spmv(A, x, q);
 		r = b - q;
 
-		//p0 = r0
+		//p0 = Mr0
 		p = r;
+		precon_apply(r, z);
 
 		for(size_t iter = 0; iter < maxiter; iter++)
 		{
 			blas::spmv(A,p,q);
 
-			auto tmp = blas::dot(r,r);
-			auto alpha = blas::dot(p,r) / blas::dot(p,q);
+			auto tmp = blas::dot(z,r);
+			auto alpha = tmp / blas::dot(p,q);
 
  			blas::axpy(alpha, p, x);
 
  			blas::axpy(-alpha, q, r);
 
- 			auto beta = blas::dot(r,r) / tmp;
+			precon_apply(r, z);
+ 			auto beta = blas::dot(z,r) / tmp;
 
  			blas::xpay(beta, r, p);//p = r + beta*p
 
