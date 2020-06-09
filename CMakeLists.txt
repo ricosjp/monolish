@@ -22,6 +22,7 @@ target_compile_features(monolish_gpu PUBLIC cxx_std_17)
 
 target_compile_options(monolish_gpu PRIVATE -O3)
 target_compile_options(monolish_gpu PRIVATE -fopenacc)
+target_link_libraries(monolish_gpu INTERFACE "-fopenacc")
 target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
 # CUDA
@@ -33,6 +34,7 @@ foreach(CUDALIB IN ITEMS cublas cusolver cusparse cudart)
   )
 endforeach()
 target_link_libraries(monolish_gpu
+  PRIVATE
   cublas
   cusolver
   cusparse
