@@ -155,7 +155,6 @@ namespace monolish{
 					if( get_device_mem_stat() ) {
 						throw std::runtime_error("Error, GPU vector cant use operator[]");
 					}
-					size = N;
 					val.resize(N);
 				}
 

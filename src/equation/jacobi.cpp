@@ -12,8 +12,9 @@ namespace monolish{
             Logger& logger = Logger::get_instance();
             logger.solver_in(monolish_func);
 
+            this->precond.M.resize(A.size());
             //send M
-            if(this->precond.M.get_device_mem_stat()){
+            if(this->precond.M.get_device_mem_stat() == false){
                 this->precond.M.send();
             }
 
