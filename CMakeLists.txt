@@ -16,42 +16,46 @@ file(GLOB_RECURSE MONOLISH_SOURCE_FILES
 # monolish_gpu
 ###############################################################################
 
-add_library(monolish_gpu SHARED "")
+option(BUILD_GPU "build GPU variant" OFF)
 
-# TODO: source files should be collected in subdirectory CMakeLists.txt
-#add_subdirectory(src)
-target_sources(monolish_gpu
-  PRIVATE
-  ${MONOLISH_SOURCE_FILES}
-)
+if (BUILD_GPU)
+  add_library(monolish_gpu SHARED "")
 
-target_compile_features(monolish_gpu PUBLIC cxx_std_17)
+  # TODO: source files should be collected in subdirectory CMakeLists.txt
+  #add_subdirectory(src)
+  target_sources(monolish_gpu
+    PRIVATE
+    ${MONOLISH_SOURCE_FILES}
+    )
 
-target_compile_options(monolish_gpu PRIVATE -O3)
+  target_compile_features(monolish_gpu PUBLIC cxx_std_17)
 
-# OpenACC
-set(OpenACC_CXX_FLAGS "-fopenacc")
-target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
-# This should be target_link_options(), but only available after CMake 3.13
-set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
+  target_compile_options(monolish_gpu PRIVATE -O3)
 
-target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+  # OpenACC
+  set(OpenACC_CXX_FLAGS "-fopenacc")
+  target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
+  # This should be target_link_options(), but only available after CMake 3.13
+  set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
 
-# CUDA
-foreach(CUDALIB IN ITEMS cublas cusolver cusparse cudart)
-  add_library(${CUDALIB} SHARED IMPORTED)
-  set_target_properties(${CUDALIB} PROPERTIES
-    IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-    INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
-  )
-endforeach(CUDALIB)
-target_link_libraries(monolish_gpu
-  PRIVATE
-  cublas
-  cusolver
-  cusparse
-  cudart
-)
+  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+
+  # CUDA
+  foreach(CUDALIB IN ITEMS cublas cusolver cusparse cudart)
+    add_library(${CUDALIB} SHARED IMPORTED)
+    set_target_properties(${CUDALIB} PROPERTIES
+      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
+      )
+  endforeach(CUDALIB)
+  target_link_libraries(monolish_gpu
+    PRIVATE
+    cublas
+    cusolver
+    cusparse
+    cudart
+    )
+endif(BUILD_GPU)
 
 ###############################################################################
 # monolish_cpu
@@ -64,7 +68,7 @@ add_library(monolish_cpu SHARED "")
 target_sources(monolish_cpu
   PRIVATE
   ${MONOLISH_SOURCE_FILES}
-)
+  )
 
 target_compile_features(monolish_cpu PUBLIC cxx_std_17)
 target_compile_options(monolish_cpu PRIVATE -O3)
@@ -81,5 +85,13 @@ endif (OpenMP_FOUND)
 #set(BLA_VENDOR OpenBLAS)
 find_package(BLAS)
 if (BLAS_FOUND)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS cblas.h
+    /usr/include
+    /usr/local/include
+    /usr/include/openblas
+    )
+  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
   target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif (BLAS_FOUND)
