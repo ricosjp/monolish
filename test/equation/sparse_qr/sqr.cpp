@@ -34,7 +34,7 @@ bool test(const char* file, const int check_ans, const T tol){
 	x.recv();
 
 	if(check_ans == 1){
-		if(ans_check<T>(x.data(), ans.data(), x.size(), 1.0e-8) == false){
+		if(ans_check<T>(x.data(), ans.data(), x.size(), tol) == false){
 			x.print_all();
 			return false;
 		};
