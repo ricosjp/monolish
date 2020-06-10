@@ -9,6 +9,7 @@
 #define MONOLISH_SOLVER_SIZE_ERROR -1
 #define MONOLISH_SOLVER_MAXITER -2
 #define MONOLISH_SOLVER_BREAKDOWN -3
+#define MONOLISH_SOLVER_NOT_IMPL -4
 
 namespace monolish{
 	namespace util{
