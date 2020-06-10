@@ -66,7 +66,7 @@ namespace monolish{
 	}
 
     template<>
-	int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<float> &A, vector<float> &x, vector<float> &b){
+	int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A, vector<float> &x, vector<float> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 

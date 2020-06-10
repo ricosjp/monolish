@@ -11,7 +11,7 @@ int main(int argc, char** argv){
 	monolish::util::set_log_level(2);
 	monolish::util::set_log_filename(argv[1]);
 
-	monolish::equation::CG cg_solver;
+	monolish::equation::CG<double> cg_solver;
 	char* file = argv[2];
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
