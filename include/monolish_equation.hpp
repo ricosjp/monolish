@@ -151,6 +151,9 @@ namespace monolish::equation{
             bool get_print_rhistory(){return print_rhistory;}
     };
 
+    /**
+     * @brief none solver class
+     */
     template<typename Float>
         class precondition{
             private:
@@ -197,8 +200,12 @@ namespace monolish::equation{
                  * @return error code (only 0 now)
                  **/
                 int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-                void precond_create(matrix::CRS<Float> &A){};
-                void precond_apply(const vector<Float>& r, vector<Float>& z){};
+                void precond_create(matrix::CRS<Float> &A){
+                    throw std::runtime_error("this precond. is not impl.");
+                }
+                void precond_apply(const vector<Float>& r, vector<Float>& z){
+                    throw std::runtime_error("this precond. is not impl.");
+                }
 
         };
 
@@ -237,6 +244,12 @@ namespace monolish::equation{
             void set_reorder(int r){ reorder = r; }
             int get_sigularity(){ return singularity; }
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+            void precond_create(matrix::CRS<Float> &A){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
+            void precond_apply(const vector<Float>& r, vector<Float>& z){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
     };
 
     /**
@@ -268,6 +281,12 @@ namespace monolish::equation{
              * @brief solve Ax=b
              */
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+            void precond_create(matrix::CRS<Float> &A){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
+            void precond_apply(const vector<Float>& r, vector<Float>& z){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
     };
 
     /**
@@ -299,5 +318,12 @@ namespace monolish::equation{
              * @brief solve Ax=b
              */
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+
+            void precond_create(matrix::CRS<Float> &A){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
+            void precond_apply(const vector<Float>& r, vector<Float>& z){
+			    throw std::runtime_error("this precond. is not impl.");
+            }
     };
 }

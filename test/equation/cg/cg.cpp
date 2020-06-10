@@ -21,14 +21,16 @@ bool test(const char* file, const int check_ans, const T tol){
 	monolish::blas::spmv(A, ans, b);
 
 	monolish::equation::CG<T> solver;
-	monolish::equation::none<T> precond;
 
 	solver.set_tol(1.0e-12);
 	solver.set_lib(0);
-	solver.set_precond_create(precond);
-	solver.set_precond_apply(precond);
  	solver.set_miniter(5);
  	solver.set_maxiter(10000);
+
+    //precond setting
+	monolish::equation::none<T> precond;
+	solver.set_precond_create(precond);
+	solver.set_precond_apply(precond);
 
 	solver.set_print_rhistory(true);
 	//solver.set_rhistory_filename("./a.txt");
