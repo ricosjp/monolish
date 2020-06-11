@@ -23,8 +23,8 @@ int main(int argc, char** argv){
 	monolish::equation::CG<double> solver;
 	monolish::equation::none<double> precond;
 
-    solver.set_precond_create(precond);
-    solver.set_precond_apply(precond);
+    solver.set_create_precond(precond);
+    solver.set_apply_precond(precond);
 
  	solver.set_tol(1.0e-12);
  	solver.set_maxiter(A.get_row());
