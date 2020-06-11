@@ -106,25 +106,6 @@ template<typename Float> class vector;
 					};
 
 					/**
-					 * @brief if(A[i,j] == val); erase
-					 * @param[in] value erase val
-					 * @return the num. of drop
-					 **/
-                    size_t drop(Float value){
-                        size_t count = 0;
-                        for(size_t i=0; i < nnz; i++){
-                            if(val[i] == value){
-                               row_index.erase(row_index.begin()+i);
-                               col_index.erase(col_index.begin()+i);
-                               val.erase(val.begin()+i);
-                               i = i -1;
-                               count++;
-                            }
-                        }
-                        return count;
-                    }
-
-					/**
 					 * @brief free data on GPU
 					 **/
 					void device_free(){

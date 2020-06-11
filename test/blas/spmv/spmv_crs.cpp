@@ -26,7 +26,6 @@ template <typename T>
 bool test(const char* file, double tol, int iter, int check_ans){
 
 	monolish::matrix::COO<T> COO(file);
-    COO.drop(0.0);
 	monolish::matrix::CRS<T> A(COO);
 
 	monolish::vector<T> x(A.get_row(), 0.0, 1.0);
@@ -59,7 +58,7 @@ bool test(const char* file, double tol, int iter, int check_ans){
 	x.device_free();
 	y.device_free();
 
-	std::cout << "total time: " << sec << std::endl;
+	std::cout << "total average time: " << sec/iter << std::endl;
 
 	return true;
 }
@@ -75,7 +74,7 @@ int main(int argc, char** argv){
 	int iter = atoi(argv[2]);
 	int check_ans = atoi(argv[3]);
 
-	monolish::util::set_log_level(3);
+	// monolish::util::set_log_level(3);
 	// monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	if( test<double>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
