@@ -28,7 +28,7 @@ bool test(const char* file, const int check_ans, const T tol){
  	solver.set_maxiter(10000);
 
     //precond setting
-	monolish::equation::Jacobi<T> precond;
+	monolish::equation::none<T> precond;
 	solver.set_precond_create(precond);
 	solver.set_precond_apply(precond);
 
@@ -61,7 +61,7 @@ int main(int argc, char** argv){
 	char* file = argv[1];
 	int check_ans = atoi(argv[2]);
 
-	monolish::util::set_log_level(3);
+	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 	
 	if(test<double>(file, check_ans, 1.0e-8) == false) {return 1;}

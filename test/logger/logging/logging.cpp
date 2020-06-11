@@ -11,7 +11,6 @@ int main(int argc, char** argv){
 	monolish::util::set_log_level(2);
 	monolish::util::set_log_filename(argv[1]);
 
-	monolish::equation::CG<double> cg_solver;
 	char* file = argv[2];
 	monolish::matrix::COO<double> COO(file);
 	monolish::matrix::CRS<double> A(COO);
@@ -21,13 +20,16 @@ int main(int argc, char** argv){
 
 	monolish::util::send(A,x,b);
 
- 	cg_solver.set_tol(1.0e-12);
- 	cg_solver.set_maxiter(A.get_row());
+	monolish::equation::CG<double> solver;
+	monolish::equation::none<double> precond;
 
- 	cg_solver.solve(A, x, b);
+    solver.set_precond_create(precond);
+    solver.set_precond_apply(precond);
 
- 	//cg_solver.set_precon(1); //jacobi modoki
- 	cg_solver.solve(A, x, b);
+ 	solver.set_tol(1.0e-12);
+ 	solver.set_maxiter(A.get_row());
+
+ 	solver.solve(A, x, b);
 
 	return 0;
 }

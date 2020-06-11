@@ -74,7 +74,7 @@ int main(int argc, char** argv){
 	int iter = atoi(argv[2]);
 	int check_ans = atoi(argv[3]);
 
-	// monolish::util::set_log_level(3);
+	monolish::util::set_log_level(3);
 	// monolish::util::set_log_filename("./monolish_test_log.txt");
 
 	if( test<double>(file, 1.0e-8, iter, check_ans) == false){ return 1; }

@@ -6,6 +6,13 @@
 #include<omp.h>
 
 #include "../../../include/monolish_blas.hpp"
+#include "../../monolish_internal.hpp"
+
+#ifdef USE_GPU
+	#include "cuda_runtime.h"
+	#include "cusparse.h"
+#endif
+
 
 namespace monolish{
 
@@ -30,6 +37,7 @@ namespace monolish{
 
 		#if USE_GPU // gpu
 
+#if 0
 		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
 		#pragma acc kernels
 		{
@@ -45,6 +53,44 @@ namespace monolish{
 					}
 				}
 		}
+#else
+		cusparseHandle_t sp_handle;
+		cusparseCreate(&sp_handle);
+
+        cusparseMatDescr_t descr = 0;
+        cusparseCreateMatDescr(&descr);
+        cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
+        cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
+        cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
+
+        const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+        const double alpha = 1.0;
+        const double beta = 0.0;
+
+		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+        #pragma acc host_data use_device(xd, yd, vald, rowd, cold)
+        {
+            check(
+                    cusparseDcsrmv(
+                        sp_handle,
+                        trans,
+                        n,
+                        n,
+                        nnz,
+                        &alpha,
+                        descr,
+                        vald,
+                        rowd,
+                        cold,
+                        xd,
+                        &beta,
+                        yd)
+                 );
+        }
+
+#endif
+
 		#else // cpu
 
 		#pragma omp parallel for 
@@ -59,6 +105,7 @@ namespace monolish{
 
 		logger.func_out();
 	}
+
 	void blas::spmv(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
@@ -80,6 +127,7 @@ namespace monolish{
 
 		#if USE_GPU // gpu
 
+#if 0
 		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
 		#pragma acc kernels
 		{
@@ -95,6 +143,44 @@ namespace monolish{
 					}
 				}
 		}
+#else
+		cusparseHandle_t sp_handle;
+		cusparseCreate(&sp_handle);
+
+        cusparseMatDescr_t descr = 0;
+        cusparseCreateMatDescr(&descr);
+        cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
+        cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
+        cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
+
+        const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+        const float alpha = 1.0;
+        const float beta = 0.0;
+
+		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+        #pragma acc host_data use_device(xd, yd, vald, rowd, cold)
+        {
+            check(
+                    cusparseScsrmv(
+                        sp_handle,
+                        trans,
+                        n,
+                        n,
+                        nnz,
+                        &alpha,
+                        descr,
+                        vald,
+                        rowd,
+                        cold,
+                        xd,
+                        &beta,
+                        yd)
+                 );
+        }
+
+#endif
+
 		#else // cpu
 
 		#pragma omp parallel for 
