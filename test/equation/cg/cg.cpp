@@ -28,9 +28,9 @@ bool test(const char* file, const int check_ans, const T tol){
  	solver.set_maxiter(10000);
 
     //precond setting
-	monolish::equation::none<T> precond;
-	solver.set_precond_create(precond);
-	solver.set_precond_apply(precond);
+// 	monolish::equation::none<T> precond;
+// 	solver.set_precond_create(precond);
+// 	solver.set_precond_apply(precond);
 
 	solver.set_print_rhistory(true);
 	//solver.set_rhistory_filename("./a.txt");

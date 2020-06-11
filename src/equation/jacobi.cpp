@@ -8,7 +8,7 @@ namespace monolish{
     // precondition
     ////////////////////////////
     template<typename T>
-        void equation::Jacobi<T>::precond_create(matrix::CRS<T>& A){
+        void equation::Jacobi<T>::create_precond(matrix::CRS<T>& A){
             Logger& logger = Logger::get_instance();
             logger.solver_in(monolish_func);
 
@@ -22,13 +22,13 @@ namespace monolish{
 
             logger.solver_out();
         }
-    template void equation::Jacobi<float>::precond_create(matrix::CRS<float>& A);
-    template void equation::Jacobi<double>::precond_create(matrix::CRS<double>& A);
+    template void equation::Jacobi<float>::create_precond(matrix::CRS<float>& A);
+    template void equation::Jacobi<double>::create_precond(matrix::CRS<double>& A);
 
     /////
 
     template<typename T>
-    void equation::Jacobi<T>::precond_apply(const vector<T>& r, vector<T>& z){
+    void equation::Jacobi<T>::apply_precond(const vector<T>& r, vector<T>& z){
         Logger& logger = Logger::get_instance();
         logger.solver_in(monolish_func);
 
@@ -36,8 +36,8 @@ namespace monolish{
 
         logger.solver_out();
     }
-    template void equation::Jacobi<float>::precond_apply(const vector<float>& r, vector<float>& z);
-    template void equation::Jacobi<double>::precond_apply(const vector<double>& r, vector<double>& z);
+    template void equation::Jacobi<float>::apply_precond(const vector<float>& r, vector<float>& z);
+    template void equation::Jacobi<double>::apply_precond(const vector<double>& r, vector<double>& z);
 
     ////////////////////////////
     // solver

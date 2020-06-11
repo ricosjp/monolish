@@ -52,13 +52,13 @@ namespace monolish::equation{
              * @brief set precondition create fucntion
              * @param[in] f function 
              **/
-            template<class PRECOND> void set_precond_create(PRECOND& p);
+            template<class PRECOND> void set_create_precond(PRECOND& p);
 
             /**
              * @brief set precondition apply fucntion
              * @param[in] f function 
              **/
-            template<class PRECOND>void set_precond_apply(PRECOND& p);
+            template<class PRECOND>void set_apply_precond(PRECOND& p);
 
             /**
              * @brief set library option (to change library, monolish, cusolver, etc.)
@@ -161,15 +161,20 @@ namespace monolish::equation{
                 vector<Float> M;
                 monolish::matrix::CRS<Float> tmpA;
 
-                std::function<void(matrix::CRS<Float>&)> precond_create;
-                std::function<void(const vector<Float>& r, vector<Float>& z)> precond_apply;
+                std::function<void(matrix::CRS<Float>&)> create_precond;
+                std::function<void(const vector<Float>& r, vector<Float>& z)> apply_precond;
 
                 std::function<void(void)> get_precond();
 
                 void set_precond_data(vector<Float>& m){M=m;};
                 vector<Float> get_precond_data() {return M;};
 
-                precondition(){};
+                precondition(){
+                    auto create = [](matrix::CRS<Float>&){};
+                    auto apply = [](const vector<Float>& r, vector<Float>& z){z = r;};
+                    create_precond = create;
+                    apply_precond = apply;
+                };
         };
 
 
@@ -179,8 +184,8 @@ namespace monolish::equation{
     template <typename Float>
         class none : public solver<Float>{
             public:
-                void precond_create(matrix::CRS<Float>& A);
-                void precond_apply(const vector<Float>& r, vector<Float>& z);
+                void create_precond(matrix::CRS<Float>& A);
+                void apply_precond(const vector<Float>& r, vector<Float>& z);
                 int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
         };
 
@@ -200,13 +205,12 @@ namespace monolish::equation{
                  * @return error code (only 0 now)
                  **/
                 int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-                void precond_create(matrix::CRS<Float> &A){
+                void create_precond(matrix::CRS<Float> &A){
                     throw std::runtime_error("this precond. is not impl.");
                 }
-                void precond_apply(const vector<Float>& r, vector<Float>& z){
+                void apply_precond(const vector<Float>& r, vector<Float>& z){
                     throw std::runtime_error("this precond. is not impl.");
                 }
-
         };
 
     //jacobi////////////////////////////////
@@ -223,8 +227,8 @@ namespace monolish::equation{
              * @return error code (only 0 now)
              **/
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-            void precond_create(matrix::CRS<Float> &A);
-            void precond_apply(const vector<Float>& r, vector<Float>& z);
+            void create_precond(matrix::CRS<Float> &A);
+            void apply_precond(const vector<Float>& r, vector<Float>& z);
     };
 
 
@@ -244,10 +248,10 @@ namespace monolish::equation{
             void set_reorder(int r){ reorder = r; }
             int get_sigularity(){ return singularity; }
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-            void precond_create(matrix::CRS<Float> &A){
+            void create_precond(matrix::CRS<Float> &A){
 			    throw std::runtime_error("this precond. is not impl.");
             }
-            void precond_apply(const vector<Float>& r, vector<Float>& z){
+            void apply_precond(const vector<Float>& r, vector<Float>& z){
 			    throw std::runtime_error("this precond. is not impl.");
             }
     };
@@ -281,10 +285,10 @@ namespace monolish::equation{
              * @brief solve Ax=b
              */
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-            void precond_create(matrix::CRS<Float> &A){
+            void create_precond(matrix::CRS<Float> &A){
 			    throw std::runtime_error("this precond. is not impl.");
             }
-            void precond_apply(const vector<Float>& r, vector<Float>& z){
+            void apply_precond(const vector<Float>& r, vector<Float>& z){
 			    throw std::runtime_error("this precond. is not impl.");
             }
     };
@@ -319,10 +323,10 @@ namespace monolish::equation{
              */
             int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
 
-            void precond_create(matrix::CRS<Float> &A){
+            void create_precond(matrix::CRS<Float> &A){
 			    throw std::runtime_error("this precond. is not impl.");
             }
-            void precond_apply(const vector<Float>& r, vector<Float>& z){
+            void apply_precond(const vector<Float>& r, vector<Float>& z){
 			    throw std::runtime_error("this precond. is not impl.");
             }
     };

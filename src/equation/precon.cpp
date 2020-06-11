@@ -8,25 +8,25 @@ namespace monolish{
 	// precond none /////////////////////////
 	////////////////////////////////////////
 	template <typename T>
-	void equation::none<T>::precond_create(matrix::CRS<T>& A){
+	void equation::none<T>::create_precond(matrix::CRS<T>& A){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 		logger.solver_out();
 	}
-	template void equation::none<float>::precond_create(matrix::CRS<float>& A);
-	template void equation::none<double>::precond_create(matrix::CRS<double>& A);
+	template void equation::none<float>::create_precond(matrix::CRS<float>& A);
+	template void equation::none<double>::create_precond(matrix::CRS<double>& A);
 
 	/////
 
 	template<typename T>
-	void equation::none<T>::precond_apply(const vector<T>& r, vector<T>& z){
+	void equation::none<T>::apply_precond(const vector<T>& r, vector<T>& z){
 		Logger& logger = Logger::get_instance();
 		logger.solver_in(monolish_func);
 		z = r;
 		logger.solver_out();
 	}
-	template void equation::none<float>::precond_apply(const vector<float>& r, vector<float>& z);
-	template void equation::none<double>::precond_apply(const vector<double>& r, vector<double>& z);
+	template void equation::none<float>::apply_precond(const vector<float>& r, vector<float>& z);
+	template void equation::none<double>::apply_precond(const vector<double>& r, vector<double>& z);
 
 	/////
 
@@ -45,30 +45,30 @@ namespace monolish{
 	//////////////////////////////////////////////////////
     template<typename T>
         template<class PRECOND>
-        void equation::solver<T>::set_precond_create(PRECOND& p){
+        void equation::solver<T>::set_create_precond(PRECOND& p){
             Logger& logger = Logger::get_instance();
             logger.util_in(monolish_func);
-            precond.precond_create = std::bind(&PRECOND::precond_create, &p, std::placeholders::_1);
+            precond.create_precond = std::bind(&PRECOND::create_precond, &p, std::placeholders::_1);
             logger.util_out();
         }
 
-    template void equation::solver<double>::set_precond_create(equation::none<double>& p);
-    template void equation::solver<float>::set_precond_create(equation::none<float>& p);
-    template void equation::solver<double>::set_precond_create(equation::Jacobi<double>& p);
-    template void equation::solver<float>::set_precond_create(equation::Jacobi<float>& p);
+    template void equation::solver<double>::set_create_precond(equation::none<double>& p);
+    template void equation::solver<float>::set_create_precond(equation::none<float>& p);
+    template void equation::solver<double>::set_create_precond(equation::Jacobi<double>& p);
+    template void equation::solver<float>::set_create_precond(equation::Jacobi<float>& p);
 
     /////
     template<typename T>
         template<class PRECOND>
-        void equation::solver<T>::set_precond_apply(PRECOND& p){
+        void equation::solver<T>::set_apply_precond(PRECOND& p){
             Logger& logger = Logger::get_instance();
             logger.util_in(monolish_func);
-            precond.precond_apply = std::bind(&PRECOND::precond_apply, &p, std::placeholders::_1, std::placeholders::_2);
+            precond.apply_precond = std::bind(&PRECOND::apply_precond, &p, std::placeholders::_1, std::placeholders::_2);
             logger.util_out();
         }
 
-    template void equation::solver<double>::set_precond_apply(equation::none<double>& p);
-    template void equation::solver<float>::set_precond_apply(equation::none<float>& p);
-    template void equation::solver<double>::set_precond_apply(equation::Jacobi<double>& p);
-    template void equation::solver<float>::set_precond_apply(equation::Jacobi<float>& p);
+    template void equation::solver<double>::set_apply_precond(equation::none<double>& p);
+    template void equation::solver<float>::set_apply_precond(equation::none<float>& p);
+    template void equation::solver<double>::set_apply_precond(equation::Jacobi<double>& p);
+    template void equation::solver<float>::set_apply_precond(equation::Jacobi<float>& p);
 }

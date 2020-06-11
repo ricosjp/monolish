@@ -24,7 +24,7 @@ namespace monolish{
 		if( x.get_device_mem_stat() == false) { x.send(); }
 		if( b.get_device_mem_stat() == false) { b.send(); }
 
-		this->precond.precond_create(A);
+		this->precond.create_precond(A);
 
 		//r = b-Ax
 		blas::spmv(A, x, q);
@@ -32,7 +32,7 @@ namespace monolish{
 
 		//p0 = Mr0
 		p = r;
-		this->precond.precond_apply(r, z);
+		this->precond.apply_precond(r, z);
 
 		for(size_t iter = 0; iter < this->maxiter; iter++)
 		{
@@ -45,7 +45,7 @@ namespace monolish{
 
  			blas::axpy(-alpha, q, r);
 
-			this->precond.precond_apply(r, z);
+			this->precond.apply_precond(r, z);
  			auto beta = blas::dot(z,r) / tmp;
 
  			blas::xpay(beta, r, p);//p = r + beta*p
