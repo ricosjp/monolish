@@ -71,8 +71,8 @@ template<typename Float> class vector;
 
 					// for n-origin
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_rowN(nnz);
-						set_colN(nnz);
+						set_rowN(N);
+						set_colN(N);
 						set_nnzN(nnz);
 
 						row_index.resize(nnz);
