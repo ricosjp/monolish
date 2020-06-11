@@ -53,7 +53,7 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
 	// free device vector
 	monolish::util::device_free(x, y);
 
-	std::cout << "total average time[sec]: " << sec / iter << std::endl;
+	std::cout << "average time[sec]: " << sec / iter << std::endl;
 
 	return true;
 }

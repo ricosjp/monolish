@@ -39,7 +39,7 @@ bool test(char* file, double tol, int iter, int check_ans){
 
 	A.device_free();
 
-	std::cout << "total time: " << sec << std::endl;
+	std::cout << "average time: " << sec/iter << std::endl;
 
 	return true;
 }
