@@ -26,6 +26,7 @@ template <typename T>
 bool test(const char* file, double tol, int iter, int check_ans){
 
 	monolish::matrix::COO<T> COO(file);
+    COO.drop(0.0);
 	monolish::matrix::CRS<T> A(COO);
 
 	monolish::vector<T> x(A.get_row(), 0.0, 1.0);

@@ -71,8 +71,8 @@ template<typename Float> class vector;
 
 					// for n-origin
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_rowN(N);
-						set_colN(N);
+						set_rowN(nnz);
+						set_colN(nnz);
 						set_nnzN(nnz);
 
 						row_index.resize(nnz);
@@ -104,6 +104,25 @@ template<typename Float> class vector;
 					void recv(){
 						throw std::runtime_error("error, GPU util of COO format is not impl. ");
 					};
+
+					/**
+					 * @brief if(A[i,j] == val); erase
+					 * @param[in] value erase val
+					 * @return the num. of drop
+					 **/
+                    size_t drop(Float value){
+                        size_t count = 0;
+                        for(size_t i=0; i < nnz; i++){
+                            if(val[i] == value){
+                               row_index.erase(row_index.begin()+i);
+                               col_index.erase(col_index.begin()+i);
+                               val.erase(val.begin()+i);
+                               i = i -1;
+                               count++;
+                            }
+                        }
+                        return count;
+                    }
 
 					/**
 					 * @brief free data on GPU
