@@ -30,8 +30,8 @@ namespace monolish{
 	
 		#if USE_GPU
 			#pragma acc data present(xd[0:size],yd[0:size])
-			#pragma acc kernels
-			#pragma acc loop independent 
+			#pragma acc parallel
+            #pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				yd[i] = xd[i] + alpha * yd[i];
 			}
@@ -60,7 +60,7 @@ namespace monolish{
 	
 		#if USE_GPU
 			#pragma acc data present(xd[0:size],yd[0:size])
-			#pragma acc kernels
+			#pragma acc parallel
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				yd[i] = xd[i] + alpha * yd[i];

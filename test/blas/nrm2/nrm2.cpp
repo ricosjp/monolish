@@ -43,7 +43,7 @@ bool test(const size_t size ,double tol, const size_t iter, const size_t check_a
 	auto end = std::chrono::system_clock::now();
 	double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
 
-	std::cout << "total average time[sec]: " << sec / iter << std::endl;
+	std::cout << "average time[sec]: " << sec / iter << std::endl;
 
 	return true;
 }

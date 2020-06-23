@@ -15,13 +15,16 @@ bool monolish::util::solver_check( const int err){
 		case MONOLISH_SOLVER_SUCCESS:
 			return 0;
 		case MONOLISH_SOLVER_MAXITER:
-			std::runtime_error("error, maxiter");
+			std::runtime_error("error, maxiter\n");
 			return false;
 		case MONOLISH_SOLVER_BREAKDOWN:
-			std::runtime_error("error, breakdown");
+			std::runtime_error("error, breakdown\n");
 			return false;
 		case MONOLISH_SOLVER_SIZE_ERROR:
-			std::runtime_error("error, size error");
+			std::runtime_error("error, size error\n");
+			return false;
+		case MONOLISH_SOLVER_NOT_IMPL:
+			std::runtime_error("error, this solver is not impl.\n");
 			return false;
 		default:
 			return 0;

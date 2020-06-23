@@ -26,7 +26,7 @@ namespace monolish{
 			#if USE_GPU // gpu
 
 			#pragma acc data present(vecd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
-			#pragma acc kernels
+			#pragma acc parallel
 			{
 				#pragma acc loop independent 
 					for(size_t i = 0 ; i < n; i++){
@@ -84,7 +84,7 @@ namespace monolish{
 			#if USE_GPU // gpu
 
 			#pragma acc data present(vecd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
-			#pragma acc kernels
+			#pragma acc parallel
 			{
 				#pragma acc loop independent 
 					for(int i = 0 ; i < n; i++){
@@ -135,7 +135,7 @@ namespace monolish{
 			#if USE_GPU // gpu
 
 			#pragma acc data present(vecd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
-			#pragma acc kernels
+			#pragma acc parallel
 			{
 				#pragma acc loop independent 
 					for(size_t i = 0 ; i < n; i++){
