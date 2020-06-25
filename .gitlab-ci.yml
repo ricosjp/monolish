@@ -14,28 +14,12 @@ stages:
     - deploy
       
 ## build monolish ###############################
-build_cpu:
+build_cmake:
     stage: build_lib
     script:
-        - make cpu; make install
-    artifacts:
-        paths:
-            - install_lib/
-        expire_in: 60min
-
-build_cpu_debug:
-    stage: build_lib
-    script:
-        - make cpu-debug; make install MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib/debug
-    artifacts:
-        paths:
-            - install_lib/
-        expire_in: 60min
-
-build_gpu:
-    stage: build_lib
-    script:
-        - make gpu; make install
+        - apt-get update && apt-get install -y --no-install-recommends cmake
+        - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=./install_lib
+        - cmake --build build --target install -- -j VERBOSE=1
     artifacts:
         paths:
             - install_lib/
@@ -43,10 +27,12 @@ build_gpu:
     tags:
         - gpu
 
-build_gpu_debug:
+build_cmake_debug:
     stage: build_lib
     script:
-        - make gpu-debug; make install MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib/debug
+        - apt-get update && apt-get install -y --no-install-recommends cmake
+        - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=./install_lib/debug
+        - cmake --build build --target install -- -j VERBOSE=1
     artifacts:
         paths:
             - install_lib/
