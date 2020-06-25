@@ -55,6 +55,12 @@ if (BUILD_GPU)
     cusparse
     cudart
     )
+
+  install(
+    TARGETS monolish_gpu
+    LIBRARY
+      DESTINATION lib/monolish
+    )
 endif(BUILD_GPU)
 
 ###############################################################################
@@ -95,3 +101,9 @@ if (BLAS_FOUND)
   target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
   target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif (BLAS_FOUND)
+
+install(
+  TARGETS monolish_cpu
+  LIBRARY
+    DESTINATION lib/monolish
+  )
