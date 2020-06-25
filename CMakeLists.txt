@@ -103,6 +103,11 @@ if (BLAS_FOUND)
 endif (BLAS_FOUND)
 
 install(
+  DIRECTORY include/
+  DESTINATION include
+  FILES_MATCHING PATTERN "*.hpp")
+
+install(
   TARGETS monolish_cpu
   LIBRARY
     DESTINATION lib/monolish
