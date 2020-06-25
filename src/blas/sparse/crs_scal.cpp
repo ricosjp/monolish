@@ -22,7 +22,7 @@ namespace monolish{
 
 	#if USE_GPU // gpu
 		#pragma acc data present(vald[0:nnz], rowd[0:n+1], cold[0:nnz])
-		#pragma acc kernels
+		#pragma acc parallel
 		#pragma acc loop independent 
 			for(int i = 0 ; i < nnz; i++){
 				vald[i] = alpha * vald[i];
@@ -52,7 +52,7 @@ namespace monolish{
 
 	#if USE_GPU // gpu
 		#pragma acc data present(vald[0:nnz], rowd[0:n+1], cold[0:nnz])
-		#pragma acc kernels
+		#pragma acc parallel
 		#pragma acc loop independent 
 			for(int i = 0 ; i < nnz; i++){
 				vald[i] = alpha * vald[i];

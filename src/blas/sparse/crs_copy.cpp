@@ -56,14 +56,14 @@ namespace monolish{
 					#if USE_GPU
 
 					#pragma acc data present(rowd[0:N+1], Mrowd[0:N+1])
-					#pragma acc kernels
+					#pragma acc parallel
 					#pragma acc loop independent 
 					for(size_t i = 0 ; i < N+1; i++){
 						rowd[i] = Mrowd[i];
 					}
 
 					#pragma acc data present(vald[0:nnz], cold[0:nnz], Mvald[0:nnz], Mcold[0:nnz])
-					#pragma acc kernels
+					#pragma acc parallel
 					#pragma acc loop independent 
 					for(size_t i = 0 ; i < NNZ; i++){
 						cold[i] = Mcold[i];
@@ -114,14 +114,14 @@ namespace monolish{
 					#if USE_GPU
 
 					#pragma acc data present(rowd[0:N+1], Mrowd[0:N+1])
-					#pragma acc kernels
+					#pragma acc parallel
 					#pragma acc loop independent 
 					for(size_t i = 0 ; i < N+1; i++){
 						rowd[i] = Mrowd[i];
 					}
 
 					#pragma acc data present(vald[0:nnz], cold[0:nnz], Mvald[0:nnz], Mcold[0:nnz])
-					#pragma acc kernels
+					#pragma acc parallel
 					#pragma acc loop independent 
 					for(size_t i = 0 ; i < NNZ; i++){
 						cold[i] = Mcold[i];

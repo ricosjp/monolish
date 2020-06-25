@@ -3,7 +3,7 @@
 
 namespace monolish{
 	template <typename T>
-	int equation::QR::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b){
+	int equation::QR<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -25,6 +25,6 @@ namespace monolish{
 		logger.func_out();
 		return ret;
 	}
-	template int equation::QR::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-	template int equation::QR::solve(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+	template int equation::QR<double>::solve(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+	template int equation::QR<float>::solve(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 }

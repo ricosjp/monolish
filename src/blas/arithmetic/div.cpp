@@ -19,7 +19,7 @@ namespace monolish{
 		#if USE_GPU
 			ans.send();
 			#pragma acc data present(vald[0:size], ansd[0:size])
-			#pragma acc kernels
+			#pragma acc parallel
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				ansd[i] = vald[i] / value;
@@ -51,7 +51,7 @@ namespace monolish{
 
 		#if USE_GPU
 			#pragma acc data present(vald[0:size])
-			#pragma acc kernels
+			#pragma acc parallel
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				vald[i] /= value;
@@ -92,7 +92,7 @@ namespace monolish{
 		#if USE_GPU
 			ans.send();
 			#pragma acc data present(vecd[0:size], vald[0:size], ansd[0:size])
-			#pragma acc kernels
+			#pragma acc parallel
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				ansd[i] = vald[i] / vecd[i];
@@ -127,7 +127,7 @@ namespace monolish{
 
 		#if USE_GPU
 			#pragma acc data present (vald[0:size], vecd[0:size])
-			#pragma acc kernels
+			#pragma acc parallel
 			#pragma acc loop independent 
 			for(size_t i = 0 ; i < size; i++){
 				vald[i] /= vecd[i];

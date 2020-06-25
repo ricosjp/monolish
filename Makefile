@@ -29,6 +29,12 @@ clean:
 	- make -f Makefile.gpu clean 
 	- make -C test/ clean
 
+zenbu:
+	make clean
+	make cpu
+	make gpu
+	make install
+
 in:
 	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
 	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
