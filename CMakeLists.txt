@@ -59,7 +59,7 @@ if (BUILD_GPU)
   install(
     TARGETS monolish_gpu
     LIBRARY
-      DESTINATION lib/monolish
+      DESTINATION lib
     )
 endif(BUILD_GPU)
 
@@ -110,5 +110,5 @@ install(
 install(
   TARGETS monolish_cpu
   LIBRARY
-    DESTINATION lib/monolish
+    DESTINATION lib
   )
