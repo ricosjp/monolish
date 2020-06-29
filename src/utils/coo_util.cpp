@@ -155,22 +155,6 @@ namespace monolish{
 		template float COO<float>::at(size_t i, size_t j);
 
 		template<typename T>
-			T COO<T>::operator[](size_t i, size_t j){
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-
-				for(size_t i=0; i<nnz; i++){
-					if( row_index[i] == (int)i && col_index[i] == (int)j){
-						return val[i];
-					}
-				}
-				logger.util_out();
-				return 0.0;
-			}
-		template double COO<double>::operator[](size_t i, size_t j);
-		template float COO<float>::operator[](size_t i, size_t j);
-
-		template<typename T>
 			void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<T> &v){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);

@@ -41,17 +41,12 @@ bool test(){
 	//out of range element
 	try {
 		addr_COO.at(3, 2);
-		throw std::logic_error("at() should throw out_of_range()");
+                throw logic_error("at() should throw out_of_range()");
 	} catch (std::out_of_range& exception) {}
 
 	//convert monolish::COO -> monolish::CRS
 	monolish::matrix::CRS<T> addr_CRS(addr_COO);
 
-	//test operator[](i, j)
-	//non zero element
-	if (addr_COO.at(0, 1) != 2) { return false; }
-	//zero element
-	if (addr_COO.at(1, 1) != 0) { return false; }
 
 //////////////////////////////////////////////////////
 
