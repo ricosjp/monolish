@@ -137,7 +137,6 @@ template<typename Float> class vector;
 					void output_mm(const char* filename);
 					void output();
 					Float at(size_t i, size_t j);
-					Float operator[](size_t i, size_t j);
 					//void insert(size_t i, size_t j, Float value);
 
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
