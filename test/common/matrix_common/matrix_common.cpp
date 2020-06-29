@@ -41,7 +41,7 @@ bool test(){
 	//out of range element
 	try {
 		addr_COO.at(3, 2);
-                throw logic_error("at() should throw out_of_range()");
+                throw std::logic_error("at() should throw out_of_range()");
 	} catch (std::out_of_range& exception) {}
 
 	//convert monolish::COO -> monolish::CRS
