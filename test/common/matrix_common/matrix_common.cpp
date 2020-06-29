@@ -1,6 +1,7 @@
 #include<iostream>
 #include<istream>
 #include<chrono>
+#include<stdexcept>
 #include"../../test_utils.hpp"
 
 template<typename T>
@@ -31,6 +32,17 @@ bool test(){
 	
 	//convert C-pointer -> monolish::COO
 	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
+
+	//test at(i, j)
+	//non zero element
+	if (addr_COO.at(0, 0) != 1) { return false; }
+	//zero element
+	if (addr_COO.at(1, 1) != 0) { return false; }
+	//out of range element
+	try {
+		addr_COO.at(3, 2);
+                throw std::logic_error("at() should throw out_of_range()");
+	} catch (std::out_of_range& exception) {}
 
 	//convert monolish::COO -> monolish::CRS
 	monolish::matrix::CRS<T> addr_CRS(addr_COO);

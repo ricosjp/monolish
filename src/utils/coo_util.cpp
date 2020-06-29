@@ -6,7 +6,7 @@
 #include <iostream>
 #include <limits>
 #include <sstream>
-
+#include <stdexcept>
 
 //todo: kill cerr 
 
@@ -139,8 +139,8 @@ namespace monolish{
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
-				if(i < row && j < col){
-					throw std::runtime_error("error");
+				if(i >= row || j >= col){
+					throw std::out_of_range("error");
 				}
 
 				for(size_t i=0; i<nnz; i++){
