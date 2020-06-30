@@ -25,6 +25,6 @@ make install
 - -DCMAKE\_INSTALL\_PREFIX=[dir]
 
 # MTG資料
-第1回MTG [GSlides](https://docs.google.com/presentation/d/1LzTvWe_b_oKFHR2HP7gd1ds7nLxLUi2ncWVo9qk0x0c/edit?usp=sharing)
+初期設計資料 [GSlides](https://docs.google.com/presentation/d/16JvP7bTtxmfMP9hqflB7FVDrxueYxYa5U2PT-SkqB20/edit?usp=sharing)
 
-第2回MTG [GSlides](https://docs.google.com/presentation/d/1bgzDkHm5AHRyxxj2mM09zGMT9P9IkH21UNLrKanhyG0/edit?usp=sharing)
+Matrix Format [Gslides](https://docs.google.com/presentation/d/1wqyw9CmlHar84WxTgnoULn0_ZHZ7IxkUnLa_HkIwVQo/edit?usp=sharing)
