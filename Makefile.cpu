@@ -53,7 +53,7 @@ vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
 vpath %.cpp ./src/blas/vector/
-vpath %.cpp ./src/blas/sparse/
+vpath %.cpp ./src/blas/matrix/
 
 vpath %.cpp ./src/utils/
 
