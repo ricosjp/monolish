@@ -3,12 +3,26 @@
 現在allgebra Docker image上での利用を前提としています．
 ここはmonolish本体の開発者向けのページです．
 
+ビルド可能なコンテナとしてallgebraがあります．コンテナにログインするためのコマンドはMakefileに書いてあるため，
+以下のコマンドで使用できます．
+
+* CPUの場合は `make in-cpu` 
+* GPUの場合は `make in` 
+
+コンテナには/monolish/にmonolishがマウントされます．
+
+monolish自体のビルドにはGNU MakeとCmakeが使えます．
+
+CPUでは共有ライブラリとして `libmonolish_cpu.so` 
+GPUでは `libmonolish_gpu.so` が生成されます．
+
+ヘッダはCPU, GPUで共通です．
+
+# make
+
+インストール場所は `$MONOLISH_DIR/lib/` です．
+
 ## CPU on Linux
-
-* `make in-cpu` でallgebraをpullしてログインできます．
-* /monolish/にmonolishがマウントされます．
-* ビルドすれば使えるはずです．f8, o1で確認済．
-
 Docker上で以下の手順でコンパイルしてインストールします．
 
 ```
@@ -16,20 +30,21 @@ Docker上で以下の手順でコンパイルしてインストールします�
 > make install
 ```
 
-共有ライブラリとして `libmonolish_cpu.so` が生成され， `$MONOLISH_DIR/lib/` にインストールされます．
 
 ## GPU on Linux
-* `make in` でallgebraをpullしてログインできます．
-CPUとGPUのsoファイルは別にしてあります．CPUとほとんど同じ手順でビルドします．
+Docker上で以下の手順でコンパイルしてインストールします．
 
 ```
 > make gpu
 > make install
 ```
 
-共有ライブラリとして `libmonolish_gpu.so` が生成され， `$MONOLISH_DIR/lib/` にインストールされます．
+# cmake
+build/など作ってcmakeでコンパイルしてください．
+オプションは以下の2つが使えます．
 
-ヘッダはCPU, GPUで共通で， `$MONOLISH_DIR/include/` にインストールされます．
+- -DBUILD\_GPU={ON/OFF}
+- -DCMAKE\_INSTALL\_PREFIX=[dir]
 
 # 環境変数等
 	* MONOLISH_DIR monolish 
