@@ -10,6 +10,7 @@
 #include<exception>
 #include<stdexcept>
 #include<vector>
+#include<string>
 
 #define MM_BANNER "%%MatrixMarket"
 #define MM_MAT "matrix"
@@ -134,8 +135,15 @@ template<typename Float> class vector;
 						input_mm(filename);
 					}
 
-					void output_mm(const char* filename);
-					void output();
+					/**
+					 * @brief print all elements to standart I/O
+					 **/
+					void print_all();
+					/**
+					 * @brief print all elements to file
+					 * @param[in] filename output filename
+					 **/
+					void print_all(std::string filename);
 					Float at(size_t i, size_t j);
 					//void insert(size_t i, size_t j, Float value);
 
