@@ -1,5 +1,6 @@
 #include<iostream>
 #include<istream>
+#include<sstream>
 #include<chrono>
 #include<stdexcept>
 #include"../../test_utils.hpp"
@@ -32,6 +33,25 @@ bool test(){
 	
 	//convert C-pointer -> monolish::COO
 	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
+
+        //test print_all()
+        //See https://stackoverflow.com/a/4191318 for testing cout output
+        std::ostringstream oss;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss.rdbuf());
+        addr_COO.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        std::string res("%%MatrixMarket matrix coordinate real general\n");
+        res += "3 3 8\n";
+        res += "1 1 1.00000000000000000e+00\n";
+        res += "1 2 2.00000000000000000e+00\n";
+        res += "1 3 3.00000000000000000e+00\n";
+        res += "2 1 4.00000000000000000e+00\n";
+        res += "2 3 5.00000000000000000e+00\n";
+        res += "3 1 6.00000000000000000e+00\n";
+        res += "3 2 6.00000000000000000e+00\n";
+        res += "3 1 8.00000000000000000e+00";
+        if (oss.str() != res) { std::cout << "print matrix mismatch" << std::endl; return false; }
 
 	//test at(i, j)
 	//non zero element
