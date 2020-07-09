@@ -28,7 +28,8 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
 	if(check_ans == 1){
 		T ans = get_ans(x, y);
 
-		monolish::util::send(x,y);
+        monolish::util::send(x,y);
+
 		T result = monolish::blas::dot(x, y);
 
 		if(ans_check<T>(result, ans, tol) == false){
@@ -37,6 +38,8 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
 	}
 
 	//exec
+    monolish::util::send(x,y);
+	T tmp = monolish::blas::dot(x, y);
 	auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
