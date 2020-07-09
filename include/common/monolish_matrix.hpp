@@ -171,7 +171,20 @@ template<typename Float> class vector;
 						mat = copy();
 					}
 
-			};
+                    /**
+                     * @brief insert element to (m, n)
+                     * @param[in] size_t m row number
+                     * @param[in] size_t n col number
+                     * @param[in] Float val matrix value (if multiple element exists, value will be added together)
+                     * @param[in] size_t offset (default to 0)
+                     **/
+                    void insert(size_t m, size_t n, Float val, size_t offset);
+
+                    /**
+                     * @brief sort COO matrix elements (and merge elements)
+                     **/
+                    void sort(bool merge);
+                };
 
 		/**
 		 * @brief CRS format Matrix
