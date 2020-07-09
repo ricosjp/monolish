@@ -171,23 +171,23 @@ namespace monolish{
 			template void COO<float>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<float> &v);
 
         template<typename T>
-        void COO<T>::insert(size_t m, size_t n, Float val, size_t offset = 0) {
+        void COO<T>::insert(size_t m, size_t n, T value, size_t offset) {
             int rownum = m - offset;
-            if (rownum < 0 || rownum >= self.get_row()) { throw std::out_of_range("row index out of range"); }
+            if (rownum < 0 || rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
             int colnum = n - offset;
-            if (colnum < 0 || colnum >= self.get_col()) { throw std::out_of_range("column index out of range"); }
+            if (colnum < 0 || colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
             row_index.push_back(rownum);
             col_index.push_back(colnum);
-            val.push_back(val);
+            val.push_back(value);
         }
-        template void COO<double>::insert(size_t m, size_t n, double val);
-        template void COO<float>::insert(size_t m, size_t n, float val);
+        template void COO<double>::insert(size_t m, size_t n, double value, size_t offset = 0);
+        template void COO<float>::insert(size_t m, size_t n, float value, size_t offset = 0);
 
         template<typename T>
-        void COO<T>::sort(bool merge = true) {
+        void COO<T>::sort(bool merge) {
 
         }
-        template void COO<double>::sort(bool merge);
-        template void COO<float>::sort(bool merge);
+        template void COO<double>::sort(bool merge = true);
+        template void COO<float>::sort(bool merge = true);
 	}
 }
