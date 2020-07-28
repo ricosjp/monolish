@@ -180,6 +180,10 @@ template<typename Float> class vector;
                      **/
                     void insert(size_t m, size_t n, Float val, size_t offset);
 
+                 private:
+                    void _q_sort(int lo, int hi);
+
+                 public:
                     /**
                      * @brief sort COO matrix elements (and merge elements)
                      **/

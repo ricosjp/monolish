@@ -184,8 +184,96 @@ namespace monolish{
         template void COO<float>::insert(size_t m, size_t n, float value, size_t offset = 0);
 
         template<typename T>
-        void COO<T>::sort(bool merge) {
+        void COO<T>::_q_sort(int lo, int hi) {
+            // Very primitive quick sort
+            int h, l, p, p1, p2, t;
+            double p3, td;
 
+            if(lo >= hi) {
+                return;
+            }
+
+            l = lo;
+            h = hi;
+            p = hi;;
+            p1 = row_index[p];
+            p2 = col_index[p];
+            p3 = val[p];
+
+            do {
+                while ((l < h) &&
+                       ((row_index[l] != row_index[p])
+                         ? (row_index[l] - row_index[p])
+                         : (col_index[l] - col_index[p])) <= 0) {
+                    l = l+1;
+                }
+                while ((h > l) &&
+                       ((row_index[h] != row_index[p])
+                        ? (row_index[h] - row_index[p])
+                        : (col_index[h] - col_index[p])) <= 0) {
+                    h = h-1;
+                }
+                if (l < h) {
+                    t = row_index[l];
+                    row_index[l] = row_index[h];
+                    row_index[h] = t;
+
+                    t = col_index[l];
+                    col_index[l] = col_index[h];
+                    col_index[h] = t;
+
+                    td = val[l];
+                    val[l] = val[h];
+                    val[h] = td;
+                }
+            } while (l < h);
+
+            row_index[p] = row_index[l];
+            row_index[l] = p1;
+
+            col_index[p] = col_index[l];
+            col_index[l] = p2;
+
+            val[p] = val[l];
+            val[l] = p3;
+
+            /* Sort smaller array first for less stack usage */
+            if (l-lo < hi-l) {
+                _q_sort(lo, l-1);
+                _q_sort(l+1, hi);
+            } else {
+                _q_sort(l+1, hi);
+                _q_sort(lo, l-1);
+            }
+        }
+        template void COO<double>::_q_sort(int lo, int hi);
+        template void COO<float>::_q_sort(int lo, int hi);
+
+        template<typename T>
+        void COO<T>::sort(bool merge) {
+            int i, k;
+
+            //  Sort by first Col and then Row
+            //  TODO: This hand-written quick sort function should be retired
+            //        after zip_iterator() (available in range-v3 library to be) is available in the standard
+            _q_sort(0, nnz-1);
+
+            /*  Remove duplicates */
+            if (merge) {
+                k = 0;
+                for( i = 1; i < nnz; i++) {
+                    if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
+                        k++;
+                        row_index[k] = row_index[i];
+                        col_index[k] = col_index[i];
+                        val[k] = val[i];
+                    } else {
+                        val[k] += val[i];
+                    }
+                }
+                nnz = k+1;
+                col_index[0] = 0;
+            }
         }
         template void COO<double>::sort(bool merge = true);
         template void COO<float>::sort(bool merge = true);
