@@ -77,7 +77,7 @@ common_gpu:
     script:
         - cd test/common/
         - make run_gpu
-        - make run_gpu PROFILER=nvprof
+        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -102,7 +102,7 @@ blas_gpu:
     script:
         - cd test/blas/
         - make run_gpu
-        - make run_gpu PROFILER=nvprof
+        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -127,7 +127,7 @@ equation_gpu:
     script:
         - cd test/equation/
         - make run_gpu
-        - make run_gpu PROFILER=nvprof
+        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -152,7 +152,7 @@ logger_gpu:
     script:
         - cd test/logger/
         - make run_gpu
-        - make run_gpu PROFILER=nvprof
+        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/

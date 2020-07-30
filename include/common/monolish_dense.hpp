@@ -91,7 +91,45 @@ namespace monolish{
                         }
                     }
 
-                    void output();
+                    /**
+                     * @brief get element A[i][j] (only CPU)
+                     * @param[in] i row
+                     * @param[in] j col 
+				     * @return A[i][j]
+                     **/
+                    Float at(size_t i, size_t j){
+                        if( get_device_mem_stat() ) {
+                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                        }
+                        if(get_row() < i){
+                            throw std::runtime_error("Error, A.row < i");
+                        }
+                        if(get_row() < j){
+                            throw std::runtime_error("Error, A.col < j");
+                        }
+                        return val[get_col() * i + j];
+                    }
+
+                    /**
+                     * @brief insert element, A[i][j] = val (only CPU)
+                     * @param[in] i row
+                     * @param[in] j col
+                     * @param[in] val value
+                     **/
+                    void insert(size_t i, size_t j, Float val){
+                        if( get_device_mem_stat() ) {
+                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                        }
+                        if(get_row() < i){
+                            throw std::runtime_error("Error, A.row < i");
+                        }
+                        if(get_row() < j){
+                            throw std::runtime_error("Error, A.col < j");
+                        }
+                        val[get_col() * i + j] = val;
+                    }
+
+                    void print_all();
 
                     // communication ///////////////////////////////////////////////////////////////////////////
                     /**

@@ -51,9 +51,13 @@ namespace monolish{
 // 		template void Dense<float>::convert(COO<float> &coo);
 
 		template<typename T>
-			void Dense<T>::output(){
+			void Dense<T>::print_all(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
+
+                if( get_device_mem_stat() ) {
+                    throw std::runtime_error("Error, GPU matrix cant use print_all");
+                }
 
                 for(size_t i = 0; i < row; i++){
                     for(size_t j = 0; j < col; j++){
@@ -63,7 +67,7 @@ namespace monolish{
 
 				logger.util_out();
 			}
-		template void Dense<double>::output();
-		template void Dense<float>::output();
+		template void Dense<double>::print_all();
+		template void Dense<float>::print_all();
 	}
 }
