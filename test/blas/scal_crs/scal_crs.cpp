@@ -3,7 +3,7 @@
 #include"monolish_blas.hpp"
 
 template <typename T>
-void get_ans(monolish::matrix::CRS<T> &A, const double alpha){
+void get_ans(const double alpha, monolish::matrix::CRS<T> &A){
 
 	for(int i = 0; i < A.get_nnz(); i++)
 		A.val[i] = alpha * A.val[i];
@@ -20,7 +20,7 @@ bool test(char* file, double tol, int iter, int check_ans){
 	if(check_ans == 1){
 		monolish::matrix::CRS<T> ansA = A;
 		monolish::blas::mscal(alpha, A);
-		get_ans(ansA, alpha);
+		get_ans(alpha, ansA);
 		A.recv();
 		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
 			return false;
