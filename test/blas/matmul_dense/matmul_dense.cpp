@@ -51,7 +51,10 @@ bool test(const size_t M, const size_t N, const size_t K, double tol, int iter, 
         if(ans_check<T>(C.val.data(), ansC.val.data(), C.get_nnz(), tol) == false){
             return false;
         };
+        A.device_free();
+        B.device_free();
     }
+
     monolish::util::send(A, B, C);
 
     auto start = std::chrono::system_clock::now();
