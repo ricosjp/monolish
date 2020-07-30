@@ -35,21 +35,29 @@ if (BUILD_GPU)
   # OpenACC
   set(OpenACC_CXX_FLAGS "-fopenacc")
   target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
+  target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
   # This should be target_link_options(), but only available after CMake 3.13
   set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
 
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
   # CUDA
-  foreach(CUDALIB IN ITEMS cublas cusolver cusparse cudart)
+  foreach(CUDALIB IN ITEMS cudart)
     add_library(${CUDALIB} SHARED IMPORTED)
     set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
       IMPORTED_LOCATION /usr/local/cuda-11.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
       INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-11.0/targets/x86_64-linux/include
       )
   endforeach(CUDALIB)
+
+  foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
+    add_library(${CUDALIB} SHARED IMPORTED)
+    set_target_properties(${CUDALIB} PROPERTIES
+      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
+      )
+  endforeach(CUDALIB)
+
   target_link_libraries(monolish_gpu
     PRIVATE
     cublas
