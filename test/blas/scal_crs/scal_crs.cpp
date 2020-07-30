@@ -15,7 +15,6 @@ bool test(char* file, double tol, int iter, int check_ans){
 	T alpha = 123.0;
 	monolish::matrix::COO<T> COO(file);
 	monolish::matrix::CRS<T> A(COO);
-	A.send();
 
 	if(check_ans == 1){
 		monolish::matrix::CRS<T> ansA = A;
@@ -25,8 +24,8 @@ bool test(char* file, double tol, int iter, int check_ans){
 		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
 			return false;
 		};
-		A.send();
 	}
+	A.send();
 
 	auto start = std::chrono::system_clock::now();
 
