@@ -19,6 +19,7 @@ bool test(char* file, double tol, int iter, int check_ans){
 	if(check_ans == 1){
 		monolish::matrix::CRS<T> ansA = A;
 		monolish::blas::mscal(alpha, A);
+        A.send();
 		get_ans(alpha, ansA);
 		A.recv();
 		if(ans_check<T>(A.val.data(), ansA.val.data(), A.get_nnz(), tol) == false){
