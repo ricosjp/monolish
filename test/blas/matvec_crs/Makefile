@@ -1,4 +1,4 @@
-FUNC=spmv_crs
+FUNC=matvec_crs
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 

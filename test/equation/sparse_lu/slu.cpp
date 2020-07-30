@@ -26,7 +26,7 @@ int main(int argc, char** argv){
 // 	// ans is 1
 // 	monolish::vector<double> ans(A.get_row(), 1.0);
 // 	monolish::vector<double> b(A.get_row(), 0.0);
-// 	monolish::blas::spmv(A, ans, b);
+// 	monolish::blas::matvec(A, ans, b);
 // 
 // 	// initial x is rand(0~1)
 // 	monolish::vector<double> x(A.get_row(), 0.0, 1.0);
