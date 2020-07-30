@@ -31,6 +31,7 @@ bool test(const size_t size ,double tol, const size_t iter, const size_t check_a
 		if(ans_check<T>(result, ans, tol) == false){
 			return false;
 		}
+        x.device_free();
 	}
 
     x.send();
