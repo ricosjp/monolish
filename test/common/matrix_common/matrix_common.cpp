@@ -68,8 +68,8 @@ bool test(){
 
 	monolish::util::send(x, filey, addry, file_CRS, addr_CRS);
 
-	monolish::blas::spmv(file_CRS, x, filey);
-	monolish::blas::spmv(addr_CRS, x, addry);
+	monolish::blas::matvec(file_CRS, x, filey);
+	monolish::blas::matvec(addr_CRS, x, addry);
 
 	monolish::util::recv(addry, filey);
 

@@ -10,6 +10,7 @@
 #include<exception>
 #include<stdexcept>
 #include<vector>
+#include<random>
 
 #define MM_BANNER "%%MatrixMarket"
 #define MM_MAT "matrix"
@@ -43,9 +44,9 @@ template<typename Float> class vector;
 
 					bool gpu_status = false; // true: sended, false: not send
 
-					void set_rowN(const size_t N){row = N;};
-					void set_colN(const size_t N){col = N;};
-					void set_nnzN(const size_t N){nnz = N;};
+					void set_row(const size_t N){row = N;};
+					void set_col(const size_t N){col = N;};
+					void set_nnz(const size_t N){nnz = N;};
 
 				public:
 
@@ -56,9 +57,9 @@ template<typename Float> class vector;
 					COO(){}
 
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
-						set_rowN(N);
-						set_colN(N);
-						set_nnzN(nnz);
+						set_row(N);
+						set_col(N);
+						set_nnz(nnz);
 
 						row_index.resize(nnz);
 						col_index.resize(nnz);
@@ -71,9 +72,9 @@ template<typename Float> class vector;
 
 					// for n-origin
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_rowN(N);
-						set_colN(N);
-						set_nnzN(nnz);
+						set_row(N);
+						set_col(N);
+						set_nnz(nnz);
 
 						row_index.resize(nnz);
 						col_index.resize(nnz);
@@ -263,8 +264,7 @@ template<typename Float> class vector;
 
 					/**
 					 * @brief copy matrix, It is same as copy()
-					 * @param[in] filename source
-					 * @return output vector
+					 * @return output matrix
 					 **/
 					void operator=(const CRS<Float>& mat);
 
