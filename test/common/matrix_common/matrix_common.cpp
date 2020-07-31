@@ -66,9 +66,8 @@ bool test(){
         if (expanded_COO.get_row() != 4) { std::cout << "row size mismatch" << std::endl; return false; }
         expanded_COO.set_col(4);
         if (expanded_COO.get_col() != 4) { std::cout << "col size mismatch" << std::endl; return false; }
-        //expanded_COO.insert(4, 4, 1.0);
-        //expanded_COO.set_nnz(9);
-        //if (expanded_COO.get_nnz() != 9) { std::cout << "nnz size mismatch" << std::endl; return false; }
+        expanded_COO.insert(3, 3, 1.0);
+        if (expanded_COO.get_nnz() != 9) { std::cout << "nnz size mismatch" << std::endl; return false; }
         // expanded.mtx
 	//	| 1 | 2 | 3 | 0 |
 	//	| 4 | 0 | 5 | 0 |
@@ -85,8 +84,7 @@ bool test(){
         ss << std::scientific;
         ss << std::setprecision(std::numeric_limits<T>::max_digits10);
         ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-        //ss << "4 4 9" << std::endl;
-        ss << "4 4 8" << std::endl;
+        ss << "4 4 9" << std::endl;
         ss << "1 1 " << 1.0 << std::endl;
         ss << "1 2 " << 2.0 << std::endl;
         ss << "1 3 " << 3.0 << std::endl;
@@ -98,6 +96,12 @@ bool test(){
         // ss << "4 4 " << 1.0 << std::endl;
         if (oss.str() != ss.str()) { std::cout << "print expanded matrix mismatch" << std::endl; return false; }
         }
+
+        expanded_COO.insert(0, 0, 3.0);
+        if (expanded_COO.get_nnz() != 10) { std::cout << "nnz size mismatch after inserting duplicate element" << std::endl; return false; }
+        expanded_COO.sort(true);
+        if (expanded_COO.at(0, 0) != 3.0) { std::cout << "sort and replace logic failed" << std::endl; return false; }
+        if (expanded_COO.get_nnz() != 9) { std::cout << "nnz size mismatch after sort and merge" << std::endl; return false; }
 
 	//test at(i, j)
 	//non zero element

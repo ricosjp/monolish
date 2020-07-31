@@ -1,5 +1,5 @@
 /**
- * @autor RICOS Co. Ltd.
+ * @author RICOS Co. Ltd.
  * @file monolish_vector.h
  * @brief declare vector class
  * @date 2019
@@ -180,7 +180,23 @@ template<typename Float> class vector;
 						mat = copy();
 					}
 
-			};
+                    /**
+                     * @brief insert element to (m, n)
+                     * @param[in] size_t m row number
+                     * @param[in] size_t n col number
+                     * @param[in] Float val matrix value (if multiple element exists, value will be added together)
+                     **/
+                    void insert(size_t m, size_t n, Float val);
+
+                 private:
+                    void _q_sort(int lo, int hi);
+
+                 public:
+                    /**
+                     * @brief sort COO matrix elements (and merge elements)
+                     **/
+                    void sort(bool merge);
+                };
 
 		/**
 		 * @brief CRS format Matrix
