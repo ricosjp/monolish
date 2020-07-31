@@ -35,19 +35,15 @@ template<typename Float> class vector;
 		template<typename Float>
 			class COO{
 				private:
-					size_t row;
 
 					/**
 					 * @brief neet col = row now
 					 */
+					size_t row;
 					size_t col;
 					size_t nnz;
 
 					bool gpu_status = false; // true: sended, false: not send
-
-					void set_row(const size_t N){row = N;};
-					void set_col(const size_t N){col = N;};
-					void set_nnz(const size_t N){nnz = N;};
 
 				public:
 
@@ -155,7 +151,7 @@ template<typename Float> class vector;
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size(){return row;}
+					size_t size() const {return row > col ? row : col;}
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
@@ -192,11 +188,10 @@ template<typename Float> class vector;
 		template<typename Float>
 			class CRS{
 				private:
-					size_t row;
-
 					/**
 					 * @brief neet col = row now
 					 */
+					size_t row;
 					size_t col;
 					size_t nnz;
 
@@ -220,7 +215,7 @@ template<typename Float> class vector;
 
 					void output();
 
-					size_t size() const{return row;}
+					size_t size() const {return row > col ? row : col;}
 					size_t get_row() const{return row;}
 					size_t get_col() const{return col;}
 					size_t get_nnz() const{return nnz;}
