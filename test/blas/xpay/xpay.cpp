@@ -35,6 +35,7 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
  			return false;
  		}
+        x.device_free();
 	}
 
 	monolish::util::send(x,y);

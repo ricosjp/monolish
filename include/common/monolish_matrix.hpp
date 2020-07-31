@@ -10,6 +10,8 @@
 #include<exception>
 #include<stdexcept>
 #include<vector>
+#include<string>
+#include<random>
 
 #define MM_BANNER "%%MatrixMarket"
 #define MM_MAT "matrix"
@@ -33,19 +35,15 @@ template<typename Float> class vector;
 		template<typename Float>
 			class COO{
 				private:
-					size_t row;
 
 					/**
 					 * @brief neet col = row now
 					 */
+					size_t row;
 					size_t col;
 					size_t nnz;
 
 					bool gpu_status = false; // true: sended, false: not send
-
-					void set_rowN(const size_t N){row = N;};
-					void set_colN(const size_t N){col = N;};
-					void set_nnzN(const size_t N){nnz = N;};
 
 				public:
 
@@ -56,9 +54,9 @@ template<typename Float> class vector;
 					COO(){}
 
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
-						set_rowN(N);
-						set_colN(N);
-						set_nnzN(nnz);
+						set_row(N);
+						set_col(N);
+						set_nnz(nnz);
 
 						row_index.resize(nnz);
 						col_index.resize(nnz);
@@ -71,9 +69,9 @@ template<typename Float> class vector;
 
 					// for n-origin
 					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_rowN(N);
-						set_colN(N);
-						set_nnzN(nnz);
+						set_row(N);
+						set_col(N);
+						set_nnz(nnz);
 
 						row_index.resize(nnz);
 						col_index.resize(nnz);
@@ -128,21 +126,32 @@ template<typename Float> class vector;
 
 					// I/O ///////////////////////////////////////////////////////////////////////////
 
+					void set_row(const size_t M){row = M;};
+					void set_col(const size_t N){col = N;};
+					void set_nnz(const size_t NNZ){nnz = NNZ;};
+
 					void input_mm(const char* filename);
 
 					COO(const char* filename){
 						input_mm(filename);
 					}
 
-					void output_mm(const char* filename);
-					void output();
+					/**
+					 * @brief print all elements to standart I/O
+					 **/
+					void print_all();
+					/**
+					 * @brief print all elements to file
+					 * @param[in] filename output filename
+					 **/
+					void print_all(std::string filename);
 					Float at(size_t i, size_t j);
 					//void insert(size_t i, size_t j, Float value);
 
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size(){return row;}
+					size_t size() const {return row > col ? row : col;}
 					size_t get_row(){return row;}
 					size_t get_col(){return col;}
 					size_t get_nnz(){return nnz;}
@@ -179,11 +188,10 @@ template<typename Float> class vector;
 		template<typename Float>
 			class CRS{
 				private:
-					size_t row;
-
 					/**
 					 * @brief neet col = row now
 					 */
+					size_t row;
 					size_t col;
 					size_t nnz;
 
@@ -207,7 +215,7 @@ template<typename Float> class vector;
 
 					void output();
 
-					size_t size() const{return row;}
+					size_t size() const {return row > col ? row : col;}
 					size_t get_row() const{return row;}
 					size_t get_col() const{return col;}
 					size_t get_nnz() const{return nnz;}
@@ -263,8 +271,7 @@ template<typename Float> class vector;
 
 					/**
 					 * @brief copy matrix, It is same as copy()
-					 * @param[in] filename source
-					 * @return output vector
+					 * @return output matrix
 					 **/
 					void operator=(const CRS<Float>& mat);
 

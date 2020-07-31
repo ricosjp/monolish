@@ -1,6 +1,7 @@
 #pragma once
 #include"monolish_logger.hpp"
 #include"monolish_matrix.hpp"
+#include"monolish_dense.hpp"
 #include"monolish_vector.hpp"
 #include<initializer_list>
 
@@ -97,7 +98,7 @@ namespace monolish{
 //device_free///////////////////
 
 		/**
-		 * @brief recv data from GPU
+		 * @brief free data of GPU
 		 **/
 		template < typename T >
 			auto device_free( T& x )
@@ -106,13 +107,13 @@ namespace monolish{
 			}
 
 		/**
-		 * @brief recv datas to GPU
+		 * @brief free datas of GPU
 		 **/
 		template < typename T, typename ... Types >
 			auto device_free( T& x, Types& ... args )
 			{
 				x.device_free();
-				recv( args... );
+				device_free( args... );
 			}
 	}
 }
