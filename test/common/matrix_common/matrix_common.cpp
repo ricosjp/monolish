@@ -83,6 +83,14 @@ bool test(){
         // test type()
         if (addr_COO.type() != "COO") { std::cout << "type() is not COO" << std::endl; return false; }
 
+        // test row(int i)
+        auto row1 = addr_COO.row(1);
+        if (row1[0] != 4.0 || row1[1] != 0.0 || row1[2] != 5.0) { std::cout << "row(int) failed" << std::endl; return false; }
+
+        // test col(int j)
+        auto col1 = addr_COO.col(1);
+        if (col1[0] != 2.0 || col1[1] != 0.0 || col1[2] != 7.0) { std::cout << "col(int) failed" << std::endl; return false; }
+
         //test changing matrix dimension
         //{set,get}_{row,col,nnz}()
         auto expanded_COO = addr_COO;
