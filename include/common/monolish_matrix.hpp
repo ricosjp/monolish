@@ -181,6 +181,10 @@ template<typename Float> class vector;
                         B = COO(get_col(), get_row(), get_nnz(), get_col_ind().data(), get_row_ptr().data(), get_val_ptr().data());
                     }
 
+                    int get_data_size() const {
+                        return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
+                    }
+
      				/////////////////////////////////////////////////////////////////////////////
 
 					/**
