@@ -1,5 +1,5 @@
 /**
- * @autor RICOS Co. Ltd.
+ * @author RICOS Co. Ltd.
  * @file monolish_vector.h
  * @brief declare vector class
  * @date 2019
