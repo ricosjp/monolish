@@ -177,12 +177,18 @@ template<typename Float> class vector;
 
                     COO& transpose() {
                         using std::swap;
+                        swap(rowN, colN);
                         swap(row_index, col_index);
-                        return this;
+                        return *this;
                     }
 
                     void transpose(COO& B) const {
-                        B = COO(get_col(), get_row(), get_nnz(), get_col_ind().data(), get_row_ptr().data(), get_val_ptr().data());
+                        B.set_row(get_col());
+                        B.set_col(get_row());
+                        B.set_nnz(get_nnz());
+                        B.row_index = get_col_ind();
+                        B.col_index = get_row_ptr();
+                        B.val       = get_val_ptr();
                     }
 
                     double get_data_size() const {
