@@ -77,6 +77,9 @@ bool test(){
         if (addr_COO.at(0, 1) != transposed_COO1.at(1, 0)) { std::cout << "A(0,1) != A^T(1,0)" << std::endl; return false; }
         }
 
+        // test get_data_size()
+        if (addr_COO.get_data_size() - 24.0e-9 * sizeof(T)) { std::cout << "get_data_size() failed" << std::endl; return false; }
+
         //test changing matrix dimension
         //{set,get}_{row,col,nnz}()
         auto expanded_COO = addr_COO;
