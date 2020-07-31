@@ -13,7 +13,7 @@ extern "C"{
 		int NNZ = *nnz;
 
 		// 1-origin
-		monolish::matrix::COO<double> COO(N, NNZ, row, col, val, 1);
+		monolish::matrix::COO<double> COO(N, N, NNZ, row, col, val, 1);
 		monolish::matrix::CRS<double> A(COO);
 
 		monolish::vector x(xp, xp+N);
