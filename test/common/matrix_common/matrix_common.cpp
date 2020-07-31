@@ -33,7 +33,7 @@ bool test(){
 	//	| 6 | 7 | 8 |
 	
 	//convert C-pointer -> monolish::COO
-	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
+	monolish::matrix::COO<T> addr_COO(N, N, NNZ, row_array, col_array, val_array);
 
         //test print_all()
         //See https://stackoverflow.com/a/4191318 for testing cout output
@@ -58,6 +58,42 @@ bool test(){
         ss << "3 3 " << 8.0 << std::endl;
         if (oss.str() != ss.str()) { std::cout << "print addr_COO matrix mismatch" << std::endl; return false; }
         }
+
+        // test transpose(), transpose(COO& B)
+        {
+        monolish::matrix::COO<T> transposed_COO1 = addr_COO;
+        monolish::matrix::COO<T> transposed_COO2;
+        transposed_COO1.transpose();
+        addr_COO.transpose(transposed_COO2);
+        std::ostringstream oss1;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss1.rdbuf());
+        transposed_COO1.print_all();
+        std::ostringstream oss2;
+        std::cout.rdbuf(oss2.rdbuf());
+        transposed_COO2.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        if (oss1.str() != oss2.str()) { std::cout << "two transpose() function mismatch" << std::endl; return false; }
+        if (addr_COO.at(0, 1) != transposed_COO1.at(1, 0)) { std::cout << "A(0,1) != A^T(1,0)" << std::endl; return false; }
+        }
+
+        // test get_data_size()
+        if (addr_COO.get_data_size() - 24.0e-9 * sizeof(T)) { std::cout << "get_data_size() failed" << std::endl; return false; }
+
+        // test type()
+        if (addr_COO.type() != "COO") { std::cout << "type() is not COO" << std::endl; return false; }
+
+        // test row(int i)
+        auto row1 = addr_COO.row(1);
+        if (row1[0] != 4.0 || row1[1] != 0.0 || row1[2] != 5.0) { std::cout << "row(int) failed" << std::endl; return false; }
+
+        // test col(int j)
+        auto col1 = addr_COO.col(1);
+        if (col1[0] != 2.0 || col1[1] != 0.0 || col1[2] != 7.0) { std::cout << "col(int) failed" << std::endl; return false; }
+
+        // test diag()
+        auto dv = addr_COO.diag();
+        if (dv[0] != 1.0 || dv[1] != 0.0 || dv[2] != 8.0) { std::cout << "diag() failed" << std::endl; return false; }
 
         //test changing matrix dimension
         //{set,get}_{row,col,nnz}()

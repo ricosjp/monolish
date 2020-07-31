@@ -39,8 +39,8 @@ template<typename Float> class vector;
 					/**
 					 * @brief neet col = row now
 					 */
-					size_t row;
-					size_t col;
+					size_t rowN;
+					size_t colN;
 					size_t nnz;
 
 					bool gpu_status = false; // true: sended, false: not send
@@ -53,8 +53,8 @@ template<typename Float> class vector;
 
 					COO(){}
 
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
-						set_row(N);
+					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
+						set_row(M);
 						set_col(N);
 						set_nnz(nnz);
 
@@ -68,8 +68,8 @@ template<typename Float> class vector;
 					}
 
 					// for n-origin
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_row(N);
+					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
+						set_row(M);
 						set_col(N);
 						set_nnz(nnz);
 
@@ -126,8 +126,8 @@ template<typename Float> class vector;
 
 					// I/O ///////////////////////////////////////////////////////////////////////////
 
-					void set_row(const size_t M){row = M;};
-					void set_col(const size_t N){col = N;};
+					void set_row(const size_t M){rowN = M;};
+					void set_col(const size_t N){colN = N;};
 					void set_nnz(const size_t NNZ){nnz = NNZ;};
 
 					void input_mm(const char* filename);
@@ -151,23 +151,84 @@ template<typename Float> class vector;
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size() const {return row > col ? row : col;}
-					size_t get_row(){return row;}
-					size_t get_col(){return col;}
-					size_t get_nnz(){return nnz;}
+					size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
+					size_t get_row() const {return rowN;}
+					size_t get_col() const {return colN;}
+					size_t get_nnz() const {return nnz;}
 
 					/**
 					 * @brief matrix copy
 					 * @return copied COO matrix
 					 **/
 					COO copy(){
-						COO tmp(row, nnz, row_index.data(), col_index.data(), val.data());
-						return tmp;
+                                            COO tmp(row, col, nnz, row_index.data(), col_index.data(), val.data());
+                                            return tmp;
 					}
 
 					std::vector<int>& get_row_ptr(){return row_index;}
 					std::vector<int>& get_col_ind(){return col_index;}
 					std::vector<Float>& get_val_ptr(){return val;}
+
+                    const std::vector<int>& get_row_ptr() const {return row_index;}
+                    const std::vector<int>& get_col_ind() const {return col_index;}
+                    const std::vector<Float>& get_val_ptr() const {return val;}
+
+					// Utility ///////////////////////////////////////////////////////////////////////////
+
+                    COO& transpose() {
+                        using std::swap;
+                        swap(rowN, colN);
+                        swap(row_index, col_index);
+                        return *this;
+                    }
+
+                    void transpose(COO& B) const {
+                        B.set_row(get_col());
+                        B.set_col(get_row());
+                        B.set_nnz(get_nnz());
+                        B.row_index = get_col_ind();
+                        B.col_index = get_row_ptr();
+                        B.val       = get_val_ptr();
+                    }
+
+                    double get_data_size() const {
+                        return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
+                    }
+
+                    std::string type() const {
+                        return "COO";
+                    }
+
+                    std::vector<Float> row(std::size_t i) const {
+                        std::vector<Float> res(get_col(), 0);
+                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
+                            if (get_row_ptr()[nz] == i) {
+                                res[get_col_ind()[nz]] = get_val_ptr()[nz];
+                            }
+                        }
+                        return res;
+                    }
+
+                    std::vector<Float> col(std::size_t j) const {
+                        std::vector<Float> res(get_row(), 0);
+                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
+                            if (get_col_ind()[nz] == j) {
+                                res[get_row_ptr()[nz]] = get_val_ptr()[nz];
+                            }
+                        }
+                        return res;
+                    }
+
+                    std::vector<Float> diag() const {
+                        std::size_t s = get_row() > get_col() ? get_col() : get_row();
+                        std::vector<Float> res(s, 0);
+                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
+                            if (get_row_ptr()[nz] == get_col_ind()[nz]) {
+                                res[get_row_ptr()[nz]] = get_val_ptr()[nz];
+                            }
+                        }
+                        return res;
+                    }
 
      				/////////////////////////////////////////////////////////////////////////////
 
