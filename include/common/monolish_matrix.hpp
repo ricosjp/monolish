@@ -185,6 +185,10 @@ template<typename Float> class vector;
                         return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
                     }
 
+                    std::string type() {
+                        return "COO";
+                    }
+
      				/////////////////////////////////////////////////////////////////////////////
 
 					/**
