@@ -152,9 +152,9 @@ template<typename Float> class vector;
 
 					//not logging, only square
 					size_t size() const {return row > col ? row : col;}
-					size_t get_row(){return row;}
-					size_t get_col(){return col;}
-					size_t get_nnz(){return nnz;}
+					size_t get_row() const {return row;}
+					size_t get_col() const {return col;}
+					size_t get_nnz() const {return nnz;}
 
 					/**
 					 * @brief matrix copy
@@ -188,7 +188,6 @@ template<typename Float> class vector;
                     std::string type() const {
                         return "COO";
                     }
-
      				/////////////////////////////////////////////////////////////////////////////
 
 					/**
