@@ -31,10 +31,12 @@ bool test(const size_t size ,double tol, const size_t iter, const size_t check_a
 		if(ans_check<T>(result, ans, tol) == false){
 			return false;
 		}
+        x.device_free();
 	}
 
-	//exec
-	auto start = std::chrono::system_clock::now();
+    x.send();
+    //exec
+    auto start = std::chrono::system_clock::now();
 
 	for(size_t i = 0; i < iter; i++){
 		T result = monolish::blas::nrm2(x);

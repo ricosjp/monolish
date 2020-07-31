@@ -1,5 +1,7 @@
 #include<iostream>
 #include<istream>
+#include<sstream>
+#include<iomanip>
 #include<chrono>
 #include<stdexcept>
 #include"../../test_utils.hpp"
@@ -23,7 +25,7 @@ bool test(){
 	val_array[4] = 5; row_array[4] = 1; col_array[4] = 2;
 	val_array[5] = 6; row_array[5] = 2; col_array[5] = 0;
 	val_array[6] = 7; row_array[6] = 2; col_array[6] = 1;
-	val_array[7] = 8; row_array[7] = 2; col_array[7] = 0;
+	val_array[7] = 8; row_array[7] = 2; col_array[7] = 2;
 
 	// test.mtx
 	//	| 1 | 2 | 3 |
@@ -31,7 +33,111 @@ bool test(){
 	//	| 6 | 7 | 8 |
 	
 	//convert C-pointer -> monolish::COO
-	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
+	monolish::matrix::COO<T> addr_COO(N, N, NNZ, row_array, col_array, val_array);
+
+        //test print_all()
+        //See https://stackoverflow.com/a/4191318 for testing cout output
+        {
+        std::ostringstream oss;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss.rdbuf());
+        addr_COO.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        std::stringstream ss; // To set Float(T) output
+        ss << std::scientific;
+        ss << std::setprecision(std::numeric_limits<T>::max_digits10);
+        ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
+        ss << "3 3 8" << std::endl;
+        ss << "1 1 " << 1.0 << std::endl;
+        ss << "1 2 " << 2.0 << std::endl;
+        ss << "1 3 " << 3.0 << std::endl;
+        ss << "2 1 " << 4.0 << std::endl;
+        ss << "2 3 " << 5.0 << std::endl;
+        ss << "3 1 " << 6.0 << std::endl;
+        ss << "3 2 " << 7.0 << std::endl;
+        ss << "3 3 " << 8.0 << std::endl;
+        if (oss.str() != ss.str()) { std::cout << "print addr_COO matrix mismatch" << std::endl; return false; }
+        }
+
+        // test transpose(), transpose(COO& B)
+        {
+        monolish::matrix::COO<T> transposed_COO1 = addr_COO;
+        monolish::matrix::COO<T> transposed_COO2;
+        transposed_COO1.transpose();
+        addr_COO.transpose(transposed_COO2);
+        std::ostringstream oss1;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss1.rdbuf());
+        transposed_COO1.print_all();
+        std::ostringstream oss2;
+        std::cout.rdbuf(oss2.rdbuf());
+        transposed_COO2.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        if (oss1.str() != oss2.str()) { std::cout << "two transpose() function mismatch" << std::endl; return false; }
+        if (addr_COO.at(0, 1) != transposed_COO1.at(1, 0)) { std::cout << "A(0,1) != A^T(1,0)" << std::endl; return false; }
+        }
+
+        // test get_data_size()
+        if (addr_COO.get_data_size() - 24.0e-9 * sizeof(T)) { std::cout << "get_data_size() failed" << std::endl; return false; }
+
+        // test type()
+        if (addr_COO.type() != "COO") { std::cout << "type() is not COO" << std::endl; return false; }
+
+        // test row(int i)
+        auto row1 = addr_COO.row(1);
+        if (row1[0] != 4.0 || row1[1] != 0.0 || row1[2] != 5.0) { std::cout << "row(int) failed" << std::endl; return false; }
+
+        // test col(int j)
+        auto col1 = addr_COO.col(1);
+        if (col1[0] != 2.0 || col1[1] != 0.0 || col1[2] != 7.0) { std::cout << "col(int) failed" << std::endl; return false; }
+
+        // test diag()
+        auto dv = addr_COO.diag();
+        if (dv[0] != 1.0 || dv[1] != 0.0 || dv[2] != 8.0) { std::cout << "diag() failed" << std::endl; return false; }
+
+        //test changing matrix dimension
+        //{set,get}_{row,col,nnz}()
+        auto expanded_COO = addr_COO;
+        expanded_COO.set_row(4);
+        if (expanded_COO.get_row() != 4) { std::cout << "row size mismatch" << std::endl; return false; }
+        expanded_COO.set_col(4);
+        if (expanded_COO.get_col() != 4) { std::cout << "col size mismatch" << std::endl; return false; }
+        expanded_COO.insert(3, 3, 1.0);
+        if (expanded_COO.get_nnz() != 9) { std::cout << "nnz size mismatch" << std::endl; return false; }
+        // expanded.mtx
+	//	| 1 | 2 | 3 | 0 |
+	//	| 4 | 0 | 5 | 0 |
+	//	| 6 | 7 | 8 | 0 |
+        //      | 0 | 0 | 0 | 1 |
+        {
+        std::ostringstream oss;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss.rdbuf());
+        expanded_COO.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        std::string res("%%MatrixMarket matrix coordinate real general\n");
+        std::stringstream ss; // To set Float(T) output
+        ss << std::scientific;
+        ss << std::setprecision(std::numeric_limits<T>::max_digits10);
+        ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
+        ss << "4 4 9" << std::endl;
+        ss << "1 1 " << 1.0 << std::endl;
+        ss << "1 2 " << 2.0 << std::endl;
+        ss << "1 3 " << 3.0 << std::endl;
+        ss << "2 1 " << 4.0 << std::endl;
+        ss << "2 3 " << 5.0 << std::endl;
+        ss << "3 1 " << 6.0 << std::endl;
+        ss << "3 2 " << 7.0 << std::endl;
+        ss << "3 3 " << 8.0 << std::endl;
+        // ss << "4 4 " << 1.0 << std::endl;
+        if (oss.str() != ss.str()) { std::cout << "print expanded matrix mismatch" << std::endl; return false; }
+        }
+
+        expanded_COO.insert(0, 0, 3.0);
+        if (expanded_COO.get_nnz() != 10) { std::cout << "nnz size mismatch after inserting duplicate element" << std::endl; return false; }
+        expanded_COO.sort(true);
+        if (expanded_COO.at(0, 0) != 3.0) { std::cout << "sort and replace logic failed" << std::endl; return false; }
+        if (expanded_COO.get_nnz() != 9) { std::cout << "nnz size mismatch after sort and merge" << std::endl; return false; }
 
 	//test at(i, j)
 	//non zero element
@@ -68,8 +174,8 @@ bool test(){
 
 	monolish::util::send(x, filey, addry, file_CRS, addr_CRS);
 
-	monolish::blas::spmv(file_CRS, x, filey);
-	monolish::blas::spmv(addr_CRS, x, addry);
+	monolish::blas::matvec(file_CRS, x, filey);
+	monolish::blas::matvec(addr_CRS, x, addry);
 
 	monolish::util::recv(addry, filey);
 
