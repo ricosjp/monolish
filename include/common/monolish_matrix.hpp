@@ -169,6 +169,10 @@ template<typename Float> class vector;
 					std::vector<int>& get_col_ind(){return col_index;}
 					std::vector<Float>& get_val_ptr(){return val;}
 
+                    const std::vector<int>& get_row_ptr() const {return row_index;}
+                    const std::vector<int>& get_col_ind() const {return col_index;}
+                    const std::vector<Float>& get_val_ptr() const {return val;}
+
 					// Utility ///////////////////////////////////////////////////////////////////////////
 
                     COO& transpose() {
