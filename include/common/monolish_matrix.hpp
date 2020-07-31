@@ -177,7 +177,7 @@ template<typename Float> class vector;
                         return this;
                     }
 
-                    void transpose(COO& B) {
+                    void transpose(COO& B) const {
                         B = COO(get_col(), get_row(), get_nnz(), get_col_ind().data(), get_row_ptr().data(), get_val_ptr().data());
                     }
 
@@ -185,7 +185,7 @@ template<typename Float> class vector;
                         return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
                     }
 
-                    std::string type() {
+                    std::string type() const {
                         return "COO";
                     }
 
