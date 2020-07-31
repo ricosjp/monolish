@@ -61,23 +61,23 @@ namespace monolish{
 				} while (buf[0] == '%');
 
 				//check size
-				size_t rowN, colN, NNZ;
+				size_t rowNN, colNN, NNZ;
 
 				std::istringstream data(buf);
-				data >> rowN >> colN >> NNZ;
+				data >> rowNN >> colNN >> NNZ;
 
 				//symmetric check!
-				if (colN != rowN) {
+				if (colNN != rowNN) {
 					std::cerr << "Matrix.input: Matrix is not square" << std::endl;
 					exit(-1);
 				}
-				if (colN <= 0 || NNZ < 0) {
+				if (colNN <= 0 || NNZ < 0) {
 					std::cerr << "Matrix.input: Matrix size should be positive" << std::endl;
 					exit(-1);
 				}
 
-				row = rowN;
-				col = row;
+				rowN = rowNN;
+				colN = rowN;
 				nnz = NNZ;
 
 				//allocate
@@ -112,7 +112,7 @@ namespace monolish{
                                 std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
                                 std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
-                                std::cout << row << " " << col << " " << nnz << std::endl;
+                                std::cout << rowN << " " << colN << " " << nnz << std::endl;
 
 				for(size_t i=0; i<nnz; i++){
                                     std::cout << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
@@ -131,7 +131,7 @@ namespace monolish{
 				out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
 				out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
-				out << row << " " << col << " " << nnz << std::endl;
+				out << rowN << " " << colN << " " << nnz << std::endl;
 
 				for(size_t i=0; i<nnz; i++){
 					out << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
@@ -146,7 +146,7 @@ namespace monolish{
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
-				if(i >= row || j >= col){
+				if(i >= rowN || j >= colN){
 					throw std::out_of_range("error");
 				}
 
@@ -169,8 +169,8 @@ namespace monolish{
 				row_index = r;
 				val = v;
 
-				row = rN;
-				col = cN;
+				rowN = rN;
+				colN = cN;
 				nnz = r.size();
 				logger.util_out();
 			}
