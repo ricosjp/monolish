@@ -161,13 +161,25 @@ template<typename Float> class vector;
 					 * @return copied COO matrix
 					 **/
 					COO copy(){
-						COO tmp(row, nnz, row_index.data(), col_index.data(), val.data());
-						return tmp;
+                                            COO tmp(row, col, nnz, row_index.data(), col_index.data(), val.data());
+                                            return tmp;
 					}
 
 					std::vector<int>& get_row_ptr(){return row_index;}
 					std::vector<int>& get_col_ind(){return col_index;}
 					std::vector<Float>& get_val_ptr(){return val;}
+
+					// Utility ///////////////////////////////////////////////////////////////////////////
+
+                    COO& transpose() {
+                        using std::swap;
+                        swap(row_index, col_index);
+                        return this;
+                    }
+
+                    void transpose(COO& B) {
+                        B = COO(get_col(), get_row(), get_nnz(), get_col_ind().data(), get_row_ptr().data(), get_val_ptr().data());
+                    }
 
      				/////////////////////////////////////////////////////////////////////////////
 
