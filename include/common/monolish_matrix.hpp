@@ -39,8 +39,8 @@ template<typename Float> class vector;
 					/**
 					 * @brief neet col = row now
 					 */
-					size_t row;
-					size_t col;
+					size_t rowN;
+					size_t colN;
 					size_t nnz;
 
 					bool gpu_status = false; // true: sended, false: not send
@@ -126,8 +126,8 @@ template<typename Float> class vector;
 
 					// I/O ///////////////////////////////////////////////////////////////////////////
 
-					void set_row(const size_t M){row = M;};
-					void set_col(const size_t N){col = N;};
+					void set_row(const size_t M){rowN = M;};
+					void set_col(const size_t N){colN = N;};
 					void set_nnz(const size_t NNZ){nnz = NNZ;};
 
 					void input_mm(const char* filename);
@@ -151,9 +151,9 @@ template<typename Float> class vector;
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size() const {return row > col ? row : col;}
-					size_t get_row() const {return row;}
-					size_t get_col() const {return col;}
+					size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
+					size_t get_row() const {return rowN;}
+					size_t get_col() const {return colN;}
 					size_t get_nnz() const {return nnz;}
 
 					/**
