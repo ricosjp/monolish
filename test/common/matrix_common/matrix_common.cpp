@@ -33,7 +33,7 @@ bool test(){
 	//	| 6 | 7 | 8 |
 	
 	//convert C-pointer -> monolish::COO
-	monolish::matrix::COO<T> addr_COO(N, NNZ, row_array, col_array, val_array);
+	monolish::matrix::COO<T> addr_COO(N, N, NNZ, row_array, col_array, val_array);
 
         //test print_all()
         //See https://stackoverflow.com/a/4191318 for testing cout output
