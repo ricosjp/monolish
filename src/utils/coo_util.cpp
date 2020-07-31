@@ -186,6 +186,7 @@ namespace monolish{
             row_index.push_back(rownum);
             col_index.push_back(colnum);
             val.push_back(value);
+            ++nnz;
         }
         template void COO<double>::insert(size_t m, size_t n, double value, size_t offset = 0);
         template void COO<float>::insert(size_t m, size_t n, float value, size_t offset = 0);
@@ -193,19 +194,16 @@ namespace monolish{
         template<typename T>
         void COO<T>::_q_sort(int lo, int hi) {
             // Very primitive quick sort
-            int h, l, p, p1, p2, t;
-            double p3, td;
-
             if(lo >= hi) {
                 return;
             }
 
-            l = lo;
-            h = hi;
-            p = hi;;
-            p1 = row_index[p];
-            p2 = col_index[p];
-            p3 = val[p];
+            int l = lo;
+            int h = hi;
+            int p = hi;;
+            int p1 = row_index[p];
+            int p2 = col_index[p];
+            double p3 = val[p];
 
             do {
                 while ((l < h) &&
@@ -221,7 +219,7 @@ namespace monolish{
                     h = h-1;
                 }
                 if (l < h) {
-                    t = row_index[l];
+                    int t = row_index[l];
                     row_index[l] = row_index[h];
                     row_index[h] = t;
 
@@ -229,7 +227,7 @@ namespace monolish{
                     col_index[l] = col_index[h];
                     col_index[h] = t;
 
-                    td = val[l];
+                    double td = val[l];
                     val[l] = val[h];
                     val[h] = td;
                 }
@@ -258,8 +256,6 @@ namespace monolish{
 
         template<typename T>
         void COO<T>::sort(bool merge) {
-            int i, k;
-
             //  Sort by first Col and then Row
             //  TODO: This hand-written quick sort function should be retired
             //        after zip_iterator() (available in range-v3 library to be) is available in the standard
@@ -267,19 +263,16 @@ namespace monolish{
 
             /*  Remove duplicates */
             if (merge) {
-                k = 0;
-                for( i = 1; i < nnz; i++) {
+                int k = 0;
+                for( int i = 1; i < nnz; i++) {
                     if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
                         k++;
                         row_index[k] = row_index[i];
                         col_index[k] = col_index[i];
-                        val[k] = val[i];
-                    } else {
-                        val[k] += val[i];
                     }
+                    val[k] = val[i];
                 }
                 nnz = k+1;
-                col_index[0] = 0;
             }
         }
         template void COO<double>::sort(bool merge = true);
