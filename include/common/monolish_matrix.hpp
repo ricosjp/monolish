@@ -188,6 +188,27 @@ template<typename Float> class vector;
                     std::string type() const {
                         return "COO";
                     }
+
+                    std::vector<Float> row(std::size_t i) const {
+                        std::vector<Float> res(get_col(), 0);
+                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
+                            if (get_row_ptr()[nz] == i) {
+                                res[get_col_ind()[nz]] = get_val_ptr()[nz];
+                            }
+                        }
+                        return res;
+                    }
+
+                    std::vector<Float> col(std::size_t j) const {
+                        std::vector<Float> res(get_row(), 0);
+                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
+                            if (get_col_ind()[nz] == j) {
+                                res[get_row_ptr()[nz]] = get_val_ptr()[nz];
+                            }
+                        }
+                        return res;
+                    }
+
      				/////////////////////////////////////////////////////////////////////////////
 
 					/**
