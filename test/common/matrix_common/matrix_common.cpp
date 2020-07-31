@@ -59,6 +59,24 @@ bool test(){
         if (oss.str() != ss.str()) { std::cout << "print addr_COO matrix mismatch" << std::endl; return false; }
         }
 
+        // test transpose(), transpose(COO& B)
+        {
+        monolish::matrix::COO<T> transposed_COO1 = addr_COO;
+        monolish::matrix::COO<T> transposed_COO2;
+        transposed_COO1.transpose();
+        addr_COO.transpose(transposed_COO2);
+        std::ostringstream oss1;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss1.rdbuf());
+        transposed_COO1.print_all();
+        std::ostringstream oss2;
+        std::cout.rdbuf(oss2.rdbuf());
+        transposed_COO2.print_all();
+        std::cout.rdbuf(p_cout_streambuf); // restore
+        if (oss1.str() != oss2.str()) { std::cout << "two transpose() function mismatch" << std::endl; return false; }
+        if (addr_COO.at(0, 1) != transposed_COO1.at(1, 0)) { std::cout << "A(0,1) != A^T(1,0)" << std::endl; return false; }
+        }
+
         //test changing matrix dimension
         //{set,get}_{row,col,nnz}()
         auto expanded_COO = addr_COO;
