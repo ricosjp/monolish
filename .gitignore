@@ -11,6 +11,8 @@
 *.bak
 *.BAK
 *.DS_Store
+*.qdrep
+*.sqlite
 *~
 Makefile.conf
 build/

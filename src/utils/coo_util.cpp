@@ -7,6 +7,7 @@
 #include <limits>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 
 //todo: kill cerr 
 
@@ -104,7 +105,25 @@ namespace monolish{
 		template void COO<float>::input_mm(const char* filename);
 
 		template<typename T>
-			void COO<T>::output_mm(const char* filename){
+			void COO<T>::print_all(){
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+                                std::cout << std::scientific;
+                                std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
+
+                                std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
+                                std::cout << row << " " << col << " " << nnz << std::endl;
+
+				for(size_t i=0; i<nnz; i++){
+                                    std::cout << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
+				}
+				logger.util_out();
+			}
+		template void COO<double>::print_all();
+		template void COO<float>::print_all();
+
+		template<typename T>
+			void COO<T>::print_all(std::string filename){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 				std::ofstream out(filename);
@@ -112,27 +131,15 @@ namespace monolish{
 				out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
 				out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL) << std::endl;
-				out << row << " " << row << " " << nnz << std::endl;
+				out << row << " " << col << " " << nnz << std::endl;
 
 				for(size_t i=0; i<nnz; i++){
 					out << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
 				}
 				logger.util_out();
 			}
-		template void COO<double>::output_mm(const char* filename);
-		template void COO<float>::output_mm(const char* filename);
-
-		template<typename T>
-			void COO<T>::output(){
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-				for(size_t i=0; i<nnz; i++){
-					std::cout << row_index[i]+1 << " " << col_index[i]+1 << " " << val[i] << std::endl;
-				}
-				logger.util_out();
-			}
-		template void COO<double>::output();
-		template void COO<float>::output();
+		template void COO<double>::print_all(std::string filename);
+		template void COO<float>::print_all(std::string filename);
 
 		template<typename T>
 			T COO<T>::at(size_t i, size_t j){

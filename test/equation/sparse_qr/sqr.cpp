@@ -22,7 +22,7 @@ bool test(const char* file, const int check_ans, const T tol){
 	monolish::util::send(A, x, ans, b);
 
 	// create ans
-	monolish::blas::spmv(A, ans, b);
+	monolish::blas::matvec(A, ans, b);
 
 	// solve
 	QR_solver.solve(A, x, b);

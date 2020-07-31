@@ -27,7 +27,7 @@ namespace monolish{
 		this->precond.create_precond(A);
 
 		//r = b-Ax
-		blas::spmv(A, x, q);
+		blas::matvec(A, x, q);
 		r = b - q;
 
 		//p0 = Mr0
@@ -36,7 +36,7 @@ namespace monolish{
 
 		for(size_t iter = 0; iter < this->maxiter; iter++)
 		{
-			blas::spmv(A,p,q);
+			blas::matvec(A,p,q);
 
 			auto tmp = blas::dot(z,r);
 			auto alpha = tmp / blas::dot(p,q);

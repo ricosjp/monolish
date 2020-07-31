@@ -31,11 +31,12 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
 		
 		monolish::util::send(x,y,z);
 		monolish::blas::axpyz(alpha, x, y, z);
+        z.recv();
 
-		z.recv();
 		if(ans_check<T>(z.data(), ansz.data(), y.size(), tol) == false){
  			return false;
  		}
+	    monolish::util::device_free(x, y);
 	}
 
 	monolish::util::send(x,y,z);

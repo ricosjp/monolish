@@ -3,24 +3,23 @@
 #include"monolish_blas.hpp"
 
 template <typename T>
-void get_ans(const double alpha, monolish::matrix::CRS<T> &A){
+void get_ans(const double alpha, monolish::matrix::Dense<T> &A){
 
 	for(int i = 0; i < A.get_nnz(); i++)
 		A.val[i] = alpha * A.val[i];
 }
 
 template <typename T>
-bool test(char* file, double tol, int iter, int check_ans){
+bool test(const size_t M, const size_t N, const double tol, int iter, int check_ans){
 
 	T alpha = 123.0;
-	monolish::matrix::COO<T> COO(file);
-	monolish::matrix::CRS<T> A(COO);
+	monolish::matrix::Dense<T> A(M, N, 0.0, 1.0); // M*N matrix
+	monolish::matrix::Dense<T> ansA = A;
 
 	if(check_ans == 1){
-		monolish::matrix::CRS<T> ansA = A;
 		get_ans(alpha, ansA);
 
-        A.send();
+	    A.send();
 		monolish::blas::mscal(alpha, A);
 		A.recv();
 
@@ -28,7 +27,7 @@ bool test(char* file, double tol, int iter, int check_ans){
 			return false;
 		};
 	}
-	A.send();
+    A.send();
 
 	auto start = std::chrono::system_clock::now();
 
@@ -48,20 +47,21 @@ bool test(char* file, double tol, int iter, int check_ans){
 
 int main(int argc, char** argv){
 
-	if(argc!=4){
-		std::cout << "error $1:matrix filename, $2: iter, $3:error check (1/0)" << std::endl;
+	if(argc!=5){
+		std::cout << "error $1: row, $2: col, $3: iter, $4: error check (1/0)" << std::endl;
 		return 1;
 	}
 
-	char* file = argv[1];
-	int iter = atoi(argv[2]);
-	int check_ans = atoi(argv[3]);
+	const size_t M = atoi(argv[1]);
+    const size_t N = atoi(argv[2]);
+	int iter = atoi(argv[3]);
+	int check_ans = atoi(argv[4]);
 
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 
-	if( test<double>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
-	if( test<float>(file, 1.0e-8, iter, check_ans) == false){ return 1; }
+	if( test<double>(M, N, 1.0e-8, iter, check_ans) == false){ return 1; }
+	if( test<float>(M, N, 1.0e-8, iter, check_ans) == false){ return 1; }
 
 	return 0;
 }

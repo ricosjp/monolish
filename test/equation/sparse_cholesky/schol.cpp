@@ -22,7 +22,7 @@ bool test(const char* file, const int check_ans, const T tol){
 	monolish::util::send(A, ans, b, x);
 
 	// make ans
-	monolish::blas::spmv(A, ans, b);
+	monolish::blas::matvec(A, ans, b);
 
 	//Cholesky_solver.set_reorder(1);
 	

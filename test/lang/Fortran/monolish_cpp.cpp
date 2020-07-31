@@ -7,7 +7,7 @@
 
 extern "C"{
 	//int cfun_(int *vec, int* col, int* row, double *val)
-	int monolish_spmv_(int *n, int* nnz, int row[], int col[], double val[], double xp[], double yp[])
+	int monolish_matvec_(int *n, int* nnz, int row[], int col[], double val[], double xp[], double yp[])
 	{
 		int N = *n;
 		int NNZ = *nnz;
@@ -21,7 +21,7 @@ extern "C"{
 
 		monolish::util::send(A,x,y);
 
-		monolish::blas::spmv(A, x, y);
+		monolish::blas::matvec(A, x, y);
 
 		monolish::util::recv(y);
 

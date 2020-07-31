@@ -16,7 +16,7 @@
 
 namespace monolish{
 
-	void blas::spmv(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y){
+	void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -106,7 +106,7 @@ namespace monolish{
 		logger.func_out();
 	}
 
-	void blas::spmv(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y){
+	void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y){
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
@@ -201,7 +201,7 @@ namespace monolish{
 			vector<T> y(vec.size()); 
 			y.send();
 
-			blas::spmv(*this, vec, y);
+			blas::matvec(*this, vec, y);
 
 			y.nonfree_recv();
 
