@@ -122,17 +122,7 @@ namespace monolish{
   		void xpay(const double alpha, const vector<double> &x, vector<double> &y);
   		void xpay(const float alpha, const vector<float> &x, vector<float> &y);
 
-//////////////////////////////////////////////////////
-//  spmv (crs)
-//////////////////////////////////////////////////////
-		/**
-		 * @brief double precision sparse matrix and vector multiplication in CRS: y = Ax
-		 * @param[in] A double precision CRS matrix
-		 * @param[in] x double precision monolish vector
-		 * @param[in] y double precision monolish vector
-		 */
-		void spmv(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y);
-		void spmv(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y);
+//CRS////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////
 //  matrix scale (crs)
@@ -144,5 +134,54 @@ namespace monolish{
 		 */
   		void mscal(const double alpha, matrix::CRS<double> &A);
   		void mscal(const float alpha, matrix::CRS<float> &A);
+
+//////////////////////////////////////////////////////
+//  matvec (crs)
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
+		 * @param[in] A double precision CRS matrix
+		 * @param[in] x double precision monolish vector
+		 * @param[in] y double precision monolish vector
+		 */
+		void matvec(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y);
+		void matvec(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y);
+
+//Dense////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////
+//  matrix scale (Dense)
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision scal: A = alpha * A
+		 * @param[in] alpha double precision scalar value
+		 * @param[in] A double precision CRS matrix
+		 */
+  		void mscal(const double alpha, matrix::Dense<double> &A);
+  		void mscal(const float alpha, matrix::Dense<float> &A);
+
+//////////////////////////////////////////////////////
+//  matvec (Dense)
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision Dense matrix and vector multiplication: y = Ax
+		 * @param[in] A double precision Dense matrix
+		 * @param[in] x double precision monolish vector
+		 * @param[in] y double precision monolish vector
+		 */
+		void matvec(const matrix::Dense<double> &A, const vector<double> &x, vector<double> &y);
+		void matvec(const matrix::Dense<float> &A, const vector<float> &x, vector<float> &y);
+
+//////////////////////////////////////////////////////
+//  matmul (Dense)
+//////////////////////////////////////////////////////
+		/**
+		 * @brief double precision Dense matrix multiplication: C = AB
+		 * @param[in] A double precision Dense matrix
+		 * @param[in] B double precision Dense matrix
+		 * @param[in] C double precision Dense matrix
+		 */
+		void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+		void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
 	}
 }

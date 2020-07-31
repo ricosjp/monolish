@@ -18,7 +18,7 @@ bool test(const char* file, const int check_ans, const T tol){
 	monolish::util::send(A, x, b, ans);
 
 	// create answer
-	monolish::blas::spmv(A, ans, b);
+	monolish::blas::matvec(A, ans, b);
 
 	monolish::equation::CG<T> solver;
 

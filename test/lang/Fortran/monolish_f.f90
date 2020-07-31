@@ -37,7 +37,7 @@ program f_call_c
 
 !     print *, "Fortran calling C, passing"
 !     print *, "i=",i,"x=",x
-    ierr = monolish_spmv(n, nnz, row, col, val, x, y)
+    ierr = monolish_matvec(n, nnz, row, col, val, x, y)
 
     print *, "y0=",y(1)
     print *, "y1=",y(2)

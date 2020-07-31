@@ -159,6 +159,18 @@ namespace monolish{
 				}
 
 				/**
+				 * @brief Add a new element at the ent of the vector (only CPU)
+				 * @param[in] val new element
+				 **/
+				void resize(Float val){
+					if( get_device_mem_stat() ) {
+						throw std::runtime_error("Error, GPU vector cant use operator[]");
+					}
+					val.push_back(val);
+				}
+
+
+				/**
 				 * @brief returns a direct pointer to the vector
 				 * @return A const pointer to the first element
 				 **/

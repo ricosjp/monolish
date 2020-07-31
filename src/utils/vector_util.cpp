@@ -8,7 +8,7 @@ namespace monolish{
 			vector<T> tmp(x.size());
 			tmp.send();
 
-			blas::spmv(A,x,tmp); //tmp=Ax
+			blas::matvec(A,x,tmp); //tmp=Ax
 			tmp = b - tmp;
 			return blas::nrm2(tmp);
 		}

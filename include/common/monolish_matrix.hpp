@@ -11,6 +11,7 @@
 #include<stdexcept>
 #include<vector>
 #include<string>
+#include<random>
 
 #define MM_BANNER "%%MatrixMarket"
 #define MM_MAT "matrix"
@@ -43,6 +44,10 @@ template<typename Float> class vector;
 					size_t nnz;
 
 					bool gpu_status = false; // true: sended, false: not send
+
+					void set_row(const size_t N){row = N;};
+					void set_col(const size_t N){col = N;};
+					void set_nnz(const size_t N){nnz = N;};
 
 				public:
 
@@ -271,8 +276,7 @@ template<typename Float> class vector;
 
 					/**
 					 * @brief copy matrix, It is same as copy()
-					 * @param[in] filename source
-					 * @return output vector
+					 * @return output matrix
 					 **/
 					void operator=(const CRS<Float>& mat);
 

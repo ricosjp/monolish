@@ -37,7 +37,7 @@ bool test(const char* file, double tol, int iter, int check_ans){
 	if(check_ans == 1){
 		get_ans(A, x, ansy);
 		monolish::util::send(A, x, y);
-		monolish::blas::spmv(A, x, y);
+		monolish::blas::matvec(A, x, y);
 		y.recv();
 		if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
 			return false;
@@ -48,7 +48,7 @@ bool test(const char* file, double tol, int iter, int check_ans){
 	auto start = std::chrono::system_clock::now();
 
 	for(int i = 0; i < iter; i++){
-		monolish::blas::spmv(A, x, y);
+		monolish::blas::matvec(A, x, y);
 	}
 
 	auto end = std::chrono::system_clock::now();
