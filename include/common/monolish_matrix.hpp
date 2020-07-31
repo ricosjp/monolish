@@ -217,7 +217,7 @@ template<typename Float> class vector;
                         std::size_t s = get_row() > get_col() ? get_col() : get_row();
                         std::vector<Float> res(s, 0);
                         for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
-                            if (get_row_ptr()[nz] == get_col_ptr()[nz]) {
+                            if (get_row_ptr()[nz] == get_col_ind()[nz]) {
                                 res[get_row_ptr()[nz]] = get_val_ptr()[nz];
                             }
                         }
