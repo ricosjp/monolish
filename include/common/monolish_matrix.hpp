@@ -53,8 +53,8 @@ template<typename Float> class vector;
 
 					COO(){}
 
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
-						set_row(N);
+					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
+						set_row(M);
 						set_col(N);
 						set_nnz(nnz);
 
@@ -68,8 +68,8 @@ template<typename Float> class vector;
 					}
 
 					// for n-origin
-					COO(const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_row(N);
+					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
+						set_row(M);
 						set_col(N);
 						set_nnz(nnz);
 
