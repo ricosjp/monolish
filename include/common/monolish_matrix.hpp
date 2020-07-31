@@ -185,9 +185,8 @@ template<typename Float> class vector;
                      * @param[in] size_t m row number
                      * @param[in] size_t n col number
                      * @param[in] Float val matrix value (if multiple element exists, value will be added together)
-                     * @param[in] size_t offset (default to 0)
                      **/
-                    void insert(size_t m, size_t n, Float val, size_t offset);
+                    void insert(size_t m, size_t n, Float val);
 
                  private:
                     void _q_sort(int lo, int hi);

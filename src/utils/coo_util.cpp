@@ -178,18 +178,18 @@ namespace monolish{
 			template void COO<float>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<float> &v);
 
         template<typename T>
-        void COO<T>::insert(size_t m, size_t n, T value, size_t offset) {
-            int rownum = m - offset;
+        void COO<T>::insert(size_t m, size_t n, T value) {
+            int rownum = m;
             if (rownum < 0 || rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
-            int colnum = n - offset;
+            int colnum = n;
             if (colnum < 0 || colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
             row_index.push_back(rownum);
             col_index.push_back(colnum);
             val.push_back(value);
             ++nnz;
         }
-        template void COO<double>::insert(size_t m, size_t n, double value, size_t offset = 0);
-        template void COO<float>::insert(size_t m, size_t n, float value, size_t offset = 0);
+        template void COO<double>::insert(size_t m, size_t n, double value);
+        template void COO<float>::insert(size_t m, size_t n, float value);
 
         template<typename T>
         void COO<T>::_q_sort(int lo, int hi) {
