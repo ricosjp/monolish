@@ -181,10 +181,10 @@ namespace monolish{
 
         template<typename T>
         void COO<T>::insert(size_t m, size_t n, T value) {
-            int rownum = m;
-            if (rownum < 0 || rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
-            int colnum = n;
-            if (colnum < 0 || colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
+            size_t rownum = m;
+            if (rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
+            size_t colnum = n;
+            if (colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
             row_index.push_back(rownum);
             col_index.push_back(colnum);
             val.push_back(value);
@@ -265,8 +265,8 @@ namespace monolish{
 
             /*  Remove duplicates */
             if (merge) {
-                int k = 0;
-                for( int i = 1; i < nnz; i++) {
+                size_t k = 0;
+                for( size_t i = 1; i < nnz; i++) {
                     if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
                         k++;
                         row_index[k] = row_index[i];
