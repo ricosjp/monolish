@@ -1,29 +1,28 @@
-TARGET=./lib/libmonolish_cpu.so
+TARGET=./lib/libmonolish_fx.so
 
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
-CXX=g++
-CXXFLAGS = -O3 -std=c++14 -lm -g -fPIC
-#CXXFLAGS += -mavx-fopenmp
-CXXFLAGS += -fopenmp
-CXXFLAGS += -Wall -Wno-unused-variable
+CXX=FCC
+#CXXFLAGS = -Nclang -O3 -Ofast -fopenmp -std=c++14 -fPIC -fvectorize -Nlibomp
+CXXFLAGS = -Kfast,openmp,zfill,parallel,simd,reduction -std=c++14 -lm -fPIC -Kopenmp -Nlibomp
+#CXXFLAGS	 += -Nsrc -Koptmsg=2
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 
 LIBFLAGS = -shared 
+#BLAS_LIB = -SSL2BLAMP
+#BLAS_LIB = -Kopenmp -SSL2BLAMP
 
 ####################
 
-BLAS_INC ?=  -I /usr/include/openblas/
-BLAS_LIB ?= -L/usr/lib64/ -lopenblas
 
 ####################
 
 # need mumps 
-MUMPS_INC ?= -I ./external/obj/mumps/include/
-MUMPS_OBJ ?= \
--L ./external/obj/mumps/lib/libpord.a \
--L ./external/obj/mumps/lib/libdmumps.a \
--L ./external/obj/mumps/lib/libmumps_common.a
+# MUMPS_INC ?= -I ./external/obj/mumps/include/
+# MUMPS_OBJ ?= \
+# -L ./external/obj/mumps/lib/libpord.a \
+# -L ./external/obj/mumps/lib/libdmumps.a \
+# -L ./external/obj/mumps/lib/libmumps_common.a
 
 ####################
 
@@ -61,7 +60,7 @@ vpath %.cpp ./src/utils/
 
 .PHONY = libs test clean
 
-OBJDIR=./obj/cpu/
+OBJDIR=./obj/fx/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
@@ -69,11 +68,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p lib
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIB_INC) $(LIB_OBJ) -o $(TARGET) $(LIB_INC) $(LIB_OBJ)
+	$(CXX) $(CXXFLAGS) $(LIBFLAGS) $(OBJS) $(LIB_INC) $(LIB_OBJ) -o $(TARGET) $(LIB_INC) $(LIB_OBJ) 
 
 $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) $(LIB_INC) $(LIB_OBJ) -I../include -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(LIB_INC) $(LIB_OBJ) -I../include -c $< -o $@ 
 
 libs:
 	git submodule update -i

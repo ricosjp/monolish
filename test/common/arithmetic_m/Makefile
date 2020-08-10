@@ -5,6 +5,9 @@ all:
 cpu:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 
+fx:
+	make -B FUNC=$(FUNC) ARCH=fx -f ../../Makefile_core.fx
+
 gpu:
 	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
 
@@ -13,6 +16,9 @@ run_cpu:
 
 run_gpu:
 	$(PROFILER) ./$(FUNC)_gpu.out ../../test.mtx
-	
+
+run_fx:
+	./$(FUNC)_fx.out 10000 10 1
+
 clean:
 	- rm *.out

@@ -1,9 +1,9 @@
 #include<iostream>
 #include<omp.h>
-#include<openacc.h>
 
 #ifdef USE_GPU
 	#include <cuda_runtime.h>
+	#include<openacc.h>
 #endif
 
 namespace monolish{

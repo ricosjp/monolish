@@ -12,6 +12,9 @@ gpu:
 	make -j -C sparse_qr/ gpu
 	make -j -C sparse_cholesky/ gpu
 
+fx:
+	make -j -C cg/ fx
+
 run_cpu:
 	make -j -C cg/ run_cpu
 	# make -C sparse_lu/ run_cpu
@@ -23,6 +26,9 @@ run_gpu:
 	# make -j -C sparse_lu/ run_gpu
 	make -j -C sparse_qr/ run_gpu
 	make -j -C sparse_cholesky/ run_gpu
+
+run_fx:
+	make -j -C cg/ run_fx
 	
 clean:
 	- make -j -C cg/ clean

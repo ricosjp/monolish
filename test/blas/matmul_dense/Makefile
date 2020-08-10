@@ -8,6 +8,9 @@ cpu:
 gpu:
 	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
 
+fx:
+	make -B FUNC=$(FUNC) ARCH=fx -f ../../Makefile_core.fx
+
 run_cpu:
 	./$(FUNC)_cpu.out 100 100 100 10 1
 	./$(FUNC)_cpu.out 101 100 100 10 1
@@ -19,6 +22,12 @@ run_gpu:
 	$(PROFILER) ./$(FUNC)_gpu.out 101 100 100 10 1
 	$(PROFILER) ./$(FUNC)_gpu.out 100 101 100 10 1
 	$(PROFILER) ./$(FUNC)_gpu.out 100 100 101 10 1
+	
+run_fx:
+	$(PROFILER) ./$(FUNC)_fx.out 100 100 100 10 1
+	$(PROFILER) ./$(FUNC)_fx.out 101 100 100 10 1
+	$(PROFILER) ./$(FUNC)_fx.out 100 101 100 10 1
+	$(PROFILER) ./$(FUNC)_fx.out 100 100 101 10 1
 	
 clean:
 	- rm *.out

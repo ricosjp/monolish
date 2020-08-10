@@ -6,6 +6,9 @@ cpu:
 gpu:
 	make -j -C logging/ gpu
 
+fx:
+	make -j -C logging/ fx
+
 run_cpu:
 	make -j -C logging/ run_cpu
 	make -j -C logging/ log_cpu
@@ -13,6 +16,10 @@ run_cpu:
 run_gpu:
 	make -j -C logging/ run_gpu
 	make -j -C logging/ log_gpu
+
+run_fx:
+	make -j -C logging/ run_fx
+	make -j -C logging/ log_fx
 	
 clean:
 	- make -j -C logging/ clean
