@@ -202,7 +202,7 @@ namespace monolish{
 
             int l = lo;
             int h = hi;
-            int p = hi;;
+            int p = hi;
             int p1 = row_index[p];
             int p2 = col_index[p];
             double p3 = val[p];
@@ -260,7 +260,7 @@ namespace monolish{
         void COO<T>::sort(bool merge) {
             //  Sort by first Col and then Row
             //  TODO: This hand-written quick sort function should be retired
-            //        after zip_iterator() (available in range-v3 library to be) is available in the standard
+            //        after zip_iterator() (available in range-v3 library) is available in the standard (hopefully C++23)
             _q_sort(0, nnz-1);
 
             /*  Remove duplicates */
