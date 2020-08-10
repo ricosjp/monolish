@@ -16,8 +16,8 @@ extern "C"{
 		monolish::matrix::COO<double> COO(N, N, NNZ, row, col, val, 1);
 		monolish::matrix::CRS<double> A(COO);
 
-		monolish::vector x(xp, xp+N);
-		monolish::vector y(xp, xp+N);
+		monolish::vector<double> x(xp, xp+N);
+		monolish::vector<double> y(xp, xp+N);
 
 		monolish::util::send(A,x,y);
 

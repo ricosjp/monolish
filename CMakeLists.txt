@@ -28,7 +28,7 @@ if (BUILD_GPU)
     ${MONOLISH_SOURCE_FILES}
     )
 
-  target_compile_features(monolish_gpu PUBLIC cxx_std_17)
+  target_compile_features(monolish_gpu PUBLIC cxx_std_14)
 
   target_compile_options(monolish_gpu PRIVATE -O3)
 
@@ -86,7 +86,7 @@ target_sources(monolish_cpu
   ${MONOLISH_SOURCE_FILES}
   )
 
-target_compile_features(monolish_cpu PUBLIC cxx_std_17)
+target_compile_features(monolish_cpu PUBLIC cxx_std_14)
 target_compile_options(monolish_cpu PRIVATE -O3)
 
 find_package(OpenMP)

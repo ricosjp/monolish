@@ -26,6 +26,19 @@ gpu:
 	make -C matvec_dense/ gpu
 	make -C matmul_dense/ gpu
 
+fx:
+	make -C axpy/ fx
+	make -C axpyz/ fx
+	make -C xpay/ fx
+	make -C scal/ fx
+	make -C dot/ fx
+	make -C nrm2/ fx
+	make -C scal_crs/ fx
+	make -C scal_dense/ fx
+	make -C matvec_crs/ fx
+	make -C matvec_dense/ fx
+	make -C matmul_dense/ fx
+
 run_cpu:
 	make -C axpy/ run_cpu
 	make -C axpyz/ run_cpu
@@ -51,6 +64,19 @@ run_gpu:
 	make -C matvec_crs/ run_gpu
 	make -C matvec_dense/ run_gpu
 	make -C matmul_dense/ run_gpu
+
+run_fx:
+	make -C axpy/ run_fx
+	make -C axpyz/ run_fx
+	make -C xpay/ run_fx
+	make -C scal/ run_fx
+	make -C dot/ run_fx
+	make -C nrm2/ run_fx
+	make -C scal_crs/ run_fx
+	make -C scal_dense/ run_fx
+	make -C matvec_crs/ run_fx
+	make -C matvec_dense/ run_fx
+	make -C matmul_dense/ run_fx
 
 clean:
 	- make -C axpy/ clean

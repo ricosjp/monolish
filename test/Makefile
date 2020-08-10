@@ -14,6 +14,13 @@ gpu:
 	make -C logger/ gpu
 	make -C lang/ gpu
 
+fx:
+	make -C common/ fx
+	make -C blas/ fx
+	make -C equation/ fx
+	make -C logger/ fx
+	make -C lang/ fx
+
 run_cpu:
 	make -C common/ run_cpu
 	make -C blas/ run_cpu
@@ -28,6 +35,13 @@ run_gpu:
 	make -C equation/ run_gpu
 	make -C logger/ run_gpu
 	make -C lang/ run_gpu
+
+run_fx:
+	make -C common/ run_fx
+	make -C blas/ run_fx
+	make -C equation/ run_fx
+	make -C logger/ run_fx
+	make -C lang/ run_fx
 
 run_gpu_profile:
 	make PROFILER="nsys nvprof" -C common/ run_gpu

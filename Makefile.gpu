@@ -1,7 +1,7 @@
 TARGET=./lib/libmonolish_gpu.so
 
 CXX=g++
-CXXFLAGS=-O3 -std=c++17
+CXXFLAGS=-O3 -std=c++14
 CXXFLAGS+=-fopenacc -foffload=nvptx-none="-misa=sm_35" -fPIC
 CXXFLAGS+=--shared
 CXXFLAGS+=-DUSE_GPU

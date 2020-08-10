@@ -161,7 +161,7 @@ template<typename Float> class vector;
 					 * @return copied COO matrix
 					 **/
 					COO copy(){
-                                            COO tmp(row, col, nnz, row_index.data(), col_index.data(), val.data());
+                                            COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
                                             return tmp;
 					}
 

@@ -15,6 +15,9 @@ gpu:
 gpu-debug:
 	make -B -j -f Makefile.gpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
 
+fx:
+	make -B -j4 -f Makefile.fx
+
 external:
 	make -j -f Makefile.cpu libs
 
@@ -27,6 +30,7 @@ test:
 clean:
 	- make -f Makefile.cpu clean 
 	- make -f Makefile.gpu clean 
+	- make -f Makefile.fx clean 
 	- make -C test/ clean
 
 zenbu:
