@@ -141,9 +141,9 @@ bool test(){
 
 	//test at(i, j)
 	//non zero element
-	if (addr_COO.at(0, 0) != 1) { return false; }
+	if (addr_COO.at(0, 0) != 1.0) { std::cout << "A(0, 0) != 1.0" << std::endl; return false; }
 	//zero element
-	if (addr_COO.at(1, 1) != 0) { return false; }
+	if (addr_COO.at(1, 1) != 0.0) { std::cout << "A(1, 1) != 0.0" << std::endl; return false; }
 	//out of range element
 	try {
 		addr_COO.at(3, 2);
