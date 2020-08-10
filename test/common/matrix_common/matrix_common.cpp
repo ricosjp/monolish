@@ -197,7 +197,7 @@ int main(int argc, char** argv){
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 	
-	if( test<double>() ) {return 1;}
-	if( test<float>() ) {return 1;}
+	if( !test<double>() ) {return 1;}
+	if( !test<float>() ) {return 1;}
 	return 0;
 }
