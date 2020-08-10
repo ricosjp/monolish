@@ -217,7 +217,7 @@ namespace monolish{
                 while ((h > l) &&
                        ((row_index[h] != row_index[p])
                         ? (row_index[h] - row_index[p])
-                        : (col_index[h] - col_index[p])) <= 0) {
+                        : (col_index[h] - col_index[p])) >= 0) {
                     h = h-1;
                 }
                 if (l < h) {

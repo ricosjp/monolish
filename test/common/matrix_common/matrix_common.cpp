@@ -129,7 +129,7 @@ bool test(){
         ss << "3 1 " << 6.0 << std::endl;
         ss << "3 2 " << 7.0 << std::endl;
         ss << "3 3 " << 8.0 << std::endl;
-        // ss << "4 4 " << 1.0 << std::endl;
+        ss << "4 4 " << 1.0 << std::endl;
         if (oss.str() != ss.str()) { std::cout << "print expanded matrix mismatch" << std::endl; return false; }
         }
 
