@@ -150,9 +150,11 @@ namespace monolish{
 					throw std::out_of_range("error");
 				}
 
-				for(size_t i=0; i<nnz; i++){
-					if( row_index[i] == (int)i && col_index[i] == (int)j){
-						return val[i];
+				// since last inserted element is effective elements,
+                                // checking from last element is necessary
+                                for(size_t k = nnz; k > 0; --k){
+					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+						return val[k-1];
 					}
 				}
 				logger.util_out();
