@@ -188,7 +188,7 @@ bool test(){
 	if(filey[1] != 20) {filey.print_all();  return false;}
 	if(filey[2] != 30) {filey.print_all();  return false;}
 
-	return 0;
+	return true;
 }
 
 int main(int argc, char** argv){
