@@ -191,6 +191,47 @@ bool test(){
 	return true;
 }
 
+template <typename T>
+bool default_constructor_test() {
+    monolish::matrix::COO<T> A;
+    A.set_row(2);
+    A.set_col(2);
+    {
+    std::ostringstream oss;
+    std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+    std::cout.rdbuf(oss.rdbuf());
+    A.print_all();
+    std::cout.rdbuf(p_cout_streambuf); // restore
+    std::string res("%%MatrixMarket matrix coordinate real general\n");
+    std::stringstream ss; // To set Float(T) output
+    ss << std::scientific;
+    ss << std::setprecision(std::numeric_limits<T>::max_digits10);
+    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
+    ss << "2 2 0" << std::endl;
+    if (oss.str() != ss.str()) { std::cout << "empty A" << std::endl; return false; }
+    }
+    A.insert(1, 1, 2.0);
+    A.insert(0, 0, 1.0);
+    A.sort(false);
+    {
+    std::ostringstream oss;
+    std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+    std::cout.rdbuf(oss.rdbuf());
+    A.print_all();
+    std::cout.rdbuf(p_cout_streambuf); // restore
+    std::string res("%%MatrixMarket matrix coordinate real general\n");
+    std::stringstream ss; // To set Float(T) output
+    ss << std::scientific;
+    ss << std::setprecision(std::numeric_limits<T>::max_digits10);
+    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
+    ss << "2 2 2" << std::endl;
+    ss << "1 1 " << 1.0 << std::endl;
+    ss << "2 2 " << 2.0 << std::endl;
+    if (oss.str() != ss.str()) { std::cout << "2 elements and sorted A" << std::endl; return false; }
+    }
+    return true;
+}
+
 int main(int argc, char** argv){
 
 	// logger option
@@ -199,5 +240,9 @@ int main(int argc, char** argv){
 	
 	if( !test<double>() ) {return 1;}
 	if( !test<float>() ) {return 1;}
-	return 0;
+
+        if( !default_constructor_test<double>() ) { return 2; }
+        if( !default_constructor_test<float>() )  { return 2; }
+
+        return 0;
 }
