@@ -1,5 +1,5 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../../../include/monolish_blas.hpp"
+#include "../../../monolish_internal.hpp"
 
 #ifdef USE_GPU
 	#include<cublas_v2.h>

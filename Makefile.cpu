@@ -39,6 +39,7 @@ SRCS +=$(notdir $(wildcard ./src/equation/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/blas/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/*/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/blas/*/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
 
@@ -53,7 +54,13 @@ vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
 vpath %.cpp ./src/blas/vector/
+
 vpath %.cpp ./src/blas/matrix/
+vpath %.cpp ./src/blas/matrix/copy/
+vpath %.cpp ./src/blas/matrix/getvec
+vpath %.cpp ./src/blas/matrix/scal
+vpath %.cpp ./src/blas/matrix/matmul
+vpath %.cpp ./src/blas/matrix/matvec
 
 vpath %.cpp ./src/utils/
 
