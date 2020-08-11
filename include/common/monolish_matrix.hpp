@@ -51,7 +51,15 @@ template<typename Float> class vector;
 					std::vector<int> col_index;
 					std::vector<Float> val;
 
-					COO(){}
+					COO()
+                                            : rowN(0)
+                                            , colN(0)
+                                            , nnz(0)
+                                            , gpu_status(false)
+                                            , row_index()
+                                            , col_index()
+                                            , val()
+					{}
 
 					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
 						set_row(M);
