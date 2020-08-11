@@ -59,9 +59,9 @@ namespace monolish{
                     throw std::runtime_error("Error, GPU matrix cant use print_all");
                 }
 
-                for(size_t i = 0; i < row; i++){
-                    for(size_t j = 0; j < col; j++){
-                        std::cout << row+1 << " " << col+1 << " " << val[i*row+j] << std::endl;
+                for(size_t i = 0; i < get_row(); i++){
+                    for(size_t j = 0; j < get_col(); j++){
+                        std::cout << get_row()+1 << " " << get_col()+1 << " " << val[i*get_row()+j] << std::endl;
                     }
                 }
 

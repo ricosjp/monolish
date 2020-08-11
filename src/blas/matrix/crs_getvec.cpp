@@ -4,18 +4,13 @@
 namespace monolish{
 	namespace matrix{
 
-		//get_diag
+		//diag
 		template<typename T>
-		void CRS<T>::get_diag(vector<T>& vec){
+		void CRS<T>::diag(vector<T>& vec){
 			Logger& logger = Logger::get_instance();
 			logger.func_in(monolish_func);
 
-			//err
-			if( get_row() != (size_t)vec.size()){
-				throw std::runtime_error("error vector size is not same");
-			}
-
-			size_t n = get_row();
+			size_t n = get_row() < get_col() ? rowN : colN;
 			size_t nnz = get_nnz();
 			T* vecd = vec.data();
 
@@ -59,19 +54,14 @@ namespace monolish{
 
 			logger.func_out();
 		}
-		template void monolish::matrix::CRS<double>::get_diag(vector<double>& vec);
-		template void monolish::matrix::CRS<float>::get_diag(vector<float>& vec);
+		template void monolish::matrix::CRS<double>::diag(vector<double>& vec);
+		template void monolish::matrix::CRS<float>::diag(vector<float>& vec);
 
 		//get_row
 		template<typename T>
-		void CRS<T>::get_row(const size_t r, vector<T>& vec){
+		void CRS<T>::row(const size_t r, vector<T>& vec){
 			Logger& logger = Logger::get_instance();
 			logger.func_in(monolish_func);
-
-			//err
-			if( get_row() != (size_t)vec.size()){
-				throw std::runtime_error("error vector size is not same");
-			}
 
 			size_t n = get_row();
 			size_t nnz = get_nnz();
@@ -110,21 +100,16 @@ namespace monolish{
 
 			logger.func_out();
 		}
-		template void monolish::matrix::CRS<double>::get_row(const size_t r, vector<double>& vec);
-		template void monolish::matrix::CRS<float>::get_row(const size_t r, vector<float>& vec);
+		template void monolish::matrix::CRS<double>::row(const size_t r, vector<double>& vec);
+		template void monolish::matrix::CRS<float>::row(const size_t r, vector<float>& vec);
 
 		//get_row
 		template<typename T>
-		void CRS<T>::get_col(const size_t c, vector<T>& vec){
+		void CRS<T>::col(const size_t c, vector<T>& vec){
 			Logger& logger = Logger::get_instance();
 			logger.func_in(monolish_func);
 
-			//err
-			if( get_row() != (size_t)vec.size()){
-				throw std::runtime_error("error vector size is not same");
-			}
-
-			size_t n = get_row();
+			size_t n = get_col();
 			size_t nnz = get_nnz();
 			T* vecd = vec.data();
 
@@ -169,7 +154,7 @@ namespace monolish{
 
 			logger.func_out();
 		}
-		template void monolish::matrix::CRS<double>::get_col(const size_t c, vector<double>& vec);
-		template void monolish::matrix::CRS<float>::get_col(const size_t c, vector<float>& vec);
+		template void monolish::matrix::CRS<double>::col(const size_t c, vector<double>& vec);
+		template void monolish::matrix::CRS<float>::col(const size_t c, vector<float>& vec);
 	}
 }

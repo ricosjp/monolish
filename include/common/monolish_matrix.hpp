@@ -26,7 +26,7 @@
 #endif
 
 namespace monolish{
-template<typename Float> class vector;
+    template<typename Float> class vector;
 	namespace matrix{
 
 		/**
@@ -151,7 +151,7 @@ template<typename Float> class vector;
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
+					//size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
 					size_t get_row() const {return rowN;}
 					size_t get_col() const {return colN;}
 					size_t get_nnz() const {return nnz;}
@@ -268,8 +268,8 @@ template<typename Float> class vector;
 					/**
 					 * @brief neet col = row now
 					 */
-					size_t row;
-					size_t col;
+					size_t rowN;
+					size_t colN;
 					size_t nnz;
 
 					bool gpu_flag = false; // not impl
@@ -290,11 +290,11 @@ template<typename Float> class vector;
 
 					CRS(const CRS<Float> &mat);
 
-					void output();
+					void print_all();
 
-					size_t size() const {return row > col ? row : col;}
-					size_t get_row() const{return row;}
-					size_t get_col() const{return col;}
+					//size_t size() const {return rowN > colN ? rowN : colN;}
+					size_t get_row() const{return rowN;}
+					size_t get_col() const{return colN;}
 					size_t get_nnz() const{return nnz;}
 
 					// communication ///////////////////////////////////////////////////////////////////////////
@@ -334,9 +334,9 @@ template<typename Float> class vector;
 					}
 
      				/////////////////////////////////////////////////////////////////////////////
-					void get_diag(vector<Float>& vec);
-					void get_row(const size_t r, vector<Float>& vec);
-					void get_col(const size_t c, vector<Float>& vec);
+					void diag(vector<Float>& vec);
+					void row(const size_t r, vector<Float>& vec);
+					void col(const size_t c, vector<Float>& vec);
 
      				/////////////////////////////////////////////////////////////////////////////
 

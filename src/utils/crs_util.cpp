@@ -21,15 +21,15 @@ namespace monolish{
 
 				//todo coo err check (only square)
 
-				row = coo.get_row();
-				col = coo.get_col();
+				rowN = coo.get_row();
+				colN = coo.get_col();
 				nnz = coo.get_nnz();
 
 				val = coo.val;
 				col_ind = coo.col_index;
 
 				// todo not inplace now
-				row_ptr.resize(row+1, 0.0);
+				row_ptr.resize(get_row()+1, 0.0);
 
 
 				row_ptr[0] = 0;
@@ -50,11 +50,11 @@ namespace monolish{
 		template void CRS<float>::convert(COO<float> &coo);
 
 		template<typename T>
-			void CRS<T>::output(){
+			void CRS<T>::print_all(){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
 
-				for(size_t i = 0; i < row; i++){
+				for(size_t i = 0; i < get_row(); i++){
 					for(size_t j = (size_t)row_ptr[i]; j < (size_t)row_ptr[i+1]; j++){
 						std::cout << i+1 << " " << col_ind[j]+1 << " " << val[j] << std::endl;
 					}
@@ -62,7 +62,7 @@ namespace monolish{
 
 				logger.util_out();
 			}
-		template void CRS<double>::output();
-		template void CRS<float>::output();
+		template void CRS<double>::print_all();
+		template void CRS<float>::print_all();
 	}
 }
