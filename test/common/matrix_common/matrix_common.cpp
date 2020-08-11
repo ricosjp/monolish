@@ -129,7 +129,7 @@ bool test(){
         ss << "3 1 " << 6.0 << std::endl;
         ss << "3 2 " << 7.0 << std::endl;
         ss << "3 3 " << 8.0 << std::endl;
-        // ss << "4 4 " << 1.0 << std::endl;
+        ss << "4 4 " << 1.0 << std::endl;
         if (oss.str() != ss.str()) { std::cout << "print expanded matrix mismatch" << std::endl; return false; }
         }
 
@@ -141,9 +141,9 @@ bool test(){
 
 	//test at(i, j)
 	//non zero element
-	if (addr_COO.at(0, 0) != 1) { return false; }
+	if (addr_COO.at(0, 0) != 1.0) { std::cout << "A(0, 0) != 1.0" << std::endl; return false; }
 	//zero element
-	if (addr_COO.at(1, 1) != 0) { return false; }
+	if (addr_COO.at(1, 1) != 0.0) { std::cout << "A(1, 1) != 0.0" << std::endl; return false; }
 	//out of range element
 	try {
 		addr_COO.at(3, 2);
@@ -188,7 +188,7 @@ bool test(){
 	if(filey[1] != 20) {filey.print_all();  return false;}
 	if(filey[2] != 30) {filey.print_all();  return false;}
 
-	return 0;
+	return true;
 }
 
 int main(int argc, char** argv){
@@ -197,7 +197,7 @@ int main(int argc, char** argv){
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 	
-	if( test<double>() ) {return 1;}
-	if( test<float>() ) {return 1;}
+	if( !test<double>() ) {return 1;}
+	if( !test<float>() ) {return 1;}
 	return 0;
 }

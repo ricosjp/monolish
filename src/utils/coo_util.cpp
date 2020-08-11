@@ -150,9 +150,11 @@ namespace monolish{
 					throw std::out_of_range("error");
 				}
 
-				for(size_t i=0; i<nnz; i++){
-					if( row_index[i] == (int)i && col_index[i] == (int)j){
-						return val[i];
+				// since last inserted element is effective elements,
+                                // checking from last element is necessary
+                                for(size_t k = nnz; k > 0; --k){
+					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+						return val[k-1];
 					}
 				}
 				logger.util_out();
@@ -179,10 +181,10 @@ namespace monolish{
 
         template<typename T>
         void COO<T>::insert(size_t m, size_t n, T value) {
-            int rownum = m;
-            if (rownum < 0 || rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
-            int colnum = n;
-            if (colnum < 0 || colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
+            size_t rownum = m;
+            if (rownum >= get_row()) { throw std::out_of_range("row index out of range"); }
+            size_t colnum = n;
+            if (colnum >= get_col()) { throw std::out_of_range("column index out of range"); }
             row_index.push_back(rownum);
             col_index.push_back(colnum);
             val.push_back(value);
@@ -200,7 +202,7 @@ namespace monolish{
 
             int l = lo;
             int h = hi;
-            int p = hi;;
+            int p = hi;
             int p1 = row_index[p];
             int p2 = col_index[p];
             double p3 = val[p];
@@ -215,7 +217,7 @@ namespace monolish{
                 while ((h > l) &&
                        ((row_index[h] != row_index[p])
                         ? (row_index[h] - row_index[p])
-                        : (col_index[h] - col_index[p])) <= 0) {
+                        : (col_index[h] - col_index[p])) >= 0) {
                     h = h-1;
                 }
                 if (l < h) {
@@ -258,13 +260,13 @@ namespace monolish{
         void COO<T>::sort(bool merge) {
             //  Sort by first Col and then Row
             //  TODO: This hand-written quick sort function should be retired
-            //        after zip_iterator() (available in range-v3 library to be) is available in the standard
+            //        after zip_iterator() (available in range-v3 library) is available in the standard (hopefully C++23)
             _q_sort(0, nnz-1);
 
             /*  Remove duplicates */
             if (merge) {
-                int k = 0;
-                for( int i = 1; i < nnz; i++) {
+                size_t k = 0;
+                for( size_t i = 1; i < nnz; i++) {
                     if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
                         k++;
                         row_index[k] = row_index[i];
