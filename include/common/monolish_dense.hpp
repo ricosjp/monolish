@@ -18,15 +18,15 @@ namespace monolish{
             class Dense{
                 private:
 
-                    size_t row;
-                    size_t col;
+                    size_t rowN;
+                    size_t colN;
                     size_t nnz;
 
                     bool gpu_flag = false; // not impl
                     bool gpu_status = false; // true: sended, false: not send
 
-					void set_row(const size_t N){row = N;};
-					void set_col(const size_t M){col = M;};
+					void set_row(const size_t N){rowN = N;};
+					void set_col(const size_t M){colN = M;};
 					void set_nnz(const size_t NZ){nnz = NZ;};
 
                 public:
@@ -34,10 +34,9 @@ namespace monolish{
 
                     void convert(COO<Float> &coo);
 
-					size_t size() const{return row;}
-					size_t get_row() const{return row;}
-					size_t get_col() const{return col;}
-					size_t get_nnz() const{return row*col;}
+					size_t get_row() const{return rowN;}
+					size_t get_col() const{return colN;}
+					size_t get_nnz() const{return get_row()*get_col();}
 
                     Dense(){}
 					Dense(const Dense<Float> &mat);
@@ -168,9 +167,9 @@ namespace monolish{
                     }
 
                     /////////////////////////////////////////////////////////////////////////////
-                    void get_diag(vector<Float>& vec);
-                    void get_row(const size_t r, vector<Float>& vec);
-                    void get_col(const size_t c, vector<Float>& vec);
+                    void diag(vector<Float>& vec);
+                    void row(const size_t r, vector<Float>& vec);
+                    void col(const size_t c, vector<Float>& vec);
 
                     /////////////////////////////////////////////////////////////////////////////
 
