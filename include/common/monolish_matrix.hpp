@@ -61,30 +61,30 @@ template<typename Float> class vector;
                                             , val()
 					{}
 
-					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value){
-						set_row(M);
-						set_col(N);
-						set_nnz(nnz);
-
-						row_index.resize(nnz);
-						col_index.resize(nnz);
-						val.resize(nnz);
-
+					COO(const size_t M, const size_t N, const size_t NNZ, const int* row, const int* col, const Float* value)
+                                            : rowN(M)
+                                            , colN(N)
+                                            , nnz(NNZ)
+                                            , gpu_status(false)
+                                            , row_index(nnz)
+                                            , col_index(nnz)
+                                            , val(nnz)
+                                        {
 						std::copy(row, row+nnz, row_index.begin());
 						std::copy(col, col+nnz, col_index.begin());
 						std::copy(value, value+nnz, val.begin());
 					}
 
 					// for n-origin
-					COO(const size_t M, const size_t N, const size_t nnz, const int* row, const int* col, const Float* value, const size_t origin){
-						set_row(M);
-						set_col(N);
-						set_nnz(nnz);
-
-						row_index.resize(nnz);
-						col_index.resize(nnz);
-						val.resize(nnz);
-
+					COO(const size_t M, const size_t N, const size_t NNZ, const int* row, const int* col, const Float* value, const size_t origin)
+                                            : rowN(M)
+                                            , colN(N)
+                                            , nnz(NNZ)
+                                            , gpu_status(false)
+                                            , row_index(nnz)
+                                            , col_index(nnz)
+                                            , val(nnz)
+                                        {
 						std::copy(row, row+nnz, row_index.begin());
 						std::copy(col, col+nnz, col_index.begin());
 						std::copy(value, value+nnz, val.begin());
