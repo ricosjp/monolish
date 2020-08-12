@@ -43,18 +43,18 @@ namespace monolish{
    		#if USE_GPU
  		    #pragma acc data present(vald[0:nnz], rowd[0:M+1], cold[0:nnz], Bd[0:K*N], Cd[0:M*N])
 			#pragma acc parallel
-            #pragma acc loop independent 
-            for(size_t i=0; i<M*N; i++){
-                Cd[i] = 0.0;
-            }
+            {
+                #pragma acc loop independent 
+                for(size_t i=0; i<M*N; i++){
+                    Cd[i] = 0.0;
+                }
 
- 		    #pragma acc data present(vald[0:nnz], rowd[0:M+1], cold[0:nnz], Bd[0:K*N], Cd[0:M*N])
-			#pragma acc parallel
-            #pragma acc loop independent 
-            for (size_t i = 0; i < M; i++){
-                for (size_t j = 0; j < N; j++){
+                for (size_t i = 0; i < M; i++){
+                    #pragma acc loop independent 
                     for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                        Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                        for (size_t j = 0; j < N; j++){
+                            Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                        }
                     }
                 }
             }
@@ -64,10 +64,10 @@ namespace monolish{
                 Cd[i] = 0.0;
             }
 
-            #pragma omp parallel for
             for (size_t i = 0; i < M; i++){
-                for (size_t j = 0; j < N; j++){
-                    for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                #pragma omp parallel for
+                for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                    for (size_t j = 0; j < N; j++){
                         Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
                     }
                 }
