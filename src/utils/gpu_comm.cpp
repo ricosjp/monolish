@@ -93,7 +93,7 @@ namespace monolish{
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
-			size_t N = size();
+			size_t N = get_row();
 			size_t nnz = get_nnz();
 
 			#pragma acc enter data copyin(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
@@ -113,7 +113,7 @@ namespace monolish{
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
-			size_t N = size();
+			size_t N = get_row();
 			size_t nnz = get_nnz();
 
 			#pragma acc exit data copyout(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
@@ -134,7 +134,7 @@ namespace monolish{
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
-			size_t N = size();
+			size_t N = get_row();
 			size_t nnz = get_nnz();
 
 			#pragma acc update host(vald[0:nnz], cold[0:nnz], rowd[0:N+1])
@@ -154,7 +154,7 @@ namespace monolish{
 			T* vald = val.data();
 			int* cold = col_ind.data();
 			int* rowd = row_ptr.data();
-			size_t N = size();
+			size_t N = get_row();
 			size_t nnz = get_nnz();
 
 			#pragma acc exit data delete(vald[0:nnz], cold[0:nnz], rowd[0:N+1])

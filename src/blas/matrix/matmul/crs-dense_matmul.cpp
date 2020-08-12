@@ -40,7 +40,7 @@ namespace monolish{
  		const size_t K = A.get_col();
 // 
    		#if USE_GPU
- 		    #pragma acc data present(Ad[0:m*k], Bd[0:k*n], Cd[0:m*n])
+ 		    #pragma acc data present(vald[0:M*K], Bd[0:K*N], Cd[0:M*N])
 			#pragma acc parallel
             {
                 #pragma acc loop independent 
@@ -106,7 +106,7 @@ namespace monolish{
  		const size_t K = A.get_col();
 // 
    		#if USE_GPU
- 		    #pragma acc data present(Ad[0:m*k], Bd[0:k*n], Cd[0:m*n])
+ 		    #pragma acc data present(vald[0:M*K], Bd[0:K*N], Cd[0:M*N])
 			#pragma acc parallel
             {
                 #pragma acc loop independent 
