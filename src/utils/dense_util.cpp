@@ -61,7 +61,7 @@ namespace monolish{
 
                 for(size_t i = 0; i < get_row(); i++){
                     for(size_t j = 0; j < get_col(); j++){
-                        std::cout << get_row()+1 << " " << get_col()+1 << " " << val[i*get_row()+j] << std::endl;
+                        std::cout << i+1 << " " << j+1 << " " << val[i*get_row()+j] << std::endl;
                     }
                 }
 

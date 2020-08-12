@@ -164,6 +164,28 @@ namespace monolish{
 		template float COO<float>::at(size_t i, size_t j);
 
 		template<typename T>
+			T COO<T>::at(size_t i, size_t j) const{
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+
+				if(i >= rowN || j >= colN){
+					throw std::out_of_range("error");
+				}
+
+				// since last inserted element is effective elements,
+                                // checking from last element is necessary
+                                for(size_t k = nnz; k > 0; --k){
+					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+						return val[k-1];
+					}
+				}
+				logger.util_out();
+				return 0.0;
+			}
+		template double COO<double>::at(size_t i, size_t j) const;
+		template float COO<float>::at(size_t i, size_t j) const;
+
+		template<typename T>
 			void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<T> &v){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
