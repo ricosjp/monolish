@@ -53,7 +53,7 @@ bool ans_check(
 		std::cout << "===============================" << std::endl;
 		for(int i=0; i < num.size(); i++){
 			std::cout << std::fixed << std::resetiosflags(std::ios_base::floatfield) << num[i] <<"\tresult:" << std::flush;
-            std::cout << std::fixed << std::setprecision(15) << result[num[i]] << "\tans:" << ans[num[i]] << std::flush; 
+            std::cout << std::fixed << std::setprecision(15) << result[num[i]] << "\tans:" << ans[num[i]] << std::endl; 
 		}
 		std::cout << "===============================" << std::endl;
 		return check;

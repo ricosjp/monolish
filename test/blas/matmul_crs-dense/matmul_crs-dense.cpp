@@ -51,7 +51,7 @@ bool test(const size_t M, const size_t N, const size_t K, double tol, int iter, 
         }
     }
 
- 	monolish::matrix::Dense<T> C(M, N, 0.0);
+ 	monolish::matrix::Dense<T> C(M, N, 123.0);
 
 	monolish::matrix::Dense<T> ansC(M, N);
  	ansC = C;
