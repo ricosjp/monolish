@@ -1,5 +1,6 @@
 #include"monolish_blas.hpp"
 #include<iostream>
+#include<iomanip>
 #include<cmath>
 #include<random>
 
@@ -14,9 +15,9 @@ bool ans_check(double result, double ans, double tol){
 	else{
 		std::cout << "Error!!" << std::endl;
 		std::cout << "===============================" << std::endl;
-		std::cout << "result\t" << result << std::endl; 
-		std::cout << "ans\t" << ans << std::endl; 
-		std::cout << "Rerr\t" << err << std::endl; 
+		std::cout << std::scientific << "result\t" << result << std::endl; 
+		std::cout << std::scientific << "ans\t" << ans << std::endl; 
+		std::cout << std::scientific << "Rerr\t" << err << std::endl; 
 		std::cout << "===============================" << std::endl;
 		return false;
 	}
@@ -50,7 +51,7 @@ bool ans_check(
 		std::cout << "Error!!" << std::endl;
 		std::cout << "===============================" << std::endl;
 		for(int i=0; i < num.size(); i++){
-			std::cout << num[i] <<"\tresult:" << result[i] << "\tans:" << ans[i] << std::endl; 
+			std::cout << std::scientific << num[i] <<"\tresult:" << result[i] << "\tans:" << ans[i] << std::endl; 
 		}
 		std::cout << "===============================" << std::endl;
 		return check;
