@@ -183,18 +183,18 @@ namespace monolish{
 		 */
 		void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
 		void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
-	}
 
-//Dense * CRS////////////////////////////////////////////////////////////////////////////////////
+//CRS * Dense////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 //  matmul (Dense)
 //////////////////////////////////////////////////////
 		/**
 		 * @brief double precision Dense matrix multiplication: C = AB
-		 * @param[in] A double precision Dense matrix
+		 * @param[in] A double precision CRS matrix
 		 * @param[in] B double precision Dense matrix
-		 * @param[in] C double precision CRS matrix
+		 * @param[in] C double precision Dense matrix
 		 */
-		void matmul(const matrix::Dense<double> &A, const matrix::CRS<double> &B, matrix::Dense<double> &C);
-		void matmul(const matrix::Dense<float> &A, const matrix::CRS<float> &B, matrix::Dense<float> &C);
+		void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+		void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
+	}
 }

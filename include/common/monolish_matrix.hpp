@@ -28,6 +28,7 @@
 namespace monolish{
     template<typename Float> class vector;
 	namespace matrix{
+        template<typename Float> class Dense;
 
 		/**
 		 * @brief Coodinate format Matrix (need to sort)
@@ -164,6 +165,7 @@ namespace monolish{
 					 **/
 					void print_all(std::string filename);
 					Float at(size_t i, size_t j);
+					Float at(size_t i, size_t j) const;
 					//void insert(size_t i, size_t j, Float value);
 
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
@@ -375,6 +377,9 @@ namespace monolish{
 
 					//mat - scalar
 					CRS<Float> operator*(const Float value);
+
+					//crs-dense
+                    Dense<Float> operator*(const Dense<Float>& B);
 			};
 	}
 }
