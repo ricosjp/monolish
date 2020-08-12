@@ -27,7 +27,7 @@ void get_ans( monolish::matrix::COO<T> &A, monolish::matrix::Dense<T> &B, monoli
     for(int i = 0; i < M; i++){
         for(int j = 0; j < N; j++){
             for(int k = 0; k < K; k++){
-                C.insert(i, j, C.at(i,j) + A.at(i,k) * B.at(k, j)+1);
+                C.insert(i, j, C.at(i,j) + A.at(i,k) * B.at(k, j));
             }
         }
     }
