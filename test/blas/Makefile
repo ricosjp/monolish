@@ -12,6 +12,7 @@ cpu:
 	make -C matvec_crs/ cpu
 	make -C matvec_dense/ cpu
 	make -C matmul_dense-dense/ cpu
+	make -C matmul_crs-dense/ cpu
 
 gpu:
 	make -C axpy/ gpu
@@ -25,6 +26,7 @@ gpu:
 	make -C matvec_crs/ gpu
 	make -C matvec_dense/ gpu
 	make -C matmul_dense-dense/ gpu
+	make -C matmul_crs-dense/ gpu
 
 fx:
 	make -C axpy/ fx
@@ -38,6 +40,7 @@ fx:
 	make -C matvec_crs/ fx
 	make -C matvec_dense/ fx
 	make -C matmul_dense-dense/ fx
+	make -C matmul_crs-dense/ fx
 
 run_cpu:
 	make -C axpy/ run_cpu
@@ -51,6 +54,7 @@ run_cpu:
 	make -C matvec_crs/ run_cpu
 	make -C matvec_dense/ run_cpu
 	make -C matmul_dense-dense/ run_cpu
+	make -C matmul_crs-dense/ run_cpu
 
 run_gpu:
 	make -C axpy/ run_gpu
@@ -64,6 +68,7 @@ run_gpu:
 	make -C matvec_crs/ run_gpu
 	make -C matvec_dense/ run_gpu
 	make -C matmul_dense-dense/ run_gpu
+	make -C matmul_crs-dense/ run_gpu
 
 run_fx:
 	make -C axpy/ run_fx
@@ -77,6 +82,7 @@ run_fx:
 	make -C matvec_crs/ run_fx
 	make -C matvec_dense/ run_fx
 	make -C matmul_dense-dense/ run_fx
+	make -C matmul_crs-dense/ run_fx
 
 clean:
 	- make -C axpy/ clean
@@ -90,3 +96,4 @@ clean:
 	- make -C matvec_crs/ clean
 	- make -C matvec_dense/ clean
 	- make -C matmul_dense-dense/ clean
+	- make -C matmul_crs-dense/ clean
