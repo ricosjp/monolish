@@ -1,4 +1,5 @@
 #include"monolish_blas.hpp"
+#include <ios>
 #include<iostream>
 #include<iomanip>
 #include<cmath>
@@ -52,7 +53,8 @@ bool ans_check(
 		std::cout << "===============================" << std::endl;
 		for(int i=0; i < num.size(); i++){
 			std::cout << std::fixed << std::resetiosflags(std::ios_base::floatfield) << num[i] <<"\tresult:" << std::flush;
-            std::cout << std::fixed << std::setprecision(15) << result[i] << "\tans:" << ans[i] << std::endl; 
+            std::cout << std::fixed << std::setprecision(15) << result[i] << "\tans:" << ans[i] << std::flush; 
+            std::cout << std::fixed << std::scientific << std::abs(result[i]-ans[i])/ans[i] << std::endl; 
 		}
 		std::cout << "===============================" << std::endl;
 		return check;
