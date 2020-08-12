@@ -49,20 +49,20 @@ namespace monolish{
 						val.resize(nnz);
                     }
 
-                    Dense(const size_t N, const size_t M, const Float* &value){
-						set_row(N);
-						set_col(M);
-						set_nnz(N*M);
+                    Dense(const size_t M, const size_t N, const Float* &value){
+						set_row(M);
+						set_col(N);
+						set_nnz(M*N);
 
 						val.resize(nnz);
 						std::copy(value, value+nnz, val.begin());
                     }
 
                     //rand
-                    Dense(const size_t N, const size_t M, const Float min, const Float max){
-						set_row(N);
-						set_col(M);
-						set_nnz(N*M);
+                    Dense(const size_t M, const size_t N, const Float min, const Float max){
+						set_row(M);
+						set_col(N);
+						set_nnz(M*N);
 
 						val.resize(nnz);
 

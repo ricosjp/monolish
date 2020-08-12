@@ -38,9 +38,10 @@ namespace monolish{
  		const size_t M = A.get_row();
  		const size_t N = B.get_col();
  		const size_t K = A.get_col();
-// 
+        const size_t nnz = A.get_nnz();
+ 
    		#if USE_GPU
- 		    #pragma acc data present(vald[0:M*K], Bd[0:K*N], Cd[0:M*N])
+ 		    #pragma acc data present(vald[0:nnz], rowd[0:M+1], cold[0:nnz], Bd[0:K*N], Cd[0:M*N])
 			#pragma acc parallel
             {
                 #pragma acc loop independent 
@@ -58,19 +59,19 @@ namespace monolish{
                 }
             }
    		#else
-        #pragma omp parallel for
-        for(size_t i=0; i<M*N; i++){
-            Cd[i] = 0.0;
-        }
+            #pragma omp parallel for
+            for(size_t i=0; i<M*N; i++){
+                Cd[i] = 0.0;
+            }
 
-        #pragma omp parallel for
-        for (size_t i = 0; i < M; i++){
-            for (size_t j = 0; j < N; j++){
-                for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                    Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+            #pragma omp parallel for
+            for (size_t i = 0; i < M; i++){
+                for (size_t j = 0; j < N; j++){
+                    for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                        Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                    }
                 }
             }
-        }
    		#endif
 		logger.func_out();
 	}
@@ -104,9 +105,10 @@ namespace monolish{
  		const size_t M = A.get_row();
  		const size_t N = B.get_col();
  		const size_t K = A.get_col();
-// 
+        const size_t nnz = A.get_nnz();
+ 
    		#if USE_GPU
- 		    #pragma acc data present(vald[0:M*K], Bd[0:K*N], Cd[0:M*N])
+ 		    #pragma acc data present(vald[0:nnz], rowd[0:M+1], cold[0:nnz], Bd[0:K*N], Cd[0:M*N])
 			#pragma acc parallel
             {
                 #pragma acc loop independent 
@@ -124,21 +126,21 @@ namespace monolish{
                 }
             }
    		#else
-        #pragma omp parallel for
-        for(size_t i=0; i<M*N; i++){
-            Cd[i] = 0.0;
-        }
+            #pragma omp parallel for
+            for(size_t i=0; i<M*N; i++){
+                Cd[i] = 0.0;
+            }
 
-        #pragma omp parallel for
-        for (size_t i = 0; i < M; i++){
-            for (size_t j = 0; j < N; j++){
-                for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                    Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+            #pragma omp parallel for
+            for (size_t i = 0; i < M; i++){
+                for (size_t j = 0; j < N; j++){
+                    for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                        Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                    }
                 }
             }
-        }
-   		#endif
-		logger.func_out();
+            #endif
+            logger.func_out();
 	}
 
 
