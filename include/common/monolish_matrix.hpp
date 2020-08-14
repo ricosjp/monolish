@@ -29,6 +29,7 @@ namespace monolish{
     template<typename Float> class vector;
 	namespace matrix{
         template<typename Float> class Dense;
+        template<typename Float> class CRS;
 
 		/**
 		 * @brief Coodinate format Matrix (need to sort)
@@ -106,6 +107,31 @@ namespace monolish{
 							col_index[i] -= origin;
 						}
 					}
+
+					COO(const matrix::COO<Float> &coo)
+                                            : rowN(coo.get_row())
+                                            , colN(coo.get_col())
+                                            , nnz(coo.get_nnz())
+                                            , gpu_status(false)
+                                            , row_index(nnz)
+                                            , col_index(nnz)
+                                            , val(nnz)
+                                        {
+						std::copy(coo.row_index.data(), coo.row_index.data()+nnz, row_index.begin());
+						std::copy(coo.col_index.data(), coo.col_index.data()+nnz, col_index.begin());
+						std::copy(coo.val.data(), coo.val.data()+nnz, val.begin());
+					}
+
+					void convert(const matrix::CRS<Float> &crs);
+					COO(const matrix::CRS<Float> &crs){
+						convert(crs);
+					}
+
+					void convert(const matrix::Dense<Float> &dense);
+					COO(const matrix::Dense<Float> &dense){
+						convert(dense);
+					}
+
 
 					// communication ///////////////////////////////////////////////////////////////////////////
 					/**
@@ -300,15 +326,13 @@ namespace monolish{
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
 
-					void convert(COO<Float> &coo);
 
 					CRS(){}
 
+					void convert(COO<Float> &coo);
 					CRS(COO<Float> &coo){
 						convert(coo);
 					}
-
-					CRS(const CRS<Float> &mat);
 
 					void print_all();
 
@@ -365,6 +389,8 @@ namespace monolish{
 					 * @return copied CRS matrix
 					 **/
 					CRS copy();
+
+                	CRS(const CRS<Float>& mat);
 
 					/**
 					 * @brief copy matrix, It is same as copy()

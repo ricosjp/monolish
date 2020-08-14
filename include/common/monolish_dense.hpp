@@ -32,7 +32,10 @@ namespace monolish{
                 public:
                     std::vector<Float> val;
 
-                    void convert(COO<Float> &coo);
+                    void convert(const COO<Float> &coo);
+					Dense(const COO<Float> &coo){
+						convert(coo);
+					}
 
 					size_t get_row() const{return rowN;}
 					size_t get_col() const{return colN;}
@@ -76,7 +79,6 @@ namespace monolish{
                         }
                     }
 
-                    
                     Dense(const size_t N, const size_t M, const Float value){
 						set_row(N);
 						set_col(M);
@@ -88,6 +90,29 @@ namespace monolish{
                         for(size_t i=0; i<val.size(); i++){
                             val[i] = value;
                         }
+                    }
+
+                    Dense& transpose() {
+                        Dense<Float> B(get_row(), get_col());
+                        for(size_t i = 0; i < get_row(); ++i){
+                            for(size_t j = 0; j < get_col(); ++j){
+                                B.val[j*get_row()+i] = val[i*get_row()+j];
+                            }
+                        }
+                        *this = B;
+                        return *this;
+                    }
+                    Dense& transpose(Dense& B) {
+                        set_row(B.get_row());
+                        set_col(B.get_col());
+                        val.resize(B.get_row() * B.get_col());
+
+                        for(size_t i = 0; i < get_row(); ++i){
+                            for(size_t j = 0; j < get_col(); ++j){
+                                val[j*get_row()+i] = B.val[i*get_row()+j];
+                            }
+                        }
+                        return *this;
                     }
 
                     /**
