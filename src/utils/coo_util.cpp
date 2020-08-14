@@ -1,4 +1,5 @@
 #include "../../include/common/monolish_matrix.hpp" 
+#include "../../include/common/monolish_dense.hpp" 
 #include "../../include/common/monolish_logger.hpp" 
 #include <cassert>
 #include <fstream>
@@ -164,6 +165,28 @@ namespace monolish{
 		template float COO<float>::at(size_t i, size_t j);
 
 		template<typename T>
+			T COO<T>::at(size_t i, size_t j) const{
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+
+				if(i >= rowN || j >= colN){
+					throw std::out_of_range("error");
+				}
+
+				// since last inserted element is effective elements,
+                                // checking from last element is necessary
+                                for(size_t k = nnz; k > 0; --k){
+					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+						return val[k-1];
+					}
+				}
+				logger.util_out();
+				return 0.0;
+			}
+		template double COO<double>::at(size_t i, size_t j) const;
+		template float COO<float>::at(size_t i, size_t j) const;
+
+		template<typename T>
 			void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<T> &v){
 				Logger& logger = Logger::get_instance();
 				logger.util_in(monolish_func);
@@ -279,5 +302,61 @@ namespace monolish{
         }
         template void COO<double>::sort(bool merge = true);
         template void COO<float>::sort(bool merge = true);
+
+		template<typename T>
+			void COO<T>::convert(const CRS<T> &crs){
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+
+                set_row(crs.get_row());
+                set_col(crs.get_row());
+                set_nnz(crs.get_nnz());
+
+                row_index.resize(nnz);
+                col_index.resize(nnz);
+                val.resize(nnz);
+
+				for(size_t i = 0; i < get_row(); i++){
+					for(size_t j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i+1]; j++){
+                        row_index[j] = i;
+                        col_index[j] = crs.col_ind[j];
+                        val[j] = crs.val[j];
+					}
+				}
+
+
+				logger.util_out();
+			}
+		template void COO<double>::convert(const CRS<double> &crs);
+		template void COO<float>::convert(const CRS<float> &crs);
+
+		template<typename T>
+			void COO<T>::convert(const Dense<T> &dense){
+				Logger& logger = Logger::get_instance();
+				logger.util_in(monolish_func);
+
+                set_row(dense.get_row());
+                set_col(dense.get_col());
+                row_index.resize(0);
+                col_index.resize(0);
+                val.resize(0);
+                size_t nz=0;
+
+                for(size_t i = 0; i < dense.get_row(); i++){
+                    for(size_t j = 0; j < dense.get_col(); j++){
+                        if(dense.at(i,j) != 0 ){
+                            row_index.push_back(i);
+                            col_index.push_back(j);
+                            val.push_back(dense.at(i,j));
+                            nz++;
+                        }
+                    }
+                }
+                set_nnz(nz);
+
+				logger.util_out();
+			}
+		template void COO<double>::convert(const Dense<double> &dense);
+		template void COO<float>::convert(const Dense<float> &dense);
 	}
 }

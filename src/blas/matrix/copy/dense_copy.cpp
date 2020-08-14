@@ -1,5 +1,5 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../../../include/monolish_blas.hpp"
+#include "../../../monolish_internal.hpp"
 
 namespace monolish{
 	namespace matrix{
@@ -14,8 +14,8 @@ namespace monolish{
 
 				Dense<T> tmp;
 				std::copy(val.data(), val.data()+nnz, tmp.val.begin());
-				tmp.row = get_row();
-				tmp.col = get_col();
+				tmp.rowN = get_row();
+				tmp.colN = get_col();
 				tmp.nnz = get_nnz();
 				if( get_device_mem_stat() ) { tmp.send(); } // gpu copy
 
@@ -34,8 +34,8 @@ namespace monolish{
 
 				val.resize(mat.get_nnz());
 
-				row = mat.get_row();
-				col = mat.get_col();
+				rowN = mat.get_row();
+				colN = mat.get_col();
 				nnz = mat.get_nnz();
 				size_t NNZ = nnz;
 
@@ -75,8 +75,8 @@ namespace monolish{
 
 				val.resize(mat.get_nnz());
 
-				row = mat.get_row();
-				col = mat.get_col();
+				rowN = mat.get_row();
+				colN = mat.get_col();
 				nnz = mat.get_nnz();
 				size_t NNZ = nnz;
 

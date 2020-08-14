@@ -26,8 +26,10 @@
 #endif
 
 namespace monolish{
-template<typename Float> class vector;
+    template<typename Float> class vector;
 	namespace matrix{
+        template<typename Float> class Dense;
+        template<typename Float> class CRS;
 
 		/**
 		 * @brief Coodinate format Matrix (need to sort)
@@ -106,6 +108,31 @@ template<typename Float> class vector;
 						}
 					}
 
+					COO(const matrix::COO<Float> &coo)
+                                            : rowN(coo.get_row())
+                                            , colN(coo.get_col())
+                                            , nnz(coo.get_nnz())
+                                            , gpu_status(false)
+                                            , row_index(nnz)
+                                            , col_index(nnz)
+                                            , val(nnz)
+                                        {
+						std::copy(coo.row_index.data(), coo.row_index.data()+nnz, row_index.begin());
+						std::copy(coo.col_index.data(), coo.col_index.data()+nnz, col_index.begin());
+						std::copy(coo.val.data(), coo.val.data()+nnz, val.begin());
+					}
+
+					void convert(const matrix::CRS<Float> &crs);
+					COO(const matrix::CRS<Float> &crs){
+						convert(crs);
+					}
+
+					void convert(const matrix::Dense<Float> &dense);
+					COO(const matrix::Dense<Float> &dense){
+						convert(dense);
+					}
+
+
 					// communication ///////////////////////////////////////////////////////////////////////////
 					/**
 					 * @brief send data to GPU
@@ -164,12 +191,13 @@ template<typename Float> class vector;
 					 **/
 					void print_all(std::string filename);
 					Float at(size_t i, size_t j);
+					Float at(size_t i, size_t j) const;
 					//void insert(size_t i, size_t j, Float value);
 
 					void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c, std::vector<Float> &v);
 
 					//not logging, only square
-					size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
+					//size_t size() const {return get_row() > get_col() ? get_row() : get_col();}
 					size_t get_row() const {return rowN;}
 					size_t get_col() const {return colN;}
 					size_t get_nnz() const {return nnz;}
@@ -286,8 +314,8 @@ template<typename Float> class vector;
 					/**
 					 * @brief neet col = row now
 					 */
-					size_t row;
-					size_t col;
+					size_t rowN;
+					size_t colN;
 					size_t nnz;
 
 					bool gpu_flag = false; // not impl
@@ -298,21 +326,19 @@ template<typename Float> class vector;
 					std::vector<int> col_ind;
 					std::vector<int> row_ptr;
 
-					void convert(COO<Float> &coo);
 
 					CRS(){}
 
+					void convert(COO<Float> &coo);
 					CRS(COO<Float> &coo){
 						convert(coo);
 					}
 
-					CRS(const CRS<Float> &mat);
+					void print_all();
 
-					void output();
-
-					size_t size() const {return row > col ? row : col;}
-					size_t get_row() const{return row;}
-					size_t get_col() const{return col;}
+					//size_t size() const {return rowN > colN ? rowN : colN;}
+					size_t get_row() const{return rowN;}
+					size_t get_col() const{return colN;}
 					size_t get_nnz() const{return nnz;}
 
 					// communication ///////////////////////////////////////////////////////////////////////////
@@ -352,9 +378,9 @@ template<typename Float> class vector;
 					}
 
      				/////////////////////////////////////////////////////////////////////////////
-					void get_diag(vector<Float>& vec);
-					void get_row(const size_t r, vector<Float>& vec);
-					void get_col(const size_t c, vector<Float>& vec);
+					void diag(vector<Float>& vec);
+					void row(const size_t r, vector<Float>& vec);
+					void col(const size_t c, vector<Float>& vec);
 
      				/////////////////////////////////////////////////////////////////////////////
 
@@ -363,6 +389,8 @@ template<typename Float> class vector;
 					 * @return copied CRS matrix
 					 **/
 					CRS copy();
+
+                	CRS(const CRS<Float>& mat);
 
 					/**
 					 * @brief copy matrix, It is same as copy()
@@ -375,6 +403,9 @@ template<typename Float> class vector;
 
 					//mat - scalar
 					CRS<Float> operator*(const Float value);
+
+					//crs-dense
+                    Dense<Float> operator*(const Dense<Float>& B);
 			};
 	}
 }

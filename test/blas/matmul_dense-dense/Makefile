@@ -1,4 +1,4 @@
-FUNC=matmul_dense
+FUNC=matmul_dense-dense
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
 

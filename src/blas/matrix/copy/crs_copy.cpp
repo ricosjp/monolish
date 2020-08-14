@@ -1,5 +1,5 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../../../include/monolish_blas.hpp"
+#include "../../../monolish_internal.hpp"
 
 namespace monolish{
 	namespace matrix{
@@ -13,10 +13,11 @@ namespace monolish{
 				if( get_device_mem_stat() ) { nonfree_recv(); } // gpu copy
 
 				CRS<T> tmp;
-				std::copy(row_ptr.data(), row_ptr.data()+(row+1), tmp.row_ptr.begin());
-				std::copy(col_ind.data(), col_ind.data()+nnz, tmp.col_ind.begin());
-				std::copy(val.data(), val.data()+nnz, tmp.val.begin());
-				tmp.row = size();
+				std::copy(row_ptr.data(), row_ptr.data()+(get_row()+1), tmp.row_ptr.begin());
+				std::copy(col_ind.data(), col_ind.data()+get_nnz(), tmp.col_ind.begin());
+				std::copy(val.data(), val.data()+get_nnz(), tmp.val.begin());
+				tmp.rowN = get_row();
+				tmp.colN = get_col();
 				tmp.nnz = get_nnz();
 				if( get_device_mem_stat() ) { tmp.send(); } // gpu copy
 
@@ -35,12 +36,14 @@ namespace monolish{
 
 				val.resize(mat.get_nnz());
 				col_ind.resize(mat.get_nnz());
-				row_ptr.resize(mat.size()+1);
+				row_ptr.resize(mat.get_row()+1);
 
-				row = mat.size();
-				size_t N = row;
+				rowN = mat.get_row();
+                colN = mat.get_col();
 				nnz = mat.get_nnz();
-				size_t NNZ = nnz;
+
+				size_t N = get_row();
+				size_t NNZ = get_nnz();
 
 				// gpu copy and recv
 				if( mat.get_device_mem_stat() ) {
@@ -74,9 +77,9 @@ namespace monolish{
 					#endif
 				}
 				else{
-					std::copy(mat.row_ptr.data(), mat.row_ptr.data()+(row+1), row_ptr.begin());
-					std::copy(mat.col_ind.data(), mat.col_ind.data()+nnz, col_ind.begin());
-					std::copy(mat.val.data(), mat.val.data()+nnz, val.begin());
+					std::copy(mat.row_ptr.data(), mat.row_ptr.data()+(get_row()+1), row_ptr.begin());
+					std::copy(mat.col_ind.data(), mat.col_ind.data()+get_nnz(), col_ind.begin());
+					std::copy(mat.val.data(), mat.val.data()+get_nnz(), val.begin());
 				}
 
 				logger.util_out();
@@ -93,12 +96,12 @@ namespace monolish{
 
 				val.resize(mat.get_nnz());
 				col_ind.resize(mat.get_nnz());
-				row_ptr.resize(mat.size()+1);
+				row_ptr.resize(mat.get_row()+1);
 
-				row = mat.size();
-				size_t N =row;
+				rowN = mat.get_row();
+				size_t N = get_row();
 				nnz = mat.get_nnz();
-				size_t NNZ = nnz;
+				size_t NNZ = get_nnz();
 
 				// gpu copy and recv
 				if( mat.get_device_mem_stat() ) {
@@ -132,9 +135,9 @@ namespace monolish{
 					#endif
 				}
 				else{
-					std::copy(mat.row_ptr.data(), mat.row_ptr.data()+(row+1), row_ptr.begin());
-					std::copy(mat.col_ind.data(), mat.col_ind.data()+nnz, col_ind.begin());
-					std::copy(mat.val.data(), mat.val.data()+nnz, val.begin());
+					std::copy(mat.row_ptr.data(), mat.row_ptr.data()+(get_row()+1), row_ptr.begin());
+					std::copy(mat.col_ind.data(), mat.col_ind.data()+get_nnz(), col_ind.begin());
+					std::copy(mat.val.data(), mat.val.data()+get_nnz(), val.begin());
 				}
 
 				logger.util_out();

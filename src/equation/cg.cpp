@@ -14,10 +14,14 @@ namespace monolish{
 		logger.solver_in(monolish_func);
 		std::ostream* pStream;
 
-		vector<T> r(A.size(), 0.0);
-		vector<T> p(A.size(), 0.0);
-		vector<T> q(A.size(), 0.0);
-		vector<T> z(A.size(), 0.0);
+        if(A.get_row() != A.get_col()){
+            throw std::runtime_error("error A.row != A.col");
+        }
+
+		vector<T> r(A.get_row(), 0.0);
+		vector<T> p(A.get_row(), 0.0);
+		vector<T> q(A.get_row(), 0.0);
+		vector<T> z(A.get_row(), 0.0);
 		monolish::util::send(r,p,q,z);
 
 		if( A.get_device_mem_stat() == false) { A.send(); }

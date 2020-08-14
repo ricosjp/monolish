@@ -25,3 +25,4 @@ doc/latex/
 docker/lib/
 docker/include/
 monolish_test.log
+test/logger/logging/*.html

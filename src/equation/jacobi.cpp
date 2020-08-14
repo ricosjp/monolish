@@ -12,13 +12,17 @@ namespace monolish{
             Logger& logger = Logger::get_instance();
             logger.solver_in(monolish_func);
 
-            this->precond.M.resize(A.size());
+            if(A.get_row() != A.get_col()){
+                throw std::runtime_error("error A.row != A.col");
+            }
+
+            this->precond.M.resize(A.get_row());
             //send M
             if(this->precond.M.get_device_mem_stat() == false){
                 this->precond.M.send();
             }
 
-            A.get_diag(this->precond.M);
+            A.diag(this->precond.M);
 
             logger.solver_out();
         }

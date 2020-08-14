@@ -5,8 +5,8 @@
 #include<stdlib.h>
 #include<omp.h>
 
-#include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../../../include/monolish_blas.hpp"
+#include "../../../monolish_internal.hpp"
 
 #ifdef USE_GPU
 	#include "cuda_runtime.h"
@@ -20,13 +20,13 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
-		//err
-		if( x.size() != y.size() || A.get_row() != (size_t)x.size()){
+		//err, M = MN * N
+		if( A.get_row() != y.size() || A.get_col() != x.size()){
 			throw std::runtime_error("error vector size is not same");
-
 		}
 
-		size_t n = A.get_row();
+		size_t m = A.get_row();
+		size_t n = A.get_col();
 		size_t nnz = A.get_nnz();
 		const double* xd = x.data();
 		double* yd = y.data();
@@ -68,14 +68,14 @@ namespace monolish{
         const double alpha = 1.0;
         const double beta = 0.0;
 
-		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+		#pragma acc data present(xd[0:n], yd[0:m], vald[0:nnz], rowd[0:m+1], cold[0:nnz])
         #pragma acc host_data use_device(xd, yd, vald, rowd, cold)
         {
             check(
                     cusparseDcsrmv(
                         sp_handle,
                         trans,
-                        n,
+                        m,
                         n,
                         nnz,
                         &alpha,
@@ -110,13 +110,13 @@ namespace monolish{
 		Logger& logger = Logger::get_instance();
 		logger.func_in(monolish_func);
 
-		//err
-		if( x.size() != y.size() || A.get_row() != (size_t)x.size()){
+		//err, M = MN * N
+		if( A.get_row() != y.size() || A.get_col() != x.size()){
 			throw std::runtime_error("error vector size is not same");
-
 		}
 
-		size_t n = A.get_row();
+		size_t m = A.get_row();
+		size_t n = A.get_col();
 		size_t nnz = A.get_nnz();
 		const float* xd = x.data();
 		float* yd = y.data();
@@ -158,14 +158,14 @@ namespace monolish{
         const float alpha = 1.0;
         const float beta = 0.0;
 
-		#pragma acc data present(xd[0:n], yd[0:n], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+		#pragma acc data present(xd[0:n], yd[0:m], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
         #pragma acc host_data use_device(xd, yd, vald, rowd, cold)
         {
             check(
                     cusparseScsrmv(
                         sp_handle,
                         trans,
-                        n,
+                        m,
                         n,
                         nnz,
                         &alpha,

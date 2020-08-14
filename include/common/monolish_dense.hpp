@@ -18,26 +18,28 @@ namespace monolish{
             class Dense{
                 private:
 
-                    size_t row;
-                    size_t col;
+                    size_t rowN;
+                    size_t colN;
                     size_t nnz;
 
                     bool gpu_flag = false; // not impl
                     bool gpu_status = false; // true: sended, false: not send
 
-					void set_row(const size_t N){row = N;};
-					void set_col(const size_t M){col = M;};
+					void set_row(const size_t N){rowN = N;};
+					void set_col(const size_t M){colN = M;};
 					void set_nnz(const size_t NZ){nnz = NZ;};
 
                 public:
                     std::vector<Float> val;
 
-                    void convert(COO<Float> &coo);
+                    void convert(const COO<Float> &coo);
+					Dense(const COO<Float> &coo){
+						convert(coo);
+					}
 
-					size_t size() const{return row;}
-					size_t get_row() const{return row;}
-					size_t get_col() const{return col;}
-					size_t get_nnz() const{return row*col;}
+					size_t get_row() const{return rowN;}
+					size_t get_col() const{return colN;}
+					size_t get_nnz() const{return get_row()*get_col();}
 
                     Dense(){}
 					Dense(const Dense<Float> &mat);
@@ -50,20 +52,20 @@ namespace monolish{
 						val.resize(nnz);
                     }
 
-                    Dense(const size_t N, const size_t M, const Float* &value){
-						set_row(N);
-						set_col(M);
-						set_nnz(N*M);
+                    Dense(const size_t M, const size_t N, const Float* &value){
+						set_row(M);
+						set_col(N);
+						set_nnz(M*N);
 
 						val.resize(nnz);
 						std::copy(value, value+nnz, val.begin());
                     }
 
                     //rand
-                    Dense(const size_t N, const size_t M, const Float min, const Float max){
-						set_row(N);
-						set_col(M);
-						set_nnz(N*M);
+                    Dense(const size_t M, const size_t N, const Float min, const Float max){
+						set_row(M);
+						set_col(N);
+						set_nnz(M*N);
 
 						val.resize(nnz);
 
@@ -77,7 +79,6 @@ namespace monolish{
                         }
                     }
 
-                    
                     Dense(const size_t N, const size_t M, const Float value){
 						set_row(N);
 						set_col(M);
@@ -89,6 +90,29 @@ namespace monolish{
                         for(size_t i=0; i<val.size(); i++){
                             val[i] = value;
                         }
+                    }
+
+                    Dense& transpose() {
+                        Dense<Float> B(get_row(), get_col());
+                        for(size_t i = 0; i < get_row(); ++i){
+                            for(size_t j = 0; j < get_col(); ++j){
+                                B.val[j*get_row()+i] = val[i*get_row()+j];
+                            }
+                        }
+                        *this = B;
+                        return *this;
+                    }
+                    Dense& transpose(Dense& B) {
+                        set_row(B.get_row());
+                        set_col(B.get_col());
+                        val.resize(B.get_row() * B.get_col());
+
+                        for(size_t i = 0; i < get_row(); ++i){
+                            for(size_t j = 0; j < get_col(); ++j){
+                                val[j*get_row()+i] = B.val[i*get_row()+j];
+                            }
+                        }
+                        return *this;
                     }
 
                     /**
@@ -110,13 +134,7 @@ namespace monolish{
                         return val[get_col() * i + j];
                     }
 
-                    /**
-                     * @brief insert element, A[i][j] = val (only CPU)
-                     * @param[in] i row
-                     * @param[in] j col
-                     * @param[in] val value
-                     **/
-                    void insert(size_t i, size_t j, Float val){
+                    Float at(size_t i, size_t j) const{
                         if( get_device_mem_stat() ) {
                             throw std::runtime_error("Error, GPU vector cant use operator[]");
                         }
@@ -126,7 +144,26 @@ namespace monolish{
                         if(get_row() < j){
                             throw std::runtime_error("Error, A.col < j");
                         }
-                        val[get_col() * i + j] = val;
+                        return val[get_col() * i + j];
+                    }
+
+                    /**
+                     * @brief insert element, A[i][j] = val (only CPU)
+                     * @param[in] i row
+                     * @param[in] j col
+                     * @param[in] val value
+                     **/
+                    void insert(size_t i, size_t j, Float Val){
+                        if( get_device_mem_stat() ) {
+                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                        }
+                        if(get_row() < i){
+                            throw std::runtime_error("Error, A.row < i");
+                        }
+                        if(get_row() < j){
+                            throw std::runtime_error("Error, A.col < j");
+                        }
+                        val[get_col() * i + j] = Val;
                     }
 
                     void print_all();
@@ -168,9 +205,9 @@ namespace monolish{
                     }
 
                     /////////////////////////////////////////////////////////////////////////////
-                    void get_diag(vector<Float>& vec);
-                    void get_row(const size_t r, vector<Float>& vec);
-                    void get_col(const size_t c, vector<Float>& vec);
+                    void diag(vector<Float>& vec);
+                    void row(const size_t r, vector<Float>& vec);
+                    void col(const size_t c, vector<Float>& vec);
 
                     /////////////////////////////////////////////////////////////////////////////
 
