@@ -329,6 +329,20 @@ namespace monolish{
 
 					CRS(){}
 
+					CRS(const size_t M, const size_t N, const size_t NNZ, const int* row, const int* col, const Float* value)
+                                            : rowN(M)
+                                            , colN(N)
+                                            , nnz(NNZ)
+                                            , gpu_status(false)
+                                            , row_ptr(M+1)
+                                            , col_ind(nnz)
+                                            , val(nnz)
+                                        {
+						std::copy(row, row+(M+1), row_ptr.begin());
+						std::copy(col, col+nnz, col_ind.begin());
+						std::copy(value, value+nnz, val.begin());
+					}
+
 					void convert(COO<Float> &coo);
 					CRS(COO<Float> &coo){
 						convert(coo);
