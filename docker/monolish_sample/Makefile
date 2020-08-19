@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-O3 -lm -std=c++11
+CXXFLAGS=-O3 -lm -std=c++14
 GPUFLAGS+=-DUSE_GPU -fopenacc -foffload=nvptx-none 
 
 all:cpu
