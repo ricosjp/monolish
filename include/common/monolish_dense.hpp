@@ -52,7 +52,7 @@ namespace monolish{
 						val.resize(nnz);
                     }
 
-                    Dense(const size_t M, const size_t N, const Float* &value){
+                    Dense(const size_t M, const size_t N, const Float* value){
 						set_row(M);
 						set_col(N);
 						set_nnz(M*N);
