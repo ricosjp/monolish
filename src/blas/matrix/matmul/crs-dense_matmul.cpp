@@ -53,7 +53,7 @@ namespace monolish{
                     #pragma acc loop independent 
                     for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                         for (size_t j = 0; j < N; j++){
-                            Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                            Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                         }
                     }
                 }
@@ -68,7 +68,7 @@ namespace monolish{
                 #pragma omp parallel for
                 for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                     for (size_t j = 0; j < N; j++){
-                        Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                        Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace monolish{
                     #pragma acc loop independent 
                     for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                         for (size_t j = 0; j < N; j++){
-                            Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                            Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                         }
                     }
                 }
@@ -135,7 +135,7 @@ namespace monolish{
                 #pragma omp parallel for
                 for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                     for (size_t j = 0; j < N; j++){
-                        Cd[i*N+j] += vald[k] * Bd[j*N + cold[k]];
+                        Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                     }
                 }
             }

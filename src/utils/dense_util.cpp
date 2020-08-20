@@ -61,7 +61,7 @@ namespace monolish{
 
                 for(size_t i = 0; i < get_row(); i++){
                     for(size_t j = 0; j < get_col(); j++){
-                        std::cout << i+1 << " " << j+1 << " " << val[i*get_row()+j] << std::endl;
+                        std::cout << i+1 << " " << j+1 << " " << val[i*get_col()+j] << std::endl;
                     }
                 }
 
@@ -87,7 +87,6 @@ namespace monolish{
 
                 for(size_t i = 0; i < coo.get_nnz(); i++){
                     insert(coo.row_index[i], coo.col_index[i], coo.val[i]);
-
                 }
 				logger.util_out();
 			}
