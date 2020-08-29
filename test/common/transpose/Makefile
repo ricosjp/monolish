@@ -11,6 +11,9 @@ gpu:
 fx:
 	make -B FUNC=$(FUNC) ARCH=fx -f ../../Makefile_core.fx
 
+sx:
+	make -B FUNC=$(FUNC) ARCH=sx -f ../../Makefile_core.sx
+
 run_cpu:
 	./$(FUNC)_cpu.out
 
@@ -19,6 +22,9 @@ run_gpu:
 
 run_fx:
 	./$(FUNC)_fx.out
+	
+run_sx:
+	./$(FUNC)_sx.out
 	
 clean:
 	- rm *.out

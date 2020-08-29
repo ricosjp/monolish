@@ -42,6 +42,20 @@ fx:
 	make -C matmul_dense-dense/ fx
 	make -C matmul_crs-dense/ fx
 
+sx:
+	make -C axpy/ sx
+	make -C axpyz/ sx
+	make -C xpay/ sx
+	make -C scal/ sx
+	make -C dot/ sx
+	make -C nrm2/ sx
+	make -C scal_crs/ sx
+	make -C scal_dense/ sx
+	make -C matvec_crs/ sx
+	make -C matvec_dense/ sx
+	make -C matmul_dense-dense/ sx
+	make -C matmul_crs-dense/ sx
+
 run_cpu:
 	make -C axpy/ run_cpu
 	make -C axpyz/ run_cpu
@@ -83,6 +97,20 @@ run_fx:
 	make -C matvec_dense/ run_fx
 	make -C matmul_dense-dense/ run_fx
 	make -C matmul_crs-dense/ run_fx
+
+run_sx:
+	make -C axpy/ run_sx
+	make -C axpyz/ run_sx
+	make -C xpay/ run_sx
+	make -C scal/ run_sx
+	make -C dot/ run_sx
+	make -C nrm2/ run_sx
+	make -C scal_crs/ run_sx
+	make -C scal_dense/ run_sx
+	make -C matvec_crs/ run_sx
+	make -C matvec_dense/ run_sx
+	make -C matmul_dense-dense/ run_sx
+	make -C matmul_crs-dense/ run_sx
 
 clean:
 	- make -C axpy/ clean

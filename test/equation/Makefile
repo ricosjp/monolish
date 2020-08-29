@@ -15,6 +15,9 @@ gpu:
 fx:
 	make -j -C cg/ fx
 
+sx:
+	make -j -C cg/ sx
+
 run_cpu:
 	make -j -C cg/ run_cpu
 	# make -C sparse_lu/ run_cpu
@@ -29,6 +32,9 @@ run_gpu:
 
 run_fx:
 	make -j -C cg/ run_fx
+
+run_sx:
+	make -j -C cg/ run_sx
 	
 clean:
 	- make -j -C cg/ clean

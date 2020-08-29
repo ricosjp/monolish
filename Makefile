@@ -18,6 +18,9 @@ gpu-debug:
 fx:
 	make -B -j4 -f Makefile.fx
 
+sx:
+	make -B -j -f Makefile.sx
+
 external:
 	make -j -f Makefile.cpu libs
 
@@ -31,6 +34,7 @@ clean:
 	- make -f Makefile.cpu clean 
 	- make -f Makefile.gpu clean 
 	- make -f Makefile.fx clean 
+	- make -f Makefile.sx clean 
 	- make -C test/ clean
 
 zenbu:

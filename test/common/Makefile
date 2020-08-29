@@ -24,6 +24,14 @@ fx:
 	make -C convert/ fx
 	make -C transpose/ fx
 
+sx:
+	make -C vector/ sx
+	make -C matrix_common/ sx
+	make -C arithmetic_sv/ sx
+	make -C arithmetic_vv/ sx
+	make -C convert/ sx
+	make -C transpose/ sx
+
 run_cpu:
 	make -C vector/ run_cpu
 	make -C matrix_common/ run_cpu
@@ -47,6 +55,14 @@ run_fx:
 	make -C arithmetic_vv/ run_fx
 	make -C convert/ run_fx
 	make -C transpose/ run_fx
+
+run_sx:
+	make -C vector/ run_sx
+	make -C matrix_common/ run_sx
+	make -C arithmetic_sv/ run_sx
+	make -C arithmetic_vv/ run_sx
+	make -C convert/ run_sx
+	make -C transpose/ run_sx
 
 clean:
 	- make -C vector/ clean
