@@ -300,8 +300,8 @@ namespace monolish{
                 nnz = k+1;
             }
         }
-        template void COO<double>::sort(bool merge = true);
-        template void COO<float>::sort(bool merge = true);
+        template void COO<double>::sort(bool merge);
+        template void COO<float>::sort(bool merge);
 
 		template<typename T>
 			void COO<T>::convert(const CRS<T> &crs){
