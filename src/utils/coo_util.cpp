@@ -151,13 +151,15 @@ namespace monolish{
 					throw std::out_of_range("error");
 				}
 
-				// since last inserted element is effective elements,
-                                // checking from last element is necessary
-                                for(size_t k = nnz; k > 0; --k){
-					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
-						return val[k-1];
-					}
-				}
+                // since last inserted element is effective elements,
+                // checking from last element is necessary
+                if(nnz != 0){
+                    for(size_t k = nnz; k > 0; --k){
+                        if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+                            return val[k-1];
+                        }
+                    }
+                }
 				logger.util_out();
 				return 0.0;
 			}
@@ -173,13 +175,15 @@ namespace monolish{
 					throw std::out_of_range("error");
 				}
 
-				// since last inserted element is effective elements,
-                                // checking from last element is necessary
-                                for(size_t k = nnz; k > 0; --k){
-					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
-						return val[k-1];
-					}
-				}
+                // since last inserted element is effective elements,
+                // checking from last element is necessary
+                if(nnz != 0){
+                    for(size_t k = nnz; k > 0; --k){
+                        if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+                            return val[k-1];
+                        }
+                    }
+                }
 				logger.util_out();
 				return 0.0;
 			}
@@ -284,6 +288,9 @@ namespace monolish{
             //  Sort by first Col and then Row
             //  TODO: This hand-written quick sort function should be retired
             //        after zip_iterator() (available in range-v3 library) is available in the standard (hopefully C++23)
+            Logger& logger = Logger::get_instance();
+            logger.util_in(monolish_func);
+
             _q_sort(0, nnz-1);
 
             /*  Remove duplicates */
@@ -299,6 +306,8 @@ namespace monolish{
                 }
                 nnz = k+1;
             }
+
+            logger.util_out();
         }
         template void COO<double>::sort(bool merge);
         template void COO<float>::sort(bool merge);
