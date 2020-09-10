@@ -58,8 +58,8 @@ namespace monolish{
                     Cd[i] = 0.0;
                 }
 
+                #pragma acc loop independent 
                 for (size_t j = 0; j < N; j++){
-                    #pragma acc loop independent 
                     for (size_t i = 0; i < M; i++){
                         for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                             Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
@@ -137,8 +137,8 @@ namespace monolish{
                     Cd[i] = 0.0;
                 }
 
+                #pragma acc loop independent 
                 for (size_t j = 0; j < N; j++){
-                    #pragma acc loop independent 
                     for (size_t i = 0; i < M; i++){
                         for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                             Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
