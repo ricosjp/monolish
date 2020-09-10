@@ -16,14 +16,23 @@ namespace monolish{
 
 		//err
 		if( A.get_col() != B.get_row()){
+            std::cout << "A.col: "<< A.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "B.row: " <<B.get_row() << std::endl;
 			throw std::runtime_error("error A.col != B.row");
 		}
 
 		if( A.get_row() != C.get_row()){
+            std::cout << "A.row: "<< A.get_row() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.row: " <<C.get_row() << std::endl;
 			throw std::runtime_error("error A.row != B.row");
 		}
 
 		if( B.get_col() != C.get_col()){
+            std::cout << "B.col: "<< B.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.col: " <<C.get_col() << std::endl;
 			throw std::runtime_error("error B.col != C.col");
 		}
 
@@ -83,14 +92,23 @@ namespace monolish{
 
 		//err
 		if( A.get_col() != B.get_row()){
+            std::cout << "A.col: "<< A.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "B.row: " <<B.get_row() << std::endl;
 			throw std::runtime_error("error A.col != B.row");
 		}
 
 		if( A.get_row() != C.get_row()){
+            std::cout << "A.row: "<< A.get_row() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.row: " <<C.get_row() << std::endl;
 			throw std::runtime_error("error A.row != B.row");
 		}
 
 		if( B.get_col() != C.get_col()){
+            std::cout << "B.col: "<< B.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.col: " <<C.get_col() << std::endl;
 			throw std::runtime_error("error B.col != C.col");
 		}
 
