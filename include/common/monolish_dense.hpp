@@ -123,26 +123,26 @@ namespace monolish{
                      **/
                     Float at(size_t i, size_t j){
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("at() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("at() Error, A.row < i");
                         }
                         if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                            throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
                     }
 
                     Float at(size_t i, size_t j) const{
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("at() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("at() Error, A.row < i");
                         }
                         if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                            throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
                     }
@@ -155,13 +155,13 @@ namespace monolish{
                      **/
                     void insert(size_t i, size_t j, Float Val){
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("insert() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("insert() Error, A.row < i");
                         }
                         if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                            throw std::runtime_error("insert() Error, A.col < j");
                         }
                         val[get_col() * i + j] = Val;
                     }
