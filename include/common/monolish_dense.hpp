@@ -128,7 +128,7 @@ namespace monolish{
                         if(get_row() < i){
                             throw std::runtime_error("at() Error, A.row < i");
                         }
-                        if(get_row() < j){
+                        if(get_col() < j){
                             throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
@@ -141,7 +141,7 @@ namespace monolish{
                         if(get_row() < i){
                             throw std::runtime_error("at() Error, A.row < i");
                         }
-                        if(get_row() < j){
+                        if(get_col() < j){
                             throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
@@ -160,7 +160,7 @@ namespace monolish{
                         if(get_row() < i){
                             throw std::runtime_error("insert() Error, A.row < i");
                         }
-                        if(get_row() < j){
+                        if(get_col() < j){
                             throw std::runtime_error("insert() Error, A.col < j");
                         }
                         val[get_col() * i + j] = Val;
