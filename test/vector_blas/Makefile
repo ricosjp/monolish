@@ -7,12 +7,13 @@ OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
-VECTOR_TEST_SIZE?=12345
-VECTOR_TEST_ITER?=100
-VECTOR_TEST_ANS_CHECK?=1
+VEC_TEST_SIZE?=12345
+VEC_TEST_ITER?=100
+VEC_TEST_ANS_CHECK?=1
 
 define RUN
-	$(1) double $(VECTOR_TEST_SIZE) $(VECTOR_TEST_ITER) $(VECTOR_TEST_ANS_CHECK)
+	$(1) double $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
+	$(1) float $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
 
 endef
 
