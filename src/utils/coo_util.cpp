@@ -144,9 +144,6 @@ namespace monolish{
 
 		template<typename T>
 			T COO<T>::at(size_t i, size_t j){
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-
 				if(i >= rowN || j >= colN){
 					throw std::out_of_range("error");
 				}
@@ -160,7 +157,6 @@ namespace monolish{
                         }
                     }
                 }
-				logger.util_out();
 				return 0.0;
 			}
 		template double COO<double>::at(size_t i, size_t j);
@@ -168,9 +164,6 @@ namespace monolish{
 
 		template<typename T>
 			T COO<T>::at(size_t i, size_t j) const{
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-
 				if(i >= rowN || j >= colN){
 					throw std::out_of_range("error");
 				}
@@ -184,7 +177,6 @@ namespace monolish{
                         }
                     }
                 }
-				logger.util_out();
 				return 0.0;
 			}
 		template double COO<double>::at(size_t i, size_t j) const;
