@@ -1,7 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
 #include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 #define FUNC "axpyz"
 #define PERF 2*size/time/1.0e+9
@@ -61,6 +59,7 @@ bool test(const size_t size, double tol, const size_t iter, const size_t check_a
     std::cout << "func\tprec\ttime[sec]\tperf[GFLOPS]\tmem[GB/s] " << std::endl;
     std::cout << FUNC << "\t" << std::flush;
     std::cout << get_type<T>() << "\t" << std::flush;
+    std::cout << size << "\t" << std::flush;
     std::cout << time << "\t" << std::flush;
     std::cout << PERF << "\t" << std::flush;
     std::cout << MEM << "\t" << std::endl;

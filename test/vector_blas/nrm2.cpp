@@ -1,7 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
 #include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 #define FUNC "nrm2"
 #define PERF 2*size/time/1.0e+9

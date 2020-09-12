@@ -1,6 +1,4 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
+#include"monolish_blas.hpp"
 #include"../test_utils.hpp"
 
 #define FUNC "axpy"

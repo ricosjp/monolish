@@ -1,7 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
 #include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 #define FUNC "xpay"
 #define PERF 3*size/time/1.0e+9

@@ -1,7 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
 #include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 #define FUNC "scal"
 #define PERF 1*size/time/1.0e+9
