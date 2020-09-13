@@ -46,10 +46,14 @@ run_gpu:
 	bash ./test.sh mscal gpu 10
 
 run_fx:
-	$(foreach var,$(OBJS_FX), $(call RUN,$(var)))
+	bash ./test.sh matmul fx 10
+	bash ./test.sh matvec fx 10
+	bash ./test.sh mscal fx 10
 
 run_sx:
-	$(foreach var,$(OBJS_SX), $(call RUN,$(var)))
+	bash ./test.sh matmul sx 10
+	bash ./test.sh matvec sx 10
+	bash ./test.sh mscal sx 10
 
 clean:
 	- rm *.out
