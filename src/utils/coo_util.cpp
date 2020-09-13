@@ -310,7 +310,7 @@ namespace monolish{
 				logger.util_in(monolish_func);
 
                 set_row(crs.get_row());
-                set_col(crs.get_row());
+                set_col(crs.get_col());
                 set_nnz(crs.get_nnz());
 
                 row_index.resize(nnz);
