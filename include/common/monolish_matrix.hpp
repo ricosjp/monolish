@@ -355,7 +355,10 @@ namespace monolish{
 					size_t get_row() const{return rowN;}
 					size_t get_col() const{return colN;}
 					size_t get_nnz() const{return nnz;}
-                    std::string get_format_name() const{return "CRS";}
+
+                    std::string type() const {
+                        return "CRS";
+                    }
 
 					// communication ///////////////////////////////////////////////////////////////////////////
 					/**

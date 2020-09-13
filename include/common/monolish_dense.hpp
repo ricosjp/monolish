@@ -40,7 +40,10 @@ namespace monolish{
 					size_t get_row() const{return rowN;}
 					size_t get_col() const{return colN;}
 					size_t get_nnz() const{return get_row()*get_col();}
-                    std::string get_format_name() const{return "Dense";}
+
+                    std::string type() const {
+                        return "Dense";
+                    }
 
                     Dense(){}
 					Dense(const Dense<Float> &mat);
