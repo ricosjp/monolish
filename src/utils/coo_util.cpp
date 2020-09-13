@@ -325,7 +325,6 @@ namespace monolish{
 					}
 				}
 
-
 				logger.util_out();
 			}
 		template void COO<double>::convert(const CRS<double> &crs);
