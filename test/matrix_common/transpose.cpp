@@ -1,10 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<sstream>
-#include<iomanip>
-#include<chrono>
-#include<stdexcept>
-#include"../../test_utils.hpp"
+#include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 template<typename T, typename M>
 bool test(){
@@ -34,30 +29,30 @@ bool test(){
 	monolish::matrix::COO<T> ans_coo(N, N, NNZ, row_array, col_array, val_array);
 
     //convert
-    M mat(ans_coo);
+    M ret(ans_coo);
 
-
-    monolish::matrix::COO<T> result_coo(mat);
+    ret.transpose();
+    ret.transpose();
 
     bool check = true;
     for(size_t i=0; i<ans_coo.get_nnz(); i++){
-        if( result_coo.get_row() != ans_coo.get_row() ||
-            result_coo.get_col() != ans_coo.get_col() ||
-            result_coo.get_nnz() != ans_coo.get_nnz()   ){
+        if( ret.get_row() != ans_coo.get_row() ||
+            ret.get_col() != ans_coo.get_col() ||
+            ret.get_nnz() != ans_coo.get_nnz()   ){
 
             std::cout << "error, row, col, nnz are different" << std::endl;
-            std::cout << result_coo.get_row() << " != " << ans_coo.get_row() << std::endl;
-            std::cout << result_coo.get_col() << " != " << ans_coo.get_col() << std::endl;
-            std::cout << result_coo.get_nnz() << " != " << ans_coo.get_nnz() << std::endl;
+            std::cout << ret.get_row() << " != " << ans_coo.get_row() << std::endl;
+            std::cout << ret.get_col() << " != " << ans_coo.get_col() << std::endl;
+            std::cout << ret.get_nnz() << " != " << ans_coo.get_nnz() << std::endl;
             check = false;
             break;
         }
 
-        if( result_coo.val[i]       != ans_coo.val[i] ||
-            result_coo.row_index[i] != ans_coo.row_index[i] ||
-            result_coo.col_index[i] != ans_coo.col_index[i]){
+        if( ret.val[i]       != ans_coo.val[i] ||
+            ret.row_index[i] != ans_coo.row_index[i] ||
+            ret.col_index[i] != ans_coo.col_index[i]){
 
-            std::cout << i << "\t" <<  result_coo.row_index[i] << "," << result_coo.col_index[i] << "," << result_coo.val[i] <<std::flush;
+            std::cout << i << "\t" <<  ret.row_index[i] << "," << ret.col_index[i] << "," << ret.val[i] <<std::flush;
             std::cout << ", (ans: " <<  ans_coo.row_index[i] << "," << ans_coo.col_index[i] << "," << ans_coo.val[i] << ")" << std::endl;
             check = false;
         }
@@ -72,19 +67,13 @@ int main(int argc, char** argv){
 	//monolish::util::set_log_level(3);
 	//monolish::util::set_log_filename("./monolish_test_log.txt");
 	
-    // COO <-> Dense
-	if( !test<double, monolish::matrix::Dense<double>>() ) {return 1;}
-	if( !test<float, monolish::matrix::Dense<float>>() ) {return 1;}
-
-    // COO <-> COO
+    // COO
 	if( !test<double, monolish::matrix::COO<double>>() ) {return 1;}
 	if( !test<float, monolish::matrix::COO<float>>() ) {return 1;}
 
-    // CRS <->Dense
-	if( !test<double, monolish::matrix::CRS<double>>() ) {return 1;}
-	if( !test<float, monolish::matrix::CRS<float>>() ) {return 1;}
-
-
+    // Dense
+// 	if( !test<double, monolish::matrix::Dense<double>>() ) {return 1;}
+// 	if( !test<float, monolish::matrix::Dense<float>>() ) {return 1;}
 
     return 0;
 }

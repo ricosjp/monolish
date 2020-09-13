@@ -1,7 +1,5 @@
-#include<iostream>
-#include<istream>
-#include<chrono>
-#include"../../test_utils.hpp"
+#include"../test_utils.hpp"
+#include"monolish_blas.hpp"
 
 template<typename T>
 bool test(const char* file){
@@ -12,12 +10,12 @@ bool test(const char* file){
 	monolish::matrix::CRS<T> CRS = tmp_CRS;
 
 	//create random vector x rand(0.1~1.0)
-   	monolish::vector<T> x(CRS.size(), 0.1, 1.0);
-   	monolish::vector<T> ansy(CRS.size(), 0.0);
+   	monolish::vector<T> x(CRS.get_row(), 0.1, 1.0);
+   	monolish::vector<T> ansy(CRS.get_row(), 0.0);
 
 	monolish::util::send(tmp_CRS, CRS, x, ansy);
 
-	monolish::blas::spmv(tmp_CRS, x, ansy);
+	monolish::blas::matvec(tmp_CRS, x, ansy);
 
 	monolish::vector<T> tsty = CRS * x;
 
