@@ -1,4 +1,5 @@
 #include"monolish_blas.hpp"
+
 #include<ios>
 #include<iostream>
 #include<iomanip>
@@ -7,6 +8,7 @@
 #include<cstring>
 #include<typeinfo>
 #include <cassert>
+#include<algorithm>
 
 template <typename T>
 bool ans_check(double result, double ans, double tol){
