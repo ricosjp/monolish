@@ -95,18 +95,18 @@ bool test(const size_t M, const size_t N, const size_t K, double tol, int iter, 
 
     double time = sec / iter;
     std::cout << "func\tprec\tM\tN\tK\ttime[sec]\tperf[GFLOPS] " << std::endl;
-    std::cout << FUNC << "(" << C.get_format_name() << "=" << A.get_format_name() << "*" <<C.get_format_name() << ")\t" << std::flush;
+    std::cout << FUNC << "(" << C.type() << "=" << A.type() << "*" <<C.type() << ")\t" << std::flush;
     std::cout << get_type<T>() << "\t" << std::flush;
     std::cout << M << "\t" << std::flush;
     std::cout << N << "\t" << std::flush;
     std::cout << K << "\t" << std::flush;
     std::cout << time << "\t" << std::flush;
 
-    if( (strcmp(A.get_format_name().data(),"Dense") == 0)){
+    if( (strcmp(A.type().data(),"Dense") == 0)){
         std::cout << DENSE_PERF << "\t" << std::endl;
     }
 
-    if( (strcmp(A.get_format_name().data(),"CRS") == 0)){
+    if( (strcmp(A.type().data(),"CRS") == 0)){
         std::cout << CRS_PERF << "\t" << std::endl;
     }
 
