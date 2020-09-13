@@ -12,11 +12,6 @@ MAT_TEST_SIZE?=124
 MAT_TEST_ITER?=100
 MAT_TEST_ANS_CHECK?=1
 
-define RUN_matmul
-	./$(1) $(2) $(3) Dense Dense $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_ITER) $(MAT_TEST_ANS_CHECK)
-
-endef
-
 all: cpu
 
 cpu: $(OBJS_CPU)
