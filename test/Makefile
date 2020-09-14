@@ -1,71 +1,96 @@
 all:cpu
 
 cpu:
-	make -C common/ cpu
-	make -C blas/ cpu
-	make -C equation// cpu
-	make -C logger/ cpu
-	make -C lang/ cpu
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 gpu:
-	make -C common/ gpu
-	make -C blas/ gpu
-	make -C equation/ gpu
-	make -C logger/ gpu
-	make -C lang/ gpu
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 fx:
-	make -C common/ fx
-	make -C blas/ fx
-	make -C equation/ fx
-	make -C logger/ fx
-	make -C lang/ fx
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 sx:
-	make -C common/ sx
-	make -C blas/ sx
-	make -C equation/ sx
-	make -C logger/ sx
-	make -C lang/ sx
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 run_cpu:
-	make -C common/ run_cpu
-	make -C blas/ run_cpu
-	make -C equation/ run_cpu
-# 	make -C equation/sparse_lu/ run_cpu
-	make -C logger/ run_cpu
-#	make -C lang/ run_cpu
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 run_gpu:
-	make -C common/ run_gpu
-	make -C blas/ run_gpu
-	make -C equation/ run_gpu
-	make -C logger/ run_gpu
-	make -C lang/ run_gpu
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 run_fx:
-	make -C common/ run_fx
-	make -C blas/ run_fx
-	make -C equation/ run_fx
-	make -C logger/ run_fx
-	make -C lang/ run_fx
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 run_sx:
-	make -C common/ run_sx
-	make -C blas/ run_sx
-	make -C equation/ run_sx
-	make -C logger/ run_sx
-	make -C lang/ run_sx
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 run_gpu_profile:
-	make PROFILER="nsys nvprof" -C common/ run_gpu
-	make PROFILER="nsys nvprof" -C blas/ run_gpu
-	make PROFILER="nsys nvprof" -C equation/ run_gpu
-	make PROFILER="nsys nvprof" -C logger/ run_gpu
-	make PROFILER="nsys nvprof" -C lang/ run_gpu
+	make PROFILER="nsys nvprof" -j -C common/ run_gpu
+	make PROFILER="nsys nvprof" -j -C blas/ run_gpu
+	make PROFILER="nsys nvprof" -j -C equation/ run_gpu
+	make PROFILER="nsys nvprof" -j -C logger/ run_gpu
+	make PROFILER="nsys nvprof" -j -C lang/ run_gpu
+	make -j -C vector_common/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
+	make -j -C logger/ $@
+	make -j -C lang/ $@
 
 clean:
-	- make clean -C common/ run_gpu
-	- make clean -C blas/ run_gpu
-	- make clean -C equation/ run_gpu
-	- make clean -C logger/ run_gpu
+	make -j -C vector_common/ clean
+	make -j -C vector_blas/ clean
+	make -j -C matrix_common/ clean
+	make -j -C matrix_blas/ clean
+	make -j -C equation/ clean
+	make -j -C logger/ clean
+	make -j -C lang/ clean

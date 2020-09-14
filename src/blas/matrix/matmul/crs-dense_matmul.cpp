@@ -16,14 +16,23 @@ namespace monolish{
 
 		//err
 		if( A.get_col() != B.get_row()){
+            std::cout << "A.col: "<< A.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "B.row: " <<B.get_row() << std::endl;
 			throw std::runtime_error("error A.col != B.row");
 		}
 
 		if( A.get_row() != C.get_row()){
+            std::cout << "A.row: "<< A.get_row() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.row: " <<C.get_row() << std::endl;
 			throw std::runtime_error("error A.row != B.row");
 		}
 
 		if( B.get_col() != C.get_col()){
+            std::cout << "B.col: "<< B.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.col: " <<C.get_col() << std::endl;
 			throw std::runtime_error("error B.col != C.col");
 		}
 
@@ -49,26 +58,29 @@ namespace monolish{
                     Cd[i] = 0.0;
                 }
 
-                for (size_t i = 0; i < M; i++){
-                    #pragma acc loop independent 
-                    for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                        for (size_t j = 0; j < N; j++){
+                #pragma acc loop independent 
+                for (size_t j = 0; j < N; j++){
+                    for (size_t i = 0; i < M; i++){
+                        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                             Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                         }
                     }
                 }
             }
    		#else
-            #pragma omp parallel for
-            for(size_t i=0; i<M*N; i++){
-                Cd[i] = 0.0;
-            }
+            #pragma omp parallel
+            {
+                #pragma omp for
+                for(size_t i=0; i<M*N; i++){
+                    Cd[i] = 0.0;
+                }
 
-            for (size_t i = 0; i < M; i++){
-                #pragma omp parallel for
-                for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                    for (size_t j = 0; j < N; j++){
-                        Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
+                #pragma omp for
+                for (size_t j = 0; j < N; j++){
+                    for (size_t i = 0; i < M; i++){
+                        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                            Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
+                        }
                     }
                 }
             }
@@ -83,14 +95,23 @@ namespace monolish{
 
 		//err
 		if( A.get_col() != B.get_row()){
+            std::cout << "A.col: "<< A.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "B.row: " <<B.get_row() << std::endl;
 			throw std::runtime_error("error A.col != B.row");
 		}
 
 		if( A.get_row() != C.get_row()){
+            std::cout << "A.row: "<< A.get_row() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.row: " <<C.get_row() << std::endl;
 			throw std::runtime_error("error A.row != B.row");
 		}
 
 		if( B.get_col() != C.get_col()){
+            std::cout << "B.col: "<< B.get_col() << std::flush;
+            std::cout << ", " << std:: flush;
+            std::cout << "C.col: " <<C.get_col() << std::endl;
 			throw std::runtime_error("error B.col != C.col");
 		}
 
@@ -116,26 +137,29 @@ namespace monolish{
                     Cd[i] = 0.0;
                 }
 
-                for (size_t i = 0; i < M; i++){
-                    #pragma acc loop independent 
-                    for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                        for (size_t j = 0; j < N; j++){
+                #pragma acc loop independent 
+                for (size_t j = 0; j < N; j++){
+                    for (size_t i = 0; i < M; i++){
+                        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
                             Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
                         }
                     }
                 }
             }
    		#else
-            #pragma omp parallel for
-            for(size_t i=0; i<M*N; i++){
-                Cd[i] = 0.0;
-            }
+            #pragma omp parallel
+            {
+                #pragma omp for
+                for(size_t i=0; i<M*N; i++){
+                    Cd[i] = 0.0;
+                }
 
-            for (size_t i = 0; i < M; i++){
-                #pragma omp parallel for
-                for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
-                    for (size_t j = 0; j < N; j++){
-                        Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
+                #pragma omp for
+                for (size_t j = 0; j < N; j++){
+                    for (size_t i = 0; i < M; i++){
+                        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i+1]; k++){
+                            Cd[i*N+j] += vald[k] * Bd[N*cold[k]+j];
+                        }
                     }
                 }
             }

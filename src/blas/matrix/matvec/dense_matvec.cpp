@@ -89,12 +89,10 @@ namespace monolish{
 
 	template<typename T>
 	vector<T> matrix::Dense<T>::operator*(vector<T>& vec){
-			vector<T> y(vec.size()); 
+			vector<T> y(get_row()); 
 			y.send();
 
 			blas::matvec(*this, vec, y);
-
-			y.nonfree_recv();
 
 			return y;
 		}

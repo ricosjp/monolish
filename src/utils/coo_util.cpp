@@ -144,21 +144,19 @@ namespace monolish{
 
 		template<typename T>
 			T COO<T>::at(size_t i, size_t j){
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-
 				if(i >= rowN || j >= colN){
 					throw std::out_of_range("error");
 				}
 
-				// since last inserted element is effective elements,
-                                // checking from last element is necessary
-                                for(size_t k = nnz; k > 0; --k){
-					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
-						return val[k-1];
-					}
-				}
-				logger.util_out();
+                // since last inserted element is effective elements,
+                // checking from last element is necessary
+                if(nnz != 0){
+                    for(size_t k = nnz; k > 0; --k){
+                        if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+                            return val[k-1];
+                        }
+                    }
+                }
 				return 0.0;
 			}
 		template double COO<double>::at(size_t i, size_t j);
@@ -166,21 +164,19 @@ namespace monolish{
 
 		template<typename T>
 			T COO<T>::at(size_t i, size_t j) const{
-				Logger& logger = Logger::get_instance();
-				logger.util_in(monolish_func);
-
 				if(i >= rowN || j >= colN){
 					throw std::out_of_range("error");
 				}
 
-				// since last inserted element is effective elements,
-                                // checking from last element is necessary
-                                for(size_t k = nnz; k > 0; --k){
-					if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
-						return val[k-1];
-					}
-				}
-				logger.util_out();
+                // since last inserted element is effective elements,
+                // checking from last element is necessary
+                if(nnz != 0){
+                    for(size_t k = nnz; k > 0; --k){
+                        if( row_index[k-1] == (int)i && col_index[k-1] == (int)j){
+                            return val[k-1];
+                        }
+                    }
+                }
 				return 0.0;
 			}
 		template double COO<double>::at(size_t i, size_t j) const;
@@ -284,6 +280,9 @@ namespace monolish{
             //  Sort by first Col and then Row
             //  TODO: This hand-written quick sort function should be retired
             //        after zip_iterator() (available in range-v3 library) is available in the standard (hopefully C++23)
+            Logger& logger = Logger::get_instance();
+            logger.util_in(monolish_func);
+
             _q_sort(0, nnz-1);
 
             /*  Remove duplicates */
@@ -299,6 +298,8 @@ namespace monolish{
                 }
                 nnz = k+1;
             }
+
+            logger.util_out();
         }
         template void COO<double>::sort(bool merge);
         template void COO<float>::sort(bool merge);
@@ -309,7 +310,7 @@ namespace monolish{
 				logger.util_in(monolish_func);
 
                 set_row(crs.get_row());
-                set_col(crs.get_row());
+                set_col(crs.get_col());
                 set_nnz(crs.get_nnz());
 
                 row_index.resize(nnz);
@@ -323,7 +324,6 @@ namespace monolish{
                         val[j] = crs.val[j];
 					}
 				}
-
 
 				logger.util_out();
 			}

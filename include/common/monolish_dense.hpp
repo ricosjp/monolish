@@ -41,6 +41,10 @@ namespace monolish{
 					size_t get_col() const{return colN;}
 					size_t get_nnz() const{return get_row()*get_col();}
 
+                    std::string type() const {
+                        return "Dense";
+                    }
+
                     Dense(){}
 					Dense(const Dense<Float> &mat);
 
@@ -96,10 +100,10 @@ namespace monolish{
                         Dense<Float> B(get_row(), get_col());
                         for(size_t i = 0; i < get_row(); ++i){
                             for(size_t j = 0; j < get_col(); ++j){
-                                B.val[j*get_row()+i] = val[i*get_row()+j];
+                                B.val[j*get_row()+i] = val[i*get_col()+j];
                             }
                         }
-                        *this = B;
+						std::copy(B.val.data(), B.val.data()+nnz, val.begin());
                         return *this;
                     }
                     Dense& transpose(Dense& B) {
@@ -109,7 +113,7 @@ namespace monolish{
 
                         for(size_t i = 0; i < get_row(); ++i){
                             for(size_t j = 0; j < get_col(); ++j){
-                                val[j*get_row()+i] = B.val[i*get_row()+j];
+                                val[j*get_row()+i] = B.val[i*get_col()+j];
                             }
                         }
                         return *this;
@@ -123,26 +127,26 @@ namespace monolish{
                      **/
                     Float at(size_t i, size_t j){
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("at() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("at() Error, A.row < i");
                         }
-                        if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                        if(get_col() < j){
+                            throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
                     }
 
                     Float at(size_t i, size_t j) const{
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("at() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("at() Error, A.row < i");
                         }
-                        if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                        if(get_col() < j){
+                            throw std::runtime_error("at() Error, A.col < j");
                         }
                         return val[get_col() * i + j];
                     }
@@ -155,13 +159,13 @@ namespace monolish{
                      **/
                     void insert(size_t i, size_t j, Float Val){
                         if( get_device_mem_stat() ) {
-                            throw std::runtime_error("Error, GPU vector cant use operator[]");
+                            throw std::runtime_error("insert() Error, GPU vector cant use operator[]");
                         }
                         if(get_row() < i){
-                            throw std::runtime_error("Error, A.row < i");
+                            throw std::runtime_error("insert() Error, A.row < i");
                         }
-                        if(get_row() < j){
-                            throw std::runtime_error("Error, A.col < j");
+                        if(get_col() < j){
+                            throw std::runtime_error("insert() Error, A.col < j");
                         }
                         val[get_col() * i + j] = Val;
                     }

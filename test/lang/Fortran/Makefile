@@ -32,8 +32,7 @@ fx:
 	$(FXCXX) $(FXCXXFLAGS) test_fort.o test_cpp.o -lstdc++ -o test.out $(LIB_FX) 
 
 run_cpu:
-	echo "cpu version does not impl."
-	# ./test.out
+#	 ./test.out
 	
 run_gpu:
 	./test.out
