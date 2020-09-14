@@ -100,10 +100,10 @@ namespace monolish{
                         Dense<Float> B(get_row(), get_col());
                         for(size_t i = 0; i < get_row(); ++i){
                             for(size_t j = 0; j < get_col(); ++j){
-                                B.val[j*get_row()+i] = val[i*get_row()+j];
+                                B.val[j*get_row()+i] = val[i*get_col()+j];
                             }
                         }
-                        *this = B;
+						std::copy(B.val.data(), B.val.data()+nnz, val.begin());
                         return *this;
                     }
                     Dense& transpose(Dense& B) {
@@ -113,7 +113,7 @@ namespace monolish{
 
                         for(size_t i = 0; i < get_row(); ++i){
                             for(size_t j = 0; j < get_col(); ++j){
-                                val[j*get_row()+i] = B.val[i*get_row()+j];
+                                val[j*get_row()+i] = B.val[i*get_col()+j];
                             }
                         }
                         return *this;
