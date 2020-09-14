@@ -57,4 +57,4 @@ in-cpu:
 	docker run -it --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
 
 format:
-	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/clang-format:latest
+	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/clang-format:latest /usr/bin/check-format.sh
