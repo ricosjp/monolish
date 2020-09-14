@@ -246,36 +246,14 @@ namespace monolish{
                         return "COO";
                     }
 
-                    std::vector<Float> row(std::size_t i) const {
-                        std::vector<Float> res(get_col(), 0);
-                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
-                            if (get_row_ptr()[nz] == i) {
-                                res[get_col_ind()[nz]] = get_val_ptr()[nz];
-                            }
-                        }
-                        return res;
-                    }
+		  std::vector<Float> row(std::size_t i) const;
+		  void row(std::size_t i, vector<Float>& vec) const;
 
-                    std::vector<Float> col(std::size_t j) const {
-                        std::vector<Float> res(get_row(), 0);
-                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
-                            if (get_col_ind()[nz] == j) {
-                                res[get_row_ptr()[nz]] = get_val_ptr()[nz];
-                            }
-                        }
-                        return res;
-                    }
+		  std::vector<Float> col(std::size_t j) const;
+		  void col(std::size_t i, vector<Float>& vec) const;
 
-                    std::vector<Float> diag() const {
-                        std::size_t s = get_row() > get_col() ? get_col() : get_row();
-                        std::vector<Float> res(s, 0);
-                        for (std::size_t nz = 0; nz < get_nnz(); ++nz) {
-                            if (get_row_ptr()[nz] == get_col_ind()[nz]) {
-                                res[get_row_ptr()[nz]] = get_val_ptr()[nz];
-                            }
-                        }
-                        return res;
-                    }
+		  std::vector<Float> diag() const;
+		  void diag(vector<Float>& vec) const;
 
      				/////////////////////////////////////////////////////////////////////////////
 
