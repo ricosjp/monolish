@@ -58,6 +58,7 @@ vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
 vpath %.cpp ./src/blas/matrix/getvec
+vpath %.cpp ./src/blas/matrix/subvec_op
 vpath %.cpp ./src/blas/matrix/scal
 vpath %.cpp ./src/blas/matrix/matvec
 vpath %.cpp ./src/blas/matrix/matadd
