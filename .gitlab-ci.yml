@@ -11,6 +11,7 @@ stages:
     - blas
     - equation
     - logger
+    - lang
     - deploy
       
 ## build monolish ###############################
@@ -62,20 +63,21 @@ build_test_gpu:
         - gpu
 
 ## test common ###################################################
-common_cpu:
+
+vector_common_cpu:
     stage: common
     script:
-        - cd test/common/
+        - cd test/vector_common/
         - make run_cpu
     artifacts:
         paths:
             - test/
         expire_in: 60min
 
-common_gpu:
+vector_common_gpu:
     stage: common
     script:
-        - cd test/common/
+        - cd test/vector_common/
         - make run_gpu
         - make run_gpu PROFILER="nsys nvprof"
     artifacts:
@@ -85,22 +87,69 @@ common_gpu:
     tags:
         - gpu
 
-## test blas ###################################################
-
-blas_cpu:
-    stage: blas
+matrix_common_cpu:
+    stage: common
     script:
-        - cd test/blas/
+        - cd test/matrix_common/
         - make run_cpu
     artifacts:
         paths:
             - test/
         expire_in: 60min
 
-blas_gpu:
+matrix_common_gpu:
+    stage: common
+    script:
+        - cd test/matrix_common/
+        - make run_gpu
+        - make run_gpu PROFILER="nsys nvprof"
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+
+## test blas ###################################################
+
+vector_blas_cpu:
     stage: blas
     script:
-        - cd test/blas/
+        - cd test/vector_blas/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+vector_blas_gpu:
+    stage: blas
+    script:
+        - cd test/vector_blas/
+        - make run_gpu
+        - make run_gpu PROFILER="nsys nvprof"
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+matrix_blas_cpu:
+    stage: blas
+    script:
+        - cd test/matrix_blas/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+matrix_blas_gpu:
+    stage: blas
+    script:
+        - cd test/matrix_blas/
         - make run_gpu
         - make run_gpu PROFILER="nsys nvprof"
     artifacts:
@@ -151,6 +200,31 @@ logger_gpu:
     stage: logger
     script:
         - cd test/logger/
+        - make run_gpu
+        - make run_gpu PROFILER="nsys nvprof"
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+    tags:
+        - gpu
+
+## test lang ###################################################
+
+lang_cpu:
+    stage: lang
+    script:
+        - cd test/lang/
+        - make run_cpu
+    artifacts:
+        paths:
+            - test/
+        expire_in: 60min
+
+lang_gpu:
+    stage: lang
+    script:
+        - cd test/lang/
         - make run_gpu
         - make run_gpu PROFILER="nsys nvprof"
     artifacts:
