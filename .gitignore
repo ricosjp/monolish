@@ -26,3 +26,7 @@ docker/lib/
 docker/include/
 monolish_test.log
 test/logger/logging/*.html
+
+# clangd
+compile_commands.json
+.clangd/

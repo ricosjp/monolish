@@ -3,6 +3,9 @@
 #cmake_policy(SET CMP0076 NEW)
 cmake_minimum_required(VERSION 3.10)
 
+# clangd setting
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
