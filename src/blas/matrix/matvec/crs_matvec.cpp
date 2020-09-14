@@ -158,7 +158,7 @@ namespace monolish{
         const float alpha = 1.0;
         const float beta = 0.0;
 
-		#pragma acc data present(xd[0:n], yd[0:m], vald[0:nnz], rowd[0:n+1], cold[0:nnz])
+		#pragma acc data present(xd[0:n], yd[0:m], vald[0:nnz], rowd[0:m+1], cold[0:nnz])
         #pragma acc host_data use_device(xd, yd, vald, rowd, cold)
         {
             check(
@@ -202,8 +202,6 @@ namespace monolish{
 			y.send();
 
 			blas::matvec(*this, vec, y);
-
-			y.nonfree_recv();
 
 			return y;
 		}

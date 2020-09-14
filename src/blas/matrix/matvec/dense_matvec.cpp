@@ -94,8 +94,6 @@ namespace monolish{
 
 			blas::matvec(*this, vec, y);
 
-			y.nonfree_recv();
-
 			return y;
 		}
 	template vector<double> matrix::Dense<double>::operator*(vector<double>& vec);
