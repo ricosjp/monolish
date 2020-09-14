@@ -81,14 +81,14 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
 #else // cpu
 
-		#pragma omp parallel for
-		for(int i = 0 ; i < (int)A.get_row(); i++){
-            double ytmp = 0.0;
-			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++){
-				ytmp += vald[j] * xd[A.col_ind[j]];
-            }
-            y[i] = ytmp;
-        }
+#pragma omp parallel for
+  for (int i = 0; i < (int)A.get_row(); i++) {
+    double ytmp = 0.0;
+    for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
+      ytmp += vald[j] * xd[A.col_ind[j]];
+    }
+    y[i] = ytmp;
+  }
 
 #endif
 
@@ -161,14 +161,14 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
 #else // cpu
 
-		#pragma omp parallel for
-		for(int i = 0 ; i < (int)A.get_row(); i++){
-            double ytmp = 0.0;
-			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++){
-				ytmp += vald[j] * xd[A.col_ind[j]];
-            }
-            y[i] = ytmp;
-        }
+#pragma omp parallel for
+  for (int i = 0; i < (int)A.get_row(); i++) {
+    double ytmp = 0.0;
+    for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
+      ytmp += vald[j] * xd[A.col_ind[j]];
+    }
+    y[i] = ytmp;
+  }
 
 #endif
 
