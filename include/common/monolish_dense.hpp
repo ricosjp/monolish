@@ -239,6 +239,9 @@ public:
 
   // mat - mat
   Dense<Float> operator*(const Dense<Float> &B);
+
+  // mat - mat
+  Dense<Float> operator+(const Dense<Float> &B);
 };
 } // namespace matrix
 } // namespace monolish

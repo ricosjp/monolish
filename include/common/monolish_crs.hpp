@@ -136,6 +136,9 @@ public:
 
   // crs-dense
   Dense<Float> operator*(const Dense<Float> &B);
+
+  // crs-dense
+  CRS<Float> operator+(const CRS<Float> &B);
 };
 } // namespace matrix
 } // namespace monolish
