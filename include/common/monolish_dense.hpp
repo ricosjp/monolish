@@ -240,6 +240,15 @@ public:
 
   // mat - mat
   Dense<Float> operator+(const Dense<Float> &B);
+
+
+  // sub-vector operation
+  void diag_add(size_t i, const Float alpha);
+  void diag_sub(size_t i, const Float alpha);
+  void diag_mul(size_t i, const Float alpha);
+  void diag_div(size_t i, const Float alpha);
+
+
 };
 } // namespace matrix
 } // namespace monolish
