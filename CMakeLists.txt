@@ -24,36 +24,32 @@ if (BUILD_GPU)
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
-
-  target_compile_features(monolish_gpu PUBLIC cxx_std_14)
-
+  set_property(TARGET monolish_gpu PROPERTY CXX_STANDARD 14)
   target_compile_options(monolish_gpu PRIVATE -O3)
+  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
   # OpenACC
-  set(OpenACC_CXX_FLAGS "-fopenacc")
-  target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
-  target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
-  # This should be target_link_options(), but only available after CMake 3.13
-  set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
-
-  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+  set(OpenACC_ACCEL_TARGET "nvptx-none")
+  find_package(OpenACC REQUIRED)
+  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
 
   # CUDA
   find_package(CUDAToolkit REQUIRED)
 
   target_link_libraries(monolish_gpu
     PRIVATE
+    OpenACC::OpenACC_CXX
     CUDA::cublas
     CUDA::cusolver
     CUDA::cusparse
     CUDA::cudart
-    )
+  )
 
   install(
     TARGETS monolish_gpu
     LIBRARY
       DESTINATION lib
-    )
+  )
 endif(BUILD_GPU)
 
 ###############################################################################
@@ -69,7 +65,7 @@ target_sources(monolish_cpu
   ${MONOLISH_SOURCE_FILES}
   )
 
-target_compile_features(monolish_cpu PUBLIC cxx_std_14)
+set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
 target_compile_options(monolish_cpu PRIVATE -O3)
 
 find_package(OpenMP)
