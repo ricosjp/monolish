@@ -5,7 +5,7 @@ namespace monolish {
 namespace matrix {
 
 // add scalar
-template <typename T> void Dense<T>::diag_add(const size_t i, const T alpha) {
+template <typename T> void Dense<T>::diag_add(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -37,11 +37,11 @@ template <typename T> void Dense<T>::diag_add(const size_t i, const T alpha) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_add(const size_t i, const double alpha);
-template void monolish::matrix::Dense<float>::diag_add(const size_t i, const float alpha);
+template void monolish::matrix::Dense<double>::diag_add(const double alpha);
+template void monolish::matrix::Dense<float>::diag_add(const float alpha);
 
 // sub scalar
-template <typename T> void Dense<T>::diag_sub(size_t i, const T alpha) {
+template <typename T> void Dense<T>::diag_sub(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -73,11 +73,11 @@ template <typename T> void Dense<T>::diag_sub(size_t i, const T alpha) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_sub(const size_t i, const double alpha);
-template void monolish::matrix::Dense<float>::diag_sub(const size_t i, const float alpha);
+template void monolish::matrix::Dense<double>::diag_sub(const double alpha);
+template void monolish::matrix::Dense<float>::diag_sub(const float alpha);
 
 // mul scalar
-template <typename T> void Dense<T>::diag_mul(size_t i, const T alpha) {
+template <typename T> void Dense<T>::diag_mul(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -109,11 +109,11 @@ template <typename T> void Dense<T>::diag_mul(size_t i, const T alpha) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_mul(const size_t i, const double alpha);
-template void monolish::matrix::Dense<float>::diag_mul(const size_t i, const float alpha);
+template void monolish::matrix::Dense<double>::diag_mul(const double alpha);
+template void monolish::matrix::Dense<float>::diag_mul(const float alpha);
 
 // div scalar
-template <typename T> void Dense<T>::diag_div(size_t i, const T alpha) {
+template <typename T> void Dense<T>::diag_div(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -145,8 +145,8 @@ template <typename T> void Dense<T>::diag_div(size_t i, const T alpha) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_div(const size_t i, const double alpha);
-template void monolish::matrix::Dense<float>::diag_div(const size_t i, const float alpha);
+template void monolish::matrix::Dense<double>::diag_div(const double alpha);
+template void monolish::matrix::Dense<float>::diag_div(const float alpha);
 
 } // namespace matrix
 } // namespace monolish

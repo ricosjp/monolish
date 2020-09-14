@@ -242,18 +242,27 @@ public:
   Dense<Float> operator+(const Dense<Float> &B);
 
 
-  // sub-vector operation
-  void diag_add(size_t i, const Float alpha);
-  void diag_sub(size_t i, const Float alpha);
-  void diag_mul(size_t i, const Float alpha);
-  void diag_div(size_t i, const Float alpha);
+  // sub-vector operation (diag)
+  void diag_add(const Float alpha);
+  void diag_sub(const Float alpha);
+  void diag_mul(const Float alpha);
+  void diag_div(const Float alpha);
 
-  void diag_add(size_t i, const vector<Float>& vec);
-  void diag_sub(size_t i, const vector<Float>& vec);
-  void diag_mul(size_t i, const vector<Float>& vec);
-  void diag_div(size_t i, const vector<Float>& vec);
+  void diag_add(const vector<Float>& vec);
+  void diag_sub(const vector<Float>& vec);
+  void diag_mul(const vector<Float>& vec);
+  void diag_div(const vector<Float>& vec);
 
+  // sub-vector operation (row)
+  void row_add(const size_t r, const Float alpha);
+  void row_sub(const size_t r, const Float alpha);
+  void row_mul(const size_t r, const Float alpha);
+  void row_div(const size_t r, const Float alpha);
 
+  void row_add(const size_t r, const vector<Float>& alpha);
+  void row_mul(const size_t r, const vector<Float>& alpha);
+  void row_sub(const size_t r, const vector<Float>& alpha);
+  void row_div(const size_t r, const vector<Float>& alpha);
 };
 } // namespace matrix
 } // namespace monolish
