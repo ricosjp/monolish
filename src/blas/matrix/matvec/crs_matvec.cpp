@@ -93,13 +93,14 @@ namespace monolish{
 
 		#else // cpu
 
-		#pragma omp parallel for 
-			for(size_t i = 0 ; i < A.get_row(); i++)
-				yd[i] = 0;
 		#pragma omp parallel for
-		for(int i = 0 ; i < (int)A.get_row(); i++)
-			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++)
-				yd[i] += vald[j] * xd[A.col_ind[j]];
+		for(int i = 0 ; i < (int)A.get_row(); i++){
+            double ytmp = 0.0;
+			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++){
+				ytmp += vald[j] * xd[A.col_ind[j]];
+            }
+            y[i] = ytmp;
+        }
 
 		#endif
 
@@ -183,13 +184,14 @@ namespace monolish{
 
 		#else // cpu
 
-		#pragma omp parallel for 
-			for(size_t i = 0 ; i < A.get_row(); i++)
-				yd[i] = 0;
 		#pragma omp parallel for
-		for(int i = 0 ; i < (int)A.get_row(); i++)
-			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++)
-				yd[i] += vald[j] * xd[A.col_ind[j]];
+		for(int i = 0 ; i < (int)A.get_row(); i++){
+            double ytmp = 0.0;
+			for(int j = A.row_ptr[i] ; j < A.row_ptr[i+1]; j++){
+				ytmp += vald[j] * xd[A.col_ind[j]];
+            }
+            y[i] = ytmp;
+        }
 
 		#endif
 
