@@ -37,7 +37,7 @@ case $1 in
         done
         ;;
     "transpose" ) 
-        for format in ${FORMAT[@]}; do
+        for format in Dense; do # only Dense
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do

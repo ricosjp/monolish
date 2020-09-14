@@ -72,17 +72,11 @@ int main(int argc, char** argv){
         if( (strcmp(argv[2],"Dense") == 0) ){
             if( test<monolish::matrix::Dense<double>,double>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
-        if( (strcmp(argv[2],"COO") == 0) ){
-            if( test<monolish::matrix::COO<double>,double>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
-        }
     }
 
     if(strcmp(argv[1],"float")==0){
         if( (strcmp(argv[2],"Dense") == 0) ){
             if( test<monolish::matrix::Dense<float>,float>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
-        }
-        if( (strcmp(argv[2],"COO") == 0) ){
-            if( test<monolish::matrix::COO<float>,float>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
     }
 
