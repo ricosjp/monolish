@@ -1,19 +1,19 @@
 #pragma once
-#include<omp.h>
-#include<vector>
+#include <omp.h>
+#include <vector>
 
 #if defined USE_MPI
-#include<mpi.h>
+#include <mpi.h>
 #endif
 
-#include"common/monolish_common.hpp"
+#include "common/monolish_common.hpp"
 
 // NOT IMPL.
-namespace monolish{
-	namespace eigenvalue{
+namespace monolish {
+namespace eigenvalue {
 
-		class lanczos{
-			int a;
-		};
-	}
-}
+class lanczos {
+  int a;
+};
+} // namespace eigenvalue
+} // namespace monolish

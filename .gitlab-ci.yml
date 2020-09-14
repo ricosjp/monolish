@@ -13,7 +13,14 @@ stages:
     - logger
     - lang
     - deploy
-      
+
+clang_format:
+    image: registry.ritc.jp/ricos/allgebra/clang-format:latest
+    stage: build_lib
+    script:
+        - check-format.sh
+    allow_failure: true
+
 ## build monolish ###############################
 build_cmake:
     stage: build_lib
