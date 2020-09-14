@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra:0.1.0
+image: registry.ritc.jp/ricos/allgebra/cuda10_2:latest
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
@@ -18,7 +18,6 @@ stages:
 build_cmake:
     stage: build_lib
     script:
-        - apt-get update && apt-get install -y --no-install-recommends cmake
         - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=./install_lib
         - cmake --build build --target install -- -j VERBOSE=1
     artifacts:
@@ -31,7 +30,6 @@ build_cmake:
 build_cmake_debug:
     stage: build_lib
     script:
-        - apt-get update && apt-get install -y --no-install-recommends cmake
         - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=./install_lib/debug
         - cmake --build build --target install -- -j VERBOSE=1
     artifacts:

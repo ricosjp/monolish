@@ -1,4 +1,4 @@
-CONTAINER  := registry.ritc.jp/ricos/allgebra:0.1.0
+CONTAINER  := registry.ritc.jp/ricos/allgebra/cuda10_2:latest
 .PHONY: cpu gpu gpu-debug lib test install
 
 all:cpu gpu
