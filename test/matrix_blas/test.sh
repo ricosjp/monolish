@@ -18,7 +18,8 @@ case $1 in
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
                         for K in ${MAT_TEST_SIZE[@]}; do
-                            $PROFILER ./matmul_$2.out $prec $format Dense Dense $M $N $K $3 1 || exit 1
+                            echo start $1 $2 $prec $format $M $N $K $3
+                            $PROFILER ./$1_$2.out $prec $format Dense Dense $M $N $K $3 1 || exit 1
                         done
                     done
                 done
@@ -30,7 +31,8 @@ case $1 in
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        $PROFILER ./matvec_$2.out $prec $format $M $N $3 1 || exit 1
+                        echo start $1 $2 $prec $format $M $N $3
+                        $PROFILER ./$1_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
@@ -41,7 +43,8 @@ case $1 in
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        .$PROFILER /mscal_$2.out $prec $format $M $N $3 1 || exit 1
+                        echo start $1 $2 $prec $format $M $N $3
+                        .$PROFILER /$1_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
