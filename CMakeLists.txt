@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.16)
-cmake_policy(SET CMP0076 NEW)
+# In order to use CMP0076, CMake 3.13 is required, but CentOS8 only provides 3.11.4
+#cmake_minimum_required(VERSION 3.13)
+#cmake_policy(SET CMP0076 NEW)
+cmake_minimum_required(VERSION 3.10)
 
 # clangd setting
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -7,6 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
+# TODO: GLOB is deprecated but used for now
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
@@ -27,32 +30,50 @@ if (BUILD_GPU)
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
-  set_property(TARGET monolish_gpu PROPERTY CXX_STANDARD 14)
+
+  target_compile_features(monolish_gpu PUBLIC cxx_std_14)
+
   target_compile_options(monolish_gpu PRIVATE -O3)
-  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
   # OpenACC
-  set(OpenACC_ACCEL_TARGET "nvptx-none")
-  find_package(OpenACC REQUIRED)
-  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
+  set(OpenACC_CXX_FLAGS "-fopenacc")
+  target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
+  target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
+  # This should be target_link_options(), but only available after CMake 3.13
+  set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
+
+  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
   # CUDA
-  find_package(CUDAToolkit REQUIRED)
+  foreach(CUDALIB IN ITEMS cudart)
+    add_library(${CUDALIB} SHARED IMPORTED)
+    set_target_properties(${CUDALIB} PROPERTIES
+      IMPORTED_LOCATION /usr/local/cuda-11.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-11.0/targets/x86_64-linux/include
+      )
+  endforeach(CUDALIB)
+
+  foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
+    add_library(${CUDALIB} SHARED IMPORTED)
+    set_target_properties(${CUDALIB} PROPERTIES
+      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
+      )
+  endforeach(CUDALIB)
 
   target_link_libraries(monolish_gpu
     PRIVATE
-    OpenACC::OpenACC_CXX
-    CUDA::cublas
-    CUDA::cusolver
-    CUDA::cusparse
-    CUDA::cudart
-  )
+    cublas
+    cusolver
+    cusparse
+    cudart
+    )
 
   install(
     TARGETS monolish_gpu
     LIBRARY
       DESTINATION lib
-  )
+    )
 endif(BUILD_GPU)
 
 ###############################################################################
@@ -68,7 +89,7 @@ target_sources(monolish_cpu
   ${MONOLISH_SOURCE_FILES}
   )
 
-set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
+target_compile_features(monolish_cpu PUBLIC cxx_std_14)
 target_compile_options(monolish_cpu PRIVATE -O3)
 
 find_package(OpenMP)
