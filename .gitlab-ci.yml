@@ -79,7 +79,6 @@ vector_common_gpu:
     script:
         - cd test/vector_common/
         - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -102,7 +101,6 @@ matrix_common_gpu:
     script:
         - cd test/matrix_common/
         - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -128,7 +126,6 @@ vector_blas_gpu:
     script:
         - cd test/vector_blas/
         - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -151,7 +148,6 @@ matrix_blas_gpu:
     script:
         - cd test/matrix_blas/
         - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
@@ -201,7 +197,6 @@ logger_gpu:
     script:
         - cd test/logger/
         - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
     artifacts:
         paths:
             - test/
