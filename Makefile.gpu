@@ -45,8 +45,9 @@ vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
 vpath %.cpp ./src/blas/matrix/getvec
 vpath %.cpp ./src/blas/matrix/scal
-vpath %.cpp ./src/blas/matrix/matmul
 vpath %.cpp ./src/blas/matrix/matvec
+vpath %.cpp ./src/blas/matrix/matadd
+vpath %.cpp ./src/blas/matrix/matmul
 
 vpath %.cpp ./src/utils/
 
