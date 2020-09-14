@@ -114,6 +114,14 @@ public:
   }
 
   /**
+   * @brief get data size [GB]
+   * @return data size
+   **/
+  double get_data_size() const {
+    return get_nnz() * sizeof(Float) / 1.0e+9;
+  }
+
+  /**
    * @brief get element A[i][j] (only CPU)
    * @param[in] i row
    * @param[in] j col

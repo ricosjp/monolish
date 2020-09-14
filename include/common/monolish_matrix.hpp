@@ -205,6 +205,10 @@ public:
     B.val = get_val_ptr();
   }
 
+  /**
+   * @brief get data size [GB]
+   * @return data size
+   **/
   double get_data_size() const {
     return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
   }
@@ -334,6 +338,14 @@ public:
   void col(const size_t c, vector<Float> &vec);
 
   /////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @brief get data size [GB]
+   * @return data size
+   **/
+  double get_data_size() const {
+    return (get_nnz() * sizeof(Float) + (get_row()+1) * sizeof(int) + get_nnz() * sizeof(int)) / 1.0e+9;
+  }
 
   /**
    * @brief matrix copy
