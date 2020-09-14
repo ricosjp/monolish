@@ -1,4 +1,4 @@
-FROM registry.ritc.jp/ricos/allgebra/cuda10_2:latest
+FROM registry.ritc.jp/ricos/allgebra:0.1.0
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
 RUN mkdir -p /opt/ricos/monolish/0.1/lib \
