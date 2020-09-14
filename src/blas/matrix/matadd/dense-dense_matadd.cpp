@@ -43,9 +43,9 @@ void blas::matadd(const matrix::Dense<double> &A,
   }
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
+  }
 #endif
   logger.func_out();
 }
@@ -84,9 +84,9 @@ void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   }
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
+  }
 #endif
 
   logger.func_out();

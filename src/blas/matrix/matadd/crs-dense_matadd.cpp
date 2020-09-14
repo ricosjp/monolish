@@ -10,8 +10,8 @@
 namespace monolish {
 
 // double ///////////////////
-void blas::matadd(const matrix::CRS<double> &A,
-                  const matrix::CRS<double> &B, matrix::CRS<double> &C) {
+void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+                  matrix::CRS<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -43,9 +43,9 @@ void blas::matadd(const matrix::CRS<double> &A,
   }
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
+  }
 #endif
   logger.func_out();
 }
@@ -84,9 +84,9 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   }
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
+  }
 #endif
 
   logger.func_out();

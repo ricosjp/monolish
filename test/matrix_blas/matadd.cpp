@@ -2,8 +2,8 @@
 #include "monolish_blas.hpp"
 
 #define FUNC "matadd"
-#define DENSE_PERF 1 * M * N / time / 1.0e+9
-#define CRS_PERF 2 * M * nnzrow / time / 1.0e+9
+#define DENSE_PERF 1 * M *N / time / 1.0e+9
+#define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
 
 template <typename T>
 void get_ans(const monolish::matrix::Dense<T> &A,
@@ -22,13 +22,12 @@ void get_ans(const monolish::matrix::Dense<T> &A,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-      C.val[i] += A.val[i] * B.val[i];
+    C.val[i] += A.val[i] * B.val[i];
   }
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test(const size_t M, const size_t N, double tol, int iter,
-          int check_ans) {
+bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
 
   size_t nnzrow = 81;
   if ((nnzrow < M) && (nnzrow < N)) {
@@ -137,7 +136,7 @@ int main(int argc, char **argv) {
         (strcmp(argv[4], "CRS") == 0)) {
       if (test<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                monolish::matrix::CRS<double>, double>(M, N, 1.0e-6, iter,
-                                                        check_ans) == false) {
+                                                      check_ans) == false) {
         return 1;
       }
     }
@@ -157,7 +156,7 @@ int main(int argc, char **argv) {
         (strcmp(argv[4], "CRS") == 0)) {
       if (test<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
                monolish::matrix::CRS<float>, float>(M, N, 1.0e-6, iter,
-                                                      check_ans) == false) {
+                                                    check_ans) == false) {
         return 1;
       }
     }
