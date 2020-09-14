@@ -62,6 +62,7 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans){
         };
         A.device_free();
         x.device_free();
+        y.device_free();
     }
     monolish::util::send(A, x, y);
 
