@@ -32,7 +32,7 @@ fx:
 	$(FXCXX) $(FXCXXFLAGS) test_fort.o test_cpp.o -lstdc++ -o test.out $(LIB_FX) 
 
 run_cpu:
-	 ./test.out
+#	 ./test.out
 	
 run_gpu:
 	./test.out
