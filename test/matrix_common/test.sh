@@ -17,7 +17,7 @@ case $1 in
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        $(PROFILER) ./convert_$2.out $prec $format $M $N $3 1 || exit 1
+                        $PROFILER ./convert_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
@@ -28,7 +28,7 @@ case $1 in
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        $(PROFILER) ./mv_mul_$2.out $prec $format $M $N $3 1 || exit 1
+                        $PROFILER ./mv_mul_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
@@ -39,13 +39,13 @@ case $1 in
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        $(PROFILER) ./transpose_$2.out $prec $format $M $N $3 1 || exit 1
+                        $PROFILER ./transpose_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
         done
         ;;
     "matrix_common" ) 
-        $(PROFILER) ./matrix_common_$2.out $prec $format $M $N $3 1 || exit 1
+        $PROFILER ./matrix_common_$2.out $prec $format $M $N $3 1 || exit 1
         ;;
 esac
