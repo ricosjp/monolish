@@ -248,6 +248,11 @@ public:
   void diag_mul(size_t i, const Float alpha);
   void diag_div(size_t i, const Float alpha);
 
+  void diag_add(size_t i, const vector<Float>& vec);
+  void diag_sub(size_t i, const vector<Float>& vec);
+  void diag_mul(size_t i, const vector<Float>& vec);
+  void diag_div(size_t i, const vector<Float>& vec);
+
 
 };
 } // namespace matrix
