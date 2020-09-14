@@ -23,7 +23,29 @@ case $1 in
             done
         done
         ;;
+    "mv_mul" ) 
+        for format in ${FORMAT[@]}; do
+            for prec in ${PREC[@]}; do
+                for M in ${MAT_TEST_SIZE[@]}; do
+                    for N in ${MAT_TEST_SIZE[@]}; do
+                        ./mv_mul_$2.out $prec $format $M $N $3 1 || exit 1
+                    done
+                done
+            done
+        done
+        ;;
+    "transpose" ) 
+        for format in ${FORMAT[@]}; do
+            for prec in ${PREC[@]}; do
+                for M in ${MAT_TEST_SIZE[@]}; do
+                    for N in ${MAT_TEST_SIZE[@]}; do
+                        ./transpose_$2.out $prec $format $M $N $3 1 || exit 1
+                    done
+                done
+            done
+        done
+        ;;
     "matrix_common" ) 
-        ./convert_$2.out $prec $format $M $N $3 1 || exit 1
+        ./matrix_common_$2.out $prec $format $M $N $3 1 || exit 1
         ;;
 esac

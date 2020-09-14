@@ -28,7 +28,7 @@ bool test(const size_t M, const size_t N, int iter, int check_ans){
                     result_coo.get_col() != ans_coo.get_col() ||
                     result_coo.get_nnz() != ans_coo.get_nnz()   ){
 
-                std::cout << "error, row, col, nnz are different(COO2" << mat.get_format_name() << ")" << std::endl;
+                std::cout << "error, row, col, nnz are different(COO2" << mat.type() << ")" << std::endl;
                 std::cout << result_coo.get_row() << " != " << ans_coo.get_row() << std::endl;
                 std::cout << result_coo.get_col() << " != " << ans_coo.get_col() << std::endl;
                 std::cout << result_coo.get_nnz() << " != " << ans_coo.get_nnz() << std::endl;
@@ -65,7 +65,7 @@ bool test(const size_t M, const size_t N, int iter, int check_ans){
 
     double time = sec / iter;
     std::cout << "func\tprec\tM\tN\ttime[sec]" << std::endl;
-    std::cout << FUNC << "(COO2" << mat.get_format_name() << ")\t" << std::flush;
+    std::cout << FUNC << "(COO2" << mat.type() << ")\t" << std::flush;
     std::cout << get_type<T>() << "\t" << std::flush;
     std::cout << M << "\t" << std::flush;
     std::cout << N << "\t" << std::flush;

@@ -1,11 +1,37 @@
 #include"../test_utils.hpp"
 #include"monolish_blas.hpp"
 
-#define FUNC "transpose"
+#define FUNC "mv_mul"
+#define DENSE_PERF 2*M*N/time/1.0e+9
+#define CRS_PERF 2*M*nnzrow/time/1.0e+9
+
+template <typename T>
+void get_ans(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx, monolish::vector<T> &my){
+
+    if(A.get_col() != mx.size()){
+        std::runtime_error("A.col != x.size");
+    }
+    if(A.get_col() != mx.size()){
+        std::runtime_error("A.row != y.size");
+    }
+
+    T* x = mx.data();
+    T* y = my.data();
+    int M = A.get_row();
+    int N = A.get_col();
+
+    for(int i = 0; i < my.size(); i++)
+        y[i] = 0;
+
+    for(int i = 0; i < M; i++){
+        for(int j = 0; j < N; j++){
+            y[i] += A.val[N * i + j] * x[j];
+        }
+    }
+}
 
 template <typename MAT, typename T>
 bool test(const size_t M, const size_t N, double tol, int iter, int check_ans){
-
     size_t nnzrow = 81;
     if( nnzrow < N){
         nnzrow=81;
@@ -13,42 +39,60 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans){
     else{
         nnzrow = N - 1;
     }
+
     monolish::matrix::COO<T> seedA = monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
 
     MAT A(seedA); // M*N matrix
 
-    if(check_ans == 1){
-        monolish::util::send(A);
-        A.transpose();
-        A.transpose();
-        A.recv();
+    monolish::vector<T> x(A.get_col(), 0.0, 1.0);
+    monolish::vector<T> y(A.get_row(), 0.0, 1.0);
 
-        monolish::matrix::COO<T> ansA(A);
-        if(ans_check<T>(seedA.val.data(), ansA.val.data(), ansA.get_nnz(), tol) == false){
+    monolish::vector<T> ansy(A.get_row());
+    ansy = y;
+
+    if(check_ans == 1){
+        monolish::matrix::Dense<T> AA(seedA);
+        get_ans(AA, x, ansy);
+
+        monolish::util::send(A, x, y);
+        y = A * x;
+        y.recv();
+        if(ans_check<T>(y.data(), ansy.data(), y.size(), tol) == false){
             return false;
         };
         A.device_free();
+        x.device_free();
     }
-    monolish::util::send(A);
+    monolish::util::send(A, x, y);
 
     auto start = std::chrono::system_clock::now();
 
     for(int i = 0; i < iter; i++){
-        A.transpose();
+        y = A * x;
     }
 
     auto end = std::chrono::system_clock::now();
     double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count()/1.0e+9;
 
     A.device_free();
+    x.device_free();
+    y.device_free();
 
     double time = sec / iter;
-    std::cout << "func\tprec\tM\tN\ttime[sec]" << std::endl;
+    std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS] " << std::endl;
     std::cout << FUNC << "(" << A.type() << ")\t" << std::flush;
     std::cout << get_type<T>() << "\t" << std::flush;
     std::cout << M << "\t" << std::flush;
     std::cout << N << "\t" << std::flush;
-    std::cout << time << "\t" << std::endl;
+    std::cout << time << "\t" << std::flush;
+
+    if( (strcmp(A.type().data(),"Dense") == 0)){
+        std::cout << DENSE_PERF << "\t" << std::endl;
+    }
+
+    if( (strcmp(A.type().data(),"CRS") == 0)){
+        std::cout << CRS_PERF << "\t" << std::endl;
+    }
 
     return true;
 }
@@ -72,8 +116,8 @@ int main(int argc, char** argv){
         if( (strcmp(argv[2],"Dense") == 0) ){
             if( test<monolish::matrix::Dense<double>,double>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
-        if( (strcmp(argv[2],"COO") == 0) ){
-            if( test<monolish::matrix::COO<double>,double>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
+        if( (strcmp(argv[2],"CRS") == 0) ){
+            if( test<monolish::matrix::CRS<double>,double>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
     }
 
@@ -81,8 +125,8 @@ int main(int argc, char** argv){
         if( (strcmp(argv[2],"Dense") == 0) ){
             if( test<monolish::matrix::Dense<float>,float>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
-        if( (strcmp(argv[2],"COO") == 0) ){
-            if( test<monolish::matrix::COO<float>,float>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
+        if( (strcmp(argv[2],"CRS") == 0) ){
+            if( test<monolish::matrix::CRS<float>,float>(M, N, 1.0e-6, iter, check_ans) == false){ return 1; }
         }
     }
 

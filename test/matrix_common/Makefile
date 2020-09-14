@@ -36,24 +36,28 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matmul cpu 10
-	bash ./test.sh matvec cpu 10
-	bash ./test.sh mscal cpu 10
+	bash ./test.sh matrix_common cpu 10
+	bash ./test.sh convert cpu 10
+	bash ./test.sh mv_mul cpu 10
+	bash ./test.sh transpose cpu 10
  
 run_gpu:
-	bash ./test.sh matmul gpu 10
-	bash ./test.sh matvec gpu 10
-	bash ./test.sh mscal gpu 10
+	bash ./test.sh matrix_common gpu 10
+	bash ./test.sh convert gpu 10
+	bash ./test.sh mv_mul gpu 10
+	bash ./test.sh transpose gpu 10
 
 run_fx:
-	bash ./test.sh matmul fx 10
-	bash ./test.sh matvec fx 10
-	bash ./test.sh mscal fx 10
+	bash ./test.sh matrix_common fx 10
+	bash ./test.sh convert fx 10
+	bash ./test.sh mv_mul fx 10
+	bash ./test.sh transpose fx 10
 
 run_sx:
-	bash ./test.sh matmul sx 10
-	bash ./test.sh matvec sx 10
-	bash ./test.sh mscal sx 10
+	bash ./test.sh matrix_common sx 10
+	bash ./test.sh convert sx 10
+	bash ./test.sh mv_mul sx 10
+	bash ./test.sh transpose sx 10
 
 clean:
 	- rm *.out

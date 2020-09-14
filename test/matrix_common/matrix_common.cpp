@@ -263,6 +263,8 @@ bool fixed_size_test() {
         ss << "2 2 " << 2.0 << std::endl;
         if (oss.str() != ss.str()) { std::cout << "2 elements and sorted A" << std::endl; return false; }
     }
+
+    std::cout << "Pass in " << get_type<T>() << " precision" << std::endl;
     return true;
 }
 
