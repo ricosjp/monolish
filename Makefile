@@ -1,4 +1,4 @@
-CONTAINER  := registry.ritc.jp/ricos/allgebra:0.1.0
+CONTAINER  := registry.ritc.jp/ricos/allgebra/cuda10_2:latest
 .PHONY: cpu gpu gpu-debug lib test install
 
 all:cpu gpu
@@ -55,3 +55,6 @@ in-cpu:
 	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
 	docker pull $(CONTAINER) 
 	docker run -it --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+
+format:
+	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/clang-format:latest /usr/bin/check-format.sh

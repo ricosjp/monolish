@@ -1,9 +1,9 @@
 CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 
-.PHONY: test allgebra 
+.PHONY: test monolish
 
-all: allgebra
+all: monolish
 
 login:
 ifeq ($(CI_BUILD_TOKEN),)
@@ -13,10 +13,10 @@ else
 endif
 
 
-allgebra: docker/Dockerfile lib/ include/
+monolish: docker/Dockerfile lib/ include/
 	docker build -t $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) . -f docker/Dockerfile
 
-push: login allgebra
+push: login monolish
 	docker push $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
 
 in:  
