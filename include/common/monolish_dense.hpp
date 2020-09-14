@@ -263,6 +263,17 @@ public:
   void row_mul(const size_t r, const vector<Float>& alpha);
   void row_sub(const size_t r, const vector<Float>& alpha);
   void row_div(const size_t r, const vector<Float>& alpha);
+
+  // sub-vector operation (col)
+  void col_add(const size_t c, const Float alpha);
+  void col_sub(const size_t c, const Float alpha);
+  void col_mul(const size_t c, const Float alpha);
+  void col_div(const size_t c, const Float alpha);
+
+  void col_add(const size_t c, const vector<Float>& alpha);
+  void col_mul(const size_t c, const vector<Float>& alpha);
+  void col_sub(const size_t c, const vector<Float>& alpha);
+  void col_div(const size_t c, const vector<Float>& alpha);
 };
 } // namespace matrix
 } // namespace monolish
