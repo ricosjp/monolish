@@ -3,6 +3,9 @@
 #cmake_policy(SET CMP0076 NEW)
 cmake_minimum_required(VERSION 3.10)
 
+# Add cmake/ as module path
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
