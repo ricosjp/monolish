@@ -100,21 +100,21 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send() const{
+  void send() const {
     throw std::runtime_error("error, GPU util of COO format is not impl. ");
   };
 
   /**
    * @brief recv data from GPU
    **/
-  void recv() const{
+  void recv() const {
     throw std::runtime_error("error, GPU util of COO format is not impl. ");
   };
 
   /**
    * @brief free data on GPU
    **/
-  void device_free() const{};
+  void device_free() const {};
 
   /**
    * @brief false; // true: sended, false: not send

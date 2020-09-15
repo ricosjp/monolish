@@ -5,7 +5,7 @@ namespace monolish {
 namespace matrix {
 
 // add vector
-template <typename T> void Dense<T>::diag_add(const vector<T>& vec) {
+template <typename T> void Dense<T>::diag_add(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -37,18 +37,20 @@ template <typename T> void Dense<T>::diag_add(const vector<T>& vec) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] += vecd[i];
+    vald[N * i + i] += vecd[i];
   }
 
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_add(const vector<double>& vec);
-template void monolish::matrix::Dense<float>::diag_add(const vector<float>& vec);
+template void
+monolish::matrix::Dense<double>::diag_add(const vector<double> &vec);
+template void
+monolish::matrix::Dense<float>::diag_add(const vector<float> &vec);
 
 // sub vector
-template <typename T> void Dense<T>::diag_sub(const vector<T>& vec) {
+template <typename T> void Dense<T>::diag_sub(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -80,18 +82,20 @@ template <typename T> void Dense<T>::diag_sub(const vector<T>& vec) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] -= vecd[i];
+    vald[N * i + i] -= vecd[i];
   }
 
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_sub(const vector<double>& vec);
-template void monolish::matrix::Dense<float>::diag_sub( const vector<float>& vec);
+template void
+monolish::matrix::Dense<double>::diag_sub(const vector<double> &vec);
+template void
+monolish::matrix::Dense<float>::diag_sub(const vector<float> &vec);
 
 // mul vector
-template <typename T> void Dense<T>::diag_mul(const vector<T>& vec) {
+template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -123,18 +127,20 @@ template <typename T> void Dense<T>::diag_mul(const vector<T>& vec) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] *= vecd[i];
+    vald[N * i + i] *= vecd[i];
   }
 
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_mul(const vector<double>& vec);
-template void monolish::matrix::Dense<float>::diag_mul(const vector<float>& vec);
+template void
+monolish::matrix::Dense<double>::diag_mul(const vector<double> &vec);
+template void
+monolish::matrix::Dense<float>::diag_mul(const vector<float> &vec);
 
 // div vector
-template <typename T> void Dense<T>::diag_div(const vector<T>& vec) {
+template <typename T> void Dense<T>::diag_div(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -166,15 +172,17 @@ template <typename T> void Dense<T>::diag_div(const vector<T>& vec) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] /= vecd[i];
+    vald[N * i + i] /= vecd[i];
   }
 
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_div( const vector<double>& vec);
-template void monolish::matrix::Dense<float>::diag_div(const vector<float>& vec);
+template void
+monolish::matrix::Dense<double>::diag_div(const vector<double> &vec);
+template void
+monolish::matrix::Dense<float>::diag_div(const vector<float> &vec);
 
 } // namespace matrix
 } // namespace monolish

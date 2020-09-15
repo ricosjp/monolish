@@ -31,7 +31,7 @@ template <typename T> void Dense<T>::diag_add(const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] += alpha;
+    vald[N * i + i] += alpha;
   }
 #endif
 
@@ -67,7 +67,7 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] -= alpha;
+    vald[N * i + i] -= alpha;
   }
 #endif
 
@@ -103,7 +103,7 @@ template <typename T> void Dense<T>::diag_mul(const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] *= alpha;
+    vald[N * i + i] *= alpha;
   }
 #endif
 
@@ -139,7 +139,7 @@ template <typename T> void Dense<T>::diag_div(const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + i] /= alpha;
+    vald[N * i + i] /= alpha;
   }
 #endif
 

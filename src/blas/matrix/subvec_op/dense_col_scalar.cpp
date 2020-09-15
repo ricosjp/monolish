@@ -31,14 +31,16 @@ template <typename T> void Dense<T>::col_add(const size_t c, const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] += alpha;
+    vald[N * i + c] += alpha;
   }
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col_add(const size_t c, const double alpha);
-template void monolish::matrix::Dense<float>::col_add(const size_t c, const float alpha);
+template void monolish::matrix::Dense<double>::col_add(const size_t c,
+                                                       const double alpha);
+template void monolish::matrix::Dense<float>::col_add(const size_t c,
+                                                      const float alpha);
 
 // sub scalar
 template <typename T> void Dense<T>::col_sub(const size_t c, const T alpha) {
@@ -67,14 +69,16 @@ template <typename T> void Dense<T>::col_sub(const size_t c, const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] -= alpha;
+    vald[N * i + c] -= alpha;
   }
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col_sub(const size_t c, const double alpha);
-template void monolish::matrix::Dense<float>::col_sub(const size_t c, const float alpha);
+template void monolish::matrix::Dense<double>::col_sub(const size_t c,
+                                                       const double alpha);
+template void monolish::matrix::Dense<float>::col_sub(const size_t c,
+                                                      const float alpha);
 
 // mul scalar
 template <typename T> void Dense<T>::col_mul(const size_t c, const T alpha) {
@@ -103,14 +107,16 @@ template <typename T> void Dense<T>::col_mul(const size_t c, const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] *= alpha;
+    vald[N * i + c] *= alpha;
   }
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col_mul(const size_t c, const double alpha);
-template void monolish::matrix::Dense<float>::col_mul(const size_t c, const float alpha);
+template void monolish::matrix::Dense<double>::col_mul(const size_t c,
+                                                       const double alpha);
+template void monolish::matrix::Dense<float>::col_mul(const size_t c,
+                                                      const float alpha);
 
 // div scalar
 template <typename T> void Dense<T>::col_div(const size_t c, const T alpha) {
@@ -139,14 +145,16 @@ template <typename T> void Dense<T>::col_div(const size_t c, const T alpha) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] /= alpha;
+    vald[N * i + c] /= alpha;
   }
 #endif
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col_div(const size_t c, const double alpha);
-template void monolish::matrix::Dense<float>::col_div(const size_t c, const float alpha);
+template void monolish::matrix::Dense<double>::col_div(const size_t c,
+                                                       const double alpha);
+template void monolish::matrix::Dense<float>::col_div(const size_t c,
+                                                      const float alpha);
 
 } // namespace matrix
 } // namespace monolish

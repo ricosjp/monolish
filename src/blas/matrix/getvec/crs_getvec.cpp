@@ -5,7 +5,7 @@ namespace monolish {
 namespace matrix {
 
 // diag
-template <typename T> void CRS<T>::diag(vector<T> &vec) const{
+template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -57,7 +57,7 @@ template void monolish::matrix::CRS<double>::diag(vector<double> &vec) const;
 template void monolish::matrix::CRS<float>::diag(vector<float> &vec) const;
 
 // get_row
-template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const{
+template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -104,7 +104,7 @@ template void monolish::matrix::CRS<float>::row(const size_t r,
                                                 vector<float> &vec) const;
 
 // get_row
-template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const{
+template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

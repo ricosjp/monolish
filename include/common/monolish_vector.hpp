@@ -195,7 +195,7 @@ public:
   /**
    * @brief print all elements to standart I/O
    **/
-  void print_all() const{
+  void print_all() const {
     for (const auto v : val) {
       std::cout << v << std::endl;
     }
@@ -205,7 +205,7 @@ public:
    * @brief print all elements to file
    * @param[in] filename output filename
    **/
-  void print_all(std::string filename) const{
+  void print_all(std::string filename) const {
 
     std::ofstream ofs(filename);
     if (!ofs) {

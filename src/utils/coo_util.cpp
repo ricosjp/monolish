@@ -108,7 +108,7 @@ template <typename T> void COO<T>::input_mm(const char *filename) {
 template void COO<double>::input_mm(const char *filename);
 template void COO<float>::input_mm(const char *filename);
 
-template <typename T> void COO<T>::print_all() const{
+template <typename T> void COO<T>::print_all() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   std::cout << std::scientific;
@@ -128,7 +128,7 @@ template <typename T> void COO<T>::print_all() const{
 template void COO<double>::print_all() const;
 template void COO<float>::print_all() const;
 
-template <typename T> void COO<T>::print_all (std::string filename) const{
+template <typename T> void COO<T>::print_all(std::string filename) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   std::ofstream out(filename);

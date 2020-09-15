@@ -5,7 +5,7 @@ namespace monolish {
 // vec ///////////////////////////////////////
 
 // send
-template <typename T> void vector<T>::send() const{
+template <typename T> void vector<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -20,7 +20,7 @@ template <typename T> void vector<T>::send() const{
 }
 
 // recv
-template <typename T> void vector<T>::recv(){
+template <typename T> void vector<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -36,7 +36,7 @@ template <typename T> void vector<T>::recv(){
 }
 
 // nonfree_recv
-template <typename T> void vector<T>::nonfree_recv(){
+template <typename T> void vector<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -51,7 +51,7 @@ template <typename T> void vector<T>::nonfree_recv(){
 }
 
 // device_free
-template <typename T> void vector<T>::device_free() const{
+template <typename T> void vector<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -80,7 +80,7 @@ template void vector<double>::device_free() const;
 
 // CRS ///////////////////////////////////
 // send
-template <typename T> void matrix::CRS<T>::send() const{
+template <typename T> void matrix::CRS<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -137,7 +137,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void matrix::CRS<T>::device_free() const{
+template <typename T> void matrix::CRS<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -169,7 +169,7 @@ template void matrix::CRS<float>::device_free() const;
 template void matrix::CRS<double>::device_free() const;
 // Dense ///////////////////////////////////
 // send
-template <typename T> void matrix::Dense<T>::send() const{
+template <typename T> void matrix::Dense<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -184,7 +184,7 @@ template <typename T> void matrix::Dense<T>::send() const{
 }
 
 // recv
-template <typename T> void matrix::Dense<T>::recv(){
+template <typename T> void matrix::Dense<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -217,7 +217,7 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void matrix::Dense<T>::device_free() const{
+template <typename T> void matrix::Dense<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

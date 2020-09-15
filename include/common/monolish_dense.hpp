@@ -249,17 +249,16 @@ public:
   // mat - mat
   Dense<Float> operator+(const Dense<Float> &B);
 
-
   // sub-vector operation (diag)
   void diag_add(const Float alpha);
   void diag_sub(const Float alpha);
   void diag_mul(const Float alpha);
   void diag_div(const Float alpha);
 
-  void diag_add(const vector<Float>& vec);
-  void diag_sub(const vector<Float>& vec);
-  void diag_mul(const vector<Float>& vec);
-  void diag_div(const vector<Float>& vec);
+  void diag_add(const vector<Float> &vec);
+  void diag_sub(const vector<Float> &vec);
+  void diag_mul(const vector<Float> &vec);
+  void diag_div(const vector<Float> &vec);
 
   // sub-vector operation (row)
   void row_add(const size_t r, const Float alpha);
@@ -267,10 +266,10 @@ public:
   void row_mul(const size_t r, const Float alpha);
   void row_div(const size_t r, const Float alpha);
 
-  void row_add(const size_t r, const vector<Float>& alpha);
-  void row_mul(const size_t r, const vector<Float>& alpha);
-  void row_sub(const size_t r, const vector<Float>& alpha);
-  void row_div(const size_t r, const vector<Float>& alpha);
+  void row_add(const size_t r, const vector<Float> &alpha);
+  void row_mul(const size_t r, const vector<Float> &alpha);
+  void row_sub(const size_t r, const vector<Float> &alpha);
+  void row_div(const size_t r, const vector<Float> &alpha);
 
   // sub-vector operation (col)
   void col_add(const size_t c, const Float alpha);
@@ -278,10 +277,10 @@ public:
   void col_mul(const size_t c, const Float alpha);
   void col_div(const size_t c, const Float alpha);
 
-  void col_add(const size_t c, const vector<Float>& alpha);
-  void col_mul(const size_t c, const vector<Float>& alpha);
-  void col_sub(const size_t c, const vector<Float>& alpha);
-  void col_div(const size_t c, const vector<Float>& alpha);
+  void col_add(const size_t c, const vector<Float> &alpha);
+  void col_mul(const size_t c, const vector<Float> &alpha);
+  void col_sub(const size_t c, const vector<Float> &alpha);
+  void col_div(const size_t c, const vector<Float> &alpha);
 };
 } // namespace matrix
 } // namespace monolish
