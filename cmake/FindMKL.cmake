@@ -48,31 +48,17 @@ find_library(MKL_GNU_THREAD          NAMES mkl_gnu_thread           HINTS ${_MKL
 find_library(MKL_CORE                NAMES mkl_core                 HINTS ${_MKL_LIBRARY_HINTS})
 unset(_MKL_LIBRARY_HINTS)
 
-if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
-  set(MKL_LIBRARIES
-    ${MKL_SCALAPACK_LP64}
-    ${MKL_INTEL_LP64}
-    ${MKL_INTEL_THREAD}
-    ${MKL_CORE}
-    ${MKL_BLACS_INTELMPI_LP64}
-    iomp5
-    pthread
-    m
-    dl
-  )
-elseif(CMAKE_C_COMPILER_ID MATCHES "GNU")
-  set(MKL_LIBRARIES
-    ${MKL_SCALAPACK_LP64}
-    ${MKL_INTEL_LP64}
-    ${MKL_GNU_THREAD}
-    ${MKL_CORE}
-    ${MKL_BLACS_OPENMPI_LP64}
-    gomp
-    pthread
-    m
-    dl
-  )
-endif()
+set(MKL_LIBRARIES
+  ${MKL_SCALAPACK_LP64}
+  ${MKL_INTEL_LP64}
+  ${MKL_GNU_THREAD}
+  ${MKL_CORE}
+  ${MKL_BLACS_OPENMPI_LP64}
+  gomp
+  pthread
+  m
+  dl
+)
 
 if(MKL_INCLUDE_PATH AND MKL_LIBRARIES)
   set(MKL_FOUND TRUE)
