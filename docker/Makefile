@@ -1,6 +1,9 @@
 CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 
+MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+MONOLISH_TOP := $(shell dirname ${MAKEFILE_DIR})
+
 .PHONY: test monolish
 
 all: monolish
@@ -13,13 +16,16 @@ else
 endif
 
 
-monolish: docker/Dockerfile lib/ include/
-	docker build -t $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) . -f docker/Dockerfile
+monolish: $(MAKEFILE_DIR)/Dockerfile
+	docker build -t $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) $(MONOLISH_TOP) -f $(MAKEFILE_DIR)/Dockerfile
 
 push: login monolish
 	docker push $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
 
-in:  
-	docker pull  $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
-	docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/monolish_sample,dst=/test  $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
-	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/test,dst=/test  $(REGISTRY):$(CI_COMMIT_REF_NAME)
+in:
+	docker pull $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
+	docker run -it \
+		--gpus all   \
+		--privileged \
+		-v $(MAKEFILE_DIR)/monolish_sample:/test \
+		$(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)

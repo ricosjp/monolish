@@ -1,17 +1,8 @@
 FROM registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
-RUN mkdir -p /opt/ricos/monolish/0.1/lib \
-&&  mkdir -p /opt/ricos/monolish/0.1/include \
-&&  mkdir -p /opt/ricos/monolish/0.1/samples 
+COPY . /monolish
 
-COPY ./lib/ /opt/ricos/monolish/0.1/lib/
-COPY ./include/ /opt/ricos/monolish/0.1/include/
-COPY ./docker/monolish_sample/ /opt/ricos/monolish/0.1/samples
-
-COPY ./lib/* /usr/lib64/
-COPY ./include/* /usr/include/
-
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
-ENV LIBRARY_PATH $LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
-ENV CPATH $CPATH:/opt/ricos/monolish/0.1/include/
+RUN cmake -Bbuild -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=/usr /monolish \
+ && cmake --build build --target install -- -j $(nproc) \
+ && rm -rf build
