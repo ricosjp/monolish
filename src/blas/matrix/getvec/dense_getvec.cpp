@@ -9,14 +9,13 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
   size_t nnz = get_nnz();
   T *vecd = vec.data();
 
   const T *vald = val.data();
   const size_t M = get_row();
   const size_t N = get_col();
-  const size_t Len = get_row() > get_col() ? get_row() : get_col();
+  const size_t Len = std::min(get_row(),get_col());
 
   if (Len != vec.size()) {
     throw std::runtime_error("error A.size != diag.size");
@@ -24,7 +23,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) {
 
 #if USE_GPU // gpu
 
-#pragma acc data present(vecd [0:n], vald [0:nnz])
+#pragma acc data present(vecd [0:Len], vald [0:nnz])
 #pragma acc parallel
   {
 #pragma acc loop independent
@@ -36,7 +35,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < Len; i++) {
-    vecd[i] = vald[N * i + i];
+      vecd[i] = vald[N * i + i];
   }
 #endif
 
