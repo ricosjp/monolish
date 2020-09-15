@@ -56,8 +56,8 @@ if (BUILD_GPU)
   foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
     add_library(${CUDALIB} SHARED IMPORTED)
     set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
+      IMPORTED_LOCATION /usr/local/cuda/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda/targets/x86_64-linux/include
       )
   endforeach(CUDALIB)
 
