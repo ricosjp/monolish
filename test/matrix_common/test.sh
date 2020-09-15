@@ -52,4 +52,16 @@ case $1 in
         echo start $1 $prec $format $M $N $3
         $PROFILER ./$1_$2.out $prec $format $M $N $3 1 || exit 1
         ;;
+    "subvec_op" ) 
+        for format in Dense; do # only Dense
+            for prec in ${PREC[@]}; do
+                for M in ${MAT_TEST_SIZE[@]}; do
+                    for N in ${MAT_TEST_SIZE[@]}; do
+                        echo start $1 $2 $prec $format $M $N $3
+                        $PROFILER ./$1_$2.out $prec $M $N || exit 1
+                    done
+                done
+            done
+        done
+        ;;
 esac

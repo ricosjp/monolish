@@ -12,15 +12,13 @@ TEST_B=$(($RANDOM%100+100)) #100~200
 MAT_TEST_SIZE=($TEST_A $TEST_B)
 
 case $1 in
-    "matmul" ) 
+    "mscal" ) 
         for format in ${FORMAT[@]}; do
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
-                        for K in ${MAT_TEST_SIZE[@]}; do
-                            echo start $1 $2 $prec $format $M $N $K $3
-                            $PROFILER ./$1_$2.out $prec $format Dense Dense $M $N $K $3 1 || exit 1
-                        done
+                        echo start $1 $2 $prec $format $M $N $3
+                        $PROFILER ./$1_$2.out $prec $format $M $N $3 1 || exit 1
                     done
                 done
             done
@@ -38,13 +36,27 @@ case $1 in
             done
         done
         ;;
-    "mscal" ) 
+    "matadd" ) 
         for format in ${FORMAT[@]}; do
             for prec in ${PREC[@]}; do
                 for M in ${MAT_TEST_SIZE[@]}; do
                     for N in ${MAT_TEST_SIZE[@]}; do
                         echo start $1 $2 $prec $format $M $N $3
-                        $PROFILER ./$1_$2.out $prec $format $M $N $3 1 || exit 1
+                            $PROFILER ./$1_$2.out $prec $format $format $format $M $N $3 1 || exit 1
+                    done
+                done
+            done
+        done
+        ;;
+    "matmul" ) 
+        for format in ${FORMAT[@]}; do
+            for prec in ${PREC[@]}; do
+                for M in ${MAT_TEST_SIZE[@]}; do
+                    for N in ${MAT_TEST_SIZE[@]}; do
+                        for K in ${MAT_TEST_SIZE[@]}; do
+                            echo start $1 $2 $prec $format $M $N $K $3
+                            $PROFILER ./$1_$2.out $prec $format Dense Dense $M $N $K $3 1 || exit 1
+                        done
                     done
                 done
             done

@@ -12,7 +12,7 @@ void get_ans(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
   if (A.get_col() != mx.size()) {
     std::runtime_error("A.col != x.size");
   }
-  if (A.get_col() != mx.size()) {
+  if (A.get_row() != my.size()) {
     std::runtime_error("A.row != y.size");
   }
 

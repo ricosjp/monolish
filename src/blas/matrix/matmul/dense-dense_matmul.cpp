@@ -130,8 +130,6 @@ matrix::Dense<T> matrix::Dense<T>::operator*(const matrix::Dense<T> &B) {
 
   blas::matmul(*this, B, C);
 
-  C.nonfree_recv();
-
   return C;
 }
 template matrix::Dense<double> matrix::Dense<double>::

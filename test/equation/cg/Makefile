@@ -1,18 +1,18 @@
 FUNC=cg
 all:
-	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
+	make -B FUNC=$(FUNC) ARCH=cpu -f ../../test_cpu.mk
 
 cpu:
-	make -B FUNC=$(FUNC) ARCH=cpu -f ../../Makefile_core.cpu
+	make -B FUNC=$(FUNC) ARCH=cpu -f ../../test_cpu.mk
 
 gpu:
-	make -B FUNC=$(FUNC) ARCH=gpu -f ../../Makefile_core.gpu
+	make -B FUNC=$(FUNC) ARCH=gpu -f ../../test_gpu.mk
 
 fx:
-	make -B FUNC=$(FUNC) ARCH=fx -f ../../Makefile_core.fx
+	make -B FUNC=$(FUNC) ARCH=fx -f ../../test_fx.mk
 
 sx:
-	make -B FUNC=$(FUNC) ARCH=sx -f ../../Makefile_core.sx
+	make -B FUNC=$(FUNC) ARCH=sx -f ../../test_sx.mk
 
 run_cpu:
 	./$(FUNC)_cpu.out ../../test.mtx 1

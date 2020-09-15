@@ -14,6 +14,50 @@ namespace blas {
 ////////////vector////////////////////
 
 //////////////////////////////////////////////////////
+//  T asum
+//////////////////////////////////////////////////////
+/**
+ * @brief double precision vector asum (absolute sum)
+ * @param[in] x double precision monolish vector
+ * @return The result of the asum
+ */
+double asum(const vector<double> &x);
+float asum(const vector<float> &x);
+
+//////////////////////////////////////////////////////
+//  void asum
+//////////////////////////////////////////////////////
+/**
+ * @brief double precision vector asum (absolute sum)
+ * @param[in] x double precision monolish vector
+ * @param[in] ans result value
+ */
+void asum(const vector<double> &x, double &ans);
+void asum(const vector<float> &x, float &ans);
+
+//////////////////////////////////////////////////////
+//  T sum
+//////////////////////////////////////////////////////
+/**
+ * @brief double precision vector sum
+ * @param[in] x double precision monolish vector
+ * @return The result of the sum
+ */
+double sum(const vector<double> &x);
+float sum(const vector<float> &x);
+
+//////////////////////////////////////////////////////
+//  void sum
+//////////////////////////////////////////////////////
+/**
+ * @brief double precision vector sum
+ * @param[in] x double precision monolish vector
+ * @param[in] ans result value
+ */
+void sum(const vector<double> &x, double &ans);
+void sum(const vector<float> &x, float &ans);
+
+//////////////////////////////////////////////////////
 //  axpy
 //////////////////////////////////////////////////////
 /**
@@ -124,37 +168,8 @@ void scal(const float alpha, vector<float> &x);
 void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 void xpay(const float alpha, const vector<float> &x, vector<float> &y);
 
-// CRS////////////////////////////////////////////////////////////////////////////////////
-
 //////////////////////////////////////////////////////
-//  matrix scale (crs)
-//////////////////////////////////////////////////////
-/**
- * @brief double precision scal: A = alpha * A
- * @param[in] alpha double precision scalar value
- * @param[in] A double precision CRS matrix
- */
-void mscal(const double alpha, matrix::CRS<double> &A);
-void mscal(const float alpha, matrix::CRS<float> &A);
-
-//////////////////////////////////////////////////////
-//  matvec (crs)
-//////////////////////////////////////////////////////
-/**
- * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
- * @param[in] A double precision CRS matrix
- * @param[in] x double precision monolish vector
- * @param[in] y double precision monolish vector
- */
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            vector<double> &y);
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            vector<float> &y);
-
-// Dense////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////
-//  matrix scale (Dense)
+//  matrix scale
 //////////////////////////////////////////////////////
 /**
  * @brief double precision scal: A = alpha * A
@@ -164,8 +179,16 @@ void matvec(const matrix::CRS<float> &A, const vector<float> &x,
 void mscal(const double alpha, matrix::Dense<double> &A);
 void mscal(const float alpha, matrix::Dense<float> &A);
 
+/**
+ * @brief double precision scal: A = alpha * A
+ * @param[in] alpha double precision scalar value
+ * @param[in] A double precision CRS matrix
+ */
+void mscal(const double alpha, matrix::CRS<double> &A);
+void mscal(const float alpha, matrix::CRS<float> &A);
+
 //////////////////////////////////////////////////////
-//  matvec (Dense)
+//  matvec
 //////////////////////////////////////////////////////
 /**
  * @brief double precision Dense matrix and vector multiplication: y = Ax
@@ -178,24 +201,45 @@ void matvec(const matrix::Dense<double> &A, const vector<double> &x,
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             vector<float> &y);
 
+/**
+ * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
+ * @param[in] A double precision CRS matrix
+ * @param[in] x double precision monolish vector
+ * @param[in] y double precision monolish vector
+ */
+void matvec(const matrix::CRS<double> &A, const vector<double> &x,
+            vector<double> &y);
+void matvec(const matrix::CRS<float> &A, const vector<float> &x,
+            vector<float> &y);
+
 //////////////////////////////////////////////////////
-//  matmul (Dense)
+//  matadd
 //////////////////////////////////////////////////////
 /**
- * @brief double precision Dense matrix multiplication: C = AB
+ * @brief double precision Dense matrix addition: C = AB (A and B must be same
+ * structure)
+ * @param[in] A double precision CRS matrix
+ * @param[in] B double precision CRS matrix
+ * @param[in] C double precision CRS matrix
+ */
+void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+            matrix::CRS<double> &C);
+void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+            matrix::CRS<float> &C);
+
+/**
+ * @brief double precision Dense matrix addition: C = AB
  * @param[in] A double precision Dense matrix
  * @param[in] B double precision Dense matrix
  * @param[in] C double precision Dense matrix
  */
-void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
-void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C);
 
-// CRS *
-// Dense////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
-//  matmul (Dense)
+//  matmul
 //////////////////////////////////////////////////////
 /**
  * @brief double precision Dense matrix multiplication: C = AB
@@ -207,5 +251,17 @@ void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C);
+
+/**
+ * @brief double precision Dense matrix multiplication: C = AB
+ * @param[in] A double precision Dense matrix
+ * @param[in] B double precision Dense matrix
+ * @param[in] C double precision Dense matrix
+ */
+void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+            matrix::Dense<double> &C);
+void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+            matrix::Dense<float> &C);
+
 } // namespace blas
 } // namespace monolish

@@ -20,8 +20,7 @@ private:
   size_t colN;
   size_t nnz;
 
-  bool gpu_flag = false;   // not impl
-  bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false; // true: sended, false: not send
 
   void set_row(const size_t N) { rowN = N; };
   void set_col(const size_t M) { colN = M; };
@@ -57,6 +56,15 @@ public:
 
     val.resize(nnz);
     std::copy(value, value + nnz, val.begin());
+  }
+
+  Dense(const size_t M, const size_t N, const std::vector<Float> value) {
+    set_row(M);
+    set_col(N);
+    set_nnz(M * N);
+
+    val.resize(nnz);
+    std::copy(value.data(), value.data() + nnz, val.begin());
   }
 
   // rand
@@ -112,6 +120,12 @@ public:
     }
     return *this;
   }
+
+  /**
+   * @brief get data size [GB]
+   * @return data size
+   **/
+  double get_data_size() const { return get_nnz() * sizeof(Float) / 1.0e+9; }
 
   /**
    * @brief get element A[i][j] (only CPU)
@@ -172,7 +186,7 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send();
+  void send() const;
 
   /**
    * @brief recv and free data from GPU
@@ -187,7 +201,7 @@ public:
   /**
    * @brief free data on GPU
    **/
-  void device_free();
+  void device_free() const;
 
   /**
    * @brief false; // true: sended, false: not send
@@ -205,9 +219,9 @@ public:
   }
 
   /////////////////////////////////////////////////////////////////////////////
-  void diag(vector<Float> &vec);
-  void row(const size_t r, vector<Float> &vec);
-  void col(const size_t c, vector<Float> &vec);
+  void diag(vector<Float> &vec) const;
+  void row(const size_t r, vector<Float> &vec) const;
+  void col(const size_t c, vector<Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -231,6 +245,42 @@ public:
 
   // mat - mat
   Dense<Float> operator*(const Dense<Float> &B);
+
+  // mat - mat
+  Dense<Float> operator+(const Dense<Float> &B);
+
+  // sub-vector operation (diag)
+  void diag_add(const Float alpha);
+  void diag_sub(const Float alpha);
+  void diag_mul(const Float alpha);
+  void diag_div(const Float alpha);
+
+  void diag_add(const vector<Float> &vec);
+  void diag_sub(const vector<Float> &vec);
+  void diag_mul(const vector<Float> &vec);
+  void diag_div(const vector<Float> &vec);
+
+  // sub-vector operation (row)
+  void row_add(const size_t r, const Float alpha);
+  void row_sub(const size_t r, const Float alpha);
+  void row_mul(const size_t r, const Float alpha);
+  void row_div(const size_t r, const Float alpha);
+
+  void row_add(const size_t r, const vector<Float> &alpha);
+  void row_mul(const size_t r, const vector<Float> &alpha);
+  void row_sub(const size_t r, const vector<Float> &alpha);
+  void row_div(const size_t r, const vector<Float> &alpha);
+
+  // sub-vector operation (col)
+  void col_add(const size_t c, const Float alpha);
+  void col_sub(const size_t c, const Float alpha);
+  void col_mul(const size_t c, const Float alpha);
+  void col_div(const size_t c, const Float alpha);
+
+  void col_add(const size_t c, const vector<Float> &alpha);
+  void col_mul(const size_t c, const vector<Float> &alpha);
+  void col_sub(const size_t c, const vector<Float> &alpha);
+  void col_div(const size_t c, const vector<Float> &alpha);
 };
 } // namespace matrix
 } // namespace monolish

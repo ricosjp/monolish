@@ -5,13 +5,13 @@ namespace monolish {
 // vec ///////////////////////////////////////
 
 // send
-template <typename T> void vector<T>::send() {
+template <typename T> void vector<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
-  T *d = val.data();
-  size_t N = val.size();
+  const T *d = val.data();
+  const size_t N = val.size();
 
 #pragma acc enter data copyin(d [0:N])
   gpu_status = true;
@@ -27,7 +27,7 @@ template <typename T> void vector<T>::recv() {
 #if USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
-    size_t N = val.size();
+    const size_t N = val.size();
 #pragma acc exit data copyout(d [0:N])
     gpu_status = false;
   }
@@ -43,7 +43,7 @@ template <typename T> void vector<T>::nonfree_recv() {
 #if USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
-    size_t N = val.size();
+    const size_t N = val.size();
 #pragma acc update host(d [0:N])
   }
 #endif
@@ -51,14 +51,14 @@ template <typename T> void vector<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void vector<T>::device_free() {
+template <typename T> void vector<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
-    T *d = val.data();
-    size_t N = val.size();
+    const T *d = val.data();
+    const size_t N = val.size();
 #pragma acc exit data delete (d [0:N])
     gpu_status = false;
   }
@@ -66,8 +66,8 @@ template <typename T> void vector<T>::device_free() {
   logger.util_out();
 }
 
-template void vector<float>::send();
-template void vector<double>::send();
+template void vector<float>::send() const;
+template void vector<double>::send() const;
 
 template void vector<float>::recv();
 template void vector<double>::recv();
@@ -75,21 +75,21 @@ template void vector<double>::recv();
 template void vector<float>::nonfree_recv();
 template void vector<double>::nonfree_recv();
 
-template void vector<float>::device_free();
-template void vector<double>::device_free();
+template void vector<float>::device_free() const;
+template void vector<double>::device_free() const;
 
 // CRS ///////////////////////////////////
 // send
-template <typename T> void matrix::CRS<T>::send() {
+template <typename T> void matrix::CRS<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
-  T *vald = val.data();
-  int *cold = col_ind.data();
-  int *rowd = row_ptr.data();
-  size_t N = get_row();
-  size_t nnz = get_nnz();
+  const T *vald = val.data();
+  const int *cold = col_ind.data();
+  const int *rowd = row_ptr.data();
+  const size_t N = get_row();
+  const size_t nnz = get_nnz();
 
 #pragma acc enter data copyin(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
   gpu_status = true;
@@ -137,17 +137,17 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void matrix::CRS<T>::device_free() {
+template <typename T> void matrix::CRS<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
-    int *cold = col_ind.data();
-    int *rowd = row_ptr.data();
-    size_t N = get_row();
-    size_t nnz = get_nnz();
+    const T *vald = val.data();
+    const int *cold = col_ind.data();
+    const int *rowd = row_ptr.data();
+    const size_t N = get_row();
+    const size_t nnz = get_nnz();
 
 #pragma acc exit data delete (vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
 
@@ -156,8 +156,8 @@ template <typename T> void matrix::CRS<T>::device_free() {
 #endif
   logger.util_out();
 }
-template void matrix::CRS<float>::send();
-template void matrix::CRS<double>::send();
+template void matrix::CRS<float>::send() const;
+template void matrix::CRS<double>::send() const;
 
 template void matrix::CRS<float>::recv();
 template void matrix::CRS<double>::recv();
@@ -165,17 +165,17 @@ template void matrix::CRS<double>::recv();
 template void matrix::CRS<float>::nonfree_recv();
 template void matrix::CRS<double>::nonfree_recv();
 
-template void matrix::CRS<float>::device_free();
-template void matrix::CRS<double>::device_free();
+template void matrix::CRS<float>::device_free() const;
+template void matrix::CRS<double>::device_free() const;
 // Dense ///////////////////////////////////
 // send
-template <typename T> void matrix::Dense<T>::send() {
+template <typename T> void matrix::Dense<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
-  T *vald = val.data();
-  size_t nnz = get_nnz();
+  const T *vald = val.data();
+  const size_t nnz = get_nnz();
 
 #pragma acc enter data copyin(vald [0:nnz])
   gpu_status = true;
@@ -217,14 +217,14 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void matrix::Dense<T>::device_free() {
+template <typename T> void matrix::Dense<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
-    size_t nnz = get_nnz();
+    const T *vald = val.data();
+    const size_t nnz = get_nnz();
 
 #pragma acc exit data delete (vald [0:nnz])
 
@@ -233,8 +233,8 @@ template <typename T> void matrix::Dense<T>::device_free() {
 #endif
   logger.util_out();
 }
-template void matrix::Dense<float>::send();
-template void matrix::Dense<double>::send();
+template void matrix::Dense<float>::send() const;
+template void matrix::Dense<double>::send() const;
 
 template void matrix::Dense<float>::recv();
 template void matrix::Dense<double>::recv();
@@ -242,6 +242,6 @@ template void matrix::Dense<double>::recv();
 template void matrix::Dense<float>::nonfree_recv();
 template void matrix::Dense<double>::nonfree_recv();
 
-template void matrix::Dense<float>::device_free();
-template void matrix::Dense<double>::device_free();
+template void matrix::Dense<float>::device_free() const;
+template void matrix::Dense<double>::device_free() const;
 } // namespace monolish
