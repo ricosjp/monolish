@@ -233,7 +233,7 @@ public:
 template <typename Float> class LU : public solver<Float> {
 private:
   int lib = 1; // lib is 1
-  int mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+//  int mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
   int cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
   int singularity;
   int reorder = 3;

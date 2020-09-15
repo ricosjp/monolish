@@ -13,8 +13,8 @@ BLAS_LIB += -lcblas -lblas_openmp
 
 ####################
 
-LIB_INC=$(BLAS_INC) $(MUMPS_INC)
-LIB_OBJ=$(BLAS_LIB) $(MUMPS_OBJ)
+LIB_INC=$(BLAS_INC) 
+LIB_OBJ=$(BLAS_LIB)
 
 ####################
 

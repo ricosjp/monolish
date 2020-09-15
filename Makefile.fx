@@ -14,20 +14,10 @@ LIBFLAGS = -shared
 
 ####################
 
-
 ####################
 
-# need mumps 
-# MUMPS_INC ?= -I ./external/obj/mumps/include/
-# MUMPS_OBJ ?= \
-# -L ./external/obj/mumps/lib/libpord.a \
-# -L ./external/obj/mumps/lib/libdmumps.a \
-# -L ./external/obj/mumps/lib/libmumps_common.a
-
-####################
-
-LIB_INC=$(BLAS_INC) $(MUMPS_INC)
-LIB_OBJ=$(BLAS_LIB) $(MUMPS_OBJ)
+LIB_INC=$(BLAS_INC) 
+LIB_OBJ=$(BLAS_LIB) 
 
 ####################
 
