@@ -49,6 +49,15 @@ public:
     std::copy(value, value + nnz, val.begin());
   }
 
+  CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
+      const std::vector<int> colind, const std::vector<Float> value)
+      : rowN(M), colN(N), nnz(value.size()), gpu_status(false), row_ptr(M + 1),
+        col_ind(nnz), val(nnz) {
+    std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
+    std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
+    std::copy(value.data(), value.data() + nnz, val.begin());
+  }
+
   void convert(COO<Float> &coo);
   CRS(COO<Float> &coo) { convert(coo); }
 

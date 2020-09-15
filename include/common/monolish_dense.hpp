@@ -58,6 +58,15 @@ public:
     std::copy(value, value + nnz, val.begin());
   }
 
+  Dense(const size_t M, const size_t N, const std::vector<Float> value) {
+    set_row(M);
+    set_col(N);
+    set_nnz(M * N);
+
+    val.resize(nnz);
+    std::copy(value.data(), value.data() + nnz, val.begin());
+  }
+
   // rand
   Dense(const size_t M, const size_t N, const Float min, const Float max) {
     set_row(M);
