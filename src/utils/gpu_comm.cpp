@@ -5,13 +5,13 @@ namespace monolish {
 // vec ///////////////////////////////////////
 
 // send
-template <typename T> void vector<T>::send() {
+template <typename T> void vector<T>::send() const{
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
-  T *d = val.data();
-  size_t N = val.size();
+  const T *d = val.data();
+  const size_t N = val.size();
 
 #pragma acc enter data copyin(d [0:N])
   gpu_status = true;
@@ -20,14 +20,14 @@ template <typename T> void vector<T>::send() {
 }
 
 // recv
-template <typename T> void vector<T>::recv() {
+template <typename T> void vector<T>::recv(){
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
-    size_t N = val.size();
+    const size_t N = val.size();
 #pragma acc exit data copyout(d [0:N])
     gpu_status = false;
   }
@@ -36,14 +36,14 @@ template <typename T> void vector<T>::recv() {
 }
 
 // nonfree_recv
-template <typename T> void vector<T>::nonfree_recv() {
+template <typename T> void vector<T>::nonfree_recv(){
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
-    size_t N = val.size();
+    const size_t N = val.size();
 #pragma acc update host(d [0:N])
   }
 #endif
@@ -51,14 +51,14 @@ template <typename T> void vector<T>::nonfree_recv() {
 }
 
 // device_free
-template <typename T> void vector<T>::device_free() {
+template <typename T> void vector<T>::device_free() const{
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if USE_GPU
   if (gpu_status == true) {
-    T *d = val.data();
-    size_t N = val.size();
+    const T *d = val.data();
+    const size_t N = val.size();
 #pragma acc exit data delete (d [0:N])
     gpu_status = false;
   }
@@ -66,8 +66,8 @@ template <typename T> void vector<T>::device_free() {
   logger.util_out();
 }
 
-template void vector<float>::send();
-template void vector<double>::send();
+template void vector<float>::send() const;
+template void vector<double>::send() const;
 
 template void vector<float>::recv();
 template void vector<double>::recv();
@@ -75,8 +75,8 @@ template void vector<double>::recv();
 template void vector<float>::nonfree_recv();
 template void vector<double>::nonfree_recv();
 
-template void vector<float>::device_free();
-template void vector<double>::device_free();
+template void vector<float>::device_free() const;
+template void vector<double>::device_free() const;
 
 // CRS ///////////////////////////////////
 // send

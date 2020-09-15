@@ -4,7 +4,7 @@
 namespace monolish {
 
 // copy
-template <typename T> vector<T> vector<T>::copy() {
+template <typename T> vector<T> vector<T>::copy(){
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

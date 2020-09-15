@@ -32,7 +32,7 @@ namespace monolish {
 template <typename Float> class vector {
 private:
   std::vector<Float> val;
-  bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false; // true: sended, false: not send
 
 public:
   vector() {}
@@ -99,7 +99,7 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send();
+  void send() const;
 
   /**
    * @brief recv and free data from GPU
@@ -114,7 +114,7 @@ public:
   /**
    * @brief free data on GPU
    **/
-  void device_free();
+  void device_free() const;
 
   /**
    * @brief false; // true: sended, false: not send
@@ -141,6 +141,12 @@ public:
   Float *data() { return val.data(); }
 
   /**
+   * @brief returns a direct pointer to the vector
+   * @return A const pointer to the first element
+   **/
+  const Float *data() const { return val.data(); }
+
+  /**
    * @brief resize vector (only CPU)
    * @param[in] N vector length
    **/
@@ -161,12 +167,6 @@ public:
     }
     val.push_back(val);
   }
-
-  /**
-   * @brief returns a direct pointer to the vector
-   * @return A const pointer to the first element
-   **/
-  const Float *data() const { return val.data(); }
 
   /**
    * @brief returns a begin iterator
@@ -195,7 +195,7 @@ public:
   /**
    * @brief print all elements to standart I/O
    **/
-  void print_all() {
+  void print_all() const{
     for (const auto v : val) {
       std::cout << v << std::endl;
     }
@@ -205,7 +205,7 @@ public:
    * @brief print all elements to file
    * @param[in] filename output filename
    **/
-  void print_all(std::string filename) {
+  void print_all(std::string filename) const{
 
     std::ofstream ofs(filename);
     if (!ofs) {
