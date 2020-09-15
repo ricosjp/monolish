@@ -40,12 +40,12 @@ public:
 
   CRS() {}
 
-  CRS(const size_t M, const size_t N, const size_t NNZ, const int *row,
-      const int *col, const Float *value)
+  CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
+      const int *colind, const Float *value)
       : rowN(M), colN(N), nnz(NNZ), gpu_status(false), row_ptr(M + 1),
         col_ind(nnz), val(nnz) {
-    std::copy(row, row + (M + 1), row_ptr.begin());
-    std::copy(col, col + nnz, col_ind.begin());
+    std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
+    std::copy(colind, colind + nnz, col_ind.begin());
     std::copy(value, value + nnz, val.begin());
   }
 
