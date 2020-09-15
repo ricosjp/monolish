@@ -1,9 +1,0 @@
-[submodule "external/mumps"]
-	path = external/mumps
-	url = https://github.com/group-gu/mumps.git
-[submodule "external/OpenBLAS"]
-	path = external/OpenBLAS
-	url = https://github.com/xianyi/OpenBLAS.git
-[submodule "external/scalapack"]
-	path = external/scalapack
-	url = https://github.com/Reference-ScaLAPACK/scalapack
