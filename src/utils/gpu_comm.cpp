@@ -174,8 +174,8 @@ template <typename T> void matrix::Dense<T>::send() const{
   logger.util_in(monolish_func);
 
 #if USE_GPU
-  T *vald = val.data();
-  size_t nnz = get_nnz();
+  const T *vald = val.data();
+  const size_t nnz = get_nnz();
 
 #pragma acc enter data copyin(vald [0:nnz])
   gpu_status = true;
