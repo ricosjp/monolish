@@ -23,9 +23,6 @@ fx:
 sx:
 	make -B -j -f Makefile.sx
 
-external:
-	make -j -f Makefile.cpu libs
-
 install:
 	make -f Makefile.cpu install
 

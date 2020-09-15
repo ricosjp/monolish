@@ -72,9 +72,6 @@ $(OBJDIR)/%.o: %.cpp $(EXTERNALS)
 $(EXTERNALS):
 	git submodule update -i
 
-libs:
-	make -C external
-
 test:
 	cd test; make; make run
 

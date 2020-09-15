@@ -18,15 +18,6 @@ BLAS_LIB ?= -L/usr/lib64/ -lopenblas
 
 ####################
 
-# need mumps 
-MUMPS_INC ?= -I ./external/obj/mumps/include/
-MUMPS_OBJ ?= \
--L ./external/obj/mumps/lib/libpord.a \
--L ./external/obj/mumps/lib/libdmumps.a \
--L ./external/obj/mumps/lib/libmumps_common.a
-
-####################
-
 LIB_INC=$(BLAS_INC) $(MUMPS_INC)
 LIB_OBJ=$(BLAS_LIB) $(MUMPS_OBJ)
 
@@ -84,21 +75,13 @@ $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) $(LIB_INC) $(LIB_OBJ) -I../include -c $< -o $@
 
-libs:
-	git submodule update -i
-	make -C external
-
 test:
 	cd test; make; make run
 	
 install:
 	-mkdir -p $(MONOLISH_DIR)
-	-mkdir -p $(MONOLISH_DIR)/external
 	-cp -r lib $(MONOLISH_DIR)
 	-cp -r include $(MONOLISH_DIR)
-	-cp -r external/obj $(MONOLISH_DIR)/external/
-	-cp -r external/obj $(MONOLISH_DIR)/external/
-
 
 clean:
 	- rm $(OBJDIR)/*
