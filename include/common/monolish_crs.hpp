@@ -119,7 +119,7 @@ public:
    * @brief matrix copy
    * @return copied CRS matrix
    **/
-  CRS copy() const;
+  CRS copy();
 
   CRS(const CRS<Float> &mat);
 
