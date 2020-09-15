@@ -31,8 +31,7 @@ private:
   size_t colN;
   size_t nnz;
 
-  bool gpu_flag = false;   // not impl
-  bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false; // true: sended, false: not send
 
 public:
   std::vector<Float> val;
@@ -67,7 +66,7 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send();
+  void send() const;
 
   /**
    * @brief recv and free data from GPU
@@ -82,7 +81,7 @@ public:
   /**
    * @brief free data on GPU
    **/
-  void device_free();
+  void device_free() const;
 
   /**
    * @brief false; // true: sended, false: not send

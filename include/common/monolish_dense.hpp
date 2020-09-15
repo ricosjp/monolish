@@ -177,7 +177,7 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send();
+  void send() const;
 
   /**
    * @brief recv and free data from GPU
@@ -192,7 +192,7 @@ public:
   /**
    * @brief free data on GPU
    **/
-  void device_free();
+  void device_free() const;
 
   /**
    * @brief false; // true: sended, false: not send
