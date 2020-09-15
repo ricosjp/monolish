@@ -210,9 +210,9 @@ public:
   }
 
   /////////////////////////////////////////////////////////////////////////////
-  void diag(vector<Float> &vec);
-  void row(const size_t r, vector<Float> &vec);
-  void col(const size_t c, vector<Float> &vec);
+  void diag(vector<Float> &vec) const;
+  void row(const size_t r, vector<Float> &vec) const;
+  void col(const size_t c, vector<Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
 
