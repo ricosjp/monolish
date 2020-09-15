@@ -39,7 +39,7 @@ private:
   size_t colN;
   size_t nnz;
 
-  bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false; // true: sended, false: not send
 
 public:
   std::vector<int> row_index;
@@ -100,21 +100,21 @@ public:
   /**
    * @brief send data to GPU
    **/
-  void send() {
+  void send() const{
     throw std::runtime_error("error, GPU util of COO format is not impl. ");
   };
 
   /**
    * @brief recv data from GPU
    **/
-  void recv() {
+  void recv() const{
     throw std::runtime_error("error, GPU util of COO format is not impl. ");
   };
 
   /**
    * @brief free data on GPU
    **/
-  void device_free(){};
+  void device_free() const{};
 
   /**
    * @brief false; // true: sended, false: not send
@@ -145,15 +145,16 @@ public:
   /**
    * @brief print all elements to standart I/O
    **/
-  void print_all();
+  void print_all() const;
+
   /**
    * @brief print all elements to file
    * @param[in] filename output filename
    **/
-  void print_all(std::string filename);
+  void print_all(std::string filename) const;
+
   Float at(size_t i, size_t j);
   Float at(size_t i, size_t j) const;
-  // void insert(size_t i, size_t j, Float value);
 
   void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c,
                std::vector<Float> &v);

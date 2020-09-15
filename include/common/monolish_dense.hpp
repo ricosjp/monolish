@@ -20,8 +20,7 @@ private:
   size_t colN;
   size_t nnz;
 
-  bool gpu_flag = false;   // not impl
-  bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false; // true: sended, false: not send
 
   void set_row(const size_t N) { rowN = N; };
   void set_col(const size_t M) { colN = M; };
