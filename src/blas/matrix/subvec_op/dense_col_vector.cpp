@@ -20,7 +20,7 @@ void Dense<T>::row_add(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -67,7 +67,7 @@ void Dense<T>::row_sub(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -114,7 +114,7 @@ void Dense<T>::row_mul(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -161,7 +161,7 @@ void Dense<T>::row_div(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
