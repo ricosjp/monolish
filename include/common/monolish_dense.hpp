@@ -98,19 +98,28 @@ public:
     }
   }
 
+  /**
+   * @brief A = A^T
+   **/
   Dense &transpose() {
-    Dense<Float> B(get_row(), get_col());
+    Dense<Float> B(get_col(), get_row());
     for (size_t i = 0; i < get_row(); ++i) {
       for (size_t j = 0; j < get_col(); ++j) {
         B.val[j * get_row() + i] = val[i * get_col() + j];
       }
     }
     std::copy(B.val.data(), B.val.data() + nnz, val.begin());
-    return *this;
-  }
-  Dense &transpose(Dense &B) {
     set_row(B.get_row());
     set_col(B.get_col());
+    return *this;
+  }
+
+  /**
+   * @brief A = B^T
+   **/
+  void transpose(const Dense &B) {
+    set_row(B.get_col());
+    set_col(B.get_row());
     val.resize(B.get_row() * B.get_col());
 
     for (size_t i = 0; i < get_row(); ++i) {
@@ -118,7 +127,6 @@ public:
         val[j * get_row() + i] = B.val[i * get_col() + j];
       }
     }
-    return *this;
   }
 
   /**

@@ -19,7 +19,15 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
 
   if (check_ans == 1) {
     monolish::util::send(A);
+
     A.transpose();
+    A.recv();
+    if (A.get_row() != N || A.get_col() != M) {
+      std::cout << "transpose error, transA.row = " << A.get_row()
+                << ", transA.col = " << A.get_col() << std::endl;
+      return false;
+    }
+    monolish::util::send(A);
     A.transpose();
     A.recv();
 

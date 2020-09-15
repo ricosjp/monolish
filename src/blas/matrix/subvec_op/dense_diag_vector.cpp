@@ -19,7 +19,7 @@ template <typename T> void Dense<T>::diag_add(const vector<T> &vec) {
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.diag.size");
   }
 
 #if USE_GPU // gpu
@@ -64,7 +64,7 @@ template <typename T> void Dense<T>::diag_sub(const vector<T> &vec) {
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.diag.size");
   }
 
 #if USE_GPU // gpu
@@ -109,7 +109,7 @@ template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.diag.size");
   }
 
 #if USE_GPU // gpu
@@ -154,7 +154,7 @@ template <typename T> void Dense<T>::diag_div(const vector<T> &vec) {
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.diag.size");
   }
 
 #if USE_GPU // gpu

@@ -6,7 +6,7 @@ namespace matrix {
 
 // add vector
 template <typename T>
-void Dense<T>::row_add(const size_t c, const vector<T> &vec) {
+void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -20,7 +20,7 @@ void Dense<T>::row_add(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -46,14 +46,14 @@ void Dense<T>::row_add(const size_t c, const vector<T> &vec) {
   logger.func_out();
 }
 template void
-monolish::matrix::Dense<double>::row_add(const size_t c,
+monolish::matrix::Dense<double>::col_add(const size_t c,
                                          const vector<double> &vec);
-template void monolish::matrix::Dense<float>::row_add(const size_t c,
+template void monolish::matrix::Dense<float>::col_add(const size_t c,
                                                       const vector<float> &vec);
 
 // sub vector
 template <typename T>
-void Dense<T>::row_sub(const size_t c, const vector<T> &vec) {
+void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -67,7 +67,7 @@ void Dense<T>::row_sub(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -93,14 +93,14 @@ void Dense<T>::row_sub(const size_t c, const vector<T> &vec) {
   logger.func_out();
 }
 template void
-monolish::matrix::Dense<double>::row_sub(const size_t c,
+monolish::matrix::Dense<double>::col_sub(const size_t c,
                                          const vector<double> &vec);
-template void monolish::matrix::Dense<float>::row_sub(const size_t c,
+template void monolish::matrix::Dense<float>::col_sub(const size_t c,
                                                       const vector<float> &vec);
 
 // mul vector
 template <typename T>
-void Dense<T>::row_mul(const size_t c, const vector<T> &vec) {
+void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -114,7 +114,7 @@ void Dense<T>::row_mul(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -140,14 +140,14 @@ void Dense<T>::row_mul(const size_t c, const vector<T> &vec) {
   logger.func_out();
 }
 template void
-monolish::matrix::Dense<double>::row_mul(const size_t c,
+monolish::matrix::Dense<double>::col_mul(const size_t c,
                                          const vector<double> &vec);
-template void monolish::matrix::Dense<float>::row_mul(const size_t c,
+template void monolish::matrix::Dense<float>::col_mul(const size_t c,
                                                       const vector<float> &vec);
 
 // div vector
 template <typename T>
-void Dense<T>::row_div(const size_t c, const vector<T> &vec) {
+void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -161,7 +161,7 @@ void Dense<T>::row_div(const size_t c, const vector<T> &vec) {
   const size_t Len = get_row();
 
   if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
+    throw std::runtime_error("error vec.size != A.row.size");
   }
 
 #if USE_GPU // gpu
@@ -187,9 +187,9 @@ void Dense<T>::row_div(const size_t c, const vector<T> &vec) {
   logger.func_out();
 }
 template void
-monolish::matrix::Dense<double>::row_div(const size_t c,
+monolish::matrix::Dense<double>::col_div(const size_t c,
                                          const vector<double> &vec);
-template void monolish::matrix::Dense<float>::row_div(const size_t c,
+template void monolish::matrix::Dense<float>::col_div(const size_t c,
                                                       const vector<float> &vec);
 
 } // namespace matrix
