@@ -3,9 +3,6 @@
 #cmake_policy(SET CMP0076 NEW)
 cmake_minimum_required(VERSION 3.10)
 
-# clangd setting
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
@@ -56,8 +53,8 @@ if (BUILD_GPU)
   foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
     add_library(${CUDALIB} SHARED IMPORTED)
     set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda/lib64/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda/include
+      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
+      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
       )
   endforeach(CUDALIB)
 
