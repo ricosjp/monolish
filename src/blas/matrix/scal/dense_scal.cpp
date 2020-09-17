@@ -66,8 +66,8 @@ matrix::Dense<T> matrix::Dense<T>::operator*(const T value) {
 
   return A;
 }
-template matrix::Dense<double> matrix::Dense<double>::
-operator*(const double value);
-template matrix::Dense<float> matrix::Dense<float>::
-operator*(const float value);
+template matrix::Dense<double>
+matrix::Dense<double>::operator*(const double value);
+template matrix::Dense<float>
+matrix::Dense<float>::operator*(const float value);
 } // namespace monolish
