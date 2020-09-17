@@ -90,7 +90,6 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 #endif
 
   logger.func_out();
-  logger.func_out();
 }
 
 template <typename T>

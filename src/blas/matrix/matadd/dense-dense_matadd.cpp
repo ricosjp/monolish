@@ -90,7 +90,6 @@ void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 #endif
 
   logger.func_out();
-  logger.func_out();
 }
 
 template <typename T>
