@@ -17,7 +17,7 @@ namespace blas {
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
  * @return The result of the asum
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -28,7 +28,7 @@ float asum(const vector<float> &x);
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
  * @param ans The result of the asum
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -39,7 +39,7 @@ void asum(const vector<float> &x, float &ans);
  * @brief single precision vector sum
  * @param x single precision monolish vector (size N)
  * @return The result of the sum
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -50,7 +50,7 @@ float sum(const vector<float> &x);
  * @brief single precision vector sum
  * @param x single precision monolish vector (size N)
  * @param ans The result of the sum
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -62,7 +62,7 @@ void sum(const vector<float> &x, float &ans);
  * @param alpha single precision scalar value
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -75,7 +75,7 @@ void axpy(const float alpha, const vector<float> &x, vector<float> &y);
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
  * @param z single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -88,7 +88,7 @@ void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
  * @return The result of the inner product product of x and y
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -100,7 +100,7 @@ float dot(const vector<float> &x, const vector<float> &y);
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
  * @param ans The result of the inner product product of x and y
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -111,7 +111,7 @@ void dot(const vector<float> &x, const vector<float> &y, float &ans);
  * @brief single precision nrm2: ||x||_2
  * @param x single precision monolish vector (size N)
  * @return The result of the nrm2
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -122,7 +122,7 @@ float nrm2(const vector<float> &x);
  * @brief single precision nrm2: ||x||_2
  * @param x single precision monolish vector (size N)
  * @param ans The result of the nrm2
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -133,7 +133,7 @@ void nrm2(const vector<float> &x, float &ans);
  * @brief single precision scal: x = alpha * x
  * @param alpha single precision scalar value
  * @param x single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -145,7 +145,7 @@ void scal(const float alpha, vector<float> &x);
  * @param alpha single precision scalar value
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -160,7 +160,7 @@ void xpay(const float alpha, const vector<float> &x, vector<float> &y);
  * @brief single precision scal: A = alpha * A
  * @param alpha single precision scalar value
  * @param A single precision Dense matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -171,7 +171,7 @@ void mscal(const float alpha, matrix::Dense<float> &A);
  * @brief single precision scal: A = alpha * A
  * @param alpha single precision scalar value
  * @param A single precision CRS matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -181,12 +181,12 @@ void mscal(const float alpha, matrix::CRS<float> &A);
 ///////////////
 
 /**
- * @brief single precision Dense matrix addition: C = A + B (A and B must be same
- * non-zero structure)
+ * @brief single precision Dense matrix addition: C = A + B (A and B must be
+ * same non-zero structure)
  * @param A single precision CRS matrix (size M x N)
  * @param B single precision CRS matrix (size M x N)
  * @param C single precision CRS matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -201,7 +201,7 @@ void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * @param A single precision Dense matrix (size M x N)
  * @param B single precision Dense matrix (size M x N)
  * @param C single precision Dense matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -216,7 +216,7 @@ void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * @param A single precision Dense matrix (size M x N)
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -229,7 +229,7 @@ void matvec(const matrix::Dense<float> &A, const vector<float> &x,
  * @param A single precision CRS matrix (size M x N)
  * @param x single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
- * @note 
+ * @note
  * - # of computation: 2nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -244,7 +244,7 @@ void matvec(const matrix::CRS<float> &A, const vector<float> &x,
  * @param A single precision Dense matrix (size M x K)
  * @param B single precision Dense matrix (size K x N)
  * @param C single precision Dense matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: 2MNK
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -257,7 +257,7 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * @param A single precision CRS matrix (size M x K)
  * @param B single precision Dense matrix (size K x N)
  * @param C single precision Dense matrix (size M x N)
- * @note 
+ * @note
  * - # of computation: 2*N*nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
