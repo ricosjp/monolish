@@ -269,13 +269,12 @@ docker_debug:
         - docker
 
 pages:
+    image: registry.ritc.jp/ricos/allgebra/doxygen:0.2.0
     stage: deploy
     script:
-        - apt update
-        - apt install -y doxygen graphviz
-        - cd doc; doxygen; ls; cd ..
-        - rm -rf public/doxygen
-        - cp -r doc/html public/
+        - rm -rf public html
+        - doxygen Doxyfile
+        - mv html public
         - cp -r test/logger/logging/*.html public/
     artifacts:
         paths:
@@ -283,4 +282,3 @@ pages:
         expire_in: 20min
     only:
         - master
-        - 50-small_bug_fix
