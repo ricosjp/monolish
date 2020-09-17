@@ -20,12 +20,13 @@ obj/
 obj_cpu/
 obj_gpu/
 pgipar*
-doc/html/
-doc/latex/
 docker/lib/
 docker/include/
 monolish_test.log
 test/logger/logging/*.html
+
+# Doxygen
+html/
 
 # clangd
 compile_commands.json

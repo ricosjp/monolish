@@ -132,8 +132,8 @@ matrix::Dense<T> matrix::Dense<T>::operator*(const matrix::Dense<T> &B) {
 
   return C;
 }
-template matrix::Dense<double> matrix::Dense<double>::
-operator*(const matrix::Dense<double> &B);
-template matrix::Dense<float> matrix::Dense<float>::
-operator*(const matrix::Dense<float> &B);
+template matrix::Dense<double>
+matrix::Dense<double>::operator*(const matrix::Dense<double> &B);
+template matrix::Dense<float>
+matrix::Dense<float>::operator*(const matrix::Dense<float> &B);
 } // namespace monolish

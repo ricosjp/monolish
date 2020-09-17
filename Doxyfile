@@ -38,7 +38,11 @@ PROJECT_NAME           = monolish
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
+<<<<<<< HEAD:doc/Doxyfile
 PROJECT_NUMBER         = 0.1.0
+=======
+PROJECT_NUMBER         = 0.2.1
+>>>>>>> 9df62703f175f1201893305738dfcf350c86c9df:Doxyfile
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -119,8 +123,8 @@ REPEAT_BRIEF           = YES
 # specifies, contains, represents, a, an and the.
 
 ABBREVIATE_BRIEF       = "The $name class" \
-                          "The $name widget" \
-						  "The $name file" \
+                         "The $name widget" \
+                         "The $name file" \
                          is \
                          provides \
                          specifies \
@@ -781,11 +785,16 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
+<<<<<<< HEAD:doc/Doxyfile
 INPUT =						../include/
 INPUT +=					../src/
 INPUT +=					./src/
 INPUT +=					../docker/doc/
 							 
+=======
+INPUT = include src test doc docker
+
+>>>>>>> 9df62703f175f1201893305738dfcf350c86c9df:Doxyfile
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
 # libiconv (or the iconv built into libc) for the transcoding. See the libiconv
