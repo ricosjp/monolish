@@ -15,7 +15,7 @@ stages:
     - deploy
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:latest
+    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
     stage: build_lib
     script:
         - check-format.sh
