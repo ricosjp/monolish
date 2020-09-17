@@ -30,7 +30,6 @@ double asum(const vector<double> &x);
  * - Order: N
  * - memory allocation: none
  */
- */
 void asum(const vector<double> &x, double &ans);
 
 /**

@@ -30,7 +30,6 @@ float asum(const vector<float> &x);
  * - Order: N
  * - memory allocation: none
  */
- */
 void asum(const vector<float> &x, float &ans);
 
 /**
