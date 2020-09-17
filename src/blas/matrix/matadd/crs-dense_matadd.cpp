@@ -101,8 +101,8 @@ matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
 
   return C;
 }
-template matrix::CRS<double> matrix::CRS<double>::
-operator+(const matrix::CRS<double> &B);
-template matrix::CRS<float> matrix::CRS<float>::
-operator+(const matrix::CRS<float> &B);
+template matrix::CRS<double>
+matrix::CRS<double>::operator+(const matrix::CRS<double> &B);
+template matrix::CRS<float>
+matrix::CRS<float>::operator+(const matrix::CRS<float> &B);
 } // namespace monolish
