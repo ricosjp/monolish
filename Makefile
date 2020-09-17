@@ -57,3 +57,6 @@ in-cpu:
 
 format:
 	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/clang-format:latest /usr/bin/check-format.sh
+
+document:
+	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/doxygen:latest doxygen Doxyfile
