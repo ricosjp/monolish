@@ -269,7 +269,7 @@ docker_debug:
         - docker
 
 pages:
-    image: registry.ritc.jp/ricos/allgebra/doxygen
+    image: registry.ritc.jp/ricos/allgebra/doxygen:0.2.0
     stage: deploy
     script:
         - rm -rf public html
