@@ -3,34 +3,34 @@ ALLGEBRA_TAG   := 20.10.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: cpu gpu gpu-debug lib test install in format
+.PHONY: cpu-debug gpu gpu-debug test-cpu test-gpu install install-cpu install-gpu in format document
 
 MONOLISH_DIR ?= $(HOME)/lib/monolish
 
-all:cpu gpu
+all: cpu gpu
 
 cpu:
-	cmake . \
+	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 cpu-debug:
-	cmake . \
+	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-Bbuild_cpu_debug
 	cmake --build build_cpu_debug -j `nproc`
 
 gpu:
-	cmake . \
+	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-Bbuild_gpu \
 		-DBUILD_GPU=ON
 	cmake --build build_gpu -j `nproc`
 
 gpu-debug:
-	cmake . \
+	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-Bbuild_gpu_debug \
@@ -38,10 +38,10 @@ gpu-debug:
 	cmake --build build_gpu_debug -j `nproc`
 
 fx:
-	make -B -j4 -f Makefile.fx
+	$(MAKE) -B -j4 -f Makefile.fx
 
 sx:
-	make -B -j -f Makefile.sx
+	$(MAKE) -B -j -f Makefile.sx
 
 install-cpu: cpu
 	cmake --build build_cpu --target install
@@ -59,24 +59,18 @@ install: install-cpu install-gpu
 install-debug: install-cpu-debug install-gpu-debug
 
 test-cpu: install-cpu
-	make -C test cpu
-	make -C test run_cpu
+	$(MAKE) -C test cpu
+	$(MAKE) -C test run_cpu
 
 test-gpu: install-gpu
-	make -C test gpu
-	make -C test run_gpu
+	$(MAKE) -C test gpu
+	$(MAKE) -C test run_gpu
 
 clean:
-	- rm -rf build*/
-	- make -f Makefile.fx clean
-	- make -f Makefile.sx clean
-	- make -C test/ clean
-
-zenbu:
-	make clean
-	make cpu
-	make gpu
-	make install
+	rm -rf build*/
+	$(MAKE) -f Makefile.fx clean
+	$(MAKE) -f Makefile.sx clean
+	$(MAKE) -C test/ clean
 
 in:
 	docker run -it --rm \
