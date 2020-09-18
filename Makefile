@@ -5,7 +5,7 @@ MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: cpu gpu gpu-debug lib test install in format
 
-MONOLISH_DIR ?= /opt/monolish
+MONOLISH_DIR ?= $(HOME)/lib/monolish
 
 all:cpu gpu
 
@@ -58,8 +58,13 @@ install-gpu-debug: gpu-debug
 install: install-cpu install-gpu
 install-debug: install-cpu-debug install-gpu-debug
 
-test:
-	cd test; make -B
+test-cpu: install-cpu
+	make -C test cpu
+	make -C test run_cpu
+
+test-gpu: install-gpu
+	make -C test gpu
+	make -C test run_gpu
 
 clean:
 	- rm -rf build*/
