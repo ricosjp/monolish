@@ -56,7 +56,15 @@ in-cpu:
 	docker run -it --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
 
 format:
-	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/clang-format:0.2.0 /usr/bin/check-format.sh
+	docker run -it --rm  \
+		-u `id -u`:`id -g` \
+		-v $(PWD):$(PWD)   \
+		-w $(PWD)          \
+		registry.ritc.jp/ricos/allgebra/clang-format:0.2.0 /usr/bin/check-format.sh
 
 document:
-	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) registry.ritc.jp/ricos/allgebra/doxygen:latest doxygen Doxyfile
+	docker run -it --rm  \
+		-u `id -u`:`id -g` \
+		-v $(PWD):$(PWD)   \
+		-w $(PWD)          \
+		registry.ritc.jp/ricos/allgebra/doxygen:0.2.0 doxygen Doxyfile
