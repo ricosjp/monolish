@@ -5,21 +5,37 @@ MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: cpu gpu gpu-debug lib test install in format
 
-INSTALL_DIR=/usr/lib64/
+MONOLISH_DIR ?= /opt/monolish
 
 all:cpu gpu
 
 cpu:
-	make -B -j -f Makefile.cpu
+	cmake . \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-Bbuild_cpu
+	cmake --build build_cpu -j `nproc`
 
 cpu-debug:
-	make -B -j -f Makefile.cpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake . \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-Bbuild_cpu_debug
+	cmake --build build_cpu_debug -j `nproc`
 
 gpu:
-	make -B -j -f Makefile.gpu
+	cmake . \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-Bbuild_gpu \
+		-DBUILD_GPU=ON
+	cmake --build build_gpu -j `nproc`
 
 gpu-debug:
-	make -B -j -f Makefile.gpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake . \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-Bbuild_gpu_debug \
+		-DBUILD_GPU=ON
+	cmake --build build_gpu_debug -j `nproc`
 
 fx:
 	make -B -j4 -f Makefile.fx
@@ -27,17 +43,28 @@ fx:
 sx:
 	make -B -j -f Makefile.sx
 
-install:
-	make -f Makefile.cpu install
+install-cpu: cpu
+	cmake --build build_cpu --target install
+
+install-cpu-debug: cpu-debug
+	cmake --build build_cpu_debug --target install
+
+install-gpu: gpu
+	cmake --build build_gpu --target install
+
+install-gpu-debug: gpu-debug
+	cmake --build build_gpu_debug --target install
+
+install: install-cpu install-gpu
+install-debug: install-cpu-debug install-gpu-debug
 
 test:
 	cd test; make -B
 
 clean:
-	- make -f Makefile.cpu clean 
-	- make -f Makefile.gpu clean 
-	- make -f Makefile.fx clean 
-	- make -f Makefile.sx clean 
+	- rm -rf build*/
+	- make -f Makefile.fx clean
+	- make -f Makefile.sx clean
 	- make -C test/ clean
 
 zenbu:
