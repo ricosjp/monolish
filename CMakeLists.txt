@@ -81,8 +81,7 @@ target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
 find_package(OpenMP)
 if (OpenMP_FOUND)
   target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  # This should be target_link_options(), but only available after CMake 3.13
-  set_target_properties(monolish_cpu PROPERTIES LINK_FLAGS ${OpenMP_CXX_FLAGS})
+  target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
   target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif (OpenMP_FOUND)
 
