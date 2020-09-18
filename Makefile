@@ -50,6 +50,7 @@ in:
 	docker run -it --rm \
 		--gpus all   \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
