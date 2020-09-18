@@ -78,6 +78,7 @@ target_compile_options(monolish_cpu PRIVATE "-mavx")
 target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
 
 
+# OpenMP
 find_package(OpenMP)
 if (OpenMP_FOUND)
   target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
@@ -85,26 +86,28 @@ if (OpenMP_FOUND)
   target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif (OpenMP_FOUND)
 
+# Intel MKL
 find_package(MKL)
+
+# BLAS
 if(MKL_FOUND)
-  set(BLA_VENDOR "Intel10_64lp")
+  # Not use FindBLAS if MKL is already found
+  target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
 else()
-  set(BLA_VENDOR "OpenBLAS")
+  find_package(BLAS REQUIRED)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS
+    NAMES cblas.h
+    HINTS
+      /usr/include
+      /usr/local/include
+      /usr/include/openblas
+  )
+  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif()
-find_package(BLAS)
-
-# BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-# see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-find_path(BLAS_INCLUDE_DIRS
-  NAMES cblas.h mkl_cblas.h
-  HINTS
-    /usr/include
-    /usr/local/include
-    /usr/include/openblas
-)
-
-target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 
 install(
   DIRECTORY include/
