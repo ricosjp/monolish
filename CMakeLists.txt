@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
 cmake_policy(SET CMP0076 NEW)
 
+# Add cmake/ as module path
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # clangd setting
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -83,20 +86,26 @@ if (OpenMP_FOUND)
   target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif (OpenMP_FOUND)
 
-# TODO: set BLA_VENDOR in modern way
-#set(BLA_VENDOR OpenBLAS)
+find_package(MKL)
+if(MKL_FOUND)
+  set(BLA_VENDOR "Intel10_64lp")
+else()
+  set(BLA_VENDOR "OpenBLAS")
+endif()
 find_package(BLAS)
-if (BLAS_FOUND)
-  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-  find_path(BLAS_INCLUDE_DIRS cblas.h
+
+# BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+# see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+find_path(BLAS_INCLUDE_DIRS
+  NAMES cblas.h mkl_cblas.h
+  HINTS
     /usr/include
     /usr/local/include
     /usr/include/openblas
-    )
-  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
-endif (BLAS_FOUND)
+)
+
+target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
+target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 
 install(
   DIRECTORY include/
