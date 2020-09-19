@@ -8,6 +8,10 @@
 #endif
 
 namespace monolish {
+/**
+ * @brief 
+ * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and Scalar
+ */
 namespace blas {
 
 //////////////////////////////////////////////////////
