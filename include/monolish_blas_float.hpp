@@ -157,7 +157,7 @@ void xpay(const float alpha, const vector<float> &x, vector<float> &y);
 //////////////////////////////////////////////////////
 
 /**
- * @brief single precision scal: A = alpha * A
+ * @brief single precision Densematrix scal: A = alpha * A
  * @param alpha single precision scalar value
  * @param A single precision Dense matrix (size M x N)
  * @note
@@ -168,7 +168,7 @@ void xpay(const float alpha, const vector<float> &x, vector<float> &y);
 void mscal(const float alpha, matrix::Dense<float> &A);
 
 /**
- * @brief single precision scal: A = alpha * A
+ * @brief single precision CRS matrix scal: A = alpha * A
  * @param alpha single precision scalar value
  * @param A single precision CRS matrix (size M x N)
  * @note
@@ -181,7 +181,7 @@ void mscal(const float alpha, matrix::CRS<float> &A);
 ///////////////
 
 /**
- * @brief single precision Dense matrix addition: C = A + B (A and B must be
+ * @brief single precision CRS matrix addition: C = A + B (A and B must be
  * same non-zero structure)
  * @param A single precision CRS matrix (size M x N)
  * @param B single precision CRS matrix (size M x N)

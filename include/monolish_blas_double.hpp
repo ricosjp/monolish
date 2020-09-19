@@ -157,7 +157,7 @@ void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 //////////////////////////////////////////////////////
 
 /**
- * @brief double precision scal: A = alpha * A
+ * @brief double precision Densematrix scal: A = alpha * A
  * @param alpha double precision scalar value
  * @param A double precision Dense matrix (size M x N)
  * @note
@@ -168,7 +168,7 @@ void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 void mscal(const double alpha, matrix::Dense<double> &A);
 
 /**
- * @brief double precision scal: A = alpha * A
+ * @brief double precision CRS matrix scal: A = alpha * A
  * @param alpha double precision scalar value
  * @param A double precision CRS matrix (size M x N)
  * @note
@@ -181,7 +181,7 @@ void mscal(const double alpha, matrix::CRS<double> &A);
 ///////////////
 
 /**
- * @brief double precision Dense matrix addition: C = A + B (A and B must be
+ * @brief double precision CRS matrix addition: C = A + B (A and B must be
  * same non-zero structure)
  * @param A double precision CRS matrix (size M x N)
  * @param B double precision CRS matrix (size M x N)
