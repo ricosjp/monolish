@@ -27,33 +27,55 @@
 namespace monolish {
 
 /**
- * @brief std::vector-like vector class
+ * @brief vector type
+ * @note
+ * - Multi-threading (OpenMP): true
+ * - GPU acceleration (OpenACC): false
  */
 template <typename Float> class vector {
 private:
+  /**
+   * @brief size N vector data
+   **/
   std::vector<Float> val;
-  mutable bool gpu_status = false; // true: sended, false: not send
+
+  /**
+   * @brief true: sended, false: not send
+   **/
+  mutable bool gpu_status = false;
 
 public:
   vector() {}
 
   // constractor ///////////////////////////////////////////////////////
   /**
-   * @brief allocate size N vector memory space
-   * @param[in] N vector length
+   * @brief allocate size N vector
+   * @param N vector length
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   vector(const size_t N) { val.resize(N); }
 
   /**
    * @brief initialize size N vector, value to fill the container
-   * @param[in] N vector length
-   * @param[in] value fill Float type value to all elements
+   * @param N vector length
+   * @param value fill Float type value to all elements
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   vector(const size_t N, const Float value) { val.resize(N, value); }
 
   /**
-   * @brief copy std::vector
-   * @param[in] vec input std::vector
+   * @brief copy from std::vector
+   * @param vec input std::vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   vector(const std::vector<Float> &vec) {
     val.resize(vec.size());
@@ -61,15 +83,26 @@ public:
   }
 
   /**
-   * @brief copy monolish::vector
-   * @param[in] vec input monolish::vector
+   * @brief copy from monolish::vector
+   * @param vec input monolish::vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   *    - # of data transfer: N (allocation)
+   *        - if `vec.gpu_statius == true`; coping data only on GPU
+   *        - else; coping data only on CPU
    **/
   vector(const vector<Float> &vec);
 
   /**
    * @brief copy from pointer
-   * @param[in] start start pointer
-   * @param[in] end  end pointer
+   * @param start start pointer
+   * @param end  end pointer
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   vector(const Float *start, const Float *end) {
     size_t size = (end - start);
@@ -79,9 +112,13 @@ public:
 
   /**
    * @brief create N length rand(min~max) vector
-   * @param[in] N vector length
-   * @param[in] min rand min
-   * @param[in] max rand max
+   * @param N vector length
+   * @param min rand min
+   * @param max rand max
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   vector(const size_t N, const Float min, const Float max) {
     val.resize(N);
@@ -98,33 +135,57 @@ public:
   // ///////////////////////////////////////////////////////////////////////////
   /**
    * @brief send data to GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
    **/
   void send() const;
 
   /**
-   * @brief recv and free data from GPU
+   * @brief recv data from GPU, and free data on GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
    **/
   void recv();
 
   /**
    * @brief recv data from GPU (w/o free)
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
    **/
   void nonfree_recv();
 
   /**
    * @brief free data on GPU
+   * @note
+   * - # of data transfer: 0
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
    **/
   void device_free() const;
 
   /**
-   * @brief false; // true: sended, false: not send
-   * @return true is sended.
-   * **/
+   * @brief true: sended, false: not send
+   * @return gpu status
+   * @note
+   * - # of data transfer: 0
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
+   **/
   bool get_device_mem_stat() const { return gpu_status; }
 
   /**
-   * @brief; free gpu mem.
-   * **/
+   * @brief destructor of vector, free GPU memory
+   * @note
+   * - # of data transfer: 0
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
+   **/
   ~vector() {
     if (get_device_mem_stat()) {
       device_free();
@@ -137,18 +198,26 @@ public:
   /**
    * @brief returns a direct pointer to the vector
    * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
    **/
   Float *data() { return val.data(); }
 
   /**
    * @brief returns a direct pointer to the vector
    * @return A const pointer to the first element
+   * @note
+   * - # of computation: 1
    **/
   const Float *data() const { return val.data(); }
 
   /**
    * @brief resize vector (only CPU)
-   * @param[in] N vector length
+   * @param N vector length
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   void resize(size_t N) {
     if (get_device_mem_stat()) {
@@ -159,7 +228,9 @@ public:
 
   /**
    * @brief Add a new element at the ent of the vector (only CPU)
-   * @param[in] val new element
+   * @param val new element
+   * @note
+   * - # of computation: 1
    **/
   void resize(Float val) {
     if (get_device_mem_stat()) {
@@ -171,29 +242,46 @@ public:
   /**
    * @brief returns a begin iterator
    * @return begin iterator
+   * @note
+   * - # of computation: 1
    **/
   auto begin() { return val.begin(); }
 
   /**
    * @brief returns a end iterator
    * @return end iterator
+   * @note
+   * - # of computation: 1
    **/
   auto end() { return val.end(); }
 
   /**
-   * @brief get vector size N
+   * @brief get vector size
    * @return vector size
+   * @note
+   * - # of computation: 1
    **/
   auto size() const { return val.size(); }
 
   /**
-   * @brief vector copy ( Copy the memory on CPU and GPU )
+   * @brief vector copy ( Copy the memory data on CPU and GPU )
    * @return copied vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   *    - # of data transfer: N (allocation)
+   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
+   *        - else; coping data only on CPU
    **/
   vector copy();
 
   /**
    * @brief print all elements to standart I/O
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   void print_all() const {
     for (const auto v : val) {
@@ -203,7 +291,11 @@ public:
 
   /**
    * @brief print all elements to file
-   * @param[in] filename output filename
+   * @param filename output filename
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   void print_all(std::string filename) const {
 
@@ -221,46 +313,239 @@ public:
 
   /**
    * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
-   * @param[in] vec source vector
+   * @param vec source vector
    * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): true
+   *    - # of data transfer: N (allocation)
+   *        - if `vec.gpu_statius == true`; copy on CPU
+   *        - else; coping data on CPU
    **/
   void operator=(const vector<Float> &vec);
 
   /**
-   * @brief copy vector from std::vector (dont gpu copy)
-   * @param[in] vec source std::vector
+   * @brief copy vector from std::vector
+   * @param vec source std::vector
    * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
    **/
   void operator=(const std::vector<Float> &vec);
 
+  /**
+   * @brief Sign inversion
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
+  vector<Float> operator-();
+
   // vec - scalar
+
+  /**
+   * @brief add scalar to vector elements (v = v[0:N] + value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
   vector<Float> operator+(const Float value);
+
+  /**
+   * @brief sub scalar to vector elements (v = v[0:N] - value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator-(const Float value);
+
+  /**
+   * @brief mul scalar to vector elements (v = v[0:N] * value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator*(const Float value);
+
+  /**
+   * @brief div scalar to vector elements (v = v[0:N] / value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator/(const Float value);
+
+  /**
+   * @brief add scalar to vector elements (v[0:N] += value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator+=(const Float value);
 
-  vector<Float> operator-(const Float value);
+  /**
+   * @brief sub scalar to vector elements (v[0:N] += value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator-=(const Float value);
-
-  vector<Float> operator*(const Float value);
+  /**
+   * @brief mul scalar to vector elements (v[0:N] += value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator*=(const Float value);
 
-  vector<Float> operator/(const Float value);
+  /**
+   * @brief div scalar to vector elements (v[0:N] += value)
+   * @param value source value
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator/=(const Float value);
 
   // vec - vec
+
+  /**
+   * @brief add vector elements (v[0:N] = v[0:N] + vec[0:N])
+   * @param vec vector (size N)
+   * @return output vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
   vector<Float> operator+(const vector<Float> &vec);
+
+  /**
+   * @brief sub vector elements (v[0:N] = v[0:N] - vec[0:N])
+   * @param vec vector (size N)
+   * @return output vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator-(const vector<Float> &vec);
+
+  /**
+   * @brief mul vector elements (v[0:N] = v[0:N] + vec[0:N])
+   * @param vec vector (size N)
+   * @return output vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator*(const vector<Float> &vec);
+
+  /**
+   * @brief div vector elements (v[0:N] = v[0:N] + vec[0:N])
+   * @param vec vector (size N)
+   * @return output vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   * @warning
+   * The arithmetic operator need to allocate tmp. array (size N)
+   **/
+  vector<Float> operator/(const vector<Float> &vec);
+
+  /**
+   * @brief add vector elements (v[0:N] += vec[0:N])
+   * @param vec vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator+=(const vector<Float> &vec);
 
-  vector<Float> operator-(const vector<Float> &vec);
+  /**
+   * @brief sub vector elements (v[0:N] -= vec[0:N])
+   * @param vec vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator-=(const vector<Float> &vec);
 
-  vector<Float> operator*(const vector<Float> &vec);
+  /**
+   * @brief mul vector elements (v[0:N] *= vec[0:N])
+   * @param vec vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator*=(const vector<Float> &vec);
 
-  vector<Float> operator/(const vector<Float> &vec);
+  /**
+   * @brief div vector elements (v[0:N] /= vec[0:N])
+   * @param vec vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
   void operator/=(const vector<Float> &vec);
 
-  vector<Float> operator-();
-
+  /**
+   * @brief refetrence to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
+   * @note
+   * - # of computation: 1
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
+   **/
   Float &operator[](size_t i) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
@@ -268,6 +553,15 @@ public:
     return val[i];
   }
 
+  /**
+   * @brief Comparing vectors (v == vec)
+   * @param vec vector (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
+   **/
   bool operator==(const vector<Float> &vec) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator==");
@@ -281,6 +575,15 @@ public:
     return true;
   }
 
+  /**
+   * @brief Comparing vectors (v != vec)
+   * @param vec vector (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
+   **/
   bool operator!=(const vector<Float> &vec) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator!=");

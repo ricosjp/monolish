@@ -8,6 +8,11 @@
 #endif
 
 namespace monolish {
+/**
+ * @brief
+ * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
+ * Scalar
+ */
 namespace blas {
 
 //////////////////////////////////////////////////////
@@ -21,6 +26,7 @@ namespace blas {
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 double asum(const vector<double> &x);
 
@@ -32,6 +38,7 @@ double asum(const vector<double> &x);
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void asum(const vector<double> &x, double &ans);
 
@@ -43,6 +50,7 @@ void asum(const vector<double> &x, double &ans);
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 double sum(const vector<double> &x);
 
@@ -54,6 +62,7 @@ double sum(const vector<double> &x);
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void sum(const vector<double> &x, double &ans);
 
@@ -66,6 +75,7 @@ void sum(const vector<double> &x, double &ans);
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void axpy(const double alpha, const vector<double> &x, vector<double> &y);
 
@@ -79,6 +89,7 @@ void axpy(const double alpha, const vector<double> &x, vector<double> &y);
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void axpyz(const double alpha, const vector<double> &x, const vector<double> &y,
            vector<double> &z);
@@ -92,6 +103,7 @@ void axpyz(const double alpha, const vector<double> &x, const vector<double> &y,
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 double dot(const vector<double> &x, const vector<double> &y);
 
@@ -104,6 +116,7 @@ double dot(const vector<double> &x, const vector<double> &y);
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void dot(const vector<double> &x, const vector<double> &y, double &ans);
 
@@ -115,6 +128,7 @@ void dot(const vector<double> &x, const vector<double> &y, double &ans);
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 double nrm2(const vector<double> &x);
 
@@ -126,6 +140,7 @@ double nrm2(const vector<double> &x);
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void nrm2(const vector<double> &x, double &ans);
 
@@ -137,6 +152,7 @@ void nrm2(const vector<double> &x, double &ans);
  * - # of computation: N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void scal(const double alpha, vector<double> &x);
 
@@ -149,6 +165,7 @@ void scal(const double alpha, vector<double> &x);
  * - # of computation: 2N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 
@@ -157,31 +174,33 @@ void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 //////////////////////////////////////////////////////
 
 /**
- * @brief double precision scal: A = alpha * A
+ * @brief double precision Densematrix scal: A = alpha * A
  * @param alpha double precision scalar value
  * @param A double precision Dense matrix (size M x N)
  * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void mscal(const double alpha, matrix::Dense<double> &A);
 
 /**
- * @brief double precision scal: A = alpha * A
+ * @brief double precision CRS matrix scal: A = alpha * A
  * @param alpha double precision scalar value
  * @param A double precision CRS matrix (size M x N)
  * @note
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void mscal(const double alpha, matrix::CRS<double> &A);
 
 ///////////////
 
 /**
- * @brief double precision Dense matrix addition: C = A + B (A and B must be
+ * @brief double precision CRS matrix addition: C = A + B (A and B must be
  * same non-zero structure)
  * @param A double precision CRS matrix (size M x N)
  * @param B double precision CRS matrix (size M x N)
@@ -190,6 +209,7 @@ void mscal(const double alpha, matrix::CRS<double> &A);
  * - # of computation: nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  * @warning
  * A and B must be same non-zero structure
  */
@@ -205,6 +225,7 @@ void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
@@ -220,6 +241,7 @@ void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
  * - # of computation: MN
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             vector<double> &y);
@@ -233,6 +255,7 @@ void matvec(const matrix::Dense<double> &A, const vector<double> &x,
  * - # of computation: 2nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             vector<double> &y);
@@ -248,6 +271,7 @@ void matvec(const matrix::CRS<double> &A, const vector<double> &x,
  * - # of computation: 2MNK
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
@@ -261,6 +285,7 @@ void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
  * - # of computation: 2*N*nnz
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
