@@ -41,8 +41,10 @@ bool solver_check(const int err);
  * @param Level loglevel
  * @note loglevel is
  * 1. logging solvers (CG, Jacobi, LU...etc.)
- * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic operators..etc.)
- * 3. logging solvers and BLAS functions and utils (send, recv, allocation...etc.)
+ * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic
+ *operators..etc.)
+ * 3. logging solvers and BLAS functions and utils (send, recv,
+ *allocation...etc.)
  **/
 void set_log_level(size_t Level);
 

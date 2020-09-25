@@ -51,8 +51,10 @@ public:
    * @param L loglevel
    * @note loglevel is
    * 1. logging solvers (CG, Jacobi, LU...etc.)
-   * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic operators..etc.)
-   * 3. logging solvers and BLAS functions and utils (send, recv, allocation...etc.)
+   * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic
+   *operators..etc.)
+   * 3. logging solvers and BLAS functions and utils (send, recv,
+   *allocation...etc.)
    * @details see also monolish::util::set_log_level()
    **/
   void set_log_level(size_t L) {

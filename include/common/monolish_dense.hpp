@@ -12,7 +12,7 @@ namespace monolish {
 template <typename Float> class vector;
 namespace matrix {
 /**
- * @brief Dense format Matrix 
+ * @brief Dense format Matrix
  * @note
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -24,12 +24,12 @@ private:
    */
   size_t rowN;
 
-  /** 
+  /**
    * @brief # of col
    */
   size_t colN;
 
-  /** 
+  /**
    * @brief # of non-zero element
    */
   size_t nnz;
@@ -86,7 +86,7 @@ public:
    * @brief Create dense matrix from dense matrix
    * @param mat input dense matrix (size M x N)
    * @note
-   * - # of computation: M*N 
+   * - # of computation: M*N
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): true
    **/
@@ -97,7 +97,7 @@ public:
    * @param M # of row
    * @param N # of col
    * @note
-   * - # of computation: M*N 
+   * - # of computation: M*N
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
@@ -179,7 +179,7 @@ public:
    * @brief Create constract dense matrix
    * @param M # of row
    * @param N # of col
-   * @param value value 
+   * @param value value
    * @note
    * - # of computation: M*N
    * - Multi-threading (OpenMP): true
@@ -418,9 +418,9 @@ public:
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-//       if(get_device_mem_stat()){
-//           device_free();
-//       }
+    //       if(get_device_mem_stat()){
+    //           device_free();
+    //       }
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -507,7 +507,8 @@ public:
   vector<Float> operator*(vector<Float> &vec);
 
   /**
-   * @brief Dense matrix (size M*K) and dense matrix (size K*N) multiplication (A*B)
+   * @brief Dense matrix (size M*K) and dense matrix (size K*N) multiplication
+   *(A*B)
    * @param B Dense matrix (size K*N)
    * @return result dense matrix (size M*N)
    * @note
@@ -528,7 +529,7 @@ public:
    **/
   Dense<Float> operator+(const Dense<Float> &B);
 
-/////////////////////////////////////////////
+  /////////////////////////////////////////////
 
   /**
    * @brief Scalar and diag. vector of dense matrix add
@@ -610,7 +611,7 @@ public:
    **/
   void diag_div(const vector<Float> &vec);
 
-///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
 
   /**
    * @brief Scalar and row vector of dense matrix add
@@ -666,7 +667,7 @@ public:
    * - GPU acceleration (OpenACC): true
    **/
   void row_add(const size_t r, const vector<Float> &vec);
- 
+
   /**
    * @brief Vector and row vector of dense matrix sub
    * @param r row number
@@ -675,7 +676,7 @@ public:
    * - # of computation: M
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void row_mul(const size_t r, const vector<Float> &vec);
 
   /**
@@ -686,7 +687,7 @@ public:
    * - # of computation: M
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void row_sub(const size_t r, const vector<Float> &vec);
 
   /**
@@ -697,10 +698,10 @@ public:
    * - # of computation: M
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void row_div(const size_t r, const vector<Float> &vec);
 
-///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
 
   /**
    * @brief Scalar and column vector of dense matrix add
@@ -756,7 +757,7 @@ public:
    * - GPU acceleration (OpenACC): true
    **/
   void col_add(const size_t c, const vector<Float> &vec);
- 
+
   /**
    * @brief Vector and column vector of dense matrix sub
    * @param c column number
@@ -765,7 +766,7 @@ public:
    * - # of computation: N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void col_mul(const size_t c, const vector<Float> &vec);
 
   /**
@@ -776,7 +777,7 @@ public:
    * - # of computation: N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void col_sub(const size_t c, const vector<Float> &vec);
 
   /**
@@ -787,9 +788,8 @@ public:
    * - # of computation: N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
-   **/ 
+   **/
   void col_div(const size_t c, const vector<Float> &vec);
-
 };
 } // namespace matrix
 } // namespace monolish

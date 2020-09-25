@@ -10,8 +10,7 @@
 /**
  * @brief Declare sparse and dense matrix class
  */
-namespace matrix {
-}
+namespace matrix {}
 
 #include "./monolish_coo.hpp"
 #include "./monolish_crs.hpp"

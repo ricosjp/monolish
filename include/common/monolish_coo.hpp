@@ -45,19 +45,22 @@ private:
   mutable bool gpu_status = false; // true: sended, false: not send
 
 public:
-/**
- * @brief Coodinate format row index, which stores row numbers of the non-zero elements (size nnz)
- */
+  /**
+   * @brief Coodinate format row index, which stores row numbers of the non-zero
+   * elements (size nnz)
+   */
   std::vector<int> row_index;
 
-/**
- * @brief Coodinate format column index, which stores column numbers of the non-zero elements (size nnz)
- */
+  /**
+   * @brief Coodinate format column index, which stores column numbers of the
+   * non-zero elements (size nnz)
+   */
   std::vector<int> col_index;
 
-/**
- * @brief Coodinate format value array, which stores values of the non-zero elements (size nnz)
- */
+  /**
+   * @brief Coodinate format value array, which stores values of the non-zero
+   * elements (size nnz)
+   */
   std::vector<Float> val;
 
   COO()
@@ -82,8 +85,10 @@ public:
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
-   * @param row row index, which stores the row numbers of the non-zero elements (size nnz)
-   * @param col col index, which stores the column numbers of the non-zero elements (size nnz)
+   * @param row row index, which stores the row numbers of the non-zero elements
+   *(size nnz)
+   * @param col col index, which stores the column numbers of the non-zero
+   *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: 3nnz
@@ -104,9 +109,12 @@ public:
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
-   * @param row n-origin row index, which stores the row numbers of the non-zero elements (size nnz)
-   * @param col n-origin col index, which stores the column numbers of the non-zero elements (size nnz)
-   * @param value n-origin value index, which stores the non-zero elements (size nnz)
+   * @param row n-origin row index, which stores the row numbers of the non-zero
+   *elements (size nnz)
+   * @param col n-origin col index, which stores the column numbers of the
+   *non-zero elements (size nnz)
+   * @param value n-origin value index, which stores the non-zero elements (size
+   *nnz)
    * @param origin n-origin
    * @note
    * - # of computation: 3nnz + 2nnz(adjust possition using origin)
@@ -324,7 +332,7 @@ public:
    * @brief Set COO array from std::vector
    * @param rN # of row
    * @param cN # of column
-   * @param r row_index 
+   * @param r row_index
    * @param c col_index
    * @param v value
    * @note
@@ -386,7 +394,7 @@ public:
   std::vector<int> &get_row_ptr() { return row_index; }
 
   /**
-   * @brief get column index 
+   * @brief get column index
    * @return column index
    * @note
    * - # of computation: nnz
@@ -396,7 +404,7 @@ public:
   std::vector<int> &get_col_ind() { return col_index; }
 
   /*
-   * @brief get value 
+   * @brief get value
    * @return velue
    * @note
    * - # of computation: nnz
@@ -416,7 +424,7 @@ public:
   const std::vector<int> &get_row_ptr() const { return row_index; }
 
   /**
-   * @brief get column index 
+   * @brief get column index
    * @return column index
    * @note
    * - # of computation: nnz
@@ -426,7 +434,7 @@ public:
   const std::vector<int> &get_col_ind() const { return col_index; }
 
   /*
-   * @brief get value 
+   * @brief get value
    * @return velue
    * @note
    * - # of computation: nnz
@@ -546,7 +554,7 @@ public:
 
   /**
    * @brief get diag. vector
-   * @param vec diag. vector 
+   * @param vec diag. vector
    * @note
    * - # of computation: nnz
    * - Multi-threading (OpenMP): false

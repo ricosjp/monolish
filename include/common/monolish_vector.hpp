@@ -42,7 +42,7 @@ private:
   /**
    * @brief true: sended, false: not send
    **/
-  mutable bool gpu_status = false; 
+  mutable bool gpu_status = false;
 
 public:
   vector() {}
@@ -496,7 +496,6 @@ public:
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
   vector<Float> operator/(const vector<Float> &vec);
-
 
   /**
    * @brief add vector elements (v[0:N] += vec[0:N])

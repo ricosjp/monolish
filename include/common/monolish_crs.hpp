@@ -20,7 +20,7 @@ template <typename Float> class Dense;
 template <typename Float> class COO;
 
 /**
- * @brief Compressed Row Storage (CRS) format Matrix 
+ * @brief Compressed Row Storage (CRS) format Matrix
  * @note
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
@@ -45,22 +45,25 @@ private:
   /**
    * @brief true: sended, false: not send
    */
-  mutable bool gpu_status = false; 
+  mutable bool gpu_status = false;
 
 public:
-/**
- * @brief CRS format value, which stores values of the non-zero elements (size nnz)
- */
+  /**
+   * @brief CRS format value, which stores values of the non-zero elements (size
+   * nnz)
+   */
   std::vector<Float> val;
 
-/**
- * @brief CRS format column index, which stores column numbers of the non-zero elements (size nnz)
- */
+  /**
+   * @brief CRS format column index, which stores column numbers of the non-zero
+   * elements (size nnz)
+   */
   std::vector<int> col_ind;
 
-/**
- * @brief CRS format row pointer, which stores the starting points of the rows of the arrays value and col_ind (size M+1)
- */
+  /**
+   * @brief CRS format row pointer, which stores the starting points of the rows
+   * of the arrays value and col_ind (size M+1)
+   */
   std::vector<int> row_ptr;
 
   CRS() {}
@@ -70,8 +73,10 @@ public:
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
-   * @param rowptr row_ptr, which stores the starting points of the rows of the arrays value and col_ind (size M+1)
-   * @param colind col_ind, which stores the column numbers of the non-zero elements (size nnz)
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: (M+1)+2nnz
@@ -91,8 +96,10 @@ public:
    * @brief Create CRS matrix from std::vector
    * @param M # of row
    * @param N # of col
-   * @param rowptr row_ptr, which stores the starting points of the rows of the arrays value and col_ind (size M+1)
-   * @param colind col_ind, which stores the column numbers of the non-zero elements (size nnz)
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: (M+1)+2nnz
@@ -339,7 +346,8 @@ public:
   vector<Float> operator*(vector<Float> &vec);
 
   /**
-   * @brief CRS matrix (size M*K) and Dense matrix (size K*N) multiplication (A*B)
+   * @brief CRS matrix (size M*K) and Dense matrix (size K*N) multiplication
+   *(A*B)
    * @param B Dense matrix (size K*N)
    * @return result Dense matrix (size M*N)
    * @note
