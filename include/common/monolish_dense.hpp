@@ -88,16 +88,9 @@ public:
    * @note
    * - # of computation: M*N 
    * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - GPU acceleration (OpenACC): true
    **/
-  Dense(const Dense<Float> &mat){
-    set_row(mat.get_row());
-    set_col(mat.get_col);
-    set_nnz(M*N);
-
-    val.resize(nnz);
-    std::copy(mat.val.data(), mat.val.data() + nnz, val.begin());
-  }
+  Dense(const Dense<Float> &mat);
 
   /**
    * @brief Allocate dense matrix
