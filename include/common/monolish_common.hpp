@@ -24,6 +24,7 @@ namespace util {
  * - # of computation: 2*M*nnz + N
  * - Multi-threading (OpenMP): true
  * - GPU acceleration (OpenACC): true
+ *    - # of data transfer: 0
  */
 template <typename T>
 T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
@@ -37,7 +38,7 @@ bool solver_check(const int err);
 /// Logger utils ///////////////////////////////
 /**
  * @brief Specifying the log level
- * @param L loglevel
+ * @param Level loglevel
  * @note loglevel is
  * 1. logging solvers (CG, Jacobi, LU...etc.)
  * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic operators..etc.)
@@ -47,7 +48,7 @@ void set_log_level(size_t Level);
 
 /**
  * @brief Specifying the log finename
- * @param file the log filename
+ * @param filename the log filename
  **/
 void set_log_filename(std::string filename);
 
@@ -55,7 +56,7 @@ void set_log_filename(std::string filename);
 
 /**
  * @brief create random vector
- * @param allocated vector
+ * @param vec allocated vector
  * @param min min. of random
  * @param max min. of random
  * @note the ramdom number generator is random generator is mt19937
@@ -113,7 +114,6 @@ matrix::COO<T> random_structure_matrix(const int M, const int N,
  * @brief create band matrix
  * @param M # of Row
  * @param N # of col.
- * @param W half-bandwidth (bandwidth is 2*W+1)
  * @param val value of diagonal elements
  * @note
  * - # of computation: M
