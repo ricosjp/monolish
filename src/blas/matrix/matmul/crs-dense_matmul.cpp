@@ -242,31 +242,31 @@ float ret[8];
   }
 #else
   const int vecL = 8;
-  float ret[8];
-  const reg zerov = SIMD_FUNC(set_ps)(0, 0, 0, 0, 0, 0, 0, 0);
 
 #pragma omp parallel for
   for (int i = 0; i < (int)(M * N); i++) {
     Cd[i] = 0.0;
   }
 
+#pragma omp parallel for
   for (int i = 0; i < (int)M; i++) {
     int start = (int)rowd[i];
     int end = (int)rowd[i + 1];
+    const int Cr = i * N;
     for (int k = start; k < end; k++) {
-      int Br = N * cold[k];
-      reg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
+      const int Br = N * cold[k];
+      const reg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
       reg tv;
       int j;
       for (j = 0; j < (int)N - (vecL - 1); j += vecL) {
         reg Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[Br + j]);
-        reg Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[i * N + j]);
+        reg Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[Cr + j]);
         tv = SIMD_FUNC(mul_ps)(Av, Bv);
         Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[i * N + j], Cv);
+        SIMD_FUNC(storeu_ps)((float *)&Cd[Cr + j], Cv);
       }
       for (; j < (int)N; j++) {
-        Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
+        Cd[Cr + j] += vald[k] * Bd[Br + j];
       }
     }
   }
