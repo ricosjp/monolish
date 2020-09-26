@@ -39,6 +39,10 @@ if (BUILD_GPU)
   set(OpenACC_CXX_FLAGS "-fopenacc")
   target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
   target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
+
+  # AVX
+  target_compile_options(monolish_cpu PRIVATE "-mavx")
+
   # This should be target_link_options(), but only available after CMake 3.13
   set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
 
