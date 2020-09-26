@@ -147,6 +147,8 @@ matrix_blas_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 matrix_blas_gpu:
     stage: blas
