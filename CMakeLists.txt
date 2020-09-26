@@ -40,9 +40,6 @@ if (BUILD_GPU)
   target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
   target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
 
-  # AVX
-  target_compile_options(monolish_cpu PRIVATE "-mavx")
-
   # This should be target_link_options(), but only available after CMake 3.13
   set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
 
@@ -95,6 +92,9 @@ target_sources(monolish_cpu
 
 target_compile_features(monolish_cpu PUBLIC cxx_std_14)
 target_compile_options(monolish_cpu PRIVATE -O3)
+# AVX
+target_compile_options(monolish_cpu PRIVATE "-mavx")
+
 
 find_package(OpenMP)
 if (OpenMP_FOUND)
