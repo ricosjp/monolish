@@ -10,32 +10,73 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
+option(BUILD_GPU "build GPU variant" OFF)
+
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
 
-###############################################################################
-# monolish_gpu
-###############################################################################
+find_package(OpenMP REQUIRED)
+find_package(MKL)  # see cmake/FindMKL.cmake for detail
 
-option(BUILD_GPU "build GPU variant" OFF)
+function(common_setup target_name)
+  add_library(${target_name} SHARED "")
 
-if (BUILD_GPU)
-  add_library(monolish_gpu SHARED "")
-
-  # TODO: source files should be collected in subdirectory CMakeLists.txt
-  #add_subdirectory(src)
-  target_sources(monolish_gpu
+  target_sources(${target_name}
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
-  set_property(TARGET monolish_gpu PROPERTY CXX_STANDARD 14)
-  target_compile_options(monolish_gpu PRIVATE -O3)
-  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+
+  set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
+  target_compile_options(${target_name} PRIVATE -O3)
+
+  # AVX
+  target_compile_options(${target_name} PRIVATE "-mavx")
+  target_compile_definitions(${target_name} PRIVATE USE_AVX)
+
   if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(monolish_gpu PRIVATE "-g3" "-fvar-tracking-assignments")
+    target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
   endif()
+
+  # OpenMP
+  target_compile_options(${target_name} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_options(${target_name} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_libraries(${target_name} PRIVATE ${OpenMP_CXX_LIBRARIES})
+
+  # BLAS
+  if(MKL_FOUND)
+    # Not use FindBLAS if MKL is already found
+    target_include_directories(${target_name} PRIVATE ${MKL_INCLUDE_PATH})
+    target_link_libraries(${target_name} PRIVATE ${MKL_LIBRARIES})
+    target_compile_definitions(${target_name} PRIVATE USE_MKL)
+  else()
+    find_package(BLAS REQUIRED)
+    # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+    # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+    find_path(BLAS_INCLUDE_DIRS
+      NAMES cblas.h
+      HINTS
+        /usr/include
+        /usr/local/include
+        /usr/include/openblas
+    )
+    target_include_directories(${target_name} PRIVATE ${BLAS_INCLUDE_DIRS})
+    target_link_libraries(${target_name} PRIVATE ${BLAS_LIBRARIES})
+  endif()
+
+  install(
+    TARGETS ${target_name}
+    LIBRARY
+      DESTINATION lib
+  )
+endfunction()
+
+common_setup(monolish_cpu)
+
+if(BUILD_GPU)
+  common_setup(monolish_gpu)
+  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
   # OpenACC
   set(OpenACC_ACCEL_TARGET "nvptx-none")
@@ -53,78 +94,10 @@ if (BUILD_GPU)
     CUDA::cusparse
     CUDA::cudart
   )
-
-  install(
-    TARGETS monolish_gpu
-    LIBRARY
-      DESTINATION lib
-  )
 endif(BUILD_GPU)
-
-###############################################################################
-# monolish_cpu
-###############################################################################
-
-add_library(monolish_cpu SHARED "")
-
-# TODO: source files should be collected in subdirectory CMakeLists.txt
-#add_subdirectory(src)
-target_sources(monolish_cpu
-  PRIVATE
-  ${MONOLISH_SOURCE_FILES}
-  )
-
-set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
-target_compile_options(monolish_cpu PRIVATE -O3)
-
-# AVX
-target_compile_options(monolish_cpu PRIVATE "-mavx")
-target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  target_compile_options(monolish_cpu PRIVATE "-g3" "-fvar-tracking-assignments")
-endif()
-
-# OpenMP
-find_package(OpenMP)
-if (OpenMP_FOUND)
-  target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
-endif (OpenMP_FOUND)
-
-# Intel MKL
-find_package(MKL)
-
-# BLAS
-if(MKL_FOUND)
-  # Not use FindBLAS if MKL is already found
-  target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
-  target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(monolish_cpu PRIVATE USE_MKL)
-else()
-  find_package(BLAS REQUIRED)
-  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-  find_path(BLAS_INCLUDE_DIRS
-    NAMES cblas.h
-    HINTS
-      /usr/include
-      /usr/local/include
-      /usr/include/openblas
-  )
-  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
-endif()
 
 install(
   DIRECTORY include/
   DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp")
-
-install(
-  TARGETS monolish_cpu
-  LIBRARY
-    DESTINATION lib
-  )
-
+  FILES_MATCHING PATTERN "*.hpp"
+)
