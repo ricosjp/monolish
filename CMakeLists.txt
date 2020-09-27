@@ -17,7 +17,6 @@ file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   src/*.cpp
 )
 
-find_package(OpenMP REQUIRED)
 find_package(MKL)  # see cmake/FindMKL.cmake for detail
 
 function(common_setup target_name)
@@ -38,11 +37,6 @@ function(common_setup target_name)
   if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
   endif()
-
-  # OpenMP
-  target_compile_options(${target_name} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(${target_name} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(${target_name} PRIVATE ${OpenMP_CXX_LIBRARIES})
 
   # BLAS
   if(MKL_FOUND)
@@ -73,6 +67,12 @@ function(common_setup target_name)
 endfunction()
 
 common_setup(monolish_cpu)
+
+# OpenMP (not common because GPU variant uses OpenACC)
+find_package(OpenMP REQUIRED)
+target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 
 if(BUILD_GPU)
   common_setup(monolish_gpu)
