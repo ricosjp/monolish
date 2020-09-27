@@ -10,7 +10,8 @@
 //#ifdef USE_AVX
 #include <immintrin.h>
 #define SIMD_FUNC(NAME) _mm256_##NAME
-using reg = __m256;
+using Sreg = __m256;
+using Dreg = __m256d;
 //#endif
 
 namespace monolish {
@@ -81,22 +82,54 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     }
   }
 #else
-#pragma omp parallel
-  {
-#pragma omp for
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
+#if USE_AVX //avx_cpu
+  const int vecL = 4;
 
-#pragma omp for
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
-      }
-    }
+#pragma omp parallel for
+  for (int i = 0; i < (int)(M * N); i++) {
+    Cd[i] = 0.0;
   }
+
+#pragma omp parallel for
+  for (int i = 0; i < (int)M; i++) {
+      int start = (int)rowd[i];
+      int end = (int)rowd[i + 1];
+      const int Cr = i * N;
+      for (int k = start; k < end; k++) {
+          const int Br = N * cold[k];
+          const Dreg Av = SIMD_FUNC(broadcast_sd)(&vald[k]);
+          Dreg tv, Bv, Cv;
+          int j;
+          for (j = 0; j < (int)N - (vecL-1); j += vecL) {
+              const int BB = Br + j;
+              const int CC = Cr + j;
+
+              Bv = SIMD_FUNC(loadu_pd)((double*)&Bd[BB]);
+              Cv = SIMD_FUNC(loadu_pd)((double*)&Cd[CC]);
+              tv = SIMD_FUNC(mul_pd)(Av, Bv);
+              Cv = SIMD_FUNC(add_pd)(Cv, tv);
+              SIMD_FUNC(storeu_pd)((double*)&Cd[CC], Cv);
+          }
+
+          for ( ; j < (int)N; j++) {
+              Cd[Cr + j] += vald[k] * Bd[Br + j];
+          }
+      }
+  }
+#else //Scalar_cpu
+#pragma omp parallel for
+  for (int j = 0; j < (int)N; j++) {
+      for (int i = 0; i < (int)M; i++) {
+          double tmp = 0;
+          int start = (int)rowd[i];
+          int end = (int)rowd[i+1];
+          for (int k = start; k < end; k++) {
+              tmp += vald[k] * Bd[N * cold[k] + j];
+          }
+          Cd[i*N+j] = tmp;
+      }
+  }
+#endif
 #endif
   logger.func_out();
 }
@@ -167,80 +200,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     }
   }
 #else
-#if 0
-#pragma omp parallel
-  {
-#pragma omp for
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
-
-#pragma omp for
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
-      }
-    }
-  }
-#else
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-#if 0
-#pragma omp parallel for
-  for (int j = 0; j < (int)N; j++) {
-      for (int i = 0; i < (int)M; i++) {
-          double tmp = 0;
-          int start = (int)rowd[i];
-          int end = (int)rowd[i+1];
-          for (int k = start; k < end; k++) {
-              tmp += vald[k] * Bd[N * cold[k] + j];
-          }
-          Cd[i*N+j] = tmp;
-      }
-  }
-#else
-#if 0
-const int vecL=8;
-float ret[8];
-
-#pragma omp parallel for
-  for (int j = 0; j < (int)N; j++) {
-      for (int i = 0; i < (int)M; i++) {
-          double tmp = 0;
-          int k = 0;
-          int start = (int)rowd[i];
-          int end = (int)rowd[i+1];
-          reg yv = SIMD_FUNC(set_ps)(0,0,0,0,0,0,0,0);
-          reg Av, Bv, tv;
-          for (k = start; k < end - (vecL-1); k+=vecL) {
-              Av = SIMD_FUNC(loadu_ps)((float*)&vald[k]);
-              Bv = SIMD_FUNC(set_ps)(
-                      Bd[N*cold[k+7]+j],
-                      Bd[N*cold[k+6]+j],
-                      Bd[N*cold[k+5]+j],
-                      Bd[N*cold[k+4]+j],
-                      Bd[N*cold[k+3]+j],
-                      Bd[N*cold[k+2]+j],
-                      Bd[N*cold[k+1]+j],
-                      Bd[N*cold[k+0]+j]
-                      );
-              
-              tv = SIMD_FUNC(mul_ps)(Av, Bv);
-              yv = SIMD_FUNC(add_ps)(yv, tv); 
-              //tmp += vald[k] * Bd[N * cold[k] + j];
-          }
-          for ( ; k < end; k++) {
-              tmp += vald[k] * Bd[N * cold[k] + j];
-          }
-          SIMD_FUNC(storeu_ps)((float*)&ret, yv);
-          tmp += ret[0] + ret[1] + ret[2] + ret[3] + ret[4] + ret[5] + ret[6] + ret[7];
-          Cd[i*N+j] = tmp;
-      }
-  }
-#else
+#if USE_AVX //avx_cpu
   const int vecL = 8;
 
 #pragma omp parallel for
@@ -255,26 +215,65 @@ float ret[8];
     const int Cr = i * N;
     for (int k = start; k < end; k++) {
       const int Br = N * cold[k];
-      const reg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
-      reg tv;
+      const Sreg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
+      Sreg tv, Bv, Cv;
       int j;
-      for (j = 0; j < (int)N - (vecL - 1); j += vecL) {
-        reg Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[Br + j]);
-        reg Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[Cr + j]);
+      for (j = 0; j < (int)N - 31; j += 32) {
+        const int BB = Br + j;
+        const int CC = Cr + j;
+
+        Bv = SIMD_FUNC(loadu_ps)((float*)&Bd[BB]);
+        Cv = SIMD_FUNC(loadu_ps)((float*)&Cd[CC]);
         tv = SIMD_FUNC(mul_ps)(Av, Bv);
         Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[Cr + j], Cv);
+        SIMD_FUNC(storeu_ps)((float*)&Cd[CC], Cv);
+
+        Bv = SIMD_FUNC(loadu_ps)((float*)&Bd[BB + 8]);
+        Cv = SIMD_FUNC(loadu_ps)((float*)&Cd[CC + 8]);
+        tv = SIMD_FUNC(mul_ps)(Av, Bv);
+        Cv = SIMD_FUNC(add_ps)(Cv, tv);
+        SIMD_FUNC(storeu_ps)((float*)&Cd[CC + 8], Cv);
+
+        Bv = SIMD_FUNC(loadu_ps)((float*)&Bd[BB + 16]);
+        Cv = SIMD_FUNC(loadu_ps)((float*)&Cd[CC + 16]);
+        tv = SIMD_FUNC(mul_ps)(Av, Bv);
+        Cv = SIMD_FUNC(add_ps)(Cv, tv);
+        SIMD_FUNC(storeu_ps)((float*)&Cd[Cr + j + 16], Cv);
+
+        Bv = SIMD_FUNC(loadu_ps)((float*)&Bd[BB + 24]);
+        Cv = SIMD_FUNC(loadu_ps)((float*)&Cd[CC + 24]);
+        tv = SIMD_FUNC(mul_ps)(Av, Bv);
+        Cv = SIMD_FUNC(add_ps)(Cv, tv);
+        SIMD_FUNC(storeu_ps)((float*)&Cd[CC + 24], Cv);
       }
-      for (; j < (int)N; j++) {
+      for ( ; j < (int)N - 7; j += 8) {
+        const int BB = Br + j;
+        const int CC = Cr + j;
+
+        Bv = SIMD_FUNC(loadu_ps)((float*)&Bd[BB]);
+        Cv = SIMD_FUNC(loadu_ps)((float*)&Cd[CC]);
+        tv = SIMD_FUNC(mul_ps)(Av, Bv);
+        Cv = SIMD_FUNC(add_ps)(Cv, tv);
+        SIMD_FUNC(storeu_ps)((float*)&Cd[CC], Cv);
+      }
+      for ( ; j < (int)N; j++) {
         Cd[Cr + j] += vald[k] * Bd[Br + j];
       }
     }
   }
-#endif
-#endif
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
+#else //Scalar_cpu
+#pragma omp parallel for
+  for (int j = 0; j < (int)N; j++) {
+      for (int i = 0; i < (int)M; i++) {
+          double tmp = 0;
+          int start = (int)rowd[i];
+          int end = (int)rowd[i+1];
+          for (int k = start; k < end; k++) {
+              tmp += vald[k] * Bd[N * cold[k] + j];
+          }
+          Cd[i*N+j] = tmp;
+      }
+  }
 #endif
 #endif
   logger.func_out();
