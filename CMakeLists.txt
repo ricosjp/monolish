@@ -101,6 +101,10 @@ if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
   target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
   target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
+<<<<<<< HEAD
+=======
+  target_compile_definitions(monolish_cpu PRIVATE USE_MKL)
+>>>>>>> a3e0da3f19e3595c017d1a638b5cf7e14b38dd9c
 else()
   find_package(BLAS REQUIRED)
   # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
