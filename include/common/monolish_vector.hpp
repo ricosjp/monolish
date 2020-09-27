@@ -596,5 +596,15 @@ public:
     }
     return false;
   }
+
+  /**
+   * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))
+   * @param vec vector (size N)
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
+  void tanh();
 };
 } // namespace monolish
