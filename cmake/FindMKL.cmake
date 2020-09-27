@@ -73,6 +73,7 @@ if(NOT MKL_VML_LIBRARY)
     message(STATUS "MKL VML/VSL/DF use default kernel: ${MKL_VML_LIBRARY}")
   endif()
 endif()
+list(APPEND MKL_LIBRARIES ${MKL_VML_LIBRARY})
 
 # Minimal components
 foreach(name intel_lp64 gnu_thread core)
