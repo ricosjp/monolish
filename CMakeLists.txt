@@ -1,15 +1,9 @@
-# In order to use CMP0076, CMake 3.13 is required, but CentOS8 only provides 3.11.4
-#cmake_minimum_required(VERSION 3.13)
-#cmake_policy(SET CMP0076 NEW)
-cmake_minimum_required(VERSION 3.10)
-
-# Add cmake/ as module path
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+cmake_minimum_required(VERSION 3.17)
+cmake_policy(SET CMP0076 NEW)
 
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
-# TODO: GLOB is deprecated but used for now
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
@@ -30,50 +24,32 @@ if (BUILD_GPU)
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
-
-  target_compile_features(monolish_gpu PUBLIC cxx_std_14)
-
+  set_property(TARGET monolish_gpu PROPERTY CXX_STANDARD 14)
   target_compile_options(monolish_gpu PRIVATE -O3)
-
-  # OpenACC
-  set(OpenACC_CXX_FLAGS "-fopenacc")
-  target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
-  target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
-  # This should be target_link_options(), but only available after CMake 3.13
-  set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
-
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
-  # CUDA
-  foreach(CUDALIB IN ITEMS cudart)
-    add_library(${CUDALIB} SHARED IMPORTED)
-    set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-11.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-11.0/targets/x86_64-linux/include
-      )
-  endforeach(CUDALIB)
+  # OpenACC
+  set(OpenACC_ACCEL_TARGET "nvptx-none")
+  find_package(OpenACC REQUIRED)
+  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
 
-  foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
-    add_library(${CUDALIB} SHARED IMPORTED)
-    set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
-      )
-  endforeach(CUDALIB)
+  # CUDA
+  find_package(CUDAToolkit REQUIRED)
 
   target_link_libraries(monolish_gpu
     PRIVATE
-    cublas
-    cusolver
-    cusparse
-    cudart
-    )
+    OpenACC::OpenACC_CXX
+    CUDA::cublas
+    CUDA::cusolver
+    CUDA::cusparse
+    CUDA::cudart
+  )
 
   install(
     TARGETS monolish_gpu
     LIBRARY
       DESTINATION lib
-    )
+  )
 endif(BUILD_GPU)
 
 ###############################################################################
@@ -89,7 +65,7 @@ target_sources(monolish_cpu
   ${MONOLISH_SOURCE_FILES}
   )
 
-target_compile_features(monolish_cpu PUBLIC cxx_std_14)
+set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
 target_compile_options(monolish_cpu PRIVATE -O3)
 
 find_package(OpenMP)
@@ -100,26 +76,20 @@ if (OpenMP_FOUND)
   target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif (OpenMP_FOUND)
 
-find_package(MKL)
-if(MKL_FOUND)
-  set(BLA_VENDOR "Intel10_64lp")
-else()
-  set(BLA_VENDOR "OpenBLAS")
-endif()
+# TODO: set BLA_VENDOR in modern way
+#set(BLA_VENDOR OpenBLAS)
 find_package(BLAS)
-
-# BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-# see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-find_path(BLAS_INCLUDE_DIRS
-  NAMES cblas.h mkl_cblas.h
-  HINTS
+if (BLAS_FOUND)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS cblas.h
     /usr/include
     /usr/local/include
     /usr/include/openblas
-)
-
-target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
+    )
+  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
+endif (BLAS_FOUND)
 
 install(
   DIRECTORY include/
@@ -131,3 +101,4 @@ install(
   LIBRARY
     DESTINATION lib
   )
+
