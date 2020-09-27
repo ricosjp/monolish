@@ -368,6 +368,15 @@ public:
    * - GPU acceleration (OpenACC): true
    **/
   CRS<Float> operator+(const CRS<Float> &B);
+
+  /**
+   * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
+  void tanh();
 };
 } // namespace matrix
 } // namespace monolish

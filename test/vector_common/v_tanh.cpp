@@ -2,22 +2,21 @@
 #include "monolish_blas.hpp"
 
 #define FUNC "tanh"
-#define PERF 2 * size / time / 1.0e+9
-#define MEM 3 * size * sizeof(T) / time / 1.0e+9
+#define PERF size / time / 1.0e+9
+#define MEM 2 * size * sizeof(T) / time / 1.0e+9
 
 template <typename T>
 void get_ans(monolish::vector<T> &ans) {
   for (size_t i = 0; i < ans.size(); i++) {
-    ans[i] = tanh(ans[i]);
+    ans[i] = std::tanh(ans[i]);
   }
 }
 
 template <typename T>
-bool test(const size_t size, double tol, const size_t iter,
-          const size_t check_ans) {
+bool test(const size_t size, double tol, const size_t iter,const size_t check_ans) {
 
-  // create random vector x rand(0.1~1.0)
-  monolish::vector<T> ans(size, 0.0, 1.0);
+  // create random vector x rand(0.1~10.0)
+  monolish::vector<T> ans(size, 0.1, 10.0);
 
   monolish::vector<T> ans_tmp;
 
@@ -85,17 +84,15 @@ int main(int argc, char **argv) {
 
   // exec and error check
   if (strcmp(argv[1], "double") == 0) {
-    if (test<double>(size, 1.0e-8, iter, check_ans) == false) {
-      std::cout << "error in double" << std::endl;
-      return 1;
-    }
+      if (test<double>(size, 1.0e-6, iter,check_ans) == false) {
+          return 1;
+      }
   }
 
   if (strcmp(argv[1], "float") == 0) {
-    if (test<float>(size, 1.0e-5, iter, check_ans) == false) {
-      std::cout << "error in float" << std::endl;
-      return 1;
-    }
+      if (test<float>(size, 1.0e-4, iter,check_ans) == false) {
+          return 1;
+      }
   }
 
   return 0;

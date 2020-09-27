@@ -3,56 +3,99 @@
 
 #ifdef USE_GPU
 #include <cublas_v2.h>
-#else
-#include <mkl_cblas.h>
 #endif
 
+#ifdef USE_MKL
 #include <mkl.h>
+#else
+#include <cblas.h>
+#endif
 
 namespace monolish {
 
-void mkl_tanh(size_t N, double* vec){
-    vdTanh(N, vec, vec);
+void tanh_core(size_t N, double* vec){
+#if USE_GPU
+#pragma acc data present(vec[0:N])
+#pragma acc parallel
+#pragma acc loop independent
+  for (size_t i = 0; i < N; i++) {
+     vec[i] = std::tanh(vec[i]);
+  }
+#else
+#if USE_MKL
+   vdTanh(N, vec, vec);
+#else
+ #pragma omp parallel for
+   for (size_t i = 0; i < N; i++) {
+    vec[i] = std::tanh(vec[i]);
+   }
+#endif
+#endif
 }
 
-void mkl_tanh(size_t N, float* vec){
-    vsTanh(N, vec, vec);
+void tanh_core(size_t N, float* vec){
+#if USE_GPU
+#pragma acc data present(vec[0:N])
+#pragma acc parallel
+#pragma acc loop independent
+  for (size_t i = 0; i < N; i++) {
+     vec[i] = std::tanh(vec[i]);
+  }
+#else
+#if USE_MKL
+   vsTanh(N, vec, vec);
+#else
+ #pragma omp parallel for
+   for (size_t i = 0; i < N; i++) {
+    vec[i] = std::tanh(vec[i]);
+   }
+#endif
+#endif
 }
+
+/////////
 
 template <typename T> void vector<T>::tanh() {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  vector<T> ans(val.size());
-
   T *vald = val.data();
-  T *ansd = ans.data();
-  size_t size = val.size();
-
-#if USE_GPU
-#pragma acc data present(vald [0:size], ansd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
-  for (size_t i = 0; i < size; i++) {
-     vald[i] = tanh(vald[i]);
-  }
-#else
-//#if USE_MKL
-  for (size_t i = 0; i < size; i++) {
-   mkl_tanh(size, vald);
-  }
-// #else
-// #pragma omp parallel for
-//   for (size_t i = 0; i < size; i++) {
-//    vald[i] = std::tanh(vald[i]);
-//   }
-// #endif
-#endif
+  tanh_core(get_nnz(), vald);
 
   logger.func_out();
 }
 
 template void vector<double>::tanh();
 template void vector<float>::tanh();
+
+/////////
+
+template <typename T> void matrix::Dense<T>::tanh() {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  T *vald = val.data();
+  tanh_core(get_nnz(), vald);
+
+  logger.func_out();
+}
+
+template void matrix::Dense<double>::tanh();
+template void matrix::Dense<float>::tanh();
+
+/////////
+
+template <typename T> void matrix::CRS<T>::tanh() {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  T *vald = val.data();
+  tanh_core(get_nnz(), vald);
+
+  logger.func_out();
+}
+
+template void matrix::CRS<double>::tanh();
+template void matrix::CRS<float>::tanh();
 
 } // namespace monolish
