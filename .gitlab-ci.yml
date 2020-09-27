@@ -78,6 +78,8 @@ vector_common_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 vector_common_gpu:
     stage: common
@@ -100,6 +102,8 @@ matrix_common_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 matrix_common_gpu:
     stage: common
@@ -125,6 +129,8 @@ vector_blas_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 vector_blas_gpu:
     stage: blas
@@ -147,6 +153,8 @@ matrix_blas_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 matrix_blas_gpu:
     stage: blas
@@ -171,6 +179,8 @@ equation_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 equation_gpu:
     stage: equation
@@ -196,6 +206,8 @@ logger_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 logger_gpu:
     stage: logger

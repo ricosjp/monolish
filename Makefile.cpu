@@ -4,8 +4,7 @@ MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
 CXXFLAGS = -O3 -std=c++14 -lm -g -fPIC
-#CXXFLAGS += -mavx-fopenmp
-CXXFLAGS += -fopenmp
+CXXFLAGS += -fopenmp -mavx -DUSE_AVX 
 CXXFLAGS += -Wall -Wno-unused-variable
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 

@@ -67,6 +67,10 @@ target_sources(monolish_cpu
 
 set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
 target_compile_options(monolish_cpu PRIVATE -O3)
+# AVX
+target_compile_options(monolish_cpu PRIVATE "-mavx")
+target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
+
 
 find_package(OpenMP)
 if (OpenMP_FOUND)
