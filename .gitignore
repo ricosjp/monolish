@@ -15,7 +15,6 @@
 *.sqlite
 *~
 Makefile.conf
-build/
 obj/
 obj_cpu/
 obj_gpu/
@@ -24,6 +23,9 @@ docker/lib/
 docker/include/
 monolish_test.log
 test/logger/logging/*.html
+
+# cmake
+build*/
 
 # Doxygen
 html/
