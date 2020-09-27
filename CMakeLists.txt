@@ -11,6 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(monolish CXX Fortran)
 
 option(BUILD_GPU "build GPU variant" OFF)
+option(USE_AVX   "Require AVX" ON)
 
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
@@ -29,8 +30,10 @@ function(common_setup target_name)
   target_compile_options(${target_name} PRIVATE -g -O3)
 
   # AVX
-  target_compile_options(${target_name} PRIVATE "-mavx")
-  target_compile_definitions(${target_name} PRIVATE USE_AVX)
+  if(USE_AVX)
+    target_compile_options(${target_name} PRIVATE "-mavx")
+    target_compile_definitions(${target_name} PRIVATE USE_AVX)
+  endif()
 
   install(
     TARGETS ${target_name}
@@ -48,6 +51,9 @@ target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
 target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 
 # MKL
+if(USE_AVX)
+  set(MKL_VML_AVX TRUE)
+endif()
 find_package(MKL)
 if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
