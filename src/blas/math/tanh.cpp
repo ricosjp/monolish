@@ -3,6 +3,7 @@
 
 #ifdef USE_GPU
 #include <cublas_v2.h>
+#include <cuda_runtime_api.h>
 #endif
 
 #ifdef USE_MKL
@@ -16,11 +17,12 @@ namespace monolish {
 void tanh_core(size_t N, double* vec){
 #if USE_GPU
 #pragma acc data present(vec[0:N])
-#pragma acc parallel
-#pragma acc loop independent
-  for (size_t i = 0; i < N; i++) {
-     vec[i] = std::tanh(vec[i]);
-  }
+#pragma acc host_data use_device(vec)
+    {
+        for (size_t i = 0; i < N; i++) {
+            vec[i] = tanh(vec[i]);
+        }
+    }
 #else
 #if USE_MKL
    vdTanh(N, vec, vec);
@@ -36,11 +38,12 @@ void tanh_core(size_t N, double* vec){
 void tanh_core(size_t N, float* vec){
 #if USE_GPU
 #pragma acc data present(vec[0:N])
-#pragma acc parallel
-#pragma acc loop independent
-  for (size_t i = 0; i < N; i++) {
-     vec[i] = std::tanh(vec[i]);
-  }
+#pragma acc host_data use_device(vec)
+    {
+        for (size_t i = 0; i < N; i++) {
+            vec[i] = tanhf(vec[i]);
+        }
+    }
 #else
 #if USE_MKL
    vsTanh(N, vec, vec);
