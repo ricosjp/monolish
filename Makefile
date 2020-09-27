@@ -12,12 +12,14 @@ all: cpu gpu
 cpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 cpu-debug:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-Bbuild_cpu_debug
 	cmake --build build_cpu_debug -j `nproc`
@@ -25,6 +27,7 @@ cpu-debug:
 gpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
 		-DBUILD_GPU=ON
 	cmake --build build_gpu -j `nproc`
@@ -32,6 +35,7 @@ gpu:
 gpu-debug:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-Bbuild_gpu_debug \
 		-DBUILD_GPU=ON
