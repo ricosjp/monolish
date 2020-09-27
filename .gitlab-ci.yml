@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra:0.1.0
+image: registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib

@@ -1,5 +1,9 @@
-CONTAINER  := registry.ritc.jp/ricos/allgebra:0.1.0
-.PHONY: cpu gpu gpu-debug lib test install
+ALLGEBRA_IMAGE := registry.ritc.jp/ricos/allgebra/cuda10_2
+ALLGEBRA_TAG   := 0.2.0
+
+MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
+.PHONY: cpu gpu gpu-debug lib test install in format
 
 INSTALL_DIR=/usr/lib64/
 
@@ -43,17 +47,13 @@ zenbu:
 	make install
 
 in:
-	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-	docker pull $(CONTAINER) 
-	docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-
-in-cpu:
-	#docker run -it -u $$(id -u):$$(id -g) --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-	#docker run -it --gpus all --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
-	docker pull $(CONTAINER) 
-	docker run -it --privileged --mount type=bind,src=$(PWD)/,dst=/monolish $(CONTAINER) 
+	docker run -it --rm \
+		--gpus all   \
+		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-v $(MONOLISH_TOP):/monolish \
+		-w /monolish \
+		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
 
 format:
 	docker run -it --rm  \
