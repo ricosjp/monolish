@@ -94,7 +94,7 @@ target_compile_features(monolish_cpu PUBLIC cxx_std_14)
 target_compile_options(monolish_cpu PRIVATE -O3)
 # AVX
 target_compile_options(monolish_cpu PRIVATE "-mavx")
-target_compile_definitions(monolish_gpu PRIVATE USE_AVX)
+target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
 
 
 find_package(OpenMP)
