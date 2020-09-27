@@ -2,15 +2,14 @@
 #include "monolish_blas.hpp"
 
 #define FUNC "m_tanh"
-#define DENSE_PERF M * N / time / 1.0e+9
-#define CRS_PERF M * nnzrow / time / 1.0e+9
+#define DENSE_PERF M *N / time / 1.0e+9
+#define CRS_PERF M *nnzrow / time / 1.0e+9
 
-template <typename T>
-void get_ans(monolish::matrix::Dense<T> &A){
+template <typename T> void get_ans(monolish::matrix::Dense<T> &A) {
 
-    for (size_t i = 0; i < A.get_nnz(); i++) {
-        A.val[i] = std::tanh(A.val[i]);
-    }
+  for (size_t i = 0; i < A.get_nnz(); i++) {
+    A.val[i] = std::tanh(A.val[i]);
+  }
 }
 
 template <typename MAT, typename T>
@@ -36,7 +35,8 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
     A.recv();
     monolish::matrix::Dense<T> resultA(A);
 
-    if (ans_check<T>(resultA.val.data(), AA.val.data(), AA.get_nnz(), tol) == false) {
+    if (ans_check<T>(resultA.val.data(), AA.val.data(), AA.get_nnz(), tol) ==
+        false) {
       return false;
     };
     A.device_free();
