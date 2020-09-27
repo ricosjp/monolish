@@ -41,12 +41,14 @@ run_cpu:
 	bash ./test.sh mv_mul cpu 10
 	bash ./test.sh transpose cpu 10
 	bash ./test.sh subvec_op cpu 10
+	bash ./test.sh m_tanh cpu 10
  
 run_gpu:
 	bash ./test.sh matrix_common gpu 10
 	bash ./test.sh convert gpu 10
 	bash ./test.sh mv_mul gpu 10
 	bash ./test.sh transpose gpu 10
+	bash ./test.sh m_tanh gpu 10
 	#bash ./test.sh subvec_op gpu 10
 
 run_fx:
@@ -55,6 +57,7 @@ run_fx:
 	bash ./test.sh mv_mul fx 10
 	bash ./test.sh transpose fx 10
 	bash ./test.sh subvec_op fx 10
+	bash ./test.sh m_tanh fx 10
 
 run_sx:
 	bash ./test.sh matrix_common sx 10
@@ -62,6 +65,7 @@ run_sx:
 	bash ./test.sh mv_mul sx 10
 	bash ./test.sh transpose sx 10
 	bash ./test.sh subvec_op sx 10
+	bash ./test.sh m_tanh sx 10
 
 clean:
 	- rm *.out

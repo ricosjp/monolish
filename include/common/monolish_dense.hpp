@@ -790,6 +790,15 @@ public:
    * - GPU acceleration (OpenACC): true
    **/
   void col_div(const size_t c, const vector<Float> &vec);
+
+  /**
+   * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
+  void tanh();
 };
 } // namespace matrix
 } // namespace monolish

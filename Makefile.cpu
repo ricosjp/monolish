@@ -4,7 +4,7 @@ MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
 CXXFLAGS = -O3 -std=c++14 -lm -g -fPIC
-CXXFLAGS += -fopenmp -mavx -DUSE_AVX 
+CXXFLAGS += -fopenmp -mavx -DUSE_AVX -DUSE_MKL
 CXXFLAGS += -Wall -Wno-unused-variable
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 
@@ -12,7 +12,7 @@ LIBFLAGS = -shared
 
 ####################
 
-BLAS_INC ?=  -I /usr/include/openblas/
+BLAS_INC ?=  -I /usr/include/openblas/ -I /usr/include/mkl/
 BLAS_LIB ?= -L/usr/lib64/ -lopenblas
 
 ####################
@@ -43,8 +43,8 @@ vpath %.cpp ./src/equation/qr/
 vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
+vpath %.cpp ./src/blas/math/
 vpath %.cpp ./src/blas/vector/
-
 vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
 vpath %.cpp ./src/blas/matrix/getvec

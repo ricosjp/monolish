@@ -38,7 +38,6 @@ set(_MKL_LIBRARY_HINTS
   /usr/local/lib
   /usr/lib
 )
-# FIXME switch to AVX2/AVX512 or SSSE versions
 find_library(MKL_VML_AVX      NAMES mkl_vml_avx      HINTS ${_MKL_LIBRARY_HINTS})
 find_library(MKL_INTEL_LP64   NAMES mkl_intel_lp64   HINTS ${_MKL_LIBRARY_HINTS})
 find_library(MKL_INTEL_THREAD NAMES mkl_intel_thread HINTS ${_MKL_LIBRARY_HINTS})
@@ -65,3 +64,4 @@ mark_as_advanced(MKL_INCLUDE_PATH MKL_LIBRARIES)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MKL DEFAULT_MSG MKL_LIBRARIES MKL_INCLUDE_PATH)
+
