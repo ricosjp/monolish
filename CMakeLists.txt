@@ -10,93 +10,49 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
+option(BUILD_GPU "build GPU variant" OFF)
+
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
 
-###############################################################################
-# monolish_gpu
-###############################################################################
+function(common_setup target_name)
+  add_library(${target_name} SHARED "")
 
-option(BUILD_GPU "build GPU variant" OFF)
-
-if (BUILD_GPU)
-  add_library(monolish_gpu SHARED "")
-
-  # TODO: source files should be collected in subdirectory CMakeLists.txt
-  #add_subdirectory(src)
-  target_sources(monolish_gpu
+  target_sources(${target_name}
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
-  set_property(TARGET monolish_gpu PROPERTY CXX_STANDARD 14)
-  target_compile_options(monolish_gpu PRIVATE -O3)
-  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+
+  set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
+  target_compile_options(${target_name} PRIVATE -O3)
+
+  # AVX
+  target_compile_options(${target_name} PRIVATE "-mavx")
+  target_compile_definitions(${target_name} PRIVATE USE_AVX)
+
   if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(monolish_gpu PRIVATE "-g3" "-fvar-tracking-assignments")
+    target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
   endif()
 
-  # OpenACC
-  set(OpenACC_ACCEL_TARGET "nvptx-none")
-  find_package(OpenACC REQUIRED)
-  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
-
-  # CUDA
-  find_package(CUDAToolkit REQUIRED)
-
-  target_link_libraries(monolish_gpu
-    PRIVATE
-    OpenACC::OpenACC_CXX
-    CUDA::cublas
-    CUDA::cusolver
-    CUDA::cusparse
-    CUDA::cudart
-  )
-
   install(
-    TARGETS monolish_gpu
+    TARGETS ${target_name}
     LIBRARY
       DESTINATION lib
   )
-endif(BUILD_GPU)
+endfunction()
 
-###############################################################################
-# monolish_cpu
-###############################################################################
-
-add_library(monolish_cpu SHARED "")
-
-# TODO: source files should be collected in subdirectory CMakeLists.txt
-#add_subdirectory(src)
-target_sources(monolish_cpu
-  PRIVATE
-  ${MONOLISH_SOURCE_FILES}
-  )
-
-set_property(TARGET monolish_cpu PROPERTY CXX_STANDARD 14)
-target_compile_options(monolish_cpu PRIVATE -O3)
-
-# AVX
-target_compile_options(monolish_cpu PRIVATE "-mavx")
-target_compile_definitions(monolish_cpu PRIVATE USE_AVX)
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  target_compile_options(monolish_cpu PRIVATE "-g3" "-fvar-tracking-assignments")
-endif()
+common_setup(monolish_cpu)
 
 # OpenMP
-find_package(OpenMP)
-if (OpenMP_FOUND)
-  target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
-endif (OpenMP_FOUND)
+find_package(OpenMP REQUIRED)
+target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 
-# Intel MKL
+# MKL
 find_package(MKL)
-
-# BLAS
 if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
   target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
@@ -117,15 +73,30 @@ else()
   target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif()
 
+if(BUILD_GPU)
+  common_setup(monolish_gpu)
+  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+
+  # OpenACC
+  set(OpenACC_ACCEL_TARGET "nvptx-none")
+  find_package(OpenACC REQUIRED)
+  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
+
+  # CUDA
+  find_package(CUDAToolkit REQUIRED)
+
+  target_link_libraries(monolish_gpu
+    PRIVATE
+    OpenACC::OpenACC_CXX
+    CUDA::cublas
+    CUDA::cusolver
+    CUDA::cusparse
+    CUDA::cudart
+  )
+endif(BUILD_GPU)
+
 install(
   DIRECTORY include/
   DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp")
-
-install(
-  TARGETS monolish_cpu
-  LIBRARY
-    DESTINATION lib
-  )
-
-
+  FILES_MATCHING PATTERN "*.hpp"
+)
