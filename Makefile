@@ -55,6 +55,14 @@ in:
 		-w /monolish \
 		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
 
+in-cpu:
+	docker run -it --rm \
+		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-v $(MONOLISH_TOP):/monolish \
+		-w /monolish \
+		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
+
 format:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \

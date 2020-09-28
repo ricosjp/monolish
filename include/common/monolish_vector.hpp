@@ -264,6 +264,14 @@ public:
   auto size() const { return val.size(); }
 
   /**
+   * @brief get vector size
+   * @return vector size
+   * @note
+   * - # of computation: 1
+   **/
+  auto get_nnz() const { return val.size(); }
+
+  /**
    * @brief vector copy ( Copy the memory data on CPU and GPU )
    * @return copied vector
    * @note
@@ -596,5 +604,14 @@ public:
     }
     return false;
   }
+
+  /**
+   * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))
+   * @note
+   * - # of computation: N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): true
+   **/
+  void tanh();
 };
 } // namespace monolish
