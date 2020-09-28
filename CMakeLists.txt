@@ -55,9 +55,9 @@ target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 find_package(MKL)
 if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
-  target_include_directories(${target_name} PRIVATE ${MKL_INCLUDE_PATH})
-  target_link_libraries(${target_name} PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(${target_name} PRIVATE USE_MKL)
+  target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
+  target_compile_definitions(monolish_cpu PRIVATE USE_MKL)
 else()
   find_package(BLAS REQUIRED)
   # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
@@ -69,8 +69,8 @@ else()
       /usr/local/include
       /usr/include/openblas
   )
-  target_include_directories(${target_name} PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(${target_name} PRIVATE ${BLAS_LIBRARIES})
+  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif()
 
 if(BUILD_GPU)
