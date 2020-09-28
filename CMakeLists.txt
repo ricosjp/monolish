@@ -17,8 +17,6 @@ file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   src/*.cpp
 )
 
-find_package(MKL)  # see cmake/FindMKL.cmake for detail
-
 function(common_setup target_name)
   add_library(${target_name} SHARED "")
 
@@ -38,27 +36,6 @@ function(common_setup target_name)
     target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
   endif()
 
-  # BLAS
-  if(MKL_FOUND)
-    # Not use FindBLAS if MKL is already found
-    target_include_directories(${target_name} PRIVATE ${MKL_INCLUDE_PATH})
-    target_link_libraries(${target_name} PRIVATE ${MKL_LIBRARIES})
-    target_compile_definitions(${target_name} PRIVATE USE_MKL)
-  else()
-    find_package(BLAS REQUIRED)
-    # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-    # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-    find_path(BLAS_INCLUDE_DIRS
-      NAMES cblas.h
-      HINTS
-        /usr/include
-        /usr/local/include
-        /usr/include/openblas
-    )
-    target_include_directories(${target_name} PRIVATE ${BLAS_INCLUDE_DIRS})
-    target_link_libraries(${target_name} PRIVATE ${BLAS_LIBRARIES})
-  endif()
-
   install(
     TARGETS ${target_name}
     LIBRARY
@@ -68,11 +45,33 @@ endfunction()
 
 common_setup(monolish_cpu)
 
-# OpenMP (not common because GPU variant uses OpenACC)
+# OpenMP
 find_package(OpenMP REQUIRED)
 target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
 target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
 target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
+
+# MKL
+find_package(MKL)
+if(MKL_FOUND)
+  # Not use FindBLAS if MKL is already found
+  target_include_directories(${target_name} PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(${target_name} PRIVATE ${MKL_LIBRARIES})
+  target_compile_definitions(${target_name} PRIVATE USE_MKL)
+else()
+  find_package(BLAS REQUIRED)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS
+    NAMES cblas.h
+    HINTS
+      /usr/include
+      /usr/local/include
+      /usr/include/openblas
+  )
+  target_include_directories(${target_name} PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(${target_name} PRIVATE ${BLAS_LIBRARIES})
+endif()
 
 if(BUILD_GPU)
   common_setup(monolish_gpu)
