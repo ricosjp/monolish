@@ -64,37 +64,14 @@ class Split1stLayer:
         title_list = ["other"] + [f"solver {str(i)}" for i in range(len(solver_dict_block_list))]
         return title_list, block_dict_lists
 
-# # Aggregate Class
-# class Aggregate:
-#     def __init__(self):
-#         self.html_tables = []
+# Aggregate Class
+class Aggregation:
+    def __init__(self):
+        self.aggr_column_lists = []
+        self.aggr_ndarrays = []
+        self.index = 0
 
-#     def first_layer_type(self, target_dict_list) -> str:
-#         return table
-
-
-# io data
-log_path = sys.argv[1]
-out_path = sys.argv[2]
-
-# data dir
-try:
-    # read data
-    with open(log_path, "r") as f:
-        yaml_dict_list = yaml.safe_load(f)
-        print("read {}".format(log_path))
-
-        # drop information
-        main_dir = "solve/monolish_cg/monolish_jacobi/"
-        drop_information = DropInformation()
-        target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
-
-        # 1st layer type
-        split_1st_layer = Split1stLayer()
-        title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
-        # print(title_list)
-
-        # aggregation
+    def aggregate(self, block_dict_lists):
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
@@ -131,6 +108,33 @@ try:
 
         else:
             index = index + 1
+
+        return aggr_column_lists, aggr_ndarrays, index
+
+
+# io data
+log_path = sys.argv[1]
+out_path = sys.argv[2]
+
+# data dir
+try:
+    # read data
+    with open(log_path, "r") as f:
+        yaml_dict_list = yaml.safe_load(f)
+        print("read {}".format(log_path))
+
+        # drop information
+        main_dir = "solve/monolish_cg/monolish_jacobi/"
+        drop_information = DropInformation()
+        target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
+
+        # 1st layer type
+        split_1st_layer = Split1stLayer()
+        title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
+
+        # aggregation
+        aggregation = Aggregation()
+        aggr_column_lists, aggr_ndarrays, index = aggregation.aggregate(block_dict_lists)
 
         # create html
         html_table_list = []
