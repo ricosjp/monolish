@@ -1,133 +1,102 @@
-# In order to use CMP0076, CMake 3.13 is required, but CentOS8 only provides 3.11.4
-#cmake_minimum_required(VERSION 3.13)
-#cmake_policy(SET CMP0076 NEW)
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.17)
+cmake_policy(SET CMP0076 NEW)
 
 # Add cmake/ as module path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+# clangd setting
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
-# TODO: GLOB is deprecated but used for now
+option(BUILD_GPU "build GPU variant" OFF)
+
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
 
-###############################################################################
-# monolish_gpu
-###############################################################################
+function(common_setup target_name)
+  add_library(${target_name} SHARED "")
 
-option(BUILD_GPU "build GPU variant" OFF)
-
-if (BUILD_GPU)
-  add_library(monolish_gpu SHARED "")
-
-  # TODO: source files should be collected in subdirectory CMakeLists.txt
-  #add_subdirectory(src)
-  target_sources(monolish_gpu
+  target_sources(${target_name}
     PRIVATE
     ${MONOLISH_SOURCE_FILES}
     )
 
-  target_compile_features(monolish_gpu PUBLIC cxx_std_14)
+  set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
+  target_compile_options(${target_name} PRIVATE -O3)
 
-  target_compile_options(monolish_gpu PRIVATE -O3)
+  # AVX
+  target_compile_options(${target_name} PRIVATE "-mavx")
+  target_compile_definitions(${target_name} PRIVATE USE_AVX)
 
-  # OpenACC
-  set(OpenACC_CXX_FLAGS "-fopenacc")
-  target_compile_options(monolish_gpu PRIVATE ${OpenACC_CXX_FLAGS})
-  target_compile_options(monolish_gpu PRIVATE "-foffload=nvptx-none=\"-misa=sm_35\"")
-  # This should be target_link_options(), but only available after CMake 3.13
-  set_target_properties(monolish_gpu PROPERTIES LINK_FLAGS ${OpenACC_CXX_FLAGS})
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
+  endif()
 
+  install(
+    TARGETS ${target_name}
+    LIBRARY
+      DESTINATION lib
+  )
+endfunction()
+
+common_setup(monolish_cpu)
+
+# OpenMP
+find_package(OpenMP REQUIRED)
+target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
+target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
+
+# MKL
+find_package(MKL)
+if(MKL_FOUND)
+  # Not use FindBLAS if MKL is already found
+  target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
+  target_compile_definitions(monolish_cpu PRIVATE USE_MKL)
+else()
+  find_package(BLAS REQUIRED)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS
+    NAMES cblas.h
+    HINTS
+      /usr/include
+      /usr/local/include
+      /usr/include/openblas
+  )
+  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
+endif()
+
+if(BUILD_GPU)
+  common_setup(monolish_gpu)
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
-  # CUDA
-  foreach(CUDALIB IN ITEMS cudart)
-    add_library(${CUDALIB} SHARED IMPORTED)
-    set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-11.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-11.0/targets/x86_64-linux/include
-      )
-  endforeach(CUDALIB)
+  # OpenACC
+  set(OpenACC_ACCEL_TARGET "nvptx-none")
+  find_package(OpenACC REQUIRED)
+  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
 
-  foreach(CUDALIB IN ITEMS cublas cusolver cusparse)
-    add_library(${CUDALIB} SHARED IMPORTED)
-    set_target_properties(${CUDALIB} PROPERTIES
-      IMPORTED_LOCATION /usr/local/cuda-10.0/targets/x86_64-linux/lib/lib${CUDALIB}.so
-      INTERFACE_INCLUDE_DIRECTORIES /usr/local/cuda-10.0/targets/x86_64-linux/include
-      )
-  endforeach(CUDALIB)
+  # CUDA
+  find_package(CUDAToolkit REQUIRED)
 
   target_link_libraries(monolish_gpu
     PRIVATE
-    cublas
-    cusolver
-    cusparse
-    cudart
-    )
-
-  install(
-    TARGETS monolish_gpu
-    LIBRARY
-      DESTINATION lib
-    )
-endif(BUILD_GPU)
-
-###############################################################################
-# monolish_cpu
-###############################################################################
-
-add_library(monolish_cpu SHARED "")
-
-# TODO: source files should be collected in subdirectory CMakeLists.txt
-#add_subdirectory(src)
-target_sources(monolish_cpu
-  PRIVATE
-  ${MONOLISH_SOURCE_FILES}
+    OpenACC::OpenACC_CXX
+    CUDA::cublas
+    CUDA::cusolver
+    CUDA::cusparse
+    CUDA::cudart
   )
-
-target_compile_features(monolish_cpu PUBLIC cxx_std_14)
-target_compile_options(monolish_cpu PRIVATE -O3)
-
-find_package(OpenMP)
-if (OpenMP_FOUND)
-  target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-  # This should be target_link_options(), but only available after CMake 3.13
-  set_target_properties(monolish_cpu PROPERTIES LINK_FLAGS ${OpenMP_CXX_FLAGS})
-  target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
-endif (OpenMP_FOUND)
-
-find_package(MKL)
-if(MKL_FOUND)
-  set(BLA_VENDOR "Intel10_64lp")
-else()
-  set(BLA_VENDOR "OpenBLAS")
-endif()
-find_package(BLAS)
-
-# BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-# see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-find_path(BLAS_INCLUDE_DIRS
-  NAMES cblas.h mkl_cblas.h
-  HINTS
-    /usr/include
-    /usr/local/include
-    /usr/include/openblas
-)
-
-target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
+endif(BUILD_GPU)
 
 install(
   DIRECTORY include/
   DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp")
-
-install(
-  TARGETS monolish_cpu
-  LIBRARY
-    DESTINATION lib
-  )
+  FILES_MATCHING PATTERN "*.hpp"
+)

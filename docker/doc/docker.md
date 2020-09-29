@@ -1,10 +1,11 @@
 \page Docker monolish docker
-# monolish docker
+
+## monolish docker
 [Allgebra][1]をベースにmonolishの共有ライブラリやヘッダファイルがインストールされたイメージ
 
 monolishが/opt/ricos/monolish/$VERSION/にインストールされています．
 
-# サンプルコード
+## サンプルコード
 サンプルコードが/opt/ricos/monolish/$VERSION/samplesに入っています．
 
 **現在サンプルは実行確認程度の意味しかありません．詳しいテストや使い方はmonolish本体のtest/を見てください**
@@ -15,7 +16,7 @@ monolishが/opt/ricos/monolish/$VERSION/にインストールされています�
 答え合わせやサイズを入力する引数は外してあります．
 何もつけずにそのまま実行すれば動くはずです．
 
-## 内積 (dot.cpp)
+### 内積 (dot.cpp)
 CPU/GPUでOpenBLAS/cuBLASを用いた内積をする．
 
 出力は実行時間とN=10^4の倍精度乱数ベクトルの内積です．\
@@ -26,7 +27,7 @@ GPUでゼロとか，10^-20とかの小さい値が返ってきた場合はGPU�
 `nvidia-smi`で確認して下さい．それでだめなら菱沼まで．
 
 
-## sparse LU (slu.cpp)
+### sparse LU (slu.cpp)
 GPUのみ．cusolverを用いたsparse LU．
 
 test.mtxを読み込んで連立一次方程式を解きます．

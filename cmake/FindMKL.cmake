@@ -26,8 +26,7 @@ set(_MKL_INCLUDE_HINTS
   /usr/local/include
   /usr/include
 )
-find_path(MKL_INCLUDE_PATH           NAMES mkl.h           HINTS ${_MKL_INCLUDE_HINTS})
-find_path(MKL_SCALAPACK_INCLUDE_PATH NAMES mkl_scalapack.h HINTS ${_MKL_INCLUDE_HINTS})
+find_path(MKL_INCLUDE_PATH NAMES mkl.h HINTS ${_MKL_INCLUDE_HINTS})
 unset(_MKL_INCLUDE_HINTS)
 
 set(_MKL_LIBRARY_HINTS
@@ -39,21 +38,18 @@ set(_MKL_LIBRARY_HINTS
   /usr/local/lib
   /usr/lib
 )
-find_library(MKL_SCALAPACK_LP64      NAMES mkl_scalapack_lp64       HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_BLACS_INTELMPI_LP64 NAMES mkl_blacs_intelmpi_lp64  HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_BLACS_OPENMPI_LP64  NAMES mkl_blacs_openmpi_lp64   HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_INTEL_LP64          NAMES mkl_intel_lp64           HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_INTEL_THREAD        NAMES mkl_intel_thread         HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_GNU_THREAD          NAMES mkl_gnu_thread           HINTS ${_MKL_LIBRARY_HINTS})
-find_library(MKL_CORE                NAMES mkl_core                 HINTS ${_MKL_LIBRARY_HINTS})
+find_library(MKL_VML_AVX      NAMES mkl_vml_avx      HINTS ${_MKL_LIBRARY_HINTS})
+find_library(MKL_INTEL_LP64   NAMES mkl_intel_lp64   HINTS ${_MKL_LIBRARY_HINTS})
+find_library(MKL_INTEL_THREAD NAMES mkl_intel_thread HINTS ${_MKL_LIBRARY_HINTS})
+find_library(MKL_GNU_THREAD   NAMES mkl_gnu_thread   HINTS ${_MKL_LIBRARY_HINTS})
+find_library(MKL_CORE         NAMES mkl_core         HINTS ${_MKL_LIBRARY_HINTS})
 unset(_MKL_LIBRARY_HINTS)
 
 set(MKL_LIBRARIES
-  ${MKL_SCALAPACK_LP64}
+  ${MKL_VML_AVX}
   ${MKL_INTEL_LP64}
   ${MKL_GNU_THREAD}
   ${MKL_CORE}
-  ${MKL_BLACS_OPENMPI_LP64}
   gomp
   pthread
   m
@@ -68,3 +64,4 @@ mark_as_advanced(MKL_INCLUDE_PATH MKL_LIBRARIES)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MKL DEFAULT_MSG MKL_LIBRARIES MKL_INCLUDE_PATH)
+

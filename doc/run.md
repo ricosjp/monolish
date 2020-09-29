@@ -1,6 +1,6 @@
 \page howto How to use
 
-# ユーザ向け：git cloneからサンプルの実行まで
+## ユーザ向け：git cloneからサンプルの実行まで
 
 ### 実行環境
 現状ではCUDA関係のライブラリのバージョンなどの制約から **Docker環境以外での利用は考えてません** ．
@@ -16,46 +16,46 @@ monolishが配布しているコンテナを利用するか，DockerFileから `
 なお，monolishは `/opt/ricos/monolish/$VERSION/` にインストールされている．
 
 
-# How to programming with monolish
+## How to programming with monolish
 重要な機能の使い方について簡単に紹介する
 
-## 基本のクラス
+### 基本のクラス
 
-### monolish::vector クラス
+#### monolish::vector クラス
 想定利用方法: ほとんどstd::vectorと同じです．演算子などもCPU / GPUで使えます．
 ([関連コード][vec])
 
-### monolish::matrix::COO クラスおよび monolish::matrix::CRS クラス
+#### monolish::matrix::COO クラスおよび monolish::matrix::CRS クラス
 Sorted COOをMM形式のファイル，または{double val, int row, int col}の3本の配列から作成し，CRSのコンストラクタにCOOを入れることで変換．
 ([関連コード][mat])
 
-## ソルバ関係
+### ソルバ関係
 
-### monolish::equation::LU クラス
+#### monolish::equation::LU クラス
 CRS形式の疎行列とベクトルを入力すればcuSolverのsparse LUを実行できる(GPUのみ)
 ([関連コード][slu])
 
-### monolish::equation::cg クラス
+#### monolish::equation::cg クラス
 CRS形式の疎行列とベクトルを入力すればCG法を実行できる気がする(いまはできない)．．．
 ([関連コード][cg])
 
-## ログ関係の関数
+### ログ関係の関数
 loggerを用いて実行時性能のログが取れる
 ([関連コード][log])
 
-### monolish::set_log_level() 関数
+#### monolish::set_log_level() 関数
 備考: 0が出力なし，1がソルバ全体時間のみ，2がBLASも出力，3がUtil関係含めて全部出力
 
-### monolish::set_log_filename() 関数
+#### monolish::set_log_filename() 関数
 備考: 設定しなければstandard I/Oに出力する
 
-## 多言語からの呼び出し
+### 多言語からの呼び出し
 
-### Fortran
+#### Fortran
 Fortranから呼び出すことができる
 ([関連コード][fort])
 
-## かなしいこと
+### かなしいこと
 * iterationのログ関係がないです
 * 終了コード周りがちょっと雑です
 * メモリ管理がアレです．たぶんリークしてるので長時間回すと死にます (これは直す+CIにvalgrindを入れます)

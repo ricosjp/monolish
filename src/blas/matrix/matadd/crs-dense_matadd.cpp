@@ -90,7 +90,6 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 #endif
 
   logger.func_out();
-  logger.func_out();
 }
 
 template <typename T>
@@ -102,8 +101,8 @@ matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
 
   return C;
 }
-template matrix::CRS<double> matrix::CRS<double>::
-operator+(const matrix::CRS<double> &B);
-template matrix::CRS<float> matrix::CRS<float>::
-operator+(const matrix::CRS<float> &B);
+template matrix::CRS<double>
+matrix::CRS<double>::operator+(const matrix::CRS<double> &B);
+template matrix::CRS<float>
+matrix::CRS<float>::operator+(const matrix::CRS<float> &B);
 } // namespace monolish

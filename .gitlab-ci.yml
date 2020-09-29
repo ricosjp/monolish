@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra:0.1.0
+image: registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
@@ -15,7 +15,7 @@ stages:
     - deploy
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:latest
+    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
     stage: build_lib
     script:
         - check-format.sh
@@ -78,6 +78,8 @@ vector_common_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 vector_common_gpu:
     stage: common
@@ -100,6 +102,8 @@ matrix_common_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 matrix_common_gpu:
     stage: common
@@ -125,6 +129,8 @@ vector_blas_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 vector_blas_gpu:
     stage: blas
@@ -147,6 +153,8 @@ matrix_blas_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 matrix_blas_gpu:
     stage: blas
@@ -171,6 +179,8 @@ equation_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 equation_gpu:
     stage: equation
@@ -196,6 +206,8 @@ logger_cpu:
         paths:
             - test/
         expire_in: 60min
+    tags:
+        - avx
 
 logger_gpu:
     stage: logger
@@ -269,13 +281,12 @@ docker_debug:
         - docker
 
 pages:
+    image: registry.ritc.jp/ricos/allgebra/doxygen:0.2.0
     stage: deploy
     script:
-        - apt update
-        - apt install -y doxygen graphviz
-        - cd doc; doxygen; ls; cd ..
-        - rm -rf public/doxygen
-        - cp -r doc/html public/
+        - rm -rf public html
+        - doxygen Doxyfile
+        - mv html public
         - cp -r test/logger/logging/*.html public/
     artifacts:
         paths:
@@ -283,4 +294,3 @@ pages:
         expire_in: 20min
     only:
         - master
-        - 50-small_bug_fix

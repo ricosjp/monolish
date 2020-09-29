@@ -46,6 +46,17 @@ public:
     return instance;
   }
 
+  /**
+   * @brief Specifying the log level
+   * @param L loglevel
+   * @note loglevel is
+   * 1. logging solvers (CG, Jacobi, LU...etc.)
+   * 2. logging solvers and BLAS functions (matmul, matvec, arithmetic
+   *operators..etc.)
+   * 3. logging solvers and BLAS functions and utils (send, recv,
+   *allocation...etc.)
+   * @details see also monolish::util::set_log_level()
+   **/
   void set_log_level(size_t L) {
     if (3 < L) { // loglevel = {0, 1, 2, 3}
       throw std::runtime_error("error bad LogLevel");
@@ -53,6 +64,11 @@ public:
     LogLevel = L;
   }
 
+  /**
+   * @brief Specifying the log finename
+   * @param file the log filename
+   * @details see also monolish::util::set_log_filename()
+   **/
   void set_log_filename(std::string file) {
     filename = file;
 

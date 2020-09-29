@@ -1,5 +1,7 @@
 \page Build Build
 
+## はじめに
+
 現在allgebra Docker image上での利用を前提としています．
 ここはmonolish本体の開発者向けのページです．
 
@@ -18,11 +20,11 @@ GPUでは `libmonolish_gpu.so` が生成されます．
 
 ヘッダはCPU, GPUで共通です．
 
-# make
+## make
 
 インストール場所は `$MONOLISH_DIR/lib/` です．
 
-## CPU on Linux
+### CPU on Linux
 Docker上で以下の手順でコンパイルしてインストールします．
 
 ```
@@ -31,7 +33,7 @@ Docker上で以下の手順でコンパイルしてインストールします�
 ```
 
 
-## GPU on Linux
+### GPU on Linux
 Docker上で以下の手順でコンパイルしてインストールします．
 
 ```
@@ -39,14 +41,14 @@ Docker上で以下の手順でコンパイルしてインストールします�
 > make install
 ```
 
-# cmake
+## cmake
 build/など作ってcmakeでコンパイルしてください．
 オプションは以下の2つが使えます．
 
 - -DBUILD\_GPU={ON/OFF}
 - -DCMAKE\_INSTALL\_PREFIX=[dir]
 
-# 環境変数等
+## 環境変数等
 	* MONOLISH_DIR monolish 
 	(インストール先，デフォルトは$(HOME)/lib/monolish)
 	* BLAS_INC
@@ -59,10 +61,10 @@ build/など作ってcmakeでコンパイルしてください．
 	* CUDA_LIB
 	(CUDAライブラリの場所，-L/usr/local/cuda-10.0/targets/x86_64-linux/lib/)
 
-# Dependencies
+## Dependencies
 CPU, GPU共通
 		* make 
-	   	* g++ 7.1以上 (C++17)
+	   	* g++ 5.1以上 (C++14)
 	   	* gfortran (Fortranとのリンクテストのみ)
 		* python3 (optional, log集計用)
 		* python3-yaml (optional, log集計用)
@@ -82,6 +84,6 @@ CPU
 		* libopenblas-dev
 
 ## 制約等
-* c++17が必要です
+* c++14が必要です
 * cuda-10.0以外の環境ではテストしていません
 * gcc + OpenACCが必要です．

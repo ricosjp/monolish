@@ -42,6 +42,7 @@ vpath %.cpp ./src/equation/qr/
 vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/blas/arithmetic/
+vpath %.cpp ./src/blas/math/
 vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
