@@ -50,6 +50,20 @@ class DropInformation:
         target_dict_list = list(filter(lambda x: x.pop("stat") if x["name"] == directory else x, target_dict_list))
         return target_dict_list
 
+# Split 1st layer Class
+class Split1stLayer:
+    def split_1st_layer(self, target_dict_list):
+        solver_dict_list = list(filter(lambda x:"solve" in x["name"], target_dict_list))
+        other_dict_list = list(filter(lambda x:"solve" not in x["name"], target_dict_list))
+
+        filter_list = list(map(lambda x:(("stat" in x) and x["stat"] == "IN" and x["name"] == "solve/"), solver_dict_list))
+        split_index_list = [i for i, x in enumerate(filter_list) if x == True] + [len(filter_list)]
+        solver_dict_block_list = [solver_dict_list[split_index_list[i]: split_index_list[i+1]] for i in range(len(split_index_list)-1)]
+
+        block_dict_lists = [other_dict_list] + solver_dict_block_list
+        title_list = ["other"] + [f"solver {str(i)}" for i in range(len(solver_dict_block_list))]
+        return title_list, block_dict_lists
+
 # # Aggregate Class
 # class Aggregate:
 #     def __init__(self):
@@ -76,20 +90,12 @@ try:
         target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
 
         # 1st layer type
-        solver_dict_list = list(filter(lambda x:"solve" in x["name"], target_dict_list))
-        other_dict_list = list(filter(lambda x:"solve" not in x["name"], target_dict_list))
-
-        filter_list = list(map(lambda x:(("stat" in x) and x["stat"] == "IN" and x["name"] == "solve/"), solver_dict_list))
-        split_index_list = [i for i, x in enumerate(filter_list) if x == True] + [len(filter_list)]
-        solver_dict_block_list = [solver_dict_list[split_index_list[i]: split_index_list[i+1]] for i in range(len(split_index_list)-1)]
-
-        block_dict_lists = [other_dict_list] + solver_dict_block_list
-        title_list = ["other"] + [f"solver {str(i)}" for i in range(len(solver_dict_block_list))]
+        split_1st_layer = Split1stLayer()
+        title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
+        # print(title_list)
 
         # aggregation
-        html_table_list = []
-        create_html = CreateHTML(html_table_list)
-
+        aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
@@ -119,11 +125,19 @@ try:
                 aggr_column_list.append(f"breakdown_layer {str(i)} [%]")
             aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
 
-            # create html table
-            html_table = create_html.create_table(title_list[index], aggr_column_list, aggr_ndarray)
-            html_table_list.append(html_table)
+            # aggregation list
+            aggr_column_lists.append(aggr_column_list)
+            aggr_ndarrays.append(aggr_ndarray)
+
+        else:
+            index = index + 1
 
         # create html
+        html_table_list = []
+        create_html = CreateHTML(html_table_list)
+        for i in range(index):
+            html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
+            html_table_list.append(html_table)
         html = create_html.create_html(html_table_list)
 
         # write html
