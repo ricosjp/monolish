@@ -359,7 +359,8 @@ public:
 
   // crs-dense
   /**
-   * @brief CRS matrix (size M*N) and CRS matrix (size K*N) addition A + B (A and B must be same non-zero structure)
+   * @brief CRS matrix (size M*N) and CRS matrix (size K*N) addition A + B (A
+   *and B must be same non-zero structure)
    * @param B CRS matrix (size M*N)
    * @return result CRS matrix (size M*N)
    * @note
