@@ -403,7 +403,7 @@ public:
    **/
   std::vector<int> &get_col_ind() { return col_index; }
 
-  /*
+  /**
    * @brief get value
    * @return velue
    * @note
@@ -433,7 +433,7 @@ public:
    **/
   const std::vector<int> &get_col_ind() const { return col_index; }
 
-  /*
+  /**
    * @brief get value
    * @return velue
    * @note
@@ -446,7 +446,7 @@ public:
   // Utility
   // ///////////////////////////////////////////////////////////////////////////
 
-  /*
+  /**
    * @brief get transposed matrix (A^T)
    * @return tranposed matrix A^T
    * @note
@@ -461,7 +461,7 @@ public:
     return *this;
   }
 
-  /*
+  /**
    * @brief create transposed matrix from COO matrix (A = B^T)
    * @param B COO matrix
    * @note
@@ -478,7 +478,7 @@ public:
     B.val = get_val_ptr();
   }
 
-  /*
+  /**
    * @brief Memory data space required by the matrix
    * @note
    * - # of computation: 3
