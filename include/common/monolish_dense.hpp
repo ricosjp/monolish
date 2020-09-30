@@ -234,7 +234,7 @@ public:
    **/
   std::string type() const { return "Dense"; }
 
-  /*
+  /**
    * @brief get transposed matrix (A^T)
    * @return tranposed matrix A^T
    * @note
@@ -257,7 +257,7 @@ public:
     return *this;
   }
 
-  /*
+  /**
    * @brief create transposed matrix from COO matrix (A = B^T)
    * @param B COO matrix
    * @note
@@ -277,7 +277,7 @@ public:
     }
   }
 
-  /*
+  /**
    * @brief Memory data space required by the matrix
    * @note
    * - # of computation: 3
