@@ -351,7 +351,7 @@ public:
    * @param B Dense matrix (size K*N)
    * @return result Dense matrix (size M*N)
    * @note
-   * - # of computation: 2*N*nnz
+   * - # of computation: 2* N * nnz
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): true
    **/

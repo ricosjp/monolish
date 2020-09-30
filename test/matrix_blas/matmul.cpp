@@ -3,7 +3,7 @@
 
 #define FUNC "matmul"
 #define DENSE_PERF 2 * M *N *K / time / 1.0e+9
-#define CRS_PERF 2 * M *N *nnzrow / time / 1.0e+9
+#define CRS_PERF 2 * M * N * nnzrow / time / 1.0e+9
 
 template <typename T>
 void get_ans(const monolish::matrix::Dense<T> &A,
