@@ -127,7 +127,6 @@ class IOData:
         self.aggr_ndarrays = []
         self.index = 0
 
-    # import yaml
     def reader(self, file_object, file_extension):
         if file_extension == "yaml":
             import yaml
