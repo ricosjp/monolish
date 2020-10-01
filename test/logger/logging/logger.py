@@ -75,7 +75,7 @@ class Aggregation:
     # import numpy as np
     def aggregate(self, block_dict_lists):
         import numpy as np
-        
+
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
@@ -148,20 +148,23 @@ try:
     with open(log_path, "r") as f:
         io_data = IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
-        print("read {}".format(log_path))
+        print(f"read {format(log_path)}")
 
         # drop information
         main_dir = "solve/monolish_cg/monolish_jacobi/"
         drop_information = DropInformation()
         target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
+        print("success drop information")
 
         # 1st layer type
         split_1st_layer = Split1stLayer()
         title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
+        print("success 1st layer type")
 
         # aggregation
         aggregation = Aggregation()
         aggr_column_lists, aggr_ndarrays, index = aggregation.aggregate(block_dict_lists)
+        print("success aggregation")
 
         # create html
         html_table_list = []
@@ -170,6 +173,7 @@ try:
             html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
         html = create_html.create_html(html_table_list)
+        print("success create html")
 
         # write html
         try:
