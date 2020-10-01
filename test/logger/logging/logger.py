@@ -3,8 +3,6 @@
 
 import sys
 import os
-import yaml
-import numpy as np
 
 # HTML Class
 class CreateHTML:
@@ -66,12 +64,18 @@ class Split1stLayer:
 
 # Aggregate Class
 class Aggregation:
+    '''
+    used numpy
+    '''
     def __init__(self):
         self.aggr_column_lists = []
         self.aggr_ndarrays = []
         self.index = 0
 
+    # import numpy as np
     def aggregate(self, block_dict_lists):
+        import numpy as np
+        
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
@@ -111,6 +115,28 @@ class Aggregation:
 
         return aggr_column_lists, aggr_ndarrays, index
 
+# i/o data Class
+class IOData:
+    '''
+    used yaml
+    '''
+    def __init__(self):
+        self.aggr_column_lists = []
+        self.aggr_ndarrays = []
+        self.index = 0
+
+    # import yaml
+    def reader(self, file_object, file_extension):
+        if file_extension == "yaml":
+            import yaml
+            dict_list = yaml.safe_load(file_object)
+        elif file_extension == "json":
+            import json
+            dict_list = json.load(file_object)
+        else:
+            dict_list = []
+        
+        return dict_list
 
 # io data
 log_path = sys.argv[1]
@@ -120,7 +146,8 @@ out_path = sys.argv[2]
 try:
     # read data
     with open(log_path, "r") as f:
-        yaml_dict_list = yaml.safe_load(f)
+        io_data = IOData()
+        yaml_dict_list = io_data.reader(f, "yaml")
         print("read {}".format(log_path))
 
         # drop information
