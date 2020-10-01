@@ -3,6 +3,8 @@
 
 import sys
 import os
+import datetime
+dt_now = datetime.datetime.now()
 
 # HTML Class
 class CreateHTML:
@@ -95,7 +97,7 @@ class Aggregation:
                     count = np.count_nonzero(temp_ndarray[:,0])
                     total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
                     rst_narray = np.array([i, col, count, total_time])
-                    aggr_ndarray=np.append(aggr_ndarray, [rst_narray], axis=0)
+                    aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
             
             aggr_column_list = ["layer", "name", "count", "total_time [s]"]
             for i in range(1, max(map(lambda x:x.count("/"), block_ndarray[:, 1]))):
@@ -148,23 +150,23 @@ try:
     with open(log_path, "r") as f:
         io_data = IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
-        print(f"read {format(log_path)}")
+        print(f"{dt_now} read {format(log_path)}")
 
         # drop information
         main_dir = "solve/monolish_cg/monolish_jacobi/"
         drop_information = DropInformation()
         target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
-        print("success drop information")
+        print(f"{dt_now} success drop information")
 
         # 1st layer type
         split_1st_layer = Split1stLayer()
         title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
-        print("success 1st layer type")
+        print(f"{dt_now} success 1st layer type")
 
         # aggregation
         aggregation = Aggregation()
         aggr_column_lists, aggr_ndarrays, index = aggregation.aggregate(block_dict_lists)
-        print("success aggregation")
+        print(f"{dt_now} success aggregation")
 
         # create html
         html_table_list = []
@@ -173,20 +175,20 @@ try:
             html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
         html = create_html.create_html(html_table_list)
-        print("success create html")
+        print(f"{dt_now} success create html")
 
         # write html
         try:
             with open(out_path, 'wb') as file:
                 file.write(html.encode("utf-8"))
-                print("write {}".format(out_path))
+                print(f"{dt_now} write {format(out_path)}")
         except FileNotFoundError as e:
-            print("write error: The specified file was not found.")
+            print(f"{dt_now} write error: The specified file was not found.")
         except Exception as e:
-            print(e)
+            print(f"{dt_now} {e}")
 
 except FileNotFoundError as e:
-    print("load error: The specified file was not found.")
+    print(f"{dt_now} load error: The specified file was not found.")
 
 except Exception as e:
-   print(e)
+   print(f"{dt_now} {e}")
