@@ -1,4 +1,4 @@
-image: registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
+image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.0
 
 before_script:
     - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
@@ -15,7 +15,7 @@ stages:
     - deploy
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.0
     stage: build_lib
     script:
         - check-format.sh
@@ -281,7 +281,7 @@ docker_debug:
         - docker
 
 pages:
-    image: registry.ritc.jp/ricos/allgebra/doxygen:0.2.0
+    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
     stage: deploy
     script:
         - rm -rf public html
