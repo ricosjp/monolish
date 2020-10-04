@@ -1,7 +1,6 @@
 image: registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
 
 before_script:
-    - export MONOLISH_DIR=${CI_PROJECT_DIR}/install_lib
     - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib
 
 stages:
@@ -14,228 +13,297 @@ stages:
     - lang
     - deploy
 
-clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
+.gpu_avx:
+    variables:
+        MONOLISH_DIR: "${CI_PROJECT_DIR}/gpu_avx"
+        BUILD_GPU: "ON"
+        USE_AVX: "ON"
+    artifacts:
+        paths:
+            - gpu_avx
+        expire_in: 60min
+    tags:
+        - gpu
+        - avx
+
+.gpu_noavx:
+    variables:
+        MONOLISH_DIR: "${CI_PROJECT_DIR}/gpu_noavx"
+        BUILD_GPU: "ON"
+        USE_AVX: "OFF"
+    artifacts:
+        paths:
+            - gpu_noavx
+        expire_in: 60min
+    tags:
+        - gpu
+
+.nogpu_avx:
+    variables:
+        MONOLISH_DIR: "${CI_PROJECT_DIR}/nogpu_avx"
+        BUILD_GPU: "OFF"
+        USE_AVX: "ON"
+    artifacts:
+        paths:
+            - nogpu_avx
+        expire_in: 60min
+    tags:
+        - avx
+
+.nogpu_noavx:
+    variables:
+        MONOLISH_DIR: "${CI_PROJECT_DIR}/nogpu_noavx"
+        BUILD_GPU: "OFF"
+        USE_AVX: "OFF"
+    artifacts:
+        paths:
+            - nogpu_noavx
+        expire_in: 60min
+
+.build_cmake:
     stage: build_lib
     script:
-        - check-format.sh
-    allow_failure: true
+        - cmake -Bbuild . -DBUILD_GPU=${BUILD_GPU} -DUSE_AVX=${USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
+        - cmake --build build --target install -- -j $(nproc) VERBOSE=1
+build_cmake_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .build_cmake
+build_cmake_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .build_cmake
+build_cmake_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .build_cmake
+build_cmake_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .build_cmake
 
-## build monolish ###############################
-build_cmake:
-    stage: build_lib
+.test_cpu:
     script:
-        - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=./install_lib
-        - cmake --build build --target install -- -j VERBOSE=1
-    artifacts:
-        paths:
-            - install_lib/
-        expire_in: 60min
-    tags:
-        - gpu
-
-## build test codes ###############################
-build_test_cpu:
-    stage: test_build
+        - make -C test cpu
+        - make -C test/${TEST_TARGET} run_cpu
+.test_gpu:
     script:
-        - cd test/; make cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
+        - make -C test gpu
+        - make -C test/${TEST_TARGET} run_gpu
 
-build_test_gpu:
-    stage: test_build
-    script:
-        - cd test/; make gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
-
-## test common ###################################################
-
-vector_common_cpu:
+#
+# vector_common
+#
+.vector_common_cpu:
     stage: common
-    script:
-        - cd test/vector_common/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-vector_common_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "vector_common"
+.vector_common_gpu:
     stage: common
-    script:
-        - cd test/vector_common/
-        - make run_gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "vector_common"
+vector_common_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .vector_common_cpu
+vector_common_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .vector_common_cpu
+vector_common_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .vector_common_gpu
+vector_common_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .vector_common_gpu
 
-matrix_common_cpu:
+#
+# matrix_common
+#
+.matrix_common_cpu:
     stage: common
-    script:
-        - cd test/matrix_common/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-matrix_common_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "matrix_common"
+.matrix_common_gpu:
     stage: common
-    script:
-        - cd test/matrix_common/
-        - make run_gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "matrix_common"
+matrix_common_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .matrix_common_cpu
+matrix_common_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .matrix_common_cpu
+matrix_common_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .matrix_common_gpu
+matrix_common_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .matrix_common_gpu
 
-
-## test blas ###################################################
-
-vector_blas_cpu:
+#
+# vector_blas
+#
+.vector_blas_cpu:
     stage: blas
-    script:
-        - cd test/vector_blas/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-vector_blas_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "vector_blas"
+.vector_blas_gpu:
     stage: blas
-    script:
-        - cd test/vector_blas/
-        - make run_gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "vector_blas"
+vector_blas_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .vector_blas_cpu
+vector_blas_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .vector_blas_cpu
+vector_blas_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .vector_blas_gpu
+vector_blas_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .vector_blas_gpu
 
-matrix_blas_cpu:
+#
+# matrix_blas
+#
+.matrix_blas_cpu:
     stage: blas
-    script:
-        - cd test/matrix_blas/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-matrix_blas_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "matrix_blas"
+.matrix_blas_gpu:
     stage: blas
-    script:
-        - cd test/matrix_blas/
-        - make run_gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "matrix_blas"
+matrix_blas_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .matrix_blas_cpu
+matrix_blas_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .matrix_blas_cpu
+matrix_blas_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .matrix_blas_gpu
+matrix_blas_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .matrix_blas_gpu
 
-## test equation ###################################################
-
-equation_cpu:
+#
+# equation
+#
+.equation_cpu:
     stage: equation
-    script:
-        - cd test/equation/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-equation_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "equation"
+.equation_gpu:
     stage: equation
-    script:
-        - cd test/equation/
-        - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "equation"
+equation_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .equation_cpu
+equation_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .equation_cpu
+equation_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .equation_gpu
+equation_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .equation_gpu
 
-## test logger ###################################################
-
-logger_cpu:
+#
+# logger
+#
+.logger_cpu:
     stage: logger
-    script:
-        - cd test/logger/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - avx
-
-logger_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "logger"
+.logger_gpu:
     stage: logger
-    script:
-        - cd test/logger/
-        - make run_gpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "logger"
+logger_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .logger_cpu
+logger_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .logger_cpu
+logger_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .logger_gpu
+logger_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .logger_gpu
 
-## test lang ###################################################
-
-lang_cpu:
+#
+# lang
+#
+.lang_cpu:
     stage: lang
-    script:
-        - cd test/lang/
-        - make run_cpu
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-
-lang_gpu:
+    extends: .test_cpu
+    variables:
+      TEST_TARGET: "lang"
+.lang_gpu:
     stage: lang
-    script:
-        - cd test/lang/
-        - make run_gpu
-        - make run_gpu PROFILER="nsys nvprof"
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
-    tags:
-        - gpu
+    extends: .test_gpu
+    variables:
+      TEST_TARGET: "lang"
+lang_nogpu_avx:
+    extends:
+      - .nogpu_avx
+      - .lang_cpu
+lang_nogpu_noavx:
+    extends:
+      - .nogpu_noavx
+      - .lang_cpu
+lang_gpu_avx:
+    extends:
+      - .gpu_avx
+      - .lang_gpu
+lang_gpu_noavx:
+    extends:
+      - .gpu_noavx
+      - .lang_gpu
 
-## docker and pages #################################################################
-
+#
+# docker and pages
+#
 docker:
     image: docker:latest
     stage: deploy
@@ -261,3 +329,11 @@ pages:
         expire_in: 20min
     only:
         - master
+
+clang_format:
+    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
+    stage: build_lib
+    script:
+        - check-format.sh
+    allow_failure: true
+
