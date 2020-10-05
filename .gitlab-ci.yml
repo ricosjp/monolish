@@ -89,12 +89,14 @@ build_cmake_nogpu_noavx:
         - make -C test cpu
         - make -C test/${TEST_TARGET} run_cpu
 .test_gpu_avx:
+    extends: .gpu_avx
     dependencies:
       - "build_cmake_gpu_avx"
     script:
         - make -C test gpu
         - make -C test/${TEST_TARGET} run_gpu
 .test_gpu_noavx:
+    extends: .gpu_noavx
     dependencies:
       - "build_cmake_gpu_noavx"
     script:
