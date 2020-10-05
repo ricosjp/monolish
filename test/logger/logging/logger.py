@@ -4,7 +4,19 @@
 import sys
 import os
 import datetime
+
 dt_now = datetime.datetime.now()
+
+# logger
+class Logger:
+    def debug_log_general(self, message) -> str:
+        print(f"[{dt_now}] {message}")
+
+    def debug_log_success(self, message) -> str:
+        print(f"[{dt_now}] success {message}")
+
+    def debug_log_error(self, message) -> str:
+        print(f"[{dt_now}] error {message}")
 
 # HTML Class
 class CreateHTML:
@@ -143,29 +155,31 @@ class IOData:
 log_path = sys.argv[1]
 out_path = sys.argv[2]
 
+logger = Logger()
+
 # data dir
 try:
     # read data
     with open(log_path, "r") as f:
         io_data = IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
-        print(f"[{dt_now}] read {format(log_path)}")
+        logger.debug_log_success(f"read {format(log_path)}")
 
         # drop information
         main_dir = "solve/monolish_cg/monolish_jacobi/"
         drop_information = DropInformation()
         target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
-        print(f"[{dt_now}] success drop information")
+        logger.debug_log_success("drop information")
 
         # 1st layer type
         split_1st_layer = Split1stLayer()
         title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
-        print(f"[{dt_now}] success 1st layer type")
+        logger.debug_log_success("1st layer type")
 
         # aggregation
         aggregation = Aggregation()
         aggr_column_lists, aggr_ndarrays, index = aggregation.aggregate(block_dict_lists)
-        print(f"[{dt_now}] success aggregation")
+        logger.debug_log_success("aggregation")
 
         # create html
         html_table_list = []
@@ -174,20 +188,20 @@ try:
             html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
         html = create_html.create_html(html_table_list)
-        print(f"[{dt_now}] success create html")
+        logger.debug_log_success("create html")
 
         # write html
         try:
             with open(out_path, 'wb') as file:
                 file.write(html.encode("utf-8"))
-                print(f"[{dt_now}] write {format(out_path)}")
+                logger.debug_log_success(f"write {format(out_path)}")
         except FileNotFoundError as e:
-            print(f"[{dt_now}] write error: The specified file was not found.")
+            logger.debug_log_error("write: The specified file was not found.")
         except Exception as e:
-            print(f"[{dt_now}] {e}")
+            logger.debug_log_general(f"{e}")
 
 except FileNotFoundError as e:
-    print(f"[{dt_now}] load error: The specified file was not found.")
+    logger.debug_log_error("load: The specified file was not found.")
 
 except Exception as e:
-   print(f"[{dt_now}] {e}")
+    logger.debug_log_general(f"{e}")
