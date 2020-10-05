@@ -10,8 +10,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
-option(BUILD_GPU "build GPU variant" OFF)
-option(USE_AVX   "Require AVX" ON)
+option(MONOLISH_USE_GPU "build GPU variant" OFF)
+option(MONOLISH_USE_AVX   "Require AVX" ON)
 
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
@@ -30,9 +30,9 @@ function(common_setup target_name)
   target_compile_options(${target_name} PRIVATE -g -O3)
 
   # AVX
-  if(USE_AVX)
+  if(MONOLISH_USE_AVX)
     target_compile_options(${target_name} PRIVATE "-mavx")
-    target_compile_definitions(${target_name} PRIVATE USE_AVX)
+    target_compile_definitions(${target_name} PRIVATE MONOLISH_USE_AVX)
   endif()
 
   install(
@@ -51,7 +51,7 @@ target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
 target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
 
 # MKL
-if(USE_AVX)
+if(MONOLISH_USE_AVX)
   set(MKL_VML_AVX TRUE)
 endif()
 find_package(MKL)
@@ -59,7 +59,7 @@ if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
   target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
   target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(monolish_cpu PRIVATE USE_MKL)
+  target_compile_definitions(monolish_cpu PRIVATE MONOLISH_USE_MKL)
 else()
   find_package(BLAS REQUIRED)
   # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
@@ -75,7 +75,7 @@ else()
   target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
 endif()
 
-if(BUILD_GPU)
+if(MONOLISH_USE_GPU)
   common_setup(monolish_gpu)
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
@@ -95,7 +95,7 @@ if(BUILD_GPU)
     CUDA::cusparse
     CUDA::cudart
   )
-endif(BUILD_GPU)
+endif()
 
 install(
   DIRECTORY include/

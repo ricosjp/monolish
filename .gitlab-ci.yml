@@ -17,8 +17,8 @@ stages:
 .gpu_avx:
     variables:
         PREFIX: "gpu_avx"
-        BUILD_GPU: "ON"
-        USE_AVX: "ON"
+        MONOLISH_USE_GPU: "ON"
+        MONOLISH_USE_AVX: "ON"
     tags:
         - gpu
         - avx
@@ -26,29 +26,29 @@ stages:
 .gpu_noavx:
     variables:
         PREFIX: "gpu_noavx"
-        BUILD_GPU: "ON"
-        USE_AVX: "OFF"
+        MONOLISH_USE_GPU: "ON"
+        MONOLISH_USE_AVX: "OFF"
     tags:
         - gpu
 
 .nogpu_avx:
     variables:
         PREFIX: "nogpu_avx"
-        BUILD_GPU: "OFF"
-        USE_AVX: "ON"
+        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_AVX: "ON"
     tags:
         - avx
 
 .nogpu_noavx:
     variables:
         PREFIX: "nogpu_noavx"
-        BUILD_GPU: "OFF"
-        USE_AVX: "OFF"
+        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_AVX: "OFF"
 
 .build_cmake:
     stage: build_lib
     script:
-        - cmake -Bbuild . -DBUILD_GPU=${BUILD_GPU} -DUSE_AVX=${USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
+        - cmake -Bbuild . -DMONOLISH_USE_GPU=${MONOLISH_USE_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
     artifacts:
         paths:
