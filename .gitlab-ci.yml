@@ -34,18 +34,6 @@ build_cmake:
     tags:
         - gpu
 
-build_cmake_debug:
-    stage: build_lib
-    script:
-        - cmake -Bbuild -H. -DBUILD_GPU=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=./install_lib/debug
-        - cmake --build build --target install -- -j VERBOSE=1
-    artifacts:
-        paths:
-            - install_lib/
-        expire_in: 60min
-    tags:
-        - gpu
-
 ## build test codes ###############################
 build_test_cpu:
     stage: test_build

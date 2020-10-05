@@ -26,15 +26,11 @@ function(common_setup target_name)
     )
 
   set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
-  target_compile_options(${target_name} PRIVATE -O3)
+  target_compile_options(${target_name} PRIVATE -g -O3)
 
   # AVX
   target_compile_options(${target_name} PRIVATE "-mavx")
   target_compile_definitions(${target_name} PRIVATE USE_AVX)
-
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
-  endif()
 
   install(
     TARGETS ${target_name}
