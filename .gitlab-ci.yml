@@ -255,28 +255,7 @@ docker:
         - docker:dind
     script:
         - apk add make
-        - cp -r install_lib/lib/ ./
-        - cp -r install_lib/include/ ./
-        - ls docker/
-        - ls lib/
-        - ls include/
-        - make -f docker/Makefile push
-    tags:
-        - docker
-
-docker_debug:
-    image: docker:latest
-    stage: deploy
-    services:
-        - docker:dind
-    script:
-        - apk add make
-        - cp -r install_lib/debug/lib/ ./
-        - cp -r install_lib/debug/include/ ./
-        - ls docker/
-        - ls lib/
-        - ls include/
-        - make -f docker/Makefile push CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}-debug
+        - make -C docker push
     tags:
         - docker
 
