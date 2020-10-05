@@ -25,8 +25,16 @@ push: login monolish
 	docker push $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
 
 in: monolish
-	docker run -it \
-		--gpus all   \
-		--privileged \
-		-v $(MAKEFILE_DIR)/monolish_sample:/test \
-		$(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
+	docker run -it --rm --gpus all $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
+
+test-cpu: monolish
+	docker run --rm                 \
+		-v $(MONOLISH_TOP)/test:/test \
+		-w /test                      \
+		$(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) bash -c "make cpu; make run_cpu"
+
+test-gpu: monolish
+	docker run --rm --gpus all      \
+		-v $(MONOLISH_TOP)/test:/test \
+		-w /test                      \
+		$(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME) bash -c "make gpu; make run_gpu"
