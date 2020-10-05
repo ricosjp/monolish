@@ -1,6 +1,7 @@
 image: registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
 
 before_script:
+    - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
     - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib
 
 stages:
@@ -15,56 +16,44 @@ stages:
 
 .gpu_avx:
     variables:
-        MONOLISH_DIR: "${CI_PROJECT_DIR}/gpu_avx"
+        PREFIX: "gpu_avx"
         BUILD_GPU: "ON"
         USE_AVX: "ON"
-    artifacts:
-        paths:
-            - gpu_avx
-        expire_in: 60min
     tags:
         - gpu
         - avx
 
 .gpu_noavx:
     variables:
-        MONOLISH_DIR: "${CI_PROJECT_DIR}/gpu_noavx"
+        PREFIX: "gpu_noavx"
         BUILD_GPU: "ON"
         USE_AVX: "OFF"
-    artifacts:
-        paths:
-            - gpu_noavx
-        expire_in: 60min
     tags:
         - gpu
 
 .nogpu_avx:
     variables:
-        MONOLISH_DIR: "${CI_PROJECT_DIR}/nogpu_avx"
+        PREFIX: "nogpu_avx"
         BUILD_GPU: "OFF"
         USE_AVX: "ON"
-    artifacts:
-        paths:
-            - nogpu_avx
-        expire_in: 60min
     tags:
         - avx
 
 .nogpu_noavx:
     variables:
-        MONOLISH_DIR: "${CI_PROJECT_DIR}/nogpu_noavx"
+        PREFIX: "nogpu_noavx"
         BUILD_GPU: "OFF"
         USE_AVX: "OFF"
-    artifacts:
-        paths:
-            - nogpu_noavx
-        expire_in: 60min
 
 .build_cmake:
     stage: build_lib
     script:
         - cmake -Bbuild . -DBUILD_GPU=${BUILD_GPU} -DUSE_AVX=${USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
+    artifacts:
+        paths:
+            - ${PREFIX}
+        expire_in: 60min
 build_cmake_gpu_avx:
     extends:
       - .gpu_avx
@@ -82,11 +71,32 @@ build_cmake_nogpu_noavx:
       - .nogpu_noavx
       - .build_cmake
 
-.test_cpu:
+#
+# Test templates
+#
+.test_nogpu_avx:
+    extends: .nogpu_avx
+    dependencies:
+      - "build_cmake_nogpu_avx"
     script:
         - make -C test cpu
         - make -C test/${TEST_TARGET} run_cpu
-.test_gpu:
+.test_nogpu_noavx:
+    extends: .nogpu_noavx
+    dependencies:
+      - "build_cmake_nogpu_noavx"
+    script:
+        - make -C test cpu
+        - make -C test/${TEST_TARGET} run_cpu
+.test_gpu_avx:
+    dependencies:
+      - "build_cmake_gpu_avx"
+    script:
+        - make -C test gpu
+        - make -C test/${TEST_TARGET} run_gpu
+.test_gpu_noavx:
+    dependencies:
+      - "build_cmake_gpu_noavx"
     script:
         - make -C test gpu
         - make -C test/${TEST_TARGET} run_gpu
@@ -94,212 +104,170 @@ build_cmake_nogpu_noavx:
 #
 # vector_common
 #
-.vector_common_cpu:
-    stage: common
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "vector_common"
-.vector_common_gpu:
-    stage: common
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "vector_common"
 vector_common_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .vector_common_cpu
+    stage: common
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "vector_common"
 vector_common_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .vector_common_cpu
+    stage: common
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "vector_common"
 vector_common_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .vector_common_gpu
+    stage: common
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "vector_common"
 vector_common_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .vector_common_gpu
+    stage: common
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "vector_common"
 
 #
 # matrix_common
 #
-.matrix_common_cpu:
-    stage: common
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "matrix_common"
-.matrix_common_gpu:
-    stage: common
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "matrix_common"
 matrix_common_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .matrix_common_cpu
+    stage: common
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "matrix_common"
 matrix_common_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .matrix_common_cpu
+    stage: common
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "matrix_common"
 matrix_common_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .matrix_common_gpu
+    stage: common
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "matrix_common"
 matrix_common_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .matrix_common_gpu
+    stage: common
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "matrix_common"
 
 #
 # vector_blas
 #
-.vector_blas_cpu:
-    stage: blas
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "vector_blas"
-.vector_blas_gpu:
-    stage: blas
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "vector_blas"
 vector_blas_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .vector_blas_cpu
+    stage: blas
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "vector_blas"
 vector_blas_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .vector_blas_cpu
+    stage: blas
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "vector_blas"
 vector_blas_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .vector_blas_gpu
+    stage: blas
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "vector_blas"
 vector_blas_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .vector_blas_gpu
+    stage: blas
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "vector_blas"
 
 #
 # matrix_blas
 #
-.matrix_blas_cpu:
-    stage: blas
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "matrix_blas"
-.matrix_blas_gpu:
-    stage: blas
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "matrix_blas"
 matrix_blas_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .matrix_blas_cpu
+    stage: blas
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "matrix_blas"
 matrix_blas_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .matrix_blas_cpu
+    stage: blas
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "matrix_blas"
 matrix_blas_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .matrix_blas_gpu
+    stage: blas
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "matrix_blas"
 matrix_blas_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .matrix_blas_gpu
+    stage: blas
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "matrix_blas"
 
 #
 # equation
 #
-.equation_cpu:
-    stage: equation
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "equation"
-.equation_gpu:
-    stage: equation
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "equation"
 equation_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .equation_cpu
+    stage: equation
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "equation"
 equation_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .equation_cpu
+    stage: equation
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "equation"
 equation_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .equation_gpu
+    stage: equation
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "equation"
 equation_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .equation_gpu
+    stage: equation
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "equation"
 
 #
 # logger
 #
-.logger_cpu:
-    stage: logger
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "logger"
-.logger_gpu:
-    stage: logger
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "logger"
 logger_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .logger_cpu
+    stage: logger
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "logger"
 logger_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .logger_cpu
+    stage: logger
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "logger"
 logger_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .logger_gpu
+    stage: logger
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "logger"
 logger_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .logger_gpu
+    stage: logger
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "logger"
 
 #
 # lang
 #
-.lang_cpu:
-    stage: lang
-    extends: .test_cpu
-    variables:
-      TEST_TARGET: "lang"
-.lang_gpu:
-    stage: lang
-    extends: .test_gpu
-    variables:
-      TEST_TARGET: "lang"
 lang_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .lang_cpu
+    stage: lang
+    extends: .test_nogpu_avx
+    variables:
+      TEST_TARGET: "lang"
 lang_nogpu_noavx:
-    extends:
-      - .nogpu_noavx
-      - .lang_cpu
+    stage: lang
+    extends: .test_nogpu_noavx
+    variables:
+      TEST_TARGET: "lang"
 lang_gpu_avx:
-    extends:
-      - .gpu_avx
-      - .lang_gpu
+    stage: lang
+    extends: .test_gpu_avx
+    variables:
+      TEST_TARGET: "lang"
 lang_gpu_noavx:
-    extends:
-      - .gpu_noavx
-      - .lang_gpu
+    stage: lang
+    extends: .test_gpu_noavx
+    variables:
+      TEST_TARGET: "lang"
 
 #
 # docker and pages
