@@ -24,16 +24,6 @@ monolish: $(MAKEFILE_DIR)/Dockerfile
 push: login monolish
 	docker push $(CI_REGISTRY_IMAGE):$(CI_COMMIT_REF_NAME)
 
-allgebra:
-	docker pull $(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
-	docker run -it --rm \
-		--gpus all   \
-		--privileged \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-v $(MONOLISH_TOP):/monolish \
-		-w /monolish \
-		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
-
 in: monolish
 	docker run -it \
 		--gpus all   \
