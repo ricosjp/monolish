@@ -9,7 +9,7 @@ RUN cmake -Bbuild -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolis
  && cmake --build build --target install -- -j $(nproc) \
  && rm -rf build
 
-RUN echo "${MONOLISH_DIR}" > /etc/ld.so.conf.d/monolish.conf && ldconfig
+RUN echo "${MONOLISH_DIR}/lib" > /etc/ld.so.conf.d/monolish.conf && ldconfig
 
 ENV CPATH              ${MONOLISH_DIR}/include
 ENV C_INCLUDE_PATH     ${MONOLISH_DIR}/include
