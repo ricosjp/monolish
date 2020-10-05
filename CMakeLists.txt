@@ -36,11 +36,10 @@ function(common_setup target_name)
     target_compile_options(${target_name} PRIVATE "-g3" "-fvar-tracking-assignments")
   endif()
 
-  # FIXME This assumes ubuntu system
   install(
     TARGETS ${target_name}
     LIBRARY
-      DESTINATION lib/x86_64-linux-gnu/
+      DESTINATION lib
   )
 endfunction()
 
