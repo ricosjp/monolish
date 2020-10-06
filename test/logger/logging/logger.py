@@ -62,7 +62,7 @@ class CreateHTML:
         return html
 
 # Drop Information Class
-class DropDictionary:
+class DropInformation:
     def drop_dict(self, directory, dict_list):
         target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("stat" in x), dict_list))
         target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("time" in x), target_dict_list))
@@ -71,6 +71,7 @@ class DropDictionary:
 
 # class Split1stLayer:
 class Grouping:
+
     def grouping_1st_layer(self, target_dict_list):
         solver_dict_list = list(filter(lambda x:"solve/" in x["name"], target_dict_list))
         other_dict_list = list(filter(lambda x:"solve/" not in x["name"], target_dict_list))
@@ -171,11 +172,11 @@ try:
         yaml_dict_list = io_data.reader(f, "yaml")
         logger.log_success(f"read {format(log_path)}")
 
-        # drop dictionary
+        # drop information
         drop_dir = "solve/monolish_cg/monolish_jacobi/"
-        drop_dictionary = DropDictionary()
-        target_dict_list = drop_dictionary.drop_dict(drop_dir, yaml_dict_list)
-        logger.log_success("drop dictionary")
+        drop_information = DropInformation()
+        target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
+        logger.log_success("drop information")
 
         # 1st layer type
         grouping = Grouping()
