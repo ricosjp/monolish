@@ -1,18 +1,18 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
 #endif
 
-//#ifdef USE_AVX
+#ifdef MONOLISH_USE_AVX
 #include <immintrin.h>
 #define SIMD_FUNC(NAME) _mm256_##NAME
 using Sreg = __m256;
 using Dreg = __m256d;
-//#endif
+#endif
 
 namespace monolish {
 
@@ -200,7 +200,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     }
   }
 #else
-#if USE_AVX // avx_cpu
+#if MONOLISH_USE_AVX // avx_cpu
   const int vecL = 8;
 
 #pragma omp parallel for

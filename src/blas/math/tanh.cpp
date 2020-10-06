@@ -1,12 +1,12 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #include <cuda_runtime_api.h>
 #endif
 
-#ifdef USE_MKL
+#ifdef MONOLISH_USE_MKL
 #include <mkl.h>
 #else
 #include <cblas.h>
@@ -15,7 +15,7 @@
 namespace monolish {
 
 void tanh_core(size_t N, double *vec) {
-#if USE_MKL
+#if MONOLISH_USE_MKL
   vdTanh(N, vec, vec);
 #else
 #pragma omp parallel for
@@ -26,7 +26,7 @@ void tanh_core(size_t N, double *vec) {
 }
 
 void tanh_core(size_t N, float *vec) {
-#if USE_MKL
+#if MONOLISH_USE_MKL
   vsTanh(N, vec, vec);
 #else
 #pragma omp parallel for
