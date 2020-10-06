@@ -62,18 +62,18 @@ class CreateHTML:
         return html
 
 # Drop Information Class
-class DropInformation:
+class DropDictionary:
     def drop_dict(self, directory, dict_list):
         target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("stat" in x), dict_list))
         target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("time" in x), target_dict_list))
         target_dict_list = list(filter(lambda x: x.pop("stat") if x["name"] == directory else x, target_dict_list))
         return target_dict_list
 
-# Split 1st layer Class
-class Split1stLayer:
-    def split_1st_layer(self, target_dict_list):
-        solver_dict_list = list(filter(lambda x:"solve" in x["name"], target_dict_list))
-        other_dict_list = list(filter(lambda x:"solve" not in x["name"], target_dict_list))
+# class Split1stLayer:
+class Grouping:
+    def grouping_1st_layer(self, target_dict_list):
+        solver_dict_list = list(filter(lambda x:"solve/" in x["name"], target_dict_list))
+        other_dict_list = list(filter(lambda x:"solve/" not in x["name"], target_dict_list))
 
         filter_list = list(map(lambda x:(("stat" in x) and x["stat"] == "IN" and x["name"] == "solve/"), solver_dict_list))
         split_index_list = [i for i, x in enumerate(filter_list) if x == True] + [len(filter_list)]
@@ -171,15 +171,15 @@ try:
         yaml_dict_list = io_data.reader(f, "yaml")
         logger.log_success(f"read {format(log_path)}")
 
-        # drop information
+        # drop dictionary
         drop_dir = "solve/monolish_cg/monolish_jacobi/"
-        drop_information = DropInformation()
-        target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
-        logger.log_success("drop information")
+        drop_dictionary = DropDictionary()
+        target_dict_list = drop_dictionary.drop_dict(drop_dir, yaml_dict_list)
+        logger.log_success("drop dictionary")
 
         # 1st layer type
-        split_1st_layer = Split1stLayer()
-        title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
+        grouping = Grouping()
+        title_list, block_dict_lists = grouping.grouping_1st_layer(target_dict_list)
         logger.log_success("1st layer type")
         # logger.dump(block_dict_lists)
 
