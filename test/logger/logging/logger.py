@@ -5,18 +5,25 @@ import sys
 import os
 import datetime
 
-dt_now = datetime.datetime.now()
-
 # logger
 class Logger:
-    def debug_log_general(self, message) -> str:
+    def log_general(self, message) -> str:
+        dt_now = datetime.datetime.now()
         print(f"[{dt_now}] {message}")
 
-    def debug_log_success(self, message) -> str:
+    def log_success(self, message) -> str:
+        dt_now = datetime.datetime.now()
         print(f"[{dt_now}] success {message}")
 
-    def debug_log_error(self, message) -> str:
+    def log_error(self, message) -> str:
+        dt_now = datetime.datetime.now()
         print(f"[{dt_now}] error {message}")
+
+    def dump(self, dict_list) -> str:
+        dt_now = datetime.datetime.now()
+        print(f"[{dt_now}] dump dict")
+        for one_dict in dict_list:
+            print(f"{one_dict}")
 
 # HTML Class
 class CreateHTML:
@@ -77,50 +84,53 @@ class Split1stLayer:
         return title_list, block_dict_lists
 
 # Aggregate Class
-class Aggregation:
-    '''
-    used numpy
-    '''
+"""
+Classes to represent the definitions of aggregate functions.
+"""
+class Aggregate:
     def __init__(self):
         self.aggr_column_lists = []
         self.aggr_ndarrays = []
         self.index = 0
 
-    # import numpy as np
-    def aggregate(self, block_dict_lists):
+    def aggregated_by_floor(self, block_dict_lists):
         import numpy as np
 
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
+            print(f"loop {index}")
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("time", "")]) if ("time" not in block_dict) else block_dict, block_dict_list))
-            # sorted ley
+            # sorted
             block_dict_list = list(map(lambda block_dict: dict(type=block_dict["type"], name=block_dict["name"], stat=block_dict["stat"], time=block_dict["time"]), block_dict_list))
 
             # columns : type, name, stat, time
             block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
-            layer_list = range(1, max(map(lambda x:x.count("/"), block_ndarray[:, 1]))+1)
+            max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
+
             aggr_ndarray = np.empty((0, 4))
-            for i in layer_list:
-                layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==i), block_ndarray[:, 1:3])))][:, [1,3]]
+            for layer in range(1, max_layer+1):
+                layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==layer), block_ndarray[:, 1:3])))][:, [1,3]]
                 for col in np.unique(layer_ndarray[:,0]):
                     temp_ndarray = layer_ndarray[np.array(list(map(lambda x: x==col, layer_ndarray[:, 0])))]
                     count = np.count_nonzero(temp_ndarray[:,0])
                     total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
-                    rst_narray = np.array([i, col, count, total_time])
+                    rst_narray = np.array([layer, col, count, total_time])
                     aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
             
             aggr_column_list = ["layer", "name", "count", "total_time [s]"]
-            for i in range(1, max(map(lambda x:x.count("/"), block_ndarray[:, 1]))):
-                percent = np.array(aggr_ndarray[:, 3], dtype="float32") / (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==i, aggr_ndarray)))][:, 3][0]) * 100.0
+            for layer in range(1, max_layer):
+                denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
+                percent = np.array(aggr_ndarray[:, 3], dtype="float32") / denominator * 100.0
                 percent = np.round(percent, decimals=3)
-                percent = np.where(percent <= 100.0 , percent, "")
+                percent = np.where(percent <= 100.0, percent, "")
                 aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
-                aggr_column_list.append(f"breakdown_layer {str(i)} [%]")
+                aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
             aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
+            # print(aggr_ndarray)
 
-            # aggregation list
+            # aggregate list
             aggr_column_lists.append(aggr_column_list)
             aggr_ndarrays.append(aggr_ndarray)
 
@@ -131,9 +141,6 @@ class Aggregation:
 
 # i/o data Class
 class IOData:
-    '''
-    used yaml
-    '''
     def __init__(self):
         self.aggr_column_lists = []
         self.aggr_ndarrays = []
@@ -156,30 +163,30 @@ log_path = sys.argv[1]
 out_path = sys.argv[2]
 
 logger = Logger()
-
 # data dir
 try:
     # read data
     with open(log_path, "r") as f:
         io_data = IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
-        logger.debug_log_success(f"read {format(log_path)}")
+        logger.log_success(f"read {format(log_path)}")
 
         # drop information
-        main_dir = "solve/monolish_cg/monolish_jacobi/"
+        drop_dir = "solve/monolish_cg/monolish_jacobi/"
         drop_information = DropInformation()
-        target_dict_list = drop_information.drop_dict(main_dir, yaml_dict_list)
-        logger.debug_log_success("drop information")
+        target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
+        logger.log_success("drop information")
 
         # 1st layer type
         split_1st_layer = Split1stLayer()
         title_list, block_dict_lists = split_1st_layer.split_1st_layer(target_dict_list)
-        logger.debug_log_success("1st layer type")
+        logger.log_success("1st layer type")
+        # logger.dump(block_dict_lists)
 
-        # aggregation
-        aggregation = Aggregation()
-        aggr_column_lists, aggr_ndarrays, index = aggregation.aggregate(block_dict_lists)
-        logger.debug_log_success("aggregation")
+        # aggregate
+        aggregate = Aggregate()
+        aggr_column_lists, aggr_ndarrays, index = aggregate.aggregated_by_floor(block_dict_lists)
+        logger.log_success("aggregate")
 
         # create html
         html_table_list = []
@@ -188,20 +195,20 @@ try:
             html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
         html = create_html.create_html(html_table_list)
-        logger.debug_log_success("create html")
+        logger.log_success("create html")
 
         # write html
         try:
             with open(out_path, 'wb') as file:
                 file.write(html.encode("utf-8"))
-                logger.debug_log_success(f"write {format(out_path)}")
+                logger.log_success(f"write {format(out_path)}")
         except FileNotFoundError as e:
-            logger.debug_log_error("write: The specified file was not found.")
+            logger.log_error("write: The specified file was not found.")
         except Exception as e:
-            logger.debug_log_general(f"{e}")
+            logger.log_general(f"{e}")
 
 except FileNotFoundError as e:
-    logger.debug_log_error("load: The specified file was not found.")
+    logger.log_error("load: The specified file was not found.")
 
 except Exception as e:
-    logger.debug_log_general(f"{e}")
+    logger.log_general(f"{e}")
