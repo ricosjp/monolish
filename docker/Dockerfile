@@ -5,7 +5,7 @@ COPY . /monolish
 
 ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
 
-RUN cmake -Bbuild -DBUILD_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
+RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
  && cmake --build build --target install -- -j $(nproc) \
  && rm -rf build
 
