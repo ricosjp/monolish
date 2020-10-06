@@ -3,7 +3,7 @@ ALLGEBRA_TAG   := 20.10.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: cpu-debug gpu gpu-debug test-cpu test-gpu install install-cpu install-gpu in format document
+.PHONY: gpu test-cpu test-gpu install install-cpu install-gpu in format document
 
 MONOLISH_DIR ?= $(HOME)/lib/monolish
 
@@ -16,30 +16,13 @@ cpu:
 		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
-cpu-debug:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-DCMAKE_BUILD_TYPE=Debug \
-		-Bbuild_cpu_debug
-	cmake --build build_cpu_debug -j `nproc`
-
 gpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
-		-DBUILD_GPU=ON
+		-DMONOLISH_USE_GPU=ON
 	cmake --build build_gpu -j `nproc`
-
-gpu-debug:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-DCMAKE_BUILD_TYPE=Debug \
-		-Bbuild_gpu_debug \
-		-DBUILD_GPU=ON
-	cmake --build build_gpu_debug -j `nproc`
 
 fx:
 	$(MAKE) -B -j4 -f Makefile.fx
@@ -50,17 +33,10 @@ sx:
 install-cpu: cpu
 	cmake --build build_cpu --target install
 
-install-cpu-debug: cpu-debug
-	cmake --build build_cpu_debug --target install
-
 install-gpu: gpu
 	cmake --build build_gpu --target install
 
-install-gpu-debug: gpu-debug
-	cmake --build build_gpu_debug --target install
-
 install: install-cpu install-gpu
-install-debug: install-cpu-debug install-gpu-debug
 
 test-cpu: install-cpu
 	$(MAKE) -C test cpu
