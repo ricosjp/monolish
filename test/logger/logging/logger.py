@@ -69,6 +69,23 @@ class DropInformation:
         target_dict_list = list(filter(lambda x: x.pop("stat") if x["name"] == directory else x, target_dict_list))
         return target_dict_list
 
+    def drop_dir_info(self, target_dict_list):
+        min_layer = min(map(lambda any_dict:any_dict["name"].count("/"), target_dict_list))
+        min_dict_list = list(filter(lambda any_dict:any_dict["name"].count("/") == min_layer, target_dict_list))
+        min_dict = min_dict_list[0]
+        min_dir = min_dict["name"]
+        drop_list = min_dir.split("/")
+        drop_dir_text = ",".join(drop_list[:-2])
+        drop_dir_text = drop_dir_text.replace(",", "/")
+        drop_dir_text = drop_dir_text + "/"
+
+        temp_dict_list = []
+        for any_dict in target_dict_list:
+            any_dict["name"] = any_dict["name"].replace(drop_dir_text, "")
+            temp_dict_list.append(any_dict)
+        target_dict_list = temp_dict_list
+        return target_dict_list
+
 # class Split1stLayer:
 class Grouping:
 
@@ -109,6 +126,7 @@ class Aggregate:
             # columns : type, name, stat, time
             block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
             max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
+            print(max_layer)
 
             aggr_ndarray = np.empty((0, 4))
             for layer in range(1, max_layer+1):
@@ -177,6 +195,10 @@ try:
         drop_information = DropInformation()
         target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
         logger.log_success("drop information")
+
+        # drop dir info
+        target_dict_list = drop_information.drop_dir_info(target_dict_list)
+        logger.log_success("drop dir infon")
 
         # 1st layer type
         grouping = Grouping()
