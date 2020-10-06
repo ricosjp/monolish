@@ -3,48 +3,54 @@ ALLGEBRA_TAG   := 20.10.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: cpu gpu gpu-debug lib test install in format
+.PHONY: gpu test-cpu test-gpu install install-cpu install-gpu in format document
 
-INSTALL_DIR=/usr/lib64/
+MONOLISH_DIR ?= $(HOME)/lib/monolish
 
-all:cpu gpu
+all: cpu gpu
 
 cpu:
-	make -B -j -f Makefile.cpu
-
-cpu-debug:
-	make -B -j -f Makefile.cpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_cpu
+	cmake --build build_cpu -j `nproc`
 
 gpu:
-	make -B -j -f Makefile.gpu
-
-gpu-debug:
-	make -B -j -f Makefile.gpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu \
+		-DMONOLISH_USE_GPU=ON
+	cmake --build build_gpu -j `nproc`
 
 fx:
-	make -B -j4 -f Makefile.fx
+	$(MAKE) -B -j4 -f Makefile.fx
 
 sx:
-	make -B -j -f Makefile.sx
+	$(MAKE) -B -j -f Makefile.sx
 
-install:
-	make -f Makefile.cpu install
+install-cpu: cpu
+	cmake --build build_cpu --target install
 
-test:
-	cd test; make -B
+install-gpu: gpu
+	cmake --build build_gpu --target install
+
+install: install-cpu install-gpu
+
+test-cpu: install-cpu
+	$(MAKE) -C test cpu
+	$(MAKE) -C test run_cpu
+
+test-gpu: install-gpu
+	$(MAKE) -C test gpu
+	$(MAKE) -C test run_gpu
 
 clean:
-	- make -f Makefile.cpu clean 
-	- make -f Makefile.gpu clean 
-	- make -f Makefile.fx clean 
-	- make -f Makefile.sx clean 
-	- make -C test/ clean
-
-zenbu:
-	make clean
-	make cpu
-	make gpu
-	make install
+	rm -rf build*/
+	$(MAKE) -f Makefile.fx clean
+	$(MAKE) -f Makefile.sx clean
+	$(MAKE) -C test/ clean
 
 in:
 	docker run -it --rm \
