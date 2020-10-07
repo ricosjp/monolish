@@ -92,7 +92,8 @@ class DropInformation:
         min_dict = min_dict_list[0]
         min_dir = min_dict["name"]
         drop_list = min_dir.split("/")
-        drop_dir_list = drop_list.pop(-2)
+        drop_dir_list = drop_list[:-2]
+        drop_dir_list = [] if drop_dir_list == [] else drop_dir_list + [""]
         drop_dir_text = ",".join(drop_dir_list)
         drop_dir_text = drop_dir_text.replace(",", "/")
 
@@ -105,15 +106,20 @@ class DropInformation:
 
 class Grouping:
     def grouping_1st_layer(self, target_dict_list):
-        solver_dict_list = list(filter(lambda any_dict:"solve/" in any_dict["name"], target_dict_list))
-        other_dict_list = list(filter(lambda any_dict:"solve/" not in any_dict["name"], target_dict_list))
+        layer_1st = "solve/"
+        solver_dict_list = list(filter(lambda any_dict:layer_1st in any_dict["name"], target_dict_list))
+        other_dict_list = list(filter(lambda any_dict:layer_1st not in any_dict["name"], target_dict_list))
 
-        filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["stat"] == "IN" and any_dict["name"] == "solve/"), solver_dict_list))
-        split_index_list = [i for i, x in enumerate(filter_list) if x == True] + [len(filter_list)]
-        solver_dict_block_list = [solver_dict_list[split_index_list[i]: split_index_list[i+1]] for i in range(len(split_index_list)-1)]
+        filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["stat"] == "IN" and any_dict["name"] == layer_1st), solver_dict_list))
+        split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
+        solver_dict_block_list = [solver_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
+
+        # filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["name"] == layer_1st), other_dict_list))
+        # split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
+        # solver_dict_block_list = [other_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
 
         block_dict_lists = [other_dict_list] + solver_dict_block_list
-        title_list = ["other"] + [f"solver {str(i)}" for i in range(len(solver_dict_block_list))]
+        title_list = ["other"] + [f"solver {str(layer)}" for layer in range(len(solver_dict_block_list))]
         return title_list, block_dict_lists
 
 class Aggregate:
@@ -131,7 +137,6 @@ class Aggregate:
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
-            # print(f"loop {index}")
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("time", "")]) if ("time" not in block_dict) else block_dict, block_dict_list))
             # sorted
@@ -150,7 +155,7 @@ class Aggregate:
                     total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
                     rst_narray = np.array([layer, col, count, total_time])
                     aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
-            
+
             aggr_column_list = ["layer", "name", "count", "total_time [s]"]
             for layer in range(1, max_layer):
                 denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
