@@ -5,7 +5,7 @@ import sys
 import os
 import datetime
 
-# Util Class
+# Utils
 class Logger:
     def log_general(self, message) -> str:
         dt_now = datetime.datetime.now()
@@ -78,12 +78,12 @@ class CreateHTML:
         """
         return html
 
-# Process Class
+# Process
 class DropInformation:
     def drop_dict(self, directory, dict_list):
-        target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("stat" in x), dict_list))
-        target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("time" in x), target_dict_list))
-        target_dict_list = list(filter(lambda x: x.pop("stat") if x["name"] == directory else x, target_dict_list))
+        target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("stat" in any_dict), dict_list))
+        target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("time" in any_dict), target_dict_list))
+        target_dict_list = list(filter(lambda any_dict:any_dict.pop("stat") if any_dict["name"] == directory else any_dict, target_dict_list))
         return target_dict_list
 
     def drop_dir_info(self, target_dict_list):
@@ -92,9 +92,9 @@ class DropInformation:
         min_dict = min_dict_list[0]
         min_dir = min_dict["name"]
         drop_list = min_dir.split("/")
-        drop_dir_text = ",".join(drop_list[:-2])
+        drop_dir_list = drop_list.pop(-2)
+        drop_dir_text = ",".join(drop_dir_list)
         drop_dir_text = drop_dir_text.replace(",", "/")
-        drop_dir_text = drop_dir_text + "/"
 
         temp_dict_list = []
         for any_dict in target_dict_list:
@@ -105,10 +105,10 @@ class DropInformation:
 
 class Grouping:
     def grouping_1st_layer(self, target_dict_list):
-        solver_dict_list = list(filter(lambda x:"solve/" in x["name"], target_dict_list))
-        other_dict_list = list(filter(lambda x:"solve/" not in x["name"], target_dict_list))
+        solver_dict_list = list(filter(lambda any_dict:"solve/" in any_dict["name"], target_dict_list))
+        other_dict_list = list(filter(lambda any_dict:"solve/" not in any_dict["name"], target_dict_list))
 
-        filter_list = list(map(lambda x:(("stat" in x) and x["stat"] == "IN" and x["name"] == "solve/"), solver_dict_list))
+        filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["stat"] == "IN" and any_dict["name"] == "solve/"), solver_dict_list))
         split_index_list = [i for i, x in enumerate(filter_list) if x == True] + [len(filter_list)]
         solver_dict_block_list = [solver_dict_list[split_index_list[i]: split_index_list[i+1]] for i in range(len(split_index_list)-1)]
 
@@ -140,7 +140,6 @@ class Aggregate:
             # columns : type, name, stat, time
             block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
             max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
-            # print(max_layer)
 
             aggr_ndarray = np.empty((0, 4))
             for layer in range(1, max_layer+1):
@@ -161,7 +160,6 @@ class Aggregate:
                 aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
                 aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
             aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
-            # print(aggr_ndarray)
 
             # aggregate list
             aggr_column_lists.append(aggr_column_list)
