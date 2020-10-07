@@ -1,22 +1,4 @@
-\page howto How to use
-
-## ユーザ向け：git cloneからサンプルの実行まで
-
-### 実行環境
-現状ではCUDA関係のライブラリのバージョンなどの制約から **Docker環境以外での利用は考えてません** ．
-monolishが配布しているコンテナを利用するか，DockerFileから `FROM` して利用します．
-
-コンテナのリポジトリはこちら:[gitlab](https://gitlab.ritc.jp/ricos/monolish/container_registry)
-
-サンプルコードが `/opt/ricos/monolish/$VERSION/samples` に入っている．
-ライブラリのリンク設定によってCPUとGPUを切り替える．
-環境変数などはすべて通してあるため，自分で作成したプログラムは `-lmonolish_cpu` か `-lmonolish_gpu` をつければ動くはず．
-ただし現在CPu版はロクなソルバがないので使う意味があまり無いです
-
-なお，monolishは `/opt/ricos/monolish/$VERSION/` にインストールされている．
-
-
-## How to programming with monolish
+# How to programming with monolish {#qstart_md}
 重要な機能の使い方について簡単に紹介する
 
 ### 基本のクラス
