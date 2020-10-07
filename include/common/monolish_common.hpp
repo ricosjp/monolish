@@ -117,15 +117,13 @@ matrix::COO<T> random_structure_matrix(const int M, const int N,
 
 /**
  * @brief create band matrix
- * @param M # of Row
- * @param N # of col.
- * @param val value of diagonal elements
+ * @param M # of Row and col.
  * @note
  * - # of computation: M
  * - Multi-threading (OpenMP): false
  * - GPU acceleration (OpenACC): false
  **/
-template <typename T> matrix::COO<T> eye(const int M, const int N, const T val);
+template <typename T> matrix::COO<T> eye(const int M);
 // send///////////////////
 
 /**
