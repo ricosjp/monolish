@@ -53,6 +53,9 @@ clean:
 	$(MAKE) -C test/ clean
 
 in:
+	in-gpu
+
+in-gpu:
 	docker run -it --rm \
 		--gpus all   \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
