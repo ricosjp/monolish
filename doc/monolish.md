@@ -21,9 +21,11 @@ monolish is MONOlithic LIner equation Solvers for Highly-parallel architecture.
 
 # 各関数の実装
 Intel, NVIDIA, OSSの説明をここに書く
+
 それぞれで何が呼ばれているかは [ここ](@ref oplist_md) をみる．
 
 # 各格納形式の機能
+[ここ](@ref MatUtil_list_md) をみる．
 
 
 # Logger
@@ -41,3 +43,5 @@ logファイルの例もCIで生成されるようになりました
 第1回MTG: [GSlides Link](https://docs.google.com/presentation/d/1LzTvWe_b_oKFHR2HP7gd1ds7nLxLUi2ncWVo9qk0x0c/edit?usp=sharing)
 
 第2回MTG: [GSlides Link](https://docs.google.com/presentation/d/1bgzDkHm5AHRyxxj2mM09zGMT9P9IkH21UNLrKanhyG0/edit?usp=sharing)
+
+ver1.0 MTG: [GSlides Link](https://docs.google.com/presentation/d/12LJXbFmAmKcEWtkIBCZm_klpqmAP6MIuvYCRAZnvwqQ/edit?usp=sharing)
