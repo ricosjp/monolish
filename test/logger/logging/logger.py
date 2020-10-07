@@ -5,7 +5,7 @@ import sys
 import os
 import datetime
 
-# logger
+# Util Class
 class Logger:
     def log_general(self, message) -> str:
         dt_now = datetime.datetime.now()
@@ -25,7 +25,24 @@ class Logger:
         for one_dict in dict_list:
             print(f"{one_dict}")
 
-# HTML Class
+class IOData:
+    def __init__(self):
+        self.aggr_column_lists = []
+        self.aggr_ndarrays = []
+        self.index = 0
+
+    def reader(self, file_object, file_extension):
+        if file_extension == "yaml":
+            import yaml
+            dict_list = yaml.safe_load(file_object)
+        elif file_extension == "json":
+            import json
+            dict_list = json.load(file_object)
+        else:
+            dict_list = []
+        
+        return dict_list
+
 class CreateHTML:
     def __init__(self, html_tables):
         self.html_tables = []
@@ -61,7 +78,7 @@ class CreateHTML:
         """
         return html
 
-# Drop Information Class
+# Process Class
 class DropInformation:
     def drop_dict(self, directory, dict_list):
         target_dict_list = list(filter(lambda x:(directory not in x["name"]) or ("stat" in x), dict_list))
@@ -86,9 +103,7 @@ class DropInformation:
         target_dict_list = temp_dict_list
         return target_dict_list
 
-# class Split1stLayer:
 class Grouping:
-
     def grouping_1st_layer(self, target_dict_list):
         solver_dict_list = list(filter(lambda x:"solve/" in x["name"], target_dict_list))
         other_dict_list = list(filter(lambda x:"solve/" not in x["name"], target_dict_list))
@@ -101,11 +116,10 @@ class Grouping:
         title_list = ["other"] + [f"solver {str(i)}" for i in range(len(solver_dict_block_list))]
         return title_list, block_dict_lists
 
-# Aggregate Class
-"""
-Classes to represent the definitions of aggregate functions.
-"""
 class Aggregate:
+    """
+    Classes to represent the definitions of aggregate functions.
+    """
     def __init__(self):
         self.aggr_column_lists = []
         self.aggr_ndarrays = []
@@ -117,7 +131,7 @@ class Aggregate:
         aggr_column_lists, aggr_ndarrays = [], []
         block_dict_lists = filter(lambda x: x != [], block_dict_lists)
         for index, block_dict_list in enumerate(block_dict_lists):
-            print(f"loop {index}")
+            # print(f"loop {index}")
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
             block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("time", "")]) if ("time" not in block_dict) else block_dict, block_dict_list))
             # sorted
@@ -126,7 +140,7 @@ class Aggregate:
             # columns : type, name, stat, time
             block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
             max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
-            print(max_layer)
+            # print(max_layer)
 
             aggr_ndarray = np.empty((0, 4))
             for layer in range(1, max_layer+1):
@@ -158,25 +172,6 @@ class Aggregate:
 
         return aggr_column_lists, aggr_ndarrays, index
 
-# i/o data Class
-class IOData:
-    def __init__(self):
-        self.aggr_column_lists = []
-        self.aggr_ndarrays = []
-        self.index = 0
-
-    def reader(self, file_object, file_extension):
-        if file_extension == "yaml":
-            import yaml
-            dict_list = yaml.safe_load(file_object)
-        elif file_extension == "json":
-            import json
-            dict_list = json.load(file_object)
-        else:
-            dict_list = []
-        
-        return dict_list
-
 # io data
 log_path = sys.argv[1]
 out_path = sys.argv[2]
@@ -204,7 +199,6 @@ try:
         grouping = Grouping()
         title_list, block_dict_lists = grouping.grouping_1st_layer(target_dict_list)
         logger.log_success("1st layer type")
-        # logger.dump(block_dict_lists)
 
         # aggregate
         aggregate = Aggregate()
