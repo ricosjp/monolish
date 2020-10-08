@@ -52,9 +52,6 @@ clean:
 	$(MAKE) -f Makefile.sx clean
 	$(MAKE) -C test/ clean
 
-in:
-	in-gpu
-
 in-gpu:
 	docker run -it --rm \
 		--gpus all   \
@@ -71,6 +68,8 @@ in-cpu:
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
+
+in: in-gpu
 
 format:
 	docker run -it --rm  \
