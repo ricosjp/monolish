@@ -54,6 +54,7 @@ namespace monolish {
     template vector<float>::vector(const size_t N, const float min, const float max);
 
     //vector utils//////////////////////
+    
     template <typename T>
         void vector<T>::print_all() const {
             for (const auto v : val) {
@@ -75,6 +76,40 @@ namespace monolish {
         }
     template void vector<double>::print_all(std::string filename) const;
     template void vector<float>::print_all(std::string filename) const;
+
+    /// vector operator ///
+    
+    template <typename T>
+        bool vector<T>::operator==(const vector<T> &vec) {
+            if (get_device_mem_stat()) {
+                throw std::runtime_error("Error, GPU vector cant use operator==");
+            }
+            if (val.size() != vec.size())
+                return false;
+            for (size_t i = 0; i < vec.size(); i++) {
+                if (val[i] != vec.val[i])
+                    return false;
+            }
+            return true;
+        }
+    template bool vector<double>::operator==(const vector<double> &vec);
+    template bool vector<float>::operator==(const vector<float> &vec);
+
+    template <typename T>
+        bool vector<T>::operator!=(const vector<T> &vec) {
+            if (get_device_mem_stat()) {
+                throw std::runtime_error("Error, GPU vector cant use operator!=");
+            }
+            if (val.size() != vec.size())
+                return true;
+            for (size_t i = 0; i < vec.size(); i++) {
+                if (val[i] != vec.val[i])
+                    return true;
+            }
+            return false;
+        }
+    template bool vector<double>::operator!=(const vector<double> &vec);
+    template bool vector<float>::operator!=(const vector<float> &vec);
 
     template <typename T>
         T util::get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {

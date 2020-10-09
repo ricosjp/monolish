@@ -542,18 +542,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  bool operator==(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator==");
-    }
-    if (val.size() != vec.size())
-      return false;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return false;
-    }
-    return true;
-  }
+  bool operator==(const vector<Float> &vec);
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -564,18 +553,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  bool operator!=(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator!=");
-    }
-    if (val.size() != vec.size())
-      return true;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return true;
-    }
-    return false;
-  }
+  bool operator!=(const vector<Float> &vec);
 
   /**
    * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))
