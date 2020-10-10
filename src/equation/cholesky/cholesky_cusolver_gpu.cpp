@@ -45,7 +45,9 @@ int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<double> &A,
                                 Drhv, tol, reorder, Dsol, &singularity));
   }
 #else
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   throw std::runtime_error("error sparse Cholesky is only GPU");
 #endif
   logger.func_out();
@@ -87,8 +89,10 @@ int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A,
                                 Drhv, tol, reorder, Dsol, &singularity));
   }
 #else
-  (void)(&A); (void)(&x); (void)(&b);
-  //throw std::runtime_error("error sparse Cholesky is only GPU");
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
+  // throw std::runtime_error("error sparse Cholesky is only GPU");
 #endif
   logger.func_out();
   return 0;

@@ -201,7 +201,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   }
 #else
 #if MONOLISH_USE_AVX // avx_cpu
-  //const int vecL = 8;
+  // const int vecL = 8;
 
 #pragma omp parallel for
   for (int i = 0; i < (int)(M * N); i++) {

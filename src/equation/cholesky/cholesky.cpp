@@ -20,7 +20,9 @@ int equation::Cholesky<T>::solve(matrix::CRS<T> &A, vector<T> &x,
   }
   logger.func_out();
 #else
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   throw std::runtime_error("error Cholesky on CPU does not impl.");
 #endif
   logger.func_out();

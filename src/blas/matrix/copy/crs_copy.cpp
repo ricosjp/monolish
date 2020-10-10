@@ -50,8 +50,8 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
     send();
 
 #if USE_GPU
-  size_t N = get_row();
-  size_t NNZ = get_nnz();
+    size_t N = get_row();
+    size_t NNZ = get_nnz();
 
     T *vald = val.data();
     int *cold = col_ind.data();

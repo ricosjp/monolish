@@ -55,7 +55,6 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
       throw std::runtime_error("error vector size is not same");
     }
 
-
 #if USE_GPU
     size_t size = vec.size();
     T *vald = val.data();
@@ -88,7 +87,6 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
     send();
-
 
 #if USE_GPU
     size_t size = vec.size();

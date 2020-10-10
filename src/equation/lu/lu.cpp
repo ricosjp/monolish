@@ -9,7 +9,9 @@ int equation::LU<double>::solve(matrix::CRS<double> &A, vector<double> &x,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   logger.func_out();
   throw std::runtime_error("error solver.lib is not 1");
 }

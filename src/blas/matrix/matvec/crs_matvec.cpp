@@ -36,7 +36,6 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
 
-
 #if 0
 #pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
                          cold [0:nnz])

@@ -9,7 +9,6 @@ template <typename T> void Dense<T>::diag_add(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-
   T *vald = val.data();
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
@@ -42,7 +41,6 @@ template void monolish::matrix::Dense<float>::diag_add(const float alpha);
 template <typename T> void Dense<T>::diag_sub(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-
 
   T *vald = val.data();
   const size_t N = get_col();
@@ -77,7 +75,6 @@ template <typename T> void Dense<T>::diag_mul(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-
   T *vald = val.data();
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
@@ -110,7 +107,6 @@ template void monolish::matrix::Dense<float>::diag_mul(const float alpha);
 template <typename T> void Dense<T>::diag_div(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-
 
   T *vald = val.data();
   const size_t N = get_col();

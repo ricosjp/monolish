@@ -44,7 +44,9 @@ int equation::QR<double>::cusolver_QR(matrix::CRS<double> &A, vector<double> &x,
                               tol, reorder, Dsol, &singularity));
   }
 #else
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   throw std::runtime_error("error sparse Cholesky is only GPU");
 #endif
   logger.func_out();
@@ -85,7 +87,9 @@ int equation::QR<float>::cusolver_QR(matrix::CRS<float> &A, vector<float> &x,
                               tol, reorder, Dsol, &singularity));
   }
 #else
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   throw std::runtime_error("error sparse Cholesky is only GPU");
 #endif
   logger.func_out();

@@ -11,7 +11,7 @@ template <typename T>
 void equation::none<T>::create_precond(matrix::CRS<T> &A) {
   Logger &logger = Logger::get_instance();
 
-  //nothing to do
+  // nothing to do
   (void)(&A);
 
   logger.solver_in(monolish_func);
@@ -40,8 +40,10 @@ template <typename T>
 int equation::none<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
-  //nothing to do
-  (void)(&A); (void)(&x); (void)(&b);
+  // nothing to do
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   logger.solver_out();
   return MONOLISH_SOLVER_SUCCESS;
 }

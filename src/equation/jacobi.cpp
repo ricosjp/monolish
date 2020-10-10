@@ -52,7 +52,9 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
                                          vector<T> &b) {
   Logger &logger = Logger::get_instance();
   // nothing to do
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   logger.solver_in(monolish_func);
   logger.solver_out();
   return MONOLISH_SOLVER_NOT_IMPL;

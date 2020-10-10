@@ -18,7 +18,9 @@ int equation::LU<double>::mumps_LU(matrix::CRS<double> &A, vector<double> &x,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  (void)(&A); (void)(&x); (void)(&b);
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   if (1) {
     throw std::runtime_error("error sparse LU on CPU does not impl.");
   }
@@ -95,4 +97,4 @@ int equation::LU<double>::mumps_LU(matrix::CRS<double> &A, vector<double> &x,
   logger.func_out();
   return 0;
 }
-}
+} // namespace monolish

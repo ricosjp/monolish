@@ -78,7 +78,6 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
     send();

@@ -15,7 +15,7 @@ template <typename T> void Dense<T>::col_add(const size_t c, const T alpha) {
 
 #if USE_GPU // gpu
 
-size_t nnz = get_nnz();
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
@@ -50,7 +50,7 @@ template <typename T> void Dense<T>::col_sub(const size_t c, const T alpha) {
   const size_t Len = get_row();
 
 #if USE_GPU // gpu
-size_t nnz = get_nnz();
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
