@@ -244,21 +244,19 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   rowN = mat.get_row();
   colN = mat.get_col();
   nnz = mat.get_nnz();
-  size_t NNZ = nnz;
 
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
     send();
-    T *vald = val.data();
-
-    const T *Mvald = mat.val.data();
 
 #if USE_GPU
+    T *vald = val.data();
+    const T *Mvald = mat.val.data();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
 #pragma acc loop independent
-    for (size_t i = 0; i < NNZ; i++) {
+    for (size_t i = 0; i < nnz; i++) {
       vald[i] = Mvald[i];
     }
 

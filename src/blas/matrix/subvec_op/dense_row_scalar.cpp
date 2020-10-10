@@ -9,15 +9,12 @@ template <typename T> void Dense<T>::row_add(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row();
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
 #if USE_GPU // gpu
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
@@ -47,15 +44,12 @@ template <typename T> void Dense<T>::row_sub(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
 #if USE_GPU // gpu
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
@@ -85,15 +79,12 @@ template <typename T> void Dense<T>::row_mul(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
 #if USE_GPU // gpu
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
@@ -123,15 +114,12 @@ template <typename T> void Dense<T>::row_div(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
 #if USE_GPU // gpu
+  size_t nnz = get_nnz();
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel

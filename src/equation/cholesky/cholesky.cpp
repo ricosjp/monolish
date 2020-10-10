@@ -2,6 +2,7 @@
 #include "../../monolish_internal.hpp"
 
 namespace monolish {
+
 template <typename T>
 int equation::Cholesky<T>::solve(matrix::CRS<T> &A, vector<T> &x,
                                  vector<T> &b) {
@@ -17,11 +18,11 @@ int equation::Cholesky<T>::solve(matrix::CRS<T> &A, vector<T> &x,
     logger.func_out();
     throw std::runtime_error("error solver.lib is not 1");
   }
-#else
   logger.func_out();
+#else
+  (void)(&A); (void)(&x); (void)(&b);
   throw std::runtime_error("error Cholesky on CPU does not impl.");
 #endif
-
   logger.func_out();
   return ret;
 }

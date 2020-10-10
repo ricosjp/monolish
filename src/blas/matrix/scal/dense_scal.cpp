@@ -21,7 +21,7 @@ void blas::mscal(const double alpha, matrix::Dense<double> &A) {
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
 #pragma acc loop independent
-  for (int i = 0; i < nnz; i++) {
+  for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];
   }
 
@@ -46,7 +46,7 @@ void blas::mscal(const float alpha, matrix::Dense<float> &A) {
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel
 #pragma acc loop independent
-  for (int i = 0; i < nnz; i++) {
+  for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];
   }
 
