@@ -56,7 +56,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  //vector(const size_t N) { val.resize(N); }
+  // vector(const size_t N) { val.resize(N); }
   vector(const size_t N);
 
   /**

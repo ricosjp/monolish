@@ -80,8 +80,7 @@ template matrix::COO<float> util::random_structure_matrix(const int M,
                                                           const int nnzrow,
                                                           const float val);
 
-template <typename T>
-matrix::COO<T> util::eye(const int M) {
+template <typename T> matrix::COO<T> util::eye(const int M) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

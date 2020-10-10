@@ -76,7 +76,7 @@ public:
    * @brief Create Dense matrix from Dense matrix
    * @param dense input Dense matrix (size M x N)
    * @note
-   * - # of computation: M*N 
+   * - # of computation: M*N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
@@ -86,7 +86,7 @@ public:
    * @brief Create dense matrix from COO matrix
    * @param coo input COO matrix (size M x N)
    * @note
-   * - # of computation: M*N 
+   * - # of computation: M*N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
@@ -100,7 +100,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): true
    **/
-  Dense(const Dense<Float> &dense){ convert(dense); };
+  Dense(const Dense<Float> &dense) { convert(dense); };
 
   /**
    * @brief Allocate dense matrix
@@ -327,9 +327,9 @@ public:
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-           if(get_device_mem_stat()){
-               device_free();
-           }
+    if (get_device_mem_stat()) {
+      device_free();
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////

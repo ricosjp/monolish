@@ -65,7 +65,7 @@ public:
 
   COO()
       : rowN(0), colN(0), nnz(0), gpu_status(false), row_index(), col_index(),
-      val() {}
+        val() {}
 
   /**
    * @brief Initialize M x N COO matrix
@@ -77,25 +77,8 @@ public:
    * - GPU acceleration (OpenACC): false
    **/
   COO(const size_t M, const size_t N)
-                                   : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(), val() {}
-
-
-  /**
-   * @brief Create COO matrix from array
-   * @param M # of row
-   * @param N # of col
-   * @param NNZ # of non-zero elements
-   * @param row row index, which stores the row numbers of the non-zero elements
-   *(size nnz)
-   * @param col col index, which stores the column numbers of the non-zero
-   *elements (size nnz)
-   * @param value value index, which stores the non-zero elements (size nnz)
-   * @note
-   * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
-   **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value);
+      : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(),
+        val() {}
 
   /**
    * @brief Create COO matrix from array
@@ -112,8 +95,28 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const std::vector<int> &row, const std::vector<int> &col, const std::vector<Float> &value){
-      this = COO(M,N,NNZ,row.data(), col.data(), value.data());
+  COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
+      const int *col, const Float *value);
+
+  /**
+   * @brief Create COO matrix from array
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of non-zero elements
+   * @param row row index, which stores the row numbers of the non-zero elements
+   *(size nnz)
+   * @param col col index, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
+   **/
+  COO(const size_t M, const size_t N, const size_t NNZ,
+      const std::vector<int> &row, const std::vector<int> &col,
+      const std::vector<Float> &value) {
+    this = COO(M, N, NNZ, row.data(), col.data(), value.data());
   }
 
   /**
@@ -133,7 +136,8 @@ public:
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value, const size_t origin);
+  COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
+      const int *col, const Float *value, const size_t origin);
 
   /**
    * @brief Create COO matrix from n-origin array
@@ -152,10 +156,11 @@ public:
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const std::vector<int> &row, const std::vector<int> &col, const std::vector<Float> &value, const size_t origin){
-      this = COO(M,N,NNZ,row.data(), col.data(), value.data(),origin);
+  COO(const size_t M, const size_t N, const size_t NNZ,
+      const std::vector<int> &row, const std::vector<int> &col,
+      const std::vector<Float> &value, const size_t origin) {
+    this = COO(M, N, NNZ, row.data(), col.data(), value.data(), origin);
   }
-  
 
   /**
    * @brief Create COO matrix from COO matrix
@@ -353,8 +358,8 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r, const std::vector<int> &c,
-               const std::vector<Float> &v);
+  void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r,
+               const std::vector<int> &c, const std::vector<Float> &v);
 
   /**
    * @brief get # of row

@@ -83,7 +83,8 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr, const int *colind, const Float *value);
+  CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
+      const int *colind, const Float *value);
 
   /**
    * @brief Create CRS matrix from std::vector
