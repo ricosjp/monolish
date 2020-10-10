@@ -20,6 +20,8 @@ namespace matrix {
     template <typename T>
         COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
                 const int *col, const T *value){
+            Logger &logger = Logger::get_instance();
+            logger.util_in(monolish_func);
             rowN = M;
             colN = N;
             nnz = NNZ;
@@ -31,6 +33,7 @@ namespace matrix {
             std::copy(row, row + nnz, row_index.begin());
             std::copy(col, col + nnz, col_index.begin());
             std::copy(value, value + nnz, val.begin());
+            logger.util_out();
         }
     template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,const int *col, const double *value);
     template COO<float>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,const int *col, const float *value);
@@ -39,6 +42,8 @@ namespace matrix {
     template <typename T>
         COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
                 const int *col, const T *value, const size_t origin){
+            Logger &logger = Logger::get_instance();
+            logger.util_in(monolish_func);
             rowN = M;
             colN = N;
             nnz = NNZ;
@@ -56,26 +61,29 @@ namespace matrix {
                 row_index[i] -= origin;
                 col_index[i] -= origin;
             }
+            logger.util_out();
         }
     template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,const int *col, const double *value, const size_t origin);
     template COO<float>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,const int *col, const float *value, const size_t origin);
 
-  template <typename T>
-  COO<T>::COO(const matrix::COO<T> &coo){
-      rowN = coo.get_row();
-      colN = coo.get_col();
-      nnz = coo.get_nnz();
-      gpu_status = false;
-      row_index.resize(nnz);
-      col_index.resize(nnz);
-      val.resize(nnz);
-          std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
-                  row_index.begin());
-      std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
-              col_index.begin());
-      std::copy(coo.val.data(), coo.val.data() + nnz, val.begin());
-
-  }
+    template <typename T>
+        COO<T>::COO(const matrix::COO<T> &coo){
+            Logger &logger = Logger::get_instance();
+            logger.util_in(monolish_func);
+            rowN = coo.get_row();
+            colN = coo.get_col();
+            nnz = coo.get_nnz();
+            gpu_status = false;
+            row_index.resize(nnz);
+            col_index.resize(nnz);
+            val.resize(nnz);
+            std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
+                    row_index.begin());
+            std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
+                    col_index.begin());
+            std::copy(coo.val.data(), coo.val.data() + nnz, val.begin());
+            logger.util_out();
+        }
   template COO<double>::COO(const matrix::COO<double> &coo);
   template COO<float>::COO(const matrix::COO<float> &coo);
 
@@ -434,24 +442,30 @@ template void COO<float>::convert(const Dense<float> &dense);
 /// transpose /////
 
 template <typename T>
-  COO<T>& COO<T>::transpose() {
+COO<T>& COO<T>::transpose() {
+    Logger &logger = Logger::get_instance();
+    logger.util_in(monolish_func);
     using std::swap;
     swap(rowN, colN);
     swap(row_index, col_index);
     return *this;
-  }
+    logger.util_out();
+}
 template COO<double>& COO<double>::transpose();
 template COO<float>& COO<float>::transpose();
 
 template <typename T>
-  void COO<T>::transpose(COO &B) const {
+void COO<T>::transpose(COO &B) const {
+    Logger &logger = Logger::get_instance();
+    logger.util_in(monolish_func);
     B.set_row(get_col());
     B.set_col(get_row());
     B.set_nnz(get_nnz());
     B.row_index = get_col_ind();
     B.col_index = get_row_ptr();
     B.val = get_val_ptr();
-  }
+    logger.util_out();
+}
 template void COO<double>::transpose(COO &B) const;
 template void COO<float>::transpose(COO &B) const;
 

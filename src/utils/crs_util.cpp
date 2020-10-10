@@ -15,6 +15,8 @@ namespace matrix {
 
     template <typename T> 
         CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr, const int *colind, const T *value){
+            Logger &logger = Logger::get_instance();
+            logger.util_in(monolish_func);
             rowN = M;
             colN = N;
             nnz = NNZ;
@@ -25,12 +27,15 @@ namespace matrix {
             std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
             std::copy(colind, colind + nnz, col_ind.begin());
             std::copy(value, value + nnz, val.begin());
+            logger.util_out();
         }
     template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr, const int *colind, const double *value);
     template CRS<float>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr, const int *colind, const float *value);
 
     template <typename T> 
         CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr, const std::vector<int> colind, const std::vector<T> value){
+            Logger &logger = Logger::get_instance();
+            logger.util_in(monolish_func);
             rowN = M;
             colN = N;
             nnz = value.size();
@@ -41,6 +46,7 @@ namespace matrix {
             std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
             std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
             std::copy(value.data(), value.data() + nnz, val.begin());
+            logger.util_out();
         }
     template CRS<double>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr, const std::vector<int> colind, const std::vector<double> value);
     template CRS<float>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr, const std::vector<int> colind, const std::vector<float> value);
