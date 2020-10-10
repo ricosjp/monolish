@@ -98,6 +98,25 @@ public:
   COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value);
 
   /**
+   * @brief Create COO matrix from array
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of non-zero elements
+   * @param row row index, which stores the row numbers of the non-zero elements
+   *(size nnz)
+   * @param col col index, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading (OpenMP): false
+   * - GPU acceleration (OpenACC): false
+   **/
+  COO(const size_t M, const size_t N, const size_t NNZ, const std::vector<int> &row, const std::vector<int> &col, const std::vector<Float> &value){
+      this = COO(M,N,NNZ,row.data(), col.data(), value.data());
+  }
+
+  /**
    * @brief Create COO matrix from n-origin array
    * @param M # of row
    * @param N # of col
@@ -115,6 +134,28 @@ public:
    * - GPU acceleration (OpenACC): false
    **/
   COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value, const size_t origin);
+
+  /**
+   * @brief Create COO matrix from n-origin array
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of non-zero elements
+   * @param row n-origin row index, which stores the row numbers of the non-zero
+   *elements (size nnz)
+   * @param col n-origin col index, which stores the column numbers of the
+   *non-zero elements (size nnz)
+   * @param value n-origin value index, which stores the non-zero elements (size
+   *nnz)
+   * @param origin n-origin
+   * @note
+   * - # of computation: 3nnz + 2nnz(adjust possition using origin)
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): false
+   **/
+  COO(const size_t M, const size_t N, const size_t NNZ, const std::vector<int> &row, const std::vector<int> &col, const std::vector<Float> &value, const size_t origin){
+      this = COO(M,N,NNZ,row.data(), col.data(), value.data(),origin);
+  }
+  
 
   /**
    * @brief Create COO matrix from COO matrix
