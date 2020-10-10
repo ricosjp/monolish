@@ -212,12 +212,12 @@ public:
   }
 
   /**
-   * @brief Add a new element at the ent of the vector (only CPU)
+   * @brief Add a new element at the end of the vector (only CPU)
    * @param val new element
    * @note
    * - # of computation: 1
    **/
-  void resize(Float val) {
+  void push_back(Float val) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
