@@ -56,7 +56,8 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  vector(const size_t N) { val.resize(N); }
+  // vector(const size_t N) { val.resize(N); }
+  vector(const size_t N);
 
   /**
    * @brief initialize size N vector, value to fill the container
@@ -67,7 +68,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  vector(const size_t N, const Float value) { val.resize(N, value); }
+  vector(const size_t N, const Float value);
 
   /**
    * @brief copy from std::vector
@@ -77,10 +78,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  vector(const std::vector<Float> &vec) {
-    val.resize(vec.size());
-    std::copy(vec.begin(), vec.end(), val.begin());
-  }
+  vector(const std::vector<Float> &vec);
 
   /**
    * @brief copy from monolish::vector
@@ -104,11 +102,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  vector(const Float *start, const Float *end) {
-    size_t size = (end - start);
-    val.resize(size);
-    std::copy(start, end, val.begin());
-  }
+  vector(const Float *start, const Float *end);
 
   /**
    * @brief create N length rand(min~max) vector
@@ -117,19 +111,10 @@ public:
    * @param max rand max
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
+   * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  vector(const size_t N, const Float min, const Float max) {
-    val.resize(N);
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
-
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
-    }
-  }
+  vector(const size_t N, const Float min, const Float max);
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -227,12 +212,12 @@ public:
   }
 
   /**
-   * @brief Add a new element at the ent of the vector (only CPU)
+   * @brief Add a new element at the end of the vector (only CPU)
    * @param val new element
    * @note
    * - # of computation: 1
    **/
-  void resize(Float val) {
+  void push_back(Float val) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
@@ -291,11 +276,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void print_all() const {
-    for (const auto v : val) {
-      std::cout << v << std::endl;
-    }
-  }
+  void print_all() const;
 
   /**
    * @brief print all elements to file
@@ -305,16 +286,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void print_all(std::string filename) const {
-
-    std::ofstream ofs(filename);
-    if (!ofs) {
-      throw std::runtime_error("error file cant open");
-    }
-    for (const auto v : val) {
-      ofs << v << std::endl;
-    }
-  }
+  void print_all(std::string filename) const;
 
   // operator
   // ///////////////////////////////////////////////////////////////////////////
@@ -570,18 +542,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  bool operator==(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator==");
-    }
-    if (val.size() != vec.size())
-      return false;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return false;
-    }
-    return true;
-  }
+  bool operator==(const vector<Float> &vec);
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -592,18 +553,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  bool operator!=(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator!=");
-    }
-    if (val.size() != vec.size())
-      return true;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return true;
-    }
-    return false;
-  }
+  bool operator!=(const vector<Float> &vec);
 
   /**
    * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))

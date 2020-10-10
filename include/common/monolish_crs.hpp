@@ -84,13 +84,7 @@ public:
    * - GPU acceleration (OpenACC): false
    **/
   CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
-      const int *colind, const Float *value)
-      : rowN(M), colN(N), nnz(NNZ), gpu_status(false), row_ptr(M + 1),
-        col_ind(nnz), val(nnz) {
-    std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
-    std::copy(colind, colind + nnz, col_ind.begin());
-    std::copy(value, value + nnz, val.begin());
-  }
+      const int *colind, const Float *value);
 
   /**
    * @brief Create CRS matrix from std::vector
@@ -107,13 +101,7 @@ public:
    * - GPU acceleration (OpenACC): false
    **/
   CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
-      const std::vector<int> colind, const std::vector<Float> value)
-      : rowN(M), colN(N), nnz(value.size()), gpu_status(false), row_ptr(M + 1),
-        col_ind(nnz), val(nnz) {
-    std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
-    std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
-    std::copy(value.data(), value.data() + nnz, val.begin());
-  }
+      const std::vector<int> colind, const std::vector<Float> value);
 
   /**
    * @brief Convert CRS from COO

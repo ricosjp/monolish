@@ -73,10 +73,20 @@ public:
   void convert(const COO<Float> &coo);
 
   /**
+   * @brief Create Dense matrix from Dense matrix
+   * @param dense input Dense matrix (size M x N)
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading (OpenMP): true
+   * - GPU acceleration (OpenACC): false
+   **/
+  void convert(const Dense<Float> &dense);
+
+  /**
    * @brief Create dense matrix from COO matrix
    * @param coo input COO matrix (size M x N)
    * @note
-   * - # of computation: M*N + nnz
+   * - # of computation: M*N
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
@@ -84,13 +94,13 @@ public:
 
   /**
    * @brief Create dense matrix from dense matrix
-   * @param mat input dense matrix (size M x N)
+   * @param dense input dense matrix (size M x N)
    * @note
    * - # of computation: M*N
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): true
    **/
-  Dense(const Dense<Float> &mat);
+  Dense(const Dense<Float> &dense) { convert(dense); };
 
   /**
    * @brief Allocate dense matrix
@@ -101,13 +111,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Dense(const size_t M, const size_t N) {
-    set_row(M);
-    set_col(N);
-    set_nnz(N * M);
-
-    val.resize(nnz);
-  }
+  Dense(const size_t M, const size_t N);
 
   /**
    * @brief Create dense matrix from array
@@ -119,14 +123,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Dense(const size_t M, const size_t N, const Float *value) {
-    set_row(M);
-    set_col(N);
-    set_nnz(M * N);
-
-    val.resize(nnz);
-    std::copy(value, value + nnz, val.begin());
-  }
+  Dense(const size_t M, const size_t N, const Float *value);
 
   /**
    * @brief Create dense matrix from std::vector
@@ -138,14 +135,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Dense(const size_t M, const size_t N, const std::vector<Float> value) {
-    set_row(M);
-    set_col(N);
-    set_nnz(M * N);
-
-    val.resize(nnz);
-    std::copy(value.data(), value.data() + nnz, val.begin());
-  }
+  Dense(const size_t M, const size_t N, const std::vector<Float> value);
 
   /**
    * @brief Create random dense matrix from dense matrix
@@ -158,22 +148,7 @@ public:
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  Dense(const size_t M, const size_t N, const Float min, const Float max) {
-    set_row(M);
-    set_col(N);
-    set_nnz(M * N);
-
-    val.resize(nnz);
-
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
-
-#pragma omp parallel for
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
-    }
-  }
+  Dense(const size_t M, const size_t N, const Float min, const Float max);
 
   /**
    * @brief Create constract dense matrix
@@ -185,18 +160,7 @@ public:
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  Dense(const size_t M, const size_t N, const Float value) {
-    set_row(M);
-    set_col(N);
-    set_nnz(M * N);
-
-    val.resize(nnz);
-
-#pragma omp parallel for
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = value;
-    }
-  }
+  Dense(const size_t M, const size_t N, const Float value);
 
   /**
    * @brief get # of row
@@ -244,18 +208,7 @@ public:
    * @warning
    * This function need to allocate tmp. matrix (size M x N)
    **/
-  Dense &transpose() {
-    Dense<Float> B(get_col(), get_row());
-    for (size_t i = 0; i < get_row(); ++i) {
-      for (size_t j = 0; j < get_col(); ++j) {
-        B.val[j * get_row() + i] = val[i * get_col() + j];
-      }
-    }
-    std::copy(B.val.data(), B.val.data() + nnz, val.begin());
-    set_row(B.get_row());
-    set_col(B.get_col());
-    return *this;
-  }
+  Dense &transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)
@@ -265,17 +218,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void transpose(const Dense &B) {
-    set_row(B.get_col());
-    set_col(B.get_row());
-    val.resize(B.get_row() * B.get_col());
-
-    for (size_t i = 0; i < get_row(); ++i) {
-      for (size_t j = 0; j < get_col(); ++j) {
-        val[j * get_row() + i] = B.val[i * get_col() + j];
-      }
-    }
-  }
+  void transpose(const Dense &B);
 
   /**
    * @brief Memory data space required by the matrix
@@ -296,18 +239,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Float at(size_t i, size_t j) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("at() Error, GPU vector cant use operator[]");
-    }
-    if (get_row() < i) {
-      throw std::runtime_error("at() Error, A.row < i");
-    }
-    if (get_col() < j) {
-      throw std::runtime_error("at() Error, A.col < j");
-    }
-    return val[get_col() * i + j];
-  }
+  Float at(const size_t i, const size_t j);
 
   /**
    * @brief get element A[i][j]
@@ -319,18 +251,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Float at(size_t i, size_t j) const {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("at() Error, GPU vector cant use operator[]");
-    }
-    if (get_row() < i) {
-      throw std::runtime_error("at() Error, A.row < i");
-    }
-    if (get_col() < j) {
-      throw std::runtime_error("at() Error, A.col < j");
-    }
-    return val[get_col() * i + j];
-  }
+  Float at(const size_t i, const size_t j) const;
 
   /**
    * @brief get element A[i][j]
@@ -343,19 +264,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void insert(size_t i, size_t j, Float Val) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error(
-          "insert() Error, GPU vector cant use operator[]");
-    }
-    if (get_row() < i) {
-      throw std::runtime_error("insert() Error, A.row < i");
-    }
-    if (get_col() < j) {
-      throw std::runtime_error("insert() Error, A.col < j");
-    }
-    val[get_col() * i + j] = Val;
-  }
+  void insert(const size_t i, const size_t j, const Float Val);
 
   /**
    * @brief print all elements to standart I/O
@@ -418,9 +327,9 @@ public:
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-    //       if(get_device_mem_stat()){
-    //           device_free();
-    //       }
+    if (get_device_mem_stat()) {
+      device_free();
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////
