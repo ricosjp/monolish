@@ -65,7 +65,7 @@ public:
 
   COO()
       : rowN(0), colN(0), nnz(0), gpu_status(false), row_index(), col_index(),
-        val() {}
+      val() {}
 
   /**
    * @brief Initialize M x N COO matrix
@@ -77,8 +77,8 @@ public:
    * - GPU acceleration (OpenACC): false
    **/
   COO(const size_t M, const size_t N)
-      : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(),
-        val() {}
+                                   : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(), val() {}
+
 
   /**
    * @brief Create COO matrix from array
@@ -95,14 +95,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
-      const int *col, const Float *value)
-      : rowN(M), colN(N), nnz(NNZ), gpu_status(false), row_index(nnz),
-        col_index(nnz), val(nnz) {
-    std::copy(row, row + nnz, row_index.begin());
-    std::copy(col, col + nnz, col_index.begin());
-    std::copy(value, value + nnz, val.begin());
-  }
+  COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value);
 
   /**
    * @brief Create COO matrix from n-origin array
@@ -121,20 +114,7 @@ public:
    * - Multi-threading (OpenMP): true
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
-      const int *col, const Float *value, const size_t origin)
-      : rowN(M), colN(N), nnz(NNZ), gpu_status(false), row_index(nnz),
-        col_index(nnz), val(nnz) {
-    std::copy(row, row + nnz, row_index.begin());
-    std::copy(col, col + nnz, col_index.begin());
-    std::copy(value, value + nnz, val.begin());
-
-#pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      row_index[i] -= origin;
-      col_index[i] -= origin;
-    }
-  }
+  COO(const size_t M, const size_t N, const size_t NNZ, const int *row, const int *col, const Float *value, const size_t origin);
 
   /**
    * @brief Create COO matrix from COO matrix
@@ -144,15 +124,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  COO(const matrix::COO<Float> &coo)
-      : rowN(coo.get_row()), colN(coo.get_col()), nnz(coo.get_nnz()),
-        gpu_status(false), row_index(nnz), col_index(nnz), val(nnz) {
-    std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
-              row_index.begin());
-    std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
-              col_index.begin());
-    std::copy(coo.val.data(), coo.val.data() + nnz, val.begin());
-  }
+  COO(const matrix::COO<Float> &coo);
 
   /**
    * @brief Create COO matrix from CRS matrix
@@ -317,7 +289,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Float at(size_t i, size_t j);
+  Float at(const size_t i, const size_t j);
 
   /**
    * @brief Get matrix element (A(i,j))
@@ -326,7 +298,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  Float at(size_t i, size_t j) const;
+  Float at(const size_t i, const size_t j) const;
 
   /**
    * @brief Set COO array from std::vector
@@ -340,8 +312,8 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void set_ptr(size_t rN, size_t cN, std::vector<int> &r, std::vector<int> &c,
-               std::vector<Float> &v);
+  void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r, const std::vector<int> &c,
+               const std::vector<Float> &v);
 
   /**
    * @brief get # of row
@@ -454,12 +426,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  COO &transpose() {
-    using std::swap;
-    swap(rowN, colN);
-    swap(row_index, col_index);
-    return *this;
-  }
+  COO &transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)
@@ -469,14 +436,7 @@ public:
    * - Multi-threading (OpenMP): false
    * - GPU acceleration (OpenACC): false
    **/
-  void transpose(COO &B) const {
-    B.set_row(get_col());
-    B.set_col(get_row());
-    B.set_nnz(get_nnz());
-    B.row_index = get_col_ind();
-    B.col_index = get_row_ptr();
-    B.val = get_val_ptr();
-  }
+  void transpose(COO &B) const;
 
   /**
    * @brief Memory data space required by the matrix
@@ -588,7 +548,7 @@ public:
    * This adds an element to the end of the array.
    * In most cases, calling sort() is required after this function.
    **/
-  void insert(size_t m, size_t n, Float val);
+  void insert(const size_t m, const size_t n, const Float val);
 
 private:
   void _q_sort(int lo, int hi);
