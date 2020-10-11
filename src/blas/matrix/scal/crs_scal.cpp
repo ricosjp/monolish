@@ -14,7 +14,6 @@ void blas::mscal(const double alpha, matrix::CRS<double> &A) {
   logger.func_in(monolish_func);
 
   size_t nnz = A.get_nnz();
-
   double *vald = A.val.data();
 
 #if USE_GPU // gpu
@@ -41,10 +40,10 @@ void blas::mscal(const float alpha, matrix::CRS<float> &A) {
   logger.func_in(monolish_func);
 
   size_t nnz = A.get_nnz();
-
   float *vald = A.val.data();
 
 #if USE_GPU // gpu
+#pragma acc data present(vald [0:nnz])
 #pragma acc parallel
 #pragma acc loop independent
   for (size_t i = 0; i < nnz; i++) {
