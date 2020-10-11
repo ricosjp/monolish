@@ -27,7 +27,7 @@ void blas::axpy(const double alpha, const vector<double> &x,
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd, yd)
+#pragma omp target data use_device_ptr(xd, yd)
   { check(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1)); }
   cublasDestroy(h);
 #else
@@ -53,7 +53,7 @@ void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd, yd)
+#pragma omp target data use_device_ptr(xd, yd)
   { check(cublasSaxpy(h, size, &alpha, xd, 1, yd, 1)); }
   cublasDestroy(h);
 #else

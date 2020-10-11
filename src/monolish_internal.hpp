@@ -3,7 +3,6 @@
 
 #ifdef USE_GPU
 #include <cuda_runtime.h>
-#include <openacc.h>
 #endif
 
 namespace monolish {
