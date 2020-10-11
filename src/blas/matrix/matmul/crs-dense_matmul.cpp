@@ -54,10 +54,10 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
 #if USE_GPU
+  const size_t K = A.get_col();
+  const size_t nnz = A.get_nnz();
 #pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
                          Bd [0:K * N], Cd [0:M * N])
 #pragma acc parallel wait
@@ -172,10 +172,10 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
 #if USE_GPU
+  const size_t K = A.get_col();
+  const size_t nnz = A.get_nnz();
 #pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
                          Bd [0:K * N], Cd [0:M * N])
 #pragma acc parallel wait
@@ -201,7 +201,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   }
 #else
 #if MONOLISH_USE_AVX // avx_cpu
-  const int vecL = 8;
+  // const int vecL = 8;
 
 #pragma omp parallel for
   for (int i = 0; i < (int)(M * N); i++) {

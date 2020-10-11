@@ -13,7 +13,6 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
                                  vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
-  std::ostream *pStream;
 
   if (A.get_row() != A.get_col()) {
     throw std::runtime_error("error A.row != A.col");

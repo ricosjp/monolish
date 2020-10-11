@@ -25,17 +25,16 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
     throw std::runtime_error("error vector size is not same");
   }
 
+  const double *vald = A.val.data();
+  const double *xd = x.data();
+
+#if USE_GPU // gpu
   size_t m = A.get_row();
   size_t n = A.get_col();
   size_t nnz = A.get_nnz();
-  const double *xd = x.data();
   double *yd = y.data();
-
-  const double *vald = A.val.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
-
-#if USE_GPU // gpu
 
 #if 0
 #pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
@@ -105,17 +104,16 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
     throw std::runtime_error("error vector size is not same");
   }
 
+  const float *vald = A.val.data();
+  const float *xd = x.data();
+
+#if USE_GPU // gpu
   size_t m = A.get_row();
   size_t n = A.get_col();
   size_t nnz = A.get_nnz();
-  const float *xd = x.data();
   float *yd = y.data();
-
-  const float *vald = A.val.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
-
-#if USE_GPU // gpu
 
 #if 0
 #pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \

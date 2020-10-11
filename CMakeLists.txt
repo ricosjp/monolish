@@ -27,7 +27,7 @@ function(common_setup target_name)
     )
 
   set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
-  target_compile_options(${target_name} PRIVATE -g -O3)
+  target_compile_options(${target_name} PRIVATE -g -O3 -Wall -Wextra)
 
   # AVX
   if(MONOLISH_USE_AVX)

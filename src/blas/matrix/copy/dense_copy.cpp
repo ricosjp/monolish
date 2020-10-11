@@ -39,15 +39,14 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   rowN = mat.get_row();
   colN = mat.get_col();
   nnz = mat.get_nnz();
-  size_t NNZ = nnz;
 
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
     send();
+#if USE_GPU
+    size_t NNZ = nnz;
     T *vald = val.data();
     const T *Mvald = mat.val.data();
-
-#if USE_GPU
 
 #pragma acc data present(vald [0:nnz])
 #pragma acc parallel

@@ -44,7 +44,6 @@ template <typename T> void vector<T>::operator+=(const T value) {
   vector<T> ans(val.size());
 
   T *vald = val.data();
-  T *ansd = ans.data();
   size_t size = val.size();
 
 #if USE_GPU

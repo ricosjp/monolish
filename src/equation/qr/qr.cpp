@@ -16,9 +16,12 @@ int equation::QR<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
     logger.func_out();
     throw std::runtime_error("error solver.lib is not 1");
   }
-#else
   logger.func_out();
-  throw std::runtime_error("error QR on CPU does not impl.");
+#else
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
+  throw std::runtime_error("error Cholesky on CPU does not impl.");
 #endif
 
   logger.func_out();
