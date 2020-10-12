@@ -13,7 +13,7 @@ template <typename T> void vector<T>::send() const {
   const T *d = val.data();
   const size_t N = val.size();
 
-#pragma omp target enter data map (to: d[0:N])
+#pragma omp target enter data map(to : d [0:N])
 
   gpu_status = true;
 #endif
@@ -30,7 +30,7 @@ template <typename T> void vector<T>::recv() {
     T *d = val.data();
     const size_t N = val.size();
 
-#pragma omp target exit data map (from: d[0:N])
+#pragma omp target exit data map(from : d [0:N])
 
     gpu_status = false;
   }
@@ -47,7 +47,7 @@ template <typename T> void vector<T>::nonfree_recv() {
   if (gpu_status == true) {
     T *d = val.data();
     const size_t N = val.size();
-#pragma omp target update from (d[0:N])
+#pragma omp target update from(d [0:N])
   }
 #endif
   logger.util_out();
@@ -62,7 +62,7 @@ template <typename T> void vector<T>::device_free() const {
   if (gpu_status == true) {
     const T *d = val.data();
     const size_t N = val.size();
-#pragma omp target exit data map (release: d[0:N])
+#pragma omp target exit data map(release : d [0:N])
     gpu_status = false;
   }
 #endif
@@ -94,7 +94,9 @@ template <typename T> void matrix::CRS<T>::send() const {
   const size_t N = get_row();
   const size_t nnz = get_nnz();
 
-#pragma omp target enter data map(to: vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target enter data map(to                                           \
+                                  :                                            \
+                                  vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
   gpu_status = true;
 #endif
   logger.util_out();
@@ -113,7 +115,8 @@ template <typename T> void matrix::CRS<T>::recv() {
     size_t N = get_row();
     size_t nnz = get_nnz();
 
-#pragma omp target exit data map(from: vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target exit data map(from                                          \
+                                 : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
     gpu_status = false;
   }
 #endif
@@ -152,7 +155,8 @@ template <typename T> void matrix::CRS<T>::device_free() const {
     const size_t N = get_row();
     const size_t nnz = get_nnz();
 
-#pragma omp target exit data map (release: vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target exit data map(release                                       \
+                                 : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
 
     gpu_status = false;
   }
@@ -180,7 +184,7 @@ template <typename T> void matrix::Dense<T>::send() const {
   const T *vald = val.data();
   const size_t nnz = get_nnz();
 
-#pragma omp target enter data map(to: vald [0:nnz])
+#pragma omp target enter data map(to : vald [0:nnz])
   gpu_status = true;
 #endif
   logger.util_out();
@@ -196,7 +200,7 @@ template <typename T> void matrix::Dense<T>::recv() {
     T *vald = val.data();
     size_t nnz = get_nnz();
 
-#pragma omp target exit data map(from: vald [0:nnz])
+#pragma omp target exit data map(from : vald [0:nnz])
     gpu_status = false;
   }
 #endif
@@ -229,7 +233,7 @@ template <typename T> void matrix::Dense<T>::device_free() const {
     const T *vald = val.data();
     const size_t nnz = get_nnz();
 
-#pragma omp target exit data map(release: vald [0:nnz])
+#pragma omp target exit data map(release : vald [0:nnz])
 
     gpu_status = false;
   }

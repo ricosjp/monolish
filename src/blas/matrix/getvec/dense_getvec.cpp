@@ -23,9 +23,9 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vecd[i] = vald[N * i + i];
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vecd[i] = vald[N * i + i];
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -58,9 +58,9 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
-      vecd[i] = vald[r * N + i];
-    }
+  for (size_t i = 0; i < N; i++) {
+    vecd[i] = vald[r * N + i];
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -96,9 +96,9 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M; i++) {
-      vecd[i] = vald[i * N + c];
-    }
+  for (size_t i = 0; i < M; i++) {
+    vecd[i] = vald[i * N + c];
+  }
 #else // cpu
 
 #pragma omp parallel for

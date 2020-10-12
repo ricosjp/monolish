@@ -38,13 +38,13 @@ void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
 #pragma omp target data use_device_ptr(xd, yd, vald)
   {
     // cublas is col major
-    check(
-        cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n, xd, 1, &beta, yd, 1));
+    check(cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n, xd, 1, &beta, yd,
+                      1));
   }
   cublasDestroy(h);
 #else
-  cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd, 1, beta, yd,
-              1);
+  cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd, 1, beta,
+              yd, 1);
 #endif
   logger.func_out();
 }
@@ -78,13 +78,13 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
 #pragma omp target data use_device_ptr(xd, yd, vald)
   {
     // cublas is col major
-    check(
-        cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m, xd, 1, &beta, yd, 1));
+    check(cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m, xd, 1, &beta, yd,
+                      1));
   }
   cublasDestroy(h);
 #else
-  cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd, 1, beta, yd,
-              1);
+  cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd, 1, beta,
+              yd, 1);
 #endif
   logger.func_out();
 }

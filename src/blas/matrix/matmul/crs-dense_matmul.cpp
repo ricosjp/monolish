@@ -59,18 +59,18 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   const size_t K = A.get_col();
   const size_t nnz = A.get_nnz();
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
+  for (size_t i = 0; i < M * N; i++) {
+    Cd[i] = 0.0;
+  }
 
 #pragma omp target teams distribute parallel for
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
       }
     }
+  }
 #else
 #if USE_AVX // avx_cpu
   const int vecL = 4;
@@ -167,18 +167,18 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   const size_t K = A.get_col();
   const size_t nnz = A.get_nnz();
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
+  for (size_t i = 0; i < M * N; i++) {
+    Cd[i] = 0.0;
+  }
 
 #pragma omp target teams distribute parallel for
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
       }
     }
+  }
 #else
 #if MONOLISH_USE_AVX // avx_cpu
   // const int vecL = 8;

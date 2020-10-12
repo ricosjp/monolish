@@ -20,18 +20,18 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      vecd[i] = 0;
-    }
+  for (size_t i = 0; i < n; i++) {
+    vecd[i] = 0;
+  }
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-        if ((int)i == cold[j]) {
-          vecd[i] = vald[j];
-        }
+  for (size_t i = 0; i < n; i++) {
+    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+      if ((int)i == cold[j]) {
+        vecd[i] = vald[j];
       }
     }
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -69,13 +69,13 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   const int *cold = col_ind.data();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      vecd[i] = 0;
-    }
+  for (size_t i = 0; i < n; i++) {
+    vecd[i] = 0;
+  }
 #pragma omp target teams distribute parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
-      vecd[col_ind[j]] = vald[j];
-    }
+  for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    vecd[col_ind[j]] = vald[j];
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -112,18 +112,18 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      vecd[i] = 0;
-    }
+  for (size_t i = 0; i < n; i++) {
+    vecd[i] = 0;
+  }
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-        if ((int)c == cold[j]) {
-          vecd[i] = vald[j];
-        }
+  for (size_t i = 0; i < n; i++) {
+    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+      if ((int)c == cold[j]) {
+        vecd[i] = vald[j];
       }
     }
+  }
 #else // cpu
 
 #pragma omp parallel for

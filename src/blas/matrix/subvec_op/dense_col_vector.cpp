@@ -24,9 +24,9 @@ void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] += vecd[i];
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * i + c] += vecd[i];
+  }
 
 #else // cpu
 
@@ -65,9 +65,9 @@ void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] -= vecd[i];
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * i + c] -= vecd[i];
+  }
 
 #else // cpu
 
@@ -106,9 +106,9 @@ void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] *= vecd[i];
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * i + c] *= vecd[i];
+  }
 
 #else // cpu
 
@@ -147,9 +147,9 @@ void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * i + c] /= vecd[i];
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * i + c] /= vecd[i];
+  }
 
 #else // cpu
 

@@ -22,7 +22,7 @@ void blas::axpyz(const double alpha, const vector<double> &x,
 #if USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
-      zd[i] = alpha * xd[i] + yd[i];
+    zd[i] = alpha * xd[i] + yd[i];
   }
 #else
 #pragma omp parallel for

@@ -17,9 +17,9 @@ template <typename T> void Dense<T>::row_add(const size_t r, const T alpha) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] += alpha;
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] += alpha;
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -48,9 +48,9 @@ template <typename T> void Dense<T>::row_sub(const size_t r, const T alpha) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] -= alpha;
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] -= alpha;
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -79,9 +79,9 @@ template <typename T> void Dense<T>::row_mul(const size_t r, const T alpha) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] *= alpha;
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] *= alpha;
+  }
 #else // cpu
 
 #pragma omp parallel for
@@ -110,9 +110,9 @@ template <typename T> void Dense<T>::row_div(const size_t r, const T alpha) {
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] /= alpha;
-    }
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] /= alpha;
+  }
 #else // cpu
 
 #pragma omp parallel for
