@@ -43,7 +43,7 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
     send();
-#if USE_GPU
+#if MONOLISH_USE_GPU
     size_t NNZ = nnz;
     T *vald = val.data();
     const T *Mvald = mat.val.data();

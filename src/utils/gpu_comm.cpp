@@ -9,7 +9,7 @@ template <typename T> void vector<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *d = val.data();
   const size_t N = val.size();
 
@@ -25,7 +25,7 @@ template <typename T> void vector<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
     const size_t N = val.size();
@@ -43,7 +43,7 @@ template <typename T> void vector<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
     const size_t N = val.size();
@@ -58,7 +58,7 @@ template <typename T> void vector<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *d = val.data();
     const size_t N = val.size();
@@ -87,7 +87,7 @@ template <typename T> void matrix::CRS<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *vald = val.data();
   const int *cold = col_ind.data();
   const int *rowd = row_ptr.data();
@@ -107,7 +107,7 @@ template <typename T> void matrix::CRS<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     int *cold = col_ind.data();
@@ -128,7 +128,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     int *cold = col_ind.data();
@@ -147,7 +147,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *vald = val.data();
     const int *cold = col_ind.data();
@@ -180,7 +180,7 @@ template <typename T> void matrix::Dense<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *vald = val.data();
   const size_t nnz = get_nnz();
 
@@ -195,7 +195,7 @@ template <typename T> void matrix::Dense<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     size_t nnz = get_nnz();
@@ -212,7 +212,7 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     size_t nnz = get_nnz();
@@ -228,7 +228,7 @@ template <typename T> void matrix::Dense<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *vald = val.data();
     const size_t nnz = get_nnz();

@@ -11,7 +11,7 @@ int equation::Cholesky<T>::solve(matrix::CRS<T> &A, vector<T> &x,
 
   int ret = -1;
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   if (lib == 1) {
     ret = cusolver_Cholesky(A, x, b);
   } else {

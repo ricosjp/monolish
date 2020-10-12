@@ -1,7 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #include <cuda_runtime_api.h>
 #endif

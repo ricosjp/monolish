@@ -19,7 +19,7 @@ void blas::axpyz(const double alpha, const vector<double> &x,
   double *zd = z.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     zd[i] = alpha * xd[i] + yd[i];
@@ -49,7 +49,7 @@ void blas::axpyz(const float alpha, const vector<float> &x,
   float *zd = z.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     zd[i] = alpha * xd[i] + yd[i];

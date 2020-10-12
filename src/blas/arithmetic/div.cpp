@@ -15,7 +15,7 @@ template <typename T> vector<T> vector<T>::operator/(const T value) {
   T *ansd = ans.data();
   size_t size = val.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   ans.send();
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
@@ -44,7 +44,7 @@ template <typename T> void vector<T>::operator/=(const T value) {
   T *vald = val.data();
   size_t size = val.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     vald[i] /= value;
@@ -81,7 +81,7 @@ template <typename T> vector<T> vector<T>::operator/(const vector<T> &vec) {
   T *ansd = ans.data();
   size_t size = vec.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   ans.send();
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
@@ -114,7 +114,7 @@ template <typename T> void vector<T>::operator/=(const vector<T> &vec) {
   T *vald = val.data();
   size_t size = vec.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     vald[i] /= vecd[i];

@@ -1,7 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -18,7 +18,7 @@ double blas::sum(const vector<double> &x) {
   const double *xd = x.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
   for (size_t i = 0; i < size; i++) {
     ans += xd[i];
@@ -43,7 +43,7 @@ float blas::sum(const vector<float> &x) {
   const float *xd = x.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
   for (size_t i = 0; i < size; i++) {
     ans += xd[i];

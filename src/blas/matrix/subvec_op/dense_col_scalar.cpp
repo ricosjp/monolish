@@ -13,7 +13,7 @@ template <typename T> void Dense<T>::col_add(const size_t c, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
   size_t nnz = get_nnz();
 
@@ -45,7 +45,7 @@ template <typename T> void Dense<T>::col_sub(const size_t c, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
@@ -76,7 +76,7 @@ template <typename T> void Dense<T>::col_mul(const size_t c, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
@@ -107,7 +107,7 @@ template <typename T> void Dense<T>::col_div(const size_t c, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for

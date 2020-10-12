@@ -82,7 +82,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   if (mat.get_device_mem_stat()) {
     send();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
     size_t N = get_row();
     size_t NNZ = get_nnz();
     T *vald = val.data();

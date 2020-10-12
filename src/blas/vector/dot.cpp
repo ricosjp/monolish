@@ -1,7 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -24,7 +24,7 @@ double blas::dot(const vector<double> &x, const vector<double> &y) {
   const double *yd = y.data();
   const size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
@@ -52,7 +52,7 @@ float blas::dot(const vector<float> &x, const vector<float> &y) {
   const float *yd = y.data();
   const size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)

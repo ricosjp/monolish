@@ -8,7 +8,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include "cuda_runtime.h"
 #include "cusparse.h"
 #endif
@@ -28,7 +28,7 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   const double *vald = A.val.data();
   const double *xd = x.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t m = A.get_row();
   size_t n = A.get_col();
   size_t nnz = A.get_nnz();
@@ -85,7 +85,7 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   const float *vald = A.val.data();
   const float *xd = x.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t m = A.get_row();
   size_t n = A.get_col();
   size_t nnz = A.get_nnz();

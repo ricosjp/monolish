@@ -19,7 +19,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
     throw std::runtime_error("error A.size != diag.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
@@ -53,7 +53,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
     throw std::runtime_error("error A.size != row.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t n = get_row();
   size_t nnz = get_nnz();
 
@@ -91,7 +91,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
     throw std::runtime_error("error A.size != row.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t n = get_col();
   size_t nnz = get_nnz();
 
