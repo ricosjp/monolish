@@ -27,7 +27,7 @@ double blas::dot(const vector<double> &x, const vector<double> &y) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd, yd)
+#pragma omp target data use_device_ptr(xd, yd)
   { check(cublasDdot(h, size, xd, 1, yd, 1, &ans)); }
   cublasDestroy(h);
 #else
@@ -55,7 +55,7 @@ float blas::dot(const vector<float> &x, const vector<float> &y) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd, yd)
+#pragma omp target data use_device_ptr(xd, yd)
   { check(cublasSdot(h, size, xd, 1, yd, 1, &ans)); }
   cublasDestroy(h);
 #else

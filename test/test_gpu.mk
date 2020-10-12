@@ -2,7 +2,7 @@ MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
 CXXFLAGS=-O3 -std=c++14
-CXXFLAGS+=-fopenacc -foffload=nvptx-none
+CXXFLAGS+=-fopenmp
 CXXFLAGS+=-DUSE_GPU
 
 LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_gpu

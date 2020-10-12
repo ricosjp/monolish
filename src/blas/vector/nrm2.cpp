@@ -21,7 +21,7 @@ double blas::nrm2(const vector<double> &x) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd)
+#pragma omp target data use_device_ptr(xd)
   { check(cublasDnrm2(h, size, xd, 1, &ans)); }
   cublasDestroy(h);
 #else
@@ -43,7 +43,7 @@ float blas::nrm2(const vector<float> &x) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd)
+#pragma omp target data use_device_ptr(xd)
   { check(cublasSnrm2(h, size, xd, 1, &ans)); }
   cublasDestroy(h);
 #else
