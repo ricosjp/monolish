@@ -61,17 +61,12 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
     const int *Mcold = mat.col_ind.data();
     const int *Mrowd = mat.row_ptr.data();
 
-#pragma acc data present(rowd [0:N + 1], Mrowd [0:N + 1])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N + 1; i++) {
       rowd[i] = Mrowd[i];
     }
 
-#pragma acc data present(vald [0:nnz], cold [0:nnz], Mvald [0:nnz],            \
-                         Mcold [0:nnz])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < NNZ; i++) {
       cold[i] = Mcold[i];
       vald[i] = Mvald[i];

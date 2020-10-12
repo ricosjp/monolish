@@ -23,14 +23,10 @@ void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + c] += vecd[i];
     }
-  }
 
 #else // cpu
 
@@ -68,14 +64,10 @@ void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + c] -= vecd[i];
     }
-  }
 
 #else // cpu
 
@@ -113,14 +105,10 @@ void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + c] *= vecd[i];
     }
-  }
 
 #else // cpu
 
@@ -158,14 +146,10 @@ void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + c] /= vecd[i];
     }
-  }
 
 #else // cpu
 

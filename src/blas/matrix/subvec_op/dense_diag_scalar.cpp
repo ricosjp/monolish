@@ -16,14 +16,10 @@ template <typename T> void Dense<T>::diag_add(const T alpha) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] += alpha;
     }
-  }
 #else // cpu
 
 #pragma omp parallel for
@@ -49,14 +45,10 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] -= alpha;
     }
-  }
 #else // cpu
 
 #pragma omp parallel for
@@ -82,14 +74,10 @@ template <typename T> void Dense<T>::diag_mul(const T alpha) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] *= alpha;
     }
-  }
 #else // cpu
 
 #pragma omp parallel for
@@ -115,14 +103,10 @@ template <typename T> void Dense<T>::diag_div(const T alpha) {
 #if USE_GPU // gpu
   size_t nnz = get_nnz();
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] /= alpha;
     }
-  }
 #else // cpu
 
 #pragma omp parallel for
