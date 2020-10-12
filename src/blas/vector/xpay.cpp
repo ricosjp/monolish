@@ -30,9 +30,7 @@ void blas::xpay(const double alpha, const vector<double> &x,
   size_t size = x.size();
 
 #if USE_GPU
-#pragma acc data present(xd [0:size], yd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     yd[i] = xd[i] + alpha * yd[i];
   }
@@ -60,9 +58,7 @@ void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
   size_t size = x.size();
 
 #if USE_GPU
-#pragma acc data present(xd [0:size], yd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     yd[i] = xd[i] + alpha * yd[i];
   }

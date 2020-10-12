@@ -19,9 +19,7 @@ double blas::sum(const vector<double> &x) {
   size_t size = x.size();
 
 #if USE_GPU
-#pragma acc data present(xd [0:size])
-#pragma acc parallel
-#pragma acc loop reduction(+ : ans)
+#pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
   for (size_t i = 0; i < size; i++) {
     ans += xd[i];
   }
@@ -46,9 +44,7 @@ float blas::sum(const vector<float> &x) {
   size_t size = x.size();
 
 #if USE_GPU
-#pragma acc data present(xd [0:size])
-#pragma acc parallel
-#pragma acc loop reduction(+ : ans)
+#pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
   for (size_t i = 0; i < size; i++) {
     ans += xd[i];
   }
