@@ -31,8 +31,6 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   const size_t nnz = A.get_nnz();
 
 #if MONOLISH_USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     Cd[i] = Ad[i] + Bd[i];
@@ -68,8 +66,6 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   const size_t nnz = A.get_nnz();
 
 #if MONOLISH_USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     Cd[i] = Ad[i] + Bd[i];
