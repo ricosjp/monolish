@@ -13,9 +13,12 @@ template <typename T> void vector<T>::send() const {
   const T *d = val.data();
   const size_t N = val.size();
 
+  if (gpu_status == true) {
+#pragma omp target update to(d [0:N])
+  } else {
 #pragma omp target enter data map(to : d [0:N])
-
-  gpu_status = true;
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
@@ -94,10 +97,14 @@ template <typename T> void matrix::CRS<T>::send() const {
   const size_t N = get_row();
   const size_t nnz = get_nnz();
 
+  if (gpu_status == true) {
+#pragma omp target update to(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+  } else {
 #pragma omp target enter data map(to                                           \
                                   :                                            \
                                   vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
-  gpu_status = true;
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
@@ -184,8 +191,12 @@ template <typename T> void matrix::Dense<T>::send() const {
   const T *vald = val.data();
   const size_t nnz = get_nnz();
 
+  if (gpu_status == true) {
+#pragma omp target update to(vald [0:nnz])
+  } else {
 #pragma omp target enter data map(to : vald [0:nnz])
-  gpu_status = true;
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
