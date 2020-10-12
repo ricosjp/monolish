@@ -253,9 +253,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
     T *vald = val.data();
     const T *Mvald = mat.val.data();
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < nnz; i++) {
       vald[i] = Mvald[i];
     }
