@@ -58,26 +58,16 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 #if USE_GPU
   const size_t K = A.get_col();
   const size_t nnz = A.get_nnz();
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < M * N; i++) {
+    Cd[i] = 0.0;
   }
 
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+#pragma omp target teams distribute parallel for
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
       }
     }
   }
@@ -176,26 +166,16 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
 #if USE_GPU
   const size_t K = A.get_col();
   const size_t nnz = A.get_nnz();
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < M * N; i++) {
+    Cd[i] = 0.0;
   }
 
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+#pragma omp target teams distribute parallel for
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
       }
     }
   }

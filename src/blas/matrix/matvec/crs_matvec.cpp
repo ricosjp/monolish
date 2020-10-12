@@ -36,24 +36,6 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
 
-#if 0
-#pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
-                         cold [0:nnz])
-#pragma acc parallel
-		{
-#pragma acc loop independent 
-				for(int i = 0 ; i < n; i++){
-					yd[i] = 0;
-				}
-
-#pragma acc loop independent
-				for(int i = 0 ; i < n; i++){
-					for(int j = rowd[i] ; j < rowd[i+1]; j++){
-						yd[i] += vald[j] * xd[cold[j]];
-					}
-				}
-		}
-#else
   cusparseHandle_t sp_handle;
   cusparseCreate(&sp_handle);
 
@@ -68,15 +50,11 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   const double alpha = 1.0;
   const double beta = 0.0;
 
-#pragma acc data present(xd [0:n], yd [0:m], vald [0:nnz], rowd [0:m + 1],     \
-                         cold [0:nnz])
-#pragma acc host_data use_device(xd, yd, vald, rowd, cold)
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
   {
     check(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald, rowd,
                          cold, xd, &beta, yd));
   }
-
-#endif
 
 #else // cpu
 
@@ -115,24 +93,6 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
 
-#if 0
-#pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
-                         cold [0:nnz])
-#pragma acc parallel
-		{
-#pragma acc loop independent 
-				for(int i = 0 ; i < n; i++){
-					yd[i] = 0;
-				}
-
-#pragma acc loop independent
-				for(int i = 0 ; i < n; i++){
-					for(int j = rowd[i] ; j < rowd[i+1]; j++){
-						yd[i] += vald[j] * xd[cold[j]];
-					}
-				}
-		}
-#else
   cusparseHandle_t sp_handle;
   cusparseCreate(&sp_handle);
 
@@ -147,15 +107,11 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   const float alpha = 1.0;
   const float beta = 0.0;
 
-#pragma acc data present(xd [0:n], yd [0:m], vald [0:nnz], rowd [0:m + 1],     \
-                         cold [0:nnz])
-#pragma acc host_data use_device(xd, yd, vald, rowd, cold)
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
   {
     check(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald, rowd,
                          cold, xd, &beta, yd));
   }
-
-#endif
 
 #else // cpu
 

@@ -30,8 +30,8 @@ template <typename Float> class CRS;
 /**
  * @brief Coodinate (COO) format Matrix (need to sort)
  * @note
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: true
+ * - GPU acceleration: false
  */
 template <typename Float> class COO {
 private:
@@ -73,8 +73,8 @@ public:
    * @param N # of col
    * @note
    * - # of computation: 0
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N)
       : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(),
@@ -92,8 +92,8 @@ public:
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
       const int *col, const Float *value);
@@ -110,8 +110,8 @@ public:
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N, const size_t NNZ,
       const std::vector<int> &row, const std::vector<int> &col,
@@ -133,8 +133,8 @@ public:
    * @param origin n-origin
    * @note
    * - # of computation: 3nnz + 2nnz(adjust possition using origin)
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
       const int *col, const Float *value, const size_t origin);
@@ -153,8 +153,8 @@ public:
    * @param origin n-origin
    * @note
    * - # of computation: 3nnz + 2nnz(adjust possition using origin)
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N, const size_t NNZ,
       const std::vector<int> &row, const std::vector<int> &col,
@@ -167,8 +167,8 @@ public:
    * @param coo input COO matrix
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const matrix::COO<Float> &coo);
 
@@ -177,8 +177,8 @@ public:
    * @param crs input COO matrix
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void convert(const matrix::CRS<Float> &crs);
 
@@ -187,8 +187,8 @@ public:
    * @param crs input COO matrix
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const matrix::CRS<Float> &crs) { convert(crs); }
 
@@ -197,8 +197,8 @@ public:
    * @param dense input Dense matrix (size M x N)
    * @note
    * - # of computation: 3NM
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void convert(const matrix::Dense<Float> &dense);
 
@@ -207,8 +207,8 @@ public:
    * @param dense input Dense matrix (size M x N)
    * @note
    * - # of computation: 3NM
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const matrix::Dense<Float> &dense) { convert(dense); }
 
@@ -266,8 +266,8 @@ public:
    * @param M # of row
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void set_row(const size_t M) { rowN = M; };
 
@@ -276,8 +276,8 @@ public:
    * @param N # of col
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void set_col(const size_t N) { colN = N; };
 
@@ -286,8 +286,8 @@ public:
    * @param NNZ # of non-zero elements
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void set_nnz(const size_t NNZ) { nnz = NNZ; };
 
@@ -295,8 +295,8 @@ public:
    * @brief Create COO matrix from MatrixMatrket format file
    * @param filename MatrixMarket format file name
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void input_mm(const char *filename);
 
@@ -304,8 +304,8 @@ public:
    * @brief Create COO matrix from MatrixMatrket format file
    * @param filename MatrixMarket format file name
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO(const char *filename) { input_mm(filename); }
 
@@ -313,8 +313,8 @@ public:
    * @brief print all elements to standart I/O
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void print_all() const;
 
@@ -323,8 +323,8 @@ public:
    * @param filename output filename
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void print_all(std::string filename) const;
 
@@ -332,8 +332,8 @@ public:
    * @brief Get matrix element (A(i,j))
    * @note
    * - # of computation: i*M+j
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Float at(const size_t i, const size_t j);
 
@@ -341,8 +341,8 @@ public:
    * @brief Get matrix element (A(i,j))
    * @note
    * - # of computation: i*M+j
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Float at(const size_t i, const size_t j) const;
 
@@ -355,8 +355,8 @@ public:
    * @param v value
    * @note
    * - # of computation: 3
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r,
                const std::vector<int> &c, const std::vector<Float> &v);
@@ -365,8 +365,8 @@ public:
    * @brief get # of row
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_row() const { return rowN; }
 
@@ -374,8 +374,8 @@ public:
    * @brief get # of col
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_col() const { return colN; }
 
@@ -383,8 +383,8 @@ public:
    * @brief get # of nnz
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_nnz() const { return nnz; }
 
@@ -393,8 +393,8 @@ public:
    * @return copied COO matrix
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO copy() {
     COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
@@ -406,8 +406,8 @@ public:
    * @return row index
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<int> &get_row_ptr() { return row_index; }
 
@@ -416,8 +416,8 @@ public:
    * @return column index
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<int> &get_col_ind() { return col_index; }
 
@@ -426,8 +426,8 @@ public:
    * @return velue
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<Float> &get_val_ptr() { return val; }
 
@@ -436,8 +436,8 @@ public:
    * @return row index
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   const std::vector<int> &get_row_ptr() const { return row_index; }
 
@@ -446,8 +446,8 @@ public:
    * @return column index
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   const std::vector<int> &get_col_ind() const { return col_index; }
 
@@ -456,8 +456,8 @@ public:
    * @return velue
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   const std::vector<Float> &get_val_ptr() const { return val; }
 
@@ -469,8 +469,8 @@ public:
    * @return tranposed matrix A^T
    * @note
    * - # of computation: 2
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   COO &transpose();
 
@@ -479,8 +479,8 @@ public:
    * @param B COO matrix
    * @note
    * - # of computation: 3 * nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void transpose(COO &B) const;
 
@@ -488,8 +488,8 @@ public:
    * @brief Memory data space required by the matrix
    * @note
    * - # of computation: 3
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   double get_data_size() const {
     return 3 * get_nnz() * sizeof(Float) / 1.0e+9;
@@ -499,8 +499,8 @@ public:
    * @brief get format name "COO"
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::string type() const { return "COO"; }
 
@@ -510,8 +510,8 @@ public:
    * @return row vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<Float> row(std::size_t i) const;
 
@@ -521,8 +521,8 @@ public:
    * @param vec row vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void row(std::size_t i, vector<Float> &vec) const;
 
@@ -532,8 +532,8 @@ public:
    * @return column vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<Float> col(std::size_t j) const;
 
@@ -543,8 +543,8 @@ public:
    * @param vec column vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void col(std::size_t i, vector<Float> &vec) const;
 
@@ -553,8 +553,8 @@ public:
    * @return diag. vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::vector<Float> diag() const;
 
@@ -563,8 +563,8 @@ public:
    * @param vec diag. vector
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void diag(vector<Float> &vec) const;
 
@@ -574,8 +574,8 @@ public:
    * @brief matrix copy
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void operator=(const COO<Float> &mat) { mat = copy(); }
 
@@ -587,8 +587,8 @@ public:
    *be added together)
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    * @warning
    * This function does not check for duplicate values.
    * This adds an element to the end of the array.
@@ -605,8 +605,8 @@ public:
    * @param merge neet to merge (true or false)
    * @note
    * - # of computation: 3nnz x log(3nnz) ~ 3nnz^2
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void sort(bool merge);
 };

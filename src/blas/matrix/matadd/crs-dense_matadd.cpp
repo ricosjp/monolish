@@ -33,13 +33,9 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc data present(Ad [0:nnz], Bd [0:nnz], Cd [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
   }
 #else
 #pragma omp parallel for
@@ -74,13 +70,9 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc data present(Ad [0:nnz], Bd [0:nnz], Cd [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
   }
 #else
 #pragma omp parallel for

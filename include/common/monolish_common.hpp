@@ -25,8 +25,8 @@ namespace util {
  * @param b monolish vector (size N)
  * @note
  * - # of computation: 2*M*nnz + N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 template <typename T>
@@ -67,8 +67,8 @@ void set_log_filename(std::string filename);
  * @note the ramdom number generator is random generator is mt19937
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): false
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: false
+ * - GPU acceleration: false
  **/
 template <typename T>
 void random_vector(vector<T> &vec, const T min, const T max) {
@@ -93,8 +93,8 @@ void random_vector(vector<T> &vec, const T min, const T max) {
  * @param val value of non-diagonal elements
  * @note
  * - # of computation: M*W
- * - Multi-threading (OpenMP): false
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: false
+ * - GPU acceleration: false
  **/
 template <typename T>
 matrix::COO<T> band_matrix(const int M, const int N, const int W,
@@ -108,8 +108,8 @@ matrix::COO<T> band_matrix(const int M, const int N, const int W,
  * @param val value of elements
  * @note
  * - # of computation: M*nnzrow
- * - Multi-threading (OpenMP): false
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: false
+ * - GPU acceleration: false
  **/
 template <typename T>
 matrix::COO<T> random_structure_matrix(const int M, const int N,
@@ -120,8 +120,8 @@ matrix::COO<T> random_structure_matrix(const int M, const int N,
  * @param M # of Row and col.
  * @note
  * - # of computation: M
- * - Multi-threading (OpenMP): false
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: false
+ * - GPU acceleration: false
  **/
 template <typename T> matrix::COO<T> eye(const int M);
 // send///////////////////

@@ -37,9 +37,7 @@ int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<double> &A,
   const double *Drhv = b.data();
   double *Dsol = x.data();
 
-#pragma acc data present(Dval [0:nnz], Dptr [0:n + 1], Dind [0:nnz],           \
-                         Drhv [0:n], Dsol [0:n])
-#pragma acc host_data use_device(Dval, Dptr, Dind, Drhv, Dsol)
+#pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
     check(cusolverSpDcsrlsvchol(sp_handle, n, nnz, descrA, Dval, Dptr, Dind,
                                 Drhv, tol, reorder, Dsol, &singularity));
@@ -81,9 +79,7 @@ int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A,
   const float *Drhv = b.data();
   float *Dsol = x.data();
 
-#pragma acc data present(Dval [0:nnz], Dptr [0:n + 1], Dind [0:nnz],           \
-                         Drhv [0:n], Dsol [0:n])
-#pragma acc host_data use_device(Dval, Dptr, Dind, Drhv, Dsol)
+#pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
     check(cusolverSpScsrlsvchol(sp_handle, n, nnz, descrA, Dval, Dptr, Dind,
                                 Drhv, tol, reorder, Dsol, &singularity));

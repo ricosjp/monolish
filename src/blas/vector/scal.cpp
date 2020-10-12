@@ -21,7 +21,7 @@ void blas::scal(const double alpha, vector<double> &x) {
   cublasHandle_t h;
   check(cublasCreate(&h));
 
-#pragma acc host_data use_device(xd)
+#pragma omp target data use_device_ptr(xd)
   { check(cublasDscal(h, size, &alpha, xd, 1)); }
 #else
   cblas_dscal(size, alpha, xd, 1);
@@ -40,7 +40,7 @@ void blas::scal(const float alpha, vector<float> &x) {
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc host_data use_device(xd)
+#pragma omp target data use_device_ptr(xd)
   { check(cublasSscal(h, size, &alpha, xd, 1)); }
 #else
   cblas_sscal(size, alpha, xd, 1);

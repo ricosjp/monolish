@@ -21,7 +21,7 @@ bool test(const size_t size, double tol, const size_t iter,
           const size_t check_ans) {
 
   // create random vector x rand(0~1)
-  double alpha = 123.0;
+  T alpha = 123.0;
   monolish::vector<T> x(size, 0.0, 1.0);
   monolish::vector<T> y(size, 0.0, 1.0);
 

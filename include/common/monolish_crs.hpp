@@ -22,8 +22,8 @@ template <typename Float> class COO;
 /**
  * @brief Compressed Row Storage (CRS) format Matrix
  * @note
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  */
 template <typename Float> class CRS {
 private:
@@ -80,8 +80,8 @@ public:
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
       const int *colind, const Float *value);
@@ -97,8 +97,8 @@ public:
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
       const std::vector<int> colind, const std::vector<Float> value);
@@ -107,8 +107,8 @@ public:
    * @brief Convert CRS from COO
    * @param coo COO format matrix
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void convert(COO<Float> &coo);
 
@@ -117,8 +117,8 @@ public:
    * @param coo Source COO format matrix
    * @return coo COO format matrix
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   CRS(COO<Float> &coo) { convert(coo); }
 
@@ -127,8 +127,8 @@ public:
    * @param mat CRS format matrix
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1)+2nnz (allocation)
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
@@ -139,8 +139,8 @@ public:
    * @brief print all elements to standart I/O
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void print_all();
 
@@ -148,8 +148,8 @@ public:
    * @brief get # of row
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_row() const { return rowN; }
 
@@ -157,8 +157,8 @@ public:
    * @brief get # of col
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_col() const { return colN; }
 
@@ -167,8 +167,8 @@ public:
    * @return copied COO matrix
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_nnz() const { return nnz; }
 
@@ -176,8 +176,8 @@ public:
    * @brief get format name "CRS"
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::string type() const { return "CRS"; }
 
@@ -186,8 +186,8 @@ public:
   /**
    * @brief send data to GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1) + 2nnz
    **/
   void send() const;
@@ -195,8 +195,8 @@ public:
   /**
    * @brief recv. data to GPU, and free data on GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1) + 2nnz
    **/
   void recv();
@@ -204,8 +204,8 @@ public:
   /**
    * @brief recv. data to GPU (w/o free)
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1) + 2nnz
    **/
   void nonfree_recv();
@@ -213,8 +213,8 @@ public:
   /**
    * @brief free data on GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: 0
    **/
   void device_free() const;
@@ -228,8 +228,8 @@ public:
   /**
    * @brief destructor of CRS matrix, free GPU memory
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: 0
    * **/
   ~CRS() {
@@ -244,8 +244,8 @@ public:
    * @param vec diag. vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag(vector<Float> &vec) const;
 
@@ -255,8 +255,8 @@ public:
    * @param vec row vector
    * @note
    * - # of computation: about nnz / M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row(const size_t r, vector<Float> &vec) const;
 
@@ -266,8 +266,8 @@ public:
    * @param vec column vector
    * @note
    * - # of computation: about nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col(const size_t c, vector<Float> &vec) const;
 
@@ -277,8 +277,8 @@ public:
    * @brief Memory data space required by the matrix
    * @note
    * - # of computation: 3
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   double get_data_size() const {
     return (get_nnz() * sizeof(Float) + (get_row() + 1) * sizeof(int) +
@@ -291,8 +291,8 @@ public:
    * @return copied CRS matrix
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1)+2nnz (allocation)
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
@@ -303,8 +303,8 @@ public:
    * @brief matrix copy
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: (M+1)+2nnz (allocation)
    *        - if `vec.gpu_statius == true`; copy on GPU
    *        - else; coping data only on CPU
@@ -317,8 +317,8 @@ public:
    * @return CRS matrix (value*A)
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   CRS<Float> operator*(const Float value);
 
@@ -328,8 +328,8 @@ public:
    * @return result vector (size M)
    * @note
    * - # of computation: 2nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   vector<Float> operator*(vector<Float> &vec);
 
@@ -340,8 +340,8 @@ public:
    * @return result Dense matrix (size M*N)
    * @note
    * - # of computation: 2* N * nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   Dense<Float> operator*(const Dense<Float> &B);
 
@@ -353,8 +353,8 @@ public:
    * @return result CRS matrix (size M*N)
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   CRS<Float> operator+(const CRS<Float> &B);
 
@@ -362,8 +362,8 @@ public:
    * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void tanh();
 };

@@ -51,8 +51,7 @@ void blas::matmul(const matrix::Dense<double> &A,
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc data present(Ad [0:m * k], Bd [0:k * n], Cd [0:m * n])
-#pragma acc host_data use_device(Ad, Bd, Cd)
+#pragma omp target data use_device_ptr(Ad, Bd, Cd)
   {
     // cublas is col major
     check(cublasDgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
@@ -108,8 +107,7 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 #if USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
-#pragma acc data present(Ad [0:m * k], Bd [0:k * n], Cd [0:m * n])
-#pragma acc host_data use_device(Ad, Bd, Cd)
+#pragma omp target data use_device_ptr(Ad, Bd, Cd)
   {
     // cublas is col major
     check(cublasSgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,

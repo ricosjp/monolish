@@ -59,9 +59,7 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
     size_t size = vec.size();
     T *vald = val.data();
     const T *vecd = vec.data();
-#pragma acc data present(vecd [0:size], vald [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       vald[i] = vecd[i];
     }
@@ -92,9 +90,7 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
     size_t size = vec.size();
     T *vald = val.data();
     const T *vecd = vec.data();
-#pragma acc data present(vecd [0:size], vald [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       vald[i] = vecd[i];
     }

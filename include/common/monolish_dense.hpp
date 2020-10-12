@@ -14,8 +14,8 @@ namespace matrix {
 /**
  * @brief Dense format Matrix
  * @note
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  */
 template <typename Float> class Dense {
 private:
@@ -67,8 +67,8 @@ public:
    * @param coo input COO matrix (size M x N)
    * @note
    * - # of computation: M*N + nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   void convert(const COO<Float> &coo);
 
@@ -77,8 +77,8 @@ public:
    * @param dense input Dense matrix (size M x N)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   void convert(const Dense<Float> &dense);
 
@@ -87,8 +87,8 @@ public:
    * @param coo input COO matrix (size M x N)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   Dense(const COO<Float> &coo) { convert(coo); }
 
@@ -97,8 +97,8 @@ public:
    * @param dense input dense matrix (size M x N)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   Dense(const Dense<Float> &dense) { convert(dense); };
 
@@ -108,8 +108,8 @@ public:
    * @param N # of col
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N);
 
@@ -120,8 +120,8 @@ public:
    * @param value value array
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N, const Float *value);
 
@@ -132,8 +132,8 @@ public:
    * @param value value std::vector (size M x N)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N, const std::vector<Float> value);
 
@@ -145,8 +145,8 @@ public:
    * @param max rand max
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N, const Float min, const Float max);
 
@@ -157,8 +157,8 @@ public:
    * @param value value
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N, const Float value);
 
@@ -166,8 +166,8 @@ public:
    * @brief get # of row
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_row() const { return rowN; }
 
@@ -175,8 +175,8 @@ public:
    * @brief get # of col
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_col() const { return colN; }
 
@@ -184,8 +184,8 @@ public:
    * @brief get # of nnz
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   size_t get_nnz() const { return get_row() * get_col(); }
 
@@ -193,8 +193,8 @@ public:
    * @brief get format name "Dense"
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   std::string type() const { return "Dense"; }
 
@@ -203,8 +203,8 @@ public:
    * @return tranposed matrix A^T
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    * @warning
    * This function need to allocate tmp. matrix (size M x N)
    **/
@@ -215,8 +215,8 @@ public:
    * @param B COO matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void transpose(const Dense &B);
 
@@ -224,8 +224,8 @@ public:
    * @brief Memory data space required by the matrix
    * @note
    * - # of computation: 3
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   double get_data_size() const { return get_nnz() * sizeof(Float) / 1.0e+9; }
 
@@ -236,8 +236,8 @@ public:
    * @return A[i][j]
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Float at(const size_t i, const size_t j);
 
@@ -248,8 +248,8 @@ public:
    * @return A[i][j]
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Float at(const size_t i, const size_t j) const;
 
@@ -261,8 +261,8 @@ public:
    * @return A[i][j]
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void insert(const size_t i, const size_t j, const Float Val);
 
@@ -270,8 +270,8 @@ public:
    * @brief print all elements to standart I/O
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void print_all();
 
@@ -280,8 +280,8 @@ public:
   /**
    * @brief send data to GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: M*N
    **/
   void send() const;
@@ -289,8 +289,8 @@ public:
   /**
    * @brief recv. data to GPU, and free data on GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: M*N
    **/
   void recv();
@@ -298,8 +298,8 @@ public:
   /**
    * @brief recv. data to GPU (w/o free)
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: M*N
    **/
   void nonfree_recv();
@@ -307,8 +307,8 @@ public:
   /**
    * @brief free data on GPU
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: 0
    **/
   void device_free() const;
@@ -322,8 +322,8 @@ public:
   /**
    * @brief destructor of CRS matrix, free GPU memory
    * @note
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: 0
    * **/
   ~Dense() {
@@ -338,8 +338,8 @@ public:
    * @param vec diag. vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag(vector<Float> &vec) const;
 
@@ -349,8 +349,8 @@ public:
    * @param vec row vector
    * @note
    * - # of computation: about nnz / M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row(const size_t r, vector<Float> &vec) const;
 
@@ -360,8 +360,8 @@ public:
    * @param vec column vector
    * @note
    * - # of computation: about nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col(const size_t c, vector<Float> &vec) const;
 
@@ -372,8 +372,8 @@ public:
    * @return copied dense matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: M*N
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
@@ -385,8 +385,8 @@ public:
    * @return copied dense matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: M*N
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
@@ -399,8 +399,8 @@ public:
    * @return CRS matrix (value*A)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   Dense<Float> operator*(const Float value);
 
@@ -410,8 +410,8 @@ public:
    * @return result vector (size M)
    * @note
    * - # of computation: 2*M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   vector<Float> operator*(vector<Float> &vec);
 
@@ -422,8 +422,8 @@ public:
    * @return result dense matrix (size M*N)
    * @note
    * - # of computation: 2*M*N*K
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   Dense<Float> operator*(const Dense<Float> &B);
 
@@ -433,8 +433,8 @@ public:
    * @return result CRS matrix (size M*N)
    * @note
    * - # of computation: M*N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   Dense<Float> operator+(const Dense<Float> &B);
 
@@ -445,8 +445,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_add(const Float alpha);
 
@@ -455,8 +455,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_sub(const Float alpha);
 
@@ -465,8 +465,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_mul(const Float alpha);
 
@@ -475,8 +475,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_div(const Float alpha);
 
@@ -485,8 +485,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_add(const vector<Float> &vec);
 
@@ -495,8 +495,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_sub(const vector<Float> &vec);
 
@@ -505,8 +505,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_mul(const vector<Float> &vec);
 
@@ -515,8 +515,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void diag_div(const vector<Float> &vec);
 
@@ -528,8 +528,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_add(const size_t r, const Float alpha);
 
@@ -539,8 +539,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_sub(const size_t r, const Float alpha);
 
@@ -550,8 +550,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_mul(const size_t r, const Float alpha);
 
@@ -561,8 +561,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_div(const size_t r, const Float alpha);
 
@@ -572,8 +572,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_add(const size_t r, const vector<Float> &vec);
 
@@ -583,8 +583,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_mul(const size_t r, const vector<Float> &vec);
 
@@ -594,8 +594,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_sub(const size_t r, const vector<Float> &vec);
 
@@ -605,8 +605,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: M
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void row_div(const size_t r, const vector<Float> &vec);
 
@@ -618,8 +618,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_add(const size_t c, const Float alpha);
 
@@ -629,8 +629,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_sub(const size_t c, const Float alpha);
 
@@ -640,8 +640,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_mul(const size_t c, const Float alpha);
 
@@ -651,8 +651,8 @@ public:
    * @param alpha scalar
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_div(const size_t c, const Float alpha);
 
@@ -662,8 +662,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_add(const size_t c, const vector<Float> &vec);
 
@@ -673,8 +673,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_mul(const size_t c, const vector<Float> &vec);
 
@@ -684,8 +684,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_sub(const size_t c, const vector<Float> &vec);
 
@@ -695,8 +695,8 @@ public:
    * @param vec vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void col_div(const size_t c, const vector<Float> &vec);
 
@@ -704,8 +704,8 @@ public:
    * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
    * @note
    * - # of computation: nnz
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void tanh();
 };

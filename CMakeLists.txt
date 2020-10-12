@@ -79,17 +79,20 @@ if(MONOLISH_USE_GPU)
   common_setup(monolish_gpu)
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
-  # OpenACC
-  set(OpenACC_ACCEL_TARGET "nvptx-none")
-  find_package(OpenACC REQUIRED)
-  target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
+  # OpenMP offloading
+  target_compile_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
+  target_link_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
+#   OpenACC
+#   set(OpenACC_ACCEL_TARGET "nvptx-none")
+#   find_package(OpenACC REQUIRED)
+#   target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
 
   # CUDA
   find_package(CUDAToolkit REQUIRED)
 
   target_link_libraries(monolish_gpu
     PRIVATE
-    OpenACC::OpenACC_CXX
+    #OpenACC::OpenACC_CXX
     CUDA::cublas
     CUDA::cusolver
     CUDA::cusparse
