@@ -17,9 +17,7 @@ template <typename T> vector<T> vector<T>::operator/(const T value) {
 
 #if USE_GPU
   ans.send();
-#pragma acc data present(vald [0:size], ansd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     ansd[i] = vald[i] / value;
   }
@@ -47,9 +45,7 @@ template <typename T> void vector<T>::operator/=(const T value) {
   size_t size = val.size();
 
 #if USE_GPU
-#pragma acc data present(vald [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     vald[i] /= value;
   }
@@ -87,9 +83,7 @@ template <typename T> vector<T> vector<T>::operator/(const vector<T> &vec) {
 
 #if USE_GPU
   ans.send();
-#pragma acc data present(vecd [0:size], vald [0:size], ansd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     ansd[i] = vald[i] / vecd[i];
   }
@@ -121,9 +115,7 @@ template <typename T> void vector<T>::operator/=(const vector<T> &vec) {
   size_t size = vec.size();
 
 #if USE_GPU
-#pragma acc data present(vald [0:size], vecd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     vald[i] /= vecd[i];
   }
