@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas.h>
 #else
 #include <cblas.h>
@@ -29,7 +29,7 @@ void blas::xpay(const double alpha, const vector<double> &x,
   double *yd = y.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     yd[i] = xd[i] + alpha * yd[i];
@@ -57,7 +57,7 @@ void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
   float *yd = y.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     yd[i] = xd[i] + alpha * yd[i];

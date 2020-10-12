@@ -1,7 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -24,7 +24,7 @@ void blas::axpy(const double alpha, const vector<double> &x,
   double *yd = y.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
@@ -50,7 +50,7 @@ void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
   float *yd = y.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)

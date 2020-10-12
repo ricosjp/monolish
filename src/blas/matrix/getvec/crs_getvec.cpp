@@ -16,8 +16,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   const int *rowd = row_ptr.data();
   const int *cold = col_ind.data();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < n; i++) {
@@ -63,10 +62,8 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   const T *vald = val.data();
   const int *rowd = row_ptr.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
   size_t n = get_row();
-  size_t nnz = get_nnz();
-  const int *cold = col_ind.data();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < n; i++) {
@@ -108,8 +105,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   const int *rowd = row_ptr.data();
   const int *cold = col_ind.data();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < n; i++) {

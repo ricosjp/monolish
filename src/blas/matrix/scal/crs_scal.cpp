@@ -16,7 +16,7 @@ void blas::mscal(const double alpha, matrix::CRS<double> &A) {
   size_t nnz = A.get_nnz();
   double *vald = A.val.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];
@@ -40,7 +40,7 @@ void blas::mscal(const float alpha, matrix::CRS<float> &A) {
   size_t nnz = A.get_nnz();
   float *vald = A.val.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];

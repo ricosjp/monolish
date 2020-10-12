@@ -249,7 +249,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   if (mat.get_device_mem_stat()) {
     send();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
     T *vald = val.data();
     const T *Mvald = mat.val.data();
 

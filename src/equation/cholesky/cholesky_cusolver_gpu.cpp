@@ -2,7 +2,7 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include "cuda_runtime.h"
 #include "cusolverSp.h"
 #include "cusparse.h"
@@ -17,7 +17,7 @@ int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<double> &A,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);
 
@@ -58,7 +58,7 @@ int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A,
                                                  vector<float> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);

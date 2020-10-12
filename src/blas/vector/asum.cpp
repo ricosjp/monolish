@@ -1,7 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -18,7 +18,7 @@ double blas::asum(const vector<double> &x) {
   const double *xd = x.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
@@ -40,7 +40,7 @@ float blas::asum(const vector<float> &x) {
   const float *xd = x.data();
   size_t size = x.size();
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)

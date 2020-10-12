@@ -1,7 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -55,9 +55,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   const size_t M = A.get_row();
   const size_t N = B.get_col();
 
-#if USE_GPU
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < M * N; i++) {
     Cd[i] = 0.0;
@@ -163,9 +161,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   const size_t M = A.get_row();
   const size_t N = B.get_col();
 
-#if USE_GPU
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
+#if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < M * N; i++) {
     Cd[i] = 0.0;

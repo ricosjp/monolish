@@ -20,8 +20,7 @@ void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -61,8 +60,7 @@ void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -102,8 +100,7 @@ void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -143,8 +140,7 @@ void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {

@@ -1,7 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -32,7 +32,7 @@ void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
   const double alpha = 1.0;
   const double beta = 0.0;
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd, vald)
@@ -72,7 +72,7 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
   const float alpha = 1.0;
   const float beta = 0.0;
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   cublasHandle_t h;
   check(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd, vald)

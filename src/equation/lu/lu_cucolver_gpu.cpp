@@ -2,7 +2,7 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include "cusolverSp.h"
 #include "cusparse.h"
 #endif

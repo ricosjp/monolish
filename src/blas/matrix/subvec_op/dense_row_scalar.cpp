@@ -13,8 +13,7 @@ template <typename T> void Dense<T>::row_add(const size_t r, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -44,8 +43,7 @@ template <typename T> void Dense<T>::row_sub(const size_t r, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -75,8 +73,7 @@ template <typename T> void Dense<T>::row_mul(const size_t r, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -106,8 +103,7 @@ template <typename T> void Dense<T>::row_div(const size_t r, const T alpha) {
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
-  size_t nnz = get_nnz();
+#if MONOLISH_USE_GPU // gpu
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {

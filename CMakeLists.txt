@@ -77,7 +77,7 @@ endif()
 
 if(MONOLISH_USE_GPU)
   common_setup(monolish_gpu)
-  target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
+  target_compile_definitions(monolish_gpu PRIVATE MONOLISH_USE_GPU)
 
   # OpenMP offloading
   target_compile_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")

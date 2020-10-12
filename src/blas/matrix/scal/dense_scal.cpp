@@ -1,7 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -17,7 +17,7 @@ void blas::mscal(const double alpha, matrix::Dense<double> &A) {
   size_t nnz = A.get_nnz();
   double *vald = A.val.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];
@@ -40,7 +40,7 @@ void blas::mscal(const float alpha, matrix::Dense<float> &A) {
   size_t nnz = A.get_nnz();
   float *vald = A.val.data();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < nnz; i++) {
     vald[i] = alpha * vald[i];
