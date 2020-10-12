@@ -20,7 +20,6 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -54,8 +53,6 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t n = get_row();
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < N; i++) {
@@ -92,8 +89,6 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t n = get_col();
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < M; i++) {

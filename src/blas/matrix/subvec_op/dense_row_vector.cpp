@@ -21,7 +21,6 @@ void Dense<T>::row_add(const size_t r, const vector<T> &vec) {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -62,7 +61,6 @@ void Dense<T>::row_sub(const size_t r, const vector<T> &vec) {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -103,7 +101,6 @@ void Dense<T>::row_mul(const size_t r, const vector<T> &vec) {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {
@@ -144,7 +141,6 @@ void Dense<T>::row_div(const size_t r, const vector<T> &vec) {
   }
 
 #if MONOLISH_USE_GPU // gpu
-  size_t nnz = get_nnz();
 
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < Len; i++) {

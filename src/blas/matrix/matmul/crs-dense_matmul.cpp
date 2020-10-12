@@ -56,8 +56,6 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   const size_t N = B.get_col();
 
 #if MONOLISH_USE_GPU
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < M * N; i++) {
     Cd[i] = 0.0;
@@ -164,8 +162,6 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   const size_t N = B.get_col();
 
 #if MONOLISH_USE_GPU
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < M * N; i++) {
     Cd[i] = 0.0;
