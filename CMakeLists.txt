@@ -79,8 +79,10 @@ if(MONOLISH_USE_GPU)
   common_setup(monolish_gpu)
   target_compile_definitions(monolish_gpu PRIVATE USE_GPU)
 
-  # OpenACC
+  # OpenMP offloading
   target_compile_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
+  target_link_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
+#   OpenACC
 #   set(OpenACC_ACCEL_TARGET "nvptx-none")
 #   find_package(OpenACC REQUIRED)
 #   target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
