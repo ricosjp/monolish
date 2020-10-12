@@ -4,10 +4,10 @@
 namespace monolish {
 
 /////vector constructor//////
-template <typename T> vector<T>::vector(const size_t N) { 
+template <typename T> vector<T>::vector(const size_t N) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-    val.resize(N); 
+  val.resize(N);
   logger.util_out();
 }
 template vector<double>::vector(const size_t N);
