@@ -36,24 +36,6 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
 
-#if 0
-#pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
-                         cold [0:nnz])
-#pragma acc parallel
-		{
-#pragma acc loop independent 
-				for(int i = 0 ; i < n; i++){
-					yd[i] = 0;
-				}
-
-#pragma acc loop independent
-				for(int i = 0 ; i < n; i++){
-					for(int j = rowd[i] ; j < rowd[i+1]; j++){
-						yd[i] += vald[j] * xd[cold[j]];
-					}
-				}
-		}
-#else
   cusparseHandle_t sp_handle;
   cusparseCreate(&sp_handle);
 
@@ -73,8 +55,6 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
     check(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald, rowd,
                          cold, xd, &beta, yd));
   }
-
-#endif
 
 #else // cpu
 
@@ -113,24 +93,6 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
 
-#if 0
-#pragma acc data present(xd [0:n], yd [0:n], vald [0:nnz], rowd [0:n + 1],     \
-                         cold [0:nnz])
-#pragma acc parallel
-		{
-#pragma acc loop independent 
-				for(int i = 0 ; i < n; i++){
-					yd[i] = 0;
-				}
-
-#pragma acc loop independent
-				for(int i = 0 ; i < n; i++){
-					for(int j = rowd[i] ; j < rowd[i+1]; j++){
-						yd[i] += vald[j] * xd[cold[j]];
-					}
-				}
-		}
-#else
   cusparseHandle_t sp_handle;
   cusparseCreate(&sp_handle);
 
@@ -150,8 +112,6 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
     check(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald, rowd,
                          cold, xd, &beta, yd));
   }
-
-#endif
 
 #else // cpu
 

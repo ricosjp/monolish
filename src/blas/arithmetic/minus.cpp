@@ -17,9 +17,7 @@ template <typename T> vector<T> vector<T>::operator-() {
 
 #if USE_GPU
   ans.send();
-#pragma acc data present(vald [0:size], ansd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
   for (size_t i = 0; i < size; i++) {
     ansd[i] = -vald[i];
   }
