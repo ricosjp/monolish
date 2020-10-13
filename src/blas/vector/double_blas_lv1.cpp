@@ -132,4 +132,88 @@ void blas::scal(const double alpha, vector<double> &x) {
   logger.func_out();
 }
 
+// axpyz ///////////////////
+void blas::axpyz(const double alpha, const vector<double> &x,
+                 const vector<double> &y, vector<double> &z) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  if (x.size() != y.size() || x.size() != z.size()) {
+    throw std::runtime_error("error vector size is not same");
+  }
+
+  const double *xd = x.data();
+  const double *yd = y.data();
+  double *zd = z.data();
+  size_t size = x.size();
+
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < size; i++) {
+    zd[i] = alpha * xd[i] + yd[i];
+  }
+#else
+#pragma omp parallel for
+  for (size_t i = 0; i < size; i++) {
+    zd[i] = alpha * xd[i] + yd[i];
+  }
+#endif
+  logger.func_out();
+}
+
+// xpay ///////////////////
+void blas::xpay(const double alpha, const vector<double> &x,
+                vector<double> &y) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  if (x.size() != y.size()) {
+    throw std::runtime_error("error vector size is not same");
+  }
+
+  const double *xd = x.data();
+  double *yd = y.data();
+  size_t size = x.size();
+
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < size; i++) {
+    yd[i] = xd[i] + alpha * yd[i];
+  }
+#else
+#pragma omp parallel for
+  for (size_t i = 0; i < size; i++) {
+    yd[i] = xd[i] + alpha * yd[i];
+  }
+#endif
+  logger.func_out();
+}
+
+// sum ///////////////////
+double blas::sum(const vector<double> &x) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  double ans = 0;
+  const double *xd = x.data();
+  size_t size = x.size();
+
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
+  for (size_t i = 0; i < size; i++) {
+    ans += xd[i];
+  }
+#else
+#pragma omp parallel for reduction(+ : ans)
+  for (size_t i = 0; i < size; i++) {
+    ans += xd[i];
+  }
+#endif
+
+  logger.func_out();
+  return ans;
+}
+
 } // namespace monolish
