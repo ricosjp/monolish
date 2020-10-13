@@ -83,7 +83,7 @@ build_cmake_nogpu_noavx:
     extends:
       - .nogpu_avx
       - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_nogpu_avx"
     script:
         - make -C test cpu
@@ -92,7 +92,7 @@ build_cmake_nogpu_noavx:
     extends:
       - .nogpu_noavx
       - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_nogpu_noavx"
     script:
         - make -C test cpu
@@ -101,7 +101,7 @@ build_cmake_nogpu_noavx:
     extends:
       - .gpu_avx
       - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_gpu_avx"
     script:
         - make -C test gpu
@@ -110,7 +110,7 @@ build_cmake_nogpu_noavx:
     extends:
       - .gpu_noavx
       - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_gpu_noavx"
     script:
         - make -C test gpu
