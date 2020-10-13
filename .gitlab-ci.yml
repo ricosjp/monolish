@@ -293,7 +293,9 @@ docker:
         - docker
 
 pages:
-    needs: []
+    needs:
+      - logger_gpu_avx
+      - logger_nogpu_avx
     image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
     stage: deploy
     script:
