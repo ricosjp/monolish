@@ -15,18 +15,23 @@ template <typename T> vector<T> vector<T>::operator*(const T value) {
   T *ansd = ans.data();
   size_t size = val.size();
 
+  if(gpu_status==true){
 #if MONOLISH_USE_GPU
-  ans.send();
+      ans.send();
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = vald[i] * value;
-  }
+      for (size_t i = 0; i < size; i++) {
+          ansd[i] = vald[i] * value;
+      }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = vald[i] * value;
-  }
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  }
+  else{
+#pragma omp parallel for
+      for (size_t i = 0; i < size; i++) {
+          ansd[i] = vald[i] * value;
+      }
+  }
 
   logger.func_out();
   return ans;
@@ -44,17 +49,22 @@ template <typename T> void vector<T>::operator*=(const T value) {
   T *vald = val.data();
   size_t size = val.size();
 
+  if(gpu_status==true){
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < size; i++) {
-    vald[i] *= value;
-  }
+      for (size_t i = 0; i < size; i++) {
+          vald[i] *= value;
+      }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < size; i++) {
-    vald[i] *= value;
-  }
+      throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  }
+  else{
+#pragma omp parallel for
+      for (size_t i = 0; i < size; i++) {
+          vald[i] *= value;
+      }
+  }
 
   logger.func_out();
 }
@@ -81,18 +91,23 @@ template <typename T> vector<T> vector<T>::operator*(const vector<T> &vec) {
   T *ansd = ans.data();
   size_t size = vec.size();
 
+  if(gpu_status==true){
 #if MONOLISH_USE_GPU
-  ans.send();
+      ans.send();
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = vald[i] * vecd[i];
-  }
+      for (size_t i = 0; i < size; i++) {
+          ansd[i] = vald[i] * vecd[i];
+      }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = vald[i] * vecd[i];
-  }
+      throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  }
+  else{
+#pragma omp parallel for
+      for (size_t i = 0; i < size; i++) {
+          ansd[i] = vald[i] * vecd[i];
+      }
+  }
 
   logger.func_out();
   return ans;
@@ -114,17 +129,22 @@ template <typename T> void vector<T>::operator*=(const vector<T> &vec) {
   T *vald = val.data();
   size_t size = vec.size();
 
+  if(gpu_status==true){
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < size; i++) {
-    vald[i] *= vecd[i];
-  }
+      for (size_t i = 0; i < size; i++) {
+          vald[i] *= vecd[i];
+      }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < size; i++) {
-    vald[i] *= vecd[i];
-  }
+      throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  }
+  else{
+#pragma omp parallel for
+      for (size_t i = 0; i < size; i++) {
+          vald[i] *= vecd[i];
+      }
+  }
 
   logger.func_out();
 }
