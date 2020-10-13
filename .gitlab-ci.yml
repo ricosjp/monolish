@@ -281,7 +281,7 @@ lang_gpu_noavx:
 # docker and pages
 #
 docker:
-    needs: []
+    # dependencies: require all tests
     image: docker:latest
     stage: deploy
     services:
@@ -293,9 +293,11 @@ docker:
         - docker
 
 pages:
-    needs:
+    dependencies:
       - logger_gpu_avx
       - logger_nogpu_avx
+      # and must be after all tests passed
+      # To avoid overwrite logger.html
     image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
     stage: deploy
     script:
@@ -311,7 +313,6 @@ pages:
         - master
 
 clang_format:
-    needs: []
     image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
     stage: build_lib
     script:
