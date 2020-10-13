@@ -17,6 +17,7 @@ stages:
 .gpu_avx:
     variables:
         PREFIX: "gpu_avx"
+        TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
     tags:
@@ -26,6 +27,7 @@ stages:
 .gpu_noavx:
     variables:
         PREFIX: "gpu_noavx"
+        TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
     tags:
@@ -34,6 +36,7 @@ stages:
 .nogpu_avx:
     variables:
         PREFIX: "nogpu_avx"
+        TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
     tags:
@@ -42,6 +45,7 @@ stages:
 .nogpu_noavx:
     variables:
         PREFIX: "nogpu_noavx"
+        TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
 
@@ -50,21 +54,23 @@ stages:
     script:
         - cmake -Bbuild . -DMONOLISH_USE_GPU=${MONOLISH_USE_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
+        - make -C test -j $(nproc) ${TEST_TARGET}
     artifacts:
         paths:
             - ${PREFIX}
+            - test/
         expire_in: 60min
 build_cmake_gpu_avx:
     extends:
       - .gpu_avx
       - .build_cmake
-build_cmake_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .build_cmake
 build_cmake_gpu_noavx:
     extends:
       - .gpu_noavx
+      - .build_cmake
+build_cmake_nogpu_avx:
+    extends:
+      - .nogpu_avx
       - .build_cmake
 build_cmake_nogpu_noavx:
     extends:
@@ -74,47 +80,34 @@ build_cmake_nogpu_noavx:
 #
 # Test templates
 #
-.test_artifact:
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
 .test_nogpu_avx:
     extends:
       - .nogpu_avx
-      - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_nogpu_avx"
     script:
-        - make -C test cpu
-        - make -C test/${TEST_TARGET} run_cpu
+      - make -C test/${TEST_TARGET} run_cpu
 .test_nogpu_noavx:
     extends:
       - .nogpu_noavx
-      - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_nogpu_noavx"
     script:
-        - make -C test cpu
-        - make -C test/${TEST_TARGET} run_cpu
+      - make -C test/${TEST_TARGET} run_cpu
 .test_gpu_avx:
     extends:
       - .gpu_avx
-      - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_gpu_avx"
     script:
-        - make -C test gpu
-        - make -C test/${TEST_TARGET} run_gpu
+      - make -C test/${TEST_TARGET} run_gpu
 .test_gpu_noavx:
     extends:
       - .gpu_noavx
-      - .test_artifact
-    dependencies:
+    needs:
       - "build_cmake_gpu_noavx"
     script:
-        - make -C test gpu
-        - make -C test/${TEST_TARGET} run_gpu
+      - make -C test/${TEST_TARGET} run_gpu
 
 #
 # vector_common
@@ -288,6 +281,7 @@ lang_gpu_noavx:
 # docker and pages
 #
 docker:
+    needs: []
     image: docker:latest
     stage: deploy
     services:
@@ -299,6 +293,9 @@ docker:
         - docker
 
 pages:
+    needs:
+      - logger_gpu_avx
+      - logger_nogpu_avx
     image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
     stage: deploy
     script:
@@ -314,6 +311,7 @@ pages:
         - master
 
 clang_format:
+    needs: []
     image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
     stage: build_lib
     script:
