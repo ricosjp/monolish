@@ -3,202 +3,25 @@
 
 import sys
 import os
-import datetime
-
-# Utils
-class Logger:
-    def log_general(self, message) -> str:
-        dt_now = datetime.datetime.now()
-        print(f"[{dt_now}] {message}")
-
-    def log_success(self, message) -> str:
-        dt_now = datetime.datetime.now()
-        print(f"[{dt_now}] success {message}")
-
-    def log_error(self, message) -> str:
-        dt_now = datetime.datetime.now()
-        print(f"[{dt_now}] error {message}")
-
-    def dump(self, dict_list) -> str:
-        dt_now = datetime.datetime.now()
-        print(f"[{dt_now}] dump dict")
-        for one_dict in dict_list:
-            print(f"{one_dict}")
-
-class IOData:
-    def __init__(self):
-        self.aggr_column_lists = []
-        self.aggr_ndarrays = []
-        self.index = 0
-
-    def reader(self, file_object, file_extension):
-        if file_extension == "yaml":
-            import yaml
-            dict_list = yaml.safe_load(file_object)
-        elif file_extension == "json":
-            import json
-            dict_list = json.load(file_object)
-        else:
-            dict_list = []
-        
-        return dict_list
-
-class CreateHTML:
-    def __init__(self, html_tables):
-        self.html_tables = []
-
-    def create_table(self, title, columns_list, aggr_ndarray) -> str:
-        # caption
-        caption = f"<caption>{title}</caption>"
-        # table header
-        column_html = "".join(list(map(lambda column:f"<th>{column}</th>", columns_list)))
-        table_header = f"<tr>{column_html}</tr>"
-        # table data
-        table_data = "".join(list(map(lambda aggr_narray:"<tr>" + "".join(list(map(lambda elem:f'<td>{str(elem)}</td>', aggr_narray))) + "</tr>", aggr_ndarray)))
-        # table
-        table = caption + table_header + table_data
-        table = f"<table border='1'>{table}</table>"
-        return table
-
-    def create_html(self, html_tables) -> str:
-        # join html tables
-        html_tables = ','.join(html_table_list)
-        html_tables = html_tables.replace(",", "")
-        # create html
-        html = f"""
-            <!DOCTYPE html>
-                <html lang="ja">
-                <head>
-                    <meta charset="utf-8">
-                </head>
-                <body>
-                    {html_tables}
-                </body>
-            </html>
-        """
-        return html
-
-# Process
-class DropInformation:
-    def drop_dict(self, directory, dict_list):
-        target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("stat" in any_dict), dict_list))
-        target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("time" in any_dict), target_dict_list))
-        target_dict_list = list(filter(lambda any_dict:any_dict.pop("stat") if any_dict["name"] == directory else any_dict, target_dict_list))
-        return target_dict_list
-
-    def drop_dir_info(self, target_dict_list):
-        min_layer = min(map(lambda any_dict:any_dict["name"].count("/"), target_dict_list))
-        min_dict_list = list(filter(lambda any_dict:any_dict["name"].count("/") == min_layer, target_dict_list))
-        min_dict = min_dict_list[0]
-        min_dir = min_dict["name"]
-        drop_list = min_dir.split("/")
-        drop_dir_list = drop_list[:-2]
-        drop_dir_list = [] if drop_dir_list == [] else drop_dir_list + [""]
-        drop_dir_text = ",".join(drop_dir_list)
-        drop_dir_text = drop_dir_text.replace(",", "/")
-
-        temp_dict_list = []
-        for any_dict in target_dict_list:
-            any_dict["name"] = any_dict["name"].replace(drop_dir_text, "")
-            temp_dict_list.append(any_dict)
-        target_dict_list = temp_dict_list
-        return target_dict_list
-
-class Grouping:
-    def grouping_1st_layer(self, target_dict_list):
-        # solve
-        layer_1st = "solve/"
-        solver_dict_list = list(filter(lambda any_dict:layer_1st in any_dict["name"], target_dict_list))
-        filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["stat"] == "IN" and any_dict["name"] == layer_1st), solver_dict_list))
-        split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
-        solver_dict_block_list = [solver_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
-
-        # other
-        other_dict_list = list(filter(lambda any_dict:layer_1st not in any_dict["name"], target_dict_list))
-        if other_dict_list:
-            layer_list = list(map(lambda any_dict:any_dict["name"].split("/")[0], other_dict_list))
-            layer_list = list(set(layer_list))
-            layer_list = list(map(lambda x:x+"/", layer_list))
-            for other_layer_1st in layer_list:
-                filter_list = list(map(lambda any_dict:any_dict["name"] == other_layer_1st, other_dict_list))
-                split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
-                other_dict_block_list = [other_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
-        else:
-            other_dict_block_list = []
-
-        block_dict_lists = other_dict_block_list + solver_dict_block_list
-        title_list = [f"other {str(no)}" for no in range(len(other_dict_block_list))] + [f"solver {str(no)}" for no in range(len(solver_dict_block_list))]
-        return title_list, block_dict_lists
-
-class Aggregate:
-    """
-    Classes to represent the definitions of aggregate functions.
-    """
-    def __init__(self):
-        self.aggr_column_lists = []
-        self.aggr_ndarrays = []
-        self.index = 0
-
-    def aggregated_by_floor(self, block_dict_lists):
-        import numpy as np
-
-        aggr_column_lists, aggr_ndarrays = [], []
-        block_dict_lists = filter(lambda x: x != [], block_dict_lists)
-        for index, block_dict_list in enumerate(block_dict_lists):
-            block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
-            block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("time", "")]) if ("time" not in block_dict) else block_dict, block_dict_list))
-            # sorted
-            block_dict_list = list(map(lambda block_dict: dict(type=block_dict["type"], name=block_dict["name"], stat=block_dict["stat"], time=block_dict["time"]), block_dict_list))
-
-            # columns : type, name, stat, time
-            block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
-            max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
-
-            aggr_ndarray = np.empty((0, 4))
-            for layer in range(1, max_layer+1):
-                layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==layer), block_ndarray[:, 1:3])))][:, [1,3]]
-                for col in np.unique(layer_ndarray[:,0]):
-                    temp_ndarray = layer_ndarray[np.array(list(map(lambda x: x==col, layer_ndarray[:, 0])))]
-                    count = np.count_nonzero(temp_ndarray[:,0])
-                    total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
-                    rst_narray = np.array([layer, col, count, total_time])
-                    aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
-
-            aggr_column_list = ["layer", "name", "count", "total_time [s]"]
-            for layer in range(1, max_layer):
-                denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
-                percent = np.array(aggr_ndarray[:, 3], dtype="float32") / denominator * 100.0
-                percent = np.round(percent, decimals=3)
-                percent = np.where(percent <= 100.0, percent, "")
-                aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
-                aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
-            aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
-
-            # aggregate list
-            aggr_column_lists.append(aggr_column_list)
-            aggr_ndarrays.append(aggr_ndarray)
-
-        else:
-            index = index + 1
-
-        return aggr_column_lists, aggr_ndarrays, index
+from utils import debug, html, read
+from libs import aggregate, drop_information, grouping
 
 # io data
 log_path = sys.argv[1]
 out_path = sys.argv[2]
 
-logger = Logger()
+logger = debug.Logger()
 # data dir
 try:
     # read data
     with open(log_path, "r") as f:
-        io_data = IOData()
+        io_data = read.IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
         logger.log_success(f"read {format(log_path)}")
 
         # drop information
         drop_dir = "solve/monolish_cg/monolish_jacobi/"
-        drop_information = DropInformation()
+        drop_information = drop_information.DropInformation()
         target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
         logger.log_success("drop information")
 
@@ -207,18 +30,18 @@ try:
         logger.log_success("drop dir info")
 
         # 1st layer type
-        grouping = Grouping()
+        grouping = grouping.Grouping()
         title_list, block_dict_lists = grouping.grouping_1st_layer(target_dict_list)
         logger.log_success("1st layer type")
 
         # aggregate
-        aggregate = Aggregate()
+        aggregate = aggregate.Aggregate()
         aggr_column_lists, aggr_ndarrays, index = aggregate.aggregated_by_floor(block_dict_lists)
         logger.log_success("aggregate")
 
         # create html
         html_table_list = []
-        create_html = CreateHTML(html_table_list)
+        create_html = html.CreateHTML(html_table_list)
         for i in range(index):
             html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
