@@ -232,24 +232,37 @@ equation_gpu_noavx:
 #
 # logger
 #
+.logger_artifact:
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 60min
 logger_nogpu_avx:
     stage: logger
-    extends: .test_nogpu_avx
+    extends:
+      - .test_nogpu_avx
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_noavx:
     stage: logger
-    extends: .test_nogpu_noavx
+    extends:
+      - .test_nogpu_noavx
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_gpu_avx:
     stage: logger
-    extends: .test_gpu_avx
+    extends:
+      - .test_gpu_avx
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_gpu_noavx:
     stage: logger
-    extends: .test_gpu_noavx
+    extends:
+      - .test_gpu_noavx
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 
