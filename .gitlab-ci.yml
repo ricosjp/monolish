@@ -47,26 +47,35 @@ stages:
 
 .build_cmake:
     stage: build_lib
-    script:
+    before_script:
         - cmake -Bbuild . -DMONOLISH_USE_GPU=${MONOLISH_USE_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
     artifacts:
         paths:
             - ${PREFIX}
+            - test/
         expire_in: 60min
 build_cmake_gpu_avx:
+    script:
+        - make -C test -j $(nproc) gpu
     extends:
       - .gpu_avx
       - .build_cmake
-build_cmake_nogpu_avx:
-    extends:
-      - .nogpu_avx
-      - .build_cmake
 build_cmake_gpu_noavx:
+    script:
+        - make -C test -j $(nproc) gpu
     extends:
       - .gpu_noavx
       - .build_cmake
+build_cmake_nogpu_avx:
+    script:
+        - make -C test -j $(nproc) cpu
+    extends:
+      - .nogpu_avx
+      - .build_cmake
 build_cmake_nogpu_noavx:
+    script:
+        - make -C test -j $(nproc) cpu
     extends:
       - .nogpu_noavx
       - .build_cmake
@@ -74,47 +83,34 @@ build_cmake_nogpu_noavx:
 #
 # Test templates
 #
-.test_artifact:
-    artifacts:
-        paths:
-            - test/
-        expire_in: 60min
 .test_nogpu_avx:
     extends:
       - .nogpu_avx
-      - .test_artifact
     needs:
       - "build_cmake_nogpu_avx"
     script:
-        - make -C test cpu
-        - make -C test/${TEST_TARGET} run_cpu
+      - make -C test/${TEST_TARGET} run_cpu
 .test_nogpu_noavx:
     extends:
       - .nogpu_noavx
-      - .test_artifact
     needs:
       - "build_cmake_nogpu_noavx"
     script:
-        - make -C test cpu
-        - make -C test/${TEST_TARGET} run_cpu
+      - make -C test/${TEST_TARGET} run_cpu
 .test_gpu_avx:
     extends:
       - .gpu_avx
-      - .test_artifact
     needs:
       - "build_cmake_gpu_avx"
     script:
-        - make -C test gpu
-        - make -C test/${TEST_TARGET} run_gpu
+      - make -C test/${TEST_TARGET} run_gpu
 .test_gpu_noavx:
     extends:
       - .gpu_noavx
-      - .test_artifact
     needs:
       - "build_cmake_gpu_noavx"
     script:
-        - make -C test gpu
-        - make -C test/${TEST_TARGET} run_gpu
+      - make -C test/${TEST_TARGET} run_gpu
 
 #
 # vector_common
