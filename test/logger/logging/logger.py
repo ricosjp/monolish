@@ -10,33 +10,32 @@ from libs import aggregate, drop_information, grouping
 log_path = sys.argv[1]
 out_path = sys.argv[2]
 
-logger = debug.Logger()
 # data dir
 try:
     # read data
     with open(log_path, "r") as f:
         io_data = read.IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
-        logger.log_success(f"read {format(log_path)}")
+        debug.log_success(f"read {format(log_path)}")
 
         # drop information
         drop_dir = "solve/monolish_cg/monolish_jacobi/"
         target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
-        logger.log_success("drop information")
+        debug.log_success("drop information")
 
         # drop dir info
         target_dict_list = drop_information.drop_dir_info(target_dict_list)
-        logger.log_success("drop dir info")
+        debug.log_success("drop dir info")
 
         # 1st layer type
         grouping = grouping.Grouping()
         title_list, block_dict_lists = grouping.grouping_1st_layer(target_dict_list)
-        logger.log_success("1st layer type")
+        debug.log_success("1st layer type")
 
         # aggregate
         aggregate = aggregate.Aggregate()
         aggr_column_lists, aggr_ndarrays, index = aggregate.aggregated_by_floor(block_dict_lists)
-        logger.log_success("aggregate")
+        debug.log_success("aggregate")
 
         # create html
         html_table_list = []
@@ -44,20 +43,20 @@ try:
             html_table = html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
         html = html.create_html(html_table_list)
-        logger.log_success("create html")
+        debug.log_success("create html")
 
         # write html
         try:
             with open(out_path, 'wb') as file:
                 file.write(html.encode("utf-8"))
-                logger.log_success(f"write {format(out_path)}")
+                debug.log_success(f"write {format(out_path)}")
         except FileNotFoundError as e:
-            logger.log_error("write: The specified file was not found.")
+            debug.log_error("write: The specified file was not found.")
         except Exception as e:
-            logger.log_general(f"{e}")
+            debug.log_general(f"{e}")
 
 except FileNotFoundError as e:
-    logger.log_error("load: The specified file was not found.")
+    debug.log_error("load: The specified file was not found.")
 
 except Exception as e:
-    logger.log_general(f"{e}")
+    debug.log_general(f"{e}")
