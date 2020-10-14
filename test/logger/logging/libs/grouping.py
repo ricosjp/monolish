@@ -24,5 +24,7 @@ class Grouping:
             other_dict_block_list = []
 
         block_dict_lists = other_dict_block_list + solver_dict_block_list
+
         title_list = [f"other {str(no)}" for no in range(len(other_dict_block_list))] + [f"solver {str(no)}" for no in range(len(solver_dict_block_list))]
+
         return title_list, block_dict_lists

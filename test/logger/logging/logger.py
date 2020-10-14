@@ -40,11 +40,11 @@ try:
 
         # create html
         html_table_list = []
-        create_html = html.CreateHTML(html_table_list)
+        # create_html = html.CreateHTML(html_table_list)
         for i in range(index):
-            html_table = create_html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
+            html_table = html.create_table(title_list[i], aggr_column_lists[i], aggr_ndarrays[i])
             html_table_list.append(html_table)
-        html = create_html.create_html(html_table_list)
+        html = html.create_html(html_table_list)
         logger.log_success("create html")
 
         # write html
