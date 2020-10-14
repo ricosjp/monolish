@@ -21,7 +21,6 @@ try:
 
         # drop information
         drop_dir = "solve/monolish_cg/monolish_jacobi/"
-        drop_information = drop_information.DropInformation()
         target_dict_list = drop_information.drop_dict(drop_dir, yaml_dict_list)
         logger.log_success("drop information")
 
