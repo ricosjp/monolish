@@ -6,10 +6,11 @@ import datetime
 """log Decorator"""
 def add_print(pattern):
     def trace(func):
-        def wrapper(*args):
+        def wrapper(*args, **kwargs):
             dt_now = datetime.datetime.now()
             function_name = ','.join(args)
-            print(f"[{dt_now}] {pattern} {function_name}")
+            list_text = ','.join(kwargs)
+            print(f"[{dt_now}] {pattern} {function_name} {list_text}")
         return wrapper
     return trace
 
@@ -24,9 +25,3 @@ def log_success(message) -> str:
 @add_print("error")
 def log_error(message) -> str:
     return(message)
-
-def dump(dict_list) -> str:
-    dt_now = datetime.datetime.now()
-    print(f"[{dt_now}] dump dict")
-    for one_dict in dict_list:
-        print(f"{one_dict}")
