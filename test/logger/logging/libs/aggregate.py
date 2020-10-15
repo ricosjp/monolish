@@ -36,12 +36,19 @@ def aggregated_by_floor(block_dict_2multiple_list):
 
 def culc_percent(aggr_ndarray, aggr_column_list, max_layer):
     for layer in range(1, max_layer):
-        aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
+        aggr_column_list.append(f"breakdown_layer {str(layer)} [%] (breakdown[%] / count)")
 
         denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
         percent = np.array(aggr_ndarray[:, 3], dtype="float32") / denominator * 100.0
         percent = np.round(percent, decimals=3)
         percent = np.where(percent <= 100.0, percent, "")
+
+        # breakdown[%] / count
+        # percent_zero_fill = np.where(percent != "", percent, 0.0)
+        # percent_zero_fill = np.array(percent_zero_fill, dtype='float32')
+        # count = np.array(aggr_ndarray[:, 2], dtype="float32")
+        # percent_divided_by_count = percent_zero_fill / count
+
         aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
     aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
 
