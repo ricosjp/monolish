@@ -22,7 +22,7 @@ def create_html(html_tables) -> str:
     html_tables = ','.join(html_tables)
     html_tables = html_tables.replace(",", "")
     # 100.0 in bold
-    html_tables = html_tables.replace("100.0", "<strong>100.0</strong>")
+    html_tables = html_tables.replace("100.0", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")
 
     # create html
     html = f"""
