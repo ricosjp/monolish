@@ -15,15 +15,8 @@ def aggregated_by_floor(block_dict_2multiple_list):
         block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
         max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
 
-        aggr_ndarray = np.empty((0, 4))
-        for layer in range(1, max_layer+1):
-            layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==layer), block_ndarray[:, 1:3])))][:, [1,3]]
-            for col in np.unique(layer_ndarray[:,0]):
-                temp_ndarray = layer_ndarray[np.array(list(map(lambda x: x==col, layer_ndarray[:, 0])))]
-                count = np.count_nonzero(temp_ndarray[:,0])
-                total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
-                rst_narray = np.array([layer, col, count, total_time])
-                aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
+        # group by
+        aggr_ndarray = groupby_with_name(block_ndarray, max_layer)
 
         # culc_percent
         aggr_column_list = ["layer", "name", "count", "total_time [s]"]
@@ -65,4 +58,16 @@ def erase_information(aggr_ndarray, max_layer):
                 temp_ndarray[3+layer] = ""
                 temp_aggr_ndarray = np.append(temp_aggr_ndarray, [temp_ndarray], axis=0)
         aggr_ndarray = temp_aggr_ndarray
+    return aggr_ndarray
+
+def groupby_with_name(block_ndarray, max_layer):
+    aggr_ndarray = np.empty((0, 4))
+    for layer in range(1, max_layer+1):
+        layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==layer), block_ndarray[:, 1:3])))][:, [1,3]]
+        for col in np.unique(layer_ndarray[:,0]):
+            temp_ndarray = layer_ndarray[np.array(list(map(lambda x: x==col, layer_ndarray[:, 0])))]
+            count = np.count_nonzero(temp_ndarray[:,0])
+            total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
+            rst_narray = np.array([layer, col, count, total_time])
+            aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
     return aggr_ndarray
