@@ -27,8 +27,10 @@ def aggregated_by_floor(block_dict_2multiple_list):
 
         # culc_percent
         aggr_column_list = ["layer", "name", "count", "total_time [s]"]
-
         aggr_ndarray, aggr_column_list = culc_percent(aggr_ndarray, aggr_column_list, max_layer)
+
+        # erase information
+        aggr_ndarray = erase_information(aggr_ndarray, max_layer)
 
         # aggregate list
         aggr_column_lists.append(aggr_column_list)
@@ -40,14 +42,27 @@ def aggregated_by_floor(block_dict_2multiple_list):
     return aggr_column_lists, aggr_ndarrays, index
 
 def culc_percent(aggr_ndarray, aggr_column_list, max_layer):
-    aggr_column_list = ["layer", "name", "count", "total_time [s]"]
     for layer in range(1, max_layer):
+        aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
+
         denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
         percent = np.array(aggr_ndarray[:, 3], dtype="float32") / denominator * 100.0
         percent = np.round(percent, decimals=3)
         percent = np.where(percent <= 100.0, percent, "")
         aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
-        aggr_column_list.append(f"breakdown_layer {str(layer)} [%]")
     aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
 
     return aggr_ndarray, aggr_column_list
+
+def erase_information(aggr_ndarray, max_layer):
+    temp_aggr_ndarray = np.empty((0, aggr_ndarray.shape[1]))
+    for layer in range(1, max_layer-1):
+        for any_ndarray in aggr_ndarray:
+            if any_ndarray[0] == str(layer) or any_ndarray[0] == str(layer+1):
+                temp_aggr_ndarray = np.append(temp_aggr_ndarray, [any_ndarray], axis=0)
+            else:
+                temp_ndarray = np.copy(any_ndarray)
+                temp_ndarray[3+layer] = ""
+                temp_aggr_ndarray = np.append(temp_aggr_ndarray, [temp_ndarray], axis=0)
+        aggr_ndarray = temp_aggr_ndarray
+    return aggr_ndarray
