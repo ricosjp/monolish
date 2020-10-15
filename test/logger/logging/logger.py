@@ -33,7 +33,7 @@ try:
         debug.log_success("1st layer type")
 
         # aggregate
-        aggregate = aggregate.Aggregate()
+        # aggregate = aggregate.Aggregate()
         aggr_column_lists, aggr_ndarrays, index = aggregate.aggregated_by_floor(block_dict_lists)
         debug.log_success("aggregate")
 

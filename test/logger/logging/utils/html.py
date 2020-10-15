@@ -21,6 +21,7 @@ def create_html(html_tables) -> str:
     # join html tables
     html_tables = ','.join(html_tables)
     html_tables = html_tables.replace(",", "")
+    # 100.0 in bold
     html_tables = html_tables.replace("100.0", "<strong>100.0</strong>")
 
     # create html
