@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import sys
 import os
+import argparse
 from utils import debug, html as html_module, read
 from libs import aggregate, drop_information, grouping
 
 # io data
-log_path = sys.argv[1]
-out_path = sys.argv[2]
+parser = argparse.ArgumentParser()
+parser.add_argument("log_path")
+parser.add_argument("out_path")
+
+args = parser.parse_args()
+log_path = args.log_path
+out_path = args.out_path
 
 def main():
     with open(log_path, "r") as f:
