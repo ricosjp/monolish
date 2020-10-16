@@ -11,7 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(monolish CXX Fortran)
 
 option(MONOLISH_USE_GPU "build GPU variant" OFF)
-option(MONOLISH_USE_AVX   "Require AVX" ON)
+option(MONOLISH_USE_AVX "Require AVX" ON)
 
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
@@ -82,17 +82,12 @@ if(MONOLISH_USE_GPU)
   # OpenMP offloading
   target_compile_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
   target_link_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
-#   OpenACC
-#   set(OpenACC_ACCEL_TARGET "nvptx-none")
-#   find_package(OpenACC REQUIRED)
-#   target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
 
   # CUDA
   find_package(CUDAToolkit REQUIRED)
 
   target_link_libraries(monolish_gpu
     PRIVATE
-    #OpenACC::OpenACC_CXX
     CUDA::cublas
     CUDA::cusolver
     CUDA::cusparse
