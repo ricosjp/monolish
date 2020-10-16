@@ -6,16 +6,17 @@ import argparse
 from utils import debug, html as html_module, read
 from libs import aggregate, drop_information, grouping
 
-# io data
-parser = argparse.ArgumentParser()
-parser.add_argument("log_path")
-parser.add_argument("out_path")
-
-args = parser.parse_args()
-log_path = args.log_path
-out_path = args.out_path
-
 def main():
+    # args
+    parser = argparse.ArgumentParser()
+    parser.add_argument("log_path")
+    parser.add_argument("out_path")
+
+    args = parser.parse_args()
+    log_path = args.log_path
+    out_path = args.out_path
+
+    # io data
     with open(log_path, "r") as f:
         io_data = read.IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
