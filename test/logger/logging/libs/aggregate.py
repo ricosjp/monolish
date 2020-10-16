@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# coding: utf-8
 import numpy as np
 
 def aggregated_by_floor(block_dict_2multiple_list):

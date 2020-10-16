@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-# coding: utf-8
-"""HTML utilities suitable."""
-
-"""list of HTML table to HTML"""
 def create_table(title, columns_list, aggr_ndarray) -> str:
+    """list of HTML table to HTML"""
     # caption
     caption = f"<caption>{title}</caption>"
     # table header
@@ -16,8 +12,8 @@ def create_table(title, columns_list, aggr_ndarray) -> str:
     table = f"<table border='1'>{table}</table>"
     return table
 
-"""list of HTML table to HTML"""
 def create_html(html_tables) -> str:
+    """list of HTML table to HTML"""
     # join html tables
     html_tables = ','.join(html_tables)
     html_tables = html_tables.replace(",", "")

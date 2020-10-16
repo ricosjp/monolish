@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
 def drop_dict(directory, dict_list):
     target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("stat" in any_dict), dict_list))
     target_dict_list = list(filter(lambda any_dict:(directory not in any_dict["name"]) or ("time" in any_dict), target_dict_list))

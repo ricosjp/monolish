@@ -1,10 +1,7 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
 import datetime
 
-"""log Decorator"""
 def add_print(pattern):
+    """log Decorator"""
     def trace(func):
         def wrapper(*args, **kwargs):
             dt_now = datetime.datetime.now()

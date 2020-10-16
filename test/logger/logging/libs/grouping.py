@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
 class Grouping:
     def grouping_1st_layer(self, target_dict_list):
         # solve
