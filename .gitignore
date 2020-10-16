@@ -26,7 +26,6 @@ docker/include/
 monolish_test.log
 
 # Logger
-test/logger/logging/*.html
 test/logger/logging/libs/__pycache__/*.pyc
 test/logger/logging/utils/__pycache__/*.pyc
 
