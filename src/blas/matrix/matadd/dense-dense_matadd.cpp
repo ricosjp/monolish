@@ -1,7 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
@@ -30,16 +30,10 @@ void blas::matadd(const matrix::Dense<double> &A,
   // MN = MK * KN
   const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
-#pragma acc data present(Ad [0:nnz], Bd [0:nnz], Cd [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
   }
 #else
 #pragma omp parallel for
@@ -71,16 +65,10 @@ void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   // MN = MK * KN
   const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
-#pragma acc data present(Ad [0:nnz], Bd [0:nnz], Cd [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    Cd[i] = Ad[i] + Bd[i];
   }
 #else
 #pragma omp parallel for

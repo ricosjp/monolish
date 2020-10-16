@@ -1,17 +1,17 @@
-FROM registry.ritc.jp/ricos/allgebra/cuda10_2:0.2.0
+FROM ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.0
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
-RUN mkdir -p /opt/ricos/monolish/0.1/lib \
-&&  mkdir -p /opt/ricos/monolish/0.1/include \
-&&  mkdir -p /opt/ricos/monolish/0.1/samples 
+COPY . /monolish
 
-COPY ./lib/ /opt/ricos/monolish/0.1/lib/
-COPY ./include/ /opt/ricos/monolish/0.1/include/
-COPY ./docker/monolish_sample/ /opt/ricos/monolish/0.1/samples
+ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
 
-COPY ./lib/* /usr/lib64/
-COPY ./include/* /usr/include/
+RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
+ && cmake --build build --target install -- -j $(nproc) \
+ && rm -rf build
 
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
-ENV LIBRARY_PATH $LIBRARY_PATH:/opt/ricos/monolish/0.1/lib/ 
-ENV CPATH $CPATH:/opt/ricos/monolish/0.1/include/
+RUN echo "${MONOLISH_DIR}/lib" > /etc/ld.so.conf.d/monolish.conf && ldconfig
+
+ENV CPATH              ${MONOLISH_DIR}/include
+ENV C_INCLUDE_PATH     ${MONOLISH_DIR}/include
+ENV CPLUS_INCLUDE_PATH ${MONOLISH_DIR}/include
+ENV LIBRARY_PATH       ${MONOLISH_DIR}/lib

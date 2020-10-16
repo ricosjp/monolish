@@ -29,8 +29,8 @@ namespace monolish {
 /**
  * @brief vector type
  * @note
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): false
+ * - Multi-threading: true
+ * - GPU acceleration: false
  */
 template <typename Float> class vector {
 private:
@@ -53,10 +53,11 @@ public:
    * @param N vector length
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  vector(const size_t N) { val.resize(N); }
+  // vector(const size_t N) { val.resize(N); }
+  vector(const size_t N);
 
   /**
    * @brief initialize size N vector, value to fill the container
@@ -64,31 +65,28 @@ public:
    * @param value fill Float type value to all elements
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  vector(const size_t N, const Float value) { val.resize(N, value); }
+  vector(const size_t N, const Float value);
 
   /**
    * @brief copy from std::vector
    * @param vec input std::vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  vector(const std::vector<Float> &vec) {
-    val.resize(vec.size());
-    std::copy(vec.begin(), vec.end(), val.begin());
-  }
+  vector(const std::vector<Float> &vec);
 
   /**
    * @brief copy from monolish::vector
    * @param vec input monolish::vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: N (allocation)
    *        - if `vec.gpu_statius == true`; coping data only on GPU
    *        - else; coping data only on CPU
@@ -101,14 +99,10 @@ public:
    * @param end  end pointer
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  vector(const Float *start, const Float *end) {
-    size_t size = (end - start);
-    val.resize(size);
-    std::copy(start, end, val.begin());
-  }
+  vector(const Float *start, const Float *end);
 
   /**
    * @brief create N length rand(min~max) vector
@@ -117,19 +111,10 @@ public:
    * @param max rand max
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: true
+   * - GPU acceleration: false
    **/
-  vector(const size_t N, const Float min, const Float max) {
-    val.resize(N);
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
-
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
-    }
-  }
+  vector(const size_t N, const Float min, const Float max);
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -137,8 +122,8 @@ public:
    * @brief send data to GPU
    * @note
    * - # of data transfer: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   void send() const;
 
@@ -146,8 +131,8 @@ public:
    * @brief recv data from GPU, and free data on GPU
    * @note
    * - # of data transfer: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   void recv();
 
@@ -155,8 +140,8 @@ public:
    * @brief recv data from GPU (w/o free)
    * @note
    * - # of data transfer: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   void nonfree_recv();
 
@@ -164,8 +149,8 @@ public:
    * @brief free data on GPU
    * @note
    * - # of data transfer: 0
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   void device_free() const;
 
@@ -174,8 +159,8 @@ public:
    * @return gpu status
    * @note
    * - # of data transfer: 0
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   bool get_device_mem_stat() const { return gpu_status; }
 
@@ -183,8 +168,8 @@ public:
    * @brief destructor of vector, free GPU memory
    * @note
    * - # of data transfer: 0
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    **/
   ~vector() {
     if (get_device_mem_stat()) {
@@ -216,8 +201,8 @@ public:
    * @param N vector length
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void resize(size_t N) {
     if (get_device_mem_stat()) {
@@ -227,12 +212,12 @@ public:
   }
 
   /**
-   * @brief Add a new element at the ent of the vector (only CPU)
+   * @brief Add a new element at the end of the vector (only CPU)
    * @param val new element
    * @note
    * - # of computation: 1
    **/
-  void resize(Float val) {
+  void push_back(Float val) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
@@ -276,8 +261,8 @@ public:
    * @return copied vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    *    - # of data transfer: N (allocation)
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
@@ -288,33 +273,20 @@ public:
    * @brief print all elements to standart I/O
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  void print_all() const {
-    for (const auto v : val) {
-      std::cout << v << std::endl;
-    }
-  }
+  void print_all() const;
 
   /**
    * @brief print all elements to file
    * @param filename output filename
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  void print_all(std::string filename) const {
-
-    std::ofstream ofs(filename);
-    if (!ofs) {
-      throw std::runtime_error("error file cant open");
-    }
-    for (const auto v : val) {
-      ofs << v << std::endl;
-    }
-  }
+  void print_all(std::string filename) const;
 
   // operator
   // ///////////////////////////////////////////////////////////////////////////
@@ -325,8 +297,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: false
+   * - GPU acceleration: true
    *    - # of data transfer: N (allocation)
    *        - if `vec.gpu_statius == true`; copy on CPU
    *        - else; coping data on CPU
@@ -339,8 +311,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   void operator=(const std::vector<Float> &vec);
 
@@ -349,8 +321,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   vector<Float> operator-();
 
@@ -362,8 +334,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -375,8 +347,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -388,8 +360,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -401,8 +373,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -414,8 +386,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator+=(const Float value);
 
@@ -425,8 +397,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator-=(const Float value);
   /**
@@ -435,8 +407,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator*=(const Float value);
 
@@ -446,8 +418,8 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator/=(const Float value);
 
@@ -459,8 +431,8 @@ public:
    * @return output vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -472,8 +444,8 @@ public:
    * @return output vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -485,8 +457,8 @@ public:
    * @return output vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -498,8 +470,8 @@ public:
    * @return output vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    * @warning
    * The arithmetic operator need to allocate tmp. array (size N)
    **/
@@ -510,8 +482,8 @@ public:
    * @param vec vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator+=(const vector<Float> &vec);
 
@@ -520,8 +492,8 @@ public:
    * @param vec vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator-=(const vector<Float> &vec);
 
@@ -530,8 +502,8 @@ public:
    * @param vec vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator*=(const vector<Float> &vec);
 
@@ -540,8 +512,8 @@ public:
    * @param vec vector (size N)
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void operator/=(const vector<Float> &vec);
 
@@ -551,8 +523,8 @@ public:
    * @return vector element (v[i])
    * @note
    * - # of computation: 1
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
   Float &operator[](size_t i) {
     if (get_device_mem_stat()) {
@@ -567,21 +539,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  bool operator==(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator==");
-    }
-    if (val.size() != vec.size())
-      return false;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return false;
-    }
-    return true;
-  }
+  bool operator==(const vector<Float> &vec);
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -589,28 +550,17 @@ public:
    * @return true or false
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): false
-   * - GPU acceleration (OpenACC): false
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  bool operator!=(const vector<Float> &vec) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use operator!=");
-    }
-    if (val.size() != vec.size())
-      return true;
-    for (size_t i = 0; i < vec.size(); i++) {
-      if (val[i] != vec.val[i])
-        return true;
-    }
-    return false;
-  }
+  bool operator!=(const vector<Float> &vec);
 
   /**
    * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))
    * @note
    * - # of computation: N
-   * - Multi-threading (OpenMP): true
-   * - GPU acceleration (OpenACC): true
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
   void tanh();
 };

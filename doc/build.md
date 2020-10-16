@@ -1,6 +1,4 @@
-\page Build Build
-
-## はじめに
+# Build monolish {#build_md}
 
 現在allgebra Docker image上での利用を前提としています．
 ここはmonolish本体の開発者向けのページです．

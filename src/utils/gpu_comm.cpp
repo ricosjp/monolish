@@ -9,12 +9,16 @@ template <typename T> void vector<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *d = val.data();
   const size_t N = val.size();
 
-#pragma acc enter data copyin(d [0:N])
-  gpu_status = true;
+  if (gpu_status == true) {
+#pragma omp target update to(d [0:N])
+  } else {
+#pragma omp target enter data map(to : d [0:N])
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
@@ -24,11 +28,13 @@ template <typename T> void vector<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
     const size_t N = val.size();
-#pragma acc exit data copyout(d [0:N])
+
+#pragma omp target exit data map(from : d [0:N])
+
     gpu_status = false;
   }
 #endif
@@ -40,11 +46,11 @@ template <typename T> void vector<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *d = val.data();
     const size_t N = val.size();
-#pragma acc update host(d [0:N])
+#pragma omp target update from(d [0:N])
   }
 #endif
   logger.util_out();
@@ -55,11 +61,11 @@ template <typename T> void vector<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *d = val.data();
     const size_t N = val.size();
-#pragma acc exit data delete (d [0:N])
+#pragma omp target exit data map(release : d [0:N])
     gpu_status = false;
   }
 #endif
@@ -84,15 +90,21 @@ template <typename T> void matrix::CRS<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *vald = val.data();
   const int *cold = col_ind.data();
   const int *rowd = row_ptr.data();
   const size_t N = get_row();
   const size_t nnz = get_nnz();
 
-#pragma acc enter data copyin(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
-  gpu_status = true;
+  if (gpu_status == true) {
+#pragma omp target update to(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+  } else {
+#pragma omp target enter data map(to                                           \
+                                  :                                            \
+                                  vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
@@ -102,7 +114,7 @@ template <typename T> void matrix::CRS<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     int *cold = col_ind.data();
@@ -110,7 +122,8 @@ template <typename T> void matrix::CRS<T>::recv() {
     size_t N = get_row();
     size_t nnz = get_nnz();
 
-#pragma acc exit data copyout(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target exit data map(from                                          \
+                                 : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
     gpu_status = false;
   }
 #endif
@@ -122,7 +135,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     int *cold = col_ind.data();
@@ -130,7 +143,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
     size_t N = get_row();
     size_t nnz = get_nnz();
 
-#pragma acc update host(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target update from(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
   }
 #endif
   logger.util_out();
@@ -141,7 +154,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *vald = val.data();
     const int *cold = col_ind.data();
@@ -149,7 +162,8 @@ template <typename T> void matrix::CRS<T>::device_free() const {
     const size_t N = get_row();
     const size_t nnz = get_nnz();
 
-#pragma acc exit data delete (vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
+#pragma omp target exit data map(release                                       \
+                                 : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
 
     gpu_status = false;
   }
@@ -173,12 +187,16 @@ template <typename T> void matrix::Dense<T>::send() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   const T *vald = val.data();
   const size_t nnz = get_nnz();
 
-#pragma acc enter data copyin(vald [0:nnz])
-  gpu_status = true;
+  if (gpu_status == true) {
+#pragma omp target update to(vald [0:nnz])
+  } else {
+#pragma omp target enter data map(to : vald [0:nnz])
+    gpu_status = true;
+  }
 #endif
   logger.util_out();
 }
@@ -188,12 +206,12 @@ template <typename T> void matrix::Dense<T>::recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     size_t nnz = get_nnz();
 
-#pragma acc exit data copyout(vald [0:nnz])
+#pragma omp target exit data map(from : vald [0:nnz])
     gpu_status = false;
   }
 #endif
@@ -205,12 +223,12 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     T *vald = val.data();
     size_t nnz = get_nnz();
 
-#pragma acc update host(vald [0:nnz])
+#pragma omp target update from(vald [0:nnz])
   }
 #endif
   logger.util_out();
@@ -221,12 +239,12 @@ template <typename T> void matrix::Dense<T>::device_free() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if USE_GPU
+#if MONOLISH_USE_GPU
   if (gpu_status == true) {
     const T *vald = val.data();
     const size_t nnz = get_nnz();
 
-#pragma acc exit data delete (vald [0:nnz])
+#pragma omp target exit data map(release : vald [0:nnz])
 
     gpu_status = false;
   }

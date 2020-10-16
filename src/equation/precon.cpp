@@ -10,6 +10,10 @@ namespace monolish {
 template <typename T>
 void equation::none<T>::create_precond(matrix::CRS<T> &A) {
   Logger &logger = Logger::get_instance();
+
+  // nothing to do
+  (void)(&A);
+
   logger.solver_in(monolish_func);
   logger.solver_out();
 }
@@ -36,8 +40,12 @@ template <typename T>
 int equation::none<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
-  return MONOLISH_SOLVER_SUCCESS;
+  // nothing to do
+  (void)(&A);
+  (void)(&x);
+  (void)(&b);
   logger.solver_out();
+  return MONOLISH_SOLVER_SUCCESS;
 }
 template int equation::none<float>::solve(matrix::CRS<float> &A,
                                           vector<float> &x, vector<float> &b);

@@ -9,23 +9,15 @@ template <typename T> void Dense<T>::row_add(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row();
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] += alpha;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] += alpha;
   }
 #else // cpu
 
@@ -47,23 +39,15 @@ template <typename T> void Dense<T>::row_sub(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] -= alpha;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] -= alpha;
   }
 #else // cpu
 
@@ -85,23 +69,15 @@ template <typename T> void Dense<T>::row_mul(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] *= alpha;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] *= alpha;
   }
 #else // cpu
 
@@ -123,23 +99,15 @@ template <typename T> void Dense<T>::row_div(const size_t r, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
-
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] /= alpha;
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] /= alpha;
   }
 #else // cpu
 

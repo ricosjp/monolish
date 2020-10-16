@@ -10,12 +10,9 @@ void Dense<T>::row_add(const size_t r, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
   const T *vecd = vec.data();
 
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
@@ -23,15 +20,11 @@ void Dense<T>::row_add(const size_t r, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.col.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] += vecd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] += vecd[i];
   }
 
 #else // cpu
@@ -57,12 +50,9 @@ void Dense<T>::row_sub(const size_t r, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
   const T *vecd = vec.data();
 
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
@@ -70,15 +60,11 @@ void Dense<T>::row_sub(const size_t r, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.col.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] -= vecd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] -= vecd[i];
   }
 
 #else // cpu
@@ -104,12 +90,9 @@ void Dense<T>::row_mul(const size_t r, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
   const T *vecd = vec.data();
 
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
@@ -117,15 +100,11 @@ void Dense<T>::row_mul(const size_t r, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.col.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] *= vecd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] *= vecd[i];
   }
 
 #else // cpu
@@ -151,12 +130,9 @@ void Dense<T>::row_div(const size_t r, const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
-  size_t nnz = get_nnz();
   const T *vecd = vec.data();
 
   T *vald = val.data();
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = get_col();
 
@@ -164,15 +140,11 @@ void Dense<T>::row_div(const size_t r, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.col.size");
   }
 
-#if USE_GPU // gpu
+#if MONOLISH_USE_GPU // gpu
 
-#pragma acc data present(vald [0:nnz], vecd [0:Len])
-#pragma acc parallel
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < Len; i++) {
-      vald[N * r + i] /= vecd[i];
-    }
+#pragma omp target teams distribute parallel for
+  for (size_t i = 0; i < Len; i++) {
+    vald[N * r + i] /= vecd[i];
   }
 
 #else // cpu

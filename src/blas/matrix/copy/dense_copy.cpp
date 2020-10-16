@@ -39,19 +39,16 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   rowN = mat.get_row();
   colN = mat.get_col();
   nnz = mat.get_nnz();
-  size_t NNZ = nnz;
 
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
     send();
+#if MONOLISH_USE_GPU
+    size_t NNZ = nnz;
     T *vald = val.data();
     const T *Mvald = mat.val.data();
 
-#if USE_GPU
-
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-#pragma acc loop independent
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < NNZ; i++) {
       vald[i] = Mvald[i];
     }
@@ -68,43 +65,5 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
 template void Dense<double>::operator=(const Dense<double> &mat);
 template void Dense<float>::operator=(const Dense<float> &mat);
 
-// copy constractor
-template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  val.resize(mat.get_nnz());
-
-  rowN = mat.get_row();
-  colN = mat.get_col();
-  nnz = mat.get_nnz();
-  size_t NNZ = nnz;
-
-  // gpu copy and recv
-  if (mat.get_device_mem_stat()) {
-    send();
-    T *vald = val.data();
-
-    const T *Mvald = mat.val.data();
-
-#if USE_GPU
-
-#pragma acc data present(vald [0:nnz])
-#pragma acc parallel
-#pragma acc loop independent
-    for (size_t i = 0; i < NNZ; i++) {
-      vald[i] = Mvald[i];
-    }
-
-    nonfree_recv();
-#endif
-  } else {
-    std::copy(mat.val.data(), mat.val.data() + nnz, val.begin());
-  }
-
-  logger.util_out();
-}
-template Dense<double>::Dense(const Dense<double> &mat);
-template Dense<float>::Dense(const Dense<float> &mat);
 } // namespace matrix
 } // namespace monolish

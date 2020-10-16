@@ -1,15 +1,14 @@
 #include <iostream>
 #include <omp.h>
 
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 #include <cuda_runtime.h>
-#include <openacc.h>
 #endif
 
 namespace monolish {
 
 // error check
-#ifdef USE_GPU
+#ifdef MONOLISH_USE_GPU
 
 auto checkError = [](auto result, auto func, auto file, auto line) {
   if (result) {

@@ -1,18 +1,18 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef USE_GPU
+#ifdef MONOLISH_MONOLISH_USE_GPU
 #include <cublas_v2.h>
 #else
 #include <cblas.h>
 #endif
 
-//#ifdef USE_AVX
+#ifdef MONOLISH_USE_AVX
 #include <immintrin.h>
 #define SIMD_FUNC(NAME) _mm256_##NAME
 using Sreg = __m256;
 using Dreg = __m256d;
-//#endif
+#endif
 
 namespace monolish {
 
@@ -54,31 +54,16 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
-  }
-
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      double tmp = 0;
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        tmp += vald[k] * Bd[N * cold[k] + j];
       }
+      Cd[i * N + j] = tmp;
     }
   }
 #else
@@ -172,36 +157,21 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
-  }
-
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
-        }
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+  for (size_t j = 0; j < N; j++) {
+    for (size_t i = 0; i < M; i++) {
+      float tmp = 0;
+      for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        tmp += vald[k] * Bd[N * cold[k] + j];
       }
+      Cd[i * N + j] = tmp;
     }
   }
 #else
-#if USE_AVX // avx_cpu
-  const int vecL = 8;
+#if MONOLISH_USE_AVX // avx_cpu
+  // const int vecL = 8;
 
 #pragma omp parallel for
   for (int i = 0; i < (int)(M * N); i++) {

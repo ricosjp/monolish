@@ -1,52 +1,58 @@
-ALLGEBRA_IMAGE := registry.ritc.jp/ricos/allgebra/cuda10_2
-ALLGEBRA_TAG   := 0.2.0
+ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/cuda10_2/mkl
+ALLGEBRA_TAG   := 20.10.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: cpu gpu gpu-debug lib test install in format
+.PHONY: gpu test-cpu test-gpu install install-cpu install-gpu in format document
 
-INSTALL_DIR=/usr/lib64/
+MONOLISH_DIR ?= $(HOME)/lib/monolish
 
-all:cpu gpu
+all: cpu gpu
 
 cpu:
-	make -B -j -f Makefile.cpu
-
-cpu-debug:
-	make -B -j -f Makefile.cpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_cpu
+	cmake --build build_cpu -j `nproc`
 
 gpu:
-	make -B -j -f Makefile.gpu
-
-gpu-debug:
-	make -B -j -f Makefile.gpu CXXFLAGS_EXTRA="-g3 -fvar-tracking-assignments"
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu \
+		-DMONOLISH_USE_GPU=ON
+	cmake --build build_gpu -j `nproc`
 
 fx:
-	make -B -j4 -f Makefile.fx
+	$(MAKE) -B -j4 -f Makefile.fx
 
 sx:
-	make -B -j -f Makefile.sx
+	$(MAKE) -B -j -f Makefile.sx
 
-install:
-	make -f Makefile.cpu install
+install-cpu: cpu
+	cmake --build build_cpu --target install
 
-test:
-	cd test; make -B
+install-gpu: gpu
+	cmake --build build_gpu --target install
+
+install: install-cpu install-gpu
+
+test-cpu: install-cpu
+	$(MAKE) -C test cpu
+	$(MAKE) -C test run_cpu
+
+test-gpu: install-gpu
+	$(MAKE) -C test gpu
+	$(MAKE) -C test run_gpu
 
 clean:
-	- make -f Makefile.cpu clean 
-	- make -f Makefile.gpu clean 
-	- make -f Makefile.fx clean 
-	- make -f Makefile.sx clean 
-	- make -C test/ clean
+	rm -rf build*/
+	$(MAKE) -f Makefile.fx clean
+	$(MAKE) -f Makefile.sx clean
+	$(MAKE) -C test/ clean
 
-zenbu:
-	make clean
-	make cpu
-	make gpu
-	make install
-
-in:
+in-gpu:
 	docker run -it --rm \
 		--gpus all   \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
@@ -63,16 +69,18 @@ in-cpu:
 		-w /monolish \
 		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
 
+in: in-gpu
+
 format:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		registry.ritc.jp/ricos/allgebra/clang-format:0.2.0 /usr/bin/check-format.sh
+		ghcr.io/ricosjp/allgebra/clang-format:20.10.0 /usr/bin/check-format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		registry.ritc.jp/ricos/allgebra/doxygen:0.2.0 doxygen Doxyfile
+		ghcr.io/ricosjp/allgebra/doxygen:20.10.0 doxygen Doxyfile
