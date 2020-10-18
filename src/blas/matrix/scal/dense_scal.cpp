@@ -1,12 +1,6 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#else
-#include <cblas.h>
-#endif
-
 namespace monolish {
 
 // double ///////////////////
@@ -17,18 +11,22 @@ void blas::mscal(const double alpha, matrix::Dense<double> &A) {
   size_t nnz = A.get_nnz();
   double *vald = A.val.data();
 
+  if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    vald[i] = alpha * vald[i];
+    for (size_t i = 0; i < nnz; i++) {
+      vald[i] = alpha * vald[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < nnz; i++) {
+      vald[i] = alpha * vald[i];
+    }
   }
 
-#else // cpu
-#pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++)
-    vald[i] = alpha * vald[i];
-
-#endif
   logger.func_out();
 }
 
@@ -40,18 +38,22 @@ void blas::mscal(const float alpha, matrix::Dense<float> &A) {
   size_t nnz = A.get_nnz();
   float *vald = A.val.data();
 
+  if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    vald[i] = alpha * vald[i];
+    for (size_t i = 0; i < nnz; i++) {
+      vald[i] = alpha * vald[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < nnz; i++) {
+      vald[i] = alpha * vald[i];
+    }
   }
 
-#else // cpu
-#pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++)
-    vald[i] = alpha * vald[i];
-
-#endif
   logger.func_out();
 }
 template <typename T>
