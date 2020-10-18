@@ -16,36 +16,37 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   const int *rowd = row_ptr.data();
   const int *cold = col_ind.data();
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < n; i++) {
-    vecd[i] = 0;
-  }
-
+    for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < n; i++) {
-    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-      if ((int)i == cold[j]) {
-        vecd[i] = vald[j];
+    for (size_t i = 0; i < n; i++) {
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        if ((int)i == cold[j]) {
+          vecd[i] = vald[j];
+        }
       }
     }
-  }
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < get_row(); i++)
-    vecd[i] = 0;
-
-#pragma omp parallel for
-  for (size_t i = 0; i < n; i++) {
-    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-      if ((int)i == cold[j]) {
-        vecd[i] = vald[j];
-      }
-    }
-  }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < get_row(); i++) {
+      vecd[i] = 0;
+    }
+#pragma omp parallel for
+    for (size_t i = 0; i < n; i++) {
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        if ((int)i == cold[j]) {
+          vecd[i] = vald[j];
+        }
+      }
+    }
+  }
 
   logger.func_out();
 }
@@ -62,29 +63,31 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   const T *vald = val.data();
   const int *rowd = row_ptr.data();
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-  size_t n = get_row();
+    size_t n = get_row();
 
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < n; i++) {
-    vecd[i] = 0;
-  }
+    for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
 #pragma omp target teams distribute parallel for
-  for (int j = rowd[r]; j < rowd[r + 1]; j++) {
-    vecd[col_ind[j]] = vald[j];
-  }
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < get_row(); i++) {
-    vecd[i] = 0;
-  }
-
-#pragma omp parallel for
-  for (int j = rowd[r]; j < rowd[r + 1]; j++) {
-    vecd[col_ind[j]] = vald[j];
-  }
+    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+      vecd[col_ind[j]] = vald[j];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < get_row(); i++) {
+      vecd[i] = 0;
+    }
+#pragma omp parallel for
+    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+      vecd[col_ind[j]] = vald[j];
+    }
+  }
 
   logger.func_out();
 }
@@ -105,37 +108,37 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   const int *rowd = row_ptr.data();
   const int *cold = col_ind.data();
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < n; i++) {
-    vecd[i] = 0;
-  }
-
+    for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < n; i++) {
-    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-      if ((int)c == cold[j]) {
-        vecd[i] = vald[j];
+    for (size_t i = 0; i < n; i++) {
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        if ((int)c == cold[j]) {
+          vecd[i] = vald[j];
+        }
       }
     }
-  }
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < get_row(); i++) {
-    vecd[i] = 0;
-  }
-
-#pragma omp parallel for
-  for (size_t i = 0; i < n; i++) {
-    for (int j = rowd[i]; j < rowd[i + 1]; j++) {
-      if ((int)c == cold[j]) {
-        vecd[i] = vald[j];
-      }
-    }
-  }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < get_row(); i++) {
+      vecd[i] = 0;
+    }
+#pragma omp parallel for
+    for (size_t i = 0; i < n; i++) {
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        if ((int)c == cold[j]) {
+          vecd[i] = vald[j];
+        }
+      }
+    }
+  }
 
   logger.func_out();
 }

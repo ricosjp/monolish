@@ -47,9 +47,9 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
 
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
+#if MONOLISH_USE_GPU
     send();
 
-#if MONOLISH_USE_GPU
     size_t N = get_row();
     size_t NNZ = get_nnz();
 
@@ -73,6 +73,8 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
     }
 
     nonfree_recv();
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
     std::copy(mat.row_ptr.data(), mat.row_ptr.data() + (get_row() + 1),
