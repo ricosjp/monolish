@@ -20,6 +20,7 @@ def main():
     with open(log_path, "r") as f:
         io_data = read.IOData()
         yaml_dict_list = io_data.reader(f, "yaml")
+        # print(yaml_dict_list)
         debug.log_success(f"read {format(log_path)}")
 
         # drop information
