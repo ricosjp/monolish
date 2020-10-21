@@ -8,12 +8,9 @@ OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
 VEC_TEST_SIZE = $(shell bash -c 'echo $$(($$RANDOM%10000+1000))')
-VEC_TEST_ITER?=100
-VEC_TEST_ANS_CHECK?=1
 
 define RUN
-	$(PROFILER) $(1) double $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
-	$(PROFILER) $(1) float $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
+	$(PROFILER) $(1) $(VEC_TEST_SIZE)
 
 endef
 

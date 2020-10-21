@@ -1,3 +1,4 @@
+#pragma once
 #include "monolish_blas.hpp"
 
 #include <algorithm>
