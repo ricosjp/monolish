@@ -1,11 +1,12 @@
-#include "scalar-vector/sv_add.hpp"
-#include "scalar-vector/sv_sub.hpp"
-#include "scalar-vector/sv_mul.hpp"
-#include "scalar-vector/sv_div.hpp"
-#include "vector-vector/vv_add.hpp"
-#include "vector-vector/vv_sub.hpp"
-#include "vector-vector/vv_mul.hpp"
-#include "vector-vector/vv_div.hpp"
+#include "arithmetic/sv_add.hpp"
+#include "arithmetic/sv_sub.hpp"
+#include "arithmetic/sv_mul.hpp"
+#include "arithmetic/sv_div.hpp"
+#include "arithmetic/vv_add.hpp"
+#include "arithmetic/vv_sub.hpp"
+#include "arithmetic/vv_mul.hpp"
+#include "arithmetic/vv_div.hpp"
+#include "arithmetic/v_minus.hpp"
 
 int main(int argc, char **argv) {
 
@@ -139,6 +140,21 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vvdiv<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vector-minus//
+  if (test_minus<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_minus<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_minus<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_minus<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
