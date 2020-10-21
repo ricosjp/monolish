@@ -11,11 +11,17 @@
 #include <random>
 #include <typeinfo>
 
-template <typename T> bool ans_check(double result, double ans, double tol) {
+template<typename T> std::string get_type();
+template<> std::string get_type<double>() { return "double"; }
+template<> std::string get_type<float>() { return "float"; }
+
+template <typename T> bool ans_check(const std::string& func, double result, double ans, double tol) {
 
   double err = std::abs(result - ans) / ans;
 
   if (err < tol) {
+    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    std::cout << ": pass" << std::endl;
     return true;
   } else {
     std::cout << "Error!!" << std::endl;
@@ -24,11 +30,14 @@ template <typename T> bool ans_check(double result, double ans, double tol) {
     std::cout << std::scientific << "ans\t" << ans << std::endl;
     std::cout << std::scientific << "Rerr\t" << err << std::endl;
     std::cout << "===============================" << std::endl;
+
+    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    std::cout << ": fail" << std::endl;
     return false;
   }
 }
 
-template <typename T> bool ans_check(T *result, T *ans, int size, double tol) {
+template <typename T> bool ans_check(const std::string& func, const T *result, const T *ans, int size, double tol) {
 
   std::vector<int> num;
   bool check = true;
@@ -42,6 +51,8 @@ template <typename T> bool ans_check(T *result, T *ans, int size, double tol) {
   }
 
   if (check) {
+    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    std::cout << ": pass" << std::endl;
     return check;
   } else {
     std::cout << "Error!!" << std::endl;
@@ -53,51 +64,8 @@ template <typename T> bool ans_check(T *result, T *ans, int size, double tol) {
                 << "\tans:" << ans[num[i]] << std::endl;
     }
     std::cout << "===============================" << std::endl;
+    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    std::cout << ": fail" << std::endl;
     return check;
   }
 }
-
-template <typename T> std::string get_type() {
-  std::string type;
-
-  if (typeid(T) == typeid(double)) {
-    type = "double";
-  }
-  if (typeid(T) == typeid(float)) {
-    type = "float";
-  }
-
-  return type;
-}
-//
-// template <typename Float_, typename Index_>
-// static inline void
-// make_3dSquare3PointsDirichlet_matrix(pzsparse::Matrix<Float_, Index_>& m,
-// Index_ n)
-// {
-//     Index_ d = static_cast<Index_>(std::cbrt(static_cast<double>(n)));
-//
-//     m.reset_format(pzsparse::MatrixFormat_Uncompressed);
-//     m.setzero();
-//     m.resize(d * d * d);
-//
-//     for (Index_ i = 0; i < d; i++) {
-//         for (Index_ j = 0; j < d; j++) {
-//             for (Index_ k = 0; k < d; k++) {
-//                 Index_ p = i * d * d + j * d + k;
-//                 if (i == 0 || i == d - 1 || j == 0 || j == d - 1 | k == 0 ||
-//                 k == d - 1) {
-//                     m.insert(p, p, 1.0);
-//                 } else {
-//                     m.insert(p, p, -6.0);
-//                     m.insert(p, i * d * d + j * d + (k + 1), 1.0);
-//                     m.insert(p, i * d * d + j * d + (k - 1), 1.0);
-//                     m.insert(p, i * d * d + (j + 1) * d + k, 1.0);
-//                     m.insert(p, i * d * d + (j - 1) * d + k, 1.0);
-//                     m.insert(p, (i + 1) * d * d + j * d + k, 1.0);
-//                     m.insert(p, (i - 1) * d * d + j * d + k, 1.0);
-//                 }
-//             }
-//         }
-//     }
-// }
