@@ -7,7 +7,7 @@ before_script:
 stages:
     - build_lib
     - test_build
-    - common
+    - vector
     - blas
     - equation
     - logger
@@ -110,28 +110,28 @@ build_cmake_nogpu_noavx:
       - make -C test/${TEST_TARGET} run_gpu
 
 #
-# vector_common
+# vector
 #
-vector_common_nogpu_avx:
-    stage: common
+vector_nogpu_avx:
+    stage: blas
     extends: .test_nogpu_avx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_nogpu_noavx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_nogpu_noavx:
+    stage: blas
     extends: .test_nogpu_noavx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_gpu_avx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_gpu_avx:
+    stage: blas
     extends: .test_gpu_avx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_gpu_noavx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_gpu_noavx:
+    stage: blas
     extends: .test_gpu_noavx
     variables:
-      TEST_TARGET: "vector_common"
+      TEST_TARGET: "vector"
 
 #
 # matrix_common
@@ -156,30 +156,6 @@ matrix_common_gpu_noavx:
     extends: .test_gpu_noavx
     variables:
       TEST_TARGET: "matrix_common"
-
-#
-# vector_blas
-#
-vector_blas_nogpu_avx:
-    stage: blas
-    extends: .test_nogpu_avx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_nogpu_noavx:
-    stage: blas
-    extends: .test_nogpu_noavx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_gpu_avx:
-    stage: blas
-    extends: .test_gpu_avx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_gpu_noavx:
-    stage: blas
-    extends: .test_gpu_noavx
-    variables:
-      TEST_TARGET: "vector_blas"
 
 #
 # matrix_blas

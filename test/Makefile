@@ -2,19 +2,19 @@ all:cpu
 
 cpu:
 	make -j -C vector/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
-	make -j -C equation/ $@
-	make -j -C logger/ $@
-	make -j -C lang/ $@
+# 	make -j -C matrix_common/ $@
+# 	make -j -C matrix_blas/ $@
+# 	make -j -C equation/ $@
+# 	make -j -C logger/ $@
+# 	make -j -C lang/ $@
 
 gpu:
 	make -j -C vector/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
-	make -j -C equation/ $@
-	make -j -C logger/ $@
-	make -j -C lang/ $@
+# 	make -j -C matrix_common/ $@
+# 	make -j -C matrix_blas/ $@
+# 	make -j -C equation/ $@
+# 	make -j -C logger/ $@
+# 	make -j -C lang/ $@
 
 fx:
 	make -j -C vector/ $@
