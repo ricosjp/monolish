@@ -1,3 +1,5 @@
+import pandas as pd
+
 def create_table(title, columns_list, aggr_ndarray) -> str:
     """list of HTML table to HTML"""
     # caption
@@ -11,6 +13,29 @@ def create_table(title, columns_list, aggr_ndarray) -> str:
     table = caption + table_header + table_data
     table = f"<table border='1'>{table}</table>"
     return table
+
+def df_to_html_table(df):
+    html_table = df.to_html()
+    return html_table
+
+def to_bold_on_html(html_table):
+    """100.0 in bold and background"""
+    html_table = html_table.replace("100.0", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")
+    return html_table
+
+def table_in_html(html_table) -> str:
+    html = f"""
+        <!DOCTYPE html>
+            <html lang="ja">
+            <head>
+                <meta charset="utf-8">
+            </head>
+            <body>
+                {table_html}
+            </body>
+        </html>
+    """
+    return html
 
 def create_html(html_tables) -> str:
     """list of HTML table to HTML"""
