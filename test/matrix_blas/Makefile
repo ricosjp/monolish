@@ -12,6 +12,11 @@ MAT_TEST_SIZE?=124
 MAT_TEST_ITER?=100
 MAT_TEST_ANS_CHECK?=1
 
+define RUN_matmul
+	./$(1) $(2) $(3) Dense Dense $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_ITER) $(MAT_TEST_ANS_CHECK)
+
+endef
+
 all: cpu
 
 cpu: $(OBJS_CPU)
@@ -31,24 +36,40 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matmul cpu 10
-	bash ./test.sh matvec cpu 10
-	bash ./test.sh mscal cpu 10
+	bash ./test.sh matrix_common cpu 10
+	bash ./test.sh matrix_convert cpu 10
+	bash ./test.sh matrix_transpose cpu 10
+	bash ./test.sh matrix_blas cpu 10
+	bash ./test.sh matrix_arithmetic cpu 10
+	bash ./test.sh matrix_subvec_op cpu 10
+	bash ./test.sh matrix_math cpu 10
  
 run_gpu:
-	bash ./test.sh matmul gpu 10
-	bash ./test.sh matvec gpu 10
-	bash ./test.sh mscal gpu 10
+	bash ./test.sh matrix_common gpu 10
+	bash ./test.sh matrix_convert gpu 10
+	bash ./test.sh matrix_transpose gpu 10
+	bash ./test.sh matrix_blas gpu 10
+	bash ./test.sh matrix_arithmetic gpu 10
+	bash ./test.sh matrix_subvec_op gpu 10
+	bash ./test.sh matrix_math gpu 10
 
 run_fx:
-	bash ./test.sh matmul fx 10
-	bash ./test.sh matvec fx 10
-	bash ./test.sh mscal fx 10
+	bash ./test.sh matrix_common fx 10
+	bash ./test.sh matrix_convert fx 10
+	bash ./test.sh matrix_transpose fx 10
+	bash ./test.sh matrix_blas fx 10
+	bash ./test.sh matrix_arithmetic fx 10
+	bash ./test.sh matrix_subvec_op fx 10
+	bash ./test.sh matrix_math fx 10
 
 run_sx:
-	bash ./test.sh matmul sx 10
-	bash ./test.sh matvec sx 10
-	bash ./test.sh mscal sx 10
+	bash ./test.sh matrix_common sx 10
+	bash ./test.sh matrix_convert sx 10
+	bash ./test.sh matrix_transpose sx 10
+	bash ./test.sh matrix_blas sx 10
+	bash ./test.sh matrix_arithmetic sx 10
+	bash ./test.sh matrix_subvec_op sx 10
+	bash ./test.sh matrix_math sx 10
 
 clean:
 	- rm *.out
