@@ -93,8 +93,8 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 template <typename T>
 matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
   matrix::CRS<T> C(*this);
-  if(gpu_status==true){
-      C.send();
+  if (gpu_status == true) {
+    C.send();
   }
 
   blas::matadd(*this, B, C);

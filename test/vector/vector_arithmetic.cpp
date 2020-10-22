@@ -1,12 +1,12 @@
 #include "arithmetic/sv_add.hpp"
-#include "arithmetic/sv_sub.hpp"
-#include "arithmetic/sv_mul.hpp"
 #include "arithmetic/sv_div.hpp"
-#include "arithmetic/vv_add.hpp"
-#include "arithmetic/vv_sub.hpp"
-#include "arithmetic/vv_mul.hpp"
-#include "arithmetic/vv_div.hpp"
+#include "arithmetic/sv_mul.hpp"
+#include "arithmetic/sv_sub.hpp"
 #include "arithmetic/v_minus.hpp"
+#include "arithmetic/vv_add.hpp"
+#include "arithmetic/vv_div.hpp"
+#include "arithmetic/vv_mul.hpp"
+#include "arithmetic/vv_sub.hpp"
 
 int main(int argc, char **argv) {
 
@@ -80,8 +80,6 @@ int main(int argc, char **argv) {
   if (test_send_svdiv<float>(size, 1.0e-4) == false) {
     return 1;
   }
-
-
 
   // vector-vetor-add//
   if (test_vvadd<double>(size, 1.0e-8) == false) {

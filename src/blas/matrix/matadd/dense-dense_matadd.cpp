@@ -93,8 +93,8 @@ void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 template <typename T>
 matrix::Dense<T> matrix::Dense<T>::operator+(const matrix::Dense<T> &B) {
   matrix::Dense<T> C(get_row(), get_col());
-  if(gpu_status==true){
-      C.send();
+  if (gpu_status == true) {
+    C.send();
   }
 
   blas::matadd(*this, B, C);

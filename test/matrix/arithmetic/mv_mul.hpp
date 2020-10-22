@@ -2,7 +2,7 @@
 
 template <typename T>
 void ans_mv_mul(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
-             monolish::vector<T> &my) {
+                monolish::vector<T> &my) {
 
   if (A.get_col() != mx.size()) {
     std::runtime_error("A.col != x.size");

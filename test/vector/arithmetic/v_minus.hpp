@@ -8,9 +8,7 @@ void ans_minus(monolish::vector<T> &mx, monolish::vector<T> &ans) {
   }
 }
 
-template <typename T>
-bool test_send_minus(const size_t size, double tol)
-{
+template <typename T> bool test_send_minus(const size_t size, double tol) {
 
   // create random vector x rand(0.1~1.0)
   monolish::vector<T> x(size, 0.1, 1.0);
@@ -27,9 +25,7 @@ bool test_send_minus(const size_t size, double tol)
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }
 
-template <typename T>
-bool test_minus(const size_t size, double tol)
-{
+template <typename T> bool test_minus(const size_t size, double tol) {
 
   // create random vector x rand(0.1~1.0)
   monolish::vector<T> x(size, 0.1, 1.0);

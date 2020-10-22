@@ -2,8 +2,8 @@
 
 template <typename T>
 void ans_mm_mul(const monolish::matrix::Dense<T> &A,
-             const monolish::matrix::Dense<T> &B,
-             monolish::matrix::Dense<T> &C) {
+                const monolish::matrix::Dense<T> &B,
+                monolish::matrix::Dense<T> &C) {
 
   if (A.get_col() != B.get_row()) {
     std::cout << A.get_col() << B.get_row() << std::endl;
@@ -35,7 +35,8 @@ void ans_mm_mul(const monolish::matrix::Dense<T> &A,
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_mm_mul(const size_t M, const size_t N, const size_t K, double tol) {
+bool test_send_mm_mul(const size_t M, const size_t N, const size_t K,
+                      double tol) {
 
   size_t nnzrow = 81;
   if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K)) {
@@ -68,7 +69,8 @@ bool test_send_mm_mul(const size_t M, const size_t N, const size_t K, double tol
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(), ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+                      ansC.get_nnz(), tol);
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
@@ -103,5 +105,6 @@ bool test_mm_mul(const size_t M, const size_t N, const size_t K, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(), ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+                      ansC.get_nnz(), tol);
 }

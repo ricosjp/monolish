@@ -10,7 +10,8 @@ template <typename T> void ans_subvec_op(monolish::vector<T> &vec) {
   }
 }
 
-template <typename T> bool test_subvec_row(const size_t M, const size_t N, double tol) {
+template <typename T>
+bool test_subvec_row(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> A(M, N, 10.0); // M*N matrix
 
   monolish::vector<T> vec(A.get_col(), 2.0);
@@ -25,10 +26,12 @@ template <typename T> bool test_subvec_row(const size_t M, const size_t N, doubl
   A.row_div(A.get_row() - 1, 2.0);
   A.row(A.get_row() - 1, vec);
 
-  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(), tol);
+  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(),
+                      tol);
 }
 
-template <typename T> bool test_subvec_col(const size_t M, const size_t N, double tol) {
+template <typename T>
+bool test_subvec_col(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> A(M, N, 10.0); // M*N matrix
 
   monolish::vector<T> vec(A.get_row(), 2.0);
@@ -43,10 +46,12 @@ template <typename T> bool test_subvec_col(const size_t M, const size_t N, doubl
   A.col_div(A.get_col() - 1, 2.0);
   A.col(A.get_col() - 1, vec);
 
-  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(), tol);
+  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(),
+                      tol);
 }
 
-template <typename T> bool test_subvec_diag(const size_t M, const size_t N, double tol) {
+template <typename T>
+bool test_subvec_diag(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> A(M, N, 10.0); // M*N matrix
 
   monolish::vector<T> vec(A.get_row(), 2.0);
@@ -61,16 +66,14 @@ template <typename T> bool test_subvec_diag(const size_t M, const size_t N, doub
   A.diag_div(2.0);
   A.diag(vec);
 
-  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(), tol);
+  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(),
+                      tol);
 }
-
-
 
 int main(int argc, char **argv) {
 
   if (argc != 3) {
-    std::cout << "$1: row, $2: col"
-              << std::endl;
+    std::cout << "$1: row, $2: col" << std::endl;
     return 1;
   }
 
@@ -82,26 +85,26 @@ int main(int argc, char **argv) {
 
   // row //
   if (test_subvec_row<double>(M, N, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
   if (test_subvec_row<float>(M, N, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
 
   // col //
   if (test_subvec_col<double>(M, N, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
   if (test_subvec_col<float>(M, N, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
 
   // diag (only square now) //
   if (test_subvec_diag<double>(M, M, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
   if (test_subvec_diag<float>(M, M, 1.0e-8) == false) {
-      return 1;
+    return 1;
   }
 
   return 0;

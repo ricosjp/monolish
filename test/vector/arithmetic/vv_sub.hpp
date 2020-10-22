@@ -1,7 +1,8 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_vvsub(monolish::vector<T> &mx, monolish::vector<T> &my, monolish::vector<T> &ans) {
+void ans_vvsub(monolish::vector<T> &mx, monolish::vector<T> &my,
+               monolish::vector<T> &ans) {
   if (mx.size() != my.size()) {
     throw std::runtime_error("x.size != y.size");
   }
@@ -11,8 +12,7 @@ void ans_vvsub(monolish::vector<T> &mx, monolish::vector<T> &my, monolish::vecto
   }
 }
 
-template <typename T>
-bool test_send_vvsub(const size_t size, double tol){
+template <typename T> bool test_send_vvsub(const size_t size, double tol) {
 
   monolish::vector<T> x(size, 0.1, 1.0);
   monolish::vector<T> y(size, 0.1, 1.0);
@@ -28,8 +28,7 @@ bool test_send_vvsub(const size_t size, double tol){
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }
 
-template <typename T>
-bool test_vvsub(const size_t size, double tol){
+template <typename T> bool test_vvsub(const size_t size, double tol) {
 
   monolish::vector<T> x(size, 0.1, 1.0);
   monolish::vector<T> y(size, 0.1, 1.0);

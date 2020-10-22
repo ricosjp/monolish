@@ -30,7 +30,8 @@ bool test_send_tanh(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(), AA.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+                      AA.get_nnz(), tol);
 }
 
 template <typename MAT, typename T>
@@ -53,5 +54,6 @@ bool test_tanh(const size_t M, const size_t N, double tol) {
   A.tanh();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(), AA.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+                      AA.get_nnz(), tol);
 }

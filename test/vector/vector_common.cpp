@@ -63,7 +63,8 @@ template <typename T> bool test(const size_t size) {
     return false;
   }
 
-  std::cout << "Pass in " << __func__ << "(" << get_type<T>() << ")" << " precision" << std::endl;
+  std::cout << "Pass in " << __func__ << "(" << get_type<T>() << ")"
+            << " precision" << std::endl;
   return true;
 }
 
@@ -80,13 +81,13 @@ int main(int argc, char **argv) {
 
   // exec and error check
   if (test<double>(size) == false) {
-      std::cout << "error in double" << std::endl;
-      return 1;
+    std::cout << "error in double" << std::endl;
+    return 1;
   }
 
   if (test<float>(size) == false) {
-      std::cout << "error in float" << std::endl;
-      return 1;
+    std::cout << "error in float" << std::endl;
+    return 1;
   }
   return 0;
 }

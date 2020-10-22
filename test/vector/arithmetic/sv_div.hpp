@@ -11,8 +11,7 @@ void ans_svdiv(monolish::vector<T> &mx, T value, monolish::vector<T> &ans) {
   }
 }
 
-template <typename T>
-bool test_send_svdiv(const size_t size, double tol){
+template <typename T> bool test_send_svdiv(const size_t size, double tol) {
 
   T value = 123.0;
   monolish::vector<T> x(size, 0.1, 1.0);
@@ -28,8 +27,7 @@ bool test_send_svdiv(const size_t size, double tol){
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }
 
-template <typename T>
-bool test_svdiv(const size_t size, double tol){
+template <typename T> bool test_svdiv(const size_t size, double tol) {
 
   T value = 123.0;
   monolish::vector<T> x(size, 0.1, 1.0);

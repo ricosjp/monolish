@@ -11,11 +11,12 @@
 #include <random>
 #include <typeinfo>
 
-template<typename T> std::string get_type();
-template<> std::string get_type<double>() { return "double"; }
-template<> std::string get_type<float>() { return "float"; }
+template <typename T> std::string get_type();
+template <> std::string get_type<double>() { return "double"; }
+template <> std::string get_type<float>() { return "float"; }
 
-template <typename T> bool ans_check(const std::string& func, double result, double ans, double tol) {
+template <typename T>
+bool ans_check(const std::string &func, double result, double ans, double tol) {
 
   double err = std::abs(result - ans) / ans;
 
@@ -37,7 +38,9 @@ template <typename T> bool ans_check(const std::string& func, double result, dou
   }
 }
 
-template <typename T> bool ans_check(const std::string& func, const T *result, const T *ans, int size, double tol) {
+template <typename T>
+bool ans_check(const std::string &func, const T *result, const T *ans, int size,
+               double tol) {
 
   std::vector<int> num;
   bool check = true;
@@ -70,7 +73,9 @@ template <typename T> bool ans_check(const std::string& func, const T *result, c
   }
 }
 
-template <typename T> bool ans_check(const std::string& func, const std::string& type, const T *result, const T *ans, int size, double tol) {
+template <typename T>
+bool ans_check(const std::string &func, const std::string &type,
+               const T *result, const T *ans, int size, double tol) {
 
   std::vector<int> num;
   bool check = true;
@@ -84,7 +89,8 @@ template <typename T> bool ans_check(const std::string& func, const std::string&
   }
 
   if (check) {
-    std::cout << func << "(" << get_type<T>() << "," << type <<  ")" << std::flush;
+    std::cout << func << "(" << get_type<T>() << "," << type << ")"
+              << std::flush;
     std::cout << ": pass" << std::endl;
     return check;
   } else {
@@ -97,7 +103,8 @@ template <typename T> bool ans_check(const std::string& func, const std::string&
                 << "\tans:" << ans[num[i]] << std::endl;
     }
     std::cout << "===============================" << std::endl;
-    std::cout << func << "(" << get_type<T>() << "," << type <<  ")" << std::flush;
+    std::cout << func << "(" << get_type<T>() << "," << type << ")"
+              << std::flush;
     std::cout << ": fail" << std::endl;
     return check;
   }

@@ -6,8 +6,7 @@ template <typename T> void ans_vtanh(monolish::vector<T> &ans) {
   }
 }
 
-template <typename T>
-bool test_send_vtanh(const size_t size, double tol){
+template <typename T> bool test_send_vtanh(const size_t size, double tol) {
 
   monolish::vector<T> ans(size, 0.1, 10.0);
 
@@ -22,8 +21,7 @@ bool test_send_vtanh(const size_t size, double tol){
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), ans.size(), tol);
 }
 
-template <typename T>
-bool test_vtanh(const size_t size, double tol){
+template <typename T> bool test_vtanh(const size_t size, double tol) {
 
   monolish::vector<T> ans(size, 0.1, 10.0);
 
