@@ -39,6 +39,36 @@ bool ans_check(const std::string &func, double result, double ans, double tol) {
 }
 
 template <typename T>
+bool ans_check(const T *result, const T *ans, int size, double tol) {
+
+  std::vector<int> num;
+  bool check = true;
+
+  for (int i = 0; i < size; i++) {
+    double err = std::abs(result[i] - ans[i]) / ans[i];
+    if (err >= tol) {
+      check = false;
+      num.push_back(i);
+    }
+  }
+
+  if (check) {
+    return check;
+  } else {
+    std::cout << "Error!!" << std::endl;
+    std::cout << "===============================" << std::endl;
+    for (int i = 0; i < num.size(); i++) {
+      std::cout << std::fixed << std::resetiosflags(std::ios_base::floatfield)
+                << num[i] << "\tresult:" << std::flush;
+      std::cout << std::fixed << std::setprecision(15) << result[num[i]]
+                << "\tans:" << ans[num[i]] << std::endl;
+    }
+    std::cout << "===============================" << std::endl;
+    return check;
+  }
+}
+
+template <typename T>
 bool ans_check(const std::string &func, const T *result, const T *ans, int size,
                double tol) {
 
