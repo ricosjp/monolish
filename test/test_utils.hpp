@@ -69,3 +69,36 @@ template <typename T> bool ans_check(const std::string& func, const T *result, c
     return check;
   }
 }
+
+template <typename T> bool ans_check(const std::string& func, const std::string& type, const T *result, const T *ans, int size, double tol) {
+
+  std::vector<int> num;
+  bool check = true;
+
+  for (int i = 0; i < size; i++) {
+    double err = std::abs(result[i] - ans[i]) / ans[i];
+    if (err >= tol) {
+      check = false;
+      num.push_back(i);
+    }
+  }
+
+  if (check) {
+    std::cout << func << "(" << get_type<T>() << "," << type <<  ")" << std::flush;
+    std::cout << ": pass" << std::endl;
+    return check;
+  } else {
+    std::cout << "Error!!" << std::endl;
+    std::cout << "===============================" << std::endl;
+    for (int i = 0; i < num.size(); i++) {
+      std::cout << std::fixed << std::resetiosflags(std::ios_base::floatfield)
+                << num[i] << "\tresult:" << std::flush;
+      std::cout << std::fixed << std::setprecision(15) << result[num[i]]
+                << "\tans:" << ans[num[i]] << std::endl;
+    }
+    std::cout << "===============================" << std::endl;
+    std::cout << func << "(" << get_type<T>() << "," << type <<  ")" << std::flush;
+    std::cout << ": fail" << std::endl;
+    return check;
+  }
+}
