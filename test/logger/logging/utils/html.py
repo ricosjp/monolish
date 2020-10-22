@@ -23,7 +23,7 @@ def to_bold_on_html(html_table):
     html_table = html_table.replace("100.0", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")
     return html_table
 
-def table_in_html(html_table) -> str:
+def table_in_html(table_html) -> str:
     html = f"""
         <!DOCTYPE html>
             <html lang="ja">
