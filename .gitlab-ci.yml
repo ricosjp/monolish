@@ -136,22 +136,22 @@ vector_gpu_noavx:
 #
 # matrix
 #
-matrix_matrix_nogpu_avx:
+matrix_nogpu_avx:
     stage: matrix
     extends: .test_nogpu_avx
     variables:
       TEST_TARGET: "matrix"
-matrix_matrix_nogpu_noavx:
+matrix_nogpu_noavx:
     stage: matrix
     extends: .test_nogpu_noavx
     variables:
       TEST_TARGET: "matrix"
-matrix_matrix_gpu_avx:
+matrix_gpu_avx:
     stage: matrix
     extends: .test_gpu_avx
     variables:
       TEST_TARGET: "matrix"
-matrix_matrix_gpu_noavx:
+matrix_gpu_noavx:
     stage: matrix
     extends: .test_gpu_noavx
     variables:
