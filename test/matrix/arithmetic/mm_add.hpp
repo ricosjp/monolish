@@ -24,9 +24,9 @@ void ans_mm_add(const monolish::matrix::Dense<T> &A,
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_send_mm_add(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N)) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = std::min({M, N}) - 1;
   }
@@ -58,9 +58,9 @@ bool test_send_mm_add(const size_t M, const size_t N, double tol) {
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_mm_add(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N)) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = std::min({M, N}) - 1;
   }

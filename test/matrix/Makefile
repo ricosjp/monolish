@@ -36,40 +36,40 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matrix_common cpu 10
-	bash ./test.sh matrix_convert cpu 10
-	bash ./test.sh matrix_transpose cpu 10
-	bash ./test.sh matrix_blas cpu 10
-	bash ./test.sh matrix_arithmetic cpu 10
-	bash ./test.sh matrix_subvec_op cpu 10
-	bash ./test.sh matrix_math cpu 10
+	bash ./test.sh matrix_common cpu
+	bash ./test.sh matrix_convert cpu
+	bash ./test.sh matrix_transpose cpu
+	bash ./test.sh matrix_blas cpu
+	bash ./test.sh matrix_arithmetic cpu
+	bash ./test.sh matrix_subvec_op cpu
+	bash ./test.sh matrix_math cpu
  
 run_gpu:
-	bash ./test.sh matrix_common gpu 10
-	bash ./test.sh matrix_convert gpu 10
-	bash ./test.sh matrix_transpose gpu 10
-	bash ./test.sh matrix_blas gpu 10
-	bash ./test.sh matrix_arithmetic gpu 10
-	bash ./test.sh matrix_subvec_op gpu 10
-	bash ./test.sh matrix_math gpu 10
+	bash ./test.sh matrix_common gpu
+	bash ./test.sh matrix_convert gpu
+	bash ./test.sh matrix_transpose gpu
+	bash ./test.sh matrix_blas gpu
+	bash ./test.sh matrix_arithmetic gpu
+	bash ./test.sh matrix_subvec_op gpu
+	bash ./test.sh matrix_math gpu
 
 run_fx:
-	bash ./test.sh matrix_common fx 10
-	bash ./test.sh matrix_convert fx 10
-	bash ./test.sh matrix_transpose fx 10
-	bash ./test.sh matrix_blas fx 10
-	bash ./test.sh matrix_arithmetic fx 10
-	bash ./test.sh matrix_subvec_op fx 10
-	bash ./test.sh matrix_math fx 10
+	bash ./test.sh matrix_common fx
+	bash ./test.sh matrix_convert fx
+	bash ./test.sh matrix_transpose fx
+	bash ./test.sh matrix_blas fx
+	bash ./test.sh matrix_arithmetic fx
+	bash ./test.sh matrix_subvec_op fx
+	bash ./test.sh matrix_math fx
 
 run_sx:
-	bash ./test.sh matrix_common sx 10
-	bash ./test.sh matrix_convert sx 10
-	bash ./test.sh matrix_transpose sx 10
-	bash ./test.sh matrix_blas sx 10
-	bash ./test.sh matrix_arithmetic sx 10
-	bash ./test.sh matrix_subvec_op sx 10
-	bash ./test.sh matrix_math sx 10
+	bash ./test.sh matrix_common sx
+	bash ./test.sh matrix_convert sx
+	bash ./test.sh matrix_transpose sx
+	bash ./test.sh matrix_blas sx
+	bash ./test.sh matrix_arithmetic sx
+	bash ./test.sh matrix_subvec_op sx
+	bash ./test.sh matrix_math sx
 
 clean:
 	- rm *.out

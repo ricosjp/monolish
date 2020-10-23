@@ -3,9 +3,9 @@
 template <typename MAT, typename T>
 bool test_send_transpose(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if (nnzrow < N) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = N - 1;
   }
@@ -46,9 +46,9 @@ bool test_send_transpose(const size_t M, const size_t N, double tol) {
 template <typename MAT, typename T>
 bool test_transpose(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if (nnzrow < N) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = N - 1;
   }
@@ -88,6 +88,9 @@ int main(int argc, char **argv) {
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
+
+  std::cout << "M=" << M << ", N=" << N << std::endl;
+
   if (test_send_transpose<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-6) == false) {
     return 1;

@@ -83,6 +83,8 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
+  std::cout << "M=" << M << ", N=" << N << std::endl;
+
   // row //
   if (test_subvec_row<double>(M, N, 1.0e-8) == false) {
     return 1;

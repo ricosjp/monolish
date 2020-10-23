@@ -29,9 +29,9 @@ void ans_mv_mul(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
 template <typename MAT, typename T>
 bool test_send_mv_mul(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if (nnzrow < N) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = N - 1;
   }
@@ -60,9 +60,9 @@ bool test_send_mv_mul(const size_t M, const size_t N, double tol) {
 template <typename MAT, typename T>
 bool test_mv_mul(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if (nnzrow < N) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = N - 1;
   }

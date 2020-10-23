@@ -2,9 +2,9 @@
 
 template <typename MAT, typename T>
 bool test_convert(const size_t M, const size_t N) {
-  size_t nnzrow = 81;
+  size_t nnzrow = 27;
   if ((nnzrow < N)) {
-    nnzrow = 81;
+    nnzrow = 27;
   } else {
     nnzrow = N - 1;
   }
@@ -73,6 +73,8 @@ int main(int argc, char **argv) {
 
   const size_t M = atoi(argv[1]);
   const size_t N = atoi(argv[2]);
+
+  std::cout << "M=" << M << ", N=" << N << std::endl;
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
