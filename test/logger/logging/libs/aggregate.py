@@ -86,35 +86,34 @@ class AggregatePandas:
         df = pd.DataFrame(dict_list)
 
         # add flg
-        any_group_df = df
-        any_group_df = any_group_df[["type", "name", "time", "stat"]]
-        any_group_df["layer"] = any_group_df.name.apply(lambda x:x.count("/")-1)
+        df = df[["type", "name", "time", "stat"]]
+        df["layer"] = df.name.apply(lambda x:x.count("/")-1)
 
-        max_layer = max(any_group_df.layer+1)
+        max_layer = max(df.layer+1)
         for any_layer in range(max_layer):
-            for index, row in any_group_df.iterrows():
+            for index, row in df.iterrows():
                 row[f"layer_{any_layer}_flg"] = 1 if row.layer == any_layer else np.nan
-                any_group_df.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
+                df.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
 
         # group lable
         for any_layer in range(max_layer):
-            number_of_groups = any_group_df[f"layer_{any_layer}_flg"].sum()
-            temp_df1 = any_group_df[(any_group_df.layer ==any_layer) & (np.isnan(any_group_df.time) == False)]
+            number_of_groups = df[f"layer_{any_layer}_flg"].sum()
+            temp_df1 = df[(df.layer ==any_layer) & (np.isnan(df.time) == False)]
             temp_df1[f"group_{any_layer}"] = [i for i in range(len(temp_df1))]
-            any_group_df = any_group_df.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
-            any_group_df.stat = any_group_df.stat.fillna("-")
-            any_group_df[any_group_df["layer"]==any_layer] = any_group_df[any_group_df["layer"]==any_layer].fillna(method="bfill")
-            any_group_df[any_group_df["layer"]>=any_layer] = any_group_df[any_group_df["layer"]>=any_layer].fillna(method="bfill")
+            df = df.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
+            df.stat = df.stat.fillna("-")
+            df[df["layer"]==any_layer] = df[df["layer"]==any_layer].fillna(method="bfill")
+            df[df["layer"]>=any_layer] = df[df["layer"]>=any_layer].fillna(method="bfill")
 
         # drop "IN"
-        any_group_df = any_group_df[any_group_df.stat != "IN"]
+        df = df[df.stat != "IN"]
         for any_layer in range(max_layer):
-            any_group_df[f"layer_{any_layer}_flg"] = any_group_df[f"layer_{any_layer}_flg"].fillna(0.0)
-        any_group_df = any_group_df.fillna("-")
+            df[f"layer_{any_layer}_flg"] = df[f"layer_{any_layer}_flg"].fillna(0.0)
+        df = df.fillna("-")
 
         # aggregate base
         temp_list = [f"group_{target_layer}" for target_layer in range(max_layer)]
-        aggr_df = any_group_df.groupby(["name", "layer"] + temp_list).sum()
+        aggr_df = df.groupby(["name", "layer"] + temp_list).sum()
         aggr_df = aggr_df.reset_index()
 
         # split
