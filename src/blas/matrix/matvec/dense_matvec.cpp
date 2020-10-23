@@ -111,7 +111,9 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
 
 template <typename T> vector<T> matrix::Dense<T>::operator*(vector<T> &vec) {
   vector<T> y(get_row());
-  y.send();
+  if (gpu_status == true) {
+    y.send();
+  }
 
   blas::matvec(*this, vec, y);
 

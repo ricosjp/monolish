@@ -42,10 +42,16 @@ template <typename T> void vector<T>::tanh() {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  recv();
+  if (gpu_status == true) {
+    recv();
+  }
+
   T *vald = val.data();
   tanh_core(get_nnz(), vald);
-  send();
+
+  if (gpu_status == true) {
+    send();
+  }
 
   logger.func_out();
 }
@@ -59,10 +65,16 @@ template <typename T> void matrix::Dense<T>::tanh() {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  recv();
+  if (gpu_status == true) {
+    recv();
+  }
+
   T *vald = val.data();
   tanh_core(get_nnz(), vald);
-  send();
+
+  if (gpu_status == true) {
+    send();
+  }
 
   logger.func_out();
 }
@@ -76,10 +88,16 @@ template <typename T> void matrix::CRS<T>::tanh() {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  recv();
+  if (gpu_status == true) {
+    recv();
+  }
+
   T *vald = val.data();
   tanh_core(get_nnz(), vald);
-  send();
+
+  if (gpu_status == true) {
+    send();
+  }
 
   logger.func_out();
 }
