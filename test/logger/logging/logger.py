@@ -25,11 +25,12 @@ def main():
 
         # Aggregate
         aggregate_pandas = aggregate.AggregatePandas()
-        df = aggregate_pandas.aggregated(yaml_dict_list)
+        other_df, solve_df = aggregate_pandas.aggregated(yaml_dict_list)
         debug.log_success("aggregated")
 
         # create html
-        table_html = html_module.df_to_html_table(df)
+        table_html = html_module.df_to_html_table(other_df)
+        table_html = table_html + html_module.df_to_html_table(solve_df)
         html = html_module.table_in_html(table_html)
         debug.log_success("html")
 

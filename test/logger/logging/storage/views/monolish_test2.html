@@ -12,13 +12,70 @@
       <th>name</th>
       <th>layer</th>
       <th>group_0</th>
+      <th>time</th>
+      <th>cont_cnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>convert/</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>0.000290</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>input_mm/</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000848</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>send/</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>0.000820</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>set_apply_precond/</td>
+      <td>0</td>
+      <td>4.0</td>
+      <td>0.000271</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>set_create_precond/</td>
+      <td>0</td>
+      <td>3.0</td>
+      <td>0.000280</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>layer</th>
+      <th>group_0</th>
       <th>group_1</th>
       <th>group_2</th>
       <th>group_3</th>
       <th>time</th>
-      <th>layer1/layer0[%]</th>
-      <th>layer2/layer1[%]</th>
-      <th>layer3/layer2[%]</th>
+      <th>cont_cnt</th>
+      <th>breakdown_0 layer1/layer0[%]</th>
+      <th>breakdown_1 layer2/layer1[%]</th>
+      <th>breakdown_2 layer3/layer2[%]</th>
+      <th>breakdown_0[%] / count</th>
+      <th>breakdown_1[%] / count</th>
+      <th>breakdown_2[%] / count</th>
     </tr>
   </thead>
   <tbody>
@@ -26,12 +83,16 @@
       <th>0</th>
       <td>solve/</td>
       <td>0</td>
-      <td>7.0</td>
+      <td>5</td>
       <td></td>
       <td></td>
       <td></td>
       <td>0.048752</td>
-      <td>100.000000</td>
+      <td>1</td>
+      <td>100</td>
+      <td></td>
+      <td></td>
+      <td>100</td>
       <td></td>
       <td></td>
     </tr>
@@ -39,455 +100,408 @@
       <th>1</th>
       <td>solve/monolish_CG/</td>
       <td>1</td>
-      <td>7.0</td>
-      <td>1.0</td>
+      <td>5</td>
+      <td>1</td>
       <td></td>
       <td></td>
       <td>0.047894</td>
-      <td>98.239050</td>
+      <td>1</td>
+      <td>98.2391</td>
       <td>100</td>
       <td></td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>solve/monolish_CG/send/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td></td>
-      <td>0.000375</td>
-      <td>0.769678</td>
-      <td>0.783474</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>solve/monolish_CG/send/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td></td>
-      <td>0.000367</td>
-      <td>0.753732</td>
-      <td>0.767242</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>solve/monolish_CG/operator-/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>10.0</td>
-      <td></td>
-      <td>0.003928</td>
-      <td>8.057725</td>
-      <td>8.20216</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>solve/monolish_CG/operator=/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>11.0</td>
-      <td></td>
-      <td>0.000457</td>
-      <td>0.937252</td>
-      <td>0.954052</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>solve/monolish_CG/operator=/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>12.0</td>
-      <td></td>
-      <td>0.000420</td>
-      <td>0.861188</td>
-      <td>0.876624</td>
+      <td>98.2391</td>
+      <td>100</td>
       <td></td>
     </tr>
     <tr>
       <th>2</th>
-      <td>solve/monolish_CG/apply_precond/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>14.0</td>
-      <td></td>
-      <td>0.001450</td>
-      <td>2.974333</td>
-      <td>3.02765</td>
-      <td>100</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>solve/monolish_CG/apply_precond/operator=/</td>
-      <td>3</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>14.0</td>
-      <td>0.0</td>
-      <td>0.000459</td>
-      <td>0.940975</td>
-      <td>0.957842</td>
-      <td>31.6365</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>solve/monolish_CG/matvec/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>15.0</td>
-      <td></td>
-      <td>0.004008</td>
-      <td>8.221205</td>
-      <td>8.36857</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>solve/monolish_CG/dot/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>16.0</td>
-      <td></td>
-      <td>0.002386</td>
-      <td>4.893553</td>
-      <td>4.98127</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>solve/monolish_CG/dot/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>17.0</td>
-      <td></td>
-      <td>0.000398</td>
-      <td>0.815883</td>
-      <td>0.830508</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>solve/monolish_CG/axpy/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>18.0</td>
-      <td></td>
-      <td>0.000400</td>
-      <td>0.821050</td>
-      <td>0.835767</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>solve/monolish_CG/axpy/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>19.0</td>
-      <td></td>
-      <td>0.000412</td>
-      <td>0.844117</td>
-      <td>0.859248</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>29</th>
       <td>solve/monolish_CG/send/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>2.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
       <td></td>
-      <td>0.000370</td>
-      <td>0.758287</td>
-      <td>0.77188</td>
+      <td>0.002612</td>
+      <td>7</td>
+      <td></td>
+      <td>5.45345</td>
+      <td></td>
+      <td></td>
+      <td>0.779064</td>
       <td></td>
     </tr>
     <tr>
       <th>3</th>
-      <td>solve/monolish_CG/apply_precond/</td>
+      <td>solve/monolish_CG/create_precond/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>21.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
       <td></td>
-      <td>0.001438</td>
-      <td>2.950355</td>
-      <td>3.00324</td>
-      <td>100</td>
+      <td>0.000852</td>
+      <td>2</td>
+      <td></td>
+      <td>1.77909</td>
+      <td></td>
+      <td></td>
+      <td>0.889544</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>solve/monolish_CG/matvec/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>2</td>
+      <td></td>
+      <td>0.007625</td>
+      <td>1</td>
+      <td></td>
+      <td>15.9208</td>
+      <td></td>
+      <td></td>
+      <td>15.9208</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>solve/monolish_CG/operator-/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td>0.003928</td>
+      <td>1</td>
+      <td></td>
+      <td>8.20216</td>
+      <td></td>
+      <td></td>
+      <td>8.20216</td>
+      <td></td>
     </tr>
     <tr>
       <th>6</th>
+      <td>solve/monolish_CG/operator=/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>4</td>
+      <td></td>
+      <td>0.000877</td>
+      <td>2</td>
+      <td></td>
+      <td>1.83068</td>
+      <td></td>
+      <td></td>
+      <td>0.915338</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>solve/monolish_CG/apply_precond/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>6</td>
+      <td></td>
+      <td>0.001450</td>
+      <td>1</td>
+      <td></td>
+      <td>3.02765</td>
+      <td>100</td>
+      <td></td>
+      <td>3.02765</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>solve/monolish_CG/apply_precond/operator=/</td>
       <td>3</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>21.0</td>
-      <td>1.0</td>
-      <td>0.000439</td>
-      <td>0.899801</td>
-      <td>0.91593</td>
-      <td>30.4981</td>
+      <td>5</td>
+      <td>1</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.000459</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>31.6365</td>
+      <td></td>
+      <td></td>
+      <td>31.6365</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>solve/monolish_CG/dot/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>22.0</td>
-      <td></td>
-      <td>0.000389</td>
-      <td>0.797235</td>
-      <td>0.811526</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>solve/monolish_CG/xpay/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>23.0</td>
-      <td></td>
-      <td>0.003986</td>
-      <td>8.176489</td>
-      <td>8.32305</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>solve/monolish_CG/nrm2/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>24.0</td>
-      <td></td>
-      <td>0.000439</td>
-      <td>0.901003</td>
-      <td>0.917154</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>21</th>
+      <th>9</th>
       <td>solve/monolish_CG/matvec/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>25.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>7</td>
       <td></td>
-      <td>0.003947</td>
-      <td>8.095877</td>
-      <td>8.241</td>
+      <td>0.004008</td>
+      <td>1</td>
       <td></td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>solve/monolish_CG/dot/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>26.0</td>
+      <td>8.36857</td>
       <td></td>
-      <td>0.000428</td>
-      <td>0.877343</td>
-      <td>0.893069</td>
       <td></td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>solve/monolish_CG/dot/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>27.0</td>
-      <td></td>
-      <td>0.000405</td>
-      <td>0.830803</td>
-      <td>0.845695</td>
+      <td>8.36857</td>
       <td></td>
     </tr>
     <tr>
       <th>10</th>
-      <td>solve/monolish_CG/axpy/</td>
+      <td>solve/monolish_CG/dot/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>28.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>8</td>
       <td></td>
-      <td>0.000387</td>
-      <td>0.794836</td>
-      <td>0.809083</td>
+      <td>0.002783</td>
+      <td>2</td>
+      <td></td>
+      <td>5.81178</td>
+      <td></td>
+      <td></td>
+      <td>2.90589</td>
       <td></td>
     </tr>
     <tr>
       <th>11</th>
       <td>solve/monolish_CG/axpy/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>29.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>9</td>
       <td></td>
-      <td>0.000409</td>
-      <td>0.839609</td>
-      <td>0.854659</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>solve/monolish_CG/send/</td>
+      <td>0.000812</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>3.0</td>
       <td></td>
-      <td>0.000369</td>
-      <td>0.756216</td>
-      <td>0.769771</td>
+      <td>1.69502</td>
+      <td></td>
+      <td></td>
+      <td>0.847508</td>
       <td></td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>12</th>
       <td>solve/monolish_CG/apply_precond/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>31.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>11</td>
       <td></td>
-      <td>0.001476</td>
-      <td>3.027398</td>
-      <td>3.08166</td>
+      <td>0.001438</td>
+      <td>1</td>
+      <td></td>
+      <td>3.00324</td>
+      <td>100</td>
+      <td></td>
+      <td>3.00324</td>
       <td>100</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>13</th>
       <td>solve/monolish_CG/apply_precond/operator=/</td>
       <td>3</td>
-      <td>7.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>11</td>
       <td>1.0</td>
-      <td>31.0</td>
-      <td>2.0</td>
-      <td>0.000477</td>
-      <td>0.977917</td>
-      <td>0.995446</td>
-      <td>32.3022</td>
+      <td>0.000439</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>30.4981</td>
+      <td></td>
+      <td></td>
+      <td>30.4981</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>solve/monolish_CG/dot/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>12</td>
+      <td></td>
+      <td>0.000389</td>
+      <td>1</td>
+      <td></td>
+      <td>0.811526</td>
+      <td></td>
+      <td></td>
+      <td>0.811526</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>solve/monolish_CG/xpay/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>13</td>
+      <td></td>
+      <td>0.003986</td>
+      <td>1</td>
+      <td></td>
+      <td>8.32305</td>
+      <td></td>
+      <td></td>
+      <td>8.32305</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>solve/monolish_CG/nrm2/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>14</td>
+      <td></td>
+      <td>0.000439</td>
+      <td>1</td>
+      <td></td>
+      <td>0.917154</td>
+      <td></td>
+      <td></td>
+      <td>0.917154</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>solve/monolish_CG/matvec/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>15</td>
+      <td></td>
+      <td>0.003947</td>
+      <td>1</td>
+      <td></td>
+      <td>8.241</td>
+      <td></td>
+      <td></td>
+      <td>8.241</td>
+      <td></td>
     </tr>
     <tr>
       <th>18</th>
       <td>solve/monolish_CG/dot/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>32.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>16</td>
       <td></td>
-      <td>0.000410</td>
-      <td>0.840403</td>
-      <td>0.855467</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>solve/monolish_CG/xpay/</td>
+      <td>0.000833</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>33.0</td>
       <td></td>
-      <td>0.004029</td>
-      <td>8.265039</td>
-      <td>8.41319</td>
+      <td>1.73876</td>
       <td></td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>solve/monolish_CG/nrm2/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>34.0</td>
       <td></td>
-      <td>0.000430</td>
-      <td>0.882350</td>
-      <td>0.898166</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>solve/monolish_CG/send/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td></td>
-      <td>0.000388</td>
-      <td>0.796076</td>
-      <td>0.810346</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>solve/monolish_CG/send/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>5.0</td>
-      <td></td>
-      <td>0.000372</td>
-      <td>0.762078</td>
-      <td>0.775738</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>solve/monolish_CG/send/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td></td>
-      <td>0.000371</td>
-      <td>0.761350</td>
-      <td>0.774997</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>solve/monolish_CG/create_precond/</td>
-      <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>8.0</td>
-      <td></td>
-      <td>0.000852</td>
-      <td>1.747759</td>
-      <td>1.77909</td>
+      <td>0.869382</td>
       <td></td>
     </tr>
     <tr>
       <th>19</th>
-      <td>solve/monolish_CG/matvec/</td>
+      <td>solve/monolish_CG/axpy/</td>
       <td>2</td>
-      <td>7.0</td>
-      <td>1.0</td>
-      <td>9.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>17</td>
       <td></td>
-      <td>0.007625</td>
-      <td>15.640434</td>
-      <td>15.9208</td>
+      <td>0.000797</td>
+      <td>2</td>
+      <td></td>
+      <td>1.66374</td>
+      <td></td>
+      <td></td>
+      <td>0.831871</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>solve/monolish_CG/apply_precond/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>19</td>
+      <td></td>
+      <td>0.001476</td>
+      <td>1</td>
+      <td></td>
+      <td>3.08166</td>
+      <td>100</td>
+      <td></td>
+      <td>3.08166</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>solve/monolish_CG/apply_precond/operator=/</td>
+      <td>3</td>
+      <td>5</td>
+      <td>1</td>
+      <td>19</td>
+      <td>2.0</td>
+      <td>0.000477</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>32.3022</td>
+      <td></td>
+      <td></td>
+      <td>32.3022</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>solve/monolish_CG/dot/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>20</td>
+      <td></td>
+      <td>0.000410</td>
+      <td>1</td>
+      <td></td>
+      <td>0.855467</td>
+      <td></td>
+      <td></td>
+      <td>0.855467</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>solve/monolish_CG/xpay/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>21</td>
+      <td></td>
+      <td>0.004029</td>
+      <td>1</td>
+      <td></td>
+      <td>8.41319</td>
+      <td></td>
+      <td></td>
+      <td>8.41319</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>solve/monolish_CG/nrm2/</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>22</td>
+      <td></td>
+      <td>0.000430</td>
+      <td>1</td>
+      <td></td>
+      <td>0.898166</td>
+      <td></td>
+      <td></td>
+      <td>0.898166</td>
       <td></td>
     </tr>
   </tbody>
