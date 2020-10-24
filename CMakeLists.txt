@@ -50,8 +50,18 @@ install(
 find_package(OpenMP REQUIRED)
 if(MONOLISH_USE_GPU)
   # GPU offloading
-  target_compile_options(${MONOLISTH_TARGET} PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
-  target_link_options(${MONOLISTH_TARGET} PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
+  target_compile_options(${MONOLISTH_TARGET} PRIVATE
+    -fopenmp
+    -fno-stack-protector
+    -fcf-protection=none
+    -foffload=nvptx-none="-O3"
+  )
+  target_link_options(${MONOLISTH_TARGET} PRIVATE
+    -fopenmp
+    -fno-stack-protector
+    -fcf-protection=none
+    -foffload=nvptx-none="-O3"
+  )
 else()
   target_compile_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
   target_link_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
