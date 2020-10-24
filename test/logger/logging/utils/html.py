@@ -20,7 +20,7 @@ def df_to_html_table(df):
 
 def to_bold_on_html(html_table):
     """100.0 in bold and background"""
-    html_table = html_table.replace("100.0", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")
+    html_table = html_table.replace("100", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")
     return html_table
 
 def table_in_html(table_html) -> str:
