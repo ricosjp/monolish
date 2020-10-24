@@ -175,7 +175,6 @@ class AggregatePandas:
             solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[["layer", f"breakdown_{target_layer}[%] / count"]].T.apply(lambda x: x[f"breakdown_{target_layer}[%] / count"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
             solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
 
-
         # drop column layer flag
         layer_column_list = [f"layer_{target_layer}_flg" for target_layer in range(solve_max_layer+1)]
         solve_df = solve_df.drop(columns=layer_column_list)

@@ -32,6 +32,7 @@ def main():
         table_html = html_module.df_to_html_table(other_df)
         table_html = table_html + html_module.df_to_html_table(solve_df)
         html = html_module.table_in_html(table_html)
+        html = html_module.to_bold_on_html(html)
         debug.log_success("html")
 
         # write html
