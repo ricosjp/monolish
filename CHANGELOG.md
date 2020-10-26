@@ -23,6 +23,7 @@ Unreleased
 
 ### Added
 - CHANGELOG.md (このファイル) の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/106
+- GitLab CI で Merge Request 毎に origin/master から CHANGELOG.md に更新があるかチェックする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
 
 ### Changed
 - Base allgebra image switched from 20.10.0 to 20.10.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
