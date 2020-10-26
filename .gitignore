@@ -29,6 +29,7 @@ monolish_test.log
 test/logger/logging/libs/__pycache__/*.pyc
 test/logger/logging/utils/__pycache__/*.pyc
 test/logger/logging/*.html
+test/logger/logging/storage/views/*.html
 
 # cmake
 build*/
