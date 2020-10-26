@@ -22,4 +22,4 @@ Unreleased
 -----------
 
 ### Added
-- CHANGELOG.mdの追加、CIでMerge Request毎にCHANGELOGを更新したかを監視する https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/106
+- CHANGELOG.md (このファイル) の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/106
