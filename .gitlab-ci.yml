@@ -1,4 +1,4 @@
-image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.0
+image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.1
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -263,7 +263,7 @@ pages:
       - logger_nogpu_avx
       # and must be after all tests passed
       # To avoid overwrite logger.html
-    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
+    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
     stage: deploy
     script:
         - rm -rf public html
@@ -278,7 +278,7 @@ pages:
         - master
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
+    image: registry.ritc.jp/ricos/allgebra/clang-format:20.10.1
     stage: build_lib
     script:
         - check-format.sh
