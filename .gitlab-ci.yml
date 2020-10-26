@@ -284,3 +284,9 @@ clang_format:
         - check-format.sh
     allow_failure: true
 
+keep-changelog:
+    image: registry.ritc.jp/ricos/allgebra/clang-format:20.10.1
+    stage: build_lib
+    script:
+        - bash -c "! git diff --exit-code master CHANGELOG.md"
+    allow_failure: true
