@@ -1,12 +1,6 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#else
-#include <cblas.h>
-#endif
-
 namespace monolish {
 
 // double ///////////////////
@@ -22,6 +16,10 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
 
   const double *Ad = A.val.data();
   const double *Bd = B.val.data();
@@ -30,17 +28,21 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   // MN = MK * KN
   const size_t nnz = A.get_nnz();
 
+  if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    Cd[i] = Ad[i] + Bd[i];
-  }
+    for (size_t i = 0; i < nnz; i++) {
+      Cd[i] = Ad[i] + Bd[i];
+    }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    Cd[i] = Ad[i] + Bd[i];
-  }
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < nnz; i++) {
+      Cd[i] = Ad[i] + Bd[i];
+    }
+  }
   logger.func_out();
 }
 
@@ -57,6 +59,10 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
 
   const float *Ad = A.val.data();
   const float *Bd = B.val.data();
@@ -65,17 +71,21 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   // MN = MK * KN
   const size_t nnz = A.get_nnz();
 
+  if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    Cd[i] = Ad[i] + Bd[i];
-  }
+    for (size_t i = 0; i < nnz; i++) {
+      Cd[i] = Ad[i] + Bd[i];
+    }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++) {
-    Cd[i] = Ad[i] + Bd[i];
-  }
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < nnz; i++) {
+      Cd[i] = Ad[i] + Bd[i];
+    }
+  }
 
   logger.func_out();
 }
@@ -83,7 +93,9 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 template <typename T>
 matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
   matrix::CRS<T> C(*this);
-  C.send();
+  if (gpu_status == true) {
+    C.send();
+  }
 
   blas::matadd(*this, B, C);
 

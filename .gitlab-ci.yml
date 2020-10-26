@@ -1,4 +1,4 @@
-image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.0
+image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.1
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -7,8 +7,8 @@ before_script:
 stages:
     - build_lib
     - test_build
-    - common
-    - blas
+    - vector
+    - matrix
     - equation
     - logger
     - lang
@@ -110,100 +110,52 @@ build_cmake_nogpu_noavx:
       - make -C test/${TEST_TARGET} run_gpu
 
 #
-# vector_common
+# vector
 #
-vector_common_nogpu_avx:
-    stage: common
+vector_nogpu_avx:
+    stage: vector
     extends: .test_nogpu_avx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_nogpu_noavx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_nogpu_noavx:
+    stage: vector
     extends: .test_nogpu_noavx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_gpu_avx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_gpu_avx:
+    stage: vector
     extends: .test_gpu_avx
     variables:
-      TEST_TARGET: "vector_common"
-vector_common_gpu_noavx:
-    stage: common
+      TEST_TARGET: "vector"
+vector_gpu_noavx:
+    stage: vector
     extends: .test_gpu_noavx
     variables:
-      TEST_TARGET: "vector_common"
+      TEST_TARGET: "vector"
 
 #
-# matrix_common
+# matrix
 #
-matrix_common_nogpu_avx:
-    stage: common
+matrix_nogpu_avx:
+    stage: matrix
     extends: .test_nogpu_avx
     variables:
-      TEST_TARGET: "matrix_common"
-matrix_common_nogpu_noavx:
-    stage: common
+      TEST_TARGET: "matrix"
+matrix_nogpu_noavx:
+    stage: matrix
     extends: .test_nogpu_noavx
     variables:
-      TEST_TARGET: "matrix_common"
-matrix_common_gpu_avx:
-    stage: common
+      TEST_TARGET: "matrix"
+matrix_gpu_avx:
+    stage: matrix
     extends: .test_gpu_avx
     variables:
-      TEST_TARGET: "matrix_common"
-matrix_common_gpu_noavx:
-    stage: common
+      TEST_TARGET: "matrix"
+matrix_gpu_noavx:
+    stage: matrix
     extends: .test_gpu_noavx
     variables:
-      TEST_TARGET: "matrix_common"
-
-#
-# vector_blas
-#
-vector_blas_nogpu_avx:
-    stage: blas
-    extends: .test_nogpu_avx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_nogpu_noavx:
-    stage: blas
-    extends: .test_nogpu_noavx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_gpu_avx:
-    stage: blas
-    extends: .test_gpu_avx
-    variables:
-      TEST_TARGET: "vector_blas"
-vector_blas_gpu_noavx:
-    stage: blas
-    extends: .test_gpu_noavx
-    variables:
-      TEST_TARGET: "vector_blas"
-
-#
-# matrix_blas
-#
-matrix_blas_nogpu_avx:
-    stage: blas
-    extends: .test_nogpu_avx
-    variables:
-      TEST_TARGET: "matrix_blas"
-matrix_blas_nogpu_noavx:
-    stage: blas
-    extends: .test_nogpu_noavx
-    variables:
-      TEST_TARGET: "matrix_blas"
-matrix_blas_gpu_avx:
-    stage: blas
-    extends: .test_gpu_avx
-    variables:
-      TEST_TARGET: "matrix_blas"
-matrix_blas_gpu_noavx:
-    stage: blas
-    extends: .test_gpu_noavx
-    variables:
-      TEST_TARGET: "matrix_blas"
+      TEST_TARGET: "matrix"
 
 #
 # equation
@@ -311,7 +263,7 @@ pages:
       - logger_nogpu_avx
       # and must be after all tests passed
       # To avoid overwrite logger.html
-    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.0
+    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
     stage: deploy
     script:
         - rm -rf public html
@@ -326,9 +278,17 @@ pages:
         - master
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:0.2.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
     stage: build_lib
     script:
         - check-format.sh
     allow_failure: true
 
+keep-changelog:
+    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
+    stage: build_lib
+    script:
+        - bash -c "! git diff --exit-code origin/master CHANGELOG.md"
+    allow_failure: true
+    except:
+        - master

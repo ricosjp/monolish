@@ -11,44 +11,62 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(monolish CXX Fortran)
 
 option(MONOLISH_USE_GPU "build GPU variant" OFF)
-option(MONOLISH_USE_AVX   "Require AVX" ON)
+option(MONOLISH_USE_AVX "Require AVX" ON)
+
+if(MONOLISH_USE_GPU)
+  set(MONOLISTH_TARGET monolish_gpu)
+else()
+  set(MONOLISTH_TARGET monolish_cpu)
+endif()
 
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
 
-function(common_setup target_name)
-  add_library(${target_name} SHARED "")
+add_library(${MONOLISTH_TARGET} SHARED "")
 
-  target_sources(${target_name}
-    PRIVATE
-    ${MONOLISH_SOURCE_FILES}
-    )
+target_sources(${MONOLISTH_TARGET}
+  PRIVATE
+  ${MONOLISH_SOURCE_FILES}
+)
 
-  set_property(TARGET ${target_name} PROPERTY CXX_STANDARD 14)
-  target_compile_options(${target_name} PRIVATE -g -O3 -Wall -Wextra)
+set_property(TARGET ${MONOLISTH_TARGET} PROPERTY CXX_STANDARD 14)
+target_compile_options(${MONOLISTH_TARGET} PRIVATE -g -O3 -Wall -Wextra)
 
-  # AVX
-  if(MONOLISH_USE_AVX)
-    target_compile_options(${target_name} PRIVATE "-mavx")
-    target_compile_definitions(${target_name} PRIVATE MONOLISH_USE_AVX)
-  endif()
+# AVX
+if(MONOLISH_USE_AVX)
+  target_compile_options(${MONOLISTH_TARGET} PRIVATE "-mavx")
+  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_AVX)
+endif()
 
-  install(
-    TARGETS ${target_name}
-    LIBRARY
-      DESTINATION lib
-  )
-endfunction()
-
-common_setup(monolish_cpu)
+install(
+  TARGETS ${MONOLISTH_TARGET}
+  LIBRARY
+  DESTINATION lib
+)
 
 # OpenMP
 find_package(OpenMP REQUIRED)
-target_compile_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-target_link_options(monolish_cpu PRIVATE ${OpenMP_CXX_FLAGS})
-target_link_libraries(monolish_cpu PRIVATE ${OpenMP_CXX_LIBRARIES})
+if(MONOLISH_USE_GPU)
+  # GPU offloading
+  target_compile_options(${MONOLISTH_TARGET} PRIVATE
+    -fopenmp
+    -fno-stack-protector
+    -fcf-protection=none
+    -foffload=nvptx-none="-O3"
+  )
+  target_link_options(${MONOLISTH_TARGET} PRIVATE
+    -fopenmp
+    -fno-stack-protector
+    -fcf-protection=none
+    -foffload=nvptx-none="-O3"
+  )
+else()
+  target_compile_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_LIBRARIES})
+endif()
 
 # MKL
 if(MONOLISH_USE_AVX)
@@ -57,9 +75,9 @@ endif()
 find_package(MKL)
 if(MKL_FOUND)
   # Not use FindBLAS if MKL is already found
-  target_include_directories(monolish_cpu PRIVATE ${MKL_INCLUDE_PATH})
-  target_link_libraries(monolish_cpu PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(monolish_cpu PRIVATE MONOLISH_USE_MKL)
+  target_include_directories(${MONOLISTH_TARGET} PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${MKL_LIBRARIES})
+  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_MKL)
 else()
   find_package(BLAS REQUIRED)
   # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
@@ -71,28 +89,16 @@ else()
       /usr/local/include
       /usr/include/openblas
   )
-  target_include_directories(monolish_cpu PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(monolish_cpu PRIVATE ${BLAS_LIBRARIES})
+  target_include_directories(${MONOLISTH_TARGET} PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${BLAS_LIBRARIES})
 endif()
 
 if(MONOLISH_USE_GPU)
-  common_setup(monolish_gpu)
-  target_compile_definitions(monolish_gpu PRIVATE MONOLISH_USE_GPU)
-
-  # OpenMP offloading
-  target_compile_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
-  target_link_options(monolish_gpu PRIVATE -fopenmp -fno-stack-protector -foffload=nvptx-none="-O3")
-#   OpenACC
-#   set(OpenACC_ACCEL_TARGET "nvptx-none")
-#   find_package(OpenACC REQUIRED)
-#   target_compile_options(monolish_gpu PRIVATE -foffload=nvptx-none="-misa=sm_35")
-
-  # CUDA
+  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_GPU)
+  # Link CUDA libraries
   find_package(CUDAToolkit REQUIRED)
-
-  target_link_libraries(monolish_gpu
+  target_link_libraries(${MONOLISTH_TARGET}
     PRIVATE
-    #OpenACC::OpenACC_CXX
     CUDA::cublas
     CUDA::cusolver
     CUDA::cusparse

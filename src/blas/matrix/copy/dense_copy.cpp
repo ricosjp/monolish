@@ -42,8 +42,8 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
 
   // gpu copy and recv
   if (mat.get_device_mem_stat()) {
-    send();
 #if MONOLISH_USE_GPU
+    send();
     size_t NNZ = nnz;
     T *vald = val.data();
     const T *Mvald = mat.val.data();
@@ -54,6 +54,8 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
     }
 
     nonfree_recv();
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
     std::copy(mat.val.data(), mat.val.data() + nnz, val.begin());

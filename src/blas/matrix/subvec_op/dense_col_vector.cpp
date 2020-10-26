@@ -20,21 +20,21 @@ void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] += vecd[i];
-  }
-
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] += vecd[i];
-  }
-
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] += vecd[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] += vecd[i];
+    }
+  }
 
   logger.func_out();
 }
@@ -60,21 +60,21 @@ void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] -= vecd[i];
-  }
-
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] -= vecd[i];
-  }
-
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] -= vecd[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] -= vecd[i];
+    }
+  }
 
   logger.func_out();
 }
@@ -100,21 +100,21 @@ void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] *= vecd[i];
-  }
-
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] *= vecd[i];
-  }
-
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] *= vecd[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] *= vecd[i];
+    }
+  }
 
   logger.func_out();
 }
@@ -140,21 +140,21 @@ void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
     throw std::runtime_error("error vec.size != A.row.size");
   }
 
+  if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-
 #pragma omp target teams distribute parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] /= vecd[i];
-  }
-
-#else // cpu
-
-#pragma omp parallel for
-  for (size_t i = 0; i < Len; i++) {
-    vald[N * i + c] /= vecd[i];
-  }
-
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] /= vecd[i];
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < Len; i++) {
+      vald[N * i + c] /= vecd[i];
+    }
+  }
 
   logger.func_out();
 }
