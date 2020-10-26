@@ -290,3 +290,5 @@ keep-changelog:
     script:
         - bash -c "! git diff --exit-code origin/master CHANGELOG.md"
     allow_failure: true
+    except:
+        - master
