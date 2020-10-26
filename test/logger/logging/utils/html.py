@@ -18,6 +18,11 @@ def df_to_html_table(df):
     html_table = df.to_html()
     return html_table
 
+def to_caption_on_html(title, html_table):
+    caption = f"<caption>{title}</caption>"
+    html_table = caption + html_table
+    return html_table
+
 def to_bold_on_html(html_table):
     """100.0 in bold and background"""
     html_table = html_table.replace("100", "<div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div>")

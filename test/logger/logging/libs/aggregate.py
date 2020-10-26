@@ -174,12 +174,25 @@ class AggregatePandas:
             solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace(0.000000, "")
             solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[["layer", f"breakdown_{target_layer}[%] / count"]].T.apply(lambda x: x[f"breakdown_{target_layer}[%] / count"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
             solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
+            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(50, "")
 
         # drop column layer flag
         layer_column_list = [f"layer_{target_layer}_flg" for target_layer in range(solve_max_layer+1)]
         solve_df = solve_df.drop(columns=layer_column_list)
         solve_df = solve_df.reset_index()
         solve_df = solve_df.drop(columns=["index"])
+
+        # final sort
+        group_0_min = min(solve_df["group_0"])
+        group_0_max = max(solve_df["group_0"])
+
+        if group_0_min == group_0_max:
+            group_0_max = group_0_max + 1
+
+        final_sort_solve_df = pd.DataFrame(columns=solve_df.columns)
+        for group_0_index in range(group_0_min, group_0_max):
+            final_sort_solve_df = pd.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
+        solve_df = final_sort_solve_df
 
         other_df = other_df.drop(columns=layer_column_list)
         layer_column_list2 = [f"group_{target_layer}" for target_layer in range(1, solve_max_layer+1)]
