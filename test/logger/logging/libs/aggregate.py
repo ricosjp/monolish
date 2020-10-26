@@ -44,12 +44,6 @@ class AggregateNumpy:
             percent = np.round(percent, decimals=3)
             percent = np.where(percent <= 100.0, percent, "")
 
-            # breakdown[%] / count
-            # percent_zero_fill = np.where(percent != "", percent, 0.0)
-            # percent_zero_fill = np.array(percent_zero_fill, dtype='float32')
-            # count = np.array(aggr_ndarray[:, 2], dtype="float32")
-            # percent_divided_by_count = percent_zero_fill / count
-
             aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
         aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
 
