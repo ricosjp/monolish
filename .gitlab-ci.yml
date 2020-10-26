@@ -278,14 +278,14 @@ pages:
         - master
 
 clang_format:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:20.10.1
+    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
     stage: build_lib
     script:
         - check-format.sh
     allow_failure: true
 
 keep-changelog:
-    image: registry.ritc.jp/ricos/allgebra/clang-format:20.10.1
+    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
     stage: build_lib
     script:
         - bash -c "! git diff --exit-code master CHANGELOG.md"
