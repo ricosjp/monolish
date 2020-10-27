@@ -20,8 +20,7 @@ def main():
 
     # io data
     with open(log_path, "r") as file:
-        io_data = read.IOData()
-        yaml_dict_list = io_data.reader(file, "yaml")
+        yaml_dict_list = read.reader(file, "yaml")
         debug.log_success(f"read {format(log_path)}")
 
         # split block
