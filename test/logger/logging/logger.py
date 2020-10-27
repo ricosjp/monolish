@@ -1,13 +1,14 @@
+"""Create log program."""
+
 #!/usr/bin/env python3
 # coding: utf-8
 
-import os
 import argparse
-import pandas as pd
 from utils import debug, html as html, read
-from libs import aggregate, drop_information, grouping
+from libs import aggregate, grouping
 
 def main():
+    """executive function"""
     # args
     parser = argparse.ArgumentParser()
     parser.add_argument("log_path")
@@ -18,9 +19,9 @@ def main():
     out_path = args.out_path
 
     # io data
-    with open(log_path, "r") as f:
+    with open(log_path, "r") as file:
         io_data = read.IOData()
-        yaml_dict_list = io_data.reader(f, "yaml")
+        yaml_dict_list = io_data.reader(file, "yaml")
         debug.log_success(f"read {format(log_path)}")
 
         # split block
