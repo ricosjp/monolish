@@ -77,51 +77,52 @@ class AggregateNumpy:
 class AggregatePandas:
     def aggregated(self, dict_list):
         # dict_list to list
-        df = pd.DataFrame(dict_list)
+        dataframe = pd.DataFrame(dict_list)
 
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
 
         # drop useless information
-        df = df[aggr_col_list]
+        dataframe = dataframe[aggr_col_list]
+
         # aggregate continuous values
-        df = self.aggregated_continuous_values(df)
+        dataframe = self.aggregated_continuous_values(dataframe)
         aggr_col_list = aggr_col_list + ["group", "cont_cnt"]
-        df = df[aggr_col_list]
+        dataframe = dataframe[aggr_col_list]
 
         # add column layer
-        df["layer"] = df.name.apply(lambda x:x.count("/")-1)
+        dataframe["layer"] = dataframe.name.apply(lambda x:x.count("/")-1)
 
         # max layer
-        global_max_layer = max(df.layer) + 1
+        global_max_layer = max(dataframe.layer) + 1
 
         # global aggeregate
         for any_layer in range(global_max_layer):
-            for index, row in df.iterrows():
+            for index, row in dataframe.iterrows():
                 row[f"layer_{any_layer}_flg"] = 1 if row.layer == any_layer else np.nan
-                df.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
+                dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
 
         # group lable
         for any_layer in range(global_max_layer):
-            number_of_groups = df[f"layer_{any_layer}_flg"].sum()
-            temp_df1 = df[(df.layer ==any_layer) & (np.isnan(df.time) == False)].copy()
+            number_of_groups = dataframe[f"layer_{any_layer}_flg"].sum()
+            temp_df1 = dataframe[(dataframe.layer ==any_layer) & (np.isnan(dataframe.time) == False)].copy()
             temp_df1[f"group_{any_layer}"] = [i for i in range(len(temp_df1))]
-            df = df.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
-            df.stat = df.stat.fillna("-")
-            df[df["layer"]==any_layer] = df[df["layer"]==any_layer].fillna(method="bfill")
-            df[df["layer"]>=any_layer] = df[df["layer"]>=any_layer].fillna(method="bfill")
+            dataframe = dataframe.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
+            dataframe.stat = dataframe.stat.fillna("-")
+            dataframe[dataframe["layer"]==any_layer] = dataframe[dataframe["layer"]==any_layer].fillna(method="bfill")
+            dataframe[dataframe["layer"]>=any_layer] = dataframe[dataframe["layer"]>=any_layer].fillna(method="bfill")
 
         # drop "IN"
-        df = df[df.stat != "IN"]
+        dataframe = dataframe[dataframe.stat != "IN"]
 
         # add column layer
         for any_layer in range(global_max_layer):
-            df[f"layer_{any_layer}_flg"] = df[f"layer_{any_layer}_flg"].fillna(0.0)
-        df = df.fillna("-")
+            dataframe[f"layer_{any_layer}_flg"] = dataframe[f"layer_{any_layer}_flg"].fillna(0.0)
+        dataframe = dataframe.fillna("-")
 
         # aggregate base
         group_column_list = [f"group_{target_layer}" for target_layer in range(global_max_layer)]
-        aggr_df = df.groupby(["name", "layer"] + group_column_list).sum()
+        aggr_df = dataframe.groupby(["name", "layer"] + group_column_list).sum()
         aggr_df = aggr_df.reset_index()
 
         # split
@@ -194,8 +195,8 @@ class AggregatePandas:
 
         return other_df, solve_df
 
-    def aggregated_continuous_values(self, df):
-        base_df = df
+    def aggregated_continuous_values(self, dataframe):
+        base_df = dataframe
 
         center_temp_df = base_df.name
         center_temp_df = center_temp_df.reset_index()
@@ -262,7 +263,7 @@ class AggregatePandas:
         any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
         any_df2 = base_df[np.isnan(base_df["group"])]
 
-        any_df3 = pd.concat([any_df1, any_df2])
+        any_df3 = pd.concat([any_df1, any_df2], sort=True)
         any_df3 = any_df3.sort_values("index")
         any_df3 = any_df3.drop(columns=["index"])
         any_df3 = any_df3.reset_index()
