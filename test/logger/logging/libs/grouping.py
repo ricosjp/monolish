@@ -1,4 +1,8 @@
+""" data grouping """
+# pylint: disable=C0301, C0326
+
 def grouping_1st_layer(target_dict_list):
+    """ grouping numpy """
     # solve
     layer_1st = "solve/"
     solver_dict_list = list(filter(lambda any_dict:layer_1st in any_dict["name"], target_dict_list))
@@ -26,6 +30,7 @@ def grouping_1st_layer(target_dict_list):
     return title_list, block_dict_lists
 
 def split_1st_layer(dict_list):
+    """ grouping pandas """
     title_list, block_dict_lists = grouping_1st_layer(dict_list)
     split_dict = dict(zip(title_list, block_dict_lists))
 
@@ -41,6 +46,6 @@ def split_1st_layer(dict_list):
                 solve_aggr_dict_list.append(any_dict)
 
     aggr_dict_list = sorted(temp_list, key=lambda x:x["name"])
-
     aggr_dict_list.extend(solve_aggr_dict_list)
+
     return aggr_dict_list
