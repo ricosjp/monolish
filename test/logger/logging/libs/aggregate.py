@@ -19,9 +19,9 @@ class AggregateNumpy:
             # group by
             aggr_ndarray = groupby_with_name(block_ndarray, max_layer)
 
-            # culc_percent
+            # calc_percent
             aggr_column_list = ["layer", "name", "count", "total_time [s]"]
-            aggr_ndarray, aggr_column_list = culc_percent(aggr_ndarray, aggr_column_list, max_layer)
+            aggr_ndarray, aggr_column_list = calc_percent(aggr_ndarray, aggr_column_list, max_layer)
 
             # erase information
             aggr_ndarray = erase_information(aggr_ndarray, max_layer)
@@ -35,7 +35,7 @@ class AggregateNumpy:
 
         return aggr_column_lists, aggr_ndarrays, index
 
-    def culc_percent(self, aggr_ndarray, aggr_column_list, max_layer):
+    def calc_percent(self, aggr_ndarray, aggr_column_list, max_layer):
         for layer in range(1, max_layer):
             aggr_column_list.append(f"breakdown_layer {str(layer)} [%] (breakdown[%] / count)")
 
