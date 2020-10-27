@@ -207,21 +207,19 @@ class AggregatePandas:
         plus_temp_df["index"] = plus_temp_df["index"].apply(lambda x:x+1)
         plus_temp_df = plus_temp_df.rename(columns={"name":"name_plus"})
 
-        temp_df2 = center_temp_df.merge(plus_temp_df, how="left", on="index")
-        temp_df3 = temp_df2[["index", "name", "name_plus"]]
-        temp_df4 = temp_df3[temp_df3["name"] == temp_df3["name_plus"]]
-        temp_df4["count_flg_plus"] = 1
-        plus_temp_df2 = center_temp_df.merge(temp_df4[["index", "count_flg_plus"]], how="left", on="index")
+        center_p_temp_df = center_temp_df.merge(plus_temp_df, how="left", on="index")
+        center_p_temp_df = center_p_temp_df[center_p_temp_df["name"] == center_p_temp_df["name_plus"]].copy()
+        center_p_temp_df["count_flg_plus"] = 1
+        plus_temp_df2 = center_temp_df.merge(center_p_temp_df[["index", "count_flg_plus"]], how="left", on="index")
 
         minus_temp_df = center_temp_df.copy()
         minus_temp_df["index"] = minus_temp_df["index"].apply(lambda x:x-1)
         minus_temp_df = minus_temp_df.rename(columns={"name":"name_minus"})
 
-        temp_df2 = center_temp_df.merge(minus_temp_df, how="left", on="index")
-        temp_df3 = temp_df2[["index", "name", "name_minus"]]
-        temp_df4 = temp_df3[temp_df3["name"] == temp_df3["name_minus"]]
-        temp_df4["count_flg_minus"] = 1
-        minus_temp_df2 = center_temp_df.merge(temp_df4[["index", "count_flg_minus"]], how="left", on="index")
+        center_m_temp_df = center_temp_df.merge(minus_temp_df, how="left", on="index")
+        center_m_temp_df = center_m_temp_df[center_m_temp_df["name"] == center_m_temp_df["name_minus"]].copy()
+        center_m_temp_df["count_flg_minus"] = 1
+        minus_temp_df2 = center_temp_df.merge(center_m_temp_df[["index", "count_flg_minus"]], how="left", on="index")
 
         center_temp_df2 = plus_temp_df2.merge(minus_temp_df2[["index", "count_flg_minus"]], how="left", on="index")
 
@@ -231,11 +229,11 @@ class AggregatePandas:
 
         center_temp_df2["flg"] = center_temp_df2["count_flg_plus"] - center_temp_df2["count_flg_minus"]
 
-        center_temp_df3 = center_temp_df2[center_temp_df2["flg"] == -1]
+        center_temp_df3 = center_temp_df2[center_temp_df2["flg"] == -1].copy()
         center_temp_df3["m_group"] = [i+1 for i in range(len(center_temp_df3))]
         center_temp_df3 = center_temp_df3[["back_idx", "m_group"]]
 
-        center_temp_df4 = center_temp_df2[center_temp_df2["flg"] == 1]
+        center_temp_df4 = center_temp_df2[center_temp_df2["flg"] == 1].copy()
         center_temp_df4["p_group"] = [i+1 for i in range(len(center_temp_df4))]
         center_temp_df4 = center_temp_df4[["back_idx", "p_group"]]
 
