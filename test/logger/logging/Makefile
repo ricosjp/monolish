@@ -1,6 +1,6 @@
 FUNC=logging
-# MONOLISH_LOG_VIEWER ?= $(HOME)/lib/monolish/test/logger/logging
-MONOLISH_LOG_VIEWER ?= ../../../monolish_log_viewer
+MONOLISH_LOG_VIEWER ?= $(HOME)/lib/monolish/monolish_log_viewer
+
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../test_cpu.mk
 
