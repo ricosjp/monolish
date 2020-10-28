@@ -26,10 +26,9 @@ docker/include/
 monolish_test.log
 
 # Logger
-test/logger/logging/libs/__pycache__/*.pyc
-test/logger/logging/utils/__pycache__/*.pyc
-test/logger/logging/*.html
-test/logger/logging/storage/views/*.html
+monolish_log_viewer/libs/__pycache__/*.pyc
+monolish_log_viewer/utils/__pycache__/*.pyc
+monolish_log_viewer/views/*.html
 
 # cmake
 build*/

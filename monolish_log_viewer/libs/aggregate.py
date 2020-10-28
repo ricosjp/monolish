@@ -261,11 +261,11 @@ class AggregatePandas:
         any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
         any_df2 = base_df[np.isnan(base_df["group"])]
 
-        any_df3 = pd.concat([any_df1, any_df2], sort=True)
-        any_df3 = any_df3.sort_values("index")
-        any_df3 = any_df3.drop(columns=["index"])
-        any_df3 = any_df3.reset_index()
-        any_df3 = any_df3.drop(columns=["index"])
-        any_df3 = any_df3.rename(columns={"cont_flg":"cont_cnt"})
+        aggr_cont_df = pd.concat([any_df1, any_df2], sort=True)
+        aggr_cont_df = aggr_cont_df.sort_values("index")
+        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
+        aggr_cont_df = aggr_cont_df.reset_index()
+        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
+        aggr_cont_df = aggr_cont_df.rename(columns={"cont_flg":"cont_cnt"})
 
-        return any_df3
+        return aggr_cont_df
