@@ -15,20 +15,22 @@ template <typename T> vector<T> vector<T>::operator-() {
   T *ansd = ans.data();
   size_t size = val.size();
 
-#if USE_GPU
-  ans.send();
-#pragma acc data present(vald [0:size], ansd [0:size])
-#pragma acc parallel
-#pragma acc loop independent
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = -vald[i];
-  }
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+    ans.send();
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < size; i++) {
+      ansd[i] = -vald[i];
+    }
 #else
-#pragma omp parallel for
-  for (size_t i = 0; i < size; i++) {
-    ansd[i] = -vald[i];
-  }
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < size; i++) {
+      ansd[i] = -vald[i];
+    }
+  }
 
   logger.func_out();
   return ans;

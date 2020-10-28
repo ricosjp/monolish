@@ -54,15 +54,12 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
     if (vec.size() != size()) {
       throw std::runtime_error("error vector size is not same");
     }
-    T *vald = val.data();
 
-    const T *vecd = vec.data();
+#if MONOLISH_USE_GPU
     size_t size = vec.size();
-
-#if USE_GPU
-#pragma acc data present(vecd [0:size], vald [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+    T *vald = val.data();
+    const T *vecd = vec.data();
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       vald[i] = vecd[i];
     }
@@ -88,15 +85,12 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
     send();
-    T *vald = val.data();
 
-    const T *vecd = vec.data();
+#if MONOLISH_USE_GPU
     size_t size = vec.size();
-
-#if USE_GPU
-#pragma acc data present(vecd [0:size], vald [0:size])
-#pragma acc parallel
-#pragma acc loop independent
+    T *vald = val.data();
+    const T *vecd = vec.data();
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       vald[i] = vecd[i];
     }

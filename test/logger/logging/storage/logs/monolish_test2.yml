@@ -1,0 +1,49 @@
+- {type : util, name : input_mm/, time : 0.000847841}
+- {type : util, name : convert/, time : 0.000290349}
+- {type : util, name : send/, time : 0.000270183}
+- {type : util, name : send/, time : 0.000280506}
+- {type : util, name : send/, time : 0.000269582}
+- {type : util, name : set_create_precond/, time : 0.00028024}
+- {type : util, name : set_apply_precond/, time : 0.000271195}
+- {type : solver, name : solve/, stat : IN}
+- {type : solver, name : solve/monolish_CG/, stat : IN}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000375234}
+- {type : util, name : solve/monolish_CG/send/, time : 0.00036746}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000369681}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000368671}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000388104}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000371529}
+- {type : util, name : solve/monolish_CG/send/, time : 0.000371174}
+- {type : solver, name : solve/monolish_CG/create_precond/, stat : IN}
+- {type : solver, name : solve/monolish_CG/create_precond/, stat : OUT, time : 0.000852069}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00762504}
+- {type : func, name : solve/monolish_CG/operator-/, time : 0.00392831}
+- {type : util, name : solve/monolish_CG/operator=/, time : 0.00045693}
+- {type : util, name : solve/monolish_CG/operator=/, time : 0.000419847}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : util, name : solve/monolish_CG/apply_precond/operator=/, time : 0.000458745}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.00145005}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00400801}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.00238571}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.00039776}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000400279}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000411525}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : util, name : solve/monolish_CG/apply_precond/operator=/, time : 0.000438672}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.00143836}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000388669}
+- {type : func, name : solve/monolish_CG/xpay/, time : 0.00398621}
+- {type : func, name : solve/monolish_CG/nrm2/, time : 0.000439258}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00394691}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000427723}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000405034}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000387499}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000409327}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : util, name : solve/monolish_CG/apply_precond/operator=/, time : 0.000476755}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.00147592}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000409714}
+- {type : func, name : solve/monolish_CG/xpay/, time : 0.00402938}
+- {type : func, name : solve/monolish_CG/nrm2/, time : 0.000430164}
+- {type : solver, name : solve/monolish_CG/, stat : OUT, time : 0.0478936}
+- {type : solver, name : solve/, stat : OUT, time : 0.0487521}

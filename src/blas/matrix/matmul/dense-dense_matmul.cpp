@@ -1,10 +1,9 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
-
-#ifdef USE_GPU
-#include <cublas_v2.h>
-#else
 #include <cblas.h>
+
+#ifdef MONOLISH_USE_GPU
+#include <cublas_v2.h>
 #endif
 
 namespace monolish {
@@ -37,6 +36,11 @@ void blas::matmul(const matrix::Dense<double> &A,
     throw std::runtime_error("error B.col != C.col");
   }
 
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   const double *Ad = A.val.data();
   const double *Bd = B.val.data();
   double *Cd = C.val.data();
@@ -48,21 +52,24 @@ void blas::matmul(const matrix::Dense<double> &A,
   const double alpha = 1.0;
   const double beta = 0.0;
 
-#if USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
-#pragma acc data present(Ad [0:m * k], Bd [0:k * n], Cd [0:m * n])
-#pragma acc host_data use_device(Ad, Bd, Cd)
-  {
-    // cublas is col major
-    check(cublasDgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
-                      k, &beta, Cd, n));
-  }
-  cublasDestroy(h);
+  if (A.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+    cublasHandle_t h;
+    check(cublasCreate(&h));
+#pragma omp target data use_device_ptr(Ad, Bd, Cd)
+    {
+      // cublas is col major
+      check(cublasDgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
+                        k, &beta, Cd, n));
+    }
+    cublasDestroy(h);
 #else
-  cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, Ad, k,
-              Bd, n, beta, Cd, n);
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, Ad,
+                k, Bd, n, beta, Cd, n);
+  }
   logger.func_out();
 }
 
@@ -94,6 +101,11 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
     throw std::runtime_error("error B.col != C.col");
   }
 
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   const float *Ad = A.val.data();
   const float *Bd = B.val.data();
   float *Cd = C.val.data();
@@ -105,28 +117,34 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   const float alpha = 1.0;
   const float beta = 0.0;
 
-#if USE_GPU
-  cublasHandle_t h;
-  check(cublasCreate(&h));
-#pragma acc data present(Ad [0:m * k], Bd [0:k * n], Cd [0:m * n])
-#pragma acc host_data use_device(Ad, Bd, Cd)
-  {
-    // cublas is col major
-    check(cublasSgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
-                      k, &beta, Cd, n));
-  }
-  cublasDestroy(h);
+  if (A.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+    cublasHandle_t h;
+    check(cublasCreate(&h));
+#pragma omp target data use_device_ptr(Ad, Bd, Cd)
+    {
+      // cublas is col major
+      check(cublasSgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
+                        k, &beta, Cd, n));
+    }
+    cublasDestroy(h);
 #else
-  cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, Ad, k,
-              Bd, n, beta, Cd, n);
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
+  } else {
+    cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha, Ad,
+                k, Bd, n, beta, Cd, n);
+  }
+
   logger.func_out();
 }
 
 template <typename T>
 matrix::Dense<T> matrix::Dense<T>::operator*(const matrix::Dense<T> &B) {
   matrix::Dense<T> C(get_row(), B.get_col());
-  C.send();
+  if (gpu_status == true) {
+    C.send();
+  }
 
   blas::matmul(*this, B, C);
 

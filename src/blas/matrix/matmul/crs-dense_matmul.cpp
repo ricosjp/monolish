@@ -1,12 +1,6 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#else
-#include <cblas.h>
-#endif
-
 #ifdef MONOLISH_USE_AVX
 #include <immintrin.h>
 #define SIMD_FUNC(NAME) _mm256_##NAME
@@ -44,6 +38,11 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     throw std::runtime_error("error B.col != C.col");
   }
 
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   const double *vald = A.val.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
@@ -54,83 +53,72 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
-  }
-
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
+  if (A.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
     for (size_t j = 0; j < N; j++) {
       for (size_t i = 0; i < M; i++) {
+        double tmp = 0;
         for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
+          tmp += vald[k] * Bd[N * cold[k] + j];
+        }
+        Cd[i * N + j] = tmp;
+      }
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+#endif
+  } else {
+#if USE_AVX // avx_cpu
+    const int vecL = 4;
+
+#pragma omp parallel for
+    for (int i = 0; i < (int)(M * N); i++) {
+      Cd[i] = 0.0;
+    }
+
+#pragma omp parallel for
+    for (int i = 0; i < (int)M; i++) {
+      int start = (int)rowd[i];
+      int end = (int)rowd[i + 1];
+      const int Cr = i * N;
+      for (int k = start; k < end; k++) {
+        const int Br = N * cold[k];
+        const Dreg Av = SIMD_FUNC(broadcast_sd)(&vald[k]);
+        Dreg tv, Bv, Cv;
+        int j;
+        for (j = 0; j < (int)N - (vecL - 1); j += vecL) {
+          const int BB = Br + j;
+          const int CC = Cr + j;
+
+          Bv = SIMD_FUNC(loadu_pd)((double *)&Bd[BB]);
+          Cv = SIMD_FUNC(loadu_pd)((double *)&Cd[CC]);
+          tv = SIMD_FUNC(mul_pd)(Av, Bv);
+          Cv = SIMD_FUNC(add_pd)(Cv, tv);
+          SIMD_FUNC(storeu_pd)((double *)&Cd[CC], Cv);
+        }
+
+        for (; j < (int)N; j++) {
+          Cd[Cr + j] += vald[k] * Bd[Br + j];
         }
       }
     }
-  }
-#else
-#if USE_AVX // avx_cpu
-  const int vecL = 4;
-
-#pragma omp parallel for
-  for (int i = 0; i < (int)(M * N); i++) {
-    Cd[i] = 0.0;
-  }
-
-#pragma omp parallel for
-  for (int i = 0; i < (int)M; i++) {
-    int start = (int)rowd[i];
-    int end = (int)rowd[i + 1];
-    const int Cr = i * N;
-    for (int k = start; k < end; k++) {
-      const int Br = N * cold[k];
-      const Dreg Av = SIMD_FUNC(broadcast_sd)(&vald[k]);
-      Dreg tv, Bv, Cv;
-      int j;
-      for (j = 0; j < (int)N - (vecL - 1); j += vecL) {
-        const int BB = Br + j;
-        const int CC = Cr + j;
-
-        Bv = SIMD_FUNC(loadu_pd)((double *)&Bd[BB]);
-        Cv = SIMD_FUNC(loadu_pd)((double *)&Cd[CC]);
-        tv = SIMD_FUNC(mul_pd)(Av, Bv);
-        Cv = SIMD_FUNC(add_pd)(Cv, tv);
-        SIMD_FUNC(storeu_pd)((double *)&Cd[CC], Cv);
-      }
-
-      for (; j < (int)N; j++) {
-        Cd[Cr + j] += vald[k] * Bd[Br + j];
-      }
-    }
-  }
 #else // Scalar_cpu
 #pragma omp parallel for
-  for (int j = 0; j < (int)N; j++) {
-    for (int i = 0; i < (int)M; i++) {
-      double tmp = 0;
-      int start = (int)rowd[i];
-      int end = (int)rowd[i + 1];
-      for (int k = start; k < end; k++) {
-        tmp += vald[k] * Bd[N * cold[k] + j];
+    for (int j = 0; j < (int)N; j++) {
+      for (int i = 0; i < (int)M; i++) {
+        double tmp = 0;
+        int start = (int)rowd[i];
+        int end = (int)rowd[i + 1];
+        for (int k = start; k < end; k++) {
+          tmp += vald[k] * Bd[N * cold[k] + j];
+        }
+        Cd[i * N + j] = tmp;
       }
-      Cd[i * N + j] = tmp;
     }
+#endif
   }
-#endif
-#endif
   logger.func_out();
 }
 
@@ -162,6 +150,11 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     throw std::runtime_error("error B.col != C.col");
   }
 
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   const float *vald = A.val.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
@@ -172,117 +165,108 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   // MN = MK * KN
   const size_t M = A.get_row();
   const size_t N = B.get_col();
-  const size_t K = A.get_col();
-  const size_t nnz = A.get_nnz();
 
-#if USE_GPU
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
-    for (size_t i = 0; i < M * N; i++) {
-      Cd[i] = 0.0;
-    }
-  }
-
-#pragma acc data present(vald [0:nnz], rowd [0:M + 1], cold [0:nnz],           \
-                         Bd [0:K * N], Cd [0:M * N])
-#pragma acc parallel wait
-  {
-#pragma acc loop independent
+  if (A.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
     for (size_t j = 0; j < N; j++) {
       for (size_t i = 0; i < M; i++) {
+        float tmp = 0;
         for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
-          Cd[i * N + j] += vald[k] * Bd[N * cold[k] + j];
+          tmp += vald[k] * Bd[N * cold[k] + j];
+        }
+        Cd[i * N + j] = tmp;
+      }
+    }
+#else
+    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+#endif
+  } else {
+#if MONOLISH_USE_AVX // avx_cpu
+                     // const int vecL = 8;
+
+#pragma omp parallel for
+    for (int i = 0; i < (int)(M * N); i++) {
+      Cd[i] = 0.0;
+    }
+
+#pragma omp parallel for
+    for (int i = 0; i < (int)M; i++) {
+      int start = (int)rowd[i];
+      int end = (int)rowd[i + 1];
+      const int Cr = i * N;
+      for (int k = start; k < end; k++) {
+        const int Br = N * cold[k];
+        const Sreg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
+        Sreg tv, Bv, Cv;
+        int j;
+        for (j = 0; j < (int)N - 31; j += 32) {
+          const int BB = Br + j;
+          const int CC = Cr + j;
+
+          Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB]);
+          Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC]);
+          tv = SIMD_FUNC(mul_ps)(Av, Bv);
+          Cv = SIMD_FUNC(add_ps)(Cv, tv);
+          SIMD_FUNC(storeu_ps)((float *)&Cd[CC], Cv);
+
+          Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 8]);
+          Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 8]);
+          tv = SIMD_FUNC(mul_ps)(Av, Bv);
+          Cv = SIMD_FUNC(add_ps)(Cv, tv);
+          SIMD_FUNC(storeu_ps)((float *)&Cd[CC + 8], Cv);
+
+          Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 16]);
+          Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 16]);
+          tv = SIMD_FUNC(mul_ps)(Av, Bv);
+          Cv = SIMD_FUNC(add_ps)(Cv, tv);
+          SIMD_FUNC(storeu_ps)((float *)&Cd[Cr + j + 16], Cv);
+
+          Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 24]);
+          Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 24]);
+          tv = SIMD_FUNC(mul_ps)(Av, Bv);
+          Cv = SIMD_FUNC(add_ps)(Cv, tv);
+          SIMD_FUNC(storeu_ps)((float *)&Cd[CC + 24], Cv);
+        }
+        for (; j < (int)N - 7; j += 8) {
+          const int BB = Br + j;
+          const int CC = Cr + j;
+
+          Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB]);
+          Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC]);
+          tv = SIMD_FUNC(mul_ps)(Av, Bv);
+          Cv = SIMD_FUNC(add_ps)(Cv, tv);
+          SIMD_FUNC(storeu_ps)((float *)&Cd[CC], Cv);
+        }
+        for (; j < (int)N; j++) {
+          Cd[Cr + j] += vald[k] * Bd[Br + j];
         }
       }
     }
-  }
-#else
-#if MONOLISH_USE_AVX // avx_cpu
-  const int vecL = 8;
-
-#pragma omp parallel for
-  for (int i = 0; i < (int)(M * N); i++) {
-    Cd[i] = 0.0;
-  }
-
-#pragma omp parallel for
-  for (int i = 0; i < (int)M; i++) {
-    int start = (int)rowd[i];
-    int end = (int)rowd[i + 1];
-    const int Cr = i * N;
-    for (int k = start; k < end; k++) {
-      const int Br = N * cold[k];
-      const Sreg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
-      Sreg tv, Bv, Cv;
-      int j;
-      for (j = 0; j < (int)N - 31; j += 32) {
-        const int BB = Br + j;
-        const int CC = Cr + j;
-
-        Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB]);
-        Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC]);
-        tv = SIMD_FUNC(mul_ps)(Av, Bv);
-        Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[CC], Cv);
-
-        Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 8]);
-        Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 8]);
-        tv = SIMD_FUNC(mul_ps)(Av, Bv);
-        Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[CC + 8], Cv);
-
-        Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 16]);
-        Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 16]);
-        tv = SIMD_FUNC(mul_ps)(Av, Bv);
-        Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[Cr + j + 16], Cv);
-
-        Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB + 24]);
-        Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC + 24]);
-        tv = SIMD_FUNC(mul_ps)(Av, Bv);
-        Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[CC + 24], Cv);
-      }
-      for (; j < (int)N - 7; j += 8) {
-        const int BB = Br + j;
-        const int CC = Cr + j;
-
-        Bv = SIMD_FUNC(loadu_ps)((float *)&Bd[BB]);
-        Cv = SIMD_FUNC(loadu_ps)((float *)&Cd[CC]);
-        tv = SIMD_FUNC(mul_ps)(Av, Bv);
-        Cv = SIMD_FUNC(add_ps)(Cv, tv);
-        SIMD_FUNC(storeu_ps)((float *)&Cd[CC], Cv);
-      }
-      for (; j < (int)N; j++) {
-        Cd[Cr + j] += vald[k] * Bd[Br + j];
-      }
-    }
-  }
 #else // Scalar_cpu
 #pragma omp parallel for
-  for (int j = 0; j < (int)N; j++) {
-    for (int i = 0; i < (int)M; i++) {
-      double tmp = 0;
-      int start = (int)rowd[i];
-      int end = (int)rowd[i + 1];
-      for (int k = start; k < end; k++) {
-        tmp += vald[k] * Bd[N * cold[k] + j];
+    for (int j = 0; j < (int)N; j++) {
+      for (int i = 0; i < (int)M; i++) {
+        double tmp = 0;
+        int start = (int)rowd[i];
+        int end = (int)rowd[i + 1];
+        for (int k = start; k < end; k++) {
+          tmp += vald[k] * Bd[N * cold[k] + j];
+        }
+        Cd[i * N + j] = tmp;
       }
-      Cd[i * N + j] = tmp;
     }
+#endif
   }
-#endif
-#endif
   logger.func_out();
 }
 
 template <typename T>
 matrix::Dense<T> matrix::CRS<T>::operator*(const matrix::Dense<T> &B) {
   matrix::Dense<T> C(get_row(), B.get_col());
-  C.send();
+  if (gpu_status == true) {
+    C.send();
+  }
 
   blas::matmul(*this, B, C);
 

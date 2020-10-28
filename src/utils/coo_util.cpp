@@ -15,6 +15,84 @@
 namespace monolish {
 namespace matrix {
 
+// matrix constructor
+
+template <typename T>
+COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
+            const int *col, const T *value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = NNZ;
+  gpu_status = false;
+  row_index.resize(nnz);
+  col_index.resize(nnz);
+  val.resize(nnz);
+
+  std::copy(row, row + nnz, row_index.begin());
+  std::copy(col, col + nnz, col_index.begin());
+  std::copy(value, value + nnz, val.begin());
+  logger.util_out();
+}
+template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ,
+                          const int *row, const int *col, const double *value);
+template COO<float>::COO(const size_t M, const size_t N, const size_t NNZ,
+                         const int *row, const int *col, const float *value);
+
+template <typename T>
+COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
+            const int *col, const T *value, const size_t origin) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = NNZ;
+  gpu_status = false;
+  row_index.resize(nnz);
+  col_index.resize(nnz);
+  val.resize(nnz);
+
+  std::copy(row, row + nnz, row_index.begin());
+  std::copy(col, col + nnz, col_index.begin());
+  std::copy(value, value + nnz, val.begin());
+
+#pragma omp parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    row_index[i] -= origin;
+    col_index[i] -= origin;
+  }
+  logger.util_out();
+}
+template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ,
+                          const int *row, const int *col, const double *value,
+                          const size_t origin);
+template COO<float>::COO(const size_t M, const size_t N, const size_t NNZ,
+                         const int *row, const int *col, const float *value,
+                         const size_t origin);
+
+template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = coo.get_row();
+  colN = coo.get_col();
+  nnz = coo.get_nnz();
+  gpu_status = false;
+  row_index.resize(nnz);
+  col_index.resize(nnz);
+  val.resize(nnz);
+  std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
+            row_index.begin());
+  std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
+            col_index.begin());
+  std::copy(coo.val.data(), coo.val.data() + nnz, val.begin());
+  logger.util_out();
+}
+template COO<double>::COO(const matrix::COO<double> &coo);
+template COO<float>::COO(const matrix::COO<float> &coo);
+
+// input and convert //////////////////////////////////////
+
 template <typename T> void COO<T>::input_mm(const char *filename) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -148,7 +226,7 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
 template void COO<double>::print_all(std::string filename) const;
 template void COO<float>::print_all(std::string filename) const;
 
-template <typename T> T COO<T>::at(size_t i, size_t j) {
+template <typename T> T COO<T>::at(const size_t i, const size_t j) {
   if (i >= rowN || j >= colN) {
     throw std::out_of_range("error");
   }
@@ -164,10 +242,10 @@ template <typename T> T COO<T>::at(size_t i, size_t j) {
   }
   return 0.0;
 }
-template double COO<double>::at(size_t i, size_t j);
-template float COO<float>::at(size_t i, size_t j);
+template double COO<double>::at(const size_t i, const size_t j);
+template float COO<float>::at(const size_t i, const size_t j);
 
-template <typename T> T COO<T>::at(size_t i, size_t j) const {
+template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
   if (i >= rowN || j >= colN) {
     throw std::out_of_range("error");
   }
@@ -183,12 +261,13 @@ template <typename T> T COO<T>::at(size_t i, size_t j) const {
   }
   return 0.0;
 }
-template double COO<double>::at(size_t i, size_t j) const;
-template float COO<float>::at(size_t i, size_t j) const;
+template double COO<double>::at(const size_t i, const size_t j) const;
+template float COO<float>::at(const size_t i, const size_t j) const;
 
 template <typename T>
-void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r,
-                     std::vector<int> &c, std::vector<T> &v) {
+void COO<T>::set_ptr(const size_t rN, const size_t cN,
+                     const std::vector<int> &r, const std::vector<int> &c,
+                     const std::vector<T> &v) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   col_index = c;
@@ -200,12 +279,17 @@ void COO<T>::set_ptr(size_t rN, size_t cN, std::vector<int> &r,
   nnz = r.size();
   logger.util_out();
 }
-template void COO<double>::set_ptr(size_t rN, size_t cN, std::vector<int> &r,
-                                   std::vector<int> &c, std::vector<double> &v);
-template void COO<float>::set_ptr(size_t rN, size_t cN, std::vector<int> &r,
-                                  std::vector<int> &c, std::vector<float> &v);
+template void COO<double>::set_ptr(const size_t rN, const size_t cN,
+                                   const std::vector<int> &r,
+                                   const std::vector<int> &c,
+                                   const std::vector<double> &v);
+template void COO<float>::set_ptr(const size_t rN, const size_t cN,
+                                  const std::vector<int> &r,
+                                  const std::vector<int> &c,
+                                  const std::vector<float> &v);
 
-template <typename T> void COO<T>::insert(size_t m, size_t n, T value) {
+template <typename T>
+void COO<T>::insert(const size_t m, const size_t n, const T value) {
   size_t rownum = m;
   if (rownum >= get_row()) {
     throw std::out_of_range("row index out of range");
@@ -219,8 +303,10 @@ template <typename T> void COO<T>::insert(size_t m, size_t n, T value) {
   val.push_back(value);
   ++nnz;
 }
-template void COO<double>::insert(size_t m, size_t n, double value);
-template void COO<float>::insert(size_t m, size_t n, float value);
+template void COO<double>::insert(const size_t m, const size_t n,
+                                  const double value);
+template void COO<float>::insert(const size_t m, const size_t n,
+                                 const float value);
 
 template <typename T> void COO<T>::_q_sort(int lo, int hi) {
   // Very primitive quick sort
@@ -364,5 +450,34 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
 }
 template void COO<double>::convert(const Dense<double> &dense);
 template void COO<float>::convert(const Dense<float> &dense);
+
+/// transpose /////
+
+template <typename T> COO<T> &COO<T>::transpose() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  using std::swap;
+  swap(rowN, colN);
+  swap(row_index, col_index);
+  return *this;
+  logger.util_out();
+}
+template COO<double> &COO<double>::transpose();
+template COO<float> &COO<float>::transpose();
+
+template <typename T> void COO<T>::transpose(COO &B) const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  B.set_row(get_col());
+  B.set_col(get_row());
+  B.set_nnz(get_nnz());
+  B.row_index = get_col_ind();
+  B.col_index = get_row_ptr();
+  B.val = get_val_ptr();
+  logger.util_out();
+}
+template void COO<double>::transpose(COO &B) const;
+template void COO<float>::transpose(COO &B) const;
+
 } // namespace matrix
 } // namespace monolish

@@ -8,10 +8,116 @@
 #include <limits>
 #include <sstream>
 
-// kill cerr
-
 namespace monolish {
 namespace matrix {
+
+// constructor ///
+
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
+            const int *colind, const T *value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = NNZ;
+  gpu_status = false;
+  row_ptr.resize(M + 1);
+  col_ind.resize(nnz);
+  val.resize(nnz);
+  std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
+  std::copy(colind, colind + nnz, col_ind.begin());
+  std::copy(value, value + nnz, val.begin());
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ,
+                          const int *rowptr, const int *colind,
+                          const double *value);
+template CRS<float>::CRS(const size_t M, const size_t N, const size_t NNZ,
+                         const int *rowptr, const int *colind,
+                         const float *value);
+
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
+            const std::vector<int> colind, const std::vector<T> value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = value.size();
+  gpu_status = false;
+  row_ptr.resize(M + 1);
+  col_ind.resize(nnz);
+  val.resize(nnz);
+  std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
+  std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
+  std::copy(value.data(), value.data() + nnz, val.begin());
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N,
+                          const std::vector<int> rowptr,
+                          const std::vector<int> colind,
+                          const std::vector<double> value);
+template CRS<float>::CRS(const size_t M, const size_t N,
+                         const std::vector<int> rowptr,
+                         const std::vector<int> colind,
+                         const std::vector<float> value);
+
+// convert ///
+//
+// copy constractor
+template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(mat.get_nnz());
+  col_ind.resize(mat.get_nnz());
+  row_ptr.resize(mat.get_row() + 1);
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+  nnz = mat.get_nnz();
+
+  // gpu copy and recv
+  if (mat.get_device_mem_stat()) {
+    send();
+
+#if MONOLISH_USE_GPU
+    size_t N = get_row();
+    size_t NNZ = get_nnz();
+    T *vald = val.data();
+    int *cold = col_ind.data();
+    int *rowd = row_ptr.data();
+
+    const T *Mvald = mat.val.data();
+    const int *Mcold = mat.col_ind.data();
+    const int *Mrowd = mat.row_ptr.data();
+
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N + 1; i++) {
+      rowd[i] = Mrowd[i];
+    }
+
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < NNZ; i++) {
+      cold[i] = Mcold[i];
+      vald[i] = Mvald[i];
+    }
+
+    nonfree_recv();
+#endif
+  } else {
+    std::copy(mat.row_ptr.data(), mat.row_ptr.data() + (get_row() + 1),
+              row_ptr.begin());
+    std::copy(mat.col_ind.data(), mat.col_ind.data() + get_nnz(),
+              col_ind.begin());
+    std::copy(mat.val.data(), mat.val.data() + get_nnz(), val.begin());
+  }
+
+  logger.util_out();
+}
+template CRS<double>::CRS(const CRS<double> &mat);
+template CRS<float>::CRS(const CRS<float> &mat);
 
 template <typename T> void CRS<T>::convert(COO<T> &coo) {
   Logger &logger = Logger::get_instance();

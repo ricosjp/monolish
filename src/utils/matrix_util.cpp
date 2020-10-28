@@ -80,23 +80,20 @@ template matrix::COO<float> util::random_structure_matrix(const int M,
                                                           const int nnzrow,
                                                           const float val);
 
-template <typename T>
-matrix::COO<T> util::eye(const int M, const int N, const T val) {
+template <typename T> matrix::COO<T> util::eye(const int M) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  matrix::COO<T> mat(M, N);
+  matrix::COO<T> mat(M, M);
 
   for (int i = 0; i < M; i++) {
-    mat.insert(i, i, val);
+    mat.insert(i, i, 1.0);
   }
 
   logger.util_out();
 
   return mat;
 }
-template matrix::COO<double> util::eye(const int M, const int N,
-                                       const double val);
-template matrix::COO<float> util::eye(const int M, const int N,
-                                      const float val);
+template matrix::COO<double> util::eye(const int M);
+template matrix::COO<float> util::eye(const int M);
 } // namespace monolish

@@ -24,8 +24,8 @@ namespace blas {
  * @return The result of the asum
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 float asum(const vector<float> &x);
@@ -36,8 +36,8 @@ float asum(const vector<float> &x);
  * @param ans The result of the asum
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void asum(const vector<float> &x, float &ans);
@@ -48,8 +48,8 @@ void asum(const vector<float> &x, float &ans);
  * @return The result of the sum
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 float sum(const vector<float> &x);
@@ -60,8 +60,8 @@ float sum(const vector<float> &x);
  * @param ans The result of the sum
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void sum(const vector<float> &x, float &ans);
@@ -73,8 +73,8 @@ void sum(const vector<float> &x, float &ans);
  * @param y single precision monolish vector (size N)
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void axpy(const float alpha, const vector<float> &x, vector<float> &y);
@@ -87,8 +87,8 @@ void axpy(const float alpha, const vector<float> &x, vector<float> &y);
  * @param z single precision monolish vector (size N)
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
@@ -101,8 +101,8 @@ void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
  * @return The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 float dot(const vector<float> &x, const vector<float> &y);
@@ -114,8 +114,8 @@ float dot(const vector<float> &x, const vector<float> &y);
  * @param ans The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void dot(const vector<float> &x, const vector<float> &y, float &ans);
@@ -126,8 +126,8 @@ void dot(const vector<float> &x, const vector<float> &y, float &ans);
  * @return The result of the nrm2
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 float nrm2(const vector<float> &x);
@@ -138,8 +138,8 @@ float nrm2(const vector<float> &x);
  * @param ans The result of the nrm2
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void nrm2(const vector<float> &x, float &ans);
@@ -150,8 +150,8 @@ void nrm2(const vector<float> &x, float &ans);
  * @param x single precision monolish vector (size N)
  * @note
  * - # of computation: N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void scal(const float alpha, vector<float> &x);
@@ -163,8 +163,8 @@ void scal(const float alpha, vector<float> &x);
  * @param y single precision monolish vector (size N)
  * @note
  * - # of computation: 2N
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void xpay(const float alpha, const vector<float> &x, vector<float> &y);
@@ -179,8 +179,8 @@ void xpay(const float alpha, const vector<float> &x, vector<float> &y);
  * @param A single precision Dense matrix (size M x N)
  * @note
  * - # of computation: MN
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void mscal(const float alpha, matrix::Dense<float> &A);
@@ -191,8 +191,8 @@ void mscal(const float alpha, matrix::Dense<float> &A);
  * @param A single precision CRS matrix (size M x N)
  * @note
  * - # of computation: MN
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void mscal(const float alpha, matrix::CRS<float> &A);
@@ -207,8 +207,8 @@ void mscal(const float alpha, matrix::CRS<float> &A);
  * @param C single precision CRS matrix (size M x N)
  * @note
  * - # of computation: nnz
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
  * A and B must be same non-zero structure
@@ -223,8 +223,8 @@ void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * @param C single precision Dense matrix (size M x N)
  * @note
  * - # of computation: MN
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
@@ -239,8 +239,8 @@ void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * @param y single precision monolish vector (size N)
  * @note
  * - # of computation: MN
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
@@ -253,8 +253,8 @@ void matvec(const matrix::Dense<float> &A, const vector<float> &x,
  * @param y single precision monolish vector (size N)
  * @note
  * - # of computation: 2nnz
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
@@ -269,8 +269,8 @@ void matvec(const matrix::CRS<float> &A, const vector<float> &x,
  * @param C single precision Dense matrix (size M x N)
  * @note
  * - # of computation: 2MNK
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
@@ -283,8 +283,8 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * @param C single precision Dense matrix (size M x N)
  * @note
  * - # of computation: 2*N*nnz
- * - Multi-threading (OpenMP): true
- * - GPU acceleration (OpenACC): true
+ * - Multi-threading: true
+ * - GPU acceleration: true
  *    - # of data transfer: 0
  */
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
