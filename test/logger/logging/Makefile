@@ -29,7 +29,7 @@ log_cpu:
 	python3 $(MONOLISH_LOG_VIEWER)/logger.py monolish_test_cpu.log $(MONOLISH_LOG_VIEWER)/views/logging_result_cpu.html
 
 log_gpu:
-	python3 logger.py monolish_test_gpu.log logging_result_gpu.html
+	python3 $(MONOLISH_LOG_VIEWER)/logger.py monolish_test_gpu.log $(MONOLISH_LOG_VIEWER)/views/logging_result_gpu.html
 
 log_fx:
 	python3 logger.py monolish_test_fx.log logging_result_fx.html
