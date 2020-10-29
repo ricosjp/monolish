@@ -1,5 +1,8 @@
 FUNC=logging
-MONOLISH_LOG_VIEWER ?= $(HOME)/lib/monolish/monolish_log_viewer
+MONOLISH_LOG_VIEWER := $(join $(subst /test/logger/logging,,$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))),/monolish_log_viewer)
+
+debug:
+	$(MONOLISH_LOG_VIEWER)
 
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../test_cpu.mk
