@@ -1,5 +1,5 @@
 FUNC=logging
-MONOLISH_LOG_VIEWER := $(join $(subst /test/logger/logging,,$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))),/monolish_log_viewer)
+MONOLISH_LOG_VIEWER ?= $(join $(subst /test/logger/logging,,$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))),/monolish_log_viewer)
 
 debug:
 	$(MONOLISH_LOG_VIEWER)
