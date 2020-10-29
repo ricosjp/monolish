@@ -29,7 +29,6 @@ monolish_test.log
 test/logger/logging/*.yml
 monolish_log_viewer/libs/__pycache__/*.pyc
 monolish_log_viewer/utils/__pycache__/*.pyc
-monolish_log_viewer/views/*.html
 .vscode/*
 
 # cmake
