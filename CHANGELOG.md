@@ -26,6 +26,6 @@ Unreleased
 - GitLab CI で Merge Request 毎に origin/master から CHANGELOG.md に更新があるかチェックする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
 
 ### Changed
-- Base allgebra image switched from 20.10.0 to 20.10.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
-- loggerの3層以上のアルゴリズム改善 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/103
 - test/logger/logging にある Python スクリプト群を Project TOP に移動させる https://gitlab.ritc.jp/ricos/monolish/-/issues/325
+- loggerの3層以上のアルゴリズム改善 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/103
+- Base allgebra image switched from 20.10.0 to 20.10.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
