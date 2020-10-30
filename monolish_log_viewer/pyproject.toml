@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "monolish_log_viewer"
+version = "0.1.0"
+description = "PyPI uploading test"
+authors = ["Shin-ichiro Ogi <ogi@ricos.co.jp>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
