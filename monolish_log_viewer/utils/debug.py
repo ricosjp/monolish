@@ -1,8 +1,11 @@
+"""log debug."""
+
 import datetime
 
 def add_print(pattern):
     """log Decorator"""
     def trace(func):
+        # pylint: disable=unused-argument
         def wrapper(*args, **kwargs):
             dt_now = datetime.datetime.now()
             function_name = ','.join(args)
@@ -13,12 +16,15 @@ def add_print(pattern):
 
 @add_print("")
 def log_general(message) -> str:
-    return(message)
+    """usually log"""
+    return message
 
 @add_print("success")
 def log_success(message) -> str:
-    return(message)
+    """success log"""
+    return message
 
 @add_print("error")
 def log_error(message) -> str:
-    return(message)
+    """error log"""
+    return message
