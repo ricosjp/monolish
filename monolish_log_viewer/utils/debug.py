@@ -15,16 +15,16 @@ def add_print(pattern):
     return trace
 
 @add_print("")
-def log_general(message) -> str:
+def log_general(message: str) -> str:
     """usually log"""
     return message
 
 @add_print("success")
-def log_success(message) -> str:
+def log_success(message: str) -> str:
     """success log"""
     return message
 
 @add_print("error")
-def log_error(message) -> str:
+def log_error(message: str) -> str:
     """error log"""
     return message

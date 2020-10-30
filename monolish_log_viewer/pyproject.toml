@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "monolish_log_viewer"
 version = "0.1.0"
-description = "PyPI uploading test"
+description = "Logger script"
 authors = ["Shin-ichiro Ogi <ogi@ricos.co.jp>"]
 
 [tool.poetry.dependencies]
