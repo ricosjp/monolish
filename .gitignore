@@ -42,3 +42,6 @@ html/
 # clangd
 compile_commands.json
 .clangd/
+
+# vscode
+.vscode/
