@@ -17,7 +17,7 @@ endif
 move_result: clone_result
 	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)
 	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)
-	sh ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec.txt
+	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec.txt
 	echo $(COMMIT) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
