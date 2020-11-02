@@ -15,9 +15,9 @@ else
 endif
 
 move_result: clone_result
-	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
-	cp *.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
-	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
+	mkdir -p $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
+	cp *.tsv $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
+	cp */*.tsv $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
 	echo $(COMMIT_MSG) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
