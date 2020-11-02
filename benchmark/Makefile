@@ -26,10 +26,10 @@ commit_result: clone_result move_result
 	- rm -rf $(BENCHMARK_DIR)
 
 get_spec_cpu:
-	bash ./get_spec.sh > spec_cpu.txt
+	bash ./get_spec.sh > spec_cpu.tsv
 
 get_spec_gpu:
-	bash ./get_spec.sh > spec_gpu.txt
+	bash ./get_spec.sh > spec_gpu.tsv
 
 cpu:
 	#make -j -C vector_common/ $@
