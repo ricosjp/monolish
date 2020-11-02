@@ -1,7 +1,6 @@
 CI_COMMIT_SHA ?= `git rev-parse HEAD`
 BENCHMARK_DIR = monolish_benchmark_result
 COMMIT:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
-HOST=`hostname | sed 's/\./_/g'`
 
 .PHONY: clone_result move_result commit_result
 
@@ -19,9 +18,9 @@ else
 endif
 
 move_result: clone_result
-	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/$(HOST)
-	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/$(HOST)
-	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/$(HOST)/spec.txt
+	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
+	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
+	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec.txt
 	echo $(COMMIT) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
