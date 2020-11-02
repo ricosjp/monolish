@@ -5,12 +5,15 @@
 #define MEM 1 * size * sizeof(T) / time / 1.0e+9
 
 template <typename T>
-bool test(const size_t size, const size_t iter) {
+bool benchmark(const size_t size, const size_t iter) {
 
   // create random vector x rand(0~1)
   monolish::vector<T> x(size, 0.0, 1.0);
 
   x.send();
+
+  T result = monolish::blas::asum(x);
+
   // exec
   auto start = std::chrono::system_clock::now();
 
@@ -31,7 +34,7 @@ bool test(const size_t size, const size_t iter) {
 
 int main(int argc, char **argv) {
   size_t size;
-  size_t iter = 100;
+  size_t iter = VECTOR_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_log.txt");
