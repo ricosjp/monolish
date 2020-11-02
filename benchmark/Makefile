@@ -16,14 +16,20 @@ endif
 
 move_result: clone_result
 	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
+	cp *.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
 	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
-	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec.txt
 	echo $(COMMIT_MSG) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
 	cd $(BENCHMARK_DIR) ; git add -A; git commit -m "`cat ../commit_msg_tmp.txt`"; git push origin master
 	- rm commit_msg_tmp.txt
 	- rm -rf $(BENCHMARK_DIR)
+
+get_spec_cpu:
+	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec_cpu.txt
+
+get_spec_gpu:
+	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec_gpu.txt
 
 cpu:
 	#make -j -C vector_common/ $@

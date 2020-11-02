@@ -258,6 +258,7 @@ benchmark_nogpu_avx:
         expire_in: 20min
     script:
       - cd benchmark
+      - make get_spec_cpu
       - make cpu
       - make run_cpu
 benchmark_gpu_avx:
@@ -272,6 +273,7 @@ benchmark_gpu_avx:
         expire_in: 20min
     script:
       - cd benchmark
+      - make get_spec_gpu
       - make gpu
       - make run_gpu
 
@@ -313,7 +315,7 @@ pages:
 benchmark_result:
     stage: deploy
     script:
-        - git config --global user.name "monolish_ci-runner"
+        - git config --global user.name "monolish_ci_runner"
         - git config --global user.email "monolish_ci_runner@example.jp"
         - cd benchmark
         - make commit_result
