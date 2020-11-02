@@ -12,6 +12,7 @@ stages:
     - equation
     - logger
     - lang
+    - benchmark
     - deploy
 
 .gpu_avx:
@@ -241,6 +242,17 @@ lang_gpu_noavx:
     extends: .test_gpu_noavx
     variables:
       TEST_TARGET: "lang"
+
+#
+# benchmark
+#
+benchmark_commit:
+    stage: benchmark
+    script:
+        - git config --global user.name "monolish_ci-runner"
+        - git config --global user.email "monolish_ci_runner@example.jp"
+        - cd benchmark
+        - make commit_result
 
 #
 # docker and pages
