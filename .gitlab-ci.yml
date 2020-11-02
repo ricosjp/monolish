@@ -12,6 +12,7 @@ stages:
     - equation
     - logger
     - lang
+    - benchmark
     - deploy
 
 .gpu_avx:
@@ -241,6 +242,15 @@ lang_gpu_noavx:
     extends: .test_gpu_noavx
     variables:
       TEST_TARGET: "lang"
+
+#
+# benchmark
+#
+benchmark_commit:
+    stage: benchmark
+    script:
+        - cd benchmark
+        - make commit_result
 
 #
 # docker and pages
