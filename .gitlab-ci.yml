@@ -247,6 +247,7 @@ lang_gpu_noavx:
 # benchmark
 #
 .benchmark_nogpu_avx:
+    stage: benchmark
     extends:
       - .nogpu_avx
     needs:
@@ -260,6 +261,7 @@ lang_gpu_noavx:
       - make cpu
       - make run_cpu
 .test_nogpu_noavx:
+    stage: benchmark
     extends:
       - .nogpu_noavx
     needs:
@@ -273,6 +275,7 @@ lang_gpu_noavx:
       - make cpu
       - make run_cpu
 .test_gpu_avx:
+    stage: benchmark
     extends:
       - .gpu_avx
     needs:
@@ -286,6 +289,7 @@ lang_gpu_noavx:
       - make gpu
       - make run_cpu
 .test_gpu_noavx:
+    stage: benchmark
     extends:
       - .gpu_noavx
     needs:
