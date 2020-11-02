@@ -260,20 +260,6 @@ benchmark_nogpu_avx:
       - cd benchmark
       - make cpu
       - make run_cpu
-benchmark_nogpu_noavx:
-    stage: benchmark
-    extends:
-      - .nogpu_noavx
-    needs:
-      - "build_cmake_nogpu_noavx"
-    artifacts:
-        paths:
-            - benchmark/
-        expire_in: 20min
-    script:
-      - cd benchmark
-      - make cpu
-      - make run_cpu
 benchmark_gpu_avx:
     stage: benchmark
     extends:
@@ -287,21 +273,7 @@ benchmark_gpu_avx:
     script:
       - cd benchmark
       - make gpu
-      - make run_cpu
-benchmark_gpu_noavx:
-    stage: benchmark
-    extends:
-      - .gpu_noavx
-    needs:
-      - "build_cmake_gpu_noavx"
-    artifacts:
-        paths:
-            - benchmark/
-        expire_in: 20min
-    script:
-      - cd benchmark
-      - make gpu
-      - make run_cpu
+      - make run_gpu
 
 #
 # docker and pages

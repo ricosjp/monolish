@@ -45,3 +45,6 @@ compile_commands.json
 
 # vscode
 .vscode/
+
+# cmake
+benchmark/*/*.tsv
