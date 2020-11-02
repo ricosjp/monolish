@@ -1,13 +1,10 @@
 CI_COMMIT_SHA ?= `git rev-parse HEAD`
-BENCHMARK_DIR = monolish_benchmark_result
-COMMIT:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
+BENCHMARK_DIR:=monolish_benchmark_result
+COMMIT_MSG:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
 
 .PHONY: clone_result move_result commit_result
 
 all:cpu
-
-aaa:
-	echo $(hostname)
 
 clone_result:
 	- rm -rf $(BENCHMARK_DIR)
@@ -21,7 +18,7 @@ move_result: clone_result
 	mkdir -p $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
 	cp */*.tsv $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/
 	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec.txt
-	echo $(COMMIT) > commit_msg_tmp.txt
+	echo $(COMMIT_MSG) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
 	cd $(BENCHMARK_DIR) ; git add -A; git commit -m "`cat ../commit_msg_tmp.txt`"; git push origin master
@@ -81,3 +78,5 @@ clean:
 	make -j -C vector_blas/ clean
 	make -j -C matrix_common/ clean
 	make -j -C matrix_blas/ clean
+	- rm -rf $(BENCHMARK_DIR)
+	- rm commit_msg_tmp.txt
