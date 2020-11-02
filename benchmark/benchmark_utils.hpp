@@ -10,8 +10,10 @@
 #include <random>
 #include <typeinfo>
 
+// vector ///
 #define VECTOR_BENCH_MIN 1000
-#define VECTOR_BENCH_MAX 1000000
+#define VECTOR_BENCH_MAX 100000000
+#define VECTOR_BENCH_ITER 10
 
 #define VECTOR_BLAS_BENCH_HEADER "func\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]" 
 

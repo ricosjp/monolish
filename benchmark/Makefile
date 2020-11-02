@@ -26,52 +26,52 @@ commit_result: clone_result move_result
 	- rm -rf $(BENCHMARK_DIR)
 
 cpu:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 gpu:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 fx:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 sx:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 run_cpu:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 run_gpu:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 run_fx:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 run_sx:
-	make -j -C vector_common/ $@
+	#make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	make -j -C matrix_common/ $@
-	make -j -C matrix_blas/ $@
+	#make -j -C matrix_common/ $@
+	#make -j -C matrix_blas/ $@
 
 clean:
 	make -j -C vector_common/ clean
