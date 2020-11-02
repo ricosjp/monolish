@@ -26,10 +26,10 @@ commit_result: clone_result move_result
 	- rm -rf $(BENCHMARK_DIR)
 
 get_spec_cpu:
-	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec_cpu.txt
+	bash ./get_spec.sh > spec_cpu.txt
 
 get_spec_gpu:
-	bash ./get_spec.sh > $(BENCHMARK_DIR)/$(CI_COMMIT_SHA)/spec_gpu.txt
+	bash ./get_spec.sh > spec_gpu.txt
 
 cpu:
 	#make -j -C vector_common/ $@
