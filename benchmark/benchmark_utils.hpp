@@ -10,51 +10,19 @@
 #include <random>
 #include <typeinfo>
 
-template <typename T> bool ans_check(double result, double ans, double tol) {
+#define VECTOR_BENCH_MIN 1000
+#define VECTOR_BENCH_MAX 1000000
 
-  double err = std::abs(result - ans) / ans;
+#define VECTOR_BLAS_BENCH_HEADER "func\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]" 
 
-  if (err < tol) {
-    return true;
-  } else {
-    std::cout << "Error!!" << std::endl;
-    std::cout << "===============================" << std::endl;
-    std::cout << std::scientific << "result\t" << result << std::endl;
-    std::cout << std::scientific << "ans\t" << ans << std::endl;
-    std::cout << std::scientific << "Rerr\t" << err << std::endl;
-    std::cout << "===============================" << std::endl;
-    return false;
-  }
-}
+#define VECTOR_BLAS_OUTPUT_RESULT() \
+  std::cout << FUNC << "\t" << std::flush; \
+  std::cout << get_type<T>() << "\t" << std::flush; \
+  std::cout << size << "\t" << std::flush; \
+  std::cout << time << "\t" << std::flush; \
+  std::cout << PERF << "\t" << std::flush; \
+  std::cout << MEM << "\t" << std::endl
 
-template <typename T> bool ans_check(T *result, T *ans, int size, double tol) {
-
-  std::vector<int> num;
-  bool check = true;
-
-  for (int i = 0; i < size; i++) {
-    double err = std::abs(result[i] - ans[i]) / ans[i];
-    if (err >= tol) {
-      check = false;
-      num.push_back(i);
-    }
-  }
-
-  if (check) {
-    return check;
-  } else {
-    std::cout << "Error!!" << std::endl;
-    std::cout << "===============================" << std::endl;
-    for (int i = 0; i < num.size(); i++) {
-      std::cout << std::fixed << std::resetiosflags(std::ios_base::floatfield)
-                << num[i] << "\tresult:" << std::flush;
-      std::cout << std::fixed << std::setprecision(15) << result[num[i]]
-                << "\tans:" << ans[num[i]] << std::endl;
-    }
-    std::cout << "===============================" << std::endl;
-    return check;
-  }
-}
 
 template <typename T> std::string get_type() {
   std::string type;
@@ -68,6 +36,7 @@ template <typename T> std::string get_type() {
 
   return type;
 }
+
 //
 // template <typename Float_, typename Index_>
 // static inline void
