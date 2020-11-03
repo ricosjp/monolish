@@ -1,33 +1,11 @@
-#include "../test_utils.hpp"
-#include "monolish_blas.hpp"
+#include "../benchmark_utils.hpp"
 
 #define FUNC "matadd"
 #define DENSE_PERF 1 * M *N / time / 1.0e+9
 #define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
 
-template <typename T>
-void get_ans(const monolish::matrix::Dense<T> &A,
-             const monolish::matrix::Dense<T> &B,
-             monolish::matrix::Dense<T> &C) {
-
-  if (A.get_row() != B.get_row()) {
-    std::runtime_error("A.row != B.row");
-  }
-  if (A.get_col() != B.get_col()) {
-    std::runtime_error("A.col != B.col");
-  }
-
-  // MN=MN+MN
-  int M = A.get_row();
-  int N = A.get_col();
-
-  for (int i = 0; i < A.get_nnz(); i++) {
-    C.val[i] += A.val[i] * B.val[i];
-  }
-}
-
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
+bool benchmark(const size_t M, const size_t N, const size_t iter) {
 
   size_t nnzrow = 81;
   if ((nnzrow < M) && (nnzrow < N)) {
@@ -37,34 +15,11 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
   }
 
   monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+      monolish::util::band_matrix<T>(M, N, nnzrow, 1.0, 1.0);
 
   MAT_A A(seedA);
   MAT_B B(seedA);
   MAT_C C(seedA);
-
-  if (check_ans == 1) {
-    monolish::matrix::Dense<T> AA(seedA);
-    monolish::matrix::Dense<T> BB(seedA);
-    monolish::matrix::Dense<T> CC(seedA);
-
-    get_ans(AA, BB, CC);
-    monolish::matrix::COO<T> ansC(CC);
-
-    monolish::util::send(A, B, C);
-    monolish::blas::matadd(A, B, C);
-    C.recv();
-
-    monolish::matrix::COO<T> resultC(C);
-
-    if (ans_check<T>(resultC.val.data(), ansC.val.data(), ansC.get_nnz(),
-                     tol) == false) {
-      return false;
-    };
-
-    A.device_free();
-    B.device_free();
-  }
 
   monolish::util::send(A, B, C);
 
@@ -84,8 +39,7 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
   C.device_free();
 
   double time = sec / iter;
-  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS] " << std::endl;
-  std::cout << FUNC << "(" << C.type() << "=" << A.type() << "*" << C.type()
+  std::cout << FUNC << "(" << C.type() << "," << A.type() << "," << B.type()
             << ")\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << M << "\t" << std::flush;
@@ -105,62 +59,76 @@ bool test(const size_t M, const size_t N, double tol, int iter, int check_ans) {
 
 int main(int argc, char **argv) {
 
-  if (argc != 9) {
-    std::cout << "error $1: precision (double or float) \
-            $2: format of A, $3: format of B, $4: format of C,\
-            $5: M, $6: N, $7: iter, $8: error check (1/0)"
-              << std::endl;
+  if (argc <= 4) {
+    std::cout <<  "error $1: precision (double or float or all) $2: format of A, $3: format of B, $4: format of C" << std::endl;
     return 1;
   }
 
-  // MN=MK*KN
-  const size_t M = atoi(argv[5]);
-  const size_t N = atoi(argv[6]);
-  int iter = atoi(argv[7]);
-  int check_ans = atoi(argv[8]);
+  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS] " << std::endl;
+
+  int iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
+  // monolish::util::set_log_filename("./monolish_log.txt");
 
-  if (strcmp(argv[1], "double") == 0) {
-    if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-        (strcmp(argv[4], "Dense") == 0)) {
-      if (test<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
-               monolish::matrix::Dense<double>, double>(M, N, 1.0e-6, iter,
-                                                        check_ans) == false) {
-        return 1;
+  if (argc == 7) {
+    const size_t M = atoi(argv[5]);
+    const size_t N = atoi(argv[6]);
+    if (strcmp(argv[1], "double") == 0) {
+      if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
+          (strcmp(argv[4], "Dense") == 0)) {
+        benchmark<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
+          monolish::matrix::Dense<double>, double>(M, N, iter);
+      }
+
+      if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "CRS") == 0) &&
+          (strcmp(argv[4], "CRS") == 0)) {
+        benchmark<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+          monolish::matrix::CRS<double>, double>(M, N, iter);
       }
     }
 
-    if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "CRS") == 0) &&
-        (strcmp(argv[4], "CRS") == 0)) {
-      if (test<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
-               monolish::matrix::CRS<double>, double>(M, N, 1.0e-6, iter,
-                                                      check_ans) == false) {
-        return 1;
+    if (strcmp(argv[1], "float") == 0) {
+      if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
+          (strcmp(argv[4], "Dense") == 0)) {
+        benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
+          monolish::matrix::Dense<float>, float>(M, N, iter);
       }
+
+      if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "CRS") == 0) &&
+          (strcmp(argv[4], "CRS") == 0)) {
+        benchmark<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+          monolish::matrix::CRS<float>, float>(M, N, iter);
+      }
+    }
+    return 0;
+  }
+
+  //Dense
+  if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
+      (strcmp(argv[4], "Dense") == 0)) {
+    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
+      benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
+        monolish::matrix::Dense<float>, float>(size, size, iter);
+    }
+    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
+      benchmark<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
+        monolish::matrix::Dense<double>, double>(size, size, iter);
     }
   }
 
-  if (strcmp(argv[1], "float") == 0) {
-    if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-        (strcmp(argv[4], "Dense") == 0)) {
-      if (test<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-               monolish::matrix::Dense<float>, float>(M, N, 1.0e-6, iter,
-                                                      check_ans) == false) {
-        return 1;
-      }
+  //CRS
+  if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "CRS") == 0) &&
+      (strcmp(argv[4], "CRS") == 0)) {
+    for(size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10){
+      benchmark<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+        monolish::matrix::CRS<float>, float>(size, size, iter);
     }
-
-    if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "CRS") == 0) &&
-        (strcmp(argv[4], "CRS") == 0)) {
-      if (test<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
-               monolish::matrix::CRS<float>, float>(M, N, 1.0e-6, iter,
-                                                    check_ans) == false) {
-        return 1;
-      }
+    for(size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10){
+      benchmark<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+        monolish::matrix::CRS<double>, double>(size, size, iter);
     }
   }
 
-  return 0;
+return 0;
 }
