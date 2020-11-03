@@ -6,7 +6,6 @@ OBJS_GPU=$(addprefix ./, $(SRCS:.cpp=_gpu.out))
 OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 
-FILENAME=`echo $(1) | sed 's/\.out//g'` 
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
 define RUN
