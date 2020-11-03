@@ -25,6 +25,20 @@
   std::cout << PERF << "\t" << std::flush; \
   std::cout << MEM << "\t" << std::endl
 
+// matrix ///
+#define MATRIX_BENCH_ITER 10
+
+// order N^2
+#define DENSE_NN_BENCH_MIN 1000
+#define DENSE_NN_BENCH_MAX 10000
+#define CRS_NN_BENCH_MIN 1000
+#define CRS_NN_BENCH_MAX 1000000
+
+// order N^3
+#define DENSE_NNN_BENCH_MIN 1000
+#define DENSE_NNN_BENCH_MAX 5000
+#define CRS_NNN_BENCH_MIN 1000
+#define CRS_NNN_BENCH_MAX 10000
 
 template <typename T> std::string get_type() {
   std::string type;
