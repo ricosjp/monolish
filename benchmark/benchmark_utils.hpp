@@ -38,7 +38,7 @@
 #define DENSE_NNN_BENCH_MIN 1000
 #define DENSE_NNN_BENCH_MAX 5000
 #define CRS_NNN_BENCH_MIN 1000
-#define CRS_NNN_BENCH_MAX 10000
+#define CRS_NNN_BENCH_MAX 3000
 
 template <typename T> std::string get_type() {
   std::string type;

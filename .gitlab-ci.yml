@@ -261,6 +261,8 @@ benchmark_nogpu_avx:
       - make get_spec_cpu
       - make cpu
       - make run_cpu
+    tags:
+      - cpu2.gitlab-runner.savanna.ritc.jp
 benchmark_gpu_avx:
     stage: benchmark
     extends:
@@ -276,6 +278,8 @@ benchmark_gpu_avx:
       - make get_spec_gpu
       - make gpu
       - make run_gpu
+    tags:
+      - gpu2.gitlab-runner.savanna.ritc.jp
 
 #
 # docker and pages
