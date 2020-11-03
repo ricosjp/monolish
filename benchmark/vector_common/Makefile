@@ -12,8 +12,7 @@ VEC_TEST_ITER?=100
 VEC_TEST_ANS_CHECK?=1
 
 define RUN
-	$(PROFILER) $(1) double $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
-	$(PROFILER) $(1) float $(VEC_TEST_SIZE) $(VEC_TEST_ITER) $(VEC_TEST_ANS_CHECK)
+	$(PROFILER) $(1)  | tee `echo $(1) | sed 's/\.out//g'`.tsv
 
 endef
 
