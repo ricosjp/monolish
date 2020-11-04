@@ -246,13 +246,44 @@ lang_gpu_noavx:
 #
 # benchmark
 #
-benchmark_commit:
+benchmark_nogpu_avx:
     stage: benchmark
+    extends:
+      - .nogpu_avx
+    needs:
+      - "build_cmake_nogpu_avx"
+    artifacts:
+        paths:
+            - benchmark/
+        expire_in: 20min
     script:
-        - git config --global user.name "monolish_ci-runner"
-        - git config --global user.email "monolish_ci_runner@example.jp"
-        - cd benchmark
-        - make commit_result
+      - cd benchmark
+      - make get_spec_cpu
+      - make cpu
+      - make run_cpu
+    tags:
+      - cpu2.gitlab-runner.savanna.ritc.jp
+    only:
+        - master
+benchmark_gpu_avx:
+    stage: benchmark
+    extends:
+      - .gpu_avx
+    needs:
+      - "build_cmake_gpu_avx"
+    artifacts:
+        paths:
+            - benchmark/
+        expire_in: 20min
+    script:
+      - cd benchmark
+      - make get_spec_gpu
+      - make gpu
+      - make run_gpu
+    tags:
+      - gpu2.gitlab-runner.savanna.ritc.jp
+    only:
+        - master
 
 #
 # docker and pages
@@ -289,6 +320,16 @@ pages:
     only:
         - master
 
+benchmark_result:
+    stage: deploy
+    script:
+        - git config --global user.name "monolish_ci_runner"
+        - git config --global user.email "monolish_ci_runner@example.jp"
+        - cd benchmark
+        - make commit_result
+    only:
+        - master
+
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
     stage: build_lib
@@ -304,3 +345,4 @@ keep-changelog:
     allow_failure: true
     except:
         - master
+

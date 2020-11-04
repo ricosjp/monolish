@@ -32,10 +32,5 @@ else
 	GPU="none"
 fi
 
-echo "\"physical_cpu\" 	 $CPUS"
-echo "\"cpu\" 	 \"$MODEL\""
-echo "\"cores\" 	 $CORE"
-echo "\"simd\" 	 $SIMD"
-echo "\"memory\" 	 \"$MEM\""
-echo "\"gpu\" 	 \"$GPU\""
-echo "\"gcc\" 	 \"$GCC\""
+printf "physical_cpu\tcpu\tcores\tsimd\tmemory\tgpu\tgcc\n"
+printf "$CPUS\t$MODEL\t$CORE\t$SIMD\t$MEM\t$GPU\t$GCC\n"

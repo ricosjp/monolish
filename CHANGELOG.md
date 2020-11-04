@@ -22,6 +22,7 @@ Unreleased
 -----------
 
 ### Added
+- ベンチマークのディレクトリを作成，masterでのみ実行するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/112
 - benchmark/にtsvを置くとCIの最後でベンチマーク結果としてアップロードされるようになった https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/111
 - version 0.0.4の `test/` を `benchmark/` として復活させたhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/110
 - CHANGELOG.md (このファイル) の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/106

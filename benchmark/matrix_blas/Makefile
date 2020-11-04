@@ -7,11 +7,6 @@ OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
-MAT_TEST_SIZE?=123
-MAT_TEST_SIZE?=124
-MAT_TEST_ITER?=100
-MAT_TEST_ANS_CHECK?=1
-
 all: cpu
 
 cpu: $(OBJS_CPU)
@@ -31,24 +26,29 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matmul cpu 10
-	bash ./test.sh matvec cpu 10
-	bash ./test.sh mscal cpu 10
+	bash ./benchmark.sh matadd cpu
+	bash ./benchmark.sh mscal cpu
+	bash ./benchmark.sh matvec cpu
+	bash ./benchmark.sh matmul cpu
  
 run_gpu:
-	bash ./test.sh matmul gpu 10
-	bash ./test.sh matvec gpu 10
-	bash ./test.sh mscal gpu 10
+	bash ./benchmark.sh matadd gpu
+	bash ./benchmark.sh mscal gpu
+	bash ./benchmark.sh matvec gpu
+	bash ./benchmark.sh matmul gpu
 
 run_fx:
-	bash ./test.sh matmul fx 10
-	bash ./test.sh matvec fx 10
-	bash ./test.sh mscal fx 10
+	bash ./benchmark.sh matadd fx
+	bash ./benchmark.sh mscal fx
+	bash ./benchmark.sh matvec fx
+	bash ./benchmark.sh matmul fx
 
 run_sx:
-	bash ./test.sh matmul sx 10
-	bash ./test.sh matvec sx 10
-	bash ./test.sh mscal sx 10
+	bash ./benchmark.sh matadd sx
+	bash ./benchmark.sh mscal sx
+	bash ./benchmark.sh matvec sx
+	bash ./benchmark.sh matmul sx
 
 clean:
 	- rm *.out
+	- rm *.tsv
