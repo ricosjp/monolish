@@ -7,16 +7,6 @@ OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
-MAT_TEST_SIZE?=123
-MAT_TEST_SIZE?=124
-MAT_TEST_ITER?=100
-MAT_TEST_ANS_CHECK?=1
-
-define RUN_matmul
-	./$(1) $(2) $(3) Dense Dense $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_ITER) $(MAT_TEST_ANS_CHECK)
-
-endef
-
 all: cpu
 
 cpu: $(OBJS_CPU)
@@ -36,36 +26,36 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matrix_common cpu 10
-	bash ./test.sh convert cpu 10
-	bash ./test.sh mv_mul cpu 10
-	bash ./test.sh transpose cpu 10
-	bash ./test.sh subvec_op cpu 10
-	bash ./test.sh m_tanh cpu 10
+	bash ./test.sh matrix_common cpu
+	bash ./test.sh convert cpu
+	bash ./test.sh mv_mul cpu
+	bash ./test.sh transpose cpu
+	bash ./test.sh subvec_op cpu
+	bash ./test.sh m_tanh cpu
  
 run_gpu:
-	bash ./test.sh matrix_common gpu 10
-	bash ./test.sh convert gpu 10
-	bash ./test.sh mv_mul gpu 10
-	bash ./test.sh transpose gpu 10
-	bash ./test.sh m_tanh gpu 10
-	#bash ./test.sh subvec_op gpu 10
+	bash ./test.sh matrix_common gpu
+	bash ./test.sh convert gpu
+	bash ./test.sh mv_mul gpu
+	bash ./test.sh transpose gpu
+	bash ./test.sh m_tanh gpu
+	#bash ./test.sh subvec_op gpu
 
 run_fx:
-	bash ./test.sh matrix_common fx 10
-	bash ./test.sh convert fx 10
-	bash ./test.sh mv_mul fx 10
-	bash ./test.sh transpose fx 10
-	bash ./test.sh subvec_op fx 10
-	bash ./test.sh m_tanh fx 10
+	bash ./test.sh matrix_common fx
+	bash ./test.sh convert fx
+	bash ./test.sh mv_mul fx
+	bash ./test.sh transpose fx
+	bash ./test.sh subvec_op fx
+	bash ./test.sh m_tanh fx
 
 run_sx:
-	bash ./test.sh matrix_common sx 10
-	bash ./test.sh convert sx 10
-	bash ./test.sh mv_mul sx 10
-	bash ./test.sh transpose sx 10
-	bash ./test.sh subvec_op sx 10
-	bash ./test.sh m_tanh sx 10
+	bash ./test.sh matrix_common sx
+	bash ./test.sh convert sx
+	bash ./test.sh mv_mul sx
+	bash ./test.sh transpose sx
+	bash ./test.sh subvec_op sx
+	bash ./test.sh m_tanh sx
 
 clean:
 	- rm *.out
