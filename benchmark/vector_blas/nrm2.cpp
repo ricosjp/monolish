@@ -4,8 +4,7 @@
 #define PERF 2 * size / time / 1.0e+9
 #define MEM 1 * size * sizeof(T) / time / 1.0e+9
 
-template <typename T>
-bool benchmark(const size_t size, const size_t iter) {
+template <typename T> bool benchmark(const size_t size, const size_t iter) {
 
   // create random vector x rand(0~1)
   monolish::vector<T> x(size, 0.0, 1.0);
@@ -57,10 +56,10 @@ int main(int argc, char **argv) {
   }
 
   // default benchmark
-  for(size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
-      benchmark<float>(size, iter);
-  for(size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
-      benchmark<double>(size, iter);
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+    benchmark<float>(size, iter);
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+    benchmark<double>(size, iter);
 
   return 0;
 }

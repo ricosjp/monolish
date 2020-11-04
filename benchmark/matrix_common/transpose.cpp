@@ -46,8 +46,7 @@ bool benchmark(const size_t M, const size_t N, int iter) {
 int main(int argc, char **argv) {
 
   if (argc <= 1) {
-    std::cout << "$1: format"
-              << std::endl;
+    std::cout << "$1: format" << std::endl;
     return 1;
   }
 
@@ -57,7 +56,7 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if(argc==5){
+  if (argc == 5) {
     const size_t M = atoi(argv[3]);
     const size_t N = atoi(argv[4]);
     if (strcmp(argv[2], "double") == 0) {
@@ -79,22 +78,24 @@ int main(int argc, char **argv) {
     }
   }
 
-  //Dense
+  // Dense
   if ((strcmp(argv[1], "Dense") == 0)) {
-    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
+    for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
+         size += 1000) {
       benchmark<monolish::matrix::Dense<float>, float>(size, size, iter);
     }
-    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
+    for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
+         size += 1000) {
       benchmark<monolish::matrix::Dense<double>, double>(size, size, iter);
     }
   }
 
-  //COO
+  // COO
   if ((strcmp(argv[1], "COO") == 0)) {
-    for(size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size *= 10){
+    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size *= 10) {
       benchmark<monolish::matrix::COO<float>, float>(size, size, iter);
     }
-    for(size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size *= 10){
+    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size *= 10) {
       benchmark<monolish::matrix::COO<double>, double>(size, size, iter);
     }
   }

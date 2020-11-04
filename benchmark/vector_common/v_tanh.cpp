@@ -10,8 +10,7 @@ template <typename T> void get_ans(monolish::vector<T> &ans) {
   }
 }
 
-template <typename T>
-bool benchmark(const size_t size, const size_t iter) {
+template <typename T> bool benchmark(const size_t size, const size_t iter) {
 
   // create random vector x rand(0.1~1.0)
   monolish::vector<T> ans(size, 321.0);
@@ -64,10 +63,10 @@ int main(int argc, char **argv) {
   }
 
   // default benchmark
-  for(size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
-      benchmark<float>(size, iter);
-  for(size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
-      benchmark<double>(size, iter);
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+    benchmark<float>(size, iter);
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+    benchmark<double>(size, iter);
 
   return 0;
 }

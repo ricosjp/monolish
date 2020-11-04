@@ -263,6 +263,8 @@ benchmark_nogpu_avx:
       - make run_cpu
     tags:
       - cpu2.gitlab-runner.savanna.ritc.jp
+    only:
+        - master
 benchmark_gpu_avx:
     stage: benchmark
     extends:
@@ -280,6 +282,8 @@ benchmark_gpu_avx:
       - make run_gpu
     tags:
       - gpu2.gitlab-runner.savanna.ritc.jp
+    only:
+        - master
 
 #
 # docker and pages
@@ -323,6 +327,8 @@ benchmark_result:
         - git config --global user.email "monolish_ci_runner@example.jp"
         - cd benchmark
         - make commit_result
+    only:
+        - master
 
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1

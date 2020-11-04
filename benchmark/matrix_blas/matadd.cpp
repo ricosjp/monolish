@@ -1,11 +1,11 @@
 #include "../benchmark_utils.hpp"
 
 #define FUNC "matadd"
-#define DENSE_PERF 1 * M * N / time / 1.0e+9
-#define CRS_PERF 2 * M * nnzrow / time / 1.0e+9
+#define DENSE_PERF 1 * M *N / time / 1.0e+9
+#define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
 
-#define DENSE_MEM 3 * M * N * sizeof(T) / time / 1.0e+9
-#define CRS_MEM 3 * M * nnzrow * sizeof(T) / time / 1.0e+9
+#define DENSE_MEM 3 * M *N * sizeof(T) / time / 1.0e+9
+#define CRS_MEM 3 * M *nnzrow * sizeof(T) / time / 1.0e+9
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool benchmark(const size_t M, const size_t N, const size_t iter) {
@@ -65,11 +65,13 @@ bool benchmark(const size_t M, const size_t N, const size_t iter) {
 int main(int argc, char **argv) {
 
   if (argc <= 3) {
-    std::cout <<  "error $1: format of A, $2: format of B, $3: format of C" << std::endl;
+    std::cout << "error $1: format of A, $2: format of B, $3: format of C"
+              << std::endl;
     return 1;
   }
 
-  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]\tperf[GB/s]" << std::endl;
+  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]\tperf[GB/s]"
+            << std::endl;
 
   size_t iter = MATRIX_BENCH_ITER;
 
@@ -82,58 +84,63 @@ int main(int argc, char **argv) {
     if (strcmp(argv[4], "double") == 0) {
       if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
           (strcmp(argv[3], "Dense") == 0)) {
-        benchmark<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
-          monolish::matrix::Dense<double>, double>(M, N, iter);
+        benchmark<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, iter);
       }
 
       if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "CRS") == 0) &&
           (strcmp(argv[3], "CRS") == 0)) {
         benchmark<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
-          monolish::matrix::CRS<double>, double>(M, N, iter);
+                  monolish::matrix::CRS<double>, double>(M, N, iter);
       }
     }
 
     if (strcmp(argv[4], "float") == 0) {
       if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
           (strcmp(argv[3], "Dense") == 0)) {
-        benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-          monolish::matrix::Dense<float>, float>(M, N, iter);
+        benchmark<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, iter);
       }
 
       if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "CRS") == 0) &&
           (strcmp(argv[3], "CRS") == 0)) {
         benchmark<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
-          monolish::matrix::CRS<float>, float>(M, N, iter);
+                  monolish::matrix::CRS<float>, float>(M, N, iter);
       }
     }
     return 0;
   }
 
-  //Dense
+  // Dense
   if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
       (strcmp(argv[3], "Dense") == 0)) {
-    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
+    for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
+         size += 1000) {
       benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-        monolish::matrix::Dense<float>, float>(size, size, iter);
+                monolish::matrix::Dense<float>, float>(size, size, iter);
     }
-    for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
-      benchmark<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
-        monolish::matrix::Dense<double>, double>(size, size, iter);
+    for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
+         size += 1000) {
+      benchmark<monolish::matrix::Dense<double>,
+                monolish::matrix::Dense<double>,
+                monolish::matrix::Dense<double>, double>(size, size, iter);
     }
   }
 
-  //CRS
+  // CRS
   if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "CRS") == 0) &&
       (strcmp(argv[3], "CRS") == 0)) {
-    for(size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10){
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10) {
       benchmark<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
-        monolish::matrix::CRS<float>, float>(size, size, iter);
+                monolish::matrix::CRS<float>, float>(size, size, iter);
     }
-    for(size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10){
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10) {
       benchmark<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
-        monolish::matrix::CRS<double>, double>(size, size, iter);
+                monolish::matrix::CRS<double>, double>(size, size, iter);
     }
   }
 
-return 0;
+  return 0;
 }

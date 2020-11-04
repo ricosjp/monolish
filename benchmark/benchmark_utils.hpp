@@ -15,14 +15,15 @@
 #define VECTOR_BENCH_MAX 100000000
 #define VECTOR_BENCH_ITER 10
 
-#define VECTOR_BLAS_BENCH_HEADER "func\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]" 
+#define VECTOR_BLAS_BENCH_HEADER                                               \
+  "func\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]"
 
-#define VECTOR_BLAS_OUTPUT_RESULT() \
-  std::cout << FUNC << "\t" << std::flush; \
-  std::cout << get_type<T>() << "\t" << std::flush; \
-  std::cout << size << "\t" << std::flush; \
-  std::cout << time << "\t" << std::flush; \
-  std::cout << PERF << "\t" << std::flush; \
+#define VECTOR_BLAS_OUTPUT_RESULT()                                            \
+  std::cout << FUNC << "\t" << std::flush;                                     \
+  std::cout << get_type<T>() << "\t" << std::flush;                            \
+  std::cout << size << "\t" << std::flush;                                     \
+  std::cout << time << "\t" << std::flush;                                     \
+  std::cout << PERF << "\t" << std::flush;                                     \
   std::cout << MEM << "\t" << std::endl
 
 // matrix ///
