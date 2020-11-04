@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 
   std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]\tperf[GB/s]" << std::endl;
 
-  int iter = MATRIX_BENCH_ITER;
+  size_t iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_log.txt");

@@ -5,7 +5,7 @@
 #define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
 
 template <typename MAT, typename T>
-bool benchmark(const size_t M, const size_t N, int iter) {
+bool benchmark(const size_t M, const size_t N, size_t iter) {
 
   size_t nnzrow = 81;
   if (nnzrow < N) {
@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 
   std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS] " << std::endl;
 
-  int iter = MATRIX_BENCH_ITER;
+  size_t iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_log.txt");
