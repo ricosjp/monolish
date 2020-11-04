@@ -18,4 +18,4 @@ requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-monolish_log_viewwer = 'monolish_log_viewer:main'
+monolish_log_viewwer = 'monolish_log_viewer.__main__:main'

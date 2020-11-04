@@ -26,10 +26,10 @@ run_fx:
 	$(PROFILER )./$(FUNC)_fx.out monolish_test_fx.log ../../test.mtx
 
 log_cpu:
-	python3 $(MONOLISH_LOG_VIEWER)/logger.py monolish_test_cpu.log logging_result_cpu.html
+	python3 $(MONOLISH_LOG_VIEWER)/monolish_log_viewer/__main__.py monolish_test_cpu.log logging_result_cpu.html
 
 log_gpu:
-	python3 $(MONOLISH_LOG_VIEWER)/logger.py monolish_test_gpu.log logging_result_gpu.html
+	python3 $(MONOLISH_LOG_VIEWER)/monolish_log_viewer/__main__.py monolish_test_gpu.log logging_result_gpu.html
 
 log_fx:
 	python3 logger.py monolish_test_fx.log logging_result_fx.html
