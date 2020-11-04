@@ -345,4 +345,4 @@ keep-changelog:
     allow_failure: true
     except:
         - master
-
+        - tags
