@@ -64,13 +64,12 @@ bool benchmark(const size_t M, const size_t N, const size_t K, int iter) {
 
 int main(int argc, char **argv) {
 
-  if (argc <= 4) {
-    std::cout << "error $1: precision (double or float or all) $2: format of A, $3: format of B, $4: format of C" << std::endl;
+  if (argc <= 3) {
+    std::cout << "error $1: format of A, $2: format of B, $3: format of C" << std::endl;
     return 1;
   }
 
   std::cout << "func\tprec\tM\tN\tK\ttime[sec]\tperf[GFLOPS] " << std::endl;
-
 
   int iter = MATRIX_BENCH_ITER;
 
@@ -84,29 +83,29 @@ int main(int argc, char **argv) {
     const size_t N = atoi(argv[6]);
     const size_t K = atoi(argv[7]);
 
-    if (strcmp(argv[1], "double") == 0) {
-      if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-          (strcmp(argv[4], "Dense") == 0)) {
+    if (strcmp(argv[4], "double") == 0) {
+      if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+          (strcmp(argv[3], "Dense") == 0)) {
         benchmark<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
           monolish::matrix::Dense<double>, double>(M, N, K, iter);
       }
 
-      if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-          (strcmp(argv[4], "Dense") == 0)) {
+      if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+          (strcmp(argv[3], "Dense") == 0)) {
         benchmark<monolish::matrix::CRS<double>, monolish::matrix::Dense<double>,
           monolish::matrix::Dense<double>, double>(M, N, K, iter);
       }
     }
 
-    if (strcmp(argv[1], "float") == 0) {
-      if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-          (strcmp(argv[4], "Dense") == 0)) {
+    if (strcmp(argv[4], "float") == 0) {
+      if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+          (strcmp(argv[3], "Dense") == 0)) {
         benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
           monolish::matrix::Dense<float>, float>(M, N, K, iter);
       }
 
-      if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-          (strcmp(argv[4], "Dense") == 0)) {
+      if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+          (strcmp(argv[3], "Dense") == 0)) {
         benchmark<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
           monolish::matrix::Dense<float>, float>(M, N, K, iter);
       }
@@ -114,8 +113,8 @@ int main(int argc, char **argv) {
   }
 
   //Dense,Dense,Dense
-  if ((strcmp(argv[2], "Dense") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-      (strcmp(argv[4], "Dense") == 0)) {
+  if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+      (strcmp(argv[3], "Dense") == 0)) {
     for(size_t size = DENSE_NNN_BENCH_MIN; size <= DENSE_NNN_BENCH_MAX; size += 1000){
       benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
         monolish::matrix::Dense<float>, float>(size, size, size, iter);
@@ -127,8 +126,8 @@ int main(int argc, char **argv) {
   }
 
   //Dense,CRS,Dense
-  if ((strcmp(argv[2], "CRS") == 0) && (strcmp(argv[3], "Dense") == 0) &&
-      (strcmp(argv[4], "Dense") == 0)) {
+  if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "Dense") == 0) &&
+      (strcmp(argv[3], "Dense") == 0)) {
     for(size_t size = CRS_NNN_BENCH_MIN; size <= CRS_NNN_BENCH_MAX; size += 1000){
       benchmark<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
         monolish::matrix::Dense<float>, float>(size, size, size, iter);
@@ -138,7 +137,6 @@ int main(int argc, char **argv) {
         monolish::matrix::Dense<double>, double>(size, size, size, iter);
     }
   }
-
 
   return 0;
 }

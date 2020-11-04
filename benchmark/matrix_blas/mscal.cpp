@@ -54,8 +54,8 @@ bool benchmark(const size_t M, const size_t N, const size_t iter) {
 
 int main(int argc, char **argv) {
 
-  if (argc <= 2) {
-    std::cout << "error $1: precision (double or float or all) $1: format" << std::endl;
+  if (argc <= 1) {
+    std::cout << "$1: format" << std::endl;
     return 1;
   }
 
@@ -71,20 +71,20 @@ int main(int argc, char **argv) {
     const size_t M = atoi(argv[3]);
     const size_t N = atoi(argv[4]);
 
-    if (strcmp(argv[1], "double") == 0) {
-      if ((strcmp(argv[2], "Dense") == 0)) {
+    if (strcmp(argv[2], "double") == 0) {
+      if ((strcmp(argv[1], "Dense") == 0)) {
         benchmark<monolish::matrix::Dense<double>, double>(M, N, iter);
       }
-      if ((strcmp(argv[2], "CRS") == 0)) {
+      if ((strcmp(argv[1], "CRS") == 0)) {
         benchmark<monolish::matrix::CRS<double>, double>(M, N, iter);
       }
     }
 
-    if (strcmp(argv[1], "float") == 0) {
-      if ((strcmp(argv[2], "Dense") == 0)) {
+    if (strcmp(argv[2], "float") == 0) {
+      if ((strcmp(argv[1], "Dense") == 0)) {
         benchmark<monolish::matrix::Dense<float>, float>(M, N, iter);
       }
-      if ((strcmp(argv[2], "CRS") == 0)) {
+      if ((strcmp(argv[1], "CRS") == 0)) {
         benchmark<monolish::matrix::CRS<float>, float>(M, N, iter);
       }
     }
@@ -92,7 +92,7 @@ int main(int argc, char **argv) {
   }
 
   //Dense
-  if ((strcmp(argv[2], "Dense") == 0)) {
+  if ((strcmp(argv[1], "Dense") == 0)) {
     for(size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX; size += 1000){
       benchmark<monolish::matrix::Dense<float>, float>(size, size, iter);
     }
@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
   }
 
   //CRS
-  if ((strcmp(argv[2], "CRS") == 0)) {
+  if ((strcmp(argv[1], "CRS") == 0)) {
     for(size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10){
       benchmark<monolish::matrix::CRS<float>, float>(size, size, iter);
     }
