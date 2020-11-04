@@ -7,11 +7,6 @@ OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 .PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
 
-MAT_TEST_SIZE?=123
-MAT_TEST_SIZE?=124
-MAT_TEST_ITER?=100
-MAT_TEST_ANS_CHECK?=1
-
 all: cpu
 
 cpu: $(OBJS_CPU)
