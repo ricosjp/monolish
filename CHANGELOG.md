@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.6.0 - 2020/11/04
+-----------
 ### Added
 - ベンチマークのディレクトリを作成，masterでのみ実行するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/112
 - benchmark/にtsvを置くとCIの最後でベンチマーク結果としてアップロードされるようになった https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/111
