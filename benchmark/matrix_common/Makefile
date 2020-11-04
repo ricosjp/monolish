@@ -32,8 +32,8 @@ run_cpu:
 	bash ./benchmark.sh m_tanh cpu
  
 run_gpu:
-	bash ./benchmark.sh convert gpu
-	bash ./benchmark.sh transpose gpu
+	#bash ./benchmark.sh convert gpu
+	#bash ./benchmark.sh transpose gpu
 	bash ./benchmark.sh mv_mul gpu
 	bash ./benchmark.sh m_tanh gpu
 
@@ -51,3 +51,4 @@ run_sx:
 
 clean:
 	- rm *.out
+	- rm *.tsv
