@@ -34,49 +34,49 @@ get_spec_gpu:
 cpu:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 gpu:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 fx:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 sx:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 run_cpu:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 run_gpu:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 run_fx:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 run_sx:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
-	#make -j -C matrix_common/ $@
+	make -j -C matrix_common/ $@
 	make -j -C matrix_blas/ $@
 
 clean:
