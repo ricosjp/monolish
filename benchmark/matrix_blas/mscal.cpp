@@ -4,6 +4,9 @@
 #define DENSE_PERF 1 * M *N / time / 1.0e+9
 #define CRS_PERF 1 * M *nnzrow / time / 1.0e+9
 
+#define DENSE_MEM 2 * M * N * sizeof(T) / time / 1.0e+9
+#define CRS_MEM 2 * M * nnzrow * sizeof(T) / time / 1.0e+9
+
 template <typename MAT, typename T>
 bool benchmark(const size_t M, const size_t N, const size_t iter) {
 
@@ -42,11 +45,13 @@ bool benchmark(const size_t M, const size_t N, const size_t iter) {
   std::cout << time << "\t" << std::flush;
 
   if ((strcmp(A.type().data(), "Dense") == 0)) {
-    std::cout << DENSE_PERF << "\t" << std::endl;
+    std::cout << DENSE_PERF << "\t" << std::flush;
+    std::cout << DENSE_MEM << "\t" << std::endl;
   }
 
   if ((strcmp(A.type().data(), "CRS") == 0)) {
-    std::cout << CRS_PERF << "\t" << std::endl;
+    std::cout << CRS_PERF << "\t" << std::flush;
+    std::cout << CRS_MEM << "\t" << std::endl;
   }
 
   return true;
@@ -64,7 +69,7 @@ int main(int argc, char **argv) {
   int iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
+  // monolish::util::set_log_filename("./monolish_log.txt");
 
   if (argc == 5) {
 

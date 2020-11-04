@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
   int iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
+  // monolish::util::set_log_filename("./monolish_log.txt");
 
   if (argc == 5) {
 
