@@ -26,36 +26,28 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./test.sh matrix_common cpu
-	bash ./test.sh convert cpu
-	bash ./test.sh mv_mul cpu
-	bash ./test.sh transpose cpu
-	bash ./test.sh subvec_op cpu
-	bash ./test.sh m_tanh cpu
+	bash ./benchmark.sh convert cpu
+	bash ./benchmark.sh transpose cpu
+	bash ./benchmark.sh mv_mul cpu
+	bash ./benchmark.sh m_tanh cpu
  
 run_gpu:
-	bash ./test.sh matrix_common gpu
-	bash ./test.sh convert gpu
-	bash ./test.sh mv_mul gpu
-	bash ./test.sh transpose gpu
-	bash ./test.sh m_tanh gpu
-	#bash ./test.sh subvec_op gpu
+	bash ./benchmark.sh convert gpu
+	bash ./benchmark.sh transpose gpu
+	bash ./benchmark.sh mv_mul gpu
+	bash ./benchmark.sh m_tanh gpu
 
 run_fx:
-	bash ./test.sh matrix_common fx
-	bash ./test.sh convert fx
-	bash ./test.sh mv_mul fx
-	bash ./test.sh transpose fx
-	bash ./test.sh subvec_op fx
-	bash ./test.sh m_tanh fx
+	bash ./benchmark.sh convert fx
+	bash ./benchmark.sh transpose fx
+	bash ./benchmark.sh mv_mul fx
+	bash ./benchmark.sh m_tanh fx
 
 run_sx:
-	bash ./test.sh matrix_common sx
-	bash ./test.sh convert sx
-	bash ./test.sh mv_mul sx
-	bash ./test.sh transpose sx
-	bash ./test.sh subvec_op sx
-	bash ./test.sh m_tanh sx
+	bash ./benchmark.sh convert sx
+	bash ./benchmark.sh transpose sx
+	bash ./benchmark.sh mv_mul sx
+	bash ./benchmark.sh m_tanh sx
 
 clean:
 	- rm *.out
