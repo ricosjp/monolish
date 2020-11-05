@@ -6,7 +6,6 @@ authors = ["Shin-ichiro Ogi <ogi@ricos.co.jp>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-# python = "^3.6.8"
 
 PyYAML = "^5.2"
 numpy  = "^1.17"
