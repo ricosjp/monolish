@@ -24,7 +24,7 @@
   std::cout << size << "\t" << std::flush;                                     \
   std::cout << time << "\t" << std::flush;                                     \
   std::cout << PERF << "\t" << std::flush;                                     \
-  std::cout << MEM << "\t" << std::endl
+  std::cout << MEM << std::endl
 
 // matrix ///
 #define MATRIX_BENCH_ITER 10
