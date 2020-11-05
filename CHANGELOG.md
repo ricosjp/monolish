@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+- matadd, mscalのbenchmarkの出力ファイルのバグを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/114
 
 0.6.0 - 2020/11/04
 -----------
