@@ -37,7 +37,7 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << M << "\t" << std::flush;
   std::cout << N << "\t" << std::flush;
-  std::cout << time << "\t" << std::endl;
+  std::cout << time << std::endl;
 
   return 0;
 }

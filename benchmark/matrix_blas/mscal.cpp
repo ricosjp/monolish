@@ -46,12 +46,12 @@ bool benchmark(const size_t M, const size_t N, const size_t iter) {
 
   if ((strcmp(A.type().data(), "Dense") == 0)) {
     std::cout << DENSE_PERF << "\t" << std::flush;
-    std::cout << DENSE_MEM << "\t" << std::endl;
+    std::cout << DENSE_MEM << std::endl;
   }
 
   if ((strcmp(A.type().data(), "CRS") == 0)) {
     std::cout << CRS_PERF << "\t" << std::flush;
-    std::cout << CRS_MEM << "\t" << std::endl;
+    std::cout << CRS_MEM << std::endl;
   }
 
   return true;
