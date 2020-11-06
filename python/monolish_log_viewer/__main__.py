@@ -1,11 +1,11 @@
 """Create log program."""
 
-#!/usr/bin/env python3
 # coding: utf-8
 
 import argparse
-from utils import debug, html as html, read
-from libs import aggregate, grouping
+
+from .utils import debug, html, read
+from .libs import aggregate, grouping
 
 def main():
     """executive function"""
