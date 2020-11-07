@@ -256,7 +256,7 @@ python:
       # To avoid overwrite logger.html
     stage: python
     script:
-      - python -m pip install poetry  # FIXME move to allgebra
+      - python3 -m pip install poetry  # FIXME move to allgebra
       - cd python
       - poetry install
       - make
