@@ -31,7 +31,6 @@ test/logger/logging/*.log
 test/logger/logging/*.html
 monolish_log_viewer/libs/__pycache__/*.pyc
 monolish_log_viewer/utils/__pycache__/*.pyc
-.vscode/*
 
 # cmake
 build*/
@@ -45,3 +44,6 @@ compile_commands.json
 
 # vscode
 .vscode/
+
+# cmake
+benchmark/*/*.tsv

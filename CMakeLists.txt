@@ -54,13 +54,13 @@ if(MONOLISH_USE_GPU)
     -fopenmp
     -fno-stack-protector
     -fcf-protection=none
-    -foffload=nvptx-none="-O3"
+    "-foffload=nvptx-none=-O3 -misa=sm_35 -lm"
   )
   target_link_options(${MONOLISTH_TARGET} PRIVATE
     -fopenmp
     -fno-stack-protector
     -fcf-protection=none
-    -foffload=nvptx-none="-O3"
+    "-foffload=nvptx-none=-O3 -misa=sm_35 -lm"
   )
 else()
   target_compile_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
