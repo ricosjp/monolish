@@ -190,6 +190,7 @@ equation_gpu_noavx:
       paths:
         - test/logger/logging
       expire_in: 60min
+      when: always
 logger_nogpu_avx:
     stage: logger
     extends:
@@ -246,14 +247,11 @@ lang_gpu_noavx:
 #
 # Test Python module
 #
-python:
+python-cpu:
     extends:
       - .logger_artifact
-    dependencies:
-      - logger_gpu_avx
+    needs:
       - logger_nogpu_avx
-      # and must be after all tests passed
-      # To avoid overwrite logger.html
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -262,7 +260,21 @@ python:
       # Test monolish_log_viewer
       - cd python
       - poetry install
-      - make
+      - make log_cpu
+python-gpu:
+    extends:
+      - .logger_artifact
+    needs:
+      - logger_gpu_avx
+    stage: python
+    script:
+      # FIXME Python setup should be moved into allgebra
+      - apt update && apt install -y python3-pip
+      - python3 -m pip install poetry
+      # Test monolish_log_viewer
+      - cd python
+      - poetry install
+      - make log_gpu
 
 #
 # docker and pages
