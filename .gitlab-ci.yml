@@ -12,6 +12,7 @@ stages:
     - equation
     - logger
     - lang
+    - python
     - deploy
 
 .gpu_avx:
@@ -243,6 +244,24 @@ lang_gpu_noavx:
       TEST_TARGET: "lang"
 
 #
+# Test Python module
+#
+python:
+    extends:
+      - .logger_artifact
+    dependencies:
+      - logger_gpu_avx
+      - logger_nogpu_avx
+      # and must be after all tests passed
+      # To avoid overwrite logger.html
+    stage: python
+    script:
+      - python -m pip install poetry  # FIXME move to allgebra
+      - cd python
+      - poetry install
+      - make
+
+#
 # docker and pages
 #
 docker:
@@ -259,10 +278,7 @@ docker:
 
 pages:
     dependencies:
-      - logger_gpu_avx
-      - logger_nogpu_avx
-      # and must be after all tests passed
-      # To avoid overwrite logger.html
+      - python
     image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
     stage: deploy
     script:
