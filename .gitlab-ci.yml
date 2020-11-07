@@ -12,6 +12,7 @@ stages:
     - equation
     - logger
     - lang
+    - python
     - benchmark
     - deploy
 
@@ -190,6 +191,7 @@ equation_gpu_noavx:
       paths:
         - test/logger/logging
       expire_in: 60min
+      when: always
 logger_nogpu_avx:
     stage: logger
     extends:
@@ -242,6 +244,38 @@ lang_gpu_noavx:
     extends: .test_gpu_noavx
     variables:
       TEST_TARGET: "lang"
+
+#
+# Test Python module
+#
+python-cpu:
+    extends:
+      - .logger_artifact
+    needs:
+      - logger_nogpu_avx
+    stage: python
+    script:
+      # FIXME Python setup should be moved into allgebra
+      - apt update && apt install -y python3-pip
+      - python3 -m pip install poetry
+      # Test monolish_log_viewer
+      - cd python
+      - poetry install
+      - make log_cpu
+python-gpu:
+    extends:
+      - .logger_artifact
+    needs:
+      - logger_gpu_avx
+    stage: python
+    script:
+      # FIXME Python setup should be moved into allgebra
+      - apt update && apt install -y python3-pip
+      - python3 -m pip install poetry
+      # Test monolish_log_viewer
+      - cd python
+      - poetry install
+      - make log_gpu
 
 #
 # benchmark
@@ -302,10 +336,8 @@ docker:
 
 pages:
     dependencies:
-      - logger_gpu_avx
-      - logger_nogpu_avx
-      # and must be after all tests passed
-      # To avoid overwrite logger.html
+      - python-cpu
+      - python-gpu
     image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
     stage: deploy
     script:

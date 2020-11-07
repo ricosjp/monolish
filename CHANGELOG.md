@@ -34,6 +34,7 @@ Unreleased
 - GitLab CI で Merge Request 毎に origin/master から CHANGELOG.md に更新があるかチェックする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/105
 
 ### Changed
+- `pyproject.toml` と `__init__.py` を作成して monolish_log_viewer を Python パッケージにする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/107
 - タグ付けのときはkeep-changelogを走らないようにするhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/113
 - cmakeでNVPTXのオプションに-misa=sm_35と-lmを付けた https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/109
 - test/logger/logging にある Python スクリプト群を Project TOP に移動させる https://gitlab.ritc.jp/ricos/monolish/-/issues/325
