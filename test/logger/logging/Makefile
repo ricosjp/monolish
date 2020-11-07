@@ -25,8 +25,5 @@ run_gpu:
 run_fx:
 	$(PROFILER )./$(FUNC)_fx.out monolish_test_fx.log ../../test.mtx
 
-log_fx:
-	python3 logger.py monolish_test_fx.log logging_result_fx.html
-	
 clean:
 	- rm *.out *.log *.html
