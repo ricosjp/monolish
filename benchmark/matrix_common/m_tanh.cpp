@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS] " << std::endl;
+  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]" << std::endl;
   size_t iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
