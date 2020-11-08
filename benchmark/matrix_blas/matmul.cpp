@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::cout << "func\tprec\tM\tN\tK\ttime[sec]\tperf[GFLOPS] " << std::endl;
+  std::cout << "func\tprec\tM\tN\tK\ttime[sec]\tperf[GFLOPS]" << std::endl;
 
   size_t iter = MATRIX_BENCH_ITER;
 
