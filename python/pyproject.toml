@@ -6,12 +6,12 @@ authors = ["Shin-ichiro Ogi <ogi@ricos.co.jp>"]
 
 [tool.poetry.dependencies]
 python = "^3.7.9"
+pytest = "^6.1.2"
 
 PyYAML = "^5.2"
 numpy  = "^1.17"
 pandas = "^1.0"
 argparse = "^1.4.0"
-pytest = "^6.1.2"
 
 [tool.poetry.dev-dependencies]
 
