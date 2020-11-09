@@ -39,6 +39,7 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
 
     cusparseMatDescr_t descr = 0;
     cusparseCreateMatDescr(&descr);
@@ -102,6 +103,7 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
 
     cusparseMatDescr_t descr = 0;
     cusparseCreateMatDescr(&descr);

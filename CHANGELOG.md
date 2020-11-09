@@ -24,6 +24,7 @@ Unreleased
 - benchmarkでpipeline_idを出力するようにする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/119
 
 ### Fixed
+- cusparseの関数が非同期で実行されているようなのでsyncを追加した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/120
 - benchmarkをtagsとschedulesでは実行しないようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/116
 - 出力ファイルの末尾に半角スペースが入っているバグを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/117
 - 出力ファイルの末尾にtabが入っているバグを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/115
