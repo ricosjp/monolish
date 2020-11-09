@@ -1,0 +1,30 @@
+- {type : solver, name : solve/, stat : IN}
+- {type : solver, name : solve/monolish_CG/, stat : IN}
+- {type : solver, name : solve/monolish_CG/create_precond/, stat : IN}
+- {type : solver, name : solve/monolish_CG/create_precond/, stat : OUT, time : 0.000856631}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00752491}
+- {type : func, name : solve/monolish_CG/operator-/, time : 0.00409249}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.000981115}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00252163}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.00248727}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000458116}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000402919}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000365773}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.000840982}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000354575}
+- {type : func, name : solve/monolish_CG/xpay/, time : 0.00233546}
+- {type : func, name : solve/monolish_CG/nrm2/, time : 0.000397699}
+- {type : func, name : solve/monolish_CG/matvec/, time : 0.00296986}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000583064}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000527}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000402616}
+- {type : func, name : solve/monolish_CG/axpy/, time : 0.000422104}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : IN}
+- {type : solver, name : solve/monolish_CG/apply_precond/, stat : OUT, time : 0.000930045}
+- {type : func, name : solve/monolish_CG/dot/, time : 0.000378529}
+- {type : func, name : solve/monolish_CG/xpay/, time : 0.00240032}
+- {type : func, name : solve/monolish_CG/nrm2/, time : 0.000571712}
+- {type : solver, name : solve/monolish_CG/, stat : OUT, time : 0.0368665}
+- {type : solver, name : solve/, stat : OUT, time : 0.0379194}
