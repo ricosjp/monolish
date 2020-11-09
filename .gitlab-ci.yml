@@ -365,6 +365,7 @@ benchmark_result:
         - git config --global user.name "monolish_ci_runner"
         - git config --global user.email "monolish_ci_runner@example.jp"
         - cd benchmark
+        - make get_ci_info
         - make commit_result
     only:
         - master

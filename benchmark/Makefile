@@ -31,6 +31,9 @@ get_spec_cpu:
 get_spec_gpu:
 	bash ./get_spec.sh > spec_gpu.tsv
 
+get_ci_info:
+	bash ./get_version_info.sh > version_info.tsv
+
 cpu:
 	make -j -C vector_common/ $@
 	make -j -C vector_blas/ $@
