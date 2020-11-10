@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Changed    既存機能の変更について。
+- benchmarkでサイズの繰り返しをヘッダでまとめで定義するようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/124
+
 ### Added
 - benchmarkでpipeline_idを出力するようにする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/119
 

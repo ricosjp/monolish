@@ -13,7 +13,7 @@
 // vector ///
 #define VECTOR_BENCH_MIN 1000
 #define VECTOR_BENCH_MAX 100000000
-#define VECTOR_BENCH_INCL *=10
+#define VECTOR_BENCH_INCL *= 10
 #define VECTOR_BENCH_ITER 10
 
 #define VECTOR_BLAS_BENCH_HEADER                                               \
@@ -33,24 +33,24 @@
 // order N^2
 #define DENSE_NN_BENCH_MIN 1000
 #define DENSE_NN_BENCH_MAX 10000
-#define DENSE_NN_BENCH_ITER +=1000
+#define DENSE_NN_BENCH_ITER += 1000
 
 #define CRS_NN_BENCH_MIN 1000
 #define CRS_NN_BENCH_MAX 1000000
-#define CRS_NN_BENCH_ITER *=10
+#define CRS_NN_BENCH_ITER *= 10
 
 #define COO_NN_BENCH_MIN 1000
 #define COO_NN_BENCH_MAX 3000
-#define COO_NN_BENCH_ITER +=1000
+#define COO_NN_BENCH_ITER += 1000
 
 // order N^3
 #define DENSE_NNN_BENCH_MIN 1000
 #define DENSE_NNN_BENCH_MAX 5000
-#define DENSE_NNN_BENCH_ITER +=1000
+#define DENSE_NNN_BENCH_ITER += 1000
 
 #define CRS_NNN_BENCH_MIN 1000
 #define CRS_NNN_BENCH_MAX 3000
-#define CRS_NNN_BENCH_ITER +=1000
+#define CRS_NNN_BENCH_ITER += 1000
 
 template <typename T> std::string get_type() {
   std::string type;

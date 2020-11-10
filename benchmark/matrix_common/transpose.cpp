@@ -92,10 +92,12 @@ int main(int argc, char **argv) {
 
   // COO
   if ((strcmp(argv[1], "COO") == 0)) {
-    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size COO_NN_BENCH_ITER) {
+    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX;
+         size COO_NN_BENCH_ITER) {
       benchmark<monolish::matrix::COO<float>, float>(size, size, iter);
     }
-    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX; size COO_NN_BENCH_ITER) {
+    for (size_t size = COO_NN_BENCH_MIN; size <= COO_NN_BENCH_MAX;
+         size COO_NN_BENCH_ITER) {
       benchmark<monolish::matrix::COO<double>, double>(size, size, iter);
     }
   }

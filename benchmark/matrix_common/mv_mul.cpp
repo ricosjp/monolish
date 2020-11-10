@@ -105,10 +105,12 @@ int main(int argc, char **argv) {
 
   // CRS
   if ((strcmp(argv[1], "CRS") == 0)) {
-    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size CRS_NN_BENCH_ITER) {
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX;
+         size CRS_NN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<float>, float>(size, size, iter);
     }
-    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size CRS_NN_BENCH_ITER) {
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX;
+         size CRS_NN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<double>, double>(size, size, iter);
     }
   }
