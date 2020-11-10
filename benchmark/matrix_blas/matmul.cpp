@@ -120,12 +120,12 @@ int main(int argc, char **argv) {
   if ((strcmp(argv[1], "Dense") == 0) && (strcmp(argv[2], "Dense") == 0) &&
       (strcmp(argv[3], "Dense") == 0)) {
     for (size_t size = DENSE_NNN_BENCH_MIN; size <= DENSE_NNN_BENCH_MAX;
-         size += 1000) {
+         size DENSE_NNN_BENCH_ITER) {
       benchmark<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
                 monolish::matrix::Dense<float>, float>(size, size, size, iter);
     }
     for (size_t size = DENSE_NNN_BENCH_MIN; size <= DENSE_NNN_BENCH_MAX;
-         size += 1000) {
+         size DENSE_NNN_BENCH_ITER) {
       benchmark<monolish::matrix::Dense<double>,
                 monolish::matrix::Dense<double>,
                 monolish::matrix::Dense<double>, double>(size, size, size,
@@ -137,12 +137,12 @@ int main(int argc, char **argv) {
   if ((strcmp(argv[1], "CRS") == 0) && (strcmp(argv[2], "Dense") == 0) &&
       (strcmp(argv[3], "Dense") == 0)) {
     for (size_t size = CRS_NNN_BENCH_MIN; size <= CRS_NNN_BENCH_MAX;
-         size += 1000) {
+         size CRS_NNN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
                 monolish::matrix::Dense<float>, float>(size, size, size, iter);
     }
     for (size_t size = CRS_NNN_BENCH_MIN; size <= CRS_NNN_BENCH_MAX;
-         size += 1000) {
+         size CRS_NNN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<double>, monolish::matrix::Dense<double>,
                 monolish::matrix::Dense<double>, double>(size, size, size,
                                                          iter);
