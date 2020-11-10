@@ -89,21 +89,23 @@ int main(int argc, char **argv) {
   // Dense
   if ((strcmp(argv[1], "Dense") == 0)) {
     for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
-         size += 1000) {
+         size DENSE_NN_BENCH_ITER) {
       benchmark<monolish::matrix::Dense<float>, float>(size, size, iter);
     }
     for (size_t size = DENSE_NN_BENCH_MIN; size <= DENSE_NN_BENCH_MAX;
-         size += 1000) {
+         size DENSE_NN_BENCH_ITER) {
       benchmark<monolish::matrix::Dense<double>, double>(size, size, iter);
     }
   }
 
   // CRS
   if ((strcmp(argv[1], "CRS") == 0)) {
-    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10) {
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX;
+         size CRS_NN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<float>, float>(size, size, iter);
     }
-    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX; size *= 10) {
+    for (size_t size = CRS_NN_BENCH_MIN; size <= CRS_NN_BENCH_MAX;
+         size CRS_NN_BENCH_ITER) {
       benchmark<monolish::matrix::CRS<double>, double>(size, size, iter);
     }
   }
