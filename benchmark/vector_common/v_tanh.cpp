@@ -63,9 +63,9 @@ int main(int argc, char **argv) {
   }
 
   // default benchmark
-  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size VECTOR_BENCH_INCL)
     benchmark<float>(size, iter);
-  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size *= 10)
+  for (size = VECTOR_BENCH_MIN; size <= VECTOR_BENCH_MAX; size VECTOR_BENCH_INCL)
     benchmark<double>(size, iter);
 
   return 0;

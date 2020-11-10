@@ -13,6 +13,7 @@
 // vector ///
 #define VECTOR_BENCH_MIN 1000
 #define VECTOR_BENCH_MAX 100000000
+#define VECTOR_BENCH_INCL *=10
 #define VECTOR_BENCH_ITER 10
 
 #define VECTOR_BLAS_BENCH_HEADER                                               \
