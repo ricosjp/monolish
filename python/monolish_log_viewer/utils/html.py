@@ -1,43 +1,28 @@
 """ Create HTML source """
 # pylint: disable=unused-import
 # pylint: disable=C0326
-import pandas as pd
+import pandas
 
-def create_table(title, columns_list, aggr_ndarray) -> str:
-    """list of HTML table to HTML"""
-    # caption
-    caption = f"<caption>{title}</caption>"
-    # table header
-    column_html = "".join(list(map(lambda column:f"<th>{column}</th>", columns_list)))
-    table_header = f"<tr>{column_html}</tr>"
-    # table data
-    table_data = "".join(list(
-        map(lambda aggr_array:"<tr>" + "".join(list(
-            map(lambda elem:f'<td>{str(elem)}</td>', aggr_array)
-        )) + "</tr>", aggr_ndarray)))
-    # table
-    table = caption + table_header + table_data
-    table = f"<table border='1'>{table}</table>"
-    return table
-
-def df_to_html_table(dataframe):
+def df_to_html_table(dataframe:pandas.DataFrame):
     """DataFrame to HTML table"""
-    html_table = dataframe.to_html()
+    html_table = dataframe.to_html(justify="center")
     return html_table
 
-def to_caption_on_html(title, html_table):
+def to_caption_on_html(title:str, html_table:str) -> str:
     """add caption"""
     caption = f"<caption>{title}</caption>"
-    html_table = caption + html_table
+    html_table = f"{caption}{html_table}"
+
     return html_table
 
-def to_bold_on_html(html_table):
+def to_bold_on_html(html_table:str) -> str:
     """100.0 in bold and background"""
+
     html_table = html_table.replace(
         "<td>100</td>", "<td><div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div></td>")
     return html_table
 
-def table_in_html(table_html) -> str:
+def table_in_html(table_html:str) -> str:
     """create html source"""
     html = f"""
         <!DOCTYPE html>
