@@ -3,7 +3,7 @@
 # pylint: disable=C0326
 import pandas
 
-def df_to_html_table(dataframe:pandas.DataFrame):
+def df_to_html_table(dataframe:pandas.DataFrame) -> str:
     """DataFrame to HTML table"""
     html_table = dataframe.to_html(justify="center")
     return html_table
