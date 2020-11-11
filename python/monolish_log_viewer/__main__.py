@@ -28,20 +28,21 @@ def main():
 
         # Aggregate
         aggregate_pandas = aggregate.AggregatePandas()
-        other_df, solve_df = aggregate_pandas.aggregated(split_dict_list)
+        solve_df = aggregate_pandas.aggregated(split_dict_list)
         debug.log_success("aggregated")
 
         # layer 1
-        other_df = aggregate_pandas.layer_1_aggregated(yaml_dict_list)
+        layer_1_aggr_df = aggregate_pandas.layer_1_aggregated(yaml_dict_list)
+        debug.log_success("layer_1_aggregated")
 
         # create html
-        other_table_html = html.df_to_html_table(other_df)
-        other_table_html = html.to_caption_on_html("layer1", other_table_html)
+        layer_1_aggr_table_html = html.df_to_html_table(layer_1_aggr_df)
+        layer_1_aggr_table_html = html.to_caption_on_html("layer1", layer_1_aggr_table_html)
 
         solve_table_html = html.df_to_html_table(solve_df)
         solve_table_html = html.to_caption_on_html("solver", solve_table_html)
 
-        all_table_html = other_table_html + solve_table_html
+        all_table_html = layer_1_aggr_table_html + solve_table_html
 
         # decoration
         all_table_html = html.to_bold_on_html(all_table_html)

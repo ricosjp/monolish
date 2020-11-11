@@ -2,78 +2,6 @@ import math
 import numpy as np
 import pandas as pd
 
-class AggregateNumpy:
-    def aggregated_by_floor(self, block_dict_2multiple_list):
-        aggr_column_lists, aggr_ndarrays = [], []
-        block_dict_2multiple_list = filter(lambda any_dict_list: any_dict_list != [], block_dict_2multiple_list)
-        for index, block_dict_list in enumerate(block_dict_2multiple_list):
-            block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("stat", "")]) if ("stat" not in block_dict) else block_dict, block_dict_list))
-            block_dict_list = list(map(lambda block_dict: dict(list(block_dict.items())+[("time", "")]) if ("time" not in block_dict) else block_dict, block_dict_list))
-            # sorted
-            block_dict_list = list(map(lambda block_dict: dict(type=block_dict["type"], name=block_dict["name"], stat=block_dict["stat"], time=block_dict["time"]), block_dict_list))
-
-            # columns : type, name, stat, time
-            block_ndarray = np.array([list(block_dict.values()) for block_dict in block_dict_list])
-            max_layer = max(map(lambda x:x.count("/"), block_ndarray[:, 1]))
-
-            # group by
-            aggr_ndarray = groupby_with_name(block_ndarray, max_layer)
-
-            # calc_percent
-            aggr_column_list = ["layer", "name", "count", "total_time [s]"]
-            aggr_ndarray, aggr_column_list = calc_percent(aggr_ndarray, aggr_column_list, max_layer)
-
-            # erase information
-            aggr_ndarray = erase_information(aggr_ndarray, max_layer)
-
-            # aggregate list
-            aggr_column_lists.append(aggr_column_list)
-            aggr_ndarrays.append(aggr_ndarray)
-
-        else:
-            index = index + 1
-
-        return aggr_column_lists, aggr_ndarrays, index
-
-    def calc_percent(self, aggr_ndarray, aggr_column_list, max_layer):
-        for layer in range(1, max_layer):
-            aggr_column_list.append(f"breakdown_layer {str(layer)} [%] (breakdown[%] / count)")
-
-            denominator = (float)(aggr_ndarray[np.array(list(map(lambda x: int(x[0])==layer, aggr_ndarray)))][:, 3][0])
-            percent = np.array(aggr_ndarray[:, 3], dtype="float32") / denominator * 100.0
-            percent = np.round(percent, decimals=3)
-            percent = np.where(percent <= 100.0, percent, "")
-
-            aggr_ndarray = np.insert(aggr_ndarray, aggr_ndarray.shape[1], percent, axis=1)
-        aggr_ndarray[:, 3] = np.round(np.array(aggr_ndarray[:, 3], dtype="float32"), decimals=3)
-
-        return aggr_ndarray, aggr_column_list
-
-    def erase_information(self, aggr_ndarray, max_layer):
-        temp_aggr_ndarray = np.empty((0, aggr_ndarray.shape[1]))
-        for layer in range(1, max_layer-1):
-            for any_ndarray in aggr_ndarray:
-                if any_ndarray[0] == str(layer) or any_ndarray[0] == str(layer+1):
-                    temp_aggr_ndarray = np.append(temp_aggr_ndarray, [any_ndarray], axis=0)
-                else:
-                    temp_ndarray = np.copy(any_ndarray)
-                    temp_ndarray[3+layer] = ""
-                    temp_aggr_ndarray = np.append(temp_aggr_ndarray, [temp_ndarray], axis=0)
-            aggr_ndarray = temp_aggr_ndarray
-        return aggr_ndarray
-
-    def groupby_with_name(self, block_ndarray, max_layer):
-        aggr_ndarray = np.empty((0, 4))
-        for layer in range(1, max_layer+1):
-            layer_ndarray = block_ndarray[np.array(list(map(lambda x: (x[1]!="IN") and (x[0].count("/")==layer), block_ndarray[:, 1:3])))][:, [1,3]]
-            for col in np.unique(layer_ndarray[:,0]):
-                temp_ndarray = layer_ndarray[np.array(list(map(lambda x: x==col, layer_ndarray[:, 0])))]
-                count = np.count_nonzero(temp_ndarray[:,0])
-                total_time = np.sum(np.array(temp_ndarray[:,1], dtype="float32"))
-                rst_narray = np.array([layer, col, count, total_time])
-                aggr_ndarray = np.append(aggr_ndarray, [rst_narray], axis=0)
-        return aggr_ndarray
-
 class AggregatePandas:
     def layer_1_aggregated(self, dict_list):
         row_df =  pd.DataFrame(dict_list)
@@ -83,8 +11,8 @@ class AggregatePandas:
         layer1_aggr_df_cnt = layer1_df.groupby(["name", "layer"]).count().reset_index()
         layer1_aggr_df_cnt = layer1_aggr_df_cnt.rename(columns={"time":"cont_cnt"})
         layer1_aggr_df = pd.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cont_cnt"]], how = "right", on="name")
+        
         return layer1_aggr_df
-
 
     def aggregated(self, dict_list):
         # dict_list to list
@@ -137,7 +65,6 @@ class AggregatePandas:
         aggr_df = aggr_df.reset_index()
 
         # split
-        other_df = aggr_df[aggr_df["name"].str.contains("solve/") == False]
         solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
         
         # local max layer
@@ -199,12 +126,9 @@ class AggregatePandas:
         for group_0_index in range(group_0_min, group_0_max):
             final_sort_solve_df = pd.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
         solve_df = final_sort_solve_df
+        solve_df = solve_df.reset_index().drop("index", axis=1)
 
-        other_df = other_df.drop(columns=layer_column_list)
-        layer_column_list2 = [f"group_{target_layer}" for target_layer in range(1, solve_max_layer+1)]
-        other_df = other_df.drop(columns=layer_column_list2)
-
-        return other_df, solve_df
+        return solve_df
 
     def aggregated_continuous_values(self, dataframe):
         base_df = dataframe
