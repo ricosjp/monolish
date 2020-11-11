@@ -1,22 +1,22 @@
-import math
-import numpy as np
-import pandas as pd
+""" aggregate """
+import numpy
+import pandas
 
 class AggregatePandas:
-    def layer_1_aggregated(self, dict_list):
-        row_df =  pd.DataFrame(dict_list)
+    def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
+        row_df =  pandas.DataFrame(dict_list)
         row_df["layer"] = row_df.name.apply(lambda x:x.count("/"))
         layer1_df = row_df[(row_df.layer==1) & (row_df.time != "IN")]
         layer1_aggr_df_sum = layer1_df.groupby(["name", "layer"]).sum().reset_index()
         layer1_aggr_df_cnt = layer1_df.groupby(["name", "layer"]).count().reset_index()
         layer1_aggr_df_cnt = layer1_aggr_df_cnt.rename(columns={"time":"cont_cnt"})
-        layer1_aggr_df = pd.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cont_cnt"]], how = "right", on="name")
+        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cont_cnt"]], how = "left", on="name")
         
         return layer1_aggr_df
 
-    def aggregated(self, dict_list):
+    def aggregated(self, dict_list:list) -> pandas.DataFrame:
         # dict_list to list
-        dataframe = pd.DataFrame(dict_list)
+        dataframe = pandas.DataFrame(dict_list)
 
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
@@ -38,13 +38,13 @@ class AggregatePandas:
         # global aggeregate
         for any_layer in range(global_max_layer):
             for index, row in dataframe.iterrows():
-                row[f"layer_{any_layer}_flg"] = 1 if row.layer == any_layer else np.nan
+                row[f"layer_{any_layer}_flg"] = 1 if row.layer == any_layer else numpy.nan
                 dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
 
         # group lable
         for any_layer in range(global_max_layer):
             number_of_groups = dataframe[f"layer_{any_layer}_flg"].sum()
-            temp_df1 = dataframe[(dataframe.layer ==any_layer) & (np.isnan(dataframe.time) == False)].copy()
+            temp_df1 = dataframe[(dataframe.layer ==any_layer) & (numpy.isnan(dataframe.time) == False)].copy()
             temp_df1[f"group_{any_layer}"] = [i for i in range(len(temp_df1))]
             dataframe = dataframe.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
             dataframe.stat = dataframe.stat.fillna("-")
@@ -122,15 +122,15 @@ class AggregatePandas:
         if group_0_min == group_0_max:
             group_0_max = group_0_max + 1
 
-        final_sort_solve_df = pd.DataFrame(columns=solve_df.columns)
+        final_sort_solve_df = pandas.DataFrame(columns=solve_df.columns)
         for group_0_index in range(group_0_min, group_0_max):
-            final_sort_solve_df = pd.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
+            final_sort_solve_df = pandas.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
         solve_df = final_sort_solve_df
         solve_df = solve_df.reset_index().drop("index", axis=1)
 
         return solve_df
 
-    def aggregated_continuous_values(self, dataframe):
+    def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
         base_df = dataframe
 
         center_temp_df = base_df.name
@@ -185,7 +185,7 @@ class AggregatePandas:
         base_df = base_df.reset_index()
         base_df["cont_flg"] = 1
 
-        temp_any_df = base_df[(np.isnan(base_df["group"]) == False)]
+        temp_any_df = base_df[(numpy.isnan(base_df["group"]) == False)]
         temp_any_df1 = temp_any_df.groupby(["group"]).max()
         temp_any_df1 = temp_any_df1.reset_index()
         temp_any_df1 = temp_any_df1[["index", "group"]]
@@ -194,9 +194,9 @@ class AggregatePandas:
         temp_any_df2 = temp_any_df2.drop(columns=["index"])
 
         any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
-        any_df2 = base_df[np.isnan(base_df["group"])]
+        any_df2 = base_df[numpy.isnan(base_df["group"])]
 
-        aggr_cont_df = pd.concat([any_df1, any_df2], sort=True)
+        aggr_cont_df = pandas.concat([any_df1, any_df2], sort=True)
         aggr_cont_df = aggr_cont_df.sort_values("index")
         aggr_cont_df = aggr_cont_df.drop(columns=["index"])
         aggr_cont_df = aggr_cont_df.reset_index()
