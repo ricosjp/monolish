@@ -13,20 +13,31 @@ def grouping_1st_layer(target_dict_list):
     # other
     other_dict_list = list(filter(lambda any_dict:layer_1st not in any_dict["name"], target_dict_list))
     if other_dict_list:
+        # print(other_dict_list)
         layer_list = list(map(lambda any_dict:any_dict["name"].split("/")[0], other_dict_list))
-        layer_list = list(set(layer_list))
+        # TODO
+        print("\n")
+        print(layer_list)
+        layer_list = ['convert', 'send', 'set_apply_precond', 'set_create_precond', 'input_mm']
+        # layer_list = sorted(set(layer_list), key=layer_list.index)
+        # layer_list = sorted(set(layer_list))
+        # layer_list = set(layer_list)
+        print(layer_list)
         layer_list = list(map(lambda x:x+"/", layer_list))
         for other_layer_1st in layer_list:
             filter_list = list(map(lambda any_dict:any_dict["name"] == other_layer_1st, other_dict_list))
             split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
             other_dict_block_list = [other_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
+            print(split_index_list)
+            print(other_dict_block_list)
     else:
         other_dict_block_list = []
 
     block_dict_lists = other_dict_block_list + solver_dict_block_list
 
     title_list = [f"other {str(no)}" for no in range(len(other_dict_block_list))] + [f"solver {str(no)}" for no in range(len(solver_dict_block_list))]
-
+    # print(title_list)
+    # print(block_dict_lists)
     return title_list, block_dict_lists
 
 def split_1st_layer(dict_list):

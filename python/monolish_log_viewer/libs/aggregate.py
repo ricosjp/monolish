@@ -75,6 +75,17 @@ class AggregateNumpy:
         return aggr_ndarray
 
 class AggregatePandas:
+    def layer_1_aggregated(self, dict_list):
+        row_df =  pd.DataFrame(dict_list)
+        row_df["layer"] = row_df.name.apply(lambda x:x.count("/"))
+        layer1_df = row_df[(row_df.layer==1) & (row_df.time != "IN")]
+        layer1_aggr_df_sum = layer1_df.groupby(["name", "layer"]).sum().reset_index()
+        layer1_aggr_df_cnt = layer1_df.groupby(["name", "layer"]).count().reset_index()
+        layer1_aggr_df_cnt = layer1_aggr_df_cnt.rename(columns={"time":"cont_cnt"})
+        layer1_aggr_df = pd.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cont_cnt"]], how = "right", on="name")
+        return layer1_aggr_df
+
+
     def aggregated(self, dict_list):
         # dict_list to list
         dataframe = pd.DataFrame(dict_list)

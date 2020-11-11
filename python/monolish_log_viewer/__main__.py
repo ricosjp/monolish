@@ -31,9 +31,12 @@ def main():
         other_df, solve_df = aggregate_pandas.aggregated(split_dict_list)
         debug.log_success("aggregated")
 
+        # layer 1
+        other_df = aggregate_pandas.layer_1_aggregated(yaml_dict_list)
+
         # create html
         other_table_html = html.df_to_html_table(other_df)
-        other_table_html = html.to_caption_on_html("other", other_table_html)
+        other_table_html = html.to_caption_on_html("layer1", other_table_html)
 
         solve_table_html = html.df_to_html_table(solve_df)
         solve_table_html = html.to_caption_on_html("solver", solve_table_html)
