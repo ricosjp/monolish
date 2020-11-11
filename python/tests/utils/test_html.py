@@ -20,7 +20,7 @@ def test_df_to_html_table():
     idxs = dataframe.index
 
     header_html = '<thead>'
-    header_html = header_html + '<tr style="text-align: right;">'
+    header_html = header_html + '<tr style="text-align: center;">'
     header_html = header_html + '<th></th>'
     for col in cols:
         header_html = header_html + f'<th>{col}</th>'
