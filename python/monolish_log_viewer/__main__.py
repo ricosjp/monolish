@@ -27,12 +27,12 @@ def main():
         split_dict_list = grouping.split_1st_layer(yaml_dict_list)
 
         # Aggregate
-        aggregate_pandas = aggregate.AggregatePandas()
-        solve_df = aggregate_pandas.aggregated(split_dict_list)
+        aggregate_dataframe = aggregate.AggregateDataFrame()
+        solve_df = aggregate_dataframe.aggregated(split_dict_list)
         debug.log_success("aggregated")
 
         # layer 1
-        layer_1_aggr_df = aggregate_pandas.layer_1_aggregated(yaml_dict_list)
+        layer_1_aggr_df = aggregate_dataframe.layer_1_aggregated(yaml_dict_list)
         debug.log_success("layer_1_aggregated")
 
         # create html

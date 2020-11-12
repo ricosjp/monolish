@@ -2,7 +2,7 @@
 import numpy
 import pandas
 
-class AggregatePandas:
+class AggregateDataFrame:
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
         # dict_list -> dataframe
         row_df =  pandas.DataFrame(dict_list)
