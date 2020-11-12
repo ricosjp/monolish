@@ -4,18 +4,27 @@ import pandas
 
 class AggregatePandas:
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
+        # dict_list -> dataframe
         row_df =  pandas.DataFrame(dict_list)
-        row_df["layer"] = row_df.name.apply(lambda x:x.count("/"))
-        layer1_df = row_df[(row_df.layer==1) & (row_df.time != "IN")]
-        layer1_aggr_df_sum = layer1_df.groupby(["name", "layer"]).sum().reset_index()
-        layer1_aggr_df_cnt = layer1_df.groupby(["name", "layer"]).count().reset_index()
-        layer1_aggr_df_cnt = layer1_aggr_df_cnt.rename(columns={"time":"cont_cnt"})
-        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cont_cnt"]], how = "left", on="name")
-        
+
+        # add column "layer"
+        row_df["layer"] = row_df.name.apply(lambda any_series:any_series.count("/"))
+
+        # where layer == "layer"
+        layer1_df = row_df[(row_df["layer"]==1) & (row_df.time != "IN")]
+
+        # groupby "name", "layer"
+        df_groupby_obj = layer1_df.groupby(["name", "layer"])
+        layer1_aggr_df_sum = df_groupby_obj.sum().reset_index()
+        layer1_aggr_df_cnt = df_groupby_obj.count().reset_index().rename(columns={"time":"cnt"})
+
+        # join
+        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cnt"]], how = "left", on="name")
+
         return layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
-        # dict_list to list
+        # dict_list -> dataframe
         dataframe = pandas.DataFrame(dict_list)
 
         # aggregate column list
@@ -30,29 +39,29 @@ class AggregatePandas:
         dataframe = dataframe[aggr_col_list]
 
         # add column layer
-        dataframe["layer"] = dataframe.name.apply(lambda x:x.count("/")-1)
+        dataframe["layer"] = dataframe["name"].apply(lambda any_series:any_series.count("/")-1)
 
         # max layer
-        global_max_layer = max(dataframe.layer) + 1
+        global_max_layer = max(dataframe["layer"]) + 1
 
         # global aggeregate
         for any_layer in range(global_max_layer):
             for index, row in dataframe.iterrows():
-                row[f"layer_{any_layer}_flg"] = 1 if row.layer == any_layer else numpy.nan
+                row[f"layer_{any_layer}_flg"] = 1 if row["layer"] == any_layer else numpy.nan
                 dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
 
         # group lable
         for any_layer in range(global_max_layer):
             number_of_groups = dataframe[f"layer_{any_layer}_flg"].sum()
-            temp_df1 = dataframe[(dataframe.layer ==any_layer) & (numpy.isnan(dataframe.time) == False)].copy()
+            temp_df1 = dataframe[(dataframe["layer"] ==any_layer) & (numpy.isnan(dataframe.time) == False)].copy()
             temp_df1[f"group_{any_layer}"] = [i for i in range(len(temp_df1))]
             dataframe = dataframe.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
-            dataframe.stat = dataframe.stat.fillna("-")
+            dataframe["stat"] = dataframe["stat"].fillna("-")
             dataframe[dataframe["layer"]==any_layer] = dataframe[dataframe["layer"]==any_layer].fillna(method="bfill")
             dataframe[dataframe["layer"]>=any_layer] = dataframe[dataframe["layer"]>=any_layer].fillna(method="bfill")
 
         # drop "IN"
-        dataframe = dataframe[dataframe.stat != "IN"]
+        dataframe = dataframe[dataframe["stat"] != "IN"]
 
         # add column layer
         for any_layer in range(global_max_layer):
@@ -68,15 +77,15 @@ class AggregatePandas:
         solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
         
         # local max layer
-        solve_max_layer = max(solve_df.layer)
+        solve_max_layer = max(solve_df["layer"])
         for target_layer in range(solve_max_layer):
-            denominator_group_list = solve_df[solve_df.layer == target_layer+1][f"group_{target_layer}"].values
-            denominator_df = solve_df[(solve_df[f"group_{target_layer}"].isin(denominator_group_list)) & (solve_df.layer == target_layer)]
+            denominator_group_list = solve_df[solve_df["layer"] == target_layer+1][f"group_{target_layer}"].values
+            denominator_df = solve_df[(solve_df[f"group_{target_layer}"].isin(denominator_group_list)) & (solve_df["layer"] == target_layer)]
             denominator_df = denominator_df[[f"group_{target_layer}", "time"]]
             denominator_df.columns = [f"group_{target_layer}", f"denominator_{target_layer+1}_time"]
 
             solve_df = solve_df.merge(denominator_df, how="left", on=[f"group_{target_layer}"])
-            solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df.time / solve_df[f"denominator_{target_layer+1}_time"] * 100
+            solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df["time"] / solve_df[f"denominator_{target_layer+1}_time"] * 100
 
             # drop column denominator
             solve_df = solve_df.drop(columns=[f"denominator_{target_layer+1}_time"])
