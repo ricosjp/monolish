@@ -74,7 +74,7 @@ class AggregateDataFrame:
 
         # split
         solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
-        
+
         # local max layer
         solve_max_layer = max(solve_df["layer"])
         for target_layer in range(solve_max_layer):
