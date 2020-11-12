@@ -11,7 +11,7 @@ class AggregateDataFrame:
         row_df["layer"] = row_df.name.apply(lambda any_series:any_series.count("/"))
 
         # where layer == "layer"
-        layer1_df = row_df[(row_df["layer"]==1) & (row_df.time != "IN")]
+        layer1_df = row_df[(row_df["layer"]==1) & (row_df["time"] != "IN")]
 
         # groupby "name", "layer"
         df_groupby_obj = layer1_df.groupby(["name", "layer"])
@@ -19,7 +19,7 @@ class AggregateDataFrame:
         layer1_aggr_df_cnt = df_groupby_obj.count().reset_index().rename(columns={"time":"cnt"})
 
         # join
-        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cnt"]], how = "left", on="name")
+        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cnt"]], how="left", on="name")
 
         return layer1_aggr_df
 
