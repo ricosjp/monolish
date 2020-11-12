@@ -52,10 +52,9 @@ class AggregatePandas:
 
         # group lable
         for any_layer in range(global_max_layer):
-            number_of_groups = dataframe[f"layer_{any_layer}_flg"].sum()
-            temp_df1 = dataframe[(dataframe["layer"] ==any_layer) & (numpy.isnan(dataframe.time) == False)].copy()
-            temp_df1[f"group_{any_layer}"] = [i for i in range(len(temp_df1))]
-            dataframe = dataframe.merge(temp_df1[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
+            temp_group_lable_df = dataframe[(dataframe["layer"] ==any_layer) & (numpy.isnan(dataframe["time"]) == False)].copy()
+            temp_group_lable_df[f"group_{any_layer}"] = [i for i in range(len(temp_group_lable_df))]
+            dataframe = dataframe.merge(temp_group_lable_df[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
             dataframe["stat"] = dataframe["stat"].fillna("-")
             dataframe[dataframe["layer"]==any_layer] = dataframe[dataframe["layer"]==any_layer].fillna(method="bfill")
             dataframe[dataframe["layer"]>=any_layer] = dataframe[dataframe["layer"]>=any_layer].fillna(method="bfill")
@@ -90,16 +89,16 @@ class AggregatePandas:
             # drop column denominator
             solve_df = solve_df.drop(columns=[f"denominator_{target_layer+1}_time"])
 
-            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda x:str(x).replace("-", "-1"))
+            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-", "-1"))
 
         # sort
         for target_layer in range(solve_max_layer):
-            solve_df[f"group_{target_layer}"] = solve_df[f"group_{target_layer}"].apply(lambda x:int(float(x)))
+            solve_df[f"group_{target_layer}"] = solve_df[f"group_{target_layer}"].apply(lambda any_series:int(float(any_series)))
         group_column_list = [f"group_{target_layer+1}" for target_layer in range(solve_max_layer)]
         solve_df = solve_df.sort_values(group_column_list)
         solve_df = solve_df.fillna("")
 
-        solve_df[f"group_{solve_max_layer-1}"] = solve_df[f"group_{solve_max_layer-1}"].apply(lambda x:int(float(x)))
+        solve_df[f"group_{solve_max_layer-1}"] = solve_df[f"group_{solve_max_layer-1}"].apply(lambda any_series:int(float(any_series)))
 
         # breakdown[%] / count
         for target_layer in range(solve_max_layer):
@@ -108,7 +107,7 @@ class AggregatePandas:
 
         # -1 to black
         for target_layer in range(solve_max_layer):
-            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda x:str(x).replace("-1", ""))
+            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-1", ""))
 
         # drop layer info
         for target_layer in range(solve_max_layer):
@@ -168,8 +167,8 @@ class AggregatePandas:
         center_temp_df2 = plus_temp_df2.merge(minus_temp_df2[["index", "count_flg_minus"]], how="left", on="index")
 
         center_temp_df2 = center_temp_df2.fillna(0)
-        center_temp_df2["count_flg_plus"] = center_temp_df2["count_flg_plus"].apply(lambda x:int(x))
-        center_temp_df2["count_flg_minus"] = center_temp_df2["count_flg_minus"].apply(lambda x:int(x))
+        center_temp_df2["count_flg_plus"] = center_temp_df2["count_flg_plus"].apply(lambda any_series:int(any_series))
+        center_temp_df2["count_flg_minus"] = center_temp_df2["count_flg_minus"].apply(lambda any_series:int(any_series))
 
         center_temp_df2["flg"] = center_temp_df2["count_flg_plus"] - center_temp_df2["count_flg_minus"]
 
