@@ -24,11 +24,11 @@ class AggregateDataFrame:
         return layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
-        # dict_list -> dataframe
-        dataframe = pandas.DataFrame(dict_list)
-
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
+
+        # dict_list -> dataframe
+        dataframe = pandas.DataFrame(dict_list, columns=aggr_col_list)
 
         # drop useless information
         dataframe = dataframe[aggr_col_list]
@@ -75,66 +75,69 @@ class AggregateDataFrame:
         # split
         solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
 
-        # local max layer
-        solve_max_layer = max(solve_df["layer"])
-        for target_layer in range(solve_max_layer):
-            denominator_group_list = solve_df[solve_df["layer"] == target_layer+1][f"group_{target_layer}"].values
-            denominator_df = solve_df[(solve_df[f"group_{target_layer}"].isin(denominator_group_list)) & (solve_df["layer"] == target_layer)]
-            denominator_df = denominator_df[[f"group_{target_layer}", "time"]]
-            denominator_df.columns = [f"group_{target_layer}", f"denominator_{target_layer+1}_time"]
+        if not solve_df.empty:
+            # local max layer
+            solve_max_layer = max(solve_df["layer"])
+            for target_layer in range(solve_max_layer):
+                denominator_group_list = solve_df[solve_df["layer"] == target_layer+1][f"group_{target_layer}"].values
+                denominator_df = solve_df[(solve_df[f"group_{target_layer}"].isin(denominator_group_list)) & (solve_df["layer"] == target_layer)]
+                denominator_df = denominator_df[[f"group_{target_layer}", "time"]]
+                denominator_df.columns = [f"group_{target_layer}", f"denominator_{target_layer+1}_time"]
 
-            solve_df = solve_df.merge(denominator_df, how="left", on=[f"group_{target_layer}"])
-            solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df["time"] / solve_df[f"denominator_{target_layer+1}_time"] * 100
+                solve_df = solve_df.merge(denominator_df, how="left", on=[f"group_{target_layer}"])
+                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df["time"] / solve_df[f"denominator_{target_layer+1}_time"] * 100
 
-            # drop column denominator
-            solve_df = solve_df.drop(columns=[f"denominator_{target_layer+1}_time"])
+                # drop column denominator
+                solve_df = solve_df.drop(columns=[f"denominator_{target_layer+1}_time"])
 
-            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-", "-1"))
+                solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-", "-1"))
 
-        # sort
-        for target_layer in range(solve_max_layer):
-            solve_df[f"group_{target_layer}"] = solve_df[f"group_{target_layer}"].apply(lambda any_series:int(float(any_series)))
-        group_column_list = [f"group_{target_layer+1}" for target_layer in range(solve_max_layer)]
-        solve_df = solve_df.sort_values(group_column_list)
-        solve_df = solve_df.fillna("")
+            # sort
+            for target_layer in range(solve_max_layer):
+                solve_df[f"group_{target_layer}"] = solve_df[f"group_{target_layer}"].apply(lambda any_series:int(float(any_series)))
+            group_column_list = [f"group_{target_layer+1}" for target_layer in range(solve_max_layer)]
+            solve_df = solve_df.sort_values(group_column_list)
+            solve_df = solve_df.fillna("")
 
-        solve_df[f"group_{solve_max_layer-1}"] = solve_df[f"group_{solve_max_layer-1}"].apply(lambda any_series:int(float(any_series)))
+            solve_df[f"group_{solve_max_layer-1}"] = solve_df[f"group_{solve_max_layer-1}"].apply(lambda any_series:int(float(any_series)))
 
-        # breakdown[%] / count
-        for target_layer in range(solve_max_layer):
-            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace("", 0.0) / solve_df["cont_cnt"]
-            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
+            # breakdown[%] / count
+            for target_layer in range(solve_max_layer):
+                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace("", 0.0) / solve_df["cont_cnt"]
+                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
 
-        # -1 to black
-        for target_layer in range(solve_max_layer):
-            solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-1", ""))
+            # -1 to black
+            for target_layer in range(solve_max_layer):
+                solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-1", ""))
 
-        # drop layer info
-        for target_layer in range(solve_max_layer):
-            solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[["layer", f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"]].T.apply(lambda x: x[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
-            solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace(0.000000, "")
-            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[["layer", f"breakdown_{target_layer}[%] / count"]].T.apply(lambda x: x[f"breakdown_{target_layer}[%] / count"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
-            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
-            solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(50, "")
+            # drop layer info
+            for target_layer in range(solve_max_layer):
+                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[["layer", f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"]].T.apply(lambda x: x[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
+                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace(0.000000, "")
+                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[["layer", f"breakdown_{target_layer}[%] / count"]].T.apply(lambda x: x[f"breakdown_{target_layer}[%] / count"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
+                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
+                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(50, "")
 
-        # drop column layer flag
-        layer_column_list = [f"layer_{target_layer}_flg" for target_layer in range(solve_max_layer+1)]
-        solve_df = solve_df.drop(columns=layer_column_list)
-        solve_df = solve_df.reset_index()
-        solve_df = solve_df.drop(columns=["index"])
+            # drop column layer flag
+            layer_column_list = [f"layer_{target_layer}_flg" for target_layer in range(solve_max_layer+1)]
+            solve_df = solve_df.drop(columns=layer_column_list)
+            solve_df = solve_df.reset_index()
+            solve_df = solve_df.drop(columns=["index"])
 
-        # final sort
-        group_0_min = min(solve_df["group_0"])
-        group_0_max = max(solve_df["group_0"])
+            # final sort
+            group_0_min = min(solve_df["group_0"])
+            group_0_max = max(solve_df["group_0"])
 
-        if group_0_min == group_0_max:
-            group_0_max = group_0_max + 1
+            if group_0_min == group_0_max:
+                group_0_max = group_0_max + 1
 
-        final_sort_solve_df = pandas.DataFrame(columns=solve_df.columns)
-        for group_0_index in range(group_0_min, group_0_max):
-            final_sort_solve_df = pandas.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
-        solve_df = final_sort_solve_df
-        solve_df = solve_df.reset_index().drop("index", axis=1)
+            final_sort_solve_df = pandas.DataFrame(columns=solve_df.columns)
+            for group_0_index in range(group_0_min, group_0_max):
+                final_sort_solve_df = pandas.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
+            solve_df = final_sort_solve_df
+            solve_df = solve_df.reset_index().drop("index", axis=1)
+        else:
+            solve_df = pandas.DataFrame()
 
         return solve_df
 

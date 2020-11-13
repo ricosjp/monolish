@@ -33,6 +33,7 @@ def grouping_1st_layer(target_dict_list:list) -> Union[list, list]:
 def split_1st_layer(dict_list:list) -> list:
     """ grouping pandas """
     title_list, block_dict_lists = grouping_1st_layer(dict_list)
+
     split_dict = dict(zip(title_list, block_dict_lists))
 
     aggr_dict_list = []

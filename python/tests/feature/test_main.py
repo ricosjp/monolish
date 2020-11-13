@@ -6,8 +6,8 @@ import argparse
 
 from monolish_log_viewer import __main__
 
-def test_execute_create_log():
-    for any_file in ["base_data1", "base_data2", "cg_iter"]:
+def test_execute_create_log_normaldata():
+    for any_file in ["only_solver", "normal_data", "only_other", "cg_iter"]:
         # pass command line arguments
         sys.argv.append(f"./tests/test_data/{any_file}.yml")
         sys.argv.append(f"./tests/test_data/{any_file}.html")
