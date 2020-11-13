@@ -6,7 +6,7 @@ import yaml
 
 from monolish_log_viewer.utils import read
 
-data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/only_solver.yml")
+data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../../test_data/only_solver.yml")
 
 def test_read_unown_data():
     with open(data_dir, "r") as file:
