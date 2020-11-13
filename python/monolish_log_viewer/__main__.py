@@ -52,8 +52,11 @@ def execute_create_log(log_path, out_path):
 
         # write html
         with open(out_path, 'wb') as file:
-            file.write(text_html.encode("utf-8"))
+            write_number_of_character = file.write(text_html.encode("utf-8"))
             debug.log_success(f"write {format(out_path)}")
+            debug.log_success(f"number of character {write_number_of_character}")
+
+            return write_number_of_character
 
 def main():
     log_path, out_path = controll_argument()
