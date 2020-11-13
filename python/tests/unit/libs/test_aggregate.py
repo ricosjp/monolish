@@ -6,7 +6,7 @@ import pandas
 from monolish_log_viewer.libs import aggregate
 from monolish_log_viewer.utils import read
 
-data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/cg_iter.yml")
+data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../../test_data/cg_iter.yml")
 print(data_dir)
 
 def test_layer_1_aggregated():

@@ -6,7 +6,7 @@ import pandas as pd
 from monolish_log_viewer.utils import read
 from monolish_log_viewer.libs import grouping
 
-data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/cg_iter.yml")
+data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../../test_data/cg_iter.yml")
 print(data_dir)
 
 def test_grouping_1st_layer():
