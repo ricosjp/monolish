@@ -1,14 +1,11 @@
 """Create log program."""
-
 # coding: utf-8
-
 import argparse
 
 from .utils import debug, html, read
 from .libs import aggregate, grouping
 
-def main():
-    """executive function"""
+def controll_argument():
     # args
     parser = argparse.ArgumentParser()
     parser.add_argument("log_path")
@@ -18,6 +15,10 @@ def main():
     log_path = args.log_path
     out_path = args.out_path
 
+    return log_path, out_path
+
+def execute_create_log(log_path, out_path):
+    """executive function"""
     # io data
     with open(log_path, "r") as file:
         yaml_dict_list = read.reader(file, "yaml")
@@ -53,6 +54,10 @@ def main():
         with open(out_path, 'wb') as file:
             file.write(text_html.encode("utf-8"))
             debug.log_success(f"write {format(out_path)}")
+
+def main():
+    log_path, out_path = controll_argument()
+    execute_create_log(log_path, out_path)
 
 if __name__ == "__main__":
     main()
