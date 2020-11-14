@@ -20,13 +20,15 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
-### Changed    既存機能の変更について。
+### Changed 
+- benchmarkの測定サイズ変更，出力ディレクトリ名変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/121
 - benchmarkでサイズの繰り返しをヘッダでまとめで定義するようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/124
 
 ### Added
 - benchmarkでpipeline_idを出力するようにする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/119
 
 ### Fixed
+- ベンチマークの測定スクリプトのバグ修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/121
 - cusparseの関数が非同期で実行されているようなのでsyncを追加した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/120
 - benchmarkをtagsとschedulesでは実行しないようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/116
 - 出力ファイルの末尾に半角スペースが入っているバグを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/117
