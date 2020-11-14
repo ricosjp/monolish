@@ -57,7 +57,7 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
     this->precond.apply_precond(r, z);
     auto beta = blas::dot(z, r) / tmp;
 
-    blas::xpay(beta, r, p); // p = r + beta*p
+    blas::xpay(beta, z, p); // p = z + beta*p
 
     T resid = this->get_residual(r);
     if (this->print_rhistory == true) {
