@@ -1,5 +1,9 @@
 CI_COMMIT_SHA ?= `git rev-parse HEAD`
+CI_PIPELLINE_ID ?= 0
+
 BENCHMARK_DIR:=monolish_benchmark_result
+VERSION_DIR_NAME=$(CI_PIPELINE_ID)_$(CI_COMMIT_SHA)
+
 COMMIT_MSG:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
 
 .PHONY: clone_result move_result commit_result
@@ -15,9 +19,9 @@ else
 endif
 
 move_result: clone_result
-	mkdir -p $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
-	cp *.tsv $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
-	cp */*.tsv $(BENCHMARK_DIR)/data/$(CI_COMMIT_SHA)/
+	mkdir -p $(BENCHMARK_DIR)/data/$(VERSION_DIR_NAME)/
+	cp *.tsv $(BENCHMARK_DIR)/data/$(VERSION_DIR_NAME)/
+	cp */*.tsv $(BENCHMARK_DIR)/data/$(VERSION_DIR_NAME)/
 	echo $(COMMIT_MSG) > commit_msg_tmp.txt
 
 commit_result: clone_result move_result
