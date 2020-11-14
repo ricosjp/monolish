@@ -299,7 +299,6 @@ benchmark_nogpu_avx:
       - cpu2.gitlab-runner.savanna.ritc.jp
     only:
         - master
-        - 356-benchmark-size
     except:
         - schedules
         - tags
@@ -323,7 +322,6 @@ benchmark_gpu_avx:
       - gpu2.gitlab-runner.savanna.ritc.jp
     only:
         - master
-        - 356-benchmark-size
     except:
         - schedules
         - tags
@@ -371,7 +369,6 @@ benchmark_result:
         - make commit_result
     only:
         - master
-        - 356-benchmark-size
     except:
         - schedules
         - tags
