@@ -2,7 +2,7 @@ CI_COMMIT_SHA ?= `git rev-parse HEAD`
 CI_PIPELLINE_ID ?= 0
 
 BENCHMARK_DIR:=monolish_benchmark_result
-VERSION_DIR_NAME=pipeline_$(CI_PIPELINE_ID)_hash_$(CI_COMMIT_SHA)
+VERSION_DIR_NAME=$(CI_COMMIT_SHA)
 
 COMMIT_MSG:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
 
