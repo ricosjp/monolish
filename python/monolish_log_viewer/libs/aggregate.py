@@ -172,24 +172,22 @@ class AggregateDataFrame:
         center_pm_temp_df["count_flg_minus"] = center_pm_temp_df["count_flg_minus"].apply(lambda any_series:int(any_series))
         center_pm_temp_df["flg"] = center_pm_temp_df["count_flg_plus"] - center_pm_temp_df["count_flg_minus"]
 
+        create_m_group_df = center_pm_temp_df[center_pm_temp_df["flg"] == -1].copy()
+        create_m_group_df["m_group"] = [i+1 for i in range(len(create_m_group_df))]
+        create_m_group_df = create_m_group_df[["back_idx", "m_group"]]
+
+        create_p_group_df = center_pm_temp_df[center_pm_temp_df["flg"] == 1].copy()
+        create_p_group_df["p_group"] = [i+1 for i in range(len(create_p_group_df))]
+        create_p_group_df = create_p_group_df[["back_idx", "p_group"]]
+
         center_temp_df2 = center_pm_temp_df
-
-        center_temp_df3 = center_pm_temp_df[center_pm_temp_df["flg"] == -1].copy()
-        center_temp_df3["m_group"] = [i+1 for i in range(len(center_temp_df3))]
-        center_temp_df3 = center_temp_df3[["back_idx", "m_group"]]
-
-        center_temp_df4 = center_pm_temp_df[center_pm_temp_df["flg"] == 1].copy()
-        center_temp_df4["p_group"] = [i+1 for i in range(len(center_temp_df4))]
-        center_temp_df4 = center_temp_df4[["back_idx", "p_group"]]
-
-        center_temp_df2 = center_temp_df2.merge(center_temp_df3, how="left", on="back_idx")
-        center_temp_df2 = center_temp_df2.merge(center_temp_df4, how="left", on="back_idx")
+        center_temp_df2 = center_temp_df2.merge(create_m_group_df, how="left", on="back_idx")
+        center_temp_df2 = center_temp_df2.merge(create_p_group_df, how="left", on="back_idx")
         center_temp_df2["m_group"] = center_temp_df2["m_group"].fillna(method="ffill")
         center_temp_df2["p_group"] = center_temp_df2["p_group"].fillna(method="bfill")
         center_temp_df3 = center_temp_df2[center_temp_df2["m_group"] == center_temp_df2["p_group"]]
         center_temp_df3 = center_temp_df3.rename(columns={"p_group":"group"})
         center_temp_df4 = center_temp_df2.merge(center_temp_df3[["back_idx", "group"]], how="left", on="back_idx")
-
         group_df = center_temp_df4[["group"]]
 
         """add grouping values"""
