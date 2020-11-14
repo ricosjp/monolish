@@ -29,6 +29,7 @@ Unreleased
 - benchmarkでpipeline_idを出力するようにする https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/119
 
 ### Fixed
+- CG法のベクトルの更新がおかしいのを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/127
 - ベンチマークの測定スクリプトのバグ修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/121
 - cusparseの関数が非同期で実行されているようなのでsyncを追加した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/120
 - benchmarkをtagsとschedulesでは実行しないようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/116
