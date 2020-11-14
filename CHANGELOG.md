@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.6.1 - 2020/11/15
+-----------
 ### Changed 
 - benchmarkの出力ディレクトリ名変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/122
 - benchmarkの測定サイズ変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/121
