@@ -144,42 +144,41 @@ class AggregateDataFrame:
     def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
         base_df = dataframe
 
-        center_temp_df = base_df.name
-        center_temp_df = center_temp_df.reset_index()
+        """create grouping flg"""
+        center_temp_seri = base_df.name
+        center_temp_df = center_temp_seri.reset_index()
         center_temp_df = center_temp_df.rename(columns={"index":"back_idx"})
         center_temp_df = center_temp_df.reset_index()
 
         plus_temp_df = center_temp_df.copy()
-        plus_temp_df["index"] = plus_temp_df["index"].apply(lambda x:x+1)
+        plus_temp_df["index"] = plus_temp_df["index"].apply(lambda any_seri:any_seri+1)
         plus_temp_df = plus_temp_df.rename(columns={"name":"name_plus"})
-
         center_p_temp_df = center_temp_df.merge(plus_temp_df, how="left", on="index")
         center_p_temp_df = center_p_temp_df[center_p_temp_df["name"] == center_p_temp_df["name_plus"]].copy()
         center_p_temp_df["count_flg_plus"] = 1
-        plus_temp_df2 = center_temp_df.merge(center_p_temp_df[["index", "count_flg_plus"]], how="left", on="index")
+        plus_flg_temp_df = center_temp_df.merge(center_p_temp_df[["index", "count_flg_plus"]], how="left", on="index")
 
         minus_temp_df = center_temp_df.copy()
-        minus_temp_df["index"] = minus_temp_df["index"].apply(lambda x:x-1)
+        minus_temp_df["index"] = minus_temp_df["index"].apply(lambda any_seri:any_seri-1)
         minus_temp_df = minus_temp_df.rename(columns={"name":"name_minus"})
-
         center_m_temp_df = center_temp_df.merge(minus_temp_df, how="left", on="index")
         center_m_temp_df = center_m_temp_df[center_m_temp_df["name"] == center_m_temp_df["name_minus"]].copy()
         center_m_temp_df["count_flg_minus"] = 1
-        minus_temp_df2 = center_temp_df.merge(center_m_temp_df[["index", "count_flg_minus"]], how="left", on="index")
+        minus_flg_temp_df = center_temp_df.merge(center_m_temp_df[["index", "count_flg_minus"]], how="left", on="index")
 
-        center_temp_df2 = plus_temp_df2.merge(minus_temp_df2[["index", "count_flg_minus"]], how="left", on="index")
+        center_pm_temp_df = plus_flg_temp_df.merge(minus_flg_temp_df[["index", "count_flg_minus"]], how="left", on="index")
+        center_pm_temp_df = center_pm_temp_df.fillna(0)
+        center_pm_temp_df["count_flg_plus"] = center_pm_temp_df["count_flg_plus"].apply(lambda any_series:int(any_series))
+        center_pm_temp_df["count_flg_minus"] = center_pm_temp_df["count_flg_minus"].apply(lambda any_series:int(any_series))
+        center_pm_temp_df["flg"] = center_pm_temp_df["count_flg_plus"] - center_pm_temp_df["count_flg_minus"]
 
-        center_temp_df2 = center_temp_df2.fillna(0)
-        center_temp_df2["count_flg_plus"] = center_temp_df2["count_flg_plus"].apply(lambda any_series:int(any_series))
-        center_temp_df2["count_flg_minus"] = center_temp_df2["count_flg_minus"].apply(lambda any_series:int(any_series))
+        center_temp_df2 = center_pm_temp_df
 
-        center_temp_df2["flg"] = center_temp_df2["count_flg_plus"] - center_temp_df2["count_flg_minus"]
-
-        center_temp_df3 = center_temp_df2[center_temp_df2["flg"] == -1].copy()
+        center_temp_df3 = center_pm_temp_df[center_pm_temp_df["flg"] == -1].copy()
         center_temp_df3["m_group"] = [i+1 for i in range(len(center_temp_df3))]
         center_temp_df3 = center_temp_df3[["back_idx", "m_group"]]
 
-        center_temp_df4 = center_temp_df2[center_temp_df2["flg"] == 1].copy()
+        center_temp_df4 = center_pm_temp_df[center_pm_temp_df["flg"] == 1].copy()
         center_temp_df4["p_group"] = [i+1 for i in range(len(center_temp_df4))]
         center_temp_df4 = center_temp_df4[["back_idx", "p_group"]]
 
@@ -190,9 +189,11 @@ class AggregateDataFrame:
         center_temp_df3 = center_temp_df2[center_temp_df2["m_group"] == center_temp_df2["p_group"]]
         center_temp_df3 = center_temp_df3.rename(columns={"p_group":"group"})
         center_temp_df4 = center_temp_df2.merge(center_temp_df3[["back_idx", "group"]], how="left", on="back_idx")
-        center_temp_df4 = center_temp_df4[["group"]]
 
-        base_df = base_df.merge(center_temp_df4, how="left", left_index=True, right_index=True)
+        group_df = center_temp_df4[["group"]]
+
+        """add grouping values"""
+        base_df = base_df.merge(group_df, how="left", left_index=True, right_index=True)
         base_df = base_df.reset_index()
         base_df["cont_flg"] = 1
 
