@@ -24,7 +24,7 @@ Unreleased
 - benchmarkで演算の種類(kind)を出力するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/129
 
 ### Changed
-- ディレクトリ名をハッシュだけに戻したhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/128
+- ディレクトリ名をハッシュ名だけに戻したhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/128
 
 
 0.6.1 - 2020/11/15
