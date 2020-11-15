@@ -35,6 +35,7 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
 
   double time = sec / iter;
   std::cout << FUNC << "(" << A.type() << ")\t" << std::flush;
+  std::cout << A.type() << "\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << M << "\t" << std::flush;
   std::cout << N << "\t" << std::flush;
@@ -58,7 +59,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::cout << "func\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]" << std::endl;
+  std::cout << "func\tkind\tprec\tM\tN\ttime[sec]\tperf[GFLOPS]" << std::endl;
   size_t iter = MATRIX_BENCH_ITER;
 
   // monolish::util::set_log_level(3);

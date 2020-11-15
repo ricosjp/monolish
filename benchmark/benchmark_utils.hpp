@@ -17,10 +17,11 @@
 #define VECTOR_BENCH_ITER 10
 
 #define VECTOR_BLAS_BENCH_HEADER                                               \
-  "func\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]"
+  "func\tkind\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]"
 
 #define VECTOR_BLAS_OUTPUT_RESULT()                                            \
   std::cout << FUNC << "\t" << std::flush;                                     \
+  std::cout << "vector" << "\t" << std::flush;                                     \
   std::cout << get_type<T>() << "\t" << std::flush;                            \
   std::cout << size << "\t" << std::flush;                                     \
   std::cout << time << "\t" << std::flush;                                     \
