@@ -21,7 +21,8 @@
 
 #define VECTOR_BLAS_OUTPUT_RESULT()                                            \
   std::cout << FUNC << "\t" << std::flush;                                     \
-  std::cout << "vector" << "\t" << std::flush;                                     \
+  std::cout << "vector"                                                        \
+            << "\t" << std::flush;                                             \
   std::cout << get_type<T>() << "\t" << std::flush;                            \
   std::cout << size << "\t" << std::flush;                                     \
   std::cout << time << "\t" << std::flush;                                     \
