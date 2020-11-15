@@ -15,10 +15,10 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
       monolish::util::band_matrix<T>(M, N, nnzrow, 1.0, 1.0);
 
   // convert COO -> MAT
-  MAT mat(ans_coo);
+  MAT A(ans_coo);
 
   // convert MAT -> result COO (dest.)
-  monolish::matrix::COO<T> result_coo(mat);
+  monolish::matrix::COO<T> result_coo(A);
 
   auto start = std::chrono::system_clock::now();
 
@@ -33,7 +33,8 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
 
   double time = sec / iter;
 
-  std::cout << FUNC << "(COO," << mat.type() << ")\t" << std::flush;
+  std::cout << FUNC << "(COO," << A.type() << ")\t" << std::flush;
+  std::cout << A.type() << "\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << M << "\t" << std::flush;
   std::cout << N << "\t" << std::flush;
