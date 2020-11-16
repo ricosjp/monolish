@@ -10,7 +10,7 @@ OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
 
 define RUN
 	$(PROFILER) $(1) > `echo $(var) | sed 's/\.out//g'`.tsv
-	cat  `echo $(var) | sed 's/\.out//g'`.tsv
+	cat `echo $(var) | sed 's/\.out//g'`.tsv
 
 endef
 
@@ -35,10 +35,10 @@ sx: $(OBJS_SX)
 run_cpu:
 	$(foreach var,$(OBJS_CPU), $(call RUN,$(var)))
  
-run_gpu
+run_gpu:
 	$(foreach var,$(OBJS_GPU), $(call RUN,$(var))) 
 
-run_fx
+run_fx:
 	$(foreach var,$(OBJS_FX), $(call RUN,$(var))) 
 
 run_sx:
