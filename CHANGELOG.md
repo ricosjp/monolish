@@ -24,12 +24,11 @@ Unreleased
 - benchmarkで演算の種類(kind)を出力するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/129
 
 ### Changed
-- vectorのbenchmarkサイズと繰り返し回数をメモリエラーが起きない範囲に調整 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/131
 - benchmarkの出力ディレクトリ名をハッシュ名だけに戻したhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/128
 
 ### Fixed
+- vectorのbenchmarkサイズと繰り返し回数をメモリエラーが起きない範囲に調整 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/131
 - vectorのbenchmarkがfailしてもCIでerror扱いにならないのを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/131
-
 
 0.6.1 - 2020/11/15
 -----------
