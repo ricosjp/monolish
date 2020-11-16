@@ -36,6 +36,12 @@ logファイルの例もCIで生成されるようになりました
 - [CPU](https://ricos.pages.ritc.jp/monolish/logging_result_cpu.html)
 - [GPU](https://ricos.pages.ritc.jp/monolish/logging_result_gpu.html)
 
+# Benchmark result
+masterブランチのベンチマークの結果が可視化されるようになりました．
+
+- [Link](https://ricos.pages.ritc.jp/monolish_benchmark_result/)
+- [gitlab repo](https://gitlab.ritc.jp/ricos/monolish_benchmark_result)
+
 
 ### そのほか
 開発の思想などは以下のMTG資料を見てください

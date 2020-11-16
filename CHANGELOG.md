@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- benchmark結果のURLをDoxygenに記載 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/134
 - benchmarkで演算の種類(kind)を出力するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/129
 
 ### Changed
