@@ -12,7 +12,7 @@ VEC_TEST_ITER?=100
 VEC_TEST_ANS_CHECK?=1
 
 define RUN
-	$(PROFILER) $(1)  | tee `echo $(1) | sed 's/\.out//g'`.tsv
+	$(PROFILER) $(1) 
 
 endef
 
@@ -35,16 +35,16 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	$(foreach var,$(OBJS_CPU), $(call RUN,$(var)))
+	$(foreach var,$(OBJS_CPU), $(call RUN,$(var))) | tee `echo $(var) | sed 's/\.out//g'`.tsv
  
 run_gpu:
-	$(foreach var,$(OBJS_GPU), $(call RUN,$(var)))
+	$(foreach var,$(OBJS_GPU), $(call RUN,$(var))) | tee `echo $(var) | sed 's/\.out//g'`.tsv
 
 run_fx:
-	$(foreach var,$(OBJS_FX), $(call RUN,$(var)))
+	$(foreach var,$(OBJS_FX), $(call RUN,$(var))) | tee `echo $(var) | sed 's/\.out//g'`.tsv
 
 run_sx:
-	$(foreach var,$(OBJS_SX), $(call RUN,$(var)))
+	$(foreach var,$(OBJS_SX), $(call RUN,$(var))) | tee `echo $(var) | sed 's/\.out//g'`.tsv
 
 clean:
 	- rm *.out
