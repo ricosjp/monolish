@@ -1,5 +1,5 @@
 """ data grouping """
-# pylint: disable=C0301, C0326
+
 from typing import Union
 
 def grouping_1st_layer(target_dict_list:list) -> Union[list, list]:

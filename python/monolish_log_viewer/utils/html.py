@@ -1,6 +1,4 @@
 """ Create HTML source """
-# pylint: disable=unused-import
-# pylint: disable=C0326
 import pandas
 
 def df_to_html_table(dataframe:pandas.DataFrame) -> str:
