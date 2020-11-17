@@ -1,12 +1,12 @@
 import pytest
-import numpy as np
-import pandas as pd
-from monolish_log_viewer.utils import html
+import numpy
+import pandas
+from monolish_log_viewer import html
 
 def test_df_to_html_table():
     # base data
-    dataframe = pd.DataFrame(
-        np.arange(12).reshape(3, 4),
+    dataframe = pandas.DataFrame(
+        numpy.arange(12).reshape(3, 4),
         columns = ["col_0", "col_1", "col_2", "col_3"],
         index = ["row_0", "row_1", "row_2"]
     )

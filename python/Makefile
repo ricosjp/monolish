@@ -14,8 +14,4 @@ log_gpu:
 	poetry run monolish_log_viewer $(DATA_DIR)/monolish_test_gpu.log $(DATA_DIR)/monolish_test_gpu.html
 
 test_logger:
-	poetry run pytest ./tests/unit/utils/test_html.py -s
-	poetry run pytest ./tests/unit/utils/test_read.py -s
-	poetry run pytest ./tests/unit/libs/test_grouping.py -s
-	poetry run pytest ./tests/unit/libs/test_aggregate.py -s
-	poetry run pytest ./tests/feature/test_create_log.py -s
+	poetry run pytest ./tests

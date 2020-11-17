@@ -1,7 +1,6 @@
 """main"""
 # coding: utf-8
-from . import create_log
-from .utils import command_manager
+from . import create_log, command_manager
 
 def main():
     log_path, out_path = command_manager.controll_argument()

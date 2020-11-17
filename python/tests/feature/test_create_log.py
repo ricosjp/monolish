@@ -1,7 +1,3 @@
-import pytest
-import os
-import sys
-import pandas
 import argparse
 
 from monolish_log_viewer import create_log
