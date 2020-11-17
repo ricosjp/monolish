@@ -18,4 +18,4 @@ test_logger:
 	poetry run pytest ./tests/unit/utils/test_read.py -s
 	poetry run pytest ./tests/unit/libs/test_grouping.py -s
 	poetry run pytest ./tests/unit/libs/test_aggregate.py -s
-	poetry run pytest ./tests/feature/test_main.py -s 
+	poetry run pytest ./tests/feature/test_create_log.py -s
