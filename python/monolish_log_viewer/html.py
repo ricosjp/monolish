@@ -31,6 +31,6 @@ def table_in_html(table_html:str) -> str:
             <body>
                 {table_html}
             </body>
-        </html>
+        </html>\n
     """
     return html

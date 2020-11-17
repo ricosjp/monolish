@@ -40,7 +40,7 @@ def test_df_to_html_table():
         <table border="1" class="dataframe">
         {header_html}
         {record_html}
-        </table>
+        </table>\n
     """
     html_text = html_text.replace("\n", "").replace(" ", "")
 
