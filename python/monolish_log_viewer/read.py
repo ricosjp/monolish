@@ -2,7 +2,7 @@
 import json
 import yaml
 
-def reader(file_object, file_extension):
+def reader(file_object, file_extension:str) -> list:
     """read data"""
     if file_extension == "yaml":
         dict_list = yaml.safe_load(file_object)

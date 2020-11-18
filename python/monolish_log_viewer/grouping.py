@@ -1,7 +1,8 @@
 """ data grouping """
-# pylint: disable=C0301, C0326
 
-def grouping_1st_layer(target_dict_list):
+from typing import Union
+
+def grouping_1st_layer(target_dict_list:list) -> Union[list, list]:
     """ grouping numpy """
     # solve
     layer_1st = "solve/"
@@ -14,7 +15,7 @@ def grouping_1st_layer(target_dict_list):
     other_dict_list = list(filter(lambda any_dict:layer_1st not in any_dict["name"], target_dict_list))
     if other_dict_list:
         layer_list = list(map(lambda any_dict:any_dict["name"].split("/")[0], other_dict_list))
-        layer_list = list(set(layer_list))
+        layer_list = sorted(set(layer_list))
         layer_list = list(map(lambda x:x+"/", layer_list))
         for other_layer_1st in layer_list:
             filter_list = list(map(lambda any_dict:any_dict["name"] == other_layer_1st, other_dict_list))
@@ -29,9 +30,10 @@ def grouping_1st_layer(target_dict_list):
 
     return title_list, block_dict_lists
 
-def split_1st_layer(dict_list):
+def split_1st_layer(dict_list:list) -> list:
     """ grouping pandas """
     title_list, block_dict_lists = grouping_1st_layer(dict_list)
+
     split_dict = dict(zip(title_list, block_dict_lists))
 
     aggr_dict_list = []

@@ -12,3 +12,6 @@ log_cpu:
 
 log_gpu:
 	poetry run monolish_log_viewer $(DATA_DIR)/monolish_test_gpu.log $(DATA_DIR)/monolish_test_gpu.html
+
+test_logger:
+	poetry run pytest ./tests

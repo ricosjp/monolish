@@ -248,6 +248,17 @@ lang_gpu_noavx:
 #
 # Test Python module
 #
+pytest:
+    needs: []
+    stage: python
+    script:
+      # FIXME Python setup should be moved into allgebra
+      - apt update && apt install -y python3-pip
+      - python3 -m pip install poetry
+      # Test monolish_log_viewer
+      - cd python
+      - poetry install
+      - make test_logger
 python-cpu:
     extends:
       - .logger_artifact

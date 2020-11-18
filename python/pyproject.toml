@@ -13,6 +13,7 @@ pandas = "^1.0"
 argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
 
 [build-system]
 requires = ["poetry>=0.12"]

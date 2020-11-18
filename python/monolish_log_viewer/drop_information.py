@@ -1,5 +1,4 @@
 """ Drop unnecessary information """
-# pylint: disable=C0301, C0326
 
 def drop_dict(directory, dict_list):
     """drop record"""
