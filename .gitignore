@@ -30,8 +30,7 @@ test/logger/logging/*.yml
 test/logger/logging/*.log
 test/logger/logging/*.html
 python/.pytest_cache/*
-python/monolish_log_viewer/__pycache__/*.pyc
-python/monolish_log_viewer/__pycache__/*.py
+python/monolish_log_viewer/__pycache__/*
 
 # cmake
 build*/
