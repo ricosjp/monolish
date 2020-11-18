@@ -2,7 +2,7 @@
 import argparse
 
 def controll_argument():
-    """ command line arguments """"
+    """ command line arguments """
     # args
     parser = argparse.ArgumentParser()
     parser.add_argument("log_path")
