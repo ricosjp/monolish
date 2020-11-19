@@ -4,6 +4,7 @@ import pandas
 
 class AggregateDataFrame:
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
+        """layer_1_aggregated"""
         # dict_list -> dataframe
         row_df =  pandas.DataFrame(dict_list)
 
@@ -24,6 +25,7 @@ class AggregateDataFrame:
         return layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
+        """aggregated"""
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
 
@@ -142,6 +144,7 @@ class AggregateDataFrame:
         return solve_df
 
     def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """aggregate continuous values"""
         base_df = dataframe
 
         """create grouping flg"""

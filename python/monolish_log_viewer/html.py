@@ -16,8 +16,18 @@ def to_caption_on_html(title:str, html_table:str) -> str:
 def to_bold_on_html(html_table:str) -> str:
     """100.0 in bold and background"""
 
-    html_table = html_table.replace(
-        "<td>100</td>", "<td><div style='text-align:center; background: #c0c0c0'><strong>100.0</strong></div></td>")
+    html_tag = "<td>100</td>"
+    html_tag_replace = (
+        """
+        <td>
+            <div style='text-align:center; background: #c0c0c0'>
+                <strong>100.0</strong>
+            </div>
+        </td>
+        """
+    )
+
+    html_table = html_table.replace(html_tag, html_tag_replace)
     return html_table
 
 def table_in_html(table_html:str) -> str:
