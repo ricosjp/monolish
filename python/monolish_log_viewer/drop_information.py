@@ -17,9 +17,12 @@ def drop_dict(directory, dict_list):
 
 def drop_dir_info(target_dict_list):
     """drop process"""
-    min_layer = min(map(lambda any_dict:any_dict["name"].count("/"), target_dict_list))
+    min_layer = min(map(
+        lambda any_dict:any_dict["name"].count("/"),
+        target_dict_list))
     min_dict_list = list(filter(
-        lambda any_dict:any_dict["name"].count("/") == min_layer, target_dict_list))
+        lambda any_dict:any_dict["name"].count("/") == min_layer,
+        target_dict_list))
     min_dict = min_dict_list[0]
     min_dir = min_dict["name"]
     drop_list = min_dir.split("/")
