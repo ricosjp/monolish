@@ -1,32 +1,62 @@
 """ data grouping """
-
 from typing import Union
 
 def grouping_1st_layer(target_dict_list:list) -> Union[list, list]:
     """ grouping numpy """
     # solve
     layer_1st = "solve/"
-    solver_dict_list = list(filter(lambda any_dict:layer_1st in any_dict["name"], target_dict_list))
-    filter_list = list(map(lambda any_dict:(("stat" in any_dict) and any_dict["stat"] == "IN" and any_dict["name"] == layer_1st), solver_dict_list))
-    split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
-    solver_dict_block_list = [solver_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
+    solver_dict_list = list(filter(
+        lambda any_dict:layer_1st in any_dict["name"],
+        target_dict_list
+    ))
+
+    filter_list = list(map(
+        lambda dict:"stat" in dict and dict["stat"] == "IN" and dict["name"] == layer_1st,
+        solver_dict_list
+    ))
+
+    split_index_list = [index for index, _ in enumerate(filter_list) if _ is True]
+    split_index_list = split_index_list + [len(filter_list)]
+
+    solver_dict_block_list = [
+        solver_dict_list[
+            split_index_list[index]:split_index_list[index+1]
+        ] for index in range(len(split_index_list)-1)
+    ]
 
     # other
-    other_dict_list = list(filter(lambda any_dict:layer_1st not in any_dict["name"], target_dict_list))
+    other_dict_list = list(filter(
+        lambda any_dict:layer_1st not in any_dict["name"],
+        target_dict_list
+    ))
+
     if other_dict_list:
         layer_list = list(map(lambda any_dict:any_dict["name"].split("/")[0], other_dict_list))
         layer_list = sorted(set(layer_list))
-        layer_list = list(map(lambda x:x+"/", layer_list))
+        layer_list = list(map(lambda dir_name:dir_name+"/", layer_list))
+
         for other_layer_1st in layer_list:
-            filter_list = list(map(lambda any_dict:any_dict["name"] == other_layer_1st, other_dict_list))
-            split_index_list = [index for index, value in enumerate(filter_list) if value == True] + [len(filter_list)]
-            other_dict_block_list = [other_dict_list[split_index_list[index]: split_index_list[index+1]] for index in range(len(split_index_list)-1)]
+            filter_list = list(map(
+                lambda any_dict, flg_key=other_layer_1st:any_dict["name"] == flg_key,
+                other_dict_list
+            ))
+
+            split_index_list = [index for index, _ in enumerate(filter_list) if _ is True]
+            split_index_list = split_index_list + [len(filter_list)]
+
+            other_dict_block_list = [
+                other_dict_list[
+                    split_index_list[index]: split_index_list[index+1]
+                ] for index in range(len(split_index_list)-1)
+            ]
     else:
         other_dict_block_list = []
 
     block_dict_lists = other_dict_block_list + solver_dict_block_list
 
-    title_list = [f"other {str(no)}" for no in range(len(other_dict_block_list))] + [f"solver {str(no)}" for no in range(len(solver_dict_block_list))]
+    other_title_list = [f"other {str(no)}" for no, _ in enumerate(other_dict_block_list)]
+    solve_title_list = [f"solver {str(no)}" for no, _ in enumerate(solver_dict_block_list)]
+    title_list = other_title_list + solve_title_list
 
     return title_list, block_dict_lists
 
