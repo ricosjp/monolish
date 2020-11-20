@@ -1,7 +1,5 @@
 """ test aggregate """
-import pytest
 import os
-import sys
 import pandas
 
 from monolish_log_viewer import aggregate, read
@@ -9,6 +7,7 @@ from monolish_log_viewer import aggregate, read
 data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/cg_iter.yml")
 
 def test_layer_1_aggregated():
+    """ test layer_1_aggregated """
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 
@@ -22,6 +21,7 @@ def test_layer_1_aggregated():
     assert layer1_aggr_df["layer"].sum() == len(layer1_aggr_df["layer"])
 
 def test_aggregated_continuous_values():
+    """ test aggregated_continuous_values """
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 
@@ -35,6 +35,7 @@ def test_aggregated_continuous_values():
     assert list(aggr_cont_df.columns) == ["cont_cnt", "group", "name", "stat", "time", "type"]
 
 def test_aggregated():
+    """ test aggregated """
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 
@@ -42,4 +43,12 @@ def test_aggregated():
     solve_df = aggregate_dataframe.aggregated(dict_list)
 
     # colum check
-    assert list(solve_df.columns) == ["name", "layer", "group_0", "group_1", "group_2", "group_3", "time", "cont_cnt", "breakdown_0 layer1/layer0[%]", "breakdown_1 layer2/layer1[%]", "breakdown_2 layer3/layer2[%]", "breakdown_0[%] / count", "breakdown_1[%] / count", "breakdown_2[%] / count"]
+    assert list(solve_df.columns) == [
+        "name", "layer",
+        "group_0", "group_1", "group_2", "group_3",
+        "time", "cont_cnt", "breakdown_0 layer1/layer0[%]",
+        "breakdown_1 layer2/layer1[%]",
+        "breakdown_2 layer3/layer2[%]",
+        "breakdown_0[%] / count",
+        "breakdown_1[%] / count",
+        "breakdown_2[%] / count"]
