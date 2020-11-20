@@ -1,6 +1,4 @@
 """ feature test """
-import argparse
-
 from monolish_log_viewer import create_log
 
 def test_execute_create_log_normaldata():
@@ -13,4 +11,4 @@ def test_execute_create_log_normaldata():
         write_number_of_character = create_log.execute_create_log(log_path, out_path)
         print("=================")
 
-        assert isinstance(write_number_of_character, int) == True
+        assert isinstance(write_number_of_character, int) is True
