@@ -84,3 +84,20 @@ document:
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
 		ghcr.io/ricosjp/allgebra/doxygen:20.10.1 doxygen Doxyfile
+
+### clang gpu
+clang_gpu:
+	$(MAKE) -B -j -f Makefile.clang_gpu
+
+install-clang_gpu: clang_gpu
+	$(MAKE) -B -j -f Makefile.clang_gpu install
+
+in-clang_gpu:
+	docker run -it --rm \
+		--gpus=all \
+		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib:/usr/local/llvm/lib/ \
+		-v $(MONOLISH_TOP):/monolish \
+		-w /monolish \
+		--privileged \
+		ghcr.io/ricosjp/allgebra/clang11_cuda10_1/mkl:manual_deploy
