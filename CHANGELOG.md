@@ -20,6 +20,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- clang11+GPUに対応したMakefileを追加(cmakeはマダ) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
 
 0.6.2 - 2020/11/17
 -----------
