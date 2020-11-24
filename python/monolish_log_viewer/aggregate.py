@@ -7,6 +7,14 @@ class AggregateDataFrame:
         Aggregation using DataFrame
         pandas.DataFrameを用いた集約処理
     """
+    def __init__(self) -> None:
+        self.layer1_aggr_df = pandas.DataFrame()
+        self.solve_df = pandas.DataFrame()
+        self.aggregate_df = pandas.DataFrame()
+        self.group_df = pandas.DataFrame()
+        self.solve_aggr_df = pandas.DataFrame()
+        self.group_0_sort_df = pandas.DataFrame()
+
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
         """layer_1_aggregated
             一層目の集約処理
@@ -33,9 +41,10 @@ class AggregateDataFrame:
         layer1_aggr_df_cnt = layer1_aggr_df_cnt[["name", "cnt"]]
 
         # join
-        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum, layer1_aggr_df_cnt, how="left", on="name")
+        self.layer1_aggr_df = pandas.merge(
+            layer1_aggr_df_sum, layer1_aggr_df_cnt, how="left", on="name")
 
-        return layer1_aggr_df
+        return self.layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
         """aggregated
@@ -75,7 +84,8 @@ class AggregateDataFrame:
         base_df = dataframe
         for any_layer in range(global_max_layer):
             temp_df = base_df[
-                (base_df["layer"] == any_layer) & (numpy.isnan(base_df["time"]) == False)].copy()
+                (base_df["layer"] == any_layer) & (numpy.isnan(base_df["time"]) == bool(False))
+            ].copy()
 
             add_col = f"group_{any_layer}"
             temp_df[add_col] = [i for i, _ in temp_df.iterrows()]
@@ -101,12 +111,120 @@ class AggregateDataFrame:
         aggr_df = base_df.groupby(["name", "layer"] + group_column_list).sum()
         aggr_df = aggr_df.reset_index()
 
-        # split
-        solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
+        # aggregate solve
+        solve_df = self.aggregated_solve(aggr_df)
+
+        return solve_df
+
+    def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """aggregate continuous values
+            同系で連続している処理の集約
+            Args:
+                dataframe(pandas.DataFrame): 元データ
+            Returns:
+                pandas.DataFrame:同系を集約した後の処理
+        """
+        base_df = dataframe
+
+        # create grouping flg
+        group_df = self.create_grouping_flg(base_df)
+
+        # add grouping values
+        base_df = base_df.merge(group_df, how="left", left_index=True, right_index=True)
+        base_df = base_df.reset_index()
+        base_df["cont_flg"] = 1
+
+        temp_any_df = base_df[(numpy.isnan(base_df["group"])  == bool(False))]
+        temp_any_df1 = temp_any_df.groupby(["group"]).max()
+        temp_any_df1 = temp_any_df1.reset_index()
+        temp_any_df1 = temp_any_df1[["index", "group"]]
+        temp_any_df2 = temp_any_df.groupby(["type", "name", "group"]).sum()
+        temp_any_df2 = temp_any_df2.reset_index()
+        temp_any_df2 = temp_any_df2.drop(columns=["index"])
+
+        any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
+        any_df2 = base_df[numpy.isnan(base_df["group"])]
+
+        aggr_cont_df = pandas.concat([any_df1, any_df2], sort=True)
+        aggr_cont_df = aggr_cont_df.sort_values("index")
+        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
+        aggr_cont_df = aggr_cont_df.reset_index()
+        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
+        aggr_cont_df = aggr_cont_df.rename(columns={"cont_flg":"cont_cnt"})
+
+        self.aggregate_df = aggr_cont_df
+
+        return self.aggregate_df
+
+    def create_grouping_flg(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """create_grouping_flg
+            連続した処理のgrouping
+            Args:
+                dataframe(pandas.DataFrame): logger data
+            Returns:
+                pandas.DataFrame:全層のgrouping df
+        """
+        center_df = dataframe["name"].reset_index()
+        center_df = center_df.rename(columns={"index":"back_idx"})
+        center_df = center_df.reset_index()
+
+        plus_df = center_df.copy()
+        plus_df["index"] = plus_df["index"].apply(lambda any_seri:any_seri+1)
+        plus_df = plus_df.rename(columns={"name":"name_plus"})
+        center_p_df = center_df.merge(plus_df, how="left", on="index")
+        center_p_df = center_p_df[center_p_df["name"] == center_p_df["name_plus"]].copy()
+        center_p_df["cnt_flg_p"] = 1
+        plus_flg_df = center_df.merge(center_p_df[["index", "cnt_flg_p"]], how="left", on="index")
+
+        minus_df = center_df.copy()
+        minus_df["index"] = minus_df["index"].apply(lambda any_seri:any_seri-1)
+        minus_df = minus_df.rename(columns={"name":"name_minus"})
+        center_m_df = center_df.merge(minus_df, how="left", on="index")
+        center_m_df = center_m_df[center_m_df["name"] == center_m_df["name_minus"]].copy()
+        center_m_df["cnt_flg_m"] = 1
+        minus_flg_df = center_df.merge(center_m_df[["index", "cnt_flg_m"]], how="left", on="index")
+        minus_flg_df = minus_flg_df[["index", "cnt_flg_m"]]
+
+        center_pm_df = plus_flg_df.merge(minus_flg_df, how="left", on="index")
+        center_pm_df = center_pm_df.fillna(0)
+        center_pm_df["flg"] = center_pm_df["cnt_flg_p"] - center_pm_df["cnt_flg_m"]
+
+        create_m_group_df = center_pm_df[center_pm_df["flg"] == -1].copy()
+        create_m_group_df["m_group"] = [i+1 for i in range(len(create_m_group_df))]
+        create_m_group_df = create_m_group_df[["back_idx", "m_group"]]
+
+        create_p_group_df = center_pm_df[center_pm_df["flg"] == 1].copy()
+        create_p_group_df["p_group"] = [i+1 for i in range(len(create_p_group_df))]
+        create_p_group_df = create_p_group_df[["back_idx", "p_group"]]
+
+        center_flg_df = center_pm_df
+        center_flg_df = center_flg_df.merge(create_m_group_df, how="left", on="back_idx")
+        center_flg_df = center_flg_df.merge(create_p_group_df, how="left", on="back_idx")
+        center_flg_df["m_group"] = center_flg_df["m_group"].fillna(method="ffill")
+        center_flg_df["p_group"] = center_flg_df["p_group"].fillna(method="bfill")
+        center_flg_where_df = center_flg_df[center_flg_df["m_group"] == center_flg_df["p_group"]]
+        center_flg_where_df = center_flg_where_df.rename(columns={"p_group":"group"})
+        center_flg_where_df = center_flg_where_df[["back_idx", "group"]]
+        center_group_df = center_flg_df.merge(center_flg_where_df, how="left", on="back_idx")
+
+        self.group_df = center_group_df[["group"]]
+
+        return self.group_df
+
+    def aggregated_solve(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """aggregated_solve
+            solveの処理の集約
+            Args:
+                dataframe(pandas.DataFrame): logger data
+            Returns:
+                pandas.DataFrame:solveの集約処理
+        """
+        solve_df = dataframe[dataframe["name"].str.contains("solve/")]
 
         if not solve_df.empty:
             # local max layer
             solve_max_layer = max(solve_df["layer"])
+
             for any_layer in range(solve_max_layer):
                 col_group = f"group_{any_layer}"
                 col_denominator = f"denominator_{any_layer+1}_time"
@@ -138,8 +256,8 @@ class AggregateDataFrame:
                 solve_df[col_group] = solve_df[col_group].apply(
                     lambda any_seri:int(float(any_seri)))
 
-            group_column_list = [f"group_{any_layer+1}" for any_layer in range(solve_max_layer)]
-            solve_df = solve_df.sort_values(group_column_list)
+            narrow_col_list = [f"group_{any_layer+1}" for any_layer in range(solve_max_layer)]
+            solve_df = solve_df.sort_values(narrow_col_list)
             solve_df = solve_df.fillna("")
 
             col_group_m1 = f"group_{solve_max_layer-1}"
@@ -173,108 +291,41 @@ class AggregateDataFrame:
                 solve_df[col_per_cnt] = solve_df[col_per_cnt].replace(50, "")
 
             # drop column layer flag
-            layer_column_list = [f"layer_{any_layer}_flg" for any_layer in range(solve_max_layer+1)]
-            solve_df = solve_df.drop(columns=layer_column_list)
+            narrow_col_list = [f"layer_{any_layer}_flg" for any_layer in range(solve_max_layer+1)]
+            solve_df = solve_df.drop(columns=narrow_col_list)
             solve_df = solve_df.reset_index()
             solve_df = solve_df.drop(columns=["index"])
 
-            # final sort
-            group_0_min = min(solve_df["group_0"])
-            group_0_max = max(solve_df["group_0"])
+            # group 0 sort
+            solve_df = self.group_0_sort(solve_df)
 
-            if group_0_min == group_0_max:
-                group_0_max = group_0_max + 1
-
-            final_sort_solve_df = pandas.DataFrame(columns=solve_df.columns)
-            for index in range(group_0_min, group_0_max):
-                final_sort_solve_df = pandas.concat(
-                    [final_sort_solve_df, solve_df[solve_df["group_0"] == index]])
-            solve_df = final_sort_solve_df
-            solve_df = solve_df.reset_index().drop("index", axis=1)
         else:
             solve_df = pandas.DataFrame()
 
-        return solve_df
+        self.solve_aggr_df = solve_df
 
-    def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
-        """aggregate continuous values
-            同系で連続している処理の集約
+        return self.solve_aggr_df
+
+    def group_0_sort(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """group_0_sort
+            group 0 に置けるsort
             Args:
-                dataframe(pandas.DataFrame): 元データ
+                dataframe(pandas.DataFrame): logger data
             Returns:
-                pandas.DataFrame:同系を集約した後の処理
+                pandas.DataFrame:sort結果
         """
-        base_df = dataframe
+        group_0_min = min(dataframe["group_0"])
+        group_0_max = max(dataframe["group_0"])
 
-        """create grouping flg"""
-        center_seri = base_df["name"]
-        center_df = center_seri.reset_index()
-        center_df = center_df.rename(columns={"index":"back_idx"})
-        center_df = center_df.reset_index()
+        if group_0_min == group_0_max:
+            group_0_max = group_0_max + 1
 
-        plus_df = center_df.copy()
-        plus_df["index"] = plus_df["index"].apply(lambda any_seri:any_seri+1)
-        plus_df = plus_df.rename(columns={"name":"name_plus"})
-        center_p_df = center_df.merge(plus_df, how="left", on="index")
-        center_p_df = center_p_df[center_p_df["name"] == center_p_df["name_plus"]].copy()
-        center_p_df["cnt_flg_p"] = 1
-        plus_flg_df = center_df.merge(center_p_df[["index", "cnt_flg_p"]], how="left", on="index")
+        final_sort_solve_df = pandas.DataFrame(columns=dataframe.columns)
+        for index in range(group_0_min, group_0_max):
+            final_sort_solve_df = pandas.concat(
+                [final_sort_solve_df, dataframe[dataframe["group_0"] == index]])
+        solve_df = final_sort_solve_df
+        solve_df = solve_df.reset_index().drop("index", axis=1)
+        self.group_0_sort_df = solve_df
 
-        minus_df = center_df.copy()
-        minus_df["index"] = minus_df["index"].apply(lambda any_seri:any_seri-1)
-        minus_df = minus_df.rename(columns={"name":"name_minus"})
-        center_m_df = center_df.merge(minus_df, how="left", on="index")
-        center_m_df = center_m_df[center_m_df["name"] == center_m_df["name_minus"]].copy()
-        center_m_df["cnt_flg_m"] = 1
-        minus_flg_df = center_df.merge(center_m_df[["index", "cnt_flg_m"]], how="left", on="index")
-        minus_flg_df = minus_flg_df[["index", "cnt_flg_m"]]
-
-        center_pm_df = plus_flg_df.merge(minus_flg_df, how="left", on="index")
-        center_pm_df = center_pm_df.fillna(0)
-        center_pm_df["cnt_flg_p"] = center_pm_df["cnt_flg_p"].apply(lambda any_seri:int(any_seri))
-        center_pm_df["cnt_flg_m"] = center_pm_df["cnt_flg_m"].apply(lambda any_seri:int(any_seri))
-        center_pm_df["flg"] = center_pm_df["cnt_flg_p"] - center_pm_df["cnt_flg_m"]
-
-        create_m_group_df = center_pm_df[center_pm_df["flg"] == -1].copy()
-        create_m_group_df["m_group"] = [i+1 for i in range(len(create_m_group_df))]
-        create_m_group_df = create_m_group_df[["back_idx", "m_group"]]
-
-        create_p_group_df = center_pm_df[center_pm_df["flg"] == 1].copy()
-        create_p_group_df["p_group"] = [i+1 for i in range(len(create_p_group_df))]
-        create_p_group_df = create_p_group_df[["back_idx", "p_group"]]
-
-        center_flg_df = center_pm_df
-        center_flg_df = center_flg_df.merge(create_m_group_df, how="left", on="back_idx")
-        center_flg_df = center_flg_df.merge(create_p_group_df, how="left", on="back_idx")
-        center_flg_df["m_group"] = center_flg_df["m_group"].fillna(method="ffill")
-        center_flg_df["p_group"] = center_flg_df["p_group"].fillna(method="bfill")
-        center_flg_where_df = center_flg_df[center_flg_df["m_group"] == center_flg_df["p_group"]]
-        center_flg_where_df = center_flg_where_df.rename(columns={"p_group":"group"})
-        center_flg_where_df = center_flg_where_df[["back_idx", "group"]]
-        center_group_df = center_flg_df.merge(center_flg_where_df, how="left", on="back_idx")
-        group_df = center_group_df[["group"]]
-
-        """add grouping values"""
-        base_df = base_df.merge(group_df, how="left", left_index=True, right_index=True)
-        base_df = base_df.reset_index()
-        base_df["cont_flg"] = 1
-
-        temp_any_df = base_df[(numpy.isnan(base_df["group"]) == False)]
-        temp_any_df1 = temp_any_df.groupby(["group"]).max()
-        temp_any_df1 = temp_any_df1.reset_index()
-        temp_any_df1 = temp_any_df1[["index", "group"]]
-        temp_any_df2 = temp_any_df.groupby(["type", "name", "group"]).sum()
-        temp_any_df2 = temp_any_df2.reset_index()
-        temp_any_df2 = temp_any_df2.drop(columns=["index"])
-
-        any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
-        any_df2 = base_df[numpy.isnan(base_df["group"])]
-
-        aggr_cont_df = pandas.concat([any_df1, any_df2], sort=True)
-        aggr_cont_df = aggr_cont_df.sort_values("index")
-        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
-        aggr_cont_df = aggr_cont_df.reset_index()
-        aggr_cont_df = aggr_cont_df.drop(columns=["index"])
-        aggr_cont_df = aggr_cont_df.rename(columns={"cont_flg":"cont_cnt"})
-
-        return aggr_cont_df
+        return self.group_0_sort_df
