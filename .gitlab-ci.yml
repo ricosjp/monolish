@@ -22,6 +22,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
         - avx
@@ -32,6 +34,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
 
@@ -41,6 +45,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
+        CC: "/usr/bin/gcc"
+        CXX: "/usr/bin/g++"
     tags:
         - avx
 
@@ -50,6 +56,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
+        CC: "/usr/bin/gcc"
+        CXX: "/usr/bin/g++"
 
 .build_cmake:
     stage: build_lib
