@@ -1,12 +1,20 @@
-""" aggregate """
+""" Aggregate processing """
 import numpy
 import pandas
 
 class AggregateDataFrame:
-    """Aggregation using DataFrame"""
-
+    """AggregateDataFrame
+        Aggregation using DataFrame
+        pandas.DataFrameを用いた集約処理
+    """
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
-        """layer_1_aggregated"""
+        """layer_1_aggregated
+            一層目の集約処理
+            Args:
+                dict_list(list): logger data
+            Returns:
+                pandas.DataFrame:1層の集約データ
+        """
         # dict_list -> dataframe
         row_df = pandas.DataFrame(dict_list)
 
@@ -30,7 +38,13 @@ class AggregateDataFrame:
         return layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
-        """aggregated"""
+        """aggregated
+            全体の集約処理
+            Args:
+                dict_list(list): logger data
+            Returns:
+                pandas.DataFrame:全層の集約処理
+        """
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
 
@@ -183,7 +197,13 @@ class AggregateDataFrame:
         return solve_df
 
     def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
-        """aggregate continuous values"""
+        """aggregate continuous values
+            同系で連続している処理の集約
+            Args:
+                dataframe(pandas.DataFrame): 元データ
+            Returns:
+                pandas.DataFrame:同系を集約した後の処理
+        """
         base_df = dataframe
 
         """create grouping flg"""
