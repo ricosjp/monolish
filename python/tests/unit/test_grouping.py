@@ -1,12 +1,11 @@
-""" test grouping """
+""" 階層分類のテスト """
 import os
 from monolish_log_viewer import grouping, read
 
 data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/cg_iter.yml")
-print(data_dir)
 
 def test_grouping_1st_layer():
-    """ test grouping_1st_layer """
+    """ 1層目の階層のカラムの正誤 """
     with open(data_dir, "r") as file:
         yaml_dict_list = read.reader(file, "yaml")
     title_list, block_dict_lists = grouping.grouping_1st_layer(yaml_dict_list)
@@ -22,7 +21,7 @@ def test_grouping_1st_layer():
     assert block_dict_lists != []
 
 def test_split_1st_layer():
-    """ test split_1st_layer """
+    """ 1層目の分類が機能しているかテスト """
     with open(data_dir, "r") as file:
         yaml_dict_list = read.reader(file, "yaml")
     dict_list = grouping.split_1st_layer(yaml_dict_list)

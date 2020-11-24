@@ -7,7 +7,7 @@ from monolish_log_viewer import aggregate, read
 data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/cg_iter.yml")
 
 def test_layer_1_aggregated():
-    """ test layer_1_aggregated """
+    """ 1層目の集計テーブルのカラムとデータが抽出出来ているかのテスト """
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 
@@ -21,7 +21,7 @@ def test_layer_1_aggregated():
     assert layer1_aggr_df["layer"].sum() == len(layer1_aggr_df["layer"])
 
 def test_aggregated_continuous_values():
-    """ test aggregated_continuous_values """
+    """ 連続で呼び出される関数の集計テスト """
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 

@@ -1,8 +1,8 @@
-""" feature test """
+""" 集計モジュールの結合テスト """
 from monolish_log_viewer import create_log
 
 def test_execute_create_log_normaldata():
-    """normal data test"""
+    """正常系での動作確認"""
     for any_file in ["only_solver", "normal_data", "only_other", "cg_iter"]:
         # pass command line arguments
         log_path = f"./tests/test_data/{any_file}.yml"
