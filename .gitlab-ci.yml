@@ -368,7 +368,7 @@ python-cpu:
     extends:
       - .logger_artifact
     needs:
-      - logger_nogpu_avx
+      - logger_nogpu_avx_gcc
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -382,7 +382,7 @@ python-gpu:
     extends:
       - .logger_artifact
     needs:
-      - logger_gpu_avx
+      - logger_gpu_avx_clang
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -401,7 +401,7 @@ benchmark_nogpu_avx_gcc:
     extends:
       - .nogpu_avx_gcc
     needs:
-      - "build_cmake_nogpu_avx"
+      - "build_cmake_nogpu_avx_gcc"
     artifacts:
         paths:
             - benchmark/
@@ -424,7 +424,7 @@ benchmark_gpu_avx_clang:
     extends:
       - .gpu_avx_clang
     needs:
-      - "build_cmake_gpu_avx"
+      - "build_cmake_gpu_avx_clang"
     artifacts:
         paths:
             - benchmark/
