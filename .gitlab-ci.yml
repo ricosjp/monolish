@@ -1,4 +1,4 @@
-image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.1
+image: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"

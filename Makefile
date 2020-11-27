@@ -1,5 +1,5 @@
-ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/cuda10_2/mkl
-ALLGEBRA_TAG   := 20.10.1
+ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl
+ALLGEBRA_TAG   := latest
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -100,20 +100,3 @@ document:
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
 		ghcr.io/ricosjp/allgebra/doxygen:20.10.1 doxygen Doxyfile
-
-### clang gpu
-clang_gpu:
-	$(MAKE) -B -j -f Makefile.clang_gpu
-
-install-clang_gpu: clang_gpu
-	$(MAKE) -B -j -f Makefile.clang_gpu install
-
-in-clang_gpu:
-	docker run -it --rm \
-		--gpus=all \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib:/usr/local/llvm-11.0.0/lib/ \
-		-v $(MONOLISH_TOP):/monolish \
-		-w /monolish \
-		--privileged \
-		ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:manual_deploy
