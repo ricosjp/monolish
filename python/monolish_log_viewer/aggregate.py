@@ -1,4 +1,4 @@
-""" Aggregate processing """
+""" aggregate """
 import numpy
 import pandas
 

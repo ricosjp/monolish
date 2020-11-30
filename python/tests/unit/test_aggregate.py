@@ -12,13 +12,15 @@ def test_layer_1_aggregated():
     """test_layer_1_aggregated
         1層目の集計テーブルのカラムとデータが抽出出来ているかのテスト
     """
+    # read test data
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 
+    # test method
     aggregate_dataframe = aggregate.AggregateDataFrame()
     layer1_aggr_df = aggregate_dataframe.layer_1_aggregated(dict_list)
 
-    # colum check
+    # column check
     assert list(layer1_aggr_df.columns) == ["name", "layer", "time", "cnt"]
 
     # layer check
