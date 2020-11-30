@@ -17,7 +17,7 @@ def execute_create_log(log_path, out_path):
     # split block
     split_dict_list = grouping.split_1st_layer(yaml_dict_list)
 
-    # Aggregate
+    # aggregate
     solve_df = aggregate_dataframe.aggregated(split_dict_list)
     debug.log_success("aggregated")
 
@@ -41,4 +41,4 @@ def execute_create_log(log_path, out_path):
     debug.log_success(f"write {format(out_path)}")
     debug.log_success(f"number of character {write_number_of_character}")
 
-    return write_number_of_character
+    return text_html

@@ -30,6 +30,7 @@ def test_aggregated_continuous_values():
     """test_aggregated_continuous_values
         連続で呼び出される関数の集計テスト
     """
+    # read test data
     with open(data_dir, "r") as file:
         dict_list = read.reader(file, "yaml")
 

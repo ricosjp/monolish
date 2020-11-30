@@ -14,6 +14,7 @@ class AggregateDataFrame:
         self.group_df = pandas.DataFrame()
         self.solve_aggr_df = pandas.DataFrame()
         self.group_0_sort_df = pandas.DataFrame()
+        self.sort_solve_df = pandas.DataFrame()
 
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
         """layer_1_aggregated
@@ -69,7 +70,7 @@ class AggregateDataFrame:
         dataframe = dataframe[aggr_col_list]
 
         # add column layer
-        dataframe["layer"] = dataframe["name"].apply(lambda any_seri:any_seri.count("/")-1)
+        dataframe["layer"] = dataframe["name"].apply(lambda name:name.count("/")-1)
 
         # max layer
         global_max_layer = max(dataframe["layer"]) + 1
@@ -114,7 +115,38 @@ class AggregateDataFrame:
         # aggregate solve
         solve_df = self.aggregated_solve(aggr_df)
 
+        # sort
+        solve_df = self.sort_solve(solve_df)
+
         return solve_df
+
+    def sort_solve(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """sort_solve_df
+            最後に表示順序を整える関数
+            Args:
+                dataframe(pandas.DataFrame): 元データ
+            Returns:
+                pandas.DataFrame:sort後のdf
+        """
+        base_df = dataframe
+        # where group
+        max_layer = max(base_df["layer"])
+        # layer 0 の最小値を1にする
+        base_df["layer"] = base_df["layer"].apply(lambda layer:int(layer)+1)
+
+        group_list = []
+        for i in range(max_layer+1):
+            group_list.append(f"group_{i}")
+            base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("", 0)
+            base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
+            base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
+
+        base_df = base_df.sort_values(group_list)
+        base_df = base_df.replace(0, "")
+
+        self.sort_solve_df = base_df
+
+        return self.sort_solve_df
 
     def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
         """aggregate continuous values
@@ -134,15 +166,19 @@ class AggregateDataFrame:
         base_df = base_df.reset_index()
         base_df["cont_flg"] = 1
 
-        temp_any_df = base_df[(numpy.isnan(base_df["group"])  == bool(False))]
-        temp_any_df1 = temp_any_df.groupby(["group"]).max()
-        temp_any_df1 = temp_any_df1.reset_index()
-        temp_any_df1 = temp_any_df1[["index", "group"]]
-        temp_any_df2 = temp_any_df.groupby(["type", "name", "group"]).sum()
-        temp_any_df2 = temp_any_df2.reset_index()
-        temp_any_df2 = temp_any_df2.drop(columns=["index"])
+        where_base_df = base_df[(numpy.isnan(base_df["group"])  == bool(False))]
 
-        any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
+        groupby_group_dfgb = where_base_df.groupby(["group"])
+        group_max_df = groupby_group_dfgb.max()
+        group_max_df = group_max_df.reset_index()
+        group_max_df = group_max_df[["index", "group"]]
+
+        groupby_tng_dfgb = where_base_df.groupby(["type", "name", "group"])
+        tng_sum_df = groupby_tng_dfgb.sum()
+        tng_sum_df = tng_sum_df.reset_index()
+        tng_sum_df = tng_sum_df.drop(columns=["index"])
+
+        any_df1 = tng_sum_df.merge(group_max_df, how="left", on = "group")
         any_df2 = base_df[numpy.isnan(base_df["group"])]
 
         aggr_cont_df = pandas.concat([any_df1, any_df2], sort=True)
