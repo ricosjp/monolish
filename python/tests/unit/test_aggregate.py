@@ -1,4 +1,4 @@
-""" test aggregate
+""" test_aggregate
     集約処理のテスト
 """
 import os

@@ -1,4 +1,6 @@
-""" 階層分類のテスト """
+"""test_grouping
+    階層分類のテスト
+"""
 import os
 from monolish_log_viewer import grouping, read
 
