@@ -26,6 +26,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
+        - gpu2.gitlab-runner.savanna.ritc.jp
         - avx
 
 .gpu_noavx_clang:
@@ -38,6 +39,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
+        - gpu2.gitlab-runner.savanna.ritc.jp
 
 .nogpu_avx_clang:
     variables:
