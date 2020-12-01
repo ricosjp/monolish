@@ -14,7 +14,11 @@ option(MONOLISH_USE_GPU "build GPU variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
 
 if(MONOLISH_USE_GPU)
-  set(MONOLISTH_TARGET monolish_gpu)
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(MONOLISTH_TARGET monolish_gpu)
+  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    message(FATAL_ERROR "GPU mode cannot be enabled with gcc")
+  endif()
 else()
   set(MONOLISTH_TARGET monolish_cpu)
 endif()
@@ -32,7 +36,7 @@ target_sources(${MONOLISTH_TARGET}
 )
 
 set_property(TARGET ${MONOLISTH_TARGET} PROPERTY CXX_STANDARD 14)
-target_compile_options(${MONOLISTH_TARGET} PRIVATE -g -O3 -Wall -Wextra)
+target_compile_options(${MONOLISTH_TARGET} PRIVATE -g -O3 -Wall -Wextra -Wno-unused-parameter)
 
 # AVX
 if(MONOLISH_USE_AVX)
@@ -50,17 +54,25 @@ install(
 find_package(OpenMP REQUIRED)
 if(MONOLISH_USE_GPU)
   # GPU offloading
+
+  # get CC
+  execute_process(
+    COMMAND allgebra_get_device_cc
+    OUTPUT_VARIABLE GPU_CC
+    ERROR_QUIET
+  )
+  string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+  message(STATUS "GPU Compute Capability is ${GPU_CC}")
+
   target_compile_options(${MONOLISTH_TARGET} PRIVATE
     -fopenmp
-    -fno-stack-protector
-    -fcf-protection=none
-    "-foffload=nvptx-none=-O3 -misa=sm_35 -lm"
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=sm_${GPU_CC}
   )
   target_link_options(${MONOLISTH_TARGET} PRIVATE
     -fopenmp
-    -fno-stack-protector
-    -fcf-protection=none
-    "-foffload=nvptx-none=-O3 -misa=sm_35 -lm"
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=sm_${GPU_CC}
   )
 else()
   target_compile_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})

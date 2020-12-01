@@ -1,4 +1,4 @@
-image: ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.1
+image: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -16,40 +16,71 @@ stages:
     - benchmark
     - deploy
 
-.gpu_avx:
+.gpu_avx_clang:
     variables:
         PREFIX: "gpu_avx"
         TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
+        - gpu2.gitlab-runner.savanna.ritc.jp
         - avx
 
-.gpu_noavx:
+.gpu_noavx_clang:
     variables:
         PREFIX: "gpu_noavx"
         TEST_TARGET: "gpu"
         MONOLISH_USE_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
+        - gpu2.gitlab-runner.savanna.ritc.jp
 
-.nogpu_avx:
+.nogpu_avx_clang:
     variables:
         PREFIX: "nogpu_avx"
         TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - avx
 
-.nogpu_noavx:
+.nogpu_noavx_clang:
     variables:
         PREFIX: "nogpu_noavx"
         TEST_TARGET: "cpu"
         MONOLISH_USE_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
+        CC: "/usr/local/llvm-11.0.0/bin/clang"
+        CXX: "/usr/local/llvm-11.0.0/bin/clang++"
+
+.nogpu_avx_gcc:
+    variables:
+        PREFIX: "nogpu_avx"
+        TEST_TARGET: "cpu"
+        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_AVX: "ON"
+        CC: "/usr/bin/gcc"
+        CXX: "/usr/bin/g++"
+    tags:
+        - avx
+
+.nogpu_noavx_gcc:
+    variables:
+        PREFIX: "nogpu_noavx"
+        TEST_TARGET: "cpu"
+        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_AVX: "OFF"
+        CC: "/usr/bin/gcc"
+        CXX: "/usr/bin/g++"
+
 
 .build_cmake:
     stage: build_lib
@@ -62,124 +93,176 @@ stages:
             - ${PREFIX}
             - test/
         expire_in: 60min
-build_cmake_gpu_avx:
+build_cmake_gpu_avx_clang:
     extends:
-      - .gpu_avx
+      - .gpu_avx_clang
       - .build_cmake
-build_cmake_gpu_noavx:
+build_cmake_gpu_noavx_clang:
     extends:
-      - .gpu_noavx
+      - .gpu_noavx_clang
       - .build_cmake
-build_cmake_nogpu_avx:
+build_cmake_nogpu_avx_clang:
     extends:
-      - .nogpu_avx
+      - .nogpu_avx_clang
       - .build_cmake
-build_cmake_nogpu_noavx:
+build_cmake_nogpu_noavx_clang:
     extends:
-      - .nogpu_noavx
+      - .nogpu_noavx_clang
+      - .build_cmake
+build_cmake_nogpu_avx_gcc:
+    extends:
+      - .nogpu_avx_gcc
+      - .build_cmake
+build_cmake_nogpu_noavx_gcc:
+    extends:
+      - .nogpu_noavx_gcc
       - .build_cmake
 
 #
 # Test templates
 #
-.test_nogpu_avx:
+.test_nogpu_avx_gcc:
     extends:
-      - .nogpu_avx
+      - .nogpu_avx_gcc
     needs:
-      - "build_cmake_nogpu_avx"
+      - "build_cmake_nogpu_avx_gcc"
     script:
       - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_noavx:
+.test_nogpu_noavx_gcc:
     extends:
-      - .nogpu_noavx
+      - .nogpu_noavx_gcc
     needs:
-      - "build_cmake_nogpu_noavx"
+      - "build_cmake_nogpu_noavx_gcc"
     script:
       - make -C test/${TEST_TARGET} run_cpu
-.test_gpu_avx:
+.test_nogpu_avx_clang:
     extends:
-      - .gpu_avx
+      - .nogpu_avx_clang
     needs:
-      - "build_cmake_gpu_avx"
+      - "build_cmake_nogpu_avx_clang"
+    script:
+      - make -C test/${TEST_TARGET} run_cpu
+.test_nogpu_noavx_clang:
+    extends:
+      - .nogpu_noavx_clang
+    needs:
+      - "build_cmake_nogpu_noavx_clang"
+    script:
+      - make -C test/${TEST_TARGET} run_cpu
+.test_gpu_avx_clang:
+    extends:
+      - .gpu_avx_clang
+    needs:
+      - "build_cmake_gpu_avx_clang"
     script:
       - make -C test/${TEST_TARGET} run_gpu
-.test_gpu_noavx:
+.test_gpu_noavx_clang:
     extends:
-      - .gpu_noavx
+      - .gpu_noavx_clang
     needs:
-      - "build_cmake_gpu_noavx"
+      - "build_cmake_gpu_noavx_clang"
     script:
       - make -C test/${TEST_TARGET} run_gpu
 
 #
 # vector
 #
-vector_nogpu_avx:
+vector_nogpu_avx_gcc:
     stage: vector
-    extends: .test_nogpu_avx
+    extends: .test_nogpu_avx_gcc
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_noavx:
+vector_nogpu_noavx_gcc:
     stage: vector
-    extends: .test_nogpu_noavx
+    extends: .test_nogpu_noavx_gcc
     variables:
       TEST_TARGET: "vector"
-vector_gpu_avx:
+vector_nogpu_avx_clang:
     stage: vector
-    extends: .test_gpu_avx
+    extends: .test_nogpu_avx_clang
     variables:
       TEST_TARGET: "vector"
-vector_gpu_noavx:
+vector_nogpu_noavx_clang:
     stage: vector
-    extends: .test_gpu_noavx
+    extends: .test_nogpu_noavx_clang
+    variables:
+      TEST_TARGET: "vector"
+vector_gpu_avx_clang:
+    stage: vector
+    extends: .test_gpu_avx_clang
+    variables:
+      TEST_TARGET: "vector"
+vector_gpu_noavx_clang:
+    stage: vector
+    extends: .test_gpu_noavx_clang
     variables:
       TEST_TARGET: "vector"
 
 #
 # matrix
 #
-matrix_nogpu_avx:
+matrix_nogpu_avx_gcc:
     stage: matrix
-    extends: .test_nogpu_avx
+    extends: .test_nogpu_avx_gcc
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_noavx:
+matrix_nogpu_noavx_gcc:
     stage: matrix
-    extends: .test_nogpu_noavx
+    extends: .test_nogpu_noavx_gcc
     variables:
       TEST_TARGET: "matrix"
-matrix_gpu_avx:
+matrix_nogpu_avx_clang:
     stage: matrix
-    extends: .test_gpu_avx
+    extends: .test_nogpu_avx_clang
     variables:
       TEST_TARGET: "matrix"
-matrix_gpu_noavx:
+matrix_nogpu_noavx_clang:
     stage: matrix
-    extends: .test_gpu_noavx
+    extends: .test_nogpu_noavx_clang
+    variables:
+      TEST_TARGET: "matrix"
+matrix_gpu_avx_clang:
+    stage: matrix
+    extends: .test_gpu_avx_clang
+    variables:
+      TEST_TARGET: "matrix"
+matrix_gpu_noavx_clang:
+    stage: matrix
+    extends: .test_gpu_noavx_clang
     variables:
       TEST_TARGET: "matrix"
 
 #
 # equation
 #
-equation_nogpu_avx:
+equation_nogpu_avx_gcc:
     stage: equation
-    extends: .test_nogpu_avx
+    extends: .test_nogpu_avx_gcc
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_noavx:
+equation_nogpu_noavx_gcc:
     stage: equation
-    extends: .test_nogpu_noavx
+    extends: .test_nogpu_noavx_gcc
     variables:
       TEST_TARGET: "equation"
-equation_gpu_avx:
+equation_nogpu_avx_clang:
     stage: equation
-    extends: .test_gpu_avx
+    extends: .test_nogpu_avx_clang
     variables:
       TEST_TARGET: "equation"
-equation_gpu_noavx:
+equation_nogpu_noavx_clang:
     stage: equation
-    extends: .test_gpu_noavx
+    extends: .test_nogpu_noavx_clang
+    variables:
+      TEST_TARGET: "equation"
+equation_gpu_avx_clang:
+    stage: equation
+    extends: .test_gpu_avx_clang
+    variables:
+      TEST_TARGET: "equation"
+equation_gpu_noavx_clang:
+    stage: equation
+    extends: .test_gpu_noavx_clang
     variables:
       TEST_TARGET: "equation"
 
@@ -192,31 +275,45 @@ equation_gpu_noavx:
         - test/logger/logging
       expire_in: 60min
       when: always
-logger_nogpu_avx:
+logger_nogpu_avx_gcc:
     stage: logger
     extends:
-      - .test_nogpu_avx
+      - .test_nogpu_avx_gcc
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_noavx:
+logger_nogpu_noavx_gcc:
     stage: logger
     extends:
-      - .test_nogpu_noavx
+      - .test_nogpu_noavx_gcc
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_gpu_avx:
+logger_nogpu_avx_clang:
     stage: logger
     extends:
-      - .test_gpu_avx
+      - .test_nogpu_avx_clang
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_gpu_noavx:
+logger_nogpu_noavx_clang:
     stage: logger
     extends:
-      - .test_gpu_noavx
+      - .test_nogpu_noavx_clang
+      - .logger_artifact
+    variables:
+      TEST_TARGET: "logger"
+logger_gpu_avx_clang:
+    stage: logger
+    extends:
+      - .test_gpu_avx_clang
+      - .logger_artifact
+    variables:
+      TEST_TARGET: "logger"
+logger_gpu_noavx_clang:
+    stage: logger
+    extends:
+      - .test_gpu_noavx_clang
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
@@ -224,24 +321,34 @@ logger_gpu_noavx:
 #
 # lang
 #
-lang_nogpu_avx:
+lang_nogpu_avx_gcc:
     stage: lang
-    extends: .test_nogpu_avx
+    extends: .test_nogpu_avx_gcc
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_noavx:
+lang_nogpu_noavx_gcc:
     stage: lang
-    extends: .test_nogpu_noavx
+    extends: .test_nogpu_noavx_gcc
     variables:
       TEST_TARGET: "lang"
-lang_gpu_avx:
+lang_nogpu_avx_clang:
     stage: lang
-    extends: .test_gpu_avx
+    extends: .test_nogpu_avx_clang
     variables:
       TEST_TARGET: "lang"
-lang_gpu_noavx:
+lang_nogpu_noavx_clang:
     stage: lang
-    extends: .test_gpu_noavx
+    extends: .test_nogpu_noavx_clang
+    variables:
+      TEST_TARGET: "lang"
+lang_gpu_avx_clang:
+    stage: lang
+    extends: .test_gpu_avx_clang
+    variables:
+      TEST_TARGET: "lang"
+lang_gpu_noavx_clang:
+    stage: lang
+    extends: .test_gpu_noavx_clang
     variables:
       TEST_TARGET: "lang"
 
@@ -263,7 +370,7 @@ python-cpu:
     extends:
       - .logger_artifact
     needs:
-      - logger_nogpu_avx
+      - logger_nogpu_avx_gcc
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -277,7 +384,7 @@ python-gpu:
     extends:
       - .logger_artifact
     needs:
-      - logger_gpu_avx
+      - logger_gpu_avx_clang
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -291,12 +398,12 @@ python-gpu:
 #
 # benchmark
 #
-benchmark_nogpu_avx:
+benchmark_nogpu_avx_gcc:
     stage: benchmark
     extends:
-      - .nogpu_avx
+      - .nogpu_avx_gcc
     needs:
-      - "build_cmake_nogpu_avx"
+      - "build_cmake_nogpu_avx_gcc"
     artifacts:
         paths:
             - benchmark/
@@ -314,12 +421,12 @@ benchmark_nogpu_avx:
         - schedules
         - tags
 
-benchmark_gpu_avx:
+benchmark_gpu_avx_clang:
     stage: benchmark
     extends:
-      - .gpu_avx
+      - .gpu_avx_clang
     needs:
-      - "build_cmake_gpu_avx"
+      - "build_cmake_gpu_avx_clang"
     artifacts:
         paths:
             - benchmark/

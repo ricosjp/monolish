@@ -1,9 +1,11 @@
-FROM ghcr.io/ricosjp/allgebra/cuda10_2/mkl:20.10.1
+FROM ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
 COPY . /monolish
 
 ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
+ENV CC /usr/local/llvm-11.0.0/bin/clang \
+ENV CXX /usr/local/llvm-11.0.0/bin/clang++ \
 
 # Build and install libmonolish_gpu.so
 RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
