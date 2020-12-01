@@ -4,11 +4,11 @@ LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 COPY . /monolish
 
 ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
+ENV CC /usr/local/llvm-11.0.0/bin/clang \
+ENV CXX /usr/local/llvm-11.0.0/bin/clang++ \
 
 # Build and install libmonolish_gpu.so
-RUN export CC=/usr/local/llvm-11.0.0/bin/clang \
- && export CC=/usr/local/llvm-11.0.0/bin/clang++ \
- && cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
+RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
  && cmake --build build --target install -- -j $(nproc) \
  && rm -rf build
 
