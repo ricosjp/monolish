@@ -30,7 +30,7 @@
   std::cout << MEM << std::endl
 
 // matrix ///
-#define MATRIX_BENCH_ITER 10
+#define MATRIX_BENCH_ITER 100
 
 // order N^2
 #define DENSE_NN_BENCH_MIN 1000
