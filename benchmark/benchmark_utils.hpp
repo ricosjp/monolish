@@ -12,9 +12,9 @@
 
 // vector ///
 #define VECTOR_BENCH_MIN 1000
-#define VECTOR_BENCH_MAX 10000000
-#define VECTOR_BENCH_INCL *= 2
-#define VECTOR_BENCH_ITER 10
+#define VECTOR_BENCH_MAX 100000000
+#define VECTOR_BENCH_INCL *= 10
+#define VECTOR_BENCH_ITER 100
 
 #define VECTOR_BLAS_BENCH_HEADER                                               \
   "func\tkind\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]"
@@ -34,15 +34,15 @@
 
 // order N^2
 #define DENSE_NN_BENCH_MIN 1000
-#define DENSE_NN_BENCH_MAX 5000
-#define DENSE_NN_BENCH_ITER += 1000
+#define DENSE_NN_BENCH_MAX 10000
+#define DENSE_NN_BENCH_ITER += 500
 
-#define CRS_NN_BENCH_MIN 1000
-#define CRS_NN_BENCH_MAX 100000
-#define CRS_NN_BENCH_ITER *= 2
+#define CRS_NN_BENCH_MIN 5000
+#define CRS_NN_BENCH_MAX 1000000
+#define CRS_NN_BENCH_ITER +=5000
 
 #define COO_NN_BENCH_MIN 1000
-#define COO_NN_BENCH_MAX 3000
+#define COO_NN_BENCH_MAX 10000
 #define COO_NN_BENCH_ITER += 500
 
 // order N^3

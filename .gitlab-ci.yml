@@ -417,6 +417,7 @@ benchmark_nogpu_avx_gcc:
       - cpu2.gitlab-runner.savanna.ritc.jp
     only:
         - master
+        - 389-clang11gcc7-benchmark-size
     except:
         - schedules
         - tags
@@ -438,6 +439,7 @@ benchmark_gpu_avx_clang:
       - make run_gpu
     tags:
       - gpu2.gitlab-runner.savanna.ritc.jp
+      - 389-clang11gcc7-benchmark-size
     only:
         - master
     except:
