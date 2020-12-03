@@ -489,6 +489,7 @@ benchmark_result:
         - make commit_result
     only:
         - master
+        - 394-clang11gcc7-benchmark-size
     except:
         - schedules
         - tags
