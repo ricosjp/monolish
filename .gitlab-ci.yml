@@ -92,7 +92,7 @@ stages:
         paths:
             - ${PREFIX}
             - test/
-        expire_in: 60min
+        expire_in: 360min
 build_cmake_gpu_avx_clang:
     extends:
       - .gpu_avx_clang
@@ -273,7 +273,7 @@ equation_gpu_noavx_clang:
     artifacts:
       paths:
         - test/logger/logging
-      expire_in: 60min
+      expire_in: 360min
       when: always
 logger_nogpu_avx_gcc:
     stage: logger
@@ -407,7 +407,7 @@ benchmark_nogpu_avx_gcc:
     artifacts:
         paths:
             - benchmark/
-        expire_in: 20min
+        expire_in: 360min
     script:
       - cd benchmark
       - make get_spec_cpu
@@ -431,7 +431,7 @@ benchmark_gpu_avx_clang:
     artifacts:
         paths:
             - benchmark/
-        expire_in: 20min
+        expire_in: 360min
     script:
       - cd benchmark
       - make get_spec_gpu
@@ -475,7 +475,7 @@ pages:
     artifacts:
         paths:
             - public
-        expire_in: 20min
+        expire_in: 360min
     only:
         - master
 
