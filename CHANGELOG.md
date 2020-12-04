@@ -27,8 +27,8 @@ Unreleased
 - cmakeでclang11+GPUに対応した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/137
 
 ### Changed 
-- CIのartifactの寿命を360分に延長 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/138
-- benchmarkの高速化のために乱数値のベクトルでなく定数ベクトルに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/138
+- CIのartifactの寿命を360分に延長 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/138
+- benchmarkの高速化のために乱数値のベクトルでなく定数ベクトルに変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/138
 - clang11gcc7コンテナに合わせてベンチマークサイズを変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/138
 - monolishコンテナをclangでビルドするようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
 - clangに合わせてtest/lang/fortranのオプションに-fPIEをつけるようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
