@@ -12,9 +12,9 @@
 
 // vector ///
 #define VECTOR_BENCH_MIN 1000
-#define VECTOR_BENCH_MAX 10000000
-#define VECTOR_BENCH_INCL *= 2
-#define VECTOR_BENCH_ITER 10
+#define VECTOR_BENCH_MAX 100000000
+#define VECTOR_BENCH_INCL *= 10
+#define VECTOR_BENCH_ITER 30
 
 #define VECTOR_BLAS_BENCH_HEADER                                               \
   "func\tkind\tprec\tsize\ttime[sec]\tperf[GFLOPS]\tmem[GB/s]"
@@ -30,20 +30,20 @@
   std::cout << MEM << std::endl
 
 // matrix ///
-#define MATRIX_BENCH_ITER 10
+#define MATRIX_BENCH_ITER 30
 
 // order N^2
 #define DENSE_NN_BENCH_MIN 1000
-#define DENSE_NN_BENCH_MAX 5000
+#define DENSE_NN_BENCH_MAX 10000
 #define DENSE_NN_BENCH_ITER += 1000
 
-#define CRS_NN_BENCH_MIN 1000
+#define CRS_NN_BENCH_MIN 10000
 #define CRS_NN_BENCH_MAX 100000
-#define CRS_NN_BENCH_ITER *= 2
+#define CRS_NN_BENCH_ITER += 10000
 
 #define COO_NN_BENCH_MIN 1000
-#define COO_NN_BENCH_MAX 3000
-#define COO_NN_BENCH_ITER += 500
+#define COO_NN_BENCH_MAX 10000
+#define COO_NN_BENCH_ITER += 1000
 
 // order N^3
 #define DENSE_NNN_BENCH_MIN 1000

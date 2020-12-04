@@ -8,7 +8,7 @@ template <typename T> bool benchmark(const size_t size, const size_t iter) {
 
   // create random vector x rand(0.1~1.0)
   T value = 123.0;
-  monolish::vector<T> x(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 1.0);
   monolish::vector<T> ans(size, 321.0);
 
   monolish::util::send(x, ans);

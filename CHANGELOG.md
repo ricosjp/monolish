@@ -21,11 +21,17 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- clang11+GPUに対応した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
+- cmakeでclang11+GPUに対応した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/137
 
 ### Changed 
+- CIのartifactの寿命を360分に延長 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/138
+- benchmarkの高速化のために乱数値のベクトルでなく定数ベクトルに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/138
+- clang11gcc7コンテナに合わせてベンチマークサイズを変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/138
 - monolishコンテナをclangでビルドするようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
 - clangに合わせてtest/lang/fortranのオプションに-fPIEをつけるようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/136
+
+### Removed
+- cmake作成前に一時的に作成したMakefile.clang-gpuを削除 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/138
 
 0.6.2 - 2020/11/17
 -----------

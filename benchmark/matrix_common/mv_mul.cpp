@@ -18,8 +18,8 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
 
   MAT A(seedA); // M*N matrix
 
-  monolish::vector<T> x(A.get_col(), 0.0, 1.0);
-  monolish::vector<T> y(A.get_row(), 0.0, 1.0);
+  monolish::vector<T> x(A.get_col(), 1.0);
+  monolish::vector<T> y(A.get_row(), 1.0);
 
   monolish::util::send(A, x, y);
 
