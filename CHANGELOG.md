@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.7.0 - 2020/12/04
+-----------
 ### Added
 - cmakeでclang11+GPUに対応した https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/137
 
