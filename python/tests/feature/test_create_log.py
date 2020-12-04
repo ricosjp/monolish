@@ -10,6 +10,7 @@ def test_execute_create_log_normaldata():
     data_list = [
         "only_solver",
         "normal_data",
+        "normal_data_order",
         # "only_other",
         "cg_iter"
         ]
