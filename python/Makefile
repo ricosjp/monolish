@@ -14,7 +14,6 @@ pylint: install
 	poetry run pylint monolish_log_viewer
 	poetry run pylint tests/feature/test_create_log.py
 	poetry run pylint tests/feature/test_aggregate.py
-	poetry run pylint tests/feature/test_grouping.py
 	poetry run pylint tests/feature/test_html.py
 	poetry run pylint tests/feature/test_read.py
 

@@ -11,7 +11,7 @@ def test_execute_create_log_normaldata():
         "only_solver",
         "normal_data",
         "normal_data_order",
-        # "only_other",
+        "only_other",
         "cg_iter"
         ]
 

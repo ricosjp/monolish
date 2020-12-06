@@ -1,6 +1,15 @@
 """ Create HTML source """
 import pandas
 
+def df_to_html_table_caption(title:str, dataframe:pandas.DataFrame) -> str:
+    """DataFrame to HTML caption and table"""
+    if not dataframe.empty:
+        table_html = df_to_html_table(dataframe)
+        table_html = to_caption_on_html(title, table_html)
+    else:
+        table_html = ""
+    return table_html
+
 def df_to_html_table(dataframe:pandas.DataFrame) -> str:
     """DataFrame to HTML table"""
     html_table = dataframe.to_html(justify="center")

@@ -63,23 +63,37 @@ class AggregateDataFrame:
 
         # drop useless information
         dataframe = dataframe[aggr_col_list]
+        # print("point 1")
+        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # aggregate continuous values
         dataframe = self.aggregated_continuous_values(dataframe)
         aggr_col_list = aggr_col_list + ["group", "cont_cnt"]
         dataframe = dataframe[aggr_col_list]
+        # print("point 2")
+        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # add column layer
-        dataframe["layer"] = dataframe["name"].apply(lambda name:name.count("/")-1)
+        # TODO:SettingWithCopyWarning
+        dataframe.loc[:, "layer"] = dataframe["name"].apply(lambda name:name.count("/")-1)
+        # print(dataframe)
+        # print(max(dataframe["layer"]))
+        # print("point 3")
+        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # max layer
         global_max_layer = max(dataframe["layer"]) + 1
+        # print("point 4")
+        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # global aggeregate
+        # TODO:SettingWithCopyWarning
         for any_layer in range(global_max_layer):
             for index, row in dataframe.iterrows():
                 row[f"layer_{any_layer}_flg"] = 1 if row["layer"] == any_layer else numpy.nan
                 dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
+        # print("point 5")
+        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # group lable
         base_df = dataframe
@@ -98,22 +112,32 @@ class AggregateDataFrame:
                 base_df["layer"]==any_layer].fillna(method="bfill")
             base_df[base_df["layer"]>=any_layer] = base_df[
                 base_df["layer"]>=any_layer].fillna(method="bfill")
+        # print("point 6")
+        # print(base_df[base_df.name=="solve/"].shape)
 
         # drop "IN"
         base_df = base_df[base_df["stat"] != "IN"]
+        # print("point 7")
+        # print(base_df[base_df.name=="solve/"].shape)
 
         # add column layer
         for any_layer in range(global_max_layer):
             base_df[f"layer_{any_layer}_flg"] = base_df[f"layer_{any_layer}_flg"].fillna(0.0)
         base_df = base_df.fillna("-")
+        # print("point 8")
+        # print(base_df[base_df.name=="solve/"].shape)
 
         # aggregate base
         group_column_list = [f"group_{any_layer}" for any_layer in range(global_max_layer)]
         aggr_df = base_df.groupby(["name", "layer"] + group_column_list).sum()
         aggr_df = aggr_df.reset_index()
+        # print("point 9")
+        # print(aggr_df[aggr_df.name=="solve/"].shape)
 
         # aggregate solve
         solve_df = self.aggregated_solve(aggr_df)
+        # print("point 10")
+        # print(solve_df[solve_df.name=="solve/"].shape)
 
         # sort
         solve_df = self.sort_solve(solve_df)
@@ -128,28 +152,33 @@ class AggregateDataFrame:
             Returns:
                 pandas.DataFrame:sort後のdf
         """
-        base_df = dataframe
-        # where group
-        max_layer = max(base_df["layer"])
-        # layer 0 の最小値を1にする
-        base_df["layer"] = base_df["layer"].apply(lambda layer:int(layer)+1)
+        if not dataframe.empty:
+            base_df = dataframe
+            # where group
+            max_layer = max(base_df["layer"])
+            # layer 0 の最小値を1にする
+            base_df["layer"] = base_df["layer"].apply(lambda layer:int(layer)+1)
 
-        group_list = []
-        for i in range(max_layer+1):
-            group_list.append(f"group_{i}")
-            base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("", 0)
-            base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
-            base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
+            group_list = []
+            for i in range(max_layer+1):
+                group_list.append(f"group_{i}")
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("", 0)
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
 
-            group_cat_list = sorted(list(set(base_df[f"group_{i}"].values)))
-            if i == 0:
-                replace_dict = {value:index+1 for index, value in enumerate(group_cat_list)}
-            else:
-                replace_dict = {value:index for index, value in enumerate(group_cat_list)}
-            base_df[f"group_{i}"] = base_df[f"group_{i}"].map(replace_dict)
+                group_cat_list = sorted(list(set(base_df[f"group_{i}"].values)))
+                if i == 0:
+                    replace_dict = {value:index+1 for index, value in enumerate(group_cat_list)}
+                else:
+                    replace_dict = {value:index for index, value in enumerate(group_cat_list)}
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].map(replace_dict)
 
-        base_df = base_df.sort_values(group_list)
-        base_df = base_df.replace(0, "")
+            base_df = base_df.sort_values(group_list)
+            base_df = base_df.replace(0, "")
+            base_df = base_df.reset_index().drop("index", axis=1)
+
+        else:
+            base_df = pandas.DataFrame()
 
         self.sort_solve_df = base_df
 
@@ -339,36 +368,9 @@ class AggregateDataFrame:
             solve_df = solve_df.reset_index()
             solve_df = solve_df.drop(columns=["index"])
 
-            # group 0 sort
-            solve_df = self.group_0_sort(solve_df)
-
         else:
             solve_df = pandas.DataFrame()
 
         self.solve_aggr_df = solve_df
 
         return self.solve_aggr_df
-
-    def group_0_sort(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
-        """group_0_sort
-            group 0 に置けるsort
-            Args:
-                dataframe(pandas.DataFrame): logger data
-            Returns:
-                pandas.DataFrame:sort結果
-        """
-        group_0_min = min(dataframe["group_0"])
-        group_0_max = max(dataframe["group_0"])
-
-        if group_0_min == group_0_max:
-            group_0_max = group_0_max + 1
-
-        final_sort_solve_df = pandas.DataFrame(columns=dataframe.columns)
-        for index in range(group_0_min, group_0_max):
-            final_sort_solve_df = pandas.concat(
-                [final_sort_solve_df, dataframe[dataframe["group_0"] == index]])
-        solve_df = final_sort_solve_df
-        solve_df = solve_df.reset_index().drop("index", axis=1)
-        self.group_0_sort_df = solve_df
-
-        return self.group_0_sort_df

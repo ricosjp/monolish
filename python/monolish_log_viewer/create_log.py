@@ -1,6 +1,6 @@
 """Create log program."""
 
-from . import debug, html, read, aggregate, grouping
+from . import debug, html, read, aggregate
 
 def execute_create_log(log_path, out_path):
     """executive function"""
@@ -14,21 +14,13 @@ def execute_create_log(log_path, out_path):
     layer_1_aggr_df = aggregate_dataframe.layer_1_aggregated(yaml_dict_list)
     debug.log_success("layer_1_aggregated")
 
-    # split block
-    # split_dict_list = grouping.split_1st_layer(yaml_dict_list)
-
     # aggregate
-    split_dict_list = yaml_dict_list
-    solve_df = aggregate_dataframe.aggregated(split_dict_list)
+    solve_df = aggregate_dataframe.aggregated(yaml_dict_list)
     debug.log_success("aggregated")
 
     # create html
-    layer_1_aggr_table_html = html.df_to_html_table(layer_1_aggr_df)
-    layer_1_aggr_table_html = html.to_caption_on_html("layer1", layer_1_aggr_table_html)
-
-    solve_table_html = html.df_to_html_table(solve_df)
-    solve_table_html = html.to_caption_on_html("solver", solve_table_html)
-
+    layer_1_aggr_table_html = html.df_to_html_table_caption("layer1", layer_1_aggr_df)
+    solve_table_html = html.df_to_html_table_caption("solver", solve_df)
     all_table_html = layer_1_aggr_table_html + solve_table_html
 
     # decoration
