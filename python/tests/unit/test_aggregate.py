@@ -19,7 +19,8 @@ def test_layer_1_aggregated():
         ]
 
     for file_name in data_list:
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + f"/../test_data/{file_name}.yml")
+        data_path = f"/../test_data/{file_name}.yml"
+        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
         # read test data
         with open(data_dir, "r") as file:
             dict_list = read.reader(file, "yaml")
@@ -46,7 +47,9 @@ def test_all_block_solver():
         ]
 
     for file_name in data_list:
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + f"/../test_data/{file_name}.yml")
+        data_path = f"/../test_data/{file_name}.yml"
+        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
+
 
         # read test data
         with open(data_dir, "r") as file:
@@ -74,7 +77,9 @@ def test_aggregated_continuous_values():
         ]
 
     for file_name in data_list:
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + f"/../test_data/{file_name}.yml")
+        data_path = f"/../test_data/{file_name}.yml"
+        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
+
 
         # read test data
         with open(data_dir, "r") as file:
@@ -101,31 +106,35 @@ def test_aggregated():
         ]
 
     for file_name in data_list:
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + f"/../test_data/{file_name}.yml")
+        data_path = f"/../test_data/{file_name}.yml"
+        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
+
         with open(data_dir, "r") as file:
             dict_list = read.reader(file, "yaml")
 
         # test data
         dataframe = pandas.DataFrame(dict_list)
         max_group_num = max(dataframe["name"].apply(lambda name:name.count("/")))
-        check_columns = ["name", "layer"]
-        check_columns = check_columns + [f"group_{i}" for i in range(max_group_num)]
-        check_columns = check_columns + ["time", "cont_cnt"]
-        check_columns = check_columns + [f"breakdown_{i} layer{i+1}/layer{i}[%]" for i in range(max_group_num-1)]
-        check_columns = check_columns + [f"breakdown_{i}[%] / count" for i in range(max_group_num-1)]
+        check_cols = ["name", "layer"]
+        check_cols = check_cols + [f"group_{i}" for i in range(max_group_num)]
+        check_cols = check_cols + ["time", "cont_cnt"]
+        loop_range = range(max_group_num-1)
+        check_cols = check_cols + [f"breakdown_{i} layer{i+1}/layer{i}[%]" for i in loop_range]
+        check_cols = check_cols + [f"breakdown_{i}[%] / count" for i in loop_range]
 
         # test method
         aggregate_dataframe = aggregate.AggregateDataFrame()
         solve_df = aggregate_dataframe.aggregated(dict_list)
 
         # colum check
-        assert list(solve_df.columns) == check_columns
+        assert list(solve_df.columns) == check_cols
 
 def test_aggregated_column_sum():
     """test_aggregated_column_sum
         誤差がないデータで合計を確認する
     """
-    data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../test_data/no_error.yml")
+    data_path = "/../test_data/no_error.yml"
+    data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
 
     # read test data
     with open(data_dir, "r") as file:
@@ -136,5 +145,7 @@ def test_aggregated_column_sum():
     solve_df = aggregate_dataframe.aggregated(dict_list)
 
     for i in range(1, max(solve_df["layer"])):
-        error_val = sum(solve_df[solve_df["layer"] == i]["time"]) - sum(solve_df[solve_df["layer"] == i+1]["time"])
+        left_side = sum(solve_df[solve_df["layer"] == i]["time"])
+        right_side = sum(solve_df[solve_df["layer"] == i+1]["time"])
+        error_val = left_side - right_side
         assert abs(error_val) < 0.000000001
