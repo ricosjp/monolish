@@ -21,9 +21,12 @@ int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<double> &A,
 
   cusparseMatDescr_t descrA;
   internal::check_CUDA(cusparseCreateMatDescr(&descrA));
-  internal::check_CUDA(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
-  internal::check_CUDA(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
-  internal::check_CUDA(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
+  internal::check_CUDA(
+      cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
+  internal::check_CUDA(
+      cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
+  internal::check_CUDA(
+      cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
 
   int n = A.get_row();
   int nnz = A.get_nnz();
@@ -37,8 +40,9 @@ int equation::Cholesky<double>::cusolver_Cholesky(matrix::CRS<double> &A,
 
 #pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
-    internal::check_CUDA(cusolverSpDcsrlsvchol(sp_handle, n, nnz, descrA, Dval, Dptr, Dind,
-                                Drhv, tol, reorder, Dsol, &singularity));
+    internal::check_CUDA(cusolverSpDcsrlsvchol(sp_handle, n, nnz, descrA, Dval,
+                                               Dptr, Dind, Drhv, tol, reorder,
+                                               Dsol, &singularity));
   }
 #else
   (void)(&A);
@@ -63,9 +67,12 @@ int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A,
 
   cusparseMatDescr_t descrA;
   internal::check_CUDA(cusparseCreateMatDescr(&descrA));
-  internal::check_CUDA(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
-  internal::check_CUDA(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
-  internal::check_CUDA(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
+  internal::check_CUDA(
+      cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
+  internal::check_CUDA(
+      cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
+  internal::check_CUDA(
+      cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
 
   int n = A.get_row();
   int nnz = A.get_nnz();
@@ -79,8 +86,9 @@ int equation::Cholesky<float>::cusolver_Cholesky(matrix::CRS<float> &A,
 
 #pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
-    internal::check_CUDA(cusolverSpScsrlsvchol(sp_handle, n, nnz, descrA, Dval, Dptr, Dind,
-                                Drhv, tol, reorder, Dsol, &singularity));
+    internal::check_CUDA(cusolverSpScsrlsvchol(sp_handle, n, nnz, descrA, Dval,
+                                               Dptr, Dind, Drhv, tol, reorder,
+                                               Dsol, &singularity));
   }
 #else
   (void)(&A);

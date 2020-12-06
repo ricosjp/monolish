@@ -38,8 +38,8 @@ void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
 #pragma omp target data use_device_ptr(xd, yd, vald)
     {
       // cublas is col major
-      internal::check_CUDA(cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n, xd, 1, &beta, yd,
-                        1));
+      internal::check_CUDA(cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n,
+                                       xd, 1, &beta, yd, 1));
     }
     cublasDestroy(h);
 #else
@@ -88,8 +88,8 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
 #pragma omp target data use_device_ptr(xd, yd, vald)
     {
       // cublas is col major
-      internal::check_CUDA(cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m, xd, 1, &beta, yd,
-                        1));
+      internal::check_CUDA(cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m,
+                                       xd, 1, &beta, yd, 1));
     }
     cublasDestroy(h);
 #else

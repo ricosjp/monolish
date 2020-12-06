@@ -46,8 +46,9 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
-                           rowd, cold, xd, &beta, yd));
+      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd, &beta,
+                                          yd));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
@@ -110,8 +111,9 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
-                           rowd, cold, xd, &beta, yd));
+      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd, &beta,
+                                          yd));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
