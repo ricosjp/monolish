@@ -20,6 +20,13 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- src/internalに配列に対する基本演算のコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
+- make testでmake test-cpuとmake-gpuを両方実行するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
+
+### Changed 
+- ドキュメントの呼び出し関数と呼び出しライブラリ一覧を修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
+- src/monolish_internal.hppをsrc/internal/monolish_internal.hppに移動 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
 
 0.7.0 - 2020/12/04
 -----------

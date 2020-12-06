@@ -1,8 +1,5 @@
-#include <iostream>
-#include <typeinfo>
-
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 

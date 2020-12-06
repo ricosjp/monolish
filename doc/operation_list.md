@@ -37,14 +37,23 @@
 
 # Vector Operations
 
-## Arithmetics (vector)
+## Arithmetics (scalar-vector)
+
+| func  | Intel         | NVIDIA           | OSS       |
+|-------|---------------|------------------|-----------|
+| add   | monolish      | monolish         | monolish  |
+| sub   | monolish      | monolish         | monolish  |
+| mul   | MKL           | cublas           | CBLAS互換 |
+| div   | monolish      | monolish         | monolish  |
+
+## Arithmetics (vector-vector)
 
 | func  | Intel         | NVIDIA           | OSS      |
 |-------|---------------|------------------|----------|
 | add   | monolish->MKL | monolish         | monolish |
 | sub   | monolish->MKL | monolish         | monolish |
 | mul   | monolish->MKL | monolish         | monolish |
-| div   | monolish->MKL | monolish         | monolish |
+| div   | monolish      | monolish         | monolish |
 | equal | monolish      | monolish         | monolish |
 | copy  | monolish->MKL | monolish->cuBLAS | CBLAS互換 |
 

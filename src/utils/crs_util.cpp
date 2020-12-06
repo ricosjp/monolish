@@ -1,10 +1,11 @@
 #include "../../include/common/monolish_logger.hpp"
 #include "../../include/common/monolish_matrix.hpp"
 #include "../../include/common/monolish_vector.hpp"
+#include "../internal/monolish_internal.hpp"
+
 #include <cassert>
 #include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <limits>
 #include <sstream>
 

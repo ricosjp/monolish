@@ -1,9 +1,9 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_equation.hpp"
-#include "../monolish_internal.hpp"
+#include "../internal/monolish_internal.hpp"
+
 #include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <string>
 
 namespace monolish {
