@@ -63,28 +63,18 @@ class AggregateDataFrame:
 
         # drop useless information
         dataframe = dataframe[aggr_col_list]
-        # print("point 1")
-        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # aggregate continuous values
         dataframe = self.aggregated_continuous_values(dataframe)
         aggr_col_list = aggr_col_list + ["group", "cont_cnt"]
         dataframe = dataframe[aggr_col_list]
-        # print("point 2")
-        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # add column layer
         # TODO:SettingWithCopyWarning
         dataframe.loc[:, "layer"] = dataframe["name"].apply(lambda name:name.count("/")-1)
-        # print(dataframe)
-        # print(max(dataframe["layer"]))
-        # print("point 3")
-        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # max layer
         global_max_layer = max(dataframe["layer"]) + 1
-        # print("point 4")
-        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # global aggeregate
         # TODO:SettingWithCopyWarning
@@ -92,8 +82,6 @@ class AggregateDataFrame:
             for index, row in dataframe.iterrows():
                 row[f"layer_{any_layer}_flg"] = 1 if row["layer"] == any_layer else numpy.nan
                 dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
-        # print("point 5")
-        # print(dataframe[dataframe.name=="solve/"].shape)
 
         # group lable
         base_df = dataframe
@@ -112,32 +100,22 @@ class AggregateDataFrame:
                 base_df["layer"]==any_layer].fillna(method="bfill")
             base_df[base_df["layer"]>=any_layer] = base_df[
                 base_df["layer"]>=any_layer].fillna(method="bfill")
-        # print("point 6")
-        # print(base_df[base_df.name=="solve/"].shape)
 
         # drop "IN"
         base_df = base_df[base_df["stat"] != "IN"]
-        # print("point 7")
-        # print(base_df[base_df.name=="solve/"].shape)
 
         # add column layer
         for any_layer in range(global_max_layer):
             base_df[f"layer_{any_layer}_flg"] = base_df[f"layer_{any_layer}_flg"].fillna(0.0)
         base_df = base_df.fillna("-")
-        # print("point 8")
-        # print(base_df[base_df.name=="solve/"].shape)
 
         # aggregate base
         group_column_list = [f"group_{any_layer}" for any_layer in range(global_max_layer)]
         aggr_df = base_df.groupby(["name", "layer"] + group_column_list).sum()
         aggr_df = aggr_df.reset_index()
-        # print("point 9")
-        # print(aggr_df[aggr_df.name=="solve/"].shape)
 
         # aggregate solve
         solve_df = self.aggregated_solve(aggr_df)
-        # print("point 10")
-        # print(solve_df[solve_df.name=="solve/"].shape)
 
         # sort
         solve_df = self.sort_solve(solve_df)
