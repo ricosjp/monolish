@@ -62,6 +62,10 @@ test-gpu: install-gpu
 	$(MAKE) -C test gpu
 	$(MAKE) -C test run_gpu
 
+test:
+	test-cpu
+	test-gpu
+
 clean:
 	rm -rf build*/
 	$(MAKE) -f Makefile.fx clean
