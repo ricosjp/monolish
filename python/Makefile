@@ -11,7 +11,7 @@ install:
 	poetry install
 
 pylint: install
-	# poetry run pylint monolish_log_viewer
+	poetry run pylint monolish_log_viewer
 	poetry run pylint tests/feature/test_create_log.py
 	poetry run pylint tests/unit/test_aggregate.py
 	poetry run pylint tests/unit/test_html.py

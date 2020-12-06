@@ -70,14 +70,14 @@ class AggregateDataFrame:
         dataframe = dataframe[aggr_col_list]
 
         # add column layer
-        # TODO:SettingWithCopyWarning
-        dataframe.loc[:, "layer"] = dataframe["name"].apply(lambda name:name.count("/")-1)
+        layer_df = dataframe.copy()
+        layer_df.loc[:, "layer"] = layer_df['name'].str.count("/") - 1
+        dataframe = layer_df
 
         # max layer
         global_max_layer = max(dataframe["layer"]) + 1
 
         # global aggeregate
-        # TODO:SettingWithCopyWarning
         for any_layer in range(global_max_layer):
             for index, row in dataframe.iterrows():
                 row[f"layer_{any_layer}_flg"] = 1 if row["layer"] == any_layer else numpy.nan
