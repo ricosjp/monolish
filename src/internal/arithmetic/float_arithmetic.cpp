@@ -14,8 +14,109 @@
 
 namespace monolish {
   namespace internal {
+///////////////////////
+//   scalar-vector   //
+///////////////////////
+    // y[i] = a[i] + alpha
+    void vadd(const size_t N, const float* a, const float alpha, float* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
 
-    // y = a + b
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] + alpha;
+        }
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+#pragma omp parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] + alpha;
+        }
+      }
+      logger.func_out();
+    }
+
+    // y[i] = a[i] - alpha
+    void vsub(const size_t N, const float* a, const float alpha, float* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
+
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] - alpha;
+        }
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+#pragma omp parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] - alpha;
+        }
+      }
+      logger.func_out();
+    }
+
+    // y[i] = a[i] * alpha
+    void vmul(const size_t N, const float* a, const float alpha, float* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
+
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] * alpha;
+        }
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+#pragma omp parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] * alpha;
+        }
+      }
+      logger.func_out();
+    }
+
+    // y[i] = a[i] / alpha
+    void vsiv(const size_t N, const float* a, const float alpha, float* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
+
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] / alpha;
+        }
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+#pragma omp parallel for
+        for (size_t i = 0; i < N; i++) {
+          y[i] = a[i] / alpha;
+        }
+      }
+      logger.func_out();
+    }
+
+///////////////////////
+//   vector-vector   //
+///////////////////////
+    // y[i] = a[i] + b[i]
     void vadd(const size_t N, const float* a, const float* b, float* y, bool gpu_status) {
       Logger &logger = Logger::get_instance();
       logger.func_in(monolish_func);
@@ -43,7 +144,7 @@ namespace monolish {
       logger.func_out();
     }
 
-    // y = a - b
+    // y[i] = a[i] - b[i]
     void vsub(const size_t N, const float* a, const float* b, float* y, bool gpu_status) {
       Logger &logger = Logger::get_instance();
       logger.func_in(monolish_func);
@@ -71,7 +172,7 @@ namespace monolish {
       logger.func_out();
     }
 
-    // y = a * b
+    // y[i] = a[i] * b[i]
     void vmul(const size_t N, const float* a, const float* b, float* y, bool gpu_status) {
       Logger &logger = Logger::get_instance();
       logger.func_in(monolish_func);
@@ -99,7 +200,7 @@ namespace monolish {
       logger.func_out();
     }
 
-    // y = a / b
+    // y[i] = a[i] / b[i]
     void vsiv(const size_t N, const float* a, const float* b, float* y, bool gpu_status) {
       Logger &logger = Logger::get_instance();
       logger.func_in(monolish_func);
