@@ -72,19 +72,16 @@ namespace monolish {
 
       if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-        for (size_t i = 0; i < N; i++) {
-          y[i] = a[i] * alpha;
-        }
+        cublasHandle_t h;
+        internal::check_CUDA(cublasCreate(&h));
+#pragma omp target data use_device_ptr(y)
+        { internal::check_CUDA(cublasDscal(h, N, &alpha, y, 1)); }
 #else
         throw std::runtime_error(
             "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
       } else {
-#pragma omp parallel for
-        for (size_t i = 0; i < N; i++) {
-          y[i] = a[i] * alpha;
-        }
+        cblas_dscal(N, alpha, y, 1);
       }
       logger.func_out();
     }
@@ -222,6 +219,63 @@ namespace monolish {
         }
       }
       logger.func_out();
+    }
+
+///////////////////////
+//   vector utils    //
+///////////////////////
+
+// y[i] = a[i] 
+    void vcopy(const size_t N, const double* a, double* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
+
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+        cublasHandle_t h;
+        internal::check_CUDA(cublasCreate(&h));
+#pragma omp target data use_device_ptr(a, y)
+        { internal::check_CUDA(cublasDcopy(h, N, a, 1, y, 1)); }
+        cublasDestroy(h);
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+        cblas_dcopy(N, a, 1, y, 1);
+      }
+      logger.func_out();
+    }
+
+// y[i] == a[i] 
+    bool vequal(const size_t N, const double* a, double* y, bool gpu_status) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
+
+      bool ans = true;
+
+      if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+        for (size_t i = 0; i < N; i++) {
+          if(y[i] != a[i]){
+            ans = false;
+          }
+        }
+#else
+        throw std::runtime_error(
+            "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+      } else {
+#pragma omp parallel for
+        for (size_t i = 0; i < N; i++) {
+          if(y[i] != a[i]){
+            ans = false;
+          }
+        }
+      }
+      logger.func_out();
+      return ans;
     }
 
   }
