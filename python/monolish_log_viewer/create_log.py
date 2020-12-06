@@ -9,15 +9,16 @@ def execute_create_log(log_path, out_path):
         yaml_dict_list = read.reader(file, "yaml")
     debug.log_success(f"read {format(log_path)}")
 
-    # layer 1
+    # aggregate layer 1
     aggregate_dataframe = aggregate.AggregateDataFrame()
     layer_1_aggr_df = aggregate_dataframe.layer_1_aggregated(yaml_dict_list)
     debug.log_success("layer_1_aggregated")
 
     # split block
-    split_dict_list = grouping.split_1st_layer(yaml_dict_list)
+    # split_dict_list = grouping.split_1st_layer(yaml_dict_list)
 
     # aggregate
+    split_dict_list = yaml_dict_list
     solve_df = aggregate_dataframe.aggregated(split_dict_list)
     debug.log_success("aggregated")
 

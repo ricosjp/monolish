@@ -8,13 +8,13 @@ class AggregateDataFrame:
         pandas.DataFrameを用いた集約処理
     """
     def __init__(self) -> None:
-        self.layer1_aggr_df = pandas.DataFrame()
-        self.solve_df = pandas.DataFrame()
-        self.aggregate_df = pandas.DataFrame()
-        self.group_df = pandas.DataFrame()
-        self.solve_aggr_df = pandas.DataFrame()
+        self.layer1_aggr_df  = pandas.DataFrame()
+        self.solve_df        = pandas.DataFrame()
+        self.aggregate_df    = pandas.DataFrame()
+        self.group_df        = pandas.DataFrame()
+        self.solve_aggr_df   = pandas.DataFrame()
         self.group_0_sort_df = pandas.DataFrame()
-        self.sort_solve_df = pandas.DataFrame()
+        self.sort_solve_df   = pandas.DataFrame()
 
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
         """layer_1_aggregated
@@ -140,6 +140,16 @@ class AggregateDataFrame:
             base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("", 0)
             base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
             base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
+
+            lis = sorted(list(set(base_df[f"group_{i}"].values)))
+            if i == 0:
+                dic = {value:index+1 for index, value in enumerate(lis)}
+                print(dic)
+            else:
+                dic = {value:index for index, value in enumerate(lis)}
+                print(dic)
+
+            base_df[f"group_{i}"] = base_df[f"group_{i}"].map(dic)
 
         base_df = base_df.sort_values(group_list)
         base_df = base_df.replace(0, "")
