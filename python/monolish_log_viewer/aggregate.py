@@ -141,15 +141,12 @@ class AggregateDataFrame:
             base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
             base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
 
-            lis = sorted(list(set(base_df[f"group_{i}"].values)))
+            group_cat_list = sorted(list(set(base_df[f"group_{i}"].values)))
             if i == 0:
-                dic = {value:index+1 for index, value in enumerate(lis)}
-                print(dic)
+                replace_dict = {value:index+1 for index, value in enumerate(group_cat_list)}
             else:
-                dic = {value:index for index, value in enumerate(lis)}
-                print(dic)
-
-            base_df[f"group_{i}"] = base_df[f"group_{i}"].map(dic)
+                replace_dict = {value:index for index, value in enumerate(group_cat_list)}
+            base_df[f"group_{i}"] = base_df[f"group_{i}"].map(replace_dict)
 
         base_df = base_df.sort_values(group_list)
         base_df = base_df.replace(0, "")
