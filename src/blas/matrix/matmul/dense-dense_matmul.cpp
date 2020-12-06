@@ -1,10 +1,5 @@
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
-#include <cblas.h>
-
-#ifdef MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#endif
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -55,11 +50,11 @@ void blas::matmul(const matrix::Dense<double> &A,
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(Ad, Bd, Cd)
     {
       // cublas is col major
-      check(cublasDgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
+      internal::check_CUDA(cublasDgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
                         k, &beta, Cd, n));
     }
     cublasDestroy(h);
@@ -120,11 +115,11 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(Ad, Bd, Cd)
     {
       // cublas is col major
-      check(cublasSgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
+      internal::check_CUDA(cublasSgemm(h, CUBLAS_OP_N, CUBLAS_OP_N, n, m, k, &alpha, Bd, n, Ad,
                         k, &beta, Cd, n));
     }
     cublasDestroy(h);

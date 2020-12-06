@@ -1,10 +1,26 @@
 #include <iostream>
+#include <typeinfo>
 #include <omp.h>
+
+#ifdef MONOLISH_USE_MKL
+#include <mkl.h>
+#else
+#include <cblas.h>
+#endif
 
 #ifdef MONOLISH_USE_GPU
 #include <cuda_runtime.h>
+#include <cublas_v2.h>
+#include "cusparse.h"
 #endif
-// internal math
+
+#ifdef MONOLISH_USE_AVX
+#include <immintrin.h>
+#define SIMD_FUNC(NAME) _mm256_##NAME
+using Sreg = __m256;
+using Dreg = __m256d;
+#endif
+
 namespace monolish {
   namespace internal {
 
@@ -18,7 +34,7 @@ namespace monolish {
         exit(EXIT_FAILURE);
       }
     };
-#define check(val) checkError((val), #val, __FILE__, __LINE__)
+#define check_CUDA(val) checkError((val), #val, __FILE__, __LINE__)
 #endif
 
     void vadd(const size_t N, const double* a, const double* b, double* y, bool gpu_status);

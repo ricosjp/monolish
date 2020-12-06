@@ -1,12 +1,5 @@
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
-
-#ifdef MONOLISH_USE_AVX
-#include <immintrin.h>
-#define SIMD_FUNC(NAME) _mm256_##NAME
-using Sreg = __m256;
-using Dreg = __m256d;
-#endif
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 

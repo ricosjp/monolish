@@ -1,11 +1,9 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../../include/monolish_equation.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 #ifdef MONOLISH_USE_GPU
-#include "cuda_runtime.h"
 #include "cusolverSp.h"
-#include "cusparse.h"
 #endif
 
 namespace monolish {
@@ -21,10 +19,10 @@ int equation::QR<double>::cusolver_QR(matrix::CRS<double> &A, vector<double> &x,
   cusolverSpCreate(&sp_handle);
 
   cusparseMatDescr_t descrA;
-  check(cusparseCreateMatDescr(&descrA));
-  check(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
-  check(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
-  check(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
+  internal::check_CUDA(cusparseCreateMatDescr(&descrA));
+  internal::check_CUDA(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
+  internal::check_CUDA(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
+  internal::check_CUDA(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
 
   int n = A.get_row();
   int nnz = A.get_nnz();
@@ -38,7 +36,7 @@ int equation::QR<double>::cusolver_QR(matrix::CRS<double> &A, vector<double> &x,
 
 #pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
-    check(cusolverSpDcsrlsvqr(sp_handle, n, nnz, descrA, Dval, Dptr, Dind, Drhv,
+    internal::check_CUDA(cusolverSpDcsrlsvqr(sp_handle, n, nnz, descrA, Dval, Dptr, Dind, Drhv,
                               tol, reorder, Dsol, &singularity));
   }
 #else
@@ -62,10 +60,10 @@ int equation::QR<float>::cusolver_QR(matrix::CRS<float> &A, vector<float> &x,
   cusolverSpCreate(&sp_handle);
 
   cusparseMatDescr_t descrA;
-  check(cusparseCreateMatDescr(&descrA));
-  check(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
-  check(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
-  check(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
+  internal::check_CUDA(cusparseCreateMatDescr(&descrA));
+  internal::check_CUDA(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
+  internal::check_CUDA(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
+  internal::check_CUDA(cusparseSetMatDiagType(descrA, CUSPARSE_DIAG_TYPE_NON_UNIT));
 
   int n = A.get_row();
   int nnz = A.get_nnz();
@@ -79,7 +77,7 @@ int equation::QR<float>::cusolver_QR(matrix::CRS<float> &A, vector<float> &x,
 
 #pragma omp target data use_device_ptr(Dval, Dptr, Dind, Drhv, Dsol)
   {
-    check(cusolverSpScsrlsvqr(sp_handle, n, nnz, descrA, Dval, Dptr, Dind, Drhv,
+    internal::check_CUDA(cusolverSpScsrlsvqr(sp_handle, n, nnz, descrA, Dval, Dptr, Dind, Drhv,
                               tol, reorder, Dsol, &singularity));
   }
 #else

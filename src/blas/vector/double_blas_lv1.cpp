@@ -1,10 +1,5 @@
 #include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
-#include <cblas.h>
-
-#ifdef MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#endif
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 // asum ///////////////////
@@ -19,9 +14,9 @@ double blas::asum(const vector<double> &x) {
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { check(cublasDasum(h, size, xd, 1, &ans)); }
+    { internal::check_CUDA(cublasDasum(h, size, xd, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -56,9 +51,9 @@ void blas::axpy(const double alpha, const vector<double> &x,
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    { check(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1)); }
+    { internal::check_CUDA(cublasDaxpy(h, size, &alpha, xd, 1, yd, 1)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -91,9 +86,9 @@ double blas::dot(const vector<double> &x, const vector<double> &y) {
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    { check(cublasDdot(h, size, xd, 1, yd, 1, &ans)); }
+    { internal::check_CUDA(cublasDdot(h, size, xd, 1, yd, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -121,9 +116,9 @@ double blas::nrm2(const vector<double> &x) {
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { check(cublasDnrm2(h, size, xd, 1, &ans)); }
+    { internal::check_CUDA(cublasDnrm2(h, size, xd, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -148,9 +143,9 @@ void blas::scal(const double alpha, vector<double> &x) {
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
-    check(cublasCreate(&h));
+    internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { check(cublasDscal(h, size, &alpha, xd, 1)); }
+    { internal::check_CUDA(cublasDscal(h, size, &alpha, xd, 1)); }
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");

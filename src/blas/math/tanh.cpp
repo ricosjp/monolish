@@ -1,16 +1,5 @@
 #include "../../../include/monolish_blas.hpp"
-#include "../../monolish_internal.hpp"
-
-#ifdef MONOLISH_MONOLISH_USE_GPU
-#include <cublas_v2.h>
-#include <cuda_runtime_api.h>
-#endif
-
-#ifdef MONOLISH_USE_MKL
-#include <mkl.h>
-#else
-#include <cblas.h>
-#endif
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 

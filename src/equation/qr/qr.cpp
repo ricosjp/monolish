@@ -1,5 +1,5 @@
 #include "../../../include/monolish_equation.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 template <typename T>

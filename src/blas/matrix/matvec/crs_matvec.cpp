@@ -1,13 +1,5 @@
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
-
-#include <iostream>
-#include <typeinfo>
-
-#ifdef MONOLISH_USE_GPU
-#include "cuda_runtime.h"
-#include "cusparse.h"
-#endif
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -54,7 +46,7 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      check(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
+      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
                            rowd, cold, xd, &beta, yd));
     }
 #else
@@ -118,7 +110,7 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      check(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
+      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
                            rowd, cold, xd, &beta, yd));
     }
 #else
