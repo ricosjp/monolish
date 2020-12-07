@@ -99,14 +99,25 @@ template <typename T> bool vector<T>::operator==(const vector<T> &vec) {
   if (get_device_mem_stat()) {
     throw std::runtime_error("Error, GPU vector cant use operator==");
   }
-  if (val.size() != vec.size())
+
+  if (val.size() != vec.size()){
     return false;
-  for (size_t i = 0; i < vec.size(); i++) {
-    if (val[i] != vec.val[i])
-      return false;
   }
+
+  if(get_device_mem_stat()!=vec.get_device_mem_stat()){
+    return false;
+  }
+
+  if(get_device_mem_stat()==true){
+    bool ret = internal::vequal(val.size(), val.data(), vec.data(), true);
+    if(ret == false){
+      return false;
+    }
+  }
+    bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
+
   logger.util_out();
-  return true;
+  return ret;
 }
 template bool vector<double>::operator==(const vector<double> &vec);
 template bool vector<float>::operator==(const vector<float> &vec);
@@ -115,16 +126,27 @@ template <typename T> bool vector<T>::operator!=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU vector cant use operator!=");
+    throw std::runtime_error("Error, GPU vector cant use operator==");
   }
-  if (val.size() != vec.size())
+
+  if (val.size() != vec.size()){
     return true;
-  for (size_t i = 0; i < vec.size(); i++) {
-    if (val[i] != vec.val[i])
-      return true;
   }
+
+  if(get_device_mem_stat()!=vec.get_device_mem_stat()){
+    return true;
+  }
+
+  if(get_device_mem_stat()==true){
+    bool ret = internal::vequal(val.size(), val.data(), vec.data(), true);
+    if(ret == false){
+      return true;
+    }
+  }
+    bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
+
   logger.util_out();
-  return false;
+  return !ret;
 }
 template bool vector<double>::operator!=(const vector<double> &vec);
 template bool vector<float>::operator!=(const vector<float> &vec);

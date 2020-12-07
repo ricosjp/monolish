@@ -259,7 +259,7 @@ void vcopy(const size_t N, const double *a, double *y, bool gpu_status) {
 }
 
 // y[i] == a[i]
-bool vequal(const size_t N, const double *a, double *y, bool gpu_status) {
+bool vequal(const size_t N, const double *a, const double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
