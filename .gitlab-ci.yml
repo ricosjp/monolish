@@ -1,4 +1,7 @@
-image: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
+variables:
+  REGISTRY: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
+
+image: ${REGISTRY}
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
