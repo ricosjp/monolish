@@ -100,21 +100,21 @@ template <typename T> bool vector<T>::operator==(const vector<T> &vec) {
     throw std::runtime_error("Error, GPU vector cant use operator==");
   }
 
-  if (val.size() != vec.size()){
+  if (val.size() != vec.size()) {
     return false;
   }
 
-  if(get_device_mem_stat()!=vec.get_device_mem_stat()){
+  if (get_device_mem_stat() != vec.get_device_mem_stat()) {
     return false;
   }
 
-  if(get_device_mem_stat()==true){
+  if (get_device_mem_stat() == true) {
     bool ret = internal::vequal(val.size(), val.data(), vec.data(), true);
-    if(ret == false){
+    if (ret == false) {
       return false;
     }
   }
-    bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
+  bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
 
   logger.util_out();
   return ret;
@@ -129,21 +129,21 @@ template <typename T> bool vector<T>::operator!=(const vector<T> &vec) {
     throw std::runtime_error("Error, GPU vector cant use operator==");
   }
 
-  if (val.size() != vec.size()){
+  if (val.size() != vec.size()) {
     return true;
   }
 
-  if(get_device_mem_stat()!=vec.get_device_mem_stat()){
+  if (get_device_mem_stat() != vec.get_device_mem_stat()) {
     return true;
   }
 
-  if(get_device_mem_stat()==true){
+  if (get_device_mem_stat() == true) {
     bool ret = internal::vequal(val.size(), val.data(), vec.data(), true);
-    if(ret == false){
+    if (ret == false) {
       return true;
     }
   }
-    bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
+  bool ret = internal::vequal(val.size(), val.data(), vec.data(), false);
 
   logger.util_out();
   return !ret;
