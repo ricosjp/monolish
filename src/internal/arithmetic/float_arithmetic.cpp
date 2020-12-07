@@ -90,7 +90,7 @@ void vmul(const size_t N, const float *a, const float alpha, float *y,
 }
 
 // y[i] = a[i] / alpha
-void vsiv(const size_t N, const float *a, const float alpha, float *y,
+void vdiv(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -205,7 +205,7 @@ void vmul(const size_t N, const float *a, const float *b, float *y,
 }
 
 // y[i] = a[i] / b[i]
-void vsiv(const size_t N, const float *a, const float *b, float *y,
+void vdiv(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
