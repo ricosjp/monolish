@@ -75,16 +75,19 @@ void vmul(const size_t N, const double *a, const double alpha, double *y,
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-    cublasHandle_t h;
-    internal::check_CUDA(cublasCreate(&h));
-#pragma omp target data use_device_ptr(y)
-    { internal::check_CUDA(cublasDscal(h, N, &alpha, y, 1)); }
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = a[i] * alpha;
+    }
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    cblas_dscal(N, alpha, y, 1);
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = a[i] * alpha;
+    }
   }
   logger.func_out();
 }
