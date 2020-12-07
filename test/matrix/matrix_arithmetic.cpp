@@ -1,7 +1,7 @@
 #include "arithmetic/mm_add.hpp"
+#include "arithmetic/mm_copy.hpp"
 #include "arithmetic/mm_mul.hpp"
 #include "arithmetic/mv_mul.hpp"
-#include "arithmetic/mm_copy.hpp"
 
 int main(int argc, char **argv) {
 
@@ -155,44 +155,43 @@ int main(int argc, char **argv) {
 
   // mm_copy Dense//
   if (test_send_mm_copy<monolish::matrix::Dense<double>,
-                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
-      false) {
+                        monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-8) == false) {
     return 1;
   }
   if (test_send_mm_copy<monolish::matrix::Dense<float>,
-                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+                        monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
   if (test_mm_copy<monolish::matrix::Dense<double>,
-                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+                   monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
   if (test_mm_copy<monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
 
   // mm_copy CRS//
   if (test_send_mm_copy<monolish::matrix::CRS<double>,
-                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+                        monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
   if (test_send_mm_copy<monolish::matrix::CRS<float>,
-                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+                        monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
-  if (test_mm_copy<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_mm_copy<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                   double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_mm_copy<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+  if (test_mm_copy<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                   float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 

@@ -2,7 +2,7 @@
 
 template <typename T>
 void ans_mm_copy(const monolish::matrix::Dense<T> &A,
-                monolish::matrix::Dense<T> &C) {
+                 monolish::matrix::Dense<T> &C) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
     C.val[i] = A.val[i];
