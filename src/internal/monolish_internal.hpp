@@ -66,6 +66,7 @@ void vsub(const size_t N, const float *a, const float *b, float *y,
 void vmul(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status);
 void vdiv(const size_t N, const float *a, const float *b, float *y,
+          bool gpu_status);
 
 // utils
 void vcopy(const size_t N, const double *a, double *y, bool gpu_status);
