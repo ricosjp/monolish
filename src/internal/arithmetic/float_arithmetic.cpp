@@ -75,22 +75,25 @@ void vmul(const size_t N, const float *a, const float alpha, float *y,
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-    cublasHandle_t h;
-    internal::check_CUDA(cublasCreate(&h));
-#pragma omp target data use_device_ptr(y)
-    { internal::check_CUDA(cublasSscal(h, N, &alpha, y, 1)); }
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = a[i] * alpha;
+    }
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    cblas_sscal(N, alpha, y, 1);
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = a[i] * alpha;
+    }
   }
   logger.func_out();
 }
 
 // y[i] = a[i] / alpha
-void vsiv(const size_t N, const float *a, const float alpha, float *y,
+void vdiv(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -205,7 +208,7 @@ void vmul(const size_t N, const float *a, const float *b, float *y,
 }
 
 // y[i] = a[i] / b[i]
-void vsiv(const size_t N, const float *a, const float *b, float *y,
+void vdiv(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -256,7 +259,7 @@ void vcopy(const size_t N, const float *a, float *y, bool gpu_status) {
 }
 
 // y[i] == a[i]
-bool vequal(const size_t N, const float *a, float *y, bool gpu_status) {
+bool vequal(const size_t N, const float *a, const float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

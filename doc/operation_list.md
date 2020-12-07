@@ -43,7 +43,7 @@
 |-------|---------------|------------------|-----------|
 | add   | monolish      | monolish         | monolish  |
 | sub   | monolish      | monolish         | monolish  |
-| mul   | MKL           | cublas           | CBLAS互換 |
+| mul   | monolish      | monolish         | monolish  |
 | div   | monolish      | monolish         | monolish  |
 
 ## Arithmetics (vector-vector)

@@ -38,22 +38,22 @@ auto checkError = [](auto result, auto func, auto file, auto line) {
 #endif
 
 // scalar-vector
-void vadd(const size_t N, const double alpha, const double *a, double *y,
+void vadd(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
-void vsub(const size_t N, const double alpha, const double *a, double *y,
+void vsub(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
-void vmul(const size_t N, const double alpha, const double *a, double *y,
+void vmul(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
-void vdiv(const size_t N, const double alpha, const double *a, double *y,
+void vdiv(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
 
-void vadd(const size_t N, const float alpha, const float *a, float *y,
+void vadd(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
-void vsub(const size_t N, const float alpha, const float *a, float *y,
+void vsub(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
-void vmul(const size_t N, const float alpha, const float *a, float *y,
+void vmul(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
-void vdiv(const size_t N, const float alpha, const float *a, float *y,
+void vdiv(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
 
 // vector-vector
@@ -74,5 +74,12 @@ void vmul(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status);
 void vdiv(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status);
+
+// utils
+void vcopy(const size_t N, const double *a, double *y, bool gpu_status);
+bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
+
+void vcopy(const size_t N, const float *a, float *y, bool gpu_status);
+bool vequal(const size_t N, const float *a, const float *y, bool gpu_status);
 } // namespace internal
 } // namespace monolish
