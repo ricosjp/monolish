@@ -9,24 +9,22 @@ template <typename T> CRS<T> CRS<T>::copy() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (get_device_mem_stat()) {
-    nonfree_recv();
-  } // gpu copy
+  CRS<T> ans(get_row(), get_col(), get_nnz());
 
-  CRS<T> tmp;
-  std::copy(row_ptr.data(), row_ptr.data() + (get_row() + 1),
-            tmp.row_ptr.begin());
-  std::copy(col_ind.data(), col_ind.data() + get_nnz(), tmp.col_ind.begin());
-  std::copy(val.data(), val.data() + get_nnz(), tmp.val.begin());
-  tmp.rowN = get_row();
-  tmp.colN = get_col();
-  tmp.nnz = get_nnz();
+  // gpu copy
   if (get_device_mem_stat()) {
-    tmp.send();
-  } // gpu copy
+    ans.send();
+    internal::vcopy((get_row()+1), row_ptr.data(), ans.row_ptr.data(), true);
+    internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), true);
+    internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
+  } 
+
+    internal::vcopy((get_row()+1), row_ptr.data(), ans.row_ptr.data(), false);
+    internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), false);
+    internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
 
   logger.util_out();
-  return tmp;
+  return ans;
 }
 
 template CRS<double> CRS<double>::copy();
@@ -45,44 +43,15 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-  // gpu copy and recv
-  if (mat.get_device_mem_stat()) {
 #if MONOLISH_USE_GPU
+  if(mat.get_device_mem_stat() == true){
     send();
-
-    size_t N = get_row();
-    size_t NNZ = get_nnz();
-
-    T *vald = val.data();
-    int *cold = col_ind.data();
-    int *rowd = row_ptr.data();
-
-    const T *Mvald = mat.val.data();
-    const int *Mcold = mat.col_ind.data();
-    const int *Mrowd = mat.row_ptr.data();
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N + 1; i++) {
-      rowd[i] = Mrowd[i];
-    }
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < NNZ; i++) {
-      cold[i] = Mcold[i];
-      vald[i] = Mvald[i];
-    }
-
-    nonfree_recv();
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-    std::copy(mat.row_ptr.data(), mat.row_ptr.data() + (get_row() + 1),
-              row_ptr.begin());
-    std::copy(mat.col_ind.data(), mat.col_ind.data() + get_nnz(),
-              col_ind.begin());
-    std::copy(mat.val.data(), mat.val.data() + get_nnz(), val.begin());
   }
+#endif
+
+  internal::vcopy((get_row()+1), mat.row_ptr.data(), row_ptr.data(), get_device_mem_stat());
+  internal::vcopy(get_nnz(), mat.col_ind.data(), col_ind.data(), get_device_mem_stat());
+  internal::vcopy(get_nnz(), mat.val.data(), val.data(), get_device_mem_stat());
 
   logger.util_out();
 }
