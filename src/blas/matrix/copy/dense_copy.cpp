@@ -15,7 +15,7 @@ template <typename T> Dense<T> Dense<T>::copy() {
   if (get_device_mem_stat()) {
     ans.send();
     internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
-  } 
+  }
 
   // cpu copy
   internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
@@ -37,13 +37,13 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-  // gpu copy 
+  // gpu copy
   if (mat.get_device_mem_stat()) {
     send();
     internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
   }
 
-  // cpu copy 
+  // cpu copy
   internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
 
   logger.util_out();

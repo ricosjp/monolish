@@ -21,14 +21,15 @@ void blas::matadd(const matrix::Dense<double> &A,
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
   logger.func_out();
 }
 
 // float ///////////////////
-void blas::matadd(const matrix::Dense<float> &A,
-                  const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                  matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -44,11 +45,11 @@ void blas::matadd(const matrix::Dense<float> &A,
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
   logger.func_out();
 }
-
 
 template <typename T>
 matrix::Dense<T> matrix::Dense<T>::operator+(const matrix::Dense<T> &B) {
