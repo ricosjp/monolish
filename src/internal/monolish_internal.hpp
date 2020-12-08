@@ -81,5 +81,11 @@ bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
 
 void vcopy(const size_t N, const float *a, float *y, bool gpu_status);
 bool vequal(const size_t N, const float *a, const float *y, bool gpu_status);
+
+// utils integer
+void vcopy(const size_t N, const int *a, int *y, bool gpu_status);
+void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status);
+bool vequal(const size_t N, const int *a, const int *y, bool gpu_status);
+bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status);
 } // namespace internal
 } // namespace monolish
