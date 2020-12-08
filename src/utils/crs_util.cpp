@@ -13,6 +13,21 @@ namespace monolish {
 namespace matrix {
 
 // constructor ///
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = NNZ;
+  gpu_status = false;
+  row_ptr.resize(M + 1);
+  col_ind.resize(nnz);
+  val.resize(nnz);
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ);
+template CRS<float>::CRS(const size_t M, const size_t N, const size_t NNZ);
 
 template <typename T>
 CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
