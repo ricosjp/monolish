@@ -21,28 +21,9 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  const double *Ad = A.val.data();
-  const double *Bd = B.val.data();
-  double *Cd = C.val.data();
+  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
-  // MN = MK * KN
-  const size_t nnz = A.get_nnz();
-
-  if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
-  }
   logger.func_out();
 }
 
@@ -64,28 +45,8 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  const float *Ad = A.val.data();
-  const float *Bd = B.val.data();
-  float *Cd = C.val.data();
-
-  // MN = MK * KN
-  const size_t nnz = A.get_nnz();
-
-  if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      Cd[i] = Ad[i] + Bd[i];
-    }
-  }
+  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
   logger.func_out();
 }

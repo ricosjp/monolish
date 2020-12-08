@@ -69,6 +69,18 @@ public:
   CRS() {}
 
   /**
+   * @brief declare CRS matrix
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of nnz
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  CRS(const size_t M, const size_t N, const size_t NNZ);
+
+  /**
    * @brief Create CRS matrix from array
    * @param M # of row
    * @param N # of col
