@@ -17,7 +17,7 @@ void vcopy(const size_t N, const int *a, int *y, bool gpu_status) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
-        y[i] = a[i];
+      y[i] = a[i];
     }
 #else
     throw std::runtime_error(
@@ -26,7 +26,7 @@ void vcopy(const size_t N, const int *a, int *y, bool gpu_status) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
-        y[i] = a[i];
+      y[i] = a[i];
     }
   }
 
@@ -42,7 +42,7 @@ void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
-        y[i] = a[i];
+      y[i] = a[i];
     }
 #else
     throw std::runtime_error(
@@ -51,7 +51,7 @@ void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
-        y[i] = a[i];
+      y[i] = a[i];
     }
   }
 

@@ -23,6 +23,7 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
+
   logger.func_out();
 }
 
@@ -46,12 +47,13 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
+
   logger.func_out();
 }
 
 template <typename T>
 matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
-  matrix::CRS<T> C(C.get_row(), C.get_col(), C.get_nnz());
+  matrix::CRS<T> C(*this);
   if (gpu_status == true) {
     C.send();
   }

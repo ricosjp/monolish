@@ -14,14 +14,14 @@ template <typename T> CRS<T> CRS<T>::copy() {
   // gpu copy
   if (get_device_mem_stat()) {
     ans.send();
-    internal::vcopy((get_row()+1), row_ptr.data(), ans.row_ptr.data(), true);
+    internal::vcopy((get_row() + 1), row_ptr.data(), ans.row_ptr.data(), true);
     internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), true);
     internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
-  } 
+  }
 
-    internal::vcopy((get_row()+1), row_ptr.data(), ans.row_ptr.data(), false);
-    internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), false);
-    internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
+  internal::vcopy((get_row() + 1), row_ptr.data(), ans.row_ptr.data(), false);
+  internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), false);
+  internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
 
   logger.util_out();
   return ans;
@@ -44,13 +44,15 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   nnz = mat.get_nnz();
 
 #if MONOLISH_USE_GPU
-  if(mat.get_device_mem_stat() == true){
+  if (mat.get_device_mem_stat() == true) {
     send();
   }
 #endif
 
-  internal::vcopy((get_row()+1), mat.row_ptr.data(), row_ptr.data(), get_device_mem_stat());
-  internal::vcopy(get_nnz(), mat.col_ind.data(), col_ind.data(), get_device_mem_stat());
+  internal::vcopy((get_row() + 1), mat.row_ptr.data(), row_ptr.data(),
+                  get_device_mem_stat());
+  internal::vcopy(get_nnz(), mat.col_ind.data(), col_ind.data(),
+                  get_device_mem_stat());
   internal::vcopy(get_nnz(), mat.val.data(), val.data(), get_device_mem_stat());
 
   logger.util_out();
