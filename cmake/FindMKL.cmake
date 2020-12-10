@@ -18,7 +18,7 @@
 # Input Variables
 # ----------------
 #
-# - env MKL_ROOT      Set MKL_ROOT environment variable,
+# - env MKLROOT      Set MKLROOT environment variable,
 #
 # - MKL_VML_AVX       VML, VSL and DF are provided for each SIMD ISA extension
 # - MKL_VML_AVX2      These flags specify which library is used.
@@ -33,7 +33,7 @@ if(MKL_INCLUDE_PATH)
 endif()
 
 set(_MKL_INCLUDE_HINTS
-  $ENV{MKL_ROOT}/include
+  $ENV{MKLROOT}/include
   $ENV{HOME}/local/include
   $ENV{HOME}/.local/include
   /opt/intel/mkl/include
@@ -46,7 +46,7 @@ find_path(MKL_INCLUDE_PATH NAMES mkl.h HINTS ${_MKL_INCLUDE_HINTS})
 unset(_MKL_INCLUDE_HINTS)
 
 set(_MKL_LIBRARY_HINTS
-  $ENV{MKL_ROOT}/lib/intel64
+  $ENV{MKLROOT}/lib/intel64
   $ENV{HOME}/local/lib
   $ENV{HOME}/.local/lib
   /opt/intel/mkl/lib/intel64
