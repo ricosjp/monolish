@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.7.1 - 2020/12/10
+-----------
 ### Added
 - matrix copyのテストを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/140
 - src/internalに配列に対する基本演算のコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
