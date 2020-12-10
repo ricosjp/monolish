@@ -7,7 +7,7 @@ void ans_svadd(monolish::vector<T> &mx, T value, monolish::vector<T> &ans) {
   }
 
   for (size_t i = 0; i < mx.size(); i++) {
-    ans[i] += mx[i] + value;
+    ans[i] = mx[i] + value;
   }
 }
 
@@ -21,7 +21,7 @@ template <typename T> bool test_send_svadd(const size_t size, double tol) {
   ans_svadd(x, value, ans_tmp);
 
   monolish::util::send(x, ans);
-  ans += x + value;
+  monolish::blas::add(x, value, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);

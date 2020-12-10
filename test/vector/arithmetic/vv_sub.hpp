@@ -8,7 +8,7 @@ void ans_vvsub(monolish::vector<T> &mx, monolish::vector<T> &my,
   }
 
   for (size_t i = 0; i < mx.size(); i++) {
-    ans[i] -= mx[i] - my[i];
+    ans[i] = mx[i] - my[i];
   }
 }
 
@@ -22,7 +22,7 @@ template <typename T> bool test_send_vvsub(const size_t size, double tol) {
   ans_vvsub(x, y, ans_tmp);
 
   monolish::util::send(x, y, ans);
-  ans -= x - y;
+  monolish::blas::sub(x, y, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
