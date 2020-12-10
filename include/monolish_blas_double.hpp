@@ -15,29 +15,17 @@ namespace monolish {
  */
 namespace blas {
 
-template <typename T> void add(const vector<T>& a, const vector<T>& b, vector<T>& y);
-template<> void add(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void add(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void add(const vector<double>& a, const double alpha, vector<double>& y);
 
-template <typename T> void add(const vector<T>& a, const T alpha, vector<T>& y);
-template<> void add(const vector<double>& a, const double alpha, vector<double>& y);
+void sub(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void sub(const vector<double>& a, const double alpha, vector<double>& y);
 
-template <typename T> void sub(const vector<T>& a, const vector<T>& b, vector<T>& y);
-template<> void sub(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void mul(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void mul(const vector<double>& a, const double alpha, vector<double>& y);
 
-template <typename T> void sub(const vector<T>& a, const T alpha, vector<T>& y);
-template<> void sub(const vector<double>& a, const double alpha, vector<double>& y);
-
-template <typename T> void mul(const vector<T>& a, const vector<T>& b, vector<T>& y);
-template<> void mul(const vector<double>& a, const vector<double>& b, vector<double>& y);
-
-template <typename T> void mul(const vector<T>& a, const T alpha, vector<T>& y);
-template<> void mul(const vector<double>& a, const double alpha, vector<double>& y);
-
-template <typename T> void div(const vector<T>& a, const vector<T>& b, vector<T>& y);
-template<> void div(const vector<double>& a, const vector<double>& b, vector<double>& y);
-
-template <typename T> void div(const vector<T>& a, const T alpha, vector<T>& y);
-template<> void div(const vector<double>& a, const double alpha, vector<double>& y);
+void div(const vector<double>& a, const vector<double>& b, vector<double>& y);
+void div(const vector<double>& a, const double alpha, vector<double>& y);
 
 //////////////////////////////////////////////////////
 //  Vector
