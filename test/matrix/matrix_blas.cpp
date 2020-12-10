@@ -1,6 +1,6 @@
 #include "blas/matadd.hpp"
-#include "blas/matsub.hpp"
 #include "blas/matmul.hpp"
+#include "blas/matsub.hpp"
 #include "blas/matvec.hpp"
 #include "blas/mscal.hpp"
 
