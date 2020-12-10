@@ -69,7 +69,6 @@ matrix::Dense<T> matrix::Dense<T>::operator+(const matrix::Dense<T> &B) {
 template matrix::Dense<double>
 matrix::Dense<double>::operator+(const matrix::Dense<double> &B);
 
-
 template <typename T>
 matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
   matrix::CRS<T> C(*this);
