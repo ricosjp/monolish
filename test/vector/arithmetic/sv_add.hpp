@@ -37,7 +37,7 @@ template <typename T> bool test_svadd(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_svadd(x, value, ans_tmp);
 
-  ans += x + value;
+  monolish::blas::add(x, value, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }

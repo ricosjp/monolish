@@ -36,7 +36,7 @@ template <typename T> bool test_svmul(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_svmul(x, value, ans_tmp);
 
-  ans *= x * value;
+  monolish::blas::mul(x, value, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }

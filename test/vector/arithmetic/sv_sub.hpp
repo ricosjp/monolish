@@ -36,7 +36,7 @@ template <typename T> bool test_svsub(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_svsub(x, value, ans_tmp);
 
-  ans -= x - value;
+  monolish::blas::sub(x, value, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }
