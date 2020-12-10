@@ -3,48 +3,6 @@
 
 namespace monolish {
 /////////////////////////////////////////////////
-// vec - vec
-/////////////////////////////////////////////////
-template <typename T>
-  void blas::mul(const vector<T>& a, const vector<T>& b, vector<T>& y){
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  // err
-  if (a.size() != b.size() || a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != b.get_device_mem_stat() || a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
-
-  internal::vmul(y.size(), a.data(), b.data, y.data(), y.gpu_status);
-
-  logger.func_out();
-}
-
-/////////////////////////////////////////////////
-// vec - scalar
-/////////////////////////////////////////////////
-template <typename T>
-  void blas::mul(const vector<T>& a, const T alpha, vector<T>& y){
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
-
-  internal::vmul(y.size(), a.data(), alpha, y.data(), y.gpu_status);
-
-  logger.func_out();
-}
-
-/////////////////////////////////////////////////
 // vec - scalar
 /////////////////////////////////////////////////
 template <typename T> vector<T> vector<T>::operator*(const T value) {
