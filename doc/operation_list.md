@@ -50,12 +50,12 @@
 
 | func  | Intel         | NVIDIA           | OSS      |
 |-------|---------------|------------------|----------|
-| add   | monolish->MKL | monolish         | monolish |
-| sub   | monolish->MKL | monolish         | monolish |
-| mul   | monolish->MKL | monolish         | monolish |
+| add   | MKL           | monolish         | monolish |
+| sub   | MKL           | monolish         | monolish |
+| mul   | MKL           | monolish         | monolish |
 | div   | monolish      | monolish         | monolish |
 | equal | monolish      | monolish         | monolish |
-| copy  | monolish->MKL | monolish->cuBLAS | CBLAS互換 |
+| copy  | MKL           | cuBLAS           | CBLAS互換|
 
 ## Mathematical functions (vector)
 
@@ -76,11 +76,11 @@
 
 | func        | Intel         | NVIDIA         | OSS            |
 |-------------|---------------|----------------|----------------|
-| add         | monolish->MKL | monolish       | monolish       |
-| sub         | monolish->MKL | monolish       | monolish       |
+| add         | MKL           | monolish       | monolish       |
+| sub         | none->MKL     | none->monolish | none->monolish |
 | equal       | none->MKL     | none->monolish | none->monolish |
 | not   equal | none->MKL     | none->monolish | none->monolish |
-| copy        | monolish      | monolish       | monolish       |
+| copy        | MKL           | cuBLAS         | CBLAS互換      |
 | transpose   | monolish      | monolish       | monolish       |
 
 ## Row/Col vector and scalar operations (Dense)
@@ -120,11 +120,11 @@
 
 | func        | Intel         | NVIDIA         | OSS            |
 |-------------|---------------|----------------|----------------|
-| add         | monolish->MKL | monolish       | monolish       |
-| sub         | monolish->MKL | monolish       | monolish       |
+| add         | MKL           | monolish       | monolish       |
+| sub         | none->MKL     | none           | none           |
 | equal       | none->MKL     | none->monolish | none->monolish |
 | not   equal | none->MKL     | none->monolish | none->monolish |
-| copy        | monolish      | monolish       | monolish       |
+| copy        | MKL           | cublas         | CBLAS互換      |
 | transpose   | none          | none           | none           |
 
 ## Row/Col vector and scalar operations (CRS)
