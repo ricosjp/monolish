@@ -1,7 +1,7 @@
 #include "../benchmark_utils.hpp"
 
 #define FUNC "vv_add"
-#define PERF 2 * size / time / 1.0e+9
+#define PERF 1 * size / time / 1.0e+9
 #define MEM 3 * size * sizeof(T) / time / 1.0e+9
 
 template <typename T> bool benchmark(const size_t size, const size_t iter) {
@@ -17,7 +17,7 @@ template <typename T> bool benchmark(const size_t size, const size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (size_t i = 0; i < iter; i++) {
-    ans += x + y;
+    monolish::blas::add(x, y, ans);
   }
 
   auto end = std::chrono::system_clock::now();
