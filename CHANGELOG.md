@@ -26,6 +26,7 @@ Unreleased
 - make testでmake test-cpuとmake-gpuを両方実行するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/139
 
 ### Changed 
+- vector,CRS,denseの現状をDoxygenに反映 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/140
 - CRSのadd, copy, scalの裏側をinternalに変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/142
 - denseのadd, copy, scalの裏側をinternalに変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/141
 - CIのコンテナ名を変数にして上から再設定できるようにした(+gitlabから変数をRICOSのコンテナレジストリにした) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/141
