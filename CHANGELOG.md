@@ -20,6 +20,11 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- matrix subを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
+
+### Changed 
+- matrix add/subでdoubleからfloatを作るようにファイル構成を変更  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
 
 0.7.1 - 2020/12/10
 -----------
