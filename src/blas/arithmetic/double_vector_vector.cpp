@@ -3,8 +3,7 @@
 
 namespace monolish {
 
-template <typename T>
-  void blas::add(const vector<T>& a, const vector<T>& b, vector<T>& y){
+  void blas::add(const vector<double>& a, const vector<double>& b, vector<double>& y){
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -16,13 +15,12 @@ template <typename T>
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vadd(y.size(), a.data(), b.data, y.data(), y.gpu_status);
+  internal::vadd(y.size(), a.data(), b.data(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
 }
 
-template <typename T>
-  void blas::sub(const vector<T>& a, const vector<T>& b, vector<T>& y){
+  void blas::sub(const vector<double>& a, const vector<double>& b, vector<double>& y){
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -34,13 +32,12 @@ template <typename T>
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vsub(y.size(), a.data(), b.data, y.data(), y.gpu_status);
+  internal::vsub(y.size(), a.data(), b.data(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
 }
 
-template <typename T>
-  void blas::mul(const vector<T>& a, const vector<T>& b, vector<T>& y){
+  void blas::mul(const vector<double>& a, const vector<double>& b, vector<double>& y){
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -52,13 +49,12 @@ template <typename T>
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vmul(y.size(), a.data(), b.data, y.data(), y.gpu_status);
+  internal::vmul(y.size(), a.data(), b.data(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
 }
 
-template <typename T>
-  void blas::div(const vector<T>& a, const vector<T>& b, vector<T>& y){
+  void blas::div(const vector<double>& a, const vector<double>& b, vector<double>& y){
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -70,7 +66,7 @@ template <typename T>
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vdiv(y.size(), a.data(), b.data, y.data(), y.gpu_status);
+  internal::vdiv(y.size(), a.data(), b.data(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
 }

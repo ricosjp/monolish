@@ -4,7 +4,7 @@
 namespace monolish {
 
   void blas::add(const vector<float>& a, const float alpha, vector<float>& y){
-    logger &logger = logger::get_instance();
+  Logger &logger = Logger::get_instance();
     logger.func_in(monolish_func);
 
     // err
@@ -15,13 +15,13 @@ namespace monolish {
       throw std::runtime_error("error vector get_device_mem_stat() is not same");
     }
 
-    internal::vadd(y.size(), a.data(), alpha, y.data(), y.gpu_status);
+    internal::vadd(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
 
     logger.func_out();
   }
 
   void blas::sub(const vector<float>& a, const float alpha, vector<float>& y){
-    logger &logger = logger::get_instance();
+  Logger &logger = Logger::get_instance();
     logger.func_in(monolish_func);
 
     // err
@@ -32,13 +32,13 @@ namespace monolish {
       throw std::runtime_error("error vector get_device_mem_stat() is not same");
     }
 
-    internal::vsub(y.size(), a.data(), alpha, y.data(), y.gpu_status);
+    internal::vsub(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
 
     logger.func_out();
   }
 
   void blas::mul(const vector<float>& a, const float alpha, vector<float>& y){
-    logger &logger = logger::get_instance();
+  Logger &logger = Logger::get_instance();
     logger.func_in(monolish_func);
 
     // err
@@ -49,13 +49,13 @@ namespace monolish {
       throw std::runtime_error("error vector get_device_mem_stat() is not same");
     }
 
-    internal::vmul(y.size(), a.data(), alpha, y.data(), y.gpu_status);
+    internal::vmul(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
 
     logger.func_out();
   }
 
   void blas::div(const vector<float>& a, const float alpha, vector<float>& y){
-    logger &logger = logger::get_instance();
+  Logger &logger = Logger::get_instance();
     logger.func_in(monolish_func);
 
     // err
@@ -66,7 +66,7 @@ namespace monolish {
       throw std::runtime_error("error vector get_device_mem_stat() is not same");
     }
 
-    internal::vdiv(y.size(), a.data(), alpha, y.data(), y.gpu_status);
+    internal::vdiv(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
 
     logger.func_out();
   }
