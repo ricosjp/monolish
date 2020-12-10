@@ -27,24 +27,28 @@ sx: $(OBJS_SX)
 
 run_cpu:
 	bash ./benchmark.sh matadd cpu
+	bash ./benchmark.sh matsub cpu
 	bash ./benchmark.sh mscal cpu
 	bash ./benchmark.sh matvec cpu
 	bash ./benchmark.sh matmul cpu
  
 run_gpu:
 	bash ./benchmark.sh matadd gpu
+	bash ./benchmark.sh matsub gpu
 	bash ./benchmark.sh mscal gpu
 	bash ./benchmark.sh matvec gpu
 	bash ./benchmark.sh matmul gpu
 
 run_fx:
 	bash ./benchmark.sh matadd fx
+	bash ./benchmark.sh matsub fx
 	bash ./benchmark.sh mscal fx
 	bash ./benchmark.sh matvec fx
 	bash ./benchmark.sh matmul fx
 
 run_sx:
 	bash ./benchmark.sh matadd sx
+	bash ./benchmark.sh matsub sx
 	bash ./benchmark.sh mscal sx
 	bash ./benchmark.sh matvec sx
 	bash ./benchmark.sh matmul sx

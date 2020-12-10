@@ -217,7 +217,7 @@ void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
 
 /**
- * @brief double precision Dense matrix addition: C = AB
+ * @brief double precision Dense matrix addition: C = A + B
  * @param A double precision Dense matrix (size M x N)
  * @param B double precision Dense matrix (size M x N)
  * @param C double precision Dense matrix (size M x N)
@@ -228,6 +228,37 @@ void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  *    - # of data transfer: 0
  */
 void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+            matrix::Dense<double> &C);
+
+/**
+ * @brief double precision CRS matrix addition: C = A - B (A and B must be
+ * same non-zero structure)
+ * @param A double precision CRS matrix (size M x N)
+ * @param B double precision CRS matrix (size M x N)
+ * @param C double precision CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and B must be same non-zero structure
+ */
+void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+            matrix::CRS<double> &C);
+
+/**
+ * @brief double precision Dense matrix addition: C = A - B
+ * @param A double precision Dense matrix (size M x N)
+ * @param B double precision Dense matrix (size M x N)
+ * @param C double precision Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matsub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
 
 ///////////////
