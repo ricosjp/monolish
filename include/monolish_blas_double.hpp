@@ -18,6 +18,7 @@ namespace blas {
 void add(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void add(const vector<double> &a, const double alpha, vector<double> &y);
 
+
 void sub(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void sub(const vector<double> &a, const double alpha, vector<double> &y);
 
@@ -31,6 +32,15 @@ void vecadd(const vector<double> &a, const vector<double> &b,
             vector<double> &y);
 void vecsub(const vector<double> &a, const vector<double> &b,
             vector<double> &y);
+
+void add(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
+void add(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
+void sub(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
+void sub(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
+void mul(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
+void mul(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
+void div(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
+void div(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
