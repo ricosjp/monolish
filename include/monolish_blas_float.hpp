@@ -27,6 +27,8 @@ void mul(const vector<float> &a, const float alpha, vector<float> &y);
 void div(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void div(const vector<float> &a, const float alpha, vector<float> &y);
 
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
