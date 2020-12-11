@@ -7,6 +7,8 @@
 #include "arithmetic/vv_div.hpp"
 #include "arithmetic/vv_mul.hpp"
 #include "arithmetic/vv_sub.hpp"
+#include "arithmetic/vecadd.hpp"
+#include "arithmetic/vecsub.hpp"
 
 int main(int argc, char **argv) {
 
@@ -153,6 +155,36 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_minus<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vecadd//
+  if (test_vecadd<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vecadd<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_vecadd<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vecadd<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vecsub//
+  if (test_vecsub<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vecsub<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_vecsub<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vecsub<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
