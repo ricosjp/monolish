@@ -11,3 +11,7 @@ cat double_blas_lv1.cpp \
     | sed -e 's/dscal/sscal/g' \
     | sed -e 's/Dscal/Sscal/g' \
     > float_blas_lv1.cpp
+
+cat double_addsub.cpp \
+    | sed -e 's/double/float/g' \
+    > float_addsub.cpp
