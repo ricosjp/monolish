@@ -3,12 +3,12 @@
 #include "arithmetic/sv_mul.hpp"
 #include "arithmetic/sv_sub.hpp"
 #include "arithmetic/v_minus.hpp"
+#include "arithmetic/vecadd.hpp"
+#include "arithmetic/vecsub.hpp"
 #include "arithmetic/vv_add.hpp"
 #include "arithmetic/vv_div.hpp"
 #include "arithmetic/vv_mul.hpp"
 #include "arithmetic/vv_sub.hpp"
-#include "arithmetic/vecadd.hpp"
-#include "arithmetic/vecsub.hpp"
 
 int main(int argc, char **argv) {
 

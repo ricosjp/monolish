@@ -2,7 +2,7 @@
 
 template <typename T>
 void ans_vecadd(monolish::vector<T> &mx, monolish::vector<T> &my,
-               monolish::vector<T> &ans) {
+                monolish::vector<T> &ans) {
   if (mx.size() != my.size()) {
     throw std::runtime_error("x.size != y.size");
   }

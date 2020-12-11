@@ -3,7 +3,8 @@
 
 namespace monolish {
 //  ///////////////////
-void blas::vecadd(const vector<double> &a, const vector<double> &b, vector<double> &y) {
+void blas::vecadd(const vector<double> &a, const vector<double> &b,
+                  vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -13,7 +14,8 @@ void blas::vecadd(const vector<double> &a, const vector<double> &b, vector<doubl
 }
 
 // vecsub ///////////////////
-void blas::vecsub(const vector<double> &a, const vector<double> &b, vector<double> &y) {
+void blas::vecsub(const vector<double> &a, const vector<double> &b,
+                  vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
