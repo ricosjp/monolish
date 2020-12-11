@@ -1,3 +1,3 @@
-cat double_matadd.cpp \
+cat double_mataddsub.cpp \
     | sed -e 's/double/float/g' \
-    > float_matadd.cpp
+    > float_mataddsub.cpp

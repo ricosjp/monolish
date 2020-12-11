@@ -26,6 +26,7 @@ Unreleased
 - matrix subを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
 
 ### Changed 
+- matadd/をmataddsub/に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/149
 - test/benchmarkのvector_commonをoperatorでなく四則演算関数に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/147
 - matrix add/subでdoubleからfloatを作るようにファイル構成を変更  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
 
