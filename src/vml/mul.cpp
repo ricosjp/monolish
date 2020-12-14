@@ -1,11 +1,11 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../internal/monolish_internal.hpp"
+#include "../../include/monolish_blas.hpp"
+#include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 /////////////////////////////////////////////////
 // vec - scalar
 /////////////////////////////////////////////////
-template <typename T> vector<T> vector<T>::operator/(const T value) {
+template <typename T> vector<T> vector<T>::operator*(const T value) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -14,31 +14,31 @@ template <typename T> vector<T> vector<T>::operator/(const T value) {
     ans.send();
   }
 
-  internal::vdiv(val.size(), val.data(), value, ans.data(), gpu_status);
+  internal::vmul(val.size(), val.data(), value, ans.data(), gpu_status);
 
   logger.func_out();
   return ans;
 }
 
-template vector<double> vector<double>::operator/(const double value);
-template vector<float> vector<float>::operator/(const float value);
+template vector<double> vector<double>::operator*(const double value);
+template vector<float> vector<float>::operator*(const float value);
 
-template <typename T> void vector<T>::operator/=(const T value) {
+template <typename T> void vector<T>::operator*=(const T value) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  internal::vdiv(val.size(), val.data(), value, val.data(), gpu_status);
+  internal::vmul(val.size(), val.data(), value, val.data(), gpu_status);
 
   logger.func_out();
 }
-template void vector<double>::operator/=(const double value);
-template void vector<float>::operator/=(const float value);
+template void vector<double>::operator*=(const double value);
+template void vector<float>::operator*=(const float value);
 
 /////////////////////////////////////////////////
 // vec - vec
 /////////////////////////////////////////////////
 
-template <typename T> vector<T> vector<T>::operator/(const vector<T> &vec) {
+template <typename T> vector<T> vector<T>::operator*(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -55,16 +55,16 @@ template <typename T> vector<T> vector<T>::operator/(const vector<T> &vec) {
     ans.send();
   }
 
-  internal::vdiv(val.size(), val.data(), vec.data(), ans.data(), gpu_status);
+  internal::vmul(val.size(), val.data(), vec.data(), ans.data(), gpu_status);
 
   logger.func_out();
   return ans;
 }
 
-template vector<double> vector<double>::operator/(const vector<double> &vec);
-template vector<float> vector<float>::operator/(const vector<float> &vec);
+template vector<double> vector<double>::operator*(const vector<double> &vec);
+template vector<float> vector<float>::operator*(const vector<float> &vec);
 
-template <typename T> void vector<T>::operator/=(const vector<T> &vec) {
+template <typename T> void vector<T>::operator*=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -76,10 +76,10 @@ template <typename T> void vector<T>::operator/=(const vector<T> &vec) {
     throw std::runtime_error("error gpu_status is not same");
   }
 
-  internal::vdiv(val.size(), val.data(), vec.data(), val.data(), gpu_status);
+  internal::vmul(val.size(), val.data(), vec.data(), val.data(), gpu_status);
 
   logger.func_out();
 }
-template void vector<double>::operator/=(const vector<double> &vec);
-template void vector<float>::operator/=(const vector<float> &vec);
+template void vector<double>::operator*=(const vector<double> &vec);
+template void vector<float>::operator*=(const vector<float> &vec);
 } // namespace monolish
