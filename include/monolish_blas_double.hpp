@@ -16,16 +16,13 @@ namespace monolish {
 namespace blas {
 
 void add(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void add(const vector<double> &a, const double alpha, vector<double> &y);
-
-
 void sub(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void sub(const vector<double> &a, const double alpha, vector<double> &y);
-
 void mul(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void mul(const vector<double> &a, const double alpha, vector<double> &y);
-
 void div(const vector<double> &a, const vector<double> &b, vector<double> &y);
+
+void add(const vector<double> &a, const double alpha, vector<double> &y);
+void sub(const vector<double> &a, const double alpha, vector<double> &y);
+void mul(const vector<double> &a, const double alpha, vector<double> &y);
 void div(const vector<double> &a, const double alpha, vector<double> &y);
 
 void vecadd(const vector<double> &a, const vector<double> &b,
@@ -33,14 +30,25 @@ void vecadd(const vector<double> &a, const vector<double> &b,
 void vecsub(const vector<double> &a, const vector<double> &b,
             vector<double> &y);
 
-void add(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
-void add(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
-void sub(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
-void sub(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
-void mul(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
-void mul(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
-void div(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
-void div(const matrix::CRS<double> &a, const matrix::CRS<double> &b, matrix::CRS<double> &y);
+void add(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void sub(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void mul(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void div(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+
+void add(const matrix::Dense<double> &a, const double &alpha, matrix::Dense<double> &C);
+void sub(const matrix::Dense<double> &a, const double &alpha, matrix::Dense<double> &C);
+void mul(const matrix::Dense<double> &a, const double &alpha, matrix::Dense<double> &C);
+void div(const matrix::Dense<double> &a, const double &alpha, matrix::Dense<double> &C);
+
+void add(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void div(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+
+void add(const matrix::CRS<double> &a, const double &alpha, matrix::CRS<double> &C);
+void sub(const matrix::CRS<double> &a, const double &alpha, matrix::CRS<double> &C);
+void mul(const matrix::CRS<double> &a, const double &alpha, matrix::CRS<double> &C);
+void div(const matrix::CRS<double> &a, const double &alpha, matrix::CRS<double> &C);
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
