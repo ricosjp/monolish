@@ -1,9 +1,9 @@
-#include "../../include/monolish_blas.hpp"
+#include "../../include/monolish_vml.hpp"
 #include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 
-void blas::add(const vector<double> &a, const vector<double> &b,
+void vml::add(const vector<double> &a, const vector<double> &b,
                vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -23,7 +23,7 @@ void blas::add(const vector<double> &a, const vector<double> &b,
   logger.func_out();
 }
 
-void blas::sub(const vector<double> &a, const vector<double> &b,
+void vml::sub(const vector<double> &a, const vector<double> &b,
                vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -43,7 +43,7 @@ void blas::sub(const vector<double> &a, const vector<double> &b,
   logger.func_out();
 }
 
-void blas::mul(const vector<double> &a, const vector<double> &b,
+void vml::mul(const vector<double> &a, const vector<double> &b,
                vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -63,7 +63,7 @@ void blas::mul(const vector<double> &a, const vector<double> &b,
   logger.func_out();
 }
 
-void blas::div(const vector<double> &a, const vector<double> &b,
+void vml::div(const vector<double> &a, const vector<double> &b,
                vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);

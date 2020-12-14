@@ -31,7 +31,8 @@ float blas::asum(const vector<float> &x) {
 void blas::asum(const vector<float> &x, float &ans) { ans = asum(x); }
 
 // axpy ///////////////////
-void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::axpy(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -195,7 +196,8 @@ void blas::axpyz(const float alpha, const vector<float> &x,
 }
 
 // xpay ///////////////////
-void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::xpay(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
