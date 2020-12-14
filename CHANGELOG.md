@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- matrix四則演算関数を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/149
+- matadd/matsub関数を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/149
 - vecadd/vecsubを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/148
 - vector四則演算関数を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/147
 - matrix subを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146

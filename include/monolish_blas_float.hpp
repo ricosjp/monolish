@@ -25,25 +25,35 @@ void sub(const vector<float> &a, const float alpha, vector<float> &y);
 void mul(const vector<float> &a, const float alpha, vector<float> &y);
 void div(const vector<float> &a, const float alpha, vector<float> &y);
 
-void vecadd(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 
-void add(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
-void sub(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
-void mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
-void div(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
+void add(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+void sub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+void mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+void div(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
 
-void add(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C);
-void sub(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C);
-void mul(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C);
-void div(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C);
+void add(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
+void sub(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
+void mul(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
+void div(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
 
-void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
-void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
-void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
-void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
 
 void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);

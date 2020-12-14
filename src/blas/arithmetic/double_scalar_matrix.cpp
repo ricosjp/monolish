@@ -4,7 +4,7 @@
 namespace monolish {
 
 ///////////////////////////////////////////
-//Dense////////////////////////////////////
+// Dense////////////////////////////////////
 ///////////////////////////////////////////
 void blas::add(const matrix::Dense<double> &A, const double alpha,
                matrix::Dense<double> &C) {
@@ -18,7 +18,7 @@ void blas::add(const matrix::Dense<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -40,7 +40,7 @@ void blas::sub(const matrix::Dense<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -62,7 +62,7 @@ void blas::mul(const matrix::Dense<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -84,7 +84,7 @@ void blas::div(const matrix::Dense<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -95,7 +95,7 @@ void blas::div(const matrix::Dense<double> &A, const double alpha,
 }
 
 ///////////////////////////////////////////
-//CRS////////////////////////////////////
+// CRS////////////////////////////////////
 ///////////////////////////////////////////
 void blas::add(const matrix::CRS<double> &A, const double alpha,
                matrix::CRS<double> &C) {
@@ -109,7 +109,7 @@ void blas::add(const matrix::CRS<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -131,7 +131,7 @@ void blas::sub(const matrix::CRS<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -153,7 +153,7 @@ void blas::mul(const matrix::CRS<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
@@ -175,7 +175,7 @@ void blas::div(const matrix::CRS<double> &A, const double alpha,
   if (A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
-    if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 

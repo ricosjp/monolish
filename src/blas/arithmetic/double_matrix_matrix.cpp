@@ -4,7 +4,7 @@
 namespace monolish {
 
 ///////////////////////////////////////////
-//Dense////////////////////////////////////
+// Dense////////////////////////////////////
 ///////////////////////////////////////////
 void blas::add(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
                matrix::Dense<double> &C) {
@@ -99,7 +99,7 @@ void blas::div(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
 }
 
 ///////////////////////////////////////////
-//CRS////////////////////////////////////
+// CRS////////////////////////////////////
 ///////////////////////////////////////////
 void blas::add(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
                matrix::CRS<double> &C) {
@@ -192,7 +192,5 @@ void blas::div(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
 
   logger.func_out();
 }
-
-
 
 } // namespace monolish

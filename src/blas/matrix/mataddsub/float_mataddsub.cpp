@@ -8,8 +8,8 @@ namespace monolish {
 ///////////////////////////////
 
 // Dense ///////////////////
-void blas::matadd(const matrix::Dense<float> &A,
-                  const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                  matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -88,8 +88,8 @@ matrix::CRS<float>::operator+(const matrix::CRS<float> &B);
 ///////////////////////////////
 
 // Dense ///////////////////
-void blas::matsub(const matrix::Dense<float> &A,
-                  const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+void blas::matsub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                  matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
