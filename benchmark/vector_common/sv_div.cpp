@@ -17,7 +17,7 @@ template <typename T> bool benchmark(const size_t size, const size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (size_t i = 0; i < iter; i++) {
-    monolish::blas::div(x, value, ans);
+    monolish::vml::div(x, value, ans);
   }
 
   auto end = std::chrono::system_clock::now();
