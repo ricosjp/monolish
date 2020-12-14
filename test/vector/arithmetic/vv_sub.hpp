@@ -22,7 +22,7 @@ template <typename T> bool test_send_vvsub(const size_t size, double tol) {
   ans_vvsub(x, y, ans_tmp);
 
   monolish::util::send(x, y, ans);
-  monolish::blas::sub(x, y, ans);
+  monolish::vml::sub(x, y, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
@@ -37,7 +37,7 @@ template <typename T> bool test_vvsub(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_vvsub(x, y, ans_tmp);
 
-  monolish::blas::sub(x, y, ans);
+  monolish::vml::sub(x, y, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }

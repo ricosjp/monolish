@@ -22,7 +22,7 @@ template <typename T> bool test_send_vvmul(const size_t size, double tol) {
   ans_vvmul(x, y, ans_tmp);
 
   monolish::util::send(x, y, ans);
-  monolish::blas::mul(x, y, ans);
+  monolish::vml::mul(x, y, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
@@ -37,7 +37,7 @@ template <typename T> bool test_vvmul(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_vvmul(x, y, ans_tmp);
 
-  monolish::blas::mul(x, y, ans);
+  monolish::vml::mul(x, y, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }

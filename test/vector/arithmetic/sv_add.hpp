@@ -21,7 +21,7 @@ template <typename T> bool test_send_svadd(const size_t size, double tol) {
   ans_svadd(x, value, ans_tmp);
 
   monolish::util::send(x, ans);
-  monolish::blas::add(x, value, ans);
+  monolish::vml::add(x, value, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
@@ -37,7 +37,7 @@ template <typename T> bool test_svadd(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_svadd(x, value, ans_tmp);
 
-  monolish::blas::add(x, value, ans);
+  monolish::vml::add(x, value, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }

@@ -21,7 +21,7 @@ template <typename T> bool test_send_svdiv(const size_t size, double tol) {
   ans_svdiv(x, value, ans_tmp);
 
   monolish::util::send(x, ans);
-  monolish::blas::div(x, value, ans);
+  monolish::vml::div(x, value, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
@@ -36,7 +36,7 @@ template <typename T> bool test_svdiv(const size_t size, double tol) {
   monolish::vector<T> ans_tmp = ans.copy();
   ans_svdiv(x, value, ans_tmp);
 
-  monolish::blas::div(x, value, ans);
+  monolish::vml::div(x, value, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
 }
