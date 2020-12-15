@@ -40,7 +40,7 @@ run_cpu:
 	bash ./test.sh matrix_convert cpu
 	bash ./test.sh matrix_transpose cpu
 	bash ./test.sh matrix_blas cpu
-	bash ./test.sh matrix_arithmetic cpu
+	bash ./test.sh matrix_vml cpu
 	bash ./test.sh matrix_subvec_op cpu
 	bash ./test.sh matrix_math cpu
  
@@ -49,7 +49,7 @@ run_gpu:
 	bash ./test.sh matrix_convert gpu
 	bash ./test.sh matrix_transpose gpu
 	bash ./test.sh matrix_blas gpu
-	bash ./test.sh matrix_arithmetic gpu
+	bash ./test.sh matrix_vml gpu
 	bash ./test.sh matrix_subvec_op gpu
 	bash ./test.sh matrix_math gpu
 
@@ -58,7 +58,7 @@ run_fx:
 	bash ./test.sh matrix_convert fx
 	bash ./test.sh matrix_transpose fx
 	bash ./test.sh matrix_blas fx
-	bash ./test.sh matrix_arithmetic fx
+	bash ./test.sh matrix_vml fx
 	bash ./test.sh matrix_subvec_op fx
 	bash ./test.sh matrix_math fx
 
@@ -67,7 +67,7 @@ run_sx:
 	bash ./test.sh matrix_convert sx
 	bash ./test.sh matrix_transpose sx
 	bash ./test.sh matrix_blas sx
-	bash ./test.sh matrix_arithmetic sx
+	bash ./test.sh matrix_vml sx
 	bash ./test.sh matrix_subvec_op sx
 	bash ./test.sh matrix_math sx
 

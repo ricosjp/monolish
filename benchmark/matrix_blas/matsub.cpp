@@ -2,7 +2,7 @@
 
 #define FUNC "matsub"
 #define DENSE_PERF 1 * M *N / time / 1.0e+9
-#define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
+#define CRS_PERF 1 * M *nnzrow / time / 1.0e+9
 
 #define DENSE_MEM 3 * M *N * sizeof(T) / time / 1.0e+9
 #define CRS_MEM 3 * M *nnzrow * sizeof(T) / time / 1.0e+9
