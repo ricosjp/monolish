@@ -26,20 +26,20 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
-	bash ./benchmark.sh convert cpu
-	bash ./benchmark.sh transpose cpu
+	bash ./benchmark.sh mv_mul cpu
+	bash ./benchmark.sh m_tanh cpu
  
 run_gpu:
-	#bash ./benchmark.sh convert gpu
-	#bash ./benchmark.sh transpose gpu
+	bash ./benchmark.sh mv_mul gpu
+	bash ./benchmark.sh m_tanh gpu
 
 run_fx:
-	bash ./benchmark.sh convert fx
-	bash ./benchmark.sh transpose fx
+	bash ./benchmark.sh mv_mul fx
+	bash ./benchmark.sh m_tanh fx
 
 run_sx:
-	bash ./benchmark.sh convert sx
-	bash ./benchmark.sh transpose sx
+	bash ./benchmark.sh mv_mul sx
+	bash ./benchmark.sh m_tanh sx
 
 clean:
 	- rm *.out
