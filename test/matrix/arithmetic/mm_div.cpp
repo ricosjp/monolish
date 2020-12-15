@@ -1,7 +1,7 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_mm_add(const monolish::matrix::Dense<T> &A,
+void ans_mm_div(const monolish::matrix::Dense<T> &A,
                 const monolish::matrix::Dense<T> &B,
                 monolish::matrix::Dense<T> &C) {
 
@@ -17,12 +17,12 @@ void ans_mm_add(const monolish::matrix::Dense<T> &A,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.val[i] = A.val[i] + B.val[i];
+    C.val[i] = A.val[i] / B.val[i];
   }
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_mm_add(const size_t M, const size_t N, double tol) {
+bool test_send_mm_div(const size_t M, const size_t N, double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N)) {
@@ -42,11 +42,11 @@ bool test_send_mm_add(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> BB(seedA);
   monolish::matrix::Dense<T> CC(seedA);
 
-  ans_mm_add(AA, BB, CC);
+  ans_mm_div(AA, BB, CC);
   monolish::matrix::COO<T> ansC(CC);
 
   monolish::util::send(A, B, C);
-  monolish::vml::add(A, B, C);
+  monolish::vml::div(A, B, C);
   C.recv();
 
   monolish::matrix::COO<T> resultC(C);
@@ -56,7 +56,7 @@ bool test_send_mm_add(const size_t M, const size_t N, double tol) {
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_mm_add(const size_t M, const size_t N, double tol) {
+bool test_mm_div(const size_t M, const size_t N, double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N)) {
@@ -76,10 +76,10 @@ bool test_mm_add(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> BB(seedA);
   monolish::matrix::Dense<T> CC(seedA);
 
-  ans_mm_add(AA, BB, CC);
+  ans_mm_div(AA, BB, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  monolish::vml::add(A, B, C);
+  monolish::vml::div(A, B, C);
 
   monolish::matrix::COO<T> resultC(C);
 

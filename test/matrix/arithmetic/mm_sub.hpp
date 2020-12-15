@@ -46,7 +46,7 @@ bool test_send_mm_sub(const size_t M, const size_t N, double tol) {
   monolish::matrix::COO<T> ansC(CC);
 
   monolish::util::send(A, B, C);
-  monolish::blas::matsub(A, B, C);
+  monolish::vml::sub(A, B, C);
   C.recv();
 
   monolish::matrix::COO<T> resultC(C);
@@ -79,7 +79,7 @@ bool test_mm_sub(const size_t M, const size_t N, double tol) {
   ans_mm_sub(AA, BB, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  monolish::blas::matsub(A, B, C);
+  monolish::vml::sub(A, B, C);
 
   monolish::matrix::COO<T> resultC(C);
 
