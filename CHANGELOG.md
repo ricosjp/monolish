@@ -28,6 +28,8 @@ Unreleased
 - matrix subを追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
 
 ### Changed 
+- test/とbenchmarkをcommon, vml, blasの3つに分割して整理 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/151
+- 四則演算関数をmonolish::vml名前空間, src/vml/, include/monolish_vml.hppに移動 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/151
 - matadd/をmataddsub/に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/149
 - test/benchmarkのvector_commonをoperatorでなく四則演算関数に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/147
 - matrix add/subでdoubleからfloatを作るようにファイル構成を変更  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
