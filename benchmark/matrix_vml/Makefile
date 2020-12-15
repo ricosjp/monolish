@@ -26,18 +26,50 @@ sx: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
 
 run_cpu:
+	bash ./benchmark.sh sm_add cpu
+	bash ./benchmark.sh sm_sub cpu
+	bash ./benchmark.sh sm_mul cpu
+	bash ./benchmark.sh sm_div cpu
+	bash ./benchmark.sh mm_add cpu
+	bash ./benchmark.sh mm_sub cpu
+	bash ./benchmark.sh mm_mul cpu
+	bash ./benchmark.sh mm_div cpu
 	bash ./benchmark.sh mv_mul cpu
 	bash ./benchmark.sh m_tanh cpu
  
 run_gpu:
+	bash ./benchmark.sh sm_add gpu
+	bash ./benchmark.sh sm_sub gpu
+	bash ./benchmark.sh sm_mul gpu
+	bash ./benchmark.sh sm_div gpu
+	bash ./benchmark.sh mm_add gpu
+	bash ./benchmark.sh mm_sub gpu
+	bash ./benchmark.sh mm_mul gpu
+	bash ./benchmark.sh mm_div gpu
 	bash ./benchmark.sh mv_mul gpu
 	bash ./benchmark.sh m_tanh gpu
 
 run_fx:
+	bash ./benchmark.sh sm_add fx
+	bash ./benchmark.sh sm_sub fx
+	bash ./benchmark.sh sm_mul fx
+	bash ./benchmark.sh sm_div fx
+	bash ./benchmark.sh mm_add fx
+	bash ./benchmark.sh mm_sub fx
+	bash ./benchmark.sh mm_mul fx
+	bash ./benchmark.sh mm_div fx
 	bash ./benchmark.sh mv_mul fx
 	bash ./benchmark.sh m_tanh fx
 
 run_sx:
+	bash ./benchmark.sh sm_add sx
+	bash ./benchmark.sh sm_sub sx
+	bash ./benchmark.sh sm_mul sx
+	bash ./benchmark.sh sm_div sx
+	bash ./benchmark.sh mm_add sx
+	bash ./benchmark.sh mm_sub sx
+	bash ./benchmark.sh mm_mul sx
+	bash ./benchmark.sh mm_div sx
 	bash ./benchmark.sh mv_mul sx
 	bash ./benchmark.sh m_tanh sx
 

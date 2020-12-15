@@ -1,6 +1,6 @@
 #include "../benchmark_utils.hpp"
 
-#define FUNC "matadd"
+#define FUNC "mm_add"
 #define DENSE_PERF 1 * M *N / time / 1.0e+9
 #define CRS_PERF 1 * M *nnzrow / time / 1.0e+9
 
@@ -29,7 +29,7 @@ bool benchmark(const size_t M, const size_t N, const size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (int i = 0; i < iter; i++) {
-    monolish::blas::matadd(A, B, C);
+    monolish::vml::add(A, B, C);
   }
 
   auto end = std::chrono::system_clock::now();
