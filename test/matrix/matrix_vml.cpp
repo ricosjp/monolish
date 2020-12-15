@@ -1,8 +1,7 @@
-#include "arithmetic/mm_add.hpp"
-#include "arithmetic/mm_sub.hpp"
-#include "arithmetic/mm_copy.hpp"
-#include "arithmetic/mm_mul.hpp"
-#include "arithmetic/mv_mul.hpp"
+#include "vml/mm_add.hpp"
+#include "vml/mm_sub.hpp"
+#include "vml/mm_mul.hpp"
+#include "vml/mm_div.hpp"
 
 int main(int argc, char **argv) {
 
@@ -117,132 +116,102 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  // mv_mul Dense//
-  if (test_send_mv_mul<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
-    return 1;
-  }
-  if (test_send_mv_mul<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
-    return 1;
-  }
-  if (test_mv_mul<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
-    return 1;
-  }
-  if (test_mv_mul<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
-    return 1;
-  }
-
-  // mv_mul CRS//
-  if (test_send_mv_mul<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
-      false) {
-    return 1;
-  }
-  if (test_send_mv_mul<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
-      false) {
-    return 1;
-  }
-  if (test_mv_mul<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
-      false) {
-    return 1;
-  }
-  if (test_mv_mul<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) == false) {
-    return 1;
-  }
-
   // mm_mul Dense//
   if (test_send_mm_mul<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>,
-                       monolish::matrix::Dense<double>, double>(
-          M, N, K, 1.0e-8) == false) {
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
     return 1;
   }
   if (test_send_mm_mul<monolish::matrix::Dense<float>,
                        monolish::matrix::Dense<float>,
-                       monolish::matrix::Dense<float>, float>(
-          M, N, K, 1.0e-4) == false) {
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
   if (test_mm_mul<monolish::matrix::Dense<double>,
                   monolish::matrix::Dense<double>,
-                  monolish::matrix::Dense<double>, double>(M, N, K, 1.0e-8) ==
+                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
   if (test_mm_mul<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, K, 1.0e-4) ==
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
 
   // mm_mul CRS//
   if (test_send_mm_mul<monolish::matrix::CRS<double>,
-                       monolish::matrix::Dense<double>,
-                       monolish::matrix::Dense<double>, double>(
-          M, N, K, 1.0e-8) == false) {
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
     return 1;
   }
   if (test_send_mm_mul<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_mul<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_mul<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_div Dense//
+  if (test_send_mm_div<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_div<monolish::matrix::Dense<float>,
                        monolish::matrix::Dense<float>,
-                       monolish::matrix::Dense<float>, float>(
-          M, N, K, 1.0e-4) == false) {
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
-  if (test_mm_mul<monolish::matrix::CRS<double>,
+  if (test_mm_div<monolish::matrix::Dense<double>,
                   monolish::matrix::Dense<double>,
-                  monolish::matrix::Dense<double>, double>(M, N, K, 1.0e-8) ==
+                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_mul<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, K, 1.0e-4) ==
-      false) {
-    return 1;
-  }
-
-  // mm_copy Dense//
-  if (test_send_mm_copy<monolish::matrix::Dense<double>,
-                        monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-8) == false) {
-    return 1;
-  }
-  if (test_send_mm_copy<monolish::matrix::Dense<float>,
-                        monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
-      false) {
-    return 1;
-  }
-  if (test_mm_copy<monolish::matrix::Dense<double>,
-                   monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
-      false) {
-    return 1;
-  }
-  if (test_mm_copy<monolish::matrix::Dense<float>,
-                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+  if (test_mm_div<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
 
-  // mm_copy CRS//
-  if (test_send_mm_copy<monolish::matrix::CRS<double>,
-                        monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+  // mm_div CRS//
+  if (test_send_mm_div<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_send_mm_copy<monolish::matrix::CRS<float>,
-                        monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+  if (test_send_mm_div<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
-  if (test_mm_copy<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
-                   double>(M, N, 1.0e-8) == false) {
+  if (test_mm_div<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test_mm_copy<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
-                   float>(M, N, 1.0e-4) == false) {
-    return 1;
+  if (test_mm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+   return 1;
   }
 
   return 0;
