@@ -42,54 +42,63 @@ cpu:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 gpu:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 fx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 sx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 run_cpu:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 run_gpu:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 run_fx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 run_sx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
 clean:
 	make -j -C vector_vml/ clean
 	make -j -C vector_blas/ clean
 	make -j -C matrix_common/ clean
+	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ clean
 	- rm -rf $(BENCHMARK_DIR)
 	- rm commit_msg_tmp.txt
