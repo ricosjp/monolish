@@ -1,4 +1,5 @@
 #include "arithmetic/mm_add.hpp"
+#include "arithmetic/mm_sub.hpp"
 #include "arithmetic/mm_copy.hpp"
 #include "arithmetic/mm_mul.hpp"
 #include "arithmetic/mv_mul.hpp"
@@ -63,6 +64,55 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_mm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_sub Dense//
+  if (test_send_mm_sub<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_sub<monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // mm_sub CRS//
+  if (test_send_mm_sub<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_sub<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
                   monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
