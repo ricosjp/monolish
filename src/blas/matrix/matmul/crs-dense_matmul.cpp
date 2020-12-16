@@ -253,20 +253,4 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   }
   logger.func_out();
 }
-
-template <typename T>
-matrix::Dense<T> matrix::CRS<T>::operator*(const matrix::Dense<T> &B) {
-  matrix::Dense<T> C(get_row(), B.get_col());
-  if (gpu_status == true) {
-    C.send();
-  }
-
-  blas::matmul(*this, B, C);
-
-  return C;
-}
-template matrix::Dense<double>
-matrix::CRS<double>::operator*(const matrix::Dense<double> &B);
-template matrix::Dense<float>
-matrix::CRS<float>::operator*(const matrix::Dense<float> &B);
 } // namespace monolish

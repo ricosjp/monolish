@@ -393,51 +393,6 @@ public:
    **/
   void operator=(const Dense<Float> &mat);
 
-  /**
-   * @brief matrix scale (value*A)
-   * @param value scalar value
-   * @return CRS matrix (value*A)
-   * @note
-   * - # of computation: M*N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  Dense<Float> operator*(const Float value);
-
-  /**
-   * @brief matrix-vector multiplication (A*vec)
-   * @param vec vector (size N)
-   * @return result vector (size M)
-   * @note
-   * - # of computation: 2*M*N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  vector<Float> operator*(vector<Float> &vec);
-
-  /**
-   * @brief Dense matrix (size M*K) and dense matrix (size K*N) multiplication
-   *(A*B)
-   * @param B Dense matrix (size K*N)
-   * @return result dense matrix (size M*N)
-   * @note
-   * - # of computation: 2*M*N*K
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  Dense<Float> operator*(const Dense<Float> &B);
-
-  /**
-   * @brief Dense matrix (size M*N) and dense matrix (size K*N) addition (A+B)
-   * @param B CRS matrix (size M*N)
-   * @return result CRS matrix (size M*N)
-   * @note
-   * - # of computation: M*N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  Dense<Float> operator+(const Dense<Float> &B);
-
   /////////////////////////////////////////////
 
   /**

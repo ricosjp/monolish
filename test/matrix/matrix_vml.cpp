@@ -1,7 +1,7 @@
 #include "vml/mm_add.hpp"
-#include "vml/mm_sub.hpp"
-#include "vml/mm_mul.hpp"
 #include "vml/mm_div.hpp"
+#include "vml/mm_mul.hpp"
+#include "vml/mm_sub.hpp"
 
 int main(int argc, char **argv) {
 
@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
   }
   if (test_mm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
                   monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
-   return 1;
+    return 1;
   }
 
   return 0;

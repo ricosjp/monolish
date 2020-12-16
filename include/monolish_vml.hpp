@@ -25,7 +25,6 @@ void sub(const vector<double> &a, const double alpha, vector<double> &y);
 void mul(const vector<double> &a, const double alpha, vector<double> &y);
 void div(const vector<double> &a, const double alpha, vector<double> &y);
 
-
 void add(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 void sub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
@@ -103,5 +102,5 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
-} // namespace blas
+} // namespace vml
 } // namespace monolish

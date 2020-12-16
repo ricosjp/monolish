@@ -24,17 +24,4 @@ void blas::mscal(const float alpha, matrix::Dense<float> &A) {
 
   logger.func_out();
 }
-
-template <typename T>
-matrix::Dense<T> matrix::Dense<T>::operator*(const T value) {
-  matrix::Dense<T> A = copy();
-
-  blas::mscal(value, A);
-
-  return A;
-}
-template matrix::Dense<double>
-matrix::Dense<double>::operator*(const double value);
-template matrix::Dense<float>
-matrix::Dense<float>::operator*(const float value);
 } // namespace monolish

@@ -55,34 +55,6 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_out();
 }
 
-template <typename T>
-matrix::Dense<T> matrix::Dense<T>::operator+(const matrix::Dense<T> &B) {
-  matrix::Dense<T> C(get_row(), get_col());
-  if (gpu_status == true) {
-    C.send();
-  }
-
-  blas::matadd(*this, B, C);
-
-  return C;
-}
-template matrix::Dense<double>
-matrix::Dense<double>::operator+(const matrix::Dense<double> &B);
-
-template <typename T>
-matrix::CRS<T> matrix::CRS<T>::operator+(const matrix::CRS<T> &B) {
-  matrix::CRS<T> C(*this);
-  if (gpu_status == true) {
-    C.send();
-  }
-
-  blas::matadd(*this, B, C);
-
-  return C;
-}
-template matrix::CRS<double>
-matrix::CRS<double>::operator+(const matrix::CRS<double> &B);
-
 ///////////////////////////////
 // subtract
 ///////////////////////////////

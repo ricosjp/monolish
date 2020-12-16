@@ -102,17 +102,4 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
 
   logger.func_out();
 }
-
-template <typename T> vector<T> matrix::Dense<T>::operator*(vector<T> &vec) {
-  vector<T> y(get_row());
-  if (gpu_status == true) {
-    y.send();
-  }
-
-  blas::matvec(*this, vec, y);
-
-  return y;
-}
-template vector<double> matrix::Dense<double>::operator*(vector<double> &vec);
-template vector<float> matrix::Dense<float>::operator*(vector<float> &vec);
 } // namespace monolish

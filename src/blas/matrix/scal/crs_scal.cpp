@@ -22,14 +22,4 @@ void blas::mscal(const float alpha, matrix::CRS<float> &A) {
 
   logger.func_out();
 }
-
-template <typename T> matrix::CRS<T> matrix::CRS<T>::operator*(const T value) {
-  matrix::CRS<T> A = copy();
-
-  blas::mscal(value, A);
-
-  return A;
-}
-template matrix::CRS<double> matrix::CRS<double>::operator*(const double value);
-template matrix::CRS<float> matrix::CRS<float>::operator*(const float value);
 } // namespace monolish
