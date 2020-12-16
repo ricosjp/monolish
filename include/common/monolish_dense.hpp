@@ -393,6 +393,28 @@ public:
    **/
   void operator=(const Dense<Float> &mat);
 
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat Dense matrix 
+   * @return true or false
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator==(const Dense<Float> &mat) const;
+
+  /**
+   * @brief Comparing matricies (A != mat)
+   * @param mat Dense matrix 
+   * @return true or false
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator!=(const Dense<Float> &mat) const;
+
   /////////////////////////////////////////////
 
   /**

@@ -572,12 +572,35 @@ public:
 
   /**
    * @brief matrix copy
+   * @param mat COO matrix 
    * @note
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void operator=(const COO<Float> &mat) { mat = copy(); }
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat COO matrix 
+   * @return true or false
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator==(const COO<Float> &mat) const;
+
+  /**
+   * @brief Comparing matricies (A != mat)
+   * @param mat COO matrix 
+   * @return true or false
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator!=(const COO<Float> &mat) const;
 
   /**
    * @brief insert element to (m, n)

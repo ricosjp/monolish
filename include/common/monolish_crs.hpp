@@ -324,6 +324,28 @@ public:
   void operator=(const CRS<Float> &mat);
 
   /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat CRS matrix 
+   * @return true or false
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator==(const CRS<Float> &mat) const;
+
+  /**
+   * @brief Comparing matricies (A != mat)
+   * @param mat CRS matrix 
+   * @return true or false
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  bool operator!=(const CRS<Float> &mat) const;
+
+  /**
    * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
    * @note
    * - # of computation: nnz
