@@ -34,6 +34,9 @@ Unreleased
 - test/benchmarkのvector_commonをoperatorでなく四則演算関数に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/147
 - matrix add/subでdoubleからfloatを作るようにファイル構成を変更  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/146
 
+### Removed
+- すべてのクラスの四則演算のoperatorを削除, test,benchmarkも同様に削除 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/153
+
 0.7.1 - 2020/12/10
 -----------
 ### Added
