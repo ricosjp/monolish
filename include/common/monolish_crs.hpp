@@ -324,53 +324,6 @@ public:
   void operator=(const CRS<Float> &mat);
 
   /**
-   * @brief matrix scale (value*A)
-   * @param value scalar value
-   * @return CRS matrix (value*A)
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  CRS<Float> operator*(const Float value);
-
-  /**
-   * @brief matrix-vector multiplication (A*vec)
-   * @param vec vector (size N)
-   * @return result vector (size M)
-   * @note
-   * - # of computation: 2nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  vector<Float> operator*(vector<Float> &vec);
-
-  /**
-   * @brief CRS matrix (size M*K) and Dense matrix (size K*N) multiplication
-   *(A*B)
-   * @param B Dense matrix (size K*N)
-   * @return result Dense matrix (size M*N)
-   * @note
-   * - # of computation: 2* N * nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  Dense<Float> operator*(const Dense<Float> &B);
-
-  // crs-dense
-  /**
-   * @brief CRS matrix (size M*N) and CRS matrix (size K*N) addition A + B (A
-   *and B must be same non-zero structure)
-   * @param B CRS matrix (size M*N)
-   * @return result CRS matrix (size M*N)
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  CRS<Float> operator+(const CRS<Float> &B);
-
-  /**
    * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
    * @note
    * - # of computation: nnz
