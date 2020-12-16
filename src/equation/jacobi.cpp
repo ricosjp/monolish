@@ -1,4 +1,5 @@
 #include "../../include/monolish_blas.hpp"
+#include "../../include/monolish_vml.hpp"
 #include "../../include/monolish_equation.hpp"
 #include "../internal/monolish_internal.hpp"
 
@@ -34,7 +35,7 @@ void equation::Jacobi<T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  z = this->precond.M * r; // x = Ab
+  vml::mul(this->precond.M, r, z); // x = Ab
 
   logger.solver_out();
 }

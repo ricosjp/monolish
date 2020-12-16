@@ -4,7 +4,7 @@
 namespace monolish {
 
 void vml::add(const vector<double> &a, const vector<double> &b,
-               vector<double> &y) {
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -24,7 +24,7 @@ void vml::add(const vector<double> &a, const vector<double> &b,
 }
 
 void vml::sub(const vector<double> &a, const vector<double> &b,
-               vector<double> &y) {
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -44,7 +44,7 @@ void vml::sub(const vector<double> &a, const vector<double> &b,
 }
 
 void vml::mul(const vector<double> &a, const vector<double> &b,
-               vector<double> &y) {
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -64,7 +64,7 @@ void vml::mul(const vector<double> &a, const vector<double> &b,
 }
 
 void vml::div(const vector<double> &a, const vector<double> &b,
-               vector<double> &y) {
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

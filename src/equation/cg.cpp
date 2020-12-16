@@ -1,4 +1,5 @@
 #include "../../include/monolish_blas.hpp"
+#include "../../include/monolish_vml.hpp"
 #include "../../include/monolish_equation.hpp"
 #include "../internal/monolish_internal.hpp"
 
@@ -38,7 +39,7 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
 
   // r = b-Ax
   blas::matvec(A, x, q);
-  r = b - q;
+  vml::sub(b, q, r);
 
   // p0 = Mr0
   p = r;

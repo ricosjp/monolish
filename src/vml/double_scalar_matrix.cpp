@@ -7,7 +7,7 @@ namespace monolish {
 // Dense////////////////////////////////////
 ///////////////////////////////////////////
 void vml::add(const matrix::Dense<double> &A, const double alpha,
-               matrix::Dense<double> &C) {
+              matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -29,7 +29,7 @@ void vml::add(const matrix::Dense<double> &A, const double alpha,
 }
 
 void vml::sub(const matrix::Dense<double> &A, const double alpha,
-               matrix::Dense<double> &C) {
+              matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -51,7 +51,7 @@ void vml::sub(const matrix::Dense<double> &A, const double alpha,
 }
 
 void vml::mul(const matrix::Dense<double> &A, const double alpha,
-               matrix::Dense<double> &C) {
+              matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -73,7 +73,7 @@ void vml::mul(const matrix::Dense<double> &A, const double alpha,
 }
 
 void vml::div(const matrix::Dense<double> &A, const double alpha,
-               matrix::Dense<double> &C) {
+              matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -98,7 +98,7 @@ void vml::div(const matrix::Dense<double> &A, const double alpha,
 // CRS////////////////////////////////////
 ///////////////////////////////////////////
 void vml::add(const matrix::CRS<double> &A, const double alpha,
-               matrix::CRS<double> &C) {
+              matrix::CRS<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -120,7 +120,7 @@ void vml::add(const matrix::CRS<double> &A, const double alpha,
 }
 
 void vml::sub(const matrix::CRS<double> &A, const double alpha,
-               matrix::CRS<double> &C) {
+              matrix::CRS<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -142,7 +142,7 @@ void vml::sub(const matrix::CRS<double> &A, const double alpha,
 }
 
 void vml::mul(const matrix::CRS<double> &A, const double alpha,
-               matrix::CRS<double> &C) {
+              matrix::CRS<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -164,7 +164,7 @@ void vml::mul(const matrix::CRS<double> &A, const double alpha,
 }
 
 void vml::div(const matrix::CRS<double> &A, const double alpha,
-               matrix::CRS<double> &C) {
+              matrix::CRS<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
