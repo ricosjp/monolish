@@ -289,12 +289,12 @@ template <typename T> bool Dense<T>::operator==(const Dense<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
       return false;
     }
   }
 
-  if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
     return false;
   }
 
@@ -323,12 +323,12 @@ template <typename T> bool Dense<T>::operator!=(const Dense<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( internal::vequal(get_nnz(), val.data(), mat.val.data(), true) ){
+    if (internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) {
       return false;
     }
   }
 
-  if( internal::vequal(get_nnz(), val.data(), mat.val.data(), false) ){
+  if (internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) {
     return false;
   }
 

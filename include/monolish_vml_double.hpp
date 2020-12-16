@@ -33,7 +33,8 @@ namespace vml {
 void add(const vector<double> &a, const vector<double> &b, vector<double> &y);
 
 /**
- * @brief double precision element by element subtraction of vector a and vector b.
+ * @brief double precision element by element subtraction of vector a and vector
+ * b.
  * @param a double precision monolish vector (size N)
  * @param b double precision monolish vector (size N)
  * @param y double precision monolish vector (size N)
@@ -46,7 +47,8 @@ void add(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void sub(const vector<double> &a, const vector<double> &b, vector<double> &y);
 
 /**
- * @brief double precision element by element multiplication of vector a and vector b.
+ * @brief double precision element by element multiplication of vector a and
+ * vector b.
  * @param a double precision monolish vector (size N)
  * @param b double precision monolish vector (size N)
  * @param y double precision monolish vector (size N)
@@ -98,7 +100,8 @@ void add(const vector<double> &a, const double alpha, vector<double> &y);
 void sub(const vector<double> &a, const double alpha, vector<double> &y);
 
 /**
- * @brief double precision scalar and vector multiplication (y[i] = a[i] * alpha)
+ * @brief double precision scalar and vector multiplication (y[i] = a[i] *
+ * alpha)
  * @param a double precision monolish vector (size N)
  * @param alpha double precision scalar value
  * @param y double precision monolish vector (size N)
@@ -124,11 +127,12 @@ void mul(const vector<double> &a, const double alpha, vector<double> &y);
 void div(const vector<double> &a, const double alpha, vector<double> &y);
 
 //////////////////////////////////////////////////////
-// Dense 
+// Dense
 //////////////////////////////////////////////////////
 
 /**
- * @brief double precision element by element addition of Dense matrix A and Dense matrix B.
+ * @brief double precision element by element addition of Dense matrix A and
+ * Dense matrix B.
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param B double precision monolish Dense Matrix (size M x N)
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -142,7 +146,8 @@ void add(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision element by element subtraction of Dense matrix A and Dense matrix B.
+ * @brief double precision element by element subtraction of Dense matrix A and
+ * Dense matrix B.
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param B double precision monolish Dense Matrix (size M x N)
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -156,7 +161,8 @@ void sub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision element by element multiplication of Dense matrix A and Dense matrix B.
+ * @brief double precision element by element multiplication of Dense matrix A
+ * and Dense matrix B.
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param B double precision monolish Dense Matrix (size M x N)
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -170,7 +176,8 @@ void mul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision element by element division of Dense matrix A and Dense matrix B.
+ * @brief double precision element by element division of Dense matrix A and
+ * Dense matrix B.
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param B double precision monolish Dense Matrix (size M x N)
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -184,7 +191,8 @@ void div(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix addition (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix addition (C[i][j] = A[i][j] +
+ * alpha)
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -198,7 +206,8 @@ void add(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix subtraction (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix subtraction (C[i][j] =
+ * A[i][j] + alpha)
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -212,7 +221,8 @@ void sub(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix multiplication (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix multiplication (C[i][j] =
+ * A[i][j] + alpha)
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -226,7 +236,8 @@ void mul(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix division (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix division (C[i][j] = A[i][j] +
+ * alpha)
  * @param A double precision monolish Dense Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish Dense Matrix (size M x N)
@@ -240,11 +251,12 @@ void div(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 //////////////////////////////////////////////////////
-// CRS 
+// CRS
 //////////////////////////////////////////////////////
 
 /**
- * @brief double precision element by element addition of CRS matrix A and CRS matrix B.
+ * @brief double precision element by element addition of CRS matrix A and CRS
+ * matrix B.
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param B double precision monolish CRS Matrix (size M x N)
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -258,7 +270,8 @@ void add(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision element by element subtraction of CRS matrix A and CRS matrix B.
+ * @brief double precision element by element subtraction of CRS matrix A and
+ * CRS matrix B.
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param B double precision monolish CRS Matrix (size M x N)
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -272,7 +285,8 @@ void sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision element by element multiplication of CRS matrix A and CRS matrix B.
+ * @brief double precision element by element multiplication of CRS matrix A and
+ * CRS matrix B.
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param B double precision monolish CRS Matrix (size M x N)
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -286,7 +300,8 @@ void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision element by element division of CRS matrix A and CRS matrix B.
+ * @brief double precision element by element division of CRS matrix A and CRS
+ * matrix B.
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param B double precision monolish CRS Matrix (size M x N)
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -300,7 +315,8 @@ void div(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix addition (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix addition (C[i][j] = A[i][j] +
+ * alpha)
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -314,7 +330,8 @@ void add(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix subtraction (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix subtraction (C[i][j] =
+ * A[i][j] + alpha)
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -328,7 +345,8 @@ void sub(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix multiplication (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix multiplication (C[i][j] =
+ * A[i][j] + alpha)
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish CRS Matrix (size M x N)
@@ -342,7 +360,8 @@ void mul(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief double precision scalar and Dence matrix division (C[i][j] = A[i][j] + alpha)
+ * @brief double precision scalar and Dence matrix division (C[i][j] = A[i][j] +
+ * alpha)
  * @param A double precision monolish CRS Matrix (size M x N)
  * @param alpha double precision scalar value
  * @param C double precision monolish CRS Matrix (size M x N)

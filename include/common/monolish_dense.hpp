@@ -395,7 +395,7 @@ public:
 
   /**
    * @brief Comparing matricies (A == mat)
-   * @param mat Dense matrix 
+   * @param mat Dense matrix
    * @return true or false
    * @note
    * - # of computation: M*N
@@ -406,7 +406,7 @@ public:
 
   /**
    * @brief Comparing matricies (A != mat)
-   * @param mat Dense matrix 
+   * @param mat Dense matrix
    * @return true or false
    * @note
    * - # of computation: M*N

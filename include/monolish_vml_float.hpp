@@ -33,7 +33,8 @@ namespace vml {
 void add(const vector<float> &a, const vector<float> &b, vector<float> &y);
 
 /**
- * @brief single precision element by element subtraction of vector a and vector b.
+ * @brief single precision element by element subtraction of vector a and vector
+ * b.
  * @param a single precision monolish vector (size N)
  * @param b single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
@@ -46,7 +47,8 @@ void add(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void sub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 
 /**
- * @brief single precision element by element multiplication of vector a and vector b.
+ * @brief single precision element by element multiplication of vector a and
+ * vector b.
  * @param a single precision monolish vector (size N)
  * @param b single precision monolish vector (size N)
  * @param y single precision monolish vector (size N)
@@ -98,7 +100,8 @@ void add(const vector<float> &a, const float alpha, vector<float> &y);
 void sub(const vector<float> &a, const float alpha, vector<float> &y);
 
 /**
- * @brief single precision scalar and vector multiplication (y[i] = a[i] * alpha)
+ * @brief single precision scalar and vector multiplication (y[i] = a[i] *
+ * alpha)
  * @param a single precision monolish vector (size N)
  * @param alpha single precision scalar value
  * @param y single precision monolish vector (size N)
@@ -124,11 +127,12 @@ void mul(const vector<float> &a, const float alpha, vector<float> &y);
 void div(const vector<float> &a, const float alpha, vector<float> &y);
 
 //////////////////////////////////////////////////////
-// Dense 
+// Dense
 //////////////////////////////////////////////////////
 
 /**
- * @brief single precision element by element addition of Dense matrix A and Dense matrix B.
+ * @brief single precision element by element addition of Dense matrix A and
+ * Dense matrix B.
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param B single precision monolish Dense Matrix (size M x N)
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -142,7 +146,8 @@ void add(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision element by element subtraction of Dense matrix A and Dense matrix B.
+ * @brief single precision element by element subtraction of Dense matrix A and
+ * Dense matrix B.
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param B single precision monolish Dense Matrix (size M x N)
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -156,7 +161,8 @@ void sub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision element by element multiplication of Dense matrix A and Dense matrix B.
+ * @brief single precision element by element multiplication of Dense matrix A
+ * and Dense matrix B.
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param B single precision monolish Dense Matrix (size M x N)
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -170,7 +176,8 @@ void mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision element by element division of Dense matrix A and Dense matrix B.
+ * @brief single precision element by element division of Dense matrix A and
+ * Dense matrix B.
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param B single precision monolish Dense Matrix (size M x N)
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -184,7 +191,8 @@ void div(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix addition (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix addition (C[i][j] = A[i][j] +
+ * alpha)
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -198,7 +206,8 @@ void add(const matrix::Dense<float> &A, const float alpha,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix subtraction (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
+ * A[i][j] + alpha)
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -212,7 +221,8 @@ void sub(const matrix::Dense<float> &A, const float alpha,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix multiplication (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
+ * A[i][j] + alpha)
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -226,7 +236,8 @@ void mul(const matrix::Dense<float> &A, const float alpha,
          matrix::Dense<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
+ * alpha)
  * @param A single precision monolish Dense Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish Dense Matrix (size M x N)
@@ -240,11 +251,12 @@ void div(const matrix::Dense<float> &A, const float alpha,
          matrix::Dense<float> &C);
 
 //////////////////////////////////////////////////////
-// CRS 
+// CRS
 //////////////////////////////////////////////////////
 
 /**
- * @brief single precision element by element addition of CRS matrix A and CRS matrix B.
+ * @brief single precision element by element addition of CRS matrix A and CRS
+ * matrix B.
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param B single precision monolish CRS Matrix (size M x N)
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -258,7 +270,8 @@ void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
 
 /**
- * @brief single precision element by element subtraction of CRS matrix A and CRS matrix B.
+ * @brief single precision element by element subtraction of CRS matrix A and
+ * CRS matrix B.
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param B single precision monolish CRS Matrix (size M x N)
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -272,7 +285,8 @@ void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
 
 /**
- * @brief single precision element by element multiplication of CRS matrix A and CRS matrix B.
+ * @brief single precision element by element multiplication of CRS matrix A and
+ * CRS matrix B.
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param B single precision monolish CRS Matrix (size M x N)
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -286,7 +300,8 @@ void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
 
 /**
- * @brief single precision element by element division of CRS matrix A and CRS matrix B.
+ * @brief single precision element by element division of CRS matrix A and CRS
+ * matrix B.
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param B single precision monolish CRS Matrix (size M x N)
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -300,7 +315,8 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix addition (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix addition (C[i][j] = A[i][j] +
+ * alpha)
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -310,11 +326,11 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void add(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix subtraction (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
+ * A[i][j] + alpha)
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -324,11 +340,11 @@ void add(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void sub(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix multiplication (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
+ * A[i][j] + alpha)
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -338,11 +354,11 @@ void sub(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void mul(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
- * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] + alpha)
+ * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
+ * alpha)
  * @param A single precision monolish CRS Matrix (size M x N)
  * @param alpha single precision scalar value
  * @param C single precision monolish CRS Matrix (size M x N)
@@ -352,8 +368,7 @@ void mul(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void div(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 } // namespace vml
 } // namespace monolish

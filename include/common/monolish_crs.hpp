@@ -325,7 +325,7 @@ public:
 
   /**
    * @brief Comparing matricies (A == mat)
-   * @param mat CRS matrix 
+   * @param mat CRS matrix
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz
@@ -336,7 +336,7 @@ public:
 
   /**
    * @brief Comparing matricies (A != mat)
-   * @param mat CRS matrix 
+   * @param mat CRS matrix
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz

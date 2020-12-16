@@ -499,24 +499,28 @@ template <typename T> bool COO<T>::operator==(const COO<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
       return false;
     }
-    if( !(internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(),
+                           true))) {
       return false;
     }
-    if( !(internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(),
+                           true))) {
       return false;
     }
   }
 
-  if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
     return false;
   }
-  if( !(internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(),
+                         false))) {
     return false;
   }
-  if( !(internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(),
+                         false))) {
     return false;
   }
 
@@ -545,24 +549,28 @@ template <typename T> bool COO<T>::operator!=(const COO<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( internal::vequal(get_nnz(), val.data(), mat.val.data(), true) ){
+    if (internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) {
       return false;
     }
-    if( internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(), true) ){
+    if (internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(),
+                         true)) {
       return false;
     }
-    if( internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(), true) ){
+    if (internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(),
+                         true)) {
       return false;
     }
   }
 
-  if( internal::vequal(get_nnz(), val.data(), mat.val.data(), false) ){
+  if (internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) {
     return false;
   }
-  if( internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(), false) ){
+  if (internal::vequal(get_nnz(), col_index.data(), mat.col_index.data(),
+                       false)) {
     return false;
   }
-  if( internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(), false) ){
+  if (internal::vequal(get_nnz(), row_index.data(), mat.row_index.data(),
+                       false)) {
     return false;
   }
 

@@ -201,24 +201,28 @@ template <typename T> bool CRS<T>::operator==(const CRS<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
       return false;
     }
-    if( !(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
+                           true))) {
       return false;
     }
-    if( !(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), true)) ){
+    if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
+                           true))) {
       return false;
     }
   }
 
-  if( !(internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
     return false;
   }
-  if( !(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
+                         false))) {
     return false;
   }
-  if( !(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), false)) ){
+  if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
+                         false))) {
     return false;
   }
 
@@ -247,24 +251,24 @@ template <typename T> bool CRS<T>::operator!=(const CRS<T> &mat) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if( internal::vequal(get_nnz(), val.data(), mat.val.data(), true) ){
+    if (internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) {
       return false;
     }
-    if( internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), true) ){
+    if (internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), true)) {
       return false;
     }
-    if( internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), true) ){
+    if (internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), true)) {
       return false;
     }
   }
 
-  if( internal::vequal(get_nnz(), val.data(), mat.val.data(), false) ){
+  if (internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) {
     return false;
   }
-  if( internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), false) ){
+  if (internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), false)) {
     return false;
   }
-  if( internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), false) ){
+  if (internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), false)) {
     return false;
   }
 

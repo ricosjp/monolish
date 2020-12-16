@@ -572,7 +572,7 @@ public:
 
   /**
    * @brief matrix copy
-   * @param mat COO matrix 
+   * @param mat COO matrix
    * @note
    * - # of computation: 3nnz
    * - Multi-threading: false
@@ -582,7 +582,7 @@ public:
 
   /**
    * @brief Comparing matricies (A == mat)
-   * @param mat COO matrix 
+   * @param mat COO matrix
    * @return true or false
    * @note
    * - # of computation: 3nnz
@@ -593,7 +593,7 @@ public:
 
   /**
    * @brief Comparing matricies (A != mat)
-   * @param mat COO matrix 
+   * @param mat COO matrix
    * @return true or false
    * @note
    * - # of computation: 3nnz
