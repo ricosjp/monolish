@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.8.0 - 2020/12/17
+-----------
 ### Added
 - VMLのDoxygenコメントを追加，Doxygenバージョンを0.8.0へ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/156
 - matrixに一致判定関数を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/156
