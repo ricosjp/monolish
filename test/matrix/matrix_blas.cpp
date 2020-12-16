@@ -2,8 +2,8 @@
 #include "blas/matmul.hpp"
 #include "blas/matsub.hpp"
 #include "blas/matvec.hpp"
-#include "blas/mscal.hpp"
 #include "blas/mm_copy.hpp"
+#include "blas/mscal.hpp"
 
 int main(int argc, char **argv) {
 
