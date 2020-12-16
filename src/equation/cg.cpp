@@ -1,6 +1,6 @@
 #include "../../include/monolish_blas.hpp"
-#include "../../include/monolish_vml.hpp"
 #include "../../include/monolish_equation.hpp"
+#include "../../include/monolish_vml.hpp"
 #include "../internal/monolish_internal.hpp"
 
 #include <fstream>
