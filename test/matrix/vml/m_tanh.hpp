@@ -26,7 +26,7 @@ bool test_send_tanh(const size_t M, const size_t N, double tol) {
   ans_tanh(AA);
 
   A.send();
-  A.tanh();
+  monolish::vml::tanh(A, A);
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
@@ -51,7 +51,7 @@ bool test_tanh(const size_t M, const size_t N, double tol) {
   monolish::matrix::Dense<T> AA(seedA);
   ans_tanh(AA);
 
-  A.tanh();
+  monolish::vml::tanh(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
   return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
