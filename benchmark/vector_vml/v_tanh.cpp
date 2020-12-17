@@ -4,12 +4,6 @@
 #define PERF size / time / 1.0e+9
 #define MEM 2 * size * sizeof(T) / time / 1.0e+9
 
-template <typename T> void get_ans(monolish::vector<T> &ans) {
-  for (size_t i = 0; i < ans.size(); i++) {
-    ans[i] = std::tanh(ans[i]);
-  }
-}
-
 template <typename T> bool benchmark(const size_t size, const size_t iter) {
 
   // create random vector x rand(0.1~1.0)
@@ -21,7 +15,7 @@ template <typename T> bool benchmark(const size_t size, const size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (size_t i = 0; i < iter; i++) {
-    ans.tanh();
+    monolish::vml::tanh(ans, ans);
   }
 
   auto end = std::chrono::system_clock::now();
