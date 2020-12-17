@@ -15,6 +15,8 @@ namespace monolish {
  */
 namespace vml {
 
+void tanh(const vector<float> &a, vector<float> &y);
+
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
@@ -326,7 +328,8 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
@@ -340,7 +343,8 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
@@ -354,7 +358,8 @@ void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
@@ -368,7 +373,8 @@ void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 } // namespace vml
 } // namespace monolish
