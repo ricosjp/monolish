@@ -27,29 +27,6 @@ void tanh_core(size_t N, float *vec) {
 
 /////////
 
-template <typename T> void vector<T>::tanh() {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  if (gpu_status == true) {
-    recv();
-  }
-
-  T *vald = val.data();
-  tanh_core(get_nnz(), vald);
-
-  if (gpu_status == true) {
-    send();
-  }
-
-  logger.func_out();
-}
-
-template void vector<double>::tanh();
-template void vector<float>::tanh();
-
-/////////
-
 template <typename T> void matrix::Dense<T>::tanh() {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
