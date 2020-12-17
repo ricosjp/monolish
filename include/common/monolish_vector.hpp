@@ -364,13 +364,5 @@ public:
    **/
   bool operator!=(const vector<Float> &vec);
 
-  /**
-   * @brief tanh vector elements (v[0:N] = tanh(vec[0:N]))
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void tanh();
 };
 } // namespace monolish
