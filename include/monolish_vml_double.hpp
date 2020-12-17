@@ -24,6 +24,9 @@ namespace vml {
    **/
 void tanh(const vector<double> &a, vector<double> &y);
 
+void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
