@@ -37,7 +37,8 @@ void vsqrt(const size_t N, const double *a, double *y, bool gpu_status) {
 //////////////
 // pow
 //////////////
-void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_status) {
+void vpow(const size_t N, const double *a, const double *b, double *y,
+          bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -64,7 +65,8 @@ void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_
   logger.func_out();
 }
 
-void vpow(const size_t N, const double *a, const double alpha, double *y, bool gpu_status) {
+void vpow(const size_t N, const double *a, const double alpha, double *y,
+          bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
