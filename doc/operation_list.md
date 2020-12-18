@@ -59,16 +59,25 @@
 
 ## Mathematical functions (vector)
 
-| func | Intel     | NVIDIA         | OSS            |
-|------|-----------|----------------|----------------|
-| sin  | none->MKL | none->monolish | none->monolish |
-| cos  | none->MKL | none->monolish | none->monolish |
-| tan  | none->MKL | none->monolish | none->monolish |
-| sinh | none->MKL | none->monolish | none->monolish |
-| cosh | none->MKL | none->monolish | none->monolish |
-| tanh | none->MKL | none->monolish | none->monolish |
-| exp  | none->MKL | none->monolish | none->monolish |
-| log  | none->MKL | none->monolish | none->monolish |
+| func    | Intel     | NVIDIA         | OSS            |
+|---------|-----------|----------------|----------------|
+| sin     | none->MKL | none->monolish | none->monolish |
+| sinh    | none->MKL | none->monolish | none->monolish |
+| arcsin  | none->MKL | none->monolish | none->monolish |
+| arcsinh | none->MKL | none->monolish | none->monolish |
+| tan     | none->MKL | none->monolish | none->monolish |
+| tanh    | none->MKL | none->monolish | none->monolish |
+| arctan  | none->MKL | none->monolish | none->monolish |
+| arctanh | none->MKL | none->monolish | none->monolish |
+| max     | none->MKL | none->monolish | none->monolish |
+| min     | none->MKL | none->monolish | none->monolish |
+| power   | none->MKL | none->monolish | none->monolish |
+| sqrt    | none->MKL | none->monolish | none->monolish |
+| sum     | none->MKL | none->monolish | none->monolish |
+| ceil    | none->MKL | none->monolish | none->monolish |
+| floor   | none->MKL | none->monolish | none->monolish |
+| sign    | none->MKL | none->monolish | none->monolish |
+| rint    | none->MKL | none->monolish | none->monolish |
 
 # Dense Matrix Operations
 
@@ -103,16 +112,25 @@
 
 ## Mathematical functions (Dense)
 
-| func | Intel     | NVIDIA         | OSS            |
-|------|-----------|----------------|----------------|
-| sin  | none->MKL | none->monolish | none->monolish |
-| cos  | none->MKL | none->monolish | none->monolish |
-| tan  | none->MKL | none->monolish | none->monolish |
-| sinh | none->MKL | none->monolish | none->monolish |
-| cosh | none->MKL | none->monolish | none->monolish |
-| tanh | MKL       | none->monolish | none->monolish |
-| exp  | none->MKL | none->monolish | none->monolish |
-| log  | none->MKL | none->monolish | none->monolish |
+| func    | Intel     | NVIDIA         | OSS            |
+|---------|-----------|----------------|----------------|
+| sin     | none->MKL | none->monolish | none->monolish |
+| sinh    | none->MKL | none->monolish | none->monolish |
+| arcsin  | none->MKL | none->monolish | none->monolish |
+| arcsinh | none->MKL | none->monolish | none->monolish |
+| tan     | none->MKL | none->monolish | none->monolish |
+| tanh    | none->MKL | none->monolish | none->monolish |
+| arctan  | none->MKL | none->monolish | none->monolish |
+| arctanh | none->MKL | none->monolish | none->monolish |
+| max     | none->MKL | none->monolish | none->monolish |
+| min     | none->MKL | none->monolish | none->monolish |
+| power   | none->MKL | none->monolish | none->monolish |
+| sqrt    | none->MKL | none->monolish | none->monolish |
+| sum     | none->MKL | none->monolish | none->monolish |
+| ceil    | none->MKL | none->monolish | none->monolish |
+| floor   | none->MKL | none->monolish | none->monolish |
+| sign    | none->MKL | none->monolish | none->monolish |
+| rint    | none->MKL | none->monolish | none->monolish |
 
 # CRS Matrix Operations
 
@@ -147,16 +165,25 @@
 
 ## Mathematical functions (CRS)
 
-| func | Intel     | NVIDIA         | OSS            |
-|------|-----------|----------------|----------------|
-| sin  | none->MKL | none->monolish | none->monolish |
-| cos  | none->MKL | none->monolish | none->monolish |
-| tan  | none->MKL | none->monolish | none->monolish |
-| sinh | none->MKL | none->monolish | none->monolish |
-| cosh | none->MKL | none->monolish | none->monolish |
-| tanh | none->MKL | none->monolish | none->monolish |
-| exp  | none->MKL | none->monolish | none->monolish |
-| log  | none->MKL | none->monolish | none->monolish |
+| func    | Intel     | NVIDIA         | OSS            |
+|---------|-----------|----------------|----------------|
+| sin     | none->MKL | none->monolish | none->monolish |
+| sinh    | none->MKL | none->monolish | none->monolish |
+| arcsin  | none->MKL | none->monolish | none->monolish |
+| arcsinh | none->MKL | none->monolish | none->monolish |
+| tan     | none->MKL | none->monolish | none->monolish |
+| tanh    | none->MKL | none->monolish | none->monolish |
+| arctan  | none->MKL | none->monolish | none->monolish |
+| arctanh | none->MKL | none->monolish | none->monolish |
+| max     | none->MKL | none->monolish | none->monolish |
+| min     | none->MKL | none->monolish | none->monolish |
+| power   | none->MKL | none->monolish | none->monolish |
+| sqrt    | none->MKL | none->monolish | none->monolish |
+| sum     | none->MKL | none->monolish | none->monolish |
+| ceil    | none->MKL | none->monolish | none->monolish |
+| floor   | none->MKL | none->monolish | none->monolish |
+| sign    | none->MKL | none->monolish | none->monolish |
+| rint    | none->MKL | none->monolish | none->monolish |
 
 # Linear Solvers
 
