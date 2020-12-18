@@ -36,9 +36,16 @@
 | Dense-Dense | MKL           | cuBLAS             | CBLAS互換     |
 | CRS-Dense   | monolish->MKL | monolish->cuSparse | monolish(AVX) |
 
+## Extended BLAS Lv3: Matrix add/sub (C=A+B)
+
+| func  | Intel    | NVIDIA   | OSS      |
+|-------|----------|----------|----------|
+| Dense | MKL      | monolish | monolish |
+| CRS   | MKL      | monolish | monolish |
+
 # Vector Operations
 
-## Arithmetics (scalar-vector)
+## scalar-vector VML
 
 | func  | Intel         | NVIDIA           | OSS       |
 |-------|---------------|------------------|-----------|
@@ -47,50 +54,71 @@
 | mul   | monolish      | monolish         | monolish  |
 | div   | monolish      | monolish         | monolish  |
 
-## Arithmetics (vector-vector)
+## vector-vector VML
 
 | func  | Intel         | NVIDIA           | OSS      |
 |-------|---------------|------------------|----------|
 | add   | MKL           | monolish         | monolish |
 | sub   | MKL           | monolish         | monolish |
 | mul   | MKL           | monolish         | monolish |
-| div   | monolish      | monolish         | monolish |
+| div   | MKL           | monolish         | monolish |
 | equal | monolish      | monolish         | monolish |
 | copy  | MKL           | cuBLAS           | CBLAS互換|
 
-## Mathematical functions (vector)
+## vector helper functions of VML
+| equal       | monolish      | monolish       | monolish |
+| not equal   | monolish      | monolish       | monolish |
+| copy        | MKL           | cuBLAS         | CBLAS互換|
+| transpose   | monolish      | monolish       | monolish |
 
-| func    | Intel     | NVIDIA         | OSS            |
-|---------|-----------|----------------|----------------|
-| sin     | none->MKL | none->monolish | none->monolish |
-| sinh    | none->MKL | none->monolish | none->monolish |
-| arcsin  | none->MKL | none->monolish | none->monolish |
-| arcsinh | none->MKL | none->monolish | none->monolish |
-| tan     | none->MKL | none->monolish | none->monolish |
-| tanh    | none->MKL | none->monolish | none->monolish |
-| arctan  | none->MKL | none->monolish | none->monolish |
-| arctanh | none->MKL | none->monolish | none->monolish |
-| max     | none->MKL | none->monolish | none->monolish |
-| min     | none->MKL | none->monolish | none->monolish |
-| power   | none->MKL | none->monolish | none->monolish |
-| sqrt    | none->MKL | none->monolish | none->monolish |
-| ceil    | none->MKL | none->monolish | none->monolish |
-| floor   | none->MKL | none->monolish | none->monolish |
-| sign    | none->MKL | none->monolish | none->monolish |
-| rint    | none->MKL | none->monolish | none->monolish |
+## vector Mathematical functions of VML
+
+| func         | Intel          | NVIDIA         | OSS            |
+|--------------|----------------|----------------|----------------|
+| sin          | none->MKL      | none->monolish | none->monolish |
+| sinh         | none->MKL      | none->monolish | none->monolish |
+| arcsin       | none->MKL      | none->monolish | none->monolish |
+| arcsinh      | none->MKL      | none->monolish | none->monolish |
+| tan          | none->MKL      | none->monolish | none->monolish |
+| tanh         | none->MKL      | none->monolish | none->monolish |
+| arctan       | none->MKL      | none->monolish | none->monolish |
+| arctanh      | none->MKL      | none->monolish | none->monolish |
+| power(v,v)   | none->MKL      | none->monolish | none->monolish |
+| power(v,s)   | none->monolish | none->monolish | none->monolish |
+| sqrt         | none->MKL      | none->monolish | none->monolish |
+| ceil         | none->MKL      | none->monolish | none->monolish |
+| floor        | none->MKL      | none->monolish | none->monolish |
+| sign         | none->monolish | none->monolish | none->monolish |
+| max(v)       | none->MKL      | none->monolish | none->monolish |
+| max(v,v)     | none->MKL      | none->monolish | none->monolish |
+| min(v)       | none->MKL      | none->monolish | none->monolish |
+| min(v,v)     | none->MKL      | none->monolish | none->monolish |
 
 # Dense Matrix Operations
 
-## Arithmetics (Dense)
+## scalar-Dense VML
 
-| func        | Intel         | NVIDIA         | OSS            |
-|-------------|---------------|----------------|----------------|
-| add         | MKL           | monolish       | monolish       |
-| sub         | none->MKL     | none->monolish | none->monolish |
-| equal       | none->MKL     | none->monolish | none->monolish |
-| not   equal | none->MKL     | none->monolish | none->monolish |
-| copy        | MKL           | cuBLAS         | CBLAS互換      |
-| transpose   | monolish      | monolish       | monolish       |
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
+| add         | MKL           | monolish       | monolish |
+| sub         | MKL           | monolish       | monolish |
+| mul         | MKL           | monolish       | monolish |
+| div         | MKL           | monolish       | monolish |
+
+## Dense-Dense VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
+| add         | MKL           | monolish       | monolish |
+| sub         | MKL           | monolish       | monolish |
+| mul         | MKL           | monolish       | monolish |
+| div         | MKL           | monolish       | monolish |
+
+## Dense helper functions of VML
+| equal       | monolish      | monolish       | monolish |
+| not equal   | monolish      | monolish       | monolish |
+| copy        | MKL           | cuBLAS         | CBLAS互換|
+| transpose   | monolish      | monolish       | monolish |
 
 ## Row/Col vector and scalar operations (Dense)
 
@@ -112,37 +140,53 @@
 
 ## Mathematical functions (Dense)
 
-| func    | Intel     | NVIDIA         | OSS            |
-|---------|-----------|----------------|----------------|
-| sin     | none->MKL | none->monolish | none->monolish |
-| sinh    | none->MKL | none->monolish | none->monolish |
-| arcsin  | none->MKL | none->monolish | none->monolish |
-| arcsinh | none->MKL | none->monolish | none->monolish |
-| tan     | none->MKL | none->monolish | none->monolish |
-| tanh    | none->MKL | none->monolish | none->monolish |
-| arctan  | none->MKL | none->monolish | none->monolish |
-| arctanh | none->MKL | none->monolish | none->monolish |
-| max     | none->MKL | none->monolish | none->monolish |
-| min     | none->MKL | none->monolish | none->monolish |
-| power   | none->MKL | none->monolish | none->monolish |
-| sqrt    | none->MKL | none->monolish | none->monolish |
-| ceil    | none->MKL | none->monolish | none->monolish |
-| floor   | none->MKL | none->monolish | none->monolish |
-| sign    | none->MKL | none->monolish | none->monolish |
-| rint    | none->MKL | none->monolish | none->monolish |
+| func         | Intel          | NVIDIA         | OSS            |
+|--------------|----------------|----------------|----------------|
+| sin          | none->MKL      | none->monolish | none->monolish |
+| sinh         | none->MKL      | none->monolish | none->monolish |
+| arcsin       | none->MKL      | none->monolish | none->monolish |
+| arcsinh      | none->MKL      | none->monolish | none->monolish |
+| tan          | none->MKL      | none->monolish | none->monolish |
+| tanh         | none->MKL      | none->monolish | none->monolish |
+| arctan       | none->MKL      | none->monolish | none->monolish |
+| arctanh      | none->MKL      | none->monolish | none->monolish |
+| power(v,v)   | none->MKL      | none->monolish | none->monolish |
+| power(v,s)   | none->monolish | none->monolish | none->monolish |
+| sqrt         | none->MKL      | none->monolish | none->monolish |
+| ceil         | none->MKL      | none->monolish | none->monolish |
+| floor        | none->MKL      | none->monolish | none->monolish |
+| sign         | none->monolish | none->monolish | none->monolish |
+| max(v)       | none->MKL      | none->monolish | none->monolish |
+| max(v,v)     | none->MKL      | none->monolish | none->monolish |
+| min(v)       | none->MKL      | none->monolish | none->monolish |
+| min(v,v)     | none->MKL      | none->monolish | none->monolish |
 
 # CRS Matrix Operations
 
-## Arithmetics (CRS)
+## scalar-CRS VML
 
-| func        | Intel         | NVIDIA         | OSS            |
-|-------------|---------------|----------------|----------------|
-| add         | MKL           | monolish       | monolish       |
-| sub         | none->MKL     | none           | none           |
-| equal       | none->MKL     | none->monolish | none->monolish |
-| not   equal | none->MKL     | none->monolish | none->monolish |
-| copy        | MKL           | cublas         | CBLAS互換      |
-| transpose   | none          | none           | none           |
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
+| add         | MKL           | monolish       | monolish |
+| sub         | MKL           | monolish       | monolish |
+| mul         | MKL           | monolish       | monolish |
+| div         | MKL           | monolish       | monolish |
+
+## CRS-CRS VML (non-zero structure must be the same)
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
+| add         | MKL           | monolish       | monolish |
+| sub         | MKL           | monolish       | monolish |
+| mul         | MKL           | monolish       | monolish |
+| div         | MKL           | monolish       | monolish |
+
+## CRS helper functions of VML
+| equal       | monolish      | monolish       | monolish |
+| not equal   | monolish      | monolish       | monolish |
+| copy        | MKL           | cuBLAS         | CBLAS互換|
+| transpose   | none          | none           | none     |
+
 
 ## Row/Col vector and scalar operations (CRS)
 
