@@ -15,6 +15,18 @@ namespace monolish {
  */
 namespace vml {
 
+/**
+ * @brief tanh to single precision vector elements (y[0:N] = tanh(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void tanh(const vector<float> &a, vector<float> &y);
+
+void tanh(const matrix::Dense<float> &A, matrix::Dense<float> &C);
+void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////

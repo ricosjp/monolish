@@ -15,7 +15,7 @@ template <typename T> bool test_send_vtanh(const size_t size, double tol) {
   ans_vtanh(ans_tmp);
 
   monolish::util::send(ans);
-  ans.tanh();
+  monolish::vml::tanh(ans, ans);
   ans.recv();
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), ans.size(), tol);
@@ -29,7 +29,7 @@ template <typename T> bool test_vtanh(const size_t size, double tol) {
   ans_tmp = ans.copy();
   ans_vtanh(ans_tmp);
 
-  ans.tanh();
+  monolish::vml::tanh(ans, ans);
 
   return ans_check<T>(__func__, ans.data(), ans_tmp.data(), ans.size(), tol);
 }

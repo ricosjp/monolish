@@ -1,45 +1,32 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_mm_div(const monolish::matrix::Dense<T> &A,
-                const monolish::matrix::Dense<T> &B,
+void ans_sm_add(const monolish::matrix::Dense<T> &A, const T alpha,
                 monolish::matrix::Dense<T> &C) {
 
-  if (A.get_row() != B.get_row()) {
-    std::runtime_error("A.row != B.row");
-  }
-  if (A.get_col() != B.get_col()) {
-    std::runtime_error("A.col != B.col");
-  }
-
-  // MN=MN+MN
-  int M = A.get_row();
-  int N = A.get_col();
-
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.val[i] = A.val[i] / B.val[i];
+    C.val[i] = A.val[i] + alpha;
   }
 }
 
-template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_mm_div(const size_t M, const size_t N, double tol) {
+template <typename MAT_A, typename MAT_C, typename T>
+bool test_send_sm_add(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
-  MAT_B B(seedA);
+  T alpha = 123.0;
   MAT_C C(seedA);
 
   monolish::matrix::Dense<T> AA(seedA);
-  monolish::matrix::Dense<T> BB(seedA);
   monolish::matrix::Dense<T> CC(seedA);
 
-  ans_mm_div(AA, BB, CC);
+  ans_sm_add(AA, alpha, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  monolish::util::send(A, B, C);
-  monolish::vml::div(A, B, C);
+  monolish::util::send(A, C);
+  monolish::vml::add(A, alpha, C);
   C.recv();
 
   monolish::matrix::COO<T> resultC(C);
@@ -48,24 +35,23 @@ bool test_send_mm_div(const size_t M, const size_t N, double tol) {
                       ansC.get_nnz(), tol);
 }
 
-template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_mm_div(const size_t M, const size_t N, double tol) {
+template <typename MAT_A, typename MAT_C, typename T>
+bool test_sm_add(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
-  MAT_B B(seedA);
+  T alpha = 123.0;
   MAT_C C(seedA);
 
   monolish::matrix::Dense<T> AA(seedA);
-  monolish::matrix::Dense<T> BB(seedA);
   monolish::matrix::Dense<T> CC(seedA);
 
-  ans_mm_div(AA, BB, CC);
+  ans_sm_add(AA, alpha, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  monolish::vml::div(A, B, C);
+  monolish::vml::add(A, alpha, C);
 
   monolish::matrix::COO<T> resultC(C);
 
