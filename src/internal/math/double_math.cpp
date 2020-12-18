@@ -5,6 +5,36 @@ namespace monolish {
 namespace internal {
 
 //////////////
+// sqrt
+//////////////
+void vsqrt(const size_t N, const double *a, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::sqrt(a[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#if MONOLISH_USE_MKL
+    vdSqrt(N, a, y);
+#else
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::sqrt(a[i]);
+    }
+#endif
+  }
+  logger.func_out();
+}
+
+//////////////
 // pow
 //////////////
 void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_status) {
