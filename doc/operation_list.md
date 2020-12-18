@@ -13,6 +13,7 @@
 | nrm2  | MKL      | cuBLAS   | CBLAS互換 |
 | scal  | MKL      | cuBLAS   | CBLAS互換 |
 | xpay  | monolish | monolish | monolish  |
+| sum   | monolish | monolish | monolish  |
 
 ## Extended BLAS Lv1: Matrix scale (alpha\*A)
 
@@ -73,7 +74,6 @@
 | min     | none->MKL | none->monolish | none->monolish |
 | power   | none->MKL | none->monolish | none->monolish |
 | sqrt    | none->MKL | none->monolish | none->monolish |
-| sum     | none->MKL | none->monolish | none->monolish |
 | ceil    | none->MKL | none->monolish | none->monolish |
 | floor   | none->MKL | none->monolish | none->monolish |
 | sign    | none->MKL | none->monolish | none->monolish |
@@ -126,7 +126,6 @@
 | min     | none->MKL | none->monolish | none->monolish |
 | power   | none->MKL | none->monolish | none->monolish |
 | sqrt    | none->MKL | none->monolish | none->monolish |
-| sum     | none->MKL | none->monolish | none->monolish |
 | ceil    | none->MKL | none->monolish | none->monolish |
 | floor   | none->MKL | none->monolish | none->monolish |
 | sign    | none->MKL | none->monolish | none->monolish |
@@ -179,7 +178,6 @@
 | min     | none->MKL | none->monolish | none->monolish |
 | power   | none->MKL | none->monolish | none->monolish |
 | sqrt    | none->MKL | none->monolish | none->monolish |
-| sum     | none->MKL | none->monolish | none->monolish |
 | ceil    | none->MKL | none->monolish | none->monolish |
 | floor   | none->MKL | none->monolish | none->monolish |
 | sign    | none->MKL | none->monolish | none->monolish |
