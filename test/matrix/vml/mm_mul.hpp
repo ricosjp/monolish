@@ -24,15 +24,8 @@ void ans_mm_mul(const monolish::matrix::Dense<T> &A,
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_send_mm_mul(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N)) {
-    nnzrow = 27;
-  } else {
-    nnzrow = std::min({M, N}) - 1;
-  }
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
   MAT_B B(seedA);
@@ -58,15 +51,8 @@ bool test_send_mm_mul(const size_t M, const size_t N, double tol) {
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_mm_mul(const size_t M, const size_t N, double tol) {
 
-  size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N)) {
-    nnzrow = 27;
-  } else {
-    nnzrow = std::min({M, N}) - 1;
-  }
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
   MAT_B B(seedA);
