@@ -10,6 +10,8 @@
 #include "vml/vv_mul.hpp"
 #include "vml/vv_sub.hpp"
 
+#include "vml/v_tanh.hpp"
+
 int main(int argc, char **argv) {
 
   if (argc != 2) {
@@ -185,6 +187,21 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vecsub<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vecsub//
+  if (test_vtanh<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vtanh<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_vtanh<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vtanh<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
