@@ -4,7 +4,10 @@
 namespace monolish {
 namespace internal {
 
-void vpow(const size_t N, const double *a, double *y, bool gpu_status) {
+//////////////
+// pow
+//////////////
+void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -12,7 +15,7 @@ void vpow(const size_t N, const double *a, double *y, bool gpu_status) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
-      y[i] = std::pow(a[i]);
+      y[i] = std::pow(a[i], b[i]);
     }
 #else
     throw std::runtime_error(
@@ -20,11 +23,38 @@ void vpow(const size_t N, const double *a, double *y, bool gpu_status) {
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vdPow(N, a, y);
+    vdPow(N, a, b, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
-      y[i] = std::pow(a[i]);
+      y[i] = std::pow(a[i], b[i]);
+    }
+#endif
+  }
+  logger.func_out();
+}
+
+void vpow(const size_t N, const double *a, const double b, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::pow(a[i], b);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#if MONOLISH_USE_MKL
+    vdPowx(N, a, b, y);
+#else
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::pow(a[i], b);
     }
 #endif
   }
