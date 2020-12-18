@@ -42,7 +42,6 @@ run_cpu:
 	bash ./test.sh matrix_blas cpu
 	bash ./test.sh matrix_vml cpu
 	bash ./test.sh matrix_subvec_op cpu
-	bash ./test.sh matrix_math cpu
  
 run_gpu:
 	bash ./test.sh matrix_common gpu
@@ -51,7 +50,6 @@ run_gpu:
 	bash ./test.sh matrix_blas gpu
 	bash ./test.sh matrix_vml gpu
 	bash ./test.sh matrix_subvec_op gpu
-	bash ./test.sh matrix_math gpu
 
 run_fx:
 	bash ./test.sh matrix_common fx
@@ -60,7 +58,6 @@ run_fx:
 	bash ./test.sh matrix_blas fx
 	bash ./test.sh matrix_vml fx
 	bash ./test.sh matrix_subvec_op fx
-	bash ./test.sh matrix_math fx
 
 run_sx:
 	bash ./test.sh matrix_common sx
@@ -69,7 +66,6 @@ run_sx:
 	bash ./test.sh matrix_blas sx
 	bash ./test.sh matrix_vml sx
 	bash ./test.sh matrix_subvec_op sx
-	bash ./test.sh matrix_math sx
 
 clean:
 	- rm *.out

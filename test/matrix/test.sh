@@ -34,7 +34,7 @@ case $1 in
         done
         ;;
 
-    "matrix_arithmetic" ) 
+    "matrix_vml" ) 
         for M in ${MAT_TEST_SIZE[@]}; do
             for N in ${MAT_TEST_SIZE[@]}; do
                 for K in ${MAT_TEST_SIZE[@]}; do
@@ -45,14 +45,6 @@ case $1 in
         ;;
 
     "matrix_transpose" ) 
-        for M in ${MAT_TEST_SIZE[@]}; do
-            for N in ${MAT_TEST_SIZE[@]}; do
-                $PROFILER ./$1_$2.out $M $N || exit 1
-            done
-        done
-        ;;
-
-    "matrix_math" ) 
         for M in ${MAT_TEST_SIZE[@]}; do
             for N in ${MAT_TEST_SIZE[@]}; do
                 $PROFILER ./$1_$2.out $M $N || exit 1

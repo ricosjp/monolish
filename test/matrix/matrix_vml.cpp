@@ -2,6 +2,7 @@
 #include "vml/mm_div.hpp"
 #include "vml/mm_mul.hpp"
 #include "vml/mm_sub.hpp"
+#include "vml/m_tanh.hpp"
 
 int main(int argc, char **argv) {
 
@@ -211,6 +212,42 @@ int main(int argc, char **argv) {
   }
   if (test_mm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
                   monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tanh Dense//
+  if (test_send_tanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_tanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_tanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_tanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+
+  // tanh CRS//
+  if (test_send_tanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_tanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_tanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_tanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-8) ==
+      false) {
     return 1;
   }
 
