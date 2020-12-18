@@ -4,11 +4,38 @@
 namespace monolish {
 namespace internal {
 
+void vpow(const size_t N, const double *a, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::pow(a[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#if MONOLISH_USE_MKL
+    vdPow(N, a, y);
+#else
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::pow(a[i]);
+    }
+#endif
+  }
+  logger.func_out();
+}
+
 //////////////
 // sin
 //////////////
 void vsin(const size_t N, const double *a, double *y, bool gpu_status) {
-  Logger &logger = Logger::get_inssince();
+  Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
@@ -35,7 +62,7 @@ void vsin(const size_t N, const double *a, double *y, bool gpu_status) {
 }
 
 void vsinh(const size_t N, const double *a, double *y, bool gpu_status) {
-  Logger &logger = Logger::get_inssince();
+  Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
@@ -62,7 +89,7 @@ void vsinh(const size_t N, const double *a, double *y, bool gpu_status) {
 }
 
 void vasin(const size_t N, const double *a, double *y, bool gpu_status) {
-  Logger &logger = Logger::get_inssince();
+  Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
@@ -88,7 +115,7 @@ void vasin(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_out();
 }
 void vasinh(const size_t N, const double *a, double *y, bool gpu_status) {
-  Logger &logger = Logger::get_inssince();
+  Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
