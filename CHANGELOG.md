@@ -24,6 +24,7 @@ Unreleased
 - internalとvmlにvtanhのコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
 
 ### Changed 
+- CIのRunner指定をホスト名でなくMacアドレスのタグ名に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/158
 - test, benchmarkにvml::vtanhに変更．元の各クラスのメンバ関数としての実装は削除 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
 - testにscalar-matrixのVMLがなかったので追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
 

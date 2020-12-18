@@ -29,7 +29,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
-        - gpu2.gitlab-runner.savanna.ritc.jp
+        - c8cbb8c6304d
         - avx
 
 .gpu_noavx_clang:
@@ -42,7 +42,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
-        - gpu2.gitlab-runner.savanna.ritc.jp
+        - c8cbb8c6304d
 
 .nogpu_avx_clang:
     variables:
@@ -417,7 +417,7 @@ benchmark_nogpu_avx_gcc:
       - make cpu
       - make run_cpu
     tags:
-      - cpu2.gitlab-runner.savanna.ritc.jp
+      - 008cfa52494d
     only:
         - master
     except:
@@ -440,7 +440,7 @@ benchmark_gpu_avx_clang:
       - make gpu
       - make run_gpu
     tags:
-      - gpu2.gitlab-runner.savanna.ritc.jp
+      - c8cbb8c6304d
     only:
         - master
     except:
