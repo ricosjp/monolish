@@ -371,6 +371,31 @@ void vfloor(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_out();
 }
 
+//////////////
+// sign
+//////////////
+void vsign(const size_t N, const double *a, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = -1 * a[i];
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = -1 * a[i];
+    }
+  }
+  logger.func_out();
+}
 
 } // namespace internal
 } // namespace monolish
