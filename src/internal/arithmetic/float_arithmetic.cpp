@@ -213,10 +213,14 @@ void vdiv(const size_t N, const float *a, const float *b, float *y,
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
+#if MONOLISH_USE_MKL
+    vsDiv(N, a, b, y);
+#else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = a[i] / b[i];
     }
+#endif
   }
   logger.func_out();
 }
