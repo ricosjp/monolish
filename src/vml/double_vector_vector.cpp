@@ -103,7 +103,7 @@ void vml::tanh(const vector<double> &a, vector<double> &y) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vtanh(y.size(), a.data(),  y.data(), y.get_device_mem_stat());
+  internal::vtanh(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
 }

@@ -1,12 +1,12 @@
+#include "vml/m_tanh.hpp"
 #include "vml/mm_add.hpp"
 #include "vml/mm_div.hpp"
 #include "vml/mm_mul.hpp"
 #include "vml/mm_sub.hpp"
 #include "vml/sm_add.hpp"
-#include "vml/sm_sub.hpp"
-#include "vml/sm_mul.hpp"
 #include "vml/sm_div.hpp"
-#include "vml/m_tanh.hpp"
+#include "vml/sm_mul.hpp"
+#include "vml/sm_sub.hpp"
 
 int main(int argc, char **argv) {
 
@@ -218,7 +218,7 @@ int main(int argc, char **argv) {
                   monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
-  
+
   // sm_add Dense//
   if (test_send_sm_add<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
@@ -252,13 +252,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_add<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_add<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_add<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+  if (test_sm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -275,8 +274,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_tanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-8) ==
-      false) {
+  if (test_tanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-8) == false) {
     return 1;
   }
 
@@ -289,12 +287,10 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_tanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_tanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_tanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-8) ==
-      false) {
+  if (test_tanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-8) == false) {
     return 1;
   }
 

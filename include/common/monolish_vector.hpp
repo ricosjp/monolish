@@ -363,6 +363,5 @@ public:
    * - GPU acceleration: false
    **/
   bool operator!=(const vector<Float> &vec);
-
 };
 } // namespace monolish

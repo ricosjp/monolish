@@ -212,7 +212,8 @@ void vml::tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vtanh(A.get_nnz(), A.val.data(),  C.val.data(), C.get_device_mem_stat());
+  internal::vtanh(A.get_nnz(), A.val.data(), C.val.data(),
+                  C.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -232,7 +233,8 @@ void vml::tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vtanh(A.get_nnz(), A.val.data(),  C.val.data(), C.get_device_mem_stat());
+  internal::vtanh(A.get_nnz(), A.val.data(), C.val.data(),
+                  C.get_device_mem_stat());
 
   logger.func_out();
 }

@@ -24,7 +24,7 @@ void ans_mm_div(const monolish::matrix::Dense<T> &A,
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_send_mm_div(const size_t M, const size_t N, double tol) {
 
-  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
@@ -51,7 +51,7 @@ bool test_send_mm_div(const size_t M, const size_t N, double tol) {
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_mm_div(const size_t M, const size_t N, double tol) {
 
-  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);

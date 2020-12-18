@@ -20,6 +20,14 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- internalとvmlにvtanhのコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
+
+### Changed 
+- test, benchmarkにvml::vtanhに変更．元の各クラスのメンバ関数としての実装は削除 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
+- testにscalar-matrixのVMLがなかったので追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
+
+### Removed
 
 0.8.0 - 2020/12/17
 -----------

@@ -1,8 +1,7 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_sm_add(const monolish::matrix::Dense<T> &A,
-                const T alpha,
+void ans_sm_add(const monolish::matrix::Dense<T> &A, const T alpha,
                 monolish::matrix::Dense<T> &C) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
@@ -13,7 +12,7 @@ void ans_sm_add(const monolish::matrix::Dense<T> &A,
 template <typename MAT_A, typename MAT_C, typename T>
 bool test_send_sm_add(const size_t M, const size_t N, double tol) {
 
-  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
@@ -39,7 +38,7 @@ bool test_send_sm_add(const size_t M, const size_t N, double tol) {
 template <typename MAT_A, typename MAT_C, typename T>
 bool test_sm_add(const size_t M, const size_t N, double tol) {
 
-  monolish::matrix::Dense<T> seed(M,N,1.0,2.0);
+  monolish::matrix::Dense<T> seed(M, N, 1.0, 2.0);
   monolish::matrix::COO<T> seedA(seed);
 
   MAT_A A(seedA);
