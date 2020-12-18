@@ -64,7 +64,7 @@ void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_
   logger.func_out();
 }
 
-void vpow(const size_t N, const double *a, const double b, double *y, bool gpu_status) {
+void vpow(const size_t N, const double *a, const double alpha, double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -72,7 +72,7 @@ void vpow(const size_t N, const double *a, const double b, double *y, bool gpu_s
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
-      y[i] = std::pow(a[i], b);
+      y[i] = std::pow(a[i], alpha);
     }
 #else
     throw std::runtime_error(
@@ -80,11 +80,11 @@ void vpow(const size_t N, const double *a, const double b, double *y, bool gpu_s
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vdPowx(N, a, b, y);
+    vdPowx(N, a, alpha, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
-      y[i] = std::pow(a[i], b);
+      y[i] = std::pow(a[i], alpha);
     }
 #endif
   }
@@ -310,6 +310,8 @@ void vatanh(const size_t N, const double *a, double *y, bool gpu_status) {
   }
   logger.func_out();
 }
+
+
 
 } // namespace internal
 } // namespace monolish
