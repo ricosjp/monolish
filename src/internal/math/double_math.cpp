@@ -166,7 +166,7 @@ void vasin(const size_t N, const double *a, double *y, bool gpu_status) {
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vdAsinh(N, a, y);
+    vdAsin(N, a, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
