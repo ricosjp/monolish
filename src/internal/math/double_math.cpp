@@ -276,7 +276,7 @@ void vatan(const size_t N, const double *a, double *y, bool gpu_status) {
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vdAtanh(N, a, y);
+    vdAtan(N, a, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
