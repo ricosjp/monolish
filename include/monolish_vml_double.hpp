@@ -15,6 +15,8 @@ namespace monolish {
  */
 namespace vml {
 
+
+
 /**
  * @brief tanh to double precision vector elements (y[0:N] = tanh(a[0:N]))
  * @note
@@ -22,10 +24,17 @@ namespace vml {
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void tanh(const vector<double> &a, vector<double> &y);
-
 void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+void sin(const vector<double> &a, vector<double> &y);
+void sinh(const vector<double> &a, vector<double> &y);
+void asin(const vector<double> &a, vector<double> &y);
+void asinh(const vector<double> &a, vector<double> &y);
+void tan(const vector<double> &a, vector<double> &y);
+void tanh(const vector<double> &a, vector<double> &y);
+void atan(const vector<double> &a, vector<double> &y);
+void atanh(const vector<double> &a, vector<double> &y);
 
 //////////////////////////////////////////////////////
 //  Vector
