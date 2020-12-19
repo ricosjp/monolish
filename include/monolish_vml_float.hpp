@@ -22,10 +22,26 @@ namespace vml {
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void tanh(const vector<float> &a, vector<float> &y);
-
 void tanh(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+void pow(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void pow(const vector<float> &a, const float alpha, vector<float> &y);
+void sqrt(const vector<float> &a, vector<float> &y);
+
+void sin(const vector<float> &a, vector<float> &y);
+void sinh(const vector<float> &a, vector<float> &y);
+void asin(const vector<float> &a, vector<float> &y);
+void asinh(const vector<float> &a, vector<float> &y);
+
+void tan(const vector<float> &a, vector<float> &y);
+void tanh(const vector<float> &a, vector<float> &y);
+void atan(const vector<float> &a, vector<float> &y);
+void atanh(const vector<float> &a, vector<float> &y);
+
+void ceil(const vector<float> &a, vector<float> &y);
+void floor(const vector<float> &a, vector<float> &y);
+void sign(const vector<float> &a, vector<float> &y);
 
 //////////////////////////////////////////////////////
 //  Vector

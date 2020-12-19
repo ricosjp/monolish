@@ -166,7 +166,7 @@ void vasin(const size_t N, const float *a, float *y, bool gpu_status) {
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vsAsinh(N, a, y);
+    vsAsin(N, a, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
@@ -276,7 +276,7 @@ void vatan(const size_t N, const float *a, float *y, bool gpu_status) {
 #endif
   } else {
 #if MONOLISH_USE_MKL
-    vsAtanh(N, a, y);
+    vsAtan(N, a, y);
 #else
 #pragma omp parallel for
     for (size_t i = 0; i < N; i++) {
@@ -343,9 +343,6 @@ void vceil(const size_t N, const float *a, float *y, bool gpu_status) {
   logger.func_out();
 }
 
-//////////////
-// fllor, floor
-//////////////
 void vfloor(const size_t N, const float *a, float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
