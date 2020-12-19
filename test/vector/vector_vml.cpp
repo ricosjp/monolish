@@ -10,7 +10,20 @@
 #include "vml/vv_mul.hpp"
 #include "vml/vv_sub.hpp"
 
+#include "vml/vv_pow.hpp"
+#include "vml/sv_pow.hpp"
+#include "vml/v_sqrt.hpp"
+#include "vml/v_sin.hpp"
+#include "vml/v_sinh.hpp"
+#include "vml/v_asin.hpp"
+#include "vml/v_asinh.hpp"
+#include "vml/v_tan.hpp"
 #include "vml/v_tanh.hpp"
+#include "vml/v_atan.hpp"
+#include "vml/v_atanh.hpp"
+#include "vml/v_ceil.hpp"
+#include "vml/v_floor.hpp"
+#include "vml/v_sign.hpp"
 
 int main(int argc, char **argv) {
 
@@ -190,20 +203,85 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  // vecsub//
-  if (test_vtanh<double>(size, 1.0e-8) == false) {
-    return 1;
-  }
-  if (test_vtanh<float>(size, 1.0e-4) == false) {
-    return 1;
-  }
+  // vvpow //
+  if (test_vvpow<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vvpow<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vvpow<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vvpow<float>(size, 1.0e-4) == false) {return 1;}
 
-  if (test_send_vtanh<double>(size, 1.0e-8) == false) {
-    return 1;
-  }
-  if (test_send_vtanh<float>(size, 1.0e-4) == false) {
-    return 1;
-  }
+  // svpow //
+  if (test_svpow<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_svpow<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_svpow<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_svpow<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vsqrt //
+  if (test_vsqrt<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vsqrt<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vsqrt<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vsqrt<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vsin //
+  if (test_vsin<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vsin<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vsin<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vsin<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vsinh //
+  if (test_vsinh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vsinh<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vsinh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vsinh<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vasin //
+  if (test_vasin<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vasin<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vasin<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vasin<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vasinh //
+  if (test_vasinh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vasinh<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vasinh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vasinh<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vtan //
+  if (test_vtan<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vtan<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vtan<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vtan<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vatan //
+  if (test_vatan<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vatan<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vatan<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vatan<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vatanh //
+  if (test_vatanh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vatanh<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vatanh<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vatanh<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vceil //
+  if (test_vceil<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vceil<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vceil<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vceil<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vfloor //
+  if (test_vfloor<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vfloor<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vfloor<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vfloor<float>(size, 1.0e-4) == false) {return 1;}
+
+  // vsign //
+  if (test_vsign<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_vsign<float>(size, 1.0e-4) == false) {return 1;}
+  if (test_send_vsign<double>(size, 1.0e-8) == false) {return 1;}
+  if (test_send_vsign<float>(size, 1.0e-4) == false) {return 1;}
+
 
   return 0;
 }
+
