@@ -2,7 +2,7 @@
 
 template <typename T> void ans_vsign(monolish::vector<T> &ans) {
   for (size_t i = 0; i < ans.size(); i++) {
-    ans[i] = -1*ans[i];
+    ans[i] = -1 * ans[i];
   }
 }
 

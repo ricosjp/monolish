@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- vectorに数学関数の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/162
 - internalに数学関数の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/160
 - Doxygenのfunction listにvmlに実装予定の数学関数の一覧を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/159
 - internalとvmlにvtanhのコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157

@@ -15,8 +15,6 @@ namespace monolish {
  */
 namespace vml {
 
-
-
 /**
  * @brief tanh to double precision vector elements (y[0:N] = tanh(a[0:N]))
  * @note
@@ -27,8 +25,7 @@ namespace vml {
 void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
-void pow(const vector<double> &a, const vector<double> &b,
-              vector<double> &y);
+void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void pow(const vector<double> &a, const double alpha, vector<double> &y);
 void sqrt(const vector<double> &a, vector<double> &y);
 
