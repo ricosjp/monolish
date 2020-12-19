@@ -27,14 +27,24 @@ namespace vml {
 void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
+void pow(const vector<double> &a, const vector<double> &b,
+              vector<double> &y);
+void pow(const vector<double> &a, const double alpha, vector<double> &y);
+void sqrt(const vector<double> &a, vector<double> &y);
+
 void sin(const vector<double> &a, vector<double> &y);
 void sinh(const vector<double> &a, vector<double> &y);
 void asin(const vector<double> &a, vector<double> &y);
 void asinh(const vector<double> &a, vector<double> &y);
+
 void tan(const vector<double> &a, vector<double> &y);
 void tanh(const vector<double> &a, vector<double> &y);
 void atan(const vector<double> &a, vector<double> &y);
 void atanh(const vector<double> &a, vector<double> &y);
+
+void ceil(const vector<double> &a, vector<double> &y);
+void floor(const vector<double> &a, vector<double> &y);
+void sign(const vector<double> &a, vector<double> &y);
 
 //////////////////////////////////////////////////////
 //  Vector
