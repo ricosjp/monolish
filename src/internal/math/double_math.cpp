@@ -343,9 +343,6 @@ void vceil(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_out();
 }
 
-//////////////
-// fllor, floor
-//////////////
 void vfloor(const size_t N, const double *a, double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);

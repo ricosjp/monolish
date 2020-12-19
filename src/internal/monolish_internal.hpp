@@ -78,19 +78,44 @@ void vdiv(const size_t N, const float *a, const float *b, float *y,
 // utils
 void vcopy(const size_t N, const double *a, double *y, bool gpu_status);
 bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
+void vcopy(const size_t N, const int *a, int *y, bool gpu_status);
+void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status);
 
 void vcopy(const size_t N, const float *a, float *y, bool gpu_status);
 bool vequal(const size_t N, const float *a, const float *y, bool gpu_status);
-
-// utils integer
-void vcopy(const size_t N, const int *a, int *y, bool gpu_status);
-void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status);
 bool vequal(const size_t N, const int *a, const int *y, bool gpu_status);
 bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status);
 
-// vtanh
+// math
+void vsqrt(const size_t N, const double *a, double *y, bool gpu_status);
+void vpow(const size_t N, const double *a, const double *b, double *y, bool gpu_status);
+void vpow(const size_t N, const double *a, const double alpha, double * y,bool gpu_status);
+void vsin(const size_t N, const double *a, double *y, bool gpu_status);
+void vsinh(const size_t N, const double *a, double *y, bool gpu_status);
+void vasin(const size_t N, const double *a, double *y, bool gpu_status);
+void vasinh(const size_t N, const double *a, double *y, bool gpu_status);
+void vtan(const size_t N, const double *a, double *y, bool gpu_status);
 void vtanh(const size_t N, const double *a, double *y, bool gpu_status);
+void vatan(const size_t N, const double *a, double *y, bool gpu_status);
+void vatanh(const size_t N, const double *a, double *y, bool gpu_status);
+void vceil(const size_t N, const double *a, double *y, bool gpu_status);
+void vfloor(const size_t N, const double *a, double *y, bool gpu_status);
+void vsign(const size_t N, const double *a, double *y, bool gpu_status);
+
+void vsqrt(const size_t N, const float *a, float *y, bool gpu_status);
+void vpow(const size_t N, const float *a, const float *b, float *y, bool gpu_status);
+void vpow(const size_t N, const float *a, const float alpha, float * y,bool gpu_status);
+void vsin(const size_t N, const float *a, float *y, bool gpu_status);
+void vsinh(const size_t N, const float *a, float *y, bool gpu_status);
+void vasin(const size_t N, const float *a, float *y, bool gpu_status);
+void vasinh(const size_t N, const float *a, float *y, bool gpu_status);
+void vtan(const size_t N, const float *a, float *y, bool gpu_status);
 void vtanh(const size_t N, const float *a, float *y, bool gpu_status);
+void vatan(const size_t N, const float *a, float *y, bool gpu_status);
+void vatanh(const size_t N, const float *a, float *y, bool gpu_status);
+void vceil(const size_t N, const float *a, float *y, bool gpu_status);
+void vfloor(const size_t N, const float *a, float *y, bool gpu_status);
+void vsign(const size_t N, const float *a, float *y, bool gpu_status);
 
 } // namespace internal
 } // namespace monolish
