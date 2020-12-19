@@ -1,0 +1,11 @@
+cat ./v_tanh.hpp | sed -e 's/tanh/sqrt/g' > v_sqrt.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/sin/g' > v_sin.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/sinh/g' > v_sinh.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/asin/g' > v_asin.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/asinh/g' > v_asinh.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/tan/g' > v_tan.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/atan/g' > v_atan.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/atanh/g' > v_atanh.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/ceil/g' > v_ceil.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/floor/g' > v_floor.hpp
+cat ./v_tanh.hpp | sed -e 's/tanh/sign/g' > v_sign.hpp
