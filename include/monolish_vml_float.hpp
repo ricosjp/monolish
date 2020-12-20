@@ -22,7 +22,6 @@ namespace vml {
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
 void pow(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void pow(const vector<float> &a, const float alpha, vector<float> &y);
@@ -63,6 +62,28 @@ void atanh(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 void ceil(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 void floor(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 void sign(const matrix::Dense<float> &A, matrix::Dense<float> &C);
+
+///////////////////////////////////
+
+void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+void pow(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
+void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
 //////////////////////////////////////////////////////
 //  Vector
@@ -375,7 +396,8 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
@@ -389,7 +411,8 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
@@ -403,7 +426,8 @@ void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
@@ -417,7 +441,8 @@ void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 } // namespace vml
 } // namespace monolish
