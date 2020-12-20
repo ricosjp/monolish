@@ -7,7 +7,6 @@
 #include "vml/sm_mul.hpp"
 #include "vml/sm_sub.hpp"
 
-#include "vml/sm_pow.hpp"
 #include "vml/m_asin.hpp"
 #include "vml/m_asinh.hpp"
 #include "vml/m_atan.hpp"
@@ -21,6 +20,7 @@
 #include "vml/m_tan.hpp"
 #include "vml/m_tanh.hpp"
 #include "vml/mm_pow.hpp"
+#include "vml/sm_pow.hpp"
 
 int main(int argc, char **argv) {
 
@@ -277,75 +277,201 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-// msqrt Dense //
-if (test_send_msqrt< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_msqrt<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_msqrt<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_msqrt<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // msqrt Dense //
+  if (test_send_msqrt<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msqrt<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msqrt<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msqrt<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// msin Dense //
-if (test_send_msin< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_msin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_msin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_msin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // msin Dense //
+  if (test_send_msin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
 
-// msinh Dense //
-if (test_send_msinh< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_msinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_msinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_msinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // msinh Dense //
+  if (test_send_msinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// masin Dense //
-if (test_send_masin< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_masin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_masin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_masin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // masin Dense //
+  if (test_send_masin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_masin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_masin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_masin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// masinh Dense //
-if (test_send_masinh< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_masinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_masinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_masinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // masinh Dense //
+  if (test_send_masinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_masinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_masinh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_masinh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// mtan Dense //
-if (test_send_mtan< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_mtan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_mtan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_mtan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // mtan Dense //
+  if (test_send_mtan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mtan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mtan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mtan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
 
-// matan Dense //
-if (test_send_matan< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_matan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_matan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_matan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // matan Dense //
+  if (test_send_matan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_matan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_matan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// matanh Dense //
-if (test_send_matanh< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_matanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_matanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_matanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // matanh Dense //
+  if (test_send_matanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_matanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_matanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// mceil Dense //
-if (test_send_mceil< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_mceil<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_mceil<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_mceil<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // mceil Dense //
+  if (test_send_mceil<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mceil<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mceil<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mceil<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// mfloor Dense //
-if (test_send_mfloor< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_mfloor<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_mfloor<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_mfloor<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
+  // mfloor Dense //
+  if (test_send_mfloor<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mfloor<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mfloor<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mfloor<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
-// msign Dense //
-if (test_send_msign< monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_send_msign<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-if (test_msign<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) == false) {return 1;}
-if (test_msign<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {return 1;}
-
+  // msign Dense //
+  if (test_send_msign<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msign<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msign<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msign<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
 
   return 0;
 }
-
-
-

@@ -44,8 +44,10 @@ void sign(const vector<double> &a, vector<double> &y);
 
 ///////////////////////////////////
 
-void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
-void pow(const matrix::Dense<double> &A, const double alpha, matrix::Dense<double> &C);
+void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+         matrix::Dense<double> &C);
+void pow(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C);
 void sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C);

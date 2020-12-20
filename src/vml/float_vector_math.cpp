@@ -7,7 +7,7 @@ namespace monolish {
 // power, sqrt
 //////////////////////////////////////////
 void vml::pow(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
-    matrix::Dense<float> &C) {
+              matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -66,7 +66,8 @@ void vml::sqrt(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vsqrt(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vsqrt(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -89,7 +90,8 @@ void vml::sin(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vsin(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vsin(A.get_nnz(), A.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -109,7 +111,8 @@ void vml::sinh(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vsinh(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vsinh(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -129,7 +132,8 @@ void vml::asin(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vasin(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vasin(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -149,7 +153,8 @@ void vml::asinh(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vasinh(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vasinh(A.get_nnz(), A.val.data(), C.val.data(),
+                   A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -172,7 +177,8 @@ void vml::tan(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vtan(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vtan(A.get_nnz(), A.val.data(), C.val.data(),
+                 A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -192,7 +198,8 @@ void vml::tanh(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vtanh(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vtanh(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -212,7 +219,8 @@ void vml::atan(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vatan(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vatan(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -232,7 +240,8 @@ void vml::atanh(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vatanh(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vatanh(A.get_nnz(), A.val.data(), C.val.data(),
+                   A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -256,7 +265,8 @@ void vml::ceil(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vceil(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vceil(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -276,7 +286,8 @@ void vml::floor(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vfloor(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vfloor(A.get_nnz(), A.val.data(), C.val.data(),
+                   A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -296,7 +307,8 @@ void vml::sign(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
     throw std::runtime_error("error matrix get_device_mem_stat() is not same");
   }
 
-  internal::vsign(A.get_nnz(), A.val.data(), C.val.data(), A.get_device_mem_stat());
+  internal::vsign(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
 
   logger.func_out();
 }

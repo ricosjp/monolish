@@ -44,8 +44,10 @@ void sign(const vector<float> &a, vector<float> &y);
 
 ///////////////////////////////////
 
-void pow(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
-void pow(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C);
+void pow(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+void pow(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
 void sqrt(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 
 void sin(const matrix::Dense<float> &A, matrix::Dense<float> &C);
@@ -373,8 +375,7 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void add(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
@@ -388,8 +389,7 @@ void add(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void sub(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
@@ -403,8 +403,7 @@ void sub(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void mul(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
@@ -418,8 +417,7 @@ void mul(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void div(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 } // namespace vml
 } // namespace monolish
