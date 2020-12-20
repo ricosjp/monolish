@@ -42,23 +42,25 @@ void ceil(const vector<double> &a, vector<double> &y);
 void floor(const vector<double> &a, vector<double> &y);
 void sign(const vector<double> &a, vector<double> &y);
 
-void pow(const matrix::Dense<double> &a, const matrix::Dense<double> &b, matrix::Dense<double> &y);
-void pow(const matrix::Dense<double> &a, const double alpha, matrix::Dense<double> &y);
-void sqrt(const matrix::Dense<double> &a, matrix::Dense<double> &y);
+///////////////////////////////////
 
-void sin(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void sinh(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void asin(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void asinh(const matrix::Dense<double> &a, matrix::Dense<double> &y);
+void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void pow(const matrix::Dense<double> &A, const double alpha, matrix::Dense<double> &C);
+void sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
-void tan(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void tanh(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void atan(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void atanh(const matrix::Dense<double> &a, matrix::Dense<double> &y);
+void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void sinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void asin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void asinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
-void ceil(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void floor(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void sign(const matrix::Dense<double> &a, matrix::Dense<double> &y);
+void tan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void atan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void floor(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void sign(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 //////////////////////////////////////////////////////
 //  Vector
