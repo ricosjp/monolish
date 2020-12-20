@@ -1,15 +1,15 @@
 #include "../../test_utils.hpp"
 #include "monolish_blas.hpp"
 
-template <typename T> void ans_tanh(monolish::matrix::Dense<T> &A) {
+template <typename T> void ans_asinh(monolish::matrix::Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.val[i] = std::tanh(A.val[i]);
+    A.val[i] = std::asinh(A.val[i]);
   }
 }
 
 template <typename MAT, typename T>
-bool test_send_mtanh(const size_t M, const size_t N, double tol) {
+bool test_send_masinh(const size_t M, const size_t N, double tol) {
   size_t nnzrow = 27;
   if (nnzrow < N) {
     nnzrow = 27;
@@ -23,10 +23,10 @@ bool test_send_mtanh(const size_t M, const size_t N, double tol) {
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
-  ans_tanh(AA);
+  ans_asinh(AA);
 
   A.send();
-  monolish::vml::tanh(A, A);
+  monolish::vml::asinh(A, A);
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
@@ -35,7 +35,7 @@ bool test_send_mtanh(const size_t M, const size_t N, double tol) {
 }
 
 template <typename MAT, typename T>
-bool test_mtanh(const size_t M, const size_t N, double tol) {
+bool test_masinh(const size_t M, const size_t N, double tol) {
   size_t nnzrow = 27;
   if (nnzrow < N) {
     nnzrow = 27;
@@ -49,9 +49,9 @@ bool test_mtanh(const size_t M, const size_t N, double tol) {
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
-  ans_tanh(AA);
+  ans_asinh(AA);
 
-  monolish::vml::tanh(A, A);
+  monolish::vml::asinh(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
   return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
