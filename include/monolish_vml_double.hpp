@@ -22,7 +22,6 @@ namespace vml {
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void pow(const vector<double> &a, const double alpha, vector<double> &y);
@@ -63,6 +62,28 @@ void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void floor(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void sign(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+///////////////////////////////////
+
+void pow(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+         matrix::CRS<double> &C);
+void pow(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C);
+void sqrt(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void sinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void asin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void asinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+void tan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void atanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+void ceil(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void floor(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void sign(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 //////////////////////////////////////////////////////
 //  Vector

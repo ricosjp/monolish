@@ -34,7 +34,20 @@ run_cpu:
 	bash ./benchmark.sh mm_sub cpu
 	bash ./benchmark.sh mm_mul cpu
 	bash ./benchmark.sh mm_div cpu
+	bash ./benchmark.sh m_sqrt cpu
+	bash ./benchmark.sh sm_pow cpu
+	bash ./benchmark.sh mm_pow cpu
+	bash ./benchmark.sh m_sin cpu
+	bash ./benchmark.sh m_sinh cpu
+	bash ./benchmark.sh m_asin cpu
+	bash ./benchmark.sh m_asinh cpu
+	bash ./benchmark.sh m_tan cpu
 	bash ./benchmark.sh m_tanh cpu
+	bash ./benchmark.sh m_atan cpu
+	bash ./benchmark.sh m_atanh cpu
+	bash ./benchmark.sh m_ceil cpu
+	bash ./benchmark.sh m_floor cpu
+	bash ./benchmark.sh m_sign cpu
  
 run_gpu:
 	bash ./benchmark.sh sm_add gpu
@@ -45,7 +58,17 @@ run_gpu:
 	bash ./benchmark.sh mm_sub gpu
 	bash ./benchmark.sh mm_mul gpu
 	bash ./benchmark.sh mm_div gpu
+	bash ./benchmark.sh m_sin gpu
+	bash ./benchmark.sh m_sinh gpu
+	bash ./benchmark.sh m_asin gpu
+	bash ./benchmark.sh m_asinh gpu
+	bash ./benchmark.sh m_tan gpu
 	bash ./benchmark.sh m_tanh gpu
+	bash ./benchmark.sh m_atan gpu
+	bash ./benchmark.sh m_atanh gpu
+	bash ./benchmark.sh m_ceil gpu
+	bash ./benchmark.sh m_floor gpu
+	bash ./benchmark.sh m_sign gpu
 
 run_fx:
 	bash ./benchmark.sh sm_add fx
@@ -56,7 +79,17 @@ run_fx:
 	bash ./benchmark.sh mm_sub fx
 	bash ./benchmark.sh mm_mul fx
 	bash ./benchmark.sh mm_div fx
+	bash ./benchmark.sh m_sin fx
+	bash ./benchmark.sh m_sinh fx
+	bash ./benchmark.sh m_asin fx
+	bash ./benchmark.sh m_asinh fx
+	bash ./benchmark.sh m_tan fx
 	bash ./benchmark.sh m_tanh fx
+	bash ./benchmark.sh m_atan fx
+	bash ./benchmark.sh m_atanh fx
+	bash ./benchmark.sh m_ceil fx
+	bash ./benchmark.sh m_floor fx
+	bash ./benchmark.sh m_sign fx
 
 run_sx:
 	bash ./benchmark.sh sm_add sx
@@ -67,7 +100,17 @@ run_sx:
 	bash ./benchmark.sh mm_sub sx
 	bash ./benchmark.sh mm_mul sx
 	bash ./benchmark.sh mm_div sx
+	bash ./benchmark.sh m_sin sx
+	bash ./benchmark.sh m_sinh sx
+	bash ./benchmark.sh m_asin sx
+	bash ./benchmark.sh m_asinh sx
+	bash ./benchmark.sh m_tan sx
 	bash ./benchmark.sh m_tanh sx
+	bash ./benchmark.sh m_atan sx
+	bash ./benchmark.sh m_atanh sx
+	bash ./benchmark.sh m_ceil sx
+	bash ./benchmark.sh m_floor sx
+	bash ./benchmark.sh m_sign sx
 
 clean:
 	- rm *.out

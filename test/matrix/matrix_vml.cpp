@@ -473,5 +473,405 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // mm_add CRS//
+  if (test_send_mm_add<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_add<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_add<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_sub CRS//
+  if (test_send_mm_sub<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_sub<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_sub<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_mul CRS//
+  if (test_send_mm_mul<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_mul<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_mul<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_mul<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_div CRS//
+  if (test_send_mm_div<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_div<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_div<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sm_add CRS//
+  if (test_send_sm_add<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_add<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_add<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sm_sub CRS//
+  if (test_send_sm_sub<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_sub<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_sub<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_sub<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sm_mul CRS//
+  if (test_send_sm_mul<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_mul<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_mul<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_mul<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sm_div CRS//
+  if (test_send_sm_div<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_div<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_div<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sm_pow CRS//
+  if (test_send_sm_pow<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_pow<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_pow<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_pow<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mm_pow CRS//
+  if (test_send_mm_pow<monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>,
+                       monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mm_pow<monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>,
+                       monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_pow<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mm_pow<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // msqrt CRS //
+  if (test_send_msqrt<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msqrt<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msqrt<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msqrt<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // msin CRS //
+  if (test_send_msin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_msin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // msinh CRS //
+  if (test_send_msinh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msinh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // masin CRS //
+  if (test_send_masin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_masin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_masin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_masin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // masinh CRS //
+  if (test_send_masinh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_masinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_masinh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_masinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mtan CRS //
+  if (test_send_mtan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mtan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mtan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mtan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // matan CRS //
+  if (test_send_matan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_matan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_matan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // matanh CRS //
+  if (test_send_matanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_matanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_matanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mceil CRS //
+  if (test_send_mceil<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mceil<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mceil<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mceil<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mfloor CRS //
+  if (test_send_mfloor<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mfloor<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mfloor<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mfloor<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // msign CRS //
+  if (test_send_msign<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_msign<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_msign<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_msign<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   return 0;
 }
