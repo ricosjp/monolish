@@ -22,7 +22,6 @@ namespace vml {
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
@@ -42,6 +41,28 @@ void atanh(const vector<double> &a, vector<double> &y);
 void ceil(const vector<double> &a, vector<double> &y);
 void floor(const vector<double> &a, vector<double> &y);
 void sign(const vector<double> &a, vector<double> &y);
+
+///////////////////////////////////
+
+void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+         matrix::Dense<double> &C);
+void pow(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C);
+void sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void sinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void asin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void asinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+void tan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void atan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void floor(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void sign(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 //////////////////////////////////////////////////////
 //  Vector
