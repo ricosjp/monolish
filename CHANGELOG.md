@@ -21,9 +21,10 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- Denseに数学関数の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/163
-- vectorに数学関数の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/162
-- internalに数学関数の追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/160
+- CRSに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/164
+- Denseに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/163
+- vectorに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/162
+- internalに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/160
 - Doxygenのfunction listにvmlに実装予定の数学関数の一覧を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/159
 - internalとvmlにvtanhのコードを実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
 

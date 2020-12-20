@@ -486,16 +486,13 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_add<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>,
+  if (test_mm_add<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                   monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_add<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -512,16 +509,13 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_sub<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>,
+  if (test_mm_sub<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                   monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_sub<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mm_sub<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -538,16 +532,13 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_mul<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>,
+  if (test_mm_mul<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                   monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_mul<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mm_mul<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -564,16 +555,13 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_div<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>,
+  if (test_mm_div<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                   monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_div<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -588,14 +576,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_add<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_add<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_add<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_sm_add<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -610,14 +596,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_sub<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_sub<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_sub<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_sm_sub<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -632,14 +616,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_mul<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_mul<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_mul<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_sm_mul<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -654,14 +636,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_div<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_div<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_div<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_sm_div<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -676,14 +656,12 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_sm_pow<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_sm_pow<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
+                  double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sm_pow<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_sm_pow<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -700,16 +678,13 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_pow<monolish::matrix::CRS<double>,
-                  monolish::matrix::CRS<double>,
+  if (test_mm_pow<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
                   monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_pow<monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>,
-                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mm_pow<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
+                  monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -726,8 +701,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_msqrt<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_msqrt<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -740,8 +714,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_msin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_msin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
   if (test_msin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
@@ -761,8 +734,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_msinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_msinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -779,8 +751,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_masin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_masin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -797,8 +768,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_masinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_masinh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -811,8 +781,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mtan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_mtan<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
   if (test_mtan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
@@ -832,8 +801,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_matan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_matan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -850,8 +818,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_matanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_matanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -868,8 +835,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mceil<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mceil<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -886,8 +852,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mfloor<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_mfloor<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -904,8 +869,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_msign<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_msign<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
