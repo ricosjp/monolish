@@ -301,4 +301,25 @@ void vml::sign(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
   logger.func_out();
 }
 
+// CRS
+void vml::tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  if (A.get_row() != C.get_row()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (A.get_col() != C.get_col()) {
+    throw std::runtime_error("error A.col != C.col");
+  }
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
+  }
+
+  internal::vtanh(A.get_nnz(), A.val.data(), C.val.data(),
+                  C.get_device_mem_stat());
+
+  logger.func_out();
+}
 } // namespace monolish
