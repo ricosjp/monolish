@@ -14,7 +14,7 @@ void ans_svpow(monolish::vector<T> &mx, T value, monolish::vector<T> &ans) {
 template <typename T> bool test_send_svpow(const size_t size, double tol) {
 
   T value = 123.0;
-  monolish::vector<T> x(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 1.0, 2.0);
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp = ans.copy();
