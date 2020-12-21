@@ -31,6 +31,7 @@ test/logger/logging/*.log
 test/logger/logging/*.html
 python/.pytest_cache/*
 python/monolish_log_viewer/__pycache__/*
+python/dist/
 
 # cmake
 build*/
