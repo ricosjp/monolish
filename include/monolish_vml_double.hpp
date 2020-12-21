@@ -126,7 +126,8 @@ void mul(const vector<double> &a, const double alpha, vector<double> &y);
 void div(const vector<double> &a, const double alpha, vector<double> &y);
 
 /**
- * @brief power to double precision vector elements by double precision scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @brief power to double precision vector elements by double precision scalar
+ *value (y[0:N] = pow(a[0:N], alpha))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -135,7 +136,8 @@ void div(const vector<double> &a, const double alpha, vector<double> &y);
 void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
 
 /**
- * @brief power to double precision vector elements by double precision vector (y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to double precision vector elements by double precision vector
+ *(y[0:N] = pow(a[0:N], b[0]:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -243,7 +245,8 @@ void ceil(const vector<double> &a, vector<double> &y);
 void floor(const vector<double> &a, vector<double> &y);
 
 /**
- * @brief sign inversion to double precision vector elements (y[0:N] = sign(a[0:N]))
+ * @brief sign inversion to double precision vector elements (y[0:N] =
+ *sign(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -375,7 +378,8 @@ void div(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 /**
- * @brief power to double precision dense matrix elements by double precision scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @brief power to double precision dense matrix elements by double precision
+ *scalar value (y[0:N] = pow(a[0:N], alpha))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -385,7 +389,8 @@ void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
          matrix::Dense<double> &C);
 
 /**
- * @brief power to double precision dense matrix elements by double precision dense matrix (y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to double precision dense matrix elements by double precision
+ *dense matrix (y[0:N] = pow(a[0:N], b[0]:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -431,7 +436,8 @@ void sinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void asin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief asinh to double precision dense matrix elements (y[0:N] = asinh(a[0:N]))
+ * @brief asinh to double precision dense matrix elements (y[0:N] =
+ *asinh(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -467,7 +473,8 @@ void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void atan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief atanh to double precision dense matrix elements (y[0:N] = atanh(a[0:N]))
+ * @brief atanh to double precision dense matrix elements (y[0:N] =
+ *atanh(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -485,7 +492,8 @@ void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief floor to double precision dense matrix elements (y[0:N] = floor(a[0:N]))
+ * @brief floor to double precision dense matrix elements (y[0:N] =
+ *floor(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -494,7 +502,8 @@ void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void floor(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief sign inversion to double precision dense matrix elements (y[0:N] = sign(a[0:N]))
+ * @brief sign inversion to double precision dense matrix elements (y[0:N] =
+ *sign(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -627,7 +636,8 @@ void div(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief power to double precision CRS matrix elements by double precision scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @brief power to double precision CRS matrix elements by double precision
+ *scalar value (y[0:N] = pow(a[0:N], alpha))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -637,7 +647,8 @@ void pow(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief power to double precision CRS matrix elements by double precision CRS matrix (y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to double precision CRS matrix elements by double precision CRS
+ *matrix (y[0:N] = pow(a[0:N], b[0]:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -746,7 +757,8 @@ void ceil(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void floor(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief sign inversion to double precision CRS matrix elements (y[0:N] = sign(a[0:N]))
+ * @brief sign inversion to double precision CRS matrix elements (y[0:N] =
+ *sign(a[0:N]))
  * @note
  * - # of computation: N
  * - Multi-threading: true
