@@ -33,8 +33,8 @@ logファイルの例もCIで生成されるようになりました
 
 `test/logger/logging` の結果が出るようになっています．
 
-- [CPU](https://ricos.pages.ritc.jp/monolish/logging_result_cpu.html)
-- [GPU](https://ricos.pages.ritc.jp/monolish/logging_result_gpu.html)
+- [CPU](https://ricos.pages.ritc.jp/monolish/monolish_test_cpu.html)
+- [GPU](https://ricos.pages.ritc.jp/monolish/monolish_test_gpu.html)
 
 # Benchmark result
 masterブランチのベンチマークの結果が可視化されるようになりました．
