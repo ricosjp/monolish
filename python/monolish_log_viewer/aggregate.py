@@ -65,8 +65,12 @@ class AggregateDataFrame:
         dataframe = dataframe[aggr_col_list]
 
         # aggregate continuous values
+        # print(dataframe)
         dataframe = self.aggregated_continuous_values(dataframe)
         aggr_col_list = aggr_col_list + ["group", "cont_cnt"]
+        # 最大表示行数を設定
+        pandas.set_option('display.max_rows', 500)
+        print(dataframe)
         dataframe = dataframe[aggr_col_list]
 
         # add column layer

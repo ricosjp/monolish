@@ -8,11 +8,11 @@ def test_execute_create_log_normaldata():
         正常データで表示されるhtmlが入っているかどうかみる
     """
     data_list = [
-        "only_solver",
+        # "only_solver",
         "normal_data",
-        "normal_data_order",
-        "only_other",
-        "cg_iter"
+        # "normal_data_order",
+        # "only_other",
+        # "cg_iter"
         ]
 
     for file_name in data_list:

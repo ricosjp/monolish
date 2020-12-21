@@ -65,34 +65,34 @@ def test_all_block_solver():
         # check max block num
         assert max(aggregated_df["group_0"]) == len(dataframe[dataframe["name"] == "solve/"])/2
 
-def test_aggregated_continuous_values():
-    """test_aggregated_continuous_values
-        連続で呼び出される関数の集計テスト
-    """
-    data_list = [
-        "only_solver",
-        "normal_data",
-        "normal_data_order",
-        "cg_iter"
-        ]
+# def test_aggregated_continuous_values():
+#     """test_aggregated_continuous_values
+#         連続で呼び出される関数の集計テスト
+#     """
+#     data_list = [
+#         "only_solver",
+#         "normal_data",
+#         "normal_data_order",
+#         "cg_iter"
+#         ]
 
-    for file_name in data_list:
-        data_path = f"/../test_data/{file_name}.yml"
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
+#     for file_name in data_list:
+#         data_path = f"/../test_data/{file_name}.yml"
+#         data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
 
 
-        # read test data
-        with open(data_dir, "r") as file:
-            dict_list = read.reader(file, "yaml")
+#         # read test data
+#         with open(data_dir, "r") as file:
+#             dict_list = read.reader(file, "yaml")
 
-        test_dataframe = pandas.DataFrame(dict_list)
-        test_dataframe = test_dataframe[["type", "name", "time", "stat"]]
+#         test_dataframe = pandas.DataFrame(dict_list)
+#         test_dataframe = test_dataframe[["type", "name", "time", "stat"]]
 
-        aggregate_dataframe = aggregate.AggregateDataFrame()
-        aggr_cont_df = aggregate_dataframe.aggregated_continuous_values(test_dataframe)
+#         aggregate_dataframe = aggregate.AggregateDataFrame()
+#         aggr_cont_df = aggregate_dataframe.aggregated_continuous_values(test_dataframe)
 
-        # colum check
-        assert list(aggr_cont_df.columns) == ["cont_cnt", "group", "name", "stat", "time", "type"]
+#         # colum check
+#         assert list(aggr_cont_df.columns) == ["cont_cnt", "group", "name", "stat", "time", "type"]
 
 def test_aggregated():
     """test aggregated
