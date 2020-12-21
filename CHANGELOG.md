@@ -98,6 +98,7 @@ Unreleased
 - benchmarkで演算の種類(kind)を出力するようにした https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/129
 
 ### Changed
+- monolish_log_viewerにlintをかけた https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/135
 - benchmarkの出力ディレクトリ名をハッシュ名だけに戻したhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/128
 
 ### Fixed

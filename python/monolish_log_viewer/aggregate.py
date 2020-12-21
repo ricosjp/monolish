@@ -3,12 +3,32 @@ import numpy
 import pandas
 
 class AggregateDataFrame:
+    """AggregateDataFrame
+        Aggregation using DataFrame
+        pandas.DataFrameを用いた集約処理
+    """
+    def __init__(self) -> None:
+        self.layer1_aggr_df  = pandas.DataFrame()
+        self.solve_df        = pandas.DataFrame()
+        self.aggregate_df    = pandas.DataFrame()
+        self.group_df        = pandas.DataFrame()
+        self.solve_aggr_df   = pandas.DataFrame()
+        self.group_0_sort_df = pandas.DataFrame()
+        self.sort_solve_df   = pandas.DataFrame()
+
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
+        """layer_1_aggregated
+            一層目の集約処理
+            Args:
+                dict_list(list): logger data
+            Returns:
+                pandas.DataFrame:1層の集約データ
+        """
         # dict_list -> dataframe
-        row_df =  pandas.DataFrame(dict_list)
+        row_df = pandas.DataFrame(dict_list)
 
         # add column "layer"
-        row_df["layer"] = row_df.name.apply(lambda any_series:any_series.count("/"))
+        row_df["layer"] = row_df.name.apply(lambda any_seri:any_seri.count("/"))
 
         # where layer == "layer"
         layer1_df = row_df[(row_df["layer"]==1) & (row_df["time"] != "IN")]
@@ -16,14 +36,25 @@ class AggregateDataFrame:
         # groupby "name", "layer"
         df_groupby_obj = layer1_df.groupby(["name", "layer"])
         layer1_aggr_df_sum = df_groupby_obj.sum().reset_index()
+        layer1_aggr_df_sum = layer1_aggr_df_sum[["name", "layer", "time"]]
+
         layer1_aggr_df_cnt = df_groupby_obj.count().reset_index().rename(columns={"time":"cnt"})
+        layer1_aggr_df_cnt = layer1_aggr_df_cnt[["name", "cnt"]]
 
         # join
-        layer1_aggr_df = pandas.merge(layer1_aggr_df_sum[["name", "layer", "time"]], layer1_aggr_df_cnt[["name", "cnt"]], how="left", on="name")
+        self.layer1_aggr_df = pandas.merge(
+            layer1_aggr_df_sum, layer1_aggr_df_cnt, how="left", on="name")
 
-        return layer1_aggr_df
+        return self.layer1_aggr_df
 
     def aggregated(self, dict_list:list) -> pandas.DataFrame:
+        """aggregated
+            全体の集約処理
+            Args:
+                dict_list(list): logger data
+            Returns:
+                pandas.DataFrame:全層の集約処理
+        """
         # aggregate column list
         aggr_col_list = ["type", "name", "time", "stat"]
 
@@ -39,7 +70,9 @@ class AggregateDataFrame:
         dataframe = dataframe[aggr_col_list]
 
         # add column layer
-        dataframe["layer"] = dataframe["name"].apply(lambda any_series:any_series.count("/")-1)
+        layer_df = dataframe.copy()
+        layer_df.loc[:, "layer"] = layer_df['name'].str.count("/") - 1
+        dataframe = layer_df
 
         # max layer
         global_max_layer = max(dataframe["layer"]) + 1
@@ -51,159 +84,115 @@ class AggregateDataFrame:
                 dataframe.loc[index, f"layer_{any_layer}_flg"] = row[f"layer_{any_layer}_flg"]
 
         # group lable
+        base_df = dataframe
         for any_layer in range(global_max_layer):
-            temp_group_lable_df = dataframe[(dataframe["layer"] ==any_layer) & (numpy.isnan(dataframe["time"]) == False)].copy()
-            temp_group_lable_df[f"group_{any_layer}"] = [i for i in range(len(temp_group_lable_df))]
-            dataframe = dataframe.merge(temp_group_lable_df[[f"group_{any_layer}"]], how="left", left_index=True, right_index=True)
-            dataframe["stat"] = dataframe["stat"].fillna("-")
-            dataframe[dataframe["layer"]==any_layer] = dataframe[dataframe["layer"]==any_layer].fillna(method="bfill")
-            dataframe[dataframe["layer"]>=any_layer] = dataframe[dataframe["layer"]>=any_layer].fillna(method="bfill")
+            temp_df = base_df[
+                (base_df["layer"] == any_layer) & (numpy.isnan(base_df["time"]) == bool(False))
+            ].copy()
+
+            add_col = f"group_{any_layer}"
+            temp_df[add_col] = [i for i, _ in temp_df.iterrows()]
+            base_df = base_df.merge(
+                temp_df[[add_col]], how="left", left_index=True, right_index=True)
+
+            base_df["stat"] = base_df["stat"].fillna("-")
+            base_df[base_df["layer"]==any_layer] = base_df[
+                base_df["layer"]==any_layer].fillna(method="bfill")
+            base_df[base_df["layer"]>=any_layer] = base_df[
+                base_df["layer"]>=any_layer].fillna(method="bfill")
 
         # drop "IN"
-        dataframe = dataframe[dataframe["stat"] != "IN"]
+        base_df = base_df[base_df["stat"] != "IN"]
 
         # add column layer
         for any_layer in range(global_max_layer):
-            dataframe[f"layer_{any_layer}_flg"] = dataframe[f"layer_{any_layer}_flg"].fillna(0.0)
-        dataframe = dataframe.fillna("-")
+            base_df[f"layer_{any_layer}_flg"] = base_df[f"layer_{any_layer}_flg"].fillna(0.0)
+        base_df = base_df.fillna("-")
 
         # aggregate base
-        group_column_list = [f"group_{target_layer}" for target_layer in range(global_max_layer)]
-        aggr_df = dataframe.groupby(["name", "layer"] + group_column_list).sum()
+        group_column_list = [f"group_{any_layer}" for any_layer in range(global_max_layer)]
+        aggr_df = base_df.groupby(["name", "layer"] + group_column_list).sum()
         aggr_df = aggr_df.reset_index()
 
-        # split
-        solve_df = aggr_df[aggr_df["name"].str.contains("solve/")]
+        # aggregate solve
+        solve_df = self.aggregated_solve(aggr_df)
 
-        if not solve_df.empty:
-            # local max layer
-            solve_max_layer = max(solve_df["layer"])
-            for target_layer in range(solve_max_layer):
-                denominator_group_list = solve_df[solve_df["layer"] == target_layer+1][f"group_{target_layer}"].values
-                denominator_df = solve_df[(solve_df[f"group_{target_layer}"].isin(denominator_group_list)) & (solve_df["layer"] == target_layer)]
-                denominator_df = denominator_df[[f"group_{target_layer}", "time"]]
-                denominator_df.columns = [f"group_{target_layer}", f"denominator_{target_layer+1}_time"]
-
-                solve_df = solve_df.merge(denominator_df, how="left", on=[f"group_{target_layer}"])
-                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df["time"] / solve_df[f"denominator_{target_layer+1}_time"] * 100
-
-                # drop column denominator
-                solve_df = solve_df.drop(columns=[f"denominator_{target_layer+1}_time"])
-
-                solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-", "-1"))
-
-            # sort
-            for target_layer in range(solve_max_layer):
-                solve_df[f"group_{target_layer}"] = solve_df[f"group_{target_layer}"].apply(lambda any_series:int(float(any_series)))
-            group_column_list = [f"group_{target_layer+1}" for target_layer in range(solve_max_layer)]
-            solve_df = solve_df.sort_values(group_column_list)
-            solve_df = solve_df.fillna("")
-
-            solve_df[f"group_{solve_max_layer-1}"] = solve_df[f"group_{solve_max_layer-1}"].apply(lambda any_series:int(float(any_series)))
-
-            # breakdown[%] / count
-            for target_layer in range(solve_max_layer):
-                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace("", 0.0) / solve_df["cont_cnt"]
-                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
-
-            # -1 to black
-            for target_layer in range(solve_max_layer):
-                solve_df[f"group_{target_layer+1}"] = solve_df[f"group_{target_layer+1}"].apply(lambda any_series:str(any_series).replace("-1", ""))
-
-            # drop layer info
-            for target_layer in range(solve_max_layer):
-                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[["layer", f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"]].T.apply(lambda x: x[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
-                solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"] = solve_df[f"breakdown_{target_layer} layer{target_layer+1}/layer{target_layer}[%]"].replace(0.000000, "")
-                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[["layer", f"breakdown_{target_layer}[%] / count"]].T.apply(lambda x: x[f"breakdown_{target_layer}[%] / count"] if x["layer"] in [target_layer, target_layer+1] else 0.0)
-                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(0.000000, "")
-                solve_df[f"breakdown_{target_layer}[%] / count"] = solve_df[f"breakdown_{target_layer}[%] / count"].replace(50, "")
-
-            # drop column layer flag
-            layer_column_list = [f"layer_{target_layer}_flg" for target_layer in range(solve_max_layer+1)]
-            solve_df = solve_df.drop(columns=layer_column_list)
-            solve_df = solve_df.reset_index()
-            solve_df = solve_df.drop(columns=["index"])
-
-            # final sort
-            group_0_min = min(solve_df["group_0"])
-            group_0_max = max(solve_df["group_0"])
-
-            if group_0_min == group_0_max:
-                group_0_max = group_0_max + 1
-
-            final_sort_solve_df = pandas.DataFrame(columns=solve_df.columns)
-            for group_0_index in range(group_0_min, group_0_max):
-                final_sort_solve_df = pandas.concat([final_sort_solve_df, solve_df[solve_df["group_0"] == group_0_index]])
-            solve_df = final_sort_solve_df
-            solve_df = solve_df.reset_index().drop("index", axis=1)
-        else:
-            solve_df = pandas.DataFrame()
+        # sort
+        solve_df = self.sort_solve(solve_df)
 
         return solve_df
 
+    def sort_solve(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """sort_solve_df
+            最後に表示順序を整える関数
+            Args:
+                dataframe(pandas.DataFrame): 元データ
+            Returns:
+                pandas.DataFrame:sort後のdf
+        """
+        if not dataframe.empty:
+            base_df = dataframe
+            # where group
+            max_layer = max(base_df["layer"])
+            # layer 0 の最小値を1にする
+            base_df["layer"] = base_df["layer"].apply(lambda layer:int(layer)+1)
+
+            group_list = []
+            for i in range(max_layer+1):
+                group_list.append(f"group_{i}")
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("", 0)
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].replace("-", 0)
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].apply(lambda x:int(float(x)))
+
+                group_cat_list = sorted(list(set(base_df[f"group_{i}"].values)))
+                if i == 0:
+                    replace_dict = {value:index+1 for index, value in enumerate(group_cat_list)}
+                else:
+                    replace_dict = {value:index for index, value in enumerate(group_cat_list)}
+                base_df[f"group_{i}"] = base_df[f"group_{i}"].map(replace_dict)
+
+            base_df = base_df.sort_values(group_list)
+            base_df = base_df.replace(0, "")
+            base_df = base_df.reset_index().drop("index", axis=1)
+
+        else:
+            base_df = pandas.DataFrame()
+
+        self.sort_solve_df = base_df
+
+        return self.sort_solve_df
+
     def aggregated_continuous_values(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """aggregate continuous values
+            同系で連続している処理の集約
+            Args:
+                dataframe(pandas.DataFrame): 元データ
+            Returns:
+                pandas.DataFrame:同系を集約した後の処理
+        """
         base_df = dataframe
 
-        """create grouping flg"""
-        center_temp_seri = base_df.name
-        center_temp_df = center_temp_seri.reset_index()
-        center_temp_df = center_temp_df.rename(columns={"index":"back_idx"})
-        center_temp_df = center_temp_df.reset_index()
+        # create grouping flg
+        group_df = self.create_grouping_flg(base_df)
 
-        plus_temp_df = center_temp_df.copy()
-        plus_temp_df["index"] = plus_temp_df["index"].apply(lambda any_seri:any_seri+1)
-        plus_temp_df = plus_temp_df.rename(columns={"name":"name_plus"})
-        center_p_temp_df = center_temp_df.merge(plus_temp_df, how="left", on="index")
-        center_p_temp_df = center_p_temp_df[center_p_temp_df["name"] == center_p_temp_df["name_plus"]].copy()
-        center_p_temp_df["count_flg_plus"] = 1
-        plus_flg_temp_df = center_temp_df.merge(center_p_temp_df[["index", "count_flg_plus"]], how="left", on="index")
-
-        minus_temp_df = center_temp_df.copy()
-        minus_temp_df["index"] = minus_temp_df["index"].apply(lambda any_seri:any_seri-1)
-        minus_temp_df = minus_temp_df.rename(columns={"name":"name_minus"})
-        center_m_temp_df = center_temp_df.merge(minus_temp_df, how="left", on="index")
-        center_m_temp_df = center_m_temp_df[center_m_temp_df["name"] == center_m_temp_df["name_minus"]].copy()
-        center_m_temp_df["count_flg_minus"] = 1
-        minus_flg_temp_df = center_temp_df.merge(center_m_temp_df[["index", "count_flg_minus"]], how="left", on="index")
-
-        center_pm_temp_df = plus_flg_temp_df.merge(minus_flg_temp_df[["index", "count_flg_minus"]], how="left", on="index")
-        center_pm_temp_df = center_pm_temp_df.fillna(0)
-        center_pm_temp_df["count_flg_plus"] = center_pm_temp_df["count_flg_plus"].apply(lambda any_series:int(any_series))
-        center_pm_temp_df["count_flg_minus"] = center_pm_temp_df["count_flg_minus"].apply(lambda any_series:int(any_series))
-        center_pm_temp_df["flg"] = center_pm_temp_df["count_flg_plus"] - center_pm_temp_df["count_flg_minus"]
-
-        create_m_group_df = center_pm_temp_df[center_pm_temp_df["flg"] == -1].copy()
-        create_m_group_df["m_group"] = [i+1 for i in range(len(create_m_group_df))]
-        create_m_group_df = create_m_group_df[["back_idx", "m_group"]]
-
-        create_p_group_df = center_pm_temp_df[center_pm_temp_df["flg"] == 1].copy()
-        create_p_group_df["p_group"] = [i+1 for i in range(len(create_p_group_df))]
-        create_p_group_df = create_p_group_df[["back_idx", "p_group"]]
-
-        center_temp_df2 = center_pm_temp_df
-        center_temp_df2 = center_temp_df2.merge(create_m_group_df, how="left", on="back_idx")
-        center_temp_df2 = center_temp_df2.merge(create_p_group_df, how="left", on="back_idx")
-        center_temp_df2["m_group"] = center_temp_df2["m_group"].fillna(method="ffill")
-        center_temp_df2["p_group"] = center_temp_df2["p_group"].fillna(method="bfill")
-        center_temp_df3 = center_temp_df2[center_temp_df2["m_group"] == center_temp_df2["p_group"]]
-        center_temp_df3 = center_temp_df3.rename(columns={"p_group":"group"})
-        center_temp_df4 = center_temp_df2.merge(center_temp_df3[["back_idx", "group"]], how="left", on="back_idx")
-        group_df = center_temp_df4[["group"]]
-
-        """add grouping values"""
+        # add grouping values
         base_df = base_df.merge(group_df, how="left", left_index=True, right_index=True)
         base_df = base_df.reset_index()
         base_df["cont_flg"] = 1
 
-        temp_any_df = base_df[(numpy.isnan(base_df["group"]) == False)]
-        temp_any_df1 = temp_any_df.groupby(["group"]).max()
-        temp_any_df1 = temp_any_df1.reset_index()
-        temp_any_df1 = temp_any_df1[["index", "group"]]
-        temp_any_df2 = temp_any_df.groupby(["type", "name", "group"]).sum()
-        temp_any_df2 = temp_any_df2.reset_index()
-        temp_any_df2 = temp_any_df2.drop(columns=["index"])
+        where_base_df = base_df[(numpy.isnan(base_df["group"])  == bool(False))]
 
-        any_df1 = temp_any_df2.merge(temp_any_df1, how="left", on = "group")
+        groupby_group_dfgb = where_base_df.groupby(["group"])
+        group_max_df = groupby_group_dfgb.max()
+        group_max_df = group_max_df.reset_index()
+        group_max_df = group_max_df[["index", "group"]]
+
+        groupby_tng_dfgb = where_base_df.groupby(["type", "name", "group"])
+        tng_sum_df = groupby_tng_dfgb.sum()
+        tng_sum_df = tng_sum_df.reset_index()
+        tng_sum_df = tng_sum_df.drop(columns=["index"])
+
+        any_df1 = tng_sum_df.merge(group_max_df, how="left", on = "group")
         any_df2 = base_df[numpy.isnan(base_df["group"])]
 
         aggr_cont_df = pandas.concat([any_df1, any_df2], sort=True)
@@ -213,4 +202,153 @@ class AggregateDataFrame:
         aggr_cont_df = aggr_cont_df.drop(columns=["index"])
         aggr_cont_df = aggr_cont_df.rename(columns={"cont_flg":"cont_cnt"})
 
-        return aggr_cont_df
+        self.aggregate_df = aggr_cont_df
+
+        return self.aggregate_df
+
+    def create_grouping_flg(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """create_grouping_flg
+            連続した処理のgrouping
+            Args:
+                dataframe(pandas.DataFrame): logger data
+            Returns:
+                pandas.DataFrame:全層のgrouping df
+        """
+        center_df = dataframe["name"].reset_index()
+        center_df = center_df.rename(columns={"index":"back_idx"})
+        center_df = center_df.reset_index()
+
+        plus_df = center_df.copy()
+        plus_df["index"] = plus_df["index"].apply(lambda any_seri:any_seri+1)
+        plus_df = plus_df.rename(columns={"name":"name_plus"})
+        center_p_df = center_df.merge(plus_df, how="left", on="index")
+        center_p_df = center_p_df[center_p_df["name"] == center_p_df["name_plus"]].copy()
+        center_p_df["cnt_flg_p"] = 1
+        plus_flg_df = center_df.merge(center_p_df[["index", "cnt_flg_p"]], how="left", on="index")
+
+        minus_df = center_df.copy()
+        minus_df["index"] = minus_df["index"].apply(lambda any_seri:any_seri-1)
+        minus_df = minus_df.rename(columns={"name":"name_minus"})
+        center_m_df = center_df.merge(minus_df, how="left", on="index")
+        center_m_df = center_m_df[center_m_df["name"] == center_m_df["name_minus"]].copy()
+        center_m_df["cnt_flg_m"] = 1
+        minus_flg_df = center_df.merge(center_m_df[["index", "cnt_flg_m"]], how="left", on="index")
+        minus_flg_df = minus_flg_df[["index", "cnt_flg_m"]]
+
+        center_pm_df = plus_flg_df.merge(minus_flg_df, how="left", on="index")
+        center_pm_df = center_pm_df.fillna(0)
+        center_pm_df["flg"] = center_pm_df["cnt_flg_p"] - center_pm_df["cnt_flg_m"]
+
+        create_m_group_df = center_pm_df[center_pm_df["flg"] == -1].copy()
+        create_m_group_df["m_group"] = [i+1 for i in range(len(create_m_group_df))]
+        create_m_group_df = create_m_group_df[["back_idx", "m_group"]]
+
+        create_p_group_df = center_pm_df[center_pm_df["flg"] == 1].copy()
+        create_p_group_df["p_group"] = [i+1 for i in range(len(create_p_group_df))]
+        create_p_group_df = create_p_group_df[["back_idx", "p_group"]]
+
+        center_flg_df = center_pm_df
+        center_flg_df = center_flg_df.merge(create_m_group_df, how="left", on="back_idx")
+        center_flg_df = center_flg_df.merge(create_p_group_df, how="left", on="back_idx")
+        center_flg_df["m_group"] = center_flg_df["m_group"].fillna(method="ffill")
+        center_flg_df["p_group"] = center_flg_df["p_group"].fillna(method="bfill")
+        center_flg_where_df = center_flg_df[center_flg_df["m_group"] == center_flg_df["p_group"]]
+        center_flg_where_df = center_flg_where_df.rename(columns={"p_group":"group"})
+        center_flg_where_df = center_flg_where_df[["back_idx", "group"]]
+        center_group_df = center_flg_df.merge(center_flg_where_df, how="left", on="back_idx")
+
+        self.group_df = center_group_df[["group"]]
+
+        return self.group_df
+
+    def aggregated_solve(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
+        """aggregated_solve
+            solveの処理の集約
+            Args:
+                dataframe(pandas.DataFrame): logger data
+            Returns:
+                pandas.DataFrame:solveの集約処理
+        """
+        solve_df = dataframe[dataframe["name"].str.contains("solve/")]
+
+        if not solve_df.empty:
+            # local max layer
+            solve_max_layer = max(solve_df["layer"])
+
+            for any_layer in range(solve_max_layer):
+                col_group = f"group_{any_layer}"
+                col_denominator = f"denominator_{any_layer+1}_time"
+
+                denominator_group_seri = solve_df[solve_df["layer"] == any_layer+1][col_group]
+                denominator_group_list = denominator_group_seri.values
+
+                denominator_df = solve_df[
+                    (solve_df[col_group].isin(denominator_group_list)) &
+                    (solve_df["layer"] == any_layer)
+                ]
+                denominator_df = denominator_df[[col_group, "time"]]
+                denominator_df.columns = [col_group, col_denominator]
+
+                col_per = f"breakdown_{any_layer} layer{any_layer+1}/layer{any_layer}[%]"
+                solve_df = solve_df.merge(denominator_df, how="left", on=[col_group])
+                solve_df[col_per] = solve_df["time"] / solve_df[col_denominator] * 100
+
+                # drop column denominator
+                solve_df = solve_df.drop(columns=[col_denominator])
+
+                col_group_p1 = f"group_{any_layer}"
+                solve_df[col_group_p1] = solve_df[col_group_p1].apply(
+                    lambda any_seri:str(any_seri).replace("-", "-1"))
+
+            # sort
+            for any_layer in range(solve_max_layer):
+                col_group = f"group_{any_layer}"
+                solve_df[col_group] = solve_df[col_group].apply(
+                    lambda any_seri:int(float(any_seri)))
+
+            narrow_col_list = [f"group_{any_layer+1}" for any_layer in range(solve_max_layer)]
+            solve_df = solve_df.sort_values(narrow_col_list)
+            solve_df = solve_df.fillna("")
+
+            col_group_m1 = f"group_{solve_max_layer-1}"
+            solve_df[col_group_m1] = solve_df[col_group_m1].apply(
+                lambda any_seri:int(float(any_seri)))
+
+            # breakdown[%] / count
+            for any_layer in range(solve_max_layer):
+                col_per_cnt = f"breakdown_{any_layer}[%] / count"
+                col_per = f"breakdown_{any_layer} layer{any_layer+1}/layer{any_layer}[%]"
+                solve_df[col_per_cnt] = solve_df[col_per].replace("", 0.0) / solve_df["cont_cnt"]
+                solve_df[col_per_cnt] = solve_df[col_per_cnt].replace(0.000000, "")
+
+            # -1 to black
+            for any_layer in range(solve_max_layer):
+                col_group = f"group_{any_layer+1}"
+                solve_df[col_group] = solve_df[col_group].apply(
+                    lambda any_seri:str(any_seri).replace("-1", ""))
+
+            # drop layer info
+            for any_layer in range(solve_max_layer):
+                col_per = f"breakdown_{any_layer} layer{any_layer+1}/layer{any_layer}[%]"
+                solve_df[col_per] = solve_df[["layer", col_per]].T.apply(
+                    lambda x: x[col_per] if x["layer"] in [any_layer, any_layer+1] else 0.0)
+                solve_df[col_per] = solve_df[col_per].replace(0.000000, "")
+
+                col_per_cnt = f"breakdown_{any_layer}[%] / count"
+                solve_df[col_per_cnt] = solve_df[["layer", col_per_cnt]].T.apply(
+                    lambda x: x[col_per_cnt] if x["layer"] in [any_layer, any_layer+1] else 0.0)
+                solve_df[col_per_cnt] = solve_df[col_per_cnt].replace(0.000000, "")
+                solve_df[col_per_cnt] = solve_df[col_per_cnt].replace(50, "")
+
+            # drop column layer flag
+            narrow_col_list = [f"layer_{any_layer}_flg" for any_layer in range(solve_max_layer+1)]
+            solve_df = solve_df.drop(columns=narrow_col_list)
+            solve_df = solve_df.reset_index()
+            solve_df = solve_df.drop(columns=["index"])
+
+        else:
+            solve_df = pandas.DataFrame()
+
+        self.solve_aggr_df = solve_df
+
+        return self.solve_aggr_df

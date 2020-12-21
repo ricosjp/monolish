@@ -14,6 +14,7 @@ argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.2"
+pylint = "^2.6.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
