@@ -15,31 +15,6 @@ namespace monolish {
  */
 namespace vml {
 
-/**
- * @brief tanh to double precision vector elements (y[0:N] = tanh(a[0:N]))
- * @note
- * - # of computation: N
- * - Multi-threading: true
- * - GPU acceleration: true
- **/
-
-void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void pow(const vector<double> &a, const double alpha, vector<double> &y);
-void sqrt(const vector<double> &a, vector<double> &y);
-
-void sin(const vector<double> &a, vector<double> &y);
-void sinh(const vector<double> &a, vector<double> &y);
-void asin(const vector<double> &a, vector<double> &y);
-void asinh(const vector<double> &a, vector<double> &y);
-
-void tan(const vector<double> &a, vector<double> &y);
-void tanh(const vector<double> &a, vector<double> &y);
-void atan(const vector<double> &a, vector<double> &y);
-void atanh(const vector<double> &a, vector<double> &y);
-
-void ceil(const vector<double> &a, vector<double> &y);
-void floor(const vector<double> &a, vector<double> &y);
-void sign(const vector<double> &a, vector<double> &y);
 
 ///////////////////////////////////
 
@@ -195,6 +170,134 @@ void mul(const vector<double> &a, const double alpha, vector<double> &y);
  *    - # of data transfer: 0
  */
 void div(const vector<double> &a, const double alpha, vector<double> &y);
+
+/**
+ * @brief power to double precision vector elements by double precision scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void pow(const vector<double> &a, const vector<double> &b, vector<double> &y);
+
+/**
+ * @brief power to double precision vector elements by double precision vector (y[0:N] = pow(a[0:N], b[0]:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void pow(const vector<double> &a, const double alpha, vector<double> &y);
+
+/**
+ * @brief sqrt to double precision vector elements (y[0:N] = sqrt(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void sqrt(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief sin to double precision vector elements (y[0:N] = sin(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void sin(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief sinh to double precision vector elements (y[0:N] = sinh(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void sinh(const vector<double> &a, vector<double> &y);
+
+
+/**
+ * @brief asin to double precision vector elements (y[0:N] = asin(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void asin(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief asinh to double precision vector elements (y[0:N] = asinh(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void asinh(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief tan to double precision vector elements (y[0:N] = tan(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void tan(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief tanh to double precision vector elements (y[0:N] = tanh(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void tanh(const vector<double> &a, vector<double> &y);
+
+
+/**
+ * @brief atan to double precision vector elements (y[0:N] = atan(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void atan(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief atanh to double precision vector elements (y[0:N] = atanh(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void atanh(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief ceil to double precision vector elements (y[0:N] = ceil(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void ceil(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief floor to double precision vector elements (y[0:N] = floor(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void floor(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief sign inversion to double precision vector elements (y[0:N] = sign(a[0:N]))
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void sign(const vector<double> &a, vector<double> &y);
 
 //////////////////////////////////////////////////////
 // Dense
