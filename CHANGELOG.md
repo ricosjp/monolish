@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- VMLのDoxygenコメントとmarkdownへの反映 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/166
 - monolish_log_viewer のライセンスを Apache-2.0 に設定 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/167
 - CRSに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/164
 - Denseに数学関数を追加 (min, max以外) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/163
