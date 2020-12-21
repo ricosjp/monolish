@@ -1,9 +1,10 @@
-import pytest
+""" html ソースの生成テスト """
 import numpy
 import pandas
 from monolish_log_viewer import html
 
 def test_df_to_html_table():
+    """ DFのtableが意図したとおりに作成できているかのテスト """
     # base data
     dataframe = pandas.DataFrame(
         numpy.arange(12).reshape(3, 4),
