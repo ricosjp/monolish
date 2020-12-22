@@ -21,6 +21,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Changed 
+- CIのRunner指定をsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
+
 0.9.0 - 2020/12/21
 -----------
 ### Added
