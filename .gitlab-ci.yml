@@ -29,7 +29,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
-        - c8cbb8c6304d
+        - nvidia0-sm_61
         - avx
 
 .gpu_noavx_clang:
@@ -42,7 +42,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - gpu
-        - c8cbb8c6304d
+        - nvidia0-sm_61
 
 .nogpu_avx_clang:
     variables:
