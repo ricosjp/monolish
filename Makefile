@@ -96,11 +96,11 @@ format:
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/clang-format:latest /usr/bin/check-format.sh
+		ghcr.io/ricosjp/allgebra/clang-format:20.10.1 /usr/bin/check-format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/doxygen:latest doxygen Doxyfile
+		ghcr.io/ricosjp/allgebra/doxygen:20.10.1 doxygen Doxyfile
