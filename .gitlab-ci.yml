@@ -1,5 +1,5 @@
 variables:
-  REGISTRY: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
+  REGISTRY: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
 
 image: ${REGISTRY}
 
@@ -466,7 +466,7 @@ pages:
     dependencies:
       - python-cpu
       - python-gpu
-    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
+    image: ghcr.io/ricosjp/allgebra/doxygen:latest
     stage: deploy
     script:
         - rm -rf public html
@@ -495,14 +495,14 @@ benchmark_result:
         - tags
 
 clang_format:
-    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
+    image: ghcr.io/ricosjp/allgebra/clang-format:latest
     stage: build_lib
     script:
         - check-format.sh
     allow_failure: true
 
 keep-changelog:
-    image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
+    image: ghcr.io/ricosjp/allgebra/clang-format:latest
     stage: build_lib
     script:
         - bash -c "! git diff --exit-code origin/master CHANGELOG.md"

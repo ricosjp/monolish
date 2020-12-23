@@ -1,5 +1,5 @@
-ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl
-ALLGEBRA_TAG   := latest
+ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl
+ALLGEBRA_TAG   := 20.12.1
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -96,11 +96,11 @@ format:
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/clang-format:20.10.1 /usr/bin/check-format.sh
+		ghcr.io/ricosjp/allgebra/clang-format:latest /usr/bin/check-format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/doxygen:20.10.1 doxygen Doxyfile
+		ghcr.io/ricosjp/allgebra/doxygen:latest doxygen Doxyfile
