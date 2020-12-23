@@ -24,6 +24,9 @@ Unreleased
 ### Changed 
 - CIのRunner指定をsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
 
+### Fixed
+- Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/172
+
 0.9.0 - 2020/12/21
 -----------
 ### Added

@@ -66,6 +66,9 @@
 | copy  | MKL           | cuBLAS           | CBLAS互換|
 
 ## vector helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
@@ -115,6 +118,9 @@
 | div         | MKL           | monolish       | monolish |
 
 ## Dense helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
@@ -182,6 +188,9 @@
 | div         | MKL           | monolish       | monolish |
 
 ## CRS helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
