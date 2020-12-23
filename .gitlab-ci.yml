@@ -1,5 +1,5 @@
 variables:
-  REGISTRY: ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl:latest
+  REGISTRY: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
 
 image: ${REGISTRY}
 

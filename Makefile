@@ -1,5 +1,5 @@
-ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/clang11gcc7/cuda10_1/mkl
-ALLGEBRA_TAG   := latest
+ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl
+ALLGEBRA_TAG   := 20.12.1
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
