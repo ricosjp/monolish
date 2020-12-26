@@ -163,7 +163,7 @@ class AggregateDataFrame:
         dataframe = dataframe.reset_index(drop=True)
         group_list = dataframe["group"].unique()
         replace_dict = {value:index+1 for index, value in enumerate(group_list)}
-        dataframe[f"group"] = dataframe[f"group"].map(replace_dict)
+        dataframe["group"] = dataframe["group"].map(replace_dict)
 
         if not dataframe.empty:
             max_layer = max(dataframe["layer"])

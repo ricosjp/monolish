@@ -63,7 +63,7 @@ def test_all_block_solver():
         aggregated_df = aggregate_dataframe.aggregated(dict_list)
 
         # check max block num
-        assert max(aggregated_df["group_0"]) == len(dataframe[dataframe["name"] == "solve/"])/2
+        assert max(aggregated_df["group"]) == len(dataframe[dataframe["name"] == "solve/"])/2
 
 # def test_aggregated_continuous_values():
 #     """test_aggregated_continuous_values
@@ -94,40 +94,40 @@ def test_all_block_solver():
 #         # colum check
 #         assert list(aggr_cont_df.columns) == ["cont_cnt", "group", "name", "stat", "time", "type"]
 
-def test_aggregated():
-    """test aggregated
-        集約値のカラムを確認する
-    """
-    data_list = [
-        "only_solver",
-        "normal_data",
-        "normal_data_order",
-        "cg_iter"
-        ]
+# def test_aggregated():
+#     """test aggregated
+#         集約値のカラムを確認する
+#     """
+#     data_list = [
+#         "only_solver",
+#         "normal_data",
+#         "normal_data_order",
+#         "cg_iter"
+#         ]
 
-    for file_name in data_list:
-        data_path = f"/../test_data/{file_name}.yml"
-        data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
+#     for file_name in data_list:
+#         data_path = f"/../test_data/{file_name}.yml"
+#         data_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + data_path)
 
-        with open(data_dir, "r") as file:
-            dict_list = read.reader(file, "yaml")
+#         with open(data_dir, "r") as file:
+#             dict_list = read.reader(file, "yaml")
 
-        # test data
-        dataframe = pandas.DataFrame(dict_list)
-        max_group_num = max(dataframe["name"].apply(lambda name:name.count("/")))
-        check_cols = ["name", "layer"]
-        check_cols = check_cols + [f"group_{i}" for i in range(max_group_num)]
-        check_cols = check_cols + ["time", "cont_cnt"]
-        loop_range = range(max_group_num-1)
-        check_cols = check_cols + [f"breakdown_{i} layer{i+1}/layer{i}[%]" for i in loop_range]
-        check_cols = check_cols + [f"breakdown_{i}[%] / count" for i in loop_range]
+#         # test data
+#         dataframe = pandas.DataFrame(dict_list)
+#         max_group_num = max(dataframe["name"].apply(lambda name:name.count("/")))
+#         check_cols = ["name", "layer"]
+#         check_cols = check_cols + [f"group_{i}" for i in range(max_group_num)]
+#         check_cols = check_cols + ["time", "cont_cnt"]
+#         loop_range = range(max_group_num-1)
+#         check_cols = check_cols + [f"breakdown_{i} layer{i+1}/layer{i}[%]" for i in loop_range]
+#         check_cols = check_cols + [f"breakdown_{i}[%] / count" for i in loop_range]
 
-        # test method
-        aggregate_dataframe = aggregate.AggregateDataFrame()
-        solve_df = aggregate_dataframe.aggregated(dict_list)
+#         # test method
+#         aggregate_dataframe = aggregate.AggregateDataFrame()
+#         solve_df = aggregate_dataframe.aggregated(dict_list)
 
-        # colum check
-        assert list(solve_df.columns) == check_cols
+#         # colum check
+#         assert list(solve_df.columns) == check_cols
 
 def test_aggregated_column_sum():
     """test_aggregated_column_sum
