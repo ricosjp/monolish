@@ -24,7 +24,7 @@ bool test(const char *file, const int check_ans, const T tol) {
 
   solver.set_tol(tol);
   solver.set_lib(0);
-  solver.set_miniter(5);
+  solver.set_miniter(0);
   solver.set_maxiter(10000);
 
   // precond setting
