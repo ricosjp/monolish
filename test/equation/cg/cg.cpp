@@ -22,7 +22,7 @@ bool test(const char *file, const int check_ans, const T tol) {
 
   monolish::equation::CG<T> solver;
 
-  solver.set_tol(1.0e-12);
+  solver.set_tol(tol);
   solver.set_lib(0);
   solver.set_miniter(5);
   solver.set_maxiter(10000);
