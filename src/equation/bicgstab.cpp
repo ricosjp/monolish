@@ -20,7 +20,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   }
 
   vector<T> r(A.get_row(), 0.0);
-  vector<T> rstar(A.get_row(), 0.0);
+  vector<T> r0(A.get_row(), 0.0);
 
   vector<T> p(A.get_row(), 0.0);
   vector<T> phat(A.get_row(), 0.0);
@@ -31,6 +31,8 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   vector<T> t(A.get_row(), 0.0);
 
   monolish::util::send(r, p, phat, s, shat);
+
+  T rho_old=1, rho=1, alpha=1, beta, omega=1;
 
   if (A.get_device_mem_stat() == false) {
     A.send();
@@ -48,27 +50,37 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   blas::matvec(A, x, r);
   vml::sub(b, r, r);
 
-  // r*0 = r0, (r*0, r0)!=0
-  rstar = r;
-
-  // p0 = r0
-  p = r;
-
-  //p = Mp
+  // r0 = r, (r*0, r0)!=0
+  r0 = r;
 
   for (size_t iter = 0; iter < this->maxiter; iter++) {
 
-    // alpha = (r(i-1), rstar) / (AM^-1*p(i-1), rstar)
-    auto rho = blas::dot(r, rstar);
+    // alpha = (r(i-1), r0) / (AM^-1*p(i-1), r0)
+    rho = blas::dot(r, r0);
 
     if(rho == 0.0){
-      // breakdown
+      printf("breakdown\n");
+      return 0;
     }
+
+    if(iter == 0){
+      p = r;
+    }
+    else{
+			// beta = (rho / rho_old) * (alpha / omega) 
+      beta = (rho / rho_old) * (alpha / omega);
+
+      // p = r + beta(p + omega * AM-1 p(i-1) )
+			// p = r + beta*(p - omega*v) 
+      blas::axpy(-omega, v, p); // p = -omega*v + p
+      blas::xpay(beta, r, p); // p = r + beta*p
+    }
+
     // phat = M^-1 p(i-1)
     this->precond.apply_precond(p, phat);
     // v = AM^-1p(i-1)
     blas::matvec(A, phat, v);
-    auto alpha = rho / blas::dot(v, rstar);
+    alpha = rho / blas::dot(v, r0);
 
     // s(i) = r(i-1) - alpha v
     blas::axpyz(-alpha, v, r, s);
@@ -79,14 +91,19 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     blas::matvec(A, shat, t);
 
     // omega = (AM-1s, s) / (AM-1s, AM-1s)
-    auto omega = blas::dot(t, s) / blas::dot(t, t);
+    omega = blas::dot(t, s) / blas::dot(t, t);
+
+    if(omega == 0.0){
+      printf("breakdown\n");
+      return 0;
+    }
 
     // x(i) = x(i-1) + alpha * M^-1 p(i-1) + omega * M^-1 s(i)
     blas::axpy(alpha,phat,x);
     blas::axpy(omega,shat,x);
 
     // r(i) = s(i-1) - omega * AM^-1 s(i-1)
-    blas::axpyz(-omega, t, s, r);
+    blas::axpyz(-omega, t, s, r); 
 
     //convergence check
     auto resid = this->get_residual(r);
@@ -98,13 +115,9 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
-    
-    // beta = alpha/omega * (r(i),rstar) / (r(i-1), rstar)
-    auto beta = alpha / omega * blas::dot(r, rstar) / rho;
 
-    // p = r + beta(p + omega * AM-1 p(i-1) )
-    blas::axpy(-omega, v, p); // p = -omega*v + p
-    blas::xpay(beta, r, p); // p = r + beta*p
+    rho_old = rho;
+    
   }
 
   logger.solver_out();
@@ -116,8 +129,6 @@ template int equation::BiCGSTAB<double>::monolish_BiCGSTAB(matrix::CRS<double> &
 template int equation::BiCGSTAB<float>::monolish_BiCGSTAB(matrix::CRS<float> &A,
                                               vector<float> &x,
                                               vector<float> &b);
-
-///
 
 template <typename T>
 int equation::BiCGSTAB<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
