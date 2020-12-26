@@ -12,6 +12,7 @@ class AggregateDataFrame:
         self.solve_df       = pandas.DataFrame()
         self.calculated_df  = pandas.DataFrame()
         self.shaping_df     = pandas.DataFrame()
+        self.base_df        = pandas.DataFrame()
 
     def layer_1_aggregated(self, dict_list:list) -> pandas.DataFrame:
         """layer_1_aggregated
@@ -75,7 +76,7 @@ class AggregateDataFrame:
 
         return self.solve_df
 
-    def create_preprocessing_table(self, dataframe:pandas.DataFrame) -> pandas.DataFrame: 
+    def create_preprocessing_table(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
         """create_preprocessing_table
             計算するtableを作る
             Args:
@@ -85,9 +86,10 @@ class AggregateDataFrame:
         """
         # apply group lable
         grouping_df = dataframe[(dataframe["layer"] == 1) & (dataframe["stat"] != "IN")]
-        grouping_df["group"] = [i for i in range(1, len(grouping_df)+1)]
+        grouping_df["group"] = range(1, len(grouping_df)+1)
         grouping_df["group"] = grouping_df["group"].astype(str)
-        dataframe = dataframe.merge(grouping_df[["group"]], how="left", left_index=True, right_index=True)
+        dataframe = dataframe.merge(
+            grouping_df[["group"]], how="left", left_index=True, right_index=True)
         dataframe["group"] = dataframe["group"].fillna(method="bfill")
 
         # drop IN record
@@ -116,14 +118,16 @@ class AggregateDataFrame:
         temp_df = aggr_df[["group", "parent"]]
         temp_df = temp_df[~temp_df.duplicated()]
         temp_df = temp_df.rename(columns={"parent":"flg_child"})
-        aggr_df = aggr_df.merge(temp_df, how="left", left_on=["group", "name"], right_on=["group", "flg_child"])
-        aggr_df["flg_child"] = aggr_df["flg_child"].apply(lambda x: str(1) if x is not numpy.nan else numpy.nan)
+        aggr_df = aggr_df.merge(
+            temp_df, how="left", left_on=["group", "name"], right_on=["group", "flg_child"])
+        aggr_df["flg_child"] = aggr_df["flg_child"].apply(
+            lambda x: str(1) if x is not numpy.nan else numpy.nan)
 
-        base_df = aggr_df[["group", "layer", "name", "parent", "flg_child", "time", "cnt"]]
+        self.base_df = aggr_df[["group", "layer", "name", "parent", "flg_child", "time", "cnt"]]
 
-        return base_df
+        return self.base_df
 
-    def calculate_table(self, dataframe:pandas.DataFrame) -> pandas.DataFrame: 
+    def calculate_table(self, dataframe:pandas.DataFrame) -> pandas.DataFrame:
         """calculate_table
             per, cnt_perを出す
             Args:
@@ -136,16 +140,22 @@ class AggregateDataFrame:
             target_df = dataframe[(dataframe["layer"] == layer) | (dataframe["layer"]  == layer+1)]
             denom_by_df = target_df[["group", "name", "time", "cnt"]]
             denom_by_df.columns = ["group", "parent_name", "parent_time", "parent_cnt"]
-            target_df = target_df.merge(denom_by_df, how="inner", left_on=["group", "parent"], right_on=["group", "parent_name"])
+            target_df = target_df.merge(denom_by_df,
+                how="inner", left_on=["group", "parent"], right_on=["group", "parent_name"])
 
             # percent
-            target_df[f"l{layer+1}/l{layer}_per"] = target_df["time"] / target_df["parent_time"] * 100
-            target_df[f"l{layer+1}/l{layer}_per/count"] = target_df[f"l{layer+1}/l{layer}_per"] / target_df["cnt"]
-            target_df = target_df[["group", "layer", "name", f"l{layer+1}/l{layer}_per", f"l{layer+1}/l{layer}_per/count"]]
+            per_col_name = f"l{layer+1}/l{layer}_per"
+            per_cnt_col_name = f"l{layer+1}/l{layer}_per/count"
+
+            target_df[per_col_name] = target_df["time"] / target_df["parent_time"] * 100
+            target_df[per_cnt_col_name] = target_df[per_col_name] / target_df["cnt"]
+            target_df = target_df[["group", "layer", "name", per_col_name, per_cnt_col_name]]
             dataframe = dataframe.merge(target_df, how="left", on=["group", "layer", "name"])
             # add 100%
-            dataframe[f"l{layer+1}/l{layer}_per"] = dataframe[f"l{layer+1}/l{layer}_per"].mask((dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
-            dataframe[f"l{layer+1}/l{layer}_per/count"] = dataframe[f"l{layer+1}/l{layer}_per/count"].mask((dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
+            dataframe[per_col_name] = dataframe[per_col_name].mask(
+                (dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
+            dataframe[per_cnt_col_name] = dataframe[per_cnt_col_name].mask(
+                (dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
 
         self.calculated_df = dataframe
 
