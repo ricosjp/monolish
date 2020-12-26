@@ -193,16 +193,44 @@ private:
 
 public:
   /**
-   * @brief solve Ax = b by CG method(lib=0: monolish)
+   * @brief solve Ax = b by BiCGSTAB method(lib=0: monolish)
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
    * @return error code (only 0 now)
    **/
   int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+
   void create_precond(matrix::CRS<Float> &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  void apply_precond(const vector<Float> &r, vector<Float> &z) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+};
+
+/**
+ * @brief BiCGSTAB solver class
+ */
+template <typename Float> class BiCGSTAB : public solver<Float> {
+private:
+  int monolish_BiCGSTAB(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+
+public:
+  /**
+   * @brief solve Ax = b by BiCGSTAB method (lib=0: monolish)
+   * @param[in] A CRS format Matrix
+   * @param[in] x solution vector
+   * @param[in] b right hand vector
+   * @return error code (only 0 now)
+   **/
+  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+
+  void create_precond(matrix::CRS<Float> &A) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
