@@ -85,9 +85,8 @@ class AggregateDataFrame:
                 pandas.DataFrame:sort後のdf
         """
         # apply group lable
-        grouping_df = dataframe[(dataframe["layer"] == 1) & (dataframe["stat"] != "IN")]
-        grouping_df["group"] = range(1, len(grouping_df)+1)
-        grouping_df["group"] = grouping_df["group"].astype(str)
+        grouping_df = dataframe[(dataframe["layer"] == 1) & (dataframe["stat"] != "IN")].copy()
+        grouping_df.loc[:, "group"] = range(1, len(grouping_df)+1)
         dataframe = dataframe.merge(
             grouping_df[["group"]], how="left", left_index=True, right_index=True)
         dataframe["group"] = dataframe["group"].fillna(method="bfill")
