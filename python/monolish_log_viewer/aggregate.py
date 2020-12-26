@@ -68,7 +68,6 @@ class AggregateDataFrame:
 
         # calculate_table
         calculated_df = self.calculate_table(base_df)
-        # print(calculated_df)
 
         # shaping
         shaping_df = self.shaping(calculated_df)
@@ -85,42 +84,42 @@ class AggregateDataFrame:
             Returns:
                 pandas.DataFrame:sort後のdf
         """
-        # apply group_0 lable
+        # apply group lable
         grouping_df = dataframe[(dataframe["layer"] == 1) & (dataframe["stat"] != "IN")]
-        grouping_df["group_0"] = [str(i) for i in range(1, len(grouping_df)+1)]
-        dataframe = dataframe.merge(grouping_df[["group_0"]], how="left", left_index=True, right_index=True)
-        dataframe["group_0"] = dataframe["group_0"].fillna(method="bfill")
+        grouping_df["group"] = [str(i) for i in range(1, len(grouping_df)+1)]
+        dataframe = dataframe.merge(grouping_df[["group"]], how="left", left_index=True, right_index=True)
+        dataframe["group"] = dataframe["group"].fillna(method="bfill")
 
         # drop IN record
         dataframe = dataframe[dataframe["stat"] != "IN"]
 
         # group by
-        groupby_group_dfgb = dataframe.groupby(["group_0", "name"])
+        groupby_group_dfgb = dataframe.groupby(["group", "name"])
 
         sum_by_aggr_df = groupby_group_dfgb.sum()
         sum_by_aggr_df = sum_by_aggr_df.reset_index()
-        sum_by_aggr_df = sum_by_aggr_df[["group_0", "name", "time"]]
+        sum_by_aggr_df = sum_by_aggr_df[["group", "name", "time"]]
 
         count_by_aggr_df = groupby_group_dfgb.count()
         count_by_aggr_df = count_by_aggr_df.reset_index()
-        count_by_aggr_df = count_by_aggr_df[["group_0", "name", "time"]]
+        count_by_aggr_df = count_by_aggr_df[["group", "name", "time"]]
         count_by_aggr_df = count_by_aggr_df.rename(columns={"time":"cnt"})
 
-        aggr_df = sum_by_aggr_df.merge(count_by_aggr_df, how="left", on=["group_0", "name"])
-        aggr_df["group_0"] = aggr_df["group_0"].apply(lambda x:int(x))
+        aggr_df = sum_by_aggr_df.merge(count_by_aggr_df, how="left", on=["group", "name"])
+        aggr_df["group"] = aggr_df["group"].apply(lambda x:int(x))
         aggr_df["layer"] = aggr_df["name"].str.count("/")
-        aggr_df = aggr_df.sort_values(by=["group_0", "name"])
+        aggr_df = aggr_df.sort_values(by=["group", "name"])
         aggr_df = aggr_df.reset_index(drop=True)
 
         # apply parent flg_child lable
         aggr_df["parent"] = aggr_df["name"].apply(lambda x:"/".join(x.split("/")[:-2]+[""]))
-        temp_df = aggr_df[["group_0", "parent"]]
+        temp_df = aggr_df[["group", "parent"]]
         temp_df = temp_df[~temp_df.duplicated()]
         temp_df = temp_df.rename(columns={"parent":"flg_child"})
-        aggr_df = aggr_df.merge(temp_df, how="left", left_on=["group_0", "name"], right_on=["group_0", "flg_child"])
+        aggr_df = aggr_df.merge(temp_df, how="left", left_on=["group", "name"], right_on=["group", "flg_child"])
         aggr_df["flg_child"] = aggr_df["flg_child"].apply(lambda x: str(1) if x is not numpy.nan else numpy.nan)
 
-        base_df = aggr_df[["group_0", "layer", "name", "parent", "flg_child", "time", "cnt"]]
+        base_df = aggr_df[["group", "layer", "name", "parent", "flg_child", "time", "cnt"]]
 
         return base_df
 
@@ -135,20 +134,19 @@ class AggregateDataFrame:
         max_layer = max(dataframe["layer"])
         for layer in range(1, max_layer):
             target_df = dataframe[(dataframe["layer"] == layer) | (dataframe["layer"]  == layer+1)]
-            denom_by_df = target_df[["group_0", "name", "time", "cnt"]]
-            denom_by_df.columns = ["group_0", "parent_name", "parent_time", "parent_cnt"]
-            target_df = target_df.merge(denom_by_df, how="inner", left_on=["group_0", "parent"], right_on=["group_0", "parent_name"])
+            denom_by_df = target_df[["group", "name", "time", "cnt"]]
+            denom_by_df.columns = ["group", "parent_name", "parent_time", "parent_cnt"]
+            target_df = target_df.merge(denom_by_df, how="inner", left_on=["group", "parent"], right_on=["group", "parent_name"])
 
             # percent
             target_df[f"l{layer+1}/l{layer}_per"] = target_df["time"] / target_df["parent_time"] * 100
             target_df[f"l{layer+1}/l{layer}_per/count"] = target_df[f"l{layer+1}/l{layer}_per"] / target_df["cnt"]
-            target_df = target_df[["group_0", "layer", "name", f"l{layer+1}/l{layer}_per", f"l{layer+1}/l{layer}_per/count"]]
-            dataframe = dataframe.merge(target_df, how="left", on=["group_0", "layer", "name"])
+            target_df = target_df[["group", "layer", "name", f"l{layer+1}/l{layer}_per", f"l{layer+1}/l{layer}_per/count"]]
+            dataframe = dataframe.merge(target_df, how="left", on=["group", "layer", "name"])
             # add 100%
             dataframe[f"l{layer+1}/l{layer}_per"] = dataframe[f"l{layer+1}/l{layer}_per"].mask((dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
             dataframe[f"l{layer+1}/l{layer}_per/count"] = dataframe[f"l{layer+1}/l{layer}_per/count"].mask((dataframe["layer"] == layer) & (dataframe["flg_child"]=="1"), 100.0)
 
-        print(dataframe)
         self.calculated_df = dataframe
 
         return self.calculated_df
@@ -163,19 +161,22 @@ class AggregateDataFrame:
         """
         dataframe = dataframe[dataframe["name"].str.contains("solve/")]
         dataframe = dataframe.reset_index(drop=True)
-        group_list = dataframe["group_0"].unique()
+        group_list = dataframe["group"].unique()
         replace_dict = {value:index+1 for index, value in enumerate(group_list)}
-        dataframe[f"group_0"] = dataframe[f"group_0"].map(replace_dict)
+        dataframe[f"group"] = dataframe[f"group"].map(replace_dict)
 
+        if not dataframe.empty:
+            max_layer = max(dataframe["layer"])
+            per_list = []
+            for layer in range(1, max_layer):
+                per_list =  per_list + [f"l{layer+1}/l{layer}_per"]
+                per_list =  per_list + [f"l{layer+1}/l{layer}_per/count"]
 
-        per_list = []
-        for layer in range(1, 4):
-            per_list =  per_list + [f"l{layer+1}/l{layer}_per"]
-            per_list =  per_list + [f"l{layer+1}/l{layer}_per/count"]
-
-        colum_list = ["name", "layer" , "group_0", "time", "cnt"] + per_list
-        dataframe = dataframe[colum_list]
-        dataframe = dataframe.fillna("")
+            colum_list = ["name", "layer" , "group", "time", "cnt"] + per_list
+            dataframe = dataframe[colum_list]
+            dataframe = dataframe.fillna("")
+        else:
+            dataframe = pandas.DataFrame()
 
         self.shaping_df = dataframe
 
