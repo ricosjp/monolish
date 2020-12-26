@@ -61,7 +61,6 @@ class AggregateDataFrame:
         # drop useless information
         dataframe = dataframe[aggr_col_list]
         dataframe["layer"] = dataframe["name"].str.count("/")
-        # print(dataframe)
 
         # create preprocessing table
         base_df = self.create_preprocessing_table(dataframe)
@@ -86,7 +85,8 @@ class AggregateDataFrame:
         """
         # apply group lable
         grouping_df = dataframe[(dataframe["layer"] == 1) & (dataframe["stat"] != "IN")]
-        grouping_df["group"] = [str(i) for i in range(1, len(grouping_df)+1)]
+        grouping_df["group"] = [i for i in range(1, len(grouping_df)+1)]
+        grouping_df["group"] = grouping_df["group"].astype(str)
         dataframe = dataframe.merge(grouping_df[["group"]], how="left", left_index=True, right_index=True)
         dataframe["group"] = dataframe["group"].fillna(method="bfill")
 
@@ -106,7 +106,7 @@ class AggregateDataFrame:
         count_by_aggr_df = count_by_aggr_df.rename(columns={"time":"cnt"})
 
         aggr_df = sum_by_aggr_df.merge(count_by_aggr_df, how="left", on=["group", "name"])
-        aggr_df["group"] = aggr_df["group"].apply(lambda x:int(x))
+        aggr_df["group"] = aggr_df["group"].astype("int")
         aggr_df["layer"] = aggr_df["name"].str.count("/")
         aggr_df = aggr_df.sort_values(by=["group", "name"])
         aggr_df = aggr_df.reset_index(drop=True)
