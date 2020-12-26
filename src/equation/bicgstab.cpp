@@ -11,7 +11,7 @@ namespace monolish {
 
 template <typename T>
 int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
-                                 vector<T> &b) {
+                                             vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -32,7 +32,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
 
   monolish::util::send(r, r0, p, phat, s, shat, v, t);
 
-  T rho_old=1, rho=1, alpha=1, beta, omega=1;
+  T rho_old = 1, rho = 1, alpha = 1, beta, omega = 1;
 
   if (A.get_device_mem_stat() == false) {
     A.send();
@@ -58,22 +58,21 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     // alpha = (r(i-1), r0) / (AM^-1*p(i-1), r0)
     rho = blas::dot(r, r0);
 
-    if(rho == 0.0){
+    if (rho == 0.0) {
       printf("breakdown\n");
       return 0;
     }
 
-    if(iter == 0){
+    if (iter == 0) {
       p = r;
-    }
-    else{
-			// beta = (rho / rho_old) * (alpha / omega) 
+    } else {
+      // beta = (rho / rho_old) * (alpha / omega)
       beta = (rho / rho_old) * (alpha / omega);
 
       // p = r + beta(p + omega * AM-1 p(i-1) )
-			// p = r + beta*(p - omega*v) 
+      // p = r + beta*(p - omega*v)
       blas::axpy(-omega, v, p); // p = -omega*v + p
-      blas::xpay(beta, r, p); // p = r + beta*p
+      blas::xpay(beta, r, p);   // p = r + beta*p
     }
 
     // phat = M^-1 p(i-1)
@@ -93,19 +92,19 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     // omega = (AM-1s, s) / (AM-1s, AM-1s)
     omega = blas::dot(t, s) / blas::dot(t, t);
 
-    if(omega == 0.0){
+    if (omega == 0.0) {
       printf("breakdown\n");
       return 0;
     }
 
     // x(i) = x(i-1) + alpha * M^-1 p(i-1) + omega * M^-1 s(i)
-    blas::axpy(alpha,phat,x);
-    blas::axpy(omega,shat,x);
+    blas::axpy(alpha, phat, x);
+    blas::axpy(omega, shat, x);
 
     // r(i) = s(i-1) - omega * AM^-1 s(i-1)
-    blas::axpyz(-omega, t, s, r); 
+    blas::axpyz(-omega, t, s, r);
 
-    //convergence check
+    // convergence check
     auto resid = this->get_residual(r);
     if (this->print_rhistory == true) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << resid
@@ -117,21 +116,20 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     }
 
     rho_old = rho;
-    
   }
 
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-template int equation::BiCGSTAB<double>::monolish_BiCGSTAB(matrix::CRS<double> &A,
-                                               vector<double> &x,
-                                               vector<double> &b);
+template int equation::BiCGSTAB<double>::monolish_BiCGSTAB(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 template int equation::BiCGSTAB<float>::monolish_BiCGSTAB(matrix::CRS<float> &A,
-                                              vector<float> &x,
-                                              vector<float> &b);
+                                                          vector<float> &x,
+                                                          vector<float> &b);
 
 template <typename T>
-int equation::BiCGSTAB<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
+int equation::BiCGSTAB<T>::solve(matrix::CRS<T> &A, vector<T> &x,
+                                 vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -144,7 +142,9 @@ int equation::BiCGSTAB<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) 
   return ret; // err code
 }
 template int equation::BiCGSTAB<double>::solve(matrix::CRS<double> &A,
-                                         vector<double> &x, vector<double> &b);
-template int equation::BiCGSTAB<float>::solve(matrix::CRS<float> &A, vector<float> &x,
-                                        vector<float> &b);
+                                               vector<double> &x,
+                                               vector<double> &b);
+template int equation::BiCGSTAB<float>::solve(matrix::CRS<float> &A,
+                                              vector<float> &x,
+                                              vector<float> &b);
 } // namespace monolish

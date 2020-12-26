@@ -215,7 +215,8 @@ public:
  */
 template <typename Float> class BiCGSTAB : public solver<Float> {
 private:
-  int monolish_BiCGSTAB(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+  int monolish_BiCGSTAB(matrix::CRS<Float> &A, vector<Float> &x,
+                        vector<Float> &b);
 
 public:
   /**
