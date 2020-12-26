@@ -30,7 +30,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   vector<T> v(A.get_row(), 0.0);
   vector<T> t(A.get_row(), 0.0);
 
-  monolish::util::send(r, p, phat, s, shat);
+  monolish::util::send(r, r0, p, phat, s, shat, v, t);
 
   T rho_old=1, rho=1, alpha=1, beta, omega=1;
 
