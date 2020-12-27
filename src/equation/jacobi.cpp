@@ -19,7 +19,7 @@ void equation::Jacobi<T>::create_precond(matrix::CRS<T> &A) {
 
   this->precond.M.resize(A.get_row());
   // send M
-  if (this->precond.M.get_device_mem_stat() == false) {
+  if (A.get_device_mem_stat() == true) {
     this->precond.M.send();
   }
 

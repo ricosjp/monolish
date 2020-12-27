@@ -25,6 +25,7 @@ Unreleased
 - BiCGSTABの実装を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 
 ### Changed 
+- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにした bug fix https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/176
 - update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/173
 - CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
 
