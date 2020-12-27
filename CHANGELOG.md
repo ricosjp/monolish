@@ -31,6 +31,7 @@ Unreleased
 ### Fixed
 - test/equationのminiterを0に設定 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 - Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/172
+- monolish_log_viewerの連続処理カウント処理を修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/169
 
 0.9.0 - 2020/12/21
 -----------
@@ -51,7 +52,6 @@ Unreleased
 - testにscalar-matrixのVMLがなかったので追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/157
 
 ### Fixed
-- monolish_log_viewerの連続処理カウント処理を修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/169
 - powerの乱数の範囲を1~2に変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/165
 
 0.8.0 - 2020/12/17
