@@ -70,7 +70,6 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
       beta = (rho / rho_old) * (alpha / omega);
 
       // p = r + beta(p + omega * AM-1 p(i-1) )
-      // p = r + beta*(p - omega*v)
       blas::axpy(-omega, v, p); // p = -omega*v + p
       blas::xpay(beta, r, p);   // p = r + beta*p
     }
@@ -93,8 +92,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     omega = blas::dot(t, s) / blas::dot(t, t);
 
     if (omega == 0.0) {
-      printf("breakdown\n");
-      return 0;
+      return MONOLISH_SOLVER_BREAKDOWN;
     }
 
     // x(i) = x(i-1) + alpha * M^-1 p(i-1) + omega * M^-1 s(i)
@@ -110,9 +108,14 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << resid
                              << std::endl;
     }
+
     if (resid < this->tol && this->miniter <= iter + 1) {
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
+    }
+
+    if ( std::isnan(resid)) {
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
 
     rho_old = rho;
