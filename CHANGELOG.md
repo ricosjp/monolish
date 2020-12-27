@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.9.1 - 2020/12/28
+-----------
 ### Added
 - add vecadd/vecsub doxygen comments https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/177
 - CG, BiCGSTABでBREAKDOWNしたりresidualがNaNになったときの判定を追加 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/175
