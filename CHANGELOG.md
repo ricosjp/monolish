@@ -20,12 +20,15 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- BiCGSTABの実装 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 
 ### Changed 
 - update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/173
 - CIのRunner指定をsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
 
 ### Fixed
+- test/equationのminiterを0に設定 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 - Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/172
 
 0.9.0 - 2020/12/21
