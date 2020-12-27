@@ -14,14 +14,38 @@ namespace monolish {
  * Scalar
  */
 namespace blas {
-void vecadd(const vector<double> &a, const vector<double> &b,
-            vector<double> &y);
-void vecsub(const vector<double> &a, const vector<double> &b,
-            vector<double> &y);
 
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
+/**
+ * @brief double precision element by element addition of vector a and vector b.
+ * @param a double precision monolish vector (size N)
+ * @param b double precision monolish vector (size N)
+ * @param y double precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void vecadd(const vector<double> &a, const vector<double> &b,
+            vector<double> &y);
+
+/**
+ * @brief double precision element by element subtraction of vector a and vector
+ * b.
+ * @param a double precision monolish vector (size N)
+ * @param b double precision monolish vector (size N)
+ * @param y double precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void vecsub(const vector<double> &a, const vector<double> &b,
+            vector<double> &y);
 /**
  * @brief double precision vector asum (absolute sum)
  * @param x double precision monolish vector (size N)
