@@ -26,6 +26,7 @@ Unreleased
 - BiCGSTABの実装を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 
 ### Changed 
+- BiCGSTABを実装済としてDoxygenに反映, update doxygen project vesion to 0.9.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/177
 - CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/terge_requests/176
 - update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/173
 - CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
