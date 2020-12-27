@@ -70,6 +70,10 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
+
+    if (std::isnan(resid)) {
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
+    }
   }
 
   logger.solver_out();
