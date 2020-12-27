@@ -21,11 +21,12 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add vecadd/vecsub doxygen comments https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/177
 - CG, BiCGSTABでBREAKDOWNしたりresidualがNaNになったときの判定を追加 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/175
 - BiCGSTABの実装を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 
 ### Changed 
-- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにした bug fix https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/176
+- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/terge_requests/176
 - update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/173
 - CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
 

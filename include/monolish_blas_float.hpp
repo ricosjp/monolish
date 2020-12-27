@@ -29,8 +29,7 @@ namespace blas {
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecadd(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
 
 /**
  * @brief single precision element by element subtraction of vector a and vector
@@ -44,8 +43,7 @@ void vecadd(const vector<float> &a, const vector<float> &b,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 /**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
