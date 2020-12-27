@@ -114,7 +114,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
       return MONOLISH_SOLVER_SUCCESS;
     }
 
-    if ( std::isnan(resid)) {
+    if (std::isnan(resid)) {
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
 
