@@ -24,20 +24,20 @@ Unreleased
 0.9.1 - 2020/12/28
 -----------
 ### Added
-- add vecadd/vecsub doxygen comments https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/177
-- CG, BiCGSTABでBREAKDOWNしたりresidualがNaNになったときの判定を追加 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/175
+- add vecadd/vecsub doxygen comments https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/177
+- CG, BiCGSTABでBREAKDOWNしたりresidualがNaNになったときの判定を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/175
 - BiCGSTABの実装を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
 
 ### Changed 
-- BiCGSTABを実装済としてDoxygenに反映, update doxygen project vesion to 0.9.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/177
-- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/terge_requests/176
-- update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/173
-- CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/171
+- BiCGSTABを実装済としてDoxygenに反映, update doxygen project vesion to 0.9.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/177
+- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/176
+- update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/173
+- CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/171
 
 ### Fixed
 - test/equationのminiterを0に設定 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
-- Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/172
-- monolish_log_viewerの連続処理カウント処理を修正 https://gitlab.ritc.jp/ricos/monolish/-/terge_requests/169
+- Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/172
+- monolish_log_viewerの連続処理カウント処理を修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/169
 
 0.9.0 - 2020/12/21
 -----------
