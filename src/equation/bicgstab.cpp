@@ -18,8 +18,10 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   if (A.get_row() != A.get_col()) {
     throw std::runtime_error("error A.row != A.col");
   }
-  if (A.get_device_mem_stat() != x.get_device_mem_stat() && A.get_device_mem_stat() != b.get_device_mem_stat()){
-    throw std::runtime_error("error, A.get_device_mem_stat != x.get_device_mem_stat != b.get_device_mem_stat");
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() &&
+      A.get_device_mem_stat() != b.get_device_mem_stat()) {
+    throw std::runtime_error("error, A.get_device_mem_stat != "
+                             "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
   vector<T> r(A.get_row(), 0.0);
@@ -33,7 +35,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   vector<T> v(A.get_row(), 0.0);
   vector<T> t(A.get_row(), 0.0);
 
-  if(A.get_device_mem_stat() == true){
+  if (A.get_device_mem_stat() == true) {
     monolish::util::send(r, r0, p, phat, s, shat, v, t);
   }
 
