@@ -252,7 +252,7 @@
 | func     | Intel          | NVIDIA         | OSS            |
 |----------|----------------|----------------|----------------|
 | CG       | monolish       | monolish       | monolish       |
-| BiCGSTAB | none->monolish | none->monolish | none->monolish |
+| BiCGSTAB | monolish       | monolish       | monolish       |
 | Jacobi   | none->monolish | none->monolish | none->monolish |
 
 ## Sparse LA Preconditioner
