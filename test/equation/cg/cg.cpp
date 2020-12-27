@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
   if (test<double>(file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<float>(file, check_ans, 1.0e-5) == false) {
+  if (test<float>(file, check_ans, 1.0e-4) == false) {
     return 1;
   }
 
