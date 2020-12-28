@@ -537,54 +537,54 @@ nogpu_noavx_clang_oss:
 #
 
 # gpu mkl
-gpu_avx_clang_mkl:
+logger_gpu_avx_clang_mkl:
     stage: lang
     extends: .test_gpu_avx_clang_mkl
     variables:
       TEST_TARGET: "lang"
-gpu_noavx_clang_mkl:
+logger_gpu_noavx_clang_mkl:
     stage: lang
     extends: .test_gpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "lang"
 # cpu mkl
-nogpu_avx_gcc_mkl:
+logger_nogpu_avx_gcc_mkl:
     stage: lang
     extends: .test_nogpu_avx_gcc_mkl
     variables:
       TEST_TARGET: "lang"
-nogpu_noavx_gcc_mkl:
+logger_nogpu_noavx_gcc_mkl:
     stage: lang
     extends: .test_nogpu_noavx_gcc_mkl
     variables:
       TEST_TARGET: "lang"
-nogpu_avx_clang_mkl:
+logger_nogpu_avx_clang_mkl:
     stage: lang
     extends: .test_nogpu_avx_clang_mkl
     variables:
       TEST_TARGET: "lang"
-nogpu_noavx_clang_mkl:
+logger_nogpu_noavx_clang_mkl:
     stage: lang
     extends: .test_nogpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "lang"
 # cpu oss
-nogpu_avx_gcc_oss:
+logger_nogpu_avx_gcc_oss:
     stage: lang
     extends: .test_nogpu_avx_gcc_oss
     variables:
       TEST_TARGET: "lang"
-nogpu_noavx_gcc_oss:
+logger_nogpu_noavx_gcc_oss:
     stage: lang
     extends: .test_nogpu_noavx_gcc_oss
     variables:
       TEST_TARGET: "lang"
-nogpu_avx_clang_oss:
+logger_nogpu_avx_clang_oss:
     stage: lang
     extends: .test_nogpu_avx_clang_oss
     variables:
       TEST_TARGET: "lang"
-nogpu_noavx_clang_oss:
+logger_nogpu_noavx_clang_oss:
     stage: lang
     extends: .test_nogpu_noavx_clang_oss
     variables:
