@@ -368,6 +368,7 @@ lang_gpu_noavx_clang_mkl:
 pytest:
     needs: []
     stage: python
+    image: ${MKL_IMAGE}
     script:
       # FIXME Python setup should be moved into allgebra
       - apt update && apt install -y python3-pip
@@ -381,6 +382,7 @@ python-cpu:
       - .logger_artifact
     needs:
       - logger_nogpu_avx_gcc_mkl
+    image: ${MKL_IMAGE}
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -395,6 +397,7 @@ python-gpu:
       - .logger_artifact
     needs:
       - logger_gpu_avx_clang_mkl
+    image: ${MKL_IMAGE}
     stage: python
     script:
       # FIXME Python setup should be moved into allgebra
@@ -489,6 +492,7 @@ pages:
 
 benchmark_result:
     stage: deploy
+    image: ${MKL_IMAGE}
     script:
         - git config --global user.name "monolish_ci_runner"
         - git config --global user.email "monolish_ci_runner@example.jp"
