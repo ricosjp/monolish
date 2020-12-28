@@ -450,57 +450,83 @@ equation_nogpu_noavx_clang_oss:
 # logger
 #
 
+.logger_artifact:
+  artifacts:
+    paths:
+      - test/logger/logging
+    expire_in: 360min
+    when: always
 # gpu mkl
 logger_gpu_avx_clang_mkl:
     stage: logger
-    extends: .test_gpu_avx_clang_mkl
+    extends: 
+      - .test_gpu_avx_clang_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_gpu_noavx_clang_mkl:
     stage: logger
-    extends: .test_gpu_noavx_clang_mkl
+    extends: 
+      - .test_gpu_noavx_clang_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 # cpu mkl
 logger_nogpu_avx_gcc_mkl:
     stage: logger
-    extends: .test_nogpu_avx_gcc_mkl
+    extends:
+      - .test_nogpu_avx_gcc_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_noavx_gcc_mkl:
     stage: logger
-    extends: .test_nogpu_noavx_gcc_mkl
+    extends:
+      - .test_nogpu_noavx_gcc_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_avx_clang_mkl:
     stage: logger
-    extends: .test_nogpu_avx_clang_mkl
+    extends:
+      - .test_nogpu_avx_clang_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_noavx_clang_mkl:
     stage: logger
-    extends: .test_nogpu_noavx_clang_mkl
+    extends:
+      - .test_nogpu_noavx_clang_mkl
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 # cpu oss
 logger_nogpu_avx_gcc_oss:
     stage: logger
-    extends: .test_nogpu_avx_gcc_oss
+    extends:
+      - .test_nogpu_avx_gcc_oss
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_noavx_gcc_oss:
     stage: logger
-    extends: .test_nogpu_noavx_gcc_oss
+    extends:
+      - .test_nogpu_noavx_gcc_oss
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_avx_clang_oss:
     stage: logger
-    extends: .test_nogpu_avx_clang_oss
+    extends:
+      - .test_nogpu_avx_clang_oss
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 logger_nogpu_noavx_clang_oss:
     stage: logger
-    extends: .test_nogpu_noavx_clang_oss
+    extends:
+      - .test_nogpu_noavx_clang_oss
+      - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 
