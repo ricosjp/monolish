@@ -153,45 +153,45 @@ stages:
         expire_in: 360min
 
 # gpu mkl
-build_cmake_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     extends:
       - .gpu_avx_clang_mkl
       - .build_cmake
-build_cmake_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     extends:
       - .gpu_noavx_clang_mkl
       - .build_cmake
 # cpu mkl
-build_cmake_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     extends:
       - .nogpu_avx_clang_mkl
       - .build_cmake
-build_cmake_nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl:
     extends:
       - .nogpu_noavx_clang_mkl
       - .build_cmake
-build_cmake_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     extends:
       - .nogpu_avx_gcc_mkl
       - .build_cmake
-build_cmake_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     extends:
       - .nogpu_noavx_gcc_mkl
       - .build_cmake
 # cpu oss
-build_cmake_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     extends:
       - .nogpu_avx_clang_oss
       - .build_cmake
-build_cmake_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     extends:
       - .nogpu_noavx_clang_oss
       - .build_cmake
-build_cmake_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     extends:
       - .nogpu_avx_gcc_oss
       - .build_cmake
-build_cmake_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     extends:
       - .nogpu_noavx_gcc_oss
       - .build_cmake
@@ -279,54 +279,54 @@ build_cmake_nogpu_noavx_gcc_oss:
 #
 
 # gpu mkl
-vector_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: vector
     extends: .test_gpu_avx_clang_mkl
     variables:
       TEST_TARGET: "vector"
-vector_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     stage: vector
     extends: .test_gpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "vector"
 # cpu mkl
-vector_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: vector
     extends: .test_nogpu_avx_gcc_mkl
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     stage: vector
     extends: .test_nogpu_noavx_gcc_mkl
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     stage: vector
     extends: .test_nogpu_avx_clang_mkl
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl:
     stage: vector
     extends: .test_nogpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "vector"
 # cpu oss
-vector_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     stage: vector
     extends: .test_nogpu_avx_gcc_oss
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     stage: vector
     extends: .test_nogpu_noavx_gcc_oss
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     stage: vector
     extends: .test_nogpu_avx_clang_oss
     variables:
       TEST_TARGET: "vector"
-vector_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     stage: vector
     extends: .test_nogpu_noavx_clang_oss
     variables:
@@ -337,54 +337,54 @@ vector_nogpu_noavx_clang_oss:
 #
 
 # gpu mkl
-matrix_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: matrix
     extends: .test_gpu_avx_clang_mkl
     variables:
       TEST_TARGET: "matrix"
-matrix_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     stage: matrix
     extends: .test_gpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "matrix"
 # cpu mkl
-matrix_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: matrix
     extends: .test_nogpu_avx_gcc_mkl
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     stage: matrix
     extends: .test_nogpu_noavx_gcc_mkl
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     stage: matrix
     extends: .test_nogpu_avx_clang_mkl
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl:
     stage: matrix
     extends: .test_nogpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "matrix"
 # cpu oss
-matrix_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     stage: matrix
     extends: .test_nogpu_avx_gcc_oss
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     stage: matrix
     extends: .test_nogpu_noavx_gcc_oss
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     stage: matrix
     extends: .test_nogpu_avx_clang_oss
     variables:
       TEST_TARGET: "matrix"
-matrix_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     stage: matrix
     extends: .test_nogpu_noavx_clang_oss
     variables:
@@ -395,54 +395,54 @@ matrix_nogpu_noavx_clang_oss:
 #
 
 # gpu mkl
-equation_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: equation
     extends: .test_gpu_avx_clang_mkl
     variables:
       TEST_TARGET: "equation"
-equation_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     stage: equation
     extends: .test_gpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "equation"
 # cpu mkl
-equation_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: equation
     extends: .test_nogpu_avx_gcc_mkl
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     stage: equation
     extends: .test_nogpu_noavx_gcc_mkl
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     stage: equation
     extends: .test_nogpu_avx_clang_mkl
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl:
     stage: equation
     extends: .test_nogpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "equation"
 # cpu oss
-equation_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     stage: equation
     extends: .test_nogpu_avx_gcc_oss
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     stage: equation
     extends: .test_nogpu_noavx_gcc_oss
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     stage: equation
     extends: .test_nogpu_avx_clang_oss
     variables:
       TEST_TARGET: "equation"
-equation_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     stage: equation
     extends: .test_nogpu_noavx_clang_oss
     variables:
@@ -459,14 +459,14 @@ equation_nogpu_noavx_clang_oss:
     expire_in: 360min
     when: always
 # gpu mkl
-logger_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: logger
     extends: 
       - .test_gpu_avx_clang_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     stage: logger
     extends: 
       - .test_gpu_noavx_clang_mkl
@@ -474,28 +474,28 @@ logger_gpu_noavx_clang_mkl:
     variables:
       TEST_TARGET: "logger"
 # cpu mkl
-logger_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: logger
     extends:
       - .test_nogpu_avx_gcc_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     stage: logger
     extends:
       - .test_nogpu_noavx_gcc_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     stage: logger
     extends:
       - .test_nogpu_avx_clang_mkl
       - .logger_artifact
     variables:
-      TEST_TARGET: "logger"
-logger_nogpu_noavx_clang_mkl:
+     TEST_TARGET: "logger"
+nogpu_noavx_clang_mkl:
     stage: logger
     extends:
       - .test_nogpu_noavx_clang_mkl
@@ -503,28 +503,28 @@ logger_nogpu_noavx_clang_mkl:
     variables:
       TEST_TARGET: "logger"
 # cpu oss
-logger_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     stage: logger
     extends:
       - .test_nogpu_avx_gcc_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     stage: logger
     extends:
       - .test_nogpu_noavx_gcc_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     stage: logger
     extends:
       - .test_nogpu_avx_clang_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
-logger_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     stage: logger
     extends:
       - .test_nogpu_noavx_clang_oss
@@ -537,54 +537,54 @@ logger_nogpu_noavx_clang_oss:
 #
 
 # gpu mkl
-lang_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: lang
     extends: .test_gpu_avx_clang_mkl
     variables:
       TEST_TARGET: "lang"
-lang_gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl:
     stage: lang
     extends: .test_gpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "lang"
 # cpu mkl
-lang_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: lang
     extends: .test_nogpu_avx_gcc_mkl
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl:
     stage: lang
     extends: .test_nogpu_noavx_gcc_mkl
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl:
     stage: lang
     extends: .test_nogpu_avx_clang_mkl
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl:
     stage: lang
     extends: .test_nogpu_noavx_clang_mkl
     variables:
       TEST_TARGET: "lang"
 # cpu oss
-lang_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
     stage: lang
     extends: .test_nogpu_avx_gcc_oss
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss:
     stage: lang
     extends: .test_nogpu_noavx_gcc_oss
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_avx_clang_oss:
+nogpu_avx_clang_oss:
     stage: lang
     extends: .test_nogpu_avx_clang_oss
     variables:
       TEST_TARGET: "lang"
-lang_nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss:
     stage: lang
     extends: .test_nogpu_noavx_clang_oss
     variables:
@@ -641,7 +641,7 @@ python-gpu:
 #
 
 # intel cpu + intel gpu + mkl
-benchmark_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
     stage: benchmark
     extends:
       - .gpu_avx_clang_mkl
@@ -665,7 +665,7 @@ benchmark_gpu_avx_clang_mkl:
         - tags
 
 # intel cpu + mkl
-benchmark_nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl:
     stage: benchmark
     extends:
       - .nogpu_avx_gcc_mkl
