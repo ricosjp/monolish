@@ -194,6 +194,7 @@ build_cmake_nogpu_avx_gcc_oss:
 build_cmake_nogpu_noavx_gcc_oss:
     extends:
       - .nogpu_noavx_gcc_oss
+      - .build_cmake
 
 #
 # Test templates
