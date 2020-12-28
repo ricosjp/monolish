@@ -640,7 +640,7 @@ python-gpu:
 #
 
 # intel cpu + intel gpu + mkl
-gpu_avx_clang_mkl:
+gpu_avx_clang_mkl_benchmark:
     stage: benchmark
     extends:
       - .gpu_avx_clang_mkl
@@ -658,13 +658,10 @@ gpu_avx_clang_mkl:
     tags:
       - c8cbb8c6304d
     only:
-        - master
-    except:
-        - schedules
-        - tags
+      - schedules
 
 # intel cpu + mkl
-nogpu_avx_gcc_mkl:
+intel_avx_gcc_mkl_benchmark:
     stage: benchmark
     extends:
       - .nogpu_avx_gcc_mkl
@@ -682,10 +679,49 @@ nogpu_avx_gcc_mkl:
     tags:
       - 008cfa52494d
     only:
-        - master
-    except:
-        - schedules
-        - tags
+      - schedules
+
+# intel cpu + oss
+intel_avx_gcc_oss_benchmark:
+    stage: benchmark
+    extends:
+      - .nogpu_avx_gcc_oss
+    needs:
+      - "nogpu_avx_gcc_oss_build_cmake"
+    artifacts:
+        paths:
+            - benchmark/
+        expire_in: 360min
+    script:
+      - cd benchmark
+      - make get_spec_cpu
+      - make cpu
+      - make run_cpu
+    tags:
+      - 008cfa52494d
+    only:
+      - schedules
+
+# AMD cpu + oss
+amd_avx_gcc_mkl_benchmark:
+    stage: benchmark
+    extends:
+      - .nogpu_avx_gcc_oss
+    needs:
+      - "nogpu_avx_gcc_oss_build_cmake"
+    artifacts:
+        paths:
+            - benchmark/
+        expire_in: 360min
+    script:
+      - cd benchmark
+      - make get_spec_cpu
+      - make cpu
+      - make run_cpu
+    tags:
+      - b42e99ecbde2
+    only:
+      - schedules
 
 #
 # docker and pages
