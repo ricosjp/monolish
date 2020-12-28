@@ -26,6 +26,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 - change CI job prefix name [ops]-[arch] -> [arch]-[ops] https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 0.9.1 - 2020/12/28
