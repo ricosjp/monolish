@@ -766,10 +766,7 @@ benchmark_result:
         - make get_ci_info
         - make commit_result
     only:
-        - master
-    except:
-        - schedules
-        - tags
+      - schedules
 
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
