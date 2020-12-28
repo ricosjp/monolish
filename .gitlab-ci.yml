@@ -1,7 +1,7 @@
 variables:
-  REGISTRY: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
+  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
+  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
 
-image: ${REGISTRY}
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -31,6 +31,7 @@ stages:
         - gpu
         - nvidia0-sm_61
         - avx
+    image: ${MKL_IMAGE}
 
 .gpu_noavx_clang:
     variables:
@@ -43,6 +44,7 @@ stages:
     tags:
         - gpu
         - nvidia0-sm_61
+    image: ${MKL_IMAGE}
 
 .nogpu_avx_clang:
     variables:
@@ -54,6 +56,7 @@ stages:
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
     tags:
         - avx
+    image: ${MKL_IMAGE}
 
 .nogpu_noavx_clang:
     variables:
@@ -63,6 +66,7 @@ stages:
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/local/llvm-11.0.0/bin/clang"
         CXX: "/usr/local/llvm-11.0.0/bin/clang++"
+    image: ${MKL_IMAGE}
 
 .nogpu_avx_gcc:
     variables:
@@ -74,6 +78,7 @@ stages:
         CXX: "/usr/bin/g++"
     tags:
         - avx
+    image: ${MKL_IMAGE}
 
 .nogpu_noavx_gcc:
     variables:
@@ -83,6 +88,7 @@ stages:
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/bin/gcc"
         CXX: "/usr/bin/g++"
+    image: ${MKL_IMAGE}
 
 
 .build_cmake:
@@ -96,6 +102,7 @@ stages:
             - ${PREFIX}
             - test/
         expire_in: 360min
+
 build_cmake_gpu_avx_clang:
     extends:
       - .gpu_avx_clang

@@ -1,4 +1,6 @@
-ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl
+ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra
+ALLGEBRA_CUDA := cuda10_1
+ALLGEBRA_CC := clang11gcc7
 ALLGEBRA_TAG   := 20.12.1
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -72,23 +74,42 @@ clean:
 	$(MAKE) -f Makefile.sx clean
 	$(MAKE) -C test/ clean
 
-in-gpu:
+in-mkl-gpu:
 	docker run -it --rm \
 		--gpus all   \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
 		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
-		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
+		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
 
-in-cpu:
+in-mkl-cpu:
 	docker run -it --rm \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
 		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
-		$(ALLGEBRA_IMAGE):$(ALLGEBRA_TAG)
+		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
 
+in-oss-gpu:
+	docker run -it --rm \
+		--gpus all   \
+		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-v $(MONOLISH_TOP):/monolish \
+		-w /monolish \
+		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
+
+in-oss-cpu:
+	docker run -it --rm \
+		-e MONOLISH_DIR=/opt/monolish/0.1 \
+		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-v $(MONOLISH_TOP):/monolish \
+		-w /monolish \
+		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
+
+in-cpu: in-mkl-cpu
+in-gpu: in-mkl-gpu
 in: in-gpu
 
 format:
@@ -96,11 +117,11 @@ format:
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/clang-format:20.10.1 /usr/bin/check-format.sh
+		$(ALLGEBRA_IMAGE)/clang-format:20.10.1 /usr/bin/check-format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		ghcr.io/ricosjp/allgebra/doxygen:20.10.1 doxygen Doxyfile
+		$(ALLGEBRA_IMAGE)/doxygen:20.10.1 doxygen Doxyfile
