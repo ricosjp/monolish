@@ -1,6 +1,6 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../../include/monolish_equation.hpp"
-#include <iostream>
+#include "../../internal/monolish_internal.hpp"
 
 //	#include "dmumps_c.h"
 //	#include "mpi.h"

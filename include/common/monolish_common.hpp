@@ -10,7 +10,8 @@
 #define MONOLISH_SOLVER_SIZE_ERROR -1
 #define MONOLISH_SOLVER_MAXITER -2
 #define MONOLISH_SOLVER_BREAKDOWN -3
-#define MONOLISH_SOLVER_NOT_IMPL -4
+#define MONOLISH_SOLVER_RESIDUAL_NAN -4
+#define MONOLISH_SOLVER_NOT_IMPL -10
 
 namespace monolish {
 /**
@@ -35,6 +36,13 @@ T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 /**
  * @brief check error
  * @param[in] err solver err code
+ * @note
+ * - MONOLISH_SOLVER_SUCCESS 0
+ * - MONOLISH_SOLVER_SIZE_ERROR -1
+ * - MONOLISH_SOLVER_MAXITER -2
+ * - MONOLISH_SOLVER_BREAKDOWN -3
+ * - MONOLISH_SOLVER_RESIDUAL_NAN -4
+ * - MONOLISH_SOLVER_NOT_IMPL -10
  */
 bool solver_check(const int err);
 

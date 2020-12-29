@@ -1,9 +1,10 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_equation.hpp"
-#include "../monolish_internal.hpp"
+#include "../../include/monolish_vml.hpp"
+#include "../internal/monolish_internal.hpp"
+
 #include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <string>
 
 namespace monolish {
@@ -15,30 +16,28 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
   logger.solver_in(monolish_func);
 
   if (A.get_row() != A.get_col()) {
-    throw std::runtime_error("error A.row != A.col");
+    throw std::runtime_error("error, A.row != A.col");
+  }
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() &&
+      A.get_device_mem_stat() != b.get_device_mem_stat()) {
+    throw std::runtime_error("error, A.get_device_mem_stat != "
+                             "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
   vector<T> r(A.get_row(), 0.0);
   vector<T> p(A.get_row(), 0.0);
   vector<T> q(A.get_row(), 0.0);
   vector<T> z(A.get_row(), 0.0);
-  monolish::util::send(r, p, q, z);
 
-  if (A.get_device_mem_stat() == false) {
-    A.send();
-  }
-  if (x.get_device_mem_stat() == false) {
-    x.send();
-  }
-  if (b.get_device_mem_stat() == false) {
-    b.send();
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(r, p, q, z);
   }
 
   this->precond.create_precond(A);
 
   // r = b-Ax
   blas::matvec(A, x, q);
-  r = b - q;
+  vml::sub(b, q, r);
 
   // p0 = Mr0
   p = r;
@@ -57,7 +56,7 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
     this->precond.apply_precond(r, z);
     auto beta = blas::dot(z, r) / tmp;
 
-    blas::xpay(beta, r, p); // p = r + beta*p
+    blas::xpay(beta, z, p); // p = z + beta*p
 
     T resid = this->get_residual(r);
     if (this->print_rhistory == true) {
@@ -68,6 +67,10 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
     if (resid < this->tol && this->miniter <= iter + 1) {
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
+    }
+
+    if (std::isnan(resid)) {
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
   }
 

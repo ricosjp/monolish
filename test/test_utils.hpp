@@ -1,5 +1,6 @@
 #pragma once
 #include "monolish_blas.hpp"
+#include "monolish_vml.hpp"
 
 #include <algorithm>
 #include <cassert>

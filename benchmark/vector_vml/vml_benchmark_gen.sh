@@ -1,0 +1,13 @@
+cat ./v_tanh.cpp | sed -e 's/tanh/sqrt/g' > v_sqrt.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/sin/g' > v_sin.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/sinh/g' > v_sinh.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/asin/g' > v_asin.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/asinh/g' > v_asinh.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/tan/g' > v_tan.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/atan/g' > v_atan.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/atanh/g' > v_atanh.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/ceil/g' > v_ceil.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/floor/g' > v_floor.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/sign/g' > v_sign.cpp
+cat ./vv_add.cpp | sed -e 's/add/pow/g' > vv_pow.cpp
+cat ./sv_add.cpp | sed -e 's/add/pow/g' > sv_pow.cpp

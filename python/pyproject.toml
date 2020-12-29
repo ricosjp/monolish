@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "monolish_log_viewer"
+version = "0.1.0"
+description = "Logger script"
+authors = ["Shin-ichiro Ogi <ogi@ricos.co.jp>"]
+license = "Apache-2.0"
+
+[tool.poetry.dependencies]
+python = "^3.7.9"
+
+PyYAML = "^5.2"
+numpy  = "^1.17"
+pandas = "^1.0"
+argparse = "^1.4.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+pylint = "^2.6.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+monolish_log_viewer = 'monolish_log_viewer.__main__:main'

@@ -1,10 +1,9 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../../../include/monolish_equation.hpp"
-#include "../../monolish_internal.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 #ifdef MONOLISH_USE_GPU
 #include "cusolverSp.h"
-#include "cusparse.h"
 #endif
 
 namespace monolish {

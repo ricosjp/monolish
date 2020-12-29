@@ -35,8 +35,11 @@ template <typename T> bool test(const size_t size) {
   }
 
   // gpu send and vec add
-  monolish::util::send(x, y, z);
-  z += x + y; // rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
+  monolish::vector<T> t(x.size());
+  monolish::util::send(x, y, z, t);
+
+  monolish::vml::add(x, y, t);
+  monolish::vml::add(t, z, z); // rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
 
   // copy (cpu and gpu)
   monolish::vector<T> tmp = z;

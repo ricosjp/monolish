@@ -1,6 +1,7 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_equation.hpp"
-#include "../monolish_internal.hpp"
+#include "../../include/monolish_vml.hpp"
+#include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -18,7 +19,7 @@ void equation::Jacobi<T>::create_precond(matrix::CRS<T> &A) {
 
   this->precond.M.resize(A.get_row());
   // send M
-  if (this->precond.M.get_device_mem_stat() == false) {
+  if (A.get_device_mem_stat() == true) {
     this->precond.M.send();
   }
 
@@ -34,7 +35,7 @@ void equation::Jacobi<T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  z = this->precond.M * r; // x = Ab
+  vml::mul(this->precond.M, r, z); // x = Ab
 
   logger.solver_out();
 }

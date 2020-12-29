@@ -1,5 +1,5 @@
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace matrix {
@@ -9,21 +9,19 @@ template <typename T> Dense<T> Dense<T>::copy() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (get_device_mem_stat()) {
-    nonfree_recv();
-  } // gpu copy
+  Dense<T> ans(get_row(), get_col());
 
-  Dense<T> tmp;
-  std::copy(val.data(), val.data() + nnz, tmp.val.begin());
-  tmp.rowN = get_row();
-  tmp.colN = get_col();
-  tmp.nnz = get_nnz();
+  // gpu copy
   if (get_device_mem_stat()) {
-    tmp.send();
-  } // gpu copy
+    ans.send();
+    internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
+  }
+
+  // cpu copy
+  internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
 
   logger.util_out();
-  return tmp;
+  return ans;
 }
 
 template Dense<double> Dense<double>::copy();
@@ -35,31 +33,18 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   logger.util_in(monolish_func);
 
   val.resize(mat.get_nnz());
-
   rowN = mat.get_row();
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-  // gpu copy and recv
+  // gpu copy
   if (mat.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
     send();
-    size_t NNZ = nnz;
-    T *vald = val.data();
-    const T *Mvald = mat.val.data();
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < NNZ; i++) {
-      vald[i] = Mvald[i];
-    }
-
-    nonfree_recv();
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-    std::copy(mat.val.data(), mat.val.data() + nnz, val.begin());
+    internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
   }
+
+  // cpu copy
+  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
 
   logger.util_out();
 }

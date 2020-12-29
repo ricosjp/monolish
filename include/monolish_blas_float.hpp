@@ -19,6 +19,32 @@ namespace blas {
 //  Vector
 //////////////////////////////////////////////////////
 /**
+ * @brief single precision element by element addition of vector a and vector b.
+ * @param a single precision monolish vector (size N)
+ * @param b single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
+
+/**
+ * @brief single precision element by element subtraction of vector a and vector
+ * b.
+ * @param a single precision monolish vector (size N)
+ * @param b single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
+/**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
  * @return The result of the asum
@@ -217,7 +243,7 @@ void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
 
 /**
- * @brief single precision Dense matrix addition: C = AB
+ * @brief single precision Dense matrix addition: C = A + B
  * @param A single precision Dense matrix (size M x N)
  * @param B single precision Dense matrix (size M x N)
  * @param C single precision Dense matrix (size M x N)
@@ -228,6 +254,37 @@ void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  *    - # of data transfer: 0
  */
 void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+            matrix::Dense<float> &C);
+
+/**
+ * @brief single precision CRS matrix addition: C = A - B (A and B must be
+ * same non-zero structure)
+ * @param A single precision CRS matrix (size M x N)
+ * @param B single precision CRS matrix (size M x N)
+ * @param C single precision CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and B must be same non-zero structure
+ */
+void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+            matrix::CRS<float> &C);
+
+/**
+ * @brief single precision Dense matrix addition: C = A - B
+ * @param A single precision Dense matrix (size M x N)
+ * @param B single precision Dense matrix (size M x N)
+ * @param C single precision Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matsub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C);
 
 ///////////////

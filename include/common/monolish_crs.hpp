@@ -69,6 +69,18 @@ public:
   CRS() {}
 
   /**
+   * @brief declare CRS matrix
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of nnz
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  CRS(const size_t M, const size_t N, const size_t NNZ);
+
+  /**
    * @brief Create CRS matrix from array
    * @param M # of row
    * @param N # of col
@@ -312,60 +324,26 @@ public:
   void operator=(const CRS<Float> &mat);
 
   /**
-   * @brief matrix scale (value*A)
-   * @param value scalar value
-   * @return CRS matrix (value*A)
+   * @brief Comparing matricies (A == mat)
+   * @param mat CRS matrix
+   * @return true or false
    * @note
-   * - # of computation: nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  CRS<Float> operator*(const Float value);
+  bool operator==(const CRS<Float> &mat) const;
 
   /**
-   * @brief matrix-vector multiplication (A*vec)
-   * @param vec vector (size N)
-   * @return result vector (size M)
+   * @brief Comparing matricies (A != mat)
+   * @param mat CRS matrix
+   * @return true or false
    * @note
-   * - # of computation: 2nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
    **/
-  vector<Float> operator*(vector<Float> &vec);
-
-  /**
-   * @brief CRS matrix (size M*K) and Dense matrix (size K*N) multiplication
-   *(A*B)
-   * @param B Dense matrix (size K*N)
-   * @return result Dense matrix (size M*N)
-   * @note
-   * - # of computation: 2* N * nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  Dense<Float> operator*(const Dense<Float> &B);
-
-  // crs-dense
-  /**
-   * @brief CRS matrix (size M*N) and CRS matrix (size K*N) addition A + B (A
-   *and B must be same non-zero structure)
-   * @param B CRS matrix (size M*N)
-   * @return result CRS matrix (size M*N)
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  CRS<Float> operator+(const CRS<Float> &B);
-
-  /**
-   * @brief tanh vector elements (A(i,j) = tanh(A(0:j)))
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void tanh();
+  bool operator!=(const CRS<Float> &mat) const;
 };
 } // namespace matrix
 } // namespace monolish

@@ -254,15 +254,15 @@ template <typename T> bool test() {
     return false;
   }
 
-  if (filey[0] != 30) {
+  if (filey[0] != 10) {
     filey.print_all();
     return false;
   }
-  if (filey[1] != 20) {
+  if (filey[1] != 0) {
     filey.print_all();
     return false;
   }
-  if (filey[2] != 30) {
+  if (filey[2] != 10) {
     filey.print_all();
     return false;
   }

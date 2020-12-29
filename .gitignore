@@ -26,9 +26,12 @@ docker/include/
 monolish_test.log
 
 # Logger
-test/logger/logging/libs/__pycache__/*.pyc
-test/logger/logging/utils/__pycache__/*.pyc
+test/logger/logging/*.yml
+test/logger/logging/*.log
 test/logger/logging/*.html
+python/.pytest_cache/*
+python/monolish_log_viewer/__pycache__/*
+python/dist/
 
 # cmake
 build*/
@@ -39,3 +42,9 @@ html/
 # clangd
 compile_commands.json
 .clangd/
+
+# vscode
+.vscode/
+
+# cmake
+benchmark/*/*.tsv

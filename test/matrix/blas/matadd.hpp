@@ -17,7 +17,7 @@ void ans_matadd(const monolish::matrix::Dense<T> &A,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.val[i] += A.val[i] * B.val[i];
+    C.val[i] = A.val[i] + B.val[i];
   }
 }
 

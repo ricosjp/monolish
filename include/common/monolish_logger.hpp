@@ -28,8 +28,6 @@ private:
 
   std::vector<std::string> calls;
   std::vector<std::chrono::system_clock::time_point> times;
-  double stime;
-  double etime;
   std::string filename;
   std::ostream *pStream;
 

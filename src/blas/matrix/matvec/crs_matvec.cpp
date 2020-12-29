@@ -1,13 +1,5 @@
 #include "../../../../include/monolish_blas.hpp"
-#include "../../../monolish_internal.hpp"
-
-#include <iostream>
-#include <typeinfo>
-
-#ifdef MONOLISH_USE_GPU
-#include "cuda_runtime.h"
-#include "cusparse.h"
-#endif
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -39,6 +31,7 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
 
     cusparseMatDescr_t descr = 0;
     cusparseCreateMatDescr(&descr);
@@ -53,8 +46,9 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      check(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
-                           rowd, cold, xd, &beta, yd));
+      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd, &beta,
+                                          yd));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
@@ -102,6 +96,7 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
 
     cusparseMatDescr_t descr = 0;
     cusparseCreateMatDescr(&descr);
@@ -116,8 +111,9 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
-      check(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha, descr, vald,
-                           rowd, cold, xd, &beta, yd));
+      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd, &beta,
+                                          yd));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
@@ -135,17 +131,4 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
   logger.func_out();
 }
-
-template <typename T> vector<T> matrix::CRS<T>::operator*(vector<T> &vec) {
-  vector<T> y(get_row());
-  if (gpu_status == true) {
-    y.send();
-  }
-
-  blas::matvec(*this, vec, y);
-
-  return y;
-}
-template vector<double> matrix::CRS<double>::operator*(vector<double> &vec);
-template vector<float> matrix::CRS<float>::operator*(vector<float> &vec);
 } // namespace monolish

@@ -22,9 +22,9 @@ bool test(const char *file, const int check_ans, const T tol) {
 
   monolish::equation::CG<T> solver;
 
-  solver.set_tol(1.0e-12);
+  solver.set_tol(tol);
   solver.set_lib(0);
-  solver.set_miniter(5);
+  solver.set_miniter(0);
   solver.set_maxiter(10000);
 
   // precond setting
@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
   if (test<double>(file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<float>(file, check_ans, 1.0e-5) == false) {
+  if (test<float>(file, check_ans, 1.0e-4) == false) {
     return 1;
   }
 
