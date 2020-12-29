@@ -60,7 +60,7 @@ run_fx:
 	bash ./test.sh matrix_subvec_op fx
 
 run_sx:
-	bash ./test.sh matrix_common sx
+	# bash ./test.sh matrix_common sx
 	bash ./test.sh matrix_convert sx
 	bash ./test.sh matrix_transpose sx
 	bash ./test.sh matrix_blas sx
