@@ -7,6 +7,11 @@ ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
 ENV CC /usr/local/llvm-11.0.0/bin/clang \
 ENV CXX /usr/local/llvm-11.0.0/bin/clang++ \
 
+RUN apt-get update -y \
+ && apt-get install -y python3-pip \
+ && apt-get clean && \
+ pip3 install monolish-log-viewer==0.1.0
+
 # Build and install libmonolish_gpu.so
 RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
  && cmake --build build --target install -- -j $(nproc) \
