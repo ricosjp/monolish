@@ -6,7 +6,7 @@
 #ifdef MONOLISH_USE_MKL
 #define dsyev_ dsyev
 #else
-void dsyev_(char *, char *, int &, double *, int &, double *, double *, int &, int &);
+void dsyev_(const char *, const char *, int *, double *, int *, double *, double *, int *, int *);
 #endif
 
 namespace monolish {
