@@ -7,6 +7,7 @@
 #include <cstring>
 #include <iomanip>
 #include <ios>
+#include <sstream>
 #include <iostream>
 #include <random>
 #include <typeinfo>
