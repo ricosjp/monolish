@@ -2,7 +2,6 @@
 #include "../../internal/monolish_internal.hpp"
 
 #include <vector>
-#include <exception>
 
 #ifndef MONOLISH_USE_MKL
 void dsyev(char *, char *, int &, double *, int &, double *, double *, int &, int &);
