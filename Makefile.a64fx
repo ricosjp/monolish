@@ -1,4 +1,4 @@
-TARGET=./lib/libmonolish_fx.so
+TARGET=./lib/libmonolish_a64fx.so
 
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
@@ -67,7 +67,7 @@ vpath %.cpp ./src/vml/
 
 .PHONY = libs test clean
 
-OBJDIR=./obj/fx/
+OBJDIR=./obj/a64fx/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 

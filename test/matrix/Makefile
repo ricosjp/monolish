@@ -3,9 +3,9 @@ vpath %.cpp ./
 
 OBJS_CPU=$(addprefix ./, $(SRCS:.cpp=_cpu.out))
 OBJS_GPU=$(addprefix ./, $(SRCS:.cpp=_gpu.out))
-OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
-OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
-.PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
+OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_a64fx.out))
+OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
+.PHONY = cpu gpu a64fx sxat run_cpu run_gpu run_sx run_a64fx clean
 
 MAT_TEST_SIZE?=123
 MAT_TEST_SIZE?=124
@@ -27,13 +27,13 @@ gpu: $(OBJS_GPU)
 %_gpu.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=gpu -f ../test_gpu.mk
 
-fx: $(OBJS_FX)
-%_fx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=fx -f ../test_fx.mk
+a64fx: $(OBJS_FX)
+%_a64fx.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=a64fx -f ../test_a64fx.mk
 
-sx: $(OBJS_SX)
-%_sx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
+sxat: $(OBJS_SX)
+%_sxat.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
 run_cpu:
 	bash ./test.sh matrix_common cpu
@@ -51,21 +51,21 @@ run_gpu:
 	bash ./test.sh matrix_vml gpu
 	bash ./test.sh matrix_subvec_op gpu
 
-run_fx:
-	bash ./test.sh matrix_common fx
-	bash ./test.sh matrix_convert fx
-	bash ./test.sh matrix_transpose fx
-	bash ./test.sh matrix_blas fx
-	bash ./test.sh matrix_vml fx
-	bash ./test.sh matrix_subvec_op fx
+run_a64fx:
+	bash ./test.sh matrix_common a64fx
+	bash ./test.sh matrix_convert a64fx
+	bash ./test.sh matrix_transpose a64fx
+	bash ./test.sh matrix_blas a64fx
+	bash ./test.sh matrix_vml a64fx
+	bash ./test.sh matrix_subvec_op a64fx
 
-run_sx:
-	# bash ./test.sh matrix_common sx
-	bash ./test.sh matrix_convert sx
-	bash ./test.sh matrix_transpose sx
-	bash ./test.sh matrix_blas sx
-	bash ./test.sh matrix_vml sx
-	bash ./test.sh matrix_subvec_op sx
+run_sxat:
+	# bash ./test.sh matrix_common sxat
+	bash ./test.sh matrix_convert sxat
+	bash ./test.sh matrix_transpose sxat
+	bash ./test.sh matrix_blas sxat
+	bash ./test.sh matrix_vml sxat
+	bash ./test.sh matrix_subvec_op sxat
 
 clean:
 	- rm *.out

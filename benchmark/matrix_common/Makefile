@@ -3,9 +3,9 @@ vpath %.cpp ./
 
 OBJS_CPU=$(addprefix ./, $(SRCS:.cpp=_cpu.out))
 OBJS_GPU=$(addprefix ./, $(SRCS:.cpp=_gpu.out))
-OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
-OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
-.PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
+OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_a64fx.out))
+OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
+.PHONY = cpu gpu a64fx sxat run_cpu run_gpu run_sxat run_a64fx clean
 
 all: cpu
 
@@ -17,13 +17,13 @@ gpu: $(OBJS_GPU)
 %_gpu.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=gpu -f ../test_gpu.mk
 
-fx: $(OBJS_FX)
-%_fx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=fx -f ../test_fx.mk
+a64fx: $(OBJS_FX)
+%_a64fx.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=a64fx -f ../test_a64fx.mk
 
-sx: $(OBJS_SX)
-%_sx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
+sxat: $(OBJS_SX)
+%_sxat.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
 run_cpu:
 	bash ./benchmark.sh convert cpu
@@ -33,13 +33,13 @@ run_gpu:
 	#bash ./benchmark.sh convert gpu
 	#bash ./benchmark.sh transpose gpu
 
-run_fx:
-	bash ./benchmark.sh convert fx
-	bash ./benchmark.sh transpose fx
+run_a64fx:
+	bash ./benchmark.sh convert a64fx
+	bash ./benchmark.sh transpose a64fx
 
-run_sx:
-	bash ./benchmark.sh convert sx
-	bash ./benchmark.sh transpose sx
+run_sxat:
+	bash ./benchmark.sh convert sxat
+	bash ./benchmark.sh transpose sxat
 
 clean:
 	- rm *.out

@@ -42,11 +42,11 @@ clang-gpu:
 cpu: gcc-cpu
 gpu: clang-gpu
 
-fx:
-	$(MAKE) -B -j4 -f Makefile.fx
+a64fx:
+	$(MAKE) -B -j4 -f Makefile.a64fx
 
-sx:
-	$(MAKE) -B -j -f Makefile.sx
+sxat:
+	$(MAKE) -B -j -f Makefile.sxat
 
 install-cpu: cpu
 	cmake --build build_cpu --target install
@@ -54,11 +54,11 @@ install-cpu: cpu
 install-gpu: gpu
 	cmake --build build_gpu --target install
 
-install-sx: 
-	$(MAKE) -B -j -f Makefile.sx install
+install-sxat: 
+	$(MAKE) -B -j -f Makefile.sxat install
 
-install-fx: 
-	$(MAKE) -B -j -f Makefile.fx install
+install-a64fx: 
+	$(MAKE) -B -j -f Makefile.a64fx install
 
 
 install: install-cpu install-gpu
@@ -77,8 +77,8 @@ test:
 
 clean:
 	rm -rf build*/
-	$(MAKE) -f Makefile.fx clean
-	$(MAKE) -f Makefile.sx clean
+	$(MAKE) -f Makefile.a64fx clean
+	$(MAKE) -f Makefile.sxat clean
 	$(MAKE) -C test/ clean
 
 in-mkl-gpu:
