@@ -27,6 +27,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- update allgebra 20.12.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
 - include algorithm in internal.hpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - change name sx->sxat, fx->a64fx https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - deploy benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179

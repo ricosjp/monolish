@@ -1,7 +1,7 @@
 ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra
 ALLGEBRA_CUDA := cuda10_1
 ALLGEBRA_CC := clang11gcc7
-ALLGEBRA_TAG   := 20.12.1
+ALLGEBRA_TAG   := 20.12.2
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 

@@ -1,4 +1,4 @@
-FROM ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.1
+FROM ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:20.12.2
 LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 
 COPY . /monolish
