@@ -42,9 +42,10 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     }
     //   Aprime^T = Atmp V
     matrix::Dense<T> Aprime(3, 3);
+    monolish::vector<T> vtmp3(3);
     for (std::size_t i = 0; i < V.size(); ++i) {
-      blas::matvec(Atmp, V[i], vtmp1);
-      Aprime.row_add(i, vtmp1);
+      blas::matvec(Atmp, V[i], vtmp3);
+      Aprime.row_add(i, vtmp3);
     }
     Aprime.transpose();
 
@@ -54,7 +55,7 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     const char jobz = 'V';
     const char uplo = 'U';
     bool bl = lapack::syev(&jobz, &uplo, Aprime, lambda);
-    if (bl) { throw std::runtime_error("LAPACK syev failed"); }
+    if (!bl) { throw std::runtime_error("LAPACK syev failed"); }
     l = lambda[0];
 
     // extract b which satisfies Aprime b = lambda_min b
