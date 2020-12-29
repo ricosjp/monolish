@@ -22,7 +22,8 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
   monolish::vector<T> p(A.get_row());
 
   // r = x - A x;
-  monolish::vector<T> vtmp(A.get_row());
+  monolish::vector<T> vtmp1(A.get_row());
+  monolish::vector<T> vtmp2(A.get_row());
   blas::matvec(A, x, vtmp);
   r = x - vtmp;
 
@@ -34,13 +35,15 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     //   Atmp^T = A V
     matrix::Dense<T> Atmp(3, A.get_row());
     for (std::size_t i = 0; i < V.size(); ++i) {
-      monolish::vector<T> vtmp(A.get_row());
-      blas::matvec(A, V[i], vtmp);
-      Atmp.row_add(i, vtmp);
+      blas::matvec(A, V[i], vtmp1);
+      Atmp.row_add(i, vtmp1);
     }
     //   Aprime^T = Atmp V
     matrix::Dense<T> Aprime(3, 3);
-    blas::matmul(Atmp, V, Aprime);
+    for (std::size_t i = 0; i < V.size(); ++i) {
+      blas::matvec(Atmp, V[i]);
+      Aprime.row_add(i, vtmp1);
+    }
     Aprime.transpose;
 
     // Eigendecomposition of Aprime
@@ -52,20 +55,26 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     monolish::vector<T> b(Aprime.get_row());
     Aprime.col(0, b);
 
-    // x = V b
-    blas::matvec(V, b, x);
+    // x = b[0] x + b[1] r + b[2] p
+    blas::scal(b[0], x, x);
+    blas::scal(b[1], r, vtmp1);
+    blas::vecadd(x, vtmp1, x);
+    blas::scal(b[2], p, vtmp1);
+    blas::vecadd(x, vtmp1, x);
+    
     // r = A x - lambda_min x
+    vtmp2 = r;
     blas::matvec(A, x, r);
-    monolish::vector<T> xtmp(x);
-    blas::scal(lambda[0], xtmp);
-    blas::vecsub(r, xtmp, r);
-    // p = { 0, rp, pp } b
-    monolish::vector<T> zeros(Aprime.get_row());
-    std::vector<monolish::vector<T>> Vtmp = { zeros, rp, pp };
-    blas::matvec(Vtmp, b, p);
+    blas::scal(lambda[0], vtmp1);
+    blas::vecsub(r, vtmp1, r);
 
-    // prepare next V = { x, r, p }
-    blas::nrm2(V, residual);
+    // p = b[1] rp + b[2] pp
+    blas::scal(b[1], vtmp2, vtmp2);
+    blas::scal(b[2], p, p);
+    blas::vecadd(vtmp2, p, p);
+
+    // residual calculation
+    blas::nrm2(r, residual);
     ++iter;
   } while (residual < eps || iter >= maxiter);
   logger.func_out();
