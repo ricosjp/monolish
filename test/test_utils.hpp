@@ -3,15 +3,15 @@
 #include "monolish_vml.hpp"
 
 #include <algorithm>
-#include <cmath>
-#include <random>
-#include <cstring>
-#include <typeinfo>
 #include <cassert>
+#include <cmath>
+#include <cstring>
+#include <iomanip>
 #include <ios>
 #include <iostream>
+#include <random>
 #include <sstream>
-#include <iomanip>
+#include <typeinfo>
 
 template <typename T> std::string get_type();
 template <> std::string get_type<double>() { return "double"; }
