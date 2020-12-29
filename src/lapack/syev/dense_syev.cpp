@@ -3,8 +3,10 @@
 
 #include <vector>
 
-#ifndef MONOLISH_USE_MKL
-void dsyev(char *, char *, int &, double *, int &, double *, double *, int &, int &);
+#ifdef MONOLISH_USE_MKL
+#define dsyev_ dsyev
+#else
+void dsyev_(char *, char *, int &, double *, int &, double *, double *, int &, int &);
 #endif
 
 namespace monolish {
@@ -19,7 +21,7 @@ bool lapack::syev(const char *jobz, const char *uplo, matrix::Dense<double> &A,
   int lwork = static_cast<int>((64+2)*A.get_row());
   std::vector<double> work(lwork);
   int size = static_cast<int>(A.get_row());
-  dsyev(jobz, uplo, &size, A.val.data(), &size, W.data(), work.data(), &lwork, &info);
+  dsyev_(jobz, uplo, &size, A.val.data(), &size, W.data(), work.data(), &lwork, &info);
   return (info==0);
 #endif
 }
