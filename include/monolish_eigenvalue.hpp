@@ -12,8 +12,9 @@
 namespace monolish {
 namespace eigenvalue {
 
-class lanczos {
-  int a;
-};
+template <typename T>
+int
+monolish_LOBPCG(monolish::matrix::CRS<T> const &A, T& lambda, monolish::vector<T> &w);
+
 } // namespace eigenvalue
 } // namespace monolish

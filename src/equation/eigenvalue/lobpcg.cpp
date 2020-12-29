@@ -1,22 +1,24 @@
-#include "../../include/monolish_blas.hpp"
-#include "../../include/monolish_lapack.hpp"
-#include "../../include/monolish_equation.hpp"
-#include "../monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_lapack.hpp"
+#include "../../../include/monolish_eigenvalue.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 template <typename T>
 int
-equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
-                                  T w,
-                                  vector<T> &w) {
+eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
+                            T& l,
+                            vector<T> &x) {
+  int info = 0;
   T eps = 1e-6;
+  T residual = 1.0;
+  std::size_t iter = 0;
   std::size_t maxiter = 10000;
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  monolish::vector<T> x(A.get_row());
   x[0] = 1.0;
   monolish::vector<T> r(A.get_row());
   monolish::vector<T> p(A.get_row());
@@ -24,8 +26,8 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
   // r = x - A x;
   monolish::vector<T> vtmp1(A.get_row());
   monolish::vector<T> vtmp2(A.get_row());
-  blas::matvec(A, x, vtmp);
-  r = x - vtmp;
+  blas::matvec(A, x, vtmp1);
+  r = x - vtmp1;
 
   do {
     // V = { x, r, p }
@@ -49,7 +51,9 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     // Eigendecomposition of Aprime
     //   (Aprime overwritten)
     monolish::vector<T> lambda(3);
-    lapack::syev('V', 'U', Aprime, lambda);
+    bool bl = lapack::syev('V', 'U', Aprime, lambda);
+    if (bl) { throw std::runtime_error("LAPACK syev failed"); }
+    l = lambda[0];
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Aprime.get_row());
@@ -65,7 +69,7 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     // r = A x - lambda_min x
     vtmp2 = r;
     blas::matvec(A, x, r);
-    blas::scal(lambda[0], vtmp1);
+    blas::scal(l, vtmp1);
     blas::vecsub(r, vtmp1, r);
 
     // p = b[1] rp + b[2] pp
@@ -76,6 +80,9 @@ equation::eig<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     // residual calculation
     blas::nrm2(r, residual);
     ++iter;
-  } while (residual < eps || iter >= maxiter);
+  } while (residual > eps || iter < maxiter);
   logger.func_out();
+  return info;
 }
+
+} // namespace monolish
