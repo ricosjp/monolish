@@ -5,7 +5,7 @@
 #include <exception>
 
 #ifndef MONOLISH_USE_MKL
-void dsyev(char *, char *, int &, double *, int &, double *, double *, int &);
+void dsyev(char *, char *, int &, double *, int &, double *, double *, int &, int &);
 #endif
 
 namespace monolish {
