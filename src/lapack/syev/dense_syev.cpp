@@ -2,6 +2,7 @@
 #include "../../internal/monolish_internal.hpp"
 
 #include <vector>
+#include <exception>
 
 namespace monolish {
 
