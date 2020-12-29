@@ -24,7 +24,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   monolish::eigenvalue::monolish_LOBPCG(A, lambda, x);
   std::cout << "lambda = " << lambda << std::endl;
 
-  if (ans_check<T>("LOBPCG", labmda, 0.031028060644010, tol) == false) {
+  if (ans_check<T>("LOBPCG", lambda, 0.031028060644010, tol) == false) {
     return false;
   }
   return true;
