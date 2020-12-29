@@ -4,8 +4,8 @@ LABEL maintainer "Toshiaki Hishinuma <hishinuma.toshiaki@gmail.com>"
 COPY . /monolish
 
 ENV MONOLISH_DIR /opt/ricos/monolish/0.3.2
-ENV CC /usr/local/llvm-11.0.0/bin/clang \
-ENV CXX /usr/local/llvm-11.0.0/bin/clang++ \
+ENV CC /usr/local/llvm-11.0.0/bin/clang 
+ENV CXX /usr/local/llvm-11.0.0/bin/clang++ 
 
 RUN apt-get update -y \
  && apt-get install -y python3-pip \
@@ -13,14 +13,9 @@ RUN apt-get update -y \
  pip3 install monolish-log-viewer==0.1.0
 
 # Build and install libmonolish_gpu.so
-RUN cmake -Bbuild -DMONOLISH_USE_GPU=ON -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
- && cmake --build build --target install -- -j $(nproc) \
- && rm -rf build
-
-# Build and install libmonolish_cpu.so
-RUN cmake -Bbuild -DMONOLISH_USE_GPU=OFF -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR} /monolish \
- && cmake --build build --target install -- -j $(nproc) \
- && rm -rf build
+RUN cd /monolish && make clean && make install \
+ && rm -rf build_cpu \
+ && rm -rf build_gpu
 
 RUN echo "${MONOLISH_DIR}/lib" > /etc/ld.so.conf.d/monolish.conf && ldconfig
 
