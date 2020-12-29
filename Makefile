@@ -54,6 +54,13 @@ install-cpu: cpu
 install-gpu: gpu
 	cmake --build build_gpu --target install
 
+install-sx: 
+	$(MAKE) -B -j -f Makefile.sx install
+
+install-fx: 
+	$(MAKE) -B -j -f Makefile.fx install
+
+
 install: install-cpu install-gpu
 
 test-cpu: install-cpu
