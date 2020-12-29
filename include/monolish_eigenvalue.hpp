@@ -8,7 +8,6 @@
 
 #include "common/monolish_common.hpp"
 
-// NOT IMPL.
 namespace monolish {
 namespace eigenvalue {
 

@@ -9,7 +9,7 @@ template <typename T>
 int
 eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
                             T& l,
-                            vector<T> &x) {
+                            monolish::vector<T> &x) {
   int info = 0;
   T eps = 1e-6;
   T residual = 1.0;
@@ -27,7 +27,7 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
   monolish::vector<T> vtmp1(A.get_row());
   monolish::vector<T> vtmp2(A.get_row());
   blas::matvec(A, x, vtmp1);
-  r = x - vtmp1;
+  blas::vecsub(x, vtmp1, r);
 
   do {
     // V = { x, r, p }
@@ -43,15 +43,17 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     //   Aprime^T = Atmp V
     matrix::Dense<T> Aprime(3, 3);
     for (std::size_t i = 0; i < V.size(); ++i) {
-      blas::matvec(Atmp, V[i]);
+      blas::matvec(Atmp, V[i], vtmp1);
       Aprime.row_add(i, vtmp1);
     }
-    Aprime.transpose;
+    Aprime.transpose();
 
     // Eigendecomposition of Aprime
     //   (Aprime overwritten)
     monolish::vector<T> lambda(3);
-    bool bl = lapack::syev('V', 'U', Aprime, lambda);
+    const char jobz = 'V';
+    const char uplo = 'U';
+    bool bl = lapack::syev(&jobz, &uplo, Aprime, lambda);
     if (bl) { throw std::runtime_error("LAPACK syev failed"); }
     l = lambda[0];
 
@@ -60,12 +62,14 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     Aprime.col(0, b);
 
     // x = b[0] x + b[1] r + b[2] p
-    blas::scal(b[0], x, x);
-    blas::scal(b[1], r, vtmp1);
+    blas::scal(b[0], x);
+    vtmp1 = r;
+    blas::scal(b[1], vtmp1);
     blas::vecadd(x, vtmp1, x);
-    blas::scal(b[2], p, vtmp1);
+    vtmp1 = p;
+    blas::scal(b[2], vtmp1);
     blas::vecadd(x, vtmp1, x);
-    
+
     // r = A x - lambda_min x
     vtmp2 = r;
     blas::matvec(A, x, r);
@@ -73,8 +77,8 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     blas::vecsub(r, vtmp1, r);
 
     // p = b[1] rp + b[2] pp
-    blas::scal(b[1], vtmp2, vtmp2);
-    blas::scal(b[2], p, p);
+    blas::scal(b[1], vtmp2);
+    blas::scal(b[2], p);
     blas::vecadd(vtmp2, p, p);
 
     // residual calculation
@@ -84,5 +88,9 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
   logger.func_out();
   return info;
 }
+
+template int eigenvalue::monolish_LOBPCG<double>(matrix::CRS<double> const &A,
+                                                 double& l,
+                                                 monolish::vector<double> &x);
 
 } // namespace monolish
