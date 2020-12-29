@@ -6,11 +6,11 @@ cpu:
 gpu:
 	make -j -C Fortran/ gpu
 
-fx:
-	make -j -C Fortran/ fx
+a64fx:
+	make -j -C Fortran/ a64fx
 
-sx:
-	make -j -C Fortran/ sx
+sxat:
+	make -j -C Fortran/ sxat
 
 run_cpu:
 	make -j -C Fortran/ run_cpu
@@ -18,11 +18,11 @@ run_cpu:
 run_gpu:
 	make -j -C Fortran/ run_gpu
 	
-run_fx:
-	make -j -C Fortran/ run_fx
+run_a64fx:
+	make -j -C Fortran/ run_a64fx
 
-run_sx:
-	make -j -C Fortran/ run_sx
+run_sxat:
+	make -j -C Fortran/ run_sxat
 	
 clean:
 	- make -j -C Fortran/ clean

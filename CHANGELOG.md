@@ -21,14 +21,20 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - define four benchmarks {intel-MKL, intel-OSS, AMD-OSS, GPU-MKL} https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
 - add oss test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- include algorithm in internal.hpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+- change name sx->sxat, fx->a64fx https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - deploy benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
 - benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 - change CI job prefix name [ops]-[arch] -> [arch]-[ops] https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+
+### Fixed
+- fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 
 0.9.1 - 2020/12/28
 -----------

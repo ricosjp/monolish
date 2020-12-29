@@ -10,6 +10,7 @@
 #include <ios>
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <typeinfo>
 
 template <typename T> std::string get_type();
