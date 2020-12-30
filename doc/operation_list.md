@@ -27,14 +27,16 @@
 | func  | Intel         | NVIDIA   | OSS       |
 |-------|---------------|----------|-----------|
 | Dense | MKL           | cuBLAS   | CBLAS互換 |
-| CRS   | monolish->MKL | cuSparse | monolish  |
+| CRS   | MKL           | cuSparse | monolish  |
 
 ## BLAS Lv3 (matmul)
 
 | func        | Intel         | NVIDIA             | OSS           |
 |-------------|---------------|--------------------|---------------|
 | Dense-Dense | MKL           | cuBLAS             | CBLAS互換     |
-| CRS-Dense   | monolish->MKL | monolish->cuSparse | monolish(AVX) |
+| CRS-Dense   | MKL           | monolish           | monolish(AVX) |
+
+- Todo) support CRS-Dense SpMM by NVIDIA cusparse (Rowmajor SpMM need cuda 11.x)
 
 ## Extended BLAS Lv3: Matrix add/sub (C=A+B)
 

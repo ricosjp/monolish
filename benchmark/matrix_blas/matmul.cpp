@@ -43,7 +43,7 @@ bool benchmark(const size_t M, const size_t N, const size_t K, size_t iter) {
   C.device_free();
 
   double time = sec / iter;
-  std::cout << FUNC << "(" << C.type() << "," << A.type() << "," << C.type()
+  std::cout << FUNC << "(" << C.type() << "," << A.type() << "," << B.type()
             << ")\t" << std::flush;
   std::cout << A.type() << "\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
