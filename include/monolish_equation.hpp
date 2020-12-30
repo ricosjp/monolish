@@ -244,7 +244,9 @@ public:
   }
 };
 
-// jacobi////////////////////////////////
+/**
+ * @brief Jacobi solver class
+ */
 template <typename Float> class Jacobi : public solver<Float> {
 private:
   int monolish_Jacobi(matrix::CRS<Float> &A, vector<Float> &x,
