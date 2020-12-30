@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Support MKL SpMV and SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/185
 - install monolish_log_viewer on monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/183
 - add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - define four benchmarks {intel-MKL, intel-OSS, AMD-OSS, GPU-MKL} https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
