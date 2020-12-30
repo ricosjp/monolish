@@ -53,11 +53,12 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-//MKL
+// MKL
 #if MONOLISH_USE_MKL
     const double alpha = 1.0;
     const double beta = 0.0;
-    mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd+1, xd, &beta, yd);
+    mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd,
+               &beta, yd);
 
 // OSS
 #else
@@ -127,11 +128,12 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-//MKL
+// MKL
 #if MONOLISH_USE_MKL
     const float alpha = 1.0;
     const float beta = 0.0;
-    mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd+1, xd, &beta, yd);
+    mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd,
+               &beta, yd);
 
 // OSS
 #else

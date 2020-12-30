@@ -50,7 +50,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
-#if 0 //row major SpMM is not supported in cuda 10.2
+#if 0 // row major SpMM is not supported in cuda 10.2
     size_t nnz = A.get_nnz();
 
     cusparseHandle_t sp_handle;
@@ -115,11 +115,12 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-//MKL
+// MKL
 #if MONOLISH_USE_MKL
     const double alpha = 1.0;
     const double beta = 0.0;
-    mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd+1, Bd, &N, &beta, Cd, &N);
+    mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
+               &N, &beta, Cd, &N);
 
 // OSS
 #else
@@ -237,11 +238,12 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-//MKL
+// MKL
 #if MONOLISH_USE_MKL
     const float alpha = 1.0;
     const float beta = 0.0;
-    mkl_scsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd+1, Bd, &N, &beta, Cd, &N);
+    mkl_scsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
+               &N, &beta, Cd, &N);
 
 // OSS
 #else
