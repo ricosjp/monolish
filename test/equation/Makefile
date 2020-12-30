@@ -15,13 +15,13 @@ gpu:
 	make -j -C sparse_qr/ gpu
 	make -j -C sparse_cholesky/ gpu
 
-fx:
-	make -j -C cg/ fx
-	make -j -C bicgstab/ fx
+a64fx:
+	make -j -C cg/ a64fx
+	make -j -C bicgstab/ a64fx
 
-sx:
-	make -j -C cg/ sx
-	make -j -C bicgstab/ sx
+sxat:
+	make -j -C cg/ sxat
+	make -j -C bicgstab/ sxat
 
 run_cpu:
 	make -j -C cg/ run_cpu
@@ -38,13 +38,13 @@ run_gpu:
 	make -j -C sparse_qr/ run_gpu
 	make -j -C sparse_cholesky/ run_gpu
 
-run_fx:
-	make -j -C cg/ run_fx
-	make -j -C bicgstab/ run_fx
+run_a64fx:
+	make -j -C cg/ run_a64fx
+	make -j -C bicgstab/ run_a64fx
 
-run_sx:
-	make -j -C cg/ run_sx
-	make -j -C bicgstab/ run_sx
+run_sxat:
+	make -j -C cg/ run_sxat
+	make -j -C bicgstab/ run_sxat
 	
 clean:
 	- make -j -C cg/ clean

@@ -18,7 +18,7 @@ bool test_send_matanh(const size_t M, const size_t N, double tol) {
   }
 
   monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 0.1);
 
   MAT A(seedA); // M*N matrix
 
@@ -44,7 +44,7 @@ bool test_matanh(const size_t M, const size_t N, double tol) {
   }
 
   monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 0.1);
 
   MAT A(seedA); // M*N matrix
 

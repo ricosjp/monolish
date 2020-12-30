@@ -14,14 +14,14 @@ gpu:
 	make -j -C logger/ $@
 	make -j -C lang/ $@
 
-fx:
+a64fx:
 	make -j -C vector/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C logger/ $@
 	make -j -C lang/ $@
 
-sx:
+sxat:
 	make -j -C vector/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
@@ -42,14 +42,14 @@ run_gpu:
 	make -j -C logger/ $@
 	make -j -C lang/ $@
 
-run_fx:
+run_a64fx:
 	make -j -C vector/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C logger/ $@
 	make -j -C lang/ $@
 
-run_sx:
+run_sxat:
 	make -j -C vector/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@

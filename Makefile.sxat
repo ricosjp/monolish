@@ -1,4 +1,4 @@
-TARGET=./lib/libmonolish_sx.so
+TARGET=./lib/libmonolish_sxat.so
 
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
@@ -20,43 +20,53 @@ LIB_OBJ=$(BLAS_LIB)
 
 SRCS =$(notdir $(wildcard  ./src/*.cpp))
 
-SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
-SRCS +=$(notdir $(wildcard ./src/equation/*/*.cpp))
-
 SRCS +=$(notdir $(wildcard ./src/blas/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/*/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/blas/*/*/*.cpp))
 
+SRCS +=$(notdir $(wildcard ./src/equation/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/equation/*/*.cpp))
+
+SRCS +=$(notdir $(wildcard ./src/internal/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/internal/*/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/internal/*/*/*.cpp))
+
 SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
+
+SRCS +=$(notdir $(wildcard ./src/vml/*.cpp))
 
 #############################################################
 
 vpath %.cpp ./src/
+
+vpath %.cpp ./src/blas/vector/
+vpath %.cpp ./src/blas/matrix/
+vpath %.cpp ./src/blas/matrix/copy/
+vpath %.cpp ./src/blas/matrix/getvec/
+vpath %.cpp ./src/blas/matrix/mataddsub/
+vpath %.cpp ./src/blas/matrix/matmul
+vpath %.cpp ./src/blas/matrix/matvec
+vpath %.cpp ./src/blas/matrix/scal
+vpath %.cpp ./src/blas/matrix/subvec_op
 
 vpath %.cpp ./src/equation/
 vpath %.cpp ./src/equation/lu/
 vpath %.cpp ./src/equation/qr/
 vpath %.cpp ./src/equation/cholesky/
 
-vpath %.cpp ./src/blas/arithmetic/
-vpath %.cpp ./src/blas/math/
-vpath %.cpp ./src/blas/vector/
-vpath %.cpp ./src/blas/matrix/
-vpath %.cpp ./src/blas/matrix/copy/
-vpath %.cpp ./src/blas/matrix/getvec
-vpath %.cpp ./src/blas/matrix/subvec_op
-vpath %.cpp ./src/blas/matrix/scal
-vpath %.cpp ./src/blas/matrix/matvec
-vpath %.cpp ./src/blas/matrix/matadd
-vpath %.cpp ./src/blas/matrix/matmul
+vpath %.cpp ./src/internal/
+vpath %.cpp ./src/internal/arithmetic/
+vpath %.cpp ./src/internal/math/
 
 vpath %.cpp ./src/utils/
+
+vpath %.cpp ./src/vml/
 
 #############################################################
 
 .PHONY = libs test clean
 
-OBJDIR=./obj/fx/
+OBJDIR=./obj/a64fx/
 
 OBJS=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
@@ -82,8 +92,6 @@ install:
 	-mkdir -p $(MONOLISH_DIR)/external
 	-cp -r lib $(MONOLISH_DIR)
 	-cp -r include $(MONOLISH_DIR)
-	-cp -r external/obj $(MONOLISH_DIR)/external/
-	-cp -r external/obj $(MONOLISH_DIR)/external/
 
 clean:
 	- rm $(OBJDIR)/*

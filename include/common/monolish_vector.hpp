@@ -22,12 +22,11 @@
 #if defined USE_MPI
 #include <mpi.h>
 #endif
-//#typedef typename std::allocator_trails::allocator_type::reference reference;
 
 namespace monolish {
 
 /**
- * @brief vector type
+ * @brief vector class
  * @note
  * - Multi-threading: true
  * - GPU acceleration: false
