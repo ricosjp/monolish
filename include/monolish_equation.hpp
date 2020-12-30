@@ -9,10 +9,17 @@
 #include <functional>
 
 namespace monolish {
+
+/**
+ * @brief Linear equation solvers
+ **/
 namespace equation {
 
 template <typename Float> class precondition;
 
+/**
+ * @brief solver base class
+ **/
 template <typename Float> class solver {
 private:
 protected:
@@ -150,7 +157,7 @@ public:
 };
 
 /**
- * @brief none solver class
+ * @brief precondition base class
  */
 template <typename Float> class precondition {
 private:
