@@ -50,6 +50,56 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
+#if 0 //row major SpMM is not supported in cuda 10.2
+    size_t nnz = A.get_nnz();
+
+    cusparseHandle_t sp_handle;
+    cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
+
+    cusparseMatDescr_t descr = 0;
+    cusparseCreateMatDescr(&descr);
+    cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
+    cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
+    cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
+
+    const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+    const double alpha = 1.0;
+    const double beta = 0.0;
+
+#pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
+    {
+      cusparseSpMatDescr_t matA;
+      cusparseDnMatDescr_t matB, matC;
+      void* dBuffer = NULL;
+      size_t buffersize = 0;
+
+      cusparseCreateCsr(&matA, M, K, nnz, (void*)rowd, (void*)cold, (void*)vald,
+          CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F);
+
+      cusparseCreateDnMat(&matB, K, N, N, (void*)Bd, CUDA_R_64F, CUSPARSE_ORDER_ROW);
+
+      cusparseCreateDnMat(&matC, M, N, N, (void*)Cd, CUDA_R_64F, CUSPARSE_ORDER_ROW);
+
+      cusparseSpMM_bufferSize(sp_handle,
+                                 CUSPARSE_OPERATION_TRANSPOSE,
+                                 CUSPARSE_OPERATION_TRANSPOSE,
+                                 &alpha, matA, matB, &beta, matC, CUDA_R_64F,
+                                 CUSPARSE_MM_ALG_DEFAULT, &buffersize);
+
+      cudaMalloc(&dBuffer, buffersize);
+
+      cusparseSpMM(sp_handle,
+          CUSPARSE_OPERATION_TRANSPOSE,
+          CUSPARSE_OPERATION_TRANSPOSE,
+          &alpha, matA, matB, &beta, matC, CUDA_R_64F,
+          CUSPARSE_MM_ALG_DEFAULT, dBuffer);
+
+      cudaFree(dBuffer);
+    }
+
+#else
 #pragma omp target teams distribute parallel for
     for (int j = 0; j < N; j++) {
       for (int i = 0; i < M; i++) {
@@ -60,6 +110,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
         Cd[i * N + j] = tmp;
       }
     }
+#endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
@@ -166,8 +217,9 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   float *Cd = C.val.data();
 
   // MN = MK * KN
-  const size_t M = A.get_row();
-  const size_t N = B.get_col();
+  const int M = A.get_row();
+  const int N = B.get_col();
+  const int K = A.get_col();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
@@ -185,6 +237,14 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
+//MKL
+#if MONOLISH_USE_MKL
+    const float alpha = 1.0;
+    const float beta = 0.0;
+    mkl_scsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd+1, Bd, &N, &beta, Cd, &N);
+
+// OSS
+#else
 #if MONOLISH_USE_AVX // avx_cpu
                      // const int vecL = 8;
 
@@ -259,6 +319,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
         Cd[i * N + j] = tmp;
       }
     }
+#endif
 #endif
   }
   logger.func_out();
