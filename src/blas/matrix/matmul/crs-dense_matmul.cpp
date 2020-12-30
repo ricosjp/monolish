@@ -44,16 +44,17 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   double *Cd = C.val.data();
 
   // MN = MK * KN
-  const size_t M = A.get_row();
-  const size_t N = B.get_col();
+  const int M = A.get_row();
+  const int N = B.get_col();
+  const int K = A.get_col();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t j = 0; j < N; j++) {
-      for (size_t i = 0; i < M; i++) {
+    for (int j = 0; j < N; j++) {
+      for (int i = 0; i < M; i++) {
         double tmp = 0;
-        for (size_t k = (size_t)rowd[i]; k < (size_t)rowd[i + 1]; k++) {
+        for (int k = rowd[i]; k < rowd[i + 1]; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
         Cd[i * N + j] = tmp;
@@ -63,6 +64,14 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
+//MKL
+#if MONOLISH_USE_MKL
+    const double alpha = 1.0;
+    const double beta = 0.0;
+    mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd+1, Bd, &N, &beta, Cd, &N);
+
+// OSS
+#else
 #if USE_AVX // avx_cpu
     const int vecL = 4;
 
@@ -110,6 +119,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
         Cd[i * N + j] = tmp;
       }
     }
+#endif
 #endif
   }
   logger.func_out();
