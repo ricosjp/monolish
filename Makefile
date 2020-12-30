@@ -76,10 +76,10 @@ test:
 	test-gpu
 
 clean:
-	rm -rf build*/
-	$(MAKE) -f Makefile.a64fx clean
-	$(MAKE) -f Makefile.sxat clean
-	$(MAKE) -C test/ clean
+	- rm -rf build*/
+	- $(MAKE) -f Makefile.a64fx clean
+	- $(MAKE) -f Makefile.sxat clean
+	- $(MAKE) -C test/ clean
 
 in-mkl-gpu:
 	docker run -it --rm \

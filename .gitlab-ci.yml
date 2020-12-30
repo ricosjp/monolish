@@ -737,6 +737,7 @@ docker:
         - make -C docker push
     tags:
         - docker
+        - gpu
 
 pages:
     dependencies:
