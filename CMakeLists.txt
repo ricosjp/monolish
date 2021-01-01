@@ -86,7 +86,7 @@ if(MONOLISH_USE_AVX)
 endif()
 find_package(MKL)
 if(MKL_FOUND)
-  # Not use FindBLAS if MKL is already found
+  # Not use FindBLAS and FindLAPACK if MKL is already found
   target_include_directories(${MONOLISTH_TARGET} PRIVATE ${MKL_INCLUDE_PATH})
   target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${MKL_LIBRARIES})
   target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_MKL)
@@ -103,6 +103,35 @@ else()
   )
   target_include_directories(${MONOLISTH_TARGET} PRIVATE ${BLAS_INCLUDE_DIRS})
   target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${BLAS_LIBRARIES})
+
+  find_package(LAPACK)
+  if(LAPACK_FOUND)
+    target_include_directories(${MONOLISTH_TARGET} PRIVATE ${LAPACK_INCLUDE_DIRS})
+    target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${LAPACK_LIBRARIES})
+    target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_LAPACK)
+
+    # LAPACKE
+    find_library(LAPACKE_LIBRARY
+      NAMES lapacke
+      DOC "Looking for LAPACKE library")
+    find_path(LAPACKE_INCLUDE_DIR
+      NAMES lapack.h
+      HINTS
+        /usr/include
+        /usr/local/include
+        /usr/include/openblas
+    )
+    find_package_handle_standard_args(LAPACKE
+      DEFAULT_MSG
+      LAPACKE_LIBRARY
+      LAPACKE_INCLUDE_DIR
+    )
+    if(LAPACKE_FOUND)
+      target_include_directories(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_INCLUDE_DIRS})
+      target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_LIBRARIES})
+      target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_LAPACKE)
+    endif()
+  endif()
 endif()
 
 if(MONOLISH_USE_GPU)
