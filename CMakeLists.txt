@@ -109,28 +109,30 @@ else()
     target_include_directories(${MONOLISTH_TARGET} PRIVATE ${LAPACK_INCLUDE_DIRS})
     target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${LAPACK_LIBRARIES})
     target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_LAPACK)
-  endif()
 
-  # LAPACKE
-  find_library(LAPACKE_LIBRARY
-    NAMES lapacke
-    DOC "Looking for LAPACKE library")
-  find_path(LAPACKE_INCLUDE_DIR
-    NAMES lapack.h
-    HINTS
-      /usr/include
-      /usr/local/include
-      /usr/include/openblas
-  )
-  find_package_handle_standard_args(LAPACKE
-    DEFAULT_MSG
-    LAPACKE_LIBRARY
-    LAPACKE_INCLUDE_DIR
-  )
-  if(LAPACKE_FOUND)
-    target_include_directories(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_INCLUDE_DIRS})
-    target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_LIBRARIES})
-    target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_LAPACKE)
+    # LAPACKE
+    find_library(LAPACKE_LIBRARY
+      NAMES lapacke
+      DOC "Looking for LAPACKE library")
+    find_path(LAPACKE_INCLUDE_DIR
+      NAMES lapack.h
+      HINTS
+        /usr/include
+        /usr/local/include
+        /usr/include/openblas
+    )
+    find_package_handle_standard_args(LAPACKE
+      DEFAULT_MSG
+      LAPACKE_LIBRARY
+      LAPACKE_INCLUDE_DIR
+    )
+    if(LAPACKE_FOUND)
+      set(LAPACKE_INCLUDE_DIRS ${LAPACKE_INCLUDE_DIR})
+      set(LAPACKE_LIBRARIES ${LAPACKE_LIBRARY})
+      target_include_directories(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_INCLUDE_DIRS})
+      target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${LAPACKE_LIBRARIES})
+      target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_LAPACKE)
+    endif()
   endif()
 endif()
 
