@@ -85,7 +85,7 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     // residual calculation
     blas::nrm2(r, residual);
     ++iter;
-  } while (residual > eps || iter < maxiter);
+  } while (residual > eps && iter < maxiter);
   logger.func_out();
   return info;
 }
