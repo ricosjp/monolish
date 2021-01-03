@@ -25,9 +25,8 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
 
   // r = x - A x;
   monolish::vector<T> vtmp1(A.get_row());
-  monolish::vector<T> vtmp2(A.get_row());
-  blas::matvec(A, x, vtmp1);
-  blas::vecsub(x, vtmp1, r);
+  blas::matvec(A, x, r);
+  blas::vecsub(x, r, r);
 
   do {
     // V = { x, r, p }
@@ -47,7 +46,6 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
       blas::matvec(Atmp, V[i], vtmp3);
       Aprime.row_add(i, vtmp3);
     }
-    Aprime.transpose();
 
     // Eigendecomposition of Aprime
     //   (Aprime overwritten)
@@ -60,27 +58,21 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Aprime.get_row());
-    Aprime.col(0, b);
+    Aprime.row(0, b);
 
     // x = b[0] xp + b[1] rp + b[2] pp
+    // p =           b[1] rp + b[2] pp
     blas::scal(b[0], x);
-    vtmp1 = r;
-    blas::scal(b[1], vtmp1);
-    blas::vecadd(x, vtmp1, x);
-    vtmp1 = p;
-    blas::scal(b[2], vtmp1);
-    blas::vecadd(x, vtmp1, x);
+    blas::scal(b[1], r);
+    blas::scal(b[2], p);
+    blas::vecadd(r, p, p);
+    blas::vecadd(x, p, x);
 
     // r = A x - lambda_min x
-    vtmp2 = r;
     blas::matvec(A, x, r);
+    vtmp1 = x;
     blas::scal(l, vtmp1);
     blas::vecsub(r, vtmp1, r);
-
-    // p = b[1] rp + b[2] pp
-    blas::scal(b[1], vtmp2);
-    blas::scal(b[2], p);
-    blas::vecadd(vtmp2, p, p);
 
     // residual calculation
     blas::nrm2(r, residual);
