@@ -62,7 +62,7 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     monolish::vector<T> b(Aprime.get_row());
     Aprime.col(0, b);
 
-    // x = b[0] x + b[1] r + b[2] p
+    // x = b[0] xp + b[1] rp + b[2] pp
     blas::scal(b[0], x);
     vtmp1 = r;
     blas::scal(b[1], vtmp1);
