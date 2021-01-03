@@ -1,10 +1,12 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigenvalue.hpp"
+#include "../include/monolish_lapack.hpp"
 #include <iostream>
 
 template <typename T>
 bool test(const char *file, const int check_ans, const T tol) {
-  monolish::matrix::COO<T> COO(12, 12);
+  const int DIM = 12;
+  monolish::matrix::COO<T> COO(DIM, DIM);
   for (std::size_t i = 0; i < COO.get_row(); ++i) {
     for (std::size_t j = 0; j < COO.get_col(); ++j) {
       T val;
@@ -16,15 +18,25 @@ bool test(const char *file, const int check_ans, const T tol) {
       COO.insert(i, j, val);
     }
   }
+  // Calculate exact result by solving full eigenproblem
+  monolish::matrix::Dense<T> AD(COO);
+  monolish::vector<T> ld(AD.get_row());
+  const char jobz = 'V';
+  const char uplo = 'U';
+  bool bl = monolish::lapack::syev(&jobz, &uplo, AD, ld);
+  if (!bl) { throw std::runtime_error("LAPACK syev failed"); }
+
+  // Calculate exact eigenvalue from analytic solution
+  T exact_result = 1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (DIM-1) + 1) / (2 * DIM + 1))));
+
   monolish::matrix::CRS<T> A(COO);
 
   T lambda;
   monolish::vector<T> x(A.get_row());
 
   monolish::eigenvalue::monolish_LOBPCG(A, lambda, x);
-  std::cout << "lambda = " << lambda << std::endl;
 
-  if (ans_check<T>("LOBPCG", lambda, 0.031028060644010, tol) == false) {
+  if (ans_check<T>("LOBPCG", lambda, exact_result, tol) == false) {
     return false;
   }
   return true;
