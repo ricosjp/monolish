@@ -75,7 +75,7 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
 template void vector<double>::operator=(const vector<double> &vec);
 template void vector<float>::operator=(const vector<float> &vec);
 
-// copy constractor
+// copy constructor
 template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
