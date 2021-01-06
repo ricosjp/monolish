@@ -23,6 +23,7 @@
 #include "vml/v_sqrt.hpp"
 #include "vml/v_tan.hpp"
 #include "vml/v_tanh.hpp"
+#include "vml/v_reciprocal.hpp"
 #include "vml/vv_pow.hpp"
 
 int main(int argc, char **argv) {
@@ -382,6 +383,20 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vsign<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vreciprocal //
+  if (test_vreciprocal<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vreciprocal<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vreciprocal<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vreciprocal<float>(size, 1.0e-4) == false) {
     return 1;
   }
 

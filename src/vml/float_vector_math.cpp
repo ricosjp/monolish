@@ -304,6 +304,27 @@ void vml::sign(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
   logger.func_out();
 }
 
+void vml::reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  if (A.get_row() != C.get_row()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (A.get_col() != C.get_col()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
+  }
+
+  internal::vreciprocal(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
+
+  logger.func_out();
+}
+
 // CRS
 // power, sqrt
 void vml::pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
@@ -601,6 +622,27 @@ void vml::sign(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
   }
 
   internal::vsign(A.get_nnz(), A.val.data(), C.val.data(),
+                  A.get_device_mem_stat());
+
+  logger.func_out();
+}
+
+void vml::reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  if (A.get_row() != C.get_row()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (A.get_col() != C.get_col()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
+  }
+
+  internal::vreciprocal(A.get_nnz(), A.val.data(), C.val.data(),
                   A.get_device_mem_stat());
 
   logger.func_out();
