@@ -26,6 +26,7 @@ Unreleased
 - define four benchmarks {intel-MKL, intel-OSS, AMD-OSS, GPU-MKL} https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
 - add oss test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88
 
 ### Changed 
 - exclude src/internal doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
