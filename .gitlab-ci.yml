@@ -13,6 +13,7 @@ stages:
     - vector
     - matrix
     - equation
+    - eigen
     - logger
     - lang
     - python
