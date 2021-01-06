@@ -74,11 +74,14 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
 
   A.diag(d);
   vml::reciprocal(d,d); // d[i] = 1/d[i]
-  //this->precond.apply_precond(r, z);
+
+  this->precond.create_precond(A);
 
   for (size_t iter = 0; iter < this->maxiter; iter++) {
+
     /* x += D^{-1}(b - Ax) */
-    //lis_psolve(solver,x,s);
+    this->precond.apply_precond(x, s);
+    s = x.copy();
     blas::matvec(A,s,t);
     blas::axpyz(-1,t,b,r);
     nrm2 = blas::nrm2(r);
