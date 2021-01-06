@@ -7,14 +7,12 @@ namespace monolish {
 
 template <typename T>
 int
-eigen::monolish_LOBPCG(matrix::CRS<T> const &A,
-                            T& l,
-                            monolish::vector<T> &x) {
-  T eps = 1e-2;
+eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
+                                  T& l,
+                                  monolish::vector<T> &x) {
   T residual = 1.0;
   T norm;
   std::size_t iter = 0;
-  std::size_t maxiter = 10000;
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -156,20 +154,39 @@ eigen::monolish_LOBPCG(matrix::CRS<T> const &A,
     // residual calculation and normalize
     blas::nrm2(w, residual);
     blas::scal(1.0 / residual, w);
+    if (this->get_print_rhistory()) {
+      *this->rhistory_stream << iter + 1 << "\t" << std::scientific << residual << std::endl;
+    }
     ++iter;
-  } while (residual > eps || iter < maxiter);
+  } while (residual > this->get_tol() || iter < this->get_maxiter());
   logger.func_out();
-  if (iter >= maxiter) {
+  if (iter >= this->get_maxiter()) {
     return MONOLISH_SOLVER_MAXITER;
-  } else if (residual > eps) {
+  } else if (residual > this->get_tol()) {
     return MONOLISH_SOLVER_RESIDUAL_NAN;
   } else {
     return MONOLISH_SOLVER_SUCCESS;
   }
 }
 
-template int eigen::monolish_LOBPCG<double>(matrix::CRS<double> const &A,
-                                                 double& l,
-                                                 monolish::vector<double> &x);
+template int eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> const &A,
+                                                    double &l,
+                                                    vector<double> &x);
 
+template <typename T>
+int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
+  Logger &logger = Logger::get_instance();
+  logger.solver_in(monolish_func);
+
+  int ret = 0;
+  if (this->lib == 0) {
+    ret = monolish_LOBPCG(A, l, x);
+  }
+
+  logger.solver_out();
+  return ret; // err code
+}
+template int eigen::LOBPCG<double>::solve(matrix::CRS<double> const &A,
+                                          double &l,
+                                          vector<double> &x);
 } // namespace monolish
