@@ -3,7 +3,6 @@ all: cpu
 cpu:
 	make -j -C cg/ cpu
 	make -j -C bicgstab/ cpu
-	make -j -C eigenvalue/ cpu
 	#make -j -C sparse_lu/ cpu
 	#make -j -C sparse_qr/ cpu
 	#make -j -C sparse_cholesky/ cpu
@@ -26,7 +25,6 @@ sxat:
 run_cpu:
 	make -j -C cg/ run_cpu
 	make -j -C bicgstab/ run_cpu
-	make -j -C eigenvalue/ run_cpu
 	# make -C sparse_lu/ run_cpu
 	# make -j -C sparse_qr/ run_gpu
 	#make -j -C sparse_cholesky/ run_cpu
@@ -49,7 +47,6 @@ run_sxat:
 clean:
 	- make -j -C cg/ clean
 	- make -j -C bicgstab/ clean
-	- make -j -C eigenvalue/ clean
 	- make -j -C sparse_lu/ clean
 	- make -j -C sparse_qr/ clean
 	- make -j -C sparse_cholesky/ clean

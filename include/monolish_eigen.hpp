@@ -9,7 +9,7 @@
 #include "common/monolish_common.hpp"
 
 namespace monolish {
-namespace eigenvalue {
+namespace eigen {
 
 template <typename T>
 int

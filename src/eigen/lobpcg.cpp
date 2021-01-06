@@ -1,13 +1,13 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../../include/monolish_lapack.hpp"
-#include "../../../include/monolish_eigenvalue.hpp"
-#include "../../internal/monolish_internal.hpp"
+#include "../../include/monolish_blas.hpp"
+#include "../../include/monolish_lapack.hpp"
+#include "../../include/monolish_eigen.hpp"
+#include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 template <typename T>
 int
-eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
+eigen::monolish_LOBPCG(matrix::CRS<T> const &A,
                             T& l,
                             monolish::vector<T> &x) {
   T eps = 1e-2;
@@ -168,7 +168,7 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
   }
 }
 
-template int eigenvalue::monolish_LOBPCG<double>(matrix::CRS<double> const &A,
+template int eigen::monolish_LOBPCG<double>(matrix::CRS<double> const &A,
                                                  double& l,
                                                  monolish::vector<double> &x);
 

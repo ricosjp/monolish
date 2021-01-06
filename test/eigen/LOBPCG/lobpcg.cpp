@@ -1,5 +1,5 @@
 #include "../../test_utils.hpp"
-#include "../include/monolish_eigenvalue.hpp"
+#include "../include/monolish_eigen.hpp"
 #include "../include/monolish_lapack.hpp"
 #include <iostream>
 
@@ -39,7 +39,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   T lambda;
   monolish::vector<T> x(A.get_row());
 
-  monolish::eigenvalue::monolish_LOBPCG(A, lambda, x);
+  monolish::eigen::monolish_LOBPCG(A, lambda, x);
 
   if (ans_check<T>("LOBPCG", lambda, exact_result, tol) == false) {
     return false;
