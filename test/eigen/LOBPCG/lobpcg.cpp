@@ -28,11 +28,14 @@ bool test(const char *file, const int check_ans, const T tol) {
   const char jobz = 'V';
   const char uplo = 'U';
   bool bl = monolish::lapack::syev(&jobz, &uplo, AD, ld);
-  if (!bl) { throw std::runtime_error("LAPACK syev failed"); }
+  if (!bl) {
+    throw std::runtime_error("LAPACK syev failed");
+  }
   T exact_result = ld[0];
 
   // Calculate exact eigenvalue from analytic solution
-  // T exact_result = 1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (DIM-1) + 1) / (2 * DIM + 1))));
+  // T exact_result = 1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (DIM-1) + 1) / (2
+  // * DIM + 1))));
 
   monolish::matrix::CRS<T> A(COO);
 

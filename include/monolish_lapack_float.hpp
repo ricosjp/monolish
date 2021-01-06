@@ -33,9 +33,8 @@ namespace lapack {
  * - GPU acceleration: false
  *    - # of data transfer: 0
  */
-bool syev(const char* jobz, const char* uplo, matrix::Dense<float> &A,
+bool syev(const char *jobz, const char *uplo, matrix::Dense<float> &A,
           vector<float> &W);
-
 
 } // namespace lapack
 } // namespace monolish

@@ -1,15 +1,13 @@
 #include "../../include/monolish_blas.hpp"
-#include "../../include/monolish_lapack.hpp"
 #include "../../include/monolish_eigen.hpp"
+#include "../../include/monolish_lapack.hpp"
 #include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 template <typename T>
-int
-eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
-                                  T& l,
-                                  monolish::vector<T> &x) {
+int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
+                                      monolish::vector<T> &x) {
   T residual = 1.0;
   T norm;
   std::size_t iter = 0;
@@ -18,7 +16,7 @@ eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
   logger.func_in(monolish_func);
 
   matrix::COO<T> COO(A);
-  // Algorithm following DOI:10.1007/978-3-319-69953-0_14 
+  // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   x[0] = 1.0;
   x[1] = -1.0;
   blas::nrm2(x, norm);
@@ -98,7 +96,9 @@ eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     const char jobz = 'V';
     const char uplo = 'L';
     bool bl = lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
-    if (!bl) { throw std::runtime_error("LAPACK sygv failed"); }
+    if (!bl) {
+      throw std::runtime_error("LAPACK sygv failed");
+    }
     std::size_t index = 0;
     l = lambda[index];
 
@@ -155,7 +155,8 @@ eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
     blas::nrm2(w, residual);
     blas::scal(1.0 / residual, w);
     if (this->get_print_rhistory()) {
-      *this->rhistory_stream << iter + 1 << "\t" << std::scientific << residual << std::endl;
+      *this->rhistory_stream << iter + 1 << "\t" << std::scientific << residual
+                             << std::endl;
     }
     ++iter;
   } while (residual > this->get_tol() || iter < this->get_maxiter());
@@ -169,9 +170,9 @@ eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A,
   }
 }
 
-template int eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> const &A,
-                                                    double &l,
-                                                    vector<double> &x);
+template int
+eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> const &A, double &l,
+                                       vector<double> &x);
 
 template <typename T>
 int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
@@ -187,6 +188,5 @@ int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
   return ret; // err code
 }
 template int eigen::LOBPCG<double>::solve(matrix::CRS<double> const &A,
-                                          double &l,
-                                          vector<double> &x);
+                                          double &l, vector<double> &x);
 } // namespace monolish
