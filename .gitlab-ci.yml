@@ -454,18 +454,16 @@ nogpu_noavx_clang_oss_equation:
 #
 
 # gpu mkl
-gpu_avx_clang_mkl_eigen:
-    stage: eigen
-    extends: .test_gpu_avx_clang_mkl
-    allow_failure: true
-    variables:
-      TEST_TARGET: "eigen"
-gpu_noavx_clang_mkl_eigen:
-    stage: eigen
-    extends: .test_gpu_noavx_clang_mkl
-    allow_failure: true
-    variables:
-      TEST_TARGET: "eigen"
+#gpu_avx_clang_mkl_eigen:
+#    stage: eigen
+#    extends: .test_gpu_avx_clang_mkl
+#    variables:
+#      TEST_TARGET: "eigen"
+#gpu_noavx_clang_mkl_eigen:
+#    stage: eigen
+#    extends: .test_gpu_noavx_clang_mkl
+#    variables:
+#      TEST_TARGET: "eigen"
 # cpu mkl
 nogpu_avx_gcc_mkl_eigen:
     stage: eigen
