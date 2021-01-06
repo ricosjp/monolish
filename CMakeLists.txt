@@ -15,12 +15,12 @@ option(MONOLISH_USE_AVX "Require AVX" ON)
 
 if(MONOLISH_USE_GPU)
   if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(MONOLISTH_TARGET monolish_gpu)
+    set(MONOLISH_TARGET monolish_gpu)
   elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     message(FATAL_ERROR "GPU mode cannot be enabled with gcc")
   endif()
 else()
-  set(MONOLISTH_TARGET monolish_cpu)
+  set(MONOLISH_TARGET monolish_cpu)
 endif()
 
 file(GLOB_RECURSE MONOLISH_SOURCE_FILES
@@ -28,24 +28,24 @@ file(GLOB_RECURSE MONOLISH_SOURCE_FILES
   src/*.cpp
 )
 
-add_library(${MONOLISTH_TARGET} SHARED "")
+add_library(${MONOLISH_TARGET} SHARED "")
 
-target_sources(${MONOLISTH_TARGET}
+target_sources(${MONOLISH_TARGET}
   PRIVATE
   ${MONOLISH_SOURCE_FILES}
 )
 
-set_property(TARGET ${MONOLISTH_TARGET} PROPERTY CXX_STANDARD 14)
-target_compile_options(${MONOLISTH_TARGET} PRIVATE -g -O3 -Wall -Wextra -Wno-unused-parameter)
+set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 14)
+target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall -Wextra -Wno-unused-parameter)
 
 # AVX
 if(MONOLISH_USE_AVX)
-  target_compile_options(${MONOLISTH_TARGET} PRIVATE "-mavx")
-  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_AVX)
+  target_compile_options(${MONOLISH_TARGET} PRIVATE "-mavx")
+  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_AVX)
 endif()
 
 install(
-  TARGETS ${MONOLISTH_TARGET}
+  TARGETS ${MONOLISH_TARGET}
   LIBRARY
   DESTINATION lib
 )
@@ -64,20 +64,20 @@ if(MONOLISH_USE_GPU)
   string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
   message(STATUS "GPU Compute Capability is ${GPU_CC}")
 
-  target_compile_options(${MONOLISTH_TARGET} PRIVATE
+  target_compile_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
     -Xopenmp-target -march=sm_${GPU_CC}
   )
-  target_link_options(${MONOLISTH_TARGET} PRIVATE
+  target_link_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
     -Xopenmp-target -march=sm_${GPU_CC}
   )
 else()
-  target_compile_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${OpenMP_CXX_LIBRARIES})
+  target_compile_options(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_options(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif()
 
 # MKL
@@ -86,10 +86,10 @@ if(MONOLISH_USE_AVX)
 endif()
 find_package(MKL)
 if(MKL_FOUND)
-  # Not use FindBLAS if MKL is already found
-  target_include_directories(${MONOLISTH_TARGET} PRIVATE ${MKL_INCLUDE_PATH})
-  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_MKL)
+  # Not use FindBLAS and FindLAPACK if MKL is already found
+  target_include_directories(${MONOLISH_TARGET} PRIVATE ${MKL_INCLUDE_PATH})
+  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${MKL_LIBRARIES})
+  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_MKL)
 else()
   find_package(BLAS REQUIRED)
   # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
@@ -101,15 +101,46 @@ else()
       /usr/local/include
       /usr/include/openblas
   )
-  target_include_directories(${MONOLISTH_TARGET} PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(${MONOLISTH_TARGET} PRIVATE ${BLAS_LIBRARIES})
+  target_include_directories(${MONOLISH_TARGET} PRIVATE ${BLAS_INCLUDE_DIRS})
+  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${BLAS_LIBRARIES})
+
+  find_package(LAPACK)
+  if(LAPACK_FOUND)
+    target_include_directories(${MONOLISH_TARGET} PRIVATE ${LAPACK_INCLUDE_DIRS})
+    target_link_libraries(${MONOLISH_TARGET} PRIVATE ${LAPACK_LIBRARIES})
+    target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_LAPACK)
+
+    # LAPACKE
+    find_library(LAPACKE_LIBRARY
+      NAMES lapacke
+      DOC "Looking for LAPACKE library")
+    find_path(LAPACKE_INCLUDE_DIR
+      NAMES lapack.h
+      HINTS
+        /usr/include
+        /usr/local/include
+        /usr/include/openblas
+    )
+    find_package_handle_standard_args(LAPACKE
+      DEFAULT_MSG
+      LAPACKE_LIBRARY
+      LAPACKE_INCLUDE_DIR
+    )
+    if(LAPACKE_FOUND)
+      set(LAPACKE_INCLUDE_DIRS ${LAPACKE_INCLUDE_DIR})
+      set(LAPACKE_LIBRARIES ${LAPACKE_LIBRARY})
+      target_include_directories(${MONOLISH_TARGET} PRIVATE ${LAPACKE_INCLUDE_DIRS})
+      target_link_libraries(${MONOLISH_TARGET} PRIVATE ${LAPACKE_LIBRARIES})
+      target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_LAPACKE)
+    endif()
+  endif()
 endif()
 
 if(MONOLISH_USE_GPU)
-  target_compile_definitions(${MONOLISTH_TARGET} PRIVATE MONOLISH_USE_GPU)
+  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_GPU)
   # Link CUDA libraries
   find_package(CUDAToolkit REQUIRED)
-  target_link_libraries(${MONOLISTH_TARGET}
+  target_link_libraries(${MONOLISH_TARGET}
     PRIVATE
     CUDA::cublas
     CUDA::cusolver
