@@ -45,8 +45,6 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
-  // 
-
   do {
     // W = A w
     blas::matvec(A, w, W);
@@ -89,10 +87,10 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
 
       // Sb = { w, x }^T { w, x }
       Sb.resize(4);
-      blas::dot(w, W, Sb[0]);
-      blas::dot(w, X, Sb[1]);
-      blas::dot(x, W, Sb[2]);
-      blas::dot(x, X, Sb[3]);
+      blas::dot(w, w, Sb[0]);
+      blas::dot(w, x, Sb[1]);
+      blas::dot(x, w, Sb[2]);
+      blas::dot(x, x, Sb[3]);
     }
     matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa);
     matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb);
