@@ -48,6 +48,7 @@ run_cpu:
 	bash ./benchmark.sh m_ceil cpu
 	bash ./benchmark.sh m_floor cpu
 	bash ./benchmark.sh m_sign cpu
+	bash ./benchmark.sh m_reciprocal cpu
  
 run_gpu:
 	bash ./benchmark.sh sm_add gpu
@@ -69,6 +70,7 @@ run_gpu:
 	bash ./benchmark.sh m_ceil gpu
 	bash ./benchmark.sh m_floor gpu
 	bash ./benchmark.sh m_sign gpu
+	bash ./benchmark.sh m_reciprocal gpu
 
 run_a64fx:
 	bash ./benchmark.sh sm_add a64fx
@@ -90,6 +92,7 @@ run_a64fx:
 	bash ./benchmark.sh m_ceil a64fx
 	bash ./benchmark.sh m_floor a64fx
 	bash ./benchmark.sh m_sign a64fx
+	bash ./benchmark.sh m_reciprocal a64fx
 
 run_sxat:
 	bash ./benchmark.sh sm_add sxat
@@ -111,6 +114,7 @@ run_sxat:
 	bash ./benchmark.sh m_ceil sxat
 	bash ./benchmark.sh m_floor sxat
 	bash ./benchmark.sh m_sign sxat
+	bash ./benchmark.sh m_reciprocal sxat
 
 clean:
 	- rm *.out
