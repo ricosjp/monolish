@@ -10,12 +10,11 @@ int
 eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
                             T& l,
                             monolish::vector<T> &x) {
-  int info = 0;
-  T eps = 1e-6;
+  T eps = 1e-2;
   T residual = 1.0;
   T norm;
   std::size_t iter = 0;
-  std::size_t maxiter = 1000;
+  std::size_t maxiter = 10000;
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -104,7 +103,6 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     if (!bl) { throw std::runtime_error("LAPACK sygv failed"); }
     std::size_t index = 0;
     l = lambda[index];
-    std::cout << l << std::endl;
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Sam.get_col());
@@ -159,9 +157,15 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     blas::nrm2(w, residual);
     blas::scal(1.0 / residual, w);
     ++iter;
-  } while (residual > eps && iter < maxiter);
+  } while (residual > eps || iter < maxiter);
   logger.func_out();
-  return info;
+  if (iter >= maxiter) {
+    return MONOLISH_SOLVER_MAXITER;
+  } else if (residual > eps) {
+    return MONOLISH_SOLVER_RESIDUAL_NAN;
+  } else {
+    return MONOLISH_SOLVER_SUCCESS;
+  }
 }
 
 template int eigenvalue::monolish_LOBPCG<double>(matrix::CRS<double> const &A,
