@@ -77,15 +77,19 @@ void vdiv(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status);
 
 // utils
+void vreciprocal(const size_t N, const float *a, float *y, bool gpu_status);
+void vreciprocal(const size_t N, const double *a, double *y, bool gpu_status);
+
+void vcopy(const size_t N, const float *a, float *y, bool gpu_status);
 void vcopy(const size_t N, const double *a, double *y, bool gpu_status);
-bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
 void vcopy(const size_t N, const int *a, int *y, bool gpu_status);
 void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status);
 
-void vcopy(const size_t N, const float *a, float *y, bool gpu_status);
 bool vequal(const size_t N, const float *a, const float *y, bool gpu_status);
+bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
 bool vequal(const size_t N, const int *a, const int *y, bool gpu_status);
 bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status);
+
 
 // math
 void vsqrt(const size_t N, const double *a, double *y, bool gpu_status);
