@@ -1,6 +1,7 @@
 all: cpu
 
 cpu:
+	make -j -C jacobi/ cpu
 	make -j -C cg/ cpu
 	make -j -C bicgstab/ cpu
 	#make -j -C sparse_lu/ cpu
@@ -8,6 +9,7 @@ cpu:
 	#make -j -C sparse_cholesky/ cpu
 
 gpu:
+	make -j -C jacobi/ gpu
 	make -j -C cg/ gpu
 	make -j -C bicgstab/ gpu
 	#make -j -C sparse_lu/ gpu
@@ -15,14 +17,17 @@ gpu:
 	make -j -C sparse_cholesky/ gpu
 
 a64fx:
+	make -j -C jacobi/ a64fx
 	make -j -C cg/ a64fx
 	make -j -C bicgstab/ a64fx
 
 sxat:
+	make -j -C jacobi/ sxat
 	make -j -C cg/ sxat
 	make -j -C bicgstab/ sxat
 
 run_cpu:
+	make -j -C jacobi/ run_cpu
 	make -j -C cg/ run_cpu
 	make -j -C bicgstab/ run_cpu
 	# make -C sparse_lu/ run_cpu
@@ -30,6 +35,7 @@ run_cpu:
 	#make -j -C sparse_cholesky/ run_cpu
 
 run_gpu:
+	make -j -C jacobi/ run_gpu
 	make -j -C cg/ run_gpu
 	make -j -C bicgstab/ run_gpu
 	# make -j -C sparse_lu/ run_gpu
@@ -37,14 +43,17 @@ run_gpu:
 	make -j -C sparse_cholesky/ run_gpu
 
 run_a64fx:
+	make -j -C jacobi/ run_a64fx
 	make -j -C cg/ run_a64fx
 	make -j -C bicgstab/ run_a64fx
 
 run_sxat:
+	make -j -C jacobi/ run_sxat
 	make -j -C cg/ run_sxat
 	make -j -C bicgstab/ run_sxat
 	
 clean:
+	- make -j -C jacobi/ clean
 	- make -j -C cg/ clean
 	- make -j -C bicgstab/ clean
 	- make -j -C sparse_lu/ clean
