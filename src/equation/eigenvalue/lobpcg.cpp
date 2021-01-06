@@ -20,8 +20,12 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
+  matrix::COO<T> COO(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14 
-  x[0] = 1.0; // This is normalized
+  x[0] = 1.0;
+  x[1] = -1.0;
+  blas::nrm2(x, norm);
+  blas::scal(1.0 / norm, x);
   monolish::vector<T> w(A.get_row());
   monolish::vector<T> p(A.get_row());
   monolish::vector<T> X(A.get_row());
@@ -47,73 +51,104 @@ eigenvalue::monolish_LOBPCG(matrix::CRS<T> const &A,
     // W = A w
     blas::matvec(A, w, W);
 
-    // Sa = { w, x, p }^T { W, X, P }
-    //    = { w, x, p }^T A { w, x, p }
-    std::vector<T> Sa(9);
-    blas::dot(w, W, Sa[0]);
-    blas::dot(w, X, Sa[1]);
-    blas::dot(w, P, Sa[2]);
-    blas::dot(x, W, Sa[3]);
-    blas::dot(x, X, Sa[4]);
-    blas::dot(x, P, Sa[5]);
-    blas::dot(p, W, Sa[6]);
-    blas::dot(p, X, Sa[7]);
-    blas::dot(p, P, Sa[8]);
-    if (iter == 0) { Sa[8] = 1.0; }
-    matrix::Dense<T> Sam(3, 3, Sa);
-    Sam.print_all();
+    std::vector<T> Sa;
+    std::vector<T> Sb;
+    if (iter > 0) {
+      // Sa = { w, x, p }^T { W, X, P }
+      //    = { w, x, p }^T A { w, x, p }
+      Sa.resize(9);
+      blas::dot(w, W, Sa[0]);
+      blas::dot(w, X, Sa[1]);
+      blas::dot(w, P, Sa[2]);
+      blas::dot(x, W, Sa[3]);
+      blas::dot(x, X, Sa[4]);
+      blas::dot(x, P, Sa[5]);
+      blas::dot(p, W, Sa[6]);
+      blas::dot(p, X, Sa[7]);
+      blas::dot(p, P, Sa[8]);
 
-    // Sb = { w, x, p }^T { w, x, p }
-    std::vector<T> Sb(9);
-    blas::dot(w, w, Sb[0]);
-    blas::dot(w, x, Sb[1]);
-    blas::dot(w, p, Sb[2]);
-    blas::dot(x, w, Sb[3]);
-    blas::dot(x, x, Sb[4]);
-    blas::dot(x, p, Sb[5]);
-    blas::dot(p, w, Sb[6]);
-    blas::dot(p, x, Sb[7]);
-    blas::dot(p, p, Sb[8]);
-    if (iter == 0) { Sb[8] = 1.0; }
-    matrix::Dense<T> Sbm(3, 3, Sb);
+      // Sb = { w, x, p }^T { w, x, p }
+      Sb.resize(9);
+      blas::dot(w, w, Sb[0]);
+      blas::dot(w, x, Sb[1]);
+      blas::dot(w, p, Sb[2]);
+      blas::dot(x, w, Sb[3]);
+      blas::dot(x, x, Sb[4]);
+      blas::dot(x, p, Sb[5]);
+      blas::dot(p, w, Sb[6]);
+      blas::dot(p, x, Sb[7]);
+      blas::dot(p, p, Sb[8]);
+    } else {
+      // Sa = { w, x }^T { W, X }
+      //    = { w, x }^T A { w, x }
+      Sa.resize(4);
+      blas::dot(w, W, Sa[0]);
+      blas::dot(w, X, Sa[1]);
+      blas::dot(x, W, Sa[2]);
+      blas::dot(x, X, Sa[3]);
+
+      // Sb = { w, x }^T { w, x }
+      Sb.resize(4);
+      blas::dot(w, W, Sb[0]);
+      blas::dot(w, X, Sb[1]);
+      blas::dot(x, W, Sb[2]);
+      blas::dot(x, X, Sb[3]);
+    }
+    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa);
+    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb);
 
     // Generalized Eigendecomposition
     //   Sa v = lambda Sb v
-    monolish::vector<T> lambda(3);
+    monolish::vector<T> lambda(Sam.get_col());
     const char jobz = 'V';
-    const char uplo = 'U';
+    const char uplo = 'L';
     bool bl = lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
     if (!bl) { throw std::runtime_error("LAPACK sygv failed"); }
     std::size_t index = 0;
     l = lambda[index];
-    // if (std::abs(l) < eps) { index = 1; l = lambda[index]; }
     std::cout << l << std::endl;
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Sam.get_col());
     Sam.col(index, b);
 
-    // x = b[0] w + b[1] x + b[2] p, normalize
-    // p = b[0] w          + b[2] p, normalize
-    blas::scal(b[0], w);
-    blas::scal(b[1], x);
-    blas::scal(b[2], p);
-    blas::vecadd(w, p, p);
-    blas::vecadd(x, p, x);
+    if (iter > 0) {
+      // x = b[0] w + b[1] x + b[2] p, normalize
+      // p = b[0] w          + b[2] p, normalize
+      blas::scal(b[0], w);
+      blas::scal(b[1], x);
+      blas::scal(b[2], p);
+      blas::vecadd(w, p, p);
+      blas::vecadd(x, p, x);
+
+      // X = b[0] W + b[1] X + b[2] P, normalize with x
+      // P = b[0] W          + b[2] P, normalize with p
+      blas::scal(b[0], W);
+      blas::scal(b[1], X);
+      blas::scal(b[2], P);
+      blas::vecadd(W, P, P);
+      blas::vecadd(X, P, X);
+    } else {
+      // x = b[0] w + b[1] x, normalize
+      // p = b[0] w         , normalize
+      blas::scal(b[0], w);
+      blas::scal(b[1], x);
+      blas::vecadd(w, p, p);
+      blas::vecadd(x, p, x);
+
+      // X = b[0] W + b[1] X, normalize with x
+      // P = b[0] W         , normalize with p
+      blas::scal(b[0], W);
+      blas::scal(b[1], X);
+      blas::vecadd(W, P, P);
+      blas::vecadd(X, P, X);
+    }
     T normp;
     blas::nrm2(p, normp);
     blas::scal(1.0 / normp, p);
     T normx;
     blas::nrm2(x, normx);
     blas::scal(1.0 / normx, x);
-    
-    // X = b[0] W + b[1] X + b[2] P, normalize with x
-    // P = b[0] W          + b[2] P, normalize with p
-    blas::scal(b[0], W);
-    blas::scal(b[1], X);
-    blas::scal(b[2], P);
-    blas::vecadd(W, P, P);
-    blas::vecadd(X, P, X);
     blas::scal(1.0 / normp, P);
     blas::scal(1.0 / normx, X);
 
