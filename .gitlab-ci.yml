@@ -598,11 +598,13 @@ nogpu_noavx_clang_oss_logger:
 gpu_avx_clang_mkl_lang:
     stage: lang
     extends: .test_gpu_avx_clang_mkl
+    allow_failure: true
     variables:
       TEST_TARGET: "lang"
 gpu_noavx_clang_mkl_lang:
     stage: lang
     extends: .test_gpu_noavx_clang_mkl
+    allow_failure: true
     variables:
       TEST_TARGET: "lang"
 # cpu mkl
