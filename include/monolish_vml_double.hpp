@@ -254,6 +254,16 @@ void floor(const vector<double> &a, vector<double> &y);
  **/
 void sign(const vector<double> &a, vector<double> &y);
 
+/**
+ * @brief reciprocal to double precision vector elements (y[0:N] =
+ * 1 / a[0:N])
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void reciprocal(const vector<double> &a, vector<double> &y);
+
 //////////////////////////////////////////////////////
 // Dense
 //////////////////////////////////////////////////////
@@ -379,7 +389,10 @@ void div(const matrix::Dense<double> &A, const double alpha,
 
 /**
  * @brief power to double precision dense matrix elements by double precision
- *scalar value (y[0:N] = pow(a[0:N], alpha))
+ *dense matrix (C[0:N] = pow(A[0:N], B[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param B double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -390,7 +403,10 @@ void pow(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
 
 /**
  * @brief power to double precision dense matrix elements by double precision
- *dense matrix (y[0:N] = pow(a[0:N], b[0]:N]))
+ *scalar value (C[0:N] = pow(A[0:N], alpha))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param alpha double precision scalar value
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -400,7 +416,9 @@ void pow(const matrix::Dense<double> &A, const double alpha,
          matrix::Dense<double> &C);
 
 /**
- * @brief sqrt to double precision dense matrix elements (y[0:N] = sqrt(a[0:N]))
+ * @brief sqrt to double precision dense matrix elements (C[0:N] = sqrt(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -409,7 +427,9 @@ void pow(const matrix::Dense<double> &A, const double alpha,
 void sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief sin to double precision dense matrix elements (y[0:N] = sin(a[0:N]))
+ * @brief sin to double precision dense matrix elements (C[0:N] = sin(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -418,7 +438,9 @@ void sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief sinh to double precision dense matrix elements (y[0:N] = sinh(a[0:N]))
+ * @brief sinh to double precision dense matrix elements (C[0:N] = sinh(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -427,7 +449,9 @@ void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void sinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief asin to double precision dense matrix elements (y[0:N] = asin(a[0:N]))
+ * @brief asin to double precision dense matrix elements (C[0:N] = asin(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -436,8 +460,10 @@ void sinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void asin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief asinh to double precision dense matrix elements (y[0:N] =
- *asinh(a[0:N]))
+ * @brief asinh to double precision dense matrix elements (C[0:N] =
+ *asinh(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -446,7 +472,9 @@ void asin(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void asinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief tan to double precision dense matrix elements (y[0:N] = tan(a[0:N]))
+ * @brief tan to double precision dense matrix elements (C[0:N] = tan(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -455,7 +483,9 @@ void asinh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief tanh to double precision dense matrix elements (y[0:N] = tanh(a[0:N]))
+ * @brief tanh to double precision dense matrix elements (C[0:N] = tanh(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -464,7 +494,9 @@ void tan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief atan to double precision dense matrix elements (y[0:N] = atan(a[0:N]))
+ * @brief atan to double precision dense matrix elements (C[0:N] = atan(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -473,8 +505,10 @@ void tanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void atan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief atanh to double precision dense matrix elements (y[0:N] =
- *atanh(a[0:N]))
+ * @brief atanh to double precision dense matrix elements (C[0:N] =
+ *atanh(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -483,7 +517,9 @@ void atan(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief ceil to double precision dense matrix elements (y[0:N] = ceil(a[0:N]))
+ * @brief ceil to double precision dense matrix elements (C[0:N] = ceil(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -492,8 +528,10 @@ void atanh(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief floor to double precision dense matrix elements (y[0:N] =
- *floor(a[0:N]))
+ * @brief floor to double precision dense matrix elements (C[0:N] =
+ *floor(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -502,14 +540,28 @@ void ceil(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void floor(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief sign inversion to double precision dense matrix elements (y[0:N] =
- *sign(a[0:N]))
+ * @brief sign inversion to double precision dense matrix elements (C[0:N] =
+ *sign(A[0:N]))
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
 void sign(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+/**
+ * @brief reciprocal to double precision dense matrix elements (C[0:N] =
+ * 1 / A[0:N])
+ * @param A double precision monolish Dense Matrix (size M x N)
+ * @param C double precision monolish Dense Matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 //////////////////////////////////////////////////////
 // CRS
@@ -636,8 +688,11 @@ void div(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief power to double precision CRS matrix elements by double precision
- *scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @brief power to double precision CRS matrix elements by double precision CRS
+ *matrix (C[0:N] = pow(A[0:N], b[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -647,8 +702,11 @@ void pow(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
 
 /**
- * @brief power to double precision CRS matrix elements by double precision CRS
- *matrix (y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to double precision CRS matrix elements by double precision
+ *scalar value (C[0:N] = pow(A[0:N], alpha))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param alpha double precision scalar value
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -658,7 +716,10 @@ void pow(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
 
 /**
- * @brief sqrt to double precision CRS matrix elements (y[0:N] = sqrt(a[0:N]))
+ * @brief sqrt to double precision CRS matrix elements (C[0:N] = sqrt(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -667,7 +728,10 @@ void pow(const matrix::CRS<double> &A, const double alpha,
 void sqrt(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief sin to double precision CRS matrix elements (y[0:N] = sin(a[0:N]))
+ * @brief sin to double precision CRS matrix elements (C[0:N] = sin(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -676,7 +740,10 @@ void sqrt(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief sinh to double precision CRS matrix elements (y[0:N] = sinh(a[0:N]))
+ * @brief sinh to double precision CRS matrix elements (C[0:N] = sinh(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -685,7 +752,10 @@ void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief asin to double precision CRS matrix elements (y[0:N] = asin(a[0:N]))
+ * @brief asin to double precision CRS matrix elements (C[0:N] = asin(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -694,7 +764,10 @@ void sinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void asin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief asinh to double precision CRS matrix elements (y[0:N] = asinh(a[0:N]))
+ * @brief asinh to double precision CRS matrix elements (C[0:N] = asinh(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -703,7 +776,10 @@ void asin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void asinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief tan to double precision CRS matrix elements (y[0:N] = tan(a[0:N]))
+ * @brief tan to double precision CRS matrix elements (C[0:N] = tan(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -712,7 +788,10 @@ void asinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void tan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief tanh to double precision CRS matrix elements (y[0:N] = tanh(a[0:N]))
+ * @brief tanh to double precision CRS matrix elements (C[0:N] = tanh(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -721,7 +800,10 @@ void tan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief atan to double precision CRS matrix elements (y[0:N] = atan(a[0:N]))
+ * @brief atan to double precision CRS matrix elements (C[0:N] = atan(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -730,7 +812,10 @@ void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief atanh to double precision CRS matrix elements (y[0:N] = atanh(a[0:N]))
+ * @brief atanh to double precision CRS matrix elements (C[0:N] = atanh(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -739,7 +824,10 @@ void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void atanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief ceil to double precision CRS matrix elements (y[0:N] = ceil(a[0:N]))
+ * @brief ceil to double precision CRS matrix elements (C[0:N] = ceil(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -748,7 +836,10 @@ void atanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void ceil(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief floor to double precision CRS matrix elements (y[0:N] = floor(a[0:N]))
+ * @brief floor to double precision CRS matrix elements (C[0:N] = floor(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -757,14 +848,29 @@ void ceil(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void floor(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief sign inversion to double precision CRS matrix elements (y[0:N] =
- *sign(a[0:N]))
+ * @brief sign inversion to double precision CRS matrix elements (C[0:N] =
+ *sign(A[0:N]))
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param B double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
 void sign(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+/**
+ * @brief reciprocal to double precision dense matrix elements (C[0:N] =
+ * 1 / A[0:N])
+ * @param A double precision monolish CRS Matrix (size M x N)
+ * @param C double precision monolish CRS Matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 } // namespace vml
 } // namespace monolish
