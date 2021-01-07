@@ -15,12 +15,12 @@ namespace monolish {
  **/
 namespace solver {
 
-template <typename Float> class precondition;
+template <typename MATRIX, typename Float> class precondition;
 
 /**
  * @brief solver base class
  **/
-template <typename Float> class solver {
+template <typename MATRIX, typename Float> class solver {
 private:
 protected:
   int lib = 0;
@@ -34,7 +34,7 @@ protected:
 
   Float get_residual(vector<Float> &x);
 
-  precondition<Float> precond;
+  precondition<MATRIX, Float> precond;
 
 public:
   /**
@@ -159,13 +159,13 @@ public:
 /**
  * @brief precondition base class
  */
-template <typename Float> class precondition {
+template <typename MATRIX, typename Float> class precondition {
 private:
 public:
   vector<Float> M;
-  monolish::matrix::CRS<Float> tmpA;
+  MATRIX tmpA;
 
-  std::function<void(matrix::CRS<Float> &)> create_precond;
+  std::function<void(MATRIX &)> create_precond;
   std::function<void(const vector<Float> &r, vector<Float> &z)> apply_precond;
 
   std::function<void(void)> get_precond();
@@ -174,7 +174,7 @@ public:
   vector<Float> get_precond_data() { return M; };
 
   precondition() {
-    auto create = [](matrix::CRS<Float> &) {};
+    auto create = [](MATRIX &) {};
     auto apply = [](const vector<Float> &r, vector<Float> &z) { z = r; };
     create_precond = create;
     apply_precond = apply;
