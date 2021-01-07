@@ -6,8 +6,8 @@
 #include <mpi.h>
 #endif
 
-#include "common/monolish_common.hpp"
 #include "./monolish_solver.hpp"
+#include "common/monolish_common.hpp"
 
 namespace monolish {
 

@@ -5,8 +5,8 @@
 #include <mpi.h>
 #endif
 
-#include "common/monolish_common.hpp"
 #include "./monolish_solver.hpp"
+#include "common/monolish_common.hpp"
 #include <functional>
 
 namespace monolish {
@@ -51,7 +51,8 @@ public:
 /**
  * @brief BiCGSTAB solver class
  */
-template <typename Float> class BiCGSTAB : public monolish::solver::solver<Float> {
+template <typename Float>
+class BiCGSTAB : public monolish::solver::solver<Float> {
 private:
   int monolish_BiCGSTAB(matrix::CRS<Float> &A, vector<Float> &x,
                         vector<Float> &b);
@@ -78,7 +79,8 @@ public:
 /**
  * @brief Jacobi solver class
  */
-template <typename Float> class Jacobi : public monolish::solver::solver<Float> {
+template <typename Float>
+class Jacobi : public monolish::solver::solver<Float> {
 private:
   int monolish_Jacobi(matrix::CRS<Float> &A, vector<Float> &x,
                       vector<Float> &b);
@@ -159,7 +161,8 @@ public:
  * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
-template <typename Float> class Cholesky : public monolish::solver::solver<Float> {
+template <typename Float>
+class Cholesky : public monolish::solver::solver<Float> {
 private:
   int lib = 1; // lib is 1
   int cusolver_Cholesky(matrix::CRS<float> &A, vector<float> &x,

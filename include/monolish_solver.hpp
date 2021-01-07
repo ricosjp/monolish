@@ -181,5 +181,5 @@ public:
   };
 };
 
-} // namespace equation
+} // namespace solver
 } // namespace monolish
