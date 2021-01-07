@@ -320,7 +320,7 @@ void vml::reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
   }
 
   internal::vreciprocal(A.get_nnz(), A.val.data(), C.val.data(),
-                  A.get_device_mem_stat());
+                        A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -643,7 +643,7 @@ void vml::reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
   }
 
   internal::vreciprocal(A.get_nnz(), A.val.data(), C.val.data(),
-                  A.get_device_mem_stat());
+                        A.get_device_mem_stat());
 
   logger.func_out();
 }

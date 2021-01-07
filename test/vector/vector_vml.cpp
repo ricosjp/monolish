@@ -17,13 +17,13 @@
 #include "vml/v_atanh.hpp"
 #include "vml/v_ceil.hpp"
 #include "vml/v_floor.hpp"
+#include "vml/v_reciprocal.hpp"
 #include "vml/v_sign.hpp"
 #include "vml/v_sin.hpp"
 #include "vml/v_sinh.hpp"
 #include "vml/v_sqrt.hpp"
 #include "vml/v_tan.hpp"
 #include "vml/v_tanh.hpp"
-#include "vml/v_reciprocal.hpp"
 #include "vml/vv_pow.hpp"
 
 int main(int argc, char **argv) {

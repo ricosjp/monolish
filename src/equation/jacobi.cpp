@@ -69,12 +69,12 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
   vector<T> s(A.get_row(), 0.0);
   vector<T> d(A.get_row(), 0.0);
 
-	auto bnrm2 = blas::nrm2(b);
-	bnrm2   = 1.0 / bnrm2;
+  auto bnrm2 = blas::nrm2(b);
+  bnrm2 = 1.0 / bnrm2;
   T nrm2 = 0.0;
 
   A.diag(d);
-  vml::reciprocal(d,d); // d[i] = 1/d[i]
+  vml::reciprocal(d, d); // d[i] = 1/d[i]
 
   this->precond.create_precond(A);
 
@@ -83,17 +83,17 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
     /* x += D^{-1}(b - Ax) */
     this->precond.apply_precond(x, s);
     s = x.copy();
-    blas::matvec(A,s,t);
-    blas::axpyz(-1,t,b,r);
+    blas::matvec(A, s, t);
+    blas::axpyz(-1, t, b, r);
     nrm2 = blas::nrm2(r);
-    vml::mul(r,d,r);
-    vml::add(x,r,x);
+    vml::mul(r, d, r);
+    vml::add(x, r, x);
 
     nrm2 = nrm2 * bnrm2;
 
     if (this->print_rhistory == true) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
-        << std::endl;
+                             << std::endl;
     }
 
     if (nrm2 < this->tol && this->miniter <= iter + 1) {

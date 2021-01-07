@@ -91,7 +91,6 @@ bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
 bool vequal(const size_t N, const int *a, const int *y, bool gpu_status);
 bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status);
 
-
 // math
 void vsqrt(const size_t N, const double *a, double *y, bool gpu_status);
 void vpow(const size_t N, const double *a, const double *b, double *y,

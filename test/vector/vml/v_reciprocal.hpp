@@ -6,7 +6,8 @@ template <typename T> void ans_vreciprocal(monolish::vector<T> &ans) {
   }
 }
 
-template <typename T> bool test_send_vreciprocal(const size_t size, double tol) {
+template <typename T>
+bool test_send_vreciprocal(const size_t size, double tol) {
 
   monolish::vector<T> ans(size, 0.1, 10.0);
 

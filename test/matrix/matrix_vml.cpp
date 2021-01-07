@@ -13,13 +13,13 @@
 #include "vml/m_atanh.hpp"
 #include "vml/m_ceil.hpp"
 #include "vml/m_floor.hpp"
+#include "vml/m_reciprocal.hpp"
 #include "vml/m_sign.hpp"
 #include "vml/m_sin.hpp"
 #include "vml/m_sinh.hpp"
 #include "vml/m_sqrt.hpp"
 #include "vml/m_tan.hpp"
 #include "vml/m_tanh.hpp"
-#include "vml/m_reciprocal.hpp"
 #include "vml/mm_pow.hpp"
 #include "vml/sm_pow.hpp"
 
@@ -875,19 +875,20 @@ int main(int argc, char **argv) {
   }
 
   // mreciprocal CRS //
-  if (test_send_mreciprocal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_send_mreciprocal<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_send_mreciprocal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
+  if (test_send_mreciprocal<monolish::matrix::CRS<float>, float>(
+          M, N, 1.0e-4) == false) {
     return 1;
   }
   if (test_mreciprocal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mreciprocal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+  if (test_mreciprocal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
 
