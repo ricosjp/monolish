@@ -11,10 +11,10 @@ template <typename T> LinearOperator<T> LinearOperator<T>::copy() {
 
   LinearOperator<T> ans(get_row(), get_col());
 
-  if(get_matvec_init_flag){
+  if(get_matvec_init_flag()){
     ans.set_matvec(get_matvec());
   }
-  if(get_rmatvec_init_flag){
+  if(get_rmatvec_init_flag()){
     ans.set_rmatvec(get_rmatvec());
   }
 

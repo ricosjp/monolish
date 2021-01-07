@@ -65,20 +65,20 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<double, monolish::equation::none<double>>(file, check_ans, 1.0e-8) ==
+  if (test<double, monolish::equation::none<monolish::matrix::CRS<double>, double>>(file, check_ans, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test<float, monolish::equation::none<float>>(file, check_ans, 1.0e-4) ==
+  if (test<float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(file, check_ans, 1.0e-4) ==
       false) {
     return 1;
   }
 
-  if (test<double, monolish::equation::Jacobi<double>>(file, check_ans,
+  if (test<double, monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(file, check_ans,
                                                        1.0e-8) == false) {
     return 1;
   }
-  if (test<float, monolish::equation::Jacobi<float>>(file, check_ans, 1.0e-4) ==
+  if (test<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(file, check_ans, 1.0e-4) ==
       false) {
     return 1;
   }
