@@ -141,8 +141,7 @@ template <typename T> matrix::COO<T> eye(const int M);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-matrix::COO<T> frank_matrix(const int &M);
+template <typename T> matrix::COO<T> frank_matrix(const int &M);
 
 /**
  * @brief Nth eigenvalue from the bottom of MxM Frank matrix
@@ -153,8 +152,7 @@ matrix::COO<T> frank_matrix(const int &M);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-T frank_matrix_eigenvalue(const int &M, const int &N);
+template <typename T> T frank_matrix_eigenvalue(const int &M, const int &N);
 
 // send///////////////////
 

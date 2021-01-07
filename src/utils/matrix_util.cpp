@@ -116,8 +116,10 @@ template <typename T> matrix::COO<T> util::frank_matrix(const int &M) {
 template matrix::COO<double> util::frank_matrix(const int &M);
 template matrix::COO<float> util::frank_matrix(const int &M);
 
-template <typename T> T util::frank_matrix_eigenvalue(const int &M, const int &N) {
-  T exact_result = 1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (M - N) + 1) / (2 * M + 1))));
+template <typename T>
+T util::frank_matrix_eigenvalue(const int &M, const int &N) {
+  T exact_result =
+      1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (M - N) + 1) / (2 * M + 1))));
   return exact_result;
 }
 template double util::frank_matrix_eigenvalue(const int &M, const int &N);
