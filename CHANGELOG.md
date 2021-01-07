@@ -34,6 +34,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- move equation::solver and equation::precondition to solver::solver and solver::precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/190
 - exclude src/internal doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
 - update allgebra 20.12.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
 - include algorithm in internal.hpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181

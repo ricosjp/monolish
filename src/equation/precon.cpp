@@ -58,7 +58,7 @@ template int equation::none<double>::solve(matrix::CRS<double> &A,
 //////////////////////////////////////////////////////
 template <typename T>
 template <class PRECOND>
-void equation::solver<T>::set_create_precond(PRECOND &p) {
+void solver::solver<T>::set_create_precond(PRECOND &p) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   precond.create_precond =
@@ -67,18 +67,18 @@ void equation::solver<T>::set_create_precond(PRECOND &p) {
 }
 
 template void
-equation::solver<double>::set_create_precond(equation::none<double> &p);
+solver::solver<double>::set_create_precond(equation::none<double> &p);
 template void
-equation::solver<float>::set_create_precond(equation::none<float> &p);
+solver::solver<float>::set_create_precond(equation::none<float> &p);
 template void
-equation::solver<double>::set_create_precond(equation::Jacobi<double> &p);
+solver::solver<double>::set_create_precond(equation::Jacobi<double> &p);
 template void
-equation::solver<float>::set_create_precond(equation::Jacobi<float> &p);
+solver::solver<float>::set_create_precond(equation::Jacobi<float> &p);
 
 /////
 template <typename T>
 template <class PRECOND>
-void equation::solver<T>::set_apply_precond(PRECOND &p) {
+void solver::solver<T>::set_apply_precond(PRECOND &p) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   precond.apply_precond =
@@ -88,11 +88,11 @@ void equation::solver<T>::set_apply_precond(PRECOND &p) {
 }
 
 template void
-equation::solver<double>::set_apply_precond(equation::none<double> &p);
+solver::solver<double>::set_apply_precond(equation::none<double> &p);
 template void
-equation::solver<float>::set_apply_precond(equation::none<float> &p);
+solver::solver<float>::set_apply_precond(equation::none<float> &p);
 template void
-equation::solver<double>::set_apply_precond(equation::Jacobi<double> &p);
+solver::solver<double>::set_apply_precond(equation::Jacobi<double> &p);
 template void
-equation::solver<float>::set_apply_precond(equation::Jacobi<float> &p);
+solver::solver<float>::set_apply_precond(equation::Jacobi<float> &p);
 } // namespace monolish
