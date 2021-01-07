@@ -1,5 +1,6 @@
 #include "blas/asum.hpp"
 #include "blas/axpy.hpp"
+#include "blas/xpay.hpp"
 #include "blas/axpyz.hpp"
 #include "blas/dot.hpp"
 #include "blas/nrm1.hpp"
@@ -46,6 +47,21 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_axpy<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // xpay//
+  if (test_xpay<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_xpay<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_xpay<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_xpay<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
