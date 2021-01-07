@@ -294,8 +294,8 @@ void matsub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
 /**
  * @brief double precision Dense matrix and vector multiplication: y = Ax
  * @param A double precision Dense matrix (size M x N)
- * @param x double precision monolish vector (size N)
- * @param y double precision monolish vector (size N)
+ * @param x double precision monolish vector (size M)
+ * @param y double precision monolish vector (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -308,8 +308,8 @@ void matvec(const matrix::Dense<double> &A, const vector<double> &x,
 /**
  * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
  * @param A double precision CRS matrix (size M x N)
- * @param x double precision monolish vector (size N)
- * @param y double precision monolish vector (size N)
+ * @param x double precision monolish vector (size M)
+ * @param y double precision monolish vector (size M)
  * @note
  * - # of computation: 2nnz
  * - Multi-threading: true
