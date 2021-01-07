@@ -35,7 +35,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   T lambda;
   monolish::vector<T> x(A.get_row());
 
-  monolish::eigen::LOBPCG<T> solver;
+  monolish::eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
 
   solver.set_tol(tol);
   solver.set_lib(0);

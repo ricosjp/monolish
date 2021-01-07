@@ -186,7 +186,7 @@ template float util::get_residual_l2(matrix::Dense<float> &A, vector<float> &x,
                                      vector<float> &b);
 
 template <typename T>
-T util::get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b) {
+T util::get_residual_l2(matrix::LinearOperator<T> &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   vector<T> tmp(x.size());

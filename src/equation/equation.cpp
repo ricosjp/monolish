@@ -17,4 +17,6 @@ template <typename MATRIX, typename T> T solver::solver<MATRIX, T>::get_residual
 
 template double solver::solver<matrix::CRS<double>, double>::get_residual(vector<double> &x);
 template float solver::solver<matrix::CRS<float>, float>::get_residual(vector<float> &x);
+template double solver::solver<matrix::LinearOperator<double>, double>::get_residual(vector<double> &x);
+template float solver::solver<matrix::LinearOperator<float>, float>::get_residual(vector<float> &x);
 } // namespace monolish

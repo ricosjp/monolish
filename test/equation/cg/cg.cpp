@@ -19,7 +19,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   // create answer
   monolish::blas::matvec(A, ans, b);
 
-  monolish::equation::CG<T> solver;
+  monolish::equation::CG<monolish::matrix::CRS<T>, T> solver;
 
   solver.set_tol(tol);
   solver.set_lib(0);
