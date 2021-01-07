@@ -66,6 +66,30 @@ template vector<float>::vector(const size_t N, const float min,
 
 // vector utils//////////////////////
 
+template <typename T> void vector<T>::fill(T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  if (get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < val.size(); i++) {
+      val[i] = value;
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < val.size(); i++) {
+      val[i] = value;
+    }
+  }
+  logger.util_out();
+}
+template void vector<double>::fill(double value);
+template void vector<float>::fill(float value);
+
 template <typename T> void vector<T>::print_all() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -97,9 +121,6 @@ template void vector<float>::print_all(std::string filename) const;
 template <typename T> bool vector<T>::operator==(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU vector cant use operator==");
-  }
 
   if (val.size() != vec.size()) {
     return false;
@@ -126,9 +147,6 @@ template bool vector<float>::operator==(const vector<float> &vec);
 template <typename T> bool vector<T>::operator!=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU vector cant use operator==");
-  }
 
   if (val.size() != vec.size()) {
     return true;

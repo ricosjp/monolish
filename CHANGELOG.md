@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add fill function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/193
 - add util::build_with functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
 - add xpay test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
 - add nrm1 and get_residual_l2(Dense) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/191

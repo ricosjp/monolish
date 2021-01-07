@@ -269,6 +269,16 @@ public:
   vector copy();
 
   /**
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
    * @brief print all elements to standart I/O
    * @note
    * - # of computation: N

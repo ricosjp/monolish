@@ -109,6 +109,30 @@ template Dense<float>::Dense(const size_t M, const size_t N, const float value);
 
 // matrix utils ///
 
+template <typename T> void Dense<T>::fill(T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  if (get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < get_nnz(); i++) {
+      val[i] = value;
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < get_nnz(); i++) {
+      val[i] = value;
+    }
+  }
+  logger.util_out();
+}
+template void Dense<double>::fill(double value);
+template void Dense<float>::fill(float value);
+
 template <typename T> void Dense<T>::print_all() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -273,9 +297,6 @@ template void Dense<float>::convert(const Dense<float> &mat);
 template <typename T> bool Dense<T>::operator==(const Dense<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU Dense cant use operator==");
-  }
 
   if (get_row() != mat.get_row()) {
     return false;
@@ -307,9 +328,6 @@ template bool Dense<float>::operator==(const Dense<float> &mat) const;
 template <typename T> bool Dense<T>::operator!=(const Dense<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU Dense cant use operator!=");
-  }
 
   if (get_row() != mat.get_row()) {
     return true;

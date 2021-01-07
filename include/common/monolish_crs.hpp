@@ -175,10 +175,9 @@ public:
   size_t get_col() const { return colN; }
 
   /**
-   * @brief matrix copy
-   * @return copied COO matrix
+   * @brief get # of non-zeros
    * @note
-   * - # of computation: 3nnz
+   * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -297,6 +296,16 @@ public:
             get_nnz() * sizeof(int)) /
            1.0e+9;
   }
+
+  /**
+   * @brief fill matrix elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
 
   /**
    * @brief matrix copy
