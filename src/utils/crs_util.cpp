@@ -167,6 +167,30 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 template void CRS<double>::convert(COO<double> &coo);
 template void CRS<float>::convert(COO<float> &coo);
 
+template <typename T> void CRS<T>::fill(T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  if (get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for 
+    for (size_t i = 0; i < get_nnz(); i++) {
+      val[i] = value;
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for 
+    for (size_t i = 0; i < get_nnz(); i++) {
+      val[i] = value;
+    }
+  }
+  logger.util_out();
+}
+template void CRS<double>::fill(double value);
+template void CRS<float>::fill(float value);
+
 template <typename T> void CRS<T>::print_all() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -185,9 +209,6 @@ template void CRS<float>::print_all();
 template <typename T> bool CRS<T>::operator==(const CRS<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU CRS cant use operator==");
-  }
 
   if (get_row() != mat.get_row()) {
     return false;
@@ -235,9 +256,6 @@ template bool CRS<float>::operator==(const CRS<float> &mat) const;
 template <typename T> bool CRS<T>::operator!=(const CRS<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU CRS cant use operator!=");
-  }
 
   if (get_row() != mat.get_row()) {
     return true;
