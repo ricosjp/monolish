@@ -1,11 +1,11 @@
 #include "blas/asum.hpp"
 #include "blas/axpy.hpp"
-#include "blas/xpay.hpp"
 #include "blas/axpyz.hpp"
 #include "blas/dot.hpp"
 #include "blas/nrm1.hpp"
 #include "blas/nrm2.hpp"
 #include "blas/scal.hpp"
+#include "blas/xpay.hpp"
 
 int main(int argc, char **argv) {
 

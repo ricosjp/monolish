@@ -239,12 +239,14 @@ bool build_with_gpu();
 bool build_with_mkl();
 
 /**
- * @brief get build option (true: with lapack, false: without lapack (=with intel mkl))
+ * @brief get build option (true: with lapack, false: without lapack (=with
+ *intel mkl))
  **/
 bool build_with_lapack();
 
 /**
- * @brief get build option (true: with cblas, false: without cblas (=with intel mkl))
+ * @brief get build option (true: with cblas, false: without cblas (=with intel
+ *mkl))
  **/
 bool build_with_cblas();
 
