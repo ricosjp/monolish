@@ -9,6 +9,7 @@
 #include <ios>
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <typeinfo>
 
 // vector ///

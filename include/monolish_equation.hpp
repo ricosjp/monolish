@@ -9,11 +9,18 @@
 #include <functional>
 
 namespace monolish {
+
+/**
+ * @brief Linear equation solvers
+ **/
 namespace equation {
 
-template <typename Float> class precondition;
+template <typename MATRIX, typename Float> class precondition;
 
-template <typename Float> class solver {
+/**
+ * @brief solver base class
+ **/
+template <typename MATRIX, typename Float> class solver {
 private:
 protected:
   int lib = 0;
@@ -27,7 +34,7 @@ protected:
 
   Float get_residual(vector<Float> &x);
 
-  precondition<Float> precond;
+  precondition<MATRIX, Float> precond;
 
 public:
   /**
@@ -150,15 +157,15 @@ public:
 };
 
 /**
- * @brief none solver class
+ * @brief precondition base class
  */
-template <typename Float> class precondition {
+template <typename MATRIX, typename Float> class precondition {
 private:
 public:
   vector<Float> M;
-  monolish::matrix::CRS<Float> tmpA;
+  MATRIX tmpA;
 
-  std::function<void(matrix::CRS<Float> &)> create_precond;
+  std::function<void(MATRIX &)> create_precond;
   std::function<void(const vector<Float> &r, vector<Float> &z)> apply_precond;
 
   std::function<void(void)> get_precond();
@@ -167,7 +174,7 @@ public:
   vector<Float> get_precond_data() { return M; };
 
   precondition() {
-    auto create = [](matrix::CRS<Float> &) {};
+    auto create = [](MATRIX &) {};
     auto apply = [](const vector<Float> &r, vector<Float> &z) { z = r; };
     create_precond = create;
     apply_precond = apply;
@@ -177,41 +184,72 @@ public:
 /**
  * @brief none solver class
  */
-template <typename Float> class none : public solver<Float> {
+template <typename MATRIX, typename Float> class none : public solver<MATRIX, Float> {
 public:
-  void create_precond(matrix::CRS<Float> &A);
+  void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 };
 
 /**
  * @brief CG solver class
  */
-template <typename Float> class CG : public solver<Float> {
+template <typename MATRIX, typename Float> class CG : public solver<MATRIX, Float> {
 private:
-  int monolish_CG(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+  int monolish_CG(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
 public:
   /**
-   * @brief solve Ax = b by CG method(lib=0: monolish)
+   * @brief solve Ax = b by BiCGSTAB method(lib=0: monolish)
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
    * @return error code (only 0 now)
    **/
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-  void create_precond(matrix::CRS<Float> &A) {
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+  void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
 };
 
-// jacobi////////////////////////////////
-template <typename Float> class Jacobi : public solver<Float> {
+/**
+ * @brief BiCGSTAB solver class
+ */
+template <typename MATRIX, typename Float> class BiCGSTAB : public solver<MATRIX, Float> {
 private:
-  int monolish_Jacobi(matrix::CRS<Float> &A, vector<Float> &x,
+  int monolish_BiCGSTAB(MATRIX &A, vector<Float> &x,
+                        vector<Float> &b);
+
+public:
+  /**
+   * @brief solve Ax = b by BiCGSTAB method (lib=0: monolish)
+   * @param[in] A CRS format Matrix
+   * @param[in] x solution vector
+   * @param[in] b right hand vector
+   * @return error code (only 0 now)
+   **/
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+  void create_precond(MATRIX &A) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+
+  void apply_precond(const vector<Float> &r, vector<Float> &z) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+};
+
+/**
+ * @brief Jacobi solver class
+ */
+template <typename MATRIX, typename Float> class Jacobi : public solver<MATRIX, Float> {
+private:
+  int monolish_Jacobi(MATRIX &A, vector<Float> &x,
                       vector<Float> &b);
 
 public:
@@ -222,27 +260,27 @@ public:
    * @param[in] b right hand vector
    * @return error code (only 0 now)
    **/
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-  void create_precond(matrix::CRS<Float> &A);
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
 };
 
 /**
  * @brief LU solver class (does not impl. now)
  */
-template <typename Float> class LU : public solver<Float> {
+template <typename MATRIX, typename Float> class LU : public solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int mumps_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-  int cusolver_LU(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+  int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
+  int cusolver_LU(MATRIX &A, vector<double> &x, vector<double> &b);
   int singularity;
   int reorder = 3;
 
 public:
   void set_reorder(int r) { reorder = r; }
   int get_sigularity() { return singularity; }
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-  void create_precond(matrix::CRS<Float> &A) {
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
@@ -254,11 +292,11 @@ public:
  * @brief QR solver class (GPU only now). can use set_tol(), get_til(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
-template <typename Float> class QR : public solver<Float> {
+template <typename MATRIX, typename Float> class QR : public solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int cusolver_QR(matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-  int cusolver_QR(matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+  int cusolver_QR(MATRIX &A, vector<double> &x, vector<double> &b);
+  int cusolver_QR(MATRIX &A, vector<float> &x, vector<float> &b);
   int singularity;
   int reorder = 3;
 
@@ -277,8 +315,8 @@ public:
   /**
    * @brief solve Ax=b
    */
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
-  void create_precond(matrix::CRS<Float> &A) {
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
@@ -290,12 +328,12 @@ public:
  * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
-template <typename Float> class Cholesky : public solver<Float> {
+template <typename MATRIX, typename Float> class Cholesky : public solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int cusolver_Cholesky(matrix::CRS<float> &A, vector<float> &x,
+  int cusolver_Cholesky(MATRIX &A, vector<float> &x,
                         vector<float> &b);
-  int cusolver_Cholesky(matrix::CRS<double> &A, vector<double> &x,
+  int cusolver_Cholesky(MATRIX &A, vector<double> &x,
                         vector<double> &b);
   int singularity;
   int reorder = 3;
@@ -315,7 +353,7 @@ public:
   /**
    * @brief solve Ax=b
    */
-  int solve(matrix::CRS<Float> &A, vector<Float> &x, vector<Float> &b);
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
   void create_precond(matrix::CRS<Float> &A) {
     throw std::runtime_error("this precond. is not impl.");

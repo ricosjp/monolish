@@ -1,9 +1,6 @@
 CI_REGISTRY_IMAGE  ?= registry.ritc.jp/ricos/monolish
 CI_COMMIT_REF_NAME ?= manual_deploy
 
-ALLGEBRA_IMAGE := registry.ritc.jp/ricos/allgebra/cuda10_2
-ALLGEBRA_TAG   := latest
-
 MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 MONOLISH_TOP := $(shell dirname ${MAKEFILE_DIR})
 

@@ -24,8 +24,8 @@ template <typename Float> class CRS;
 /**
  * @brief Linear Operator imitating Matrix
  * @note
- * - Multi-threading: depends
- * - GPU acceleration: depends
+ * - Multi-threading: depends on matvec/rmatvec functions
+ * - GPU acceleration: depends on matvec/rmatvec functions
  */
 template <typename Float> class LinearOperator {
 private:
@@ -84,7 +84,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)> MATVEC);
+  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)>& MATVEC);
 
   /**
    * @brief declare LinearOperator
@@ -97,7 +97,17 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)> MATVEC, const std::function<vector<Float>(const vector<Float>&)> RMATVEC);
+  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)>& MATVEC, const std::function<vector<Float>(const vector<Float>&)>& RMATVEC);
+
+  /**
+   * @brief Create LinearOperator from LinearOperator
+   * @param LinearOperator format LinearOperator
+   * @note
+   * - # of computation: 4 + 2 functions
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  LinearOperator(const LinearOperator<Float> &linearoperator);
 
   /**
    * @brief get # of row
@@ -180,6 +190,50 @@ public:
    **/
   std::string type() const { return "LinearOperator"; }
 
+  /**
+   * @brief send data to GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void send() const {};
+
+  /**
+   * @brief recv. data to GPU, and free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void recv() const {};
+
+  /**
+   * @brief recv. data to GPU (w/o free)
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void nonfree_recv() const {};
+
+  /**
+   * @brief free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void device_free() const {};
+
+  /**
+   * @brief true: sended, false: not send
+   * @return gpu status
+   * **/
+  bool get_device_mem_stat() const {return false;};
+
+  /**
+   * @brief destructor of LinearOperator, free GPU memory
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   * **/
   ~LinearOperator() {}
 
   /**

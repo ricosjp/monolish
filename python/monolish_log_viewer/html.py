@@ -42,14 +42,14 @@ def to_bold_on_html(html_table:str) -> str:
 def table_in_html(table_html:str) -> str:
     """create html source"""
     html = f"""
-        <!DOCTYPE html>
-            <html lang="ja">
-            <head>
-                <meta charset="utf-8">
-            </head>
-            <body>
-                {table_html}
-            </body>
-        </html>\n
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        {table_html}
+    </body>
+</html>\n
     """
     return html

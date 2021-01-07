@@ -4,7 +4,7 @@
 
 namespace monolish {
 
-template <typename T> T equation::solver<T>::get_residual(vector<T> &x) {
+template <typename MATRIX, typename T> T equation::solver<MATRIX, T>::get_residual(vector<T> &x) {
   switch (resid_method) {
   case 0:
     return blas::nrm2(x);
@@ -15,6 +15,6 @@ template <typename T> T equation::solver<T>::get_residual(vector<T> &x) {
   }
 }
 
-template double equation::solver<double>::get_residual(vector<double> &x);
-template float equation::solver<float>::get_residual(vector<float> &x);
+template double equation::solver<matrix::CRS<double>, double>::get_residual(vector<double> &x);
+template float equation::solver<matrix::CRS<float>, float>::get_residual(vector<float> &x);
 } // namespace monolish

@@ -3,9 +3,9 @@ vpath %.cpp ./
 
 OBJS_CPU=$(addprefix ./, $(SRCS:.cpp=_cpu.out))
 OBJS_GPU=$(addprefix ./, $(SRCS:.cpp=_gpu.out))
-OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_fx.out))
-OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sx.out))
-.PHONY = cpu gpu fx sx run_cpu run_gpu run_sx run_fx clean
+OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_a64fx.out))
+OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
+.PHONY = cpu gpu a64fx sxat run_cpu run_gpu run_sxat run_a64fx clean
 
 all: cpu
 
@@ -17,13 +17,13 @@ gpu: $(OBJS_GPU)
 %_gpu.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=gpu -f ../test_gpu.mk
 
-fx: $(OBJS_FX)
-%_fx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=fx -f ../test_fx.mk
+a64fx: $(OBJS_FX)
+%_a64fx.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=a64fx -f ../test_a64fx.mk
 
-sx: $(OBJS_SX)
-%_sx.out: %.cpp
-	make -B FUNC=$(<:.cpp=) ARCH=sx -f ../test_sx.mk
+sxat: $(OBJS_SX)
+%_sxat.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
 run_cpu:
 	bash ./benchmark.sh sm_add cpu
@@ -48,6 +48,7 @@ run_cpu:
 	bash ./benchmark.sh m_ceil cpu
 	bash ./benchmark.sh m_floor cpu
 	bash ./benchmark.sh m_sign cpu
+	bash ./benchmark.sh m_reciprocal cpu
  
 run_gpu:
 	bash ./benchmark.sh sm_add gpu
@@ -69,48 +70,51 @@ run_gpu:
 	bash ./benchmark.sh m_ceil gpu
 	bash ./benchmark.sh m_floor gpu
 	bash ./benchmark.sh m_sign gpu
+	bash ./benchmark.sh m_reciprocal gpu
 
-run_fx:
-	bash ./benchmark.sh sm_add fx
-	bash ./benchmark.sh sm_sub fx
-	bash ./benchmark.sh sm_mul fx
-	bash ./benchmark.sh sm_div fx
-	bash ./benchmark.sh mm_add fx
-	bash ./benchmark.sh mm_sub fx
-	bash ./benchmark.sh mm_mul fx
-	bash ./benchmark.sh mm_div fx
-	bash ./benchmark.sh m_sin fx
-	bash ./benchmark.sh m_sinh fx
-	bash ./benchmark.sh m_asin fx
-	bash ./benchmark.sh m_asinh fx
-	bash ./benchmark.sh m_tan fx
-	bash ./benchmark.sh m_tanh fx
-	bash ./benchmark.sh m_atan fx
-	bash ./benchmark.sh m_atanh fx
-	bash ./benchmark.sh m_ceil fx
-	bash ./benchmark.sh m_floor fx
-	bash ./benchmark.sh m_sign fx
+run_a64fx:
+	bash ./benchmark.sh sm_add a64fx
+	bash ./benchmark.sh sm_sub a64fx
+	bash ./benchmark.sh sm_mul a64fx
+	bash ./benchmark.sh sm_div a64fx
+	bash ./benchmark.sh mm_add a64fx
+	bash ./benchmark.sh mm_sub a64fx
+	bash ./benchmark.sh mm_mul a64fx
+	bash ./benchmark.sh mm_div a64fx
+	bash ./benchmark.sh m_sin a64fx
+	bash ./benchmark.sh m_sinh a64fx
+	bash ./benchmark.sh m_asin a64fx
+	bash ./benchmark.sh m_asinh a64fx
+	bash ./benchmark.sh m_tan a64fx
+	bash ./benchmark.sh m_tanh a64fx
+	bash ./benchmark.sh m_atan a64fx
+	bash ./benchmark.sh m_atanh a64fx
+	bash ./benchmark.sh m_ceil a64fx
+	bash ./benchmark.sh m_floor a64fx
+	bash ./benchmark.sh m_sign a64fx
+	bash ./benchmark.sh m_reciprocal a64fx
 
-run_sx:
-	bash ./benchmark.sh sm_add sx
-	bash ./benchmark.sh sm_sub sx
-	bash ./benchmark.sh sm_mul sx
-	bash ./benchmark.sh sm_div sx
-	bash ./benchmark.sh mm_add sx
-	bash ./benchmark.sh mm_sub sx
-	bash ./benchmark.sh mm_mul sx
-	bash ./benchmark.sh mm_div sx
-	bash ./benchmark.sh m_sin sx
-	bash ./benchmark.sh m_sinh sx
-	bash ./benchmark.sh m_asin sx
-	bash ./benchmark.sh m_asinh sx
-	bash ./benchmark.sh m_tan sx
-	bash ./benchmark.sh m_tanh sx
-	bash ./benchmark.sh m_atan sx
-	bash ./benchmark.sh m_atanh sx
-	bash ./benchmark.sh m_ceil sx
-	bash ./benchmark.sh m_floor sx
-	bash ./benchmark.sh m_sign sx
+run_sxat:
+	bash ./benchmark.sh sm_add sxat
+	bash ./benchmark.sh sm_sub sxat
+	bash ./benchmark.sh sm_mul sxat
+	bash ./benchmark.sh sm_div sxat
+	bash ./benchmark.sh mm_add sxat
+	bash ./benchmark.sh mm_sub sxat
+	bash ./benchmark.sh mm_mul sxat
+	bash ./benchmark.sh mm_div sxat
+	bash ./benchmark.sh m_sin sxat
+	bash ./benchmark.sh m_sinh sxat
+	bash ./benchmark.sh m_asin sxat
+	bash ./benchmark.sh m_asinh sxat
+	bash ./benchmark.sh m_tan sxat
+	bash ./benchmark.sh m_tanh sxat
+	bash ./benchmark.sh m_atan sxat
+	bash ./benchmark.sh m_atanh sxat
+	bash ./benchmark.sh m_ceil sxat
+	bash ./benchmark.sh m_floor sxat
+	bash ./benchmark.sh m_sign sxat
+	bash ./benchmark.sh m_reciprocal sxat
 
 clean:
 	- rm *.out

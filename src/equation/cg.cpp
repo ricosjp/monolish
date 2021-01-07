@@ -9,30 +9,28 @@
 
 namespace monolish {
 
-template <typename T>
-int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
+template <typename MATRIX, typename T>
+int equation::CG<MATRIX, T>::monolish_CG(MATRIX &A, vector<T> &x,
                                  vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
   if (A.get_row() != A.get_col()) {
-    throw std::runtime_error("error A.row != A.col");
+    throw std::runtime_error("error, A.row != A.col");
+  }
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() &&
+      A.get_device_mem_stat() != b.get_device_mem_stat()) {
+    throw std::runtime_error("error, A.get_device_mem_stat != "
+                             "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
   vector<T> r(A.get_row(), 0.0);
   vector<T> p(A.get_row(), 0.0);
   vector<T> q(A.get_row(), 0.0);
   vector<T> z(A.get_row(), 0.0);
-  monolish::util::send(r, p, q, z);
 
-  if (A.get_device_mem_stat() == false) {
-    A.send();
-  }
-  if (x.get_device_mem_stat() == false) {
-    x.send();
-  }
-  if (b.get_device_mem_stat() == false) {
-    b.send();
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(r, p, q, z);
   }
 
   this->precond.create_precond(A);
@@ -42,8 +40,8 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
   vml::sub(b, q, r);
 
   // p0 = Mr0
-  p = r;
   this->precond.apply_precond(r, z);
+  p = z;
 
   for (size_t iter = 0; iter < this->maxiter; iter++) {
     blas::matvec(A, p, q);
@@ -70,22 +68,26 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
+
+    if (std::isnan(resid)) {
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
+    }
   }
 
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-template int equation::CG<double>::monolish_CG(matrix::CRS<double> &A,
+template int equation::CG<matrix::CRS<double>, double>::monolish_CG(matrix::CRS<double> &A,
                                                vector<double> &x,
                                                vector<double> &b);
-template int equation::CG<float>::monolish_CG(matrix::CRS<float> &A,
+template int equation::CG<matrix::CRS<float>, float>::monolish_CG(matrix::CRS<float> &A,
                                               vector<float> &x,
                                               vector<float> &b);
 
 ///
 
-template <typename T>
-int equation::CG<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::CG<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -97,8 +99,8 @@ int equation::CG<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   logger.solver_out();
   return ret; // err code
 }
-template int equation::CG<double>::solve(matrix::CRS<double> &A,
+template int equation::CG<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
                                          vector<double> &x, vector<double> &b);
-template int equation::CG<float>::solve(matrix::CRS<float> &A, vector<float> &x,
+template int equation::CG<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A, vector<float> &x,
                                         vector<float> &b);
 } // namespace monolish

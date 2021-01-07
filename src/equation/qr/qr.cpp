@@ -2,8 +2,8 @@
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
-template <typename T>
-int equation::QR<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::QR<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -27,8 +27,8 @@ int equation::QR<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   logger.func_out();
   return ret;
 }
-template int equation::QR<double>::solve(matrix::CRS<double> &A,
+template int equation::QR<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
                                          vector<double> &x, vector<double> &b);
-template int equation::QR<float>::solve(matrix::CRS<float> &A, vector<float> &x,
+template int equation::QR<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A, vector<float> &x,
                                         vector<float> &b);
 } // namespace monolish

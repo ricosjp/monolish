@@ -1,3 +1,4 @@
+#include "../../include/common/monolish_logger.hpp"
 #include "../../include/common/monolish_matrix.hpp"
 #include "../../include/common/monolish_vector.hpp"
 #include "../internal/monolish_internal.hpp"
@@ -26,7 +27,7 @@ template LinearOperator<double>::LinearOperator(const size_t M, const size_t N);
 template LinearOperator<float>::LinearOperator(const size_t M, const size_t N);
 
 template <typename T>
-LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::function<vector<T>(const vector<T>&)& MATVEC){
+LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::function<vector<T>(const vector<T>&)>& MATVEC){
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   rowN = M;
@@ -37,11 +38,11 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::fun
   logger.util_out();
 }
 
-template LinearOperator<double>::LinearOperator(const size_t M, const size_t N, const std::function<vector<double>(const vector<double>&)& MATVEC);
-template LinearOperator<float>::LinearOperator(const size_t M, const size_t N, const std::function<vector<float>(const vector<float>&)& MATVEC);
+template LinearOperator<double>::LinearOperator(const size_t M, const size_t N, const std::function<vector<double>(const vector<double>&)>& MATVEC);
+template LinearOperator<float>::LinearOperator(const size_t M, const size_t N, const std::function<vector<float>(const vector<float>&)>& MATVEC);
 
 template <typename T>
-LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::function<vector<T>(const vector<T>&)& MATVEC, const std::function<vector<T>(const vector<T>&)& RMATVEC){
+LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::function<vector<T>(const vector<T>&)>& MATVEC, const std::function<vector<T>(const vector<T>&)>& RMATVEC){
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   rowN = M;
@@ -52,6 +53,9 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::fun
   rmatvec_init_flag = true;
   logger.util_out();
 }
+
+template LinearOperator<double>::LinearOperator(const size_t M, const size_t N, const std::function<vector<double>(const vector<double>&)>& MATVEC, const std::function<vector<double>(const vector<double>&)>& RMATVEC);
+template LinearOperator<float>::LinearOperator(const size_t M, const size_t N, const std::function<vector<float>(const vector<float>&)>& MATVEC, const std::function<vector<float>(const vector<float>&)>& RMATVEC);
 
 // copy constructor
 template <typename T> LinearOperator<T>::LinearOperator(const LinearOperator<T>& linearoperator){
@@ -72,22 +76,22 @@ template LinearOperator<double>::LinearOperator(const LinearOperator<double> &li
 template LinearOperator<float>::LinearOperator(const LinearOperator<float> &linearoperator);
 
 template <typename T>
-LinearOperator<T>::set_matvec(const std::function<vector<T>(const vector<T>&)& MATVEC){
+void LinearOperator<T>::set_matvec(const std::function<vector<T>(const vector<T>&)>& MATVEC){
   matvec = MATVEC;
   matvec_init_flag = true;
 }
 
-template LinearOperator<double>::set_matvec(const std::function<vector<T>(const vector<T>&)& MATVEC);
-template LinearOperator<float>::set_matvec(const std::function<vector<T>(const vector<T>&)& MATVEC);
+template void LinearOperator<double>::set_matvec(const std::function<vector<double>(const vector<double>&)>& MATVEC);
+template void LinearOperator<float>::set_matvec(const std::function<vector<float>(const vector<float>&)>& MATVEC);
 
 template <typename T>
-LinearOperator<T>::set_matvec(const std::function<vector<T>(const vector<T>&)& RMATVEC){
+void LinearOperator<T>::set_rmatvec(const std::function<vector<T>(const vector<T>&)>& RMATVEC){
   rmatvec = RMATVEC;
   rmatvec_init_flag = true;
 }
 
-template LinearOperator<double>::set_rmatvec(const std::function<vector<T>(const vector<T>&)& RMATVEC);
-template LinearOperator<float>::set_rmatvec(const std::function<vector<T>(const vector<T>&)& RMATVEC);
+template void LinearOperator<double>::set_rmatvec(const std::function<vector<double>(const vector<double>&)>& RMATVEC);
+template void LinearOperator<float>::set_rmatvec(const std::function<vector<float>(const vector<float>&)>& RMATVEC);
 
 } // namespace matrix
 } // namespace monolish

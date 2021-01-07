@@ -81,7 +81,7 @@ template CRS<float>::CRS(const size_t M, const size_t N,
 
 // convert ///
 //
-// copy constractor
+// copy constructor
 template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);

@@ -20,6 +20,48 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- add Frank matrix creation and eigenvalue calculation routine https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/189
+- add jacobi solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add jacobi preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add vml::reciprocal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88
+- Support MKL SpMV and SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/185
+- install monolish_log_viewer on monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/183
+- add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+- define four benchmarks {intel-MKL, intel-OSS, AMD-OSS, GPU-MKL} https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
+- add oss test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+- add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+
+### Changed 
+- exclude src/internal doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
+- update allgebra 20.12.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
+- include algorithm in internal.hpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+- change name sx->sxat, fx->a64fx https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+- deploy benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
+- benchmark only:master -> only:schedules(weekly) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+- change CI job prefix name [ops]-[arch] -> [arch]-[ops] https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
+
+### Fixed
+- fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+
+0.9.1 - 2020/12/28
+-----------
+### Added
+- add vecadd/vecsub doxygen comments https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/177
+- CG, BiCGSTABでBREAKDOWNしたりresidualがNaNになったときの判定を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/175
+- BiCGSTABの実装を追加 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
+
+### Changed 
+- BiCGSTABを実装済としてDoxygenに反映, update doxygen project vesion to 0.9.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/177
+- CG,BiCGSTABでA,x,bのGPU Statusが一致していなければerrorになるようにしたhttps://gitlab.ritc.jp/ricos/monolish/-/merge_requests/176
+- update allgebra 20.10.1 -> 20.12.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/173
+- CIのRunner指定をhostnameからGPUのsmタグに変更 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/171
+
+### Fixed
+- test/equationのminiterを0に設定 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/174
+- Doxygenのmarkdownのtableが崩れているのを修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/172
+- monolish_log_viewerの連続処理カウント処理を修正 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/169
 
 0.9.0 - 2020/12/21
 -----------

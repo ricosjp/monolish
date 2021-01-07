@@ -10,7 +10,8 @@
 #define MONOLISH_SOLVER_SIZE_ERROR -1
 #define MONOLISH_SOLVER_MAXITER -2
 #define MONOLISH_SOLVER_BREAKDOWN -3
-#define MONOLISH_SOLVER_NOT_IMPL -4
+#define MONOLISH_SOLVER_RESIDUAL_NAN -4
+#define MONOLISH_SOLVER_NOT_IMPL -10
 
 namespace monolish {
 /**
@@ -35,6 +36,13 @@ T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
 /**
  * @brief check error
  * @param[in] err solver err code
+ * @note
+ * - MONOLISH_SOLVER_SUCCESS 0
+ * - MONOLISH_SOLVER_SIZE_ERROR -1
+ * - MONOLISH_SOLVER_MAXITER -2
+ * - MONOLISH_SOLVER_BREAKDOWN -3
+ * - MONOLISH_SOLVER_RESIDUAL_NAN -4
+ * - MONOLISH_SOLVER_NOT_IMPL -10
  */
 bool solver_check(const int err);
 
@@ -124,6 +132,28 @@ matrix::COO<T> random_structure_matrix(const int M, const int N,
  * - GPU acceleration: false
  **/
 template <typename T> matrix::COO<T> eye(const int M);
+
+/**
+ * @brief create Frank matrix
+ * @param M # of row and col
+ * @note
+ * - # of computation: M^2
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> matrix::COO<T> frank_matrix(const int &M);
+
+/**
+ * @brief Nth eigenvalue from the bottom of MxM Frank matrix
+ * @param M dimension of Frank matrix
+ * @param N #-th eigenvalue from the bottom
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> T frank_matrix_eigenvalue(const int &M, const int &N);
+
 // send///////////////////
 
 /**

@@ -14,7 +14,7 @@ FXCXXFLAGS=-Kfast,openmp,zfill,parallel,simd -std=c++14 -lm -SSL2BLAMP
 
 LIB_CPU=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
 LIB_GPU=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_gpu
-LIB_FX=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_fx
+LIB_FX=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_a64fx
 
 cpu:
 	$(FCC) $(FFLAGS) -c monolish_f.f90 -o test_fort.o
@@ -26,7 +26,7 @@ gpu:
 	$(CXX) $(CXXFLAGS) $(LIB_GPU) -c monolish_cpp.cpp -o test_cpp.o
 	$(FCC) $(FFLAGS) test_fort.o test_cpp.o -lstdc++ -o test.out $(LIB_GPU)
 
-fx:
+a64fx:
 	$(FXFCC) $(FXFFLAGS) -c monolish_f.f90 -o test_fort.o
 	$(FXCXX) $(FXCXXFLAGS) $(LIB_FX) -c monolish_cpp.cpp -o test_cpp.o 
 	$(FXCXX) $(FXCXXFLAGS) test_fort.o test_cpp.o -lstdc++ -o test.out $(LIB_FX) 
@@ -37,7 +37,7 @@ run_cpu:
 run_gpu:
 	./test.out
 
-run_fx:
+run_a64fx:
 	./test.out
 	
 clean:

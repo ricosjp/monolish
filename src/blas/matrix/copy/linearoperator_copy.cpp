@@ -5,7 +5,7 @@ namespace monolish {
 namespace matrix {
 
 // copy
-template <typename T> LinearOperator LinearOperator<T>::copy() {
+template <typename T> LinearOperator<T> LinearOperator<T>::copy() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

@@ -17,7 +17,7 @@ void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> 
   }
 
   const vector<double> tmp = A.get_matvec()(x);
-  blas::axpy(1.0, tmp y);
+  blas::axpy(1.0, tmp, y);
 
   logger.func_out();
 }
@@ -36,7 +36,7 @@ void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double>
   }
 
   const vector<double> tmp = A.get_rmatvec()(x);
-  blas::axpy(1.0, tmp y);
+  blas::axpy(1.0, tmp, y);
 
   logger.func_out();
 }
@@ -55,7 +55,7 @@ void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x
   }
 
   const vector<float> tmp = A.get_matvec()(x);
-  blas::axpy(1.0, tmp y);
+  blas::axpy(1.0, tmp, y);
 
   logger.func_out();
 }
@@ -74,7 +74,7 @@ void blas::rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &
   }
 
   const vector<float> tmp = A.get_rmatvec()(x);
-  blas::axpy(1.0, tmp y);
+  blas::axpy(1.0, tmp, y);
 
   logger.func_out();
 }

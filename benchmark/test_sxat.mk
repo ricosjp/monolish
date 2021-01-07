@@ -8,7 +8,7 @@ BLAS_LIB += -lcblas -lblas_openmp
 
 CXXFLAGS=-O3 -lm -fopenmp -pthread -std=c++14
 
-LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_sx $(BLAS_LIB) 
+LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_sxat $(BLAS_LIB) 
 
 OBJS=$(FUNC)_$(ARCH).out
 

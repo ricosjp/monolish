@@ -17,6 +17,7 @@
 #include "vml/v_atanh.hpp"
 #include "vml/v_ceil.hpp"
 #include "vml/v_floor.hpp"
+#include "vml/v_reciprocal.hpp"
 #include "vml/v_sign.hpp"
 #include "vml/v_sin.hpp"
 #include "vml/v_sinh.hpp"
@@ -382,6 +383,20 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vsign<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vreciprocal //
+  if (test_vreciprocal<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vreciprocal<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vreciprocal<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vreciprocal<float>(size, 1.0e-4) == false) {
     return 1;
   }
 

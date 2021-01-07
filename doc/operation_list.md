@@ -27,14 +27,16 @@
 | func  | Intel         | NVIDIA   | OSS       |
 |-------|---------------|----------|-----------|
 | Dense | MKL           | cuBLAS   | CBLAS互換 |
-| CRS   | monolish->MKL | cuSparse | monolish  |
+| CRS   | MKL           | cuSparse | monolish  |
 
 ## BLAS Lv3 (matmul)
 
 | func        | Intel         | NVIDIA             | OSS           |
 |-------------|---------------|--------------------|---------------|
 | Dense-Dense | MKL           | cuBLAS             | CBLAS互換     |
-| CRS-Dense   | monolish->MKL | monolish->cuSparse | monolish(AVX) |
+| CRS-Dense   | MKL           | monolish           | monolish(AVX) |
+
+- Todo) support CRS-Dense SpMM by NVIDIA cusparse (Rowmajor SpMM need cuda 11.x)
 
 ## Extended BLAS Lv3: Matrix add/sub (C=A+B)
 
@@ -66,6 +68,9 @@
 | copy  | MKL           | cuBLAS           | CBLAS互換|
 
 ## vector helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
@@ -89,6 +94,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |
@@ -115,6 +121,9 @@
 | div         | MKL           | monolish       | monolish |
 
 ## Dense helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
@@ -138,6 +147,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |
@@ -182,6 +192,9 @@
 | div         | MKL           | monolish       | monolish |
 
 ## CRS helper functions of VML
+
+| func        | Intel         | NVIDIA         | OSS      |
+|-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
@@ -205,6 +218,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |
@@ -243,7 +257,7 @@
 | func     | Intel          | NVIDIA         | OSS            |
 |----------|----------------|----------------|----------------|
 | CG       | monolish       | monolish       | monolish       |
-| BiCGSTAB | none->monolish | none->monolish | none->monolish |
+| BiCGSTAB | monolish       | monolish       | monolish       |
 | Jacobi   | none->monolish | none->monolish | none->monolish |
 
 ## Sparse LA Preconditioner

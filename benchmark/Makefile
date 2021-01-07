@@ -52,14 +52,14 @@ gpu:
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-fx:
+a64fx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-sx:
+sxat:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
@@ -80,14 +80,14 @@ run_gpu:
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-run_fx:
+run_a64fx:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-run_sx:
+run_sxat:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
