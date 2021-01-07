@@ -212,5 +212,41 @@ auto device_free(T &x, Types &... args) {
   x.device_free();
   device_free(args...);
 }
+
+/**
+ * @brief get build option (true: with avx, false: without avx)
+ **/
+bool build_with_avx();
+
+/**
+ * @brief get build option (true: with avx2, false: without avx2)
+ **/
+bool build_with_avx2();
+
+/**
+ * @brief get build option (true: with avx512, false: without avx512)
+ **/
+bool build_with_avx512();
+
+/**
+ * @brief get build option (true: enable gpu, false: disable gpu)
+ **/
+bool build_with_gpu();
+
+/**
+ * @brief get build option (true: with intel mkl, false: without intel mkl)
+ **/
+bool build_with_mkl();
+
+/**
+ * @brief get build option (true: with lapack, false: without lapack (=with intel mkl))
+ **/
+bool build_with_lapack();
+
+/**
+ * @brief get build option (true: with cblas, false: without cblas (=with intel mkl))
+ **/
+bool build_with_cblas();
+
 } // namespace util
 } // namespace monolish
