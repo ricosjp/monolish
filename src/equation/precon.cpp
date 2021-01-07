@@ -63,7 +63,7 @@ template int equation::none<matrix::CRS<double>, double>::solve(matrix::CRS<doub
 //////////////////////////////////////////////////////
 template <typename MATRIX, typename T>
 template <class PRECOND>
-void equation::solver<MATRIX, T>::set_create_precond(PRECOND &p) {
+void solver::solver<MATRIX, T>::set_create_precond(PRECOND &p) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   precond.create_precond =
@@ -72,18 +72,18 @@ void equation::solver<MATRIX, T>::set_create_precond(PRECOND &p) {
 }
 
 template void
-equation::solver<matrix::CRS<double>, double>::set_create_precond(equation::none<matrix::CRS<double>, double> &p);
+solver::solver<matrix::CRS<double>, double>::set_create_precond(equation::none<matrix::CRS<double>, double> &p);
 template void
-equation::solver<matrix::CRS<float>, float>::set_create_precond(equation::none<matrix::CRS<float>, float> &p);
+solver::solver<matrix::CRS<float>, float>::set_create_precond(equation::none<matrix::CRS<float>, float> &p);
 template void
-equation::solver<matrix::CRS<double>, double>::set_create_precond(equation::Jacobi<matrix::CRS<double>, double> &p);
+solver::solver<matrix::CRS<double>, double>::set_create_precond(equation::Jacobi<matrix::CRS<double>, double> &p);
 template void
-equation::solver<matrix::CRS<float>, float>::set_create_precond(equation::Jacobi<matrix::CRS<float>, float> &p);
+solver::solver<matrix::CRS<float>, float>::set_create_precond(equation::Jacobi<matrix::CRS<float>, float> &p);
 
 /////
 template <typename MATRIX, typename T>
 template <class PRECOND>
-void equation::solver<MATRIX, T>::set_apply_precond(PRECOND &p) {
+void solver::solver<MATRIX, T>::set_apply_precond(PRECOND &p) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   precond.apply_precond =
@@ -93,11 +93,11 @@ void equation::solver<MATRIX, T>::set_apply_precond(PRECOND &p) {
 }
 
 template void
-equation::solver<matrix::CRS<double>, double>::set_apply_precond(equation::none<matrix::CRS<double>, double> &p);
+solver::solver<matrix::CRS<double>, double>::set_apply_precond(equation::none<matrix::CRS<double>, double> &p);
 template void
-equation::solver<matrix::CRS<float>, float>::set_apply_precond(equation::none<matrix::CRS<float>, float> &p);
+solver::solver<matrix::CRS<float>, float>::set_apply_precond(equation::none<matrix::CRS<float>, float> &p);
 template void
-equation::solver<matrix::CRS<double>, double>::set_apply_precond(equation::Jacobi<matrix::CRS<double>, double> &p);
+solver::solver<matrix::CRS<double>, double>::set_apply_precond(equation::Jacobi<matrix::CRS<double>, double> &p);
 template void
-equation::solver<matrix::CRS<float>, float>::set_apply_precond(equation::Jacobi<matrix::CRS<float>, float> &p);
+solver::solver<matrix::CRS<float>, float>::set_apply_precond(equation::Jacobi<matrix::CRS<float>, float> &p);
 } // namespace monolish

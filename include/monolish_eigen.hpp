@@ -6,9 +6,8 @@
 #include <mpi.h>
 #endif
 
+#include "./monolish_solver.hpp"
 #include "common/monolish_common.hpp"
-
-#include "monolish_equation.hpp"
 
 namespace monolish {
 
@@ -20,7 +19,7 @@ namespace eigen {
 /**
  * @brief LOBPCG solver
  */
-template <typename MATRIX, typename Float> class LOBPCG : public equation::solver<MATRIX, Float> {
+template <typename MATRIX, typename Float> class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
   int monolish_LOBPCG(MATRIX const &A, Float &lambda,

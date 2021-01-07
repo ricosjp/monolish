@@ -149,6 +149,30 @@ double dot(const vector<double> &x, const vector<double> &y);
 void dot(const vector<double> &x, const vector<double> &y, double &ans);
 
 /**
+ * @brief double precision nrm1: sum(abs(x[0:N]))
+ * @param x double precision monolish vector (size N)
+ * @return The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+double nrm1(const vector<double> &x);
+
+/**
+ * @brief double precision nrm1: sum(abs(x[0:N]))
+ * @param x double precision monolish vector (size N)
+ * @param ans The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void nrm1(const vector<double> &x, double &ans);
+
+/**
  * @brief double precision nrm2: ||x||_2
  * @param x double precision monolish vector (size N)
  * @return The result of the nrm2
@@ -331,8 +355,8 @@ void matsub(const matrix::LinearOperator<double> &A, const matrix::LinearOperato
 /**
  * @brief double precision Dense matrix and vector multiplication: y = Ax
  * @param A double precision Dense matrix (size M x N)
- * @param x double precision monolish vector (size N)
- * @param y double precision monolish vector (size N)
+ * @param x double precision monolish vector (size M)
+ * @param y double precision monolish vector (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -345,8 +369,8 @@ void matvec(const matrix::Dense<double> &A, const vector<double> &x,
 /**
  * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
  * @param A double precision CRS matrix (size M x N)
- * @param x double precision monolish vector (size N)
- * @param y double precision monolish vector (size N)
+ * @param x double precision monolish vector (size M)
+ * @param y double precision monolish vector (size M)
  * @note
  * - # of computation: 2nnz
  * - Multi-threading: true

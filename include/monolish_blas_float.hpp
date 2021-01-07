@@ -147,6 +147,30 @@ float dot(const vector<float> &x, const vector<float> &y);
 void dot(const vector<float> &x, const vector<float> &y, float &ans);
 
 /**
+ * @brief single precision nrm1: sum(abs(x[0:N]))
+ * @param x single precision monolish vector (size N)
+ * @return The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+float nrm1(const vector<float> &x);
+
+/**
+ * @brief single precision nrm1: sum(abs(x[0:N]))
+ * @param x single precision monolish vector (size N)
+ * @param ans The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void nrm1(const vector<float> &x, float &ans);
+
+/**
  * @brief single precision nrm2: ||x||_2
  * @param x single precision monolish vector (size N)
  * @return The result of the nrm2
@@ -329,8 +353,8 @@ void matsub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator
 /**
  * @brief single precision Dense matrix and vector multiplication: y = Ax
  * @param A single precision Dense matrix (size M x N)
- * @param x single precision monolish vector (size N)
- * @param y single precision monolish vector (size N)
+ * @param x single precision monolish vector (size M)
+ * @param y single precision monolish vector (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -343,8 +367,8 @@ void matvec(const matrix::Dense<float> &A, const vector<float> &x,
 /**
  * @brief single precision sparse matrix (CRS) and vector multiplication: y = Ax
  * @param A single precision CRS matrix (size M x N)
- * @param x single precision monolish vector (size N)
- * @param y single precision monolish vector (size N)
+ * @param x single precision monolish vector (size M)
+ * @param y single precision monolish vector (size M)
  * @note
  * - # of computation: 2nnz
  * - Multi-threading: true

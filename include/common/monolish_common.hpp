@@ -20,7 +20,7 @@ namespace monolish {
 namespace util {
 
 /**
- * @brief get nrm |b-Ax|
+ * @brief get nrm |b-Ax|_2
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size N)
  * @param b monolish vector (size N)
@@ -32,6 +32,20 @@ namespace util {
  */
 template <typename T>
 T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
+
+/**
+ * @brief get nrm |b-Ax|_2
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size N)
+ * @param b monolish vector (size N)
+ * @note
+ * - # of computation: 2*M*nnz + N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+template <typename T>
+T get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b);
 
 /**
  * @brief check error
