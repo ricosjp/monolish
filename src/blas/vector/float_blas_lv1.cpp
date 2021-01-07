@@ -31,7 +31,8 @@ float blas::asum(const vector<float> &x) {
 void blas::asum(const vector<float> &x, float &ans) { ans = asum(x); }
 
 // axpy ///////////////////
-void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::axpy(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -155,6 +156,37 @@ void blas::scal(const float alpha, vector<float> &x) {
   logger.func_out();
 }
 
+// nrm1 ///////////////////
+float blas::nrm1(const vector<float> &x) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  float ans = 0;
+  const float *xd = x.data();
+  size_t size = x.size();
+
+  if (x.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
+    for (size_t i = 0; i < size; i++) {
+      ans += std::abs(xd[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for reduction(+ : ans)
+    for (size_t i = 0; i < size; i++) {
+      ans += std::abs(xd[i]);
+    }
+  }
+
+  logger.func_out();
+  return ans;
+}
+void blas::nrm1(const vector<float> &x, float &ans) { ans = nrm1(x); }
+
 // axpyz ///////////////////
 void blas::axpyz(const float alpha, const vector<float> &x,
                  const vector<float> &y, vector<float> &z) {
@@ -195,7 +227,8 @@ void blas::axpyz(const float alpha, const vector<float> &x,
 }
 
 // xpay ///////////////////
-void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::xpay(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

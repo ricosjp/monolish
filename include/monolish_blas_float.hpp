@@ -29,7 +29,8 @@ namespace blas {
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b,
+            vector<float> &y);
 
 /**
  * @brief single precision element by element subtraction of vector a and vector
@@ -43,7 +44,8 @@ void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b,
+            vector<float> &y);
 /**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
@@ -145,6 +147,30 @@ float dot(const vector<float> &x, const vector<float> &y);
  *    - # of data transfer: 0
  */
 void dot(const vector<float> &x, const vector<float> &y, float &ans);
+
+/**
+ * @brief single precision nrm1: sum(abs(x[0:N]))
+ * @param x single precision monolish vector (size N)
+ * @return The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+float nrm1(const vector<float> &x);
+
+/**
+ * @brief single precision nrm1: sum(abs(x[0:N]))
+ * @param x single precision monolish vector (size N)
+ * @param ans The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void nrm1(const vector<float> &x, float &ans);
 
 /**
  * @brief single precision nrm2: ||x||_2
