@@ -22,13 +22,16 @@ Unreleased
 -----------
 ### Added
 - add Frank matrix creation and eigenvalue calculation routine https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/189
+- add jacobi solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add jacobi preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add vml::reciprocal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
+- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88
 - Support MKL SpMV and SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/185
 - install monolish_log_viewer on monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/183
 - add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 - define four benchmarks {intel-MKL, intel-OSS, AMD-OSS, GPU-MKL} https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/179
 - add oss test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
-- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88
 
 ### Changed 
 - exclude src/internal doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182

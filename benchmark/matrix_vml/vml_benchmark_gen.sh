@@ -9,5 +9,6 @@ cat ./m_tanh.cpp | sed -e 's/tanh/atanh/g' > m_atanh.cpp
 cat ./m_tanh.cpp | sed -e 's/tanh/ceil/g' > m_ceil.cpp
 cat ./m_tanh.cpp | sed -e 's/tanh/floor/g' > m_floor.cpp
 cat ./m_tanh.cpp | sed -e 's/tanh/sign/g' > m_sign.cpp
+cat ./m_tanh.cpp | sed -e 's/tanh/reciprocal/g' > m_reciprocal.cpp
 cat ./mm_add.cpp | sed -e 's/add/pow/g' > vm_pow.cpp
 cat ./sm_add.cpp | sed -e 's/add/pow/g' > sm_pow.cpp

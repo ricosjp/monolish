@@ -151,7 +151,7 @@ public:
   Dense(const size_t M, const size_t N, const Float min, const Float max);
 
   /**
-   * @brief Create constract dense matrix
+   * @brief Create construct dense matrix
    * @param M # of row
    * @param N # of col
    * @param value value

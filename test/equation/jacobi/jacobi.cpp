@@ -19,7 +19,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   // create answer
   monolish::blas::matvec(A, ans, b);
 
-  monolish::equation::BiCGSTAB<T> solver;
+  monolish::equation::Jacobi<T> solver;
 
   solver.set_tol(tol);
   solver.set_lib(0);
