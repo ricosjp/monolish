@@ -71,7 +71,7 @@ template <typename T> void vector<T>::fill(T value) {
   logger.util_in(monolish_func);
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for 
+#pragma omp target teams distribute parallel for
     for (size_t i = 0; i < val.size(); i++) {
       val[i] = value;
     }
@@ -80,7 +80,7 @@ template <typename T> void vector<T>::fill(T value) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-#pragma omp parallel for 
+#pragma omp parallel for
     for (size_t i = 0; i < val.size(); i++) {
       val[i] = value;
     }

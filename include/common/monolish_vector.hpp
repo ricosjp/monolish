@@ -269,7 +269,7 @@ public:
   vector copy();
 
   /**
-   * @brief fill vector elements with a scalar value 
+   * @brief fill vector elements with a scalar value
    * @param value scalar value
    * @note
    * - # of computation: N

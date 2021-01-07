@@ -402,7 +402,7 @@ public:
   }
 
   /**
-   * @brief fill matrix elements with a scalar value 
+   * @brief fill matrix elements with a scalar value
    * @param value scalar value
    * @note
    * - # of computation: N

@@ -366,9 +366,9 @@ public:
   void col(const size_t c, vector<Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
-  
+
   /**
-   * @brief fill matrix elements with a scalar value 
+   * @brief fill matrix elements with a scalar value
    * @param value scalar value
    * @note
    * - # of computation: N
