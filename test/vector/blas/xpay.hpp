@@ -8,7 +8,7 @@ void ans_xpay(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my) {
   }
 
   for (size_t i = 0; i < mx.size(); i++) {
-    my[i] = alpha * mx[i] + my[i];
+    my[i] = mx[i] + alpha*my[i];
   }
 }
 
