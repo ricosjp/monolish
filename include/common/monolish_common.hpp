@@ -132,6 +132,30 @@ matrix::COO<T> random_structure_matrix(const int M, const int N,
  * - GPU acceleration: false
  **/
 template <typename T> matrix::COO<T> eye(const int M);
+
+/**
+ * @brief create Frank matrix
+ * @param M # of row and col
+ * @note
+ * - # of computation: M^2
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+matrix::COO<T> frank_matrix(const int &M);
+
+/**
+ * @brief Nth eigenvalue from the bottom of MxM Frank matrix
+ * @param M dimension of Frank matrix
+ * @param N #-th eigenvalue from the bottom
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+T frank_matrix_eigenvalue(const int &M, const int &N);
+
 // send///////////////////
 
 /**

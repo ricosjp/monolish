@@ -5,8 +5,8 @@
 
 template <typename T>
 bool test(const char *file, const int check_ans, const T tol) {
-  const int DIM = 13;
-  monolish::matrix::COO<T> COO(DIM, DIM);
+  int DIM = 13;
+  monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
   // for (std::size_t i = 0; i < COO.get_row(); ++i) {
   //   for (std::size_t j = 0; j < COO.get_col(); ++j) {
   //     if (i == j) { COO.insert(i, j, 2.0); }
@@ -15,27 +15,20 @@ bool test(const char *file, const int check_ans, const T tol) {
   //     if (j == 0 && i == DIM - 1) { COO.insert(i, j, -1.0); }
   //   }
   // }
-  for (std::size_t i = 0; i < COO.get_row(); ++i) {
-    for (std::size_t j = 0; j < COO.get_col(); ++j) {
-      T val = DIM - std::max(i, j);
-      COO.insert(i, j, val);
-    }
-  }
 
   // Calculate exact result by solving full eigenproblem
-  monolish::matrix::Dense<T> AD(COO);
-  monolish::vector<T> ld(AD.get_row());
-  const char jobz = 'V';
-  const char uplo = 'U';
-  bool bl = monolish::lapack::syev(&jobz, &uplo, AD, ld);
-  if (!bl) {
-    throw std::runtime_error("LAPACK syev failed");
-  }
-  T exact_result = ld[0];
+  // monolish::matrix::Dense<T> AD(COO);
+  // monolish::vector<T> ld(AD.get_row());
+  // const char jobz = 'V';
+  // const char uplo = 'U';
+  // bool bl = monolish::lapack::syev(&jobz, &uplo, AD, ld);
+  // if (!bl) {
+  //   throw std::runtime_error("LAPACK syev failed");
+  // }
+  // T exact_result = ld[0];
 
   // Calculate exact eigenvalue from analytic solution
-  // T exact_result = 1.0 / (2.0 * (1.0 - std::cos(M_PI * (2 * (DIM-1) + 1) / (2
-  // * DIM + 1))));
+  T exact_result = monolish::util::frank_matrix_eigenvalue<T>(DIM, 1);
 
   monolish::matrix::CRS<T> A(COO);
 
