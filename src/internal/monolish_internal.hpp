@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <omp.h>
+#include <stdexcept>
 #include <typeinfo>
 
 #ifdef MONOLISH_USE_MKL

@@ -13,6 +13,7 @@ stages:
     - vector
     - matrix
     - equation
+    - eigen
     - logger
     - lang
     - python
@@ -447,6 +448,64 @@ nogpu_noavx_clang_oss_equation:
     extends: .test_nogpu_noavx_clang_oss
     variables:
       TEST_TARGET: "equation"
+
+#
+# eigen
+#
+
+# gpu mkl
+#gpu_avx_clang_mkl_eigen:
+#    stage: eigen
+#    extends: .test_gpu_avx_clang_mkl
+#    variables:
+#      TEST_TARGET: "eigen"
+#gpu_noavx_clang_mkl_eigen:
+#    stage: eigen
+#    extends: .test_gpu_noavx_clang_mkl
+#    variables:
+#      TEST_TARGET: "eigen"
+# cpu mkl
+nogpu_avx_gcc_mkl_eigen:
+    stage: eigen
+    extends: .test_nogpu_avx_gcc_mkl
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_noavx_gcc_mkl_eigen:
+    stage: eigen
+    extends: .test_nogpu_noavx_gcc_mkl
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_avx_clang_mkl_eigen:
+    stage: eigen
+    extends: .test_nogpu_avx_clang_mkl
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_noavx_clang_mkl_eigen:
+    stage: eigen
+    extends: .test_nogpu_noavx_clang_mkl
+    variables:
+      TEST_TARGET: "eigen"
+# cpu oss
+nogpu_avx_gcc_oss_eigen:
+    stage: eigen
+    extends: .test_nogpu_avx_gcc_oss
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_noavx_gcc_oss_eigen:
+    stage: eigen
+    extends: .test_nogpu_noavx_gcc_oss
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_avx_clang_oss_eigen:
+    stage: eigen
+    extends: .test_nogpu_avx_clang_oss
+    variables:
+      TEST_TARGET: "eigen"
+nogpu_noavx_clang_oss_eigen:
+    stage: eigen
+    extends: .test_nogpu_noavx_clang_oss
+    variables:
+      TEST_TARGET: "eigen"
 
 #
 # logger
