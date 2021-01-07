@@ -180,8 +180,8 @@ T util::get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b) {
   logger.util_out();
   return blas::nrm2(tmp);
 }
-template double util::get_residual_l2(matrix::Dense<double> &A, vector<double> &x,
-                                      vector<double> &b);
+template double util::get_residual_l2(matrix::Dense<double> &A,
+                                      vector<double> &x, vector<double> &b);
 template float util::get_residual_l2(matrix::Dense<float> &A, vector<float> &x,
                                      vector<float> &b);
 } // namespace monolish

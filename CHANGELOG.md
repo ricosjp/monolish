@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add nrm1 and get_residual_l2(Dense) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/191
 - add Frank matrix creation and eigenvalue calculation routine https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/189
 - add jacobi solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
 - add jacobi preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
