@@ -24,6 +24,7 @@ void equation::Jacobi<T>::create_precond(matrix::CRS<T> &A) {
   }
 
   A.diag(this->precond.M);
+  vml::reciprocal(this->precond.M, this->precond.M);
 
   logger.solver_out();
 }
