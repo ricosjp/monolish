@@ -94,6 +94,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |
@@ -146,6 +147,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |
@@ -216,6 +218,7 @@
 | ceil         |       MKL      |       monolish |       monolish |
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
+| reciprocal   |       monolish |       monolish |       monolish |
 | max(v)       | none->MKL      | none->monolish | none->monolish |
 | max(v,v)     | none->MKL      | none->monolish | none->monolish |
 | min(v)       | none->MKL      | none->monolish | none->monolish |

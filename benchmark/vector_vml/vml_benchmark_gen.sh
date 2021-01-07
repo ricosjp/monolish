@@ -9,5 +9,6 @@ cat ./v_tanh.cpp | sed -e 's/tanh/atanh/g' > v_atanh.cpp
 cat ./v_tanh.cpp | sed -e 's/tanh/ceil/g' > v_ceil.cpp
 cat ./v_tanh.cpp | sed -e 's/tanh/floor/g' > v_floor.cpp
 cat ./v_tanh.cpp | sed -e 's/tanh/sign/g' > v_sign.cpp
+cat ./v_tanh.cpp | sed -e 's/tanh/reciprocal/g' > v_reciprocal.cpp
 cat ./vv_add.cpp | sed -e 's/add/pow/g' > vv_pow.cpp
 cat ./sv_add.cpp | sed -e 's/add/pow/g' > sv_pow.cpp

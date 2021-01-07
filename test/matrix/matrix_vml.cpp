@@ -13,6 +13,7 @@
 #include "vml/m_atanh.hpp"
 #include "vml/m_ceil.hpp"
 #include "vml/m_floor.hpp"
+#include "vml/m_reciprocal.hpp"
 #include "vml/m_sign.hpp"
 #include "vml/m_sin.hpp"
 #include "vml/m_sinh.hpp"
@@ -870,6 +871,24 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_msign<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mreciprocal CRS //
+  if (test_send_mreciprocal<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mreciprocal<monolish::matrix::CRS<float>, float>(
+          M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mreciprocal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mreciprocal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
 

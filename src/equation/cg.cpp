@@ -40,8 +40,8 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
   vml::sub(b, q, r);
 
   // p0 = Mr0
-  p = r;
   this->precond.apply_precond(r, z);
+  p = z;
 
   for (size_t iter = 0; iter < this->maxiter; iter++) {
     blas::matvec(A, p, q);
