@@ -48,6 +48,19 @@ template <typename T>
 T get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b);
 
 /**
+ * @brief get nrm |b-Ax|_2
+ * @param A LinearOperator (size M x N)
+ * @param x monolish vector (size N)
+ * @param b monolish vector (size N)
+ * @note
+ * - # of computation: depends on matvec function
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+template <typename T>
+T get_residual_l2(matrix::LinearOperator<T> &A, vector<T> &x, vector<T> &b);
+
+/**
  * @brief check error
  * @param[in] err solver err code
  * @note
