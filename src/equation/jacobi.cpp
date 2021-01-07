@@ -68,6 +68,7 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
   vector<T> t(A.get_row(), 0.0);
   vector<T> s(A.get_row(), 0.0);
   vector<T> d(A.get_row(), 0.0);
+  util::send(r, t, s, d);
 
   auto bnrm2 = blas::nrm2(b);
   bnrm2 = 1.0 / bnrm2;
