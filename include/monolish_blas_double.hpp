@@ -149,6 +149,30 @@ double dot(const vector<double> &x, const vector<double> &y);
 void dot(const vector<double> &x, const vector<double> &y, double &ans);
 
 /**
+ * @brief double precision nrm1: sum(abs(x[0:N]))
+ * @param x double precision monolish vector (size N)
+ * @return The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+double nrm1(const vector<double> &x);
+
+/**
+ * @brief double precision nrm1: sum(abs(x[0:N]))
+ * @param x double precision monolish vector (size N)
+ * @param ans The result of the nrm1
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void nrm1(const vector<double> &x, double &ans);
+
+/**
  * @brief double precision nrm2: ||x||_2
  * @param x double precision monolish vector (size N)
  * @return The result of the nrm2

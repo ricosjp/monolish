@@ -156,6 +156,37 @@ void blas::scal(const double alpha, vector<double> &x) {
   logger.func_out();
 }
 
+// nrm1 ///////////////////
+double blas::nrm1(const vector<double> &x) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  double ans = 0;
+  const double *xd = x.data();
+  size_t size = x.size();
+
+  if (x.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
+    for (size_t i = 0; i < size; i++) {
+      ans += std::abs(xd[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for reduction(+ : ans)
+    for (size_t i = 0; i < size; i++) {
+      ans += std::abs(xd[i]);
+    }
+  }
+
+  logger.func_out();
+  return ans;
+}
+void blas::nrm1(const vector<double> &x, double &ans) { ans = nrm1(x); }
+
 // axpyz ///////////////////
 void blas::axpyz(const double alpha, const vector<double> &x,
                  const vector<double> &y, vector<double> &z) {
