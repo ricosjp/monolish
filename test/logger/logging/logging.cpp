@@ -20,8 +20,8 @@ int main(int argc, char **argv) {
 
   monolish::util::send(A, x, b);
 
-  monolish::equation::CG<double> solver;
-  monolish::equation::none<double> precond;
+  monolish::equation::CG<monolish::matrix::CRS<double>, double> solver;
+  monolish::equation::none<monolish::matrix::CRS<double>, double> precond;
 
   solver.set_create_precond(precond);
   solver.set_apply_precond(precond);
