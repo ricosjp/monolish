@@ -380,7 +380,7 @@ public:
   size_t get_col() const { return colN; }
 
   /**
-   * @brief get # of nnz
+   * @brief get # of non-zeros
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -400,6 +400,16 @@ public:
     COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
     return tmp;
   }
+
+  /**
+   * @brief fill matrix elements with a scalar value 
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
 
   /**
    * @brief get row index
