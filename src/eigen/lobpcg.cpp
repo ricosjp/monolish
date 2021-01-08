@@ -177,9 +177,8 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
 template int
 eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> const &A, double &l,
                                        vector<double> &x);
-template int
-eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> const &A, float &l,
-                                      vector<float> &x);
+template int eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> const &A,
+                                                   float &l, vector<float> &x);
 
 template <typename T>
 int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
@@ -197,7 +196,7 @@ int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
 
 template int eigen::LOBPCG<double>::solve(matrix::CRS<double> const &A,
                                           double &l, vector<double> &x);
-template int eigen::LOBPCG<float>::solve(matrix::CRS<float> const &A,
-                                         float &l, vector<float> &x);
+template int eigen::LOBPCG<float>::solve(matrix::CRS<float> const &A, float &l,
+                                         vector<float> &x);
 
 } // namespace monolish
