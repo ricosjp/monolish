@@ -195,16 +195,17 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL)
-      << std::endl;
+  std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL
+                          " " MM_TYPE_GENERAL)
+            << std::endl;
   std::cout << rowN << " " << colN << " " << nnz << std::endl;
 
-  if (get_device_mem_stat() == true && force_cpu==false) {
+  if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_GPU
 #pragma omp target
     for (size_t i = 0; i < get_row(); i++) {
       for (size_t j = (size_t)row_ptr[i]; j < (size_t)row_ptr[i + 1]; j++) {
-        printf("%d %d %f\n", i+1, col_ind[j]+1, val[j]);
+        printf("%d %d %f\n", i + 1, col_ind[j] + 1, val[j]);
       }
     }
 #else
@@ -214,7 +215,8 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   } else {
     for (size_t i = 0; i < get_row(); i++) {
       for (size_t j = (size_t)row_ptr[i]; j < (size_t)row_ptr[i + 1]; j++) {
-        std::cout << i + 1 << " " << col_ind[j] + 1 << " " << val[j] << std::endl;
+        std::cout << i + 1 << " " << col_ind[j] + 1 << " " << val[j]
+                  << std::endl;
       }
     }
   }

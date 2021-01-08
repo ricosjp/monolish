@@ -94,9 +94,9 @@ template <typename T> void vector<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  const T* vald = val.data();
+  const T *vald = val.data();
 
-  if (get_device_mem_stat() == true && force_cpu==false) {
+  if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_GPU
 #pragma omp target
     for (size_t i = 0; i < val.size(); i++) {

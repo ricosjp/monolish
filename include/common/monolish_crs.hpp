@@ -155,7 +155,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all(bool force_cpu=false) const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief get # of row
