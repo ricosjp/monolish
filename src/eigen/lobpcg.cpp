@@ -178,9 +178,9 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
   return MONOLISH_SOLVER_MAXITER;
 }
 
-template int
-eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A, double &l,
-                                       vector<double> &x);
+template int eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A,
+                                                    double &l,
+                                                    vector<double> &x);
 template int eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> &A,
                                                    float &l, vector<float> &x);
 
@@ -198,8 +198,8 @@ int eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
   return ret; // err code
 }
 
-template int eigen::LOBPCG<double>::solve(matrix::CRS<double> &A,
-                                          double &l, vector<double> &x);
+template int eigen::LOBPCG<double>::solve(matrix::CRS<double> &A, double &l,
+                                          vector<double> &x);
 template int eigen::LOBPCG<float>::solve(matrix::CRS<float> &A, float &l,
                                          vector<float> &x);
 
