@@ -8,12 +8,9 @@ namespace monolish {
 template <typename T>
 int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
                                       monolish::vector<T> &x) {
-  T residual = 1.0;
   T norm;
-  std::size_t iter = 0;
-
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.solver_in(monolish_func);
 
   matrix::COO<T> COO(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
@@ -40,7 +37,7 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
-  do {
+  for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     // W = A w
     blas::matvec(A, w, W);
 
@@ -151,23 +148,30 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
     blas::scal(l, vtmp1);
     blas::vecsub(X, vtmp1, w);
 
-    // residual calculation and normalize
+    // residual calculation
+    T residual;
     blas::nrm2(w, residual);
-    blas::scal(1.0 / residual, w);
     if (this->get_print_rhistory()) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << residual
                              << std::endl;
     }
-    ++iter;
-  } while (residual > this->get_tol() || iter < this->get_maxiter());
-  logger.func_out();
-  if (iter >= this->get_maxiter()) {
-    return MONOLISH_SOLVER_MAXITER;
-  } else if (residual > this->get_tol()) {
-    return MONOLISH_SOLVER_RESIDUAL_NAN;
-  } else {
-    return MONOLISH_SOLVER_SUCCESS;
+
+    // early return when residual is small enough
+    if (residual < this->get_tol() && this->get_miniter() < iter + 1) {
+      logger.solver_out();
+      return MONOLISH_SOLVER_SUCCESS;
+    }
+
+    if (std::isnan(residual)) {
+      logger.solver_out();
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
+    }
+
+    // normalize w
+    blas::scal(1.0 / residual, w);
   }
+  logger.solver_out();
+  return MONOLISH_SOLVER_MAXITER;
 }
 
 template int
