@@ -22,7 +22,7 @@ namespace eigen {
 template <typename Float> class LOBPCG : public solver::solver<Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
-  int monolish_LOBPCG(matrix::CRS<Float> const &A, Float &lambda,
+  int monolish_LOBPCG(matrix::CRS<Float> &A, Float &lambda,
                       vector<Float> &x);
 
 public:
@@ -34,7 +34,7 @@ public:
    * @param[in] x corresponding eigenvector
    * @return error code (only 0 now)
    **/
-  int solve(matrix::CRS<Float> const &A, Float &lambda, vector<Float> &x);
+  int solve(matrix::CRS<Float> &A, Float &lambda, vector<Float> &x);
 
   void create_precond(matrix::CRS<Float> &A) {
     throw std::runtime_error("this precond. is not impl.");

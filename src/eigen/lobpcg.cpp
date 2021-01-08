@@ -6,13 +6,14 @@
 namespace monolish {
 
 template <typename T>
-int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
+int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
                                       monolish::vector<T> &x) {
   T norm;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
   matrix::COO<T> COO(A);
+  this->precond.create_precond(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   x[0] = 1.0;
   x[1] = -1.0;
@@ -147,6 +148,9 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
     vtmp1 = x;
     blas::scal(l, vtmp1);
     blas::vecsub(X, vtmp1, w);
+    // apply preconditioner
+    this->precond.apply_precond(w, vtmp1);
+    w = vtmp1;
 
     // residual calculation
     T residual;
@@ -175,13 +179,13 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
 }
 
 template int
-eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> const &A, double &l,
+eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A, double &l,
                                        vector<double> &x);
-template int eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> const &A,
+template int eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> &A,
                                                    float &l, vector<float> &x);
 
 template <typename T>
-int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
+int eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -194,9 +198,9 @@ int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
   return ret; // err code
 }
 
-template int eigen::LOBPCG<double>::solve(matrix::CRS<double> const &A,
+template int eigen::LOBPCG<double>::solve(matrix::CRS<double> &A,
                                           double &l, vector<double> &x);
-template int eigen::LOBPCG<float>::solve(matrix::CRS<float> const &A, float &l,
+template int eigen::LOBPCG<float>::solve(matrix::CRS<float> &A, float &l,
                                          vector<float> &x);
 
 } // namespace monolish
