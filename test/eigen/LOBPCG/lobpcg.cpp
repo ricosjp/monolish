@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test<double, monolish::equation::Jacobi<double>>(file, check_ans, 1.0 + 1,
+  if (test<double, monolish::equation::Jacobi<double>>(file, check_ans, 1.0e+1,
                                                        150) == false) {
     return 1;
   }
