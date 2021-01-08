@@ -90,16 +90,32 @@ template <typename T> void vector<T>::fill(T value) {
 template void vector<double>::fill(double value);
 template void vector<float>::fill(float value);
 
-template <typename T> void vector<T>::print_all() const {
+template <typename T> void vector<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  for (const auto v : val) {
-    std::cout << v << std::endl;
+
+  const T* vald = val.data();
+
+  if (get_device_mem_stat() == true && force_cpu==false) {
+#if MONOLISH_USE_GPU
+#pragma omp target
+    for (size_t i = 0; i < val.size(); i++) {
+      printf("%f\n", vald[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+    for (size_t i = 0; i < val.size(); i++) {
+      std::cout << vald[i] << std::endl;
+    }
   }
+
   logger.util_out();
 }
-template void vector<double>::print_all() const;
-template void vector<float>::print_all() const;
+template void vector<double>::print_all(bool force_cpu) const;
+template void vector<float>::print_all(bool force_cpu) const;
 
 template <typename T> void vector<T>::print_all(std::string filename) const {
   Logger &logger = Logger::get_instance();

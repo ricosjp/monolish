@@ -148,13 +148,14 @@ public:
   CRS(const CRS<Float> &mat);
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all();
+  void print_all(bool force_cpu=false) const;
 
   /**
    * @brief get # of row
