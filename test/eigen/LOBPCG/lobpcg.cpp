@@ -5,7 +5,7 @@
 
 template <typename T>
 bool test(const char *file, const int check_ans, const T tol) {
-  int DIM = 13;
+  int DIM = 12;
   monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
   // for (std::size_t i = 0; i < COO.get_row(); ++i) {
   //   for (std::size_t j = 0; j < COO.get_col(); ++j) {
@@ -37,10 +37,10 @@ bool test(const char *file, const int check_ans, const T tol) {
 
   monolish::eigen::LOBPCG<T> solver;
 
-  solver.set_tol(tol);
+  solver.set_tol(1.0e-2);
   solver.set_lib(0);
   solver.set_miniter(0);
-  solver.set_maxiter(10000);
+  solver.set_maxiter(150);
 
   solver.set_print_rhistory(true);
 
@@ -69,12 +69,12 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<double>(file, check_ans, 1.0e-1) == false) {
+  if (test<double>(file, check_ans, 1.0e-0) == false) {
     return 1;
   }
-  // if (test<float>(file, check_ans, 1.0e-4) == false) {
-  //   return 1;
-  // }
+  if (test<float>(file, check_ans, 1.0e-0) == false) {
+    return 1;
+  }
 
   return 0;
 }
