@@ -310,13 +310,14 @@ public:
   COO(const char *filename) { input_mm(filename); }
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Unused options for integrity
    * @note
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file

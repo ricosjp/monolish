@@ -280,12 +280,13 @@ public:
 
   /**
    * @brief print all elements to standart I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: N
    * - Multi-threading: false
-   * - GPU acceleration: false
+   * - GPU acceleration: true (doesn't work in parallel)
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file
