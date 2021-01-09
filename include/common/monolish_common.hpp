@@ -168,6 +168,33 @@ template <typename T> matrix::COO<T> frank_matrix(const int &M);
  **/
 template <typename T> T frank_matrix_eigenvalue(const int &M, const int &N);
 
+/**
+ * @brief create tridiagonal Toeplitz matrix
+ * @param M # of row and col
+ * @param a value of diagonal elements
+ * @param b value of next-to-diagonal elements
+ * @note
+ * - # of computation: M
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a, T b);
+
+/**
+ * @brief Nth smallest eigenvalue of MxM tridiagonal Toeplitz matrix
+ * @param M dimension of tridiagonal Toeplitz matrix
+ * @param N #-th eigenvalue from the bottom
+ * @param a value of diagonal elements
+ * @param b value of next-to-diagonal elements
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b);
+
 // send///////////////////
 
 /**

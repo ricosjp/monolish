@@ -4,9 +4,10 @@
 #include <iostream>
 
 template <typename T>
-bool test(const char *file, const int check_ans, const T tol) {
-  int DIM = 12;
-  monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
+bool test(const char *file, const int check_ans, const T tol_ev, const T tol_res) {
+  int DIM = 100;
+  monolish::matrix::COO<T> COO = monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 11.0, -1.0);
+  COO.sort(true);
   // for (std::size_t i = 0; i < COO.get_row(); ++i) {
   //   for (std::size_t j = 0; j < COO.get_col(); ++j) {
   //     if (i == j) { COO.insert(i, j, 2.0); }
@@ -28,19 +29,19 @@ bool test(const char *file, const int check_ans, const T tol) {
   // T exact_result = ld[0];
 
   // Calculate exact eigenvalue from analytic solution
-  T exact_result = monolish::util::frank_matrix_eigenvalue<T>(DIM, 1);
+  T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(DIM, 0, 11.0, -1.0);
 
   monolish::matrix::CRS<T> A(COO);
 
   T lambda;
-  monolish::vector<T> x(A.get_row());
+  monolish::vector<T> x(A.get_row(), 0.0);
 
   monolish::eigen::LOBPCG<T> solver;
 
-  solver.set_tol(1.0e-2);
+  solver.set_tol(tol_res);
   solver.set_lib(0);
   solver.set_miniter(0);
-  solver.set_maxiter(150);
+  solver.set_maxiter(1000);
 
   solver.set_print_rhistory(true);
 
@@ -49,7 +50,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   }
 
   if (check_ans == 1) {
-    if (ans_check<T>("LOBPCG", lambda, exact_result, tol) == false) {
+    if (ans_check<T>("LOBPCG", lambda, exact_result, tol_ev) == false) {
       return false;
     }
   }
@@ -69,10 +70,10 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<double>(file, check_ans, 1.0e-0) == false) {
+  if (test<double>(file, check_ans, 1.0e-3, 1.0e-2) == false) {
     return 1;
   }
-  if (test<float>(file, check_ans, 1.0e-0) == false) {
+  if (test<float>(file, check_ans, 1.0e-1, 1.0e-0) == false) {
     return 1;
   }
 
