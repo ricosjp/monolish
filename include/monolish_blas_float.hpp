@@ -16,6 +16,45 @@ namespace monolish {
 namespace blas {
 
 //////////////////////////////////////////////////////
+//  Copy
+//////////////////////////////////////////////////////
+/**
+ * @brief single precision vector copy (y=a)
+ * @param a single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const vector<float> &a, vector<float> &y);
+
+/**
+ * @brief single precision Dense matrix copy (y=a)
+ * @param a single precision monolish Dense matrix (size M x N)
+ * @param y single precision monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const matrix::Dense<float> &a, matrix::Dense<float> &y);
+
+/**
+ * @brief single precision CRS matrix copy (y=a)
+ * @param a single precision monolish CRS matrix (size M x N)
+ * @param y single precision monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const matrix::CRS<float> &a, matrix::CRS<float> &y);
+
+//////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
 /**
@@ -29,7 +68,8 @@ namespace blas {
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b,
+            vector<float> &y);
 
 /**
  * @brief single precision element by element subtraction of vector a and vector
@@ -43,7 +83,8 @@ void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b,
+            vector<float> &y);
 /**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
@@ -261,7 +302,7 @@ void mscal(const float alpha, matrix::CRS<float> &A);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
@@ -292,7 +333,7 @@ void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
