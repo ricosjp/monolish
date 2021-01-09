@@ -38,6 +38,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- dont use direct reference solver class value in solve function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/200
 - CRS.print_all() output matrixmarket format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
 - support print_all() on GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
 - move equation::solver and equation::precondition to solver::solver and solver::precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/190

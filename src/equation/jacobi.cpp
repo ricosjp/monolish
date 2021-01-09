@@ -79,7 +79,7 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
 
   this->precond.create_precond(A);
 
-  for (size_t iter = 0; iter < this->maxiter; iter++) {
+  for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
 
     /* x += D^{-1}(b - Ax) */
     this->precond.apply_precond(x, s);
@@ -92,12 +92,12 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
 
     nrm2 = nrm2 * bnrm2;
 
-    if (this->print_rhistory == true) {
+    if (this->get_print_rhistory() == true) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
                              << std::endl;
     }
 
-    if (nrm2 < this->tol && this->miniter <= iter + 1) {
+    if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
@@ -123,7 +123,7 @@ int equation::Jacobi<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   logger.solver_in(monolish_func);
 
   int ret = 0;
-  if (this->lib == 0) {
+  if (this->get_lib() == 0) {
     ret = monolish_Jacobi(A, x, b);
   }
 
