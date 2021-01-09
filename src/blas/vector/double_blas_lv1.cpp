@@ -4,7 +4,7 @@
 namespace monolish {
 
 // copy ///////////////////
-void blas::copy(const vector<double> &a, vector<float> &y) {
+void blas::copy(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
