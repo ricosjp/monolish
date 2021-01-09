@@ -40,7 +40,7 @@ void copy(const vector<float> &a, vector<float> &y);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void copy(const matrix::Dense<float> &a, matrix::Dense<float> &y);
+void copy(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 
 /**
  * @brief single precision CRS matrix copy (y=a)
@@ -51,8 +51,10 @@ void copy(const matrix::Dense<float> &a, matrix::Dense<float> &y);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  */
-void copy(const matrix::CRS<float> &a, matrix::CRS<float> &y);
+void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
 //////////////////////////////////////////////////////
 //  Vector
