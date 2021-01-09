@@ -186,7 +186,7 @@ int eigen::LOBPCG<T>::solve(matrix::CRS<T> const &A, T &l, vector<T> &x) {
   logger.solver_in(monolish_func);
 
   int ret = 0;
-  if (this->lib == 0) {
+  if (this->get_lib() == 0) {
     ret = monolish_LOBPCG(A, l, x);
   }
 
