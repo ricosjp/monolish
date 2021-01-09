@@ -8,8 +8,8 @@ namespace monolish {
 ///////////////////////////////
 
 // Dense ///////////////////
-void blas::matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
-                  matrix::Dense<float> &C) {
+void blas::matadd(const matrix::Dense<float> &A,
+                  const matrix::Dense<float> &B, matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -44,6 +44,9 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
   }
+  if (A.get_nnz() != B.get_nnz() && A.get_nnz() != C.get_nnz()) {
+    throw std::runtime_error("error A.nnz != B.nnz != C.nnz");
+  }
   if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
       A.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error get_device_mem_stat() is not same");
@@ -60,8 +63,8 @@ void blas::matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 ///////////////////////////////
 
 // Dense ///////////////////
-void blas::matsub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
-                  matrix::Dense<float> &C) {
+void blas::matsub(const matrix::Dense<float> &A,
+                  const matrix::Dense<float> &B, matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -95,6 +98,10 @@ void blas::matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
   }
   if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
     throw std::runtime_error("error A.col != B.col != C.col");
+  }
+  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
+      A.get_device_mem_stat() != C.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
   }
   if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
       A.get_device_mem_stat() != C.get_device_mem_stat()) {
