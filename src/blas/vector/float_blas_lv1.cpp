@@ -2,6 +2,25 @@
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
+
+// copy ///////////////////
+void blas::copy(const vector<float> &a, vector<float> &y) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  if (a.size() != y.size()) {
+    throw std::runtime_error("error vector size is not same");
+  }
+  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error vector get_device_mem_stat() is not same");
+  }
+
+  internal::vcopy(y.size(), a.data(), y.data(), y.get_device_mem_stat());
+
+  logger.util_out();
+}
+
 // asum ///////////////////
 float blas::asum(const vector<float> &x) {
   Logger &logger = Logger::get_instance();
@@ -31,7 +50,8 @@ float blas::asum(const vector<float> &x) {
 void blas::asum(const vector<float> &x, float &ans) { ans = asum(x); }
 
 // axpy ///////////////////
-void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::axpy(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -226,7 +246,8 @@ void blas::axpyz(const float alpha, const vector<float> &x,
 }
 
 // xpay ///////////////////
-void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
+void blas::xpay(const float alpha, const vector<float> &x,
+                vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
