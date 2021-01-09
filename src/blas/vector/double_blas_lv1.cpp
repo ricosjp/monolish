@@ -2,6 +2,25 @@
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
+
+// copy ///////////////////
+void blas::copy(const vector<double> &a, vector<float> &y) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  if (a.size() != y.size()) {
+    throw std::runtime_error("error vector size is not same");
+  }
+  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error vector get_device_mem_stat() is not same");
+  }
+
+  internal::vcopy(y.size(), a.data(), y.data(), y.get_device_mem_stat());
+
+  logger.util_out();
+}
+
 // asum ///////////////////
 double blas::asum(const vector<double> &x) {
   Logger &logger = Logger::get_instance();

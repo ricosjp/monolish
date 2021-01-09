@@ -3,27 +3,6 @@
 
 namespace monolish {
 
-//blas::copy
-template <typename T>
- void blas::copy(const monolish::vector<T> &a, monolish::vector<T> &y) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
-
-  internal::vcopy(y.size(), a.data(), y.data(), y.get_device_mem_stat());
-
-  logger.util_out();
-}
-template vector<double>::vector(const vector<double> &vec);
-template vector<float>::vector(const vector<float> &vec);
-
 // copy
 template <typename T> vector<T> vector<T>::copy() {
   Logger &logger = Logger::get_instance();
