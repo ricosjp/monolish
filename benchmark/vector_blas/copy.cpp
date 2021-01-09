@@ -1,7 +1,7 @@
 #include "../benchmark_utils.hpp"
 
 #define FUNC "copy"
-#define PERF 0 
+#define PERF 0
 #define MEM 2 * size * sizeof(T) / time / 1.0e+9
 
 template <typename T> bool benchmark(const size_t size, const size_t iter) {

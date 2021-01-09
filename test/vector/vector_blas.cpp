@@ -1,7 +1,7 @@
-#include "blas/copy.hpp"
 #include "blas/asum.hpp"
 #include "blas/axpy.hpp"
 #include "blas/axpyz.hpp"
+#include "blas/copy.hpp"
 #include "blas/dot.hpp"
 #include "blas/nrm1.hpp"
 #include "blas/nrm2.hpp"

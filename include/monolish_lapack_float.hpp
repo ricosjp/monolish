@@ -53,8 +53,7 @@ bool syev(const char *jobz, const char *uplo, matrix::Dense<float> &A,
  *    - # of data transfer: 0
  */
 bool sygv(const int itype, const char *jobz, const char *uplo,
-          matrix::Dense<float> &A, matrix::Dense<float> &B,
-          vector<float> &W);
+          matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &W);
 
 } // namespace lapack
 } // namespace monolish
