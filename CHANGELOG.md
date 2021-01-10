@@ -40,6 +40,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- syev, sygv: automatically generate float from double using d2f.sh https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/204
 - change copy() to copy constructor in test dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 - change operator= to blas::copy in equation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 - dont use direct reference solver class value in solve function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/200
