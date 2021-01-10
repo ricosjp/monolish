@@ -92,29 +92,37 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test_tridiagonal_toeplitz<double, monolish::equation::none<double>>(check_ans, 3.0e-2, 8.0e-2) == false) {
+  if (test_tridiagonal_toeplitz<double, monolish::equation::none<double>>(
+          check_ans, 3.0e-2, 8.0e-2) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<float, monolish::equation::none<float>>(check_ans, 1.0e-1, 1.0e-0) == false) {
+  if (test_tridiagonal_toeplitz<float, monolish::equation::none<float>>(
+          check_ans, 1.0e-1, 1.0e-0) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<double, monolish::equation::Jacobi<double>>(check_ans, 1.0e-2, 1.0e-2) == false) {
+  if (test_tridiagonal_toeplitz<double, monolish::equation::Jacobi<double>>(
+          check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<float, monolish::equation::Jacobi<float>>(check_ans, 5.0e-2, 5.0e-2) == false) {
+  if (test_tridiagonal_toeplitz<float, monolish::equation::Jacobi<float>>(
+          check_ans, 5.0e-2, 5.0e-2) == false) {
     return 1;
   }
 
-  if (test_laplacian_1d<double, monolish::equation::none<double>>(check_ans, 2.0e-2, 5.0e-2) == false) {
+  if (test_laplacian_1d<double, monolish::equation::none<double>>(
+          check_ans, 2.0e-2, 5.0e-2) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float, monolish::equation::none<float>>(check_ans, 1.0e-1, 3.0e-1) == false) {
+  if (test_laplacian_1d<float, monolish::equation::none<float>>(
+          check_ans, 1.0e-1, 3.0e-1) == false) {
     return 1;
   }
-  if (test_laplacian_1d<double, monolish::equation::Jacobi<double>>(check_ans, 5.0e-2, 5.0e-2) == false) {
+  if (test_laplacian_1d<double, monolish::equation::Jacobi<double>>(
+          check_ans, 5.0e-2, 5.0e-2) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float, monolish::equation::Jacobi<float>>(check_ans, 2.0e-1, 2.0e-1) == false) {
+  if (test_laplacian_1d<float, monolish::equation::Jacobi<float>>(
+          check_ans, 2.0e-1, 2.0e-1) == false) {
     return 1;
   }
   return 0;

@@ -31,7 +31,7 @@ Unreleased
 - add jacobi solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
 - add jacobi preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
 - add vml::reciprocal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
-- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/194 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/197
+- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/194 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/197 https://gitlab.ritc.jp/ricos/monolish/-/issues/479
 - Support MKL SpMV and SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/185
 - install monolish_log_viewer on monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/183
 - add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
