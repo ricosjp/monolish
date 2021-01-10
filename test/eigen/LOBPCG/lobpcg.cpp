@@ -1,9 +1,10 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
+#include "../include/monolish_equation.hpp"
 #include "../include/monolish_lapack.hpp"
 #include <iostream>
 
-template <typename T>
+template <typename T, typename PRECOND>
 bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
                 const int check_ans, const T tol_ev, const T tol_res) {
   monolish::matrix::CRS<T> A(mat);
@@ -16,6 +17,11 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(1000);
+
+  // precond setting
+  PRECOND precond;
+  solver.set_create_precond(precond);
+  solver.set_apply_precond(precond);
 
   solver.set_print_rhistory(true);
 
@@ -31,7 +37,7 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   return true;
 }
 
-template <typename T>
+template <typename T, typename PRECOND>
 bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
                                const T tol_res) {
   int DIM = 100;
@@ -61,16 +67,16 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
   T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
       DIM, 0, 11.0, -1.0);
 
-  return test_solve(COO, exact_result, check_ans, tol_ev, tol_res);
+  return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev, tol_res);
 }
 
-template <typename T>
+template <typename T, typename PRECOND>
 bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 10000;
   monolish::matrix::COO<T> COO = monolish::util::laplacian_matrix_1D<T>(DIM);
   T exact_result = monolish::util::laplacian_matrix_1D_eigenvalue<T>(DIM, 0);
 
-  return test_solve(COO, exact_result, check_ans, tol_ev, tol_res);
+  return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev, tol_res);
 }
 
 int main(int argc, char **argv) {
@@ -86,17 +92,37 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test_tridiagonal_toeplitz<double>(check_ans, 3.0e-2, 8.0e-2) == false) {
+  if (test_tridiagonal_toeplitz<double, monolish::equation::none<double>>(
+          check_ans, 3.0e-2, 8.0e-2) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<float>(check_ans, 1.0e-1, 1.0e-0) == false) {
+  if (test_tridiagonal_toeplitz<float, monolish::equation::none<float>>(
+          check_ans, 1.0e-1, 1.0e-0) == false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<double, monolish::equation::Jacobi<double>>(
+          check_ans, 1.0e-2, 1.0e-2) == false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<float, monolish::equation::Jacobi<float>>(
+          check_ans, 5.0e-2, 5.0e-2) == false) {
     return 1;
   }
 
-  if (test_laplacian_1d<double>(check_ans, 2.0e-2, 5.0e-2) == false) {
+  if (test_laplacian_1d<double, monolish::equation::none<double>>(
+          check_ans, 2.0e-2, 5.0e-2) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float>(check_ans, 1.0e-1, 3.0e-1) == false) {
+  if (test_laplacian_1d<float, monolish::equation::none<float>>(
+          check_ans, 1.0e-1, 3.0e-1) == false) {
+    return 1;
+  }
+  if (test_laplacian_1d<double, monolish::equation::Jacobi<double>>(
+          check_ans, 5.0e-2, 5.0e-2) == false) {
+    return 1;
+  }
+  if (test_laplacian_1d<float, monolish::equation::Jacobi<float>>(
+          check_ans, 2.0e-1, 2.0e-1) == false) {
     return 1;
   }
   return 0;
