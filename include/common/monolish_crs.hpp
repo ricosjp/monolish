@@ -323,7 +323,7 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
+   *    - # of data transfer: (M+1)+2nnz (only allocation)
    *        - if `vec.gpu_status == true`; coping data on GPU
    *        - else; coping data on CPU
    **/
