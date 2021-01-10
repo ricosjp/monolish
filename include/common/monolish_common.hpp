@@ -195,6 +195,27 @@ matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a, T b);
 template <typename T>
 T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b);
 
+/**
+ * @brief create 1D Laplacian matrix
+ * @param M # of row and col
+ * @note
+ * - # of computation: M
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> matrix::COO<T> laplacian_matrix_1D(const int &M);
+
+/**
+ * @brief Nth smallest eigenvalue of 1D Laplacian matrix
+ * @param M dimension of tridiagonal Toeplitz matrix
+ * @param N #-th eigenvalue from the bottom
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> T laplacian_matrix_1D_eigenvalue(const int &M, int N);
+
 // send///////////////////
 
 /**
