@@ -267,13 +267,14 @@ public:
   void insert(const size_t i, const size_t j, const Float Val);
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: M*N
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all();
+  void print_all(bool force_cpu = false) const;
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -376,19 +377,6 @@ public:
    * - GPU acceleration: true
    **/
   void fill(Float value);
-
-  /**
-   * @brief matrix copy
-   * @return copied dense matrix
-   * @note
-   * - # of computation: M*N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   *    - # of data transfer: M*N
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
-   **/
-  Dense copy();
 
   /**
    * @brief matrix copy

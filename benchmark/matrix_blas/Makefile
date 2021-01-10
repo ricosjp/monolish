@@ -26,6 +26,7 @@ sxat: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
 run_cpu:
+	bash ./benchmark.sh matcopy cpu
 	bash ./benchmark.sh matadd cpu
 	bash ./benchmark.sh matsub cpu
 	bash ./benchmark.sh mscal cpu
@@ -33,6 +34,7 @@ run_cpu:
 	bash ./benchmark.sh matmul cpu
  
 run_gpu:
+	bash ./benchmark.sh matcopy gpu
 	bash ./benchmark.sh matadd gpu
 	bash ./benchmark.sh matsub gpu
 	bash ./benchmark.sh mscal gpu
@@ -40,6 +42,7 @@ run_gpu:
 	bash ./benchmark.sh matmul gpu
 
 run_a64fx:
+	bash ./benchmark.sh matcopy a64fx
 	bash ./benchmark.sh matadd a64fx
 	bash ./benchmark.sh matsub a64fx
 	bash ./benchmark.sh mscal a64fx
@@ -47,6 +50,7 @@ run_a64fx:
 	bash ./benchmark.sh matmul a64fx
 
 run_sxat:
+	bash ./benchmark.sh matcopy sxat
 	bash ./benchmark.sh matadd sxat
 	bash ./benchmark.sh matsub sxat
 	bash ./benchmark.sh mscal sxat

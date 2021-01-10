@@ -310,13 +310,14 @@ public:
   COO(const char *filename) { input_mm(filename); }
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Unused options for integrity
    * @note
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file
@@ -387,19 +388,6 @@ public:
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return nnz; }
-
-  /**
-   * @brief matrix copy
-   * @return copied COO matrix
-   * @note
-   * - # of computation: 3nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  COO copy() {
-    COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
-    return tmp;
-  }
 
   /**
    * @brief fill matrix elements with a scalar value
@@ -587,8 +575,10 @@ public:
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * src. and dst. must be same non-zero structure (dont check in this function)
    **/
-  void operator=(const COO<Float> &mat) { mat = copy(); }
+  void operator=(const COO<Float> &mat);
 
   /**
    * @brief Comparing matricies (A == mat)

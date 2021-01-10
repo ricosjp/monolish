@@ -148,13 +148,14 @@ public:
   CRS(const CRS<Float> &mat);
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all();
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief get # of row
@@ -306,19 +307,6 @@ public:
    * - GPU acceleration: true
    **/
   void fill(Float value);
-
-  /**
-   * @brief matrix copy
-   * @return copied CRS matrix
-   * @note
-   * - # of computation: (M+1)+2nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
-   **/
-  CRS copy();
 
   /**
    * @brief matrix copy

@@ -133,25 +133,35 @@ template <typename T> void Dense<T>::fill(T value) {
 template void Dense<double>::fill(double value);
 template void Dense<float>::fill(float value);
 
-template <typename T> void Dense<T>::print_all() {
+template <typename T> void Dense<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("Error, GPU matrix cant use print_all");
-  }
-
-  for (size_t i = 0; i < get_row(); i++) {
-    for (size_t j = 0; j < get_col(); j++) {
-      std::cout << i + 1 << " " << j + 1 << " " << val[i * get_col() + j]
-                << std::endl;
+  if (get_device_mem_stat() == true && force_cpu == false) {
+#if MONOLISH_USE_GPU
+#pragma omp target
+    for (size_t i = 0; i < get_row(); i++) {
+      for (size_t j = 0; j < get_col(); j++) {
+        printf("%d %d %f\n", i + 1, j + 1, val[i * get_col() + j]);
+      }
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+    for (size_t i = 0; i < get_row(); i++) {
+      for (size_t j = 0; j < get_col(); j++) {
+        std::cout << i + 1 << " " << j + 1 << " " << val[i * get_col() + j]
+                  << std::endl;
+      }
     }
   }
 
   logger.util_out();
 }
-template void Dense<double>::print_all();
-template void Dense<float>::print_all();
+template void Dense<double>::print_all(bool force_cpu) const;
+template void Dense<float>::print_all(bool force_cpu) const;
 
 template <typename T> T Dense<T>::at(const size_t i, const size_t j) {
   if (get_device_mem_stat()) {

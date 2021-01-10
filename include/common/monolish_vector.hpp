@@ -256,19 +256,6 @@ public:
   auto get_nnz() const { return val.size(); }
 
   /**
-   * @brief vector copy ( Copy the memory data on CPU and GPU )
-   * @return copied vector
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
-   **/
-  vector copy();
-
-  /**
    * @brief fill vector elements with a scalar value
    * @param value scalar value
    * @note
@@ -280,12 +267,13 @@ public:
 
   /**
    * @brief print all elements to standart I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: N
    * - Multi-threading: false
-   * - GPU acceleration: false
+   * - GPU acceleration: true (doesn't work in parallel)
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file

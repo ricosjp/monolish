@@ -16,6 +16,47 @@ namespace monolish {
 namespace blas {
 
 //////////////////////////////////////////////////////
+//  Copy
+//////////////////////////////////////////////////////
+/**
+ * @brief single precision vector copy (y=a)
+ * @param a single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const vector<float> &a, vector<float> &y);
+
+/**
+ * @brief single precision Dense matrix copy (y=a)
+ * @param a single precision monolish Dense matrix (size M x N)
+ * @param y single precision monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const matrix::Dense<float> &A, matrix::Dense<float> &C);
+
+/**
+ * @brief single precision CRS matrix copy (y=a)
+ * @param a single precision monolish CRS matrix (size M x N)
+ * @param y single precision monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
+ */
+void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+//////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
 /**
@@ -261,7 +302,7 @@ void mscal(const float alpha, matrix::CRS<float> &A);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
@@ -292,7 +333,7 @@ void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
