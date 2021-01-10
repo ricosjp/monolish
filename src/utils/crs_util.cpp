@@ -179,7 +179,7 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
+  val.resize(crs.get_nnz());
   col_ind.resize(crs.get_nnz());
   row_ptr.resize(crs.get_row() + 1);
 
@@ -199,8 +199,8 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
 
   logger.util_out();
 }
-template void CRS<double>::convert(COO<double> &coo);
-template void CRS<float>::convert(COO<float> &coo);
+template void CRS<double>::convert(CRS<double> &coo);
+template void CRS<float>::convert(CRS<float> &coo);
 
 // Utils
 template <typename T> void CRS<T>::fill(T value) {
