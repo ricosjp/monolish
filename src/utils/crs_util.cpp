@@ -79,8 +79,6 @@ template CRS<float>::CRS(const size_t M, const size_t N,
                          const std::vector<int> colind,
                          const std::vector<float> value);
 
-// convert ///
-//
 // copy constructor
 template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
@@ -135,6 +133,35 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
 template CRS<double>::CRS(const CRS<double> &mat);
 template CRS<float>::CRS(const CRS<float> &mat);
 
+// operator= (copy)
+template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(mat.get_nnz());
+  col_ind.resize(mat.get_nnz());
+  row_ptr.resize(mat.get_row() + 1);
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+  nnz = mat.get_nnz();
+
+#if MONOLISH_USE_GPU
+  if (mat.get_device_mem_stat() == true) {
+    send();
+  }
+#endif
+
+  internal::vcopy((get_row() + 1), mat.row_ptr.data(), row_ptr.data(),
+                  get_device_mem_stat());
+  internal::vcopy(get_nnz(), mat.col_ind.data(), col_ind.data(),
+                  get_device_mem_stat());
+  internal::vcopy(get_nnz(), mat.val.data(), val.data(), get_device_mem_stat());
+
+  logger.util_out();
+}
+
+// convert ///
 template <typename T> void CRS<T>::convert(COO<T> &coo) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
