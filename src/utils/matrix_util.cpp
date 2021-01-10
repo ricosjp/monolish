@@ -131,13 +131,13 @@ template <typename T> matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int
 
   matrix::COO<T> mat(M, M);
   mat.insert(0, 0, a);
-  mat.insert(1, 0, b);
+  mat.insert(0, 1, b);
   for (int i = 1; i < M - 1; ++i) {
-    mat.insert(i - 1, i, b);
-    mat.insert(i,     i, a);
-    mat.insert(i + 1, i, b);
+    mat.insert(i, i - 1, b);
+    mat.insert(i, i    , a);
+    mat.insert(i, i + 1, b);
   }
-  mat.insert(M - 2, M - 1, b);
+  mat.insert(M - 1, M - 2, b);
   mat.insert(M - 1, M - 1, a);
 
   logger.util_out();

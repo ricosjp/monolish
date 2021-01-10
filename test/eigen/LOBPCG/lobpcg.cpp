@@ -35,7 +35,6 @@ template <typename T>
 bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 100;
   monolish::matrix::COO<T> COO = monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 11.0, -1.0);
-  COO.sort(true);
   // for (std::size_t i = 0; i < COO.get_row(); ++i) {
   //   for (std::size_t j = 0; j < COO.get_col(); ++j) {
   //     if (i == j) { COO.insert(i, j, 2.0); }
@@ -66,7 +65,6 @@ template <typename T>
 bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 10000;
   monolish::matrix::COO<T> COO = monolish::util::laplacian_matrix_1D<T>(DIM);
-  COO.sort(true);
   T exact_result = monolish::util::laplacian_matrix_1D_eigenvalue<T>(DIM, 0);
 
   return test_solve(COO, exact_result, check_ans, tol_ev, tol_res);
