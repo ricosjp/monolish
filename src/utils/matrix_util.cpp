@@ -125,4 +125,52 @@ T util::frank_matrix_eigenvalue(const int &M, const int &N) {
 template double util::frank_matrix_eigenvalue(const int &M, const int &N);
 template float util::frank_matrix_eigenvalue(const int &M, const int &N);
 
+template <typename T>
+matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int &M, T a, T b) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  matrix::COO<T> mat(M, M);
+  mat.insert(0, 0, a);
+  mat.insert(0, 1, b);
+  for (int i = 1; i < M - 1; ++i) {
+    mat.insert(i, i - 1, b);
+    mat.insert(i, i, a);
+    mat.insert(i, i + 1, b);
+  }
+  mat.insert(M - 1, M - 2, b);
+  mat.insert(M - 1, M - 1, a);
+
+  logger.util_out();
+  return mat;
+}
+template matrix::COO<double>
+util::tridiagonal_toeplitz_matrix(const int &M, double a, double b);
+template matrix::COO<float> util::tridiagonal_toeplitz_matrix(const int &M,
+                                                              float a, float b);
+
+template <typename T>
+T util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b) {
+  T exact_result = a - 2.0 * b * std::cos(M_PI * (N + 1) / (M + 1));
+  return exact_result;
+}
+template double util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M,
+                                                             int N, double a,
+                                                             double b);
+template float util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N,
+                                                            float a, float b);
+
+template <typename T> matrix::COO<T> util::laplacian_matrix_1D(const int &M) {
+  return util::tridiagonal_toeplitz_matrix<T>(M, 2.0, -1.0);
+}
+template matrix::COO<double> util::laplacian_matrix_1D(const int &M);
+template matrix::COO<float> util::laplacian_matrix_1D(const int &M);
+
+template <typename T>
+T util::laplacian_matrix_1D_eigenvalue(const int &M, int N) {
+  return util::tridiagonal_toeplitz_matrix_eigenvalue<T>(M, N, 2.0, -1.0);
+}
+template double util::laplacian_matrix_1D_eigenvalue(const int &M, int N);
+template float util::laplacian_matrix_1D_eigenvalue(const int &M, int N);
+
 } // namespace monolish
