@@ -390,19 +390,6 @@ public:
   size_t get_nnz() const { return nnz; }
 
   /**
-   * @brief matrix copy
-   * @return copied COO matrix
-   * @note
-   * - # of computation: 3nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  COO copy() {
-    COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
-    return tmp;
-  }
-
-  /**
    * @brief fill matrix elements with a scalar value
    * @param value scalar value
    * @note
@@ -588,8 +575,10 @@ public:
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * src. and dst. must be same non-zero structure (dont check in this function)
    **/
-  void operator=(const COO<Float> &mat) { mat = copy(); }
+  void operator=(const COO<Float> &mat);
 
   /**
    * @brief Comparing matricies (A == mat)

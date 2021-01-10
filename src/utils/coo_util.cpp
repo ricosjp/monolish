@@ -92,8 +92,34 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
 template COO<double>::COO(const matrix::COO<double> &coo);
 template COO<float>::COO(const matrix::COO<float> &coo);
 
+// operator=
+template <typename T> void COO<T>::operator=(const matrix::COO<T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  if (get_row() != mat.get_row()) {
+    throw std::runtime_error("error A.row != C.row");
+  }
+  if (get_col() != mat.get_col()) {
+    throw std::runtime_error("error A.col != C.col");
+  }
+  if (get_nnz() != mat.get_nnz()) {
+    throw std::runtime_error("error A.nnz != C.nnz");
+  }
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
+  //value copy
+  internal::vcopy(get_nnz(), val.data(), mat.val.data(),
+                  get_device_mem_stat());
+
+  logger.util_out();
+}
+
 // input and convert //////////////////////////////////////
-//
+
 template <typename T> void COO<T>::fill(T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
