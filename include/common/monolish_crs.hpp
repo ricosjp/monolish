@@ -310,19 +310,6 @@ public:
 
   /**
    * @brief matrix copy
-   * @return copied CRS matrix
-   * @note
-   * - # of computation: (M+1)+2nnz
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
-   **/
-  CRS copy();
-
-  /**
-   * @brief matrix copy
    * @note
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true

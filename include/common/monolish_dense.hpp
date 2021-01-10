@@ -389,19 +389,6 @@ public:
    *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
    *        - else; coping data only on CPU
    **/
-  Dense copy();
-
-  /**
-   * @brief matrix copy
-   * @return copied dense matrix
-   * @note
-   * - # of computation: M*N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   *    - # of data transfer: M*N
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
-   **/
   void operator=(const Dense<Float> &mat);
 
   /**
