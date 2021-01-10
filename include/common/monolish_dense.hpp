@@ -93,14 +93,17 @@ public:
   Dense(const COO<Float> &coo) { convert(coo); }
 
   /**
-   * @brief Create dense matrix from dense matrix
-   * @param dense input dense matrix (size M x N)
+   * @brief Create Dense matrix from Dense matrix
+   * @param dense Dense format matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `vec.gpu_status == true`; coping data on CPU and GPU respectively
+   *        - else; coping data only on CPU
    **/
-  Dense(const Dense<Float> &dense) { convert(dense); };
+  Dense(const Dense<Float> &dense);
 
   /**
    * @brief Allocate dense matrix
@@ -385,9 +388,9 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `vec.gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
    **/
   void operator=(const Dense<Float> &mat);
 
@@ -399,6 +402,8 @@ public:
    * - # of computation: M*N
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * Check data on both CPU and GPU
    **/
   bool operator==(const Dense<Float> &mat) const;
 
@@ -410,6 +415,8 @@ public:
    * - # of computation: M*N
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * Check data on both CPU and GPU
    **/
   bool operator!=(const Dense<Float> &mat) const;
 

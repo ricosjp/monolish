@@ -107,6 +107,31 @@ template Dense<double>::Dense(const size_t M, const size_t N,
                               const double value);
 template Dense<float>::Dense(const size_t M, const size_t N, const float value);
 
+//copy constructor///////////////////////////////
+template <typename T> 
+Dense<T>::Dense(const Dense<T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(mat.get_nnz());
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+  nnz = mat.get_nnz();
+
+#if MONOLISH_USE_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+
+  logger.util_out();
+}
+template Dense<double>::Dense(const Dense<double> &mat);
+template Dense<float>::Dense(const Dense<float> &mat);
+
 // operator= (copy)
 template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
@@ -122,9 +147,9 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
     send();
     internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
   }
-
-  // cpu copy
-  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+  else{
+    internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+  }
 
   logger.util_out();
 }
@@ -305,24 +330,13 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-  // gpu copy and recv
-  if (mat.get_device_mem_stat()) {
-    send();
-
 #if MONOLISH_USE_GPU
-    T *vald = val.data();
-    const T *Mvald = mat.val.data();
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < nnz; i++) {
-      vald[i] = Mvald[i];
-    }
-
-    nonfree_recv();
-#endif
-  } else {
-    std::copy(mat.val.data(), mat.val.data() + nnz, val.begin());
+  if (mat.get_device_mem_stat()) {
+    throw std::runtime_error(
+        "error can not convert CRS->CRS when gpu_status == true");
   }
+#endif
+  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
 
   logger.util_out();
 }
