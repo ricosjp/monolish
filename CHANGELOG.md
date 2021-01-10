@@ -22,6 +22,7 @@ Unreleased
 -----------
 ### Added
 - add Frank matrix, tridiagonal Toeplitz matrix, 1D Laplacian matrix as sample matrices https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/199
+- add blas::copy https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/201
 - add fill function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/193
 - add util::build_with functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
 - add xpay test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
@@ -39,6 +40,9 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- change copy() to copy constructor in test dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- change operator= to blas::copy in equation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- dont use direct reference solver class value in solve function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/200
 - CRS.print_all() output matrixmarket format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
 - support print_all() on GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
 - move equation::solver and equation::precondition to solver::solver and solver::precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/190
@@ -53,6 +57,11 @@ Unreleased
 ### Fixed
 - fix LOBPCG iteration logic https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/195
 - fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+
+### Deprecated
+- delete vector.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- delete Dense.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- delete CRS.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 
 0.9.1 - 2020/12/28
 -----------

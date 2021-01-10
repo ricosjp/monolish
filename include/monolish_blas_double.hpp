@@ -16,6 +16,47 @@ namespace monolish {
 namespace blas {
 
 //////////////////////////////////////////////////////
+//  Copy
+//////////////////////////////////////////////////////
+/**
+ * @brief double precision vector copy (y=a)
+ * @param a double precision monolish vector (size N)
+ * @param y double precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const vector<double> &a, vector<double> &y);
+
+/**
+ * @brief double precision Dense matrix copy (y=a)
+ * @param a double precision monolish Dense matrix (size M x N)
+ * @param y double precision monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+
+/**
+ * @brief double precision CRS matrix copy (y=a)
+ * @param a double precision monolish CRS matrix (size M x N)
+ * @param y double precision monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: M x N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
+ */
+void copy(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+
+//////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
 /**
@@ -263,7 +304,7 @@ void mscal(const double alpha, matrix::CRS<double> &A);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
@@ -294,7 +335,7 @@ void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A and B must be same non-zero structure (dont check in this function)
  */
 void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);

@@ -58,9 +58,9 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   vml::sub(b, r, r);
 
   // r0 = r, (r*0, r0)!=0
-  r0 = r;
+  blas::copy(r, r0);
 
-  for (size_t iter = 0; iter < this->maxiter; iter++) {
+  for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
 
     // alpha = (r(i-1), r0) / (AM^-1*p(i-1), r0)
     rho = blas::dot(r, r0);
@@ -71,7 +71,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     }
 
     if (iter == 0) {
-      p = r;
+      blas::copy(r, p);
     } else {
       // beta = (rho / rho_old) * (alpha / omega)
       beta = (rho / rho_old) * (alpha / omega);
@@ -111,12 +111,12 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
 
     // convergence check
     auto resid = this->get_residual(r);
-    if (this->print_rhistory == true) {
+    if (this->get_print_rhistory() == true) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << resid
                              << std::endl;
     }
 
-    if (resid < this->tol && this->miniter <= iter + 1) {
+    if (resid < this->get_tol() && this->get_miniter() <= iter + 1) {
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
@@ -144,7 +144,7 @@ int equation::BiCGSTAB<T>::solve(matrix::CRS<T> &A, vector<T> &x,
   logger.solver_in(monolish_func);
 
   int ret = 0;
-  if (this->lib == 0) {
+  if (this->get_lib() == 0) {
     ret = monolish_BiCGSTAB(A, x, b);
   }
 

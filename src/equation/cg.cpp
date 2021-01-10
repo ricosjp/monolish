@@ -41,9 +41,9 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
 
   // p0 = Mr0
   this->precond.apply_precond(r, z);
-  p = z;
+  blas::copy(z, p);
 
-  for (size_t iter = 0; iter < this->maxiter; iter++) {
+  for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
     blas::matvec(A, p, q);
 
     auto tmp = blas::dot(z, r);
@@ -59,12 +59,12 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
     blas::xpay(beta, z, p); // p = z + beta*p
 
     T resid = this->get_residual(r);
-    if (this->print_rhistory == true) {
+    if (this->get_print_rhistory() == true) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << resid
                              << std::endl;
     }
 
-    if (resid < this->tol && this->miniter <= iter + 1) {
+    if (resid < this->get_tol() && this->get_miniter() <= iter + 1) {
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
@@ -92,7 +92,7 @@ int equation::CG<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   logger.solver_in(monolish_func);
 
   int ret = 0;
-  if (this->lib == 0) {
+  if (this->get_lib() == 0) {
     ret = monolish_CG(A, x, b);
   }
 

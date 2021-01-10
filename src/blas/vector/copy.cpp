@@ -3,28 +3,6 @@
 
 namespace monolish {
 
-// copy
-template <typename T> vector<T> vector<T>::copy() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  if (get_device_mem_stat()) {
-    nonfree_recv();
-  } // gpu copy
-
-  vector<T> tmp(val.size());
-  std::copy(val.begin(), val.end(), tmp.val.begin());
-  if (get_device_mem_stat()) {
-    tmp.send();
-  } // gpu copy
-
-  logger.util_out();
-  return tmp;
-}
-
-template vector<double> vector<double>::copy();
-template vector<float> vector<float>::copy();
-
 // copy std vector
 template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();

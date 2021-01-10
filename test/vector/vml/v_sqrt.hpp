@@ -10,8 +10,7 @@ template <typename T> bool test_send_vsqrt(const size_t size, double tol) {
 
   monolish::vector<T> ans(size, 0.1, 10.0);
 
-  monolish::vector<T> ans_tmp;
-  ans_tmp = ans.copy();
+  monolish::vector<T> ans_tmp(ans);
   ans_vsqrt(ans_tmp);
 
   monolish::util::send(ans);
@@ -25,8 +24,7 @@ template <typename T> bool test_vsqrt(const size_t size, double tol) {
 
   monolish::vector<T> ans(size, 0.1, 10.0);
 
-  monolish::vector<T> ans_tmp;
-  ans_tmp = ans.copy();
+  monolish::vector<T> ans_tmp(ans);
   ans_vsqrt(ans_tmp);
 
   monolish::vml::sqrt(ans, ans);

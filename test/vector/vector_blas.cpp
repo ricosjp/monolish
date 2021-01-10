@@ -1,6 +1,7 @@
 #include "blas/asum.hpp"
 #include "blas/axpy.hpp"
 #include "blas/axpyz.hpp"
+#include "blas/copy.hpp"
 #include "blas/dot.hpp"
 #include "blas/nrm1.hpp"
 #include "blas/nrm2.hpp"
@@ -19,6 +20,21 @@ int main(int argc, char **argv) {
 
   size_t size = atoi(argv[1]);
   std::cout << "size: " << size << std::endl;
+
+  // copy//
+  if (test_copy<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_copy<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_copy<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_copy<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
 
   // asum//
   if (test_asum<double>(size, 1.0e-8) == false) {

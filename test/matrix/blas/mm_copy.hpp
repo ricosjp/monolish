@@ -32,7 +32,7 @@ bool test_send_mm_copy(const size_t M, const size_t N, double tol) {
   monolish::matrix::COO<T> ansC(CC);
 
   monolish::util::send(A, C);
-  C = A;
+  monolish::blas::copy(C, A);
   C.recv();
 
   monolish::matrix::COO<T> resultC(C);
@@ -63,7 +63,7 @@ bool test_mm_copy(const size_t M, const size_t N, double tol) {
   ans_mm_copy(AA, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  C = A;
+  monolish::blas::copy(C, A);
 
   monolish::matrix::COO<T> resultC(C);
 
