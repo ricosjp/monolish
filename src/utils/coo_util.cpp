@@ -111,9 +111,8 @@ template <typename T> void COO<T>::operator=(const matrix::COO<T> &mat) {
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  //value copy
-  internal::vcopy(get_nnz(), val.data(), mat.val.data(),
-                  get_device_mem_stat());
+  // value copy
+  internal::vcopy(get_nnz(), val.data(), mat.val.data(), get_device_mem_stat());
 
   logger.util_out();
 }
