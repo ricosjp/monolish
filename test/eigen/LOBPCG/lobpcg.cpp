@@ -32,9 +32,11 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
 }
 
 template <typename T>
-bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev, const T tol_res) {
+bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
+                               const T tol_res) {
   int DIM = 100;
-  monolish::matrix::COO<T> COO = monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 11.0, -1.0);
+  monolish::matrix::COO<T> COO =
+      monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 11.0, -1.0);
   // for (std::size_t i = 0; i < COO.get_row(); ++i) {
   //   for (std::size_t j = 0; j < COO.get_col(); ++j) {
   //     if (i == j) { COO.insert(i, j, 2.0); }
@@ -56,7 +58,8 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev, const T tol_
   // T exact_result = ld[0];
 
   // Calculate exact eigenvalue from analytic solution
-  T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(DIM, 0, 11.0, -1.0);
+  T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
+      DIM, 0, 11.0, -1.0);
 
   return test_solve(COO, exact_result, check_ans, tol_ev, tol_res);
 }

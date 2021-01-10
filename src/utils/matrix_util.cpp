@@ -125,7 +125,8 @@ T util::frank_matrix_eigenvalue(const int &M, const int &N) {
 template double util::frank_matrix_eigenvalue(const int &M, const int &N);
 template float util::frank_matrix_eigenvalue(const int &M, const int &N);
 
-template <typename T> matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int &M, T a, T b) {
+template <typename T>
+matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int &M, T a, T b) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -134,7 +135,7 @@ template <typename T> matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int
   mat.insert(0, 1, b);
   for (int i = 1; i < M - 1; ++i) {
     mat.insert(i, i - 1, b);
-    mat.insert(i, i    , a);
+    mat.insert(i, i, a);
     mat.insert(i, i + 1, b);
   }
   mat.insert(M - 1, M - 2, b);
@@ -145,8 +146,8 @@ template <typename T> matrix::COO<T> util::tridiagonal_toeplitz_matrix(const int
 }
 template matrix::COO<double>
 util::tridiagonal_toeplitz_matrix(const int &M, double a, double b);
-template matrix::COO<float>
-util::tridiagonal_toeplitz_matrix(const int &M, float a, float b);
+template matrix::COO<float> util::tridiagonal_toeplitz_matrix(const int &M,
+                                                              float a, float b);
 
 template <typename T>
 T util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b) {
@@ -165,7 +166,8 @@ template <typename T> matrix::COO<T> util::laplacian_matrix_1D(const int &M) {
 template matrix::COO<double> util::laplacian_matrix_1D(const int &M);
 template matrix::COO<float> util::laplacian_matrix_1D(const int &M);
 
-template <typename T> T util::laplacian_matrix_1D_eigenvalue(const int &M, int N) {
+template <typename T>
+T util::laplacian_matrix_1D_eigenvalue(const int &M, int N) {
   return util::tridiagonal_toeplitz_matrix_eigenvalue<T>(M, N, 2.0, -1.0);
 }
 template double util::laplacian_matrix_1D_eigenvalue(const int &M, int N);
