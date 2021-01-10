@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<double>(file, check_ans, 5.0e-2, 1.0e-1) == false) {
+  if (test<double>(file, check_ans, 3.0e-2, 8.0e-2) == false) {
     return 1;
   }
   if (test<float>(file, check_ans, 1.0e-1, 1.0e-0) == false) {
