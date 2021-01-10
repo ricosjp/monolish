@@ -180,21 +180,21 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   logger.util_in(monolish_func);
 
   val.resize(mat.get_nnz());
-  col_ind.resize(mat.get_nnz());
-  row_ptr.resize(mat.get_row() + 1);
+  col_ind.resize(crs.get_nnz());
+  row_ptr.resize(crs.get_row() + 1);
 
-  rowN = mat.get_row();
-  colN = mat.get_col();
-  nnz = mat.get_nnz();
+  rowN = crs.get_row();
+  colN = crs.get_col();
+  nnz = crs.get_nnz();
 
-  if (mat.get_device_mem_stat() == true) {
+  if (crs.get_device_mem_stat() == true) {
     throw std::runtime_error(
         "error can not convert CRS->CRS when gpu_status == true");
   }
   else{
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), false);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), false);
-    internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
+    internal::vcopy(crs.row_ptr.size(), crs.row_ptr.data(), row_ptr.data(), false);
+    internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(), false);
+    internal::vcopy(crs.val.size(), crs.val.data(), val.data(), false);
   }
 
   logger.util_out();
