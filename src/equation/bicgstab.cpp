@@ -58,7 +58,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
   vml::sub(b, r, r);
 
   // r0 = r, (r*0, r0)!=0
-  r0 = r;
+  blas::copy(r, r0);
 
   for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
 
@@ -71,7 +71,7 @@ int equation::BiCGSTAB<T>::monolish_BiCGSTAB(matrix::CRS<T> &A, vector<T> &x,
     }
 
     if (iter == 0) {
-      p = r;
+      blas::copy(r, p);
     } else {
       // beta = (rho / rho_old) * (alpha / omega)
       beta = (rho / rho_old) * (alpha / omega);

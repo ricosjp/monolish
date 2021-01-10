@@ -31,7 +31,7 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
   blas::dot(x, X, mu);
   // w = X - mu x
   monolish::vector<T> vtmp1(A.get_row());
-  vtmp1 = x;
+  blas::copy(x, vtmp1);
   blas::scal(mu, vtmp1);
   blas::vecsub(X, vtmp1, w);
   blas::nrm2(w, norm);
@@ -144,7 +144,7 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> const &A, T &l,
     blas::scal(1.0 / normx, X);
 
     // w = X - lambda x
-    vtmp1 = x;
+    blas::copy(x, vtmp1);
     blas::scal(l, vtmp1);
     blas::vecsub(X, vtmp1, w);
 

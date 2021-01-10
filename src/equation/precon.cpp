@@ -26,7 +26,7 @@ template <typename T>
 void equation::none<T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
-  z = r;
+  blas::copy(r, z);
   logger.solver_out();
 }
 template void equation::none<float>::apply_precond(const vector<float> &r,

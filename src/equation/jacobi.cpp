@@ -83,7 +83,7 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
 
     /* x += D^{-1}(b - Ax) */
     this->precond.apply_precond(x, s);
-    s = x.copy();
+    blas::copy(x, s);
     blas::matvec(A, s, t);
     blas::axpyz(-1, t, b, r);
     nrm2 = blas::nrm2(r);

@@ -4,32 +4,6 @@
 namespace monolish {
 namespace matrix {
 
-// copy
-template <typename T> CRS<T> CRS<T>::copy() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  CRS<T> ans(get_row(), get_col(), get_nnz());
-
-  // gpu copy
-  if (get_device_mem_stat()) {
-    ans.send();
-    internal::vcopy((get_row() + 1), row_ptr.data(), ans.row_ptr.data(), true);
-    internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), true);
-    internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
-  }
-
-  internal::vcopy((get_row() + 1), row_ptr.data(), ans.row_ptr.data(), false);
-  internal::vcopy(get_nnz(), col_ind.data(), ans.col_ind.data(), false);
-  internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
-
-  logger.util_out();
-  return ans;
-}
-
-template CRS<double> CRS<double>::copy();
-template CRS<float> CRS<float>::copy();
-
 // copy monolish CRS
 template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();

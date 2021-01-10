@@ -4,29 +4,6 @@
 namespace monolish {
 namespace matrix {
 
-// copy
-template <typename T> Dense<T> Dense<T>::copy() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  Dense<T> ans(get_row(), get_col());
-
-  // gpu copy
-  if (get_device_mem_stat()) {
-    ans.send();
-    internal::vcopy(get_nnz(), val.data(), ans.val.data(), true);
-  }
-
-  // cpu copy
-  internal::vcopy(get_nnz(), val.data(), ans.val.data(), false);
-
-  logger.util_out();
-  return ans;
-}
-
-template Dense<double> Dense<double>::copy();
-template Dense<float> Dense<float>::copy();
-
 // copy monolish Dense
 template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
