@@ -41,7 +41,7 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
 
   // p0 = Mr0
   this->precond.apply_precond(r, z);
-  p = z;
+  blas::copy(z, p);
 
   for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
     blas::matvec(A, p, q);
