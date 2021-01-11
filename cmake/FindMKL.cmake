@@ -26,12 +26,6 @@
 #                     and default kernel is used if all of them are false.
 #
 
-if(MKL_INCLUDE_PATH)
-  # Already found
-  set(MKL_FOUND TRUE)
-  return()
-endif()
-
 set(_MKL_INCLUDE_HINTS
   $ENV{MKLROOT}/include
   $ENV{HOME}/local/include
