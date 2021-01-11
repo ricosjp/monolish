@@ -8,7 +8,7 @@ namespace monolish {
 template <typename T> vector<T>::vector(const size_t N) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  val.resize(N);
+  resize(N);
   logger.util_out();
 }
 template vector<double>::vector(const size_t N);
@@ -17,7 +17,13 @@ template vector<float>::vector(const size_t N);
 template <typename T> vector<T>::vector(const size_t N, const T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  val.resize(N, value);
+  resize(N);
+
+#pragma omp parallel for
+  for (size_t i = 0; i < val.size(); i++) {
+    val[i] = value;
+  }
+
   logger.util_out();
 }
 template vector<double>::vector(const size_t N, const double value);
@@ -27,7 +33,7 @@ template <typename T> vector<T>::vector(const T *start, const T *end) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   size_t size = (end - start);
-  val.resize(size);
+  resize(size);
   std::copy(start, end, val.begin());
   logger.util_out();
 }
@@ -38,7 +44,7 @@ template <typename T>
 vector<T>::vector(const size_t N, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  val.resize(N);
+  resize(N);
   std::random_device random;
   std::mt19937 mt(random());
   std::uniform_real_distribution<> rand(min, max);
@@ -55,11 +61,10 @@ template vector<float>::vector(const size_t N, const float min,
                                const float max);
 
 // copy constructor
-//
 template <typename T> vector<T>::vector(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  val.resize(vec.size());
+  resize(vec.size());
   std::copy(vec.begin(), vec.end(), val.begin());
   logger.util_out();
 }
@@ -70,26 +75,16 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(vec.size());
+  resize(vec.size());
 
   // gpu copy and recv
+#if MONOLISH_USE_GPU
   if (vec.get_device_mem_stat()) {
     send();
-
-#if MONOLISH_USE_GPU
-    size_t size = vec.size();
-    T *vald = val.data();
-    const T *vecd = vec.data();
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
-      vald[i] = vecd[i];
-    }
-
-    nonfree_recv();
-#endif
-  } else {
-    std::copy(vec.val.begin(), vec.val.end(), val.begin());
+    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
   }
+#endif
+    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
 
   logger.util_out();
 }
@@ -101,7 +96,7 @@ template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(vec.size());
+  resize(vec.size());
   std::copy(vec.begin(), vec.end(), val.begin());
 
   logger.util_out();
@@ -114,29 +109,21 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
+  if (size() != vec.size()) {
+    throw std::runtime_error("error vector size is not same");
+  }
+  if (get_device_mem_stat() != vec.get_device_mem_stat()) {
+    throw std::runtime_error("error vector get_device_mem_stat() is not same");
+  }
+
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
-
-    if (get_device_mem_stat() == false) {
-      throw std::runtime_error(
-          "Error, No GPU memory allocated for the return value (operator=)");
-    }
-    if (vec.size() != size()) {
-      throw std::runtime_error("error vector size is not same");
-    }
-
 #if MONOLISH_USE_GPU
-    size_t size = vec.size();
-    T *vald = val.data();
-    const T *vecd = vec.data();
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
-      vald[i] = vecd[i];
-    }
+    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
 #endif
-  } else {
-    val.resize(vec.size());
-    std::copy(vec.val.begin(), vec.val.end(), val.begin());
+  }
+  else{
+    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
   }
 
   logger.util_out();

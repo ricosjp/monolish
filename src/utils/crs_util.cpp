@@ -115,17 +115,22 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
-  col_ind.resize(mat.get_nnz());
-  row_ptr.resize(mat.get_row() + 1);
-
-  rowN = mat.get_row();
-  colN = mat.get_col();
-  nnz = mat.get_nnz();
+  // err
+  if (get_row() != mat.get_row()) {
+    throw std::runtime_error("error A.row != mat.row");
+  }
+  if (get_col() != mat.get_col()) {
+    throw std::runtime_error("error A.col != mat.col");
+  }
+  if (get_nnz() != mat.get_nnz()) {
+    throw std::runtime_error("error A.nnz != mat.nnz");
+  }
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
 
   if (mat.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
-    send();
     internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), true);
     internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
