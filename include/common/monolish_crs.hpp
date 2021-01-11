@@ -151,7 +151,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    *    - # of data transfer:  (M+1)+2nnz (only allocation)
-   *        - if `mat.gpu_status == true`; coping data on CPU and GPU respectively
+   *        - if `mat.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   CRS(const CRS<Float> &mat);
@@ -323,7 +324,7 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: 
+   *    - # of data transfer:
    *        - if `vec.gpu_status == true`; coping data on GPU
    *        - else; coping data on CPU
    **/

@@ -100,7 +100,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    *    - # of data transfer: M+N (onlu allocation)
-   *        - if `dense.gpu_status == true`; coping data on CPU and GPU respectively
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   Dense(const Dense<Float> &dense);

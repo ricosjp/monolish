@@ -87,7 +87,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    *    - # of data transfer: N (only allocation)
-   *        - if `vec.gpu_status == true`; coping data on CPU and GPU respectively
+   *        - if `vec.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   vector(const vector<Float> &vec);

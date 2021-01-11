@@ -107,9 +107,8 @@ template Dense<double>::Dense(const size_t M, const size_t N,
                               const double value);
 template Dense<float>::Dense(const size_t M, const size_t N, const float value);
 
-//copy constructor///////////////////////////////
-template <typename T> 
-Dense<T>::Dense(const Dense<T> &mat) {
+// copy constructor///////////////////////////////
+template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -151,8 +150,7 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   // gpu copy
   if (mat.get_device_mem_stat()) {
     internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
-  }
-  else{
+  } else {
     internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
   }
 

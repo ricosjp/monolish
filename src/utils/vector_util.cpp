@@ -84,7 +84,7 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
     internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
   }
 #endif
-    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
+  internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
 
   logger.util_out();
 }
@@ -121,8 +121,7 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
 #if MONOLISH_USE_GPU
     internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
 #endif
-  }
-  else{
+  } else {
     internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
   }
 

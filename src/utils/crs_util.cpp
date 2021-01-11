@@ -95,14 +95,18 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
 #if MONOLISH_USE_GPU
   if (mat.get_device_mem_stat()) {
     send();
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), true);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), true);
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    true);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    true);
     internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
-  } 
+  }
 #endif
 
-  internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), false);
-  internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), false);
+  internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                  false);
+  internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                  false);
   internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
 
   logger.util_out();
@@ -131,14 +135,17 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
 
   if (mat.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), true);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), true);
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    true);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    true);
     internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
 #endif
-  }
-  else{
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(), false);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(), false);
+  } else {
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    false);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    false);
     internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
   }
 
@@ -195,10 +202,11 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   if (crs.get_device_mem_stat() == true) {
     throw std::runtime_error(
         "error can not convert CRS->CRS when gpu_status == true");
-  }
-  else{
-    internal::vcopy(crs.row_ptr.size(), crs.row_ptr.data(), row_ptr.data(), false);
-    internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(), false);
+  } else {
+    internal::vcopy(crs.row_ptr.size(), crs.row_ptr.data(), row_ptr.data(),
+                    false);
+    internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(),
+                    false);
     internal::vcopy(crs.val.size(), crs.val.data(), val.data(), false);
   }
 
