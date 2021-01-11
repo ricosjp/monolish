@@ -99,8 +99,8 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: 0
-   *        - if `vec.gpu_status == true`; coping data on CPU and GPU respectively
+   *    - # of data transfer: M+N (onlu allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU respectively
    *        - else; coping data only on CPU
    **/
   Dense(const Dense<Float> &dense);
@@ -388,7 +388,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M*N (only allocation)
+   *    - # of data transfer: 0
    *        - if `vec.gpu_statius == true`; coping data on CPU
    *        - else; coping data on CPU
    **/

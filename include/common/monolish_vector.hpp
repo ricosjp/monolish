@@ -86,7 +86,7 @@ public:
    * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
+   *    - # of data transfer: N (only allocation)
    *        - if `vec.gpu_status == true`; coping data on CPU and GPU respectively
    *        - else; coping data only on CPU
    **/
@@ -296,7 +296,7 @@ public:
    * - # of computation: N
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
+   *    - # of data transfer: 0
    *        - if `vec.gpu_statius == true`; coping data on GPU
    *        - else; coping data on CPU
    **/
