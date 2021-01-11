@@ -86,8 +86,9 @@ public:
    * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; coping data only on GPU
+   *    - # of data transfer: N (only allocation)
+   *        - if `vec.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   vector(const vector<Float> &vec);
@@ -296,8 +297,8 @@ public:
    * - # of computation: N
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU
+   *    - # of data transfer: 0
+   *        - if `vec.gpu_statius == true`; coping data on GPU
    *        - else; coping data on CPU
    **/
   void operator=(const vector<Float> &vec);
@@ -308,7 +309,7 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   void operator=(const std::vector<Float> &vec);

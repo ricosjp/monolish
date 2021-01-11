@@ -79,8 +79,6 @@ template CRS<float>::CRS(const size_t M, const size_t N,
                          const std::vector<int> colind,
                          const std::vector<float> value);
 
-// convert ///
-//
 // copy constructor
 template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
@@ -94,47 +92,69 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-  // gpu copy and recv
+#if MONOLISH_USE_GPU
   if (mat.get_device_mem_stat()) {
     send();
-
-#if MONOLISH_USE_GPU
-    size_t N = get_row();
-    size_t NNZ = get_nnz();
-    T *vald = val.data();
-    int *cold = col_ind.data();
-    int *rowd = row_ptr.data();
-
-    const T *Mvald = mat.val.data();
-    const int *Mcold = mat.col_ind.data();
-    const int *Mrowd = mat.row_ptr.data();
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N + 1; i++) {
-      rowd[i] = Mrowd[i];
-    }
-
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < NNZ; i++) {
-      cold[i] = Mcold[i];
-      vald[i] = Mvald[i];
-    }
-
-    nonfree_recv();
-#endif
-  } else {
-    std::copy(mat.row_ptr.data(), mat.row_ptr.data() + (get_row() + 1),
-              row_ptr.begin());
-    std::copy(mat.col_ind.data(), mat.col_ind.data() + get_nnz(),
-              col_ind.begin());
-    std::copy(mat.val.data(), mat.val.data() + get_nnz(), val.begin());
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    true);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    true);
+    internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
   }
+#endif
+
+  internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                  false);
+  internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                  false);
+  internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
 
   logger.util_out();
 }
 template CRS<double>::CRS(const CRS<double> &mat);
 template CRS<float>::CRS(const CRS<float> &mat);
 
+// operator= (copy)
+template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  if (get_row() != mat.get_row()) {
+    throw std::runtime_error("error A.row != mat.row");
+  }
+  if (get_col() != mat.get_col()) {
+    throw std::runtime_error("error A.col != mat.col");
+  }
+  if (get_nnz() != mat.get_nnz()) {
+    throw std::runtime_error("error A.nnz != mat.nnz");
+  }
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
+  if (mat.get_device_mem_stat() == true) {
+#if MONOLISH_USE_GPU
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    true);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    true);
+    internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
+#endif
+  } else {
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    false);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    false);
+    internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
+  }
+
+  logger.util_out();
+}
+template void CRS<double>::operator=(const CRS<double> &mat);
+template void CRS<float>::operator=(const CRS<float> &mat);
+
+// convert ///
 template <typename T> void CRS<T>::convert(COO<T> &coo) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -167,6 +187,35 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 template void CRS<double>::convert(COO<double> &coo);
 template void CRS<float>::convert(COO<float> &coo);
 
+template <typename T> void CRS<T>::convert(CRS<T> &crs) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(crs.get_nnz());
+  col_ind.resize(crs.get_nnz());
+  row_ptr.resize(crs.get_row() + 1);
+
+  rowN = crs.get_row();
+  colN = crs.get_col();
+  nnz = crs.get_nnz();
+
+  if (crs.get_device_mem_stat() == true) {
+    throw std::runtime_error(
+        "error can not convert CRS->CRS when gpu_status == true");
+  } else {
+    internal::vcopy(crs.row_ptr.size(), crs.row_ptr.data(), row_ptr.data(),
+                    false);
+    internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(),
+                    false);
+    internal::vcopy(crs.val.size(), crs.val.data(), val.data(), false);
+  }
+
+  logger.util_out();
+}
+template void CRS<double>::convert(CRS<double> &coo);
+template void CRS<float>::convert(CRS<float> &coo);
+
+// Utils
 template <typename T> void CRS<T>::fill(T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);

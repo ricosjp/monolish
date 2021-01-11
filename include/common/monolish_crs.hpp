@@ -116,7 +116,7 @@ public:
       const std::vector<int> colind, const std::vector<Float> value);
 
   /**
-   * @brief Convert CRS from COO
+   * @brief Convert CRS matrix from COO matrix
    * @param coo COO format matrix
    * @note
    * - Multi-threading: false
@@ -125,7 +125,16 @@ public:
   void convert(COO<Float> &coo);
 
   /**
-   * @brief Create CRS from COO
+   * @brief Convert CRS matrix from COO matrix
+   * @param crs CRS format matrix
+   * @note
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  void convert(CRS<Float> &crs);
+
+  /**
+   * @brief Create CRS matrix from COO matrix
    * @param coo Source COO format matrix
    * @return coo COO format matrix
    * @note
@@ -135,14 +144,15 @@ public:
   CRS(COO<Float> &coo) { convert(coo); }
 
   /**
-   * @brief Create CRS from CRS
+   * @brief Create CRS matrix from CRS matrix
    * @param mat CRS format matrix
    * @note
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
+   *    - # of data transfer:  (M+1)+2nnz (only allocation)
+   *        - if `mat.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   CRS(const CRS<Float> &mat);
@@ -314,9 +324,9 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on GPU
-   *        - else; coping data only on CPU
+   *    - # of data transfer:
+   *        - if `vec.gpu_status == true`; coping data on GPU
+   *        - else; coping data on CPU
    **/
   void operator=(const CRS<Float> &mat);
 
@@ -326,8 +336,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   * @warning
+   * Check data on both CPU and GPU
    **/
   bool operator==(const CRS<Float> &mat) const;
 
@@ -337,8 +349,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   * @warning
+   * Check data on both CPU and GPU
    **/
   bool operator!=(const CRS<Float> &mat) const;
 };

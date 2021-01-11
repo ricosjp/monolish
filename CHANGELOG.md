@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add CRS::convert(CRS) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
 - add Frank matrix, tridiagonal Toeplitz matrix, 1D Laplacian matrix as sample matrices https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/199
 - add blas::copy https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/201
 - add fill function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/193
@@ -56,6 +57,7 @@ Unreleased
 - change CI job prefix name [ops]-[arch] -> [arch]-[ops] https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Fixed
+- fix specifications of copy, operator=, copy constructor, convert https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
 - fix LOBPCG iteration logic https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/195
 - fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 
