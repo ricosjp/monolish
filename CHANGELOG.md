@@ -41,6 +41,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- monolish container created only web, tags, master https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/207
 - Drop FindMKL.cmake include guard https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/206
 - syev, sygv: automatically generate float from double using d2f.sh https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/204
 - change copy() to copy constructor in test dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202

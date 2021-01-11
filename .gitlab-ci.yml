@@ -797,6 +797,10 @@ docker:
     tags:
         - docker
         - gpu
+    only:
+      - master
+      - tags
+      - web
 
 pages:
     dependencies:
