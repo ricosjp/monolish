@@ -6,63 +6,95 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> void CRS<T>::convert(COO<T> &coo) {
+template <typename T> bool CRS<T>::operator==(const CRS<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  rowN = coo.get_row();
-  colN = coo.get_col();
-  nnz = coo.get_nnz();
+  if (get_row() != mat.get_row()) {
+    return false;
+  }
+  if (get_col() != mat.get_col()) {
+    return false;
+  }
 
-  val = coo.val;
-  col_ind = coo.col_index;
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    return false;
+  }
 
-  // todo not inplace now
-  row_ptr.resize(get_row() + 1, 0.0);
-
-  row_ptr[0] = 0;
-  size_t c_row = 0;
-  for (size_t i = 0; i < coo.get_nnz(); i++) {
-
-    if ((int)c_row == coo.row_index[i]) {
-      row_ptr[c_row + 1] = i + 1;
-    } else {
-      c_row = c_row + 1;
-      row_ptr[c_row + 1] = i + 1;
+  if (get_device_mem_stat() == true) {
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
+      return false;
+    }
+    if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
+                           true))) {
+      return false;
+    }
+    if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
+                           true))) {
+      return false;
     }
   }
-  logger.util_out();
-}
-template void CRS<double>::convert(COO<double> &coo);
-template void CRS<float>::convert(COO<float> &coo);
 
-template <typename T> void CRS<T>::convert(CRS<T> &crs) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  val.resize(crs.get_nnz());
-  col_ind.resize(crs.get_nnz());
-  row_ptr.resize(crs.get_row() + 1);
-
-  rowN = crs.get_row();
-  colN = crs.get_col();
-  nnz = crs.get_nnz();
-
-  if (crs.get_device_mem_stat() == true) {
-    throw std::runtime_error(
-        "error can not convert CRS->CRS when gpu_status == true");
-  } else {
-    internal::vcopy(crs.row_ptr.size(), crs.row_ptr.data(), row_ptr.data(),
-                    false);
-    internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(),
-                    false);
-    internal::vcopy(crs.val.size(), crs.val.data(), val.data(), false);
+  if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
+    return false;
+  }
+  if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
+                         false))) {
+    return false;
+  }
+  if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
+                         false))) {
+    return false;
   }
 
   logger.util_out();
+  return true;
 }
-template void CRS<double>::convert(CRS<double> &coo);
-template void CRS<float>::convert(CRS<float> &coo);
+template bool CRS<double>::operator==(const CRS<double> &mat) const;
+template bool CRS<float>::operator==(const CRS<float> &mat) const;
+
+template <typename T> bool CRS<T>::operator!=(const CRS<T> &mat) const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  if (get_row() != mat.get_row()) {
+    return true;
+  }
+  if (get_col() != mat.get_col()) {
+    return true;
+  }
+
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    return true;
+  }
+
+  if (get_device_mem_stat() == true) {
+    if (internal::vequal(get_nnz(), val.data(), mat.val.data(), true)) {
+      return false;
+    }
+    if (internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), true)) {
+      return false;
+    }
+    if (internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), true)) {
+      return false;
+    }
+  }
+
+  if (internal::vequal(get_nnz(), val.data(), mat.val.data(), false)) {
+    return false;
+  }
+  if (internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(), false)) {
+    return false;
+  }
+  if (internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(), false)) {
+    return false;
+  }
+
+  logger.util_out();
+  return true;
+}
+template bool CRS<double>::operator!=(const CRS<double> &mat) const;
+template bool CRS<float>::operator!=(const CRS<float> &mat) const;
 
 } // namespace matrix
 } // namespace monolish
