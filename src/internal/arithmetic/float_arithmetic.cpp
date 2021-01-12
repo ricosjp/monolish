@@ -265,6 +265,9 @@ bool vequal(const size_t N, const float *a, const float *y, bool gpu_status) {
       if (y[i] != a[i]) {
         ans = false;
       }
+      if(ans==false){
+        break;
+      }
     }
 #else
     throw std::runtime_error(
@@ -275,6 +278,9 @@ bool vequal(const size_t N, const float *a, const float *y, bool gpu_status) {
     for (size_t i = 0; i < N; i++) {
       if (y[i] != a[i]) {
         ans = false;
+      }
+      if(ans==false){
+        break;
       }
     }
   }
