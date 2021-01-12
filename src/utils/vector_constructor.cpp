@@ -68,6 +68,7 @@ template <typename T> vector<T>::vector(const std::vector<T> &vec) {
   std::copy(vec.begin(), vec.end(), val.begin());
   logger.util_out();
 }
+
 template vector<double>::vector(const std::vector<double> &vec);
 template vector<float>::vector(const std::vector<float> &vec);
 
@@ -88,6 +89,8 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
 
   logger.util_out();
 }
+
 template vector<double>::vector(const vector<double> &vec);
 template vector<float>::vector(const vector<float> &vec);
+
 } // namespace monolish
