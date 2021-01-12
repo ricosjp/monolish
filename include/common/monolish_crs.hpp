@@ -325,10 +325,22 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    *    - # of data transfer:
-   *        - if `vec.gpu_status == true`; coping data on GPU
+   *        - if `gpu_status == true`; coping data on GPU
    *        - else; coping data on CPU
    **/
   void operator=(const CRS<Float> &mat);
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat CRS matrix
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const CRS<Float> &mat, bool compare_cpu_and_device=false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -338,8 +350,8 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   * @warning
-   * Check data on both CPU and GPU
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator==(const CRS<Float> &mat) const;
 
@@ -351,8 +363,8 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   * @warning
-   * Check data on both CPU and GPU
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator!=(const CRS<Float> &mat) const;
 };

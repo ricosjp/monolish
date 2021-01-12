@@ -583,10 +583,22 @@ public:
   /**
    * @brief Comparing matricies (A == mat)
    * @param mat COO matrix
+   * @param compare_cpu_and_device Unused options for integrity
    * @return true or false
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading: false
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  bool equal(const COO<Float> &mat, bool compare_cpu_and_device=false) const;
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat COO matrix
+   * @return true or false
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   bool operator==(const COO<Float> &mat) const;
@@ -597,7 +609,7 @@ public:
    * @return true or false
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   bool operator!=(const COO<Float> &mat) const;

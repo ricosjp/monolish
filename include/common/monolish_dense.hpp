@@ -390,7 +390,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    *    - # of data transfer: 0
-   *        - if `vec.gpu_statius == true`; coping data on CPU
+   *        - if `gpu_statius == true`; coping data on CPU
    *        - else; coping data on CPU
    **/
   void operator=(const Dense<Float> &mat);
@@ -398,13 +398,25 @@ public:
   /**
    * @brief Comparing matricies (A == mat)
    * @param mat Dense matrix
+   * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   * @warning
-   * Check data on both CPU and GPU
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const Dense<Float> &mat, bool compare_cpu_and_device=false) const;
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat Dense matrix
+   * @return true or false
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator==(const Dense<Float> &mat) const;
 
@@ -414,10 +426,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   * @warning
-   * Check data on both CPU and GPU
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator!=(const Dense<Float> &mat) const;
 
