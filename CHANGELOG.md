@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add equal operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/208
 - add CRS::convert(CRS) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
 - add Frank matrix, tridiagonal Toeplitz matrix, 1D Laplacian matrix as sample matrices https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/199
 - add blas::copy https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/201
@@ -41,6 +42,7 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- operator=, != call equal operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/208
 - organize src/util dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/198
 - change test-cpu -> test_cpu in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/198
 - monolish container created only web, tags, master https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/207

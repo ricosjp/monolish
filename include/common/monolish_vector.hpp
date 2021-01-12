@@ -350,7 +350,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    **/
-  bool equal(const vector<Float> &vec, bool compare_cpu_and_device=false) const;
+  bool equal(const vector<Float> &vec,
+             bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing vectors (v == vec)

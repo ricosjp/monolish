@@ -405,7 +405,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    **/
-  bool equal(const Dense<Float> &mat, bool compare_cpu_and_device=false) const;
+  bool equal(const Dense<Float> &mat,
+             bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)

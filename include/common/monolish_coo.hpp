@@ -590,7 +590,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  bool equal(const COO<Float> &mat, bool compare_cpu_and_device=false) const;
+  bool equal(const COO<Float> &mat, bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)

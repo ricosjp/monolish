@@ -6,7 +6,8 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> bool COO<T>::equal(const COO<T> &mat, bool compare_cpu_and_device) const {
+template <typename T>
+bool COO<T>::equal(const COO<T> &mat, bool compare_cpu_and_device) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   if (get_device_mem_stat()) {
@@ -53,8 +54,10 @@ template <typename T> bool COO<T>::equal(const COO<T> &mat, bool compare_cpu_and
   logger.util_out();
   return true;
 }
-template bool COO<double>::equal(const COO<double> &mat, bool compare_cpu_and_device) const;
-template bool COO<float>::equal(const COO<float> &mat, bool compare_cpu_and_device) const;
+template bool COO<double>::equal(const COO<double> &mat,
+                                 bool compare_cpu_and_device) const;
+template bool COO<float>::equal(const COO<float> &mat,
+                                bool compare_cpu_and_device) const;
 
 template <typename T> bool COO<T>::operator==(const COO<T> &mat) const {
   Logger &logger = Logger::get_instance();
