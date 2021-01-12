@@ -6,50 +6,63 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> void Dense<T>::convert(const COO<T> &coo) {
+template <typename T>
+bool Dense<T>::equal(const Dense<T> &mat, bool compare_cpu_and_device) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  set_row(coo.get_row());
-  set_col(coo.get_col());
-  set_nnz(get_row() * get_col());
-  val.resize(get_row() * get_col());
-
-#pragma omp parallel for
-  for (size_t i = 0; i < get_nnz(); i++) {
-    val[i] = 0.0;
+  if (get_row() != mat.get_row()) {
+    return false;
+  }
+  if (get_col() != mat.get_col()) {
+    return false;
+  }
+  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    return false;
   }
 
-  for (size_t i = 0; i < coo.get_nnz(); i++) {
-    insert(coo.row_index[i], coo.col_index[i], coo.val[i]);
+  if (get_device_mem_stat() == true) {
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
+      return false;
+    }
+  } else if (get_device_mem_stat() == false ||
+             compare_cpu_and_device == false) {
+    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
+      return false;
+    }
   }
+
   logger.util_out();
+  return true;
 }
-template void Dense<double>::convert(const COO<double> &coo);
-template void Dense<float>::convert(const COO<float> &coo);
+template bool Dense<double>::equal(const Dense<double> &mat,
+                                   bool compare_cpu_and_device) const;
+template bool Dense<float>::equal(const Dense<float> &mat,
+                                  bool compare_cpu_and_device) const;
 
-template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
+template <typename T> bool Dense<T>::operator==(const Dense<T> &mat) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
-
-  rowN = mat.get_row();
-  colN = mat.get_col();
-  nnz = mat.get_nnz();
-
-#if MONOLISH_USE_GPU
-  if (mat.get_device_mem_stat()) {
-    throw std::runtime_error(
-        "error can not convert CRS->CRS when gpu_status == true");
-  }
-#endif
-  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+  bool ans = equal(mat, false);
 
   logger.util_out();
+  return ans;
 }
-template void Dense<double>::convert(const Dense<double> &mat);
-template void Dense<float>::convert(const Dense<float> &mat);
+template bool Dense<double>::operator==(const Dense<double> &mat) const;
+template bool Dense<float>::operator==(const Dense<float> &mat) const;
+
+template <typename T> bool Dense<T>::operator!=(const Dense<T> &mat) const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = equal(mat, false);
+
+  logger.util_out();
+  return !(ans);
+}
+template bool Dense<double>::operator!=(const Dense<double> &mat) const;
+template bool Dense<float>::operator!=(const Dense<float> &mat) const;
 
 } // namespace matrix
 } // namespace monolish
