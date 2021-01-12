@@ -342,7 +342,7 @@ public:
 
   /**
    * @brief Comparing matricies (A == mat)
-   * @param mat Dense matrix
+   * @param vec vector
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
    * @note
@@ -350,7 +350,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    **/
-  bool equal(const Dense<Float> &mat, bool compare_cpu_and_device=false) const;
+  bool equal(const vector<Float> &vec, bool compare_cpu_and_device=false) const;
 
   /**
    * @brief Comparing vectors (v == vec)
