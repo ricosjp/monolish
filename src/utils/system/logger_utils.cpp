@@ -1,10 +1,9 @@
-#include "../../include/monolish_blas.hpp"
-#include "../internal/monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 // solver
-
 void Logger::solver_in(std::string func_name) {
   if (LogLevel >= 1) {
     if (filename.empty()) {
@@ -67,7 +66,6 @@ void Logger::solver_out() {
 }
 
 // func
-
 void Logger::func_in(std::string func_name) {
   if (LogLevel >= 2) {
     if (filename.empty()) {
@@ -155,7 +153,6 @@ void Logger::util_out() {
 }
 
 /// logger util ///
-
 void util::set_log_level(size_t Level) {
   Logger &logger = Logger::get_instance();
   logger.set_log_level(Level);
