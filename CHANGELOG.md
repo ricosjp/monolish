@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.10.0 - 2021/01/13
+-----------
 ### Added
 - add equal operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/208
 - add CRS::convert(CRS) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
