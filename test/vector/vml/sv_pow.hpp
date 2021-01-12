@@ -31,7 +31,7 @@ template <typename T> bool test_svpow(const size_t size, double tol) {
   std::cout << __func__ << "(" << get_type<T>() << ")" << std::flush;
 
   T value = 123.0;
-  monolish::vector<T> x(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 1.0, 2.0);
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp(ans);
