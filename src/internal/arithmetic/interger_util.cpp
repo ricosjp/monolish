@@ -72,9 +72,6 @@ bool vequal(const size_t N, const int *a, const int *y, bool gpu_status) {
       if (y[i] != a[i]) {
         ans = false;
       }
-      if(ans==false){
-        break;
-      }
     }
 #else
     throw std::runtime_error(
@@ -85,9 +82,6 @@ bool vequal(const size_t N, const int *a, const int *y, bool gpu_status) {
     for (size_t i = 0; i < N; i++) {
       if (y[i] != a[i]) {
         ans = false;
-      }
-      if(ans==false){
-        break;
       }
     }
   }
@@ -109,9 +103,6 @@ bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status) {
       if (y[i] != a[i]) {
         ans = false;
       }
-      if(ans==false){
-        break;
-      }
     }
 #else
     throw std::runtime_error(
@@ -122,9 +113,6 @@ bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status) {
     for (size_t i = 0; i < N; i++) {
       if (y[i] != a[i]) {
         ans = false;
-      }
-      if(ans==false){
-        break;
       }
     }
   }
