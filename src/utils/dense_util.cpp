@@ -131,35 +131,6 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
 template Dense<double>::Dense(const Dense<double> &mat);
 template Dense<float>::Dense(const Dense<float> &mat);
 
-// operator= (copy)
-template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  // err
-  if (get_row() != mat.get_row()) {
-    throw std::runtime_error("error A.row != mat.row");
-  }
-  if (get_col() != mat.get_col()) {
-    throw std::runtime_error("error A.col != mat.col");
-  }
-  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
-
-  // gpu copy
-  if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
-  } else {
-    internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
-  }
-
-  logger.util_out();
-}
-
-template void Dense<double>::operator=(const Dense<double> &mat);
-template void Dense<float>::operator=(const Dense<float> &mat);
-
 // matrix utils ///
 
 template <typename T> void Dense<T>::fill(T value) {
@@ -233,41 +204,6 @@ template void Dense<double>::insert(const size_t i, const size_t j,
                                     const double Val);
 template void Dense<float>::insert(const size_t i, const size_t j,
                                    const float Val);
-
-template <typename T> Dense<T> &Dense<T>::transpose() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  Dense<T> B(get_col(), get_row());
-  for (size_t i = 0; i < get_row(); ++i) {
-    for (size_t j = 0; j < get_col(); ++j) {
-      B.val[j * get_row() + i] = val[i * get_col() + j];
-    }
-  }
-  std::copy(B.val.data(), B.val.data() + nnz, val.begin());
-  set_row(B.get_row());
-  set_col(B.get_col());
-  logger.util_out();
-  return *this;
-}
-template Dense<double> &Dense<double>::transpose();
-template Dense<float> &Dense<float>::transpose();
-
-template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  set_row(B.get_col());
-  set_col(B.get_row());
-  val.resize(B.get_row() * B.get_col());
-
-  for (size_t i = 0; i < get_row(); ++i) {
-    for (size_t j = 0; j < get_col(); ++j) {
-      val[j * get_row() + i] = B.val[i * get_col() + j];
-    }
-  }
-  logger.util_out();
-}
-template void Dense<double>::transpose(const Dense<double> &B);
-template void Dense<float>::transpose(const Dense<float> &B);
 
 } // namespace matrix
 } // namespace monolish

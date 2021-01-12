@@ -92,31 +92,6 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
 template COO<double>::COO(const matrix::COO<double> &coo);
 template COO<float>::COO(const matrix::COO<float> &coo);
 
-// operator=
-template <typename T> void COO<T>::operator=(const matrix::COO<T> &mat) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  // err
-  if (get_row() != mat.get_row()) {
-    throw std::runtime_error("error A.row != C.row");
-  }
-  if (get_col() != mat.get_col()) {
-    throw std::runtime_error("error A.col != C.col");
-  }
-  if (get_nnz() != mat.get_nnz()) {
-    throw std::runtime_error("error A.nnz != C.nnz");
-  }
-  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
-
-  // value copy
-  internal::vcopy(get_nnz(), val.data(), mat.val.data(), get_device_mem_stat());
-
-  logger.util_out();
-}
-
 template <typename T> void COO<T>::fill(T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -311,33 +286,6 @@ template <typename T> void COO<T>::sort(bool merge) {
 }
 template void COO<double>::sort(bool merge);
 template void COO<float>::sort(bool merge);
-
-/// transpose /////
-template <typename T> COO<T> &COO<T>::transpose() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  using std::swap;
-  swap(rowN, colN);
-  swap(row_index, col_index);
-  return *this;
-  logger.util_out();
-}
-template COO<double> &COO<double>::transpose();
-template COO<float> &COO<float>::transpose();
-
-template <typename T> void COO<T>::transpose(COO &B) const {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  B.set_row(get_col());
-  B.set_col(get_row());
-  B.set_nnz(get_nnz());
-  B.row_index = get_col_ind();
-  B.col_index = get_row_ptr();
-  B.val = get_val_ptr();
-  logger.util_out();
-}
-template void COO<double>::transpose(COO &B) const;
-template void COO<float>::transpose(COO &B) const;
 
 } // namespace matrix
 } // namespace monolish
