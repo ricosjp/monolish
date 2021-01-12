@@ -132,31 +132,6 @@ template Dense<double>::Dense(const Dense<double> &mat);
 template Dense<float>::Dense(const Dense<float> &mat);
 
 // matrix utils ///
-
-template <typename T> void Dense<T>::fill(T value) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  if (get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-#else
-    throw std::runtime_error(
-        "error USE_GPU is false, but get_device_mem_stat() == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-  }
-  logger.util_out();
-}
-template void Dense<double>::fill(double value);
-template void Dense<float>::fill(float value);
-
 template <typename T> T Dense<T>::at(const size_t i, const size_t j) {
   if (get_device_mem_stat()) {
     throw std::runtime_error("at() Error, GPU vector cant use operator[]");

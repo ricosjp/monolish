@@ -92,30 +92,6 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
 template COO<double>::COO(const matrix::COO<double> &coo);
 template COO<float>::COO(const matrix::COO<float> &coo);
 
-template <typename T> void COO<T>::fill(T value) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  if (get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-#else
-    throw std::runtime_error(
-        "error USE_GPU is false, but get_device_mem_stat() == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-  }
-  logger.util_out();
-}
-template void COO<double>::fill(double value);
-template void COO<float>::fill(float value);
-
 template <typename T> T COO<T>::at(const size_t i, const size_t j) {
   if (i >= rowN || j >= colN) {
     throw std::out_of_range("error");

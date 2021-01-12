@@ -113,31 +113,5 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
 }
 template CRS<double>::CRS(const CRS<double> &mat);
 template CRS<float>::CRS(const CRS<float> &mat);
-
-// Utils
-template <typename T> void CRS<T>::fill(T value) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  if (get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-#else
-    throw std::runtime_error(
-        "error USE_GPU is false, but get_device_mem_stat() == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = value;
-    }
-  }
-  logger.util_out();
-}
-template void CRS<double>::fill(double value);
-template void CRS<float>::fill(float value);
-
 } // namespace matrix
 } // namespace monolish
