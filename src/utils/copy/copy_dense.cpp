@@ -34,5 +34,5 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
 template void Dense<double>::operator=(const Dense<double> &mat);
 template void Dense<float>::operator=(const Dense<float> &mat);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

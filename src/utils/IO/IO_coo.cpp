@@ -147,7 +147,5 @@ template <typename T> void COO<T>::input_mm(const char *filename) {
 template void COO<double>::input_mm(const char *filename);
 template void COO<float>::input_mm(const char *filename);
 
-
-
-}
-}
+} // namespace matrix
+} // namespace monolish

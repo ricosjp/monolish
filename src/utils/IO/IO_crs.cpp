@@ -49,5 +49,5 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
 template void CRS<double>::print_all(bool force_cpu) const;
 template void CRS<float>::print_all(bool force_cpu) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

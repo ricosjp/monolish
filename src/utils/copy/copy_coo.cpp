@@ -54,6 +54,5 @@ template void COO<float>::set_ptr(const size_t rN, const size_t cN,
                                   const std::vector<int> &c,
                                   const std::vector<float> &v);
 
-
-}
-}
+} // namespace matrix
+} // namespace monolish

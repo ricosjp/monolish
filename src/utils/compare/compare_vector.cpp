@@ -58,4 +58,4 @@ template <typename T> bool vector<T>::operator!=(const vector<T> &vec) {
 template bool vector<double>::operator!=(const vector<double> &vec);
 template bool vector<float>::operator!=(const vector<float> &vec);
 
-}
+} // namespace monolish

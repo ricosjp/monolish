@@ -56,5 +56,5 @@ template void Dense<double>::insert(const size_t i, const size_t j,
 template void Dense<float>::insert(const size_t i, const size_t j,
                                    const float Val);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

@@ -96,5 +96,5 @@ template <typename T> bool CRS<T>::operator!=(const CRS<T> &mat) const {
 template bool CRS<double>::operator!=(const CRS<double> &mat) const;
 template bool CRS<float>::operator!=(const CRS<float> &mat) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

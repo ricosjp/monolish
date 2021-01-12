@@ -30,5 +30,5 @@ template <typename T> void CRS<T>::fill(T value) {
 template void CRS<double>::fill(double value);
 template void CRS<float>::fill(float value);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

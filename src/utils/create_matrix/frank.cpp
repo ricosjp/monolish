@@ -22,7 +22,6 @@ template <typename T> matrix::COO<T> util::frank_matrix(const int &M) {
 template matrix::COO<double> util::frank_matrix(const int &M);
 template matrix::COO<float> util::frank_matrix(const int &M);
 
-
 template <typename T>
 T util::frank_matrix_eigenvalue(const int &M, const int &N) {
   T exact_result =
@@ -32,4 +31,4 @@ T util::frank_matrix_eigenvalue(const int &M, const int &N) {
 template double util::frank_matrix_eigenvalue(const int &M, const int &N);
 template float util::frank_matrix_eigenvalue(const int &M, const int &N);
 
-}
+} // namespace monolish

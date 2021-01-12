@@ -60,5 +60,5 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
 template void COO<double>::convert(const Dense<double> &dense);
 template void COO<float>::convert(const Dense<float> &dense);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

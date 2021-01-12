@@ -30,5 +30,5 @@ template <typename T> void Dense<T>::fill(T value) {
 template void Dense<double>::fill(double value);
 template void Dense<float>::fill(float value);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

@@ -30,4 +30,4 @@ template <typename T> void vector<T>::fill(T value) {
 template void vector<double>::fill(double value);
 template void vector<float>::fill(float value);
 
-}
+} // namespace monolish

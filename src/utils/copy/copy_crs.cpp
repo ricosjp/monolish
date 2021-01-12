@@ -45,5 +45,5 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
 template void CRS<double>::operator=(const CRS<double> &mat);
 template void CRS<float>::operator=(const CRS<float> &mat);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

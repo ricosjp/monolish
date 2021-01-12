@@ -51,5 +51,5 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
 template void Dense<double>::convert(const Dense<double> &mat);
 template void Dense<float>::convert(const Dense<float> &mat);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

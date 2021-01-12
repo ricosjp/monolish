@@ -64,5 +64,5 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
 template void CRS<double>::convert(CRS<double> &coo);
 template void CRS<float>::convert(CRS<float> &coo);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

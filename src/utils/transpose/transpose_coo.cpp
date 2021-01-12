@@ -32,5 +32,5 @@ template <typename T> void COO<T>::transpose(COO &B) const {
 template void COO<double>::transpose(COO &B) const;
 template void COO<float>::transpose(COO &B) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

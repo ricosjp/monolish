@@ -30,5 +30,5 @@ template <typename T> void COO<T>::fill(T value) {
 template void COO<double>::fill(double value);
 template void COO<float>::fill(float value);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

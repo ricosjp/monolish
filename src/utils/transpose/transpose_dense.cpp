@@ -41,5 +41,5 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
 template void Dense<double>::transpose(const Dense<double> &B);
 template void Dense<float>::transpose(const Dense<float> &B);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

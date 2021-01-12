@@ -43,4 +43,4 @@ template matrix::COO<float> util::random_structure_matrix(const int M,
                                                           const int N,
                                                           const int nnzrow,
                                                           const float val);
-}
+} // namespace monolish

@@ -44,5 +44,5 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
 template void Dense<double>::print_all(bool force_cpu) const;
 template void Dense<float>::print_all(bool force_cpu) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

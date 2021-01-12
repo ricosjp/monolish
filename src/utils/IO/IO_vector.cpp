@@ -56,4 +56,4 @@ template <typename T> void vector<T>::print_all(std::string filename) const {
 template void vector<double>::print_all(std::string filename) const;
 template void vector<float>::print_all(std::string filename) const;
 
-}
+} // namespace monolish

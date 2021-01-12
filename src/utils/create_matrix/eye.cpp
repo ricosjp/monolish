@@ -20,4 +20,4 @@ template <typename T> matrix::COO<T> util::eye(const int M) {
 template matrix::COO<double> util::eye(const int M);
 template matrix::COO<float> util::eye(const int M);
 
-}
+} // namespace monolish

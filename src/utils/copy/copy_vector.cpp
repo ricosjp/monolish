@@ -19,7 +19,6 @@ template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
 template void vector<double>::operator=(const std::vector<double> &vec);
 template void vector<float>::operator=(const std::vector<float> &vec);
 
-
 template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -46,4 +45,4 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
 template void vector<double>::operator=(const vector<double> &vec);
 template void vector<float>::operator=(const vector<float> &vec);
 
-}
+} // namespace monolish

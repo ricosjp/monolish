@@ -106,5 +106,5 @@ template <typename T> bool COO<T>::operator!=(const COO<T> &mat) const {
 template bool COO<double>::operator!=(const COO<double> &mat) const;
 template bool COO<float>::operator!=(const COO<float> &mat) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

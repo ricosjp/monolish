@@ -157,5 +157,5 @@ template <typename T> void COO<T>::sort(bool merge) {
 template void COO<double>::sort(bool merge);
 template void COO<float>::sort(bool merge);
 
-}
-}
+} // namespace matrix
+} // namespace monolish

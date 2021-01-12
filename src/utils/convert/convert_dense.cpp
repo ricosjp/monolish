@@ -68,5 +68,5 @@ template <typename T> bool Dense<T>::operator!=(const Dense<T> &mat) const {
 template bool Dense<double>::operator!=(const Dense<double> &mat) const;
 template bool Dense<float>::operator!=(const Dense<float> &mat) const;
 
-}
-}
+} // namespace matrix
+} // namespace monolish

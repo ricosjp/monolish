@@ -38,4 +38,4 @@ template double util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M,
 template float util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N,
                                                             float a, float b);
 
-}
+} // namespace monolish

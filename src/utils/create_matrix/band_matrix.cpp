@@ -40,4 +40,4 @@ template matrix::COO<float> util::band_matrix(const int M, const int N,
                                               const int W, const float diag_val,
                                               const float val);
 
-}
+} // namespace monolish
