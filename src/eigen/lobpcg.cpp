@@ -7,7 +7,7 @@ namespace monolish {
 
 template <typename T>
 int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
-                                      monolish::vector<T> &x) {
+                                               monolish::vector<T> &x) {
   T norm;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -178,11 +178,12 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
   return MONOLISH_SOLVER_MAXITER;
 }
 
-template int standard_eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A,
-                                                    double &l,
-                                                    vector<double> &x);
-template int standard_eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> &A,
-                                                   float &l, vector<float> &x);
+template int
+standard_eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A,
+                                                double &l, vector<double> &x);
+template int
+standard_eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> &A, float &l,
+                                               vector<float> &x);
 
 template <typename T>
 int standard_eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
@@ -198,9 +199,10 @@ int standard_eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
   return ret; // err code
 }
 
-template int standard_eigen::LOBPCG<double>::solve(matrix::CRS<double> &A, double &l,
-                                          vector<double> &x);
-template int standard_eigen::LOBPCG<float>::solve(matrix::CRS<float> &A, float &l,
-                                         vector<float> &x);
+template int standard_eigen::LOBPCG<double>::solve(matrix::CRS<double> &A,
+                                                   double &l,
+                                                   vector<double> &x);
+template int standard_eigen::LOBPCG<float>::solve(matrix::CRS<float> &A,
+                                                  float &l, vector<float> &x);
 
 } // namespace monolish
