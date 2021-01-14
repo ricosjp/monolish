@@ -1,5 +1,5 @@
-#include "../../../include/monolish_lapack.hpp"
-#include "../../internal/monolish_internal.hpp"
+#include "../../monolish_internal.hpp"
+#include "../monolish_lapack_double.hpp"
 
 #include <vector>
 
@@ -12,9 +12,9 @@
 namespace monolish {
 
 // double
-bool lapack::sygv(const int itype, const char *jobz, const char *uplo,
-                  matrix::Dense<double> &A, matrix::Dense<double> &B,
-                  vector<double> &W) {
+bool internal::lapack::sygv(const int itype, const char *jobz, const char *uplo,
+                            matrix::Dense<double> &A, matrix::Dense<double> &B,
+                            vector<double> &W) {
 #ifdef MONOLISH_USE_GPU
   throw std::logic_error("not yet implemented for GPU");
 #else // MONOLISH_USE_GPU

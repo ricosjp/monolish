@@ -1,5 +1,5 @@
 #pragma once
-#include "common/monolish_common.hpp"
+#include "../../../include/common/monolish_common.hpp"
 #include <stdio.h>
 #include <vector>
 
@@ -8,6 +8,7 @@
 #endif
 
 namespace monolish {
+namespace internal {
 /**
  * @brief
  * Linear Algebra Package for Dense Matrix
@@ -19,13 +20,13 @@ namespace lapack {
 //////////////////////////////////////////////////////
 
 /**
- * @brief Finds the eigenvalues and eigenvectors of a single precision dense
+ * @brief Finds the eigenvalues and eigenvectors of a double precision dense
  * symmetric matrix A
  * @param jobz when 'N' then calculate eigenvalues only, and when 'V' calculate
  * eigenvalues and eigenvectors
  * @param uplo when 'U' then upper triangle of A is used, and when 'L' then
  * lower triangle of A is used
- * @param A single precision symmetric Dense matrix (size M x M)
+ * @param A double precision symmetric Dense matrix (size M x M)
  * @note
  * - # of computation: M^3
  * - A is destroyed after called
@@ -33,18 +34,18 @@ namespace lapack {
  * - GPU acceleration: false
  *    - # of data transfer: 0
  */
-bool syev(const char *jobz, const char *uplo, matrix::Dense<float> &A,
-          vector<float> &W);
+bool syev(const char *jobz, const char *uplo, matrix::Dense<double> &A,
+          vector<double> &W);
 
 /**
- * @brief Finds the eigenvalues and eigenvectors of a single precision dense
+ * @brief Finds the eigenvalues and eigenvectors of a double precision dense
  * symmetric matrix A
  * @param jobz when 'N' then calculate eigenvalues only, and when 'V' calculate
  * eigenvalues and eigenvectors
  * @param uplo when 'U' then upper triangle of A is used, and when 'L' then
  * lower triangle of A is used
- * @param A single precision symmetric Dense matrix (size M x M)
- * @param B single precision symmetric Dense Matrix (size M x M)
+ * @param A double precision symmetric Dense matrix (size M x M)
+ * @param B double precision symmetric Dense Matrix (size M x M)
  * @note
  * - # of computation: M^3
  * - A is destroyed after called
@@ -53,7 +54,9 @@ bool syev(const char *jobz, const char *uplo, matrix::Dense<float> &A,
  *    - # of data transfer: 0
  */
 bool sygv(const int itype, const char *jobz, const char *uplo,
-          matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &W);
+          matrix::Dense<double> &A, matrix::Dense<double> &B,
+          vector<double> &W);
 
 } // namespace lapack
+} // namespace internal
 } // namespace monolish

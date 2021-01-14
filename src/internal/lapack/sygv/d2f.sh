@@ -1,3 +1,4 @@
+#!/bin/bash
 cat dense_double_sygv.cpp \
     | sed -e 's/double/float/g' \
     | sed -e 's/dsygv/ssygv/g' \

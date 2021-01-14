@@ -1,7 +1,6 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
 #include "../include/monolish_equation.hpp"
-#include "../include/monolish_lapack.hpp"
 #include <iostream>
 
 template <typename T, typename PRECOND>
