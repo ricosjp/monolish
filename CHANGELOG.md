@@ -22,6 +22,7 @@ Unreleased
 -----------
 ### Changed
 - move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
+- add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
 0.10.0 - 2021/01/13
 -----------
