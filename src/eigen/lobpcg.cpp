@@ -1,7 +1,7 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_eigen.hpp"
-#include "../internal/monolish_internal.hpp"
 #include "../internal/lapack/monolish_lapack.hpp"
+#include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 

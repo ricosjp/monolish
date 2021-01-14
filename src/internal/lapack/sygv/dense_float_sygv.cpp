@@ -1,5 +1,5 @@
-#include "../monolish_lapack_float.hpp"
 #include "../../monolish_internal.hpp"
+#include "../monolish_lapack_float.hpp"
 
 #include <vector>
 
@@ -13,8 +13,8 @@ namespace monolish {
 
 // float
 bool internal::lapack::sygv(const int itype, const char *jobz, const char *uplo,
-                  matrix::Dense<float> &A, matrix::Dense<float> &B,
-                  vector<float> &W) {
+                            matrix::Dense<float> &A, matrix::Dense<float> &B,
+                            vector<float> &W) {
 #ifdef MONOLISH_USE_GPU
   throw std::logic_error("not yet implemented for GPU");
 #else // MONOLISH_USE_GPU
