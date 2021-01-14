@@ -1,7 +1,7 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_eigen.hpp"
-#include "../../include/monolish_lapack.hpp"
 #include "../internal/monolish_internal.hpp"
+#include "../internal/lapack/monolish_lapack.hpp"
 
 namespace monolish {
 
@@ -93,7 +93,7 @@ int eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
     monolish::vector<T> lambda(Sam.get_col());
     const char jobz = 'V';
     const char uplo = 'L';
-    bool bl = lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
+    bool bl = internal::lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
     if (!bl) {
       throw std::runtime_error("LAPACK sygv failed");
     }
