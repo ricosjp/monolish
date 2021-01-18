@@ -17,6 +17,10 @@ namespace vml {
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
+void max(const vector<double> &a, const vector<double> &b, vector<double> &y);
+void min(const vector<double> &a, const vector<double> &b, vector<double> &y);
+double max(const vector<double> &y);
+double min(const vector<double> &y);
 
 /**
  * @brief double precision element by element addition of vector a and vector b.
