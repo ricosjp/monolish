@@ -12,7 +12,7 @@ int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A,
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  const char jobz = 'N';
+  const char jobz = 'V';
   const char uplo = 'U';
 
   int info = internal::lapack::syev(&jobz, &uplo, A, lambda);

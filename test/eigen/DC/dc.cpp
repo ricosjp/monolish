@@ -72,16 +72,14 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
       // Check eigenvectors from |Ax - lambda x|
       monolish::vector<T> x(DIM);
       A.row(i, x);
-      monolish::vector<T> tmp = x;
-      monolish::blas::matvec(Aorig, tmp, tmp);
-      std::cout << "eigenvalue: " << lambda[i] << std::endl;
+      monolish::vector<T> tmp(DIM);
+      monolish::vector<T> tmp2 = x;
+      monolish::blas::matvec(Aorig, tmp2, tmp);
       monolish::blas::scal(lambda[i], x);
-      //x.print_all(); std::cout << std::endl;
-      //tmp.print_all(); std::cout << std::endl;
       std::string svec = "DC eigenvector";
-      //if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) == false) {
-        //return false;
-      //}	
+      if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) == false) {
+        return false;
+      }	
     }
   }
   return true;
@@ -110,11 +108,11 @@ int main(int argc, char **argv) {
 //  }
 
   if (test_laplacian_1d<double>(
-          check_ans, 1.0e-8, 1.0e-8) == false) {
+          check_ans, 1.0e-8, 2.0e-3) == false) {
     return 1;
   }
   if (test_laplacian_1d<float>(
-          check_ans, 1.0e-3, 1.0e-2) == false) {
+          check_ans, 1.0e-3, 2.0e-1) == false) {
     return 1;
   }
   return 0;
