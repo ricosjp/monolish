@@ -32,8 +32,8 @@ void copy(const vector<double> &a, vector<double> &y);
 
 /**
  * @brief double precision Dense matrix copy (y=a)
- * @param a double precision monolish Dense matrix (size M x N)
- * @param y double precision monolish Dense matrix (size M x N)
+ * @param A double precision monolish Dense matrix (size M x N)
+ * @param C double precision monolish Dense matrix (size M x N)
  * @note
  * - # of computation: M x N
  * - Multi-threading: true
@@ -44,8 +44,8 @@ void copy(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
  * @brief double precision CRS matrix copy (y=a)
- * @param a double precision monolish CRS matrix (size M x N)
- * @param y double precision monolish CRS matrix (size M x N)
+ * @param A double precision monolish CRS matrix (size M x N)
+ * @param C double precision monolish CRS matrix (size M x N)
  * @note
  * - # of computation: M x N
  * - Multi-threading: true
