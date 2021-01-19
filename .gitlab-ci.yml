@@ -338,14 +338,14 @@ nogpu_noavx_clang_oss:
     when: always
 # gpu mkl
 gpu_avx_clang_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends: 
       - .test_gpu_avx_clang_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 gpu_noavx_clang_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends: 
       - .test_gpu_noavx_clang_mkl
       - .logger_artifact
@@ -353,28 +353,28 @@ gpu_noavx_clang_mkl_logger:
       TEST_TARGET: "logger"
 # cpu mkl
 nogpu_avx_gcc_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_avx_gcc_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 nogpu_noavx_gcc_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_noavx_gcc_mkl
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 nogpu_avx_clang_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_avx_clang_mkl
       - .logger_artifact
     variables:
      TEST_TARGET: "logger"
 nogpu_noavx_clang_mkl_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_noavx_clang_mkl
       - .logger_artifact
@@ -382,28 +382,28 @@ nogpu_noavx_clang_mkl_logger:
       TEST_TARGET: "logger"
 # cpu oss
 nogpu_avx_gcc_oss_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_avx_gcc_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 nogpu_noavx_gcc_oss_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_noavx_gcc_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 nogpu_avx_clang_oss_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_avx_clang_oss
       - .logger_artifact
     variables:
       TEST_TARGET: "logger"
 nogpu_noavx_clang_oss_logger:
-    stage: logger
+    stage: logger_test
     extends:
       - .test_nogpu_noavx_clang_oss
       - .logger_artifact
