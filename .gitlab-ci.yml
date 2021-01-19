@@ -10,7 +10,6 @@ before_script:
 stages:
     - build_lib
     - test
-    - logger_test
     - python
     - benchmark
     - deploy
@@ -197,219 +196,147 @@ nogpu_noavx_gcc_oss_build_cmake:
 #
 
 # gpu mkl
-.test_gpu_avx_clang_mkl:
+gpu_avx_clang_mkl:
+    stage: test
     extends:
       - .gpu_avx_clang_mkl
     needs:
       - "gpu_avx_clang_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_gpu
-.test_gpu_noavx_clang_mkl:
+      - make -C test/ run_gpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+gpu_noavx_clang_mkl:
+    stage: test
     extends:
       - .gpu_noavx_clang_mkl
     needs:
       - "gpu_noavx_clang_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_gpu
-## cpu mkl
-.test_nogpu_avx_gcc_mkl:
+      - make -C test/ run_gpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+# cpu mkl
+nogpu_avx_gcc_mkl:
+    stage: test
     extends:
       - .nogpu_avx_gcc_mkl
     needs:
       - "nogpu_avx_gcc_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_noavx_gcc_mkl:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_noavx_gcc_mkl:
+    stage: test
     extends:
       - .nogpu_noavx_gcc_mkl
     needs:
       - "nogpu_noavx_gcc_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_avx_clang_mkl:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_avx_clang_mkl:
+    stage: test
     extends:
       - .nogpu_avx_clang_mkl
     needs:
       - "nogpu_avx_clang_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_noavx_clang_mkl:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_noavx_clang_mkl:
+    stage: test
     extends:
       - .nogpu_noavx_clang_mkl
     needs:
       - "nogpu_noavx_clang_mkl_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
 # cpu oss
-.test_nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss:
+    stage: test
     extends:
       - .nogpu_avx_gcc_oss
     needs:
       - "nogpu_avx_gcc_oss_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_noavx_gcc_oss:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_noavx_gcc_oss:
+    stage: test
     extends:
       - .nogpu_noavx_gcc_oss
     needs:
       - "nogpu_noavx_gcc_oss_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_avx_clang_oss:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_avx_clang_oss:
+    stage: test
     extends:
       - .nogpu_avx_clang_oss
     needs:
       - "nogpu_avx_clang_oss_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-.test_nogpu_noavx_clang_oss:
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
+
+nogpu_noavx_clang_oss:
+    stage: test
     extends:
       - .nogpu_noavx_clang_oss
     needs:
       - "nogpu_noavx_clang_oss_build_cmake"
     script:
-      - make -C test/${TEST_TARGET} run_cpu
-
-#
-# vector
-#
-
-# gpu mkl
-gpu_avx_clang_mkl:
-    stage: test
-    extends: .test_gpu_avx_clang_mkl
-    variables:
-      TEST_TARGET: "run_gpu"
-gpu_noavx_clang_mkl:
-    stage: test
-    extends: .test_gpu_noavx_clang_mkl
-    variables:
-      TEST_TARGET: "test"
-# cpu mkl
-nogpu_avx_gcc_mkl:
-    stage: test
-    extends: .test_nogpu_avx_gcc_mkl
-    variables:
-      TEST_TARGET: "test"
-nogpu_noavx_gcc_mkl:
-    stage: test
-    extends: .test_nogpu_noavx_gcc_mkl
-    variables:
-      TEST_TARGET: "test"
-nogpu_avx_clang_mkl:
-    stage: test
-    extends: .test_nogpu_avx_clang_mkl
-    variables:
-      TEST_TARGET: "test"
-nogpu_noavx_clang_mkl:
-    stage: test
-    extends: .test_nogpu_noavx_clang_mkl
-    variables:
-      TEST_TARGET: "test"
-# cpu oss
-nogpu_avx_gcc_oss:
-    stage: test
-    extends: .test_nogpu_avx_gcc_oss
-    variables:
-      TEST_TARGET: "test"
-nogpu_noavx_gcc_oss:
-    stage: test
-    extends: .test_nogpu_noavx_gcc_oss
-    variables:
-      TEST_TARGET: "test"
-nogpu_avx_clang_oss:
-    stage: test
-    extends: .test_nogpu_avx_clang_oss
-    variables:
-      TEST_TARGET: "test"
-nogpu_noavx_clang_oss:
-    stage: test
-    extends: .test_nogpu_noavx_clang_oss
-    variables:
-      TEST_TARGET: "test"
-#
-# logger
-#
-.logger_artifact:
-  artifacts:
-    paths:
-      - test/logger/logging
-    expire_in: 360min
-    when: always
-# gpu mkl
-gpu_avx_clang_mkl_logger:
-    stage: logger_test
-    extends: 
-      - .test_gpu_avx_clang_mkl
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-gpu_noavx_clang_mkl_logger:
-    stage: logger_test
-    extends: 
-      - .test_gpu_noavx_clang_mkl
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-# cpu mkl
-nogpu_avx_gcc_mkl_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_avx_gcc_mkl
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-nogpu_noavx_gcc_mkl_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_noavx_gcc_mkl
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-nogpu_avx_clang_mkl_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_avx_clang_mkl
-      - .logger_artifact
-    variables:
-     TEST_TARGET: "logger"
-nogpu_noavx_clang_mkl_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_noavx_clang_mkl
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-# cpu oss
-nogpu_avx_gcc_oss_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_avx_gcc_oss
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-nogpu_noavx_gcc_oss_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_noavx_gcc_oss
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-nogpu_avx_clang_oss_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_avx_clang_oss
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-nogpu_noavx_clang_oss_logger:
-    stage: logger_test
-    extends:
-      - .test_nogpu_noavx_clang_oss
-      - .logger_artifact
-    variables:
-      TEST_TARGET: "logger"
-
+      - make -C test/ run_cpu
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
 #
 # Test Python module
 #
