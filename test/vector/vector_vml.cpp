@@ -25,6 +25,10 @@
 #include "vml/v_tan.hpp"
 #include "vml/v_tanh.hpp"
 #include "vml/vv_pow.hpp"
+#include "vml/v_max.hpp"
+#include "vml/v_min.hpp"
+#include "vml/vv_max.hpp"
+#include "vml/vv_min.hpp"
 
 int main(int argc, char **argv) {
 
@@ -397,6 +401,62 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vreciprocal<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vmax //
+  if (test_vmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vmin //
+  if (test_vmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vvmax //
+  if (test_vvmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vvmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vvmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vvmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vvmin //
+  if (test_vvmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vvmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vvmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vvmin<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
