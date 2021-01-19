@@ -10,6 +10,7 @@ before_script:
 stages:
     - build_lib
     - test
+    - logger_test
     - python
     - benchmark
     - deploy
@@ -337,6 +338,7 @@ nogpu_noavx_clang_oss:
         - test/logger/logging
       expire_in: 360min
       when: always
+
 #
 # Test Python module
 #
@@ -353,8 +355,11 @@ pytest:
       - poetry install
       - make test_logger
 python-cpu:
-    extends:
-      - .logger_artifact
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
     needs:
       - nogpu_avx_gcc_mkl_logger
     image: ${MKL_IMAGE}
@@ -368,8 +373,11 @@ python-cpu:
       - poetry install
       - make log_cpu
 python-gpu:
-    extends:
-      - .logger_artifact
+    artifacts:
+      paths:
+        - test/logger/logging
+      expire_in: 360min
+      when: always
     needs:
       - gpu_avx_clang_mkl_logger
     image: ${MKL_IMAGE}
