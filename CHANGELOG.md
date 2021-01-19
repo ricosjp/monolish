@@ -25,6 +25,9 @@ Unreleased
 - add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 ### Changed
+- Summarize CI stage public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
+- comment out LOBPCG run_gpu https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
+- comment out vector print_all test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
 - Dense.set_nnz, set_row, set_col -> public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/217
 - move eigen -> standard_eigen namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/213
 - move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
