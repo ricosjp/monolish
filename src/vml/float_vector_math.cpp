@@ -740,7 +740,7 @@ float vml::max(const matrix::CRS<float> &C) {
   float max = internal::vmax(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
-  return std::max(max,0);
+  return std::max(max,(float)0.0);
 }
 
 void vml::min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C) {
@@ -770,6 +770,6 @@ float vml::min(const matrix::CRS<float> &C) {
   float min = internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
-  return std::min(min,0);
+  return std::min(min,(float)0.0);
 }
 } // namespace monolish
