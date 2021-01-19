@@ -9,6 +9,7 @@ before_script:
 
 stages:
     - build_lib
+    - nogpu_noavx_clang_oss
     - test
     - logger_test
     - python
@@ -192,8 +193,14 @@ nogpu_noavx_gcc_oss_build_cmake:
       - .nogpu_noavx_gcc_oss
       - .build_cmake
 
+hoge:
+  stage: nogpu_noavx_clang_oss
+  script:
+    - ls
+  when: always
+
 #
-# Test templates
+# Test
 #
 
 # gpu mkl
