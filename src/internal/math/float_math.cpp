@@ -395,6 +395,118 @@ void vsign(const size_t N, const float *a, float *y, bool gpu_status) {
   }
   logger.func_out();
 }
+//////////////
+// max
+//////////////
+float vmax(const size_t N, const float *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  float max = y[0];
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for reduction(max : max)
+    for (size_t i = 0; i < N; i++) {
+      if (y[i] > max) {
+        max = y[i];
+      }
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for reduction(max : max)
+    for (size_t i = 0; i < N; i++) {
+      if (y[i] > max) {
+        max = y[i];
+      }
+    }
+  }
+  logger.func_out();
+  return max;
+}
+
+void vmax(const size_t N, const float *a, const float *b, float *y,
+          bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::max(a[i], b[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::max(a[i], b[i]);
+    }
+  }
+  logger.func_out();
+}
+
+//////////////
+// min
+//////////////
+float vmin(const size_t N, const float *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  float min = y[0];
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for reduction(min : min)
+    for (size_t i = 0; i < N; i++) {
+      if (y[i] < min) {
+        min = y[i];
+      }
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for reduction(min : min)
+    for (size_t i = 0; i < N; i++) {
+      if (y[i] < min) {
+        min = y[i];
+      }
+    }
+  }
+  logger.func_out();
+  return min;
+}
+void vmin(const size_t N, const float *a, const float *b, float *y,
+          bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_GPU
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::min(a[i], b[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (size_t i = 0; i < N; i++) {
+      y[i] = std::min(a[i], b[i]);
+    }
+  }
+  logger.func_out();
+}
 
 } // namespace internal
 } // namespace monolish
