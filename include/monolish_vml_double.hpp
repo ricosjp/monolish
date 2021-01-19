@@ -22,6 +22,16 @@ void min(const vector<double> &a, const vector<double> &b, vector<double> &y);
 double max(const vector<double> &y);
 double min(const vector<double> &y);
 
+void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+double max(const matrix::CRS<double> &C);
+double min(const matrix::CRS<double> &C);
+
+void max(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void min(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+double max(const matrix::Dense<double> &C);
+double min(const matrix::Dense<double> &C);
+
 /**
  * @brief double precision element by element addition of vector a and vector b.
  * @param a double precision monolish vector (size N)
