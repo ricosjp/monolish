@@ -13,6 +13,8 @@
 #include "vml/m_atanh.hpp"
 #include "vml/m_ceil.hpp"
 #include "vml/m_floor.hpp"
+#include "vml/m_max.hpp"
+#include "vml/m_min.hpp"
 #include "vml/m_reciprocal.hpp"
 #include "vml/m_sign.hpp"
 #include "vml/m_sin.hpp"
@@ -20,12 +22,10 @@
 #include "vml/m_sqrt.hpp"
 #include "vml/m_tan.hpp"
 #include "vml/m_tanh.hpp"
-#include "vml/mm_pow.hpp"
-#include "vml/sm_pow.hpp"
-#include "vml/m_max.hpp"
-#include "vml/m_min.hpp"
 #include "vml/mm_max.hpp"
 #include "vml/mm_min.hpp"
+#include "vml/mm_pow.hpp"
+#include "vml/sm_pow.hpp"
 
 int main(int argc, char **argv) {
 
@@ -543,13 +543,16 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_max<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
+  if (test_mm_max<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>,
                   monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_max<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+  if (test_mm_max<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
 
@@ -566,13 +569,16 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mm_min<monolish::matrix::Dense<double>, monolish::matrix::Dense<double>,
+  if (test_mm_min<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>,
                   monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_mm_min<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+  if (test_mm_min<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
     return 1;
   }
 
@@ -1009,8 +1015,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mmax<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_mmax<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
   if (test_mmax<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
@@ -1026,8 +1031,7 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_mmin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
+  if (test_mmin<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
   if (test_mmin<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {

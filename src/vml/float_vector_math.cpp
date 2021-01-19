@@ -325,7 +325,8 @@ void vml::reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
   logger.func_out();
 }
 
-void vml::max(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+void vml::max(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+              matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -336,11 +337,13 @@ void vml::max(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matr
   if (A.get_col() != C.get_col() || A.get_col() != B.get_col()) {
     throw std::runtime_error("error A.row != C.row");
   }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat() || B.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat() ||
+      B.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vmax(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(), C.get_device_mem_stat());
+  internal::vmax(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 C.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -349,13 +352,15 @@ float vml::max(const matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float max = internal::vmax(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
+  float max =
+      internal::vmax(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
   return max;
 }
 
-void vml::min(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+void vml::min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+              matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -366,11 +371,13 @@ void vml::min(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matr
   if (A.get_col() != C.get_col() || A.get_col() != B.get_col()) {
     throw std::runtime_error("error A.row != C.row");
   }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat() || B.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat() ||
+      B.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vmin(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(), C.get_device_mem_stat());
+  internal::vmin(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 C.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -379,7 +386,8 @@ float vml::min(const matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float min = internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
+  float min =
+      internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
   return min;
@@ -713,7 +721,8 @@ void vml::reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
   logger.func_out();
 }
 
-void vml::max(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C) {
+void vml::max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+              matrix::CRS<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -724,11 +733,13 @@ void vml::max(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::
   if (A.get_col() != C.get_col() || A.get_col() != B.get_col()) {
     throw std::runtime_error("error A.row != C.row");
   }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat() || B.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat() ||
+      B.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vmax(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(), C.get_device_mem_stat());
+  internal::vmax(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 C.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -737,13 +748,15 @@ float vml::max(const matrix::CRS<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float max = internal::vmax(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
+  float max =
+      internal::vmax(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
-  return std::max(max,(float)0.0);
+  return std::max(max, (float)0.0);
 }
 
-void vml::min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C) {
+void vml::min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+              matrix::CRS<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -754,11 +767,13 @@ void vml::min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::
   if (A.get_col() != C.get_col() || A.get_col() != B.get_col()) {
     throw std::runtime_error("error A.row != C.row");
   }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat() || B.get_device_mem_stat() != C.get_device_mem_stat()) {
+  if (A.get_device_mem_stat() != C.get_device_mem_stat() ||
+      B.get_device_mem_stat() != C.get_device_mem_stat()) {
     throw std::runtime_error("error vector get_device_mem_stat() is not same");
   }
 
-  internal::vmin(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(), C.get_device_mem_stat());
+  internal::vmin(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+                 C.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -767,9 +782,10 @@ float vml::min(const matrix::CRS<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float min = internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
+  float min =
+      internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
 
   logger.func_out();
-  return std::min(min,(float)0.0);
+  return std::min(min, (float)0.0);
 }
 } // namespace monolish

@@ -265,7 +265,8 @@ void sign(const vector<double> &a, vector<double> &y);
 void reciprocal(const vector<double> &a, vector<double> &y);
 
 /**
- * @brief Create a new vector with greatest elements of two vectors (y[0:N] = max(a[0:N], b[0]:N]))
+ * @brief Create a new vector with greatest elements of two vectors (y[0:N] =
+ *max(a[0:N], b[0]:N]))
  * @param a double precision monolish vector (size N)
  * @param b double precision monolish vector (size N)
  * @param y double precision monolish vector (size N)
@@ -277,7 +278,8 @@ void reciprocal(const vector<double> &a, vector<double> &y);
 void max(const vector<double> &a, const vector<double> &b, vector<double> &y);
 
 /**
- * @brief Create a new vector with smallest elements of two vectors (y[0:N] = max(a[0:N], b[0]:N]))
+ * @brief Create a new vector with smallest elements of two vectors (y[0:N] =
+ *max(a[0:N], b[0]:N]))
  * @param a double precision monolish vector (size N)
  * @param b double precision monolish vector (size N)
  * @param y double precision monolish vector (size N)
@@ -289,7 +291,8 @@ void max(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void min(const vector<double> &a, const vector<double> &b, vector<double> &y);
 
 /**
- * @brief Finds the greatest element in double precision vector (max_element(y[0:N]))
+ * @brief Finds the greatest element in double precision vector
+ *(max_element(y[0:N]))
  * @param y double precision monolish vector (size N)
  * @return greatest value
  * @note
@@ -300,7 +303,8 @@ void min(const vector<double> &a, const vector<double> &b, vector<double> &y);
 double max(const vector<double> &y);
 
 /**
- * @brief Finds the smallest element in double precision vector (max_element(y[0:N]))
+ * @brief Finds the smallest element in double precision vector
+ *(max_element(y[0:N]))
  * @param y double precision monolish vector (size N)
  * @return smallest value
  * @note
@@ -610,7 +614,8 @@ void sign(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 
 /**
- * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] = A(a[0:nnz], B[0]:nnz]))
+ * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
  * @param A double precision monolish Dense matrix (size M x N)
  * @param B double precision monolish Dense matrix (size M x N)
  * @param C double precision monolish Dense matrix (size M x N)
@@ -619,10 +624,12 @@ void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void max(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void max(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+         matrix::Dense<double> &C);
 
 /**
- * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] = A(a[0:nnz], B[0]:nnz]))
+ * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
  * @param A double precision monolish Dense matrix (size M x N)
  * @param B double precision monolish Dense matrix (size M x N)
  * @param C double precision monolish Dense matrix (size M x N)
@@ -631,10 +638,12 @@ void max(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix:
  * - Multi-threading: true
  * - GPU acceleration: true
  **/
-void min(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void min(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+         matrix::Dense<double> &C);
 
 /**
- * @brief Finds the greatest element in double precision Dense matrices (max_element(C[0:nnz]))
+ * @brief Finds the greatest element in double precision Dense matrices
+ *(max_element(C[0:nnz]))
  * @param C double precision monolish Dense matrix (size M x N)
  * @return greatest value
  * @note
@@ -644,7 +653,8 @@ void min(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix:
  **/
 double max(const matrix::Dense<double> &C);
 /**
- * @brief Finds the greatest element in double precision Dense matrices (max_element(C[0:nnz]))
+ * @brief Finds the greatest element in double precision Dense matrices
+ *(max_element(C[0:nnz]))
  * @param C double precision monolish Dense matrix (size M x N)
  * @return greatest value
  * @note
@@ -1009,7 +1019,8 @@ void sign(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
 /**
- * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] = A(a[0:nnz], B[0]:nnz]))
+ * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
  * @param A double precision monolish CRS matrix (size M x N)
  * @param B double precision monolish CRS matrix (size M x N)
  * @param C double precision monolish CRS matrix (size M x N)
@@ -1020,10 +1031,12 @@ void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * @warning
  * A, B and C must be same non-zero structure (dont check in this function)
  **/
-void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+         matrix::CRS<double> &C);
 
 /**
- * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] = A(a[0:nnz], B[0]:nnz]))
+ * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
  * @param A double precision monolish CRS matrix (size M x N)
  * @param B double precision monolish CRS matrix (size M x N)
  * @param C double precision monolish CRS matrix (size M x N)
@@ -1034,10 +1047,12 @@ void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS
  * @warning
  * A, B and C must be same non-zero structure (dont check in this function)
  **/
-void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
+void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+         matrix::CRS<double> &C);
 
 /**
- * @brief Finds the greatest element in double precision CRS matrices (max_element(C[0:nnz]))
+ * @brief Finds the greatest element in double precision CRS matrices
+ *(max_element(C[0:nnz]))
  * @param C double precision monolish CRS matrix (size M x N)
  * @return greatest value
  * @note
@@ -1047,7 +1062,8 @@ void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS
  **/
 double max(const matrix::CRS<double> &C);
 /**
- * @brief Finds the greatest element in double precision CRS matrices (max_element(C[0:nnz]))
+ * @brief Finds the greatest element in double precision CRS matrices
+ *(max_element(C[0:nnz]))
  * @param C double precision monolish CRS matrix (size M x N)
  * @return greatest value
  * @note

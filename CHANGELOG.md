@@ -20,10 +20,17 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- add vector reciprocal test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+- add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+
 ### Changed
 - move eigen -> standard_eigen namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/213
 - move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
+
+### Changed
+- fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 0.10.0 - 2021/01/13
 -----------

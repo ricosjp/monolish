@@ -38,7 +38,6 @@ bool test_mmax(const size_t M, const size_t N, double tol) {
     nnzrow = N - 1;
   }
 
-
   monolish::matrix::COO<T> seedA =
       monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
 
