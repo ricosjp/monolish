@@ -39,21 +39,6 @@ private:
    */
   mutable bool gpu_status = false; // true: sended, false: not send
 
-  /**
-   * @brief Set row number
-   **/
-  void set_row(const size_t N) { rowN = N; };
-
-  /**
-   * @brief Set column number
-   **/
-  void set_col(const size_t M) { colN = M; };
-
-  /**
-   * @brief Set # of non-zero elements
-   **/
-  void set_nnz(const size_t NZ) { nnz = NZ; };
-
 public:
   /**
    * @brief Dense format value(size M x N)
@@ -192,6 +177,33 @@ public:
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return get_row() * get_col(); }
+
+  /**
+   * @brief Set row number
+   * @param M # of row
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_row(const size_t N) { rowN = N; };
+
+  /**
+   * @brief Set column number
+   * @param N # of col
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_col(const size_t M) { colN = M; };
+
+  /**
+   * @brief Set # of non-zero elements
+   * @param NNZ # of non-zero elements
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_nnz(const size_t NZ) { nnz = NZ; };
 
   /**
    * @brief get format name "Dense"
