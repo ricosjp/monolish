@@ -398,20 +398,20 @@ void vsign(const size_t N, const float *a, float *y, bool gpu_status) {
 //////////////
 // max
 //////////////
-float vmax(const size_t N, float *y, bool gpu_status) {
+float vmax(const size_t N, const float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float max_val = 0.0;
+  float max = 0.0;
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for reduction(max : max_val)
+#pragma omp target teams distribute parallel for reduction(max : max)
     for( size_t i=0;i<N; i++)
     {
-        if(y[i] > max_val)
+        if(y[i] > max)
         {
-            max_val = y[i];  
+            max = y[i];  
         }
     }
 #else
@@ -419,23 +419,22 @@ float vmax(const size_t N, float *y, bool gpu_status) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-#pragma omp parallel for reduction(max : max_val)
+#pragma omp parallel for reduction(max : max)
     for( size_t i=0;i<N; i++)
     {
-      if(y[i] > max_val)
+      if(y[i] > max)
       {
-        max_val = y[i];  
+        max = y[i];  
       }
     }
   }
   logger.func_out();
+  return max;
 }
 
 void vmax(const size_t N, const float *a, const float *b, float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-
-  float max_val = 0.0;
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
@@ -461,20 +460,20 @@ void vmax(const size_t N, const float *a, const float *b, float *y, bool gpu_sta
 //////////////
 // min
 //////////////
-float vmin(const size_t N, float *y, bool gpu_status) {
+float vmin(const size_t N, const float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float min_val = 0.0;
+  float min = 0.0;
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for reduction(min : min_val)
+#pragma omp target teams distribute parallel for reduction(min : min)
     for( size_t i=0;i<N; i++)
     {
-        if(y[i] > min_val)
+        if(y[i] < min)
         {
-            min_val = y[i];  
+            min = y[i];  
         }
     }
 #else
@@ -482,22 +481,21 @@ float vmin(const size_t N, float *y, bool gpu_status) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-#pragma omp parallel for reduction(min : min_val)
+#pragma omp parallel for reduction(min : min)
     for( size_t i=0;i<N; i++)
     {
-      if(y[i] > min_val)
+      if(y[i] < min)
       {
-        min_val = y[i];  
+        min = y[i];  
       }
     }
   }
   logger.func_out();
+  return min;
 }
 void vmin(const size_t N, const float *a, const float *b, float *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-
-  float min_val = 0.0;
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU

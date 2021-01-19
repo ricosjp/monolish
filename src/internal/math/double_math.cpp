@@ -471,7 +471,7 @@ double vmin(const size_t N, const double *y, bool gpu_status) {
 #pragma omp target teams distribute parallel for reduction(min : min)
     for( size_t i=0;i<N; i++)
     {
-        if(y[i] > min)
+        if(y[i] < min)
         {
             min = y[i];  
         }
@@ -484,7 +484,7 @@ double vmin(const size_t N, const double *y, bool gpu_status) {
 #pragma omp parallel for reduction(min : min)
     for( size_t i=0;i<N; i++)
     {
-      if(y[i] > min)
+      if(y[i] < min)
       {
         min = y[i];  
       }
