@@ -42,6 +42,36 @@ private:
   size_t colN;
   size_t nnz;
 
+  /**
+   * @brief Set row number
+   * @param M # of row
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_row(const size_t M) { rowN = M; };
+
+  /**
+   * @brief Set col number
+   * @param N # of col
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_col(const size_t N) { colN = N; };
+
+  /**
+   * @brief Set # of non-zero elements
+   * @param NNZ # of non-zero elements
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_nnz(const size_t NNZ) { nnz = NNZ; };
+
   mutable bool gpu_status = false; // true: sended, false: not send
 
 public:
@@ -260,36 +290,6 @@ public:
 
   // I/O
   // ///////////////////////////////////////////////////////////////////////////
-
-  /**
-   * @brief Set row number
-   * @param M # of row
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_row(const size_t M) { rowN = M; };
-
-  /**
-   * @brief Set col number
-   * @param N # of col
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_col(const size_t N) { colN = N; };
-
-  /**
-   * @brief Set # of non-zero elements
-   * @param NNZ # of non-zero elements
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_nnz(const size_t NNZ) { nnz = NNZ; };
 
   /**
    * @brief Create COO matrix from MatrixMatrket format file
