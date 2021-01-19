@@ -17,6 +17,7 @@ namespace vml {
 //////////////////////////////////////////////////////
 //  Vector
 //////////////////////////////////////////////////////
+
 /**
  * @brief single precision element by element addition of vector a and vector b.
  * @param a single precision monolish vector (size N)
