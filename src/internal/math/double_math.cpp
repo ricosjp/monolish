@@ -402,7 +402,7 @@ double vmax(const size_t N, const double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  double max = 0.0;
+  double max = y[0];
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
@@ -464,7 +464,7 @@ double vmin(const size_t N, const double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  double min = 0.0;
+  double min = y[0];
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
