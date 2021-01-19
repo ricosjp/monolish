@@ -361,7 +361,7 @@ python-cpu:
       expire_in: 360min
       when: always
     needs:
-      - nogpu_avx_gcc_mkl_logger
+      - nogpu_avx_gcc_mkl
     image: ${MKL_IMAGE}
     stage: python
     script:
@@ -379,7 +379,7 @@ python-gpu:
       expire_in: 360min
       when: always
     needs:
-      - gpu_avx_clang_mkl_logger
+      - gpu_avx_clang_mkl
     image: ${MKL_IMAGE}
     stage: python
     script:
