@@ -56,6 +56,11 @@ private:
   mutable bool gpu_status = false;
 
   /**
+   * @brief hash, created from row_index and col_index
+   */
+  size_t structure_hash;
+
+  /**
    * @brief create index array hash (to compare structure)
    * - # of computation: 2*nnz
    * - Multi-threading: true

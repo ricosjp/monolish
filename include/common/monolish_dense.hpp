@@ -40,12 +40,18 @@ private:
   mutable bool gpu_status = false;
 
   /**
+   * @brief hash, always zero
+   */
+  const size_t structure_hash=0;
+
+  /**
    * @brief create index array hash (to compare structure)
    * @note
    * - # of computation: 1
    * Dense always return 0
    */
-  void create_hash();
+  void create_hash(){
+  };
 
 public:
   /**

@@ -48,6 +48,11 @@ private:
   mutable bool gpu_status = false;
 
   /**
+   * @brief hash, created from row_ptr and col_ind
+   */
+  size_t structure_hash;
+
+  /**
    * @brief create index array hash (to compare structure)
    * @note
    * - # of computation: nnz + rowN + 1
