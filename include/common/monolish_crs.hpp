@@ -47,6 +47,15 @@ private:
    */
   mutable bool gpu_status = false;
 
+  /**
+   * @brief create index array hash (to compare structure)
+   * @note
+   * - # of computation: nnz + rowN + 1
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   */
+  void create_hash();
+
 public:
   /**
    * @brief CRS format value, which stores values of the non-zero elements (size
@@ -202,6 +211,14 @@ public:
    * - GPU acceleration: false
    **/
   std::string type() const { return "CRS"; }
+
+  /**
+   * @brief get index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   */
+  size_t get_hash();
+
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////

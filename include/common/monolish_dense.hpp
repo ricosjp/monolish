@@ -30,14 +30,22 @@ private:
   size_t colN;
 
   /**
-   * @brief # of non-zero element
+   * @brief # of non-zero element (M * N)
    */
   size_t nnz;
 
   /**
    * @brief true: sended, false: not send
    */
-  mutable bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false;
+
+  /**
+   * @brief create index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   * Dense always return 0
+   */
+  void create_hash();
 
 public:
   /**
@@ -177,6 +185,14 @@ public:
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return get_row() * get_col(); }
+
+  /**
+   * @brief get index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   * Dense always return 0 
+   */
+  size_t get_hash();
 
   /**
    * @brief Set row number

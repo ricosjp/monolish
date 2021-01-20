@@ -36,13 +36,32 @@ template <typename Float> class CRS;
 template <typename Float> class COO {
 private:
   /**
-   * @brief neet col = row now
+   * @brief # of row
    */
   size_t rowN;
+
+  /**
+   * @brief # of col
+   */
   size_t colN;
+
+  /**
+   * @brief # of non-zero element
+   */
   size_t nnz;
 
-  mutable bool gpu_status = false; // true: sended, false: not send
+  /**
+   * @brief true: sended, false: not send
+   */
+  mutable bool gpu_status = false;
+
+  /**
+   * @brief create index array hash (to compare structure)
+   * - # of computation: 2*nnz
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   */
+  void create_hash();
 
 public:
   /**
@@ -388,6 +407,13 @@ public:
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return nnz; }
+
+  /**
+   * @brief get index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   */
+  size_t get_hash();
 
   /**
    * @brief fill matrix elements with a scalar value
