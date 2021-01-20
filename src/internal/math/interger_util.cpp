@@ -9,7 +9,8 @@ namespace internal {
 ///////////////////////
 
 // y[i] = a[i]
-size_t vhash(const size_t N, const int *y, const int seed_value, bool gpu_status) {
+size_t vhash(const size_t N, const int *y, const int seed_value,
+             bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -17,7 +18,7 @@ size_t vhash(const size_t N, const int *y, const int seed_value, bool gpu_status
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for reduction(^:seed)
+#pragma omp target teams distribute parallel for reduction(^ : seed)
     for (size_t i = 0; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
@@ -26,7 +27,7 @@ size_t vhash(const size_t N, const int *y, const int seed_value, bool gpu_status
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-#pragma omp parallel for reduction(^:seed)
+#pragma omp parallel for reduction(^ : seed)
     for (size_t i = 0; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
@@ -35,7 +36,8 @@ size_t vhash(const size_t N, const int *y, const int seed_value, bool gpu_status
   logger.func_out();
 }
 
-size_t vhash(const size_t N, const size_t *y, const size_t seed_value, bool gpu_status) {
+size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
+             bool gpu_status) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -43,7 +45,7 @@ size_t vhash(const size_t N, const size_t *y, const size_t seed_value, bool gpu_
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for reduction(^:seed)
+#pragma omp target teams distribute parallel for reduction(^ : seed)
     for (size_t i = 0; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
@@ -52,7 +54,7 @@ size_t vhash(const size_t N, const size_t *y, const size_t seed_value, bool gpu_
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-#pragma omp parallel for reduction(^:seed)
+#pragma omp parallel for reduction(^ : seed)
     for (size_t i = 0; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }

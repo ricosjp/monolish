@@ -42,7 +42,7 @@ private:
   /**
    * @brief hash, always zero
    */
-  const size_t structure_hash=0;
+  const size_t structure_hash = 0;
 
   /**
    * @brief create index array hash (to compare structure)
@@ -50,8 +50,7 @@ private:
    * - # of computation: 1
    * Dense always return 0
    */
-  void create_hash(){
-  };
+  void create_hash(){};
 
 public:
   /**
@@ -196,11 +195,9 @@ public:
    * @brief get index array hash (to compare structure)
    * @note
    * - # of computation: 1
-   * Dense always return 0 
+   * Dense always return 0
    */
-  size_t get_hash(){
-    return structure_hash;
-  }
+  size_t get_hash() { return structure_hash; }
 
   /**
    * @brief Set row number

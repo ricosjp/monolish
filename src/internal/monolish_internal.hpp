@@ -138,8 +138,10 @@ void vmax(const size_t N, const float *a, const float *b, float *y,
 void vmin(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status);
 
-size_t vhash(const size_t N, const int *y, const int seed_value, bool gpu_status);
-size_t vhash(const size_t N, const size_t *y, const size_t seed_value, bool gpu_status);
+size_t vhash(const size_t N, const int *y, const int seed_value,
+             bool gpu_status);
+size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
+             bool gpu_status);
 
 } // namespace internal
 } // namespace monolish
