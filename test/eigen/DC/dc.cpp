@@ -22,8 +22,9 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
     for (std::size_t i = 0; i < DIM; ++i) {
       std::cout << "Toeplitz: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
-      T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
-        DIM, DIM-i-1, 11.0, -1.0);
+      T exact_result =
+          monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
+              DIM, DIM - i - 1, 11.0, -1.0);
       std::string sval = "DC eigenvalue(Toeplitz)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
@@ -36,9 +37,10 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
       monolish::blas::matvec(Aorig, tmp2, tmp);
       monolish::blas::scal(lambda[i], x);
       std::string svec = "DC eigenvector(Toeplitz)";
-      if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) == false) {
+      if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) ==
+          false) {
         return false;
-      }	
+      }
     }
   }
   return true;
@@ -47,8 +49,7 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
 template <typename T>
 bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 100;
-  monolish::matrix::COO<T> COO =
-      monolish::util::laplacian_matrix_1D<T>(DIM);
+  monolish::matrix::COO<T> COO = monolish::util::laplacian_matrix_1D<T>(DIM);
   monolish::matrix::Dense<T> A(COO);
   monolish::matrix::Dense<T> Aorig(COO);
   monolish::vector<T> lambda(DIM);
@@ -62,8 +63,8 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
     for (std::size_t i = 0; i < DIM; ++i) {
       std::cout << "Laplacian: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
-      T exact_result = monolish::util::laplacian_matrix_1D_eigenvalue<T>(
-        DIM, DIM-i-1);
+      T exact_result =
+          monolish::util::laplacian_matrix_1D_eigenvalue<T>(DIM, DIM - i - 1);
       std::string sval = "DC eigenvalue(Laplacian)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
@@ -76,9 +77,10 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
       monolish::blas::matvec(Aorig, tmp2, tmp);
       monolish::blas::scal(lambda[i], x);
       std::string svec = "DC eigenvector(Laplacian)";
-      if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) == false) {
+      if (ans_check<T>(svec, x.data(), tmp.data(), x.size(), tol_res) ==
+          false) {
         return false;
-      }	
+      }
     }
   }
   return true;
@@ -94,21 +96,17 @@ int main(int argc, char **argv) {
   char *file = argv[1];
   int check_ans = atoi(argv[2]);
 
- if (test_tridiagonal_toeplitz<double>(
-         check_ans, 1.0e-8, 1.0e-4) == false) {
-   return 1;
- }
- if (test_tridiagonal_toeplitz<float>(
-         check_ans, 1.0e-4, 1.0e-2) == false) {
-   return 1;
- }
-
-  if (test_laplacian_1d<double>(
-          check_ans, 1.0e-8, 2.0e-3) == false) {
+  if (test_tridiagonal_toeplitz<double>(check_ans, 1.0e-8, 1.0e-4) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float>(
-          check_ans, 1.0e-3, 2.0e-1) == false) {
+  if (test_tridiagonal_toeplitz<float>(check_ans, 1.0e-4, 1.0e-2) == false) {
+    return 1;
+  }
+
+  if (test_laplacian_1d<double>(check_ans, 1.0e-8, 2.0e-3) == false) {
+    return 1;
+  }
+  if (test_laplacian_1d<float>(check_ans, 1.0e-3, 2.0e-1) == false) {
     return 1;
   }
   return 0;

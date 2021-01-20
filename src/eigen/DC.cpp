@@ -6,8 +6,7 @@
 namespace monolish {
 
 template <typename T>
-int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A,
-                                     vector<T> &lambda) {
+int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A, vector<T> &lambda) {
   int ret = MONOLISH_SOLVER_SUCCESS;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -26,12 +25,10 @@ int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A,
   return ret;
 }
 
-template int
-standard_eigen::DC<double>::LAPACK_DC(matrix::Dense<double> &A,
-                                        vector<double> &lambda);
-template int
-standard_eigen::DC<float>::LAPACK_DC(matrix::Dense<float> &A,
-                                       vector<float> &lambda);
+template int standard_eigen::DC<double>::LAPACK_DC(matrix::Dense<double> &A,
+                                                   vector<double> &lambda);
+template int standard_eigen::DC<float>::LAPACK_DC(matrix::Dense<float> &A,
+                                                  vector<float> &lambda);
 
 template <typename T>
 int standard_eigen::DC<T>::solve(matrix::Dense<T> &A, vector<T> &lambda) {
