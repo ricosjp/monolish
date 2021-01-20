@@ -418,7 +418,9 @@ public:
    * @note
    * - # of computation: 1
    */
-  size_t get_hash();
+  size_t get_hash(){
+    return structure_hash;
+  }
 
   /**
    * @brief fill matrix elements with a scalar value

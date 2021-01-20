@@ -198,7 +198,9 @@ public:
    * - # of computation: 1
    * Dense always return 0 
    */
-  size_t get_hash();
+  size_t get_hash(){
+    return structure_hash;
+  }
 
   /**
    * @brief Set row number
