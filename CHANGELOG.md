@@ -28,6 +28,8 @@ Unreleased
 - add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 ### Changed
+- compute_hash in CRS convert and constructor https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
 - Summarize CI stage public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
 - comment out LOBPCG run_gpu https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
 - comment out vector print_all test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
@@ -36,8 +38,9 @@ Unreleased
 - move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
-### Changed
-- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
+### Fixed
+- delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 0.10.0 - 2021/01/13
