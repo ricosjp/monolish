@@ -39,6 +39,7 @@ Unreleased
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
 ### Fixed
+- fix vhash return value bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215

@@ -34,6 +34,8 @@ size_t vhash(const size_t N, const int *y, const int seed_value,
   }
 
   logger.func_out();
+
+  return seed;
 }
 
 size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
@@ -61,6 +63,8 @@ size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
   }
 
   logger.func_out();
+
+  return seed;
 }
 
 } // namespace internal
