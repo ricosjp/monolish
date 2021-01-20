@@ -55,19 +55,6 @@ private:
    */
   mutable bool gpu_status = false;
 
-  /**
-   * @brief hash, created from row_index and col_index
-   */
-  size_t structure_hash;
-
-  /**
-   * @brief create index array hash (to compare structure)
-   * - # of computation: 2*nnz
-   * - Multi-threading: true
-   * - GPU acceleration: false
-   */
-  void create_hash();
-
 public:
   /**
    * @brief Coodinate format row index, which stores row numbers of the non-zero
@@ -412,13 +399,6 @@ public:
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return nnz; }
-
-  /**
-   * @brief get index array hash (to compare structure)
-   * @note
-   * - # of computation: 1
-   */
-  size_t get_hash() { return structure_hash; }
 
   /**
    * @brief fill matrix elements with a scalar value
