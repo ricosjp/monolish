@@ -41,12 +41,16 @@ template <typename T> bool test(const size_t size) {
   monolish::vml::add(x, y, t);
   monolish::vml::add(t, z, z); // rand(1~2) + 123+0, rand(1~2) + 123 + 111 ....
   if (monolish::util::build_with_gpu()) {
+#if 0
     printf("gpu printf:\n");
-    z.print_all(); // printf test
+    z.print_all(true); // printf test
+#endif
   }
   if (monolish::util::build_with_gpu()) {
+#if 0
     printf("cpu printf(before recv):\n");
     z.print_all(true); // printf test
+#endif
   }
 
   // copy (cpu and gpu)
@@ -57,8 +61,10 @@ template <typename T> bool test(const size_t size) {
   tmp.recv();
 
   if (monolish::util::build_with_gpu()) {
+#if 0
     printf("cpu printf(after recv):\n");
     z.print_all(); // printf test
+#endif
   }
 
   // compare (on cpu)
