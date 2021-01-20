@@ -31,6 +31,7 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
       row_ptr[c_row + 1] = i + 1;
     }
   }
+  compute_hash();
   logger.util_out();
 }
 template void CRS<double>::convert(COO<double> &coo);
@@ -47,6 +48,7 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   rowN = crs.get_row();
   colN = crs.get_col();
   nnz = crs.get_nnz();
+  structure_hash = crs.get_hash();
 
   if (crs.get_device_mem_stat() == true) {
     throw std::runtime_error(

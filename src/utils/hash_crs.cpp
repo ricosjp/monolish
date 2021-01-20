@@ -1,12 +1,12 @@
-#include "../../../include/common/monolish_dense.hpp"
-#include "../../../include/common/monolish_logger.hpp"
-#include "../../../include/common/monolish_matrix.hpp"
-#include "../../internal/monolish_internal.hpp"
+#include "../../include/common/monolish_dense.hpp"
+#include "../../include/common/monolish_logger.hpp"
+#include "../../include/common/monolish_matrix.hpp"
+#include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace matrix {
 
-template <typename T> void CRS<T>::create_hash() {
+template <typename T> void CRS<T>::compute_hash() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -17,8 +17,8 @@ template <typename T> void CRS<T>::create_hash() {
 
   logger.util_out();
 }
-template void CRS<double>::create_hash();
-template void CRS<float>::create_hash();
+template void CRS<double>::compute_hash();
+template void CRS<float>::compute_hash();
 
 } // namespace matrix
 } // namespace monolish
