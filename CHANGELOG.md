@@ -35,6 +35,7 @@ Unreleased
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
 ### Changed
+- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
 - fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 0.10.0 - 2021/01/13
