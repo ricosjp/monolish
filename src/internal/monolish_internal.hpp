@@ -11,6 +11,7 @@
 #endif
 
 #ifdef MONOLISH_USE_GPU
+#include <cusolverDn.h>
 #include "cusparse.h"
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
