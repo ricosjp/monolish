@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
+- add internal::vhash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
 - add Dense solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/214
 - add vector reciprocal test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 - add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
