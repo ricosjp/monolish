@@ -44,5 +44,24 @@ public:
   }
 };
 
+/**
+ * @brief Devide and Conquer solver
+ */
+template <typename Float> class DC : public solver::solver<Float> {
+private:
+  int LAPACK_DC(matrix::Dense<Float> &A, vector<Float> &lambda);
+
+public:
+  int solve(matrix::Dense<Float> &A, vector<Float> &lambda);
+
+  void create_precond(matrix::Dense<Float> &A) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+
+  void apply_precond(const vector<Float> &r, vector<Float> &z) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+};
+
 } // namespace standard_eigen
 } // namespace monolish
