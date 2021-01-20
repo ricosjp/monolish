@@ -14,7 +14,7 @@ int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A, vector<T> &lambda) {
   const char jobz = 'V';
   const char uplo = 'U';
 
-  int info = internal::lapack::syev(&jobz, &uplo, A, lambda);
+  int info = internal::lapack::syevd(A, lambda, &jobz, &uplo);
   if (info > 0) {
     ret = MONOLISH_SOLVER_BREAKDOWN;
   } else if (info < 0) {

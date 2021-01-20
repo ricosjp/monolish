@@ -93,8 +93,8 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
     monolish::vector<T> lambda(Sam.get_col());
     const char jobz = 'V';
     const char uplo = 'L';
-    bool bl = internal::lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
-    if (!bl) {
+    int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
+    if (info != 0) {
       throw std::runtime_error("LAPACK sygv failed");
     }
     std::size_t index = 0;
