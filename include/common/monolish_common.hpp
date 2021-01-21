@@ -111,13 +111,21 @@ template <typename T, typename U> bool is_same_structure(T A, U B) {
 }
 
 template <typename T>
-bool is_same_structure(matrix::Dense<T> A, matrix::Dense<T> B);
+bool is_same_structure(matrix::Dense<T> &A, matrix::Dense<T> &B);
 
 template <typename T>
-bool is_same_structure(matrix::COO<T> A, matrix::COO<T> B);
+bool is_same_structure(matrix::COO<T> &A, matrix::COO<T> &B);
 
 template <typename T>
-bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B);
+bool is_same_structure(matrix::CRS<T> &A, matrix::CRS<T> &B);
+
+template <typename T, typename... types>
+bool is_same_structure(T &A, types &... args) {
+  if(!(is_same_structure(A, args...))){
+    return false;
+  }
+  return true;
+}
 
 // create matrix //////////////////
 
