@@ -50,7 +50,8 @@ template <typename T> bool test() {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(COO_A, COO_B, COO_C, COO_A, COO_B, COO_C))) {
+  if (!(monolish::util::is_same_structure(COO_A, COO_B, COO_C, COO_A, COO_B,
+                                          COO_C))) {
     return false;
   }
 

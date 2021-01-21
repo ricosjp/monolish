@@ -115,8 +115,10 @@ bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B) {
   return ans;
 }
 
-template bool is_same_structure(const matrix::CRS<double> &A, const matrix::CRS<double> &B);
-template bool is_same_structure(const matrix::CRS<float> &A, const matrix::CRS<float> &B);
+template bool is_same_structure(const matrix::CRS<double> &A,
+                                const matrix::CRS<double> &B);
+template bool is_same_structure(const matrix::CRS<float> &A,
+                                const matrix::CRS<float> &B);
 
 } // namespace util
 } // namespace monolish

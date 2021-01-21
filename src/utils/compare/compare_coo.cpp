@@ -124,8 +124,10 @@ bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B) {
   return ans;
 }
 
-template bool is_same_structure(const matrix::COO<double> &A, const matrix::COO<double> &B);
-template bool is_same_structure(const matrix::COO<float> &A, const matrix::COO<float> &B);
+template bool is_same_structure(const matrix::COO<double> &A,
+                                const matrix::COO<double> &B);
+template bool is_same_structure(const matrix::COO<float> &A,
+                                const matrix::COO<float> &B);
 
 } // namespace util
 } // namespace monolish

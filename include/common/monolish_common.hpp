@@ -107,8 +107,8 @@ void random_vector(vector<T> &vec, const T min, const T max) {
 // is_same //////////////////
 
 /**
- * @brief compare matrix structure 
-**/
+ * @brief compare matrix structure
+ **/
 template <typename T, typename U> bool is_same_structure(const T A, const U B) {
   return false;
 }
@@ -153,20 +153,17 @@ template <typename T>
 bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
 
 /**
- * @brief compare matrix structure 
-**/
+ * @brief compare matrix structure
+ **/
 template <typename T, typename... types>
 bool is_same_structure(const T &A, const T &B, const types &... args) {
-  return is_same_structure(A,B) && is_same_structure(A, args...);
+  return is_same_structure(A, B) && is_same_structure(A, args...);
 }
-
 
 /**
  * @brief compare matrix size
-**/
-template <typename T, typename U> bool is_same_size(T A, U B) {
-  return false;
-}
+ **/
+template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
 
 /**
  * @brief compare row and col size
@@ -191,8 +188,7 @@ bool is_same_size(matrix::Dense<T> &A, matrix::Dense<T> &B);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-bool is_same_size(matrix::COO<T> &A, matrix::COO<T> &B);
+template <typename T> bool is_same_size(matrix::COO<T> &A, matrix::COO<T> &B);
 
 /**
  * @brief compare row and col size
@@ -204,15 +200,14 @@ bool is_same_size(matrix::COO<T> &A, matrix::COO<T> &B);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-bool is_same_size(matrix::CRS<T> &A, matrix::CRS<T> &B);
+template <typename T> bool is_same_size(matrix::CRS<T> &A, matrix::CRS<T> &B);
 
 /**
  * @brief compare matrix size
-**/
+ **/
 template <typename T, typename... types>
 bool is_same_size(const T &A, const T &B, const types &... args) {
-  return is_same_size(A,B) && is_same_size(A, args...);
+  return is_same_size(A, B) && is_same_size(A, args...);
 }
 
 // create matrix //////////////////
