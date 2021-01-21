@@ -95,7 +95,7 @@ template bool CRS<float>::operator!=(const CRS<float> &mat) const;
 namespace monolish {
 namespace util {
 template <typename T>
-bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B) {
+bool is_same_structure(matrix::CRS<T> &A, matrix::CRS<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -115,8 +115,8 @@ bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B) {
   return ans;
 }
 
-template bool is_same_structure(matrix::CRS<double> A, matrix::CRS<double> B);
-template bool is_same_structure(matrix::CRS<float> A, matrix::CRS<float> B);
+template bool is_same_structure(matrix::CRS<double> &A, matrix::CRS<double> &B);
+template bool is_same_structure(matrix::CRS<float> &A, matrix::CRS<float> &B);
 
 } // namespace util
 } // namespace monolish
