@@ -98,7 +98,7 @@ template bool COO<float>::operator!=(const COO<float> &mat) const;
 namespace monolish {
 namespace util {
 template <typename T>
-bool is_same_structure(matrix::COO<T> &A, matrix::COO<T> &B) {
+bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -124,8 +124,8 @@ bool is_same_structure(matrix::COO<T> &A, matrix::COO<T> &B) {
   return ans;
 }
 
-template bool is_same_structure(matrix::COO<double> &A, matrix::COO<double> &B);
-template bool is_same_structure(matrix::COO<float> &A, matrix::COO<float> &B);
+template bool is_same_structure(const matrix::COO<double> &A, const matrix::COO<double> &B);
+template bool is_same_structure(const matrix::COO<float> &A, const matrix::COO<float> &B);
 
 } // namespace util
 } // namespace monolish
