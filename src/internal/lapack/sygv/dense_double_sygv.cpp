@@ -55,18 +55,29 @@ int internal::lapack::sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B,
   double *Avald = A.val.data();
   double *Bvald = B.val.data();
   double *Wd = W.data();
-#pragma omp target data use_device_ptr(Avald, Bvald, Wd)
+  std::vector<int> cu_lwork(1);
+  int *cu_lworkd = cu_lwork.data();
+#pragma omp target enter data map(to : cu_lworkd[0:1])
+#pragma omp target data use_device_ptr(Avald, Bvald, Wd, cu_lworkd)
   {
     //workspace query
-    internal::check_CUDA(cusolverDnDsygvd_bufferSize(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, &lwork));
-    double *work = (double *)malloc(sizeof(double) * lwork);
-    int *devinfo = (int *)malloc(sizeof(int));
-    internal::check_CUDA(cusolverDnDsygvd(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, work, lwork, devinfo));
-    info = *devinfo;
-    free(work);
-    free(devinfo);
+    internal::check_CUDA(cusolverDnDsygvd_bufferSize(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, cu_lworkd));
+  }
+#pragma omp target exit data map(from : cu_lworkd[0:1])
+  lwork = cu_lwork[0];
+  monolish::vector<double> work(lwork);
+  work.send();
+  double *workd = work.data();
+  std::vector<int> devinfo(1);
+  int *devinfod = devinfo.data();
+#pragma omp target enter data map(to : devinfod[0:1])
+#pragma omp target data use_device_ptr(Avald, Bvald, Wd, workd, devinfod)
+  {
+    internal::check_CUDA(cusolverDnDsygvd(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, workd, lwork, devinfod));
   }
   cudaDeviceSynchronize();
+#pragma omp target exit data map(from : devinfod[0:1])
+  info = devinfo[0];
   monolish::util::recv(A, W);
   cusolverDnDestroy(h);
 #else // MONOLISH_USE_GPU
