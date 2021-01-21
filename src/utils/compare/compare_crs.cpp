@@ -12,38 +12,47 @@ bool CRS<T>::equal(const CRS<T> &mat, bool compare_cpu_and_device) const {
   logger.util_in(monolish_func);
 
   if (get_row() != mat.get_row()) {
+    logger.util_out();
     return false;
   }
   if (get_col() != mat.get_col()) {
+    logger.util_out();
     return false;
   }
   if (get_device_mem_stat() != mat.get_device_mem_stat()) {
+    logger.util_out();
     return false;
   }
 
   if (get_device_mem_stat() == true) {
     if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
+      logger.util_out();
       return false;
     }
     if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
                            true))) {
+      logger.util_out();
       return false;
     }
     if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
                            true))) {
+      logger.util_out();
       return false;
     }
   } else if (get_device_mem_stat() == false ||
              compare_cpu_and_device == false) {
     if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
+      logger.util_out();
       return false;
     }
     if (!(internal::vequal(get_nnz(), col_ind.data(), mat.col_ind.data(),
                            false))) {
+      logger.util_out();
       return false;
     }
     if (!(internal::vequal(get_nnz(), row_ptr.data(), mat.row_ptr.data(),
                            false))) {
+      logger.util_out();
       return false;
     }
   }
@@ -82,3 +91,32 @@ template bool CRS<float>::operator!=(const CRS<float> &mat) const;
 
 } // namespace matrix
 } // namespace monolish
+
+namespace monolish{
+  namespace util{
+    template <typename T>
+      bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B){
+        Logger &logger = Logger::get_instance();
+        logger.util_in(monolish_func);
+
+        bool ans = true;
+
+        if(A.get_row() != B.get_row() && A.get_col() != B.get_col()){
+          logger.util_out();
+          ans = false;
+        }
+
+        if (A.get_hash() != B.get_hash()){
+          logger.util_out();
+          return false;
+        }
+
+        logger.util_out();
+        return ans;
+      }
+
+    template bool is_same_structure(matrix::CRS<double> A, matrix::CRS<double> B);
+    template bool is_same_structure(matrix::CRS<float> A, matrix::CRS<float> B);
+
+  }
+}
