@@ -9,6 +9,7 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   monolish::matrix::CRS<T> A(mat);
   T lambda;
   monolish::vector<T> x(A.get_row());
+  monolish::util::send(A);
 
   monolish::eigen::LOBPCG<T> solver;
 
