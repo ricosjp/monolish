@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add variadic template is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
 - add is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/222
 - add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
 - add internal::vhash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
@@ -40,6 +41,7 @@ Unreleased
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
 ### Fixed
+- fix get_hash and is_same_structure const https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
 - fix vhash return value bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
