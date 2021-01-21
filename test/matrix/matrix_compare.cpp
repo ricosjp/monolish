@@ -46,7 +46,11 @@ template <typename T> bool test() {
   val_array[7] = 10;
   monolish::matrix::COO<T> COO_C(N, N, NNZ, row_array, col_array, val_array);
 
-  if (COO_A == COO_B) {
+  if (COO_A == COO_B && COO_A == COO_C) {
+    return false;
+  }
+
+  if (!(monolish::util::is_same_size(COO_A, COO_B, COO_C))) {
     return false;
   }
 
@@ -57,23 +61,35 @@ template <typename T> bool test() {
 
   monolish::matrix::CRS<T> CRS_A(COO_A);
   monolish::matrix::CRS<T> CRS_B(COO_B);
+  monolish::matrix::CRS<T> CRS_C(COO_C);
 
-  if (CRS_A == CRS_B) {
+  if (CRS_A == CRS_B && CRS_A == CRS_C) {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(CRS_A, CRS_B))) {
+  if (!(monolish::util::is_same_size(CRS_A, CRS_B, CRS_C))) {
+    return false;
+  }
+
+  if (!(monolish::util::is_same_structure(CRS_A, CRS_B, CRS_C, CRS_A, CRS_B,
+                                          CRS_C))) {
     return false;
   }
 
   monolish::matrix::Dense<T> Dense_A(COO_A);
   monolish::matrix::Dense<T> Dense_B(COO_B);
+  monolish::matrix::Dense<T> Dense_C(COO_C);
 
-  if (Dense_A == Dense_B) {
+  if (Dense_A == Dense_B && Dense_A == Dense_C) {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(Dense_A, Dense_B))) {
+  if (!(monolish::util::is_same_size(Dense_A, Dense_B, Dense_C))) {
+    return false;
+  }
+
+  if (!(monolish::util::is_same_structure(Dense_A, Dense_B, Dense_C, Dense_A,
+                                          Dense_B, Dense_C))) {
     return false;
   }
 
