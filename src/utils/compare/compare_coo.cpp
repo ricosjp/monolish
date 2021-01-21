@@ -95,37 +95,37 @@ template bool COO<float>::operator!=(const COO<float> &mat) const;
 } // namespace matrix
 } // namespace monolish
 
-namespace monolish{
-  namespace util{
-    template <typename T>
-      bool is_same_structure(matrix::COO<T> A, matrix::COO<T> B){
-        Logger &logger = Logger::get_instance();
-        logger.util_in(monolish_func);
+namespace monolish {
+namespace util {
+template <typename T>
+bool is_same_structure(matrix::COO<T> A, matrix::COO<T> B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 
-        bool ans = true;
+  bool ans = true;
 
-        if(A.get_row() != B.get_row() && A.get_col() != B.get_col()){
-          logger.util_out();
-          ans = false;
-        }
-
-        if (!(internal::vequal(A.get_nnz(), A.col_index.data(), B.col_index.data(),
-                false))) {
-          logger.util_out();
-          return false;
-        }
-        if (!(internal::vequal(A.get_nnz(), A.row_index.data(), B.row_index.data(),
-                false))) {
-          logger.util_out();
-          return false;
-        }
-
-        logger.util_out();
-        return ans;
-      }
-
-    template bool is_same_structure(matrix::COO<double> A, matrix::COO<double> B);
-    template bool is_same_structure(matrix::COO<float> A, matrix::COO<float> B);
-
+  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
   }
+
+  if (!(internal::vequal(A.get_nnz(), A.col_index.data(), B.col_index.data(),
+                         false))) {
+    logger.util_out();
+    return false;
+  }
+  if (!(internal::vequal(A.get_nnz(), A.row_index.data(), B.row_index.data(),
+                         false))) {
+    logger.util_out();
+    return false;
+  }
+
+  logger.util_out();
+  return ans;
 }
+
+template bool is_same_structure(matrix::COO<double> A, matrix::COO<double> B);
+template bool is_same_structure(matrix::COO<float> A, matrix::COO<float> B);
+
+} // namespace util
+} // namespace monolish

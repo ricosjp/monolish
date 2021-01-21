@@ -92,31 +92,31 @@ template bool CRS<float>::operator!=(const CRS<float> &mat) const;
 } // namespace matrix
 } // namespace monolish
 
-namespace monolish{
-  namespace util{
-    template <typename T>
-      bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B){
-        Logger &logger = Logger::get_instance();
-        logger.util_in(monolish_func);
+namespace monolish {
+namespace util {
+template <typename T>
+bool is_same_structure(matrix::CRS<T> A, matrix::CRS<T> B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 
-        bool ans = true;
+  bool ans = true;
 
-        if(A.get_row() != B.get_row() && A.get_col() != B.get_col()){
-          logger.util_out();
-          ans = false;
-        }
-
-        if (A.get_hash() != B.get_hash()){
-          logger.util_out();
-          return false;
-        }
-
-        logger.util_out();
-        return ans;
-      }
-
-    template bool is_same_structure(matrix::CRS<double> A, matrix::CRS<double> B);
-    template bool is_same_structure(matrix::CRS<float> A, matrix::CRS<float> B);
-
+  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
   }
+
+  if (A.get_hash() != B.get_hash()) {
+    logger.util_out();
+    return false;
+  }
+
+  logger.util_out();
+  return ans;
 }
+
+template bool is_same_structure(matrix::CRS<double> A, matrix::CRS<double> B);
+template bool is_same_structure(matrix::CRS<float> A, matrix::CRS<float> B);
+
+} // namespace util
+} // namespace monolish

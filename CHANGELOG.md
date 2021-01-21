@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/222
 - add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
 - add internal::vhash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
 - add Dense solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/214
@@ -42,7 +43,7 @@ Unreleased
 - fix vhash return value bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
-- fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+- fix ans_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 0.10.0 - 2021/01/13
 -----------

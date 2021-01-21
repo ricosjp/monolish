@@ -43,33 +43,33 @@ template <typename T> bool test() {
   val_array[7] = 9;
   monolish::matrix::COO<T> COO_B(N, N, NNZ, row_array, col_array, val_array);
 
-  if(COO_A == COO_B){
+  if (COO_A == COO_B) {
     return false;
   }
 
-  if( !(monolish::util::is_same_structure(COO_A, COO_B)) ){
+  if (!(monolish::util::is_same_structure(COO_A, COO_B))) {
     return false;
   }
 
   monolish::matrix::CRS<T> CRS_A(COO_A);
   monolish::matrix::CRS<T> CRS_B(COO_B);
 
-  if(CRS_A == CRS_B){
+  if (CRS_A == CRS_B) {
     return false;
   }
 
-  if( !(monolish::util::is_same_structure(CRS_A, CRS_B)) ){
+  if (!(monolish::util::is_same_structure(CRS_A, CRS_B))) {
     return false;
   }
 
   monolish::matrix::Dense<T> Dense_A(COO_A);
   monolish::matrix::Dense<T> Dense_B(COO_B);
 
-  if(Dense_A == Dense_B){
+  if (Dense_A == Dense_B) {
     return false;
   }
 
-  if( !(monolish::util::is_same_structure(Dense_A, Dense_B)) ){
+  if (!(monolish::util::is_same_structure(Dense_A, Dense_B))) {
     return false;
   }
 

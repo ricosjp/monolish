@@ -106,8 +106,9 @@ void random_vector(vector<T> &vec, const T min, const T max) {
 
 // is_same_structure //////////////////
 //
-template <typename T, typename U>
-bool is_same_structure(T A, U B){ return false; }
+template <typename T, typename U> bool is_same_structure(T A, U B) {
+  return false;
+}
 
 template <typename T>
 bool is_same_structure(matrix::Dense<T> A, matrix::Dense<T> B);
