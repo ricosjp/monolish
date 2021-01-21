@@ -147,9 +147,9 @@ bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B) {
 }
 
 template bool is_same_size(const matrix::COO<double> &A,
-                                const matrix::COO<double> &B);
+                           const matrix::COO<double> &B);
 template bool is_same_size(const matrix::COO<float> &A,
-                                const matrix::COO<float> &B);
+                           const matrix::COO<float> &B);
 
 } // namespace util
 } // namespace monolish

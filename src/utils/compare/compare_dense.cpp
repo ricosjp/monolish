@@ -108,9 +108,9 @@ bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
 }
 
 template bool is_same_size(const matrix::Dense<double> &A,
-                                const matrix::Dense<double> &B);
+                           const matrix::Dense<double> &B);
 template bool is_same_size(const matrix::Dense<float> &A,
-                                const matrix::Dense<float> &B);
+                           const matrix::Dense<float> &B);
 
 } // namespace util
 } // namespace monolish

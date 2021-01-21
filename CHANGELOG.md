@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add is_same_size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
 - add variadic template is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
 - add is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/222
 - add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216

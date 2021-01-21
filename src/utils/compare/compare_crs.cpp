@@ -138,9 +138,9 @@ bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B) {
 }
 
 template bool is_same_size(const matrix::CRS<double> &A,
-                                const matrix::CRS<double> &B);
+                           const matrix::CRS<double> &B);
 template bool is_same_size(const matrix::CRS<float> &A,
-                                const matrix::CRS<float> &B);
+                           const matrix::CRS<float> &B);
 
 } // namespace util
 } // namespace monolish
