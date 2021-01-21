@@ -38,6 +38,7 @@ sxat: $(OBJS_SX)
 run_cpu:
 	bash ./test.sh matrix_common cpu
 	bash ./test.sh matrix_convert cpu
+	bash ./test.sh matrix_compare cpu
 	bash ./test.sh matrix_transpose cpu
 	bash ./test.sh matrix_blas cpu
 	bash ./test.sh matrix_vml cpu
@@ -46,6 +47,7 @@ run_cpu:
 run_gpu:
 	bash ./test.sh matrix_common gpu
 	bash ./test.sh matrix_convert gpu
+	bash ./test.sh matrix_compare gpu
 	bash ./test.sh matrix_transpose gpu
 	bash ./test.sh matrix_blas gpu
 	bash ./test.sh matrix_vml gpu
@@ -54,6 +56,7 @@ run_gpu:
 run_a64fx:
 	bash ./test.sh matrix_common a64fx
 	bash ./test.sh matrix_convert a64fx
+	bash ./test.sh matrix_compare a64fx
 	bash ./test.sh matrix_transpose a64fx
 	bash ./test.sh matrix_blas a64fx
 	bash ./test.sh matrix_vml a64fx
@@ -62,6 +65,7 @@ run_a64fx:
 run_sxat:
 	# bash ./test.sh matrix_common sxat
 	bash ./test.sh matrix_convert sxat
+	bash ./test.sh matrix_compare sxat
 	bash ./test.sh matrix_transpose sxat
 	bash ./test.sh matrix_blas sxat
 	bash ./test.sh matrix_vml sxat
