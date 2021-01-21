@@ -56,19 +56,17 @@ int internal::lapack::sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B,
 #pragma omp target data use_device_ptr(Avald, Bvald, Wd)
   {
     //workspace query
-    internal::check_CUDA(cusolverDnDsygvd_bufferSize(h, cu_itype, cu_jobz, cu_uplo, size*size, Avald, size, Bvald, size, Wd, &lwork));
+    internal::check_CUDA(cusolverDnDsygvd_bufferSize(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, &lwork));
   }
   monolish::vector<double> work(lwork);
-  monolish::vector<int> devinfo(1);
-  monolish::util::send(work, devinfo);
+  monolish::util::send(work);
   double *workd = work.data();
-  int *devinfod = devinfo.data();
-#pragma omp target data use_device_ptr(Avald, Bvald, Wd, workd, devinfod)
+#pragma omp target data use_device_ptr(Avald, Bvald, Wd, workd)
   {
-    internal::check_CUDA(cusolverDnDsygvd(h, cu_itype, cu_jobz, cu_uplo, size*size, Avald, size, Bvald, size, Wd, workd, lwork, devinfod));
+    int devinfo;
+    internal::check_CUDA(cusolverDnDsygvd(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, workd, lwork, &devinfo));
+    info = devinfo;
   }
-  monolish::util::recv(devinfo);
-  info = devinfo[0];
   cusolverDnDestroy(h);
 #else // MONOLISH_USE_GPU
   std::vector<double> work(1);
