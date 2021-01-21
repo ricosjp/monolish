@@ -34,6 +34,10 @@ case $1 in
         done
         ;;
 
+    "matrix_compare" ) 
+        $PROFILER ./$1_$2.out $prec $format $M $N 1 || exit 1
+        ;;
+
     "matrix_vml" ) 
         for M in ${MAT_TEST_SIZE[@]}; do
             for N in ${MAT_TEST_SIZE[@]}; do
