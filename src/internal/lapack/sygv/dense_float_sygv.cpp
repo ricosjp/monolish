@@ -10,8 +10,8 @@ namespace monolish {
 
 // float
 int internal::lapack::sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B,
-                            vector<float> &W, const int itype,
-                            const char *jobz, const char *uplo) {
+                            vector<float> &W, const int itype, const char *jobz,
+                            const char *uplo) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
   int info = 0;
@@ -22,7 +22,7 @@ int internal::lapack::sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B,
   cusolverDnHandle_t h;
   internal::check_CUDA(cusolverDnCreate(&h));
   cusolverEigType_t cu_itype;
-  switch(itype) {
+  switch (itype) {
   case 1:
     cu_itype = CUSOLVER_EIG_TYPE_1;
     break;
@@ -57,20 +57,24 @@ int internal::lapack::sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B,
   float *Wd = W.data();
 #pragma omp target data use_device_ptr(Avald, Bvald, Wd)
   {
-    //workspace query
-    internal::check_CUDA(cusolverDnSsygvd_bufferSize(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, &lwork));
+    // workspace query
+    internal::check_CUDA(cusolverDnSsygvd_bufferSize(h, cu_itype, cu_jobz,
+                                                     cu_uplo, size, Avald, size,
+                                                     Bvald, size, Wd, &lwork));
   }
   monolish::vector<float> work(lwork);
   work.send();
   float *workd = work.data();
   std::vector<int> devinfo(1);
   int *devinfod = devinfo.data();
-#pragma omp target enter data map(to : devinfod[0:1])
+#pragma omp target enter data map(to : devinfod [0:1])
 #pragma omp target data use_device_ptr(Avald, Bvald, Wd, workd, devinfod)
   {
-    internal::check_CUDA(cusolverDnSsygvd(h, cu_itype, cu_jobz, cu_uplo, size, Avald, size, Bvald, size, Wd, workd, lwork, devinfod));
+    internal::check_CUDA(cusolverDnSsygvd(h, cu_itype, cu_jobz, cu_uplo, size,
+                                          Avald, size, Bvald, size, Wd, workd,
+                                          lwork, devinfod));
   }
-#pragma omp target exit data map(from : devinfod[0:1])
+#pragma omp target exit data map(from : devinfod [0:1])
   cudaDeviceSynchronize();
   info = devinfo[0];
   monolish::util::recv(A, W);
