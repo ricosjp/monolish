@@ -176,7 +176,7 @@ template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
  * - GPU acceleration: false
  **/
 template <typename T>
-bool is_same_size(matrix::Dense<T> &A, matrix::Dense<T> &B);
+bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
 
 /**
  * @brief compare row and col size
@@ -188,7 +188,7 @@ bool is_same_size(matrix::Dense<T> &A, matrix::Dense<T> &B);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> bool is_same_size(matrix::COO<T> &A, matrix::COO<T> &B);
+template <typename T> bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B);
 
 /**
  * @brief compare row and col size
@@ -200,7 +200,7 @@ template <typename T> bool is_same_size(matrix::COO<T> &A, matrix::COO<T> &B);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> bool is_same_size(matrix::CRS<T> &A, matrix::CRS<T> &B);
+template <typename T> bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
 
 /**
  * @brief compare matrix size
