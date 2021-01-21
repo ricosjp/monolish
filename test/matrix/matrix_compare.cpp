@@ -43,11 +43,15 @@ template <typename T> bool test() {
   val_array[7] = 9;
   monolish::matrix::COO<T> COO_B(N, N, NNZ, row_array, col_array, val_array);
 
+  val_array[7] = 10;
+  monolish::matrix::COO<T> COO_C(N, N, NNZ, row_array, col_array, val_array);
+
   if (COO_A == COO_B) {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(COO_A, COO_B))) {
+  if (!(monolish::util::is_same_structure(COO_A, COO_B, COO_C, COO_A, COO_B,
+                                          COO_C))) {
     return false;
   }
 
