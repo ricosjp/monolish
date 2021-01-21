@@ -124,7 +124,7 @@ template <typename T, typename U> bool is_same_structure(const T A, const U B) {
  * - GPU acceleration: false
  **/
 template <typename T>
-bool is_same_structure(const vector<T> &x, const vector &y) {
+bool is_same_structure(const vector<T> &x, const vector<T> &y) {
   return x.size() == y.size();
 }
 
@@ -190,7 +190,8 @@ template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> bool is_same_size(const vector<T> &x, const vector &y) {
+template <typename T>
+bool is_same_size(const vector<T> &x, const vector<T> &y) {
   return x.size() == y.size();
 }
 
