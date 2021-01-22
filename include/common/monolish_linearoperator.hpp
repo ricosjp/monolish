@@ -50,6 +50,11 @@ private:
   bool rmatvec_init_flag;
 
   /**
+   * @brief true: sended, false: not send
+   */
+  mutable bool gpu_status = false;
+
+  /**
    * @brief pseudo multiplication function of matrix and vector
    */
   std::function<vector<Float>(const vector<Float>&)> matvec;
@@ -248,7 +253,7 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  bool get_device_mem_stat() const {return false;};
+  bool get_device_mem_stat() const {return gpu_status;};
 
   /**
    * @brief destructor of LinearOperator, free GPU memory

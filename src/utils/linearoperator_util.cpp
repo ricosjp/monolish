@@ -20,6 +20,7 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N){
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
+  gpu_status = false;
   matvec_init_flag = false;
   rmatvec_init_flag = false;
   logger.util_out();
@@ -33,6 +34,7 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::fun
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
+  gpu_status = false;
   matvec = MATVEC;
   matvec_init_flag = true;
   rmatvec_init_flag = false;
@@ -48,6 +50,7 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N, const std::fun
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
+  gpu_status = false;
   matvec = MATVEC;
   matvec_init_flag = true;
   rmatvec = RMATVEC;
@@ -65,6 +68,8 @@ template <typename T> LinearOperator<T>::LinearOperator(const LinearOperator<T>&
 
   rowN = linearoperator.get_row();
   colN = linearoperator.get_col();
+
+  gpu_status = linearoperator.get_device_mem_stat();
 
   matvec = linearoperator.get_matvec();
   matvec_init_flag = linearoperator.get_matvec_init_flag();
@@ -84,6 +89,8 @@ template <typename T> void LinearOperator<T>::convert(COO<T> &coo){
 
   rowN = coo.get_row();
   colN = coo.get_col();
+
+  gpu_status = coo.get_device_mem_stat();
 
   set_matvec([&](const monolish::vector<T>& VEC){
     CRS<T> crs(coo);
