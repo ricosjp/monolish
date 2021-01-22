@@ -67,8 +67,6 @@ bool test_send_matvec_linearoperator(const size_t M, const size_t N, double tol)
     nnzrow = N - 1;
   }
 
-  fprintf(stderr, "test_send_matvec_linearoperator start\n");
-
   monolish::matrix::COO<T> seedA =
       monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
 
@@ -83,16 +81,10 @@ bool test_send_matvec_linearoperator(const size_t M, const size_t N, double tol)
   monolish::matrix::Dense<T> AA(seedA);
   ans_matvec(AA, x, ansy);
 
-  fprintf(stderr, "send to GPU\n");
   monolish::util::send(A1, x, y);
-  fprintf(stderr, "create LinearOperator\n");
   MAT A2(A1); // M*N matrix
-  fprintf(stderr, "GPU states = %u %u %u\n", A2.get_device_mem_stat(), x.get_device_mem_stat(), y.get_device_mem_stat());
   monolish::blas::matvec(A2, x, y);
-  fprintf(stderr, "calculation end\n");
   y.recv();
-
-  fprintf(stderr, "test_send_matvec_linearoperator middle\n");
 
   return ans_check<T>(__func__, A2.type(), y.data(), ansy.data(), y.size(), tol);
 }

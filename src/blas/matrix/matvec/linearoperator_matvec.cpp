@@ -12,6 +12,11 @@ void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> 
     throw std::runtime_error("error vector size is not same");
   }
 
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
+      A.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   if(!A.get_matvec_init_flag()){
     throw std::runtime_error("matvec is not defined in A");
   }
@@ -28,6 +33,11 @@ void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double>
   // err, M = MN * N
   if (A.get_row() != y.size() && A.get_col() != x.size()) {
     throw std::runtime_error("error vector size is not same");
+  }
+
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
+      A.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
   if(!A.get_rmatvec_init_flag()){
@@ -48,6 +58,11 @@ void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x
     throw std::runtime_error("error vector size is not same");
   }
 
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
+      A.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
+  }
+
   if(!A.get_matvec_init_flag()){
     throw std::runtime_error("matvec is not defined in A");
   }
@@ -64,6 +79,11 @@ void blas::rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &
   // err, M = MN * N
   if (A.get_row() != y.size() && A.get_col() != x.size()) {
     throw std::runtime_error("error vector size is not same");
+  }
+
+  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
+      A.get_device_mem_stat() != y.get_device_mem_stat()) {
+    throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
   if(!A.get_rmatvec_init_flag()){

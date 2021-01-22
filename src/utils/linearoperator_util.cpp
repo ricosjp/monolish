@@ -122,7 +122,6 @@ template <typename T> void LinearOperator<T>::convert(CRS<T> &crs){
     if(gpu_status) {
       monolish::util::send(vec);
     }
-    fprintf(stderr, "GPU status in matvec in LinearOperator : %u %u %u\n", crs.get_device_mem_stat(), VEC.get_device_mem_stat(), vec.get_device_mem_stat());
     monolish::blas::matvec(crs, VEC, vec);
     return vec;
   });

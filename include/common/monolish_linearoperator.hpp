@@ -259,6 +259,8 @@ public:
    * **/
   bool get_device_mem_stat() const {return gpu_status;};
 
+  void set_device_mem_stat(bool status) {gpu_status = status; return;};
+
   /**
    * @brief destructor of LinearOperator, free GPU memory
    * @note
