@@ -304,25 +304,25 @@ int main(int argc, char **argv) {
 
   // matmul LinearOperator//
   if (test_send_matmul<monolish::matrix::LinearOperator<double>,
-                       monolish::matrix::Dense<double>,
-                       monolish::matrix::Dense<double>, double>(
+                       monolish::matrix::LinearOperator<double>,
+                       monolish::matrix::LinearOperator<double>, double>(
           M, N, K, 1.0e-8) == false) {
     return 1;
   }
   if (test_send_matmul<monolish::matrix::LinearOperator<float>,
-                       monolish::matrix::Dense<float>,
-                       monolish::matrix::Dense<float>, float>(
+                       monolish::matrix::LinearOperator<float>,
+                       monolish::matrix::LinearOperator<float>, float>(
           M, N, K, 1.0e-4) == false) {
     return 1;
   }
   if (test_matmul<monolish::matrix::LinearOperator<double>,
-                  monolish::matrix::Dense<double>,
-                  monolish::matrix::Dense<double>, double>(M, N, K, 1.0e-8) ==
+                  monolish::matrix::LinearOperator<double>,
+                  monolish::matrix::LinearOperator<double>, double>(M, N, K, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_matmul<monolish::matrix::LinearOperator<float>, monolish::matrix::Dense<float>,
-                  monolish::matrix::Dense<float>, float>(M, N, K, 1.0e-4) ==
+  if (test_matmul<monolish::matrix::LinearOperator<float>, monolish::matrix::LinearOperator<float>,
+                  monolish::matrix::LinearOperator<float>, float>(M, N, K, 1.0e-4) ==
       false) {
     return 1;
   }
