@@ -42,8 +42,8 @@ int internal::lapack::syevd(matrix::Dense<double> &A, vector<double> &W,
 #pragma omp target data use_device_ptr(Avald, Wd)
   {
     // workspace query
-    internal::check_CUDA(cusolverDnDsyevd_bufferSize(h, cu_jobz,
-                                                     cu_uplo, size, Avald, size, Wd, &lwork));
+    internal::check_CUDA(cusolverDnDsyevd_bufferSize(h, cu_jobz, cu_uplo, size,
+                                                     Avald, size, Wd, &lwork));
   }
   monolish::vector<double> work(lwork);
   work.send();
@@ -53,9 +53,8 @@ int internal::lapack::syevd(matrix::Dense<double> &A, vector<double> &W,
 #pragma omp target enter data map(to : devinfod [0:1])
 #pragma omp target data use_device_ptr(Avald, Wd, workd, devinfod)
   {
-    internal::check_CUDA(cusolverDnDsyevd(h, cu_jobz, cu_uplo, size,
-                                          Avald, size, Wd, workd,
-                                          lwork, devinfod));
+    internal::check_CUDA(cusolverDnDsyevd(h, cu_jobz, cu_uplo, size, Avald,
+                                          size, Wd, workd, lwork, devinfod));
   }
 #pragma omp target exit data map(from : devinfod [0:1])
   cudaDeviceSynchronize();
