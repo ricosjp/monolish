@@ -13,7 +13,7 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
   monolish::matrix::Dense<T> Aorig(COO);
   monolish::vector<T> lambda(DIM);
 
-  monolish::eigen::DC<T> solver;
+  monolish::eigen::DC<monolish::matrix::Dense<T>, T> solver;
   if (monolish::util::solver_check(solver.solve(A, lambda))) {
     return false;
   }
@@ -54,7 +54,7 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
   monolish::matrix::Dense<T> Aorig(COO);
   monolish::vector<T> lambda(DIM);
 
-  monolish::eigen::DC<T> solver;
+  monolish::eigen::DC<monolish::matrix::COO<T>, T> solver;
   if (monolish::util::solver_check(solver.solve(A, lambda))) {
     return false;
   }

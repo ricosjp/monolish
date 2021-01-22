@@ -11,7 +11,7 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   monolish::vector<T> x(A.get_row());
   monolish::util::send(A);
 
-  monolish::eigen::LOBPCG<T> solver;
+  monolish::eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
 
   solver.set_tol(tol_res);
   solver.set_lib(0);
@@ -92,36 +92,36 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test_tridiagonal_toeplitz<double, monolish::equation::none<double>>(
+  if (test_tridiagonal_toeplitz<double, monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           check_ans, 3.0e-2, 8.0e-2) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<float, monolish::equation::none<float>>(
+  if (test_tridiagonal_toeplitz<float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           check_ans, 1.0e-1, 1.0e-0) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<double, monolish::equation::Jacobi<double>>(
+  if (test_tridiagonal_toeplitz<double, monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
           check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
-  if (test_tridiagonal_toeplitz<float, monolish::equation::Jacobi<float>>(
+  if (test_tridiagonal_toeplitz<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
           check_ans, 5.0e-2, 5.0e-2) == false) {
     return 1;
   }
 
-  if (test_laplacian_1d<double, monolish::equation::none<double>>(
+  if (test_laplacian_1d<double, monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           check_ans, 2.0e-2, 5.0e-2) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float, monolish::equation::none<float>>(
+  if (test_laplacian_1d<float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           check_ans, 1.0e-1, 3.0e-1) == false) {
     return 1;
   }
-  if (test_laplacian_1d<double, monolish::equation::Jacobi<double>>(
+  if (test_laplacian_1d<double, monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
           check_ans, 5.0e-2, 5.0e-2) == false) {
     return 1;
   }
-  if (test_laplacian_1d<float, monolish::equation::Jacobi<float>>(
+  if (test_laplacian_1d<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
           check_ans, 2.0e-1, 2.0e-1) == false) {
     return 1;
   }
