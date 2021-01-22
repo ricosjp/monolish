@@ -8,7 +8,7 @@ namespace monolish {
 // LinearOperator ///////////////////////////
 /////////////////////////////////////////////
 
-void vml::add(const matrix::LinearOperator<double> &A, const double alpha,
+void vml::add(const matrix::LinearOperator<double> &A, const double &alpha,
               matrix::LinearOperator<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -45,7 +45,7 @@ void vml::add(const matrix::LinearOperator<double> &A, const double alpha,
   logger.func_out();
 }
 
-void vml::sub(const matrix::LinearOperator<double> &A, const double alpha,
+void vml::sub(const matrix::LinearOperator<double> &A, const double &alpha,
               matrix::LinearOperator<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -82,7 +82,7 @@ void vml::sub(const matrix::LinearOperator<double> &A, const double alpha,
   logger.func_out();
 }
 
-void vml::mul(const matrix::LinearOperator<double> &A, const double alpha,
+void vml::mul(const matrix::LinearOperator<double> &A, const double &alpha,
               matrix::LinearOperator<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -119,7 +119,7 @@ void vml::mul(const matrix::LinearOperator<double> &A, const double alpha,
   logger.func_out();
 }
 
-void vml::div(const matrix::LinearOperator<double> &A, const double alpha,
+void vml::div(const matrix::LinearOperator<double> &A, const double &alpha,
               matrix::LinearOperator<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);

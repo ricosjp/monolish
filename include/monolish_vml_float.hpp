@@ -1111,7 +1111,7 @@ void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void add(const matrix::LinearOperator<float> &A, const float alpha,
+void add(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 
@@ -1126,7 +1126,7 @@ void add(const matrix::LinearOperator<float> &A, const float alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void sub(const matrix::LinearOperator<float> &A, const float alpha,
+void sub(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
@@ -1140,7 +1140,7 @@ void sub(const matrix::LinearOperator<float> &A, const float alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void mul(const matrix::LinearOperator<float> &A, const float alpha,
+void mul(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
@@ -1154,7 +1154,7 @@ void mul(const matrix::LinearOperator<float> &A, const float alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void div(const matrix::LinearOperator<float> &A, const float alpha,
+void div(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 

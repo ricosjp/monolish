@@ -1116,7 +1116,7 @@ void sub(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<d
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void add(const matrix::LinearOperator<double> &A, const double alpha,
+void add(const matrix::LinearOperator<double> &A, const double &alpha,
          matrix::LinearOperator<double> &C);
 
 
@@ -1131,7 +1131,7 @@ void add(const matrix::LinearOperator<double> &A, const double alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void sub(const matrix::LinearOperator<double> &A, const double alpha,
+void sub(const matrix::LinearOperator<double> &A, const double &alpha,
          matrix::LinearOperator<double> &C);
 
 /**
@@ -1145,7 +1145,7 @@ void sub(const matrix::LinearOperator<double> &A, const double alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void mul(const matrix::LinearOperator<double> &A, const double alpha,
+void mul(const matrix::LinearOperator<double> &A, const double &alpha,
          matrix::LinearOperator<double> &C);
 
 /**
@@ -1159,7 +1159,7 @@ void mul(const matrix::LinearOperator<double> &A, const double alpha,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void div(const matrix::LinearOperator<double> &A, const double alpha,
+void div(const matrix::LinearOperator<double> &A, const double &alpha,
          matrix::LinearOperator<double> &C);
 
 } // namespace vml
