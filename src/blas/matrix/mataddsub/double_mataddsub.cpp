@@ -91,12 +91,17 @@ void blas::matadd(const matrix::LinearOperator<double> &A, const matrix::LinearO
         if(A.get_device_mem_stat()){
           util::send(vec, vec_tmp);
         }
+        fprintf(stderr, "check2-1\n");
         blas::matvec(A, VEC, vec);
+        fprintf(stderr, "check2-2\n");
         blas::matvec(B, VEC, vec_tmp);
+        fprintf(stderr, "check2-3\n");
         blas::axpy(1.0, vec_tmp, vec);
+        fprintf(stderr, "check2-4\n");
         if(A.get_device_mem_stat()){
           util::device_free(vec_tmp);
         }
+        fprintf(stderr, "check2-5\n");
         return vec;
       }
     );
