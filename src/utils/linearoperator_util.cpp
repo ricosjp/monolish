@@ -168,13 +168,10 @@ void LinearOperator<T>::convert_to_Dense(Dense<T>& dense) const {
     if(gpu_status){
       util::send(ans, vec);
     }
-    fprintf(stderr, "check3-1\n");
     ans = matvec(vec);
-    fprintf(stderr, "check3-2\n");
     if(gpu_status){
       util::recv(ans);
     }
-    fprintf(stderr, "check3-3\n");
     for(size_t j = 0; j < rowN; ++j){
       values[j*colN+i] = ans[j];
     }

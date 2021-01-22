@@ -79,20 +79,14 @@ bool test_send_matadd_linearoperator(const size_t M, const size_t N, double tol)
   ans_matadd(AA, BB, CC);
   monolish::matrix::COO<T> ansC(CC);
 
-  fprintf(stderr, "check1-1\n");
   monolish::util::send(A1, B1, C1);
-  fprintf(stderr, "check1-2\n");
   MAT_A A(A1);
   MAT_B B(B1);
   MAT_C C(C1);
-  fprintf(stderr, "check1-3\n");
   monolish::blas::matadd(A, B, C);
-  fprintf(stderr, "check1-4\n");
   C.recv();
-  fprintf(stderr, "check1-5\n");
 
   monolish::matrix::COO<T> resultC(C);
-  fprintf(stderr, "check1-6\n");
 
   return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
                       ansC.get_nnz(), tol);
