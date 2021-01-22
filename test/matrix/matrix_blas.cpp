@@ -235,11 +235,11 @@ int main(int argc, char **argv) {
   }
 
   // matvec LinearOperator//
-  if (test_send_matvec<monolish::matrix::LinearOperator<double>, double>(M, N, 1.0e-6) ==
+  if (test_send_matvec_linearoperator<monolish::matrix::LinearOperator<double>, double>(M, N, 1.0e-6) ==
       false) {
     return 1;
   }
-  if (test_send_matvec<monolish::matrix::LinearOperator<float>, float>(M, N, 1.0e-3) ==
+  if (test_send_matvec_linearoperator<monolish::matrix::LinearOperator<float>, float>(M, N, 1.0e-3) ==
       false) {
     return 1;
   }
