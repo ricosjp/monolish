@@ -165,7 +165,13 @@ void LinearOperator<T>::convert_to_Dense(Dense<T>& dense) const {
     vec_tmp[i] = 1;
     vector<T> vec(vec_tmp);
     vector<T> ans(rowN);
+    if(gpu_status){
+      util::send(vec);
+    }
     ans = matvec(vec);
+    if(gpu_status){
+      util::recv(ans);
+    }
     for(size_t j = 0; j < rowN; ++j){
       values[j*colN+i] = ans[j];
     }
