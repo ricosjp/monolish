@@ -47,6 +47,11 @@ private:
    */
   mutable bool gpu_status = false;
 
+  /**
+   * @brief hash, created from row_ptr and col_ind
+   */
+  size_t structure_hash;
+
 public:
   /**
    * @brief CRS format value, which stores values of the non-zero elements (size
@@ -81,7 +86,7 @@ public:
   CRS(const size_t M, const size_t N, const size_t NNZ);
 
   /**
-   * @brief Create CRS matrix from array
+   * @brief Create CRS matrix from array, also compute the hash
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
@@ -91,7 +96,7 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: (M+1)+2nnz
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -99,7 +104,7 @@ public:
       const int *colind, const Float *value);
 
   /**
-   * @brief Create CRS matrix from std::vector
+   * @brief Create CRS matrix from std::vector, also compute the hash
    * @param M # of row
    * @param N # of col
    * @param rowptr row_ptr, which stores the starting points of the rows of the
@@ -108,7 +113,7 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: (M+1)+2nnz
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -116,7 +121,7 @@ public:
       const std::vector<int> colind, const std::vector<Float> value);
 
   /**
-   * @brief Convert CRS matrix from COO matrix
+   * @brief Convert CRS matrix from COO matrix, also compute the hash
    * @param coo COO format matrix
    * @note
    * - Multi-threading: false
@@ -134,7 +139,7 @@ public:
   void convert(CRS<Float> &crs);
 
   /**
-   * @brief Create CRS matrix from COO matrix
+   * @brief Create CRS matrix from COO matrix, also compute the hash
    * @param coo Source COO format matrix
    * @return coo COO format matrix
    * @note
@@ -202,6 +207,22 @@ public:
    * - GPU acceleration: false
    **/
   std::string type() const { return "CRS"; }
+
+  /**
+   * @brief compute index array hash (to compare structure)
+   * @note
+   * - # of computation: nnz + rowN + 1
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   */
+  void compute_hash();
+
+  /**
+   * @brief get index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   */
+  size_t get_hash() const { return structure_hash; }
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////

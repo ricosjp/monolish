@@ -66,3 +66,51 @@ template bool Dense<float>::operator!=(const Dense<float> &mat) const;
 
 } // namespace matrix
 } // namespace monolish
+
+namespace monolish {
+namespace util {
+
+template <typename T>
+bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = false;
+
+  if (A.get_row() == B.get_row() && A.get_col() == B.get_col()) {
+    logger.util_out();
+    ans = true;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_structure(const matrix::Dense<double> &A,
+                                const matrix::Dense<double> &B);
+template bool is_same_structure(const matrix::Dense<float> &A,
+                                const matrix::Dense<float> &B);
+
+template <typename T>
+bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_size(const matrix::Dense<double> &A,
+                           const matrix::Dense<double> &B);
+template bool is_same_size(const matrix::Dense<float> &A,
+                           const matrix::Dense<float> &B);
+
+} // namespace util
+} // namespace monolish

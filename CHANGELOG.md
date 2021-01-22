@@ -22,11 +22,19 @@ Unreleased
 -----------
 ### Added
 - LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
+- add vector is_same_size, is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
+- add is_same_size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
+- add variadic template is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
+- add is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/222
+- add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
+- add internal::vhash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
 - add Dense solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/214
 - add vector reciprocal test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 - add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 ### Changed
+- compute_hash in CRS convert and constructor https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
 - Summarize CI stage public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
 - comment out LOBPCG run_gpu https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
 - comment out vector print_all test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
@@ -35,9 +43,12 @@ Unreleased
 - move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
 - add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
 
-### Changed
-- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
-- fix ans\_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+### Fixed
+- fix get_hash and is_same_structure const https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
+- fix vhash return value bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- fix ans_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 0.10.0 - 2021/01/13
 -----------

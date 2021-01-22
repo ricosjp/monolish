@@ -104,6 +104,144 @@ void random_vector(vector<T> &vec, const T min, const T max) {
   }
 }
 
+// is_same //////////////////
+
+/**
+ * @brief compare matrix structure
+ **/
+template <typename T, typename U> bool is_same_structure(const T A, const U B) {
+  return false;
+}
+
+/**
+ * @brief compare structure of vector (same as is_same_size())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const vector<T> &x, const vector<T> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+
+/**
+ * @brief compare structure using col_index and row_index, M, and N
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B);
+
+/**
+ * @brief compare structure using structure_hash, M, and N
+ * @param A CRS matrix
+ * @param B CRS matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+
+/**
+ * @brief compare matrix structure
+ **/
+template <typename T, typename... types>
+bool is_same_structure(const T &A, const T &B, const types &... args) {
+  return is_same_structure(A, B) && is_same_structure(A, args...);
+}
+
+/**
+ * @brief compare matrix size
+ **/
+template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
+
+/**
+ * @brief compare size of vector (same as is_same_structure())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const vector<T> &x, const vector<T> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare row and col size
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+
+/**
+ * @brief compare row and col size
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B);
+
+/**
+ * @brief compare row and col size
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+
+/**
+ * @brief compare matrix size
+ **/
+template <typename T, typename... types>
+bool is_same_size(const T &A, const T &B, const types &... args) {
+  return is_same_size(A, B) && is_same_size(A, args...);
+}
+
 // create matrix //////////////////
 
 /**

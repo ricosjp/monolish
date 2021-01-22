@@ -36,13 +36,24 @@ template <typename Float> class CRS;
 template <typename Float> class COO {
 private:
   /**
-   * @brief neet col = row now
+   * @brief # of row
    */
   size_t rowN;
+
+  /**
+   * @brief # of col
+   */
   size_t colN;
+
+  /**
+   * @brief # of non-zero element
+   */
   size_t nnz;
 
-  mutable bool gpu_status = false; // true: sended, false: not send
+  /**
+   * @brief true: sended, false: not send
+   */
+  mutable bool gpu_status = false;
 
 public:
   /**

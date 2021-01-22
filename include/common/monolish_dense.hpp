@@ -30,14 +30,14 @@ private:
   size_t colN;
 
   /**
-   * @brief # of non-zero element
+   * @brief # of non-zero element (M * N)
    */
   size_t nnz;
 
   /**
    * @brief true: sended, false: not send
    */
-  mutable bool gpu_status = false; // true: sended, false: not send
+  mutable bool gpu_status = false;
 
 public:
   /**

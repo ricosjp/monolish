@@ -38,6 +38,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
   std::copy(colind, colind + nnz, col_ind.begin());
   std::copy(value, value + nnz, val.begin());
+  compute_hash();
   logger.util_out();
 }
 template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ,
@@ -62,6 +63,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
   std::copy(value.data(), value.data() + nnz, val.begin());
+  compute_hash();
   logger.util_out();
 }
 template CRS<double>::CRS(const size_t M, const size_t N,
@@ -103,6 +105,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                   false);
   internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
 
+  compute_hash();
   logger.util_out();
 }
 template CRS<double>::CRS(const CRS<double> &mat);
