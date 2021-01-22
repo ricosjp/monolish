@@ -166,7 +166,7 @@ void LinearOperator<T>::convert_to_Dense(Dense<T>& dense) const {
     vector<T> vec(vec_tmp);
     vector<T> ans(rowN);
     if(gpu_status){
-      util::send(vec);
+      util::send(ans, vec);
     }
     fprintf(stderr, "check3-1\n");
     ans = matvec(vec);
