@@ -47,6 +47,11 @@ private:
    */
   mutable bool gpu_status = false;
 
+  /**
+   * @brief hash, created from row_ptr and col_ind
+   */
+  size_t structure_hash;
+
 public:
   /**
    * @brief CRS format value, which stores values of the non-zero elements (size
@@ -81,7 +86,7 @@ public:
   CRS(const size_t M, const size_t N, const size_t NNZ);
 
   /**
-   * @brief Create CRS matrix from array
+   * @brief Create CRS matrix from array, also compute the hash
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
@@ -91,7 +96,7 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: (M+1)+2nnz
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -99,7 +104,7 @@ public:
       const int *colind, const Float *value);
 
   /**
-   * @brief Create CRS matrix from std::vector
+   * @brief Create CRS matrix from std::vector, also compute the hash
    * @param M # of row
    * @param N # of col
    * @param rowptr row_ptr, which stores the starting points of the rows of the
@@ -108,7 +113,7 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: (M+1)+2nnz
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -116,7 +121,7 @@ public:
       const std::vector<int> colind, const std::vector<Float> value);
 
   /**
-   * @brief Convert CRS from COO
+   * @brief Convert CRS matrix from COO matrix, also compute the hash
    * @param coo COO format matrix
    * @note
    * - Multi-threading: false
@@ -125,7 +130,16 @@ public:
   void convert(COO<Float> &coo);
 
   /**
-   * @brief Create CRS from COO
+   * @brief Convert CRS matrix from COO matrix
+   * @param crs CRS format matrix
+   * @note
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  void convert(CRS<Float> &crs);
+
+  /**
+   * @brief Create CRS matrix from COO matrix, also compute the hash
    * @param coo Source COO format matrix
    * @return coo COO format matrix
    * @note
@@ -135,26 +149,28 @@ public:
   CRS(COO<Float> &coo) { convert(coo); }
 
   /**
-   * @brief Create CRS from CRS
+   * @brief Create CRS matrix from CRS matrix
    * @param mat CRS format matrix
    * @note
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
+   *    - # of data transfer:  (M+1)+2nnz (only allocation)
+   *        - if `mat.gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   CRS(const CRS<Float> &mat);
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all();
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief get # of row
@@ -175,10 +191,9 @@ public:
   size_t get_col() const { return colN; }
 
   /**
-   * @brief matrix copy
-   * @return copied COO matrix
+   * @brief get # of non-zeros
    * @note
-   * - # of computation: 3nnz
+   * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -192,6 +207,22 @@ public:
    * - GPU acceleration: false
    **/
   std::string type() const { return "CRS"; }
+
+  /**
+   * @brief compute index array hash (to compare structure)
+   * @note
+   * - # of computation: nnz + rowN + 1
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   */
+  void compute_hash();
+
+  /**
+   * @brief get index array hash (to compare structure)
+   * @note
+   * - # of computation: 1
+   */
+  size_t get_hash() const { return structure_hash; }
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -299,17 +330,14 @@ public:
   }
 
   /**
-   * @brief matrix copy
-   * @return copied CRS matrix
+   * @brief fill matrix elements with a scalar value
+   * @param value scalar value
    * @note
-   * - # of computation: (M+1)+2nnz
+   * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
    **/
-  CRS copy();
+  void fill(Float value);
 
   /**
    * @brief matrix copy
@@ -317,11 +345,23 @@ public:
    * - # of computation: (M+1)+2nnz
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: (M+1)+2nnz (allocation)
-   *        - if `vec.gpu_statius == true`; copy on GPU
-   *        - else; coping data only on CPU
+   *    - # of data transfer:
+   *        - if `gpu_status == true`; coping data on GPU
+   *        - else; coping data on CPU
    **/
   void operator=(const CRS<Float> &mat);
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat CRS matrix
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const CRS<Float> &mat, bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -329,8 +369,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator==(const CRS<Float> &mat) const;
 
@@ -340,8 +382,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: (M+1)+2nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator!=(const CRS<Float> &mat) const;
 };

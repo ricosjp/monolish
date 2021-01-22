@@ -117,6 +117,144 @@ void random_vector(vector<T> &vec, const T min, const T max) {
   }
 }
 
+// is_same //////////////////
+
+/**
+ * @brief compare matrix structure
+ **/
+template <typename T, typename U> bool is_same_structure(const T A, const U B) {
+  return false;
+}
+
+/**
+ * @brief compare structure of vector (same as is_same_size())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const vector<T> &x, const vector<T> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+
+/**
+ * @brief compare structure using col_index and row_index, M, and N
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B);
+
+/**
+ * @brief compare structure using structure_hash, M, and N
+ * @param A CRS matrix
+ * @param B CRS matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+
+/**
+ * @brief compare matrix structure
+ **/
+template <typename T, typename... types>
+bool is_same_structure(const T &A, const T &B, const types &... args) {
+  return is_same_structure(A, B) && is_same_structure(A, args...);
+}
+
+/**
+ * @brief compare matrix size
+ **/
+template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
+
+/**
+ * @brief compare size of vector (same as is_same_structure())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const vector<T> &x, const vector<T> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare row and col size
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+
+/**
+ * @brief compare row and col size
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B);
+
+/**
+ * @brief compare row and col size
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+
+/**
+ * @brief compare matrix size
+ **/
+template <typename T, typename... types>
+bool is_same_size(const T &A, const T &B, const types &... args) {
+  return is_same_size(A, B) && is_same_size(A, args...);
+}
+
 // create matrix //////////////////
 
 /**
@@ -181,6 +319,54 @@ template <typename T> matrix::COO<T> frank_matrix(const int &M);
  **/
 template <typename T> T frank_matrix_eigenvalue(const int &M, const int &N);
 
+/**
+ * @brief create tridiagonal Toeplitz matrix
+ * @param M # of row and col
+ * @param a value of diagonal elements
+ * @param b value of next-to-diagonal elements
+ * @note
+ * - # of computation: M
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a, T b);
+
+/**
+ * @brief Nth smallest eigenvalue of MxM tridiagonal Toeplitz matrix
+ * @param M dimension of tridiagonal Toeplitz matrix
+ * @param N #-th eigenvalue from the bottom
+ * @param a value of diagonal elements
+ * @param b value of next-to-diagonal elements
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b);
+
+/**
+ * @brief create 1D Laplacian matrix
+ * @param M # of row and col
+ * @note
+ * - # of computation: M
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> matrix::COO<T> laplacian_matrix_1D(const int &M);
+
+/**
+ * @brief Nth smallest eigenvalue of 1D Laplacian matrix
+ * @param M dimension of tridiagonal Toeplitz matrix
+ * @param N #-th eigenvalue from the bottom
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T> T laplacian_matrix_1D_eigenvalue(const int &M, int N);
+
 // send///////////////////
 
 /**
@@ -225,5 +411,43 @@ auto device_free(T &x, Types &... args) {
   x.device_free();
   device_free(args...);
 }
+
+/**
+ * @brief get build option (true: with avx, false: without avx)
+ **/
+bool build_with_avx();
+
+/**
+ * @brief get build option (true: with avx2, false: without avx2)
+ **/
+bool build_with_avx2();
+
+/**
+ * @brief get build option (true: with avx512, false: without avx512)
+ **/
+bool build_with_avx512();
+
+/**
+ * @brief get build option (true: enable gpu, false: disable gpu)
+ **/
+bool build_with_gpu();
+
+/**
+ * @brief get build option (true: with intel mkl, false: without intel mkl)
+ **/
+bool build_with_mkl();
+
+/**
+ * @brief get build option (true: with lapack, false: without lapack (=with
+ *intel mkl))
+ **/
+bool build_with_lapack();
+
+/**
+ * @brief get build option (true: with cblas, false: without cblas (=with intel
+ *mkl))
+ **/
+bool build_with_cblas();
+
 } // namespace util
 } // namespace monolish

@@ -14,6 +14,7 @@
 #include "cusparse.h"
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
+#include <cusolverDn.h>
 #endif
 
 #ifdef MONOLISH_USE_AVX
@@ -108,6 +109,12 @@ void vatanh(const size_t N, const double *a, double *y, bool gpu_status);
 void vceil(const size_t N, const double *a, double *y, bool gpu_status);
 void vfloor(const size_t N, const double *a, double *y, bool gpu_status);
 void vsign(const size_t N, const double *a, double *y, bool gpu_status);
+double vmax(const size_t N, const double *y, bool gpu_status);
+double vmin(const size_t N, const double *y, bool gpu_status);
+void vmax(const size_t N, const double *a, const double *b, double *y,
+          bool gpu_status);
+void vmin(const size_t N, const double *a, const double *b, double *y,
+          bool gpu_status);
 
 void vsqrt(const size_t N, const float *a, float *y, bool gpu_status);
 void vpow(const size_t N, const float *a, const float *b, float *y,
@@ -125,6 +132,17 @@ void vatanh(const size_t N, const float *a, float *y, bool gpu_status);
 void vceil(const size_t N, const float *a, float *y, bool gpu_status);
 void vfloor(const size_t N, const float *a, float *y, bool gpu_status);
 void vsign(const size_t N, const float *a, float *y, bool gpu_status);
+float vmax(const size_t N, const float *y, bool gpu_status);
+float vmin(const size_t N, const float *y, bool gpu_status);
+void vmax(const size_t N, const float *a, const float *b, float *y,
+          bool gpu_status);
+void vmin(const size_t N, const float *a, const float *b, float *y,
+          bool gpu_status);
+
+size_t vhash(const size_t N, const int *y, const int seed_value,
+             bool gpu_status);
+size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
+             bool gpu_status);
 
 } // namespace internal
 } // namespace monolish

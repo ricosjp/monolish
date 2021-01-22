@@ -32,6 +32,7 @@ SRCS +=$(notdir $(wildcard ./src/internal/*/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/internal/*/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/utils/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/vml/*.cpp))
 
@@ -59,6 +60,15 @@ vpath %.cpp ./src/internal/arithmetic/
 vpath %.cpp ./src/internal/math/
 
 vpath %.cpp ./src/utils/
+vpath %.cpp ./src/utils/at_insert_sort/
+vpath %.cpp ./src/utils/compare/
+vpath %.cpp ./src/utils/convert
+vpath %.cpp ./src/utils/copy/
+vpath %.cpp ./src/utils/create_matrix/
+vpath %.cpp ./src/utils/fill/
+vpath %.cpp ./src/utils/IO/
+vpath %.cpp ./src/utils/system/
+vpath %.cpp ./src/utils/transpose/
 
 vpath %.cpp ./src/vml/
 

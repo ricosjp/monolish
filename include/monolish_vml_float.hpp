@@ -264,6 +264,56 @@ void sign(const vector<float> &a, vector<float> &y);
  **/
 void reciprocal(const vector<float> &a, vector<float> &y);
 
+/**
+ * @brief Create a new vector with greatest elements of two vectors (y[0:N] =
+ *max(a[0:N], b[0]:N]))
+ * @param a single precision monolish vector (size N)
+ * @param b single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void max(const vector<float> &a, const vector<float> &b, vector<float> &y);
+
+/**
+ * @brief Create a new vector with smallest elements of two vectors (y[0:N] =
+ *max(a[0:N], b[0]:N]))
+ * @param a single precision monolish vector (size N)
+ * @param b single precision monolish vector (size N)
+ * @param y single precision monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void min(const vector<float> &a, const vector<float> &b, vector<float> &y);
+
+/**
+ * @brief Finds the greatest element in single precision vector
+ *(max_element(y[0:N]))
+ * @param y single precision monolish vector (size N)
+ * @return greatest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float max(const vector<float> &y);
+
+/**
+ * @brief Finds the smallest element in single precision vector
+ *(max_element(y[0:N]))
+ * @param y single precision monolish vector (size N)
+ * @return smallest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float min(const vector<float> &y);
+
 //////////////////////////////////////////////////////
 // Dense
 //////////////////////////////////////////////////////
@@ -563,6 +613,56 @@ void sign(const matrix::Dense<float> &A, matrix::Dense<float> &C);
  **/
 void reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 
+/**
+ * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
+ * @param A single precision monolish Dense matrix (size M x N)
+ * @param B single precision monolish Dense matrix (size M x N)
+ * @param C single precision monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void max(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+
+/**
+ * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
+ * @param A single precision monolish Dense matrix (size M x N)
+ * @param B single precision monolish Dense matrix (size M x N)
+ * @param C single precision monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C);
+
+/**
+ * @brief Finds the greatest element in single precision Dense matrices
+ *(max_element(C[0:nnz]))
+ * @param C single precision monolish Dense matrix (size M x N)
+ * @return greatest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float max(const matrix::Dense<float> &C);
+/**
+ * @brief Finds the greatest element in single precision Dense matrices
+ *(max_element(C[0:nnz]))
+ * @param C single precision monolish Dense matrix (size M x N)
+ * @return greatest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float min(const matrix::Dense<float> &C);
 //////////////////////////////////////////////////////
 // CRS
 //////////////////////////////////////////////////////
@@ -578,6 +678,8 @@ void reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure (dont check in this function)
  */
 void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -593,6 +695,8 @@ void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure (dont check in this function)
  */
 void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -608,6 +712,8 @@ void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure (dont check in this function)
  */
 void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -623,6 +729,8 @@ void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure (dont check in this function)
  */
 void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -638,6 +746,8 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  */
 void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
@@ -652,6 +762,8 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  */
 void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
@@ -666,6 +778,8 @@ void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  */
 void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
@@ -680,6 +794,8 @@ void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  */
 void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
@@ -693,6 +809,8 @@ void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -707,6 +825,8 @@ void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
@@ -719,6 +839,8 @@ void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -731,6 +853,8 @@ void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -743,6 +867,8 @@ void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -755,6 +881,8 @@ void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -767,6 +895,8 @@ void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -779,6 +909,8 @@ void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -791,6 +923,8 @@ void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -803,6 +937,8 @@ void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
  **/
 void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -815,6 +951,8 @@ void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -827,6 +965,8 @@ void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -839,6 +979,8 @@ void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -852,6 +994,8 @@ void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -864,8 +1008,65 @@ void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
+ * @warning
+ * A and C must be same non-zero structure (dont check in this function)
  **/
 void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+
+/**
+ * @brief Create a new matrix with greatest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
+ * @param A single precision monolish CRS matrix (size M x N)
+ * @param B single precision monolish CRS matrix (size M x N)
+ * @param C single precision monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
+ **/
+void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+
+/**
+ * @brief Create a new matrix with smallest elements of two matrices (C[0:nnz] =
+ *A(a[0:nnz], B[0]:nnz]))
+ * @param A single precision monolish CRS matrix (size M x N)
+ * @param B single precision monolish CRS matrix (size M x N)
+ * @param C single precision monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ * @warning
+ * A, B and C must be same non-zero structure (dont check in this function)
+ **/
+void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C);
+
+/**
+ * @brief Finds the greatest element in single precision CRS matrices
+ *(max_element(C[0:nnz]))
+ * @param C single precision monolish CRS matrix (size M x N)
+ * @return greatest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float max(const matrix::CRS<float> &C);
+/**
+ * @brief Finds the greatest element in single precision CRS matrices
+ *(max_element(C[0:nnz]))
+ * @param C single precision monolish CRS matrix (size M x N)
+ * @return greatest value
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ **/
+float min(const matrix::CRS<float> &C);
 
 //////////////////////////////////////////////////////
 //  LinearOperator
@@ -955,6 +1156,8 @@ void mul(const matrix::LinearOperator<float> &A, const float alpha,
  */
 void div(const matrix::LinearOperator<float> &A, const float alpha,
          matrix::LinearOperator<float> &C);
+
+
 
 } // namespace vml
 } // namespace monolish

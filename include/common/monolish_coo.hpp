@@ -37,13 +37,24 @@ template <typename Float> class LinearOperator;
 template <typename Float> class COO {
 private:
   /**
-   * @brief neet col = row now
+   * @brief # of row
    */
   size_t rowN;
+
+  /**
+   * @brief # of col
+   */
   size_t colN;
+
+  /**
+   * @brief # of non-zero element
+   */
   size_t nnz;
 
-  mutable bool gpu_status = false; // true: sended, false: not send
+  /**
+   * @brief true: sended, false: not send
+   */
+  mutable bool gpu_status = false;
 
 public:
   /**
@@ -217,6 +228,36 @@ public:
 
   COO(const matrix::LinearOperator<Float> &linearoperator) { convert(linearoperator); }
 
+  /**
+   * @brief Set row number
+   * @param M # of row
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_row(const size_t M) { rowN = M; };
+
+  /**
+   * @brief Set col number
+   * @param N # of col
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_col(const size_t N) { colN = N; };
+
+  /**
+   * @brief Set # of non-zero elements
+   * @param NNZ # of non-zero elements
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_nnz(const size_t NNZ) { nnz = NNZ; };
+
   // communication
   // ///////////////////////////////////////////////////////////////////////////
   /**
@@ -267,36 +308,6 @@ public:
   // ///////////////////////////////////////////////////////////////////////////
 
   /**
-   * @brief Set row number
-   * @param M # of row
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_row(const size_t M) { rowN = M; };
-
-  /**
-   * @brief Set col number
-   * @param N # of col
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_col(const size_t N) { colN = N; };
-
-  /**
-   * @brief Set # of non-zero elements
-   * @param NNZ # of non-zero elements
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void set_nnz(const size_t NNZ) { nnz = NNZ; };
-
-  /**
    * @brief Create COO matrix from MatrixMatrket format file
    * @param filename MatrixMarket format file name
    * @note
@@ -315,13 +326,14 @@ public:
   COO(const char *filename) { input_mm(filename); }
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Unused options for integrity
    * @note
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file
@@ -385,7 +397,7 @@ public:
   size_t get_col() const { return colN; }
 
   /**
-   * @brief get # of nnz
+   * @brief get # of non-zeros
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -394,17 +406,14 @@ public:
   size_t get_nnz() const { return nnz; }
 
   /**
-   * @brief matrix copy
-   * @return copied COO matrix
+   * @brief fill matrix elements with a scalar value
+   * @param value scalar value
    * @note
-   * - # of computation: 3nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
    **/
-  COO copy() {
-    COO tmp(rowN, colN, nnz, row_index.data(), col_index.data(), val.data());
-    return tmp;
-  }
+  void fill(Float value);
 
   /**
    * @brief get row index
@@ -582,8 +591,22 @@ public:
    * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * src. and dst. must be same non-zero structure (dont check in this function)
    **/
-  void operator=(const COO<Float> &mat) { mat = copy(); }
+  void operator=(const COO<Float> &mat);
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat COO matrix
+   * @param compare_cpu_and_device Unused options for integrity
+   * @return true or false
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  bool equal(const COO<Float> &mat, bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -591,7 +614,7 @@ public:
    * @return true or false
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   bool operator==(const COO<Float> &mat) const;
@@ -602,7 +625,7 @@ public:
    * @return true or false
    * @note
    * - # of computation: 3nnz
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   bool operator!=(const COO<Float> &mat) const;

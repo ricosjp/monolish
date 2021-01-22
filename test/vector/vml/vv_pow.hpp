@@ -18,7 +18,7 @@ template <typename T> bool test_send_vvpow(const size_t size, double tol) {
   monolish::vector<T> y(size, 0.1, 1.0);
   monolish::vector<T> ans(size, 321.0);
 
-  monolish::vector<T> ans_tmp = ans.copy();
+  monolish::vector<T> ans_tmp(ans);
   ans_vvpow(x, y, ans_tmp);
 
   monolish::util::send(x, y, ans);
@@ -34,7 +34,7 @@ template <typename T> bool test_vvpow(const size_t size, double tol) {
   monolish::vector<T> y(size, 0.1, 1.0);
   monolish::vector<T> ans(size, 321.0);
 
-  monolish::vector<T> ans_tmp = ans.copy();
+  monolish::vector<T> ans_tmp(ans);
   ans_vvpow(x, y, ans_tmp);
 
   monolish::vml::pow(x, y, ans);

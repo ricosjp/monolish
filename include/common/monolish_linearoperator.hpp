@@ -159,6 +159,7 @@ public:
 
   /**
    * @brief get multiplication function of (Hermitian) transposed matrix and vector
+  C = A;
    * @note
    * - # of computation: 1 function
    * - Multi-threading: false

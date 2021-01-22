@@ -39,7 +39,19 @@ template <typename T> bool test(const size_t size) {
   monolish::util::send(x, y, z, t);
 
   monolish::vml::add(x, y, t);
-  monolish::vml::add(t, z, z); // rand(1~2) + 123+0, rand(1~2) + 123 + 1 ....
+  monolish::vml::add(t, z, z); // rand(1~2) + 123+0, rand(1~2) + 123 + 111 ....
+  if (monolish::util::build_with_gpu()) {
+#if 0
+    printf("gpu printf:\n");
+    z.print_all(true); // printf test
+#endif
+  }
+  if (monolish::util::build_with_gpu()) {
+#if 0
+    printf("cpu printf(before recv):\n");
+    z.print_all(true); // printf test
+#endif
+  }
 
   // copy (cpu and gpu)
   monolish::vector<T> tmp = z;
@@ -47,6 +59,13 @@ template <typename T> bool test(const size_t size) {
   // recv vector z and tmp from gpu
   z.recv();
   tmp.recv();
+
+  if (monolish::util::build_with_gpu()) {
+#if 0
+    printf("cpu printf(after recv):\n");
+    z.print_all(); // printf test
+#endif
+  }
 
   // compare (on cpu)
   if (tmp != z) {
@@ -72,6 +91,11 @@ template <typename T> bool test(const size_t size) {
 }
 
 int main(int argc, char **argv) {
+
+  if (argc != 2) {
+    std::cout << "error!, $1:vector size" << std::endl;
+    return 1;
+  }
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");

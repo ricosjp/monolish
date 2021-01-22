@@ -21,12 +21,51 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
+- add vector is_same_size, is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
+- add is_same_size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
+- add variadic template is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
+- add is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/222
+- add create_hash and get_hash of matrix class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
+- add internal::vhash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/216
+- add Dense solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/214
+- add vector reciprocal test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+- add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+
+### Changed
+- compute_hash in CRS convert and constructor https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
+- Summarize CI stage public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
+- comment out LOBPCG run_gpu https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
+- comment out vector print_all test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
+- Dense.set_nnz, set_row, set_col -> public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/217
+- move eigen -> standard_eigen namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/213
+- move LAPACK raw functions to internal namespace https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/211
+- add lapack.h to repository and use LAPACK Fortran interface when using LAPACK internally. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/212
+
+### Fixed
+- fix get_hash and is_same_structure const https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/223
+- fix vhash return value bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- delete create_hash in COO and Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- create_hash -> compute_hash https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
+- fix ans_check bug in test util https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
+
+0.10.0 - 2021/01/13
+-----------
+### Added
+- add equal operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/208
+- add CRS::convert(CRS) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
+- add Frank matrix, tridiagonal Toeplitz matrix, 1D Laplacian matrix as sample matrices https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/199
+- add blas::copy https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/201
+- add fill function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/193
+- add util::build_with functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
+- add xpay test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/192
 - add nrm1 and get_residual_l2(Dense) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/191
 - add Frank matrix creation and eigenvalue calculation routine https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/189
 - add jacobi solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
 - add jacobi preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
 - add vml::reciprocal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/188
-- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88
+- add LOBPCG eigensolver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/88 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/194 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/197 https://gitlab.ritc.jp/ricos/monolish/-/issues/479
 - Support MKL SpMV and SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/185
 - install monolish_log_viewer on monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/183
 - add install-sxat install-a64fx target in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
@@ -35,6 +74,17 @@ Unreleased
 - add makefile target `make oss-cpu` `make oss-cpu` `make mkl-cpu` `make mkl-gpu` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Changed 
+- operator=, != call equal operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/208
+- organize src/util dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/198
+- change test-cpu -> test_cpu in makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/198
+- monolish container created only web, tags, master https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/207
+- Drop FindMKL.cmake include guard https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/206
+- syev, sygv: automatically generate float from double using d2f.sh https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/204
+- change copy() to copy constructor in test dir https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- change operator= to blas::copy in equation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- dont use direct reference solver class value in solve function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/200
+- CRS.print_all() output matrixmarket format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
+- support print_all() on GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/196
 - move equation::solver and equation::precondition to solver::solver and solver::precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/190
 - exclude src/internal doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
 - update allgebra 20.12.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/182
@@ -45,7 +95,14 @@ Unreleased
 - change CI job prefix name [ops]-[arch] -> [arch]-[ops] https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/178
 
 ### Fixed
+- fix specifications of copy, operator=, copy constructor, convert https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/203
+- fix LOBPCG iteration logic https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/195
 - fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
+
+### Deprecated
+- delete vector.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- delete Dense.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
+- delete CRS.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 
 0.9.1 - 2020/12/28
 -----------

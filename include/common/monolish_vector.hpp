@@ -86,8 +86,9 @@ public:
    * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; coping data only on GPU
+   *    - # of data transfer: N (only allocation)
+   *        - if `gpu_status == true`; coping data on CPU and GPU
+   *respectively
    *        - else; coping data only on CPU
    **/
   vector(const vector<Float> &vec);
@@ -256,26 +257,24 @@ public:
   auto get_nnz() const { return val.size(); }
 
   /**
-   * @brief vector copy ( Copy the memory data on CPU and GPU )
-   * @return copied vector
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
    * @note
    * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
    **/
-  vector copy();
+  void fill(Float value);
 
   /**
    * @brief print all elements to standart I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: N
    * - Multi-threading: false
-   * - GPU acceleration: false
+   * - GPU acceleration: true (doesn't work in parallel)
    **/
-  void print_all() const;
+  void print_all(bool force_cpu = false) const;
 
   /**
    * @brief print all elements to file
@@ -298,8 +297,8 @@ public:
    * - # of computation: N
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: N (allocation)
-   *        - if `vec.gpu_statius == true`; copy on CPU
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
    *        - else; coping data on CPU
    **/
   void operator=(const vector<Float> &vec);
@@ -310,7 +309,7 @@ public:
    * @return output vector
    * @note
    * - # of computation: N
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: false
    **/
   void operator=(const std::vector<Float> &vec);
@@ -342,13 +341,28 @@ public:
   }
 
   /**
+   * @brief Comparing matricies (A == mat)
+   * @param vec vector
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const vector<Float> &vec,
+             bool compare_cpu_and_device = false) const;
+
+  /**
    * @brief Comparing vectors (v == vec)
    * @param vec vector (size N)
    * @return true or false
    * @note
    * - # of computation: N
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator==(const vector<Float> &vec);
 
@@ -358,8 +372,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: N
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator!=(const vector<Float> &vec);
 };

@@ -1,19 +1,16 @@
 #include "../../include/monolish_blas.hpp"
 #include "../../include/monolish_eigen.hpp"
-#include "../../include/monolish_lapack.hpp"
+#include "../internal/lapack/monolish_lapack.hpp"
 #include "../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 template <typename MATRIX, typename T>
-int eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX const &A, T &l,
-                                      monolish::vector<T> &x) {
-  T residual = 1.0;
+int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
+                                               monolish::vector<T> &x) {
   T norm;
-  std::size_t iter = 0;
-
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.solver_in(monolish_func);
 
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   x[0] = 1.0;
@@ -25,6 +22,11 @@ int eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX const &A, T &l,
   monolish::vector<T> X(A.get_row());
   monolish::vector<T> W(A.get_row());
   monolish::vector<T> P(A.get_row());
+  monolish::vector<T> vtmp1(A.get_row());
+
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(x, w, p, X, W, P, vtmp1);
+  }
 
   // X = A x
   blas::matvec(A, x, X);
@@ -32,19 +34,18 @@ int eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX const &A, T &l,
   T mu;
   blas::dot(x, X, mu);
   // w = X - mu x
-  monolish::vector<T> vtmp1(A.get_row());
-  vtmp1 = x;
+  blas::copy(x, vtmp1);
   blas::scal(mu, vtmp1);
   blas::vecsub(X, vtmp1, w);
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
-  do {
+  for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     // W = A w
     blas::matvec(A, w, W);
 
-    std::vector<T> Sa;
-    std::vector<T> Sb;
+    vector<T> Sa;
+    vector<T> Sb;
     if (iter > 0) {
       // Sa = { w, x, p }^T { W, X, P }
       //    = { w, x, p }^T A { w, x, p }
@@ -86,17 +87,23 @@ int eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX const &A, T &l,
       blas::dot(x, w, Sb[2]);
       blas::dot(x, x, Sb[3]);
     }
-    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa);
-    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb);
+    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa.data());
+    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb.data());
 
     // Generalized Eigendecomposition
     //   Sa v = lambda Sb v
     monolish::vector<T> lambda(Sam.get_col());
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(Sam, Sbm, lambda);
+    }
     const char jobz = 'V';
     const char uplo = 'L';
-    bool bl = lapack::sygv(1, &jobz, &uplo, Sam, Sbm, lambda);
-    if (!bl) {
+    int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
+    if (info != 0) {
       throw std::runtime_error("LAPACK sygv failed");
+    }
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::recv(Sam, lambda);
     }
     std::size_t index = 0;
     l = lambda[index];
@@ -146,51 +153,75 @@ int eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX const &A, T &l,
     blas::scal(1.0 / normx, X);
 
     // w = X - lambda x
-    vtmp1 = x;
+    blas::copy(x, vtmp1);
     blas::scal(l, vtmp1);
     blas::vecsub(X, vtmp1, w);
+    // apply preconditioner
+    this->precond.apply_precond(w, vtmp1);
+    w = vtmp1;
 
-    // residual calculation and normalize
+    // residual calculation
+    T residual;
     blas::nrm2(w, residual);
-    blas::scal(1.0 / residual, w);
     if (this->get_print_rhistory()) {
       *this->rhistory_stream << iter + 1 << "\t" << std::scientific << residual
                              << std::endl;
     }
-    ++iter;
-  } while (residual > this->get_tol() || iter < this->get_maxiter());
-  logger.func_out();
-  if (iter >= this->get_maxiter()) {
-    return MONOLISH_SOLVER_MAXITER;
-  } else if (residual > this->get_tol()) {
-    return MONOLISH_SOLVER_RESIDUAL_NAN;
-  } else {
-    return MONOLISH_SOLVER_SUCCESS;
+
+    // early return when residual is small enough
+    if (residual < this->get_tol() && this->get_miniter() < iter + 1) {
+      logger.solver_out();
+      return MONOLISH_SOLVER_SUCCESS;
+    }
+
+    if (std::isnan(residual)) {
+      logger.solver_out();
+      return MONOLISH_SOLVER_RESIDUAL_NAN;
+    }
+
+    // normalize w
+    blas::scal(1.0 / residual, w);
   }
+  logger.solver_out();
+  return MONOLISH_SOLVER_MAXITER;
 }
 
 template int
-eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(matrix::CRS<double> const &A, double &l,
-                                       vector<double> &x);
+standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(matrix::CRS<double> &A,
+                                                double &l, vector<double> &x);
 template int
-eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(matrix::LinearOperator<double> const &A, double &l,
-                                       vector<double> &x);
+standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(matrix::CRS<float> &A, float &l,
+                                               vector<float> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(matrix::LinearOperator<double> &A,
+                                                double &l, vector<double> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::monolish_LOBPCG(matrix::LinearOperator<float> &A, float &l,
+                                               vector<float> &x);
 
 template <typename MATRIX, typename T>
-int eigen::LOBPCG<MATRIX, T>::solve(MATRIX const &A, T &l, vector<T> &x) {
+int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, T &l, vector<T> &x) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
   int ret = 0;
-  if (this->lib == 0) {
+  if (this->get_lib() == 0) {
     ret = monolish_LOBPCG(A, l, x);
   }
 
   logger.solver_out();
   return ret; // err code
 }
-template int eigen::LOBPCG<matrix::CRS<double>, double>::solve(matrix::CRS<double> const &A,
-                                          double &l, vector<double> &x);
-template int eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(matrix::LinearOperator<double> const &A,
-                                          double &l, vector<double> &x);
+
+template int standard_eigen::LOBPCG<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
+                                                   double &l,
+                                                   vector<double> &x);
+template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A,
+                                                  float &l, vector<float> &x);
+template int standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(matrix::LinearOperator<double> &A,
+                                                   double &l,
+                                                   vector<double> &x);
+template int standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::solve(matrix::LinearOperator<float> &A,
+                                                  float &l, vector<float> &x);
+
 } // namespace monolish

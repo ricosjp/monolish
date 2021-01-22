@@ -258,14 +258,13 @@
 |----------|----------------|----------------|----------------|
 | CG       | monolish       | monolish       | monolish       |
 | BiCGSTAB | monolish       | monolish       | monolish       |
-| Jacobi   | none->monolish | none->monolish | none->monolish |
+| Jacobi   | monolish       | monolish       | monolish       |
 
 ## Sparse LA Preconditioner
 
 | func   | Intel                                | NVIDIA   | OSS      |
 |--------|--------------------------------------|----------|----------|
 | Jacobi | monolish                             | monolish | monolish |
-| ???    | Jacobiだけじゃ弱すぎるのでなにか．． |          |          |
 
 ## Sparse Eigen
 

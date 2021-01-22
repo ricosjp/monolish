@@ -30,29 +30,14 @@ private:
   size_t colN;
 
   /**
-   * @brief # of non-zero element
+   * @brief # of non-zero element (M * N)
    */
   size_t nnz;
 
   /**
    * @brief true: sended, false: not send
    */
-  mutable bool gpu_status = false; // true: sended, false: not send
-
-  /**
-   * @brief Set row number
-   **/
-  void set_row(const size_t N) { rowN = N; };
-
-  /**
-   * @brief Set column number
-   **/
-  void set_col(const size_t M) { colN = M; };
-
-  /**
-   * @brief Set # of non-zero elements
-   **/
-  void set_nnz(const size_t NZ) { nnz = NZ; };
+  mutable bool gpu_status = false;
 
 public:
   /**
@@ -93,14 +78,18 @@ public:
   Dense(const COO<Float> &coo) { convert(coo); }
 
   /**
-   * @brief Create dense matrix from dense matrix
-   * @param dense input dense matrix (size M x N)
+   * @brief Create Dense matrix from Dense matrix
+   * @param dense Dense format matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
+   * - Multi-threading: true
    * - GPU acceleration: true
+   *    - # of data transfer: M+N (onlu allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
    **/
-  Dense(const Dense<Float> &dense) { convert(dense); };
+  Dense(const Dense<Float> &dense);
 
   /**
    * @brief Allocate dense matrix
@@ -181,13 +170,40 @@ public:
   size_t get_col() const { return colN; }
 
   /**
-   * @brief get # of nnz
+   * @brief get # of non-zeros
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   size_t get_nnz() const { return get_row() * get_col(); }
+
+  /**
+   * @brief Set row number
+   * @param M # of row
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_row(const size_t N) { rowN = N; };
+
+  /**
+   * @brief Set column number
+   * @param N # of col
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_col(const size_t M) { colN = M; };
+
+  /**
+   * @brief Set # of non-zero elements
+   * @param NNZ # of non-zero elements
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_nnz(const size_t NZ) { nnz = NZ; };
 
   /**
    * @brief get format name "Dense"
@@ -267,13 +283,14 @@ public:
   void insert(const size_t i, const size_t j, const Float Val);
 
   /**
-   * @brief print all elements to standart I/O
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
    * @note
    * - # of computation: M*N
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all();
+  void print_all(bool force_cpu = false) const;
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -368,17 +385,14 @@ public:
   /////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @brief matrix copy
-   * @return copied dense matrix
+   * @brief fill matrix elements with a scalar value
+   * @param value scalar value
    * @note
-   * - # of computation: M*N
+   * - # of computation: N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
    **/
-  Dense copy();
+  void fill(Float value);
 
   /**
    * @brief matrix copy
@@ -387,11 +401,24 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
-   *        - if `vec.gpu_statius == true`; copy on CPU; then send to GPU
-   *        - else; coping data only on CPU
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
    **/
   void operator=(const Dense<Float> &mat);
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param mat Dense matrix
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const Dense<Float> &mat,
+             bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -399,8 +426,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator==(const Dense<Float> &mat) const;
 
@@ -410,8 +439,10 @@ public:
    * @return true or false
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
-   * - GPU acceleration: false
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
    **/
   bool operator!=(const Dense<Float> &mat) const;
 
