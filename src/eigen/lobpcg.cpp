@@ -12,6 +12,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
+  this->precond.create_precond(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   x[0] = 1.0;
   x[1] = -1.0;
