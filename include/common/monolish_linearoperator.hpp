@@ -40,16 +40,6 @@ private:
   size_t colN;
 
   /**
-   * @brief pseudo multiplication function of matrix and vector
-   */
-  std::function<vector<Float>(const vector<Float>&)> matvec;
-
-  /**
-   * @brief pseudo multiplication function of (Hermitian) transposed matrix and vector
-   */
-  std::function<vector<Float>(const vector<Float>&)> rmatvec;
-
-  /**
    * @brief flag that shows matvec is defined or not
    */
   bool matvec_init_flag;
@@ -58,6 +48,16 @@ private:
    * @brief flag that shows rmatvec is defined or not
    */
   bool rmatvec_init_flag;
+
+  /**
+   * @brief pseudo multiplication function of matrix and vector
+   */
+  std::function<vector<Float>(const vector<Float>&)> matvec;
+
+  /**
+   * @brief pseudo multiplication function of (Hermitian) transposed matrix and vector
+   */
+  std::function<vector<Float>(const vector<Float>&)> rmatvec;
 
 public:
 
@@ -98,6 +98,27 @@ public:
    * - GPU acceleration: false
    */
   LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)>& MATVEC, const std::function<vector<Float>(const vector<Float>&)>& RMATVEC);
+
+  /**
+   * @brief Convert LinearOperator from COO
+   * @param coo COO format matrix
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void convert(COO<Float> &coo);
+
+  /**
+   * @brief Create LinearOperator from COO
+   * @param coo Source COO format matrix
+   * @return coo COO format matrix
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  LinearOperator(COO<Float> &coo) { convert(coo); }
+
+  void convert_to_Dense(Dense<Float> &dense) const ;
 
   /**
    * @brief Create LinearOperator from LinearOperator

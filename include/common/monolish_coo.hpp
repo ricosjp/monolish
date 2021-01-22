@@ -26,6 +26,7 @@ template <typename Float> class vector;
 namespace matrix {
 template <typename Float> class Dense;
 template <typename Float> class CRS;
+template <typename Float> class LinearOperator;
 
 /**
  * @brief Coodinate (COO) format Matrix (need to sort)
@@ -211,6 +212,10 @@ public:
    * - GPU acceleration: false
    **/
   COO(const matrix::Dense<Float> &dense) { convert(dense); }
+
+  void convert(const matrix::LinearOperator<Float> &linearoperator);
+
+  COO(const matrix::LinearOperator<Float> &linearoperator) { convert(linearoperator); }
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////

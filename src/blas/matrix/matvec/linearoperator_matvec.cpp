@@ -16,8 +16,7 @@ void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> 
     throw std::runtime_error("matvec is not defined in A");
   }
 
-  const vector<double> tmp = A.get_matvec()(x);
-  blas::axpy(1.0, tmp, y);
+  y = A.get_matvec()(x);
 
   logger.func_out();
 }
@@ -35,8 +34,7 @@ void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double>
     throw std::runtime_error("rmatvec is not defined in A");
   }
 
-  const vector<double> tmp = A.get_rmatvec()(x);
-  blas::axpy(1.0, tmp, y);
+  y = A.get_rmatvec()(x);
 
   logger.func_out();
 }
@@ -54,8 +52,7 @@ void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x
     throw std::runtime_error("matvec is not defined in A");
   }
 
-  const vector<float> tmp = A.get_matvec()(x);
-  blas::axpy(1.0, tmp, y);
+  y = A.get_matvec()(x);
 
   logger.func_out();
 }
@@ -73,8 +70,7 @@ void blas::rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &
     throw std::runtime_error("rmatvec is not defined in A");
   }
 
-  const vector<float> tmp = A.get_rmatvec()(x);
-  blas::axpy(1.0, tmp, y);
+  y = A.get_rmatvec()(x);
 
   logger.func_out();
 }

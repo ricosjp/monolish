@@ -137,7 +137,7 @@ void vml::div(const matrix::LinearOperator<double> &A, const double alpha,
       [&](const vector<double>& VEC){
         vector<double> vec(A.get_row(), 0.0), vec_tmp(A.get_row(), 0.0);
         blas::matvec(A, VEC, vec_tmp);
-        vml::mul(vec_tmp, alpha, vec);
+        vml::mul(vec_tmp, 1.0/alpha, vec);
         return vec;
       }
     );
@@ -147,7 +147,7 @@ void vml::div(const matrix::LinearOperator<double> &A, const double alpha,
       [&](const vector<double>& VEC){
         vector<double> vec(A.get_col(), 0.0), vec_tmp(A.get_col(), 0.0);
         blas::rmatvec(A, VEC, vec_tmp);
-        vml::mul(vec_tmp, alpha, vec);
+        vml::mul(vec_tmp, 1.0/alpha, vec);
         return vec;
       }
     );

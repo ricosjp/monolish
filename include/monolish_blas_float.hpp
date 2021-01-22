@@ -247,17 +247,6 @@ void mscal(const float alpha, matrix::Dense<float> &A);
  */
 void mscal(const float alpha, matrix::CRS<float> &A);
 
-/**
- * @brief single precision LinearOperator scal: A = alpha * A
- * @param alpha single precision scalar value
- * @param A single precision LinearOperator (size M x N)
- * @note
- * - # of computation: 2 functions
- * - Multi-threading: false
- * - GPU acceleration: false
- */
-void mscal(const float alpha, matrix::LinearOperator<float> &A);
-
 ///////////////
 
 /**

@@ -452,6 +452,20 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
 template void COO<double>::convert(const Dense<double> &dense);
 template void COO<float>::convert(const Dense<float> &dense);
 
+template <typename T> void COO<T>::convert(const LinearOperator<T> &linearoperator){
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  Dense<T> dense;
+  linearoperator.convert_to_Dense(dense);
+  convert(dense);
+
+  logger.util_out();
+}
+
+template void COO<double>::convert(const LinearOperator<double> &linearoperator);
+template void COO<float>::convert(const LinearOperator<float> &linearoperator);
+
 /// transpose /////
 
 template <typename T> COO<T> &COO<T>::transpose() {
