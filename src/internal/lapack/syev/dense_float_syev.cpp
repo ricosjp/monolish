@@ -62,9 +62,6 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
   monolish::util::recv(A, W);
   cusolverDnDestroy(h);
 #else // MONOLISH_USE_GPU
-  int info = 0;
-  int size = static_cast<int>(A.get_row());
-  int lwork = -1;
   std::vector<float> work(1);
   int liwork = -1;
   std::vector<int> iwork(1);
