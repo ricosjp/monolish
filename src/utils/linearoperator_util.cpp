@@ -106,6 +106,30 @@ template <typename T> void LinearOperator<T>::convert(COO<T> &coo){
 template void LinearOperator<double>::convert(COO<double> &coo);
 template void LinearOperator<float>::convert(COO<float> &coo);
 
+template <typename T> void LinearOperator<T>::convert(CRS<T> &crs){
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // todo crs err check (only square)
+
+  rowN = crs.get_row();
+  colN = crs.get_col();
+
+  gpu_status = crs.get_device_mem_stat();
+
+  set_matvec([&](const monolish::vector<T>& VEC){
+    monolish::vector<T> vec(crs.get_row(), 0);
+    monolish::blas::matvec(crs, VEC, vec);
+    return vec;
+  });
+  rmatvec_init_flag = false;
+
+  logger.util_out();
+}
+
+template void LinearOperator<double>::convert(CRS<double> &crs);
+template void LinearOperator<float>::convert(CRS<float> &crs);
+
 template <typename T>
 void LinearOperator<T>::set_matvec(const std::function<vector<T>(const vector<T>&)>& MATVEC){
   matvec = MATVEC;
