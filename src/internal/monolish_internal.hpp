@@ -14,6 +14,7 @@
 #include "cusparse.h"
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
+#include <cusolverDn.h>
 #endif
 
 #ifdef MONOLISH_USE_AVX

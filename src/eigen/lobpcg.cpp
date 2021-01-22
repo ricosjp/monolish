@@ -12,7 +12,6 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  matrix::COO<T> COO(A);
   this->precond.create_precond(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   x[0] = 1.0;
@@ -24,6 +23,11 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
   monolish::vector<T> X(A.get_row());
   monolish::vector<T> W(A.get_row());
   monolish::vector<T> P(A.get_row());
+  monolish::vector<T> vtmp1(A.get_row());
+
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(x, w, p, X, W, P, vtmp1);
+  }
 
   // X = A x
   blas::matvec(A, x, X);
@@ -31,7 +35,6 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
   T mu;
   blas::dot(x, X, mu);
   // w = X - mu x
-  monolish::vector<T> vtmp1(A.get_row());
   blas::copy(x, vtmp1);
   blas::scal(mu, vtmp1);
   blas::vecsub(X, vtmp1, w);
@@ -42,8 +45,8 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
     // W = A w
     blas::matvec(A, w, W);
 
-    std::vector<T> Sa;
-    std::vector<T> Sb;
+    vector<T> Sa;
+    vector<T> Sb;
     if (iter > 0) {
       // Sa = { w, x, p }^T { W, X, P }
       //    = { w, x, p }^T A { w, x, p }
@@ -85,17 +88,23 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
       blas::dot(x, w, Sb[2]);
       blas::dot(x, x, Sb[3]);
     }
-    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa);
-    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb);
+    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa.data());
+    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb.data());
 
     // Generalized Eigendecomposition
     //   Sa v = lambda Sb v
     monolish::vector<T> lambda(Sam.get_col());
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(Sam, Sbm, lambda);
+    }
     const char jobz = 'V';
     const char uplo = 'L';
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
     if (info != 0) {
       throw std::runtime_error("LAPACK sygv failed");
+    }
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::recv(Sam, lambda);
     }
     std::size_t index = 0;
     l = lambda[index];

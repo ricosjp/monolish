@@ -18,7 +18,7 @@ run_cpu:
 	./$(FUNC)_cpu.out ../../test.mtx 1
 
 run_gpu:
-#	$(PROFILER)./$(FUNC)_gpu.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_gpu.out ../../test.mtx 1
 
 run_fx:
 	$(PROFILER)./$(FUNC)_fx.out ../../test.mtx 1
