@@ -1083,7 +1083,8 @@ float min(const matrix::CRS<float> &C);
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B,
+void add(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
          matrix::LinearOperator<float> &C);
 
 /**
@@ -1097,12 +1098,13 @@ void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B,
+void sub(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator addition (C[i][j] = A[i][j] +
- * alpha)
+ * @brief float precision scalar and LinearOperator addition (C[i][j] = A[i][j]
+ * + alpha)
  * @param A float precision monolish LinearOperator (size M x N)
  * @param alpha float precision scalar value
  * @param C float precision monolish LinearOperator (size M x N)
@@ -1114,10 +1116,9 @@ void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
 void add(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
-
 /**
- * @brief float precision scalar and LinearOperator subtraction (C[i][j] = A[i][j] -
- * alpha)
+ * @brief float precision scalar and LinearOperator subtraction (C[i][j] =
+ * A[i][j] - alpha)
  * @param A float precision monolish LinearOperator (size M x N)
  * @param alpha float precision scalar value
  * @param C float precision monolish LinearOperator (size M x N)
@@ -1130,8 +1131,8 @@ void sub(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator multiplication (C[i][j] = A[i][j] *
- * alpha)
+ * @brief float precision scalar and LinearOperator multiplication (C[i][j] =
+ * A[i][j] * alpha)
  * @param A float precision monolish LinearOperator (size M x N)
  * @param alpha float precision scalar value
  * @param C float precision monolish LinearOperator (size M x N)
@@ -1144,8 +1145,8 @@ void mul(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator division (C[i][j] = A[i][j] /
- * alpha)
+ * @brief float precision scalar and LinearOperator division (C[i][j] = A[i][j]
+ * / alpha)
  * @param A float precision monolish LinearOperator (size M x N)
  * @param alpha float precision scalar value
  * @param C float precision monolish LinearOperator (size M x N)
@@ -1156,8 +1157,6 @@ void mul(const matrix::LinearOperator<float> &A, const float &alpha,
  */
 void div(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
-
-
 
 } // namespace vml
 } // namespace monolish

@@ -11,7 +11,7 @@ namespace monolish {
 
 template <typename MATRIX, typename T>
 int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
-                                             vector<T> &b) {
+                                                     vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -133,18 +133,19 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
 }
 template int equation::BiCGSTAB<matrix::CRS<double>, double>::monolish_BiCGSTAB(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-template int equation::BiCGSTAB<matrix::CRS<float>, float>::monolish_BiCGSTAB(matrix::CRS<float> &A,
-                                                          vector<float> &x,
-                                                          vector<float> &b);
+template int equation::BiCGSTAB<matrix::CRS<float>, float>::monolish_BiCGSTAB(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-template int equation::BiCGSTAB<matrix::LinearOperator<double>, double>::monolish_BiCGSTAB(
+template int
+equation::BiCGSTAB<matrix::LinearOperator<double>, double>::monolish_BiCGSTAB(
     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
-template int equation::BiCGSTAB<matrix::LinearOperator<float>, float>::monolish_BiCGSTAB(
+template int
+equation::BiCGSTAB<matrix::LinearOperator<float>, float>::monolish_BiCGSTAB(
     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 
 template <typename MATRIX, typename T>
 int equation::BiCGSTAB<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
-                                 vector<T> &b) {
+                                         vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -156,16 +157,12 @@ int equation::BiCGSTAB<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return ret; // err code
 }
-template int equation::BiCGSTAB<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
-                                               vector<double> &x,
-                                               vector<double> &b);
-template int equation::BiCGSTAB<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A,
-                                              vector<float> &x,
-                                              vector<float> &b);
-template int equation::BiCGSTAB<matrix::LinearOperator<double>, double>::solve(matrix::LinearOperator<double> &A,
-                                               vector<double> &x,
-                                               vector<double> &b);
-template int equation::BiCGSTAB<matrix::LinearOperator<float>, float>::solve(matrix::LinearOperator<float> &A,
-                                               vector<float> &x,
-                                               vector<float> &b);
+template int equation::BiCGSTAB<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::BiCGSTAB<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+template int equation::BiCGSTAB<matrix::LinearOperator<double>, double>::solve(
+    matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+template int equation::BiCGSTAB<matrix::LinearOperator<float>, float>::solve(
+    matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 } // namespace monolish

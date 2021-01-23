@@ -51,7 +51,8 @@ void blas::copy(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
 }
 
 // LinearOperator ///////////////////
-void blas::copy(const matrix::LinearOperator<float> &A, matrix::LinearOperator<float> &C) {
+void blas::copy(const matrix::LinearOperator<float> &A,
+                matrix::LinearOperator<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -66,10 +67,10 @@ void blas::copy(const matrix::LinearOperator<float> &A, matrix::LinearOperator<f
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  if(A.get_matvec_init_flag()){
+  if (A.get_matvec_init_flag()) {
     C.set_matvec(A.get_matvec());
   }
-  if(C.get_rmatvec_init_flag()){
+  if (C.get_rmatvec_init_flag()) {
     C.set_rmatvec(A.get_rmatvec());
   }
 

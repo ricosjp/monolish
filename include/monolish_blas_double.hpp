@@ -52,7 +52,8 @@ void copy(const matrix::Dense<double> &A, matrix::Dense<double> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void copy(const matrix::LinearOperator<double> &A, matrix::LinearOperator<double> &C);
+void copy(const matrix::LinearOperator<double> &A,
+          matrix::LinearOperator<double> &C);
 
 /**
  * @brief double precision CRS matrix copy (y=a)
@@ -345,7 +346,8 @@ void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void matadd(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B,
+void matadd(const matrix::LinearOperator<double> &A,
+            const matrix::LinearOperator<double> &B,
             matrix::LinearOperator<double> &C);
 
 /**
@@ -389,7 +391,8 @@ void matsub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void matsub(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B,
+void matsub(const matrix::LinearOperator<double> &A,
+            const matrix::LinearOperator<double> &B,
             matrix::LinearOperator<double> &C);
 
 ///////////////
@@ -423,7 +426,8 @@ void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             vector<double> &y);
 
 /**
- * @brief double precision matrix (LinearOperator) and vector multiplication: y = Ax
+ * @brief double precision matrix (LinearOperator) and vector multiplication: y
+ * = Ax
  * @param A double precision LinearOperator (size M x N)
  * @param x double precision monolish vector (size N)
  * @param y double precision monolish vector (size M)
@@ -436,7 +440,8 @@ void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
             vector<double> &y);
 
 /**
- * @brief double precision (Hermitian) transposed matrix (LinearOperator) and vector multiplication: y = A^T x
+ * @brief double precision (Hermitian) transposed matrix (LinearOperator) and
+ * vector multiplication: y = A^T x
  * @param A double precision LinearOperator (size M x N)
  * @param x double precision monolish vector (size M)
  * @param y double precision monolish vector (size N)
@@ -446,7 +451,7 @@ void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
  * - GPU acceleration: depends on matvec function
  */
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            vector<double> &y);
+             vector<double> &y);
 
 ///////////////
 
@@ -488,7 +493,8 @@ void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
  * - Multi-threading: false
  * - GPU acceleration: false
  */
-void matmul(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B,
+void matmul(const matrix::LinearOperator<double> &A,
+            const matrix::LinearOperator<double> &B,
             matrix::LinearOperator<double> &C);
 
 } // namespace blas

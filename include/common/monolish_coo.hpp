@@ -226,7 +226,9 @@ public:
 
   void convert(const matrix::LinearOperator<Float> &linearoperator);
 
-  COO(const matrix::LinearOperator<Float> &linearoperator) { convert(linearoperator); }
+  COO(const matrix::LinearOperator<Float> &linearoperator) {
+    convert(linearoperator);
+  }
 
   /**
    * @brief Set row number

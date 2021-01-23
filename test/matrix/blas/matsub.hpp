@@ -56,7 +56,8 @@ bool test_send_matsub(const size_t M, const size_t N, double tol) {
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_matsub_linearoperator(const size_t M, const size_t N, double tol) {
+bool test_send_matsub_linearoperator(const size_t M, const size_t N,
+                                     double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N)) {

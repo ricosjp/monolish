@@ -3,7 +3,8 @@
 
 namespace monolish {
 
-void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> &x, vector<double> &y){
+void blas::matvec(const matrix::LinearOperator<double> &A,
+                  const vector<double> &x, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -17,7 +18,7 @@ void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> 
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  if(!A.get_matvec_init_flag()){
+  if (!A.get_matvec_init_flag()) {
     throw std::runtime_error("matvec is not defined in A");
   }
 
@@ -26,7 +27,8 @@ void blas::matvec(const matrix::LinearOperator<double> &A, const vector<double> 
   logger.func_out();
 }
 
-void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x, vector<double> &y){
+void blas::rmatvec(const matrix::LinearOperator<double> &A,
+                   const vector<double> &x, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -40,7 +42,7 @@ void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double>
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  if(!A.get_rmatvec_init_flag()){
+  if (!A.get_rmatvec_init_flag()) {
     throw std::runtime_error("rmatvec is not defined in A");
   }
 
@@ -49,7 +51,8 @@ void blas::rmatvec(const matrix::LinearOperator<double> &A, const vector<double>
   logger.func_out();
 }
 
-void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x, vector<float> &y){
+void blas::matvec(const matrix::LinearOperator<float> &A,
+                  const vector<float> &x, vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -63,7 +66,7 @@ void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  if(!A.get_matvec_init_flag()){
+  if (!A.get_matvec_init_flag()) {
     throw std::runtime_error("matvec is not defined in A");
   }
 
@@ -72,7 +75,8 @@ void blas::matvec(const matrix::LinearOperator<float> &A, const vector<float> &x
   logger.func_out();
 }
 
-void blas::rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x, vector<float> &y){
+void blas::rmatvec(const matrix::LinearOperator<float> &A,
+                   const vector<float> &x, vector<float> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -86,7 +90,7 @@ void blas::rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &
     throw std::runtime_error("error get_device_mem_stat() is not same");
   }
 
-  if(!A.get_rmatvec_init_flag()){
+  if (!A.get_rmatvec_init_flag()) {
     throw std::runtime_error("rmatvec is not defined in A");
   }
 

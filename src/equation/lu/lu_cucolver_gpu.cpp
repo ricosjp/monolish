@@ -9,8 +9,8 @@
 namespace monolish {
 
 template <>
-int equation::LU<matrix::CRS<double>, double>::cusolver_LU(matrix::CRS<double> &A, vector<double> &x,
-                                      vector<double> &b) {
+int equation::LU<matrix::CRS<double>, double>::cusolver_LU(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
   // nothing to do

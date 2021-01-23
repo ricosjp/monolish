@@ -25,10 +25,10 @@ int standard_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, vector<T> &lambda) {
   return ret;
 }
 
-template int standard_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(matrix::Dense<double> &A,
-                                                   vector<double> &lambda);
-template int standard_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(matrix::Dense<float> &A,
-                                                  vector<float> &lambda);
+template int standard_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(
+    matrix::Dense<double> &A, vector<double> &lambda);
+template int standard_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(
+    matrix::Dense<float> &A, vector<float> &lambda);
 
 template <typename MATRIX, typename T>
 int standard_eigen::DC<MATRIX, T>::solve(MATRIX &A, vector<T> &lambda) {
@@ -44,9 +44,10 @@ int standard_eigen::DC<MATRIX, T>::solve(MATRIX &A, vector<T> &lambda) {
   return ret; // err code
 }
 
-template int standard_eigen::DC<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
-                                               vector<double> &lambda);
-template int standard_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
-                                              vector<float> &x);
+template int standard_eigen::DC<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, vector<double> &lambda);
+template int
+standard_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
+                                                       vector<float> &x);
 
 } // namespace monolish

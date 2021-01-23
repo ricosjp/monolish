@@ -73,10 +73,9 @@ bool test_send_matmul(const size_t M, const size_t N, const size_t K,
                       ansC.get_nnz(), tol);
 }
 
-
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_matmul_linearoperator(const size_t M, const size_t N, const size_t K,
-                      double tol) {
+bool test_send_matmul_linearoperator(const size_t M, const size_t N,
+                                     const size_t K, double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K)) {
@@ -91,7 +90,7 @@ bool test_send_matmul_linearoperator(const size_t M, const size_t N, const size_
       monolish::util::random_structure_matrix<T>(K, N, nnzrow, 1.0);
   monolish::matrix::COO<T> seedC =
       monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
-  
+
   monolish::matrix::CRS<T> A1(seedA);
   monolish::matrix::CRS<T> B1(seedB);
   monolish::matrix::CRS<T> C1(seedC);

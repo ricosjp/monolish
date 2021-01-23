@@ -2,7 +2,5 @@
 #include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
-namespace matrix {
-
-} // namespace matrix
+namespace matrix {} // namespace matrix
 } // namespace monolish

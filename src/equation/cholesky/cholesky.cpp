@@ -5,7 +5,7 @@ namespace monolish {
 
 template <typename MATRIX, typename T>
 int equation::Cholesky<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
-                                 vector<T> &b) {
+                                         vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -29,10 +29,8 @@ int equation::Cholesky<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
   return ret;
 }
 
-template int equation::Cholesky<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
-                                               vector<double> &x,
-                                               vector<double> &b);
-template int equation::Cholesky<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A,
-                                              vector<float> &x,
-                                              vector<float> &b);
+template int equation::Cholesky<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::Cholesky<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 } // namespace monolish

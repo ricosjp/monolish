@@ -15,7 +15,8 @@ namespace equation {
 /**
  * @brief none solver class
  */
-template <typename MATRIX, typename Float> class none : public monolish::solver::solver<MATRIX, Float> {
+template <typename MATRIX, typename Float>
+class none : public monolish::solver::solver<MATRIX, Float> {
 public:
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
@@ -25,7 +26,8 @@ public:
 /**
  * @brief CG solver class
  */
-template <typename MATRIX, typename Float> class CG : public monolish::solver::solver<MATRIX, Float> {
+template <typename MATRIX, typename Float>
+class CG : public monolish::solver::solver<MATRIX, Float> {
 private:
   int monolish_CG(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
@@ -54,8 +56,7 @@ public:
 template <typename MATRIX, typename Float>
 class BiCGSTAB : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_BiCGSTAB(MATRIX &A, vector<Float> &x,
-                        vector<Float> &b);
+  int monolish_BiCGSTAB(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
 public:
   /**
@@ -82,8 +83,7 @@ public:
 template <typename MATRIX, typename Float>
 class Jacobi : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_Jacobi(MATRIX &A, vector<Float> &x,
-                      vector<Float> &b);
+  int monolish_Jacobi(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
 public:
   /**
@@ -101,7 +101,8 @@ public:
 /**
  * @brief LU solver class (does not impl. now)
  */
-template <typename MATRIX, typename Float> class LU : public monolish::solver::solver<MATRIX, Float> {
+template <typename MATRIX, typename Float>
+class LU : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
   int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
@@ -125,7 +126,8 @@ public:
  * @brief QR solver class (GPU only now). can use set_tol(), get_til(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
-template <typename MATRIX, typename Float> class QR : public monolish::solver::solver<MATRIX, Float> {
+template <typename MATRIX, typename Float>
+class QR : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
   int cusolver_QR(MATRIX &A, vector<double> &x, vector<double> &b);
@@ -165,10 +167,8 @@ template <typename MATRIX, typename Float>
 class Cholesky : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int cusolver_Cholesky(MATRIX &A, vector<float> &x,
-                        vector<float> &b);
-  int cusolver_Cholesky(MATRIX &A, vector<double> &x,
-                        vector<double> &b);
+  int cusolver_Cholesky(MATRIX &A, vector<float> &x, vector<float> &b);
+  int cusolver_Cholesky(MATRIX &A, vector<double> &x, vector<double> &b);
   int singularity;
   int reorder = 3;
 

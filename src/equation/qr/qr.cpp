@@ -27,8 +27,8 @@ int equation::QR<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   logger.func_out();
   return ret;
 }
-template int equation::QR<matrix::CRS<double>, double>::solve(matrix::CRS<double> &A,
-                                         vector<double> &x, vector<double> &b);
-template int equation::QR<matrix::CRS<float>, float>::solve(matrix::CRS<float> &A, vector<float> &x,
-                                        vector<float> &b);
+template int equation::QR<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::QR<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 } // namespace monolish

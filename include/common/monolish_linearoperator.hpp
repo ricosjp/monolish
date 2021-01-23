@@ -7,12 +7,12 @@
 
 #pragma once
 #include <exception>
+#include <functional>
 #include <omp.h>
 #include <random>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <functional>
 
 namespace monolish {
 template <typename Float> class vector;
@@ -57,15 +57,15 @@ private:
   /**
    * @brief pseudo multiplication function of matrix and vector
    */
-  std::function<vector<Float>(const vector<Float>&)> matvec;
+  std::function<vector<Float>(const vector<Float> &)> matvec;
 
   /**
-   * @brief pseudo multiplication function of (Hermitian) transposed matrix and vector
+   * @brief pseudo multiplication function of (Hermitian) transposed matrix and
+   * vector
    */
-  std::function<vector<Float>(const vector<Float>&)> rmatvec;
+  std::function<vector<Float>(const vector<Float> &)> rmatvec;
 
 public:
-
   LinearOperator() {}
 
   /**
@@ -89,20 +89,26 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)>& MATVEC);
+  LinearOperator(
+      const size_t M, const size_t N,
+      const std::function<vector<Float>(const vector<Float> &)> &MATVEC);
 
   /**
    * @brief declare LinearOperator
    * @param M # of row
    * @param N # of col
    * @param MATVEC multiplication function of matrix and vector
-   * @param RMATVEC multiplication function of (Hermitian) transposed matrix and vector
+   * @param RMATVEC multiplication function of (Hermitian) transposed matrix and
+   * vector
    * @note
    * - # of computation: 4 + 2 functions
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  LinearOperator(const size_t M, const size_t N, const std::function<vector<Float>(const vector<Float>&)>& MATVEC, const std::function<vector<Float>(const vector<Float>&)>& RMATVEC);
+  LinearOperator(
+      const size_t M, const size_t N,
+      const std::function<vector<Float>(const vector<Float> &)> &MATVEC,
+      const std::function<vector<Float>(const vector<Float> &)> &RMATVEC);
 
   /**
    * @brief Convert LinearOperator from COO
@@ -127,7 +133,7 @@ public:
 
   LinearOperator(CRS<Float> &crs) { convert(crs); }
 
-  void convert_to_Dense(Dense<Float> &dense) const ;
+  void convert_to_Dense(Dense<Float> &dense) const;
 
   /**
    * @brief Create LinearOperator from LinearOperator
@@ -164,17 +170,21 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  std::function<vector<Float>(const vector<Float>&)> get_matvec() const { return matvec; }
+  std::function<vector<Float>(const vector<Float> &)> get_matvec() const {
+    return matvec;
+  }
 
   /**
-   * @brief get multiplication function of (Hermitian) transposed matrix and vector
-  C = A;
+   * @brief get multiplication function of (Hermitian) transposed matrix and
+  vector C = A;
    * @note
    * - # of computation: 1 function
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  std::function<vector<Float>(const vector<Float>&)> get_rmatvec() const { return rmatvec; }
+  std::function<vector<Float>(const vector<Float> &)> get_rmatvec() const {
+    return rmatvec;
+  }
 
   /**
    * @brief get flag that shows matvec is defined or not
@@ -201,16 +211,19 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void set_matvec(const std::function<vector<Float>(const vector<Float>&)>& MATVEC);
+  void
+  set_matvec(const std::function<vector<Float>(const vector<Float> &)> &MATVEC);
 
   /**
-   * @brief set multiplication function of (Hermitian) transposed matrix and vector
+   * @brief set multiplication function of (Hermitian) transposed matrix and
+   * vector
    * @note
    * - # of computation: 1 + 1 function
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void set_rmatvec(const std::function<vector<Float>(const vector<Float>&)>& RMATVEC);
+  void set_rmatvec(
+      const std::function<vector<Float>(const vector<Float> &)> &RMATVEC);
 
   /**
    * @brief get format name "LinearOperator"
@@ -257,9 +270,12 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  bool get_device_mem_stat() const {return gpu_status;};
+  bool get_device_mem_stat() const { return gpu_status; };
 
-  void set_device_mem_stat(bool status) {gpu_status = status; return;};
+  void set_device_mem_stat(bool status) {
+    gpu_status = status;
+    return;
+  };
 
   /**
    * @brief destructor of LinearOperator, free GPU memory
@@ -288,7 +304,6 @@ public:
    * - GPU acceleration: false
    */
   void operator=(const LinearOperator<Float> &mat);
-
 };
-} // namespace linearoperator
+} // namespace matrix
 } // namespace monolish

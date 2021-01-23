@@ -60,7 +60,8 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
 template void COO<double>::convert(const Dense<double> &dense);
 template void COO<float>::convert(const Dense<float> &dense);
 
-template <typename T> void COO<T>::convert(const LinearOperator<T> &linearoperator){
+template <typename T>
+void COO<T>::convert(const LinearOperator<T> &linearoperator) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -71,7 +72,8 @@ template <typename T> void COO<T>::convert(const LinearOperator<T> &linearoperat
   logger.util_out();
 }
 
-template void COO<double>::convert(const LinearOperator<double> &linearoperator);
+template void
+COO<double>::convert(const LinearOperator<double> &linearoperator);
 template void COO<float>::convert(const LinearOperator<float> &linearoperator);
 
 } // namespace matrix

@@ -58,7 +58,8 @@ bool test_send_matvec(const size_t M, const size_t N, double tol) {
 }
 
 template <typename MAT, typename T>
-bool test_send_matvec_linearoperator(const size_t M, const size_t N, double tol) {
+bool test_send_matvec_linearoperator(const size_t M, const size_t N,
+                                     double tol) {
 
   size_t nnzrow = 27;
   if (nnzrow < N) {
@@ -86,10 +87,9 @@ bool test_send_matvec_linearoperator(const size_t M, const size_t N, double tol)
   monolish::blas::matvec(A2, x, y);
   y.recv();
 
-  return ans_check<T>(__func__, A2.type(), y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, A2.type(), y.data(), ansy.data(), y.size(),
+                      tol);
 }
-
-
 
 template <typename MAT, typename T>
 bool test_matvec(const size_t M, const size_t N, double tol) {
