@@ -20,6 +20,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Fixed
+- fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
 
 0.11.0 - 2021/01/23
 -----------

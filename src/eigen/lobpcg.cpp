@@ -106,8 +106,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
     // therefore we set is_singular flag to true and restart the iteration step.
     if (info == 6) {
       if (this->get_print_rhistory()) {
-        *this->rhistory_stream << iter + 1 << "\t" << "singular; restart the step"
-                               << std::endl;
+        *this->rhistory_stream << iter + 1 << "\t"
+                               << "singular; restart the step" << std::endl;
       }
       is_singular = true;
       iter--;
