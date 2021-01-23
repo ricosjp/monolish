@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.11.0 - 2021/01/23
+-----------
 ### Added
 - LinerOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/210
 - LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
