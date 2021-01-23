@@ -95,45 +95,45 @@ int main(int argc, char **argv) {
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-          check_ans, 3.0e-2, 8.0e-2) == false) {
+          check_ans, 1.0e-8, 1.0e-4) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.0e-1, 1.0e-0) == false) {
+          check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
-          check_ans, 1.0e-2, 1.0e-2) == false) {
+          check_ans, 1.0e-8, 1.0e-4) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-          check_ans, 5.0e-2, 5.0e-2) == false) {
+          check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
 
   if (test_laplacian_1d<double, monolish::equation::none<
                                     monolish::matrix::CRS<double>, double>>(
-          check_ans, 2.0e-2, 5.0e-2) == false) {
+          check_ans, 1.0e-3, 1.0e-3) == false) {
     return 1;
   }
   if (test_laplacian_1d<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.0e-1, 3.0e-1) == false) {
+          check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
   if (test_laplacian_1d<double, monolish::equation::Jacobi<
                                     monolish::matrix::CRS<double>, double>>(
-          check_ans, 5.0e-2, 5.0e-2) == false) {
+          check_ans, 1.0e-3, 1.0e-3) == false) {
     return 1;
   }
   if (test_laplacian_1d<float, monolish::equation::Jacobi<
                                    monolish::matrix::CRS<float>, float>>(
-          check_ans, 2.0e-1, 2.0e-1) == false) {
+          check_ans, 1.0e-2, 1.0e-2) == false) {
     return 1;
   }
   return 0;
