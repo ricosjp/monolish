@@ -5,8 +5,8 @@
 
 namespace monolish {
 
-template <typename T>
-int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A, vector<T> &lambda) {
+template <typename MATRIX, typename T>
+int standard_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, vector<T> &lambda) {
   int ret = MONOLISH_SOLVER_SUCCESS;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -25,13 +25,13 @@ int standard_eigen::DC<T>::LAPACK_DC(matrix::Dense<T> &A, vector<T> &lambda) {
   return ret;
 }
 
-template int standard_eigen::DC<double>::LAPACK_DC(matrix::Dense<double> &A,
-                                                   vector<double> &lambda);
-template int standard_eigen::DC<float>::LAPACK_DC(matrix::Dense<float> &A,
-                                                  vector<float> &lambda);
+template int standard_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(
+    matrix::Dense<double> &A, vector<double> &lambda);
+template int standard_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(
+    matrix::Dense<float> &A, vector<float> &lambda);
 
-template <typename T>
-int standard_eigen::DC<T>::solve(matrix::Dense<T> &A, vector<T> &lambda) {
+template <typename MATRIX, typename T>
+int standard_eigen::DC<MATRIX, T>::solve(MATRIX &A, vector<T> &lambda) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -44,9 +44,10 @@ int standard_eigen::DC<T>::solve(matrix::Dense<T> &A, vector<T> &lambda) {
   return ret; // err code
 }
 
-template int standard_eigen::DC<double>::solve(matrix::Dense<double> &A,
-                                               vector<double> &lambda);
-template int standard_eigen::DC<float>::solve(matrix::Dense<float> &A,
-                                              vector<float> &x);
+template int standard_eigen::DC<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, vector<double> &lambda);
+template int
+standard_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
+                                                       vector<float> &x);
 
 } // namespace monolish

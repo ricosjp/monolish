@@ -19,10 +19,11 @@ namespace standard_eigen {
 /**
  * @brief LOBPCG solver
  */
-template <typename Float> class LOBPCG : public solver::solver<Float> {
+template <typename MATRIX, typename Float>
+class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
-  int monolish_LOBPCG(matrix::CRS<Float> &A, Float &lambda, vector<Float> &x);
+  int monolish_LOBPCG(MATRIX &A, Float &lambda, vector<Float> &x);
 
 public:
   /**
@@ -33,9 +34,9 @@ public:
    * @param[in] x corresponding eigenvector
    * @return error code (only 0 now)
    **/
-  int solve(matrix::CRS<Float> &A, Float &lambda, vector<Float> &x);
+  int solve(MATRIX &A, Float &lambda, vector<Float> &x);
 
-  void create_precond(matrix::CRS<Float> &A) {
+  void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
 
@@ -47,14 +48,15 @@ public:
 /**
  * @brief Devide and Conquer solver
  */
-template <typename Float> class DC : public solver::solver<Float> {
+template <typename MATRIX, typename Float>
+class DC : public solver::solver<MATRIX, Float> {
 private:
-  int LAPACK_DC(matrix::Dense<Float> &A, vector<Float> &lambda);
+  int LAPACK_DC(MATRIX &A, vector<Float> &lambda);
 
 public:
-  int solve(matrix::Dense<Float> &A, vector<Float> &lambda);
+  int solve(MATRIX &A, vector<Float> &lambda);
 
-  void create_precond(matrix::Dense<Float> &A) {
+  void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
 

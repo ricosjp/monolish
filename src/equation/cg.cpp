@@ -9,9 +9,9 @@
 
 namespace monolish {
 
-template <typename T>
-int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
-                                 vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::CG<MATRIX, T>::monolish_CG(MATRIX &A, vector<T> &x,
+                                         vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -77,17 +77,15 @@ int equation::CG<T>::monolish_CG(matrix::CRS<T> &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-template int equation::CG<double>::monolish_CG(matrix::CRS<double> &A,
-                                               vector<double> &x,
-                                               vector<double> &b);
-template int equation::CG<float>::monolish_CG(matrix::CRS<float> &A,
-                                              vector<float> &x,
-                                              vector<float> &b);
+template int equation::CG<matrix::CRS<double>, double>::monolish_CG(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::CG<matrix::CRS<float>, float>::monolish_CG(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
 ///
 
-template <typename T>
-int equation::CG<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::CG<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -99,8 +97,8 @@ int equation::CG<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   logger.solver_out();
   return ret; // err code
 }
-template int equation::CG<double>::solve(matrix::CRS<double> &A,
-                                         vector<double> &x, vector<double> &b);
-template int equation::CG<float>::solve(matrix::CRS<float> &A, vector<float> &x,
-                                        vector<float> &b);
+template int equation::CG<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::CG<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 } // namespace monolish

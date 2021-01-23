@@ -9,8 +9,8 @@
 namespace monolish {
 
 template <>
-int equation::QR<double>::cusolver_QR(matrix::CRS<double> &A, vector<double> &x,
-                                      vector<double> &b) {
+int equation::QR<matrix::CRS<double>, double>::cusolver_QR(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -54,8 +54,9 @@ int equation::QR<double>::cusolver_QR(matrix::CRS<double> &A, vector<double> &x,
 }
 
 template <>
-int equation::QR<float>::cusolver_QR(matrix::CRS<float> &A, vector<float> &x,
-                                     vector<float> &b) {
+int equation::QR<matrix::CRS<float>, float>::cusolver_QR(matrix::CRS<float> &A,
+                                                         vector<float> &x,
+                                                         vector<float> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

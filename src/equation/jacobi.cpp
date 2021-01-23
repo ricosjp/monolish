@@ -8,8 +8,8 @@ namespace monolish {
 ////////////////////////////
 // precondition
 ////////////////////////////
-template <typename T>
-void equation::Jacobi<T>::create_precond(matrix::CRS<T> &A) {
+template <typename MATRIX, typename T>
+void equation::Jacobi<MATRIX, T>::create_precond(MATRIX &A) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -28,11 +28,14 @@ void equation::Jacobi<T>::create_precond(matrix::CRS<T> &A) {
 
   logger.solver_out();
 }
-template void equation::Jacobi<float>::create_precond(matrix::CRS<float> &A);
-template void equation::Jacobi<double>::create_precond(matrix::CRS<double> &A);
+template void equation::Jacobi<matrix::CRS<float>, float>::create_precond(
+    matrix::CRS<float> &A);
+template void equation::Jacobi<matrix::CRS<double>, double>::create_precond(
+    matrix::CRS<double> &A);
 
-template <typename T>
-void equation::Jacobi<T>::apply_precond(const vector<T> &r, vector<T> &z) {
+template <typename MATRIX, typename T>
+void equation::Jacobi<MATRIX, T>::apply_precond(const vector<T> &r,
+                                                vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -40,18 +43,18 @@ void equation::Jacobi<T>::apply_precond(const vector<T> &r, vector<T> &z) {
 
   logger.solver_out();
 }
-template void equation::Jacobi<float>::apply_precond(const vector<float> &r,
-                                                     vector<float> &z);
-template void equation::Jacobi<double>::apply_precond(const vector<double> &r,
-                                                      vector<double> &z);
+template void equation::Jacobi<matrix::CRS<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void equation::Jacobi<matrix::CRS<double>, double>::apply_precond(
+    const vector<double> &r, vector<double> &z);
 
 ////////////////////////////
 // solver
 ////////////////////////////
 
-template <typename T>
-int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
-                                         vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::Jacobi<MATRIX, T>::monolish_Jacobi(MATRIX &A, vector<T> &x,
+                                                 vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -110,15 +113,13 @@ int equation::Jacobi<T>::monolish_Jacobi(matrix::CRS<T> &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_NOT_IMPL;
 }
-template int equation::Jacobi<double>::monolish_Jacobi(matrix::CRS<double> &A,
-                                                       vector<double> &x,
-                                                       vector<double> &b);
-template int equation::Jacobi<float>::monolish_Jacobi(matrix::CRS<float> &A,
-                                                      vector<float> &x,
-                                                      vector<float> &b);
+template int equation::Jacobi<matrix::CRS<double>, double>::monolish_Jacobi(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
+template int equation::Jacobi<matrix::CRS<float>, float>::monolish_Jacobi(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-template <typename T>
-int equation::Jacobi<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
+template <typename MATRIX, typename T>
+int equation::Jacobi<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -131,9 +132,8 @@ int equation::Jacobi<T>::solve(matrix::CRS<T> &A, vector<T> &x, vector<T> &b) {
   return ret; // err code
 }
 
-template int equation::Jacobi<float>::solve(matrix::CRS<float> &A,
-                                            vector<float> &x, vector<float> &b);
-template int equation::Jacobi<double>::solve(matrix::CRS<double> &A,
-                                             vector<double> &x,
-                                             vector<double> &b);
+template int equation::Jacobi<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+template int equation::Jacobi<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 } // namespace monolish

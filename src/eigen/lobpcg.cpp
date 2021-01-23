@@ -5,9 +5,9 @@
 
 namespace monolish {
 
-template <typename T>
-int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
-                                               monolish::vector<T> &x) {
+template <typename MATRIX, typename T>
+int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
+                                                       monolish::vector<T> &x) {
   T norm;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -188,14 +188,19 @@ int standard_eigen::LOBPCG<T>::monolish_LOBPCG(matrix::CRS<T> &A, T &l,
 }
 
 template int
-standard_eigen::LOBPCG<double>::monolish_LOBPCG(matrix::CRS<double> &A,
-                                                double &l, vector<double> &x);
+standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
+    matrix::CRS<double> &A, double &l, vector<double> &x);
+template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
+    matrix::CRS<float> &A, float &l, vector<float> &x);
 template int
-standard_eigen::LOBPCG<float>::monolish_LOBPCG(matrix::CRS<float> &A, float &l,
-                                               vector<float> &x);
+standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(
+    matrix::LinearOperator<double> &A, double &l, vector<double> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::monolish_LOBPCG(
+    matrix::LinearOperator<float> &A, float &l, vector<float> &x);
 
-template <typename T>
-int standard_eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
+template <typename MATRIX, typename T>
+int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, T &l, vector<T> &x) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -208,10 +213,15 @@ int standard_eigen::LOBPCG<T>::solve(matrix::CRS<T> &A, T &l, vector<T> &x) {
   return ret; // err code
 }
 
-template int standard_eigen::LOBPCG<double>::solve(matrix::CRS<double> &A,
-                                                   double &l,
-                                                   vector<double> &x);
-template int standard_eigen::LOBPCG<float>::solve(matrix::CRS<float> &A,
-                                                  float &l, vector<float> &x);
+template int standard_eigen::LOBPCG<matrix::CRS<double>, double>::solve(
+    matrix::CRS<double> &A, double &l, vector<double> &x);
+template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, float &l, vector<float> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(
+    matrix::LinearOperator<double> &A, double &l, vector<double> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::solve(
+    matrix::LinearOperator<float> &A, float &l, vector<float> &x);
 
 } // namespace monolish

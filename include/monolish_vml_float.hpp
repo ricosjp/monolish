@@ -1068,5 +1068,95 @@ float max(const matrix::CRS<float> &C);
  **/
 float min(const matrix::CRS<float> &C);
 
+//////////////////////////////////////////////////////
+//  LinearOperator
+//////////////////////////////////////////////////////
+
+/**
+ * @brief float precision element by element addition of LinearOperator A and
+ * LinearOperator B.
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param B float precision monolish LinearOperator (size M x N)
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void add(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
+         matrix::LinearOperator<float> &C);
+
+/**
+ * @brief float precision element by element subtraction of LinearOperator A and
+ * LinearOperator B.
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param B float precision monolish LinearOperator (size M x N)
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void sub(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
+         matrix::LinearOperator<float> &C);
+
+/**
+ * @brief float precision scalar and LinearOperator addition (C[i][j] = A[i][j]
+ * + alpha)
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param alpha float precision scalar value
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void add(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
+
+/**
+ * @brief float precision scalar and LinearOperator subtraction (C[i][j] =
+ * A[i][j] - alpha)
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param alpha float precision scalar value
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void sub(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
+
+/**
+ * @brief float precision scalar and LinearOperator multiplication (C[i][j] =
+ * A[i][j] * alpha)
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param alpha float precision scalar value
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void mul(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
+
+/**
+ * @brief float precision scalar and LinearOperator division (C[i][j] = A[i][j]
+ * / alpha)
+ * @param A float precision monolish LinearOperator (size M x N)
+ * @param alpha float precision scalar value
+ * @param C float precision monolish LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void div(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
+
 } // namespace vml
 } // namespace monolish

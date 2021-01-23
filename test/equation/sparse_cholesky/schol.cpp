@@ -6,7 +6,7 @@
 template <typename T>
 bool test(const char *file, const int check_ans, const T tol) {
 
-  monolish::equation::Cholesky<T> Cholesky_solver;
+  monolish::equation::Cholesky<monolish::matrix::CRS<T>, T> Cholesky_solver;
 
   monolish::matrix::COO<T> COO(file);
   monolish::matrix::CRS<T> A(COO);
