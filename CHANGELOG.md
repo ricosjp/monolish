@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- LinerOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/210
 - LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
 - add vector is_same_size, is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
 - add is_same_size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
