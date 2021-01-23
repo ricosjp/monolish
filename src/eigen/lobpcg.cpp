@@ -41,13 +41,30 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
-  for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
-    // W = A w
-    blas::matvec(A, w, W);
+  // B singular flag
+  bool is_singular = false;
+  // W = A w
+  blas::matvec(A, w, W);
 
+  for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     vector<T> Sa;
     vector<T> Sb;
-    if (iter > 0) {
+    if (iter == 0 || is_singular) {
+      // Sa = { w, x }^T { W, X }
+      //    = { w, x }^T A { w, x }
+      Sa.resize(4);
+      blas::dot(w, W, Sa[0]);
+      blas::dot(w, X, Sa[1]);
+      blas::dot(x, W, Sa[2]);
+      blas::dot(x, X, Sa[3]);
+
+      // Sb = { w, x }^T { w, x }
+      Sb.resize(4);
+      blas::dot(w, w, Sb[0]);
+      blas::dot(w, x, Sb[1]);
+      blas::dot(x, w, Sb[2]);
+      blas::dot(x, x, Sb[3]);
+    } else {
       // Sa = { w, x, p }^T { W, X, P }
       //    = { w, x, p }^T A { w, x, p }
       Sa.resize(9);
@@ -72,21 +89,6 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
       blas::dot(p, w, Sb[6]);
       blas::dot(p, x, Sb[7]);
       blas::dot(p, p, Sb[8]);
-    } else {
-      // Sa = { w, x }^T { W, X }
-      //    = { w, x }^T A { w, x }
-      Sa.resize(4);
-      blas::dot(w, W, Sa[0]);
-      blas::dot(w, X, Sa[1]);
-      blas::dot(x, W, Sa[2]);
-      blas::dot(x, X, Sa[3]);
-
-      // Sb = { w, x }^T { w, x }
-      Sb.resize(4);
-      blas::dot(w, w, Sb[0]);
-      blas::dot(w, x, Sb[1]);
-      blas::dot(x, w, Sb[2]);
-      blas::dot(x, x, Sb[3]);
     }
     matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa.data());
     matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb.data());
@@ -100,8 +102,18 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
     const char jobz = 'V';
     const char uplo = 'L';
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
-    if (info != 0) {
-      throw std::runtime_error("LAPACK sygv failed");
+    // info==6 means order 3 of B is not positive definite, similar to step 0.
+    // therefore we set is_singular flag to true and restart the iteration step.
+    if (info == 6) {
+      if (this->get_print_rhistory()) {
+        *this->rhistory_stream << iter + 1 << "\t"
+                               << "singular; restart the step" << std::endl;
+      }
+      is_singular = true;
+      iter--;
+      continue;
+    } else if (info != 0) {
+      throw std::runtime_error("internal LAPACK sygvd returned error");
     }
     if (A.get_device_mem_stat() == true) {
       monolish::util::recv(Sam, lambda);
@@ -113,7 +125,21 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
     monolish::vector<T> b(Sam.get_col());
     Sam.col(index, b);
 
-    if (iter > 0) {
+    if (iter == 0 || is_singular) {
+      // x = b[0] w + b[1] x, normalize
+      // p = b[0] w         , normalize
+      blas::scal(b[0], w);
+      blas::scal(b[1], x);
+      blas::vecadd(w, p, p);
+      blas::vecadd(x, p, x);
+
+      // X = b[0] W + b[1] X, normalize with x
+      // P = b[0] W         , normalize with p
+      blas::scal(b[0], W);
+      blas::scal(b[1], X);
+      blas::vecadd(W, P, P);
+      blas::vecadd(X, P, X);
+    } else {
       // x = b[0] w + b[1] x + b[2] p, normalize
       // p = b[0] w          + b[2] p, normalize
       blas::scal(b[0], w);
@@ -127,20 +153,6 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
       blas::scal(b[0], W);
       blas::scal(b[1], X);
       blas::scal(b[2], P);
-      blas::vecadd(W, P, P);
-      blas::vecadd(X, P, X);
-    } else {
-      // x = b[0] w + b[1] x, normalize
-      // p = b[0] w         , normalize
-      blas::scal(b[0], w);
-      blas::scal(b[1], x);
-      blas::vecadd(w, p, p);
-      blas::vecadd(x, p, x);
-
-      // X = b[0] W + b[1] X, normalize with x
-      // P = b[0] W         , normalize with p
-      blas::scal(b[0], W);
-      blas::scal(b[1], X);
       blas::vecadd(W, P, P);
       blas::vecadd(X, P, X);
     }
@@ -182,6 +194,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
 
     // normalize w
     blas::scal(1.0 / residual, w);
+    // W = A w
+    blas::matvec(A, w, W);
   }
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
