@@ -123,7 +123,7 @@ int main(int argc, char **argv) {
   }
   if (test_laplacian_1d<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.0e-2, 1.0e-2) == false) {
+          check_ans, 2.0e-2, 1.0e-2) == false) {
     return 1;
   }
   if (test_laplacian_1d<double, monolish::equation::Jacobi<
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
   }
   if (test_laplacian_1d<float, monolish::equation::Jacobi<
                                    monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.0e-2, 1.0e-2) == false) {
+          check_ans, 2.0e-2, 1.0e-2) == false) {
     return 1;
   }
   return 0;
