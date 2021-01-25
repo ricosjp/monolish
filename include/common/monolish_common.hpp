@@ -263,8 +263,8 @@ bool is_same_size(const T &A, const T &B, const types &... args) {
  * - GPU acceleration: false
  **/
 template <typename T>
-bool on_device_mem(const T &arg){
-  return arg.get_device_mem_stat;
+bool is_same_device_mem_stat(const T &arg1, const T& arg2){
+  return arg1.get_device_mem_stat() && arg2.get_device_mem_stat();
 }
 
 /**
@@ -275,8 +275,8 @@ bool on_device_mem(const T &arg){
  * - GPU acceleration: false
  **/
 template <typename T, typename... types>
-bool is_same_device_mem_stat(const T &arg, const types &... args) {
-  return on_device_mem(arg) && on_device_mem(args...);
+bool is_same_device_mem_stat(const T &arg1, const T &arg2, const types &... args) {
+  return is_same_device_mem_stat(arg1, arg2) && is_same_device_mem_stat(arg1, args...);
 }
 
 // create matrix //////////////////
