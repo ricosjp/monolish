@@ -255,6 +255,19 @@ bool is_same_size(const T &A, const T &B, const types &... args) {
   return is_same_size(A, B) && is_same_size(A, args...);
 }
 
+template <typename T>
+bool on_device_mem(const T &arg){
+  return arg.get_device_mem_stat;
+}
+
+/**
+ * @brief on_device_mem (true or false)
+ **/
+template <typename T, typename... types>
+bool on_device_mem(const T &arg, const types &... args) {
+  return on_device_mem(arg) && on_device_mem(args...);
+}
+
 // create matrix //////////////////
 
 /**
