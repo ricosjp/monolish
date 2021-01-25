@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <omp.h>
+#include <cassert>
 #include <stdexcept>
 #include <typeinfo>
 
