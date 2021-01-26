@@ -7,7 +7,8 @@ namespace monolish {
 namespace util {
 
 template <typename T>
-bool is_same_structure(const matrix::LinearOperator<T> &A, const matrix::LinearOperator<T> &B) {
+bool is_same_structure(const matrix::LinearOperator<T> &A,
+                       const matrix::LinearOperator<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -28,7 +29,8 @@ template bool is_same_structure(const matrix::LinearOperator<float> &A,
                                 const matrix::LinearOperator<float> &B);
 
 template <typename T>
-bool is_same_size(const matrix::LinearOperator<T> &A, const matrix::LinearOperator<T> &B) {
+bool is_same_size(const matrix::LinearOperator<T> &A,
+                  const matrix::LinearOperator<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

@@ -1,5 +1,5 @@
-#include "../../../include/common/monolish_logger.hpp"
 #include "../../../include/common/monolish_dense.hpp"
+#include "../../../include/common/monolish_logger.hpp"
 #include "../../../include/common/monolish_matrix.hpp"
 #include "../../../include/common/monolish_vector.hpp"
 #include "../../../include/monolish_blas.hpp"
@@ -64,7 +64,6 @@ template <typename T> void LinearOperator<T>::convert(CRS<T> &crs) {
 
 template void LinearOperator<double>::convert(CRS<double> &crs);
 template void LinearOperator<float>::convert(CRS<float> &crs);
-
 
 template <typename T>
 void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
