@@ -4,23 +4,6 @@
 namespace monolish {
 namespace matrix {
 
-// copy
-template <typename T> LinearOperator<T> LinearOperator<T>::copy() {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-
-  LinearOperator<T> ans(get_row(), get_col());
-
-  if (get_matvec_init_flag()) {
-    ans.set_matvec(get_matvec());
-  }
-  if (get_rmatvec_init_flag()) {
-    ans.set_rmatvec(get_rmatvec());
-  }
-
-  return ans;
-}
-
 template <typename T>
 void LinearOperator<T>::operator=(const LinearOperator<T> &linearoperator) {
   Logger &logger = Logger::get_instance();
