@@ -14,15 +14,9 @@ void vml::add(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == C.get_row());
+  assert(A.get_col() == C.get_col());
+  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -62,15 +56,9 @@ void vml::sub(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == C.get_row());
+  assert(A.get_col() == C.get_col());
+  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -110,15 +98,9 @@ void vml::mul(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == C.get_row());
+  assert(A.get_col() == C.get_col());
+  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -158,15 +140,9 @@ void vml::div(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == C.get_row());
+  assert(A.get_col() == C.get_col());
+  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {

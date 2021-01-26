@@ -12,13 +12,8 @@ void vml::pow(const vector<double> &a, const vector<double> &b,
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != b.size() || a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != b.get_device_mem_stat() ||
-      a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, b, y));
+  assert(util::is_same_device_mem_stat(a, b, y));
 
   internal::vpow(y.size(), a.data(), b.data(), y.data(),
                  y.get_device_mem_stat());
@@ -31,12 +26,8 @@ void vml::pow(const vector<double> &a, const double alpha, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vpow(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
 
@@ -48,12 +39,8 @@ void vml::sqrt(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vsqrt(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -68,12 +55,8 @@ void vml::sin(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vsin(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -85,12 +68,8 @@ void vml::sinh(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vsinh(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -102,12 +81,8 @@ void vml::asin(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vasin(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -119,12 +94,8 @@ void vml::asinh(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vasinh(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -139,12 +110,8 @@ void vml::tan(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vtan(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -156,12 +123,8 @@ void vml::tanh(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vtanh(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -173,12 +136,8 @@ void vml::atan(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vatan(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -190,12 +149,8 @@ void vml::atanh(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vatanh(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -211,12 +166,8 @@ void vml::ceil(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vceil(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -228,12 +179,8 @@ void vml::floor(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vfloor(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -245,12 +192,8 @@ void vml::sign(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vsign(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -262,12 +205,8 @@ void vml::reciprocal(const vector<double> &a, vector<double> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vreciprocal(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -280,13 +219,8 @@ void vml::max(const vector<double> &a, const vector<double> &b,
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size() || a.size() != b.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat() ||
-      b.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vmax(y.size(), a.data(), b.data(), y.data(),
                  y.get_device_mem_stat());
@@ -310,13 +244,8 @@ void vml::min(const vector<double> &a, const vector<double> &b,
   logger.func_in(monolish_func);
 
   // err
-  if (a.size() != y.size() || a.size() != b.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat() ||
-      b.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, b, y));
+  assert(util::is_same_device_mem_stat(a, b, y));
 
   internal::vmin(y.size(), a.data(), b.data(), y.data(),
                  y.get_device_mem_stat());
