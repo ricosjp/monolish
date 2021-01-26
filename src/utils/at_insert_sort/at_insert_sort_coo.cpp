@@ -8,8 +8,8 @@ namespace matrix {
 
 template <typename T> T COO<T>::at(const size_t i, const size_t j) {
 
-  assert(get_row() > i);
-  assert(get_col() > j);
+  assert(i <= get_row());
+  assert(j <= get_col());
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
@@ -27,8 +27,8 @@ template float COO<float>::at(const size_t i, const size_t j);
 
 template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
 
-  assert(get_row() > i);
-  assert(get_col() > j);
+  assert(i <= get_row());
+  assert(j <= get_col());
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
@@ -49,8 +49,8 @@ template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
   size_t rownum = m;
   size_t colnum = n;
-  assert(rownum < get_row());
-  assert(colnum < get_col());
+  assert(rownum <= get_row());
+  assert(colnum <= get_col());
 
   row_index.push_back(rownum);
   col_index.push_back(colnum);

@@ -10,8 +10,8 @@ template <typename T> T Dense<T>::at(const size_t i, const size_t j) {
   if (get_device_mem_stat()) {
     throw std::runtime_error("at() Error, GPU vector cant use operator[]");
   }
-  assert(get_row() > i);
-  assert(get_col() > j);
+  assert(i <= get_row());
+  assert(j <= get_col());
 
   return val[get_col() * i + j];
 }
@@ -23,8 +23,8 @@ template <typename T> T Dense<T>::at(const size_t i, const size_t j) const {
     throw std::runtime_error("at() Error, GPU vector cant use operator[]");
   }
 
-  assert(get_row() > i);
-  assert(get_col() > j);
+  assert(i <= get_row());
+  assert(j <= get_col());
 
   return val[get_col() * i + j];
 }
@@ -39,8 +39,8 @@ void Dense<T>::insert(const size_t i, const size_t j, const T Val) {
     throw std::runtime_error("insert() Error, GPU vector cant use operator[]");
   }
 
-  assert(get_row() > i);
-  assert(get_col() > j);
+  assert(i <= get_row());
+  assert(j <= get_col());
 
   val[get_col() * i + j] = Val;
 }
