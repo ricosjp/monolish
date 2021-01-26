@@ -32,6 +32,7 @@ Unreleased
 - change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Fixed
+- fix error check doxygen comment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/232
 - fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
 
 ### Deprecated

@@ -679,7 +679,7 @@ float min(const matrix::Dense<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -696,7 +696,7 @@ void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -713,7 +713,7 @@ void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -730,7 +730,7 @@ void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -749,8 +749,7 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * @warning
  * A and C must be same non-zero structure
  */
-void add(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
@@ -764,10 +763,9 @@ void add(const matrix::CRS<float> &A, const float alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  */
-void sub(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
@@ -783,8 +781,7 @@ void sub(const matrix::CRS<float> &A, const float alpha,
  * @warning
  * A and C must be same non-zero structure
  */
-void mul(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
@@ -800,8 +797,7 @@ void mul(const matrix::CRS<float> &A, const float alpha,
  * @warning
  * A and C must be same non-zero structure
  */
-void div(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief power to single precision CRS matrix elements by single precision CRS
@@ -832,8 +828,7 @@ void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * @warning
  * A and C must be same non-zero structure
  **/
-void pow(const matrix::CRS<float> &A, const float alpha,
-         matrix::CRS<float> &C);
+void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 
 /**
  * @brief sqrt to single precision CRS matrix elements (C[0:N] = sqrt(A[0:N]))
@@ -943,7 +938,7 @@ void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -957,7 +952,7 @@ void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  **/
 void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -1014,7 +1009,7 @@ void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  **/
 void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -1029,7 +1024,7 @@ void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -1045,7 +1040,7 @@ void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);

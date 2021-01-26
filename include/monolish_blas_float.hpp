@@ -65,7 +65,7 @@ void copy(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  */
 void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -83,8 +83,7 @@ void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecadd(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
 
 /**
  * @brief single precision element by element subtraction of vector a and vector
@@ -98,8 +97,7 @@ void vecadd(const vector<float> &a, const vector<float> &b,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 /**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
@@ -317,7 +315,7 @@ void mscal(const float alpha, matrix::CRS<float> &A);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure 
+ * A and B must be same non-zero structure
  */
 void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);
@@ -362,7 +360,7 @@ void matadd(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A B must be same non-zero structure 
+ * A B must be same non-zero structure
  */
 void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
             matrix::CRS<float> &C);

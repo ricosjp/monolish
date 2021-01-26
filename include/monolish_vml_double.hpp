@@ -679,7 +679,7 @@ double min(const matrix::Dense<double> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void add(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
@@ -696,7 +696,7 @@ void add(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
@@ -713,7 +713,7 @@ void sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
@@ -730,7 +730,7 @@ void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure 
+ * A, B, and C must be same non-zero structure
  */
 void div(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
@@ -764,7 +764,7 @@ void add(const matrix::CRS<double> &A, const double alpha,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  */
 void sub(const matrix::CRS<double> &A, const double alpha,
          matrix::CRS<double> &C);
@@ -943,7 +943,7 @@ void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
@@ -957,7 +957,7 @@ void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  **/
 void atanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
@@ -1014,7 +1014,7 @@ void sign(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  **/
 void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
@@ -1029,7 +1029,7 @@ void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);
@@ -1045,7 +1045,7 @@ void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure 
+ * A, B and C must be same non-zero structure
  **/
 void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C);

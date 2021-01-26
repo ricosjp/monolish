@@ -65,7 +65,7 @@ void copy(const matrix::LinearOperator<double> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure 
+ * A and C must be same non-zero structure
  */
 void copy(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 
@@ -317,7 +317,7 @@ void mscal(const double alpha, matrix::CRS<double> &A);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure 
+ * A and B must be same non-zero structure
  */
 void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
@@ -362,7 +362,7 @@ void matadd(const matrix::LinearOperator<double> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A B must be same non-zero structure 
+ * A B must be same non-zero structure
  */
 void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
