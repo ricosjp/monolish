@@ -181,6 +181,19 @@ template <typename T>
 bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
 
 /**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A LinearOperator matrix
+ * @param B LinearOperator matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_structure(const matrix::LinearOperator<T> &A, const matrix::LinearOperator<T> &B);
+
+/**
  * @brief compare matrix structure
  **/
 template <typename T, typename... types>
@@ -246,6 +259,19 @@ bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B);
  **/
 template <typename T>
 bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+
+/**
+ * @brief compare row and col size
+ * @param A LinearOperator matrix
+ * @param B LinearOperator matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+bool is_same_size(const matrix::LinearOperator<T> &A, const matrix::LinearOperator<T> &B);
 
 /**
  * @brief compare matrix size
