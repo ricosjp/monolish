@@ -29,7 +29,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU // CUDA11 will support SpMM
-#if 0 // row major SpMM is not supported in cuda 10.2
+#if 0                // row major SpMM is not supported in cuda 10.2
     size_t nnz = A.get_nnz();
 
     cusparseHandle_t sp_handle;
