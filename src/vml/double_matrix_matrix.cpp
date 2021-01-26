@@ -11,17 +11,9 @@ void vml::add(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  //err
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -34,17 +26,9 @@ void vml::sub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  //err
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -57,17 +41,9 @@ void vml::mul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  //err
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vmul(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -80,17 +56,9 @@ void vml::div(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  //err
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vdiv(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -107,16 +75,9 @@ void vml::add(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -130,16 +91,9 @@ void vml::sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -153,16 +107,9 @@ void vml::mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vmul(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
@@ -176,16 +123,9 @@ void vml::div(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error matrix get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vdiv(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  C.get_device_mem_stat());
