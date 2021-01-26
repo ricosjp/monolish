@@ -4,3 +4,5 @@ cat ./double_matrix_matrix.cpp | sed -e 's/double/float/g'  > float_matrix_matri
 cat ./double_scalar_matrix.cpp | sed -e 's/double/float/g'  > float_scalar_matrix.cpp
 cat ./double_matrix_math.cpp | sed -e 's/double/float/g'  > float_vector_math.cpp
 cat ./double_vector_math.cpp | sed -e 's/double/float/g'  > float_matrix_math.cpp
+cat ./double_linearoperator_linearoperator.cpp | sed -e 's/double/float/g'  > ./float_linearoperator_linearoperator.cpp
+cat ./double_scalar_linearoperator.cpp | sed -e 's/double/float/g'  > ./float_scalar_linearoperator.cpp
