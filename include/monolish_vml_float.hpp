@@ -679,7 +679,7 @@ float min(const matrix::Dense<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure (dont check in this function)
+ * A, B, and C must be same non-zero structure 
  */
 void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -696,7 +696,7 @@ void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure (dont check in this function)
+ * A, B, and C must be same non-zero structure 
  */
 void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -713,7 +713,7 @@ void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure (dont check in this function)
+ * A, B, and C must be same non-zero structure 
  */
 void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -730,7 +730,7 @@ void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A, B, and C must be same non-zero structure (dont check in this function)
+ * A, B, and C must be same non-zero structure 
  */
 void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -747,9 +747,10 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  */
-void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void add(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix subtraction (C[i][j] =
@@ -763,9 +764,10 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure 
  */
-void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void sub(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix multiplication (C[i][j] =
@@ -779,9 +781,10 @@ void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  */
-void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void mul(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief single precision scalar and Dence matrix division (C[i][j] = A[i][j] +
@@ -795,9 +798,10 @@ void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  */
-void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void div(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief power to single precision CRS matrix elements by single precision CRS
@@ -810,7 +814,7 @@ void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -826,9 +830,10 @@ void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  **/
-void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+void pow(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C);
 
 /**
  * @brief sqrt to single precision CRS matrix elements (C[0:N] = sqrt(A[0:N]))
@@ -840,7 +845,7 @@ void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -854,7 +859,7 @@ void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -868,7 +873,7 @@ void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -882,7 +887,7 @@ void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -896,7 +901,7 @@ void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -910,7 +915,7 @@ void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -924,7 +929,7 @@ void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure
  **/
 void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -938,7 +943,7 @@ void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure 
  **/
 void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -952,7 +957,7 @@ void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure 
  **/
 void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -966,7 +971,7 @@ void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  **/
 void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -980,7 +985,7 @@ void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  **/
 void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -995,7 +1000,7 @@ void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure
  **/
 void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -1009,7 +1014,7 @@ void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A and C must be same non-zero structure (dont check in this function)
+ * A and C must be same non-zero structure 
  **/
 void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
@@ -1024,7 +1029,7 @@ void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure 
  **/
 void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -1040,7 +1045,7 @@ void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  * @warning
- * A, B and C must be same non-zero structure (dont check in this function)
+ * A, B and C must be same non-zero structure 
  **/
 void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C);
@@ -1073,11 +1078,11 @@ float min(const matrix::CRS<float> &C);
 //////////////////////////////////////////////////////
 
 /**
- * @brief float precision element by element addition of LinearOperator A and
+ * @brief single precision element by element addition of LinearOperator A and
  * LinearOperator B.
- * @param A float precision monolish LinearOperator (size M x N)
- * @param B float precision monolish LinearOperator (size M x N)
- * @param C float precision monolish LinearOperator (size M x N)
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param B single precision monolish LinearOperator (size M x N)
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
@@ -1088,11 +1093,11 @@ void add(const matrix::LinearOperator<float> &A,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision element by element subtraction of LinearOperator A and
- * LinearOperator B.
- * @param A float precision monolish LinearOperator (size M x N)
- * @param B float precision monolish LinearOperator (size M x N)
- * @param C float precision monolish LinearOperator (size M x N)
+ * @brief single precision element by element subtraction of LinearOperator A
+ * and LinearOperator B.
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param B single precision monolish LinearOperator (size M x N)
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
@@ -1103,11 +1108,11 @@ void sub(const matrix::LinearOperator<float> &A,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator addition (C[i][j] = A[i][j]
+ * @brief single precision scalar and LinearOperator addition (C[i][j] = A[i][j]
  * + alpha)
- * @param A float precision monolish LinearOperator (size M x N)
- * @param alpha float precision scalar value
- * @param C float precision monolish LinearOperator (size M x N)
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param alpha single precision scalar value
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
@@ -1117,11 +1122,11 @@ void add(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator subtraction (C[i][j] =
+ * @brief single precision scalar and LinearOperator subtraction (C[i][j] =
  * A[i][j] - alpha)
- * @param A float precision monolish LinearOperator (size M x N)
- * @param alpha float precision scalar value
- * @param C float precision monolish LinearOperator (size M x N)
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param alpha single precision scalar value
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
@@ -1131,11 +1136,11 @@ void sub(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator multiplication (C[i][j] =
+ * @brief single precision scalar and LinearOperator multiplication (C[i][j] =
  * A[i][j] * alpha)
- * @param A float precision monolish LinearOperator (size M x N)
- * @param alpha float precision scalar value
- * @param C float precision monolish LinearOperator (size M x N)
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param alpha single precision scalar value
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
@@ -1145,11 +1150,11 @@ void mul(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 
 /**
- * @brief float precision scalar and LinearOperator division (C[i][j] = A[i][j]
+ * @brief single precision scalar and LinearOperator division (C[i][j] = A[i][j]
  * / alpha)
- * @param A float precision monolish LinearOperator (size M x N)
- * @param alpha float precision scalar value
- * @param C float precision monolish LinearOperator (size M x N)
+ * @param A single precision monolish LinearOperator (size M x N)
+ * @param alpha single precision scalar value
+ * @param C single precision monolish LinearOperator (size M x N)
  * @note
  * - # of computation: 2 functions
  * - Multi-threading: false
