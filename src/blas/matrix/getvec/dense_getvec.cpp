@@ -15,9 +15,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   const size_t N = get_col();
   const size_t Len = std::min(get_row(), get_col());
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error A.size != diag.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -50,9 +48,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   const T *vald = val.data();
   const size_t N = get_col();
 
-  if (N != vec.size()) {
-    throw std::runtime_error("error A.size != row.size");
-  }
+  assert(N == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -88,9 +84,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   const size_t M = get_row();
   const size_t N = get_col();
 
-  if (M != vec.size()) {
-    throw std::runtime_error("error A.size != row.size");
-  }
+  assert(M == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu

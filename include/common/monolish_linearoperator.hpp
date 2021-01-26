@@ -293,16 +293,6 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  LinearOperator copy();
-
-  /**
-   * @brief operator copy
-   * @return copied LinearOperator
-   * @note
-   * - # of computation: 4 + 2 functions
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   */
   void operator=(const LinearOperator<Float> &mat);
 };
 } // namespace matrix

@@ -9,12 +9,8 @@ void blas::copy(const vector<float> &a, vector<float> &y) {
   logger.util_in(monolish_func);
 
   // err
-  if (a.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (a.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(a, y));
+  assert(util::is_same_device_mem_stat(a, y));
 
   internal::vcopy(y.size(), a.data(), y.data(), y.get_device_mem_stat());
 
@@ -55,12 +51,8 @@ void blas::axpy(const float alpha, const vector<float> &x, vector<float> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (x.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (x.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(x, y));
+  assert(util::is_same_device_mem_stat(x, y));
 
   const float *xd = x.data();
   float *yd = y.data();
@@ -89,12 +81,8 @@ float blas::dot(const vector<float> &x, const vector<float> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (x.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (x.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(x, y));
+  assert(util::is_same_device_mem_stat(x, y));
 
   float ans = 0;
   const float *xd = x.data();
@@ -212,13 +200,8 @@ void blas::axpyz(const float alpha, const vector<float> &x,
   logger.func_in(monolish_func);
 
   // err
-  if (x.size() != y.size() || x.size() != z.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (x.get_device_mem_stat() != y.get_device_mem_stat() ||
-      x.get_device_mem_stat() != z.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(x, y, z));
+  assert(util::is_same_device_mem_stat(x, y, z));
 
   const float *xd = x.data();
   const float *yd = y.data();
@@ -250,12 +233,8 @@ void blas::xpay(const float alpha, const vector<float> &x, vector<float> &y) {
   logger.func_in(monolish_func);
 
   // err
-  if (x.size() != y.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (x.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(x, y));
+  assert(util::is_same_device_mem_stat(x, y));
 
   const float *xd = x.data();
   float *yd = y.data();

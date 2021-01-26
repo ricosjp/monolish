@@ -10,31 +10,10 @@ void blas::matmul(const matrix::Dense<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_col() != B.get_row()) {
-    std::cout << "A.col: " << A.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "B.row: " << B.get_row() << std::endl;
-    throw std::runtime_error("error A.col != B.row");
-  }
-
-  if (A.get_row() != C.get_row()) {
-    std::cout << "A.row: " << A.get_row() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.row: " << C.get_row() << std::endl;
-    throw std::runtime_error("error A.row != B.row");
-  }
-
-  if (B.get_col() != C.get_col()) {
-    std::cout << "B.col: " << B.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.col: " << C.get_col() << std::endl;
-    throw std::runtime_error("error B.col != C.col");
-  }
-
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(A.get_col() == B.get_row());
+  assert(A.get_row() == C.get_row());
+  assert(B.get_col() == C.get_col());
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   const double *Ad = A.val.data();
   const double *Bd = B.val.data();
@@ -75,31 +54,10 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_col() != B.get_row()) {
-    std::cout << "A.col: " << A.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "B.row: " << B.get_row() << std::endl;
-    throw std::runtime_error("error A.col != B.row");
-  }
-
-  if (A.get_row() != C.get_row()) {
-    std::cout << "A.row: " << A.get_row() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.row: " << C.get_row() << std::endl;
-    throw std::runtime_error("error A.row != B.row");
-  }
-
-  if (B.get_col() != C.get_col()) {
-    std::cout << "B.col: " << B.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.col: " << C.get_col() << std::endl;
-    throw std::runtime_error("error B.col != C.col");
-  }
-
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(A.get_col() == B.get_row());
+  assert(A.get_row() == C.get_row());
+  assert(B.get_col() == C.get_col());
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   const float *Ad = A.val.data();
   const float *Bd = B.val.data();

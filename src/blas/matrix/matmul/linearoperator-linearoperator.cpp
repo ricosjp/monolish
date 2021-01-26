@@ -11,40 +11,13 @@ void blas::matmul(const matrix::LinearOperator<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_col() != B.get_row()) {
-    std::cout << "A.col: " << A.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "B.row: " << B.get_row() << std::endl;
-    throw std::runtime_error("error A.col != B.row");
-  }
+  assert(A.get_col() == B.get_row());
+  assert(A.get_row() == C.get_row());
+  assert(B.get_col() == C.get_col());
+  assert(util::is_same_device_mem_stat(A, B, C));
 
-  if (A.get_row() != C.get_row()) {
-    std::cout << "A.row: " << A.get_row() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.row: " << C.get_row() << std::endl;
-    throw std::runtime_error("error A.row != B.row");
-  }
-
-  if (B.get_col() != C.get_col()) {
-    std::cout << "B.col: " << B.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.col: " << C.get_col() << std::endl;
-    throw std::runtime_error("error B.col != C.col");
-  }
-
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
-
-  if (A.get_matvec_init_flag() != B.get_matvec_init_flag()) {
-    throw std::runtime_error("error A.matvec_init_flag != B.matvec_init_flag");
-  }
-
-  if (A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag()) {
-    throw std::runtime_error(
-        "error A.rmatvec_init_flag != B.rmatvec_init_flag");
-  }
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -86,40 +59,13 @@ void blas::matmul(const matrix::LinearOperator<float> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_col() != B.get_row()) {
-    std::cout << "A.col: " << A.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "B.row: " << B.get_row() << std::endl;
-    throw std::runtime_error("error A.col != B.row");
-  }
+  assert(A.get_col() == B.get_row());
+  assert(A.get_row() == C.get_row());
+  assert(B.get_col() == C.get_col());
+  assert(util::is_same_device_mem_stat(A, B, C));
 
-  if (A.get_row() != C.get_row()) {
-    std::cout << "A.row: " << A.get_row() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.row: " << C.get_row() << std::endl;
-    throw std::runtime_error("error A.row != B.row");
-  }
-
-  if (B.get_col() != C.get_col()) {
-    std::cout << "B.col: " << B.get_col() << std::flush;
-    std::cout << ", " << std::flush;
-    std::cout << "C.col: " << C.get_col() << std::endl;
-    throw std::runtime_error("error B.col != C.col");
-  }
-
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
-
-  if (A.get_matvec_init_flag() != B.get_matvec_init_flag()) {
-    throw std::runtime_error("error A.matvec_init_flag != B.matvec_init_flag");
-  }
-
-  if (A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag()) {
-    throw std::runtime_error(
-        "error A.rmatvec_init_flag != B.rmatvec_init_flag");
-  }
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<float> &VEC) {
