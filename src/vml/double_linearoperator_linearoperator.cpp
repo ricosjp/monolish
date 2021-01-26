@@ -15,12 +15,8 @@ void vml::add(const matrix::LinearOperator<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == B.get_row());
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == B.get_col());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == B.get_device_mem_stat());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
   assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
@@ -67,15 +63,8 @@ void vml::sub(const matrix::LinearOperator<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == B.get_row());
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == B.get_col());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == B.get_device_mem_stat());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
-
-  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
-  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {

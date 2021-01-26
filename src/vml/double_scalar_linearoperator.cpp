@@ -14,9 +14,8 @@ void vml::add(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
+  assert(util::is_same_size(A, C));
+  assert(util::is_same_device_mem_stat(A, C));
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -56,9 +55,8 @@ void vml::sub(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
+  assert(util::is_same_size(A, C));
+  assert(util::is_same_device_mem_stat(A, C));
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -98,9 +96,8 @@ void vml::mul(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
+  assert(util::is_same_size(A, C));
+  assert(util::is_same_device_mem_stat(A, C));
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -140,9 +137,8 @@ void vml::div(const matrix::LinearOperator<double> &A, const double &alpha,
   logger.func_in(monolish_func);
 
   // err
-  assert(A.get_row() == C.get_row());
-  assert(A.get_col() == C.get_col());
-  assert(A.get_device_mem_stat() == C.get_device_mem_stat());
+  assert(util::is_same_size(A, C));
+  assert(util::is_same_device_mem_stat(A, C));
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
