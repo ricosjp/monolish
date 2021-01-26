@@ -291,8 +291,8 @@ bool is_same_size(const T &A, const T &B, const types &... args) {
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-bool is_same_device_mem_stat(const T &arg1, const T &arg2) {
+template <typename T, typename U>
+bool is_same_device_mem_stat(const T &arg1, const U &arg2) {
   return arg1.get_device_mem_stat() == arg2.get_device_mem_stat();
 }
 
@@ -303,8 +303,8 @@ bool is_same_device_mem_stat(const T &arg1, const T &arg2) {
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T, typename... types>
-bool is_same_device_mem_stat(const T &arg1, const T &arg2,
+template <typename T, typename U, typename... types>
+bool is_same_device_mem_stat(const T &arg1, const U &arg2,
                              const types &... args) {
   return is_same_device_mem_stat(arg1, arg2) &&
          is_same_device_mem_stat(arg1, args...);
