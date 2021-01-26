@@ -1,3 +1,4 @@
+#include "../../../include/common/monolish_common.hpp"
 #include "../../../include/common/monolish_dense.hpp"
 #include "../../../include/common/monolish_logger.hpp"
 #include "../../../include/common/monolish_matrix.hpp"
@@ -23,12 +24,9 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (size() != vec.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (get_device_mem_stat() != vec.get_device_mem_stat()) {
-    throw std::runtime_error("error vector get_device_mem_stat() is not same");
-  }
+  // err
+  assert(monolish::util::is_same_size(*this, vec));
+  assert(monolish::util::is_same_device_mem_stat(*this, vec));
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {

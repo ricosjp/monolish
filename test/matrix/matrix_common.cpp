@@ -205,12 +205,6 @@ template <typename T> bool test() {
     std::cout << "A(1, 1) != 0.0" << std::endl;
     return false;
   }
-  // out of range element
-  try {
-    addr_COO.at(3, 2);
-    throw std::logic_error("at() should throw out_of_range()");
-  } catch (std::out_of_range &exception) {
-  }
 
   // convert monolish::COO -> monolish::CRS
   monolish::matrix::CRS<T> addr_CRS(addr_COO);
