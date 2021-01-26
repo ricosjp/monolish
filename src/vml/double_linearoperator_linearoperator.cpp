@@ -22,8 +22,8 @@ void vml::add(const matrix::LinearOperator<double> &A,
   assert(A.get_device_mem_stat() == B.get_device_mem_stat());
   assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
-  assert(A.get_matvec_init_flag() != B.get_matvec_init_flag());
-  assert(A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag());
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -74,8 +74,8 @@ void vml::sub(const matrix::LinearOperator<double> &A,
   assert(A.get_device_mem_stat() == B.get_device_mem_stat());
   assert(A.get_device_mem_stat() == C.get_device_mem_stat());
 
-  assert(A.get_matvec_init_flag() != B.get_matvec_init_flag());
-  assert(A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag());
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
