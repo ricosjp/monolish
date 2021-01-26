@@ -25,6 +25,7 @@ Unreleased
 - add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Changed
+- change util error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/231
 - change BLAS error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/229
 - change linear operator VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/228
 - organize linearoperator utils https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/227
