@@ -18,7 +18,7 @@ void vml::add(const matrix::LinearOperator<float> &A,
   assert(A.get_row() != B.get_row() || A.get_row() != C.get_row());
   assert(A.get_col() != B.get_col() && A.get_col() != C.get_col());
   assert(A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat());
+         A.get_device_mem_stat() != C.get_device_mem_stat());
 
   assert(A.get_matvec_init_flag() != B.get_matvec_init_flag());
   assert(A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag());
@@ -68,7 +68,7 @@ void vml::sub(const matrix::LinearOperator<float> &A,
   assert(A.get_row() != B.get_row() || A.get_row() != C.get_row());
   assert(A.get_col() != B.get_col() && A.get_col() != C.get_col());
   assert(A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat());
+         A.get_device_mem_stat() != C.get_device_mem_stat());
 
   assert(A.get_matvec_init_flag() != B.get_matvec_init_flag());
   assert(A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag());

@@ -11,7 +11,7 @@ void vml::add(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  //err
+  // err
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
@@ -26,7 +26,7 @@ void vml::sub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  //err
+  // err
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
@@ -41,7 +41,7 @@ void vml::mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  //err
+  // err
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
@@ -56,7 +56,7 @@ void vml::div(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  //err
+  // err
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 

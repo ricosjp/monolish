@@ -26,6 +26,7 @@ Unreleased
 0.11.0 - 2021/01/23
 -----------
 ### Added
+- add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 - LinerOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/210
 - LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
 - add vector is_same_size, is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
@@ -39,6 +40,7 @@ Unreleased
 - add VML max/min https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/215
 
 ### Changed
+- change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 - compute_hash in CRS convert and constructor https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/221
 - make internal syev()/sygv() interface to Fortran95-like https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/219
 - Summarize CI stage public function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/218
