@@ -25,6 +25,7 @@ void blas::copy(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
 
   // err
   assert(util::is_same_size(A, C));
+  assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
   internal::vcopy(A.get_nnz(), A.val.data(), C.val.data(),
