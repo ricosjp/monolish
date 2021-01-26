@@ -102,7 +102,7 @@ bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B) {
 
   bool ans = true;
 
-  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
     ans = false;
   }
@@ -128,7 +128,7 @@ bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B) {
 
   bool ans = true;
 
-  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
     ans = false;
   }

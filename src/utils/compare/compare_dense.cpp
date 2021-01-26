@@ -77,7 +77,7 @@ bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
 
   bool ans = false;
 
-  if (A.get_row() == B.get_row() && A.get_col() == B.get_col()) {
+  if (A.get_row() == B.get_row() || A.get_col() == B.get_col()) {
     logger.util_out();
     ans = true;
   }
@@ -98,7 +98,7 @@ bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
 
   bool ans = true;
 
-  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
     ans = false;
   }
