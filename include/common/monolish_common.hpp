@@ -284,7 +284,6 @@ bool is_same_size(const T &A, const T &B, const types &... args) {
 }
 
 /**
-/**
  * @brief compare same device memory status
  * @note
  * - # of computation: 1
