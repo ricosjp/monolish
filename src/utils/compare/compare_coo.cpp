@@ -105,7 +105,7 @@ bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B) {
 
   bool ans = true;
 
-  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
     ans = false;
   }
@@ -137,7 +137,7 @@ bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B) {
 
   bool ans = true;
 
-  if (A.get_row() != B.get_row() && A.get_col() != B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
     ans = false;
   }
