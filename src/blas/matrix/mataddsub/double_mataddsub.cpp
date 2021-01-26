@@ -14,16 +14,8 @@ void blas::matadd(const matrix::Dense<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
@@ -38,19 +30,9 @@ void blas::matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_nnz() != B.get_nnz() && A.get_nnz() != C.get_nnz()) {
-    throw std::runtime_error("error A.nnz != B.nnz != C.nnz");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
@@ -66,25 +48,11 @@ void blas::matadd(const matrix::LinearOperator<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
-  if (A.get_matvec_init_flag() != B.get_matvec_init_flag()) {
-    throw std::runtime_error("error A.matvec_init_flag != B.matvec_init_flag");
-  }
-
-  if (A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag()) {
-    throw std::runtime_error(
-        "error A.rmatvec_init_flag != B.rmatvec_init_flag");
-  }
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
@@ -132,16 +100,8 @@ void blas::matsub(const matrix::Dense<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
@@ -156,20 +116,9 @@ void blas::matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_structure(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
   internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
                  A.get_device_mem_stat());
@@ -185,25 +134,11 @@ void blas::matsub(const matrix::LinearOperator<double> &A,
   logger.func_in(monolish_func);
 
   // err
-  if (A.get_row() != B.get_row() && A.get_row() != C.get_row()) {
-    throw std::runtime_error("error A.row != B.row != C.row");
-  }
-  if (A.get_col() != B.get_col() && A.get_col() != C.get_col()) {
-    throw std::runtime_error("error A.col != B.col != C.col");
-  }
-  if (A.get_device_mem_stat() != B.get_device_mem_stat() ||
-      A.get_device_mem_stat() != C.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(util::is_same_size(A, B, C));
+  assert(util::is_same_device_mem_stat(A, B, C));
 
-  if (A.get_matvec_init_flag() != B.get_matvec_init_flag()) {
-    throw std::runtime_error("error A.matvec_init_flag != B.matvec_init_flag");
-  }
-
-  if (A.get_rmatvec_init_flag() != B.get_rmatvec_init_flag()) {
-    throw std::runtime_error(
-        "error A.rmatvec_init_flag != B.rmatvec_init_flag");
-  }
+  assert(A.get_matvec_init_flag() == B.get_matvec_init_flag());
+  assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
     C.set_matvec([&](const vector<double> &VEC) {
