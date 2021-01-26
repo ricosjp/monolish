@@ -16,9 +16,7 @@ void Dense<T>::col_add(const size_t c, const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.row.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -56,9 +54,7 @@ void Dense<T>::col_sub(const size_t c, const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.row.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -96,9 +92,7 @@ void Dense<T>::col_mul(const size_t c, const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.row.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -136,9 +130,7 @@ void Dense<T>::col_div(const size_t c, const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.row.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu

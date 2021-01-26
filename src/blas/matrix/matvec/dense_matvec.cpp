@@ -9,19 +9,10 @@ void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_col() != x.size()) {
-    throw std::runtime_error("error A.col != x.size");
-  }
-
-  if (A.get_row() != y.size()) {
-    throw std::runtime_error("error A.row != y.size");
-  }
-
-  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
-      A.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  // err, M = MN * N
+  assert(A.get_row() == y.size());
+  assert(A.get_col() == x.size());
+  assert(util::is_same_device_mem_stat(A, x, y));
 
   const double *xd = x.data();
   double *yd = y.data();
@@ -59,19 +50,10 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  // err
-  if (A.get_col() != x.size()) {
-    throw std::runtime_error("error A.col != x.size");
-  }
-
-  if (A.get_row() != y.size()) {
-    throw std::runtime_error("error A.row != y.size");
-  }
-
-  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
-      A.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  // err, M = MN * N
+  assert(A.get_row() == y.size());
+  assert(A.get_col() == x.size());
+  assert(util::is_same_device_mem_stat(A, x, y));
 
   const float *xd = x.data();
   float *yd = y.data();

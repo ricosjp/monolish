@@ -9,13 +9,9 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   logger.func_in(monolish_func);
 
   // err, M = MN * N
-  if (A.get_row() != y.size() && A.get_col() != x.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
-      A.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == y.size());
+  assert(A.get_col() == x.size());
+  assert(util::is_same_device_mem_stat(A, x, y));
 
   const double *vald = A.val.data();
   const double *xd = x.data();
@@ -82,14 +78,9 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   logger.func_in(monolish_func);
 
   // err, M = MN * N
-  if (A.get_row() != y.size() && A.get_col() != x.size()) {
-    throw std::runtime_error("error vector size is not same");
-  }
-
-  if (A.get_device_mem_stat() != x.get_device_mem_stat() ||
-      A.get_device_mem_stat() != y.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(A.get_row() == y.size());
+  assert(A.get_col() == x.size());
+  assert(util::is_same_device_mem_stat(A, x, y));
 
   const float *vald = A.val.data();
   const int *rowd = A.row_ptr.data();

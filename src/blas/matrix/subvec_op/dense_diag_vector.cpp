@@ -15,9 +15,7 @@ template <typename T> void Dense<T>::diag_add(const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.diag.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -53,9 +51,7 @@ template <typename T> void Dense<T>::diag_sub(const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.diag.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -91,9 +87,7 @@ template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.diag.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -129,9 +123,7 @@ template <typename T> void Dense<T>::diag_div(const vector<T> &vec) {
   const size_t N = get_col();
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
-  if (Len != vec.size()) {
-    throw std::runtime_error("error vec.size != A.diag.size");
-  }
+  assert(Len == vec.size());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
