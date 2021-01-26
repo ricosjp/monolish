@@ -1,3 +1,4 @@
+#include "../../../include/common/monolish_common.hpp"
 #include "../../../include/common/monolish_dense.hpp"
 #include "../../../include/common/monolish_logger.hpp"
 #include "../../../include/common/monolish_matrix.hpp"
