@@ -11,18 +11,9 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   logger.util_in(monolish_func);
 
   // err
-  if (get_row() != mat.get_row()) {
-    throw std::runtime_error("error A.row != mat.row");
-  }
-  if (get_col() != mat.get_col()) {
-    throw std::runtime_error("error A.col != mat.col");
-  }
-  if (get_nnz() != mat.get_nnz()) {
-    throw std::runtime_error("error A.nnz != mat.nnz");
-  }
-  if (get_device_mem_stat() != mat.get_device_mem_stat()) {
-    throw std::runtime_error("error get_device_mem_stat() is not same");
-  }
+  assert(monolish::util::is_same_size(*this, mat));
+  assert(monolish::util::is_same_structure(*this, mat));
+  assert(monolish::util::is_same_device_mem_stat(*this, mat));
 
   if (mat.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU

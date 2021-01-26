@@ -7,9 +7,9 @@ namespace monolish {
 namespace matrix {
 
 template <typename T> T COO<T>::at(const size_t i, const size_t j) {
-  if (i >= rowN || j >= colN) {
-    throw std::out_of_range("error");
-  }
+
+  assert(get_row() > i);
+  assert(get_col() > j);
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
@@ -26,9 +26,9 @@ template double COO<double>::at(const size_t i, const size_t j);
 template float COO<float>::at(const size_t i, const size_t j);
 
 template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
-  if (i >= rowN || j >= colN) {
-    throw std::out_of_range("error");
-  }
+
+  assert(get_row() > i);
+  assert(get_col() > j);
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
@@ -45,17 +45,13 @@ template double COO<double>::at(const size_t i, const size_t j) const;
 template float COO<float>::at(const size_t i, const size_t j) const;
 
 // insert //
-
 template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
   size_t rownum = m;
-  if (rownum >= get_row()) {
-    throw std::out_of_range("row index out of range");
-  }
   size_t colnum = n;
-  if (colnum >= get_col()) {
-    throw std::out_of_range("column index out of range");
-  }
+  assert(rownum < get_row());
+  assert(colnum < get_col());
+
   row_index.push_back(rownum);
   col_index.push_back(colnum);
   val.push_back(value);
