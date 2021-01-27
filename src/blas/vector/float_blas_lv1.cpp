@@ -152,6 +152,7 @@ void blas::scal(const float alpha, vector<float> &x) {
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
     { internal::check_CUDA(cublasSscal(h, size, &alpha, xd, 1)); }
+    cublasDestroy(h);
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");

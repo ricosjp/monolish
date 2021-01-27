@@ -32,6 +32,7 @@ Unreleased
 - change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Fixed
+- fix cublas handler leak in blas::scal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/234
 - fix error check doxygen comment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/232
 - fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
 
