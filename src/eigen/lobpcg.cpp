@@ -35,9 +35,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   T mu;
   blas::dot(x, X, mu);
   // w = X - mu x
-  blas::copy(x, vtmp1);
-  blas::scal(mu, vtmp1);
-  blas::vecsub(X, vtmp1, w);
+  blas::axpyz(-mu, x, X, w);
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
