@@ -1,3 +1,4 @@
+#include "../../../include/common/monolish_common.hpp"
 #include "../../../include/monolish_blas.hpp"
 #include "../../internal/monolish_internal.hpp"
 

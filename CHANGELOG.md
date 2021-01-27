@@ -26,12 +26,15 @@ Unreleased
 
 ### Changed
 - change LOBPCG eigensolver using xpay, axpyz instead of scal, vecadd, and vecsub https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
+- change util error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/231
 - change BLAS error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/229
 - change linear operator VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/228
 - organize linearoperator utils https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/227
 - change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Fixed
+- fix cublas handler leak in blas::scal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/234
+- fix error check doxygen comment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/232
 - fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
 
 ### Deprecated
