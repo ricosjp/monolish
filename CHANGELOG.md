@@ -33,6 +33,8 @@ Unreleased
 - change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Fixed
+- fix slow convergence bug in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
+- fix Eigenvalue calculation routine of Frank, Tridiagonal Toeplitz https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
 - fix cublas handler leak in blas::scal https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/234
 - fix error check doxygen comment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/232
 - fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
