@@ -29,7 +29,7 @@ template matrix::COO<float> util::tridiagonal_toeplitz_matrix(const int &M,
 
 template <typename T>
 T util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b) {
-  T exact_result = a - 2.0 * b * std::cos(M_PI * (N + 1) / (M + 1));
+  T exact_result = a - 2.0 * std::abs(b) * std::cos(M_PI * (N + 1) / (M + 1));
   return exact_result;
 }
 template double util::tridiagonal_toeplitz_matrix_eigenvalue(const int &M,
