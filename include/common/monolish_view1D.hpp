@@ -54,14 +54,18 @@ template <typename TYPE>
         range = last - first; 
       }
 
-      size_t size(){ return range;}
-      size_t get_nnz(){ return range;}
+      size_t size() const{ return range;}
+      size_t get_nnz() const{ return range;} 
 
-      size_t get_device_mem_stat(){ return target.get_device_mem_stat();}
+      void set_first(size_t i){ first=i;}
+      void set_last(size_t i){ last=i;}
+
+      size_t get_device_mem_stat() const{ return target.get_device_mem_stat();}
 
       auto* data();
+      auto* data() const{return data();}
 
-      void print_all();
+      void print_all() const;
 
       void resize(const size_t N);
 
