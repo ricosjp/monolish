@@ -55,12 +55,6 @@ template <typename TYPE>
         size = last - first; 
       }
 
-      void resize(size_t ){
-        first = start;
-        last = end;
-        size = last - first; 
-        
-      }
       size_t get_size(){ return size;}
 
       size_t get_device_mem_stat(){ return target.get_device_mem_stat();}
