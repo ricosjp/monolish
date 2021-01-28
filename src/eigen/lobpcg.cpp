@@ -121,7 +121,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Sam.get_col());
-    Sam.col(index, b);
+    Sam.row(index, b);
 
     if (iter == 0 || is_singular) {
       // x = b[0] w + b[1] x, normalize
