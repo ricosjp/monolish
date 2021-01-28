@@ -45,17 +45,17 @@ template <typename TYPE>
       TYPE& target;
       size_t first;
       size_t last;
-      size_t size;
-      mutable bool gpu_status = false;
+      size_t range;
 
     public:
-      view1D(TYPE& x, size_t start, size_t end):target(x){
+      view1D(TYPE& x, const size_t start, const size_t end):target(x){
         first = start;
         last = end;
-        size = last - first; 
+        range = last - first; 
       }
 
-      size_t get_size(){ return size;}
+      size_t size(){ return range;}
+      size_t get_nnz(){ return range;}
 
       size_t get_device_mem_stat(){ return target.get_device_mem_stat();}
 
@@ -63,7 +63,9 @@ template <typename TYPE>
 
       void print_all();
 
-      auto& operator[](size_t i);
+      void resize(const size_t N);
+
+      auto& operator[](const size_t i);
   };
 
 } // namespace monolish
