@@ -67,13 +67,11 @@ template <typename TYPE>
   };
 
 template<> auto* view1D<monolish::vector<double>>::data(){
-  std::cout << "hello goma" << std::endl;
-  return target.data();
+  return target.data()+first;
 }
 
 template<> auto* view1D<monolish::matrix::Dense<double>>::data(){
-  std::cout << "hello goma" << std::endl;
-  return target.val.data();
+  return target.val.data()+first;
 }
 
 template<> void view1D<monolish::vector<double>>::print_all(){
