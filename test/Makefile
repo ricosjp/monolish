@@ -2,6 +2,7 @@ all:cpu
 
 cpu:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -10,6 +11,7 @@ cpu:
 
 gpu:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -18,6 +20,7 @@ gpu:
 
 a64fx:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -26,6 +29,7 @@ a64fx:
 
 sxat:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -34,6 +38,7 @@ sxat:
 
 run_cpu:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -42,6 +47,7 @@ run_cpu:
 
 run_gpu:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -50,6 +56,7 @@ run_gpu:
 
 run_a64fx:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
@@ -58,6 +65,7 @@ run_a64fx:
 
 run_sxat:
 	make -j -C vector/ $@
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ $@
 	make -j -C eigen/ $@
