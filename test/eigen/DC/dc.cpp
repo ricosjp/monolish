@@ -23,8 +23,8 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
       std::cout << "Toeplitz: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
       T exact_result =
-          monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
-              DIM, i, 11.0, -1.0);
+          monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(DIM, i,
+                                                                    11.0, -1.0);
       std::string sval = "DC eigenvalue(Toeplitz)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
