@@ -35,9 +35,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   T mu;
   blas::dot(x, X, mu);
   // w = X - mu x
-  blas::copy(x, vtmp1);
-  blas::scal(mu, vtmp1);
-  blas::vecsub(X, vtmp1, w);
+  blas::axpyz(-mu, x, X, w);
   blas::nrm2(w, norm);
   blas::scal(1.0 / norm, w);
 
@@ -123,52 +121,44 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
 
     // extract b which satisfies Aprime b = lambda_min b
     monolish::vector<T> b(Sam.get_col());
-    Sam.col(index, b);
+    Sam.row(index, b);
 
     if (iter == 0 || is_singular) {
       // x = b[0] w + b[1] x, normalize
       // p = b[0] w         , normalize
       blas::scal(b[0], w);
-      blas::scal(b[1], x);
-      blas::vecadd(w, p, p);
-      blas::vecadd(x, p, x);
+      blas::copy(w, p);
+      blas::xpay(b[1], p, x);
 
       // X = b[0] W + b[1] X, normalize with x
       // P = b[0] W         , normalize with p
       blas::scal(b[0], W);
-      blas::scal(b[1], X);
-      blas::vecadd(W, P, P);
-      blas::vecadd(X, P, X);
+      blas::copy(W, P);
+      blas::xpay(b[1], P, X);
     } else {
       // x = b[0] w + b[1] x + b[2] p, normalize
       // p = b[0] w          + b[2] p, normalize
       blas::scal(b[0], w);
-      blas::scal(b[1], x);
-      blas::scal(b[2], p);
-      blas::vecadd(w, p, p);
-      blas::vecadd(x, p, x);
+      blas::xpay(b[2], w, p);
+      blas::xpay(b[1], p, x);
 
       // X = b[0] W + b[1] X + b[2] P, normalize with x
       // P = b[0] W          + b[2] P, normalize with p
       blas::scal(b[0], W);
-      blas::scal(b[1], X);
-      blas::scal(b[2], P);
-      blas::vecadd(W, P, P);
-      blas::vecadd(X, P, X);
+      blas::xpay(b[2], W, P);
+      blas::xpay(b[1], P, X);
     }
     T normp;
     blas::nrm2(p, normp);
     blas::scal(1.0 / normp, p);
+    blas::scal(1.0 / normp, P);
     T normx;
     blas::nrm2(x, normx);
     blas::scal(1.0 / normx, x);
-    blas::scal(1.0 / normp, P);
     blas::scal(1.0 / normx, X);
 
     // w = X - lambda x
-    blas::copy(x, vtmp1);
-    blas::scal(l, vtmp1);
-    blas::vecsub(X, vtmp1, w);
+    blas::axpyz(-l, x, X, w);
     // apply preconditioner
     this->precond.apply_precond(w, vtmp1);
     w = vtmp1;

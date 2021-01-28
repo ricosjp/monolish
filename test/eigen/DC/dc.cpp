@@ -23,8 +23,8 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
       std::cout << "Toeplitz: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
       T exact_result =
-          monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
-              DIM, DIM - i - 1, 11.0, -1.0);
+          monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(DIM, i,
+                                                                    11.0, -1.0);
       std::string sval = "DC eigenvalue(Toeplitz)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
@@ -64,7 +64,7 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
       std::cout << "Laplacian: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
       T exact_result =
-          monolish::util::laplacian_matrix_1D_eigenvalue<T>(DIM, DIM - i - 1);
+          monolish::util::laplacian_matrix_1D_eigenvalue<T>(DIM, i);
       std::string sval = "DC eigenvalue(Laplacian)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
