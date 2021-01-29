@@ -12,8 +12,10 @@ MAT_TEST_SIZE?=124
 MAT_TEST_ITER?=100
 MAT_TEST_ANS_CHECK?=1
 
-define RUN_matmul
-	./$(1) $(2) $(3) Dense Dense $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_SIZE) $(MAT_TEST_ITER) $(MAT_TEST_ANS_CHECK)
+VEC_TEST_SIZE = $(shell bash -c 'echo $$(($$RANDOM%10000+1000))')
+
+define RUN
+	$(PROFILER) $(1) $(VEC_TEST_SIZE)
 
 endef
 
@@ -36,40 +38,17 @@ sxat: $(OBJS_SX)
 	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
 run_cpu:
-	bash ./test.sh matrix_common cpu
-	bash ./test.sh matrix_convert cpu
-	bash ./test.sh matrix_compare cpu
-	bash ./test.sh matrix_transpose cpu
-	bash ./test.sh matrix_blas cpu
-	bash ./test.sh matrix_vml cpu
-	bash ./test.sh matrix_subvec_op cpu
+	$(foreach var,$(OBJS_CPU), $(call RUN,$(var)))
  
 run_gpu:
-	bash ./test.sh matrix_common gpu
-	bash ./test.sh matrix_convert gpu
-	bash ./test.sh matrix_compare gpu
-	bash ./test.sh matrix_transpose gpu
-	bash ./test.sh matrix_blas gpu
-	bash ./test.sh matrix_vml gpu
-	bash ./test.sh matrix_subvec_op gpu
+	$(foreach var,$(OBJS_GPU), $(call RUN,$(var)))
 
 run_a64fx:
-	bash ./test.sh matrix_common a64fx
-	bash ./test.sh matrix_convert a64fx
-	bash ./test.sh matrix_compare a64fx
-	bash ./test.sh matrix_transpose a64fx
-	bash ./test.sh matrix_blas a64fx
-	bash ./test.sh matrix_vml a64fx
-	bash ./test.sh matrix_subvec_op a64fx
+	$(foreach var,$(OBJS_FX), $(call RUN,$(var)))
 
 run_sxat:
-	# bash ./test.sh matrix_common sxat
-	bash ./test.sh matrix_convert sxat
-	bash ./test.sh matrix_compare sxat
-	bash ./test.sh matrix_transpose sxat
-	bash ./test.sh matrix_blas sxat
-	bash ./test.sh matrix_vml sxat
-	bash ./test.sh matrix_subvec_op sxat
+	$(foreach var,$(OBJS_SX), $(call RUN,$(var)))
+
 
 clean:
 	- rm *.out
