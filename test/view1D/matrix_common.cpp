@@ -14,7 +14,7 @@ template <typename T> bool test(const size_t size) {
 
   std::cout << "--- view[2-5] ---" << std::endl;
 
-  monolish::view1D<monolish::vector<T>> v(x, 2, 5);
+  monolish::view1D<monolish::vector<T>, T> v(x, 2, 5);
   v.print_all();
 
   std::cout << "--- view[2] = 12345 ---" << std::endl;
@@ -25,7 +25,7 @@ template <typename T> bool test(const size_t size) {
   monolish::matrix::Dense<T> A(3,3, 1.0);
 
   std::cout << "--- get view[2:5] ---" << std::endl;
-  monolish::view1D<monolish::matrix::Dense<T>> mv(A, 2, 5);
+  monolish::view1D<monolish::matrix::Dense<T>, T> mv(A, 2, 5);
   mv.print_all();
 
   std::cout << "--- view[2] = 12345 ---" << std::endl;

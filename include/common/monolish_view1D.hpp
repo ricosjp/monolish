@@ -7,6 +7,7 @@
 
 #pragma once
 #include "./monolish_logger.hpp"
+#include <cassert>
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -38,38 +39,62 @@ namespace monolish {
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-template <typename TYPE>
+template <typename TYPE, typename Float>
   class view1D {
     private:
 
       TYPE& target;
+      Float* target_data;
       size_t first;
       size_t last;
       size_t range;
 
     public:
-      view1D(TYPE& x, const size_t start, const size_t end):target(x){
+
+      view1D(monolish::vector<Float>& x, const size_t start, const size_t end):target(x){
         first = start;
         last = end;
         range = last - first; 
+        target_data = x.data();
+      }
+
+      view1D(monolish::matrix::Dense<Float>& A, const size_t start, const size_t end):target(A){
+        first = start;
+        last = end;
+        range = last - first; 
+        target_data = A.val.data();
       }
 
       size_t size() const{ return range;}
       size_t get_nnz() const{ return range;} 
 
-      void set_first(size_t i){ first=i;}
-      void set_last(size_t i){ last=i;}
+      void set_first(size_t i){
+        first=i;
+      }
+
+      void set_last(size_t i){
+        assert(first+i <= target.get_nnz());
+        last=i;
+      }
 
       size_t get_device_mem_stat() const{ return target.get_device_mem_stat();}
 
-      auto* data();
-      auto* data() const{return data();}
+      Float* data(){return target_data;}
+      Float* data() const{return data();}
 
-      void print_all() const;
+      void print_all(bool force_cpu=false) const;
 
-      void resize(const size_t N);
+      void resize(size_t N){
+        assert(first+N <= target.get_nnz());
+        last = first + N;
+      }
 
-      auto& operator[](const size_t i);
+      Float& operator[](const size_t i){
+        if (target.get_device_mem_stat()) {
+          throw std::runtime_error("Error, GPU vector cant use operator[]");
+        }
+        return target_data[i];
+      }
   };
 
 } // namespace monolish
