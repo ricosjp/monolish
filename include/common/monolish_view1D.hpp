@@ -25,13 +25,13 @@
 #endif
 
 namespace monolish {
-  template <typename Float> class vector;
+template <typename Float> class vector;
 
-  namespace matrix {
-    template <typename Float> class Dense;
-    template <typename Float> class CRS;
-    template <typename Float> class LinearOperator;
-  }
+namespace matrix {
+template <typename Float> class Dense;
+template <typename Float> class CRS;
+template <typename Float> class LinearOperator;
+} // namespace matrix
 
 /**
  * @brief 1D view class
@@ -39,62 +39,60 @@ namespace monolish {
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-template <typename TYPE, typename Float>
-  class view1D {
-    private:
+template <typename TYPE, typename Float> class view1D {
+private:
+  TYPE &target;
+  Float *target_data;
+  size_t first;
+  size_t last;
+  size_t range;
 
-      TYPE& target;
-      Float* target_data;
-      size_t first;
-      size_t last;
-      size_t range;
+public:
+  view1D(monolish::vector<Float> &x, const size_t start, const size_t end)
+      : target(x) {
+    first = start;
+    last = end;
+    range = last - first;
+    target_data = x.data();
+  }
 
-    public:
+  view1D(monolish::matrix::Dense<Float> &A, const size_t start,
+         const size_t end)
+      : target(A) {
+    first = start;
+    last = end;
+    range = last - first;
+    target_data = A.val.data();
+  }
 
-      view1D(monolish::vector<Float>& x, const size_t start, const size_t end):target(x){
-        first = start;
-        last = end;
-        range = last - first; 
-        target_data = x.data();
-      }
+  size_t size() const { return range; }
+  size_t get_nnz() const { return range; }
 
-      view1D(monolish::matrix::Dense<Float>& A, const size_t start, const size_t end):target(A){
-        first = start;
-        last = end;
-        range = last - first; 
-        target_data = A.val.data();
-      }
+  void set_first(size_t i) { first = i; }
 
-      size_t size() const{ return range;}
-      size_t get_nnz() const{ return range;} 
+  void set_last(size_t i) {
+    assert(first + i <= target.get_nnz());
+    last = i;
+  }
 
-      void set_first(size_t i){
-        first=i;
-      }
+  size_t get_device_mem_stat() const { return target.get_device_mem_stat(); }
 
-      void set_last(size_t i){
-        assert(first+i <= target.get_nnz());
-        last=i;
-      }
+  Float *data() { return target_data; }
+  Float *data() const { return data(); }
 
-      size_t get_device_mem_stat() const{ return target.get_device_mem_stat();}
+  void print_all(bool force_cpu = false) const;
 
-      Float* data(){return target_data;}
-      Float* data() const{return data();}
+  void resize(size_t N) {
+    assert(first + N <= target.get_nnz());
+    last = first + N;
+  }
 
-      void print_all(bool force_cpu=false) const;
-
-      void resize(size_t N){
-        assert(first+N <= target.get_nnz());
-        last = first + N;
-      }
-
-      Float& operator[](const size_t i){
-        if (target.get_device_mem_stat()) {
-          throw std::runtime_error("Error, GPU vector cant use operator[]");
-        }
-        return target_data[i+first];
-      }
-  };
+  Float &operator[](const size_t i) {
+    if (target.get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
+    }
+    return target_data[i + first];
+  }
+};
 
 } // namespace monolish

@@ -6,7 +6,7 @@ template <typename T> bool test(const size_t size) {
   //(x) monolish::vector = std::vector  = 123, 123, ..., 123
   monolish::vector<T> x(size);
 
-  for(size_t i=0; i<size; i++){
+  for (size_t i = 0; i < size; i++) {
     x[i] = i;
   }
 
@@ -26,9 +26,8 @@ template <typename T> bool test(const size_t size) {
   v.resize(4);
   v.print_all();
 
-
   std::cout << "--- get view[2:5] of Dense, and print on GPU ---" << std::endl;
-  monolish::matrix::Dense<T> A(3,3, 1.0);
+  monolish::matrix::Dense<T> A(3, 3, 1.0);
   A.send();
   monolish::view1D<monolish::matrix::Dense<T>, T> mv(A, 2, 5);
   mv.print_all();
