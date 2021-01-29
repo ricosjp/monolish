@@ -16,12 +16,11 @@ void view1D<monolish::vector<double>, double>::print_all(bool force_cpu) const{
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  double* val = target.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_GPU
 #pragma omp target
   for(size_t i=first; i<last; i++){
-      printf("%f\n", val[i]);
+      printf("%f\n", target_data[i]);
   }
 #else
     throw std::runtime_error(
@@ -29,7 +28,7 @@ void view1D<monolish::vector<double>, double>::print_all(bool force_cpu) const{
 #endif
   } else {
     for(size_t i=first; i<last; i++){
-      printf("%f\n", val[i]);
+      printf("%f\n", target_data[i]);
     }
   }
   logger.util_out();
@@ -44,7 +43,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(bool force_cpu) 
 #if MONOLISH_USE_GPU
 #pragma omp target
   for(size_t i=first; i<last; i++){
-      printf("%f\n", target.val[i]);
+      printf("%f\n", target_data[i]);
   }
 #else
     throw std::runtime_error(
@@ -52,7 +51,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(bool force_cpu) 
 #endif
   } else {
     for(size_t i=first; i<last; i++){
-      printf("%f\n", target.val[i]);
+      printf("%f\n", target_data[i]);
     }
   }
   logger.util_out();

@@ -93,7 +93,7 @@ template <typename TYPE, typename Float>
         if (target.get_device_mem_stat()) {
           throw std::runtime_error("Error, GPU vector cant use operator[]");
         }
-        return target_data[i];
+        return target_data[i+first];
       }
   };
 

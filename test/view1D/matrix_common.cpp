@@ -22,6 +22,10 @@ template <typename T> bool test(const size_t size) {
 
   x.print_all();
 
+  std::cout << "--- view.resize(4) ---" << std::endl;
+  v.resize(4);
+  v.print_all();
+
   monolish::matrix::Dense<T> A(3,3, 1.0);
 
   std::cout << "--- get view[2:5] ---" << std::endl;
