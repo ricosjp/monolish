@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- define 1Dview class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/233
 - add linearoperator util: is_XXX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/227
 - add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 

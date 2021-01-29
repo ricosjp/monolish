@@ -3,6 +3,7 @@
 #include "monolish_logger.hpp"
 #include "monolish_matrix.hpp"
 #include "monolish_vector.hpp"
+#include "monolish_view1D.hpp"
 #include <initializer_list>
 
 // error code
