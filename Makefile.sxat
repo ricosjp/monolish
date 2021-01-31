@@ -41,7 +41,6 @@ SRCS +=$(notdir $(wildcard ./src/vml/*.cpp))
 vpath %.cpp ./src/
 
 vpath %.cpp ./src/blas/vector/
-vpath %.cpp ./src/blas/vector/addsub
 vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
 vpath %.cpp ./src/blas/matrix/getvec/
