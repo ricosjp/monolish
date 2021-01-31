@@ -26,10 +26,6 @@ void vecadd(const vector<double> &a, const vector<double> &b,
             vector<double> &y) {
   vecadd_core(a, b, y);
 }
-
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y) {
-  vecadd_core(a, b, y);
-}
 } // namespace blas
 
 } // namespace monolish

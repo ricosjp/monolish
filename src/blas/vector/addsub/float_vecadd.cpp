@@ -1,5 +1,5 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../internal/monolish_internal.hpp"
+#include "../../../../include/monolish_blas.hpp"
+#include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
 // vecadd ///////////////////
@@ -22,11 +22,8 @@ void vecadd_core(const F1 &a, const F2 &b, F3 &y) {
 } // namespace
 
 namespace blas {
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y) {
-  vecadd_core(a, b, y);
-}
-
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y) {
+void vecadd(const vector<float> &a, const vector<float> &b,
+            vector<float> &y) {
   vecadd_core(a, b, y);
 }
 } // namespace blas
