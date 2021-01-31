@@ -22,8 +22,7 @@ void vecsub_core(const F1 &a, const F2 &b, F3 &y) {
 } // namespace
 
 namespace blas {
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y) {
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y) {
   vecsub_core(a, b, y);
 }
 } // namespace blas

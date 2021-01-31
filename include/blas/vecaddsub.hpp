@@ -43,8 +43,7 @@ void vecadd(const vector<double> &a, const view1D<vector<double>, double> &b,
 void vecadd(const view1D<vector<double>, double> &a,
             const view1D<vector<double>, double> &b,
             view1D<vector<double>, double> &y);
-void vecadd(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void vecadd(const view1D<vector<float>, float> &a, const vector<float> &b,
             vector<float> &y);
 void vecadd(const vector<float> &a, const view1D<vector<float>, float> &b,
@@ -91,8 +90,7 @@ void vecsub(const vector<double> &a, const view1D<vector<double>, double> &b,
 void vecsub(const view1D<vector<double>, double> &a,
             const view1D<vector<double>, double> &b,
             view1D<vector<double>, double> &y);
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y);
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void vecsub(const view1D<vector<float>, float> &a, const vector<float> &b,
             vector<float> &y);
 void vecsub(const vector<float> &a, const view1D<vector<float>, float> &b,
@@ -110,5 +108,5 @@ void vecsub(const view1D<vector<float>, float> &a,
             view1D<vector<float>, float> &y);
 //@}
 
-}
-}
+} // namespace blas
+} // namespace monolish
