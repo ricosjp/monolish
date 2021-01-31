@@ -73,32 +73,6 @@ void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 //  Vector
 //////////////////////////////////////////////////////
 /**
- * @brief single precision element by element addition of vector a and vector b.
- * @param a single precision monolish vector (size N)
- * @param b single precision monolish vector (size N)
- * @param y single precision monolish vector (size N)
- * @note
- * - # of computation: N
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y);
-
-/**
- * @brief single precision element by element subtraction of vector a and vector
- * b.
- * @param a single precision monolish vector (size N)
- * @param b single precision monolish vector (size N)
- * @param y single precision monolish vector (size N)
- * @note
- * - # of computation: N
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y);
-/**
  * @brief single precision vector asum (absolute sum)
  * @param x single precision monolish vector (size N)
  * @return The result of the asum
@@ -145,19 +119,6 @@ float sum(const vector<float> &x);
  *    - # of data transfer: 0
  */
 void sum(const vector<float> &x, float &ans);
-
-/**
- * @brief single precision axpy: y = ax + y
- * @param alpha single precision scalar value
- * @param x single precision monolish vector (size N)
- * @param y single precision monolish vector (size N)
- * @note
- * - # of computation: N
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void axpy(const float alpha, const vector<float> &x, vector<float> &y);
 
 /**
  * @brief single precision axpyz: z = ax + y
