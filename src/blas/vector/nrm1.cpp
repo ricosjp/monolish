@@ -4,8 +4,7 @@
 namespace monolish {
 
 namespace {
-template <typename F1>
-double Dnrm1_core(const F1 &x) {
+template <typename F1> double Dnrm1_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -34,8 +33,7 @@ double Dnrm1_core(const F1 &x) {
   return ans;
 }
 
-template <typename F1>
-float Snrm1_core(const F1 &x) {
+template <typename F1> float Snrm1_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -67,16 +65,11 @@ float Snrm1_core(const F1 &x) {
 } // namespace
 
 namespace blas {
-double nrm1(const vector<double> &x) {
-  return Dnrm1_core(x);
-}
+double nrm1(const vector<double> &x) { return Dnrm1_core(x); }
 void nrm1(const vector<double> &x, double &ans) { ans = nrm1(x); }
 
-float nrm1(const vector<float> &x) {
-  return Snrm1_core(x);
-}
+float nrm1(const vector<float> &x) { return Snrm1_core(x); }
 void nrm1(const vector<float> &x, float &ans) { ans = nrm1(x); }
-
 
 } // namespace blas
 

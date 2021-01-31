@@ -4,8 +4,7 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2>
-void Dscal_core(const F1 alpha, F2 &x) {
+template <typename F1, typename F2> void Dscal_core(const F1 alpha, F2 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -29,8 +28,7 @@ void Dscal_core(const F1 alpha, F2 &x) {
   logger.func_out();
 }
 
-template <typename F1, typename F2>
-void Sscal_core(const F1 alpha, F2 &x) {
+template <typename F1, typename F2> void Sscal_core(const F1 alpha, F2 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -57,13 +55,9 @@ void Sscal_core(const F1 alpha, F2 &x) {
 } // namespace
 
 namespace blas {
-void scal(const double alpha, vector<double> &x){
-  Dscal_core(alpha, x);
-}
+void scal(const double alpha, vector<double> &x) { Dscal_core(alpha, x); }
 
-void scal(const float alpha, vector<float> &x){
-  Sscal_core(alpha, x);
-}
+void scal(const float alpha, vector<float> &x) { Sscal_core(alpha, x); }
 
 } // namespace blas
 } // namespace monolish

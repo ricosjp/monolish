@@ -73,13 +73,13 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
 } // namespace
 
 namespace blas {
-void axpyz(const double alpha, const vector<double> &x,
-            const vector<double> &y, vector<double> &z) {
+void axpyz(const double alpha, const vector<double> &x, const vector<double> &y,
+           vector<double> &z) {
   Daxpyz_core(alpha, x, y, z);
 }
 
-void axpyz(const float alpha, const vector<float> &x,
-            const vector<float> &y, vector<float> &z) {
+void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
+           vector<float> &z) {
   Saxpyz_core(alpha, x, y, z);
 }
 

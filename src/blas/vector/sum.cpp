@@ -4,8 +4,7 @@
 namespace monolish {
 
 namespace {
-template <typename F1>
-double Dsum_core(const F1 &x) {
+template <typename F1> double Dsum_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -34,8 +33,7 @@ double Dsum_core(const F1 &x) {
   return ans;
 }
 
-template <typename F1>
-float Ssum_core(const F1 &x) {
+template <typename F1> float Ssum_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -67,16 +65,11 @@ float Ssum_core(const F1 &x) {
 } // namespace
 
 namespace blas {
-double sum(const vector<double> &x) {
-  return Dsum_core(x);
-}
+double sum(const vector<double> &x) { return Dsum_core(x); }
 void sum(const vector<double> &x, double &ans) { ans = sum(x); }
 
-float sum(const vector<float> &x) {
-  return Ssum_core(x);
-}
+float sum(const vector<float> &x) { return Ssum_core(x); }
 void sum(const vector<float> &x, float &ans) { ans = sum(x); }
-
 
 } // namespace blas
 

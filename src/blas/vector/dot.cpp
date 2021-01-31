@@ -3,9 +3,8 @@
 
 namespace monolish {
 
-  namespace{
-template <typename F1, typename F2>
-double Ddot_core(const F1 &x, const F2 &y) {
+namespace {
+template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -36,8 +35,7 @@ double Ddot_core(const F1 &x, const F2 &y) {
   return ans;
 }
 
-template <typename F1, typename F2>
-float Sdot_core(const F1 &x, const F2 &y) {
+template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -75,12 +73,16 @@ namespace blas {
 double dot(const vector<double> &x, const vector<double> &y) {
   return Ddot_core(x, y);
 }
-void dot(const vector<double> &x, const vector<double> &y, double &ans) { ans = dot(x, y); }
+void dot(const vector<double> &x, const vector<double> &y, double &ans) {
+  ans = dot(x, y);
+}
 
 float dot(const vector<float> &x, const vector<float> &y) {
   return Sdot_core(x, y);
 }
-void dot(const vector<float> &x, const vector<float> &y, float &ans) { ans = dot(x, y); }
+void dot(const vector<float> &x, const vector<float> &y, float &ans) {
+  ans = dot(x, y);
+}
 
 } // namespace blas
 
