@@ -83,15 +83,23 @@ void copy(const matrix::CRS<double> &A, matrix::CRS<double> &C);
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecadd(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void vecadd(const view1D<vector<double>,double> &a, const vector<double> &b, vector<double> &y);
-void vecadd(const vector<double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
-void vecadd(const view1D<vector<double>,double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
-void vecadd(const vector<double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
-void vecadd(const view1D<vector<double>,double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
-void vecadd(const vector<double> &a, const view1D<vector<double>,double> &b, view1D<vector<double>,double> &y);
-void vecadd(const view1D<vector<double>,double> &a, const view1D<vector<double>,double> &b, view1D<vector<double>,double> &y);
-
+void vecadd(const vector<double> &a, const vector<double> &b,
+            vector<double> &y);
+void vecadd(const view1D<vector<double>, double> &a, const vector<double> &b,
+            vector<double> &y);
+void vecadd(const vector<double> &a, const view1D<vector<double>, double> &b,
+            vector<double> &y);
+void vecadd(const view1D<vector<double>, double> &a,
+            const view1D<vector<double>, double> &b, vector<double> &y);
+void vecadd(const vector<double> &a, const vector<double> &b,
+            view1D<vector<double>, double> &y);
+void vecadd(const view1D<vector<double>, double> &a, const vector<double> &b,
+            view1D<vector<double>, double> &y);
+void vecadd(const vector<double> &a, const view1D<vector<double>, double> &b,
+            view1D<vector<double>, double> &y);
+void vecadd(const view1D<vector<double>, double> &a,
+            const view1D<vector<double>, double> &b,
+            view1D<vector<double>, double> &y);
 
 /**
  * @brief element by element subtraction of vector a and vector b.
@@ -104,14 +112,23 @@ void vecadd(const view1D<vector<double>,double> &a, const view1D<vector<double>,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void vecsub(const vector<double> &a, const vector<double> &b, vector<double> &y);
-void vecsub(const view1D<vector<double>,double> &a, const vector<double> &b, vector<double> &y);
-void vecsub(const vector<double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
-void vecsub(const view1D<vector<double>,double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
-void vecsub(const vector<double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
-void vecsub(const view1D<vector<double>,double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
-void vecsub(const vector<double> &a, const view1D<vector<double>,double> &b, view1D<vector<double>,double> &y);
-void vecsub(const view1D<vector<double>,double> &a, const view1D<vector<double>,double> &b, view1D<vector<double>,double> &y);
+void vecsub(const vector<double> &a, const vector<double> &b,
+            vector<double> &y);
+void vecsub(const view1D<vector<double>, double> &a, const vector<double> &b,
+            vector<double> &y);
+void vecsub(const vector<double> &a, const view1D<vector<double>, double> &b,
+            vector<double> &y);
+void vecsub(const view1D<vector<double>, double> &a,
+            const view1D<vector<double>, double> &b, vector<double> &y);
+void vecsub(const vector<double> &a, const vector<double> &b,
+            view1D<vector<double>, double> &y);
+void vecsub(const view1D<vector<double>, double> &a, const vector<double> &b,
+            view1D<vector<double>, double> &y);
+void vecsub(const vector<double> &a, const view1D<vector<double>, double> &b,
+            view1D<vector<double>, double> &y);
+void vecsub(const view1D<vector<double>, double> &a,
+            const view1D<vector<double>, double> &b,
+            view1D<vector<double>, double> &y);
 
 /**
  * @brief double precision vector asum (absolute sum)

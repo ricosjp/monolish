@@ -26,6 +26,7 @@ Unreleased
 - add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Changed
+- change vecadd/vecsub template https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/236
 - change LOBPCG eigensolver using xpay, axpyz instead of scal, vecadd, and vecsub https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
 - change util error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/231
 - change BLAS error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/229
