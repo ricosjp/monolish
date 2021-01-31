@@ -58,8 +58,6 @@ float Sasum_core(const F1 &x) {
   return ans;
 }
 
-
-
 } // namespace
 
 namespace blas {
