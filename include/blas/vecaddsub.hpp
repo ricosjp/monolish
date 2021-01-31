@@ -15,7 +15,7 @@ namespace monolish {
 namespace blas {
 
 /**
- * @name element by element addition of vector a and vector b.
+ * @name vecadd
  * @param a monolish vector or view1D (size N)
  * @param b monolish vector or view1D (size N)
  * @param y monolish vector or view1D (size N)
@@ -26,6 +26,9 @@ namespace blas {
  *    - # of data transfer: 0
  */
 //@{
+/**
+ * @brief element by element addition of vector a and vector b.
+ */
 void vecadd(const vector<double> &a, const vector<double> &b,
             vector<double> &y);
 void vecadd(const view1D<vector<double>, double> &a, const vector<double> &b,
@@ -62,7 +65,7 @@ void vecadd(const view1D<vector<float>, float> &a,
 //@}
 
 /**
- * @name element by element subtraction of vector a and vector b.
+ * @name vecsub
  * @param a monolish vector or view1D (size N)
  * @param b monolish vector or view1D (size N)
  * @param y monolish vector or view1D (size N)
@@ -73,6 +76,9 @@ void vecadd(const view1D<vector<float>, float> &a,
  *    - # of data transfer: 0
  */
 //@{
+/**
+ * @brief element by element subtraction of vector a and vector b.
+ */
 void vecsub(const vector<double> &a, const vector<double> &b,
             vector<double> &y);
 void vecsub(const view1D<vector<double>, double> &a, const vector<double> &b,
