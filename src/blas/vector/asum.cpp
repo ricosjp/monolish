@@ -2,10 +2,8 @@
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
-// vecadd ///////////////////
-//
+
 namespace {
-// asum ///////////////////
 template <typename F1>
 double Dasum_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
@@ -32,7 +30,7 @@ double Dasum_core(const F1 &x) {
   logger.func_out();
   return ans;
 }
-// asum ///////////////////
+
 template <typename F1>
 float Sasum_core(const F1 &x) {
   Logger &logger = Logger::get_instance();

@@ -2,8 +2,7 @@
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
-// vecadd ///////////////////
-//
+
 namespace {
 template <typename F1, typename F2>
 void copy_core(const F1 &a, F2 &y) {
