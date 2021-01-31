@@ -1,5 +1,5 @@
-#include "../../../../include/monolish_blas.hpp"
-#include "../../../internal/monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 // vecsub ///////////////////
@@ -24,6 +24,9 @@ void vecsub_core(const F1 &a, const F2 &b, F3 &y) {
 namespace blas {
 void vecsub(const vector<double> &a, const vector<double> &b,
             vector<double> &y) {
+  vecsub_core(a, b, y);
+}
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y) {
   vecsub_core(a, b, y);
 }
 } // namespace blas
