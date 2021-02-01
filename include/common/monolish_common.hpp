@@ -422,9 +422,33 @@ template <typename T> matrix::COO<T> laplacian_matrix_1D(const int &M);
  **/
 template <typename T> T laplacian_matrix_1D_eigenvalue(const int &M, int N);
 
+/**
+ * @brief create Toeplitz-plus-Hankel matrix
+ * @param M # of row and col
+ * @param a0 value of diagonal elements
+ * @param a1 value of next-to-diagonal elements
+ * @param a2 value of second-next-to-diagonal elements
+ * @note
+ * - taken from arxiv:2007.08130
+ * - (0, 0) and (M-1, M-1) elements are modified to a0-a2
+ * - both A and B of the GEVP have same structure
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
 template <typename T>
 matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0, T a1, T a2);
 
+/**
+ * @brief Nth smallest eigenvalue of GEVP Ax=lBx of Toeplitz-plus-Hankel matrixes A, B
+ * @param M dimension of Toeplitz-plus-Hankel marices
+ * @param N #-th eigenvalue from the bottom
+ * @param a0, a1, a2 value of Toeplitz-plus-Hankel matrix A
+ * @param b0, b1, b2 value of TOeplitz-plus-Hankel matrix B
+ * @note
+ * - # of computation: O(1)
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
 template <typename T>
 T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N, T a0, T a1, T a2,
                                          T b0, T b1, T b2);
