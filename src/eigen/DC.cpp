@@ -50,4 +50,44 @@ template int
 standard_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
                                                        vector<float> &x);
 
+template <typename MATRIX, typename T>
+int generalized_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, MATRIX &B, vector<T> &lambda, int itype) {
+  int ret = MONOLISH_SOLVER_SUCCESS;
+  Logger &logger = Logger::get_instance();
+  logger.solver_in(monolish_func);
+
+  const char jobz = 'V';
+  const char uplo = 'U';
+
+  int info = internal::lapack::sygvd(A, B, lambda, itype, &jobz, &uplo);
+  if (info > 0) {
+    ret = MONOLISH_SOLVER_BREAKDOWN;
+  } else if (info < 0) {
+    ret = MONOLISH_SOLVER_RESIDUAL_NAN;
+  }
+
+  logger.solver_out();
+  return ret;
+}
+
+template int generalized_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda, int itype);
+template int generalized_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda, int itype);
+
+template <typename MATRIX, typename T>
+int generalized_eigen::DC<MATRIX, T>::solve(MATRIX &A, MATRIX &B, vector<T> &lambda, int itype) {
+  Logger &logger = Logger::get_instance();
+  logger.solver_in(monolish_func);
+
+  int ret = 0;
+  if (this->get_lib() == 0) {
+    ret = LAPACK_DC(A, B, lambda, itype);
+  }
+
+  logger.solver_out();
+  return ret; // err code
+}
+
+template int generalized_eigen::DC<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda, int itype);
+template int generalized_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda, int itype);
+
 } // namespace monolish

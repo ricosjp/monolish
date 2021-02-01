@@ -422,6 +422,14 @@ template <typename T> matrix::COO<T> laplacian_matrix_1D(const int &M);
  **/
 template <typename T> T laplacian_matrix_1D_eigenvalue(const int &M, int N);
 
+template <typename T>
+matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0, T a1, T a2);
+
+template <typename T>
+T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N, T a0, T a1, T a2,
+                                         T b0, T b1, T b2);
+
+
 // send///////////////////
 
 /**
