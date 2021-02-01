@@ -3,7 +3,8 @@
 
 namespace monolish {
 
-void blas::mscal(const double alpha, matrix::CRS<double> &A) {
+namespace {
+template <typename T> void mscal_core(const T alpha, matrix::CRS<T> &A) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -12,14 +13,11 @@ void blas::mscal(const double alpha, matrix::CRS<double> &A) {
 
   logger.func_out();
 }
+} // namespace
 
-void blas::mscal(const float alpha, matrix::CRS<float> &A) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+namespace blas {
+void mscal(const double alpha, matrix::CRS<double> &A) { mscal_core(alpha, A); }
 
-  internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
-                 A.get_device_mem_stat());
-
-  logger.func_out();
-}
+void mscal(const float alpha, matrix::CRS<float> &A) { mscal_core(alpha, A); }
+} // namespace blas
 } // namespace monolish

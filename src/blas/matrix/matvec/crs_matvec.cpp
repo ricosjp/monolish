@@ -3,8 +3,10 @@
 
 namespace monolish {
 
-void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
-                  vector<double> &y) {
+namespace {
+// double ///////////////////
+template <typename VEC>
+void Dmatvec_core(const matrix::CRS<double> &A, const VEC &x, VEC &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -49,14 +51,14 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-// MKL
+    // MKL
 #if MONOLISH_USE_MKL
     const double alpha = 1.0;
     const double beta = 0.0;
     mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd,
                &beta, yd);
 
-// OSS
+    // OSS
 #else
 #pragma omp parallel for
     for (int i = 0; i < (int)A.get_row(); i++) {
@@ -72,8 +74,9 @@ void blas::matvec(const matrix::CRS<double> &A, const vector<double> &x,
   logger.func_out();
 }
 
-void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
-                  vector<float> &y) {
+// float ///////////////////
+template <typename VEC>
+void Smatvec_core(const matrix::CRS<float> &A, const VEC &x, VEC &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -83,17 +86,16 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const float *vald = A.val.data();
+  const float *xd = x.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
-  const float *xd = x.data();
-  float *yd = y.data();
   const int m = A.get_row();
   const int n = A.get_col();
   const int nnz = A.get_nnz();
+  float *yd = y.data();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU // gpu
-
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
     cudaDeviceSynchronize();
@@ -119,18 +121,18 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-// MKL
+    // MKL
 #if MONOLISH_USE_MKL
     const float alpha = 1.0;
     const float beta = 0.0;
     mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd,
                &beta, yd);
 
-// OSS
+    // OSS
 #else
 #pragma omp parallel for
     for (int i = 0; i < (int)A.get_row(); i++) {
-      double ytmp = 0.0;
+      float ytmp = 0.0;
       for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
         ytmp += vald[j] * xd[A.col_ind[j]];
       }
@@ -141,4 +143,18 @@ void blas::matvec(const matrix::CRS<float> &A, const vector<float> &x,
 
   logger.func_out();
 }
+} // namespace
+
+namespace blas {
+void matvec(const matrix::CRS<double> &A, const vector<double> &x,
+            vector<double> &y) {
+  Dmatvec_core(A, x, y);
+}
+
+void matvec(const matrix::CRS<float> &A, const vector<float> &x,
+            vector<float> &y) {
+  Smatvec_core(A, x, y);
+}
+} // namespace blas
+
 } // namespace monolish

@@ -3,9 +3,10 @@
 
 namespace monolish {
 
+namespace {
 // double ///////////////////
-void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
-                  vector<double> &y) {
+template <typename VEC>
+void Dmatvec_core(const matrix::Dense<double> &A, const VEC &x, VEC &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -45,8 +46,8 @@ void blas::matvec(const matrix::Dense<double> &A, const vector<double> &x,
 }
 
 // float ///////////////////
-void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
-                  vector<float> &y) {
+template <typename VEC>
+void Smatvec_core(const matrix::Dense<float> &A, const VEC &x, VEC &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -84,4 +85,17 @@ void blas::matvec(const matrix::Dense<float> &A, const vector<float> &x,
 
   logger.func_out();
 }
+} // namespace
+
+namespace blas {
+void matvec(const matrix::Dense<double> &A, const vector<double> &x,
+            vector<double> &y) {
+  Dmatvec_core(A, x, y);
+}
+
+void matvec(const matrix::Dense<float> &A, const vector<float> &x,
+            vector<float> &y) {
+  Smatvec_core(A, x, y);
+}
+} // namespace blas
 } // namespace monolish
