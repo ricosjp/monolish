@@ -3,26 +3,21 @@
 
 namespace monolish {
 
-  namespace{
-  template <typename T>
-    void mscal_core(const T alpha, matrix::CRS<T> &A) {
-      Logger &logger = Logger::get_instance();
-      logger.func_in(monolish_func);
+namespace {
+template <typename T> void mscal_core(const T alpha, matrix::CRS<T> &A) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
 
-      internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
-          A.get_device_mem_stat());
+  internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
+                 A.get_device_mem_stat());
 
-      logger.func_out();
-    }
-  }
-
-namespace blas{
-  void mscal(const double alpha, matrix::CRS<double> &A){
-    mscal_core(alpha, A);
-  }
-
-  void mscal(const float alpha, matrix::CRS<float> &A){
-    mscal_core(alpha, A);
-  }
+  logger.func_out();
 }
+} // namespace
+
+namespace blas {
+void mscal(const double alpha, matrix::CRS<double> &A) { mscal_core(alpha, A); }
+
+void mscal(const float alpha, matrix::CRS<float> &A) { mscal_core(alpha, A); }
+} // namespace blas
 } // namespace monolish
