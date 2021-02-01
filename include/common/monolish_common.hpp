@@ -439,7 +439,8 @@ template <typename T>
 matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0, T a1, T a2);
 
 /**
- * @brief Nth smallest eigenvalue of GEVP Ax=lBx of Toeplitz-plus-Hankel matrixes A, B
+ * @brief Nth smallest eigenvalue of GEVP Ax=lBx of Toeplitz-plus-Hankel
+ * matrixes A, B
  * @param M dimension of Toeplitz-plus-Hankel marices
  * @param N #-th eigenvalue from the bottom
  * @param a0, a1, a2 value of Toeplitz-plus-Hankel matrix A
@@ -452,7 +453,6 @@ matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0, T a1, T a2);
 template <typename T>
 T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N, T a0, T a1, T a2,
                                          T b0, T b1, T b2);
-
 
 // send///////////////////
 

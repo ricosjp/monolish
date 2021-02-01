@@ -51,7 +51,8 @@ standard_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
                                                        vector<float> &x);
 
 template <typename MATRIX, typename T>
-int generalized_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, MATRIX &B, vector<T> &lambda, int itype) {
+int generalized_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, MATRIX &B,
+                                                vector<T> &lambda, int itype) {
   int ret = MONOLISH_SOLVER_SUCCESS;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -70,11 +71,16 @@ int generalized_eigen::DC<MATRIX, T>::LAPACK_DC(MATRIX &A, MATRIX &B, vector<T> 
   return ret;
 }
 
-template int generalized_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda, int itype);
-template int generalized_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda, int itype);
+template int generalized_eigen::DC<matrix::Dense<double>, double>::LAPACK_DC(
+    matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda,
+    int itype);
+template int generalized_eigen::DC<matrix::Dense<float>, float>::LAPACK_DC(
+    matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda,
+    int itype);
 
 template <typename MATRIX, typename T>
-int generalized_eigen::DC<MATRIX, T>::solve(MATRIX &A, MATRIX &B, vector<T> &lambda, int itype) {
+int generalized_eigen::DC<MATRIX, T>::solve(MATRIX &A, MATRIX &B,
+                                            vector<T> &lambda, int itype) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -87,7 +93,11 @@ int generalized_eigen::DC<MATRIX, T>::solve(MATRIX &A, MATRIX &B, vector<T> &lam
   return ret; // err code
 }
 
-template int generalized_eigen::DC<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda, int itype);
-template int generalized_eigen::DC<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda, int itype);
+template int generalized_eigen::DC<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &lambda,
+    int itype);
+template int generalized_eigen::DC<matrix::Dense<float>, float>::solve(
+    matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &lambda,
+    int itype);
 
 } // namespace monolish

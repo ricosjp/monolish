@@ -87,10 +87,15 @@ bool test_laplacian_1d(const int check_ans, const T tol_ev, const T tol_res) {
 }
 
 template <typename T>
-bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev, const T tol_res) {
+bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
+                               const T tol_res) {
   int DIM = 100;
-  monolish::matrix::COO<T> COO_A = monolish::util::toeplitz_plus_hankel_matrix<T>(DIM, 1.0, -1.0/3.0, -1.0/6.0);
-  monolish::matrix::COO<T> COO_B = monolish::util::toeplitz_plus_hankel_matrix<T>(DIM, 11.0/20.0, 13.0/60.0, 1.0/120.0);
+  monolish::matrix::COO<T> COO_A =
+      monolish::util::toeplitz_plus_hankel_matrix<T>(DIM, 1.0, -1.0 / 3.0,
+                                                     -1.0 / 6.0);
+  monolish::matrix::COO<T> COO_B =
+      monolish::util::toeplitz_plus_hankel_matrix<T>(DIM, 11.0 / 20.0,
+                                                     13.0 / 60.0, 1.0 / 120.0);
   monolish::matrix::Dense<T> A(COO_A);
   monolish::matrix::Dense<T> Aorig(COO_A);
   monolish::matrix::Dense<T> B(COO_B);
@@ -107,7 +112,9 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev, const T tol_
       std::cout << "Toeplitz + Hankel: " << i << "th" << std::endl;
       // Check eiegnvalues based on analytic results
       T exact_result =
-          monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(DIM, i, 1.0, -1.0/3.0, -1.0/6.0, 11.0/20.0, 13.0/60.0, 1.0/120.0);
+          monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
+              DIM, i, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
+              1.0 / 120.0);
       std::string sval = "DC eigenvalue(Toeplitz plus Hankel)";
       if (ans_check<T>(sval, lambda[i], exact_result, tol_ev) == false) {
         return false;
