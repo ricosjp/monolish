@@ -3,25 +3,28 @@
 
 namespace monolish {
 
-// double ///////////////////
-void blas::mscal(const double alpha, matrix::Dense<double> &A) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  namespace{
 
-  internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
-                 A.get_device_mem_stat());
+  template <typename T>
+    void mscal_core(const T alpha, matrix::Dense<T> &A) {
+      Logger &logger = Logger::get_instance();
+      logger.func_in(monolish_func);
 
-  logger.func_out();
+      internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
+          A.get_device_mem_stat());
+
+      logger.func_out();
+    }
+  }
+
+namespace blas{
+  void mscal(const double alpha, matrix::Dense<double> &A){
+    mscal_core(alpha, A);
+  }
+
+  void mscal(const float alpha, matrix::Dense<float> &A){
+    mscal_core(alpha, A);
+  }
 }
 
-// float ///////////////////
-void blas::mscal(const float alpha, matrix::Dense<float> &A) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
-                 A.get_device_mem_stat());
-
-  logger.func_out();
-}
 } // namespace monolish
