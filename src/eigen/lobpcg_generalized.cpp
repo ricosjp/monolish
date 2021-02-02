@@ -6,8 +6,8 @@
 namespace monolish {
 
 template <typename MATRIX, typename T>
-int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, MATRIX &B, T &l,
-                                                          monolish::vector<T> &x, int itype) {
+int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
+    MATRIX &A, MATRIX &B, T &l, monolish::vector<T> &x, int itype) {
   // LOBPCG only support itype == 1 (Ax = lBx)
   assert(itype == 1);
 
@@ -34,7 +34,6 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, MATRIX &B, 
   if (A.get_device_mem_stat() == true) {
     monolish::util::send(x, w, p, X, W, P, vtmp1);
   }
-
 
   // X = A x
   blas::matvec(A, x, X);
@@ -224,18 +223,24 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, MATRIX &B, 
 
 template int
 generalized_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
-    matrix::CRS<double> &A, matrix::CRS<double> &B, double &l, vector<double> &x, int itype = 1);
-template int generalized_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
-    matrix::CRS<float> &A, matrix::CRS<float> &B, float &l, vector<float> &x, int itype = 1);
+    matrix::CRS<double> &A, matrix::CRS<double> &B, double &l,
+    vector<double> &x, int itype = 1);
 template int
-generalized_eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(
-    matrix::LinearOperator<double> &A, matrix::LinearOperator<double> &B, double &l, vector<double> &x, int itype = 1);
-template int
-generalized_eigen::LOBPCG<matrix::LinearOperator<float>, float>::monolish_LOBPCG(
-    matrix::LinearOperator<float> &A, matrix::LinearOperator<float> &B, float &l, vector<float> &x, int itype = 1);
+generalized_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
+    matrix::CRS<float> &A, matrix::CRS<float> &B, float &l, vector<float> &x,
+    int itype = 1);
+template int generalized_eigen::LOBPCG<matrix::LinearOperator<double>, double>::
+    monolish_LOBPCG(matrix::LinearOperator<double> &A,
+                    matrix::LinearOperator<double> &B, double &l,
+                    vector<double> &x, int itype = 1);
+template int generalized_eigen::LOBPCG<matrix::LinearOperator<float>, float>::
+    monolish_LOBPCG(matrix::LinearOperator<float> &A,
+                    matrix::LinearOperator<float> &B, float &l,
+                    vector<float> &x, int itype = 1);
 
 template <typename MATRIX, typename T>
-int generalized_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, MATRIX &B, T &l, vector<T> &x, int itype) {
+int generalized_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, MATRIX &B, T &l,
+                                                vector<T> &x, int itype) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -249,14 +254,18 @@ int generalized_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, MATRIX &B, T &l, vect
 }
 
 template int generalized_eigen::LOBPCG<matrix::CRS<double>, double>::solve(
-    matrix::CRS<double> &A, matrix::CRS<double> &B, double &l, vector<double> &x, int itype);
+    matrix::CRS<double> &A, matrix::CRS<double> &B, double &l,
+    vector<double> &x, int itype);
 template int generalized_eigen::LOBPCG<matrix::CRS<float>, float>::solve(
-    matrix::CRS<float> &A, matrix::CRS<float> &B, float &l, vector<float> &x, int itype);
+    matrix::CRS<float> &A, matrix::CRS<float> &B, float &l, vector<float> &x,
+    int itype);
 template int
 generalized_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(
-    matrix::LinearOperator<double> &A, matrix::LinearOperator<double> &B, double &l, vector<double> &x, int itype);
+    matrix::LinearOperator<double> &A, matrix::LinearOperator<double> &B,
+    double &l, vector<double> &x, int itype);
 template int
 generalized_eigen::LOBPCG<matrix::LinearOperator<float>, float>::solve(
-    matrix::LinearOperator<float> &A, matrix::LinearOperator<float> &B, float &l, vector<float> &x, int itype);
+    matrix::LinearOperator<float> &A, matrix::LinearOperator<float> &B,
+    float &l, vector<float> &x, int itype);
 
 } // namespace monolish

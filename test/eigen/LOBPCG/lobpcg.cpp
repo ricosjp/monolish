@@ -40,7 +40,8 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
 }
 
 template <typename T, typename PRECOND>
-bool test_solve_GEVP(monolish::matrix::COO<T> matA, monolish::matrix::COO<T> matB, const T exact_result,
+bool test_solve_GEVP(monolish::matrix::COO<T> matA,
+                     monolish::matrix::COO<T> matB, const T exact_result,
                      const int check_ans, const T tol_ev, const T tol_res,
                      const std::string s) {
   monolish::matrix::CRS<T> A(matA);
@@ -111,12 +112,13 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
                                                      13.0 / 60.0, 1.0 / 120.0);
 
   // Check eiegnvalues based on analytic results
-  T exact_result =
-      monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
-          DIM, 0, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
-          1.0 / 120.0);
+  T exact_result = monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
+      DIM, 0, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
+      1.0 / 120.0);
 
-  return test_solve_GEVP<T, PRECOND>(COO_A, COO_B, exact_result, check_ans, tol_ev, tol_res * DIM, "Toeplitz + Hankel");
+  return test_solve_GEVP<T, PRECOND>(COO_A, COO_B, exact_result, check_ans,
+                                     tol_ev, tol_res * DIM,
+                                     "Toeplitz + Hankel");
 }
 
 int main(int argc, char **argv) {
@@ -177,25 +179,28 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_toeplitz_plus_hankel<double, monolish::equation::none<monolish::matrix::CRS<double>,
-                                                  double>>(check_ans, 2.0e-1,
-                                                           1.0e-5) == false) {
-    return 1;
-  }
-  if (test_toeplitz_plus_hankel<float,
-                 monolish::equation::none<monolish::matrix::CRS<float>, float>>(
+  if (test_toeplitz_plus_hankel<
+          double,
+          monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           check_ans, 2.0e-1, 1.0e-5) == false) {
     return 1;
   }
-  if (test_toeplitz_plus_hankel<double, monolish::equation::Jacobi<
-                             monolish::matrix::CRS<double>, double>>(
+  if (test_toeplitz_plus_hankel<
+          float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           check_ans, 2.0e-1, 1.0e-5) == false) {
     return 1;
   }
-  if (test_toeplitz_plus_hankel<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>,
-                                                   float>>(check_ans, 2.0e-1,
-                                                           1.0e-5) == false) {
+  if (test_toeplitz_plus_hankel<
+          double,
+          monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
+          check_ans, 2.0e-1, 1.0e-5) == false) {
     return 1;
   }
-return 0;
+  if (test_toeplitz_plus_hankel<
+          float,
+          monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
+          check_ans, 2.0e-1, 1.0e-5) == false) {
+    return 1;
+  }
+  return 0;
 }
