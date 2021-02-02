@@ -189,6 +189,7 @@ public:
    * @brief solve Ax=b
    */
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  int solve(MATRIX &A, vector<Float> &xb);
 
   void create_precond(matrix::CRS<Float> &A) {
     throw std::runtime_error("this precond. is not impl.");
