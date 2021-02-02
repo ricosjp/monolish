@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
   if (test_toeplitz_plus_hankel<double>(check_ans, 1.0e-8, 1.0e-4) == false) {
     return 1;
   }
-  if (test_toeplitz_plus_hankel<float>(check_ans, 6.0e-4, 3.0e-2) == false) {
+  if (test_toeplitz_plus_hankel<float>(check_ans, 5.0e-3, 1.0e-1) == false) {
     return 1;
   }
   return 0;
