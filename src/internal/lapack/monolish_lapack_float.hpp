@@ -103,13 +103,14 @@ int sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B, vector<float> &W,
  * - GPU acceleration: ture
  *    - # of data transfer: min(M,N) integer array
  */
-int getrf(matrix::Dense<float> &A, std::vector<int>& ipiv);
+int getrf(matrix::Dense<float> &A, std::vector<int> &ipiv);
 
 /**
  * @brief slove Lu...atode kaku
  * @param A single precision Dense matrix (size M x N)
  * @param B single precision vector (size M)
-                     On entry, the right hand side matrix B. On exit, the solution matrix X.
+                     On entry, the right hand side matrix B. On exit, the
+ solution matrix X.
  * @param ipiv integer array (size min(M,N))
  * @return 0 if successfully computed
  * -i then the i-th parameter had an illegal value
@@ -122,7 +123,8 @@ int getrf(matrix::Dense<float> &A, std::vector<int>& ipiv);
  * - GPU acceleration: ture
  *    - # of data transfer: min(M,N) integer array
  */
-int getrs(const matrix::Dense<float> &A, vector<float> &B, const std::vector<int>& ipiv);
+int getrs(const matrix::Dense<float> &A, vector<float> &B,
+          const std::vector<int> &ipiv);
 
 /**
  * @brief LU bunkai...atode kaku
@@ -139,13 +141,14 @@ int getrs(const matrix::Dense<float> &A, vector<float> &B, const std::vector<int
  * - GPU acceleration: ture
  *    - # of data transfer: min(M,N) integer array
  */
-int sytrf(matrix::Dense<float> &A, std::vector<int>& ipiv);
+int sytrf(matrix::Dense<float> &A, std::vector<int> &ipiv);
 
 /**
  * @brief slove Lu...atode kaku
  * @param A single precision symmetric Dense matrix (size M x M)
  * @param B single precision vector (size M)
-                     On entry, the right hand side matrix B. On exit, the solution matrix X.
+                     On entry, the right hand side matrix B. On exit, the
+ solution matrix X.
  * @param ipiv integer array (size min(M,N))
  * @return 0 if successfully computed
  * -i then the i-th parameter had an illegal value
@@ -158,7 +161,8 @@ int sytrf(matrix::Dense<float> &A, std::vector<int>& ipiv);
  * - GPU acceleration: ture
  *    - # of data transfer: min(M,N) integer array
  */
-int sytrs(const matrix::Dense<float> &A, vector<float> &B, const std::vector<int>& ipiv);
+int sytrs(const matrix::Dense<float> &A, vector<float> &B,
+          const std::vector<int> &ipiv);
 
 } // namespace lapack
 } // namespace internal
