@@ -182,24 +182,24 @@ int main(int argc, char **argv) {
   if (test_toeplitz_plus_hankel<
           double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
           double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
           float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   return 0;
