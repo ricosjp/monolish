@@ -17,6 +17,27 @@ namespace monolish {
 namespace generalized_eigen {
 
 /**
+ * @brief LOBPCG solver
+ */
+template <typename MATRIX, typename Float>
+class LOBPCG : public solver::solver<MATRIX, Float> {
+private:
+  // TODO: support multiple lambda(eigenvalue)s
+  int monolish_LOBPCG(MATRIX &A, MATRIX &B, Float &lambda, vector<Float> &x, int itype);
+
+public:
+  int solve(MATRIX &A, MATRIX &B, Float &lambda, vector<Float> &x, int itype);
+
+  void create_precond(MATRIX &A) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+
+  void apply_precond(const vector<Float> &r, vector<Float> &z) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+};
+
+/**
  * @brief Devide and Conquer solver
  */
 template <typename MATRIX, typename Float>
