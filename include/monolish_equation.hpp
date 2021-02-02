@@ -114,6 +114,7 @@ public:
   void set_reorder(int r) { reorder = r; }
   int get_sigularity() { return singularity; }
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  int solve(MATRIX &A, vector<Float> &xb);
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
