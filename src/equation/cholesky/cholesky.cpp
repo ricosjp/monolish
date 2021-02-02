@@ -1,5 +1,6 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../internal/monolish_internal.hpp"
+#include "../../internal/lapack/monolish_lapack.hpp"
 
 namespace monolish {
 
@@ -33,4 +34,39 @@ template int equation::Cholesky<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 template int equation::Cholesky<matrix::CRS<float>, float>::solve(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+
+template <>
+int equation::Cholesky<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
+    vector<double> &XB) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (lib==1){
+    std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
+    internal::lapack::sytrf(A, ipiv);
+    internal::lapack::sytrs(A,  XB, ipiv);
+  } else {
+    logger.func_out();
+    throw std::runtime_error("error solver.lib is not 1");
+  }
+
+  logger.func_out();
+}
+template <>
+int equation::Cholesky<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
+                                                     vector<float> &XB) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (lib == 1) {
+    std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
+    internal::lapack::sytrf(A, ipiv);
+    internal::lapack::sytrs(A,  XB, ipiv);
+  } else {
+    logger.func_out();
+    throw std::runtime_error("error solver.lib is not 1");
+  }
+
+  logger.func_out();
+}
 } // namespace monolish
