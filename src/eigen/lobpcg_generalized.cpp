@@ -32,7 +32,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   monolish::vector<T> vtmp1(A.get_row());
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(x, w, p, X, W, P, vtmp1);
+    monolish::util::send(x, w, p, X, W, P, B, BX, BW, BP, vtmp1);
   }
 
   // X = A x
