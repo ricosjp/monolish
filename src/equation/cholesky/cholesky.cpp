@@ -51,9 +51,14 @@ int equation::Cholesky<matrix::Dense<double>, double>::solve(
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
+    A.recv();
+    XB.recv();
+
     if (internal::lapack::sytrs(A, XB, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
+
+    XB.send();
 
   } else {
     logger.func_out();
@@ -78,9 +83,15 @@ int equation::Cholesky<matrix::Dense<float>, float>::solve(
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
+    A.recv();
+    XB.recv();
+
     if (internal::lapack::sytrs(A, XB, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
+
+    XB.send();
+
   } else {
     logger.func_out();
     throw std::runtime_error("error solver.lib is not 1");
@@ -106,9 +117,14 @@ int equation::Cholesky<matrix::Dense<double>, double>::solve(
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
+    A.recv();
+    x.recv();
+
     if (internal::lapack::sytrs(A, x, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
+
+    x.send();
 
   } else {
     logger.func_out();
@@ -135,9 +151,15 @@ int equation::Cholesky<matrix::Dense<float>, float>::solve(
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
+    A.recv();
+    x.recv();
+
     if (internal::lapack::sytrs(A, x, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
+
+    x.send();
+
   } else {
     logger.func_out();
     throw std::runtime_error("error solver.lib is not 1");
