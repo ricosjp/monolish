@@ -26,7 +26,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     internal::check_CUDA(cusolverDnCreate(&h));
     int lwork = -1;
 
-#pragma omp target data use_device_ptr(Ad, ipivd)
+#pragma omp target data use_device_ptr(Ad)
     {
       internal::check_CUDA(cusolverDnSgetrf_bufferSize(h, M, N, Ad, M, &lwork));
     }
