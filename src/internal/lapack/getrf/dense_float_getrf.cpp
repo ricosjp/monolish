@@ -54,7 +54,6 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     cudaDeviceSynchronize();
     info = devinfo[0];
     cusolverDnDestroy(h);
-    cudaDeviceSynchronize();
 
 #else
     throw std::runtime_error(
