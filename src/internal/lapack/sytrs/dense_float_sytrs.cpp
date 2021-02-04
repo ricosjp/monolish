@@ -23,7 +23,7 @@ int internal::lapack::sytrs(const matrix::Dense<float> &A, vector<float> &B,
   const int *ipivd = ipiv.data();
   const char U = 'U';
 
-  if(ipiv.size() != M){
+  if (ipiv.size() != M) {
     logger.func_out();
     std::runtime_error("lapack::getrf, ipiv size error");
   }

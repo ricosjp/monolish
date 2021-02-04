@@ -19,7 +19,7 @@ int internal::lapack::sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
   int *ipivd = ipiv.data();
   const char U = 'U';
 
-  if(ipiv.size() != M){
+  if (ipiv.size() != M) {
     logger.func_out();
     std::runtime_error("lapack::getrf, ipiv size error");
   }
@@ -49,7 +49,7 @@ int internal::lapack::sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
                                             ipivd, workd, lwork, devinfod));
     }
 
-#pragma omp target exit data map(from : devinfod[0:1])
+#pragma omp target exit data map(from : devinfod [0:1])
 #pragma omp target exit data map(from : ipivd [0:M])
     cudaDeviceSynchronize();
     info = devinfo[0];

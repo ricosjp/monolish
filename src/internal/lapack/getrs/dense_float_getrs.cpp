@@ -14,7 +14,7 @@ int internal::lapack::getrs(const matrix::Dense<float> &A, vector<float> &B,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  if(ipiv.size() != std::min(A.get_row(), A.get_col())){
+  if (ipiv.size() != std::min(A.get_row(), A.get_col())) {
     logger.func_out();
     std::runtime_error("lapack::getrs, ipiv size error");
   }
@@ -38,12 +38,12 @@ int internal::lapack::getrs(const matrix::Dense<float> &A, vector<float> &B,
     std::vector<int> devinfo(1);
     int *devinfod = devinfo.data();
 
-#pragma omp target enter data map(to : ipivd [0:ipivl], devinfod[0:1])
+#pragma omp target enter data map(to : ipivd [0:ipivl], devinfod [0:1])
 
 #pragma omp target data use_device_ptr(Ad, ipivd, Bd, devinfod)
     {
-      internal::check_CUDA(
-          cusolverDnSgetrs(h, CUBLAS_OP_N, M, K, Ad, N, ipivd, Bd, M, devinfod));
+      internal::check_CUDA(cusolverDnSgetrs(h, CUBLAS_OP_N, M, K, Ad, N, ipivd,
+                                            Bd, M, devinfod));
     }
 
     // free

@@ -13,7 +13,7 @@ int internal::lapack::getrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  if(ipiv.size() != std::min(A.get_row(), A.get_col())){
+  if (ipiv.size() != std::min(A.get_row(), A.get_col())) {
     logger.func_out();
     std::runtime_error("lapack::getrf, ipiv size error");
   }

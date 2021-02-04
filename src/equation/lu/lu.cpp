@@ -1,5 +1,5 @@
-#include "../../../include/monolish_equation.hpp"
 #include "../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_equation.hpp"
 #include "../../internal/lapack/monolish_lapack.hpp"
 #include "../../internal/monolish_internal.hpp"
 
@@ -44,11 +44,11 @@ int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
   if (lib == 1) {
     std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
 
-    if(internal::lapack::getrf(A, ipiv) != 0){
+    if (internal::lapack::getrf(A, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
-    if(internal::lapack::getrs(A, XB, ipiv) != 0){
+    if (internal::lapack::getrs(A, XB, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
 
@@ -71,11 +71,11 @@ int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
   if (lib == 1) {
     std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
 
-    if(internal::lapack::getrf(A, ipiv) != 0){
+    if (internal::lapack::getrf(A, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
-    if(internal::lapack::getrs(A, XB, ipiv) != 0){
+    if (internal::lapack::getrs(A, XB, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
   } else {
@@ -89,7 +89,7 @@ int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
 
 template <>
 int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
-                                                       vector<double> &x, 
+                                                       vector<double> &x,
                                                        vector<double> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -100,11 +100,11 @@ int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
     std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
     monolish::blas::copy(b, x);
 
-    if(internal::lapack::getrf(A, ipiv) != 0){
+    if (internal::lapack::getrf(A, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
-    if(internal::lapack::getrs(A, x, ipiv) != 0){
+    if (internal::lapack::getrs(A, x, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
 
@@ -119,8 +119,8 @@ int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
 
 template <>
 int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
-                                                       vector<float> &x, 
-                                                       vector<float> &b) {
+                                                     vector<float> &x,
+                                                     vector<float> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -130,11 +130,11 @@ int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
     std::vector<int> ipiv(std::min(A.get_row(), A.get_col()));
     monolish::blas::copy(b, x);
 
-    if(internal::lapack::getrf(A, ipiv) != 0){
+    if (internal::lapack::getrf(A, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     };
 
-    if(internal::lapack::getrs(A, x, ipiv) != 0){
+    if (internal::lapack::getrs(A, x, ipiv) != 0) {
       ret = MONOLISH_SOLVER_BREAKDOWN;
     }
   } else {
