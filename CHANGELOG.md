@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add Dense LU/Cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/240
 - add LOBPCG(Sparse) eigensolver for generalized eigenproblem https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/241
 - add DC(Dense) eigensolver for generalized eigenproblem https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/235
 - add test matrices for generalized eigenvalue problem from arxiv:2007.08130 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/235
