@@ -26,28 +26,33 @@ int internal::lapack::getrs(const matrix::Dense<double> &A, vector<double> &B,
   const double *Ad = A.val.data();
   double *Bd = B.data();
   const int *ipivd = ipiv.data();
-  int ipivl = ipiv.size();
   const char trans = 'N';
 
   if (A.get_device_mem_stat() == true && B.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
+    int ipivl = ipiv.size();
     cudaDeviceSynchronize();
     cusolverDnHandle_t h;
     cudaDeviceSynchronize();
     internal::check_CUDA(cusolverDnCreate(&h));
+    std::vector<int> devinfo(1);
+    int *devinfod = devinfo.data();
+
+#pragma omp target enter data map(to : ipivd [0:ipivl], devinfod[0:1])
+
+#pragma omp target data use_device_ptr(Ad, ipivd, Bd, devinfod)
+    {
+      internal::check_CUDA(
+          cusolverDnDgetrs(h, CUBLAS_OP_N, M, K, Ad, N, ipivd, Bd, M, devinfod));
+    }
+
+    // free
+#pragma omp target exit data map(release : ipivd [0:ipivl])
+#pragma omp target exit data map(from : devinfod [0:1])
+    cudaDeviceSynchronize();
+    info = devinfo[0];
     cusolverDnDestroy(h);
-// #pragma omp target enter data map(to : ipivd [0:ipivl])
-// 
-// #pragma omp target data use_device_ptr(Ad, ipivd, Bd)
-//     {
-//       internal::check_CUDA(
-//           cusolverDnDgetrs(h, CUBLAS_OP_N, M, K, Ad, N, ipivd, Bd, M, &info));
-//     }
-// 
-//     // free
-// #pragma omp target exit data map(release : ipivd [0:ipivl])
-//     cusolverDnDestroy(h);
-// 
+
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");

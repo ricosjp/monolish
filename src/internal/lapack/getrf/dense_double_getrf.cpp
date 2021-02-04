@@ -41,16 +41,20 @@ int internal::lapack::getrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
     monolish::vector<double> work(lwork);
     work.send();
     double *workd = work.data();
+    std::vector<int> devinfo(1);
+    int *devinfod = devinfo.data();
 
-#pragma omp target data use_device_ptr(Ad, ipivd, workd)
+#pragma omp target enter data map(to : devinfod [0:1])
+#pragma omp target data use_device_ptr(Ad, ipivd, workd, devinfod)
     {
       internal::check_CUDA(
-          cusolverDnDgetrf(h, M, N, Ad, M, workd, ipivd, &info));
+          cusolverDnDgetrf(h, M, N, Ad, M, workd, ipivd, devinfod));
     }
-
-    // free
-    work.recv();
+#pragma omp target exit data map(from : devinfod [0:1])
+    cudaDeviceSynchronize();
+    info = devinfo[0];
     cusolverDnDestroy(h);
+    cudaDeviceSynchronize();
 
 #else
     throw std::runtime_error(
