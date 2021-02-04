@@ -4,7 +4,7 @@
 #include <iostream>
 
 template <typename T>
-bool test(const char *file, const int check_ans, const T tol) {
+bool LU_test(const char *file, const int check_ans, const T tol) {
 
   monolish::equation::LU<monolish::matrix::Dense<T>, T> LU_solver;
 
@@ -41,6 +41,8 @@ bool test(const char *file, const int check_ans, const T tol) {
       return false;
     };
   }
+  std::cout << "Pass in " << __func__ << "(" << get_type<T>() << ")"
+            << " precision" << std::endl;
   return true;
 }
 
@@ -54,13 +56,13 @@ int main(int argc, char **argv) {
   char *file = argv[1];
   int check_ans = atoi(argv[2]);
 
-  // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
+  monolish::util::set_log_level(3);
+  monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<double>(file, check_ans, 1.0e-8) == false) {
+  if (LU_test<double>(file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<float>(file, check_ans, 1.0e-5) == false) {
+  if (LU_test<float>(file, check_ans, 1.0e-5) == false) {
     return 1;
   }
 
