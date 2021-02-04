@@ -69,7 +69,7 @@ public:
    * @brief set library option (to change library, monolish, cusolver, etc.)
    * @param[in] library number
    **/
-  void set_lib(double l) { lib = l; }
+  void set_lib(int l) { lib = l; }
 
   /**
    * @brief set tolerance (default:1.0e-8)

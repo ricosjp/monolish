@@ -84,6 +84,86 @@ int syevd(matrix::Dense<double> &A, vector<double> &W, const char *jobz,
 int sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B, vector<double> &W,
           const int itype, const char *jobz, const char *uplo);
 
+//////////////////////////////////////////////////////
+//  Linear equation
+//////////////////////////////////////////////////////
+
+/**
+ * @brief LU bunkai...atode kaku
+ * @param A double precision Dense matrix (size M x N)
+ * @param ipiv integer array (size min(M,N))
+ * @return 0 if successfully computed
+ * -i then the i-th parameter had an illegal value
+ * i then the algorithm failed to converge and i elements did not converge to 0
+ * @note
+ * - # of computation: XXXXX
+ * - A is destroyed after called
+ * - Multi-threading: true
+ * - Temporary array is created inside the function
+ * - GPU acceleration: ture
+ *    - # of data transfer: min(M,N) integer array
+ */
+int getrf(matrix::Dense<double> &A, std::vector<int> &ipiv);
+
+/**
+ * @brief slove Lu...atode kaku
+ * @param A double precision Dense matrix (size M x N)
+ * @param B double precision vector (size M)
+                     On entry, the right hand side matrix B. On exit, the
+ solution matrix X.
+ * @param ipiv integer array (size min(M,N))
+ * @return 0 if successfully computed
+ * -i then the i-th parameter had an illegal value
+ * i then the algorithm failed to converge and i elements did not converge to 0
+ * @note
+ * - # of computation: XXXXX
+ * - A is destroyed after called
+ * - Multi-threading: true
+ * - Temporary array is created inside the function
+ * - GPU acceleration: ture
+ *    - # of data transfer: min(M,N) integer array
+ */
+int getrs(const matrix::Dense<double> &A, vector<double> &B,
+          const std::vector<int> &ipiv);
+
+/**
+ * @brief LU bunkai...atode kaku
+ * @param A double precision symmetric Dense matrix (size M x M)
+ * @param ipiv integer array (size min(M,N))
+ * @return 0 if successfully computed
+ * -i then the i-th parameter had an illegal value
+ * i then the algorithm failed to converge and i elements did not converge to 0
+ * @note
+ * - # of computation: XXXXX
+ * - A is destroyed after called
+ * - Multi-threading: true
+ * - Temporary array is created inside the function
+ * - GPU acceleration: ture
+ *    - # of data transfer: min(M,N) integer array
+ */
+int sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv);
+
+/**
+ * @brief slove Lu...atode kaku
+ * @param A double precision symmetric Dense matrix (size M x M)
+ * @param B double precision vector (size M)
+                     On entry, the right hand side matrix B. On exit, the
+ solution matrix X.
+ * @param ipiv integer array (size min(M,N))
+ * @return 0 if successfully computed
+ * -i then the i-th parameter had an illegal value
+ * i then the algorithm failed to converge and i elements did not converge to 0
+ * @note
+ * - # of computation: XXXXX
+ * - A is destroyed after called
+ * - Multi-threading: true
+ * - Temporary array is created inside the function
+ * - GPU acceleration: ture
+ *    - # of data transfer: min(M,N) integer array
+ */
+int sytrs(const matrix::Dense<double> &A, vector<double> &B,
+          const std::vector<int> &ipiv);
+
 } // namespace lapack
 } // namespace internal
 } // namespace monolish
