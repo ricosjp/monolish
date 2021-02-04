@@ -19,6 +19,11 @@ int internal::lapack::sytrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
   int *ipivd = ipiv.data();
   const char U = 'U';
 
+  if(ipiv.size() != M){
+    logger.func_out();
+    std::runtime_error("lapack::getrf, ipiv size error");
+  }
+
   if (A.get_device_mem_stat()) {
 #if MONOLISH_USE_GPU
     cudaDeviceSynchronize();
@@ -26,7 +31,7 @@ int internal::lapack::sytrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     internal::check_CUDA(cusolverDnCreate(&h));
     int lwork = -1;
 
-#pragma omp target data use_device_ptr(Ad, ipivd)
+#pragma omp target data use_device_ptr(Ad)
     { internal::check_CUDA(cusolverDnSsytrf_bufferSize(h, M, Ad, M, &lwork)); }
 
 #pragma omp target enter data map(to : ipivd [0:M])
@@ -34,14 +39,20 @@ int internal::lapack::sytrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     work.send();
     float *workd = work.data();
 
-#pragma omp target data use_device_ptr(Ad, ipivd, workd)
+    std::vector<int> devinfo(1);
+    int *devinfod = devinfo.data();
+
+#pragma omp target enter data map(to : devinfod [0:1])
+#pragma omp target data use_device_ptr(Ad, ipivd, workd, devinfod)
     {
       internal::check_CUDA(cusolverDnSsytrf(h, CUBLAS_FILL_MODE_UPPER, M, Ad, M,
-                                            ipivd, workd, lwork, &info));
+                                            ipivd, workd, lwork, devinfod));
     }
 
-    // free
-#pragma omp target exit data map(from : workd [0:lwork])
+#pragma omp target exit data map(from : devinfod[0:1])
+#pragma omp target exit data map(from : ipivd [0:M])
+    cudaDeviceSynchronize();
+    info = devinfo[0];
     cusolverDnDestroy(h);
 
 #else
@@ -49,8 +60,8 @@ int internal::lapack::sytrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    std::vector<float> work(1);
-    int lwork = 1;
+    int lwork = M;
+    std::vector<float> work(M);
     ssytrf_(&U, &M, Ad, &M, ipivd, work.data(), &lwork, &info);
   }
 

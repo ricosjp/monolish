@@ -23,6 +23,11 @@ int internal::lapack::sytrs(const matrix::Dense<float> &A, vector<float> &B,
   const int *ipivd = ipiv.data();
   const char U = 'U';
 
+  if(ipiv.size() != M){
+    logger.func_out();
+    std::runtime_error("lapack::getrf, ipiv size error");
+  }
+
   if (A.get_device_mem_stat() == true && B.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cudaDeviceSynchronize();
@@ -42,15 +47,23 @@ int internal::lapack::sytrs(const matrix::Dense<float> &A, vector<float> &B,
     work.send();
     float *workd = work.data();
 
-#pragma omp target data use_device_ptr(Ad, ipivd, Bd, workd)
+    std::vector<int> devinfo(1);
+    int *devinfod = devinfo.data();
+
+#pragma omp target enter data map(to : devinfod [0:1])
+
+#pragma omp target data use_device_ptr(Ad, ipivd, Bd, workd, devinfod)
     {
       internal::check_CUDA(cusolverDnSsytrs(h, CUBLAS_FILL_MODE_UPPER, M, nrhs,
                                             Ad, N, ipivd, Bd, M, workd, lwork,
-                                            &info));
+                                            devinfod));
     }
 
     // free
+#pragma omp target exit data map(from : devinfod [0:1])
 #pragma omp target exit data map(release : ipivd [0:M], workd [0:lwork])
+    cudaDeviceSynchronize();
+    info = devinfo[0];
     cusolverDnDestroy(h);
 
 #else
