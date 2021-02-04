@@ -13,11 +13,17 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
+  if(ipiv.size() != std::min(A.get_row(), A.get_col())){
+    logger.func_out();
+    std::runtime_error("lapack::getrs, ipiv size error");
+  }
+
   int info = 0;
   const int M = (int)A.get_row();
   const int N = (int)A.get_col();
   float *Ad = A.val.data();
   int *ipivd = ipiv.data();
+  int ipivl = ipiv.size();
 
   if (A.get_device_mem_stat()) {
 #if MONOLISH_USE_GPU
@@ -31,7 +37,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
       internal::check_CUDA(cusolverDnSgetrf_bufferSize(h, M, N, Ad, M, &lwork));
     }
 
-#pragma omp target enter data map(to : ipivd [0:M])
+#pragma omp target enter data map(to : ipivd [0:ipivl])
     monolish::vector<float> work(lwork);
     work.send();
     float *workd = work.data();
@@ -43,7 +49,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     }
 
     // free
-#pragma omp target exit data map(from : workd [0:lwork])
+#pragma omp target exit data map(from : workd [0:lwork], ipivd[0:ipivl])
     cusolverDnDestroy(h);
 
 #else
