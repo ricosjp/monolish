@@ -5,7 +5,7 @@ namespace monolish {
 
 namespace {
 template <typename F1, typename F2, typename F3> 
-  double mmsub_core(const F1 &A, const F2 alpha, F3 &C) {
+  void mmsub_core(const F1 &A, const F2 alpha, F3 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

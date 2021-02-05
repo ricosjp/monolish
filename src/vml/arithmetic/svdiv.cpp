@@ -5,7 +5,7 @@ namespace monolish {
 
 namespace {
 template <typename F1, typename F2, typename F3> 
-  double svdiv_core(const F1 &a, const F2 alpha, F3 &y) {
+  void svdiv_core(const F1 &a, const F2 alpha, F3 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
