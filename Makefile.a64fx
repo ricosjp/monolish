@@ -70,6 +70,7 @@ vpath %.cpp ./src/utils/fill/
 vpath %.cpp ./src/utils/IO/
 vpath %.cpp ./src/utils/system/
 vpath %.cpp ./src/utils/transpose/
+vpath %.cpp ./src/utils/minus/
 
 vpath %.cpp ./src/vml/
 
