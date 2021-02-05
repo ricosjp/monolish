@@ -1,6 +1,6 @@
-#include "../../include/monolish_blas.hpp"
-#include "../../include/monolish_vml.hpp"
-#include "../internal/monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_vml.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -8,9 +8,9 @@ namespace monolish {
 // LinearOperator /////////////////////////
 ///////////////////////////////////////////
 
-void vml::add(const matrix::LinearOperator<double> &A,
-              const matrix::LinearOperator<double> &B,
-              matrix::LinearOperator<double> &C) {
+void vml::add(const matrix::LinearOperator<float> &A,
+              const matrix::LinearOperator<float> &B,
+              matrix::LinearOperator<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -22,8 +22,8 @@ void vml::add(const matrix::LinearOperator<double> &A,
   assert(A.get_rmatvec_init_flag() == B.get_rmatvec_init_flag());
 
   if (A.get_matvec_init_flag()) {
-    C.set_matvec([&](const vector<double> &VEC) {
-      vector<double> vec(A.get_row(), 0.0), vec_tmp(A.get_row(), 0.0);
+    C.set_matvec([&](const vector<float> &VEC) {
+      vector<float> vec(A.get_row(), 0.0), vec_tmp(A.get_row(), 0.0);
       if (A.get_device_mem_stat()) {
         util::send(vec, vec_tmp);
       }
@@ -38,8 +38,8 @@ void vml::add(const matrix::LinearOperator<double> &A,
   }
 
   if (A.get_rmatvec_init_flag()) {
-    C.set_rmatvec([&](const vector<double> &VEC) {
-      vector<double> vec(A.get_col(), 0.0), vec_tmp(A.get_col(), 0.0);
+    C.set_rmatvec([&](const vector<float> &VEC) {
+      vector<float> vec(A.get_col(), 0.0), vec_tmp(A.get_col(), 0.0);
       if (A.get_device_mem_stat()) {
         util::send(vec, vec_tmp);
       }
@@ -56,9 +56,9 @@ void vml::add(const matrix::LinearOperator<double> &A,
   logger.func_out();
 }
 
-void vml::sub(const matrix::LinearOperator<double> &A,
-              const matrix::LinearOperator<double> &B,
-              matrix::LinearOperator<double> &C) {
+void vml::sub(const matrix::LinearOperator<float> &A,
+              const matrix::LinearOperator<float> &B,
+              matrix::LinearOperator<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -67,8 +67,8 @@ void vml::sub(const matrix::LinearOperator<double> &A,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   if (A.get_matvec_init_flag()) {
-    C.set_matvec([&](const vector<double> &VEC) {
-      vector<double> vec(A.get_row(), 0.0), vec_tmp(A.get_row(), 0.0);
+    C.set_matvec([&](const vector<float> &VEC) {
+      vector<float> vec(A.get_row(), 0.0), vec_tmp(A.get_row(), 0.0);
       if (A.get_device_mem_stat()) {
         util::send(vec, vec_tmp);
       }
@@ -83,8 +83,8 @@ void vml::sub(const matrix::LinearOperator<double> &A,
   }
 
   if (A.get_rmatvec_init_flag()) {
-    C.set_rmatvec([&](const vector<double> &VEC) {
-      vector<double> vec(A.get_col(), 0.0), vec_tmp(A.get_col(), 0.0);
+    C.set_rmatvec([&](const vector<float> &VEC) {
+      vector<float> vec(A.get_col(), 0.0), vec_tmp(A.get_col(), 0.0);
       if (A.get_device_mem_stat()) {
         util::send(vec, vec_tmp);
       }
