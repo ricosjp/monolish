@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2, typename F3> 
-  void mmsub_core(const F1 &A, const F2 alpha, F3 &C) {
+template <typename F1, typename F2, typename F3>
+void mmsub_core(const F1 &A, const F2 alpha, F3 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -23,22 +23,26 @@ template <typename F1, typename F2, typename F3>
 
 namespace vml {
 // Dense //
-void sub(const matrix::Dense<double> &A, const double alpha, matrix::Dense<double> &C) { 
+void sub(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C) {
   mmsub_core(A, alpha, C);
 }
 
-void sub(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C) { 
+void sub(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C) {
   mmsub_core(A, alpha, C);
 }
 
 // CRS //
-void sub(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C) { 
+void sub(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C) {
   mmsub_core(A, alpha, C);
 }
 
-void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C) { 
+void sub(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C) {
   mmsub_core(A, alpha, C);
 }
-} // namespace blas
+} // namespace vml
 
 } // namespace monolish

@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2, typename F3> 
-  void mmdiv_core(const F1 &A, const F2 alpha, F3 &C) {
+template <typename F1, typename F2, typename F3>
+void mmdiv_core(const F1 &A, const F2 alpha, F3 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -23,22 +23,26 @@ template <typename F1, typename F2, typename F3>
 
 namespace vml {
 // Dense //
-void div(const matrix::Dense<double> &A, const double alpha, matrix::Dense<double> &C) { 
+void div(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C) {
   mmdiv_core(A, alpha, C);
 }
 
-void div(const matrix::Dense<float> &A, const float alpha, matrix::Dense<float> &C) { 
+void div(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C) {
   mmdiv_core(A, alpha, C);
 }
 
 // CRS //
-void div(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C) { 
+void div(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C) {
   mmdiv_core(A, alpha, C);
 }
 
-void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C) { 
+void div(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C) {
   mmdiv_core(A, alpha, C);
 }
-} // namespace blas
+} // namespace vml
 
 } // namespace monolish

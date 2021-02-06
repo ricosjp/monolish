@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2, typename F3> 
-  void vvadd_core(const F1 &a, const F2 &b, F3 &y) {
+template <typename F1, typename F2, typename F3>
+void vvadd_core(const F1 &a, const F2 &b, F3 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -22,14 +22,14 @@ template <typename F1, typename F2, typename F3>
 } // namespace
 
 namespace vml {
-void add(const vector<double> &a, const vector<double> &b, vector<double> &y) { 
+void add(const vector<double> &a, const vector<double> &b, vector<double> &y) {
   vvadd_core(a, b, y);
 }
 
-void add(const vector<float> &a, const vector<float> &b, vector<float> &y) { 
+void add(const vector<float> &a, const vector<float> &b, vector<float> &y) {
   vvadd_core(a, b, y);
 }
 
-} // namespace blas
+} // namespace vml
 
 } // namespace monolish
