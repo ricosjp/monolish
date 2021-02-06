@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2, typename F3> 
-  void mmmul_core(const F1 &A, const F2 &B, F3 &C) {
+template <typename F1, typename F2, typename F3>
+void mmmul_core(const F1 &A, const F2 &B, F3 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -24,22 +24,26 @@ template <typename F1, typename F2, typename F3>
 
 namespace vml {
 // Dense //
-void mul(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matrix::Dense<double> &C) { 
+void mul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+         matrix::Dense<double> &C) {
   mmmul_core(A, B, C);
 }
 
-void mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C) { 
+void mul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+         matrix::Dense<float> &C) {
   mmmul_core(A, B, C);
 }
 
 // CRS //
-void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C) { 
+void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
+         matrix::CRS<double> &C) {
   mmmul_core(A, B, C);
 }
 
-void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C) { 
+void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
+         matrix::CRS<float> &C) {
   mmmul_core(A, B, C);
 }
-} // namespace blas
+} // namespace vml
 
 } // namespace monolish

@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2, typename F3> 
-  void svsub_core(const F1 &a, const F2 alpha, F3 &y) {
+template <typename F1, typename F2, typename F3>
+void svsub_core(const F1 &a, const F2 alpha, F3 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -21,14 +21,14 @@ template <typename F1, typename F2, typename F3>
 } // namespace
 
 namespace vml {
-void sub(const vector<double> &a, const double alpha, vector<double> &y) { 
+void sub(const vector<double> &a, const double alpha, vector<double> &y) {
   svsub_core(a, alpha, y);
 }
 
-void sub(const vector<float> &a, const float alpha, vector<float> &y) { 
+void sub(const vector<float> &a, const float alpha, vector<float> &y) {
   svsub_core(a, alpha, y);
 }
 
-} // namespace blas
+} // namespace vml
 
 } // namespace monolish
