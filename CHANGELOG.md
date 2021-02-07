@@ -30,6 +30,7 @@ Unreleased
 - add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Changed
+- change VML math functions template https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/243
 - change VML arithmetic functions template https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/239
 - change matrix BLAS template (without subvec_op and matmul) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/238
 - change vector BLAS template https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/237
