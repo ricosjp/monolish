@@ -1,13 +1,13 @@
-#include "../../include/monolish_vml.hpp"
-#include "../internal/monolish_internal.hpp"
+#include "../../../include/monolish_vml.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
 //////////////////////////////////////////
 // power, sqrt
 //////////////////////////////////////////
-void vml::pow(const vector<float> &a, const vector<float> &b,
-              vector<float> &y) {
+void vml::pow(const vector<double> &a, const vector<double> &b,
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -21,7 +21,7 @@ void vml::pow(const vector<float> &a, const vector<float> &b,
   logger.func_out();
 }
 
-void vml::pow(const vector<float> &a, const float alpha, vector<float> &y) {
+void vml::pow(const vector<double> &a, const double alpha, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -34,7 +34,7 @@ void vml::pow(const vector<float> &a, const float alpha, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::sqrt(const vector<float> &a, vector<float> &y) {
+void vml::sqrt(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -47,23 +47,7 @@ void vml::sqrt(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-//////////////////////////////////////////
-// sin
-//////////////////////////////////////////
-void vml::sin(const vector<float> &a, vector<float> &y) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  // err
-  assert(util::is_same_size(a, y));
-  assert(util::is_same_device_mem_stat(a, y));
-
-  internal::vsin(y.size(), a.data(), y.data(), y.get_device_mem_stat());
-
-  logger.func_out();
-}
-
-void vml::sinh(const vector<float> &a, vector<float> &y) {
+void vml::sinh(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -76,7 +60,7 @@ void vml::sinh(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::asin(const vector<float> &a, vector<float> &y) {
+void vml::asin(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -89,7 +73,7 @@ void vml::asin(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::asinh(const vector<float> &a, vector<float> &y) {
+void vml::asinh(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -105,7 +89,7 @@ void vml::asinh(const vector<float> &a, vector<float> &y) {
 //////////////////////////////////////////
 // tan
 //////////////////////////////////////////
-void vml::tan(const vector<float> &a, vector<float> &y) {
+void vml::tan(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -118,7 +102,7 @@ void vml::tan(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::tanh(const vector<float> &a, vector<float> &y) {
+void vml::tanh(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -131,7 +115,7 @@ void vml::tanh(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::atan(const vector<float> &a, vector<float> &y) {
+void vml::atan(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -144,7 +128,7 @@ void vml::atan(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::atanh(const vector<float> &a, vector<float> &y) {
+void vml::atanh(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -161,7 +145,7 @@ void vml::atanh(const vector<float> &a, vector<float> &y) {
 // other
 //////////////////////////////////////////
 
-void vml::ceil(const vector<float> &a, vector<float> &y) {
+void vml::ceil(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -174,7 +158,7 @@ void vml::ceil(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::floor(const vector<float> &a, vector<float> &y) {
+void vml::floor(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -187,7 +171,7 @@ void vml::floor(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::sign(const vector<float> &a, vector<float> &y) {
+void vml::sign(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -200,7 +184,7 @@ void vml::sign(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::reciprocal(const vector<float> &a, vector<float> &y) {
+void vml::reciprocal(const vector<double> &a, vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -213,8 +197,8 @@ void vml::reciprocal(const vector<float> &a, vector<float> &y) {
   logger.func_out();
 }
 
-void vml::max(const vector<float> &a, const vector<float> &b,
-              vector<float> &y) {
+void vml::max(const vector<double> &a, const vector<double> &b,
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -228,18 +212,18 @@ void vml::max(const vector<float> &a, const vector<float> &b,
   logger.func_out();
 }
 
-float vml::max(const vector<float> &y) {
+double vml::max(const vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float max = internal::vmax(y.size(), y.data(), y.get_device_mem_stat());
+  double max = internal::vmax(y.size(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
   return max;
 }
 
-void vml::min(const vector<float> &a, const vector<float> &b,
-              vector<float> &y) {
+void vml::min(const vector<double> &a, const vector<double> &b,
+              vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -253,11 +237,11 @@ void vml::min(const vector<float> &a, const vector<float> &b,
   logger.func_out();
 }
 
-float vml::min(const vector<float> &y) {
+double vml::min(const vector<double> &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  float min = internal::vmin(y.size(), y.data(), y.get_device_mem_stat());
+  double min = internal::vmin(y.size(), y.data(), y.get_device_mem_stat());
 
   logger.func_out();
   return min;

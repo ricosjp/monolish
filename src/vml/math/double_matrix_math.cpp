@@ -1,5 +1,5 @@
-#include "../../include/monolish_vml.hpp"
-#include "../internal/monolish_internal.hpp"
+#include "../../../include/monolish_vml.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 
@@ -44,21 +44,6 @@ void vml::sqrt(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
 
   internal::vsqrt(A.get_nnz(), A.val.data(), C.val.data(),
                   A.get_device_mem_stat());
-
-  logger.func_out();
-}
-
-// sin
-void vml::sin(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  // err
-  assert(util::is_same_size(A, C));
-  assert(util::is_same_device_mem_stat(A, C));
-
-  internal::vsin(A.get_nnz(), A.val.data(), C.val.data(),
-                 A.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -321,22 +306,6 @@ void vml::sqrt(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
 
   internal::vsqrt(A.get_nnz(), A.val.data(), C.val.data(),
                   A.get_device_mem_stat());
-
-  logger.func_out();
-}
-
-// sin
-void vml::sin(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  // err
-  assert(util::is_same_size(A, C));
-  assert(util::is_same_structure(A, C));
-  assert(util::is_same_device_mem_stat(A, C));
-
-  internal::vsin(A.get_nnz(), A.val.data(), C.val.data(),
-                 A.get_device_mem_stat());
 
   logger.func_out();
 }
