@@ -47,7 +47,7 @@ namespace monolish {
       svpow_core(a, alpha, y);
     }
 
-    void pow(const vector<float> &a, const double alpha, vector<float> &y) {
+    void pow(const vector<float> &a, const float alpha, vector<float> &y) {
       svpow_core(a, alpha, y);
     }
   }
