@@ -1,13 +1,25 @@
-cat ./vtanh.hpp | sed -e 's/tanh/sqrt/g' > vsqrt.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/sin/g' > vsin.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/sinh/g' > vsinh.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/asin/g' > vasin.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/asinh/g' > vasinh.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/tan/g' > vtan.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/atan/g' > vatan.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/atanh/g' > vatanh.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/ceil/g' > vceil.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/floor/g' > vfloor.hpp
-cat ./vtanh.hpp | sed -e 's/tanh/sign/g' > vsign.hpp
+cat ./vsin.cpp | sed -e 's/sin/sqrt/g' > vsqrt.cpp
+cat ./vsin.cpp | sed -e 's/sin/sinh/g' > vsinh.cpp
+cat ./vsin.cpp | sed -e 's/sin/asin/g' > vasin.cpp
+cat ./vsin.cpp | sed -e 's/sin/asinh/g' > vasinh.cpp
+cat ./vsin.cpp | sed -e 's/sin/tan/g' > vtan.cpp
+cat ./vsin.cpp | sed -e 's/sin/tanh/g' > vtanh.cpp
+cat ./vsin.cpp | sed -e 's/sin/atan/g' > vatan.cpp
+cat ./vsin.cpp | sed -e 's/sin/asin/g' > vasin.cpp
+cat ./vsin.cpp | sed -e 's/sin/ceil/g' > vceil.cpp
+cat ./vsin.cpp | sed -e 's/sin/floor/g' > vfloor.cpp
+cat ./vsin.cpp | sed -e 's/sin/sign/g' > vsign.cpp
+cat ./vsin.cpp | sed -e 's/sin/reciprocal/g' > vreciprocal.cpp
 
-echo ""
+cat ./msin.cpp | sed -e 's/sin/sqrt/g' > msqrt.cpp
+cat ./msin.cpp | sed -e 's/sin/sinh/g' > msinh.cpp
+cat ./msin.cpp | sed -e 's/sin/asin/g' > masin.cpp
+cat ./msin.cpp | sed -e 's/sin/asinh/g' > masinh.cpp
+cat ./msin.cpp | sed -e 's/sin/tan/g' > mtan.cpp
+cat ./msin.cpp | sed -e 's/sin/tanh/g' > mtanh.cpp
+cat ./msin.cpp | sed -e 's/sin/atan/g' > matan.cpp
+cat ./msin.cpp | sed -e 's/sin/asin/g' > masin.cpp
+cat ./msin.cpp | sed -e 's/sin/ceil/g' > mceil.cpp
+cat ./msin.cpp | sed -e 's/sin/floor/g' > mfloor.cpp
+cat ./msin.cpp | sed -e 's/sin/sign/g' > msign.cpp
+cat ./msin.cpp | sed -e 's/sin/reciprocal/g' > mreciprocal.cpp
