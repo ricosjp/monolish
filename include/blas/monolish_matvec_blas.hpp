@@ -27,8 +27,7 @@ namespace blas {
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void matvec(const matrix::Dense<double> &A, const vector<double> &x, vector<double> &y);
 void matvec(const matrix::Dense<double> &A, const vector<double> &x, view1D<vector<double>,double> &y);
 void matvec(const matrix::Dense<double> &A, const view1D<vector<double>,double> &x, vector<double> &y);

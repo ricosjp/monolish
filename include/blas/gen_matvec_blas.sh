@@ -32,8 +32,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
