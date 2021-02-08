@@ -2,8 +2,6 @@ C=const
 
 echo " #pragma once
 #include \"../common/monolish_common.hpp\"
-#include <stdio.h>
-#include <vector>
 
 #if defined USE_MPI
 #include <mpi.h>
