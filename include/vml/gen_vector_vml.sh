@@ -63,7 +63,7 @@ echo "
   for prec in double float; do
     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
       for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-        echo "void ${func[$i]}(const $arg1 &a, const $prec &alpha, $arg3 &y);"
+        echo "void ${func[$i]}(const $arg1 &a, const $prec alpha, $arg2 &y);"
       done
     done
   done
@@ -115,7 +115,7 @@ echo "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      echo "void pow(const $arg1 &a, const $prec &alpha, $arg3 &y);"
+      echo "void pow(const $arg1 &a, const $prec alpha, $arg2 &y);"
     done
   done
 done
@@ -184,7 +184,7 @@ func=(max min)
 for i in ${!detail[@]}; do
 echo "
 /**
- * @brief Finds the ${detail[$i]} element in vector ($math_element(y[0:N]))
+ * @brief Finds the ${detail[$i]} element in vector (${funx[$i]}(y[0:N]))
  * @param y monolish vector (size N)
  * @return $math value
  * @note
@@ -194,7 +194,7 @@ echo "
 */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    echo "$prec ${func[$i]}($arg1 &y);"
+    echo "$prec ${func[$i]}(const $arg1 &y);"
   done
 done
 done

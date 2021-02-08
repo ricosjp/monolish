@@ -140,14 +140,14 @@ void div(const view1D<vector<float>,float> &a, const view1D<vector<float>,float>
 * - GPU acceleration: true
 *    - # of data transfer: 0
 */ 
-void add(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void add(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void add(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void add(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void add(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void add(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void add(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void add(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
+void add(const vector<double> &a, const double alpha, vector<double> &y);
+void add(const vector<double> &a, const double alpha, view1D<vector<double>,double> &y);
+void add(const view1D<vector<double>,double> &a, const double alpha, vector<double> &y);
+void add(const view1D<vector<double>,double> &a, const double alpha, view1D<vector<double>,double> &y);
+void add(const vector<float> &a, const float alpha, vector<float> &y);
+void add(const vector<float> &a, const float alpha, view1D<vector<float>,float> &y);
+void add(const view1D<vector<float>,float> &a, const float alpha, vector<float> &y);
+void add(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<float>,float> &y);
 
 /**
 * @brief element by element subtract of vector a and vector b.
@@ -160,14 +160,14 @@ void add(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector
 * - GPU acceleration: true
 *    - # of data transfer: 0
 */ 
-void sub(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void sub(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void sub(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void sub(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void sub(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void sub(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void sub(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void sub(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
+void sub(const vector<double> &a, const double alpha, vector<double> &y);
+void sub(const vector<double> &a, const double alpha, view1D<vector<double>,double> &y);
+void sub(const view1D<vector<double>,double> &a, const double alpha, vector<double> &y);
+void sub(const view1D<vector<double>,double> &a, const double alpha, view1D<vector<double>,double> &y);
+void sub(const vector<float> &a, const float alpha, vector<float> &y);
+void sub(const vector<float> &a, const float alpha, view1D<vector<float>,float> &y);
+void sub(const view1D<vector<float>,float> &a, const float alpha, vector<float> &y);
+void sub(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<float>,float> &y);
 
 /**
 * @brief element by element multiplication of vector a and vector b.
@@ -180,14 +180,14 @@ void sub(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector
 * - GPU acceleration: true
 *    - # of data transfer: 0
 */ 
-void mul(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void mul(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void mul(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void mul(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void mul(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void mul(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void mul(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void mul(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
+void mul(const vector<double> &a, const double alpha, vector<double> &y);
+void mul(const vector<double> &a, const double alpha, view1D<vector<double>,double> &y);
+void mul(const view1D<vector<double>,double> &a, const double alpha, vector<double> &y);
+void mul(const view1D<vector<double>,double> &a, const double alpha, view1D<vector<double>,double> &y);
+void mul(const vector<float> &a, const float alpha, vector<float> &y);
+void mul(const vector<float> &a, const float alpha, view1D<vector<float>,float> &y);
+void mul(const view1D<vector<float>,float> &a, const float alpha, vector<float> &y);
+void mul(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<float>,float> &y);
 
 /**
 * @brief element by element division of vector a and vector b.
@@ -200,14 +200,14 @@ void mul(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector
 * - GPU acceleration: true
 *    - # of data transfer: 0
 */ 
-void div(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void div(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void div(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void div(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void div(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void div(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void div(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void div(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
+void div(const vector<double> &a, const double alpha, vector<double> &y);
+void div(const vector<double> &a, const double alpha, view1D<vector<double>,double> &y);
+void div(const view1D<vector<double>,double> &a, const double alpha, vector<double> &y);
+void div(const view1D<vector<double>,double> &a, const double alpha, view1D<vector<double>,double> &y);
+void div(const vector<float> &a, const float alpha, vector<float> &y);
+void div(const vector<float> &a, const float alpha, view1D<vector<float>,float> &y);
+void div(const view1D<vector<float>,float> &a, const float alpha, vector<float> &y);
+void div(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<float>,float> &y);
 
 
 /**
@@ -252,14 +252,14 @@ void pow(const view1D<vector<float>,float> &a, const view1D<vector<float>,float>
 * - GPU acceleration: true
 *    - # of data transfer: 0
 */ 
-void pow(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void pow(const vector<double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void pow(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void pow(const view1D<vector<double>,double> &a, const double &alpha, view1D<vector<float>,float> &y);
-void pow(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void pow(const vector<float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void pow(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
-void pow(const view1D<vector<float>,float> &a, const float &alpha, view1D<vector<float>,float> &y);
+void pow(const vector<double> &a, const double alpha, vector<double> &y);
+void pow(const vector<double> &a, const double alpha, view1D<vector<double>,double> &y);
+void pow(const view1D<vector<double>,double> &a, const double alpha, vector<double> &y);
+void pow(const view1D<vector<double>,double> &a, const double alpha, view1D<vector<double>,double> &y);
+void pow(const vector<float> &a, const float alpha, vector<float> &y);
+void pow(const vector<float> &a, const float alpha, view1D<vector<float>,float> &y);
+void pow(const view1D<vector<float>,float> &a, const float alpha, vector<float> &y);
+void pow(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<float>,float> &y);
 
 
 /**
@@ -545,10 +545,10 @@ void min(const view1D<vector<float>,float> &a, const view1D<vector<float>,float>
  * - Multi-threading: true
  * - GPU acceleration: true
 */ 
-double max(vector<double> &y);
-double max(view1D<vector<double>,double> &y);
-float max(vector<float> &y);
-float max(view1D<vector<float>,float> &y);
+double max(const vector<double> &y);
+double max(const view1D<vector<double>,double> &y);
+float max(const vector<float> &y);
+float max(const view1D<vector<float>,float> &y);
 
 /**
  * @brief Finds the smallest element in vector ((y[0:N]))
@@ -559,10 +559,10 @@ float max(view1D<vector<float>,float> &y);
  * - Multi-threading: true
  * - GPU acceleration: true
 */ 
-double min(vector<double> &y);
-double min(view1D<vector<double>,double> &y);
-float min(vector<float> &y);
-float min(view1D<vector<float>,float> &y);
+double min(const vector<double> &y);
+double min(const view1D<vector<double>,double> &y);
+float min(const vector<float> &y);
+float min(const view1D<vector<float>,float> &y);
 
 
 /**
