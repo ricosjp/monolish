@@ -239,13 +239,13 @@ void dot(const view1D<vector<float>,float> &x, const view1D<vector<float>,float>
  *    - # of data transfer: 0
  */ 
 double dot(const vector<double> &x, const vector<double> &y);
-double dot(const vector<double> &x, const vector<double> &y);
+double dot(const vector<double> &x, const view1D<vector<double>,double> &y);
 double dot(const view1D<vector<double>,double> &x, const vector<double> &y);
-double dot(const view1D<vector<double>,double> &x, const vector<double> &y);
+double dot(const view1D<vector<double>,double> &x, const view1D<vector<double>,double> &y);
 float dot(const vector<float> &x, const vector<float> &y);
-float dot(const vector<float> &x, const vector<float> &y);
+float dot(const vector<float> &x, const view1D<vector<float>,float> &y);
 float dot(const view1D<vector<float>,float> &x, const vector<float> &y);
-float dot(const view1D<vector<float>,float> &x, const vector<float> &y);
+float dot(const view1D<vector<float>,float> &x, const view1D<vector<float>,float> &y);
 
 
 /**

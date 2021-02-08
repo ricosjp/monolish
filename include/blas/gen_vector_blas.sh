@@ -252,7 +252,7 @@ echo "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      echo "$prec dot($C $arg1 &x, $C vector<$prec> &y);"
+      echo "$prec dot($C $arg1 &x, $C $arg2 &y);"
     done
   done
 done
