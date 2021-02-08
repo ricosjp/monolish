@@ -12,8 +12,7 @@ echo " #pragma once
 namespace monolish {
 /**
  * @brief
- * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
- * Scalar
+ * Vector and Matrix element-wise math library
  */
 namespace vml {
 "
@@ -155,7 +154,7 @@ func=(max min)
 for i in ${!detail[@]}; do
 echo "
 /**
-* @brief Create a new vector with ${detail[$i]} elements of two matrices (y[0:N] = a(a[0:N], b[0:N]))
+* @brief Create a new vector with ${detail[$i]} elements of two matrices (y[0:N] = ${func[$i]}(a[0:N], b[0:N]))
 * @param a monolish vector (size N)
 * @param b monolish vector (size N)
 * @param y monolish vector (size N)
@@ -184,14 +183,14 @@ func=(max min)
 for i in ${!detail[@]}; do
 echo "
 /**
- * @brief Finds the ${detail[$i]} element in vector (${funx[$i]}(y[0:N]))
+ * @brief Finds the ${detail[$i]} element in vector (${func[$i]}(y[0:N]))
  * @param y monolish vector (size N)
- * @return $math value
+ * @return ${detail[$i]} value
  * @note
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
-*/ "
+*/"
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "$prec ${func[$i]}(const $arg1 &y);"
