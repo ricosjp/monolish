@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../common/monolish_common.hpp"
 #include <stdio.h>
@@ -99,4 +98,3 @@ void rmatvec(const matrix::LinearOperator<float> &A, const view1D<vector<float>,
 
 } // namespace blas
 } // namespace monolish
-

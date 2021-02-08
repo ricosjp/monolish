@@ -1,7 +1,6 @@
 C=const
 
-echo "
-#pragma once
+echo "#pragma once
 #include \"../common/monolish_common.hpp\"
 #include <stdio.h>
 #include <vector>
@@ -383,5 +382,4 @@ done
 
 echo "
 } // namespace blas
-} // namespace monolish
-"
+} // namespace monolish"

@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../common/monolish_common.hpp"
 #include <stdio.h>
@@ -351,4 +350,3 @@ void xpay(const float alpha, const view1D<vector<float>,float> &x, view1D<vector
 
 } // namespace blas
 } // namespace monolish
-

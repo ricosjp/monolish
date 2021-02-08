@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../common/monolish_common.hpp"
 #include <stdio.h>
@@ -222,4 +221,3 @@ void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B, matrix::
 
 } // namespace blas
 } // namespace monolish
-
