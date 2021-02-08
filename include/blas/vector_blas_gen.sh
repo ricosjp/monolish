@@ -18,6 +18,54 @@ namespace monolish {
  */
 namespace blas {
 "
+## vecadd
+echo "
+/**
+ * @brief element by element addition of vector a and vector b.
+ * @param a monolish vector (size N)
+ * @param b monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+"
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+echo "void vecadd(const $arg1 &a, const $arg2 &b, $arg3 &y);"
+      done
+    done
+  done
+done
+
+## vecsub
+echo "
+/**
+ * @brief element by element subtract of vector a and vector b.
+ * @param a monolish vector (size N)
+ * @param b monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+"
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+echo "void vecsub(const $arg1 &a, const $arg2 &b, $arg3 &y);"
+      done
+    done
+  done
+done
+
 
 ## copy
 echo "
