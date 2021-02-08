@@ -74,9 +74,9 @@ void vecsub(const view1D<vector<float>,float> &a, const view1D<vector<float>,flo
 void vecsub(const view1D<vector<float>,float> &a, const view1D<vector<float>,float> &b, view1D<vector<float>,float> &y);
 
 /**
- * @brief double precision vector\<float\> copy (y=a)
- * @param a double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
+ * @brief vector\<float\> copy (y=a)
+ * @param a monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -94,8 +94,8 @@ void copy(const view1D<vector<float>,float> &x, view1D<vector<float>,float> &y);
 
 
 /**
- * @brief double precision vector\<float\> asum (absolute sum)
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief vector\<float\> asum (absolute sum)
+ * @param x monolish vector\<float\> (size N)
  * @return The result of the asum
  * @note
  * - # of computation: N
@@ -110,8 +110,8 @@ void asum(const view1D<vector<float>,float> &x, float &ans);
 
 
 /**
- * @brief double precision vector\<float\> asum (absolute sum)
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief vector\<float\> asum (absolute sum)
+ * @param x monolish vector\<float\> (size N)
  * @param ans The result of the asum
  * @note
  * - # of computation: N
@@ -125,8 +125,8 @@ float asum(const vector<float> &x);
 float asum(const view1D<vector<float>,float> &x);
 
 /**
- * @brief double precision vector\<float\> sum
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief vector\<float\> sum
+ * @param x monolish vector\<float\> (size N)
  * @return The result of the sum
  * @note
  * - # of computation: N
@@ -141,8 +141,8 @@ void sum(const view1D<vector<float>,float> &x, float &ans);
 
 
 /**
- * @brief double precision vector\<float\> sum
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief vector\<float\> sum
+ * @param x monolish vector\<float\> (size N)
  * @param ans The result of the sum
  * @note
  * - # of computation: N
@@ -157,10 +157,10 @@ float sum(const view1D<vector<float>,float> &x);
 
 
 /**
- * @brief double precision axpy: y = ax + y
- * @param alpha double precision scalar value
- * @param x double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
+ * @brief axpy: y = ax + y
+ * @param alpha scalar value
+ * @param x monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -178,11 +178,11 @@ void axpy(const float alpha, const view1D<vector<float>,float> &x, view1D<vector
 
 
 /**
- * @brief double precision axpyz: z = ax + y
- * @param alpha double precision scalar value
- * @param x double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
- * @param z double precision monolish vector\<float\> (size N)
+ * @brief axpyz: z = ax + y
+ * @param alpha scalar value
+ * @param x monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
+ * @param z monolish vector\<float\> (size N)
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -208,9 +208,9 @@ void axpyz(const float alpha, const view1D<vector<float>,float> &x, const view1D
 
 
 /**
- * @brief double precision inner product (dot)
- * @param x double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
+ * @brief inner product (dot)
+ * @param x monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
  * @return The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
@@ -229,9 +229,9 @@ void dot(const view1D<vector<float>,float> &x, const view1D<vector<float>,float>
 
 
 /**
- * @brief double precision inner product (dot)
- * @param x double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
+ * @brief inner product (dot)
+ * @param x monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
  * @param ans The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
@@ -250,8 +250,8 @@ float dot(const view1D<vector<float>,float> &x, const vector<float> &y);
 
 
 /**
- * @brief double precision nrm1: sum(abs(x[0:N]))
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief nrm1: sum(abs(x[0:N]))
+ * @param x monolish vector\<float\> (size N)
  * @return The result of the nrm1
  * @note
  * - # of computation: N
@@ -266,8 +266,8 @@ void nrm1(const view1D<vector<float>,float> &x, float &ans);
 
 
 /**
- * @brief double precision nrm1: sum(abs(x[0:N]))
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief nrm1: sum(abs(x[0:N]))
+ * @param x monolish vector\<float\> (size N)
  * @param ans The result of the nrm1
  * @note
  * - # of computation: N
@@ -282,8 +282,8 @@ float nrm1(const view1D<vector<float>,float> &x);
 
 
 /**
- * @brief double precision nrm2: ||x||_2
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief nrm2: ||x||_2
+ * @param x monolish vector\<float\> (size N)
  * @return The result of the nrm2
  * @note
  * - # of computation: 2N
@@ -298,8 +298,8 @@ void nrm2(const view1D<vector<float>,float> &x, float &ans);
 
 
 /**
- * @brief double precision nrm2: ||x||_2
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief nrm2: ||x||_2
+ * @param x monolish vector\<float\> (size N)
  * @param ans The result of the nrm2
  * @note
  * - # of computation: 2N
@@ -314,9 +314,9 @@ float nrm2(const view1D<vector<float>,float> &x);
 
 
 /**
- * @brief double precision scal: x = alpha * x
- * @param alpha double precision scalar value
- * @param x double precision monolish vector\<float\> (size N)
+ * @brief scal: x = alpha * x
+ * @param alpha scalar value
+ * @param x monolish vector\<float\> (size N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -330,10 +330,10 @@ void scal(const float alpha, view1D<vector<float>,float> &x);
 
 
 /**
- * @brief double precision xpay: y = x + ay
- * @param alpha double precision scalar value
- * @param x double precision monolish vector\<float\> (size N)
- * @param y double precision monolish vector\<float\> (size N)
+ * @brief xpay: y = x + ay
+ * @param alpha scalar value
+ * @param x monolish vector\<float\> (size N)
+ * @param y monolish vector\<float\> (size N)
  * @note
  * - # of computation: 2N
  * - Multi-threading: true

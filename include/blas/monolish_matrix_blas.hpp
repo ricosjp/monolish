@@ -18,9 +18,9 @@ namespace blas {
 
 
 /**
-* @brief double precision Dense matrix copy (C=A)
-* @param A double precision monolish Dense matrix (size M x N)
-* @param C double precision monolish Dense matrix (size M x N)
+* @brief Dense matrix copy (C=A)
+* @param A monolish Dense matrix (size M x N)
+* @param C monolish Dense matrix (size M x N)
 * @note
 * - # of computation: M x N
 * - Multi-threading: true
@@ -32,9 +32,9 @@ void copy(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 
 
 /**
-* @brief double precision LinearOperator copy (C=A)
-* @param A double precision monolish LinearOperator (size M x N)
-* @param C double precision monolish LinearOperator (size M x N)
+* @brief LinearOperator copy (C=A)
+* @param A monolish LinearOperator (size M x N)
+* @param C monolish LinearOperator (size M x N)
 * @note
 * - # of computation: M x N
 * - Multi-threading: true
@@ -46,9 +46,9 @@ void copy(const matrix::LinearOperator<float> &A, matrix::LinearOperator<float> 
 
 
 /**
-* @brief double precision CRS matrix copy (y=a)
-* @param A double precision monolish CRS matrix (size M x N)
-* @param C double precision monolish CRS matrix (size M x N)
+* @brief CRS matrix copy (y=a)
+* @param A monolish CRS matrix (size M x N)
+* @param C monolish CRS matrix (size M x N)
 * @note
 * - # of computation: M x N
 * - Multi-threading: true
@@ -62,9 +62,9 @@ void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 
 
 /**
-* @brief double precision Densematrix scal: A = alpha * A
-* @param alpha double precision scalar value
-* @param A double precision Dense matrix (size M x N)
+* @brief Densematrix scal: A = alpha * A
+* @param alpha scalar value
+* @param A Dense matrix (size M x N)
 * @note
 * - # of computation: MN
 * - Multi-threading: true
@@ -76,9 +76,9 @@ void mscal(const float alpha, matrix::Dense<float> &A);
 
 
 /**
-* @brief double precision CRS matrix scal: A = alpha * A
-* @param alpha double precision scalar value
-* @param A double precision CRS matrix (size M x N)
+* @brief CRS matrix scal: A = alpha * A
+* @param alpha scalar value
+* @param A CRS matrix (size M x N)
 * @note
 * - # of computation: MN
 * - Multi-threading: true
@@ -90,10 +90,10 @@ void mscal(const float alpha, matrix::CRS<float> &A);
 
 
 /**
-* @brief double precision Dense matrix addition: C = A + B
-* @param A double precision Dense matrix (size M x N)
-* @param B double precision Dense matrix (size M x N)
-* @param C double precision Dense matrix (size M x N)
+* @brief Dense matrix addition: C = A + B
+* @param A Dense matrix (size M x N)
+* @param B Dense matrix (size M x N)
+* @param C Dense matrix (size M x N)
 * @note
 * - # of computation: MN
 * - Multi-threading: true
@@ -104,10 +104,10 @@ void matadd(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matr
 void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
 
 /**
-* @brief double precision LinearOperator addition: C = A + B
-* @param A double precision LinearOperator (size M x N)
-* @param B double precision LinearOperator (size M x N)
-* @param C double precision LinearOperator (size M x N)
+* @brief LinearOperator addition: C = A + B
+* @param A LinearOperator (size M x N)
+* @param B LinearOperator (size M x N)
+* @param C LinearOperator (size M x N)
 * @note
 * - # of computation: 2 functions
 * - Multi-threading: false
@@ -117,11 +117,11 @@ void matadd(const matrix::LinearOperator<double> &A, const matrix::LinearOperato
 void matadd(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
 
 /**
-* @brief double precision CRS matrix addition: C = A + B (A and B must be
+* @brief CRS matrix addition: C = A + B (A and B must be
 * same non-zero structure)
-* @param A double precision CRS matrix (size M x N)
-* @param B double precision CRS matrix (size M x N)
-* @param C double precision CRS matrix (size M x N)
+* @param A CRS matrix (size M x N)
+* @param B CRS matrix (size M x N)
+* @param C CRS matrix (size M x N)
 * @note
 * - # of computation: nnz
 * - Multi-threading: true
@@ -135,10 +135,10 @@ void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CR
 
 
 /**
-* @brief double precision Dense matrix subtract: C = A - B
-* @param A double precision Dense matrix (size M x N)
-* @param B double precision Dense matrix (size M x N)
-* @param C double precision Dense matrix (size M x N)
+* @brief Dense matrix subtract: C = A - B
+* @param A Dense matrix (size M x N)
+* @param B Dense matrix (size M x N)
+* @param C Dense matrix (size M x N)
 * @note
 * - # of computation: MN
 * - Multi-threading: true
@@ -149,10 +149,10 @@ void matsub(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matr
 void matsub(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
 
 /**
-* @brief double precision LinearOperator subtract: C = A - B
-* @param A double precision LinearOperator (size M x N)
-* @param B double precision LinearOperator (size M x N)
-* @param C double precision LinearOperator (size M x N)
+* @brief LinearOperator subtract: C = A - B
+* @param A LinearOperator (size M x N)
+* @param B LinearOperator (size M x N)
+* @param C LinearOperator (size M x N)
 * @note
 * - # of computation: 2 functions
 * - Multi-threading: false
@@ -162,11 +162,11 @@ void matsub(const matrix::LinearOperator<double> &A, const matrix::LinearOperato
 void matsub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
 
 /**
-* @brief double precision CRS matrix subtract: C = A - B (A and B must be
+* @brief CRS matrix subtract: C = A - B (A and B must be
 * same non-zero structure)
-* @param A double precision CRS matrix (size M x N)
-* @param B double precision CRS matrix (size M x N)
-* @param C double precision CRS matrix (size M x N)
+* @param A CRS matrix (size M x N)
+* @param B CRS matrix (size M x N)
+* @param C CRS matrix (size M x N)
 * @note
 * - # of computation: nnz
 * - Multi-threading: true
@@ -180,10 +180,10 @@ void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CR
 
 
 /**
-* @brief double precision Dense matrix multiplication: C = AB
-* @param A double precision Dense matrix (size M x K)
-* @param B double precision Dense matrix (size K x N)
-* @param C double precision Dense matrix (size M x N)
+* @brief Dense matrix multiplication: C = AB
+* @param A Dense matrix (size M x K)
+* @param B Dense matrix (size K x N)
+* @param C Dense matrix (size M x N)
 * @note
 * - # of computation: 2MNK
 * - Multi-threading: true
@@ -194,10 +194,10 @@ void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B, matr
 void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix::Dense<float> &C);
 
 /**
-* @brief double precision LinearOperator multiplication: C = AB
-* @param A double precision LinearOperator (size M x K)
-* @param B double precision LinearOperator (size K x N)
-* @param C double precision LinearOperator (size M x N)
+* @brief LinearOperator multiplication: C = AB
+* @param A LinearOperator (size M x K)
+* @param B LinearOperator (size K x N)
+* @param C LinearOperator (size M x N)
 * @note
 * - # of computation: 2 functions
 * - Multi-threading: false
@@ -207,10 +207,10 @@ void matmul(const matrix::LinearOperator<double> &A, const matrix::LinearOperato
 void matmul(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
 
 /**
-* @brief double precision CRS and Dense matrix multiplication: C = AB
-* @param A double precision CRS matrix (size M x K)
-* @param B double precision Dense matrix (size K x N)
-* @param C double precision Dense matrix (size M x N)
+* @brief CRS and Dense matrix multiplication: C = AB
+* @param A CRS matrix (size M x K)
+* @param B Dense matrix (size K x N)
+* @param C Dense matrix (size M x N)
 * @note
 * - # of computation: 2*N*nnz
 * - Multi-threading: true
