@@ -1,7 +1,5 @@
 #pragma once
 #include "common/monolish_common.hpp"
-#include <stdio.h>
-#include <vector>
 
 #if defined USE_MPI
 #include <mpi.h>
@@ -176,64 +174,6 @@ void matsub(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
 void matsub(const matrix::LinearOperator<double> &A,
             const matrix::LinearOperator<double> &B,
             matrix::LinearOperator<double> &C);
-
-///////////////
-
-/**
- * @brief double precision Dense matrix and vector multiplication: y = Ax
- * @param A double precision Dense matrix (size M x N)
- * @param x double precision monolish vector (size M)
- * @param y double precision monolish vector (size M)
- * @note
- * - # of computation: MN
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void matvec(const matrix::Dense<double> &A, const vector<double> &x,
-            vector<double> &y);
-
-/**
- * @brief double precision sparse matrix (CRS) and vector multiplication: y = Ax
- * @param A double precision CRS matrix (size M x N)
- * @param x double precision monolish vector (size M)
- * @param y double precision monolish vector (size M)
- * @note
- * - # of computation: 2nnz
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            vector<double> &y);
-
-/**
- * @brief double precision matrix (LinearOperator) and vector multiplication: y
- * = Ax
- * @param A double precision LinearOperator (size M x N)
- * @param x double precision monolish vector (size N)
- * @param y double precision monolish vector (size M)
- * @note
- * - # of computation: depends on matvec function
- * - Multi-threading: depends on matvec function
- * - GPU acceleration: depends on matvec function
- */
-void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            vector<double> &y);
-
-/**
- * @brief double precision (Hermitian) transposed matrix (LinearOperator) and
- * vector multiplication: y = A^T x
- * @param A double precision LinearOperator (size M x N)
- * @param x double precision monolish vector (size M)
- * @param y double precision monolish vector (size N)
- * @note
- * - # of computation: depends on matvec function
- * - Multi-threading: depends on matvec function
- * - GPU acceleration: depends on matvec function
- */
-void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-             vector<double> &y);
 
 ///////////////
 

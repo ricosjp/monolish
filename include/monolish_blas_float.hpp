@@ -1,7 +1,5 @@
 #pragma once
 #include "common/monolish_common.hpp"
-#include <stdio.h>
-#include <vector>
 
 #if defined USE_MPI
 #include <mpi.h>
@@ -176,64 +174,6 @@ void matsub(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 void matsub(const matrix::LinearOperator<float> &A,
             const matrix::LinearOperator<float> &B,
             matrix::LinearOperator<float> &C);
-
-///////////////
-
-/**
- * @brief single precision Dense matrix and vector multiplication: y = Ax
- * @param A single precision Dense matrix (size M x N)
- * @param x single precision monolish vector (size M)
- * @param y single precision monolish vector (size M)
- * @note
- * - # of computation: MN
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void matvec(const matrix::Dense<float> &A, const vector<float> &x,
-            vector<float> &y);
-
-/**
- * @brief single precision sparse matrix (CRS) and vector multiplication: y = Ax
- * @param A single precision CRS matrix (size M x N)
- * @param x single precision monolish vector (size M)
- * @param y single precision monolish vector (size M)
- * @note
- * - # of computation: 2nnz
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            vector<float> &y);
-
-/**
- * @brief single precision matrix (LinearOperator) and vector multiplication: y
- * = Ax
- * @param A single precision LinearOperator (size M x N)
- * @param x single precision monolish vector (size N)
- * @param y single precision monolish vector (size M)
- * @note
- * - # of computation: depends on matvec function
- * - Multi-threading: depends on matvec function
- * - GPU acceleration: depends on matvec function
- */
-void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            vector<float> &y);
-
-/**
- * @brief single precision (Hermitian) transposed matrix (LinearOperator) and
- * vector multiplication: y = A^T x
- * @param A single precision LinearOperator (size M x N)
- * @param x single precision monolish vector (size M)
- * @param y single precision monolish vector (size N)
- * @note
- * - # of computation: depends on matvec function
- * - Multi-threading: depends on matvec function
- * - GPU acceleration: depends on matvec function
- */
-void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-             vector<float> &y);
 
 ///////////////
 
