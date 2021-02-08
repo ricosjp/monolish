@@ -27,7 +27,7 @@ echo "
  * @param B monolish Dense Matrix (size M x N)
  * @param C monolish Dense Matrix (size M x N)
  * @note
-* - # of computation: M*N
+ * - # of computation: M*N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -52,7 +52,7 @@ echo "
  * @param alpha scalar value
  * @param C monolish Dense Matrix (size M x N)
  * @note
-* - # of computation: M*N
+ * - # of computation: M*N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -73,7 +73,7 @@ echo "
  * @param B monolish Dense Matrix (size M x N)
  * @param C monolish Dense Matrix (size M x N)
  * @note
-* - # of computation: M*N
+ * - # of computation: M*N
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -88,7 +88,7 @@ echo "
  * @param alpha scalar value
  * @param C monolish Dense Matrix (size M x N)
  * @note
-* - # of computation: M*N
+ * - # of computation: M*N
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -103,13 +103,13 @@ math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign)
 for math in ${math[@]}; do
 echo "
 /**
-* @brief $math to Dense matrix elements (C[0:nnz] = $math(A[0:nnz]))
-* @param A monolish Dense matrix (size M x N)
-* @param C monolish Dense matrix (size M x N)
-* @note
-* - # of computation: M*N
-* - Multi-threading: true
-* - GPU acceleration: true
+ * @brief $math to Dense matrix elements (C[0:nnz] = $math(A[0:nnz]))
+ * @param A monolish Dense matrix (size M x N)
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
 */ "
 for prec in double float; do
   echo "void $math(const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
@@ -125,15 +125,15 @@ func=(max min)
 for i in ${!detail[@]}; do
 echo "
 /**
-* @brief Create a new Dense matrix with ${detail[$i]} elements of two matrices (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
-* @param A monolish Dense matrix (size M x N)
-* @param B monolish Dense matrix (size M x N)
-* @param C monolish Dense matrix (size M x N)
-* @note
-* - # of computation: M*N
-* - Multi-threading: true
-* - GPU acceleration: true
-*    - # of data transfer: 0
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of two matrices (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
+ * @param A monolish Dense matrix (size M x N)
+ * @param B monolish Dense matrix (size M x N)
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
 */ "
 for prec in double float; do
   echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
@@ -167,10 +167,10 @@ echo ""
 ## reciprocal
 echo "
 /**
-* @brief reciprocal to Dense matrix elements (C[0:nnz] = 1 / A[0:nnz])
-* @param A monolish Dense matrix (size M x N)
-* @param C monolish Dense matrix (size M x N)
-* @note
+ * @brief reciprocal to Dense matrix elements (C[0:nnz] = 1 / A[0:nnz])
+ * @param A monolish Dense matrix (size M x N)
+ * @param C monolish Dense matrix (size M x N)
+ * @note
  * - # of computation: M*N
  * - Multi-threading: true
  * - GPU acceleration: true
