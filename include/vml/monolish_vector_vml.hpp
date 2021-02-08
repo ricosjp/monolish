@@ -10,8 +10,7 @@
 namespace monolish {
 /**
  * @brief
- * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
- * Scalar
+ * Vector and Matrix element-wise math library
  */
 namespace vml {
 
@@ -480,7 +479,7 @@ void sign(const view1D<vector<float>,float> &a, view1D<vector<float>,float> &y);
 
 
 /**
-* @brief Create a new vector with greatest elements of two matrices (y[0:N] = a(a[0:N], b[0:N]))
+* @brief Create a new vector with greatest elements of two matrices (y[0:N] = max(a[0:N], b[0:N]))
 * @param a monolish vector (size N)
 * @param b monolish vector (size N)
 * @param y monolish vector (size N)
@@ -508,7 +507,7 @@ void max(const view1D<vector<float>,float> &a, const view1D<vector<float>,float>
 void max(const view1D<vector<float>,float> &a, const view1D<vector<float>,float> &b, view1D<vector<float>,float> &y);
 
 /**
-* @brief Create a new vector with smallest elements of two matrices (y[0:N] = a(a[0:N], b[0:N]))
+* @brief Create a new vector with smallest elements of two matrices (y[0:N] = min(a[0:N], b[0:N]))
 * @param a monolish vector (size N)
 * @param b monolish vector (size N)
 * @param y monolish vector (size N)
@@ -537,28 +536,28 @@ void min(const view1D<vector<float>,float> &a, const view1D<vector<float>,float>
 
 
 /**
- * @brief Finds the greatest element in vector ((y[0:N]))
+ * @brief Finds the greatest element in vector (max(y[0:N]))
  * @param y monolish vector (size N)
- * @return sign value
+ * @return greatest value
  * @note
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
-*/ 
+*/
 double max(const vector<double> &y);
 double max(const view1D<vector<double>,double> &y);
 float max(const vector<float> &y);
 float max(const view1D<vector<float>,float> &y);
 
 /**
- * @brief Finds the smallest element in vector ((y[0:N]))
+ * @brief Finds the smallest element in vector (min(y[0:N]))
  * @param y monolish vector (size N)
- * @return sign value
+ * @return smallest value
  * @note
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: true
-*/ 
+*/
 double min(const vector<double> &y);
 double min(const view1D<vector<double>,double> &y);
 float min(const vector<float> &y);
