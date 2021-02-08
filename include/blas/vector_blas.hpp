@@ -27,8 +27,7 @@ namespace blas {
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void vecadd(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void vecadd(const vector<double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
 void vecadd(const vector<double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
@@ -56,8 +55,7 @@ void vecadd(const view1D<vector<float>,float> &a, const view1D<vector<float>,flo
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void vecsub(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void vecsub(const vector<double> &a, const vector<double> &b, view1D<vector<double>,double> &y);
 void vecsub(const vector<double> &a, const view1D<vector<double>,double> &b, vector<double> &y);
@@ -84,8 +82,7 @@ void vecsub(const view1D<vector<float>,float> &a, const view1D<vector<float>,flo
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void copy(const vector<double> &x, vector<double> &y);
 void copy(const vector<double> &x, view1D<vector<double>,double> &y);
 void copy(const view1D<vector<double>,double> &x, vector<double> &y);
@@ -105,8 +102,7 @@ void copy(const view1D<vector<float>,float> &x, view1D<vector<float>,float> &y);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void asum(const vector<double> &x, double &ans);
 void asum(const view1D<vector<double>,double> &x, double &ans);
 void asum(const vector<float> &x, float &ans);
@@ -122,8 +118,7 @@ void asum(const view1D<vector<float>,float> &x, float &ans);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 double asum(const vector<double> &x);
 double asum(const view1D<vector<double>,double> &x);
 float asum(const vector<float> &x);
@@ -138,8 +133,7 @@ float asum(const view1D<vector<float>,float> &x);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void sum(const vector<double> &x, double &ans);
 void sum(const view1D<vector<double>,double> &x, double &ans);
 void sum(const vector<float> &x, float &ans);
@@ -155,8 +149,7 @@ void sum(const view1D<vector<float>,float> &x, float &ans);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 double sum(const vector<double> &x);
 double sum(const view1D<vector<double>,double> &x);
 float sum(const vector<float> &x);
@@ -173,8 +166,7 @@ float sum(const view1D<vector<float>,float> &x);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void axpy(const double alpha, const vector<double> &x, vector<double> &y);
 void axpy(const double alpha, const vector<double> &x, view1D<vector<double>,double> &y);
 void axpy(const double alpha, const view1D<vector<double>,double> &x, vector<double> &y);
@@ -196,8 +188,7 @@ void axpy(const float alpha, const view1D<vector<float>,float> &x, view1D<vector
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void axpyz(const double alpha, const vector<double> &x, const vector<double> &y, vector<double> &z);
 void axpyz(const double alpha, const vector<double> &x, const vector<double> &y, view1D<vector<double>,double> &z);
 void axpyz(const double alpha, const vector<double> &x, const view1D<vector<double>,double> &y, vector<double> &z);
@@ -226,8 +217,7 @@ void axpyz(const float alpha, const view1D<vector<float>,float> &x, const view1D
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void dot(const vector<double> &x, const vector<double> &y, double &ans);
 void dot(const vector<double> &x, const view1D<vector<double>,double> &y, double &ans);
 void dot(const view1D<vector<double>,double> &x, const vector<double> &y, double &ans);
@@ -248,8 +238,7 @@ void dot(const view1D<vector<float>,float> &x, const view1D<vector<float>,float>
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 double dot(const vector<double> &x, const vector<double> &y);
 double dot(const vector<double> &x, const vector<double> &y);
 double dot(const view1D<vector<double>,double> &x, const vector<double> &y);
@@ -269,8 +258,7 @@ float dot(const view1D<vector<float>,float> &x, const vector<float> &y);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void nrm1(const vector<double> &x, double &ans);
 void nrm1(const view1D<vector<double>,double> &x, double &ans);
 void nrm1(const vector<float> &x, float &ans);
@@ -286,8 +274,7 @@ void nrm1(const view1D<vector<float>,float> &x, float &ans);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 double nrm1(const vector<double> &x);
 double nrm1(const view1D<vector<double>,double> &x);
 float nrm1(const vector<float> &x);
@@ -303,8 +290,7 @@ float nrm1(const view1D<vector<float>,float> &x);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void nrm2(const vector<double> &x, double &ans);
 void nrm2(const view1D<vector<double>,double> &x, double &ans);
 void nrm2(const vector<float> &x, float &ans);
@@ -320,8 +306,7 @@ void nrm2(const view1D<vector<float>,float> &x, float &ans);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 double nrm2(const vector<double> &x);
 double nrm2(const view1D<vector<double>,double> &x);
 float nrm2(const vector<float> &x);
@@ -337,8 +322,7 @@ float nrm2(const view1D<vector<float>,float> &x);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void scal(const double alpha, vector<double> &x);
 void scal(const double alpha, view1D<vector<double>,double> &x);
 void scal(const float alpha, vector<float> &x);
@@ -355,8 +339,7 @@ void scal(const float alpha, view1D<vector<float>,float> &x);
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-
+ */ 
 void xpay(const double alpha, const vector<double> &x, vector<double> &y);
 void xpay(const double alpha, const vector<double> &x, view1D<vector<double>,double> &y);
 void xpay(const double alpha, const view1D<vector<double>,double> &x, vector<double> &y);

@@ -30,8 +30,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -54,8 +53,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -78,8 +76,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -101,8 +98,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "void asum($C $arg1 &x, $prec &ans);"
@@ -122,8 +118,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "$prec asum($C $arg1 &x);"
@@ -141,8 +136,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "void sum($C $arg1 &x, $prec &ans);"
@@ -162,8 +156,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "$prec sum($C $arg1 &x);"
@@ -184,8 +177,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -209,8 +201,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -235,8 +226,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -259,8 +249,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
@@ -282,8 +271,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "void nrm1($C $arg1 &x, $prec &ans);"
@@ -303,8 +291,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "$prec nrm1($C $arg1 &x);"
@@ -324,8 +311,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "void nrm2($C $arg1 &x, $prec &ans);"
@@ -345,8 +331,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     echo "$prec nrm2($C $arg1 &x);"
@@ -366,8 +351,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
       echo "void scal(const $prec alpha, $arg1 &x);"
@@ -388,8 +372,7 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-"
+ */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
