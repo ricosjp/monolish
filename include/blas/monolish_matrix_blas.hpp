@@ -113,8 +113,8 @@ void matadd(const matrix::Dense<float> &A, const matrix::Dense<float> &B, matrix
 * - Multi-threading: false
 * - GPU acceleration: false
 */ 
-void matadd(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<> &C);
-void matadd(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<> &C);
+void matadd(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<double> &C);
+void matadd(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
 
 /**
 * @brief double precision CRS matrix addition: C = A + B (A and B must be

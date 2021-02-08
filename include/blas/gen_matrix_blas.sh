@@ -145,7 +145,7 @@ echo "
 * - GPU acceleration: false
 */ "
 for prec in double float; do
-  echo "void matadd(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<> &C);"
+  echo "void matadd(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<$prec> &C);"
 done
 
 #matadd CRS
