@@ -213,8 +213,7 @@ bool is_same_structure(const T &A, const T &B, const types &... args) {
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T, typename U>
-bool is_same_size(const T &x, const U &y) {
+template <typename T, typename U> bool is_same_size(const T &x, const U &y) {
   return x.size() == y.size();
 }
 
@@ -275,10 +274,8 @@ bool is_same_size(const matrix::LinearOperator<T> &A,
  * @brief compare matrix size
  **/
 template <typename T, typename U, typename... types>
-bool is_same_size(const T &arg1, const U &arg2,
-                             const types &... args) {
-  return is_same_size(arg1, arg2) &&
-         is_same_size(arg1, args...);
+bool is_same_size(const T &arg1, const U &arg2, const types &... args) {
+  return is_same_size(arg1, arg2) && is_same_size(arg1, args...);
 }
 
 /**
