@@ -1,4 +1,4 @@
- #pragma once
+#pragma once
 #include "../common/monolish_common.hpp"
 
 #if defined USE_MPI
@@ -12,7 +12,6 @@ namespace monolish {
  */
 namespace vml {
 
-
 /**
  * @brief element by element addition LinearOperator matrix A and
  * LinearOperator matrix B.
@@ -23,9 +22,13 @@ namespace vml {
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void add(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<double> &C);
-void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
+ */
+void add(const matrix::LinearOperator<double> &A,
+         const matrix::LinearOperator<double> &B,
+         matrix::LinearOperator<double> &C);
+void add(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
+         matrix::LinearOperator<float> &C);
 
 /**
  * @brief element by element subtract LinearOperator matrix A and
@@ -37,10 +40,13 @@ void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void sub(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<double> &C);
-void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
-
+ */
+void sub(const matrix::LinearOperator<double> &A,
+         const matrix::LinearOperator<double> &B,
+         matrix::LinearOperator<double> &C);
+void sub(const matrix::LinearOperator<float> &A,
+         const matrix::LinearOperator<float> &B,
+         matrix::LinearOperator<float> &C);
 
 /**
  * @brief element by element addition LinearOperator matrix A and
@@ -52,9 +58,11 @@ void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void add(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
-void add(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+ */
+void add(const matrix::LinearOperator<double> &A, const double &alpha,
+         matrix::LinearOperator<double> &C);
+void add(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
 
 /**
  * @brief element by element subtract LinearOperator matrix A and
@@ -66,9 +74,11 @@ void add(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void sub(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
-void sub(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+ */
+void sub(const matrix::LinearOperator<double> &A, const double &alpha,
+         matrix::LinearOperator<double> &C);
+void sub(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
 
 /**
  * @brief element by element multiplication LinearOperator matrix A and
@@ -80,9 +90,11 @@ void sub(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void mul(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
-void mul(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+ */
+void mul(const matrix::LinearOperator<double> &A, const double &alpha,
+         matrix::LinearOperator<double> &C);
+void mul(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
 
 /**
  * @brief element by element division LinearOperator matrix A and
@@ -94,9 +106,11 @@ void mul(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
  * - # of computation: 2 functions
  * - Multi-threading: false
  * - GPU acceleration: false
-*/ 
-void div(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
-void div(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+ */
+void div(const matrix::LinearOperator<double> &A, const double &alpha,
+         matrix::LinearOperator<double> &C);
+void div(const matrix::LinearOperator<float> &A, const float &alpha,
+         matrix::LinearOperator<float> &C);
 
-} // namespace blas
-} // namespace monolish 
+} // namespace vml
+} // namespace monolish
