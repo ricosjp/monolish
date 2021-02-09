@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.11.1 - 2021/02/09
+-----------
 ### Added
 - add 1Dview hpp (cpp is not impl. only declareration) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/244
 - add Dense LU/Cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/240
