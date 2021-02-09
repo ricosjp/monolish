@@ -71,11 +71,37 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 } // namespace
 
 namespace blas {
-void xpay(const double alpha, const vector<double> &x, vector<double> &y) {
+
+void xpay(const double alpha, const vector<double> &x,
+          vector<double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const vector<double> &x,
+          view1D<vector<double>, double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const view1D<vector<double>, double> &x,
+          vector<double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const view1D<vector<double>, double> &x,
+          view1D<vector<double>, double> &y) {
   Dxpay_core(alpha, x, y);
 }
 
 void xpay(const float alpha, const vector<float> &x, vector<float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const vector<float> &x,
+          view1D<vector<float>, float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const view1D<vector<float>, float> &x,
+          vector<float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const view1D<vector<float>, float> &x,
+          view1D<vector<float>, float> &y) {
   Sxpay_core(alpha, x, y);
 }
 

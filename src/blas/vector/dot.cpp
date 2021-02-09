@@ -70,17 +70,62 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
 
 namespace blas {
 
-double dot(const vector<double> &x, const vector<double> &y) {
+double dot(const vector<double> &x, const vector<double> &y){
   return Ddot_core(x, y);
 }
+double dot(const vector<double> &x, const view1D<vector<double>, double> &y){
+  return Ddot_core(x, y);
+}
+double dot(const view1D<vector<double>, double> &x, const vector<double> &y){
+  return Ddot_core(x, y);
+}
+double dot(const view1D<vector<double>, double> &x,
+           const view1D<vector<double>, double> &y){
+  return Ddot_core(x, y);
+}
+float dot(const vector<float> &x, const vector<float> &y){
+  return Sdot_core(x, y);
+}
+float dot(const vector<float> &x, const view1D<vector<float>, float> &y){
+  return Sdot_core(x, y);
+}
+float dot(const view1D<vector<float>, float> &x, const vector<float> &y){
+  return Sdot_core(x, y);
+}
+float dot(const view1D<vector<float>, float> &x,
+           const view1D<vector<float>, float> &y){
+  return Sdot_core(x, y);
+}
+
+
 void dot(const vector<double> &x, const vector<double> &y, double &ans) {
   ans = dot(x, y);
 }
-
-float dot(const vector<float> &x, const vector<float> &y) {
-  return Sdot_core(x, y);
+void dot(const vector<double> &x, const view1D<vector<double>, double> &y,
+         double &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<double>, double> &x, const vector<double> &y,
+         double &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<double>, double> &x,
+         const view1D<vector<double>, double> &y, double &ans) {
+  ans = dot(x, y);
 }
 void dot(const vector<float> &x, const vector<float> &y, float &ans) {
+  ans = dot(x, y);
+}
+void dot(const vector<float> &x, const view1D<vector<float>, float> &y,
+         float &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<float>, float> &x, const vector<float> &y,
+         float &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<float>, float> &x,
+         const view1D<vector<float>, float> &y, float &ans) {
   ans = dot(x, y);
 }
 

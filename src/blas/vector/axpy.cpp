@@ -67,14 +67,39 @@ void Saxpy_core(const F1 alpha, const F2 &x, F3 &y) {
 } // namespace
 
 namespace blas {
-void axpy(const double alpha, const vector<double> &x, vector<double> &y) {
+
+void axpy(const double alpha, const vector<double> &x,
+          vector<double> &y) {
+  Daxpy_core(alpha, x, y);
+}
+void axpy(const double alpha, const vector<double> &x,
+          view1D<vector<double>, double> &y) {
+  Daxpy_core(alpha, x, y);
+}
+void axpy(const double alpha, const view1D<vector<double>, double> &x,
+          vector<double> &y) {
+  Daxpy_core(alpha, x, y);
+}
+void axpy(const double alpha, const view1D<vector<double>, double> &x,
+          view1D<vector<double>, double> &y) {
   Daxpy_core(alpha, x, y);
 }
 
 void axpy(const float alpha, const vector<float> &x, vector<float> &y) {
   Saxpy_core(alpha, x, y);
 }
+void axpy(const float alpha, const vector<float> &x,
+          view1D<vector<float>, float> &y) {
+  Saxpy_core(alpha, x, y);
+}
+void axpy(const float alpha, const view1D<vector<float>, float> &x,
+          vector<float> &y) {
+  Saxpy_core(alpha, x, y);
+}
+void axpy(const float alpha, const view1D<vector<float>, float> &x,
+          view1D<vector<float>, float> &y) {
+  Saxpy_core(alpha, x, y);
+}
 
 } // namespace blas
-
 } // namespace monolish

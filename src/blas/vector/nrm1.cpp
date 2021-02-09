@@ -65,11 +65,16 @@ template <typename F1> float Snrm1_core(const F1 &x) {
 } // namespace
 
 namespace blas {
-double nrm1(const vector<double> &x) { return Dnrm1_core(x); }
-void nrm1(const vector<double> &x, double &ans) { ans = nrm1(x); }
 
+double nrm1(const vector<double> &x) { return Dnrm1_core(x); }
+double nrm1(const view1D<vector<double>, double> &x) { return Dnrm1_core(x); }
 float nrm1(const vector<float> &x) { return Snrm1_core(x); }
+float nrm1(const view1D<vector<float>, float> &x) { return Snrm1_core(x); }
+
+void nrm1(const vector<double> &x, double &ans) { ans = nrm1(x); }
+void nrm1(const view1D<vector<double>, double> &x, double &ans){ ans = nrm1(x); }
 void nrm1(const vector<float> &x, float &ans) { ans = nrm1(x); }
+void nrm1(const view1D<vector<float>, float> &x, float &ans){ ans = nrm1(x); }
 
 } // namespace blas
 
