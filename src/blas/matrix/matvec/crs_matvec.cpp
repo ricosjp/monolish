@@ -5,8 +5,8 @@ namespace monolish {
 
 namespace {
 // double ///////////////////
-template <typename VEC>
-void Dmatvec_core(const matrix::CRS<double> &A, const VEC &x, VEC &y) {
+template <typename VEC1, typename VEC2>
+void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -75,8 +75,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC &x, VEC &y) {
 }
 
 // float ///////////////////
-template <typename VEC>
-void Smatvec_core(const matrix::CRS<float> &A, const VEC &x, VEC &y) {
+template <typename VEC1, typename VEC2>
+void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

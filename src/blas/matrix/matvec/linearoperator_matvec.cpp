@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename T, typename VEC>
-void matvec_core(const matrix::LinearOperator<T> &A, const VEC &x, VEC &y) {
+template <typename T, typename VEC1, typename VEC2>
+void matvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -20,8 +20,8 @@ void matvec_core(const matrix::LinearOperator<T> &A, const VEC &x, VEC &y) {
   logger.func_out();
 }
 
-template <typename T, typename VEC>
-void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC &x, VEC &y) {
+template <typename T, typename VEC1, typename VEC2>
+void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -43,35 +43,8 @@ void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
             vector<double> &y) {
   matvec_core(A, x, y);
 }
-void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y) {
-  matvec_core(A, x, y);
-}
-void matvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y) {
-  matvec_core(A, x, y);
-}
-void matvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y) {
-  matvec_core(A, x, y);
-}
-
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
              vector<double> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-             view1D<vector<double>, double> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<double> &A,
-             const view1D<vector<double>, double> &x, vector<double> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<double> &A,
-             const view1D<vector<double>, double> &x,
-             view1D<vector<double>, double> &y) {
   rmatvec_core(A, x, y);
 }
 
@@ -79,35 +52,8 @@ void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
             vector<float> &y) {
   matvec_core(A, x, y);
 }
-void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y) {
-  matvec_core(A, x, y);
-}
-void matvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x, vector<float> &y) {
-  matvec_core(A, x, y);
-}
-void matvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y) {
-  matvec_core(A, x, y);
-}
-
 void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
              vector<float> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-             view1D<vector<float>, float> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<float> &A,
-             const view1D<vector<float>, float> &x, vector<float> &y) {
-  rmatvec_core(A, x, y);
-}
-void rmatvec(const matrix::LinearOperator<float> &A,
-             const view1D<vector<float>, float> &x,
-             view1D<vector<float>, float> &y) {
   rmatvec_core(A, x, y);
 }
 
