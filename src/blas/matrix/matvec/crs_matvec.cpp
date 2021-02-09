@@ -146,8 +146,22 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC &x, VEC &y) {
 } // namespace
 
 namespace blas {
+
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             vector<double> &y) {
+  Dmatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<double> &A, const vector<double> &x,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x, vector<double> &y) {
+  Dmatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<vector<double>, double> &y) {
   Dmatvec_core(A, x, y);
 }
 
@@ -155,6 +169,19 @@ void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             vector<float> &y) {
   Smatvec_core(A, x, y);
 }
-} // namespace blas
+void matvec(const matrix::CRS<float> &A, const vector<float> &x,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x, vector<float> &y) {
+  Smatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(A, x, y);
+}
 
+} // namespace blas
 } // namespace monolish

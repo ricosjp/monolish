@@ -38,22 +38,79 @@ void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC &x, VEC &y) {
 } // namespace
 
 namespace blas {
+
 void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
             vector<double> &y) {
   matvec_core(A, x, y);
 }
+void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
+            view1D<vector<double>, double> &y) {
+  matvec_core(A, x, y);
+}
+void matvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x, vector<double> &y) {
+  matvec_core(A, x, y);
+}
+void matvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<vector<double>, double> &y) {
+  matvec_core(A, x, y);
+}
+
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-             vector<double> &y) {
+            vector<double> &y) {
   rmatvec_core(A, x, y);
 }
+void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
+            view1D<vector<double>, double> &y) {
+  rmatvec_core(A, x, y);
+}
+void rmatvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x, vector<double> &y) {
+  rmatvec_core(A, x, y);
+}
+void rmatvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<vector<double>, double> &y) {
+  rmatvec_core(A, x, y);
+}
+
+
 void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
             vector<float> &y) {
   matvec_core(A, x, y);
 }
+void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
+            view1D<vector<float>, float> &y) {
+  matvec_core(A, x, y);
+}
+void matvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x, vector<float> &y) {
+  matvec_core(A, x, y);
+}
+void matvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x,
+            view1D<vector<float>, float> &y) {
+  matvec_core(A, x, y);
+}
+
 void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-             vector<float> &y) {
+            vector<float> &y) {
   rmatvec_core(A, x, y);
 }
-} // namespace blas
+void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
+            view1D<vector<float>, float> &y) {
+  rmatvec_core(A, x, y);
+}
+void rmatvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x, vector<float> &y) {
+  rmatvec_core(A, x, y);
+}
+void rmatvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x,
+            view1D<vector<float>, float> &y) {
+  rmatvec_core(A, x, y);
+}
 
+} // namespace blas
 } // namespace monolish
