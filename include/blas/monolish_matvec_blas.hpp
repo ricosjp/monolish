@@ -15,6 +15,7 @@ namespace monolish {
  */
 namespace blas {
 
+
 /**
  * @brief Dense matrix and vector multiplication: y = Ax
  * @param A Dense matrix (size M x N)
@@ -25,25 +26,16 @@ namespace blas {
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-void matvec(const matrix::Dense<double> &A, const vector<double> &x,
-            vector<double> &y);
-void matvec(const matrix::Dense<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::Dense<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y);
-void matvec(const matrix::Dense<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::Dense<float> &A, const vector<float> &x,
-            vector<float> &y);
-void matvec(const matrix::Dense<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y);
-void matvec(const matrix::Dense<float> &A,
-            const view1D<vector<float>, float> &x, vector<float> &y);
-void matvec(const matrix::Dense<float> &A,
-            const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y);
+ */ 
+void matvec(const matrix::Dense<double> &A, const vector<double> &x, vector<double> &y);
+void matvec(const matrix::Dense<double> &A, const vector<double> &x, view1D<vector<double>,double> &y);
+void matvec(const matrix::Dense<double> &A, const view1D<vector<double>,double> &x, vector<double> &y);
+void matvec(const matrix::Dense<double> &A, const view1D<vector<double>,double> &x, view1D<vector<double>,double> &y);
+void matvec(const matrix::Dense<float> &A, const vector<float> &x, vector<float> &y);
+void matvec(const matrix::Dense<float> &A, const vector<float> &x, view1D<vector<float>,float> &y);
+void matvec(const matrix::Dense<float> &A, const view1D<vector<float>,float> &x, vector<float> &y);
+void matvec(const matrix::Dense<float> &A, const view1D<vector<float>,float> &x, view1D<vector<float>,float> &y);
+
 
 /**
  * @brief sparse matrix (CRS) and vector multiplication: y = Ax
@@ -55,24 +47,16 @@ void matvec(const matrix::Dense<float> &A,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
- */
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            vector<double> &y);
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y);
-void matvec(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            vector<float> &y);
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y);
-void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
-            vector<float> &y);
-void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y);
+ */ 
+void matvec(const matrix::CRS<double> &A, const vector<double> &x, vector<double> &y);
+void matvec(const matrix::CRS<double> &A, const vector<double> &x, view1D<vector<double>,double> &y);
+void matvec(const matrix::CRS<double> &A, const view1D<vector<double>,double> &x, vector<double> &y);
+void matvec(const matrix::CRS<double> &A, const view1D<vector<double>,double> &x, view1D<vector<double>,double> &y);
+void matvec(const matrix::CRS<float> &A, const vector<float> &x, vector<float> &y);
+void matvec(const matrix::CRS<float> &A, const vector<float> &x, view1D<vector<float>,float> &y);
+void matvec(const matrix::CRS<float> &A, const view1D<vector<float>,float> &x, vector<float> &y);
+void matvec(const matrix::CRS<float> &A, const view1D<vector<float>,float> &x, view1D<vector<float>,float> &y);
+
 
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax
@@ -83,25 +67,9 @@ void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
  * - # of computation: depends on matvec function
  * - Multi-threading: depends on matvec function
  * - GPU acceleration: depends on matvec function
- */
-void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            vector<double> &y);
-void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y);
-void matvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y);
-void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            vector<float> &y);
-void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y);
-void matvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x, vector<float> &y);
-void matvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y);
+ */ 
+void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x, vector<double> &y);
+void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x, vector<float> &y);
 
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax
@@ -112,25 +80,9 @@ void matvec(const matrix::LinearOperator<float> &A,
  * - # of computation: depends on matvec function
  * - Multi-threading: depends on matvec function
  * - GPU acceleration: depends on matvec function
- */
-void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-             vector<double> &y);
-void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-             view1D<vector<double>, double> &y);
-void rmatvec(const matrix::LinearOperator<double> &A,
-             const view1D<vector<double>, double> &x, vector<double> &y);
-void rmatvec(const matrix::LinearOperator<double> &A,
-             const view1D<vector<double>, double> &x,
-             view1D<vector<double>, double> &y);
-void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-             vector<float> &y);
-void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-             view1D<vector<float>, float> &y);
-void rmatvec(const matrix::LinearOperator<float> &A,
-             const view1D<vector<float>, float> &x, vector<float> &y);
-void rmatvec(const matrix::LinearOperator<float> &A,
-             const view1D<vector<float>, float> &x,
-             view1D<vector<float>, float> &y);
+ */ 
+void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x, vector<double> &y);
+void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x, vector<float> &y);
 
 } // namespace blas
 } // namespace monolish
