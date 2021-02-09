@@ -171,7 +171,7 @@ echo "
  * A, B, and C must be same non-zero structure
 */ "
 for prec in double float; do
-    echo "$prec ${func[$i]}(matrix::CRS<$prec> &C);"
+    echo "$prec ${func[$i]}(const matrix::CRS<$prec> &C);"
 done
 done
 
