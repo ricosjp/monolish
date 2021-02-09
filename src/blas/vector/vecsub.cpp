@@ -57,9 +57,7 @@ void vecsub(const view1D<vector<double>, double> &a,
   vecsub_core(a, b, y);
 }
 
-
-void vecsub(const vector<float> &a, const vector<float> &b,
-            vector<float> &y) {
+void vecsub(const vector<float> &a, const vector<float> &b, vector<float> &y) {
   vecsub_core(a, b, y);
 }
 void vecsub(const vector<float> &a, const vector<float> &b,

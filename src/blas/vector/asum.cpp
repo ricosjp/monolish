@@ -63,7 +63,9 @@ namespace blas {
 double asum(const vector<double> &x) { return Dasum_core(x); }
 double asum(const view1D<vector<double>, double> &x) { return Dasum_core(x); }
 void asum(const vector<double> &x, double &ans) { ans = asum(x); }
-void asum(const view1D<vector<double>, double> &x, double &ans) { ans = asum(x); }
+void asum(const view1D<vector<double>, double> &x, double &ans) {
+  ans = asum(x);
+}
 
 float asum(const vector<float> &x) { return Sasum_core(x); }
 float asum(const view1D<vector<float>, float> &x) { return Sasum_core(x); }

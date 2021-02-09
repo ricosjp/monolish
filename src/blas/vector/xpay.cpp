@@ -72,8 +72,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 
 namespace blas {
 
-void xpay(const double alpha, const vector<double> &x,
-          vector<double> &y) {
+void xpay(const double alpha, const vector<double> &x, vector<double> &y) {
   Dxpay_core(alpha, x, y);
 }
 void xpay(const double alpha, const vector<double> &x,

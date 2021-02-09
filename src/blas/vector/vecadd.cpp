@@ -57,9 +57,7 @@ void vecadd(const view1D<vector<double>, double> &a,
   vecadd_core(a, b, y);
 }
 
-
-void vecadd(const vector<float> &a, const vector<float> &b,
-            vector<float> &y) {
+void vecadd(const vector<float> &a, const vector<float> &b, vector<float> &y) {
   vecadd_core(a, b, y);
 }
 void vecadd(const vector<float> &a, const vector<float> &b,

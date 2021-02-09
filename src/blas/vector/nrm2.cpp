@@ -65,9 +65,11 @@ float nrm2(const vector<float> &x) { return Snrm2_core(x); }
 float nrm2(const view1D<vector<float>, float> &x) { return Snrm2_core(x); }
 
 void nrm2(const vector<double> &x, double &ans) { ans = nrm2(x); }
-void nrm2(const view1D<vector<double>, double> &x, double &ans){ ans = nrm2(x); }
+void nrm2(const view1D<vector<double>, double> &x, double &ans) {
+  ans = nrm2(x);
+}
 void nrm2(const vector<float> &x, float &ans) { ans = nrm2(x); }
-void nrm2(const view1D<vector<float>, float> &x, float &ans){ ans = nrm2(x); }
+void nrm2(const view1D<vector<float>, float> &x, float &ans) { ans = nrm2(x); }
 
 } // namespace blas
 

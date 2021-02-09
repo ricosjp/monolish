@@ -21,32 +21,28 @@ template <typename F1, typename F2> void copy_core(const F1 &x, F2 &y) {
 
 namespace blas {
 
-void copy(const vector<double> &x, vector<double> &y) {
-  copy_core(x, y); 
-}
+void copy(const vector<double> &x, vector<double> &y) { copy_core(x, y); }
 void copy(const vector<double> &x, view1D<vector<double>, double> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 void copy(const view1D<vector<double>, double> &x, vector<double> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 void copy(const view1D<vector<double>, double> &x,
           view1D<vector<double>, double> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 
-void copy(const vector<float> &x, vector<float> &y) {
-  copy_core(x, y); 
-}
+void copy(const vector<float> &x, vector<float> &y) { copy_core(x, y); }
 void copy(const vector<float> &x, view1D<vector<float>, float> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 void copy(const view1D<vector<float>, float> &x, vector<float> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 void copy(const view1D<vector<float>, float> &x,
           view1D<vector<float>, float> &y) {
-  copy_core(x, y); 
+  copy_core(x, y);
 }
 
 } // namespace blas

@@ -108,7 +108,6 @@ void axpyz(const double alpha, const view1D<vector<double>, double> &x,
   Daxpyz_core(alpha, x, y, z);
 }
 
-
 void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
            vector<float> &z) {
   Saxpyz_core(alpha, x, y, z);
