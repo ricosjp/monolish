@@ -22,6 +22,8 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
   const size_t n = A.get_col();
   const double alpha = 1.0;
   const double beta = 0.0;
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
@@ -31,15 +33,15 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
     {
       // cublas is col major
       internal::check_CUDA(cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n,
-                                       xd, 1, &beta, yd, 1));
+                                       xd+xoffset, 1, &beta, yd+yoffset, 1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd, 1, beta,
-                yd, 1);
+    cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd+xoffset, 1, beta,
+                yd+yoffset, 1);
   }
 
   logger.func_out();
@@ -63,6 +65,8 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
   const size_t m = A.get_col();
   const float alpha = 1.0;
   const float beta = 0.0;
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
@@ -72,15 +76,15 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
     {
       // cublas is col major
       internal::check_CUDA(cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m,
-                                       xd, 1, &beta, yd, 1));
+                                       xd+xoffset, 1, &beta, yd+yoffset, 1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd, 1, beta,
-                yd, 1);
+    cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd+xoffset, 1, beta,
+                yd+yoffset, 1);
   }
 
   logger.func_out();
