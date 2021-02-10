@@ -114,23 +114,23 @@ void matvec(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: depends on matvec function
  */
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            vector<double> &y);
+             vector<double> &y);
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y);
+             view1D<vector<double>, double> &y);
 void rmatvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y);
+             const view1D<vector<double>, double> &x, vector<double> &y);
 void rmatvec(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y);
+             const view1D<vector<double>, double> &x,
+             view1D<vector<double>, double> &y);
 void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            vector<float> &y);
+             vector<float> &y);
 void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y);
+             view1D<vector<float>, float> &y);
 void rmatvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x, vector<float> &y);
+             const view1D<vector<float>, float> &x, vector<float> &y);
 void rmatvec(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y);
+             const view1D<vector<float>, float> &x,
+             view1D<vector<float>, float> &y);
 
 } // namespace blas
 } // namespace monolish
