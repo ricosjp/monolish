@@ -31,9 +31,9 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
 echo "void vecadd(const $arg1 &a, const $arg2 &b, $arg3 &y);"
       done
     done
@@ -54,9 +54,9 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
 echo "void vecsub(const $arg1 &a, const $arg2 &b, $arg3 &y);"
       done
     done
@@ -77,8 +77,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void copy($C $arg1 &x, $arg2 &y);"
     done
   done
@@ -99,7 +99,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "void asum($C $arg1 &x, $prec &ans);"
   done
 done
@@ -119,7 +119,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "$prec asum($C $arg1 &x);"
   done
 done
@@ -137,7 +137,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "void sum($C $arg1 &x, $prec &ans);"
   done
 done
@@ -157,7 +157,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "$prec sum($C $arg1 &x);"
   done
 done
@@ -178,8 +178,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void axpy(const $prec alpha, const $arg1 &x, $arg2 &y);"
     done
   done
@@ -202,9 +202,9 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
         echo "void axpyz(const $prec alpha, const $arg1 &x, const $arg2 &y, $arg3 &z);"
       done
     done
@@ -227,8 +227,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void dot($C $arg1 &x, $C $arg2 &y, $prec &ans);"
     done
   done
@@ -250,8 +250,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "$prec dot($C $arg1 &x, $C $arg2 &y);"
     done
   done
@@ -272,7 +272,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "void nrm1($C $arg1 &x, $prec &ans);"
   done
 done
@@ -292,7 +292,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "$prec nrm1($C $arg1 &x);"
   done
 done
@@ -312,7 +312,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "void nrm2($C $arg1 &x, $prec &ans);"
   done
 done
@@ -332,7 +332,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     echo "$prec nrm2($C $arg1 &x);"
   done
 done
@@ -352,7 +352,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void scal(const $prec alpha, $arg1 &x);"
   done
 done
@@ -373,8 +373,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void xpay(const $prec alpha, const $arg1 &x, $arg2 &y);"
     done
   done

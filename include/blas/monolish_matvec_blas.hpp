@@ -30,20 +30,46 @@ void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             vector<double> &y);
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             view1D<vector<double>, double> &y);
+void matvec(const matrix::Dense<double> &A, const vector<double> &x,
+            view1D<matrix::Dense<double>, double> &y);
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y);
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y);
+void matvec(const matrix::Dense<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<matrix::Dense<double>, double> &y);
+void matvec(const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, vector<double> &y);
+void matvec(const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x,
+            view1D<vector<double>, double> &y);
+void matvec(const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x,
+            view1D<matrix::Dense<double>, double> &y);
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             vector<float> &y);
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             view1D<vector<float>, float> &y);
+void matvec(const matrix::Dense<float> &A, const vector<float> &x,
+            view1D<matrix::Dense<float>, float> &y);
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x, vector<float> &y);
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y);
+void matvec(const matrix::Dense<float> &A,
+            const view1D<vector<float>, float> &x,
+            view1D<matrix::Dense<float>, float> &y);
+void matvec(const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec(const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x,
+            view1D<vector<float>, float> &y);
+void matvec(const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x,
+            view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief sparse matrix (CRS) and vector multiplication: y = Ax
@@ -60,19 +86,44 @@ void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             vector<double> &y);
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             view1D<vector<double>, double> &y);
+void matvec(const matrix::CRS<double> &A, const vector<double> &x,
+            view1D<matrix::Dense<double>, double> &y);
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y);
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y);
+void matvec(const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<matrix::Dense<double>, double> &y);
+void matvec(const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, vector<double> &y);
+void matvec(const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x,
+            view1D<vector<double>, double> &y);
+void matvec(const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x,
+            view1D<matrix::Dense<double>, double> &y);
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             vector<float> &y);
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             view1D<vector<float>, float> &y);
+void matvec(const matrix::CRS<float> &A, const vector<float> &x,
+            view1D<matrix::Dense<float>, float> &y);
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             vector<float> &y);
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y);
+void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
+            view1D<matrix::Dense<float>, float> &y);
+void matvec(const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec(const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x,
+            view1D<vector<float>, float> &y);
+void matvec(const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x,
+            view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax

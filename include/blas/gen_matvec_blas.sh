@@ -33,8 +33,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void matvec(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
@@ -56,8 +56,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
