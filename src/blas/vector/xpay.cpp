@@ -91,6 +91,10 @@ void xpay(const double alpha, const view1D<vector<double>, double> &x,
           view1D<vector<double>, double> &y) {
   Dxpay_core(alpha, x, y);
 }
+void xpay(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+          view1D<matrix::Dense<double>, double> &y) {
+  Dxpay_core(alpha, x, y);
+}
 
 void xpay(const float alpha, const vector<float> &x, vector<float> &y) {
   Sxpay_core(alpha, x, y);
@@ -105,6 +109,10 @@ void xpay(const float alpha, const view1D<vector<float>, float> &x,
 }
 void xpay(const float alpha, const view1D<vector<float>, float> &x,
           view1D<vector<float>, float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+          view1D<matrix::Dense<float>, float> &y) {
   Sxpay_core(alpha, x, y);
 }
 

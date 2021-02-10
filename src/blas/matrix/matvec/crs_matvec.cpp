@@ -168,6 +168,11 @@ void matvec(const matrix::CRS<double> &A,
             view1D<vector<double>, double> &y) {
   Dmatvec_core(A, x, y);
 }
+void matvec(const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(A, x, y);
+}
 
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             vector<float> &y) {
@@ -183,6 +188,10 @@ void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
 }
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
+  Smatvec_core(A, x, y);
+}
+void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>, float> &x,
+            view1D<matrix::Dense<float>, float> &y) {
   Smatvec_core(A, x, y);
 }
 

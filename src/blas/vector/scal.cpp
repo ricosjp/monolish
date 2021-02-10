@@ -61,9 +61,15 @@ void scal(const double alpha, vector<double> &x) { Dscal_core(alpha, x); }
 void scal(const double alpha, view1D<vector<double>, double> &x) {
   Dscal_core(alpha, x);
 }
+void scal(const double alpha, view1D<matrix::Dense<double>, double> &x) {
+  Dscal_core(alpha, x);
+}
 
 void scal(const float alpha, vector<float> &x) { Sscal_core(alpha, x); }
 void scal(const float alpha, view1D<vector<float>, float> &x) {
+  Sscal_core(alpha, x);
+}
+void scal(const float alpha, view1D<matrix::Dense<float>, float> &x) {
   Sscal_core(alpha, x);
 }
 
