@@ -18,8 +18,8 @@ void vecadd_core(const F1 &a, const F2 &b, F3 &y) {
   assert(monolish::util::is_same_size(a, b, y));
   assert(monolish::util::is_same_device_mem_stat(a, b, y));
 
-  monolish::internal::vadd(y.size(), a.data()+aoffset, b.data()+boffset, y.data()+yoffset,
-                           y.get_device_mem_stat());
+  monolish::internal::vadd(y.size(), a.data() + aoffset, b.data() + boffset,
+                           y.data() + yoffset, y.get_device_mem_stat());
 
   logger.func_out();
 }

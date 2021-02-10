@@ -46,8 +46,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
       internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
-                                          descr, vald, rowd, cold, xd+xoffset, &beta,
-                                          yd+yoffset));
+                                          descr, vald, rowd, cold, xd + xoffset,
+                                          &beta, yd + yoffset));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
@@ -57,8 +57,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 #if MONOLISH_USE_MKL
     const double alpha = 1.0;
     const double beta = 0.0;
-    mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd+xoffset,
-               &beta, yd+yoffset);
+    mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1,
+               xd + xoffset, &beta, yd + yoffset);
 
     // OSS
 #else
@@ -66,9 +66,9 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
     for (int i = 0; i < (int)A.get_row(); i++) {
       double ytmp = 0.0;
       for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
-        ytmp += vald[j] * (xd+xoffset)[A.col_ind[j]];
+        ytmp += vald[j] * (xd + xoffset)[A.col_ind[j]];
       }
-      y[i+yoffset] = ytmp;
+      y[i + yoffset] = ytmp;
     }
 #endif
   }
@@ -118,8 +118,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
       internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
-                                          descr, vald, rowd, cold, xd+xoffset, &beta,
-                                          yd+yoffset));
+                                          descr, vald, rowd, cold, xd + xoffset,
+                                          &beta, yd + yoffset));
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
@@ -129,8 +129,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 #if MONOLISH_USE_MKL
     const float alpha = 1.0;
     const float beta = 0.0;
-    mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1, xd+xoffset,
-               &beta, yd+yoffset);
+    mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1,
+               xd + xoffset, &beta, yd + yoffset);
 
     // OSS
 #else
@@ -138,9 +138,9 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
     for (int i = 0; i < (int)A.get_row(); i++) {
       float ytmp = 0.0;
       for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
-        ytmp += vald[j] * (xd+xoffset)[A.col_ind[j]];
+        ytmp += vald[j] * (xd + xoffset)[A.col_ind[j]];
       }
-      y[i+yoffset] = ytmp;
+      y[i + yoffset] = ytmp;
     }
 #endif
   }

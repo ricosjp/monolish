@@ -33,15 +33,16 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
     {
       // cublas is col major
       internal::check_CUDA(cublasDgemv(h, CUBLAS_OP_T, n, m, &alpha, vald, n,
-                                       xd+xoffset, 1, &beta, yd+yoffset, 1));
+                                       xd + xoffset, 1, &beta, yd + yoffset,
+                                       1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd+xoffset, 1, beta,
-                yd+yoffset, 1);
+    cblas_dgemv(CblasRowMajor, CblasNoTrans, m, n, alpha, vald, n, xd + xoffset,
+                1, beta, yd + yoffset, 1);
   }
 
   logger.func_out();
@@ -76,15 +77,16 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
     {
       // cublas is col major
       internal::check_CUDA(cublasSgemv(h, CUBLAS_OP_T, m, n, &alpha, vald, m,
-                                       xd+xoffset, 1, &beta, yd+yoffset, 1));
+                                       xd + xoffset, 1, &beta, yd + yoffset,
+                                       1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd+xoffset, 1, beta,
-                yd+yoffset, 1);
+    cblas_sgemv(CblasRowMajor, CblasNoTrans, n, m, alpha, vald, m, xd + xoffset,
+                1, beta, yd + yoffset, 1);
   }
 
   logger.func_out();

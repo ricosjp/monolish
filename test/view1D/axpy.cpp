@@ -1,8 +1,7 @@
 #include "../test_utils.hpp"
 #include "monolish_blas.hpp"
 
-template <typename T, typename V>
-void ans_axpy(T alpha, V &mx, V &my) {
+template <typename T, typename V> void ans_axpy(T alpha, V &mx, V &my) {
   if (mx.size() != my.size()) {
     throw std::runtime_error("x.size != y.size");
   }
@@ -17,11 +16,11 @@ template <typename T> bool test_send_axpy(const size_t size, double tol) {
   T alpha = 123.0;
   monolish::vector<T> vecx(size, 1.0);
   monolish::vector<T> vecy(size, 1.0);
-  monolish::view1D<monolish::vector<T>,T> x(vecx, 5, size/2);
-  monolish::view1D<monolish::vector<T>,T> y(vecy, 5, size/2);
+  monolish::view1D<monolish::vector<T>, T> x(vecx, 5, size / 2);
+  monolish::view1D<monolish::vector<T>, T> y(vecy, 5, size / 2);
 
   monolish::vector<T> vecansy = vecy;
-  monolish::view1D<monolish::vector<T>,T> ansy(vecansy, 5, size/2);
+  monolish::view1D<monolish::vector<T>, T> ansy(vecansy, 5, size / 2);
   ans_axpy(alpha, x, ansy);
 
   monolish::util::send(vecx, vecy);
@@ -45,7 +44,7 @@ template <typename T> bool test_axpy(const size_t size, double tol) {
   return ans_check<T>(__func__, y.data(), ansy.data(), y.size(), tol);
 }
 
-int main(){
+int main() {
   size_t size = 40;
 
   // monolish::util::set_log_level(3);

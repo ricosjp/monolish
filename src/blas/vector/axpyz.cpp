@@ -25,7 +25,7 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      zd[i+zoffset] = alpha * xd[i+xoffset] + yd[i+yoffset];
+      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -34,7 +34,7 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      zd[i+zoffset] = alpha * xd[i+xoffset] + yd[i+yoffset];
+      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
   }
   logger.func_out();
@@ -61,7 +61,7 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      zd[i+zoffset] = alpha * xd[i+xoffset] + yd[i+yoffset];
+      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -70,7 +70,7 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      zd[i+zoffset] = alpha * xd[i+xoffset] + yd[i+yoffset];
+      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
   }
   logger.func_out();

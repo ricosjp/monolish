@@ -68,9 +68,9 @@ public:
   size_t size() const { return range; }
   size_t get_nnz() const { return range; }
 
-  size_t get_first() const{return first;}
-  size_t get_last() const{return last;}
-  size_t get_offset() const{return first;}
+  size_t get_first() const { return first; }
+  size_t get_last() const { return last; }
+  size_t get_offset() const { return first; }
   void set_first(size_t i) { first = i; }
 
   void set_last(size_t i) {

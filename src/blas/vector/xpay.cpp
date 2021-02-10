@@ -23,7 +23,7 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i+yoffset] = xd[i+xoffset] + alpha * yd[i+yoffset];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -32,7 +32,7 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i+yoffset] = xd[i+xoffset] + alpha * yd[i+yoffset];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }
   logger.func_out();
@@ -57,7 +57,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i+yoffset] = xd[i+xoffset] + alpha * yd[i+yoffset];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -66,7 +66,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i+yoffset] = xd[i+xoffset] + alpha * yd[i+yoffset];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }
   logger.func_out();

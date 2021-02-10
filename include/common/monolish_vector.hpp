@@ -177,9 +177,7 @@ public:
     }
   }
 
-  size_t get_offset() const{
-    return 0;
-  }
+  size_t get_offset() const { return 0; }
 
   // util
   // ///////////////////////////////////////////////////////////////////////////
