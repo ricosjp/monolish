@@ -33,10 +33,13 @@ template <typename T> bool test_send_axpy(const size_t size, double tol) {
 template <typename T> bool test_axpy(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
+  monolish::vector<T> vecx(size, 0.0, 1.0);
+  monolish::vector<T> vecy(size, 0.0, 1.0);
+  monolish::view1D<monolish::vector<T>, T> x(vecx, 5, size / 2);
+  monolish::view1D<monolish::vector<T>, T> y(vecy, 5, size / 2);
 
-  monolish::vector<T> ansy = y;
+  monolish::vector<T> vecansy = vecy;
+  monolish::view1D<monolish::vector<T>, T> ansy(vecansy, 5, size / 2);
   ans_axpy(alpha, x, ansy);
 
   monolish::blas::axpy(alpha, x, y);
