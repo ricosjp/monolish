@@ -16,12 +16,14 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   const double *xd = x.data();
   double *yd = y.data();
   size_t size = x.size();
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i] = xd[i] + alpha * yd[i];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -30,7 +32,7 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i] = xd[i] + alpha * yd[i];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }
   logger.func_out();
@@ -48,12 +50,14 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   const float *xd = x.data();
   float *yd = y.data();
   size_t size = x.size();
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i] = xd[i] + alpha * yd[i];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
     throw std::runtime_error(
@@ -62,7 +66,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < size; i++) {
-      yd[i] = xd[i] + alpha * yd[i];
+      yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }
   logger.func_out();
@@ -71,11 +75,36 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 } // namespace
 
 namespace blas {
+
 void xpay(const double alpha, const vector<double> &x, vector<double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const vector<double> &x,
+          view1D<vector<double>, double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const view1D<vector<double>, double> &x,
+          vector<double> &y) {
+  Dxpay_core(alpha, x, y);
+}
+void xpay(const double alpha, const view1D<vector<double>, double> &x,
+          view1D<vector<double>, double> &y) {
   Dxpay_core(alpha, x, y);
 }
 
 void xpay(const float alpha, const vector<float> &x, vector<float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const vector<float> &x,
+          view1D<vector<float>, float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const view1D<vector<float>, float> &x,
+          vector<float> &y) {
+  Sxpay_core(alpha, x, y);
+}
+void xpay(const float alpha, const view1D<vector<float>, float> &x,
+          view1D<vector<float>, float> &y) {
   Sxpay_core(alpha, x, y);
 }
 

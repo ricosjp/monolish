@@ -4,15 +4,19 @@
 namespace monolish {
 
 namespace {
-template <typename F1, typename F2> void copy_core(const F1 &a, F2 &y) {
+template <typename F1, typename F2> void copy_core(const F1 &x, F2 &y) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  // err
-  assert(util::is_same_size(a, y));
-  assert(util::is_same_device_mem_stat(a, y));
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
-  internal::vcopy(y.size(), a.data(), y.data(), y.get_device_mem_stat());
+  // err
+  assert(util::is_same_size(x, y));
+  assert(util::is_same_device_mem_stat(x, y));
+
+  internal::vcopy(y.size(), x.data() + xoffset, y.data() + yoffset,
+                  y.get_device_mem_stat());
 
   logger.util_out();
 }
@@ -21,8 +25,29 @@ template <typename F1, typename F2> void copy_core(const F1 &a, F2 &y) {
 
 namespace blas {
 
-void copy(const vector<double> &a, vector<double> &y) { copy_core(a, y); }
-void copy(const vector<float> &a, vector<float> &y) { copy_core(a, y); }
+void copy(const vector<double> &x, vector<double> &y) { copy_core(x, y); }
+void copy(const vector<double> &x, view1D<vector<double>, double> &y) {
+  copy_core(x, y);
+}
+void copy(const view1D<vector<double>, double> &x, vector<double> &y) {
+  copy_core(x, y);
+}
+void copy(const view1D<vector<double>, double> &x,
+          view1D<vector<double>, double> &y) {
+  copy_core(x, y);
+}
+
+void copy(const vector<float> &x, vector<float> &y) { copy_core(x, y); }
+void copy(const vector<float> &x, view1D<vector<float>, float> &y) {
+  copy_core(x, y);
+}
+void copy(const view1D<vector<float>, float> &x, vector<float> &y) {
+  copy_core(x, y);
+}
+void copy(const view1D<vector<float>, float> &x,
+          view1D<vector<float>, float> &y) {
+  copy_core(x, y);
+}
 
 } // namespace blas
 } // namespace monolish

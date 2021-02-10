@@ -204,12 +204,7 @@ bool is_same_structure(const T &A, const T &B, const types &... args) {
 }
 
 /**
- * @brief compare matrix size
- **/
-template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
-
-/**
- * @brief compare size of vector (same as is_same_structure())
+ * @brief compare size of vector or 1Dview (same as is_same_structure())
  * @param x monolish vector
  * @param y monolish vector
  * @return true is same size
@@ -218,8 +213,7 @@ template <typename T, typename U> bool is_same_size(T A, U B) { return false; }
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T>
-bool is_same_size(const vector<T> &x, const vector<T> &y) {
+template <typename T, typename U> bool is_same_size(const T &x, const U &y) {
   return x.size() == y.size();
 }
 
@@ -279,9 +273,9 @@ bool is_same_size(const matrix::LinearOperator<T> &A,
 /**
  * @brief compare matrix size
  **/
-template <typename T, typename... types>
-bool is_same_size(const T &A, const T &B, const types &... args) {
-  return is_same_size(A, B) && is_same_size(A, args...);
+template <typename T, typename U, typename... types>
+bool is_same_size(const T &arg1, const U &arg2, const types &... args) {
+  return is_same_size(arg1, arg2) && is_same_size(arg1, args...);
 }
 
 /**

@@ -16,20 +16,25 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   const double *xd = x.data();
   const double *yd = y.data();
   const size_t size = x.size();
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    { internal::check_CUDA(cublasDdot(h, size, xd, 1, yd, 1, &ans)); }
+    {
+      internal::check_CUDA(
+          cublasDdot(h, size, xd + xoffset, 1, yd + yoffset, 1, &ans));
+    }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_ddot(size, xd, 1, yd, 1);
+    ans = cblas_ddot(size, xd + xoffset, 1, yd + yoffset, 1);
   }
   logger.func_out();
   return ans;
@@ -47,20 +52,25 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   const float *xd = x.data();
   const float *yd = y.data();
   const size_t size = x.size();
+  const size_t xoffset = x.get_offset();
+  const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    { internal::check_CUDA(cublasSdot(h, size, xd, 1, yd, 1, &ans)); }
+    {
+      internal::check_CUDA(
+          cublasSdot(h, size, xd + xoffset, 1, yd + yoffset, 1, &ans));
+    }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_sdot(size, xd, 1, yd, 1);
+    ans = cblas_sdot(size, xd + xoffset, 1, yd + yoffset, 1);
   }
   logger.func_out();
   return ans;
@@ -73,14 +83,58 @@ namespace blas {
 double dot(const vector<double> &x, const vector<double> &y) {
   return Ddot_core(x, y);
 }
-void dot(const vector<double> &x, const vector<double> &y, double &ans) {
-  ans = dot(x, y);
+double dot(const vector<double> &x, const view1D<vector<double>, double> &y) {
+  return Ddot_core(x, y);
 }
-
+double dot(const view1D<vector<double>, double> &x, const vector<double> &y) {
+  return Ddot_core(x, y);
+}
+double dot(const view1D<vector<double>, double> &x,
+           const view1D<vector<double>, double> &y) {
+  return Ddot_core(x, y);
+}
 float dot(const vector<float> &x, const vector<float> &y) {
   return Sdot_core(x, y);
 }
+float dot(const vector<float> &x, const view1D<vector<float>, float> &y) {
+  return Sdot_core(x, y);
+}
+float dot(const view1D<vector<float>, float> &x, const vector<float> &y) {
+  return Sdot_core(x, y);
+}
+float dot(const view1D<vector<float>, float> &x,
+          const view1D<vector<float>, float> &y) {
+  return Sdot_core(x, y);
+}
+
+void dot(const vector<double> &x, const vector<double> &y, double &ans) {
+  ans = dot(x, y);
+}
+void dot(const vector<double> &x, const view1D<vector<double>, double> &y,
+         double &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<double>, double> &x, const vector<double> &y,
+         double &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<double>, double> &x,
+         const view1D<vector<double>, double> &y, double &ans) {
+  ans = dot(x, y);
+}
 void dot(const vector<float> &x, const vector<float> &y, float &ans) {
+  ans = dot(x, y);
+}
+void dot(const vector<float> &x, const view1D<vector<float>, float> &y,
+         float &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<float>, float> &x, const vector<float> &y,
+         float &ans) {
+  ans = dot(x, y);
+}
+void dot(const view1D<vector<float>, float> &x,
+         const view1D<vector<float>, float> &y, float &ans) {
   ans = dot(x, y);
 }
 

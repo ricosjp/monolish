@@ -20,16 +20,22 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- add view1D BLAS https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
+- add view1D axpy test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
+
+### Changed
+- support view1D in is_same_size() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
 0.11.1 - 2021/02/09
 -----------
 ### Added
-- add 1Dview hpp (cpp is not impl. only declareration) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/244
+- add view1D hpp (cpp is not impl. only declareration) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/244
 - add Dense LU/Cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/240
 - add LOBPCG(Sparse) eigensolver for generalized eigenproblem https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/241
 - add DC(Dense) eigensolver for generalized eigenproblem https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/235
 - add test matrices for generalized eigenvalue problem from arxiv:2007.08130 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/235
-- define 1Dview class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/233
+- define view1D class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/233
 - add linearoperator util: is_XXX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/227
 - add is_same_device_mem_stat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
