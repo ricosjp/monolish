@@ -11,12 +11,13 @@ template <typename F1> double Dsum_core(const F1 &x) {
   double ans = 0;
   const double *xd = x.data();
   size_t size = x.size();
+  const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
     for (size_t i = 0; i < size; i++) {
-      ans += xd[i];
+      ans += xd[i+xoffset];
     }
 #else
     throw std::runtime_error(
@@ -25,7 +26,7 @@ template <typename F1> double Dsum_core(const F1 &x) {
   } else {
 #pragma omp parallel for reduction(+ : ans)
     for (size_t i = 0; i < size; i++) {
-      ans += xd[i];
+      ans += xd[i+xoffset];
     }
   }
 
@@ -40,12 +41,13 @@ template <typename F1> float Ssum_core(const F1 &x) {
   float ans = 0;
   const float *xd = x.data();
   size_t size = x.size();
+  const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
     for (size_t i = 0; i < size; i++) {
-      ans += xd[i];
+      ans += xd[i+xoffset];
     }
 #else
     throw std::runtime_error(
@@ -54,7 +56,7 @@ template <typename F1> float Ssum_core(const F1 &x) {
   } else {
 #pragma omp parallel for reduction(+ : ans)
     for (size_t i = 0; i < size; i++) {
-      ans += xd[i];
+      ans += xd[i+xoffset];
     }
   }
 
