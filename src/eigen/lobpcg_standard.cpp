@@ -30,7 +30,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   monolish::vector<T> vtmp2(A.get_row());
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, WXP, vtmp1, vtmp2);
+    monolish::util::send(wxp, WXP, vtmp1, vtmp2, xinout);
   }
 
   blas::copy(xinout, x);
