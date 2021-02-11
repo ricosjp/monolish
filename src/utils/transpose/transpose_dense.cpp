@@ -10,9 +10,9 @@ template <typename T> Dense<T> &Dense<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   Dense<T> B(get_col(), get_row());
-  for (size_t i = 0; i < get_row(); ++i) {
-    for (size_t j = 0; j < get_col(); ++j) {
-      B.val[j * get_col() + i] = val[i * get_row() + j];
+  for (size_t i = 0; i < B.get_row(); ++i) {
+    for (size_t j = 0; j < B.get_col(); ++j) {
+      B.val[i * B.get_col() + j] = val[j * B.get_row() + i];
     }
   }
   std::copy(B.val.data(), B.val.data() + nnz, val.begin());
@@ -33,7 +33,7 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
 
   for (size_t i = 0; i < get_row(); ++i) {
     for (size_t j = 0; j < get_col(); ++j) {
-      val[j * get_col() + i] = B.val[i * get_row() + j];
+      val[i * get_col() + j] = B.val[j * get_row() + i];
     }
   }
   logger.util_out();
