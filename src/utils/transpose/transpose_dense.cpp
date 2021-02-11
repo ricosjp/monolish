@@ -12,7 +12,7 @@ template <typename T> Dense<T> &Dense<T>::transpose() {
   Dense<T> B(get_col(), get_row());
   for (size_t i = 0; i < get_row(); ++i) {
     for (size_t j = 0; j < get_col(); ++j) {
-      B.val[j * get_row() + i] = val[i * get_col() + j];
+      B.val[j * get_col() + i] = val[i * get_row() + j];
     }
   }
   std::copy(B.val.data(), B.val.data() + nnz, val.begin());
@@ -33,7 +33,7 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
 
   for (size_t i = 0; i < get_row(); ++i) {
     for (size_t j = 0; j < get_col(); ++j) {
-      val[j * get_row() + i] = B.val[i * get_col() + j];
+      val[j * get_col() + i] = B.val[i * get_row() + j];
     }
   }
   logger.util_out();
