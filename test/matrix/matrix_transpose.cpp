@@ -105,14 +105,14 @@ bool test_transpose_elements(const size_t M, const size_t N, double tol) {
       s += ",";
       s += is;
       s += ")";
-      if (std::abs(A.at(i, j)) > tol && ans_check<T>(s, A.at(i, j), B.at(j, i), tol) == false) {
+      if (std::abs(A.at(i, j)) > tol &&
+          ans_check<T>(s, A.at(i, j), B.at(j, i), tol) == false) {
         return false;
       }
     }
   }
   return true;
 }
-
 
 int main(int argc, char **argv) {
 
@@ -169,23 +169,23 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_transpose_elements<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
+  if (test_transpose_elements<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
 
-  if (test_transpose_elements<monolish::matrix::Dense<float>, float>(M, N, 1.0e-6) ==
-      false) {
+  if (test_transpose_elements<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
 
-  if (test_transpose_elements<monolish::matrix::COO<double>, double>(M, N, 1.0e-6) ==
-      false) {
+  if (test_transpose_elements<monolish::matrix::COO<double>, double>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
 
-  if (test_transpose_elements<monolish::matrix::COO<float>, float>(M, N, 1.0e-6) ==
-      false) {
+  if (test_transpose_elements<monolish::matrix::COO<float>, float>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
 
