@@ -6,8 +6,8 @@
 namespace monolish {
 
 template <typename MATRIX, typename T>
-int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
-                                                       monolish::vector<T> &xinout) {
+int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
+    MATRIX &A, T &l, monolish::vector<T> &xinout) {
   T norm;
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
@@ -18,19 +18,24 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   xinout[1] = -1.0;
   blas::nrm2(xinout, norm);
   blas::scal(1.0 / norm, xinout);
-  monolish::vector<T> wxp(3 * A.get_row());
-  monolish::vector<T> WXP(3 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> w(wxp, 0, 1 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> x(wxp, 1 * A.get_row(), 2 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> p(wxp, 2 * A.get_row(), 3 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> W(WXP, 0, 1 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> X(WXP, 1 * A.get_row(), 2 * A.get_row());
-  monolish::view1D<monolish::vector<T>, T> P(WXP, 2 * A.get_row(), 3 * A.get_row());
+  monolish::matrix::Dense<T> wxp(3, A.get_col());
+  monolish::matrix::Dense<T> twxp(A.get_col(), 3);
+  monolish::matrix::Dense<T> WXP(3, A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> w(wxp, 0, 1 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> x(wxp, 1 * A.get_row(),
+                                             2 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> p(wxp, 2 * A.get_row(),
+                                             3 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> W(WXP, 0, 1 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> X(WXP, 1 * A.get_row(),
+                                             2 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> P(WXP, 2 * A.get_row(),
+                                             3 * A.get_row());
   monolish::vector<T> vtmp1(A.get_row());
   monolish::vector<T> vtmp2(A.get_row());
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, WXP, vtmp1, vtmp2, xinout);
+    monolish::util::send(wxp, twxp, WXP, vtmp1, vtmp2, xinout);
   }
 
   blas::copy(xinout, x);
@@ -48,60 +53,66 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
   bool is_singular = false;
   // W = A w
   blas::matvec(A, w, W);
+  matrix::Dense<T> Sam(3, 3);
+  matrix::Dense<T> Sbm(3, 3);
+  vector<T> lambda(Sam.get_col());
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(Sam, Sbm, lambda);
+  }
 
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
-    vector<T> Sa;
-    vector<T> Sb;
     if (iter == 0 || is_singular) {
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::recv(Sam, Sbm);
+      }
+
       // Sa = { w, x }^T { W, X }
       //    = { w, x }^T A { w, x }
-      Sa.resize(4);
-      blas::dot(w, W, Sa[0]);
-      blas::dot(w, X, Sa[1]);
-      blas::dot(x, W, Sa[2]);
-      blas::dot(x, X, Sa[3]);
+      Sam.set_col(2);
+      Sam.set_row(2);
+      Sam.set_nnz(4);
+      Sam.val.resize(4);
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::send(Sam, Sbm);
+      }
+      monolish::matrix::Dense<T> wx(2, A.get_col());
+      monolish::matrix::Dense<T> twx(A.get_col(), 2);
+      monolish::matrix::Dense<T> WX(2, A.get_col());
+      monolish::view1D<monolish::matrix::Dense<T>, T> w2(wx, 0, 1 * A.get_col());
+      monolish::view1D<monolish::matrix::Dense<T>, T> x2(wx, 1 * A.get_row(),
+                                                         2 * A.get_row());
+      monolish::view1D<monolish::matrix::Dense<T>, T> W2(WX, 0, 1 * A.get_row());
+      monolish::view1D<monolish::matrix::Dense<T>, T> X2(WX, 1 * A.get_row(),
+                                                         2 * A.get_row());
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::send(wx, twx, WX);
+      }
+      blas::copy(w, w2);
+      blas::copy(x, x2);
+      blas::copy(W, W2);
+      blas::copy(X, X2);
+      twx.transpose(wx);
+      std::cout << wx.at(1, 0) << " " << twx.at(0, 1) << std::endl;
+      blas::matmul(WX, twx, Sam);
 
       // Sb = { w, x }^T { w, x }
-      Sb.resize(4);
-      blas::dot(w, w, Sb[0]);
-      blas::dot(w, x, Sb[1]);
-      blas::dot(x, w, Sb[2]);
-      blas::dot(x, x, Sb[3]);
+      Sbm.set_col(2);
+      Sbm.set_row(2);
+      Sbm.set_nnz(4);
+      Sbm.val.resize(4);
+      blas::matmul(wx, twx, Sbm);
     } else {
+      twxp.transpose(wxp);
       // Sa = { w, x, p }^T { W, X, P }
       //    = { w, x, p }^T A { w, x, p }
-      Sa.resize(9);
-      blas::dot(w, W, Sa[0]);
-      blas::dot(w, X, Sa[1]);
-      blas::dot(w, P, Sa[2]);
-      blas::dot(x, W, Sa[3]);
-      blas::dot(x, X, Sa[4]);
-      blas::dot(x, P, Sa[5]);
-      blas::dot(p, W, Sa[6]);
-      blas::dot(p, X, Sa[7]);
-      blas::dot(p, P, Sa[8]);
-
+      blas::matmul(WXP, twxp, Sam);
       // Sb = { w, x, p }^T { w, x, p }
-      Sb.resize(9);
-      blas::dot(w, w, Sb[0]);
-      blas::dot(w, x, Sb[1]);
-      blas::dot(w, p, Sb[2]);
-      blas::dot(x, w, Sb[3]);
-      blas::dot(x, x, Sb[4]);
-      blas::dot(x, p, Sb[5]);
-      blas::dot(p, w, Sb[6]);
-      blas::dot(p, x, Sb[7]);
-      blas::dot(p, p, Sb[8]);
+      blas::matmul(wxp, twxp, Sbm);
     }
-    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa.data());
-    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb.data());
-
+    Sam.print_all(); std::cout << std::endl;
+    Sbm.print_all(); std::cout << std::endl;
     // Generalized Eigendecomposition
     //   Sa v = lambda Sb v
-    monolish::vector<T> lambda(Sam.get_col());
-    if (A.get_device_mem_stat() == true) {
-      monolish::util::send(Sam, Sbm, lambda);
-    }
     const char jobz = 'V';
     const char uplo = 'L';
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
@@ -185,6 +196,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
     }
 
     if (std::isnan(residual)) {
+      blas::copy(x, xinout);
       logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
@@ -193,7 +205,27 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(MATRIX &A, T &l,
     blas::scal(1.0 / residual, w);
     // W = A w
     blas::matvec(A, w, W);
+
+    // reset is_singular flag
+    if (iter == 0 || is_singular) {
+      is_singular = false;
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::recv(Sam, Sbm);
+      }
+      Sam.set_row(3);
+      Sam.set_col(3);
+      Sam.set_nnz(9);
+      Sam.val.resize(9);
+      Sbm.set_row(3);
+      Sbm.set_col(3);
+      Sbm.set_nnz(9);
+      Sbm.val.resize(9);
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::send(Sam, Sbm);
+      }
+    }
   }
+  blas::copy(x, xinout);
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
@@ -204,10 +236,12 @@ standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
 template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
     matrix::CRS<float> &A, float &l, vector<float> &x);
 // template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(
+// standard_eigen::LOBPCG<matrix::LinearOperator<double>,
+// double>::monolish_LOBPCG(
 //     matrix::LinearOperator<double> &A, double &l, vector<double> &x);
 // template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::monolish_LOBPCG(
+// standard_eigen::LOBPCG<matrix::LinearOperator<float>,
+// float>::monolish_LOBPCG(
 //     matrix::LinearOperator<float> &A, float &l, vector<float> &x);
 
 template <typename MATRIX, typename T>
