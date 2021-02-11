@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add matvec of linearoperator with view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/247
 - add view1D BLAS https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 - add view1D axpy test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 

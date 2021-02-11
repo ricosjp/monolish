@@ -137,8 +137,22 @@ void matvec(const matrix::CRS<float> &A,
  */
 void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
             vector<double> &y);
+void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
+            view1D<vector<double>, double> &y);
+void matvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x, vector<double> &y);
+void matvec(const matrix::LinearOperator<double> &A,
+            const view1D<vector<double>, double> &x,
+            view1D<vector<double>, double> &y);
 void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
             vector<float> &y);
+void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
+            view1D<vector<float>, float> &y);
+void matvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x, vector<float> &y);
+void matvec(const matrix::LinearOperator<float> &A,
+            const view1D<vector<float>, float> &x,
+            view1D<vector<float>, float> &y);
 
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax
@@ -152,8 +166,22 @@ void matvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
  */
 void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
              vector<double> &y);
+void rmatvec(const matrix::LinearOperator<double> &A, const vector<double> &x,
+             view1D<vector<double>, double> &y);
+void rmatvec(const matrix::LinearOperator<double> &A,
+             const view1D<vector<double>, double> &x, vector<double> &y);
+void rmatvec(const matrix::LinearOperator<double> &A,
+             const view1D<vector<double>, double> &x,
+             view1D<vector<double>, double> &y);
 void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
              vector<float> &y);
+void rmatvec(const matrix::LinearOperator<float> &A, const vector<float> &x,
+             view1D<vector<float>, float> &y);
+void rmatvec(const matrix::LinearOperator<float> &A,
+             const view1D<vector<float>, float> &x, vector<float> &y);
+void rmatvec(const matrix::LinearOperator<float> &A,
+             const view1D<vector<float>, float> &x,
+             view1D<vector<float>, float> &y);
 
 } // namespace blas
 } // namespace monolish
