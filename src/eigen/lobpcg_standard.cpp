@@ -63,18 +63,16 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     if (iter == 0 || is_singular) {
       if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm);
+        monolish::util::recv(Sam, Sbm, lambda);
       }
 
+      lambda.resize(2);
       // Sa = { w, x }^T { W, X }
       //    = { w, x }^T A { w, x }
       Sam.set_col(2);
       Sam.set_row(2);
       Sam.set_nnz(4);
       Sam.val.resize(4);
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm);
-      }
       monolish::matrix::Dense<T> wx(2, A.get_col());
       monolish::matrix::Dense<T> twx(A.get_col(), 2);
       monolish::matrix::Dense<T> WX(2, A.get_col());
@@ -85,14 +83,19 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       monolish::view1D<monolish::matrix::Dense<T>, T> X2(WX, 1 * A.get_row(),
                                                          2 * A.get_row());
       if (A.get_device_mem_stat() == true) {
-        monolish::util::send(wx, twx, WX);
+        monolish::util::send(Sam, Sbm, lambda, wx, WX);
       }
       blas::copy(w, w2);
       blas::copy(x, x2);
       blas::copy(W, W2);
       blas::copy(X, X2);
+      if (A.get_device_mem_stat() == true) {
+        wx.nonfree_recv();
+      }
       twx.transpose(wx);
-      std::cout << wx.at(1, 0) << " " << twx.at(0, 1) << std::endl;
+      if (A.get_device_mem_stat() == true) {
+        twx.send();
+      }
       blas::matmul(WX, twx, Sam);
 
       // Sb = { w, x }^T { w, x }
@@ -102,15 +105,23 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       Sbm.val.resize(4);
       blas::matmul(wx, twx, Sbm);
     } else {
+      if (A.get_device_mem_stat() == true) {
+        wxp.nonfree_recv();
+      }
       twxp.transpose(wxp);
+      if (A.get_device_mem_stat() == true) {
+        monolish::util::send(twxp, Sam, Sbm, lambda);
+      }
       // Sa = { w, x, p }^T { W, X, P }
       //    = { w, x, p }^T A { w, x, p }
       blas::matmul(WXP, twxp, Sam);
       // Sb = { w, x, p }^T { w, x, p }
       blas::matmul(wxp, twxp, Sbm);
     }
-    Sam.print_all(); std::cout << std::endl;
-    Sbm.print_all(); std::cout << std::endl;
+    if (A.get_device_mem_stat() == true) {
+      Sam.nonfree_recv();
+      Sbm.nonfree_recv();
+    }
     // Generalized Eigendecomposition
     //   Sa v = lambda Sb v
     const char jobz = 'V';
@@ -210,7 +221,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     if (iter == 0 || is_singular) {
       is_singular = false;
       if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm);
+        monolish::util::recv(Sam, Sbm, lambda);
       }
       Sam.set_row(3);
       Sam.set_col(3);
@@ -220,8 +231,9 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       Sbm.set_col(3);
       Sbm.set_nnz(9);
       Sbm.val.resize(9);
+      lambda.resize(3);
       if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm);
+        monolish::util::send(Sam, Sbm, lambda);
       }
     }
   }
