@@ -23,14 +23,14 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   monolish::matrix::Dense<T> WXP(3, A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> w(wxp, 0, 1 * A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> x(wxp, 1 * A.get_row(),
-                                             2 * A.get_row());
+                                                    2 * A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> p(wxp, 2 * A.get_row(),
-                                             3 * A.get_row());
+                                                    3 * A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> W(WXP, 0, 1 * A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> X(WXP, 1 * A.get_row(),
-                                             2 * A.get_row());
+                                                    2 * A.get_row());
   monolish::view1D<monolish::matrix::Dense<T>, T> P(WXP, 2 * A.get_row(),
-                                             3 * A.get_row());
+                                                    3 * A.get_row());
   monolish::vector<T> vtmp1(A.get_row());
   monolish::vector<T> vtmp2(A.get_row());
 
@@ -63,7 +63,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
     if (iter == 0 || is_singular) {
       // It is intended not to resize actual memory layout
-      // and just use the beginning part of 
+      // and just use the beginning part of
       // (i.e. not touching {Sam,Sbm,wxp,twxp,WXP}.{val,nnz})
       Sam.set_col(2);
       Sam.set_row(2);
