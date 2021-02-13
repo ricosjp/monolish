@@ -7,7 +7,7 @@ namespace monolish {
 
 template <typename MATRIX, typename T>
 int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
-    MATRIX &A, MATRIX &B, T &l, monolish::vector<T> &x, int itype) {
+    MATRIX &A, MATRIX &B, T &l, monolish::vector<T> &xinout, int itype) {
   // LOBPCG only support itype == 1 (Ax = lBx)
   assert(itype == 1);
 
@@ -17,24 +17,37 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   this->precond.create_precond(A);
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
-  x[0] = 1.0;
-  x[1] = -1.0;
-  blas::nrm2(x, norm);
-  blas::scal(1.0 / norm, x);
-  monolish::vector<T> w(A.get_row());
-  monolish::vector<T> p(A.get_row());
-  monolish::vector<T> X(A.get_row());
-  monolish::vector<T> W(A.get_row());
-  monolish::vector<T> P(A.get_row());
-  monolish::vector<T> BX(A.get_row());
-  monolish::vector<T> BW(A.get_row());
-  monolish::vector<T> BP(A.get_row());
+  xinout[0] = 1.0;
+  xinout[1] = -1.0;
+  blas::nrm2(xinout, norm);
+  blas::scal(1.0 / norm, xinout);
+  monolish::matrix::Dense<T> wxp(3, A.get_col());
+  monolish::matrix::Dense<T> twxp(A.get_col(), 3);
+  monolish::matrix::Dense<T> WXP(3, A.get_row());
+  monolish::matrix::Dense<T> BWXP(3, A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> w(wxp, 0, 1 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> x(wxp, 1 * A.get_row(),
+                                             2 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> p(wxp, 2 * A.get_row(),
+                                             3 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> W(WXP, 0, 1 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> X(WXP, 1 * A.get_row(),
+                                             2 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> P(WXP, 2 * A.get_row(),
+                                                    3 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> BW(BWXP, 0, 1 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> BX(BWXP, 1 * A.get_row(),
+                                                     2 * A.get_row());
+  monolish::view1D<monolish::matrix::Dense<T>, T> BP(BWXP, 2 * A.get_row(),
+                                                     3 * A.get_row());
   monolish::vector<T> vtmp1(A.get_row());
+  monolish::vector<T> vtmp2(A.get_row());
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(x, w, p, X, W, P, B, BX, BW, BP, vtmp1);
+    monolish::util::send(wxp, twxp, WXP, BWXP, vtmp1, vtmp2, xinout);
   }
 
+  blas::copy(xinout, x);
   // X = A x
   blas::matvec(A, x, X);
   // BX = B x
@@ -57,60 +70,46 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   // BW = B w
   blas::matvec(B, w, BW);
 
+  matrix::Dense<T> Sam(3, 3);
+  matrix::Dense<T> Sbm(3, 3);
+  vector<T> lambda(Sam.get_col());
+
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
-    vector<T> Sa;
-    vector<T> Sb;
-    if (iter == 0 || is_singular) {
-      // Sa = { w, x }^T { W, X }
-      //    = { w, x }^T A { w, x }
-      Sa.resize(4);
-      blas::dot(w, W, Sa[0]);
-      blas::dot(w, X, Sa[1]);
-      blas::dot(x, W, Sa[2]);
-      blas::dot(x, X, Sa[3]);
-
-      // Sb = { w, x }^T { BW, BX }
-      //    = { w, x }^T B { w, x }
-      Sb.resize(4);
-      blas::dot(w, BW, Sb[0]);
-      blas::dot(w, BX, Sb[1]);
-      blas::dot(x, BW, Sb[2]);
-      blas::dot(x, BX, Sb[3]);
-    } else {
-      // Sa = { w, x, p }^T { W, X, P }
-      //    = { w, x, p }^T A { w, x, p }
-      Sa.resize(9);
-      blas::dot(w, W, Sa[0]);
-      blas::dot(w, X, Sa[1]);
-      blas::dot(w, P, Sa[2]);
-      blas::dot(x, W, Sa[3]);
-      blas::dot(x, X, Sa[4]);
-      blas::dot(x, P, Sa[5]);
-      blas::dot(p, W, Sa[6]);
-      blas::dot(p, X, Sa[7]);
-      blas::dot(p, P, Sa[8]);
-
-      // Sb = { w, x, p }^T { BW, BX, BP }
-      Sb.resize(9);
-      blas::dot(w, BW, Sb[0]);
-      blas::dot(w, BX, Sb[1]);
-      blas::dot(w, BP, Sb[2]);
-      blas::dot(x, BW, Sb[3]);
-      blas::dot(x, BX, Sb[4]);
-      blas::dot(x, BP, Sb[5]);
-      blas::dot(p, BW, Sb[6]);
-      blas::dot(p, BX, Sb[7]);
-      blas::dot(p, BP, Sb[8]);
-    }
-    matrix::Dense<T> Sam(std::sqrt(Sa.size()), std::sqrt(Sa.size()), Sa.data());
-    matrix::Dense<T> Sbm(std::sqrt(Sb.size()), std::sqrt(Sb.size()), Sb.data());
-
-    // Generalized Eigendecomposition
-    //   Sa v = lambda Sb v
-    monolish::vector<T> lambda(Sam.get_col());
     if (A.get_device_mem_stat() == true) {
       monolish::util::send(Sam, Sbm, lambda);
     }
+    if (iter == 0 || is_singular) {
+      // It is intended not to resize actual memory layout
+      // and just use the beginning part of 
+      // (i.e. not touching {Sam,Sbm,wxp,twxp,WXP}.{val,nnz})
+      Sam.set_col(2);
+      Sam.set_row(2);
+      Sbm.set_col(2);
+      Sbm.set_row(2);
+      wxp.set_row(2);
+      twxp.set_col(2);
+      WXP.set_row(2);
+      BWXP.set_row(2);
+    }
+    if (A.get_device_mem_stat() == true) {
+      wxp.nonfree_recv();
+    }
+    twxp.transpose(wxp);
+    if (A.get_device_mem_stat() == true) {
+      twxp.send();
+    }
+    // Sa = { w, x, p }^T { W, X, P }
+    //    = { w, x, p }^T A { w, x, p }
+    blas::matmul(WXP, twxp, Sam);
+    // Sb = { w, x, p }^T { BW, BX, BP }
+    blas::matmul(BWXP, twxp, Sbm);
+
+    if (A.get_device_mem_stat() == true) {
+      Sam.nonfree_recv();
+      Sbm.nonfree_recv();
+    }
+    // Generalized Eigendecomposition
+    //   Sa v = lambda Sb v
     const char jobz = 'V';
     const char uplo = 'L';
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
@@ -134,46 +133,32 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     l = lambda[index];
 
     // extract b which satisfies Aprime b = lambda_min b
-    monolish::vector<T> b(Sam.get_row());
+    size_t size_b = std::sqrt(Sam.get_nnz());
+    monolish::vector<T> b(size_b);
     Sam.row(index, b);
 
     if (iter == 0 || is_singular) {
-      // x = b[0] w + b[1] x, normalize
-      // p = b[0] w         , normalize
-      blas::scal(b[0], w);
-      blas::copy(w, p);
-      blas::xpay(b[1], p, x);
-
-      // X = b[0] W + b[1] X, normalize with x
-      // P = b[0] W         , normalize with p
-      blas::scal(b[0], W);
-      blas::copy(W, P);
-      blas::xpay(b[1], P, X);
-
-      // BX = b[0] BW + b[1] BX, normalize with x
-      // BP = b[0] BW          , normalize with p
-      blas::scal(b[0], BW);
-      blas::copy(BW, BP);
-      blas::xpay(b[1], BP, BX);
-    } else {
-      // x = b[0] w + b[1] x + b[2] p, normalize
-      // p = b[0] w          + b[2] p, normalize
-      blas::scal(b[0], w);
-      blas::xpay(b[2], w, p);
-      blas::xpay(b[1], p, x);
-
-      // X = b[0] W + b[1] X + b[2] P, normalize with x
-      // P = b[0] W          + b[2] P, normalize with p
-      blas::scal(b[0], W);
-      blas::xpay(b[2], W, P);
-      blas::xpay(b[1], P, X);
-
-      // BX = b[0] BW + b[1] BX + b[2] BP, normalize with x
-      // BP = b[0] BW           + b[2] BP, normalize with p
-      blas::scal(b[0], BW);
-      blas::xpay(b[2], BW, BP);
-      blas::xpay(b[1], BP, BX);
+      // b[2] is not calculated so explicitly set to 0
+      b[2] = 0.0;
     }
+
+    // x = b[0] w + b[1] x + b[2] p, normalize
+    // p = b[0] w          + b[2] p, normalize
+    blas::scal(b[0], w);
+    blas::xpay(b[2], w, p);
+    blas::xpay(b[1], p, x);
+
+    // X = b[0] W + b[1] X + b[2] P, normalize with x
+    // P = b[0] W          + b[2] P, normalize with p
+    blas::scal(b[0], W);
+    blas::xpay(b[2], W, P);
+    blas::xpay(b[1], P, X);
+
+    // BX = b[0] BW + b[1] BX + b[2] BP, normalize with x
+    // BP = b[0] BW           + b[2] BP, normalize with p
+    blas::scal(b[0], BW);
+    blas::xpay(b[2], BW, BP);
+    blas::xpay(b[1], BP, BX);
     T normp;
     blas::nrm2(p, normp);
     blas::scal(1.0 / normp, p);
@@ -188,8 +173,9 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     // w = X - lambda BX
     blas::axpyz(-l, BX, X, w);
     // apply preconditioner
-    this->precond.apply_precond(w, vtmp1);
-    w = vtmp1;
+    blas::copy(w, vtmp2);
+    this->precond.apply_precond(vtmp2, vtmp1);
+    blas::copy(vtmp1, w);
 
     // residual calculation
     T residual;
@@ -201,11 +187,13 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
     // early return when residual is small enough
     if (residual < this->get_tol() && this->get_miniter() < iter + 1) {
+      blas::copy(x, xinout);
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
 
     if (std::isnan(residual)) {
+      blas::copy(x, xinout);
       logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
@@ -216,7 +204,21 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     blas::matvec(A, w, W);
     // BW = B w
     blas::matvec(B, w, BW);
+
+    // reset is_singular flag
+    if (iter == 0 || is_singular) {
+      is_singular = false;
+      Sam.set_row(3);
+      Sam.set_col(3);
+      Sbm.set_row(3);
+      Sbm.set_col(3);
+      wxp.set_row(3);
+      twxp.set_col(3);
+      WXP.set_row(3);
+      BWXP.set_row(3);
+    }
   }
+  blas::copy(x, xinout);
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
