@@ -78,7 +78,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
     twxp.transpose(wxp);
     if (A.get_device_mem_stat() == true) {
-      monolish::util::send(twxp, Sam, Sbm, lambda);
+      twxp.send();
     }
     // Sa = { w, x, p }^T { W, X, P }
     //    = { w, x, p }^T A { w, x, p }
@@ -115,34 +115,26 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     l = lambda[index];
 
     // extract b which satisfies Aprime b = lambda_min b
-    monolish::vector<T> b(Sam.get_col());
+    size_t size_b = std::sqrt(Sam.get_nnz());
+    monolish::vector<T> b(size_b);
     Sam.row(index, b);
 
     if (iter == 0 || is_singular) {
-      // x = b[0] w + b[1] x, normalize
-      // p = b[0] w         , normalize
-      blas::scal(b[0], w);
-      blas::copy(w, p);
-      blas::xpay(b[1], p, x);
-
-      // X = b[0] W + b[1] X, normalize with x
-      // P = b[0] W         , normalize with p
-      blas::scal(b[0], W);
-      blas::copy(W, P);
-      blas::xpay(b[1], P, X);
-    } else {
-      // x = b[0] w + b[1] x + b[2] p, normalize
-      // p = b[0] w          + b[2] p, normalize
-      blas::scal(b[0], w);
-      blas::xpay(b[2], w, p);
-      blas::xpay(b[1], p, x);
-
-      // X = b[0] W + b[1] X + b[2] P, normalize with x
-      // P = b[0] W          + b[2] P, normalize with p
-      blas::scal(b[0], W);
-      blas::xpay(b[2], W, P);
-      blas::xpay(b[1], P, X);
+      // b[2] is not calculated so explicitly set to 0
+      b[2] = 0.0;
     }
+
+    // x = b[0] w + b[1] x + b[2] p, normalize
+    // p = b[0] w          + b[2] p, normalize
+    blas::scal(b[0], w);
+    blas::xpay(b[2], w, p);
+    blas::xpay(b[1], p, x);
+
+    // X = b[0] W + b[1] X + b[2] P, normalize with x
+    // P = b[0] W          + b[2] P, normalize with p
+    blas::scal(b[0], W);
+    blas::xpay(b[2], W, P);
+    blas::xpay(b[1], P, X);
     T normp;
     blas::nrm2(p, normp);
     blas::scal(1.0 / normp, p);
