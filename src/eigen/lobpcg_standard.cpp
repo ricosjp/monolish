@@ -62,61 +62,30 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     if (iter == 0 || is_singular) {
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm);
-      }
-
-      // Sa = { w, x }^T { W, X }
-      //    = { w, x }^T A { w, x }
       // It is intended not to resize actual memory layout
-      // (i.e. not touching Sam.val and Sam.nnz)
+      // and just use the beginning part of 
+      // (i.e. not touching {Sam,Sbm,wxp,twxp,WXP}.{val,nnz})
       Sam.set_col(2);
       Sam.set_row(2);
-      monolish::matrix::Dense<T> wx(2, A.get_col());
-      monolish::matrix::Dense<T> twx(A.get_col(), 2);
-      monolish::matrix::Dense<T> WX(2, A.get_col());
-      monolish::view1D<monolish::matrix::Dense<T>, T> w2(wx, 0, 1 * A.get_col());
-      monolish::view1D<monolish::matrix::Dense<T>, T> x2(wx, 1 * A.get_row(),
-                                                         2 * A.get_row());
-      monolish::view1D<monolish::matrix::Dense<T>, T> W2(WX, 0, 1 * A.get_row());
-      monolish::view1D<monolish::matrix::Dense<T>, T> X2(WX, 1 * A.get_row(),
-                                                         2 * A.get_row());
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm, wx, WX);
-      }
-      blas::copy(w, w2);
-      blas::copy(x, x2);
-      blas::copy(W, W2);
-      blas::copy(X, X2);
-      if (A.get_device_mem_stat() == true) {
-        wx.nonfree_recv();
-      }
-      twx.transpose(wx);
-      if (A.get_device_mem_stat() == true) {
-        twx.send();
-      }
-      blas::matmul(WX, twx, Sam);
-
-      // Sb = { w, x }^T { w, x }
-      // It is intended not to resize actual memory layout
-      // (i.e. not touching Sbm.val and Sbm.nnz)
       Sbm.set_col(2);
       Sbm.set_row(2);
-      blas::matmul(wx, twx, Sbm);
-    } else {
-      if (A.get_device_mem_stat() == true) {
-        wxp.nonfree_recv();
-      }
-      twxp.transpose(wxp);
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::send(twxp, Sam, Sbm, lambda);
-      }
-      // Sa = { w, x, p }^T { W, X, P }
-      //    = { w, x, p }^T A { w, x, p }
-      blas::matmul(WXP, twxp, Sam);
-      // Sb = { w, x, p }^T { w, x, p }
-      blas::matmul(wxp, twxp, Sbm);
+      wxp.set_row(2);
+      twxp.set_col(2);
+      WXP.set_row(2);
     }
+    if (A.get_device_mem_stat() == true) {
+      wxp.nonfree_recv();
+    }
+    twxp.transpose(wxp);
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(twxp, Sam, Sbm, lambda);
+    }
+    // Sa = { w, x, p }^T { W, X, P }
+    //    = { w, x, p }^T A { w, x, p }
+    blas::matmul(WXP, twxp, Sam);
+    // Sb = { w, x, p }^T { w, x, p }
+    blas::matmul(wxp, twxp, Sbm);
+
     if (A.get_device_mem_stat() == true) {
       Sam.nonfree_recv();
       Sbm.nonfree_recv();
@@ -219,16 +188,13 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     // reset is_singular flag
     if (iter == 0 || is_singular) {
       is_singular = false;
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm);
-      }
       Sam.set_row(3);
       Sam.set_col(3);
       Sbm.set_row(3);
       Sbm.set_col(3);
-      if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm);
-      }
+      wxp.set_row(3);
+      twxp.set_col(3);
+      WXP.set_row(3);
     }
   }
   blas::copy(x, xinout);
