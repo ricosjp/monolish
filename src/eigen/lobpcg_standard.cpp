@@ -56,11 +56,11 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   matrix::Dense<T> Sam(3, 3);
   matrix::Dense<T> Sbm(3, 3);
   vector<T> lambda(Sam.get_col());
-  if (A.get_device_mem_stat() == true) {
-    monolish::util::send(Sam, Sbm, lambda);
-  }
 
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(Sam, Sbm, lambda);
+    }
     if (iter == 0 || is_singular) {
       // It is intended not to resize actual memory layout
       // and just use the beginning part of 
