@@ -63,16 +63,15 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     if (iter == 0 || is_singular) {
       if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm, lambda);
+        monolish::util::recv(Sam, Sbm);
       }
 
-      lambda.resize(2);
       // Sa = { w, x }^T { W, X }
       //    = { w, x }^T A { w, x }
+      // It is intended not to resize actual memory layout
+      // (i.e. not touching Sam.val and Sam.nnz)
       Sam.set_col(2);
       Sam.set_row(2);
-      Sam.set_nnz(4);
-      Sam.val.resize(4);
       monolish::matrix::Dense<T> wx(2, A.get_col());
       monolish::matrix::Dense<T> twx(A.get_col(), 2);
       monolish::matrix::Dense<T> WX(2, A.get_col());
@@ -83,7 +82,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       monolish::view1D<monolish::matrix::Dense<T>, T> X2(WX, 1 * A.get_row(),
                                                          2 * A.get_row());
       if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm, lambda, wx, WX);
+        monolish::util::send(Sam, Sbm, wx, WX);
       }
       blas::copy(w, w2);
       blas::copy(x, x2);
@@ -99,10 +98,10 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       blas::matmul(WX, twx, Sam);
 
       // Sb = { w, x }^T { w, x }
+      // It is intended not to resize actual memory layout
+      // (i.e. not touching Sbm.val and Sbm.nnz)
       Sbm.set_col(2);
       Sbm.set_row(2);
-      Sbm.set_nnz(4);
-      Sbm.val.resize(4);
       blas::matmul(wx, twx, Sbm);
     } else {
       if (A.get_device_mem_stat() == true) {
@@ -221,19 +220,14 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     if (iter == 0 || is_singular) {
       is_singular = false;
       if (A.get_device_mem_stat() == true) {
-        monolish::util::recv(Sam, Sbm, lambda);
+        monolish::util::recv(Sam, Sbm);
       }
       Sam.set_row(3);
       Sam.set_col(3);
-      Sam.set_nnz(9);
-      Sam.val.resize(9);
       Sbm.set_row(3);
       Sbm.set_col(3);
-      Sbm.set_nnz(9);
-      Sbm.val.resize(9);
-      lambda.resize(3);
       if (A.get_device_mem_stat() == true) {
-        monolish::util::send(Sam, Sbm, lambda);
+        monolish::util::send(Sam, Sbm);
       }
     }
   }
