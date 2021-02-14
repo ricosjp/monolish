@@ -76,6 +76,44 @@ bool test_transpose(const size_t M, const size_t N, double tol) {
   return true;
 }
 
+template <typename MAT, typename T>
+bool test_transpose_elements(const size_t M, const size_t N, double tol) {
+  size_t nnzrow = 27;
+  if (nnzrow < N) {
+    nnzrow = 27;
+  } else {
+    nnzrow = N - 1;
+  }
+  monolish::matrix::COO<T> seedA =
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+
+  MAT A(seedA); // M*N matrix
+
+  MAT B(N, M); // N*M matrix
+  B.transpose(A);
+
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      std::string is = std::to_string(i);
+      std::string js = std::to_string(j);
+      std::string s = "A(";
+      s += is;
+      s += ",";
+      s += js;
+      s += ") == A^T(";
+      s += js;
+      s += ",";
+      s += is;
+      s += ")";
+      if (std::abs(A.at(i, j)) > tol &&
+          ans_check<T>(s, A.at(i, j), B.at(j, i), tol) == false) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 int main(int argc, char **argv) {
 
   if (argc != 3) {
@@ -128,6 +166,26 @@ int main(int argc, char **argv) {
 
   if (test_transpose<monolish::matrix::COO<float>, float>(M, N, 1.0e-6) ==
       false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::COO<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::COO<float>, float>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
 

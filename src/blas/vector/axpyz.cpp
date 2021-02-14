@@ -113,6 +113,11 @@ void axpyz(const double alpha, const view1D<vector<double>, double> &x,
            view1D<vector<double>, double> &z) {
   Daxpyz_core(alpha, x, y, z);
 }
+void axpyz(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+           const view1D<matrix::Dense<double>, double> &y,
+           view1D<matrix::Dense<double>, double> &z) {
+  Daxpyz_core(alpha, x, y, z);
+}
 
 void axpyz(const float alpha, const vector<float> &x, const vector<float> &y,
            vector<float> &z) {
@@ -146,6 +151,11 @@ void axpyz(const float alpha, const view1D<vector<float>, float> &x,
 void axpyz(const float alpha, const view1D<vector<float>, float> &x,
            const view1D<vector<float>, float> &y,
            view1D<vector<float>, float> &z) {
+  Saxpyz_core(alpha, x, y, z);
+}
+void axpyz(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+           const view1D<matrix::Dense<float>, float> &y,
+           view1D<matrix::Dense<float>, float> &z) {
   Saxpyz_core(alpha, x, y, z);
 }
 

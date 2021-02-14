@@ -26,6 +26,7 @@ Unreleased
 - add view1D axpy test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
 ### Changed
+- Use view1D in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/246
 - support view1D in is_same_size() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
 0.11.1 - 2021/02/09
