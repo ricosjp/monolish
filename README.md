@@ -24,6 +24,12 @@ make install
 - -DBUILD\_GPU={ON/OFF}
 - -DCMAKE\_INSTALL\_PREFIX=[dir]
 
+# 開発者向け
+monolishはchangelogに変更がない場合とclang-formatかけてない場合にCIでwarningがでる．
+
+- clang formatはTOPDIRで make format するとgit addされてるファイル全部に自動でかかります
+- changelogは `CHANGELOG.md` に主要な変更とマージリクエストの番号を書く
+
 # MTG資料
 初期設計資料 [GSlides](https://docs.google.com/presentation/d/16JvP7bTtxmfMP9hqflB7FVDrxueYxYa5U2PT-SkqB20/edit?usp=sharing)
 
