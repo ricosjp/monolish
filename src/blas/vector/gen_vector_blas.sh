@@ -1,6 +1,8 @@
 C=const
 
-echo "#pragma once
+echo "
+#include \"../../../include/monolish_blas.hpp\"
+#include \"../../internal/monolish_internal.hpp\"
 #include \"asum.hpp\"
 #include \"axpy.hpp\"
 #include \"axpyz.hpp\"
@@ -51,34 +53,52 @@ for prec in double float; do
     done
   done
 done
-# 
-# 
-# ## copy
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#       echo "void copy($C $arg1 &x, $arg2 &y);"
-#     done
-#   done
-# done
-# 
-# echo ""
-# 
-# ## asum
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     echo "void asum($C $arg1 &x, $prec &ans);"
-#   done
-# done
-# 
-# echo ""
-# 
-# ## asum
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     echo "$prec asum($C $arg1 &x);"
-#   done
-# done
+
+echo ""
+
+## copy
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+        if [ $prec = "double" ]
+        then
+          echo "void copy($C $arg1 &x, $arg2 &y){copy_core(x, y);}"
+        else
+          echo "void copy($C $arg1 &x, $arg2 &y){copy_core(x, y);}"
+        fi
+    done
+  done
+done
+
+echo ""
+
+## asum
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    if [ $prec = "double" ]
+    then
+      echo "$prec asum($C $arg1 &x){ return Dasum_core(x); }"
+    else
+      echo "$prec asum($C $arg1 &x){ return Sasum_core(x); }"
+    fi
+  done
+done
+
+echo ""
+
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    if [ $prec = "double" ]
+    then
+      echo "void asum($C $arg1 &x, $prec &ans){ ans = asum(x); }"
+    else
+      echo "void asum($C $arg1 &x, $prec &ans){ ans = asum(x); }"
+    fi
+  done
+done
+
+echo ""
+
 # 
 # ## sum
 # for prec in double float; do
