@@ -1,5 +1,4 @@
-#include "../../../include/monolish_blas.hpp"
-#include "../../internal/monolish_internal.hpp"
+#pragma once
 
 namespace monolish {
 
