@@ -99,22 +99,30 @@ done
 
 echo ""
 
-# 
-# ## sum
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     echo "void sum($C $arg1 &x, $prec &ans);"
-#   done
-# done
-# 
-# echo ""
-# 
-# ## sum
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     echo "$prec sum($C $arg1 &x);"
-#   done
-# done
+## sum
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    if [ $prec = "double" ]
+    then
+      echo "$prec sum($C $arg1 &x){ return Dsum_core(x); }"
+    else
+      echo "$prec sum($C $arg1 &x){ return Ssum_core(x); }"
+    fi
+  done
+done
+
+echo ""
+
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    if [ $prec = "double" ]
+    then
+      echo "void sum($C $arg1 &x, $prec &ans){ ans = sum(x); }"
+    else
+      echo "void sum($C $arg1 &x, $prec &ans){ ans = sum(x); }"
+    fi
+  done
+done
 # 
 # echo ""
 # 

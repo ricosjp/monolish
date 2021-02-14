@@ -160,6 +160,19 @@ void asum(const vector<float> &x, float &ans){ ans = asum(x); }
 void asum(const view1D<vector<float>,float> &x, float &ans){ ans = asum(x); }
 void asum(const view1D<matrix::Dense<float>,float> &x, float &ans){ ans = asum(x); }
 
+double sum(const vector<double> &x){ return Dsum_core(x); }
+double sum(const view1D<vector<double>,double> &x){ return Dsum_core(x); }
+double sum(const view1D<matrix::Dense<double>,double> &x){ return Dsum_core(x); }
+float sum(const vector<float> &x){ return Ssum_core(x); }
+float sum(const view1D<vector<float>,float> &x){ return Ssum_core(x); }
+float sum(const view1D<matrix::Dense<float>,float> &x){ return Ssum_core(x); }
+
+void sum(const vector<double> &x, double &ans){ ans = sum(x); }
+void sum(const view1D<vector<double>,double> &x, double &ans){ ans = sum(x); }
+void sum(const view1D<matrix::Dense<double>,double> &x, double &ans){ ans = sum(x); }
+void sum(const vector<float> &x, float &ans){ ans = sum(x); }
+void sum(const view1D<vector<float>,float> &x, float &ans){ ans = sum(x); }
+void sum(const view1D<matrix::Dense<float>,float> &x, float &ans){ ans = sum(x); }
 
 } // namespace blas
 } // namespace monolish
