@@ -173,9 +173,13 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
       // extract eigenvector of Sa v = lambda Sb v
       vector<T> b(3 * m);
+      if (iter == 0 || is_singular) {
+        b.resize(2 * m);
+      }
       Sam.row(i, b);
       
       if (iter == 0 || is_singular) {
+        b.resize(3 * m);
         // b[2m+1]...b[3m-1] is not calculated so explicitly set to 0
         for (std::size_t j = 2 * m + 1; j < 3 * m; ++j) {
           b[j] = 0.0;
