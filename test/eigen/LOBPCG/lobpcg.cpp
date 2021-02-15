@@ -85,7 +85,7 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
   int DIM = 100;
   monolish::matrix::COO<T> COO =
       monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 10.0, -1.0);
-  monolish::vector<T> exact_result(10);
+  monolish::vector<T> exact_result(1);
   for (int i = 0; i < exact_result.size(); ++i) {
     exact_result[i] = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
         DIM, i, 10.0, -1.0);
@@ -99,7 +99,7 @@ template <typename T, typename PRECOND>
 bool test_frank(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 100;
   monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
-  monolish::vector<T> exact_result(10);
+  monolish::vector<T> exact_result(1);
   for (int i = 0; i < exact_result.size(); ++i) {
     exact_result[i] = monolish::util::frank_matrix_eigenvalue<T>(DIM, i);
   }

@@ -126,13 +126,9 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       wxp.nonfree_recv();
     }
     twxp.transpose(wxp);
-    blas::copy(wxp, wxp_p);
     if (A.get_device_mem_stat() == true) {
       twxp.send();
     }
-    // prepare previous step results
-    wxp_p = wxp;
-    WXP_p = WXP;
     // Sa = { w, x, p }^T { W, X, P }
     //    = { w, x, p }^T A { w, x, p }
     blas::matmul(WXP, twxp, Sam);
@@ -151,7 +147,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
     // 5m < info <= 6m means order 3 of B is not positive definite, similar to step 0.
     // therefore we set is_singular flag to true and restart the iteration step.
-    if (5 * m < info && info <= 6 * m) {
+    if (static_cast<int>(5 * m) < info && info <= static_cast<int>(6 * m)) {
       if (this->get_print_rhistory()) {
         *this->rhistory_stream << iter + 1 << "\t"
                                << "singular; restart the step" << std::endl;
@@ -166,6 +162,13 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       monolish::util::recv(Sam, lambda);
     }
 
+    // prepare previous step results
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(wxp_p, WXP_p);
+    }
+    
+    blas::copy(wxp, wxp_p);
+    blas::copy(WXP, WXP_p);
     vector<T> residual(m);
     for (std::size_t i = 0; i < m; ++i) {
       // copy current eigenvalue results
@@ -177,11 +180,11 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
         b.resize(2 * m);
       }
       Sam.row(i, b);
-      
+
       if (iter == 0 || is_singular) {
         b.resize(3 * m);
-        // b[2m+1]...b[3m-1] is not calculated so explicitly set to 0
-        for (std::size_t j = 2 * m + 1; j < 3 * m; ++j) {
+        // b[2m]...b[3m-1] is not calculated so explicitly set to 0
+        for (std::size_t j = 2 * m; j < 3 * m; ++j) {
           b[j] = 0.0;
         }
       }
@@ -194,28 +197,28 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
           blas::xpay(b[2 * m + j], w[i], p[i]);
           blas::xpay(b[m + j], p[i], x[i]);
         } else {
-          blas::axpy(b[j], wp[j], w[i]); // w[i] can be used as temporary
+          blas::axpy(b[j], wp[j], p[i]);
           blas::axpy(b[2 * m + j], pp[j], p[i]);
           blas::axpy(b[j], wp[j], x[i]);
           blas::axpy(b[2 * m + j], pp[j], x[i]);
           blas::axpy(b[m + j], xp[j], x[i]);
         }
 
-        // X[i] = \Sum_j b[j] W[j] + b[m+j] X[j] + b[2m+j] P[j], normalize with x
-        // P[i] = \Sum_j b[j] W[j]               + b[2m+j] P[j], normalize with p
+        // X[i] = \Sum_j b[j]W[j] + b[m+j]X[j] + b[2m+j]P[j], normalize with x
+        // P[i] = \Sum_j b[j]W[j]              + b[2m+j]P[j], normalize with p
         if (j == 0) {
           blas::scal(b[j], W[i]);
           blas::xpay(b[2 * m + j], W[i], P[i]);
           blas::xpay(b[m + j], P[i], X[i]);
         } else {
-          blas::axpy(b[j], Wp[j], W[i]); // w[i] can be used as temporary
+          blas::axpy(b[j], Wp[j], P[i]);
           blas::axpy(b[2 * m + j], Pp[j], P[i]);
           blas::axpy(b[j], Wp[j], X[i]);
           blas::axpy(b[2 * m + j], Pp[j], X[i]);
           blas::axpy(b[m + j], Xp[j], X[i]);
         }
       }
-    
+
       T normp;
       blas::nrm2(p[i], normp);
       blas::scal(1.0 / normp, p[i]);
@@ -235,8 +238,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       // residual calculation
       blas::nrm2(w[i], residual[i]);
       if (this->get_print_rhistory()) {
-        *this->rhistory_stream << iter + 1 << "\t" << i << "\t" << std::scientific << residual[i]
-                               << std::endl;
+        *this->rhistory_stream << iter + 1 << "\t" << i << "\t"
+                               << std::scientific << residual[i] << std::endl;
       }
       if (std::isnan(residual[i])) {
         for (std::size_t i = 0; i < m; ++i) {
