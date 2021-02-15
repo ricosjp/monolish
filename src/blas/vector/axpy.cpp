@@ -93,6 +93,10 @@ void axpy(const double alpha, const view1D<vector<double>, double> &x,
           view1D<vector<double>, double> &y) {
   Daxpy_core(alpha, x, y);
 }
+void axpy(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+          view1D<matrix::Dense<double>, double> &y) {
+  Daxpy_core(alpha, x, y);
+}
 
 void axpy(const float alpha, const vector<float> &x, vector<float> &y) {
   Saxpy_core(alpha, x, y);
@@ -107,6 +111,10 @@ void axpy(const float alpha, const view1D<vector<float>, float> &x,
 }
 void axpy(const float alpha, const view1D<vector<float>, float> &x,
           view1D<vector<float>, float> &y) {
+  Saxpy_core(alpha, x, y);
+}
+void axpy(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+          view1D<matrix::Dense<float>, float> &y) {
   Saxpy_core(alpha, x, y);
 }
 

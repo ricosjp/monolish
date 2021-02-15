@@ -23,18 +23,18 @@ template <typename MATRIX, typename Float>
 class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
-  int monolish_LOBPCG(MATRIX &A, Float &lambda, vector<Float> &x);
+  int monolish_LOBPCG(MATRIX &A, vector<Float> &lambda, matrix::Dense<Float> &x);
 
 public:
   /**
    * @brief calculate eigenvalues and eigenvectors or A by LOBPCG method(lib=0:
    *monolish)
    * @param[in] A CRS format Matrix
-   * @param[in] lambda smallest eigenvalue
-   * @param[in] x corresponding eigenvector
+   * @param[in] lambda up to m smallest eigenvalue
+   * @param[in] x corresponding eigenvectors in Dense matrix format
    * @return error code (only 0 now)
    **/
-  int solve(MATRIX &A, Float &lambda, vector<Float> &x);
+  int solve(MATRIX &A, vector<Float> &lambda, matrix::Dense<Float> &x);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
