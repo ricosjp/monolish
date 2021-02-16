@@ -81,7 +81,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   }
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, twxp, WXP, vtmp1, vtmp2);
+    monolish::util::send(wxp, WXP, wxp_p, WXP_p, twxp, vtmp1, vtmp2, xinout);
   }
 
   for (std::size_t i = 0; i < m; ++i) {
@@ -103,10 +103,13 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   matrix::Dense<T> Sam(3 * m, 3 * m);
   matrix::Dense<T> Sbm(3 * m, 3 * m);
   vector<T> lambda(3 * m);
+    if (A.get_device_mem_stat() == true) {
+      monolish::util::send(Sbm);
+    }
 
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     if (A.get_device_mem_stat() == true) {
-      monolish::util::send(Sam, Sbm, lambda);
+      monolish::util::send(Sam, lambda);
     }
     if (iter == 0 || is_singular) {
       // It is intended not to resize actual memory layout
@@ -124,6 +127,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
     if (A.get_device_mem_stat() == true) {
       wxp.nonfree_recv();
+      twxp.device_free();
     }
     twxp.transpose(wxp);
     if (A.get_device_mem_stat() == true) {
@@ -163,10 +167,6 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
 
     // prepare previous step results
-    if (A.get_device_mem_stat() == true) {
-      monolish::util::send(wxp_p, WXP_p);
-    }
-    
     blas::copy(wxp, wxp_p);
     blas::copy(WXP, WXP_p);
     vector<T> residual(m);
