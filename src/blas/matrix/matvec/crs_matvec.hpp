@@ -1,5 +1,4 @@
-#include "../../../../include/monolish_blas.hpp"
-#include "../../../internal/monolish_internal.hpp"
+#pragma once
 
 namespace monolish {
 
@@ -148,53 +147,4 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   logger.func_out();
 }
 } // namespace
-
-namespace blas {
-
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            vector<double> &y) {
-  Dmatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<double> &A, const vector<double> &x,
-            view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x,
-            view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y);
-}
-
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            vector<float> &y) {
-  Smatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<float> &A, const vector<float> &x,
-            view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
-            vector<float> &y) {
-  Smatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
-            view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y);
-}
-void matvec(const matrix::CRS<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y);
-}
-
-} // namespace blas
 } // namespace monolish
