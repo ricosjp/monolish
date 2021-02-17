@@ -5,8 +5,8 @@
 
 template <typename T, typename PRECOND>
 bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
-                const int check_ans, const T tol_ev, const T tol_res, const int maxiter,
-                const std::string s) {
+                const int check_ans, const T tol_ev, const T tol_res,
+                const int maxiter, const std::string s) {
   monolish::matrix::CRS<T> A(mat);
   monolish::vector<T> lambda(exact_result.size());
   monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
@@ -32,8 +32,8 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
 
   if (check_ans == 1) {
     for (int i = 0; i < lambda.size(); ++i) {
-      if (ans_check<T>("LOBPCG(" + s + ")", lambda[i], exact_result[i], tol_ev) ==
-          false) {
+      if (ans_check<T>("LOBPCG(" + s + ")", lambda[i], exact_result[i],
+                       tol_ev) == false) {
         return false;
       }
     }

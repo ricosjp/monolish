@@ -1,6 +1,6 @@
 #include "../../include/monolish_blas.hpp"
-#include "../../include/monolish_vml.hpp"
 #include "../../include/monolish_eigen.hpp"
+#include "../../include/monolish_vml.hpp"
 #include "../internal/lapack/monolish_lapack.hpp"
 #include "../internal/monolish_internal.hpp"
 
@@ -61,16 +61,22 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   for (std::size_t i = 0; i < m; ++i) {
     w.push_back(view1D<matrix::Dense<T>, T>(wxp, i * n, (i + 1) * n));
     x.push_back(view1D<matrix::Dense<T>, T>(wxp, (m + i) * n, (m + i + 1) * n));
-    p.push_back(view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, (2 * m + i + 1) * n));
+    p.push_back(
+        view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, (2 * m + i + 1) * n));
     W.push_back(view1D<matrix::Dense<T>, T>(WXP, i * n, (i + 1) * n));
     X.push_back(view1D<matrix::Dense<T>, T>(WXP, (m + i) * n, (m + i + 1) * n));
-    P.push_back(view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, (2 * m + i + 1) * n));
+    P.push_back(
+        view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, (2 * m + i + 1) * n));
     wp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, i * n, (i + 1) * n));
-    xp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, (m + i + 1) * n));
-    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n, (2 * m + i + 1) * n));
+    xp.push_back(
+        view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, (m + i + 1) * n));
+    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n,
+                                             (2 * m + i + 1) * n));
     Wp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, i * n, (i + 1) * n));
-    Xp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, (m + i + 1) * n));
-    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n, (2 * m + i + 1) * n));
+    Xp.push_back(
+        view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, (m + i + 1) * n));
+    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n,
+                                             (2 * m + i + 1) * n));
   }
 
   // Preparing initial input to be orthonormal to each other
@@ -86,7 +92,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   }
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, WXP, wxp_p, WXP_p, twxp, vtmp1, vtmp2, zero, xinout);
+    monolish::util::send(wxp, WXP, wxp_p, WXP_p, twxp, vtmp1, vtmp2, zero,
+                         xinout);
   }
 
   for (std::size_t i = 0; i < m; ++i) {
@@ -104,7 +111,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   // B singular flag
   bool is_singular = false;
-  
+
   matrix::Dense<T> Sam(3 * m, 3 * m);
   matrix::Dense<T> Sbm(3 * m, 3 * m);
   vector<T> lambda(3 * m);
@@ -154,8 +161,9 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     const char jobz = 'V';
     const char uplo = 'L';
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
-    // 5m < info <= 6m means order 3 of B is not positive definite, similar to step 0.
-    // therefore we set is_singular flag to true and restart the iteration step.
+    // 5m < info <= 6m means order 3 of B is not positive definite, similar to
+    // step 0. therefore we set is_singular flag to true and restart the
+    // iteration step.
     int lbound = 5 * m;
     int ubound = 6 * m;
     if (iter == 0 || is_singular) {
@@ -209,11 +217,11 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       for (std::size_t j = 0; j < m; ++j) {
         // x[i] = \Sum_j b[j] w[j] + b[m+j] x[j] + b[2m+j] p[j], normalize
         // p[i] = \Sum_j b[j] w[j]               + b[2m+j] p[j], normalize
-        blas::axpy(b[j],         wp[j], p[i]);
+        blas::axpy(b[j], wp[j], p[i]);
         blas::axpy(b[2 * m + j], pp[j], p[i]);
-        blas::axpy(b[j],         wp[j], x[i]);
+        blas::axpy(b[j], wp[j], x[i]);
         blas::axpy(b[2 * m + j], pp[j], x[i]);
-        blas::axpy(b[m + j],     xp[j], x[i]);
+        blas::axpy(b[m + j], xp[j], x[i]);
 
         // X[i] = \Sum_j b[j]W[j] + b[m+j]X[j] + b[2m+j]P[j], normalize with x
         // P[i] = \Sum_j b[j]W[j]              + b[2m+j]P[j], normalize with p
@@ -261,7 +269,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
 
     // early return when residual is small enough
-    if (vml::max(residual) < this->get_tol() && this->get_miniter() < iter + 1) {
+    if (vml::max(residual) < this->get_tol() &&
+        this->get_miniter() < iter + 1) {
       for (std::size_t i = 0; i < m; ++i) {
         view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
         blas::copy(x[i], xinout_i);
@@ -307,7 +316,8 @@ template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
 //     matrix::LinearOperator<float> &A, float &l, vector<float> &x);
 
 template <typename MATRIX, typename T>
-int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, vector<T> &l, matrix::Dense<T> &x) {
+int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, vector<T> &l,
+                                             matrix::Dense<T> &x) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
