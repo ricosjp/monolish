@@ -172,22 +172,22 @@ int main(int argc, char **argv) {
   }
 
   if (test_frank<double, monolish::equation::none<monolish::matrix::CRS<double>,
-                                                  double>>(check_ans, 1.0e-1,
+                                                  double>>(check_ans, 1.5e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float,
                  monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.0e-1, 1.0e-5) == false) {
+          check_ans, 1.5e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<double, monolish::equation::Jacobi<
                              monolish::matrix::CRS<double>, double>>(
-          check_ans, 1.0e-1, 1.0e-5) == false) {
+          check_ans, 1.5e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>,
-                                                   float>>(check_ans, 1.0e-1,
+                                                   float>>(check_ans, 1.5e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
