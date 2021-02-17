@@ -30,7 +30,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   const std::size_t n = A.get_col();
 
   // Internal memory
-  // currently 6m+(6m+3m+2) vectors are used
+  // currently 6m+(6m+3m+4) vectors are used
   matrix::Dense<T> wxp(3 * m, n);
   matrix::Dense<T> WXP(3 * m, n);
   // TODO: wxp_p and WXP_p are not needed when m=1
@@ -42,8 +42,10 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   //       and view1D is supported by preconditioners
   monolish::vector<T> vtmp1(n);
   monolish::vector<T> vtmp2(n);
-  // TODO: zero are not needed when view1D supports fill(T val)
+  // TODO: zero is not needed when view1D supports fill(T val)
   monolish::vector<T> zero(n, 0.0);
+  // TODO: r is not needed when util::random_vector supports view1D
+  monolish::vector<T> r(n);
 
   // view1Ds for calculation
   std::vector<view1D<matrix::Dense<T>, T>> w;
@@ -81,7 +83,6 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   // Preparing initial input to be orthonormal to each other
   for (std::size_t i = 0; i < m; ++i) {
-    vector<T> r(n);
     T minval = 0.0;
     T maxval = 1.0;
     util::random_vector(r, minval, maxval);
@@ -255,9 +256,9 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
                                << std::scientific << residual[i] << std::endl;
       }
       if (std::isnan(residual[i])) {
-        for (std::size_t i = 0; i < m; ++i) {
-          view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
-          blas::copy(x[i], xinout_i);
+        for (std::size_t j = 0; j < m; ++j) {
+          view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
+          blas::copy(x[j], xinout_j);
         }
         logger.solver_out();
         return MONOLISH_SOLVER_RESIDUAL_NAN;
