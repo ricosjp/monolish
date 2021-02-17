@@ -5,7 +5,7 @@
 
 template <typename T, typename PRECOND>
 bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
-                const int check_ans, const T tol_ev, const T tol_res,
+                const int check_ans, const T tol_ev, const T tol_res, const int maxiter,
                 const std::string s) {
   monolish::matrix::CRS<T> A(mat);
   monolish::vector<T> lambda(exact_result.size());
@@ -17,7 +17,7 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
   solver.set_tol(tol_res);
   solver.set_lib(0);
   solver.set_miniter(0);
-  solver.set_maxiter(A.get_row());
+  solver.set_maxiter(maxiter);
 
   // precond setting
   PRECOND precond;
@@ -92,7 +92,7 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
   }
 
   return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, "Tridiagonal Toeplitz");
+                                tol_res * DIM, DIM, "Tridiagonal Toeplitz");
 }
 
 template <typename T, typename PRECOND>
@@ -105,7 +105,7 @@ bool test_frank(const int check_ans, const T tol_ev, const T tol_res) {
   }
 
   return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, "Frank");
+                                tol_res * DIM, 2 * DIM, "Frank");
 }
 
 template <typename T, typename PRECOND>
@@ -145,44 +145,44 @@ int main(int argc, char **argv) {
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
 
   if (test_frank<double, monolish::equation::none<monolish::matrix::CRS<double>,
-                                                  double>>(check_ans, 2.0e-1,
+                                                  double>>(check_ans, 1.0e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float,
                  monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 1.0e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<double, monolish::equation::Jacobi<
                              monolish::matrix::CRS<double>, double>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 1.0e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>,
-                                                   float>>(check_ans, 2.0e-1,
+                                                   float>>(check_ans, 1.0e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
