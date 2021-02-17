@@ -40,8 +40,10 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   matrix::Dense<T> twxp(n, 3 * m);
   // TODO: vtmp1 and vtmp2 are not needed when in-place preconditioner is used
   //       and view1D is supported by preconditioners
-  monolish::vector<T> vtmp1(A.get_row());
-  monolish::vector<T> vtmp2(A.get_row());
+  monolish::vector<T> vtmp1(n);
+  monolish::vector<T> vtmp2(n);
+  // TODO: zero are not needed when view1D supports fill(T val)
+  monolish::vector<T> zero(n, 0.0);
 
   // view1Ds for calculation
   std::vector<view1D<matrix::Dense<T>, T>> w;
@@ -81,7 +83,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   }
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, WXP, wxp_p, WXP_p, twxp, vtmp1, vtmp2, xinout);
+    monolish::util::send(wxp, WXP, wxp_p, WXP_p, twxp, vtmp1, vtmp2, zero, xinout);
   }
 
   for (std::size_t i = 0; i < m; ++i) {
@@ -103,9 +105,9 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   matrix::Dense<T> Sam(3 * m, 3 * m);
   matrix::Dense<T> Sbm(3 * m, 3 * m);
   vector<T> lambda(3 * m);
-    if (A.get_device_mem_stat() == true) {
-      monolish::util::send(Sbm);
-    }
+  if (A.get_device_mem_stat() == true) {
+    monolish::util::send(Sbm);
+  }
 
   for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
     if (A.get_device_mem_stat() == true) {
@@ -192,31 +194,23 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       for (std::size_t j = 0; j < m; ++j) {
         // x[i] = \Sum_j b[j] w[j] + b[m+j] x[j] + b[2m+j] p[j], normalize
         // p[i] = \Sum_j b[j] w[j]               + b[2m+j] p[j], normalize
-        if (j == 0) {
-          blas::scal(b[j], w[i]);
-          blas::xpay(b[2 * m + j], w[i], p[i]);
-          blas::xpay(b[m + j], p[i], x[i]);
-        } else {
-          blas::axpy(b[j], wp[j], p[i]);
-          blas::axpy(b[2 * m + j], pp[j], p[i]);
-          blas::axpy(b[j], wp[j], x[i]);
-          blas::axpy(b[2 * m + j], pp[j], x[i]);
-          blas::axpy(b[m + j], xp[j], x[i]);
-        }
+        blas::copy(zero, p[i]);
+        blas::axpy(b[j],         wp[j], p[i]);
+        blas::axpy(b[2 * m + j], pp[j], p[i]);
+        blas::copy(zero, x[i]);
+        blas::axpy(b[j],         wp[j], x[i]);
+        blas::axpy(b[2 * m + j], pp[j], x[i]);
+        blas::axpy(b[m + j],     xp[j], x[i]);
 
         // X[i] = \Sum_j b[j]W[j] + b[m+j]X[j] + b[2m+j]P[j], normalize with x
         // P[i] = \Sum_j b[j]W[j]              + b[2m+j]P[j], normalize with p
-        if (j == 0) {
-          blas::scal(b[j], W[i]);
-          blas::xpay(b[2 * m + j], W[i], P[i]);
-          blas::xpay(b[m + j], P[i], X[i]);
-        } else {
-          blas::axpy(b[j], Wp[j], P[i]);
-          blas::axpy(b[2 * m + j], Pp[j], P[i]);
-          blas::axpy(b[j], Wp[j], X[i]);
-          blas::axpy(b[2 * m + j], Pp[j], X[i]);
-          blas::axpy(b[m + j], Xp[j], X[i]);
-        }
+        blas::copy(zero, P[i]);
+        blas::axpy(b[j], Wp[j], P[i]);
+        blas::axpy(b[2 * m + j], Pp[j], P[i]);
+        blas::copy(zero, X[i]);
+        blas::axpy(b[j], Wp[j], X[i]);
+        blas::axpy(b[2 * m + j], Pp[j], X[i]);
+        blas::axpy(b[m + j], Xp[j], X[i]);
       }
 
       T normp;
