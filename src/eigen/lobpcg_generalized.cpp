@@ -28,7 +28,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   }
 
   this->precond.create_precond(A);
-  
+
   // Algorithm following DOI:10.1007/978-3-319-69953-0_14
   // m is the number of eigenpairs to compute
   const std::size_t m = l.size();
@@ -84,9 +84,10 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     P.push_back(
         view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, (2 * m + i + 1) * n));
     BW.push_back(view1D<matrix::Dense<T>, T>(BWXP, i * n, (i + 1) * n));
-    BX.push_back(view1D<matrix::Dense<T>, T>(BWXP, (m + i) * n, (m + i + 1) * n));
-    BP.push_back(
-        view1D<matrix::Dense<T>, T>(BWXP, (2 * m + i) * n, (2 * m + i + 1) * n));
+    BX.push_back(
+        view1D<matrix::Dense<T>, T>(BWXP, (m + i) * n, (m + i + 1) * n));
+    BP.push_back(view1D<matrix::Dense<T>, T>(BWXP, (2 * m + i) * n,
+                                             (2 * m + i + 1) * n));
     wp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, i * n, (i + 1) * n));
     xp.push_back(
         view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, (m + i + 1) * n));
@@ -101,7 +102,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     BXp.push_back(
         view1D<matrix::Dense<T>, T>(BWXP_p, (m + i) * n, (m + i + 1) * n));
     BPp.push_back(view1D<matrix::Dense<T>, T>(BWXP_p, (2 * m + i) * n,
-                                             (2 * m + i + 1) * n));
+                                              (2 * m + i + 1) * n));
   }
 
   // Preparing initial input to be orthonormal to each other
@@ -116,7 +117,8 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   }
 
   if (A.get_device_mem_stat() == true) {
-    monolish::util::send(wxp, WXP, BWXP, wxp_p, WXP_p, BWXP_p, twxp, vtmp1, vtmp2, zero, xinout);
+    monolish::util::send(wxp, WXP, BWXP, wxp_p, WXP_p, BWXP_p, twxp, vtmp1,
+                         vtmp2, zero, xinout);
   }
 
   for (std::size_t i = 0; i < m; ++i) {
@@ -140,7 +142,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   // B singular flag
   bool is_singular = false;
-  
+
   matrix::Dense<T> Sam(3 * m, 3 * m);
   matrix::Dense<T> Sbm(3 * m, 3 * m);
   vector<T> lambda(3 * m);
@@ -265,8 +267,9 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
         blas::axpy(b[2 * m + j], Pp[j], X[i]);
         blas::axpy(b[m + j], Xp[j], X[i]);
 
-        // BX[i] = \Sum_j b[j]BW[j] + b[m+j]BX[j] + b[2m+j]BP[j], normalize with x
-        // BP[i] = \Sum_j b[j]BW[j]               + b[2m+j]BP[j], normalize with p
+        // BX[i] = \Sum_j b[j]BW[j] + b[m+j]BX[j] + b[2m+j]BP[j], normalize with
+        // x BP[i] = \Sum_j b[j]BW[j]               + b[2m+j]BP[j], normalize
+        // with p
         blas::axpy(b[j], BWp[j], BP[i]);
         blas::axpy(b[2 * m + j], BPp[j], BP[i]);
         blas::axpy(b[j], BWp[j], BX[i]);
@@ -313,7 +316,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       // BW = B w
       blas::matvec(B, w[i], BW[i]);
     }
-      
+
     // early return when residual is small enough
     if (vml::max(residual) < this->get_tol() &&
         this->get_miniter() < iter + 1) {
@@ -355,8 +358,8 @@ generalized_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
     matrix::Dense<double> &x, int itype = 1);
 template int
 generalized_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
-    matrix::CRS<float> &A, matrix::CRS<float> &B, vector<float> &l, matrix::Dense<float> &x,
-    int itype = 1);
+    matrix::CRS<float> &A, matrix::CRS<float> &B, vector<float> &l,
+    matrix::Dense<float> &x, int itype = 1);
 template int generalized_eigen::LOBPCG<matrix::LinearOperator<double>, double>::
     monolish_LOBPCG(matrix::LinearOperator<double> &A,
                     matrix::LinearOperator<double> &B, vector<double> &l,
@@ -367,8 +370,10 @@ template int generalized_eigen::LOBPCG<matrix::LinearOperator<float>, float>::
                     matrix::Dense<float> &x, int itype = 1);
 
 template <typename MATRIX, typename T>
-int generalized_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, MATRIX &B, vector<T> &l,
-                                                matrix::Dense<T> &x, int itype) {
+int generalized_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, MATRIX &B,
+                                                vector<T> &l,
+                                                matrix::Dense<T> &x,
+                                                int itype) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -385,8 +390,8 @@ template int generalized_eigen::LOBPCG<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, matrix::CRS<double> &B, vector<double> &l,
     matrix::Dense<double> &x, int itype);
 template int generalized_eigen::LOBPCG<matrix::CRS<float>, float>::solve(
-    matrix::CRS<float> &A, matrix::CRS<float> &B, vector<float> &l, matrix::Dense<float> &x,
-    int itype);
+    matrix::CRS<float> &A, matrix::CRS<float> &B, vector<float> &l,
+    matrix::Dense<float> &x, int itype);
 template int
 generalized_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(
     matrix::LinearOperator<double> &A, matrix::LinearOperator<double> &B,
