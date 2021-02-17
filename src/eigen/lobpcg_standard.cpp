@@ -75,9 +75,12 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   // Preparing initial input to be orthonormal to each other
   for (std::size_t i = 0; i < m; ++i) {
+    vector<T> r(n);
+    T minval = 0.0;
+    T maxval = 1.0;
+    util::random_vector(r, minval, maxval);
+    blas::copy(r, x[i]);
     T norm;
-    x[i][i] = 1.0;
-    x[i][i + 1] = -1.0;
     blas::nrm2(x[i], norm);
     blas::scal(1.0 / norm, x[i]);
   }
@@ -153,7 +156,13 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     int info = internal::lapack::sygvd(Sam, Sbm, lambda, 1, &jobz, &uplo);
     // 5m < info <= 6m means order 3 of B is not positive definite, similar to step 0.
     // therefore we set is_singular flag to true and restart the iteration step.
-    if (static_cast<int>(5 * m) < info && info <= static_cast<int>(6 * m)) {
+    int lbound = 5 * m;
+    int ubound = 6 * m;
+    if (iter == 0 || is_singular) {
+      lbound = 3 * m;
+      ubound = 4 * m;
+    }
+    if (lbound < info && info <= ubound) {
       if (this->get_print_rhistory()) {
         *this->rhistory_stream << iter + 1 << "\t"
                                << "singular; restart the step" << std::endl;
@@ -161,8 +170,11 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       is_singular = true;
       iter--;
       continue;
-    } else if (info != 0) {
-      throw std::runtime_error("internal LAPACK sygvd returned error");
+    } else if (info != 0 && info < static_cast<int>(m)) {
+      std::string s = "sygvd returns ";
+      s += std::to_string(info);
+      s += ": internal LAPACK sygvd returned error";
+      throw std::runtime_error(s);
     }
     if (A.get_device_mem_stat() == true) {
       monolish::util::recv(Sam, lambda);
@@ -190,24 +202,23 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
           b[j] = 0.0;
         }
       }
-
+      blas::copy(zero, p[i]);
+      blas::copy(zero, x[i]);
+      blas::copy(zero, P[i]);
+      blas::copy(zero, X[i]);
       for (std::size_t j = 0; j < m; ++j) {
         // x[i] = \Sum_j b[j] w[j] + b[m+j] x[j] + b[2m+j] p[j], normalize
         // p[i] = \Sum_j b[j] w[j]               + b[2m+j] p[j], normalize
-        blas::copy(zero, p[i]);
         blas::axpy(b[j],         wp[j], p[i]);
         blas::axpy(b[2 * m + j], pp[j], p[i]);
-        blas::copy(zero, x[i]);
         blas::axpy(b[j],         wp[j], x[i]);
         blas::axpy(b[2 * m + j], pp[j], x[i]);
         blas::axpy(b[m + j],     xp[j], x[i]);
 
         // X[i] = \Sum_j b[j]W[j] + b[m+j]X[j] + b[2m+j]P[j], normalize with x
         // P[i] = \Sum_j b[j]W[j]              + b[2m+j]P[j], normalize with p
-        blas::copy(zero, P[i]);
         blas::axpy(b[j], Wp[j], P[i]);
         blas::axpy(b[2 * m + j], Pp[j], P[i]);
-        blas::copy(zero, X[i]);
         blas::axpy(b[j], Wp[j], X[i]);
         blas::axpy(b[2 * m + j], Pp[j], X[i]);
         blas::axpy(b[m + j], Xp[j], X[i]);
