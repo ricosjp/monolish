@@ -43,13 +43,13 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
 
 template <typename T, typename PRECOND>
 bool test_solve_GEVP(monolish::matrix::COO<T> matA,
-                     monolish::matrix::COO<T> matB, const T exact_result,
-                     const int check_ans, const T tol_ev, const T tol_res,
-                     const std::string s) {
+                     monolish::matrix::COO<T> matB,
+                     monolish::vector<T> exact_result, const int check_ans,
+                     const T tol_ev, const T tol_res, const std::string s) {
   monolish::matrix::CRS<T> A(matA);
   monolish::matrix::CRS<T> B(matB);
-  T lambda;
-  monolish::vector<T> x(A.get_row());
+  monolish::vector<T> lambda(exact_result.size());
+  monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
   monolish::util::send(A, B);
 
   monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
@@ -71,9 +71,11 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   }
 
   if (check_ans == 1) {
-    if (ans_check<T>("LOBPCG(" + s + ")", lambda, exact_result, tol_ev) ==
-        false) {
-      return false;
+    for (int i = 0; i < lambda.size(); ++i) {
+      if (ans_check<T>("LOBPCG(" + s + ")", lambda[i], exact_result[i],
+                       tol_ev) == false) {
+        return false;
+      }
     }
   }
   return true;
@@ -120,9 +122,12 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
                                                      13.0 / 60.0, 1.0 / 120.0);
 
   // Check eiegnvalues based on analytic results
-  T exact_result = monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
-      DIM, 0, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
-      1.0 / 120.0);
+  monolish::vector<T> exact_result(2);
+  for (int i = 0; i < exact_result.size(); ++i) {
+    exact_result[i] = monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
+        DIM, i, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
+        1.0 / 120.0);
+  }
 
   return test_solve_GEVP<T, PRECOND>(COO_A, COO_B, exact_result, check_ans,
                                      tol_ev, tol_res * DIM,
