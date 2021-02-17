@@ -32,7 +32,8 @@ bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
 }
 
 template <typename T, typename PRECOND>
-bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum, const T tol_res) {
+bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
+                    const T tol_res) {
   monolish::matrix::COO<T> COOA(fileA);
   monolish::matrix::CRS<T> A(COOA);
   monolish::matrix::COO<T> COOB(fileB);
@@ -216,7 +217,9 @@ int main(int argc, char **argv) {
     is_benchmark = true;
     break;
   default:
-    std::cout << "error $1:matrix A filename (optional), $2:matrix B filename (optional), $3:error check (1/0) (optional)" << std::endl;
+    std::cout << "error $1:matrix A filename (optional), $2:matrix B filename "
+                 "(optional), $3:error check (1/0) (optional)"
+              << std::endl;
   }
 
   if (is_benchmark) {
