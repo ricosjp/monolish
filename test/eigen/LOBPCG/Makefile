@@ -15,16 +15,16 @@ sx:
 	make -B FUNC=$(FUNC) ARCH=sx -f ../../test_sx.mk
 
 run_cpu:
-	./$(FUNC)_cpu.out ../../test.mtx 1
+	./$(FUNC)_cpu.out 1
 
 run_gpu:
-	$(PROFILER)./$(FUNC)_gpu.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_gpu.out 1
 
 run_fx:
-	$(PROFILER)./$(FUNC)_fx.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_fx.out 1
 
 run_sx:
-	$(PROFILER)./$(FUNC)_sx.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_sx.out 1
 
 clean:
 	- rm *.out
