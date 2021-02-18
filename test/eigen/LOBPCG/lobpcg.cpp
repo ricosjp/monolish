@@ -47,6 +47,7 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
   monolish::matrix::COO<T> COOB(fileB);
   monolish::matrix::CRS<T> B(COOB);
   A.send();
+  B.send();
 
   monolish::vector<T> eigvals(eignum);
   monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
