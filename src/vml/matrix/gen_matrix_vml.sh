@@ -31,11 +31,10 @@ for MAT in Dense CRS
 do
 
 ## $MAT matrix-matrix arithmetic
-detail=(addition subtract multiplication division)
-func=(add sub mul div)
-for i in ${!detail[@]}; do
+funcs=(add sub mul div)
+for func in ${funcs[@]}; do
   for prec in double float; do
-    echo "void ${func[$i]}(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mm${func}_core(A, B, C);}"
+    echo "void ${func}(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mm${func}_core(A, B, C);}"
   done
 done
 
@@ -43,11 +42,10 @@ echo ""
 ################################################################
 
 ## $MAT matrix-scalar arithmetic
-detail=(addition subtract multiplication division)
-func=(add sub mul div)
-for i in ${!detail[@]}; do
+funcs=(add sub mul div)
+for func in ${funcs[@]}; do
   for prec in double float; do
-    echo "void ${func[$i]}(const matrix::$MAT<$prec> &A, const $prec alpha, matrix::$MAT<$prec> &C){sm${func}_core(A, alpha, C);}"
+    echo "void ${func}(const matrix::$MAT<$prec> &A, const $prec alpha, matrix::$MAT<$prec> &C){sm${func}_core(A, alpha, C);}"
   done
 done
 
@@ -78,10 +76,10 @@ echo ""
 
 ## matrix-matrix max min
 detail=(greatest smallest)
-func=(max min)
-for i in ${!detail[@]}; do
+funcs=(max min)
+for func in ${funcs[@]}; do
   for prec in double float; do
-    echo "void ${func[$i]}(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mm${func}_core(A, B, C);}"
+    echo "void ${func}(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mm${func}_core(A, B, C);}"
   done
 done
 
@@ -89,10 +87,10 @@ echo ""
 
 ## $MAT matrix max min
 detail=(greatest smallest)
-func=(max min)
-for i in ${!detail[@]}; do
+funcs=(max min)
+for func in ${funcs[@]}; do
   for prec in double float; do
-    echo "$prec ${func[$i]}(const matrix::$MAT<$prec> &C){return m${func}_core<matrix::$MAT<$prec>,$prec>(C);}"
+    echo "$prec ${func}(const matrix::$MAT<$prec> &C){return m${func}_core<matrix::$MAT<$prec>,$prec>(C);}"
   done
 done
 
