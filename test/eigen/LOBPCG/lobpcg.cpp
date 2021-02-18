@@ -1,15 +1,90 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
 #include "../include/monolish_equation.hpp"
+#include <chrono>
 #include <iostream>
 
 template <typename T, typename PRECOND>
-bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
+bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
+  monolish::matrix::COO<T> COO(fileA);
+  monolish::matrix::CRS<T> A(COO);
+  A.send();
+
+  monolish::vector<T> eigvals(eignum);
+  monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+
+  monolish::standard_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+
+  solver.set_tol(tol_res);
+  solver.set_lib(0);
+  solver.set_miniter(0);
+  solver.set_maxiter(A.get_row());
+
+  // precond setting
+  PRECOND precond;
+  solver.set_create_precond(precond);
+  solver.set_apply_precond(precond);
+
+  solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
+  if (monolish::util::solver_check(solver.solve(A, eigvals, eigvecs))) {
+    return false;
+  }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cerr << "time: " << sec << std::endl;
+  return true;
+}
+
+template <typename T, typename PRECOND>
+bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
+                    const T tol_res) {
+  monolish::matrix::COO<T> COOA(fileA);
+  monolish::matrix::CRS<T> A(COOA);
+  monolish::matrix::COO<T> COOB(fileB);
+  monolish::matrix::CRS<T> B(COOB);
+  A.send();
+  B.send();
+
+  monolish::vector<T> eigvals(eignum);
+  monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+
+  monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+
+  solver.set_tol(tol_res);
+  solver.set_lib(0);
+  solver.set_miniter(0);
+  solver.set_maxiter(A.get_row());
+
+  // precond setting
+  PRECOND precond;
+  solver.set_create_precond(precond);
+  solver.set_apply_precond(precond);
+
+  solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
+  if (monolish::util::solver_check(solver.solve(A, B, eigvals, eigvecs, 1))) {
+    return false;
+  }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cerr << "time: " << sec << std::endl;
+  return true;
+}
+
+template <typename T, typename PRECOND>
+bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
                 const int check_ans, const T tol_ev, const T tol_res,
-                const std::string s) {
+                const int maxiter, const std::string s) {
   monolish::matrix::CRS<T> A(mat);
-  T lambda;
-  monolish::vector<T> x(A.get_row());
+  monolish::vector<T> lambda(exact_result.size());
+  monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
   monolish::util::send(A);
 
   monolish::eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
@@ -17,7 +92,7 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   solver.set_tol(tol_res);
   solver.set_lib(0);
   solver.set_miniter(0);
-  solver.set_maxiter(A.get_row());
+  solver.set_maxiter(maxiter);
 
   // precond setting
   PRECOND precond;
@@ -31,9 +106,11 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
   }
 
   if (check_ans == 1) {
-    if (ans_check<T>("LOBPCG(" + s + ")", lambda, exact_result, tol_ev) ==
-        false) {
-      return false;
+    for (int i = 0; i < lambda.size(); ++i) {
+      if (ans_check<T>("LOBPCG(" + s + ")", lambda[i], exact_result[i],
+                       tol_ev) == false) {
+        return false;
+      }
     }
   }
   return true;
@@ -41,13 +118,13 @@ bool test_solve(monolish::matrix::COO<T> mat, const T exact_result,
 
 template <typename T, typename PRECOND>
 bool test_solve_GEVP(monolish::matrix::COO<T> matA,
-                     monolish::matrix::COO<T> matB, const T exact_result,
-                     const int check_ans, const T tol_ev, const T tol_res,
-                     const std::string s) {
+                     monolish::matrix::COO<T> matB,
+                     monolish::vector<T> exact_result, const int check_ans,
+                     const T tol_ev, const T tol_res, const std::string s) {
   monolish::matrix::CRS<T> A(matA);
   monolish::matrix::CRS<T> B(matB);
-  T lambda;
-  monolish::vector<T> x(A.get_row());
+  monolish::vector<T> lambda(exact_result.size());
+  monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
   monolish::util::send(A, B);
 
   monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
@@ -69,9 +146,11 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   }
 
   if (check_ans == 1) {
-    if (ans_check<T>("LOBPCG(" + s + ")", lambda, exact_result, tol_ev) ==
-        false) {
-      return false;
+    for (int i = 0; i < lambda.size(); ++i) {
+      if (ans_check<T>("LOBPCG(" + s + ")", lambda[i], exact_result[i],
+                       tol_ev) == false) {
+        return false;
+      }
     }
   }
   return true;
@@ -83,21 +162,27 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
   int DIM = 100;
   monolish::matrix::COO<T> COO =
       monolish::util::tridiagonal_toeplitz_matrix<T>(DIM, 10.0, -1.0);
-  T exact_result = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
-      DIM, 0, 10.0, -1.0);
+  monolish::vector<T> exact_result(2);
+  for (int i = 0; i < exact_result.size(); ++i) {
+    exact_result[i] = monolish::util::tridiagonal_toeplitz_matrix_eigenvalue<T>(
+        DIM, i, 10.0, -1.0);
+  }
 
   return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, "Tridiagonal Toeplitz");
+                                tol_res * DIM, DIM, "Tridiagonal Toeplitz");
 }
 
 template <typename T, typename PRECOND>
 bool test_frank(const int check_ans, const T tol_ev, const T tol_res) {
   int DIM = 100;
   monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
-  T exact_result = monolish::util::frank_matrix_eigenvalue<T>(DIM, 0);
+  monolish::vector<T> exact_result(2);
+  for (int i = 0; i < exact_result.size(); ++i) {
+    exact_result[i] = monolish::util::frank_matrix_eigenvalue<T>(DIM, i);
+  }
 
   return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, "Frank");
+                                tol_res * DIM, 2 * DIM, "Frank");
 }
 
 template <typename T, typename PRECOND>
@@ -112,9 +197,12 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
                                                      13.0 / 60.0, 1.0 / 120.0);
 
   // Check eiegnvalues based on analytic results
-  T exact_result = monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
-      DIM, 0, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
-      1.0 / 120.0);
+  monolish::vector<T> exact_result(2);
+  for (int i = 0; i < exact_result.size(); ++i) {
+    exact_result[i] = monolish::util::toeplitz_plus_hankel_matrix_eigenvalue<T>(
+        DIM, i, 1.0, -1.0 / 3.0, -1.0 / 6.0, 11.0 / 20.0, 13.0 / 60.0,
+        1.0 / 120.0);
+  }
 
   return test_solve_GEVP<T, PRECOND>(COO_A, COO_B, exact_result, check_ans,
                                      tol_ev, tol_res * DIM,
@@ -122,14 +210,82 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
 }
 
 int main(int argc, char **argv) {
-
-  if (argc != 3) {
-    std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
-    return 1;
+  char *fileA;
+  char *fileB;
+  int check_ans;
+  bool is_benchmark = false;
+  switch (argc) {
+  case 1:
+    check_ans = 1;
+    break;
+  case 2:
+    check_ans = atoi(argv[1]);
+    break;
+  case 3:
+    check_ans = atoi(argv[2]);
+    fileA = argv[1];
+    is_benchmark = true;
+    break;
+  case 4:
+    check_ans = atoi(argv[3]);
+    fileA = argv[1];
+    fileB = argv[2];
+    is_benchmark = true;
+    break;
+  default:
+    std::cout << "error $1:matrix A filename (optional), $2:matrix B filename "
+                 "(optional), $3:error check (1/0) (optional)"
+              << std::endl;
   }
 
-  char *file = argv[1];
-  int check_ans = atoi(argv[2]);
+  if (is_benchmark) {
+    if (argc == 3) {
+      if (!benchmark_SEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
+        return 1;
+      }
+      if (!benchmark_SEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
+        return 2;
+      }
+      if (!benchmark_SEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
+        return 3;
+      }
+      if (!benchmark_SEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
+        return 4;
+      }
+      return 0;
+    } else if (argc == 4) {
+      if (!benchmark_GEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 1;
+      }
+      if (!benchmark_GEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 2;
+      }
+      if (!benchmark_GEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 3;
+      }
+      if (!benchmark_GEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 4;
+      }
+      return 0;
+    }
+    return -1;
+  }
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
@@ -137,44 +293,44 @@ int main(int argc, char **argv) {
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
           float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-          check_ans, 3.0e-4, 1.0e-5) == false) {
+          check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
 
   if (test_frank<double, monolish::equation::none<monolish::matrix::CRS<double>,
-                                                  double>>(check_ans, 2.0e-1,
+                                                  double>>(check_ans, 1.5e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float,
                  monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 1.5e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<double, monolish::equation::Jacobi<
                              monolish::matrix::CRS<double>, double>>(
-          check_ans, 2.0e-1, 1.0e-5) == false) {
+          check_ans, 1.5e-1, 1.0e-5) == false) {
     return 1;
   }
   if (test_frank<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>,
-                                                   float>>(check_ans, 2.0e-1,
+                                                   float>>(check_ans, 1.5e-1,
                                                            1.0e-5) == false) {
     return 1;
   }
