@@ -124,7 +124,7 @@ public:
 };
 
 /**
- * @brief QR solver class (GPU only now). can use set_tol(), get_til(),
+ * @brief QR solver class (GPU only now). can use set_tol(), get_tol(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
 template <typename MATRIX, typename Float>
@@ -161,7 +161,7 @@ public:
 };
 
 /**
- * @brief Cholesky solver class (GPU only now). can use set_tol(), get_til(),
+ * @brief Cholesky solver class (CPU only now). can use set_tol(), get_tol(),
  * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
  */
 template <typename MATRIX, typename Float>
