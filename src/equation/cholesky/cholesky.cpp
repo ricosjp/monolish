@@ -42,6 +42,10 @@ int equation::Cholesky<matrix::Dense<double>, double>::solve(
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
+  if (A.get_device_mem_stat() == true) {
+    throw std::runtime_error("error Dense Cholesky on GPU does not impl.");
+  }
+
   int ret = MONOLISH_SOLVER_SUCCESS;
 
   if (lib == 1) {

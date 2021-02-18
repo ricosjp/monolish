@@ -15,7 +15,7 @@ gpu:
 	make -j -C cg/ gpu
 	make -j -C bicgstab/ gpu
 	make -j -C dense_lu/ gpu
-	make -j -C dense_cholesky/ gpu
+	#make -j -C dense_cholesky/ gpu
 	#make -j -C sparse_lu/ gpu
 	make -j -C sparse_qr/ gpu
 	make -j -C sparse_cholesky/ gpu
@@ -45,7 +45,7 @@ run_gpu:
 	make -j -C cg/ run_gpu
 	make -j -C bicgstab/ run_gpu
 	make -j -C dense_lu/ run_gpu
-	make -j -C dense_cholesky/ run_gpu
+	# make -j -C dense_cholesky/ run_gpu
 	# make -j -C sparse_lu/ run_gpu
 	make -j -C sparse_qr/ run_gpu
 	make -j -C sparse_cholesky/ run_gpu
