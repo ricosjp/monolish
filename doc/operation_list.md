@@ -95,10 +95,10 @@
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
 | reciprocal   |       monolish |       monolish |       monolish |
-| max(v)       | none->MKL      | none->monolish | none->monolish |
-| max(v,v)     | none->MKL      | none->monolish | none->monolish |
-| min(v)       | none->MKL      | none->monolish | none->monolish |
-| min(v,v)     | none->MKL      | none->monolish | none->monolish |
+| max(v)       |       MKL      |       monolish |       monolish |
+| max(v,v)     |       MKL      |       monolish |       monolish |
+| min(v)       |       MKL      |       monolish |       monolish |
+| min(v,v)     |       MKL      |       monolish |       monolish |
 
 # Dense Matrix Operations
 
@@ -148,10 +148,10 @@
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
 | reciprocal   |       monolish |       monolish |       monolish |
-| max(v)       | none->MKL      | none->monolish | none->monolish |
-| max(v,v)     | none->MKL      | none->monolish | none->monolish |
-| min(v)       | none->MKL      | none->monolish | none->monolish |
-| min(v,v)     | none->MKL      | none->monolish | none->monolish |
+| max(v)       |       MKL      |       monolish |       monolish |
+| max(v,v)     |       MKL      |       monolish |       monolish |
+| min(v)       |       MKL      |       monolish |       monolish |
+| min(v,v)     |       MKL      |       monolish |       monolish |
 
 ## Row/Col vector and scalar operations (Dense)
 
@@ -219,38 +219,39 @@
 | floor        |       MKL      |       monolish |       monolish |
 | sign         |       monolish |       monolish |       monolish |
 | reciprocal   |       monolish |       monolish |       monolish |
-| max(v)       | none->MKL      | none->monolish | none->monolish |
-| max(v,v)     | none->MKL      | none->monolish | none->monolish |
-| min(v)       | none->MKL      | none->monolish | none->monolish |
-| min(v,v)     | none->MKL      | none->monolish | none->monolish |
+| max(v)       |       MKL      |       monolish |       monolish |
+| max(v,v)     |       MKL      |       monolish |       monolish |
+| min(v)       |       MKL      |       monolish |       monolish |
+| min(v,v)     |       MKL      |       monolish |       monolish |
 
 ## Row/Col vector and scalar operations (CRS)
 
-| func | Intel | NVIDIA | OSS  |
-|------|-------|--------|------|
-| add  | none  | none   | none |
-| sub  | none  | none   | none |
-| mul  | none  | none   | none |
-| div  | none  | none   | none |
+| func | Intel            | NVIDIA            | OSS             |
+|------|------------------|-------------------|-----------------|
+| add  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| sub  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| mul  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| div  | todo) not impl.  | todo) not impl.   | todo) not impl. |
 
 ## Row/Col vector and vector operations (CRS)
 
-| func | Intel | NVIDIA | OSS  |
-|------|-------|--------|------|
-| add  | none  | none   | none |
-| sub  | none  | none   | none |
-| mul  | none  | none   | none |
-| div  | none  | none   | none |
+| func | Intel            | NVIDIA            | OSS             |
+|------|------------------|-------------------|-----------------|
+| add  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| sub  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| mul  | todo) not impl.  | todo) not impl.   | todo) not impl. |
+| div  | todo) not impl.  | todo) not impl.   | todo) not impl. |
 
 # Linear Solvers
 
 ## Dense (あまり決まってない)
-| func     | Intel                                        | NVIDIA         | OSS |
-|----------|----------------------------------------------|----------------|-----|
-| LU       | none->MKL                                    | none->cusolver | ??? |
-| QR       | none->MKL                                    | none->cusolver | ??? |
-| Cholesky | none->MKL                                    | none->cusolver | ??? |
-| ???      | 全部やってるとLAPACKラッパーになっちゃう．． |                |     |
+| func     | Intel                                        | NVIDIA                    | OSS             |
+|----------|----------------------------------------------|---------------------------|---------------- |
+| LU       | MKL                                          | cusolver                  | OpenBLAS+LAPACK |
+| Cholesky | MKL                                          | todo) not impl.*          | OpenBLAS+LAPACK |
+| QR       | todo) not impl.->MKL                         | todo) not impl.->cusolver |                 |
+
+- *) Cholesky is not impl. in cusolver11.1
 
 ## Sparse LA
 
@@ -268,7 +269,7 @@
 
 ## Sparse Eigen
 
-| func    | Intel          | NVIDIA         | OSS            |
-|---------|----------------|----------------|----------------|
-| Lanczos | none->monolish | none->monolish | none->monolish |
-| Arnoldi | none->monolish | none->monolish | none->monolish |
+| func    | Intel                     | NVIDIA                    | OSS                       |
+|---------|---------------------------|---------------------------|---------------------------|
+| Lanczos | todo) not impl.->monolish | todo) not impl.->monolish | todo) not impl.->monolish |
+| Arnoldi | todo) not impl.->monolish | todo) not impl.->monolish | todo) not impl.->monolish |
