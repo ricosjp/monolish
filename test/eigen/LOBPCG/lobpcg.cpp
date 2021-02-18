@@ -1,6 +1,7 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
 #include "../include/monolish_equation.hpp"
+#include <chrono>
 #include <iostream>
 
 template <typename T, typename PRECOND>
@@ -25,9 +26,16 @@ bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
   solver.set_apply_precond(precond);
 
   solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
   if (monolish::util::solver_check(solver.solve(A, eigvals, eigvecs))) {
     return false;
   }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cout << "time: " << sec << std::endl;
   return true;
 }
 
@@ -56,9 +64,16 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
   solver.set_apply_precond(precond);
 
   solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
   if (monolish::util::solver_check(solver.solve(A, B, eigvals, eigvecs, 1))) {
     return false;
   }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cout << "time: " << sec << std::endl;
   return true;
 }
 
@@ -224,46 +239,46 @@ int main(int argc, char **argv) {
 
   if (is_benchmark) {
     if (argc == 3) {
-      if (benchmark_SEVP<double, monolish::equation::none<
-                                     monolish::matrix::CRS<double>, double>>(
-              fileA, 10, 1.0e-8)) {
+      if (!benchmark_SEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
         return 1;
-      } else if (benchmark_SEVP<float,
-                                monolish::equation::none<
-                                    monolish::matrix::CRS<float>, float>>(
-                     fileA, 10, 1.0e-8)) {
+      }
+      if (!benchmark_SEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
         return 2;
-      } else if (benchmark_SEVP<double,
-                                monolish::equation::Jacobi<
-                                    monolish::matrix::CRS<double>, double>>(
-                     fileA, 10, 1.0e-8)) {
+      }
+      if (!benchmark_SEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
         return 3;
-      } else if (benchmark_SEVP<float,
-                                monolish::equation::Jacobi<
-                                    monolish::matrix::CRS<float>, float>>(
-                     fileA, 10, 1.0e-8)) {
+      }
+      if (!benchmark_SEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
         return 4;
       }
       return 0;
     } else if (argc == 4) {
-      if (benchmark_GEVP<double, monolish::equation::none<
-                                     monolish::matrix::CRS<double>, double>>(
-              fileA, fileB, 10, 1.0e-8)) {
+      if (!benchmark_GEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
         return 1;
-      } else if (benchmark_GEVP<float,
-                                monolish::equation::none<
-                                    monolish::matrix::CRS<float>, float>>(
-                     fileA, fileB, 10, 1.0e-8)) {
+      }
+      if (!benchmark_GEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
         return 2;
-      } else if (benchmark_GEVP<double,
-                                monolish::equation::Jacobi<
-                                    monolish::matrix::CRS<double>, double>>(
-                     fileA, fileB, 10, 1.0e-8)) {
+      }
+      if (!benchmark_GEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
         return 3;
-      } else if (benchmark_GEVP<float,
-                                monolish::equation::Jacobi<
-                                    monolish::matrix::CRS<float>, float>>(
-                     fileA, fileB, 10, 1.0e-8)) {
+      }
+      if (!benchmark_GEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
         return 4;
       }
       return 0;
