@@ -35,7 +35,7 @@ bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
                    .count() /
                1.0e+9;
 
-  std::cout << "time: " << sec << std::endl;
+  std::cerr << "time: " << sec << std::endl;
   return true;
 }
 
@@ -74,7 +74,7 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
                    .count() /
                1.0e+9;
 
-  std::cout << "time: " << sec << std::endl;
+  std::cerr << "time: " << sec << std::endl;
   return true;
 }
 
