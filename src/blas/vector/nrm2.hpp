@@ -56,6 +56,6 @@ template <typename F1> float Snrm2_core(const F1 &x) {
   logger.func_out();
   return ans;
 }
-}
+} // namespace
 
 } // namespace monolish

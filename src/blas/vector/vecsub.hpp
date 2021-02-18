@@ -1,6 +1,6 @@
 #pragma once
 
-namespace monolish{
+namespace monolish {
 namespace {
 template <typename F1, typename F2, typename F3>
 void vecsub_core(const F1 &a, const F2 &b, F3 &y) {
@@ -16,9 +16,9 @@ void vecsub_core(const F1 &a, const F2 &b, F3 &y) {
   assert(util::is_same_device_mem_stat(a, b, y));
 
   internal::vsub(y.size(), a.data() + aoffset, b.data() + boffset,
-                           y.data() + yoffset, y.get_device_mem_stat());
+                 y.data() + yoffset, y.get_device_mem_stat());
 
   logger.func_out();
 }
 } // namespace
-}
+} // namespace monolish

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace monolish{
+namespace monolish {
 namespace {
 template <typename F1, typename F2> void copy_core(const F1 &x, F2 &y) {
   Logger &logger = Logger::get_instance();
@@ -19,4 +19,4 @@ template <typename F1, typename F2> void copy_core(const F1 &x, F2 &y) {
   logger.util_out();
 }
 } // namespace
-}
+} // namespace monolish

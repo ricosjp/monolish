@@ -1,6 +1,6 @@
 #pragma once
 
-namespace monolish{
+namespace monolish {
 namespace {
 template <typename F1> double Dasum_core(const F1 &x) {
   Logger &logger = Logger::get_instance();
@@ -57,4 +57,4 @@ template <typename F1> float Sasum_core(const F1 &x) {
 }
 
 } // namespace
-}
+} // namespace monolish
