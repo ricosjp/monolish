@@ -1,3 +1,5 @@
+#pragma once
+
 namespace monolish {
 namespace {
 template <typename F1, typename F2, typename F3>

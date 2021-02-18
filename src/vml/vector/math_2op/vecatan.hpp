@@ -1,3 +1,5 @@
+#pragma once
+
 namespace monolish {
 namespace {
 template <typename F1, typename F2> void vatan_core(const F1 &a, F2 &y) {

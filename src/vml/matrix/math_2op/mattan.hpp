@@ -1,3 +1,5 @@
+#pragma once
+
 namespace monolish {
 namespace {
 template <typename F1, typename F2> void mtan_core(const F1 &A, F2 &C) {

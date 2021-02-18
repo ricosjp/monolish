@@ -1,3 +1,4 @@
+#!/bin/bash
 cat double_arithmetic.cpp \
     | sed -e 's/double/float/g' \
     | sed -e 's/vdAdd/vsAdd/g' \
