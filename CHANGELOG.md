@@ -57,6 +57,7 @@ Unreleased
 - change VML error throw to assert using is_same_XX https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/226
 
 ### Fixed
+- fix logger type inference https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/252
 - fix random CI failing of LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/jobs/97686
 - fix slow convergence bug in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
 - fix Eigenvalue calculation routine of Frank, Tridiagonal Toeplitz https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/230
