@@ -1,6 +1,3 @@
-#include "../../../include/monolish_vml.hpp"
-#include "../../internal/monolish_internal.hpp"
-
 namespace monolish {
 namespace {
 template <typename F1, typename F2> void msin_core(const F1 &A, F2 &C) {
@@ -18,20 +15,4 @@ template <typename F1, typename F2> void msin_core(const F1 &A, F2 &C) {
   logger.func_out();
 }
 } // namespace
-
-namespace vml {
-void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
-  msin_core(A, C);
-}
-void sin(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
-  msin_core(A, C);
-}
-
-void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
-  msin_core(A, C);
-}
-void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
-  msin_core(A, C);
-}
-} // namespace vml
 } // namespace monolish
