@@ -1,7 +1,82 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
 #include "../include/monolish_equation.hpp"
+#include <chrono>
 #include <iostream>
+
+template <typename T, typename PRECOND>
+bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
+  monolish::matrix::COO<T> COO(fileA);
+  monolish::matrix::CRS<T> A(COO);
+  A.send();
+
+  monolish::vector<T> eigvals(eignum);
+  monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+
+  monolish::standard_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+
+  solver.set_tol(tol_res);
+  solver.set_lib(0);
+  solver.set_miniter(0);
+  solver.set_maxiter(A.get_row());
+
+  // precond setting
+  PRECOND precond;
+  solver.set_create_precond(precond);
+  solver.set_apply_precond(precond);
+
+  solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
+  if (monolish::util::solver_check(solver.solve(A, eigvals, eigvecs))) {
+    return false;
+  }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cerr << "time: " << sec << std::endl;
+  return true;
+}
+
+template <typename T, typename PRECOND>
+bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
+                    const T tol_res) {
+  monolish::matrix::COO<T> COOA(fileA);
+  monolish::matrix::CRS<T> A(COOA);
+  monolish::matrix::COO<T> COOB(fileB);
+  monolish::matrix::CRS<T> B(COOB);
+  A.send();
+  B.send();
+
+  monolish::vector<T> eigvals(eignum);
+  monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+
+  monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+
+  solver.set_tol(tol_res);
+  solver.set_lib(0);
+  solver.set_miniter(0);
+  solver.set_maxiter(A.get_row());
+
+  // precond setting
+  PRECOND precond;
+  solver.set_create_precond(precond);
+  solver.set_apply_precond(precond);
+
+  solver.set_print_rhistory(true);
+  auto start = std::chrono::system_clock::now();
+  if (monolish::util::solver_check(solver.solve(A, B, eigvals, eigvecs, 1))) {
+    return false;
+  }
+  auto end = std::chrono::system_clock::now();
+  double sec = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+                   .count() /
+               1.0e+9;
+
+  std::cerr << "time: " << sec << std::endl;
+  return true;
+}
 
 template <typename T, typename PRECOND>
 bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
@@ -135,14 +210,82 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
 }
 
 int main(int argc, char **argv) {
-
-  if (argc != 3) {
-    std::cout << "error $1:matrix filename, $2:error check (1/0)" << std::endl;
-    return 1;
+  char *fileA;
+  char *fileB;
+  int check_ans;
+  bool is_benchmark = false;
+  switch (argc) {
+  case 1:
+    check_ans = 1;
+    break;
+  case 2:
+    check_ans = atoi(argv[1]);
+    break;
+  case 3:
+    check_ans = atoi(argv[2]);
+    fileA = argv[1];
+    is_benchmark = true;
+    break;
+  case 4:
+    check_ans = atoi(argv[3]);
+    fileA = argv[1];
+    fileB = argv[2];
+    is_benchmark = true;
+    break;
+  default:
+    std::cout << "error $1:matrix A filename (optional), $2:matrix B filename "
+                 "(optional), $3:error check (1/0) (optional)"
+              << std::endl;
   }
 
-  char *file = argv[1];
-  int check_ans = atoi(argv[2]);
+  if (is_benchmark) {
+    if (argc == 3) {
+      if (!benchmark_SEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
+        return 1;
+      }
+      if (!benchmark_SEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
+        return 2;
+      }
+      if (!benchmark_SEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, 10, 1.0e-4)) {
+        return 3;
+      }
+      if (!benchmark_SEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, 10, 1.0e-4)) {
+        return 4;
+      }
+      return 0;
+    } else if (argc == 4) {
+      if (!benchmark_GEVP<double, monolish::equation::none<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 1;
+      }
+      if (!benchmark_GEVP<float, monolish::equation::none<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 2;
+      }
+      if (!benchmark_GEVP<double, monolish::equation::Jacobi<
+                                      monolish::matrix::CRS<double>, double>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 3;
+      }
+      if (!benchmark_GEVP<float, monolish::equation::Jacobi<
+                                     monolish::matrix::CRS<float>, float>>(
+              fileA, fileB, 10, 1.0e-4)) {
+        return 4;
+      }
+      return 0;
+    }
+    return -1;
+  }
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
