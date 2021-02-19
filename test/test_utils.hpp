@@ -141,3 +141,34 @@ bool ans_check(const std::string &func, const std::string &type,
     return check;
   }
 }
+
+void print_build_info() {
+
+  if(monolish::util::build_with_avx()){
+    std::cout << "monolish: enable AVX" << std::endl;
+  }
+
+  if(monolish::util::build_with_avx2()){
+    std::cout << "monolish: enable AVX2" << std::endl;
+  }
+
+  if(monolish::util::build_with_avx512()){
+    std::cout << "monolish: enable AVX512" << std::endl;
+  }
+
+  if(monolish::util::build_with_gpu()){
+    std::cout << "monolish: enable GPU" << std::endl;
+  }
+
+  if(monolish::util::build_with_cblas()){
+    std::cout << "monolish: enable CBLAS" << std::endl;
+  }
+
+  if(monolish::util::build_with_mkl()){
+    std::cout << "monolish: enable MKL" << std::endl;
+  }
+
+  if(monolish::util::build_with_lapack()){
+    std::cout << "monolish: enable LAPACK" << std::endl;
+  }
+}
