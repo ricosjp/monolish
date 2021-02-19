@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
-  
+
   print_build_info();
 
   size_t size = atoi(argv[1]);
