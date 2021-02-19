@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add 1Dview fill https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/255
 - add 1Dview VML https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/248
 - add benchmarking code in LOBPCG test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/250
 - add matvec of linearoperator with view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/247

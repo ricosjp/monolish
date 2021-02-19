@@ -6,8 +6,7 @@
 
 namespace monolish {
 
-template <typename T, typename U>
-  void view1D<T,U>::fill(U value) {
+template <typename T, typename U> void view1D<T, U>::fill(U value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   U *val = data();
@@ -31,7 +30,8 @@ template <typename T, typename U>
 }
 template void view1D<vector<double>, double>::fill(double value);
 template void view1D<matrix::Dense<double>, double>::fill(double value);
-template void view1D<matrix::LinearOperator<double>, double>::fill(double value);
+template void
+view1D<matrix::LinearOperator<double>, double>::fill(double value);
 template void view1D<vector<float>, float>::fill(float value);
 template void view1D<matrix::Dense<float>, float>::fill(float value);
 template void view1D<matrix::LinearOperator<float>, float>::fill(float value);

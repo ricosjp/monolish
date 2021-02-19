@@ -126,14 +126,14 @@ public:
   size_t get_offset() const { return first; }
 
   /**
-   * @brief change first position 
+   * @brief change first position
    * @note
    * - # of computation: 1
    **/
   void set_first(size_t i) { first = i; }
 
   /**
-   * @brief change last position 
+   * @brief change last position
    * @note
    * - # of computation: 1
    **/
