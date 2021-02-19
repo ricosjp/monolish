@@ -95,6 +95,7 @@ class AggregateDataFrame:
         dataframe = dataframe[dataframe["stat"] != "IN"]
 
         # group by
+        dataframe.time = dataframe.time.astype(float)
         groupby_group_dfgb = dataframe.groupby(["group", "name"])
 
         sum_by_aggr_df = groupby_group_dfgb.sum()
