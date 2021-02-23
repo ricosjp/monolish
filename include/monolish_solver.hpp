@@ -171,13 +171,13 @@ public:
 
   /**
    * @brief get print rhistory status
-   * @param[in] print rhistory true/false
+   * @return print rhistory true/false
    **/
   bool get_print_rhistory() const { return print_rhistory; }
 
   /**
-   * get handling scheme of initial vector handling
-   * return current handling scheme of initial vector
+   * @brief get handling scheme of initial vector handling
+   * @return current handling scheme of initial vector
    */
   initvec_scheme get_initvec_scheme() const { return initvecscheme; }
 };
