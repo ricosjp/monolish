@@ -35,6 +35,9 @@ Unreleased
 - Use view1D in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/246
 - support view1D in is_same_size() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
+### Fixed
+- fix to allow nvprof in docker https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/256
+
 ### Deprecated
 - delete gpu cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/253
 
