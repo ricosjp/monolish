@@ -29,6 +29,7 @@ Unreleased
 - add view1D axpy test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
 ### Changed
+- add scheme of initial vector handling in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/257
 - add pragma once and shebang https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/251
 - generate matrix VML https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/248
 - support multiple eigenpairs in LOBPCG https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/249
