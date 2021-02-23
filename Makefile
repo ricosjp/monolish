@@ -84,6 +84,7 @@ clean:
 in_mkl_gpu:
 	docker run -it --rm \
 		--gpus all   \
+		--cap-add SYS_ADMIN \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
 		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
 		-v $(MONOLISH_TOP):/monolish \
@@ -101,6 +102,7 @@ in_mkl_cpu:
 in_oss_gpu:
 	docker run -it --rm \
 		--gpus all   \
+		--cap-add SYS_ADMIN \
 		-e MONOLISH_DIR=/opt/monolish/0.1 \
 		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
 		-v $(MONOLISH_TOP):/monolish \
