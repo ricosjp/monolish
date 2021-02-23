@@ -15,6 +15,17 @@ namespace monolish {
  **/
 namespace solver {
 
+/**
+ * @brief Enum class defining how to handle initial vectors
+ * RANDOM use randomly initialized vectors
+ * USER use initial vectors set by user
+ */
+enum class initvec_scheme
+  {
+   RANDOM,
+   USER,
+  };
+
 template <typename MATRIX, typename Float> class precondition;
 
 /**
@@ -31,6 +42,7 @@ protected:
   bool print_rhistory = false;
   std::string rhistory_file;
   std::ostream *rhistory_stream;
+  initvec_scheme initvecscheme = initvec_scheme::RANDOM;
 
   Float get_residual(vector<Float> &x);
 
@@ -117,6 +129,14 @@ public:
       throw std::runtime_error("error bad filename");
     }
   }
+
+  /**
+   * @brief set how to handle initial vector
+   * @param[in] scheme: RANDOM or USER
+   */
+  void set_initvec_scheme(initvec_scheme scheme) {
+    initvecscheme = scheme;
+  }
   ///////////////////////////////////////////////////////////////////
 
   /**
@@ -154,6 +174,12 @@ public:
    * @param[in] print rhistory true/false
    **/
   bool get_print_rhistory() { return print_rhistory; }
+
+  /**
+   * get handling scheme of initial vector handling
+   * return current handling scheme of initial vector
+   */
+  initvec_scheme get_initvec_scheme() const { return initvecscheme; }
 };
 
 /**
