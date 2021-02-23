@@ -105,15 +105,23 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
                                               (2 * m + i + 1) * n));
   }
 
-  // Preparing initial input to be orthonormal to each other
-  for (std::size_t i = 0; i < m; ++i) {
-    T minval = 0.0;
-    T maxval = 1.0;
-    util::random_vector(r, minval, maxval);
-    blas::copy(r, x[i]);
-    T norm;
-    blas::nrm2(x[i], norm);
-    blas::scal(1.0 / norm, x[i]);
+  if (this->get_initvec_scheme() == monolish::solver::initvec_scheme::RANDOM) {
+    // Preparing initial input to be orthonormal to each other
+    for (std::size_t i = 0; i < m; ++i) {
+      T minval = 0.0;
+      T maxval = 1.0;
+      util::random_vector(r, minval, maxval);
+      blas::copy(r, x[i]);
+      T norm;
+      blas::nrm2(x[i], norm);
+      blas::scal(1.0 / norm, x[i]);
+    }
+  } else { // initvec_scheme::USER
+    // Copy User-supplied xinout to x
+    for (std::size_t i = 0; i < m; ++i) {
+      view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
+      blas::copy(xinout_i, x[i]);
+    }
   }
 
   if (A.get_device_mem_stat() == true) {

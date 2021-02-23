@@ -15,6 +15,16 @@ namespace monolish {
  **/
 namespace solver {
 
+/**
+ * @brief Enum class defining how to handle initial vectors
+ * RANDOM use randomly initialized vectors
+ * USER use initial vectors set by user
+ */
+enum class initvec_scheme {
+  RANDOM,
+  USER,
+};
+
 template <typename MATRIX, typename Float> class precondition;
 
 /**
@@ -31,6 +41,7 @@ protected:
   bool print_rhistory = false;
   std::string rhistory_file;
   std::ostream *rhistory_stream;
+  initvec_scheme initvecscheme = initvec_scheme::RANDOM;
 
   Float get_residual(vector<Float> &x);
 
@@ -117,43 +128,55 @@ public:
       throw std::runtime_error("error bad filename");
     }
   }
+
+  /**
+   * @brief set how to handle initial vector
+   * @param[in] scheme: RANDOM or USER
+   */
+  void set_initvec_scheme(initvec_scheme scheme) { initvecscheme = scheme; }
   ///////////////////////////////////////////////////////////////////
 
   /**
    * @brief get library option
    * @return library number
    **/
-  int get_lib() { return lib; }
+  int get_lib() const { return lib; }
 
   /**
    * @brief get tolerance
    * @return tolerance
    **/
-  double get_tol() { return tol; }
+  double get_tol() const { return tol; }
 
   /**
    * @brief get maxiter
    * @return  maxiter
    **/
-  size_t get_maxiter() { return maxiter; }
+  size_t get_maxiter() const { return maxiter; }
 
   /**
    * @brief get miniter
    * @return  miniter
    **/
-  size_t get_miniter() { return miniter; }
+  size_t get_miniter() const { return miniter; }
 
   /**
    * @brief get residual method(default=0)
    * @return residual method number
    **/
-  size_t get_residual_method() { return resid_method; }
+  size_t get_residual_method() const { return resid_method; }
 
   /**
    * @brief get print rhistory status
-   * @param[in] print rhistory true/false
+   * @return print rhistory true/false
    **/
-  bool get_print_rhistory() { return print_rhistory; }
+  bool get_print_rhistory() const { return print_rhistory; }
+
+  /**
+   * @brief get handling scheme of initial vector handling
+   * @return current handling scheme of initial vector
+   */
+  initvec_scheme get_initvec_scheme() const { return initvecscheme; }
 };
 
 /**

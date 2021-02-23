@@ -1,6 +1,7 @@
 #include "../../test_utils.hpp"
 #include "../include/monolish_eigen.hpp"
 #include "../include/monolish_equation.hpp"
+#include "../include/monolish_solver.hpp"
 #include <chrono>
 #include <iostream>
 
@@ -12,6 +13,9 @@ bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
 
   monolish::vector<T> eigvals(eignum);
   monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+  for (size_t i = 0; i < eignum; ++i) {
+    eigvecs.insert(i, (i * 7) % A.get_row(), 1.0);
+  }
 
   monolish::standard_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
 
@@ -19,6 +23,7 @@ bool benchmark_SEVP(const char *fileA, const int eignum, const T tol_res) {
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(A.get_row());
+  solver.set_initvec_scheme(monolish::solver::initvec_scheme::USER);
 
   // precond setting
   PRECOND precond;
@@ -51,6 +56,9 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
 
   monolish::vector<T> eigvals(eignum);
   monolish::matrix::Dense<T> eigvecs(eignum, A.get_row());
+  for (size_t i = 0; i < eignum; ++i) {
+    eigvecs.insert(i, (i * 7) % A.get_row(), 1.0);
+  }
 
   monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
 
@@ -58,6 +66,7 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(A.get_row());
+  solver.set_initvec_scheme(monolish::solver::initvec_scheme::USER);
 
   // precond setting
   PRECOND precond;
@@ -85,6 +94,9 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
   monolish::matrix::CRS<T> A(mat);
   monolish::vector<T> lambda(exact_result.size());
   monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
+  for (size_t i = 0; i < exact_result.size(); ++i) {
+    x.insert(i, (i * 7) % A.get_row(), 1.0);
+  }
   monolish::util::send(A);
 
   monolish::eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
@@ -93,6 +105,7 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(maxiter);
+  solver.set_initvec_scheme(monolish::solver::initvec_scheme::USER);
 
   // precond setting
   PRECOND precond;
@@ -125,6 +138,9 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   monolish::matrix::CRS<T> B(matB);
   monolish::vector<T> lambda(exact_result.size());
   monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
+  for (size_t i = 0; i < exact_result.size(); ++i) {
+    x.insert(i, (i * 7) % A.get_row(), 1.0);
+  }
   monolish::util::send(A, B);
 
   monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
@@ -133,6 +149,7 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(A.get_row());
+  solver.set_initvec_scheme(monolish::solver::initvec_scheme::USER);
 
   // precond setting
   PRECOND precond;
