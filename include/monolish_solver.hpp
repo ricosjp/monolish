@@ -20,11 +20,10 @@ namespace solver {
  * RANDOM use randomly initialized vectors
  * USER use initial vectors set by user
  */
-enum class initvec_scheme
-  {
-   RANDOM,
-   USER,
-  };
+enum class initvec_scheme {
+  RANDOM,
+  USER,
+};
 
 template <typename MATRIX, typename Float> class precondition;
 
@@ -134,9 +133,7 @@ public:
    * @brief set how to handle initial vector
    * @param[in] scheme: RANDOM or USER
    */
-  void set_initvec_scheme(initvec_scheme scheme) {
-    initvecscheme = scheme;
-  }
+  void set_initvec_scheme(initvec_scheme scheme) { initvecscheme = scheme; }
   ///////////////////////////////////////////////////////////////////
 
   /**
