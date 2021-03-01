@@ -79,6 +79,16 @@ public:
   vector(const std::vector<Float> &vec);
 
   /**
+   * @brief copy from std::vector
+   * @param vec input std::vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  vector(const std::initializer_list<Float> &list);
+
+  /**
    * @brief copy from monolish::vector
    * @param vec input monolish::vector
    * @note

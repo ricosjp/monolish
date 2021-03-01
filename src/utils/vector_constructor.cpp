@@ -72,6 +72,18 @@ template <typename T> vector<T>::vector(const std::vector<T> &vec) {
 template vector<double>::vector(const std::vector<double> &vec);
 template vector<float>::vector(const std::vector<float> &vec);
 
+// copy constructor
+template <typename T> vector<T>::vector(const std::initializer_list<T> &list) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  resize(list.size());
+  std::copy(list.begin(), list.end(), val.begin());
+  logger.util_out();
+}
+
+template vector<double>::vector(const std::initializer_list<double> &vec);
+template vector<float>::vector(const std::initializer_list<float> &vec);
+
 template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
