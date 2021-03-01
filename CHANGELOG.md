@@ -40,6 +40,7 @@ Unreleased
 - fix to allow nvprof in docker https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/256
 
 ### Deprecated
+- delete std::vector row(), col(), diag() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/259
 - delete gpu cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/253
 
 0.11.1 - 2021/02/09
