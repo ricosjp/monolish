@@ -54,8 +54,7 @@ template <typename T> vector<T> COO<T>::row(const size_t r) const {
 }
 template vector<double>
 monolish::matrix::COO<double>::row(const size_t r) const;
-template vector<float>
-monolish::matrix::COO<float>::row(const size_t r) const;
+template vector<float> monolish::matrix::COO<float>::row(const size_t r) const;
 
 template <typename T> void COO<T>::row(const size_t r, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
@@ -90,8 +89,7 @@ template <typename T> vector<T> COO<T>::col(const size_t c) const {
 }
 template vector<double>
 monolish::matrix::COO<double>::col(const size_t c) const;
-template vector<float>
-monolish::matrix::COO<float>::col(const size_t c) const;
+template vector<float> monolish::matrix::COO<float>::col(const size_t c) const;
 
 template <typename T> void COO<T>::col(const size_t c, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
