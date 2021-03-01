@@ -20,6 +20,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- support vector constructor from initializer_list https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/261
 
 0.12.0 - 2021/03/02
 -----------

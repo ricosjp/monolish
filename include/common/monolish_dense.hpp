@@ -124,7 +124,20 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Dense(const size_t M, const size_t N, const std::vector<Float> value);
+  Dense(const size_t M, const size_t N, const std::vector<Float> &value);
+
+  /**
+   * @brief Create dense matrix from std::initializer_list
+   * @param M # of row
+   * @param N # of col
+   * @param list value std::initializer_list (size M x N)
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  Dense(const size_t M, const size_t N,
+        const std::initializer_list<Float> &list);
 
   /**
    * @brief Create random dense matrix from dense matrix

@@ -40,7 +40,7 @@ template Dense<float>::Dense(const size_t M, const size_t N,
                              const float *value);
 
 template <typename T>
-Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> value) {
+Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   set_row(M);
@@ -48,13 +48,31 @@ Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> value) {
   set_nnz(M * N);
 
   val.resize(nnz);
-  std::copy(value.data(), value.data() + nnz, val.begin());
+  std::copy(value.begin(), value.end(), val.begin());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
-                              const std::vector<double> value);
+                              const std::vector<double> &value);
 template Dense<float>::Dense(const size_t M, const size_t N,
-                             const std::vector<float> value);
+                             const std::vector<float> &value);
+
+template <typename T>
+Dense<T>::Dense(const size_t M, const size_t N,
+                const std::initializer_list<T> &list) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  set_row(M);
+  set_col(N);
+  set_nnz(M * N);
+
+  val.resize(nnz);
+  std::copy(list.begin(), list.end(), val.begin());
+  logger.util_out();
+}
+template Dense<double>::Dense(const size_t M, const size_t N,
+                              const std::initializer_list<double> &list);
+template Dense<float>::Dense(const size_t M, const size_t N,
+                             const std::initializer_list<float> &list);
 
 template <typename T>
 Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
