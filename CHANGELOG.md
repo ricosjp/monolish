@@ -37,6 +37,7 @@ Unreleased
 - support view1D in is_same_size() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/245
 
 ### Fixed
+- fix view1D VML offset bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/260
 - fix to allow nvprof in docker https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/256
 
 ### Deprecated
