@@ -11,8 +11,8 @@ void vvpow_core(const F1 &a, const F2 &b, F3 &y) {
   assert(util::is_same_size(a, b, y));
   assert(util::is_same_device_mem_stat(a, b, y));
 
-  internal::vpow(y.size(), a.data(), b.data(), y.data(),
-                 y.get_device_mem_stat());
+  internal::vpow(y.size(), a.data() + a.get_offset(), b.data() + b.get_offset(),
+                 y.data() + y.get_offset(), y.get_device_mem_stat());
 
   logger.func_out();
 }
@@ -26,7 +26,8 @@ void svpow_core(const F1 &a, const F2 &alpha, F3 &y) {
   assert(util::is_same_size(a, y));
   assert(util::is_same_device_mem_stat(a, y));
 
-  internal::vpow(y.size(), a.data(), alpha, y.data(), y.get_device_mem_stat());
+  internal::vpow(y.size(), a.data() + a.get_offset(), alpha,
+                 y.data() + y.get_offset(), y.get_device_mem_stat());
 
   logger.func_out();
 }
