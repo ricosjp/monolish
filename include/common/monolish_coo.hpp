@@ -529,7 +529,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<Float> row(std::size_t i) const;
+  vector<Float> row(std::size_t i) const;
 
   /**
    * @brief get row vector
@@ -551,7 +551,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<Float> col(std::size_t j) const;
+  vector<Float> col(std::size_t j) const;
 
   /**
    * @brief get column vector
@@ -572,7 +572,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<Float> diag() const;
+  vector<Float> diag() const;
 
   /**
    * @brief get diag. vector
