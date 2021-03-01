@@ -136,7 +136,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Dense(const size_t M, const size_t N, const std::initializer_list<Float> &list);
+  Dense(const size_t M, const size_t N,
+        const std::initializer_list<Float> &list);
 
   /**
    * @brief Create random dense matrix from dense matrix

@@ -57,7 +57,8 @@ template Dense<float>::Dense(const size_t M, const size_t N,
                              const std::vector<float> &value);
 
 template <typename T>
-Dense<T>::Dense(const size_t M, const size_t N, const std::initializer_list<T> &list) {
+Dense<T>::Dense(const size_t M, const size_t N,
+                const std::initializer_list<T> &list) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   set_row(M);
