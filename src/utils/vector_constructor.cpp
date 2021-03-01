@@ -81,8 +81,8 @@ template <typename T> vector<T>::vector(const std::initializer_list<T> &list) {
   logger.util_out();
 }
 
-template vector<double>::vector(const std::initializer_list<double> &vec);
-template vector<float>::vector(const std::initializer_list<float> &vec);
+template vector<double>::vector(const std::initializer_list<double> &list);
+template vector<float>::vector(const std::initializer_list<float> &list);
 
 template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
