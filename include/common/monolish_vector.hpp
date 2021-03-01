@@ -79,8 +79,8 @@ public:
   vector(const std::vector<Float> &vec);
 
   /**
-   * @brief copy from std::vector
-   * @param vec input std::vector
+   * @brief copy from initializer_list
+   * @param list input initializer_list
    * @note
    * - # of computation: N
    * - Multi-threading: false
