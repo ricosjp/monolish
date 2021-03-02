@@ -75,6 +75,65 @@ template CRS<float>::CRS(const size_t M, const size_t N,
                          const std::vector<int> colind,
                          const std::vector<float> value);
 
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
+            const int *colind, const T *value, const size_t origin) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = NNZ;
+  gpu_status = false;
+  row_ptr.resize(M + 1);
+  col_ind.resize(nnz);
+  val.resize(nnz);
+  std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
+  std::copy(colind, colind + nnz, col_ind.begin());
+  std::copy(value, value + nnz, val.begin());
+
+#pragma omp parallel for
+  for (size_t i = 0; i < nnz; i++) {
+    col_index[i] -= origin;
+  }
+
+  compute_hash();
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ,
+                          const int *rowptr, const int *colind,
+                          const double *value, const size_t origin);
+template CRS<float>::CRS(const size_t M, const size_t N, const size_t NNZ,
+                         const int *rowptr, const int *colind,
+                         const float *value, const size_t origin);
+
+
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
+            const std::vector<int> colind, const vector<T> value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  nnz = value.size();
+  gpu_status = false;
+  row_ptr.resize(M + 1);
+  col_ind.resize(nnz);
+  val.resize(nnz);
+  std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
+  std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
+  std::copy(value.data(), value.data() + nnz, val.begin());
+  compute_hash();
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N,
+                          const std::vector<int> rowptr,
+                          const std::vector<int> colind,
+                          const vector<double> value);
+template CRS<float>::CRS(const size_t M, const size_t N,
+                         const std::vector<int> rowptr,
+                         const std::vector<int> colind,
+                         const vector<float> value);
+
 // copy constructor
 template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
