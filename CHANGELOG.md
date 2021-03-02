@@ -26,6 +26,9 @@ Unreleased
 - add matrix constructor from monolish::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
+### Fixed
+- update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263
+
 0.12.0 - 2021/03/02
 -----------
 ### Added
