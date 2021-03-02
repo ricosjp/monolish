@@ -29,6 +29,9 @@ Unreleased
 ### Fixed
 - update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263
 
+### Deprecated
+- delete row/col vector arithmetics in Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/264
+
 0.12.0 - 2021/03/02
 -----------
 ### Added

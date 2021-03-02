@@ -49,7 +49,7 @@ vpath %.cpp ./src/blas/matrix/mataddsub/
 vpath %.cpp ./src/blas/matrix/matmul
 vpath %.cpp ./src/blas/matrix/matvec
 vpath %.cpp ./src/blas/matrix/scal
-vpath %.cpp ./src/blas/matrix/subvec_op
+vpath %.cpp ./src/blas/matrix/diag_op
 
 vpath %.cpp ./src/equation/
 vpath %.cpp ./src/equation/lu/
