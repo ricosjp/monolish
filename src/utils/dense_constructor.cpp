@@ -57,6 +57,38 @@ template Dense<float>::Dense(const size_t M, const size_t N,
                              const std::vector<float> &value);
 
 template <typename T>
+Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  set_row(M);
+  set_col(N);
+  set_nnz(M * N);
+
+  val.resize(nnz);
+  std::copy(value.data(), value.data()+nnz, val.begin());
+
+  if(value.get_device_mem_stat() == true){
+#if MONOLISH_USE_GPU
+    send();
+    const T* data = value.data();
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < get_nnz(); i++) {
+      val[i] = data[i];
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  }
+
+  logger.util_out();
+}
+template Dense<double>::Dense(const size_t M, const size_t N,
+                              const vector<double> &value);
+template Dense<float>::Dense(const size_t M, const size_t N,
+                             const vector<float> &value);
+
+template <typename T>
 Dense<T>::Dense(const size_t M, const size_t N,
                 const std::initializer_list<T> &list) {
   Logger &logger = Logger::get_instance();

@@ -151,7 +151,7 @@ public:
    * @note
    * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
    * - Multi-threading: false
-   * - GPU acceleration: false
+   * - GPU acceleration: true
    **/
   CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
       const std::vector<int> &colind, const vector<Float> &value);
