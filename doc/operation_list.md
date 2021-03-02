@@ -1,26 +1,36 @@
 # Operation list {#oplist_md}
 ![](img/call_blas.png)
-# BLAS Operations
+
+
+# Introduction
+- ここに説明を書く
+- vectorにはview1Dも突っ込める(ようにする)
+
+# BLAS 
 
 ## BLAS Lv1
 
 | func  | Intel    | NVIDIA   | OSS       |
 |-------|----------|----------|-----------|
+| copy  | MKL      | cuBLAS   | CBLAS互換 |
+| sum   | monolish | monolish | monolish  |
 | asum  | MKL      | cuBLAS   | CBLAS互換 |
 | axpy  | MKL      | cuBLAS   | CBLAS互換 |
 | axpyz | monolish | monolish | monolish  |
+| xpay  | monolish | monolish | monolish  |
 | dot   | MKL      | cuBLAS   | CBLAS互換 |
+| nrm1  | monolish | monolish | monolish  |
 | nrm2  | MKL      | cuBLAS   | CBLAS互換 |
 | scal  | MKL      | cuBLAS   | CBLAS互換 |
-| xpay  | monolish | monolish | monolish  |
-| sum   | monolish | monolish | monolish  |
 
-## Extended BLAS Lv1: Matrix scale (alpha\*A)
+## Extended BLAS Lv1
 
-| func  | Intel    | NVIDIA   | OSS      |
-|-------|----------|----------|----------|
-| Dense | monolish | monolish | monolish |
-| CRS   | monolish | monolish | monolish |
+| func                | Intel    | NVIDIA   | OSS      |
+|---------------------|----------|----------|----------|
+| matrix scale(Dense) | monolish | monolish | monolish |
+| matrix scale(CRS)   | monolish | monolish | monolish |
+| vecadd              | monolish | monolish | monolish |
+| vecsub              | monolish | monolish | monolish |
 
 ## BLAS Lv2 (matvec)
 
@@ -45,7 +55,7 @@
 | Dense | MKL      | monolish | monolish |
 | CRS   | MKL      | monolish | monolish |
 
-# Vector Operations
+# Vector (and view1D) Operations
 
 ## scalar-vector VML
 
@@ -74,7 +84,6 @@
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
-| transpose   | monolish      | monolish       | monolish |
 
 ## vector Mathematical functions of VML
 
@@ -153,24 +162,6 @@
 | min(v)       |       MKL      |       monolish |       monolish |
 | min(v,v)     |       MKL      |       monolish |       monolish |
 
-## Row/Col vector and scalar operations (Dense)
-
-| func | Intel    | NVIDIA   | OSS      |
-|------|----------|----------|----------|
-| add  | monolish | monolish | monolish |
-| sub  | monolish | monolish | monolish |
-| mul  | monolish | monolish | monolish |
-| div  | monolish | monolish | monolish |
-
-## Row/Col vector and vector operations (Dense)
-
-| func | Intel    | NVIDIA   | OSS      |
-|------|----------|----------|----------|
-| add  | monolish | monolish | monolish |
-| sub  | monolish | monolish | monolish |
-| mul  | monolish | monolish | monolish |
-| div  | monolish | monolish | monolish |
-
 # CRS Matrix Operations
 
 ## scalar-CRS operations of VML
@@ -198,7 +189,6 @@
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
 | copy        | MKL           | cuBLAS         | CBLAS互換|
-| transpose   | monolish      | monolish       | monolish |
 
 ## CRS mathematical functions of VML
 
@@ -224,36 +214,27 @@
 | min(v)       |       MKL      |       monolish |       monolish |
 | min(v,v)     |       MKL      |       monolish |       monolish |
 
-## Row/Col vector and scalar operations (CRS)
-
-| func | Intel            | NVIDIA            | OSS             |
-|------|------------------|-------------------|-----------------|
-| add  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| sub  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| mul  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| div  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-
-## Row/Col vector and vector operations (CRS)
-
-| func | Intel            | NVIDIA            | OSS             |
-|------|------------------|-------------------|-----------------|
-| add  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| sub  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| mul  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-| div  | todo) not impl.  | todo) not impl.   | todo) not impl. |
-
 # Linear Solvers
 
-## Dense (あまり決まってない)
-| func     | Intel                                        | NVIDIA                    | OSS             |
-|----------|----------------------------------------------|---------------------------|---------------- |
-| LU       | MKL                                          | cusolver                  | OpenBLAS+LAPACK |
-| Cholesky | MKL                                          | todo) not impl.*          | OpenBLAS+LAPACK |
-| QR       | todo) not impl.->MKL                         | todo) not impl.->cusolver |                 |
+## Direct Solvers for for Dense matrix
+| func     | Intel                                        | NVIDIA                    | OSS                                    |
+|----------|----------------------------------------------|---------------------------|--------------------------------------- |
+| LU       | MKL                                          | cusolver                  | OpenBLAS+LAPACK                        |
+| Cholesky | MKL                                          | not impl.*                | OpenBLAS+LAPACK                        |
+| QR       | todo) not impl.->MKL                         | todo) not impl.->cusolver | todo) not impl. -> OpenBLAS+LAPACK     |
 
-- *) Cholesky is not impl. in cusolver11.1
+- *) Cholesky is not impl. in cusolver 11.1
 
-## Sparse LA
+## Direct Solvers for sparse matrix
+| func     | Intel                          | NVIDIA           | OSS                             |
+|----------|--------------------------------|------------------|-------------------------------- |
+| LU       | todo) not impl.->MKL           | not impl.*       | todo) not impl. -> MUMPS        |
+| Cholesky | todo) not impl.->MKL           | cusolver         | todo) not impl. -> ????         |
+| QR       | todo) not impl.->MKL           | cusolver         | todo) not impl. -> ????         |
+
+- *) sparse LU is not impl. in cusolver 11.1
+
+## Iterative solvers (only CRS now, We will support Dense)
 
 | func     | Intel          | NVIDIA         | OSS            |
 |----------|----------------|----------------|----------------|
@@ -261,15 +242,37 @@
 | BiCGSTAB | monolish       | monolish       | monolish       |
 | Jacobi   | monolish       | monolish       | monolish       |
 
-## Sparse LA Preconditioner
+## Preconditioners of Sparse Linear solver
 
-| func   | Intel                                | NVIDIA   | OSS      |
-|--------|--------------------------------------|----------|----------|
-| Jacobi | monolish                             | monolish | monolish |
+| func   | Intel          | NVIDIA   | OSS      |
+|--------|----------------|----------|----------|
+| Jacobi | monolish       | monolish | monolish |
 
-## Sparse Eigen
+# Standard Eigen Solvers
 
-| func    | Intel                     | NVIDIA                    | OSS                       |
-|---------|---------------------------|---------------------------|---------------------------|
-| Lanczos | todo) not impl.->monolish | todo) not impl.->monolish | todo) not impl.->monolish |
-| Arnoldi | todo) not impl.->monolish | todo) not impl.->monolish | todo) not impl.->monolish |
+## For dense matrix
+
+| func                     | Intel     | NVIDIA         | OSS             |
+|--------------------------|-----------|----------------|-----------------|
+| Devide and Conquer       | MKL       | cusolver       | OpenBLAS+LAPACK |
+
+## For sparse matrix
+
+| func                     | Intel     | NVIDIA         | OSS             |
+|--------------------------|-----------|----------------|-----------------|
+| LOBPCG                   | monolish  | monolish       | monolish        |
+
+# Generalized Eigen Solvers
+
+## For dense matrix
+
+| func                     | Intel     | NVIDIA         | OSS             |
+|--------------------------|-----------|----------------|-----------------|
+| Devide and Conquer       | MKL       | cusolver       | OpenBLAS+LAPACK |
+
+
+## For sparse matrix
+
+| func                     | Intel     | NVIDIA         | OSS             |
+|--------------------------|-----------|----------------|-----------------|
+| LOBPCG                   | monolish  | monolish       | monolish        |
