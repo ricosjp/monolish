@@ -127,6 +127,18 @@ public:
   Dense(const size_t M, const size_t N, const std::vector<Float> &value);
 
   /**
+   * @brief Create dense matrix from monolish::vector
+   * @param M # of row
+   * @param N # of col
+   * @param value value std::vector (size M x N)
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  Dense(const size_t M, const size_t N, const vector<Float> &value);
+
+  /**
    * @brief Create dense matrix from std::initializer_list
    * @param M # of row
    * @param N # of col
@@ -163,6 +175,18 @@ public:
    * - GPU acceleration: false
    **/
   Dense(const size_t M, const size_t N, const Float value);
+
+  /**
+   * @brief Set Dense array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const std::vector<Float> &value);
 
   /**
    * @brief get # of row

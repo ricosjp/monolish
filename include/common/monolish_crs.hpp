@@ -104,6 +104,25 @@ public:
       const int *colind, const Float *value);
 
   /**
+   * @brief Create CRS matrix from array, also compute the hash
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of non-zero elements
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind n-origin col_ind, which stores the column numbers of the
+   *non-zero elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash) + nnz(compute
+   *origin)
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
+      const int *colind, const Float *value, const size_t origin);
+
+  /**
    * @brief Create CRS matrix from std::vector, also compute the hash
    * @param M # of row
    * @param N # of col
@@ -117,8 +136,25 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  CRS(const size_t M, const size_t N, const std::vector<int> rowptr,
-      const std::vector<int> colind, const std::vector<Float> value);
+  CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
+      const std::vector<int> &colind, const std::vector<Float> &value);
+
+  /**
+   * @brief Create CRS matrix from std::vector, also compute the hash
+   * @param M # of row
+   * @param N # of col
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash)
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
+      const std::vector<int> &colind, const vector<Float> &value);
 
   /**
    * @brief Convert CRS matrix from COO matrix, also compute the hash
@@ -161,6 +197,23 @@ public:
    *        - else; coping data only on CPU
    **/
   CRS(const CRS<Float> &mat);
+
+  /**
+   * @brief Set CRS array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const std::vector<int> &rowptr,
+               const std::vector<int> &colind, const std::vector<Float> &value);
 
   /**
    * @brief print all elements to standard I/O

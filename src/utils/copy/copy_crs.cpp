@@ -37,5 +37,30 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
 template void CRS<double>::operator=(const CRS<double> &mat);
 template void CRS<float>::operator=(const CRS<float> &mat);
 
+template <typename T>
+void CRS<T>::set_ptr(const size_t M, const size_t N,
+                     const std::vector<int> &rowptr,
+                     const std::vector<int> &colind,
+                     const std::vector<T> &value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  col_ind = colind;
+  row_ptr = rowptr;
+  val = value;
+
+  rowN = M;
+  colN = N;
+  nnz = val.size();
+  logger.util_out();
+}
+template void CRS<double>::set_ptr(const size_t M, const size_t N,
+                                   const std::vector<int> &rowptr,
+                                   const std::vector<int> &colind,
+                                   const std::vector<double> &value);
+template void CRS<float>::set_ptr(const size_t M, const size_t N,
+                                  const std::vector<int> &rowptr,
+                                  const std::vector<int> &colind,
+                                  const std::vector<float> &value);
+
 } // namespace matrix
 } // namespace monolish

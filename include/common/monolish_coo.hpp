@@ -111,7 +111,7 @@ public:
       const int *col, const Float *value);
 
   /**
-   * @brief Create COO matrix from array
+   * @brief Create COO matrix from std::vector
    * @param M # of row
    * @param N # of col
    * @param NNZ # of non-zero elements
@@ -128,6 +128,30 @@ public:
   COO(const size_t M, const size_t N, const size_t NNZ,
       const std::vector<int> &row, const std::vector<int> &col,
       const std::vector<Float> &value) {
+    this = COO(M, N, NNZ, row.data(), col.data(), value.data());
+  }
+
+  /**
+   * @brief Create COO matrix from monolish::vector
+   * @param M # of row
+   * @param N # of col
+   * @param NNZ # of non-zero elements
+   * @param row row index, which stores the row numbers of the non-zero elements
+   *(size nnz)
+   * @param col col index, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   * @warning
+   * gpu_status of input vectors must be false
+   **/
+  COO(const size_t M, const size_t N, const size_t NNZ,
+      const std::vector<int> &row, const std::vector<int> &col,
+      const vector<Float> &value) {
+    assert(value.get_device_mem_stat() == false);
     this = COO(M, N, NNZ, row.data(), col.data(), value.data());
   }
 
