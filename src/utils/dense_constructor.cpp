@@ -65,12 +65,12 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
   set_nnz(M * N);
 
   val.resize(nnz);
-  std::copy(value.data(), value.data()+nnz, val.begin());
+  std::copy(value.data(), value.data() + nnz, val.begin());
 
-  if(value.get_device_mem_stat() == true){
+  if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     send();
-    const T* data = value.data();
+    const T *data = value.data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       val[i] = data[i];

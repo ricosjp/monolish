@@ -25,7 +25,6 @@ Unreleased
 - add set_ptr in all matrix dormat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 - add matrix constructor from monolish::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
-- add Dense matrix constructor from view1D  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 0.12.0 - 2021/03/02
 -----------

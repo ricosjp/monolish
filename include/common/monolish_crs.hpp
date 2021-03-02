@@ -110,17 +110,17 @@ public:
    * @param NNZ # of non-zero elements
    * @param rowptr row_ptr, which stores the starting points of the rows of the
    *arrays value and col_ind (size M+1)
-   * @param colind n-origin col_ind, which stores the column numbers of the non-zero
-   *elements (size nnz)
+   * @param colind n-origin col_ind, which stores the column numbers of the
+   *non-zero elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash) + nnz(compute origin)
+   * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash) + nnz(compute
+   *origin)
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
       const int *colind, const Float *value, const size_t origin);
-
 
   /**
    * @brief Create CRS matrix from std::vector, also compute the hash
