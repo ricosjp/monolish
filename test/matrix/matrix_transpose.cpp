@@ -94,23 +94,14 @@ bool test_transpose_elements(const size_t M, const size_t N, double tol) {
 
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {
-      std::string is = std::to_string(i);
-      std::string js = std::to_string(j);
-      std::string s = "A(";
-      s += is;
-      s += ",";
-      s += js;
-      s += ") == A^T(";
-      s += js;
-      s += ",";
-      s += is;
-      s += ")";
-      if (std::abs(A.at(i, j)) > tol &&
-          ans_check<T>(s, A.at(i, j), B.at(j, i), tol) == false) {
+      if (A.at(i, j) != B.at(j, i)) {
         return false;
       }
     }
   }
+  std::cout << "test_transpose_elements"
+            << "(" << get_type<T>() << ")" << std::flush;
+  std::cout << ": pass" << std::endl;
   return true;
 }
 
