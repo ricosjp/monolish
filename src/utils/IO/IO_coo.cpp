@@ -120,18 +120,13 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   std::istringstream data(buf);
   data >> rowNN >> colNN >> NNZ;
 
-  // symmetric check!
-  if (colNN != rowNN) {
-    std::cerr << "Matrix.input: Matrix is not square" << std::endl;
-    exit(-1);
-  }
   if (colNN <= 0 || NNZ < 0) {
     std::cerr << "Matrix.input: Matrix size should be positive" << std::endl;
     exit(-1);
   }
 
   rowN = rowNN;
-  colN = rowN;
+  colN = colNN;
   nnz = NNZ;
 
   // allocate
