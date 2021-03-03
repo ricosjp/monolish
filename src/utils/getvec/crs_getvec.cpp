@@ -23,11 +23,13 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
 #if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < n; i++) {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
-        } else {
-          vecd[i] = 0.0;
         }
       }
     }
@@ -37,11 +39,13 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
+#pragma omp parallel for
+    for (size_t i = 0; i < n; i++) {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
-        } else {
-          vecd[i] = 0.0;
         }
       }
     }
@@ -117,11 +121,13 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
 #if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
+#pragma omp target teams distribute parallel for
+    for (size_t i = 0; i < n; i++) {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
-        } else {
-          vecd[i] = 0.0;
         }
       }
     }
@@ -131,11 +137,13 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   } else {
 #pragma omp parallel for
     for (size_t i = 0; i < n; i++) {
+      vecd[i] = 0;
+    }
+#pragma omp parallel for
+    for (size_t i = 0; i < n; i++) {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
-        } else {
-          vecd[i] = 0.0;
         }
       }
     }
