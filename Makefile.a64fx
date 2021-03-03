@@ -45,7 +45,6 @@ vpath %.cpp ./src/
 vpath %.cpp ./src/blas/vector/
 vpath %.cpp ./src/blas/matrix/
 vpath %.cpp ./src/blas/matrix/copy/
-vpath %.cpp ./src/blas/matrix/getvec/
 vpath %.cpp ./src/blas/matrix/mataddsub/
 vpath %.cpp ./src/blas/matrix/matmul
 vpath %.cpp ./src/blas/matrix/matvec
@@ -62,6 +61,7 @@ vpath %.cpp ./src/internal/arithmetic/
 vpath %.cpp ./src/internal/math/
 
 vpath %.cpp ./src/utils/
+vpath %.cpp ./src/utils/getvec/
 vpath %.cpp ./src/utils/at_insert_sort/
 vpath %.cpp ./src/utils/compare/
 vpath %.cpp ./src/utils/convert

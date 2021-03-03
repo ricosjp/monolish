@@ -1,5 +1,5 @@
-#include "../../../../include/monolish_blas.hpp"
-#include "../../../internal/monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace matrix {
@@ -11,6 +11,9 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
 
   size_t n = get_row() < get_col() ? rowN : colN;
   T *vecd = vec.data();
+
+  assert(n == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   const T *vald = val.data();
   const int *rowd = row_ptr.data();
@@ -35,7 +38,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < get_row(); i++) {
+    for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
@@ -58,14 +61,17 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
+  size_t n = get_row();
   T *vecd = vec.data();
 
   const T *vald = val.data();
   const int *rowd = row_ptr.data();
 
+  assert(n == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
+
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-    size_t n = get_row();
 
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
@@ -80,7 +86,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < get_row(); i++) {
+    for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
@@ -108,6 +114,9 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   const int *rowd = row_ptr.data();
   const int *cold = col_ind.data();
 
+  assert(n == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
+
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
 #pragma omp target teams distribute parallel for
@@ -127,7 +136,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < get_row(); i++) {
+    for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for

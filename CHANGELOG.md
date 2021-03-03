@@ -28,15 +28,18 @@ Unreleased
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 ### Changed
+- move blas/matrix/getvec to util/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - change char* to std::string in matrix I/O https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 - change print_all() MM to COO (delete MM header) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 - support input unsymmetric file MM format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 
 ### Fixed
+- add checking gpu_status and size in getvec https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
 - update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263
 
 ### Deprecated
+- delete return vector getvec function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - delete row/col vector arithmetics in Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/264
 
 0.12.0 - 2021/03/02

@@ -1,5 +1,5 @@
-#include "../../../../include/monolish_blas.hpp"
-#include "../../../internal/monolish_internal.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace matrix {
@@ -16,6 +16,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   const size_t Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -49,6 +50,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   const size_t N = get_col();
 
   assert(N == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
@@ -85,6 +87,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   const size_t N = get_col();
 
   assert(M == vec.size());
+  assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
