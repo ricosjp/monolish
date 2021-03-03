@@ -559,17 +559,6 @@ public:
   /**
    * @brief get row vector
    * @param i row number
-   * @return row vector
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  vector<Float> row(std::size_t i) const;
-
-  /**
-   * @brief get row vector
-   * @param i row number
    * @param vec row vector
    * @note
    * - # of computation: nnz
@@ -577,17 +566,6 @@ public:
    * - GPU acceleration: false
    **/
   void row(std::size_t i, vector<Float> &vec) const;
-
-  /**
-   * @brief get column vector
-   * @param j column number
-   * @return column vector
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  vector<Float> col(std::size_t j) const;
 
   /**
    * @brief get column vector
@@ -599,16 +577,6 @@ public:
    * - GPU acceleration: false
    **/
   void col(std::size_t i, vector<Float> &vec) const;
-
-  /**
-   * @brief get diag. vector
-   * @return diag. vector
-   * @note
-   * - # of computation: nnz
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  vector<Float> diag() const;
 
   /**
    * @brief get diag. vector
