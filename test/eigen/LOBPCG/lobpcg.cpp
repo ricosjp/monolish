@@ -190,19 +190,6 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
 }
 
 template <typename T, typename PRECOND>
-bool test_frank(const int check_ans, const T tol_ev, const T tol_res) {
-  int DIM = 100;
-  monolish::matrix::COO<T> COO = monolish::util::frank_matrix<T>(DIM);
-  monolish::vector<T> exact_result(2);
-  for (int i = 0; i < exact_result.size(); ++i) {
-    exact_result[i] = monolish::util::frank_matrix_eigenvalue<T>(DIM, i);
-  }
-
-  return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, 2 * DIM, "Frank");
-}
-
-template <typename T, typename PRECOND>
 bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
                                const T tol_res) {
   int DIM = 100;
@@ -328,27 +315,6 @@ int main(int argc, char **argv) {
           float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
           check_ans, 1.0e-3, 1.0e-5) == false) {
-    return 1;
-  }
-
-  if (test_frank<double, monolish::equation::none<monolish::matrix::CRS<double>,
-                                                  double>>(check_ans, 1.5e-1,
-                                                           1.0e-5) == false) {
-    return 1;
-  }
-  if (test_frank<float,
-                 monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          check_ans, 1.5e-1, 1.0e-5) == false) {
-    return 1;
-  }
-  if (test_frank<double, monolish::equation::Jacobi<
-                             monolish::matrix::CRS<double>, double>>(
-          check_ans, 1.5e-1, 1.0e-5) == false) {
-    return 1;
-  }
-  if (test_frank<float, monolish::equation::Jacobi<monolish::matrix::CRS<float>,
-                                                   float>>(check_ans, 1.5e-1,
-                                                           1.0e-5) == false) {
     return 1;
   }
 

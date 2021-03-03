@@ -27,6 +27,7 @@ Unreleased
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 ### Fixed
+- do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
 - update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263
 
 ### Deprecated
