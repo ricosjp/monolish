@@ -1,5 +1,5 @@
-#include "../../internal/monolish_internal.hpp"
 #include "../../../include/monolish_blas.hpp"
+#include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace matrix {
@@ -26,8 +26,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
-        }
-        else{
+        } else {
           vecd[i] = 0.0;
         }
       }
@@ -41,8 +40,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
-        }
-        else{
+        } else {
           vecd[i] = 0.0;
         }
       }
@@ -122,8 +120,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
-        }
-        else{
+        } else {
           vecd[i] = 0.0;
         }
       }
@@ -137,8 +134,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
       for (int j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
-        }
-        else{
+        } else {
           vecd[i] = 0.0;
         }
       }
@@ -148,8 +144,8 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   logger.func_out();
 }
 template void monolish::matrix::CRS<double>::col(const size_t c,
-    vector<double> &vec) const;
+                                                 vector<double> &vec) const;
 template void monolish::matrix::CRS<float>::col(const size_t c,
-    vector<float> &vec) const;
+                                                vector<float> &vec) const;
 } // namespace matrix
 } // namespace monolish
