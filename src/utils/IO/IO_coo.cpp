@@ -20,11 +20,6 @@ template <typename T> void COO<T>::print_all(bool force_cpu) const {
   std::cout << std::scientific;
   std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL
-                          " " MM_TYPE_GENERAL)
-            << std::endl;
-  std::cout << rowN << " " << colN << " " << nnz << std::endl;
-
   for (size_t i = 0; i < nnz; i++) {
     std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
               << std::endl;
@@ -41,6 +36,22 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   out << std::scientific;
   out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
+  for (size_t i = 0; i < nnz; i++) {
+    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
+        << std::endl;
+  }
+  logger.util_out();
+}
+template void COO<double>::print_all(std::string filename) const;
+template void COO<float>::print_all(std::string filename) const;
+
+template <typename T> void COO<T>::output_mm(const std::string filename) const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  std::ofstream out(filename);
+  out << std::scientific;
+  out << std::setprecision(std::numeric_limits<T>::max_digits10);
+
   out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL)
       << std::endl;
   out << rowN << " " << colN << " " << nnz << std::endl;
@@ -51,10 +62,10 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   }
   logger.util_out();
 }
-template void COO<double>::print_all(std::string filename) const;
-template void COO<float>::print_all(std::string filename) const;
+template void COO<double>::output_mm(const std::string filename) const;
+template void COO<float>::output_mm(const std::string filename) const;
 
-template <typename T> void COO<T>::input_mm(const char *filename) {
+template <typename T> void COO<T>::input_mm(const std::string filename) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -109,18 +120,13 @@ template <typename T> void COO<T>::input_mm(const char *filename) {
   std::istringstream data(buf);
   data >> rowNN >> colNN >> NNZ;
 
-  // symmetric check!
-  if (colNN != rowNN) {
-    std::cerr << "Matrix.input: Matrix is not square" << std::endl;
-    exit(-1);
-  }
   if (colNN <= 0 || NNZ < 0) {
     std::cerr << "Matrix.input: Matrix size should be positive" << std::endl;
     exit(-1);
   }
 
   rowN = rowNN;
-  colN = rowN;
+  colN = colNN;
   nnz = NNZ;
 
   // allocate
@@ -144,8 +150,8 @@ template <typename T> void COO<T>::input_mm(const char *filename) {
   logger.util_out();
 }
 
-template void COO<double>::input_mm(const char *filename);
-template void COO<float>::input_mm(const char *filename);
+template void COO<double>::input_mm(const std::string filename);
+template void COO<float>::input_mm(const std::string filename);
 
 } // namespace matrix
 } // namespace monolish

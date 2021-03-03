@@ -18,11 +18,6 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  std::cout << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL
-                          " " MM_TYPE_GENERAL)
-            << std::endl;
-  std::cout << rowN << " " << colN << " " << nnz << std::endl;
-
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_GPU
 #pragma omp target

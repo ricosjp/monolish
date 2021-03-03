@@ -21,10 +21,16 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add output_mm in COO https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 - support vector constructor from initializer_list https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/261
 - add set_ptr in all matrix dormat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 - add matrix constructor from monolish::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
+
+### Changed
+- change char* to std::string in matrix I/O https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
+- change print_all() MM to COO (delete MM header) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
+- support input unsymmetric file MM format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 
 ### Fixed
 - do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
