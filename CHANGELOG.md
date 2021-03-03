@@ -28,6 +28,7 @@ Unreleased
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 ### Changed
+- delete printf in transpose test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/268
 - move blas/matrix/getvec to util/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - change char* to std::string in matrix I/O https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 - change print_all() MM to COO (delete MM header) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
