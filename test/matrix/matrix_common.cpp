@@ -109,21 +109,25 @@ template <typename T> bool test() {
   }
 
   // test row(int i)
-  auto row1 = addr_COO.row(1);
+  monolish::vector<T> row1(addr_COO.get_row());
+  addr_COO.row(1, row1);
   if (row1[0] != 4.0 || row1[1] != 0.0 || row1[2] != 5.0) {
     std::cout << "row(int) failed" << std::endl;
     return false;
   }
 
   // test col(int j)
-  auto col1 = addr_COO.col(1);
+  monolish::vector<T> col1(addr_COO.get_col());
+  addr_COO.col(1, col1);
   if (col1[0] != 2.0 || col1[1] != 0.0 || col1[2] != 7.0) {
     std::cout << "col(int) failed" << std::endl;
     return false;
   }
 
   // test diag()
-  auto dv = addr_COO.diag();
+  size_t s = addr_COO.get_row() > addr_COO.get_col() ? addr_COO.get_col() : addr_COO.get_row();
+  monolish::vector<T> dv(s);
+  addr_COO.diag(dv);
   if (dv[0] != 1.0 || dv[1] != 0.0 || dv[2] != 8.0) {
     std::cout << "diag() failed" << std::endl;
     return false;
