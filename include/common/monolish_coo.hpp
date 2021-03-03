@@ -334,22 +334,34 @@ public:
   // ///////////////////////////////////////////////////////////////////////////
 
   /**
-   * @brief Create COO matrix from MatrixMatrket format file
+   * @brief Create COO matrix from MatrixMatrket format file (only real general)
+   * (MatrixMarket format: https://math.nist.gov/MatrixMarket/formats.html)
    * @param filename MatrixMarket format file name
    * @note
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void input_mm(const char *filename);
+  void input_mm(const std::string filename);
 
   /**
-   * @brief Create COO matrix from MatrixMatrket format file
+   * @brief Create COO matrix from MatrixMatrket format file (only real general)
+   * (MatrixMarket format: https://math.nist.gov/MatrixMarket/formats.html)
    * @param filename MatrixMarket format file name
    * @note
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  COO(const char *filename) { input_mm(filename); }
+  COO(const std::string filename) { input_mm(filename); }
+
+  /**
+   * @brief output matrix elements in MatrixMarket format
+   * (MatrixMarket format: https://math.nist.gov/MatrixMarket/formats.html)
+   * @param filename MatrixMarket format file name
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void output_mm(const std::string filename) const;
 
   /**
    * @brief print all elements to standard I/O
@@ -369,7 +381,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void print_all(std::string filename) const;
+  void print_all(const std::string filename) const;
 
   /**
    * @brief Get matrix element (A(i,j))

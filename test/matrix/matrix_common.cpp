@@ -58,8 +58,6 @@ template <typename T> bool test() {
     std::stringstream ss;              // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "3 3 8" << std::endl;
     ss << "1 1 " << 1.0 << std::endl;
     ss << "1 2 " << 2.0 << std::endl;
     ss << "1 3 " << 3.0 << std::endl;
@@ -164,8 +162,6 @@ template <typename T> bool test() {
     std::stringstream ss; // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "4 4 9" << std::endl;
     ss << "1 1 " << 1.0 << std::endl;
     ss << "1 2 " << 2.0 << std::endl;
     ss << "1 3 " << 3.0 << std::endl;
@@ -281,8 +277,6 @@ template <typename T> bool default_constructor_test() {
     std::stringstream ss; // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "2 2 0" << std::endl;
     if (oss.str() != ss.str()) {
       std::cout << "empty A" << std::endl;
       return false;
@@ -301,8 +295,6 @@ template <typename T> bool default_constructor_test() {
     std::stringstream ss; // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "2 2 2" << std::endl;
     ss << "1 1 " << 1.0 << std::endl;
     ss << "2 2 " << 2.0 << std::endl;
     if (oss.str() != ss.str()) {
@@ -325,8 +317,6 @@ template <typename T> bool fixed_size_test() {
     std::stringstream ss; // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "2 2 0" << std::endl;
     if (oss.str() != ss.str()) {
       std::cout << "empty A" << std::endl;
       return false;
@@ -345,8 +335,6 @@ template <typename T> bool fixed_size_test() {
     std::stringstream ss; // To set Float(T) output
     ss << std::scientific;
     ss << std::setprecision(std::numeric_limits<T>::max_digits10);
-    ss << "%%MatrixMarket matrix coordinate real general" << std::endl;
-    ss << "2 2 2" << std::endl;
     ss << "1 1 " << 1.0 << std::endl;
     ss << "2 2 " << 2.0 << std::endl;
     if (oss.str() != ss.str()) {
