@@ -125,7 +125,8 @@ template <typename T> bool test() {
   }
 
   // test diag()
-  size_t s = addr_COO.get_row() > addr_COO.get_col() ? addr_COO.get_col() : addr_COO.get_row();
+  size_t s = addr_COO.get_row() > addr_COO.get_col() ? addr_COO.get_col()
+                                                     : addr_COO.get_row();
   monolish::vector<T> dv(s);
   addr_COO.diag(dv);
   if (dv[0] != 1.0 || dv[1] != 0.0 || dv[2] != 8.0) {
