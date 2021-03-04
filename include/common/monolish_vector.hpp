@@ -205,7 +205,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *data() { return data(); }
+  Float *data() { return val.data(); }
 
   /**
    * @brief resize vector (only CPU)
@@ -241,7 +241,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *begin() const { return val.begin(); }
+  const Float *begin() const { return val.data(); }
 
   /**
    * @brief returns a begin iterator
@@ -249,7 +249,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *begin() { return begin(); }
+  Float *begin() { return val.data(); }
 
   /**
    * @brief returns a end iterator
@@ -257,7 +257,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *end() const { return val.end(); }
+  const Float *end() const { return val.data() + size(); }
 
   /**
    * @brief returns a end iterator
@@ -265,7 +265,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *end() { return end(); }
+  Float *end() { return val.data() + size(); }
 
   /**
    * @brief get vector size

@@ -166,7 +166,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *data() { return data(); }
+  Float *data() { return target_data; }
 
   /**
    * @brief returns begin iterator (include offset)
@@ -182,7 +182,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *begin() { return begin(); }
+  Float *begin() { return target_data + get_offset(); }
 
   /**
    * @brief returns a end iterator
@@ -198,7 +198,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *end() { return end(); }
+  Float *end() { return target_data + range; }
 
   /**
    * @brief print all elements to standart I/O
