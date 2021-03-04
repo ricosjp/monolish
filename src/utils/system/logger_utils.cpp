@@ -4,7 +4,7 @@
 namespace monolish {
 
 // solver
-void Logger::solver_in(std::string func_name) {
+void Logger::solver_in(const std::string func_name) {
   if (LogLevel >= 1) {
     if (filename.empty()) {
       pStream = &std::cout;
@@ -66,7 +66,7 @@ void Logger::solver_out() {
 }
 
 // func
-void Logger::func_in(std::string func_name) {
+void Logger::func_in(const std::string func_name) {
   if (LogLevel >= 2) {
     if (filename.empty()) {
       pStream = &std::cout;
@@ -110,7 +110,7 @@ void Logger::func_out() {
 }
 
 // util
-void Logger::util_in(std::string func_name) {
+void Logger::util_in(const std::string func_name) {
   if (LogLevel >= 3) {
     if (filename.empty()) {
       pStream = &std::cout;
