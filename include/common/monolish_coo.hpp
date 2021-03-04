@@ -399,7 +399,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j) const;
+  Float at(const size_t i, const size_t j) const{ return at(i,j); };
 
   /**
    * @brief Set COO array from std::vector
