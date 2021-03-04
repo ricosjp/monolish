@@ -193,19 +193,19 @@ public:
 
   /**
    * @brief returns a direct pointer to the vector
-   * @return A pointer to the first element
-   * @note
-   * - # of computation: 1
-   **/
-  Float *data() { return val.data(); }
-
-  /**
-   * @brief returns a direct pointer to the vector
    * @return A const pointer to the first element
    * @note
    * - # of computation: 1
    **/
   const Float *data() const { return val.data(); }
+
+  /**
+   * @brief returns a direct pointer to the vector
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  Float *data() { return data(); }
 
   /**
    * @brief resize vector (only CPU)
@@ -241,7 +241,15 @@ public:
    * @note
    * - # of computation: 1
    **/
-  auto begin() { return val.begin(); }
+  auto begin() const{ return val.begin(); }
+
+  /**
+   * @brief returns a begin iterator
+   * @return begin iterator
+   * @note
+   * - # of computation: 1
+   **/
+  auto begin() { return begin(); }
 
   /**
    * @brief returns a end iterator
@@ -249,7 +257,15 @@ public:
    * @note
    * - # of computation: 1
    **/
-  auto end() { return val.end(); }
+  auto end() const{ return val.end(); }
+
+  /**
+   * @brief returns a end iterator
+   * @return end iterator
+   * @note
+   * - # of computation: 1
+   **/
+  auto end() { return end(); }
 
   /**
    * @brief get vector size
