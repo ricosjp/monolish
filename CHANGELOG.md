@@ -35,6 +35,7 @@ Unreleased
 - support input unsymmetric file MM format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 
 ### Fixed
+- fix const non-const consistency https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/270
 - add checking gpu_status and size in getvec https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
 - update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263

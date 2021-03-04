@@ -6,25 +6,6 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> T COO<T>::at(const size_t i, const size_t j) {
-
-  assert(i <= get_row());
-  assert(j <= get_col());
-
-  // since last inserted element is effective elements,
-  // checking from last element is necessary
-  if (nnz != 0) {
-    for (size_t k = nnz; k > 0; --k) {
-      if (row_index[k - 1] == (int)i && col_index[k - 1] == (int)j) {
-        return val[k - 1];
-      }
-    }
-  }
-  return 0.0;
-}
-template double COO<double>::at(const size_t i, const size_t j);
-template float COO<float>::at(const size_t i, const size_t j);
-
 template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
 
   assert(i <= get_row());

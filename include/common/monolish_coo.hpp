@@ -390,7 +390,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j);
+  Float at(const size_t i, const size_t j) const;
 
   /**
    * @brief Get matrix element (A(i,j))
@@ -399,7 +399,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j) const;
+  Float at(const size_t i, const size_t j) {
+    return static_cast<const COO *>(this)->at(i, j);
+  };
 
   /**
    * @brief Set COO array from std::vector

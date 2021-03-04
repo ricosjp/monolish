@@ -158,7 +158,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *data() { return target_data; }
+  Float *data() const { return target_data; }
 
   /**
    * @brief returns a direct pointer to the vector (dont include offset)
@@ -166,7 +166,39 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float *data() const { return target_data; }
+  Float *data() { return target_data; }
+
+  /**
+   * @brief returns begin iterator (include offset)
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  Float *begin() const { return target_data + get_offset(); }
+
+  /**
+   * @brief returns begin iterator (include offset)
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  Float *begin() { return target_data + get_offset(); }
+
+  /**
+   * @brief returns a end iterator
+   * @return end iterator
+   * @note
+   * - # of computation: 1
+   **/
+  Float *end() const { return target_data + range; }
+
+  /**
+   * @brief returns a end iterator
+   * @return end iterator
+   * @note
+   * - # of computation: 1
+   **/
+  Float *end() { return target_data + range; }
 
   /**
    * @brief print all elements to standart I/O

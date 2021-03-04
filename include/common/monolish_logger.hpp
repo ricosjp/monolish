@@ -67,7 +67,7 @@ public:
    * @param file the log filename
    * @details see also monolish::util::set_log_filename()
    **/
-  void set_log_filename(std::string file) {
+  void set_log_filename(const std::string file) {
     filename = file;
 
     // file open
@@ -79,15 +79,15 @@ public:
   }
 
   // for solver (large func.)
-  void solver_in(std::string func_name);
+  void solver_in(const std::string func_name);
   void solver_out();
 
   // for blas (small func.)
-  void func_in(std::string func_name);
+  void func_in(const std::string func_name);
   void func_out();
 
   // for utils (very small func.)
-  void util_in(std::string func_name);
+  void util_in(const std::string func_name);
   void util_out();
 };
 } // namespace monolish
