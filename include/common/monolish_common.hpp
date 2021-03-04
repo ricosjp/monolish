@@ -32,7 +32,7 @@ namespace util {
  *    - # of data transfer: 0
  */
 template <typename T>
-T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
+T get_residual_l2(const matrix::CRS<T> &A, const vector<T> &x, const vector<T> &b);
 
 /**
  * @brief get nrm |b-Ax|_2
@@ -46,7 +46,7 @@ T get_residual_l2(matrix::CRS<T> &A, vector<T> &x, vector<T> &b);
  *    - # of data transfer: 0
  */
 template <typename T>
-T get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b);
+T get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x, const vector<T> &b);
 
 /**
  * @brief get nrm |b-Ax|_2
@@ -59,7 +59,7 @@ T get_residual_l2(matrix::Dense<T> &A, vector<T> &x, vector<T> &b);
  * - GPU acceleration: false
  */
 template <typename T>
-T get_residual_l2(matrix::LinearOperator<T> &A, vector<T> &x, vector<T> &b);
+T get_residual_l2(const matrix::LinearOperator<T> &A, const vector<T> &x, const vector<T> &b);
 
 /**
  * @brief check error
