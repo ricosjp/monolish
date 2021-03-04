@@ -153,12 +153,12 @@ void Logger::util_out() {
 }
 
 /// logger util ///
-void util::set_log_level(size_t Level) {
+void util::set_log_level(const size_t Level) {
   Logger &logger = Logger::get_instance();
   logger.set_log_level(Level);
 }
 
-void util::set_log_filename(std::string filename) {
+void util::set_log_filename(const std::string filename) {
   Logger &logger = Logger::get_instance();
   logger.set_log_filename(filename);
 }

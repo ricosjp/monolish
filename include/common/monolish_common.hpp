@@ -85,13 +85,13 @@ bool solver_check(const int err);
  * 3. logging solvers and BLAS functions and utils (send, recv,
  *allocation...etc.)
  **/
-void set_log_level(size_t Level);
+void set_log_level(const size_t Level);
 
 /**
  * @brief Specifying the log finename
  * @param filename the log filename
  **/
-void set_log_filename(std::string filename);
+void set_log_filename(const std::string filename);
 
 // create typical data///////////////////////////
 
