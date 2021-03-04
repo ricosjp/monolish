@@ -41,11 +41,11 @@ T util::get_residual_l2(const matrix::CRS<T> &A, const vector<T> &x, const vecto
   return blas::nrm2(tmp);
 }
 template double util::get_residual_l2(const matrix::CRS<double> &A, const vector<double> &x,
-                                      vector<double> &b);
+                                      const vector<double> &b);
 template float util::get_residual_l2(const matrix::CRS<float> &A, const vector<float> &x,
                                      const vector<float> &b);
 template <typename T>
-T util::get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x, vector<T> &b) {
+T util::get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x, const vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   vector<T> tmp(x.size());
