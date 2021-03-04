@@ -304,7 +304,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j){return at(i,j);};
+  Float at(const size_t i, const size_t j) { return at(i, j); };
 
   /**
    * @brief get element A[i][j]

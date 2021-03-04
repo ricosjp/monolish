@@ -190,7 +190,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* end() const{ return target_data + range; }
+  Float *end() const { return target_data + range; }
 
   /**
    * @brief returns a end iterator
@@ -198,7 +198,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* end() { return end(); }
+  Float *end() { return end(); }
 
   /**
    * @brief print all elements to standart I/O

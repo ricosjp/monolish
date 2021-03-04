@@ -241,7 +241,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* begin() const{ return val.begin(); }
+  Float *begin() const { return val.begin(); }
 
   /**
    * @brief returns a begin iterator
@@ -249,7 +249,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* begin() { return begin(); }
+  Float *begin() { return begin(); }
 
   /**
    * @brief returns a end iterator
@@ -257,7 +257,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* end() const{ return val.end(); }
+  Float *end() const { return val.end(); }
 
   /**
    * @brief returns a end iterator
@@ -265,7 +265,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  Float* end() { return end(); }
+  Float *end() { return end(); }
 
   /**
    * @brief get vector size

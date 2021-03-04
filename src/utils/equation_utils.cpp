@@ -29,7 +29,8 @@ bool util::solver_check(const int err) {
 }
 
 template <typename T>
-T util::get_residual_l2(const matrix::CRS<T> &A, const vector<T> &x, const vector<T> &b) {
+T util::get_residual_l2(const matrix::CRS<T> &A, const vector<T> &x,
+                        const vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   vector<T> tmp(x.size());
@@ -40,12 +41,15 @@ T util::get_residual_l2(const matrix::CRS<T> &A, const vector<T> &x, const vecto
   logger.util_out();
   return blas::nrm2(tmp);
 }
-template double util::get_residual_l2(const matrix::CRS<double> &A, const vector<double> &x,
+template double util::get_residual_l2(const matrix::CRS<double> &A,
+                                      const vector<double> &x,
                                       const vector<double> &b);
-template float util::get_residual_l2(const matrix::CRS<float> &A, const vector<float> &x,
+template float util::get_residual_l2(const matrix::CRS<float> &A,
+                                     const vector<float> &x,
                                      const vector<float> &b);
 template <typename T>
-T util::get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x, const vector<T> &b) {
+T util::get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x,
+                        const vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   vector<T> tmp(x.size());
@@ -57,8 +61,10 @@ T util::get_residual_l2(const matrix::Dense<T> &A, const vector<T> &x, const vec
   return blas::nrm2(tmp);
 }
 template double util::get_residual_l2(const matrix::Dense<double> &A,
-                                      const vector<double> &x, const vector<double> &b);
-template float util::get_residual_l2(const matrix::Dense<float> &A, const vector<float> &x,
+                                      const vector<double> &x,
+                                      const vector<double> &b);
+template float util::get_residual_l2(const matrix::Dense<float> &A,
+                                     const vector<float> &x,
                                      const vector<float> &b);
 
 template <typename T>
@@ -75,8 +81,10 @@ T util::get_residual_l2(const matrix::LinearOperator<T> &A, const vector<T> &x,
   return blas::nrm2(tmp);
 }
 template double util::get_residual_l2(const matrix::LinearOperator<double> &A,
-                                      const vector<double> &x, const vector<double> &b);
+                                      const vector<double> &x,
+                                      const vector<double> &b);
 template float util::get_residual_l2(const matrix::LinearOperator<float> &A,
-                                     const vector<float> &x, const vector<float> &b);
+                                     const vector<float> &x,
+                                     const vector<float> &b);
 
 } // namespace monolish
