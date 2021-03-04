@@ -283,18 +283,6 @@ public:
   double get_data_size() const { return get_nnz() * sizeof(Float) / 1.0e+9; }
 
   /**
-   * @brief get element A[i][j] (only CPU)
-   * @param i row
-   * @param j col
-   * @return A[i][j]
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  Float at(const size_t i, const size_t j);
-
-  /**
    * @brief get element A[i][j]
    * @param i row
    * @param j col
@@ -305,6 +293,18 @@ public:
    * - GPU acceleration: false
    **/
   Float at(const size_t i, const size_t j) const;
+
+  /**
+   * @brief get element A[i][j] (only CPU)
+   * @param i row
+   * @param j col
+   * @return A[i][j]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  Float at(const size_t i, const size_t j){return at(i,j);};
 
   /**
    * @brief get element A[i][j]

@@ -6,18 +6,6 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> T Dense<T>::at(const size_t i, const size_t j) {
-  if (get_device_mem_stat()) {
-    throw std::runtime_error("at() Error, GPU vector cant use operator[]");
-  }
-  assert(i <= get_row());
-  assert(j <= get_col());
-
-  return val[get_col() * i + j];
-}
-template double Dense<double>::at(const size_t i, const size_t j);
-template float Dense<float>::at(const size_t i, const size_t j);
-
 template <typename T> T Dense<T>::at(const size_t i, const size_t j) const {
   if (get_device_mem_stat()) {
     throw std::runtime_error("at() Error, GPU vector cant use operator[]");
