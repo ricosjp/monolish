@@ -1,20 +1,44 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
-monolish is どこでも動くmath kernel library
+monolish "monolithfy"  gomachan writen in C++
+一体化
+一枚岩
+完全に統制された
+画一的な
+unify?
+uniform
+integrated
 
-monolish 
-- Works on any architecture 
-- High performance(MPI, Multi-threading, SIMD)
-- Communication I/F (GPU/MPI, send-recv
+# Policy
+monolish let developper be oblivious about:
+- Argument data type of matrix/vector operations
+- Matrix structure / storage format
+- Various processor which execute library  (Intel/NVIDIA/AMD/ARM etc.) 
+- Vender specific data transfer API (host RAM to Device RAM)
+- Cumbersome package dependency
+- Perormance tuning and visualization
+
+# Build and Install
+
+
+- Oblivious about platform
+- Oblivious about High performance(MPI, Multi-threading, SIMD)
 - Don’t reinvent the wheel (BLAS/SparseBLAS, Matrix Asm., Math func.,)
-- Don't depend matrix structure for Linear Systems (Direct/Iterative, LA/Eigen)
-- Build and Package Managing (cmake, Docker)
 - Performance Logging to Find the bottleneck (logger)
-- Continuous Integration／Continuous Delivery/Continuous Benchmark (monolish performance viewer)
-- easy to implement other Language FFI (C++ and other language I/F)
-- Don't depend Data type / type system (double/float, int/long, complex...)
-- Don't implicitly allocate memory??
-- Don't implement functions whose performance is unknown
+- Build and Package Managing (cmake, Docker)
+- zero-overhead
+Don't implicitly allocate memory??
+- user friendly communication I/F
 - Don't require many code changes due to hardware changes (Intel, AMD, Power, ARM, A64fx, SXAT, NVIDIA GPU, AMD GPU...)
+- 簡単にかけるCommunication I/F (GPU/MPI, send-recv)
+
+
+======
+- Don't implement functions whose performance is unknown
+- Continuous Integration／Continuous Delivery/Continuous Benchmark (monolish performance viewer)
+
+- easy to implement other Language FFI (C++ and other language I/F)
+
+
 - Don't suffer from dependency resolution
 
 どこでも動く：
