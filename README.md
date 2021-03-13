@@ -14,7 +14,7 @@ monolish let developper be oblivious about:
 各特徴を説明するファイルを作ってリンクを貼る
 
 [oplist]: doc/operation_list.md
-[oplist]: doc/gpu.md
+[gpu]: doc/gpu.md
 
 
 # Build and Install
