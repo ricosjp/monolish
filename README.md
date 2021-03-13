@@ -1,21 +1,25 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
 monolish is a linear solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
+
 monolish is a vendor-independent open source library written in C ++ that aims to be grand unified linear algebra library on any hardware.
 
 # Feature (Policyか？)
 monolish let developper be oblivious about:
-- Argument data type of matrix/vector operations
+- Argument data type of matrix/vector operations([doxygen function list][doxy-func])
 - Matrix structure / storage format
 - [Various processor which execute library  (Intel/NVIDIA/AMD/ARM etc.) ][oplist]
 - [Vender specific data transfer API (host RAM to Device RAM)][gpu]
-- Cumbersome package dependency
-- Perormance tuning and visualization
+- [Cumbersome package dependency][build]
+- [find bottoleneck][logger] and [Perormance tuning and benchmark][perfviewer]
 
 各特徴を説明するファイルを作ってリンクを貼る
 
 [oplist]: doc/operation_list.md
 [gpu]: doc/gpu.md
-
+[doxy-func]: http://gogo-gomachan.com/charactor/
+[build]: doc/build.md
+[logger]: http://gogo-gomachan.com/charactor/
+[perfviewer]: http://gogo-gomachan.com/charactor/
 
 # Build and Install
 ## Download binary
