@@ -1,6 +1,14 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
 monolish is a linear solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
 
+# What monolish solves
+BLAS has 150+ functions and lapack has 1000+ functions. These are complete software for dense matrix operations.
+However, these are not enough due to the growing needs of users.
+
+In particular, sparse matrix operations and machine learning kernels are not implemented.
+To solve this, the libraries (MKL, cusolver, etc.) by each hardware vendor and numpy / scipy, julia, matlab, etc. implement extended functions.
+On the other hand, these software APIs are not unified. These are language or vecder specific.
+
 monolish is a vendor-independent open source library written in C ++ that aims to be grand unified linear algebra library on any hardware.
 
 # Feature (Policyか？)
@@ -23,7 +31,7 @@ monolish let developper be oblivious about:
 
 # Build and Install
 ## Download binary
-リンクを貼る
+[githubのリンクを貼る](http://gogo-gomachan.com/charactor/)
 
 ## Docker
 [allgebra](https://github.com/ricosjp/allgebra)
