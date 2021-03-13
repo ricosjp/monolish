@@ -7,16 +7,19 @@ monolish let developper be oblivious about:
 - Argument data type of matrix/vector operations
 - Matrix structure / storage format
 - [Various processor which execute library  (Intel/NVIDIA/AMD/ARM etc.) ][oplist]
-- Vender specific data transfer API (host RAM to Device RAM)
+- [Vender specific data transfer API (host RAM to Device RAM)][gpu]
 - Cumbersome package dependency
 - Perormance tuning and visualization
 
 各特徴を説明するファイルを作ってリンクを貼る
 
 [oplist]: doc/operation_list.md
+[oplist]: doc/gpu.md
+
 
 # Build and Install
 ## Download binary
+リンクを貼る
 
 ## Docker
 [allgebra](https://github.com/ricosjp/allgebra)
@@ -36,17 +39,20 @@ make install
 ```
 
 # Support
-Support情報をここに書く(issueのURL)
+Supportの受け方をここに書く(issueを書いてね)
+If you have any question, bug to report or would like to propose a new feature, feel free to create an [issue][issue] on GitHub.
 
+[issue]: http://gogo-gomachan.com/charactor/
 
 # Contributing
 Contributionに必要な情報をここに書く
 
+```
 monolishはchangelogに変更がない場合とclang-formatかけてない場合にCIでwarningがでる．
 
 - clang formatはTOPDIRで make format するとgit addされてるファイル全部に自動でかかります
 - changelogは `CHANGELOG.md` に主要な変更とマージリクエストの番号を書く
-
+```
 
 # Licensing
 monolish is available under the Apache License
