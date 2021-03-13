@@ -7,7 +7,7 @@ monolish let developper be oblivious about:
 - [Various processor which execute library  (Intel CPU / NVIDIA GPU / AMD CPU / ARM CPU / NEC SX-Aurora TSUBASA etc.) ][oplist]
 - [Vender specific data transfer API (host RAM to Device RAM)][gpu]
 - [Find bottolenecks][logger] and [Perormance benchmark][perfviewer]
-- Argument data type of matrix/vector operations([doxygen function list][doxy-func])
+- Argument data type of matrix/vector operations ([doxygen function list][doxy-func])
 - Matrix structure / storage format
 - [Cumbersome package dependency][build]
 
