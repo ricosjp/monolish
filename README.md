@@ -1,10 +1,30 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
+monolish unify valious linear algebra libraries.
+パワフルなgomaを備えています
+monolish aimed to be grand unified linear algebra library.
+monolish aimed to be grand monolitic linear algebra library.
+
+hard venderに依存しない．
+OSSでやるんだという強い決意をここに書く．
+
+BLASだけで十分な時代は終演を迎えました．
+
+どこでも動く：
+- BLAS: 150+ functions (163?)
+- LAPACK: 1000+ functions (1302?)
+
+Intelだけ：
+- MKL2020: 10000+ functions (14850?)
+
+NVIDIAだけ：
+- CUBLAS/CUSPARSE/CUSOLVER/cuFFT cuda11.2: 1000+ functions (1112?)
+
+
 monolish "monolithfy"  gomachan writen in C++
 一体化
 一枚岩
 完全に統制された
 画一的な
-unify?
 uniform
 integrated
 
@@ -41,15 +61,6 @@ Don't implicitly allocate memory??
 
 - Don't suffer from dependency resolution
 
-どこでも動く：
-- BLAS: 150+ functions (163?)
-- LAPACK: 1000+ functions (1302?)
-
-Intelだけ：
-- MKL2020: 10000+ functions (14850?)
-
-NVIDIAだけ：
-- CUBLAS/CUSPARSE/CUSOLVER/cuFFT cuda11.2: 1000+ functions (1112?)
 
 - C++のパッケージマネージメントをするためにDockerを使う
 - 性能を保証するためにCIでベンチマークして可視化する
