@@ -3,12 +3,13 @@ monolish is a linear solver library that monolithically fuses variable data type
 
 # Feature (Policyか？)
 monolish let developper be oblivious about:
+- Performance tuning
+- [Various processor which execute library  (Intel CPU / NVIDIA GPU / AMD CPU / ARM CPU / NEC SX-Aurora TSUBASA etc.) ][oplist]
+- [Vender specific data transfer API (host RAM to Device RAM)][gpu]
+- [Find bottolenecks][logger] and [Perormance benchmark][perfviewer]
 - Argument data type of matrix/vector operations([doxygen function list][doxy-func])
 - Matrix structure / storage format
-- [Various processor which execute library  (Intel/NVIDIA/AMD/ARM etc.) ][oplist]
-- [Vender specific data transfer API (host RAM to Device RAM)][gpu]
 - [Cumbersome package dependency][build]
-- [Find bottoleneck][logger] and [Perormance tuning and benchmark][perfviewer]
 
 各特徴を説明するファイルを作ってリンクを貼る
 
