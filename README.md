@@ -8,7 +8,7 @@ monolish let developper be oblivious about:
 - [Various processor which execute library  (Intel/NVIDIA/AMD/ARM etc.) ][oplist]
 - [Vender specific data transfer API (host RAM to Device RAM)][gpu]
 - [Cumbersome package dependency][build]
-- [find bottoleneck][logger] and [Perormance tuning and benchmark][perfviewer]
+- [Find bottoleneck][logger] and [Perormance tuning and benchmark][perfviewer]
 
 各特徴を説明するファイルを作ってリンクを貼る
 
@@ -33,7 +33,7 @@ monolish provides an API that integrates the numerical algebra libraries of each
 monolish calls the vendor-developed numerical algebra libraries whenever possible.
 monolish implements and provides functions that are not implemented in these libraries.
 
-monolish solves cumbersome package management with Docker.
+monolish solves cumbersome package management by Docker.
 
 # Build and Install
 ## Download binary
