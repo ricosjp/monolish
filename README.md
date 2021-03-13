@@ -9,7 +9,7 @@ In particular, sparse matrix operations and machine learning kernels are not imp
 To solve this, the libraries (MKL, cusolver, etc.) by each hardware vendor and numpy / scipy, julia, matlab, etc. implement extended functions.
 On the other hand, these software APIs are not unified. These are language or vecder specific.
 
-monolish is a vendor-independent open source library written in C ++ that aims to be grand unified linear algebra library on any hardware.
+monolish is a vendor-independent open source library written in C++ that aims to be grand unified linear algebra library on any hardware.
 
 # Feature (Policyか？)
 monolish let developper be oblivious about:
