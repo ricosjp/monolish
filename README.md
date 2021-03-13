@@ -1,13 +1,15 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
-monolish unify valious linear algebra libraries.
-パワフルなgomaを備えています
-monolish aimed to be grand unified linear algebra library.
-monolish aimed to be grand monolitic linear algebra library.
+- monolish unify valious linear algebra libraries.
+- パワフルなgomaを備えています
+- monolish aimed to be grand unified linear algebra library.
+- monolish aimed to be grand monolitic linear algebra library.
 
-hard venderに依存しない．
-OSSでやるんだという強い決意をここに書く．
+- hard venderに依存しない．
+- OSSでやるんだという強い決意をここに書く．
 
-BLASだけで十分な時代は終演を迎えました．
+- BLASだけで十分な時代は終演を迎えました．
+- Welcome to new era?
+- Welcome to new goma?
 
 どこでも動く：
 - BLAS: 150+ functions (163?)
