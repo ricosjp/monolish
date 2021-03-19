@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add get_residual_l2 in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
+- add VML in view1D<Dense> https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
 - add output_mm in COO https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 - support vector constructor from initializer_list https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/261
 - add set_ptr in all matrix dormat https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262

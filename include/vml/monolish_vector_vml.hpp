@@ -27,35 +27,127 @@ namespace vml {
 void add(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void add(const vector<double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void add(const vector<double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void add(const vector<double> &a, const view1D<vector<double>, double> &b,
          vector<double> &y);
 void add(const vector<double> &a, const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void add(const vector<double> &a, const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void add(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void add(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void add(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void add(const view1D<vector<double>, double> &a, const vector<double> &b,
          vector<double> &y);
 void add(const view1D<vector<double>, double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void add(const view1D<vector<double>, double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void add(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b, vector<double> &y);
 void add(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void add(const view1D<vector<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void add(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void add(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void add(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, vector<double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<vector<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<matrix::Dense<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b, vector<double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void add(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void add(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void add(const vector<float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void add(const vector<float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void add(const vector<float> &a, const view1D<vector<float>, float> &b,
          vector<float> &y);
 void add(const vector<float> &a, const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void add(const vector<float> &a, const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void add(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         vector<float> &y);
+void add(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void add(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void add(const view1D<vector<float>, float> &a, const vector<float> &b,
          vector<float> &y);
 void add(const view1D<vector<float>, float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void add(const view1D<vector<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void add(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b, vector<float> &y);
 void add(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void add(const view1D<vector<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void add(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void add(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void add(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         vector<float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<vector<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b, vector<float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void add(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief element by element subtract of vector a and vector b.
@@ -71,35 +163,127 @@ void add(const view1D<vector<float>, float> &a,
 void sub(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void sub(const vector<double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void sub(const vector<double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void sub(const vector<double> &a, const view1D<vector<double>, double> &b,
          vector<double> &y);
 void sub(const vector<double> &a, const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void sub(const vector<double> &a, const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void sub(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void sub(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void sub(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void sub(const view1D<vector<double>, double> &a, const vector<double> &b,
          vector<double> &y);
 void sub(const view1D<vector<double>, double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void sub(const view1D<vector<double>, double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void sub(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b, vector<double> &y);
 void sub(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void sub(const view1D<vector<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void sub(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void sub(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void sub(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, vector<double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<vector<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<matrix::Dense<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b, vector<double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void sub(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void sub(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void sub(const vector<float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void sub(const vector<float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void sub(const vector<float> &a, const view1D<vector<float>, float> &b,
          vector<float> &y);
 void sub(const vector<float> &a, const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void sub(const vector<float> &a, const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void sub(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         vector<float> &y);
+void sub(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void sub(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void sub(const view1D<vector<float>, float> &a, const vector<float> &b,
          vector<float> &y);
 void sub(const view1D<vector<float>, float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void sub(const view1D<vector<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void sub(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b, vector<float> &y);
 void sub(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void sub(const view1D<vector<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void sub(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void sub(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void sub(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         vector<float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<vector<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b, vector<float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void sub(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief element by element multiplication of vector a and vector b.
@@ -115,35 +299,127 @@ void sub(const view1D<vector<float>, float> &a,
 void mul(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void mul(const vector<double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void mul(const vector<double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void mul(const vector<double> &a, const view1D<vector<double>, double> &b,
          vector<double> &y);
 void mul(const vector<double> &a, const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void mul(const vector<double> &a, const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void mul(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void mul(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void mul(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void mul(const view1D<vector<double>, double> &a, const vector<double> &b,
          vector<double> &y);
 void mul(const view1D<vector<double>, double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void mul(const view1D<vector<double>, double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void mul(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b, vector<double> &y);
 void mul(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void mul(const view1D<vector<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void mul(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void mul(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void mul(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, vector<double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<vector<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<matrix::Dense<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b, vector<double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void mul(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void mul(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void mul(const vector<float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void mul(const vector<float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void mul(const vector<float> &a, const view1D<vector<float>, float> &b,
          vector<float> &y);
 void mul(const vector<float> &a, const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void mul(const vector<float> &a, const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void mul(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         vector<float> &y);
+void mul(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void mul(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void mul(const view1D<vector<float>, float> &a, const vector<float> &b,
          vector<float> &y);
 void mul(const view1D<vector<float>, float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void mul(const view1D<vector<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void mul(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b, vector<float> &y);
 void mul(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void mul(const view1D<vector<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void mul(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void mul(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void mul(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         vector<float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<vector<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b, vector<float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void mul(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief element by element division of vector a and vector b.
@@ -159,35 +435,127 @@ void mul(const view1D<vector<float>, float> &a,
 void div(const vector<double> &a, const vector<double> &b, vector<double> &y);
 void div(const vector<double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void div(const vector<double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void div(const vector<double> &a, const view1D<vector<double>, double> &b,
          vector<double> &y);
 void div(const vector<double> &a, const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void div(const vector<double> &a, const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void div(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void div(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void div(const vector<double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void div(const view1D<vector<double>, double> &a, const vector<double> &b,
          vector<double> &y);
 void div(const view1D<vector<double>, double> &a, const vector<double> &b,
          view1D<vector<double>, double> &y);
+void div(const view1D<vector<double>, double> &a, const vector<double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void div(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b, vector<double> &y);
 void div(const view1D<vector<double>, double> &a,
          const view1D<vector<double>, double> &b,
          view1D<vector<double>, double> &y);
+void div(const view1D<vector<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void div(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void div(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void div(const view1D<vector<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, vector<double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<vector<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const vector<double> &b, view1D<matrix::Dense<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b, vector<double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<vector<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<vector<double>, double> &y);
+void div(const view1D<matrix::Dense<double>, double> &a,
+         const view1D<matrix::Dense<double>, double> &b,
+         view1D<matrix::Dense<double>, double> &y);
 void div(const vector<float> &a, const vector<float> &b, vector<float> &y);
 void div(const vector<float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void div(const vector<float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void div(const vector<float> &a, const view1D<vector<float>, float> &b,
          vector<float> &y);
 void div(const vector<float> &a, const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void div(const vector<float> &a, const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void div(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         vector<float> &y);
+void div(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void div(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void div(const view1D<vector<float>, float> &a, const vector<float> &b,
          vector<float> &y);
 void div(const view1D<vector<float>, float> &a, const vector<float> &b,
          view1D<vector<float>, float> &y);
+void div(const view1D<vector<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 void div(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b, vector<float> &y);
 void div(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+void div(const view1D<vector<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void div(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void div(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void div(const view1D<vector<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         vector<float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<vector<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b, vector<float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<vector<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<vector<float>, float> &y);
+void div(const view1D<matrix::Dense<float>, float> &a,
+         const view1D<matrix::Dense<float>, float> &b,
+         view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief element by element addition of vector a and vector b.
@@ -706,8 +1074,10 @@ void min(const view1D<vector<float>, float> &a,
  */
 double max(const vector<double> &y);
 double max(const view1D<vector<double>, double> &y);
+double max(const view1D<matrix::Dense<double>, double> &y);
 float max(const vector<float> &y);
 float max(const view1D<vector<float>, float> &y);
+float max(const view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief Finds the smallest element in vector (min(y[0:N]))
@@ -720,8 +1090,10 @@ float max(const view1D<vector<float>, float> &y);
  */
 double min(const vector<double> &y);
 double min(const view1D<vector<double>, double> &y);
+double min(const view1D<matrix::Dense<double>, double> &y);
 float min(const vector<float> &y);
 float min(const view1D<vector<float>, float> &y);
+float min(const view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief reciprocal to double precision vector elements (y[0:N] = 1 / a[0:N])
@@ -734,14 +1106,32 @@ float min(const view1D<vector<float>, float> &y);
  */
 void reciprocal(const vector<double> &a, vector<double> &y);
 void reciprocal(const vector<double> &a, view1D<vector<double>, double> &y);
+void reciprocal(const vector<double> &a,
+                view1D<matrix::Dense<double>, double> &y);
 void reciprocal(const view1D<vector<double>, double> &a, vector<double> &y);
 void reciprocal(const view1D<vector<double>, double> &a,
                 view1D<vector<double>, double> &y);
+void reciprocal(const view1D<vector<double>, double> &a,
+                view1D<matrix::Dense<double>, double> &y);
+void reciprocal(const view1D<matrix::Dense<double>, double> &a,
+                vector<double> &y);
+void reciprocal(const view1D<matrix::Dense<double>, double> &a,
+                view1D<vector<double>, double> &y);
+void reciprocal(const view1D<matrix::Dense<double>, double> &a,
+                view1D<matrix::Dense<double>, double> &y);
 void reciprocal(const vector<float> &a, vector<float> &y);
 void reciprocal(const vector<float> &a, view1D<vector<float>, float> &y);
+void reciprocal(const vector<float> &a, view1D<matrix::Dense<float>, float> &y);
 void reciprocal(const view1D<vector<float>, float> &a, vector<float> &y);
 void reciprocal(const view1D<vector<float>, float> &a,
                 view1D<vector<float>, float> &y);
+void reciprocal(const view1D<vector<float>, float> &a,
+                view1D<matrix::Dense<float>, float> &y);
+void reciprocal(const view1D<matrix::Dense<float>, float> &a, vector<float> &y);
+void reciprocal(const view1D<matrix::Dense<float>, float> &a,
+                view1D<vector<float>, float> &y);
+void reciprocal(const view1D<matrix::Dense<float>, float> &a,
+                view1D<matrix::Dense<float>, float> &y);
 
 } // namespace vml
 } // namespace monolish
