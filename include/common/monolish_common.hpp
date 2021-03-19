@@ -32,49 +32,53 @@ namespace util {
  *    - # of data transfer: 0
  */
 double get_residual_l2(const matrix::Dense<double> &A, const vector<double> &x,
-            const vector<double> &y);
+                       const vector<double> &y);
 double get_residual_l2(const matrix::Dense<double> &A, const vector<double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::Dense<double> &A, const vector<double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<vector<double>, double> &x, const vector<double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const vector<double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<matrix::Dense<double>, double> &x, const vector<double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const vector<double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::Dense<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 float get_residual_l2(const matrix::Dense<float> &A, const vector<float> &x,
-            const vector<float> &y);
+                      const vector<float> &y);
 float get_residual_l2(const matrix::Dense<float> &A, const vector<float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::Dense<float> &A, const vector<float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<vector<float>, float> &x, const vector<float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const vector<float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<matrix::Dense<float>, float> &x, const vector<float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const vector<float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::Dense<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief get nrm |b-Ax|_2
@@ -88,49 +92,53 @@ float get_residual_l2(const matrix::Dense<float> &A,
  *    - # of data transfer: 0
  */
 double get_residual_l2(const matrix::CRS<double> &A, const vector<double> &x,
-            const vector<double> &y);
+                       const vector<double> &y);
 double get_residual_l2(const matrix::CRS<double> &A, const vector<double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::CRS<double> &A, const vector<double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x, const vector<double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const vector<double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<matrix::Dense<double>, double> &x, const vector<double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const vector<double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::CRS<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 float get_residual_l2(const matrix::CRS<float> &A, const vector<float> &x,
-            const vector<float> &y);
+                      const vector<float> &y);
 float get_residual_l2(const matrix::CRS<float> &A, const vector<float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::CRS<float> &A, const vector<float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<vector<float>, float> &x, const vector<float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const vector<float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<matrix::Dense<float>, float> &x, const vector<float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const vector<float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::CRS<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 
 /**
  * @brief get nrm |b-Ax|_2
@@ -143,50 +151,58 @@ float get_residual_l2(const matrix::CRS<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-double get_residual_l2(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            const vector<double> &y);
-double get_residual_l2(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            const view1D<vector<double>, double> &y);
-double get_residual_l2(const matrix::LinearOperator<double> &A, const vector<double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x, const vector<double> &y);
+                       const vector<double> &x, const vector<double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const vector<double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<vector<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
+                       const vector<double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<matrix::Dense<double>, double> &x, const vector<double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const vector<double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<vector<double>, double> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
 double get_residual_l2(const matrix::LinearOperator<double> &A,
-            const view1D<matrix::Dense<double>, double> &x,
-            const view1D<matrix::Dense<double>, double> &y);
-float get_residual_l2(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            const vector<float> &y);
-float get_residual_l2(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            const view1D<vector<float>, float> &y);
-float get_residual_l2(const matrix::LinearOperator<float> &A, const vector<float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                       const view1D<vector<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
+double get_residual_l2(const matrix::LinearOperator<double> &A,
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const vector<double> &y);
+double get_residual_l2(const matrix::LinearOperator<double> &A,
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<vector<double>, double> &y);
+double get_residual_l2(const matrix::LinearOperator<double> &A,
+                       const view1D<matrix::Dense<double>, double> &x,
+                       const view1D<matrix::Dense<double>, double> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x, const vector<float> &y);
+                      const vector<float> &x, const vector<float> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const vector<float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<vector<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const vector<float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<matrix::Dense<float>, float> &x, const vector<float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const vector<float> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<vector<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
 float get_residual_l2(const matrix::LinearOperator<float> &A,
-            const view1D<matrix::Dense<float>, float> &x,
-            const view1D<matrix::Dense<float>, float> &y);
+                      const view1D<vector<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
+float get_residual_l2(const matrix::LinearOperator<float> &A,
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const vector<float> &y);
+float get_residual_l2(const matrix::LinearOperator<float> &A,
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<vector<float>, float> &y);
+float get_residual_l2(const matrix::LinearOperator<float> &A,
+                      const view1D<matrix::Dense<float>, float> &x,
+                      const view1D<matrix::Dense<float>, float> &y);
 /**
  * @brief check error
  * @param[in] err solver err code
