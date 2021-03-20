@@ -58,7 +58,7 @@ int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 template <>
 int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
@@ -84,7 +84,7 @@ int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 
 template <>
@@ -114,7 +114,7 @@ int equation::LU<matrix::Dense<double>, double>::solve(matrix::Dense<double> &A,
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 
 template <>
@@ -143,7 +143,7 @@ int equation::LU<matrix::Dense<float>, float>::solve(matrix::Dense<float> &A,
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 
 } // namespace monolish

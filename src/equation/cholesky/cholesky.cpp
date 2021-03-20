@@ -70,7 +70,7 @@ int equation::Cholesky<matrix::Dense<double>, double>::solve(
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 template <>
 int equation::Cholesky<matrix::Dense<float>, float>::solve(
@@ -102,7 +102,7 @@ int equation::Cholesky<matrix::Dense<float>, float>::solve(
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 
 template <>
@@ -136,7 +136,7 @@ int equation::Cholesky<matrix::Dense<double>, double>::solve(
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 
 template <>
@@ -170,6 +170,6 @@ int equation::Cholesky<matrix::Dense<float>, float>::solve(
   }
 
   logger.func_out();
-  return 0;
+  return ret;
 }
 } // namespace monolish
