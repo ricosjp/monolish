@@ -36,7 +36,7 @@ target_sources(${MONOLISH_TARGET}
 )
 
 set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 14)
-target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall -Wextra -Wno-unused-parameter)
+target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall)
 
 # AVX
 if(MONOLISH_USE_AVX)
