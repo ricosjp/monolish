@@ -20,7 +20,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   const int *cold = A.col_ind.data();
   const int m = A.get_row();
   const int n = A.get_col();
-  const int nnz = A.get_nnz();
   double *yd = y.data();
   const size_t xoffset = x.get_offset();
   const size_t yoffset = y.get_offset();
@@ -41,6 +40,7 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 
     const double alpha = 1.0;
     const double beta = 0.0;
+    const int nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
@@ -92,7 +92,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   const int *cold = A.col_ind.data();
   const int m = A.get_row();
   const int n = A.get_col();
-  const int nnz = A.get_nnz();
   float *yd = y.data();
   const size_t xoffset = x.get_offset();
   const size_t yoffset = y.get_offset();
@@ -111,6 +110,7 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 
     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
+    const int nnz = A.get_nnz();
     const float alpha = 1.0;
     const float beta = 0.0;
 
