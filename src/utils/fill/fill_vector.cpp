@@ -12,9 +12,10 @@ template <typename T> void vector<T>::fill(T value) {
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
     T* vald = val.data();
+    auto N = val.size();
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = value;
+    for (size_t i = 0; i < N; i++) {
+      vald[i] = value;
     }
 #else
     throw std::runtime_error(
