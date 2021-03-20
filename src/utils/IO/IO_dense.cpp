@@ -20,7 +20,7 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_GPU
-    const T* vald = val.data();
+    const T *vald = val.data();
 #pragma omp target
     for (size_t i = 0; i < get_row(); i++) {
       for (size_t j = 0; j < get_col(); j++) {

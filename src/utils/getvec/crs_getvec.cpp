@@ -72,7 +72,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-    const int* indexd = col_ind.data();
+    const int *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {

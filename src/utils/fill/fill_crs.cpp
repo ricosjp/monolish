@@ -11,7 +11,7 @@ template <typename T> void CRS<T>::fill(T value) {
   logger.util_in(monolish_func);
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
-    T* vald = val.data();
+    T *vald = val.data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = value;
