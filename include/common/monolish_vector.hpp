@@ -475,7 +475,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator==(const vector<Float> &vec);
+  bool operator==(const vector<Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v == vec)
@@ -488,7 +488,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  void operator==(const view1D<vector<Float>, Float> &vec);
+  bool operator==(const view1D<vector<Float>, Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v == vec)
@@ -501,7 +501,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  void operator==(const view1D<matrix::Dense<Float>, Float> &vec);
+  bool operator==(const view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -514,7 +514,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator!=(const vector<Float> &vec);
+  bool operator!=(const vector<Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -527,7 +527,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  void operator!=(const view1D<vector<Float>, Float> &vec);
+  bool operator!=(const view1D<vector<Float>, Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -540,6 +540,6 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  void operator!=(const view1D<matrix::Dense<Float>, Float> &vec);
+  bool operator!=(const view1D<matrix::Dense<Float>, Float> &vec) const;
 };
 } // namespace monolish
