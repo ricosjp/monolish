@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add vector utils in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/274
 - add get_residual_l2 in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
 - add VML in view1D<Dense> https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/272
@@ -31,6 +32,7 @@ Unreleased
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 ### Changed
+- vector utils to const https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/274
 - delete printf in transpose test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/268
 - move blas/matrix/getvec to util/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - change char* to std::string in matrix I/O https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265

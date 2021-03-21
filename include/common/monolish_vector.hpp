@@ -6,8 +6,8 @@
  **/
 
 #pragma once
-#include "./monolish_logger.hpp"
 #include "./monolish_dense.hpp"
+#include "./monolish_logger.hpp"
 #include "./monolish_view1D.hpp"
 #include <exception>
 #include <fstream>

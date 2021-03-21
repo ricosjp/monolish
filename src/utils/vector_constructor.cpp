@@ -105,7 +105,8 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
 template vector<double>::vector(const vector<double> &vec);
 template vector<float>::vector(const vector<float> &vec);
 
-template <typename T> vector<T>::vector(const monolish::view1D<monolish::vector<T>,T> &vec) {
+template <typename T>
+vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -115,7 +116,8 @@ template <typename T> vector<T>::vector(const monolish::view1D<monolish::vector<
 #if MONOLISH_USE_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
+                    true);
   }
 #endif
   internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), false);
@@ -123,10 +125,11 @@ template <typename T> vector<T>::vector(const monolish::view1D<monolish::vector<
   logger.util_out();
 }
 
-template vector<double>::vector(const view1D<vector<double>,double> &vec);
-template vector<float>::vector(const view1D<vector<float>,float> &vec);
+template vector<double>::vector(const view1D<vector<double>, double> &vec);
+template vector<float>::vector(const view1D<vector<float>, float> &vec);
 
-template <typename T> vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>,T> &vec) {
+template <typename T>
+vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -136,7 +139,8 @@ template <typename T> vector<T>::vector(const monolish::view1D<monolish::matrix:
 #if MONOLISH_USE_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
+                    true);
   }
 #endif
   internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), false);
@@ -144,7 +148,8 @@ template <typename T> vector<T>::vector(const monolish::view1D<monolish::matrix:
   logger.util_out();
 }
 
-template vector<double>::vector(const view1D<matrix::Dense<double>,double> &vec);
-template vector<float>::vector(const view1D<matrix::Dense<float>,float> &vec);
+template vector<double>::vector(
+    const view1D<matrix::Dense<double>, double> &vec);
+template vector<float>::vector(const view1D<matrix::Dense<float>, float> &vec);
 
 } // namespace monolish
