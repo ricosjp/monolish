@@ -126,7 +126,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
 #if MONOLISH_USE_GPU
     send();
     const T *data = value.data();
-    const T *vald = val.data();
+    T *vald = val.data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = data[i];
