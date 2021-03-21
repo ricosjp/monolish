@@ -43,4 +43,49 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
 template void vector<double>::operator=(const vector<double> &vec);
 template void vector<float>::operator=(const vector<float> &vec);
 
+template <typename T> void vector<T>::operator=(const view1D<vector<T>,T> &vec) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_size(*this, vec));
+  assert(monolish::util::is_same_device_mem_stat(*this, vec));
+
+  // gpu copy and recv
+  if (vec.get_device_mem_stat()) {
+#if MONOLISH_USE_GPU
+    internal::vcopy(vec.size(), vec.data()+vec.get_offset(), val.data(), true);
+#endif
+  } else {
+    internal::vcopy(vec.size(), vec.data()+vec.get_offset(), val.data(), false);
+  }
+
+  logger.util_out();
+}
+
+template void vector<double>::operator=(const view1D<vector<double>,double> &vec);
+template void vector<float>::operator=(const view1D<vector<float>,float> &vec);
+
+template <typename T> void vector<T>::operator=(const view1D<matrix::Dense<T>,T> &vec) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_size(*this, vec));
+  assert(monolish::util::is_same_device_mem_stat(*this, vec));
+
+  // gpu copy and recv
+  if (vec.get_device_mem_stat()) {
+#if MONOLISH_USE_GPU
+    internal::vcopy(vec.size(), vec.data()+vec.get_offset(), val.data(), true);
+#endif
+  } else {
+    internal::vcopy(vec.size(), vec.data()+vec.get_offset(), val.data(), false);
+  }
+
+  logger.util_out();
+}
+
+template void vector<double>::operator=(const view1D<matrix::Dense<double>,double> &vec);
+template void vector<float>::operator=(const view1D<matrix::Dense<float>,float> &vec);
 } // namespace monolish
