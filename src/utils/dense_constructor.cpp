@@ -71,9 +71,10 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
 #if MONOLISH_USE_GPU
     send();
     const T *data = value.data();
+    T *vald = val.data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
-      val[i] = data[i];
+      vald[i] = data[i];
     }
 #else
     throw std::runtime_error(

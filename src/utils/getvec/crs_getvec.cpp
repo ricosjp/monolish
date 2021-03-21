@@ -72,6 +72,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
+    const int *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
@@ -79,7 +80,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
     }
 #pragma omp target teams distribute parallel for
     for (int j = rowd[r]; j < rowd[r + 1]; j++) {
-      vecd[col_ind[j]] = vald[j];
+      vecd[indexd[j]] = vald[j];
     }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
