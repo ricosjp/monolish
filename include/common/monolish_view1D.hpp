@@ -58,7 +58,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(monolish::vector<Float> &x, const size_t start, const size_t end)
+  view1D(vector<Float> &x, const size_t start, const size_t end)
       : target(x) {
     first = start;
     last = end;
@@ -76,13 +76,49 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(monolish::matrix::Dense<Float> &A, const size_t start,
+  view1D(matrix::Dense<Float> &A, const size_t start,
          const size_t end)
       : target(A) {
     first = start;
     last = end;
     range = last - first;
     target_data = A.val.data();
+  }
+
+  /**
+   * @brief create view1D(start:end) from monolish::vector
+   * @param x view1D create from monolish::vector
+   * @param start start position (x.first + start)
+   * @param end end position (x.last + end)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  view1D(view1D<vector<Float>,Float> &x, const size_t start, const size_t end)
+      : target(x) {
+    first = x.get_first() + start;
+    last = x.get_last() + end;
+    range = last - first;
+    target_data = x.data();
+  }
+
+  /**
+   * @brief create view1D(start:end) from monolish::matrix::Dense
+   * @param x view1D create from monolish::matrix::Dense
+   * @param start start position (x.first + start)
+   * @param end end position (x.last + end)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  view1D(view1D<matrix::Dense<Float>,Float> &x, const size_t start, const size_t end)
+      : target(x) {
+    first = x.get_first() + start;
+    last = x.get_last() + end;
+    range = last - first;
+    target_data = x.data();
   }
 
   /**
@@ -153,7 +189,7 @@ public:
   size_t get_device_mem_stat() const { return target.get_device_mem_stat(); }
 
   /**
-   * @brief returns a direct pointer to the vector (dont include offset)
+   * @brief returns a direct pointer to the original vector (dont include offset)
    * @return A pointer to the first element
    * @note
    * - # of computation: 1
