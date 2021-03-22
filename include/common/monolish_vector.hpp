@@ -6,7 +6,9 @@
  **/
 
 #pragma once
+#include "./monolish_dense.hpp"
 #include "./monolish_logger.hpp"
+#include "./monolish_view1D.hpp"
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -101,6 +103,34 @@ public:
    *        - else; coping data only on CPU
    **/
   vector(const vector<Float> &vec);
+
+  /**
+   * @brief copy from monolish::view1D from vector
+   * @param vec input monolish::view1D from vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: N (only allocation)
+   *        - if `gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  vector(const view1D<vector<Float>, Float> &vec);
+
+  /**
+   * @brief copy from monolish::view1D from monolish::matrix::Dense
+   * @param vec input monolish::view1D from monolish::matrix::Dense
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: N (only allocation)
+   *        - if `gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  vector(const view1D<matrix::Dense<Float>, Float> &vec);
 
   /**
    * @brief copy from pointer
@@ -331,6 +361,34 @@ public:
   void operator=(const vector<Float> &vec);
 
   /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<vector<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::matrix::Dense
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
    * @brief copy vector from std::vector
    * @param vec source std::vector
    * @return output vector
@@ -381,6 +439,32 @@ public:
              bool compare_cpu_and_device = false) const;
 
   /**
+   * @brief Comparing matricies (A == mat)
+   * @param vec view1D from monolish::vector
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const view1D<vector<Float>, Float> &vec,
+             bool compare_cpu_and_device = false) const;
+
+  /**
+   * @brief Comparing matricies (A == mat)
+   * @param vec vieq1D from monolish::matrix::Dense
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  bool equal(const view1D<matrix::Dense<Float>, Float> &vec,
+             bool compare_cpu_and_device = false) const;
+
+  /**
    * @brief Comparing vectors (v == vec)
    * @param vec vector (size N)
    * @return true or false
@@ -391,7 +475,33 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator==(const vector<Float> &vec);
+  bool operator==(const vector<Float> &vec) const;
+
+  /**
+   * @brief Comparing vectors (v == vec)
+   * @param vec view1D from monolish::vector (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
+  bool operator==(const view1D<vector<Float>, Float> &vec) const;
+
+  /**
+   * @brief Comparing vectors (v == vec)
+   * @param vec view1D from monolish::matrix::Dense (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
+  bool operator==(const view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /**
    * @brief Comparing vectors (v != vec)
@@ -404,6 +514,32 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator!=(const vector<Float> &vec);
+  bool operator!=(const vector<Float> &vec) const;
+
+  /**
+   * @brief Comparing vectors (v != vec)
+   * @param vec vector (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
+  bool operator!=(const view1D<vector<Float>, Float> &vec) const;
+
+  /**
+   * @brief Comparing vectors (v != vec)
+   * @param vec vector (size N)
+   * @return true or false
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
+  bool operator!=(const view1D<matrix::Dense<Float>, Float> &vec) const;
 };
 } // namespace monolish
