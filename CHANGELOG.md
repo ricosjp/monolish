@@ -21,7 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add createion of view1D from view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/276
+- add create view1D from view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/276
 - add vector utils in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/274
 - add get_residual_l2 in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
 - add VML in view1D<Dense> https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
