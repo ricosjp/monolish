@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add createion of view1D from view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/276
 - add vector utils in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/274
 - add get_residual_l2 in view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
 - add VML in view1D<Dense> https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/271
@@ -40,7 +41,7 @@ Unreleased
 - support input unsymmetric file MM format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 
 ### Fixed
-- fix clang warnings https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/273
+- fix clang warnings https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/275
 - fix const non-const consistency https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/270
 - add checking gpu_status and size in getvec https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
