@@ -31,6 +31,7 @@ SRCS +=$(notdir $(wildcard ./src/equation/*/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/internal/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/internal/*/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/internal/*/*/*.cpp))
+SRCS +=$(notdir $(wildcard ./src/internal/*/*/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/utils/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/utils/*/*.cpp))
@@ -58,6 +59,13 @@ vpath %.cpp ./src/equation/cholesky/
 
 vpath %.cpp ./src/internal/
 vpath %.cpp ./src/internal/arithmetic/
+vpath %.cpp ./src/internal/lapack/
+vpath %.cpp ./src/internal/lapack/getrf/
+vpath %.cpp ./src/internal/lapack/getrs/
+vpath %.cpp ./src/internal/lapack/syev/
+vpath %.cpp ./src/internal/lapack/sygv/
+vpath %.cpp ./src/internal/lapack/sytrf/
+vpath %.cpp ./src/internal/lapack/sytrs/
 vpath %.cpp ./src/internal/math/
 
 vpath %.cpp ./src/utils/
@@ -73,10 +81,9 @@ vpath %.cpp ./src/utils/system/
 vpath %.cpp ./src/utils/transpose/
 vpath %.cpp ./src/utils/minus/
 
-vpath %.cpp ./src/vml/arithmetic
-vpath %.cpp ./src/vml/linearoperator
-vpath %.cpp ./src/vml/math_1_3op
-vpath %.cpp ./src/vml/math_2op
+vpath %.cpp ./src/vml/linearoperator/
+vpath %.cpp ./src/vml/matrix/
+vpath %.cpp ./src/vml/vector/
 
 #############################################################
 
