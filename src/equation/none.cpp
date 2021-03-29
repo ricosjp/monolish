@@ -44,9 +44,8 @@ void equation::none<MATRIX, T>::apply_precond(const vector<T> &r,
   blas::copy(r, z);
   logger.solver_out();
 }
-template void
-equation::none<matrix::Dense<float>, float>::apply_precond(const vector<float> &r,
-                                                         vector<float> &z);
+template void equation::none<matrix::Dense<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
 template void equation::none<matrix::Dense<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
@@ -57,9 +56,10 @@ template void equation::none<matrix::CRS<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
 template void
-equation::none<matrix::LinearOperator<float>, float>::apply_precond(const vector<float> &r,
-                                                         vector<float> &z);
-template void equation::none<matrix::LinearOperator<double>, double>::apply_precond(
+equation::none<matrix::LinearOperator<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void
+equation::none<matrix::LinearOperator<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
 /////

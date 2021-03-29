@@ -87,11 +87,9 @@ template int equation::CG<matrix::CRS<double>, double>::monolish_CG(
 template int equation::CG<matrix::CRS<float>, float>::monolish_CG(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-template int
-equation::CG<matrix::LinearOperator<double>, double>::monolish_CG(
+template int equation::CG<matrix::LinearOperator<double>, double>::monolish_CG(
     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
-template int
-equation::CG<matrix::LinearOperator<float>, float>::monolish_CG(
+template int equation::CG<matrix::LinearOperator<float>, float>::monolish_CG(
     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 
 ///

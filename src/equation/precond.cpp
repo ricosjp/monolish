@@ -16,7 +16,7 @@ void solver::solver<MATRIX, T>::set_create_precond(PRECOND &p) {
   logger.util_out();
 }
 
-//none
+// none
 template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
     equation::none<matrix::Dense<double>, double> &p);
 template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
@@ -27,12 +27,14 @@ template void solver::solver<matrix::CRS<double>, double>::set_create_precond(
 template void solver::solver<matrix::CRS<float>, float>::set_create_precond(
     equation::none<matrix::CRS<float>, float> &p);
 
-template void solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
+template void
+solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
     equation::none<matrix::LinearOperator<double>, double> &p);
-template void solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
+template void
+solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
     equation::none<matrix::LinearOperator<float>, float> &p);
 
-//jacobi
+// jacobi
 template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
     equation::Jacobi<matrix::Dense<double>, double> &p);
 template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
@@ -54,7 +56,7 @@ void solver::solver<MATRIX, T>::set_apply_precond(PRECOND &p) {
                 std::placeholders::_2);
   logger.util_out();
 }
-//none
+// none
 template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
     equation::none<matrix::Dense<double>, double> &p);
 template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
@@ -65,12 +67,14 @@ template void solver::solver<matrix::CRS<double>, double>::set_apply_precond(
 template void solver::solver<matrix::CRS<float>, float>::set_apply_precond(
     equation::none<matrix::CRS<float>, float> &p);
 
-template void solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
+template void
+solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
     equation::none<matrix::LinearOperator<double>, double> &p);
-template void solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
+template void
+solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
     equation::none<matrix::LinearOperator<float>, float> &p);
 
-//jacobi
+// jacobi
 template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
     equation::Jacobi<matrix::Dense<double>, double> &p);
 template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(

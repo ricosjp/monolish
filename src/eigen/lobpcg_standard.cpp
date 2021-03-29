@@ -313,7 +313,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 template int
 standard_eigen::LOBPCG<matrix::Dense<double>, double>::monolish_LOBPCG(
     matrix::Dense<double> &A, vector<double> &l, matrix::Dense<double> &x);
-template int standard_eigen::LOBPCG<matrix::Dense<float>, float>::monolish_LOBPCG(
+template int
+standard_eigen::LOBPCG<matrix::Dense<float>, float>::monolish_LOBPCG(
     matrix::Dense<float> &A, vector<float> &l, matrix::Dense<float> &x);
 template int
 standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(

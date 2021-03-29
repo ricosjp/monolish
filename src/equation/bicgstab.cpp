@@ -131,7 +131,8 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-template int equation::BiCGSTAB<matrix::Dense<double>, double>::monolish_BiCGSTAB(
+template int
+equation::BiCGSTAB<matrix::Dense<double>, double>::monolish_BiCGSTAB(
     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 template int equation::BiCGSTAB<matrix::Dense<float>, float>::monolish_BiCGSTAB(
     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);

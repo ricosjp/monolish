@@ -67,14 +67,12 @@ int main(int argc, char **argv) {
 
   std::cout << "CRS, none" << std::endl;
 
-  if (test<monolish::matrix::CRS<double>,
-           double,
+  if (test<monolish::matrix::CRS<double>, double,
            monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<monolish::matrix::CRS<float>,
-          float,
+  if (test<monolish::matrix::CRS<float>, float,
            monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           file, check_ans, 1.0e-4) == false) {
     return 1;
@@ -82,14 +80,12 @@ int main(int argc, char **argv) {
 
   std::cout << "CRS, jacobi" << std::endl;
 
-  if (test<monolish::matrix::CRS<double>,
-            double,
+  if (test<monolish::matrix::CRS<double>, double,
            monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
           file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<monolish::matrix::CRS<float>,
-          float,
+  if (test<monolish::matrix::CRS<float>, float,
            monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
           file, check_ans, 1.0e-4) == false) {
     return 1;
@@ -97,14 +93,12 @@ int main(int argc, char **argv) {
 
   std::cout << "Dense, none" << std::endl;
 
-  if (test<monolish::matrix::Dense<double>,
-           double,
+  if (test<monolish::matrix::Dense<double>, double,
            monolish::equation::none<monolish::matrix::Dense<double>, double>>(
           file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<monolish::matrix::Dense<float>,
-          float,
+  if (test<monolish::matrix::Dense<float>, float,
            monolish::equation::none<monolish::matrix::Dense<float>, float>>(
           file, check_ans, 1.0e-4) == false) {
     return 1;
@@ -112,14 +106,12 @@ int main(int argc, char **argv) {
 
   std::cout << "Dense, jacobi" << std::endl;
 
-  if (test<monolish::matrix::Dense<double>,
-            double,
+  if (test<monolish::matrix::Dense<double>, double,
            monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
           file, check_ans, 1.0e-8) == false) {
     return 1;
   }
-  if (test<monolish::matrix::Dense<float>,
-          float,
+  if (test<monolish::matrix::Dense<float>, float,
            monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
           file, check_ans, 1.0e-4) == false) {
     return 1;
