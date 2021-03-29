@@ -41,7 +41,7 @@ Unreleased
 - support input unsymmetric file MM format https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/265
 
 ### Fixed
-- fix sxat and a64fx makefiles https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/280
+- fix sxat and a64fx makefile dirs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/280
 - fix clang warnings https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/275
 - fix const non-const consistency https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/270
 - add checking gpu_status and size in getvec https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
