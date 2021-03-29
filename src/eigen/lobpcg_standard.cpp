@@ -311,6 +311,11 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 }
 
 template int
+standard_eigen::LOBPCG<matrix::Dense<double>, double>::monolish_LOBPCG(
+    matrix::Dense<double> &A, vector<double> &l, matrix::Dense<double> &x);
+template int standard_eigen::LOBPCG<matrix::Dense<float>, float>::monolish_LOBPCG(
+    matrix::Dense<float> &A, vector<float> &l, matrix::Dense<float> &x);
+template int
 standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
     matrix::CRS<double> &A, vector<double> &l, matrix::Dense<double> &x);
 template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
@@ -339,6 +344,10 @@ int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, vector<T> &l,
   return ret; // err code
 }
 
+template int standard_eigen::LOBPCG<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, vector<double> &l, matrix::Dense<double> &x);
+template int standard_eigen::LOBPCG<matrix::Dense<float>, float>::solve(
+    matrix::Dense<float> &A, vector<float> &l, matrix::Dense<float> &x);
 template int standard_eigen::LOBPCG<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &l, matrix::Dense<double> &x);
 template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::solve(
