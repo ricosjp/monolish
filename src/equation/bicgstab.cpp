@@ -131,6 +131,12 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
+template int
+equation::BiCGSTAB<matrix::Dense<double>, double>::monolish_BiCGSTAB(
+    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+template int equation::BiCGSTAB<matrix::Dense<float>, float>::monolish_BiCGSTAB(
+    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+
 template int equation::BiCGSTAB<matrix::CRS<double>, double>::monolish_BiCGSTAB(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 template int equation::BiCGSTAB<matrix::CRS<float>, float>::monolish_BiCGSTAB(
@@ -157,10 +163,16 @@ int equation::BiCGSTAB<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return ret; // err code
 }
+template int equation::BiCGSTAB<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+template int equation::BiCGSTAB<matrix::Dense<float>, float>::solve(
+    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+
 template int equation::BiCGSTAB<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 template int equation::BiCGSTAB<matrix::CRS<float>, float>::solve(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+
 template int equation::BiCGSTAB<matrix::LinearOperator<double>, double>::solve(
     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 template int equation::BiCGSTAB<matrix::LinearOperator<float>, float>::solve(

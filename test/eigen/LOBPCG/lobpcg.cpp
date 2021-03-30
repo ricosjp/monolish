@@ -87,11 +87,11 @@ bool benchmark_GEVP(const char *fileA, const char *fileB, const int eignum,
   return true;
 }
 
-template <typename T, typename PRECOND>
+template <typename MATRIX, typename T, typename PRECOND>
 bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
                 const int check_ans, const T tol_ev, const T tol_res,
                 const int maxiter, const std::string s) {
-  monolish::matrix::CRS<T> A(mat);
+  MATRIX A(mat);
   monolish::vector<T> lambda(exact_result.size());
   monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
   for (size_t i = 0; i < exact_result.size(); ++i) {
@@ -99,7 +99,7 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
   }
   monolish::util::send(A);
 
-  monolish::eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+  monolish::eigen::LOBPCG<MATRIX, T> solver;
 
   solver.set_tol(tol_res);
   solver.set_lib(0);
@@ -129,13 +129,13 @@ bool test_solve(monolish::matrix::COO<T> mat, monolish::vector<T> exact_result,
   return true;
 }
 
-template <typename T, typename PRECOND>
+template <typename MATRIX, typename T, typename PRECOND>
 bool test_solve_GEVP(monolish::matrix::COO<T> matA,
                      monolish::matrix::COO<T> matB,
                      monolish::vector<T> exact_result, const int check_ans,
                      const T tol_ev, const T tol_res, const std::string s) {
-  monolish::matrix::CRS<T> A(matA);
-  monolish::matrix::CRS<T> B(matB);
+  MATRIX A(matA);
+  MATRIX B(matB);
   monolish::vector<T> lambda(exact_result.size());
   monolish::matrix::Dense<T> x(exact_result.size(), A.get_row());
   for (size_t i = 0; i < exact_result.size(); ++i) {
@@ -143,7 +143,7 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   }
   monolish::util::send(A, B);
 
-  monolish::generalized_eigen::LOBPCG<monolish::matrix::CRS<T>, T> solver;
+  monolish::generalized_eigen::LOBPCG<MATRIX, T> solver;
 
   solver.set_tol(tol_res);
   solver.set_lib(0);
@@ -173,7 +173,7 @@ bool test_solve_GEVP(monolish::matrix::COO<T> matA,
   return true;
 }
 
-template <typename T, typename PRECOND>
+template <typename MATRIX, typename T, typename PRECOND>
 bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
                                const T tol_res) {
   int DIM = 100;
@@ -185,11 +185,12 @@ bool test_tridiagonal_toeplitz(const int check_ans, const T tol_ev,
         DIM, i, 10.0, -1.0);
   }
 
-  return test_solve<T, PRECOND>(COO, exact_result, check_ans, tol_ev,
-                                tol_res * DIM, DIM, "Tridiagonal Toeplitz");
+  return test_solve<MATRIX, T, PRECOND>(COO, exact_result, check_ans, tol_ev,
+                                        tol_res * DIM, DIM,
+                                        "Tridiagonal Toeplitz");
 }
 
-template <typename T, typename PRECOND>
+template <typename MATRIX, typename T, typename PRECOND>
 bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
                                const T tol_res) {
   int DIM = 100;
@@ -208,9 +209,9 @@ bool test_toeplitz_plus_hankel(const int check_ans, const T tol_ev,
         1.0 / 120.0);
   }
 
-  return test_solve_GEVP<T, PRECOND>(COO_A, COO_B, exact_result, check_ans,
-                                     tol_ev, tol_res * DIM,
-                                     "Toeplitz + Hankel");
+  return test_solve_GEVP<MATRIX, T, PRECOND>(COO_A, COO_B, exact_result,
+                                             check_ans, tol_ev, tol_res * DIM,
+                                             "Toeplitz + Hankel");
 }
 
 int main(int argc, char **argv) {
@@ -294,50 +295,106 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
+  std::cout << "CRS" << std::endl;
+
   if (test_tridiagonal_toeplitz<
-          double,
+          monolish::matrix::CRS<double>, double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
-          float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
+          monolish::matrix::CRS<float>, float,
+          monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
-          double,
+          monolish::matrix::CRS<double>, double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
           check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
   if (test_tridiagonal_toeplitz<
-          float,
+          monolish::matrix::CRS<float>, float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
           check_ans, 1.0e-3, 1.0e-5) == false) {
     return 1;
   }
 
   if (test_toeplitz_plus_hankel<
-          double,
+          monolish::matrix::CRS<double>, double,
           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
           check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
-          float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(
+          monolish::matrix::CRS<float>, float,
+          monolish::equation::none<monolish::matrix::CRS<float>, float>>(
           check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
-          double,
+          monolish::matrix::CRS<double>, double,
           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
           check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
   if (test_toeplitz_plus_hankel<
-          float,
+          monolish::matrix::CRS<float>, float,
           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
+          check_ans, 5.0e-4, 1.0e-6) == false) {
+    return 1;
+  }
+
+  std::cout << "Dense" << std::endl;
+
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::Dense<double>, double,
+          monolish::equation::none<monolish::matrix::Dense<double>, double>>(
+          check_ans, 1.0e-3, 1.0e-5) == false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::Dense<float>, float,
+          monolish::equation::none<monolish::matrix::Dense<float>, float>>(
+          check_ans, 1.0e-3, 1.0e-5) == false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::Dense<double>, double,
+          monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
+          check_ans, 1.0e-3, 1.0e-5) == false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::Dense<float>, float,
+          monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
+          check_ans, 1.0e-3, 1.0e-5) == false) {
+    return 1;
+  }
+
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::Dense<double>, double,
+          monolish::equation::none<monolish::matrix::Dense<double>, double>>(
+          check_ans, 5.0e-4, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::Dense<float>, float,
+          monolish::equation::none<monolish::matrix::Dense<float>, float>>(
+          check_ans, 5.0e-4, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::Dense<double>, double,
+          monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
+          check_ans, 5.0e-4, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::Dense<float>, float,
+          monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
           check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
