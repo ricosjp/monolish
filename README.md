@@ -1,24 +1,24 @@
 # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
 monolish is a linear solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
 
-# Feature (Policyか？)
+# Feature
 monolish let developper be oblivious about:
-- Performance tuning
+- [Performance tuning][tuning_rule]
 - [Various processor which execute library  (Intel CPU / NVIDIA GPU / AMD CPU / ARM CPU / NEC SX-Aurora TSUBASA etc.) ][oplist]
 - [Vender specific data transfer API (host RAM to Device RAM)][gpu]
 - [Find bottolenecks][logger] and [Perormance benchmark][perfviewer]
-- Argument data type of matrix / vector operations ([doxygen function list][doxy-func])
-- Matrix structure / storage format
+- Argument data type of matrix / vector operations ([doxygen function list][doxy_func])
+- [Matrix structure / storage format][matrix_storage]
 - [Cumbersome package dependency][build]
-
-各特徴を説明するファイルを作ってリンクを貼る
 
 [oplist]: doc/operation_list.md
 [gpu]: doc/gpu.md
-[doxy-func]: http://gogo-gomachan.com/charactor/
+[doxy_func]: XXXXXXXXXXXXXXX
 [build]: doc/build.md
-[logger]: http://gogo-gomachan.com/charactor/
-[perfviewer]: http://gogo-gomachan.com/charactor/
+[logger]: XXXXXXXXXXXXXXXXXXXXXXXXX
+[perfviewer]: XXXXXXXXXXXXXXXXXX
+[matrix_storage]:XXXXXXXXXXXXXXXX
+[tunenig_rule]:XXXXXXXXXXXXXXX 
 
 # What monolish solves
 monolish is a vendor-independent open source library written in C++ that aims to be grand unified linear algebra library on any hardware.
@@ -38,40 +38,24 @@ monolish solves cumbersome package management by Docker.
 
 # Build and Install
 ## Download binary
-[githubのリンクを貼る](http://gogo-gomachan.com/charactor/)
+XXXXXXX
 
-## Docker
-[allgebra](https://github.com/ricosjp/allgebra)
-
-Install path is `$MONOLISH_DIR` 
-
-### CPU
-```
-make cpu
-make install
-```
-
-### GPU
-```
-make gpu
-make install
-```
+## Build (for monolish Developpers)
+see [doc/instration.md](doc/instration.md)
 
 # Support
-Supportの受け方をここに書く(issueを書いてね)
 If you have any question, bug to report or would like to propose a new feature, feel free to create an [issue][issue] on GitHub.
 
-[issue]: http://gogo-gomachan.com/charactor/
+[issue]: https://github.com/ricosjp/monolish/issues
 
 # Contributing
-Contributionに必要な情報をここに書く
+If you want to contribute to monolish, create an [Issue][issue] and create a pull request for the Issue.
+Before resolving the WIP of the pull request, you need to do the following two things
 
-```
-monolishはchangelogに変更がない場合とclang-formatかけてない場合にCIでwarningがでる．
+- Apply clang-format with `make format` command.
+- Record the major fixes and the URL of the pull request in `CHANGELOG.md`.
 
-- clang formatはTOPDIRで make format するとgit addされてるファイル全部に自動でかかります
-- changelogは `CHANGELOG.md` に主要な変更とマージリクエストの番号を書く
-```
+The `make format` command will automatically apply clang-format to all git added files.
 
 License
 --------
@@ -88,59 +72,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
-# memo
-- Oblivious about platform
-- Oblivious about High performance(MPI, Multi-threading, SIMD)
-- Don’t reinvent the wheel (BLAS/SparseBLAS, Matrix Asm., Math func.,)
-- Performance Logging to Find the bottleneck (logger)
-- Build and Package Managing (cmake, Docker)
-- zero-overhead
-Don't implicitly allocate memory??
-- user friendly communication I/F
-- Don't require many code changes due to hardware changes (Intel, AMD, Power, ARM, A64fx, SXAT, NVIDIA GPU, AMD GPU...)
-- 簡単にかけるCommunication I/F (GPU/MPI, send-recv)
-
-
-======
-- Don't implement functions whose performance is unknown
-- Continuous Integration／Continuous Delivery/Continuous Benchmark (monolish performance viewer)
-
-- easy to implement other Language FFI (C++ and other language I/F)
-
-
-- Don't suffer from dependency resolution
-
-どこでも動く：
-- BLAS: 150+ functions (163?)
-- LAPACK: 1000+ functions (1302?)
-
-Intelだけ：
-- MKL2020: 10000+ functions (14850?)
-
-NVIDIAだけ：
-- CUBLAS/CUSPARSE/CUSOLVER/cuFFT cuda11.2: 1000+ functions (1112?)
-
-
-- C++のパッケージマネージメントをするためにDockerを使う
-- 性能を保証するためにCIでベンチマークして可視化する
-- BLAS/LAPACKとMKLの差はmonolishが埋める
-- 型や行列形状に依存した関数名をやめてtemplate化する
-- ユーザが想像できないメモリを確保しない
-
-
-# MTG資料
-
-初期設計資料 [GSlides](https://docs.google.com/presentation/d/16JvP7bTtxmfMP9hqflB7FVDrxueYxYa5U2PT-SkqB20/edit?usp=sharing)
-
-Matrix Format [Gslides](https://docs.google.com/presentation/d/1wqyw9CmlHar84WxTgnoULn0_ZHZ7IxkUnLa_HkIwVQo/edit?usp=sharing)
-
-ver1.0 MTG: [GSlides Link](https://docs.google.com/presentation/d/12LJXbFmAmKcEWtkIBCZm_klpqmAP6MIuvYCRAZnvwqQ/edit?usp=sharing)
-
-# 関連URL
-
-https://ricos.pages.ritc.jp/monolish_benchmark_result/
-
-# License
-# 
