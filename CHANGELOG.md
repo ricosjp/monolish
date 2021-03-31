@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add add row/col/diag functions for view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/281
 - add LOBCPG for dense matrix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/278
 - add iterative solver for dense matrix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/278
 - add create view1D from view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/276
