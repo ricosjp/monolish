@@ -39,7 +39,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
 template void monolish::matrix::Dense<double>::diag(vector<double> &vec) const;
 template void monolish::matrix::Dense<float>::diag(vector<float> &vec) const;
 
-template <typename T> void Dense<T>::diag(view1D<vector<T>,T> &vec) const {
+template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -70,10 +70,13 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>,T> &vec) const {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag(view1D<vector<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::diag(view1D<vector<float>,float> &vec) const;
+template void monolish::matrix::Dense<double>::diag(
+    view1D<vector<double>, double> &vec) const;
+template void
+monolish::matrix::Dense<float>::diag(view1D<vector<float>, float> &vec) const;
 
-template <typename T> void Dense<T>::diag(view1D<matrix::Dense<T>,T> &vec) const {
+template <typename T>
+void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -104,8 +107,10 @@ template <typename T> void Dense<T>::diag(view1D<matrix::Dense<T>,T> &vec) const
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag(view1D<matrix::Dense<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::diag(view1D<matrix::Dense<float>,float> &vec) const;
+template void monolish::matrix::Dense<double>::diag(
+    view1D<matrix::Dense<double>, double> &vec) const;
+template void monolish::matrix::Dense<float>::diag(
+    view1D<matrix::Dense<float>, float> &vec) const;
 
 // row
 template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
@@ -143,7 +148,8 @@ template void monolish::matrix::Dense<double>::row(const size_t r,
 template void monolish::matrix::Dense<float>::row(const size_t r,
                                                   vector<float> &vec) const;
 
-template <typename T> void Dense<T>::row(const size_t r, view1D<vector<T>,T> &vec) const {
+template <typename T>
+void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -173,12 +179,15 @@ template <typename T> void Dense<T>::row(const size_t r, view1D<vector<T>,T> &ve
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::row(const size_t r,
-                                                   view1D<vector<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::row(const size_t r,
-                                                   view1D<vector<float>,float> &vec) const;
+template void
+monolish::matrix::Dense<double>::row(const size_t r,
+                                     view1D<vector<double>, double> &vec) const;
+template void
+monolish::matrix::Dense<float>::row(const size_t r,
+                                    view1D<vector<float>, float> &vec) const;
 
-template <typename T> void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>,T> &vec) const {
+template <typename T>
+void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -208,10 +217,10 @@ template <typename T> void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::row(const size_t r,
-                                                   view1D<matrix::Dense<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::row(const size_t r,
-                                                   view1D<matrix::Dense<float>,float> &vec) const;
+template void monolish::matrix::Dense<double>::row(
+    const size_t r, view1D<matrix::Dense<double>, double> &vec) const;
+template void monolish::matrix::Dense<float>::row(
+    const size_t r, view1D<matrix::Dense<float>, float> &vec) const;
 
 // col
 template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
@@ -250,7 +259,8 @@ template void monolish::matrix::Dense<double>::col(const size_t c,
 template void monolish::matrix::Dense<float>::col(const size_t c,
                                                   vector<float> &vec) const;
 
-template <typename T> void Dense<T>::col(const size_t c, view1D<vector<T>,T> &vec) const {
+template <typename T>
+void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -281,12 +291,15 @@ template <typename T> void Dense<T>::col(const size_t c, view1D<vector<T>,T> &ve
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col(const size_t c,
-                                                   view1D<vector<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::col(const size_t c,
-                                                  view1D<vector<float>,float> &vec) const;
+template void
+monolish::matrix::Dense<double>::col(const size_t c,
+                                     view1D<vector<double>, double> &vec) const;
+template void
+monolish::matrix::Dense<float>::col(const size_t c,
+                                    view1D<vector<float>, float> &vec) const;
 
-template <typename T> void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>,T> &vec) const {
+template <typename T>
+void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -317,9 +330,9 @@ template <typename T> void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::col(const size_t c,
-                                                   view1D<matrix::Dense<double>,double> &vec) const;
-template void monolish::matrix::Dense<float>::col(const size_t c,
-                                                  view1D<matrix::Dense<float>,float> &vec) const;
+template void monolish::matrix::Dense<double>::col(
+    const size_t c, view1D<matrix::Dense<double>, double> &vec) const;
+template void monolish::matrix::Dense<float>::col(
+    const size_t c, view1D<matrix::Dense<float>, float> &vec) const;
 } // namespace matrix
 } // namespace monolish

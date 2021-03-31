@@ -345,8 +345,8 @@ public:
    * - GPU acceleration: true
    **/
   void diag(vector<Float> &vec) const;
-  void diag(view1D<vector<Float>,Float> &vec) const;
-  void diag(view1D<matrix::Dense<Float>,Float> &vec) const;
+  void diag(view1D<vector<Float>, Float> &vec) const;
+  void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get row vector
@@ -358,8 +358,8 @@ public:
    * - GPU acceleration: true
    **/
   void row(const size_t r, vector<Float> &vec) const;
-  void row(const size_t r, view1D<vector<Float>,Float> &vec) const;
-  void row(const size_t r, view1D<matrix::Dense<Float>,Float> &vec) const;
+  void row(const size_t r, view1D<vector<Float>, Float> &vec) const;
+  void row(const size_t r, view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get column vector
@@ -371,8 +371,8 @@ public:
    * - GPU acceleration: true
    **/
   void col(const size_t c, vector<Float> &vec) const;
-  void col(const size_t c, view1D<vector<Float>,Float> &vec) const;
-  void col(const size_t c, view1D<matrix::Dense<Float>,Float> &vec) const;
+  void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
+  void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
 
