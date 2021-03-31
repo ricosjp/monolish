@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.13.0 - 2021/03/31
+-----------
 ### Added
 - add Dense diag operations for Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/282
 - add row/col/diag functions for view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/281
