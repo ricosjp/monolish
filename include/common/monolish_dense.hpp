@@ -543,6 +543,8 @@ public:
    * - GPU acceleration: true
    **/
   void diag_add(const vector<Float> &vec);
+  void diag_add(const view1D<vector<Float>,Float> &vec);
+  void diag_add(const view1D<matrix::Dense<Float>,Float> &vec);
 
   /**
    * @brief Vector and diag. vector of dense matrix sub
@@ -553,6 +555,8 @@ public:
    * - GPU acceleration: true
    **/
   void diag_sub(const vector<Float> &vec);
+  void diag_sub(const view1D<vector<Float>,Float> &vec);
+  void diag_sub(const view1D<matrix::Dense<Float>,Float> &vec);
 
   /**
    * @brief Vector and diag. vector of dense matrix mul
@@ -563,6 +567,8 @@ public:
    * - GPU acceleration: true
    **/
   void diag_mul(const vector<Float> &vec);
+  void diag_mul(const view1D<vector<Float>,Float> &vec);
+  void diag_mul(const view1D<matrix::Dense<Float>,Float> &vec);
 
   /**
    * @brief Vector and diag. vector of dense matrix div
@@ -573,6 +579,8 @@ public:
    * - GPU acceleration: true
    **/
   void diag_div(const vector<Float> &vec);
+  void diag_div(const view1D<vector<Float>,Float> &vec);
+  void diag_div(const view1D<matrix::Dense<Float>,Float> &vec);
 };
 } // namespace matrix
 } // namespace monolish
