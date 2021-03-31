@@ -139,7 +139,7 @@ template void monolish::matrix::COO<float>::row(const size_t r,
 
 // col
 template <typename T> void COO<T>::col(const size_t c, vector<T> &vec) const {
-  Logger &logger = Logger::get_instance();
+  Ldfsdkfjlsfjgger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   assert(get_row() == vec.size());
