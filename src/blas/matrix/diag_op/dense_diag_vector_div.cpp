@@ -5,6 +5,7 @@ namespace monolish {
 namespace matrix {
 
 // div vector
+
 template <typename T> void Dense<T>::diag_div(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -40,6 +41,7 @@ monolish::matrix::Dense<double>::diag_div(const vector<double> &vec);
 template void
 monolish::matrix::Dense<float>::diag_div(const vector<float> &vec);
 
+
 template <typename T> void Dense<T>::diag_div(const view1D<vector<T>,T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -74,6 +76,7 @@ template void
 monolish::matrix::Dense<double>::diag_div(const view1D<vector<double>, double> &vec);
 template void
 monolish::matrix::Dense<float>::diag_div(const view1D<vector<float>, float> &vec);
+
 
 template <typename T> void Dense<T>::diag_div(const matrix::Dense<vector<T>,T> &vec) {
   Logger &logger = Logger::get_instance();
