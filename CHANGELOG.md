@@ -21,7 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add add row/col/diag functions for view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/281
+- add Dense diag operations for Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/282
+- add row/col/diag functions for view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/281
 - add LOBCPG for dense matrix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/278
 - add iterative solver for dense matrix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/278
 - add create view1D from view1D https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/276
@@ -36,6 +37,7 @@ Unreleased
 - add matrix constructor from N-origin std::vector  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/262
 
 ### Changed
+- generate add2others in Dense diag operation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/282
 - vector utils to const https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/274
 - delete printf in transpose test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/268
 - move blas/matrix/getvec to util/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267

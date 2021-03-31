@@ -34,6 +34,5 @@ template <typename T> void Dense<T>::diag_add(const T alpha) {
 template void monolish::matrix::Dense<double>::diag_add(const double alpha);
 template void monolish::matrix::Dense<float>::diag_add(const float alpha);
 
-
 } // namespace matrix
 } // namespace monolish

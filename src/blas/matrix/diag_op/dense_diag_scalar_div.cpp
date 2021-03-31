@@ -34,6 +34,5 @@ template <typename T> void Dense<T>::diag_div(const T alpha) {
 template void monolish::matrix::Dense<double>::diag_div(const double alpha);
 template void monolish::matrix::Dense<float>::diag_div(const float alpha);
 
-
 } // namespace matrix
 } // namespace monolish
