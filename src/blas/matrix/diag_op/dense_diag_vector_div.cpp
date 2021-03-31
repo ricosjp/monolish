@@ -77,7 +77,7 @@ template void monolish::matrix::Dense<float>::diag_div(
     const view1D<vector<float>, float> &vec);
 
 template <typename T>
-void Dense<T>::diag_div(const matrix::Dense<vector<T>, T> &vec) {
+void Dense<T>::diag_div(const view1D<matrix::Dense<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
