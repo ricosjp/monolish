@@ -10,6 +10,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: MONOlithic LInier equation Solvers for Highly-parallel architecture
  monolish is a linear solver library that monolithically fuses
- variable data types, matrix structures, matrix data formats, 
+ variable data types, matrix structures, matrix data formats,
  vender specific data transfer APIs, and vender specific numerical
  algebra libraries.
