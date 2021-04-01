@@ -1,4 +1,4 @@
-# GPU programming {#gpu_md}
+# GPU programming {#gpu_dev}
 
 # はじめに
 monolishの各クラス(vector, matrix)は`send()`関数を用いることでGPUにマッピングされる．

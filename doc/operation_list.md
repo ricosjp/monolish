@@ -1,4 +1,4 @@
-# Operation list {#oplist_md}
+# Operation list {#oplist}
 This section describes the implementation of each function.
 
 ## Implementation of matrix/vector operations
@@ -9,14 +9,14 @@ The monolish uses these libraries as much as possible, and implements the missin
 When compiling, it switches the function to be called if the MKL or CUDA libraries are available or not. Switch dependency libraries at compile time.
 
 The branch for the case where MKL or CUDA libraries are not available is called `OSS`.
-OSS is an implementation for architectures such as AMD, ARM, Power, etc.
+`OSS` is an implementation for architectures such as AMD, ARM, Power, etc.
 
-In OSS, we assume that only CBLAS compatible BLAS libraries and LAPACK can be used.
+In `OSS`, we assume that only CBLAS compatible BLAS libraries and LAPACK can be used.
 The functions of MKL and CUDA libraries that are not implemented in CBLAS are implemented in monolish.
 
 ![](img/call_blas.png)
 
-## Solver Implementation
+## Implementation of Linear Solvers
 LAPACK is a complete direct solver for dense matrices. monolish calls LAPACK for direct solver for dense matrices.
 
 The direct solver for sparse matrices is implemented in paradiso/mumps/cusolver. monolish calls these libraries. Currently, only cusolver is implemented.
