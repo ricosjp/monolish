@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 9)
 Package: monolish
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: MONOlithic Liner equation Solvers for Highly-parallel architecture
- monolish is a linear solver library that monolithically fuses variable data type,
- matrix structures, matrix data format, vender specific data transfer APIs,
+Description: MONOlithic LInier equation Solvers for Highly-parallel architecture
+ monolish is a linear solver library that monolithically fuses variable data types,
+ matrix structures, matrix data formats, vender specific data transfer APIs,
  and vender specific numerical algebra libraries.
