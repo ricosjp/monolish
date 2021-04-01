@@ -17,8 +17,8 @@ monolish let developper be oblivious about:
 [build]: doc/build.md
 [logger]: XXXXXXXXXXXXXXXXXXXXXXXXX
 [perfviewer]: XXXXXXXXXXXXXXXXXX
-[matrix_storage]:XXXXXXXXXXXXXXXX
-[tunenig_rule]:XXXXXXXXXXXXXXX 
+[matrix_storage]: XXXXXXXXXXXXXXXX
+[tuning_rule]: XXXXXXXXXXXXXXX 
 
 # What monolish solves
 monolish is a vendor-independent open source library written in C++ that aims to be grand unified linear algebra library on any hardware.
