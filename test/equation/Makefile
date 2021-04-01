@@ -64,6 +64,8 @@ clean:
 	- make -j -C jacobi/ clean
 	- make -j -C cg/ clean
 	- make -j -C bicgstab/ clean
+	- make -j -C dense_lu/ clean
+	- make -j -C dense_cholesky/ clean
 	- make -j -C sparse_lu/ clean
 	- make -j -C sparse_qr/ clean
 	- make -j -C sparse_cholesky/ clean
