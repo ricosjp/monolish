@@ -1,32 +1,42 @@
 # monolish data types {#data_type}
 
 ## Vector
+monolish::vector is a vector class like std::vector that can manage device memory of CPU and GPU.
 
-hogehoge...
+Compared to std::vector, some functions commonly used in numerical computation are implemented.
+- Random vector creation
+- Match all elements
+- Output of all elements to file or standard output
 
-monolish::vector
+We plan to implement all the features of std::vector in the future.
+
+## view1D
+monolish::view1D is a vector reference class with offset.
+It can be created from monolish::vector or monolish::matrix::Dense.
+
+Since view1D is not a hardcopy but a reference, it can extract a part of a vector or matrix without cost.
+
+We plan to implement 2D view class in the future.
 
 ## Matrix
-
 The implementation of the matrix storage format in monolish has several features.
 
-The matrix format has the following two attributes;
+The matrix format has the following two attributes:
 1. `editable`
 2. `computable`
 
 A matrix storage format with `editable` attribute can reference and add matrix elements.
 
-A matrix storage format with `computable` attribute can be used for computation and has functions such as transfer to GPU (see here for a list of computation functions).
+A matrix storage format with `computabl
 
 
 In monolish, Dense matrix is considered as one of the sparse matrix formats.
 Currently, there are four matrix storage formats available: Dense, COO, CRS, and LinearOperator.
-The attributes of each matrix storage format are shown below;
+The attributes of each matrix storage format are shown below:
 - monolish::matrix::Dense: `editable and computable`
 - monolish::matrix::COO: `editable`
 - monolish::matrix::CRS: `computable`
 - monolish::matrix::LinearOperator: `computable` (special format)
-
 
 Matrices stored in COO format can be easily referenced, but the computation cannot be parallelized. COO does not have any attributes to compute.
 
@@ -42,9 +52,9 @@ when a new matrix storage format is implemented, all the matrices with the same 
 For example, We will implement ELL, JAD and other storage formats, it will be implemented as a class with `computable` attributes like CRS.
 (This is a beautiful implementation policy. But probably the policy will be broken....).
 
-![](./img/matrix_convert.png)
+![](./img/convert.png)
 
-# Matrix Util functions list {#MatUtil_list_md}
+### Matrix Util functions list 
 
 | func                          | COO (editable)              | Dense (editable/computable) | CRS (computable) |
 |-------------------------------|-----------------------------|------------------------------|---------------|
@@ -60,3 +70,34 @@ For example, We will implement ELL, JAD and other storage formats, it will be im
 | recv                          | don't support GPU           | CPU/GPU                      | CPU/GPU       |
 | nonfree_recv                  | don't support GPU           | CPU/GPU                      | CPU/GPU       |
 | device_free                   | don't support GPU           | CPU/GPU                      | CPU/GPU       |
+
+## Storacture of matrix storage formats
+### monolish::matrix::COO
+monolish::matrix::COO uses following three arrays:
+- `val` is an array of length # of nonzeros, which stores the values of the nonzero elements.
+- `row_index` is an array of length # of nonzeros, which stores the row numbers of the nonzero elements.
+- `col_index` is an array of length # of nonzeros, which stores the column numbers of the nonzero elements.
+
+![](./img/COO.png)
+
+### monolish::matrix::CRS
+monolish::matrix::CRS uses following three arrays:
+- `val` is an array of length # of nonzeros, which stores the nonzero elements of matrix A along the row.
+- `col_ind` is an array of length # of nonzeros, which stores the column numbers of the nonzero elements
+stored in the array value.
+- `row_ptr` is an array of length # of row + 1, which stores the starting points of the rows of the arrays value and index.
+
+![](./img/CRS.png)
+
+### monolish::matrix::Dense
+monolish::matrix::Dense uses following one array:
+- `val` is an array of length # of nonzeros (M*N).
+
+![](./img/Dense.png)
+
+### monolish::matrix::LinearOperator
+monolish::matrix::LinearOperator is a common interface for performing matrix vector products.
+
+This class serves as an abstract interface between iterative solvers and matrix-like objects.
+
+See the [Scipy documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.LinearOperator.html) for more details
