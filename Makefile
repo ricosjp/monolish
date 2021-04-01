@@ -24,7 +24,7 @@ clang_cpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
 	cmake --build build_gpu -j `nproc`
@@ -33,7 +33,7 @@ clang_gpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
 		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
 		-DMONOLISH_USE_GPU=ON
