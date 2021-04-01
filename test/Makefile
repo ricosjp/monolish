@@ -88,6 +88,7 @@ run_gpu_profile:
 
 clean:
 	make -j -C vector/ clean
+	make -j -C view1D/ $@
 	make -j -C matrix/ $@
 	make -j -C equation/ clean
 	make -j -C eigen/ $@
