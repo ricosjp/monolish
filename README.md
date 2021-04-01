@@ -41,7 +41,7 @@ monolish solves cumbersome package management by Docker.
 XXXXXXX
 
 ## Build (for monolish Developpers)
-see [doc/instration.md](doc/instration.md)
+see [doc/installation.md](doc/installation.md)
 
 # Support
 If you have any question, bug to report or would like to propose a new feature, feel free to create an [issue][issue] on GitHub.
