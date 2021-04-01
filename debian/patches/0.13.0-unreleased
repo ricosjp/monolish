@@ -1,0 +1,419 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ monolish (0.13.0-1) UNRELEASED; urgency=medium
+ .
+   * Initial release.
+Author: Ryo IGARASHI <rigarash@ricos.co.jp>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2021-04-01
+
+--- monolish-0.13.0.orig/CHANGELOG.md
++++ monolish-0.13.0/CHANGELOG.md
+@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に
+ 
+ Unreleased
+ -----------
++### Fixed
++- update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
++- make clean to clean every generated files https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/287
+ 
+ 0.13.0 - 2021/03/31
+ -----------
+--- /dev/null
++++ monolish-0.13.0/LICENSE
+@@ -0,0 +1,201 @@
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
++
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
++
++   1. Definitions.
++
++      "License" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      "Licensor" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      "Legal Entity" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      "control" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      "You" (or "Your") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      "Source" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      "Object" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      "Work" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      "Derivative Works" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      "Contribution" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, "submitted"
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as "Not a Contribution."
++
++      "Contributor" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a "NOTICE" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an "AS IS" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS
++
++   APPENDIX: How to apply the Apache License to your work.
++
++      To apply the Apache License to your work, attach the following
++      boilerplate notice, with the fields enclosed by brackets "{}"
++      replaced with your own identifying information. (Don't include
++      the brackets!)  The text should be enclosed in the appropriate
++      comment syntax for the file format. We also recommend that a
++      file or class name and description of purpose be included on the
++      same "printed page" as the copyright notice for easier
++      identification within third-party archives.
++
++   Copyright [yyyy] [name of copyright owner]
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++       http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
+--- monolish-0.13.0.orig/README.md
++++ monolish-0.13.0/README.md
+@@ -1,24 +1,24 @@
+ # monolish: MONOlithic Liner equation Solvers for Highly-parallel architecture
+ monolish is a linear solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
+ 
+-# Feature (Policyか？)
++# Feature
+ monolish let developper be oblivious about:
+-- Performance tuning
++- [Performance tuning][tuning_rule]
+ - [Various processor which execute library  (Intel CPU / NVIDIA GPU / AMD CPU / ARM CPU / NEC SX-Aurora TSUBASA etc.) ][oplist]
+ - [Vender specific data transfer API (host RAM to Device RAM)][gpu]
+ - [Find bottolenecks][logger] and [Perormance benchmark][perfviewer]
+-- Argument data type of matrix / vector operations ([doxygen function list][doxy-func])
+-- Matrix structure / storage format
++- Argument data type of matrix / vector operations ([doxygen function list][doxy_func])
++- [Matrix structure / storage format][matrix_storage]
+ - [Cumbersome package dependency][build]
+ 
+-各特徴を説明するファイルを作ってリンクを貼る
+-
+ [oplist]: doc/operation_list.md
+ [gpu]: doc/gpu.md
+-[doxy-func]: http://gogo-gomachan.com/charactor/
++[doxy_func]: XXXXXXXXXXXXXXX
+ [build]: doc/build.md
+-[logger]: http://gogo-gomachan.com/charactor/
+-[perfviewer]: http://gogo-gomachan.com/charactor/
++[logger]: XXXXXXXXXXXXXXXXXXXXXXXXX
++[perfviewer]: XXXXXXXXXXXXXXXXXX
++[matrix_storage]: XXXXXXXXXXXXXXXX
++[tuning_rule]: XXXXXXXXXXXXXXX 
+ 
+ # What monolish solves
+ monolish is a vendor-independent open source library written in C++ that aims to be grand unified linear algebra library on any hardware.
+@@ -38,99 +38,37 @@ monolish solves cumbersome package manag
+ 
+ # Build and Install
+ ## Download binary
+-[githubのリンクを貼る](http://gogo-gomachan.com/charactor/)
+-
+-## Docker
+-[allgebra](https://github.com/ricosjp/allgebra)
+-
+-Install path is `$MONOLISH_DIR` 
++XXXXXXX
+ 
+-### CPU
+-```
+-make cpu
+-make install
+-```
+-
+-### GPU
+-```
+-make gpu
+-make install
+-```
++## Build (for monolish Developpers)
++see [doc/installation.md](doc/installation.md)
+ 
+ # Support
+-Supportの受け方をここに書く(issueを書いてね)
+ If you have any question, bug to report or would like to propose a new feature, feel free to create an [issue][issue] on GitHub.
+ 
+-[issue]: http://gogo-gomachan.com/charactor/
++[issue]: https://github.com/ricosjp/monolish/issues
+ 
+ # Contributing
+-Contributionに必要な情報をここに書く
+-
+-```
+-monolishはchangelogに変更がない場合とclang-formatかけてない場合にCIでwarningがでる．
+-
+-- clang formatはTOPDIRで make format するとgit addされてるファイル全部に自動でかかります
+-- changelogは `CHANGELOG.md` に主要な変更とマージリクエストの番号を書く
+-```
+-
+-# Licensing
+-monolish is available under the Apache License
+-
+-ライセンスファイルへのリンクをここに貼る
+-
+-
+-
+-# memo
+-- Oblivious about platform
+-- Oblivious about High performance(MPI, Multi-threading, SIMD)
+-- Don’t reinvent the wheel (BLAS/SparseBLAS, Matrix Asm., Math func.,)
+-- Performance Logging to Find the bottleneck (logger)
+-- Build and Package Managing (cmake, Docker)
+-- zero-overhead
+-Don't implicitly allocate memory??
+-- user friendly communication I/F
+-- Don't require many code changes due to hardware changes (Intel, AMD, Power, ARM, A64fx, SXAT, NVIDIA GPU, AMD GPU...)
+-- 簡単にかけるCommunication I/F (GPU/MPI, send-recv)
+-
+-
+-======
+-- Don't implement functions whose performance is unknown
+-- Continuous Integration／Continuous Delivery/Continuous Benchmark (monolish performance viewer)
+-
+-- easy to implement other Language FFI (C++ and other language I/F)
+-
+-
+-- Don't suffer from dependency resolution
+-
+-どこでも動く：
+-- BLAS: 150+ functions (163?)
+-- LAPACK: 1000+ functions (1302?)
+-
+-Intelだけ：
+-- MKL2020: 10000+ functions (14850?)
+-
+-NVIDIAだけ：
+-- CUBLAS/CUSPARSE/CUSOLVER/cuFFT cuda11.2: 1000+ functions (1112?)
+-
+-
+-- C++のパッケージマネージメントをするためにDockerを使う
+-- 性能を保証するためにCIでベンチマークして可視化する
+-- BLAS/LAPACKとMKLの差はmonolishが埋める
+-- 型や行列形状に依存した関数名をやめてtemplate化する
+-- ユーザが想像できないメモリを確保しない
+-
+-
+-# MTG資料
++If you want to contribute to monolish, create an [Issue][issue] and create a pull request for the Issue.
++Before resolving the WIP of the pull request, you need to do the following two things
+ 
+-初期設計資料 [GSlides](https://docs.google.com/presentation/d/16JvP7bTtxmfMP9hqflB7FVDrxueYxYa5U2PT-SkqB20/edit?usp=sharing)
++- Apply clang-format with `make format` command.
++- Record the major fixes and the URL of the pull request in `CHANGELOG.md`.
+ 
+-Matrix Format [Gslides](https://docs.google.com/presentation/d/1wqyw9CmlHar84WxTgnoULn0_ZHZ7IxkUnLa_HkIwVQo/edit?usp=sharing)
++The `make format` command will automatically apply clang-format to all git added files.
+ 
+-ver1.0 MTG: [GSlides Link](https://docs.google.com/presentation/d/12LJXbFmAmKcEWtkIBCZm_klpqmAP6MIuvYCRAZnvwqQ/edit?usp=sharing)
++License
++--------
++Copyright 2021 RICOS Co. Ltd.
+ 
+-# 関連URL
++Licensed under the Apache License, Version 2.0 (the "License");
++you may not use this file except in compliance with the License.
++You may obtain a copy of the License at
+ 
+-https://ricos.pages.ritc.jp/monolish_benchmark_result/
++http://www.apache.org/licenses/LICENSE-2.0
+ 
+-# License
+-# 
++Unless required by applicable law or agreed to in writing, software
++distributed under the License is distributed on an "AS IS" BASIS,
++WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++See the License for the specific language governing permissions and
++limitations under the License.
+--- monolish-0.13.0.orig/test/Makefile
++++ monolish-0.13.0/test/Makefile
+@@ -88,6 +88,7 @@ run_gpu_profile:
+ 
+ clean:
+ 	make -j -C vector/ clean
++	make -j -C view1D/ $@
+ 	make -j -C matrix/ $@
+ 	make -j -C equation/ clean
+ 	make -j -C eigen/ $@
+--- monolish-0.13.0.orig/test/equation/Makefile
++++ monolish-0.13.0/test/equation/Makefile
+@@ -64,6 +64,8 @@ clean:
+ 	- make -j -C jacobi/ clean
+ 	- make -j -C cg/ clean
+ 	- make -j -C bicgstab/ clean
++	- make -j -C dense_lu/ clean
++	- make -j -C dense_cholesky/ clean
+ 	- make -j -C sparse_lu/ clean
+ 	- make -j -C sparse_qr/ clean
+ 	- make -j -C sparse_cholesky/ clean
