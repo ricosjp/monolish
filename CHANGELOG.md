@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+- add github pages for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/288
+
 ### Fixed
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
 - make clean to clean every generated files https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/287
