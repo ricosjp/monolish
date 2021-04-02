@@ -19,3 +19,6 @@ run:
 	./cg_cpu.out
 	echo "run GPU"
 	./cg_gpu.out
+
+clean:
+	rm *.out
