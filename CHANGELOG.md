@@ -22,7 +22,7 @@ Unreleased
 -----------
 ### Added
 - add github pages for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/288
-- add doxygen document in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
+- add doxygen documents in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
 
 ### Fixed
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
