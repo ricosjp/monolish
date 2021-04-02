@@ -1,14 +1,22 @@
 # monolish: MONOlithic LIner equation Solvers for Highly-parallel architecture. {#mainpage}
 
-## User Guide
-1. [Installation guide](@ref install_guide)
-2. [Data types](@ref data_type)
-3. Compile and run simple program on CPU
-4. GPU device acceleration
-5. [High performance matrix/vector operations](@ref oplist)
-6. [Performance logging and find bottlenecks](@ref logger)
-7. [coming soon] View continuous benchmarking
+## For users:
+- [What's is monolish?](@ref monolish_intro)
+- [Installation](@ref install_guide)
+- [Data types](@ref data_type)
+- [Compile and run simple program on CPU](@ref cpu_dev)
+- [GPU device acceleration](@ref gpu_dev)
+- [High performance matrix/vector operations](@ref oplist)
+- [Performance logging and find bottlenecks](@ref logger)
+- View continuous benchmarking (coming soon)
 
-## Developpers guide
-1. [Development policy for high performance](@ref dev_rule)
-2. [Build monolish](@ref build_guide)
+## For developpers:
+- [Build monolish](@ref build_guide)
+- Contribute guide (coming soon)
+
+## Meta information:
+- [Reporting bugs](https://github.com/ricosjp/monolish/issues)
+- [Release notes](https://github.com/ricosjp/monolish/releases)
+- [Lisence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
+
+Copyright 2021 RICOS Co. Ltd.

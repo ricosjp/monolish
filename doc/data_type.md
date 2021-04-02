@@ -1,5 +1,8 @@
 # monolish data types {#data_type}
 
+## Introduction
+In monolish, you can specify double or float as the template argument for each class.
+
 ## Vector
 monolish::vector is a vector class like std::vector that can manage device memory of CPU and GPU.
 
@@ -40,7 +43,7 @@ The attributes of each matrix storage format are shown below:
 
 Matrices stored in COO format can be easily referenced, but the computation cannot be parallelized. COO does not have any attributes to compute.
 
-Matrices stored in CRS format can be parallelized efficiently. CRS does not have the `editable` attribute.
+Computation of matrices stored in CRS format can be parallelized efficiently. CRS does not have the `editable` attribute.
 
 Matrices stored in the Dense format can be edited and computed efficiently; Dense has both attributes.
 
@@ -78,6 +81,11 @@ monolish::matrix::COO uses following three arrays:
 - `row_index` is an array of length # of nonzeros, which stores the row numbers of the nonzero elements.
 - `col_index` is an array of length # of nonzeros, which stores the column numbers of the nonzero elements.
 
+matrices stored in COO format do not guarantee that the data is sorted.
+When working with COO matrices, it is assumed that the data is not sorted.
+
+You need to call monolish::matrix::COO.sort() function before converting it to convert other storage format.
+
 ![](./img/COO.png)
 
 ### monolish::matrix::CRS
@@ -86,6 +94,10 @@ monolish::matrix::CRS uses following three arrays:
 - `col_ind` is an array of length # of nonzeros, which stores the column numbers of the nonzero elements
 stored in the array value.
 - `row_ptr` is an array of length # of row + 1, which stores the starting points of the rows of the arrays value and index.
+
+CRS records the data structure as a hash value, so that the structure can be checked quickly during computation.
+
+In case of direct manipulation of an array with CRS format, it can be recalculated using monolish::matrix::CRS.compute_hash() function.
 
 ![](./img/CRS.png)
 

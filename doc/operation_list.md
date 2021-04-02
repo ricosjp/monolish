@@ -1,7 +1,5 @@
-# Operation list {#oplist}
+# Implementation of matrix/vector operations{#oplist}
 This section describes the implementation of each function.
-
-## Implementation of matrix/vector operations
 The first goal of monolish is to implement the basic operations that allow the BLAS, Sparse BLAS, and VML functions of the MKL and CUDA libraries to work on all hardware environments.
 
 On intel CPUs and NVIDIA GPUs, MKL and CUDA libraries are the fastest.
