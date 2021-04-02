@@ -1,72 +1,106 @@
-# GPU programming {#gpu_md}
+# GPU device acceleration {#gpu_dev}
 
-# はじめに
-monolishの各クラス(vector, matrix)は`send()`関数を用いることでGPUにマッピングされる．
-GPUにマッピングされたデータは`recv()`または`device_free`することによってGPUから解放される．
+## Introduction
+The following four classes have the `computable` attribute:
+- monolish::vector
+- monolish::view1D
+- monolish::matrix::CRS
+- monolish::matrix::Dense
 
-`libmonolish_cpu.so`をリンクした場合， `send()` や `recv()`は何も行わないため，コードの共通化は可能である．
+These classes support computing on the GPU and have five functions for GPU programming.
+- @ref monolish::vector.send() "send()"
+- @ref monolish::vector.recv() "recv()"
+- @ref monolish::vector.device_free() "device\_free()"
+- @ref monolish::vector.get_device_mem_stat() "get_device_mem_stat()"
 
-`libmonolish_gpu.so`をリンクした場合， `send()` によってGPUにデータを送ることが出来るようになる．
-GPUに転送済のデータかどうかは `get_device_mem_stat()` 関数によって得られる．
+When libmonolish\_cpu.so is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
 
-* CPUでデータを生成し，
-* GPUで計算し，
-* 最後にデータをCPUに受け取る
+When libmonolish\_gpu.so is linked, these functions enable data communication with the GPU.
 
-という流れを意識することが転送を減らす上で重要である．
+Each class is mapped to GPU memory by using the send() function.
+The class to which the data is transferred to the GPU behaves differently, and it becomes impossible to perform operations on the elements of vectors and matrices.
 
-GPUにデータが転送された変数は挙動が異なり，ベクトルや行列の要素に対する演算はできなくなる．
+Whether the data has been transferred to the GPU can be obtained by the get\_device\_mem\_stat() function.
 
-また，演算時にCPU/GPUどちらのデータに処理が反映されるかも注意が必要である．
+The data mapped to the GPU is released from the GPU by recv() or device\_free().
 
-本ページでは`get_device_mem_stat()`がtrueのときの各関数の挙動について説明する
+For developers, there is a nonfree\_recv() function that receives data from the GPU without freeing the GPU memory.
+However, in the current version, there is no way to explicitly change the status of GPU memory, so it is not useful for most users.
 
-# 各クラスのGPUにおける挙動の違い
-## monolish::vector
+GPU progrms using monolish are implemented with the following flow in mind.
+1. First, the CPU generates data, and then
+2. Transfer data from CPU to GPU
+3. Calculate on GPU,
+4. Finally, receive data from GPU to CPU
 
-| Operation                                | where to run | Description                    | memo                          |
-|------------------------------------------|--------------|--------------------------------|-------------------------------|
-| BLAS演算                                 | GPU          | axpy(), matvec()など               |                               |
-| 要素参照                                 | Error        | operator[], at(), insert()など |                               |
-| 要素演算                                 | GPU          | elemadd()など                    |                               |
-| 代入演算子                               | GPU          | operator=, operator+=など      | サイズが異なると死ぬ          |
-| copy関数                                 | CPU/GPU      | y = x.copy()                   | 転送が発生する可能性がある    |
-| monolish::vectorでのコピーコンストラクタ | CPU/GPU      | コピーコンストラクタ           | PU/GPUの両方の状態がコピー    |
-| 比較演算子                               | GPU          | operator==, operator!=         |                               |
-| 情報取得                                 | CPU          | size()など                     |                               |
-| resize()                                 | Error        | ベクトルサイズの変更           |                               |
-| print\_all()                             | CPU          | ベクトルの全出力               | デバッグ用にCPUのデータを吐く |
+It is important to be aware that send and recv are not performed many times in order to reduce transfers.
 
-## monolish::matrix::COO
+## Compute innerproduct on GPU
+First, a simple inner product program for GPU is shown below:
 
-計算用の関数を持たないためGPUでは扱えない． `send` や `recv` 関数も使えない
+\code{.cpp}
+#include<iostream>
+#include<monolish_blas.hpp>
+void main(){
+  size_t N = 100;
+  monolish::vector<double> x(N, 1.0); // x = {1,1,...,1}, length N
+  monolish::vector<double> y(N, 1.0, 2.0); // Random vector length N with values in the range 1.0 to 2.0
 
-## monolish::matrix::CRS
+  monolish::util::send(x, y); //send data to GPU
 
-| Operation                                | where to run | Description                    | memo                          |
-|------------------------------------------|--------------|--------------------------------|-------------------------------|
-| BLAS演算                                      | GPU     | SpMVなど                       |                               |
-| 要素参照                                      | Error   | operator[], at(), insert()など |                               |
-| 要素演算                                      | GPU   | elemadd()など                  |                               |
-| 行ベクトル・列ベクトルの取得                  | GPU     | get\_diag()など                |                               |
-| 算術演算子                                    | GPU     | operator+など                  |                               |
-| 代入演算子                                    | GPU     | operator=, operator+=など      | サイズが異なると死ぬ          |
-| copy関数                                      | CPU/GPU | y = x.copy()                   | 転送が発生する可能性がある    |
-| monolish::matrix::CRSでのコピーコンストラクタ | CPU/GPU | コピーコンストラクタ           | PU/GPUの両方の状態がコピー    |
-| 情報取得                                      | CPU     | size(),get\_rowなど            |                               |
-| print\_all()                                  | CPU     | ベクトルの全出力               | デバッグ用にCPUのデータを吐く |
+  double ans = monolish::blas::dot(x, y); // compute innerproduct
 
-## monolish::matrix::Dense
+  std::cout << ans << std::endl;
+}
+\endcode
 
-| Operation                                | where to run | Description                    | memo                          |
-|------------------------------------------|--------------|--------------------------------|-------------------------------|
-| BLAS演算                                      | GPU     | SpMVなど                       |                               |
-| 要素参照                                      | Error   | operator[], at(), insert()など |                               |
-| 要素演算                                      | GPU   | elemadd()など                  |                               |
-| 行ベクトル・列ベクトルの取得                  | GPU     | get\_diag()など                |                               |
-| 算術演算子                                    | GPU     | operator+など                  |                               |
-| 代入演算子                                    | GPU     | operator=, operator+=など      | サイズが異なると死ぬ          |
-| copy関数                                      | CPU/GPU | y = x.copy()                   | 転送が発生する可能性がある    |
-| monolish::matrix::CRSでのコピーコンストラクタ | CPU/GPU | コピーコンストラクタ           | PU/GPUの両方の状態がコピー    |
-| 情報取得                                      | CPU     | size(),get\_rowなど            |                               |
-| print\_all()                                  | CPU     | ベクトルの全出力               | デバッグ用にCPUのデータを吐く |
+- Each class has `send()` and `recv()` functions.
+- monolish::util::send() is a convenient util function that can take variable length arguments.
+- The scalar values are automatically synchronized between the CPU and GPU.
+- The BLAS and VML functions in monolish automatically call the GPU functions when they receive data that has already been sent.
+- When libmonolish\_cpu.so is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
+- In this program, `x` and `y` do not need to receive to the CPU, so the memory management was left to the automatic release by the destructor.
+
+## Solve Ax=b on GPU
+The following is a sample program that solves a linear equations; Ax=b using the conjugate gradient method with jacobi preconditioner on GPU.
+
+Surprisingly, this program requires only two lines of changes from the CPU program.
+
+\code{.cpp}
+#include<iostream>
+#include<monolish_equation.hpp>
+
+void main(){
+  monolish::matrix::COO<double> A_COO("test_matrix.mtx") // Input from file
+  // Edit the matrix as needed //
+  // Execute A_COO.sort() after editing the matrix //
+  monolish::matrix::CRS<double> A(A_COO) // Create CRS format and convert from COO format
+
+  monolish::vector<double> x(A.get_row(), 1.0, 2.0); length A.row
+  monolish::vector<double> b(A.get_row(), 1.0, 2.0); // Random vector length N with values in the range 1.0 to 2.0
+
+  monolish::util::send(A, x, b);
+
+  monolish::equation::CG<monolish::matrix::CRS, double> solver; // Create CG class
+
+  monolish::equation::Jacobi precond; // create jacobi preconditioner
+  solver.set_create_precond(precond); // set preconditioner creation to CG solver
+  solver.set_apply_precond(precond); // set preconditioner application function to CG solver
+
+  solver.set_tol(1.0e-12);
+  solver.set_maxiter(A.get_row()); 
+
+  monolish::util::solver_check(solver.solve(A, x, b)); //solver Ax=b by CG with jacobi
+
+  monolish::util::recv(x);
+
+  x.print_all();
+}
+\endcode
+- After creating the vectors and matrix A, send the data to the GPU using the monolish::util::send() function.
+- For x that requires output, explicitly receive data to the CPU using the @ref monolish::vector.recv() "recv()" function. At this time, the memory of x on the GPU is released.
+- The memory of A, A_COO, and b is released by the destructor at the end of the function.
+
+## Environment variable
+- LIBOMPTARGET\_DEBUG= [1 or 0]
+- CUDA\_VISIBLE\_DEVICES= [Device num.]
