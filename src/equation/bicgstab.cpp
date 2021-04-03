@@ -41,16 +41,6 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
 
   T rho_old = 1, rho = 1, alpha = 1, beta, omega = 1;
 
-  if (A.get_device_mem_stat() == false) {
-    A.send();
-  }
-  if (x.get_device_mem_stat() == false) {
-    x.send();
-  }
-  if (b.get_device_mem_stat() == false) {
-    b.send();
-  }
-
   this->precond.create_precond(A);
 
   // r = b-Ax
