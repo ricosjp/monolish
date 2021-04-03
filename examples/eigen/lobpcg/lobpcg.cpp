@@ -8,7 +8,8 @@ int main(){
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  int DIM = 100;
+  // Create tridiagonal toeplitz matrix
+  int DIM = 10;
   monolish::matrix::COO<double> COO =
       monolish::util::tridiagonal_toeplitz_matrix<double>(DIM, 10.0, -1.0);
 
