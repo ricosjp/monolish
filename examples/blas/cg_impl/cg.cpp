@@ -1,15 +1,17 @@
 #include "monolish_blas.hpp"
-#include "monolish_vml.hpp"
 #include "monolish_equation.hpp"
+#include "monolish_vml.hpp"
 #include <iostream>
 
 /*
-This is a program of CG method implemented as an example of monolish::blas and monolish::vml.
-The CG method is implemented in monolish::equation, so there is not need for users to implement it.
+This is a program of CG method implemented as an example of monolish::blas and
+monolish::vml. The CG method is implemented in monolish::equation, so there is
+not need for users to implement it.
 */
 
 template <typename MATRIX, typename Float>
-void my_cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Float> b){
+void my_cg(const MATRIX A, monolish::vector<Float> x,
+           const monolish::vector<Float> b) {
   monolish::Logger &logger = monolish::Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -33,8 +35,8 @@ void my_cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Flo
     monolish::blas::matvec(A, p, q); // q = Ap
 
     // alpha = (r, r) / (Ap,q)
-    auto tmp = monolish::blas::dot(r, r); 
-    auto alpha = tmp / monolish::blas::dot(p, q); 
+    auto tmp = monolish::blas::dot(r, r);
+    auto alpha = tmp / monolish::blas::dot(p, q);
 
     monolish::blas::axpy(alpha, p, x); // x = alpha*p + x
 
@@ -46,7 +48,7 @@ void my_cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Flo
 
     // check convergence
     auto resid = monolish::blas::nrm2(r);
-    std::cout << iter + 1 << ": \t" <<  resid << std::endl;
+    std::cout << iter + 1 << ": \t" << resid << std::endl;
 
     if (resid < tol) {
       logger.solver_out();
@@ -61,7 +63,6 @@ void my_cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Flo
   logger.solver_out();
 }
 
-
 int main(int argc, char **argv) {
 
   // output log if you need
@@ -70,8 +71,9 @@ int main(int argc, char **argv) {
 
   // create matrix from MatrixMarket format file
   // monolish::matrix::COO<double> COO("./sample.mtx");
-  
-  // or create tridiagonal toeplitz matrix. diagonal elements is 11, non-diagonal elements are -1.0
+
+  // or create tridiagonal toeplitz matrix. diagonal elements is 11,
+  // non-diagonal elements are -1.0
   size_t DIM = 100;
   monolish::matrix::COO<double> COO =
       monolish::util::tridiagonal_toeplitz_matrix<double>(DIM, 11.0, -1.0);
@@ -105,4 +107,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-

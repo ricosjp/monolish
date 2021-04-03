@@ -1,27 +1,27 @@
-#include<iostream>
-#include"monolish_blas.hpp"
-#include"monolish_equation.hpp"
+#include "monolish_blas.hpp"
+#include "monolish_equation.hpp"
+#include <iostream>
 
 // Template a matrix format, solver and preconditioer.
-template<typename MATRIX, typename SOLVER, typename PRECOND, typename FLOAT>
-void solve(){
+template <typename MATRIX, typename SOLVER, typename PRECOND, typename FLOAT>
+void solve() {
   monolish::matrix::COO<FLOAT> A_COO("sample.mtx"); // Input from file
 
   // Edit the matrix as needed //
   // Execute A_COO.sort() after editing the matrix //
-  
+
   MATRIX A(A_COO); // Create CRS format and convert from COO format
 
   // Length A.row()
   // Random vector length A.row() with values in the range 1.0 to 2.0
-  monolish::vector<FLOAT> x(A.get_row(), 1.0, 2.0); 
-  monolish::vector<FLOAT> b(A.get_row(), 1.0, 2.0); 
+  monolish::vector<FLOAT> x(A.get_row(), 1.0, 2.0);
+  monolish::vector<FLOAT> b(A.get_row(), 1.0, 2.0);
 
   // Send to GPU
   monolish::util::send(A, x, b);
 
   // Create solver
-  SOLVER solver; 
+  SOLVER solver;
 
   // Create preconditioner
   PRECOND precond;
@@ -37,7 +37,7 @@ void solve(){
   // solver.set_rhistory_filename("./a.txt");
 
   // Solve
-  monolish::util::solver_check(solver.solve(A, x, b)); 
+  monolish::util::solver_check(solver.solve(A, x, b));
 
   // Recv. from GPU
   monolish::util::send(x);
@@ -46,32 +46,35 @@ void solve(){
   x.print_all();
 }
 
-int main(){
+int main() {
 
   // output log if you need
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  std::cout <<  "A is Dense, solver is CG, precondition is Jacobi, precision is double" << std::endl;
-  solve<
-    monolish::matrix::CRS<double>, 
-    monolish::equation::CG<monolish::matrix::CRS<double>,double>,
-    monolish::equation::Jacobi<monolish::matrix::CRS<double>,double>,
-    double>();
+  std::cout
+      << "A is Dense, solver is CG, precondition is Jacobi, precision is double"
+      << std::endl;
+  solve<monolish::matrix::CRS<double>,
+        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+        monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>,
+        double>();
 
-  std::cout << "A is Dense, solver is BiCGSTAB, precondition is none, precision is float" << std::endl;
-  solve<
-    monolish::matrix::Dense<float>, 
-    monolish::equation::BiCGSTAB<monolish::matrix::Dense<float>,float>,
-    monolish::equation::none<monolish::matrix::Dense<float>,float>,
-    float>();
+  std::cout << "A is Dense, solver is BiCGSTAB, precondition is none, "
+               "precision is float"
+            << std::endl;
+  solve<monolish::matrix::Dense<float>,
+        monolish::equation::BiCGSTAB<monolish::matrix::Dense<float>, float>,
+        monolish::equation::none<monolish::matrix::Dense<float>, float>,
+        float>();
 
-  std::cout << "A is Dense, solver is LU, precondition is none, precision is double" << std::endl;
-  solve<
-    monolish::matrix::Dense<double>, 
-    monolish::equation::LU<monolish::matrix::Dense<double>,double>,
-    monolish::equation::none<monolish::matrix::Dense<double>,double>,
-    double>();
+  std::cout
+      << "A is Dense, solver is LU, precondition is none, precision is double"
+      << std::endl;
+  solve<monolish::matrix::Dense<double>,
+        monolish::equation::LU<monolish::matrix::Dense<double>, double>,
+        monolish::equation::none<monolish::matrix::Dense<double>, double>,
+        double>();
 
   return 0;
 }

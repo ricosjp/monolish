@@ -1,8 +1,8 @@
-#include<iostream>
-#include<monolish_equation.hpp>
-#include<monolish_eigen.hpp>
+#include <iostream>
+#include <monolish_eigen.hpp>
+#include <monolish_equation.hpp>
 
-int main(){
+int main() {
 
   // Output log if you need
   // monolish::util::set_log_level(3);
