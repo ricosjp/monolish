@@ -9,7 +9,7 @@ The CG method is implemented in monolish::equation, so there is not need for use
 */
 
 template <typename MATRIX, typename Float>
-void cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Float> b){
+void my_cg(const MATRIX A, monolish::vector<Float> x, const monolish::vector<Float> b){
   monolish::Logger &logger = monolish::Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
   monolish::util::send(A, x, b);
 
   // solve
-  cg(A, x, b);
+  my_cg(A, x, b);
 
   // print vector x if you need.
   // x.print_all("solution.txt");
