@@ -230,7 +230,7 @@ public:
 
 /**
  * @brief QR solver class (Dense, GPU only now). can use set_tol(), get_tol(),
- * set_reorder(), get_singularity(). 
+ * set_reorder(), get_singularity().
  * @note
  * attribute:
  * - solver : true
@@ -288,8 +288,8 @@ public:
 };
 
 /**
- * @brief Cholesky solver class. 
- * It can use set_tol(), get_tol(), set_reorder(), get_singularity(). 
+ * @brief Cholesky solver class.
+ * It can use set_tol(), get_tol(), set_reorder(), get_singularity().
  * @note
  * attribute:
  * - solver : true
