@@ -1,0 +1,2 @@
+libcuda 1 cuda-compat-10-1
+libcublas 10 libcublas10 (= 10.1.243-3)
