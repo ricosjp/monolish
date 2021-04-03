@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add solver.name() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/291
 - add samples in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/290
 - add github pages for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/288
 - add doxygen documents in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
