@@ -204,7 +204,6 @@ int main(){
     double>();
 
   std::cout << "A is Dense, solver is BiCGSTAB, precondition is none, precision is float" << std::endl;
-
   solve<
     monolish::matrix::Dense<float>, 
     monolish::equation::BiCGSTAB<monolish::matrix::Dense<float>,float>,
