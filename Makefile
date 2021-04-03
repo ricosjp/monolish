@@ -85,16 +85,16 @@ in_mkl_gpu:
 	docker run -it --rm \
 		--gpus all   \
 		--cap-add SYS_ADMIN \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-e MONOLISH_DIR=/opt/monolish/ \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
 
 in_mkl_cpu:
 	docker run -it --rm \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-e MONOLISH_DIR=/opt/monolish/ \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
@@ -103,16 +103,16 @@ in_oss_gpu:
 	docker run -it --rm \
 		--gpus all   \
 		--cap-add SYS_ADMIN \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-e MONOLISH_DIR=/opt/monolish/ \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
 
 in_oss_cpu:
 	docker run -it --rm \
-		-e MONOLISH_DIR=/opt/monolish/0.1 \
-		-e LD_LIBRARY_PATH=/opt/monolish/0.1/lib \
+		-e MONOLISH_DIR=/opt/monolish/ \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
