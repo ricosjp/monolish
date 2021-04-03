@@ -41,18 +41,33 @@ First, a simple inner product program for GPU is shown below:
 \code{.cpp}
 #include<iostream>
 #include<monolish_blas.hpp>
-void main(){
+int main(){
+
+  // Output log if you need
+  // monolish::util::set_log_level(3);
+  // monolish::util::set_log_filename("./monolish_log.txt");
+
   size_t N = 100;
-  monolish::vector<double> x(N, 1.0); // x = {1,1,...,1}, length N
-  monolish::vector<double> y(N, 1.0, 2.0); // Random vector length N with values in the range 1.0 to 2.0
 
-  monolish::util::send(x, y); //send data to GPU
+  // x = {1,1,...,1}, length N
+  monolish::vector<double> x(N, 1.0); 
 
-  double ans = monolish::blas::dot(x, y); // compute innerproduct
+  // Random vector length N with values in the range 1.0 to 2.0
+  monolish::vector<double> y(N, 1.0, 2.0); 
+
+  //send data to GPU
+  monolish::util::send(x, y); 
+
+  // compute innerproduct
+  double ans = monolish::blas::dot(x, y); 
 
   std::cout << ans << std::endl;
+
+  return 0;
 }
 \endcode
+
+This sample code can be found in `/sample/blas/innerproduct/`.
 
 - Each class has `send()` and `recv()` functions.
 - monolish::util::send() is a convenient util function that can take variable length arguments.
@@ -61,45 +76,75 @@ void main(){
 - When libmonolish\_cpu.so is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
 - In this program, `x` and `y` do not need to receive to the CPU, so the memory management was left to the automatic release by the destructor.
 
+For a more advanced example, sample programs that implement CG methods using monolish::BLAS and monolish::VML can be found in `/sample/blas/cg_impl/`.
+
 ## Solve Ax=b on GPU
 The following is a sample program that solves a linear equations; Ax=b using the conjugate gradient method with jacobi preconditioner on GPU.
 
-Surprisingly, this program requires only two lines of changes from the CPU program.
+This program requires only two lines of changes from the CPU program.
 
 \code{.cpp}
 #include<iostream>
 #include<monolish_equation.hpp>
 
-void main(){
-  monolish::matrix::COO<double> A_COO("test_matrix.mtx") // Input from file
+int main(){
+
+  // Output log if you need
+  // monolish::util::set_log_level(3);
+  // monolish::util::set_log_filename("./monolish_log.txt");
+
+  monolish::matrix::COO<double> A_COO("sample.mtx"); // Input from file
+
   // Edit the matrix as needed //
   // Execute A_COO.sort() after editing the matrix //
-  monolish::matrix::CRS<double> A(A_COO) // Create CRS format and convert from COO format
 
-  monolish::vector<double> x(A.get_row(), 1.0, 2.0); length A.row
-  monolish::vector<double> b(A.get_row(), 1.0, 2.0); // Random vector length N with values in the range 1.0 to 2.0
+  monolish::matrix::CRS<double> A(A_COO); // Create CRS format and convert from COO format
+
+  // Length A.row()
+  // Random vector length A.row() with values in the range 1.0 to 2.0
+  monolish::vector<double> x(A.get_row(), 1.0, 2.0); 
+  monolish::vector<double> b(A.get_row(), 1.0, 2.0); 
 
   monolish::util::send(A, x, b);
 
-  monolish::equation::CG<monolish::matrix::CRS, double> solver; // Create CG class
+  // Create CG class
+  monolish::equation::CG<monolish::matrix::CRS<double>, double> solver; 
 
-  monolish::equation::Jacobi precond; // create jacobi preconditioner
-  solver.set_create_precond(precond); // set preconditioner creation to CG solver
-  solver.set_apply_precond(precond); // set preconditioner application function to CG solver
+  // create jacobi preconditioner
+  monolish::equation::Jacobi<monolish::matrix::CRS<double>, double> precond; 
 
+  // Set preconditioner to CG solver
+  solver.set_create_precond(precond); 
+  solver.set_apply_precond(precond);
+
+  // Set solver options
   solver.set_tol(1.0e-12);
   solver.set_maxiter(A.get_row()); 
 
-  monolish::util::solver_check(solver.solve(A, x, b)); //solver Ax=b by CG with jacobi
+  // if you need residual history
+  // solver.set_print_rhistory(true);
+  // solver.set_rhistory_filename("./a.txt");
 
+  //Solve Ax=b by CG with jacobi
+  monolish::util::solver_check(solver.solve(A, x, b)); 
+
+  // Recv x from GPU
   monolish::util::recv(x);
 
+  // Show answer
   x.print_all();
+  
+  return 0;
 }
 \endcode
+
+This sample code can be found in `/sample/equation/cg/`.
+
 - After creating the vectors and matrix A, send the data to the GPU using the monolish::util::send() function.
 - For x that requires output, explicitly receive data to the CPU using the @ref monolish::vector.recv() "recv()" function. At this time, the memory of x on the GPU is released.
-- The memory of A, A_COO, and b is released by the destructor at the end of the function.
+- The CPU/GPU memory of A, A_COO, and b is released by the destructor at the end of the function.
+
+A sample program for a templated linear equation solver can be found at `sample/equation/templated_solver`.
 
 ## Environment variable
 - LIBOMPTARGET\_DEBUG= [1 or 0]
