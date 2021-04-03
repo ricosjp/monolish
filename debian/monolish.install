@@ -1,2 +1,3 @@
 /usr/local/llvm-11.0.0/lib/libomp.so usr/lib/monolish
 /usr/local/llvm-11.0.0/lib/libomptarget.so usr/lib/monolish
+/usr/local/llvm-11.0.0/lib/libomptarget.rtl.cuda.so usr/lib/monolish
