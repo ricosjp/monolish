@@ -17,6 +17,9 @@ void solve(){
   monolish::vector<FLOAT> x(A.get_row(), 1.0, 2.0); 
   monolish::vector<FLOAT> b(A.get_row(), 1.0, 2.0); 
 
+  // Send to GPU
+  monolish::util::send(A, x, b);
+
   // Create solver
   SOLVER solver; 
 
@@ -36,6 +39,9 @@ void solve(){
   // Solve
   monolish::util::solver_check(solver.solve(A, x, b)); 
 
+  // Recv. from GPU
+  monolish::util::send(x);
+
   // output x to standard output
   x.print_all();
 }
@@ -54,7 +60,6 @@ int main(){
     double>();
 
   std::cout << "A is Dense, solver is BiCGSTAB, precondition is none, precision is float" << std::endl;
-
   solve<
     monolish::matrix::Dense<float>, 
     monolish::equation::BiCGSTAB<monolish::matrix::Dense<float>,float>,

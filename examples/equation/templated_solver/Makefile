@@ -5,20 +5,20 @@ LIB=-L$(MONOLISH_DIR)/lib/
 
 all: cpu gpu
 
-cpu: cg_cpu.out
-gpu: cg_gpu.out
+cpu: solver_cpu.out
+gpu: solver_gpu.out
 	
-cg_cpu.out: cg.cpp
-	$(CXX) $(INC) $(LIB) cg.cpp -o $@  -lmonolish_cpu
+solver_cpu.out: solver.cpp
+	$(CXX) $(INC) $(LIB) solver.cpp -o $@  -lmonolish_cpu
 
-cg_gpu.out: cg.cpp
-	$(CXX) $(INC) $(LIB) cg.cpp -o $@  -lmonolish_gpu
+solver_gpu.out: solver.cpp
+	$(CXX) $(INC) $(LIB) solver.cpp -o $@  -lmonolish_gpu
 
 run:
 	echo "run CPU"
-	./cg_cpu.out
+	./solver_cpu.out
 	echo "run GPU"
-	./cg_gpu.out
+	./solver_gpu.out
 
 clean:
 	rm *.out
