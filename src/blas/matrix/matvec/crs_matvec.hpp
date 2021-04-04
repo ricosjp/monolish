@@ -18,8 +18,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   const double *xd = x.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
-  const int m = A.get_row();
-  const int n = A.get_col();
   double *yd = y.data();
   const size_t xoffset = x.get_offset();
   const size_t yoffset = y.get_offset();
@@ -38,6 +36,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 
     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
+    const int m = A.get_row();
+    const int n = A.get_col();
     const double alpha = 1.0;
     const double beta = 0.0;
     const int nnz = A.get_nnz();
@@ -54,6 +54,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   } else {
     // MKL
 #if MONOLISH_USE_MKL
+    const int m = A.get_row();
+    const int n = A.get_col();
     const double alpha = 1.0;
     const double beta = 0.0;
     mkl_dcsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1,
@@ -64,8 +66,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 #pragma omp parallel for
     for (int i = 0; i < (int)A.get_row(); i++) {
       double ytmp = 0.0;
-      for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
-        ytmp += vald[j] * (xd + xoffset)[A.col_ind[j]];
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        ytmp += vald[j] * (xd + xoffset)[cold[j]];
       }
       yd[i + yoffset] = ytmp;
     }
@@ -90,8 +92,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   const float *xd = x.data();
   const int *rowd = A.row_ptr.data();
   const int *cold = A.col_ind.data();
-  const int m = A.get_row();
-  const int n = A.get_col();
   float *yd = y.data();
   const size_t xoffset = x.get_offset();
   const size_t yoffset = y.get_offset();
@@ -110,6 +110,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 
     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
+    const int m = A.get_row();
+    const int n = A.get_col();
     const int nnz = A.get_nnz();
     const float alpha = 1.0;
     const float beta = 0.0;
@@ -126,6 +128,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   } else {
     // MKL
 #if MONOLISH_USE_MKL
+    const int m = A.get_row();
+    const int n = A.get_col();
     const float alpha = 1.0;
     const float beta = 0.0;
     mkl_scsrmv("N", &m, &n, &alpha, "G__C", vald, cold, rowd, rowd + 1,
@@ -136,8 +140,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 #pragma omp parallel for
     for (int i = 0; i < (int)A.get_row(); i++) {
       float ytmp = 0.0;
-      for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
-        ytmp += vald[j] * (xd + xoffset)[A.col_ind[j]];
+      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+        ytmp += vald[j] * (xd + xoffset)[cold[j]];
       }
       yd[i + yoffset] = ytmp;
     }

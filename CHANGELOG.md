@@ -32,6 +32,7 @@ Unreleased
 - change "make in" of MONOLISH_INSTALL_DIR https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/292
 
 ### Fixed
+- fix clang warning, unnecessary variable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/294
 - fix: bicgstab gpu bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/290
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
 - make clean to clean every generated files https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/287
