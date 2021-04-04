@@ -29,9 +29,9 @@ The output log is in yml format.
 The monolish project has developed a tool to analyze and visualize the output log files.
 The program is available in `monolish/python/`.
 
-It has been uploaded to [PyPI](https://pypi.org/project/monolish-log-viewer/) sever and can be installed using the `pip` command.
+It has been uploaded to the [PyPI](https://pypi.org/project/monolish-log-viewer/) server and can be installed using the `pip` command.
 
-If pip is not available, use the following command.
+If `pip` is not available, use the following command.
 ```
 apt install python-3-pip
 ```
@@ -49,6 +49,5 @@ To generate log.html from log.yml, execute the following command.
 monolish_log_viewer log.yml log.html
 ```
 
-A sample can be found below:
-- [CPU log data](https://ricos.pages.ritc.jp/monolish/monolish_test_cpu.html)
-- [GPU log data](https://ricos.pages.ritc.jp/monolish/monolish_test_gpu.html)
+## NOTE:
+The sum of the func. and util. times may not match the solver time, because the solver, func. and util. functions are timed separately.
