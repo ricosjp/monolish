@@ -3,11 +3,11 @@ monolish is a linear equation solver library that monolithically fuses variable 
 
 monolish let developper be oblivious about:
 - Performance tuning
-- Various processor which execute library  (Intel CPU / NVIDIA GPU / AMD CPU / ARM CPU / NEC SX-Aurora TSUBASA etc.) 
-- Vender specific data transfer API (host RAM to Device RAM)
-- Find bottolenecks and Perormance benchmark
+- Various processor which execute library  (Intel CPU, NVIDIA GPU, AMD CPU, ARM CPU, A64fx, NEC SX-Aurora TSUBASA etc.) 
+- Vender specific data transfer APIs (host RAM to Device RAM)
+- Find bottolenecks and perormance benchmark
 - Argument data type of matrix / vector operations
-- Matrix structure / storage format
+- Matrix structure and matrix storage format
 - Cumbersome package dependency
 
 ---
