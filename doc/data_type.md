@@ -19,7 +19,7 @@ It can be created from monolish::vector or monolish::matrix::Dense.
 
 Since view1D is not a hardcopy but a reference, it can extract a part of a vector or matrix without cost.
 
-We plan to implement 2D view class in the future.
+We plan to implement a 2D view class in the future.
 
 ## Matrix
 The implementation of the matrix storage format in monolish has several features.
@@ -28,12 +28,10 @@ The matrix format has the following two attributes:
 1. `editable`
 2. `computable`
 
-A matrix storage format with `editable` attribute can reference and add matrix elements.
+A matrix storage format with the `editable` attribute can reference and add matrix elements.
+A matrix storage format with the `computale` attribte can be used as an argument to a function for various operations.
 
-A matrix storage format with `computabl
-
-
-In monolish, Dense matrix is considered as one of the sparse matrix formats.
+In monolish, the Dense matrix is considered as one of the sparse matrix formats.
 Currently, there are four matrix storage formats available: Dense, COO, CRS, and LinearOperator.
 The attributes of each matrix storage format are shown below:
 - monolish::matrix::Dense: `editable and computable`
@@ -43,16 +41,16 @@ The attributes of each matrix storage format are shown below:
 
 Matrices stored in COO format can be easily referenced, but the computation cannot be parallelized. COO does not have any attributes to compute.
 
-Computation of matrices stored in CRS format can be parallelized efficiently. CRS does not have the `editable` attribute.
+The computation of matrices stored in CRS format can be parallelized efficiently. CRS does not have the `editable` attribute.
 
 Matrices stored in the Dense format can be edited and computed efficiently; Dense has both attributes.
 
 The LinearOperator format is a special format that can be created from all matrix storage formats, but it does not have an `editable` attribute. 
-LinearOperator does not have all utility functions and don't support GPU.
+LinearOperator does not have all utility functions and does not support GPU.
 
-Matirx storage formats belong to one of three attribute groups: `editable` / `computable` / `editable and computable`.
+Matrix storage formats belong to one of three attribute groups: `editable` / `computable` / `editable and computable`.
 when a new matrix storage format is implemented, all the matrices with the same attribute group will have the same functionality.
-For example, We will implement ELL, JAD and other storage formats, it will be implemented as a class with `computable` attributes like CRS.
+For example, We will implement ELL, JAD, and other storage formats, it will be implemented as a class with `computable` attributes like CRS.
 (This is a beautiful implementation policy. But probably the policy will be broken....).
 
 ![](./img/convert.png)

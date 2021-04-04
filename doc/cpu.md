@@ -5,7 +5,7 @@ The monolish namespace contains monolish::vector and monolish::view1D.
 monolish has the following 7 namespaces in addition to the monolish namespace:
 - monolish::matrix : Provides classes for Dense and Sparse matrices. This can be used by including other header files.
 - monolish::blas : Provides a monolithic BLAS API that eliminates dependencies on data types, matrix format, and hardware-specific APIs. This is included in `monolish_blas.hpp`.
-- monolish::vml : Provides the calculation of mathematical functions to each element of a vector. This is an open source implementation of the [VML functions included in Intel MKL](https://software.intel.com/content/www/us/en/develop/articles/new-mkl-vml-api.html). This is included in `monolish_vml.hpp`.
+- monolish::vml : Provides the calculation of mathematical functions to each element of a vector. This is an open-source implementation of the [VML functions included in Intel MKL](https://software.intel.com/content/www/us/en/develop/articles/new-mkl-vml-api.html). This is included in `monolish_vml.hpp`.
 - monolish::equation : Provides a solution for linear equations.	This is included in `monolish_equation.hpp`.
 - monolish::standard_eigen : Provides solutions to standard eigenvalue problems. This is included in `monolish_eigen.hpp`.
 - monolish::generalized_eigen : Provides a solution to the generalized eigenvalue problem. This is included in `monolish_generalized_eigen.hpp`.
@@ -13,7 +13,7 @@ monolish has the following 7 namespaces in addition to the monolish namespace:
 
 This chapter describes a sample program using monolish that runs on the CPU.
 
-Sample programs that run on the GPU can be found at sample/. They also work on the CPU.
+Sample programs that run on the GPU can be found at `sample/`. They work on the CPU and GPU.
 The programs running on the GPU are described in the next chapter.
 
 ## Compute innerproduct 
@@ -45,13 +45,24 @@ int main(){
 }
 \endcode
 
+This program can be compiled by the following command.
+```
+g++ -O3 -fopenmp innerproduct.cpp -o innerproduct_cpu.out -lmonolish_cpu
+```
+
+The following command runs this.
+``` 
+./innerproduct_cpu.out
+```
+
+A description of this program is given below:
 - A monolish::vector can be declared like a std::vector.
 - As an extension, monolish::vector can also create random vectors.
-- The inner product function is monolish::blas::dot(). It does not need type-dependent function names like sdot or ddot.
+- The inner product function is monolish::blas::dot(). It does not need type-dependent function names, for example `sdot` or `ddot`.
 - For the BLAS library called inside monolish::vector::dot(), see [here](@ref oplist).
 - At the end of the function, the memory of monolish::vector is automatically released by the destructor.
 
-This program will be executed in parallel. 
+This program is executed in parallel. 
 The number of threads is specified by the `OMP_NUM_THREADS` environment variable.
 
 ## Solve Ax=b
@@ -129,7 +140,7 @@ The solver class included in monolish::equation has the following functions:
 - @ref monolish::equation::CG.set_create_precond() "set_create_precond()" : Register another class' create_precond to the class as a function to create the preprocessing matrix.
 - @ref monolish::equation::CG.set_apply_precond() "set_apply_precond()" : Register "apply_precond" of another class to the class as a function to apply preprocessing.
 
-The class that executes `solve()` will execute the registered `create_precond()` and `apply_precond()`.
+The class that executes `solve()` execute the registered `create_precond()` and `apply_precond()`.
 If no preconditioner is registered, it calls monolish::equation::none as "none preconditioner".
 
 By being able to register the creation and application of preconditioners separately, users can use the preconditioner matrix in different ways.
@@ -137,6 +148,8 @@ By being able to register the creation and application of preconditioners separa
 In the current version, the create_precond() and apply_precond() functions of some classes do not work.
 In the future, we will make these functions work in all classes.
 This implementation would be very efficient for multi-grid methods.
+
+See [here](@ref solverlist) for a list of solvers.
 
 ## Improve solver program
 The program in the previous chapter has the matrix storage format, data type, solver name, and preconditioner name written all over the program.
