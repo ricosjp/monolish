@@ -10,12 +10,12 @@ The following four classes have the `computable` attribute:
 These classes support computing on the GPU and have five functions for GPU programming.
 - @ref monolish::vector.send() "send()"
 - @ref monolish::vector.recv() "recv()"
-- @ref monolish::vector.device_free() "device\_free()"
+- @ref monolish::vector.device_free() "device_free()"
 - @ref monolish::vector.get_device_mem_stat() "get_device_mem_stat()"
 
-When libmonolish\_cpu.so is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
+When `libmonolish_cpu.so` is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
 
-When libmonolish\_gpu.so is linked, these functions enable data communication with the GPU.
+When `libmonolish_gpu.so` is linked, these functions enable data communication with the GPU.
 
 Each class is mapped to GPU memory by using the send() function.
 The class to which the data is transferred to the GPU behaves differently, and it becomes impossible to perform operations on the elements of vectors and matrices.
@@ -24,10 +24,13 @@ Whether the data has been transferred to the GPU can be obtained by the get\_dev
 
 The data mapped to the GPU is released from the GPU by recv() or device\_free().
 
+Most of the functions are executed on the CPU or GPU according to get\_device\_mem\_stat() .
+A copy constructor is special, it is a function that copies an instance of a class. So both CPU and GPU data will be copied.
+
 For developers, there is a nonfree\_recv() function that receives data from the GPU without freeing the GPU memory.
 However, in the current version, there is no way to explicitly change the status of GPU memory, so it is not useful for most users.
 
-GPU progrms using monolish are implemented with the following flow in mind.
+GPU programs using monolish are implemented with the following flow in mind.
 1. First, the CPU generates data, and then
 2. Transfer data from CPU to GPU
 3. Calculate on GPU,
@@ -36,7 +39,7 @@ GPU progrms using monolish are implemented with the following flow in mind.
 It is important to be aware that send and recv are not performed many times in order to reduce transfers.
 
 ## Compute innerproduct on GPU
-First, a simple inner product program for GPU is shown below:
+A simple inner product program for GPU is shown below:
 
 \code{.cpp}
 #include<iostream>
@@ -69,6 +72,17 @@ int main(){
 
 This sample code can be found in `/sample/blas/innerproduct/`.
 
+This program can be compiled by the following command.
+```
+g++ -O3 -fopenmp innerproduct.cpp -o innerproduct_cpu.out -lmonolish_gpu
+```
+
+The following command runs this.
+``` 
+./innerproduct_gpu.out
+```
+
+A description of this program is given below:
 - Each class has `send()` and `recv()` functions.
 - monolish::util::send() is a convenient util function that can take variable length arguments.
 - The scalar values are automatically synchronized between the CPU and GPU.
@@ -147,5 +161,7 @@ This sample code can be found in `/sample/equation/cg/`.
 A sample program for a templated linear equation solver can be found at `sample/equation/templated_solver`.
 
 ## Environment variable
-- LIBOMPTARGET\_DEBUG= [1 or 0]
-- CUDA\_VISIBLE\_DEVICES= [Device num.]
+- LIBOMPTARGET\_DEBUG= [1 or 0] : Output debug information on OpenMP Offloading at runtime
+
+- CUDA\_VISIBLE\_DEVICES= [Device num.] : Specify GPU device number
+
