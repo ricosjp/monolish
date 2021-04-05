@@ -4,11 +4,20 @@ DESTDIR:=$(CURDIR)/debian/monolish
 	dh $@
 
 override_dh_auto_build:
-	MONOLISH_DIR=/usr dh_auto_build -- cpu clang_gpu_all
+	MONOLISH_DIR=$(DESTDIR)/usr dh_auto_build -- cpu clang_gpu_all
 
 override_dh_auto_install:
-	MONOLISH_DIR=/usr make install_cpu install_gpu_all
+	make MONOLISH_DIR=$(DESTDIR)/usr install_cpu install_gpu_all
 
 override_dh_install:
 	dh_install --sourcedir=/
-	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/libmonolish_gpu.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_35.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_37.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_50.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_52.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_53.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_60.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_61.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_62.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_70.so
+	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/monolish/libmonolish_gpu_75.so
