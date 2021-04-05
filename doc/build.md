@@ -35,7 +35,7 @@ make install
 - GPU, OSS (for NVIDIA GPU on AMD)
 ```
 git clone git@github.com:ricosjp/monolish.git
-make in_mkl_cpu
+make in_oss_gpu
 make install
 ```
 
