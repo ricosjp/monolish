@@ -74,7 +74,7 @@ This sample code can be found in `/sample/blas/innerproduct/`.
 
 This program can be compiled by the following command.
 ```
-g++ -O3 -fopenmp innerproduct.cpp -o innerproduct_cpu.out -lmonolish_gpu
+g++ -O3 innerproduct.cpp -o innerproduct_cpu.out -lmonolish_gpu
 ```
 
 The following command runs this.

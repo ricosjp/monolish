@@ -47,7 +47,7 @@ int main(){
 
 This program can be compiled by the following command.
 ```
-g++ -O3 -fopenmp innerproduct.cpp -o innerproduct_cpu.out -lmonolish_cpu
+g++ -O3 innerproduct.cpp -o innerproduct_cpu.out -lmonolish_cpu
 ```
 
 The following command runs this.
