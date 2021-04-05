@@ -171,7 +171,7 @@ run_amd_oss:
 	bash ./benchmark.sh m_sign amd_oss
 	bash ./benchmark.sh m_reciprocal amd_oss
  
-nvidia:
+run_nvidia:
 	bash ./benchmark.sh sm_add nvidia
 	bash ./benchmark.sh sm_sub nvidia
 	bash ./benchmark.sh sm_mul nvidia
