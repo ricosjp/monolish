@@ -364,7 +364,7 @@ gpu_avx_clang_mkl_benchmark:
     script:
       - cd benchmark
       - make get_spec_gpu
-      - make gpu
+      - make nvidia
       - make run_gpu
     tags:
       - c8cbb8c6304d
@@ -383,7 +383,7 @@ intel_avx_gcc_mkl_benchmark:
     script:
       - cd benchmark
       - make get_spec_cpu
-      - make cpu
+      - make intel_mkl
       - make run_cpu
     tags:
       - 008cfa52494d
@@ -402,7 +402,7 @@ intel_avx_gcc_oss_benchmark:
     script:
       - cd benchmark
       - make get_spec_cpu
-      - make cpu
+      - make intel_oss
       - make run_cpu
     tags:
       - 008cfa52494d
@@ -421,7 +421,7 @@ amd_avx_gcc_mkl_benchmark:
     script:
       - cd benchmark
       - make get_spec_cpu
-      - make cpu
+      - make amd_oss
       - make run_cpu
     tags:
       - b42e99ecbde2
