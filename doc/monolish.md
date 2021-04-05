@@ -2,7 +2,7 @@
 
 ## For users:
 - [What's monolish?](@ref monolish_intro)
-- [Installation](@ref install_guide)
+- Installation
   - [Installation using apt (for ubuntu XXX)](@ref install_guide)
   - [Build monolish from source code](@ref build_guide)
 - [Data types](@ref data_type)
