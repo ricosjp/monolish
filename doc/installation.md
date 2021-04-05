@@ -21,19 +21,6 @@ $ apt install ./monolish_0.14.0-1+oss+nvidia_amd64.deb
 
 cusolver, cusparse libraries dependencies are automatically resolved via apt.
 
-
-## Intel CPU (Intel)
-coming soon...
-
-## AMD CPU (OSS)
-coming soon...
-
-## Intel CPU + NVIDIA GPU (Intel+NVIDIA)
-coming soon...
-
-## AMD CPU + NVIDIA GPU (OSS+NVIDIA)
-coming soon...
-
 ## Other Archtectures or OS
 see [here](@ref build_guide)
 
