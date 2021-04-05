@@ -13,7 +13,7 @@ Download deb file from Releases page and install as follows:
 \code{shell}
 $ sudo apt update && sudo apt install wget
 $ wget https://github.com/ricosjp/monolish/releases/download/0.14.0/monolish_0.14.0-1+oss+nvidia_amd64.deb
-$ apt install ./monolish_0.14.0-1+oss_amd64.deb
+$ apt install ./monolish_0.14.0-1+oss+nvidia_amd64.deb
 \endcode
 
 - +oss+nvidia is OSS+NVIDIA variant
