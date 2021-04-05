@@ -11,7 +11,7 @@
 - [Matrix/vector operations](@ref oplist)
 - [Linear solvers](@ref solverlist)
 - [Performance logging and find bottlenecks](@ref logger)
-- View continuous benchmarking (coming soon)
+- [View continuous benchmarking results](https://ricosjp.github.io/monolish_benchmark_result/)
 
 ## For developpers:
 - [Contribution guide](@ref contribution) 
