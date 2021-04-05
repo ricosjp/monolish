@@ -4,11 +4,11 @@ CI_PIPELLINE_ID ?= 0
 BENCHMARK_DIR:=monolish_benchmark_result
 VERSION_DIR_NAME=$(CI_COMMIT_SHA)
 
-COMMIT_MSG:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
+COMMIT_MSG:=https://github.com/ricosjp/monolish/commit/$(CI_COMMIT_SHA)
 
 .PHONY: clone_result move_result commit_result
 
-all:cpu
+all:cpu gpu
 
 clone_result:
 	- rm -rf $(BENCHMARK_DIR)
@@ -29,23 +29,48 @@ commit_result: clone_result move_result
 	- rm commit_msg_tmp.txt
 	- rm -rf $(BENCHMARK_DIR)
 
-get_spec_cpu:
-	bash ./get_spec.sh > spec_cpu.tsv
+get_spec_intel_mkl:
+	bash ./get_spec.sh > spec_intel_mkl.tsv
 
-get_spec_gpu:
-	bash ./get_spec.sh > spec_gpu.tsv
+get_spec_intel_oss:
+	bash ./get_spec.sh > spec_intel_oss.tsv
+
+get_spec_amd_oss:
+	bash ./get_spec.sh > spec_amd_oss.tsv
+
+get_spec_nvidia:
+	bash ./get_spec.sh > spec_nvidia.tsv
 
 get_ci_info:
 	bash ./get_version_info.sh > version_info.tsv
 
-cpu:
+
+cpu: intel_mkl
+
+gpu: intel_gpu
+
+intel_mkl:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-gpu:
+intel_oss:
+	make -j -C vector_vml/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
+	make -j -C matrix_blas/ $@
+
+amd_oss:
+	make -j -C vector_vml/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
+	make -j -C matrix_blas/ $@
+
+nvidia:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
@@ -66,14 +91,28 @@ sxat:
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-run_cpu:
+run_intel_mkl:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
 
-run_gpu:
+run_intel_oss:
+	make -j -C vector_vml/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
+	make -j -C matrix_blas/ $@
+
+run_amd_oss:
+	make -j -C vector_vml/ $@
+	make -j -C vector_blas/ $@
+	make -j -C matrix_common/ $@
+	make -j -C matrix_vml/ $@
+	make -j -C matrix_blas/ $@
+
+run_nvidia:
 	make -j -C vector_vml/ $@
 	make -j -C vector_blas/ $@
 	make -j -C matrix_common/ $@

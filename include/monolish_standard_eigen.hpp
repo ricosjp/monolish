@@ -18,6 +18,18 @@ namespace standard_eigen {
 
 /**
  * @brief LOBPCG solver
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
  */
 template <typename MATRIX, typename Float>
 class LOBPCG : public solver::solver<MATRIX, Float> {
@@ -44,10 +56,31 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::standard_eigen::LOBPCG"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::standard_eigen::LOBPCG"; }
 };
 
 /**
  * @brief Devide and Conquer solver
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : false
+ * - Sparse / OSS : false
  */
 template <typename MATRIX, typename Float>
 class DC : public solver::solver<MATRIX, Float> {
@@ -64,6 +97,15 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::standard_eigen::DC"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::standard_eigen::DC"; }
 };
 
 } // namespace standard_eigen

@@ -20,13 +20,31 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.14.0 - 2021/04/05
+-----------
 ### Added
+- add build for users in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/296
+- add solver table in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/293
+- add gpu copy in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/293
+- add solver.name() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/291
+- add samples in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/290
 - add github pages for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/288
+- add doxygen documents in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
+- add packaging setting in Makefile, CMakeLists.txt https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/285
+
+### Changed
+- support benchmark for each archtecture https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/295
+- change "make in" of MONOLISH_INSTALL_DIR https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/292
 
 ### Fixed
+- fix clang warning, unnecessary variable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/294
+- fix: bicgstab gpu bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/290
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
 - make clean to clean every generated files https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/287
 - Fix typo CMAKE_C_COMPILER -> CMAKE_CXX_COMPILER https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/289
+- check English in documentation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/298
+- Fix examples not to see MONOLISH_DIR https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/297
 
 0.13.0 - 2021/03/31
 -----------

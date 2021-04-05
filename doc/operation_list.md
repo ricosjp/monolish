@@ -1,10 +1,7 @@
-# Operation list {#oplist_md}
-![](img/call_blas.png)
+# Implementation of matrix/vector operations{#oplist}
+monolish switches between `Intel`, `NVIDIA` and `OSS` at build time (see [here](@ref call_lib)).
 
-
-# Introduction
-- ここに説明を書く
-- vectorにはview1Dも突っ込める(ようにする)
+This chapter explains what libraries are called by matrix and vector operations.
 
 # BLAS 
 
@@ -12,16 +9,16 @@
 
 | func  | Intel    | NVIDIA   | OSS       |
 |-------|----------|----------|-----------|
-| copy  | MKL      | cuBLAS   | CBLAS互換 |
+| copy  | MKL      | cuBLAS   | CBLAS     |
 | sum   | monolish | monolish | monolish  |
-| asum  | MKL      | cuBLAS   | CBLAS互換 |
-| axpy  | MKL      | cuBLAS   | CBLAS互換 |
+| asum  | MKL      | cuBLAS   | CBLAS     |
+| axpy  | MKL      | cuBLAS   | CBLAS     |
 | axpyz | monolish | monolish | monolish  |
 | xpay  | monolish | monolish | monolish  |
-| dot   | MKL      | cuBLAS   | CBLAS互換 |
+| dot   | MKL      | cuBLAS   | CBLAS     |
 | nrm1  | monolish | monolish | monolish  |
-| nrm2  | MKL      | cuBLAS   | CBLAS互換 |
-| scal  | MKL      | cuBLAS   | CBLAS互換 |
+| nrm2  | MKL      | cuBLAS   | CBLAS     |
+| scal  | MKL      | cuBLAS   | CBLAS     |
 
 ## Extended BLAS Lv1
 
@@ -36,14 +33,14 @@
 
 | func  | Intel         | NVIDIA   | OSS       |
 |-------|---------------|----------|-----------|
-| Dense | MKL           | cuBLAS   | CBLAS互換 |
+| Dense | MKL           | cuBLAS   | CBLAS     |
 | CRS   | MKL           | cuSparse | monolish  |
 
 ## BLAS Lv3 (matmul)
 
 | func        | Intel         | NVIDIA             | OSS           |
 |-------------|---------------|--------------------|---------------|
-| Dense-Dense | MKL           | cuBLAS             | CBLAS互換     |
+| Dense-Dense | MKL           | cuBLAS             | CBLAS         |
 | CRS-Dense   | MKL           | monolish           | monolish(AVX) |
 
 - Todo) support CRS-Dense SpMM by NVIDIA cusparse (Rowmajor SpMM need cuda 11.x)
@@ -75,7 +72,7 @@
 | mul   | MKL           | monolish         | monolish |
 | div   | MKL           | monolish         | monolish |
 | equal | monolish      | monolish         | monolish |
-| copy  | MKL           | cuBLAS           | CBLAS互換|
+| copy  | MKL           | cuBLAS           | CBLAS    |
 
 ## vector helper functions of VML
 
@@ -83,7 +80,7 @@
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
-| copy        | MKL           | cuBLAS         | CBLAS互換|
+| copy        | MKL           | cuBLAS         | CBLAS    |
 
 ## vector Mathematical functions of VML
 
@@ -135,7 +132,7 @@
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
-| copy        | MKL           | cuBLAS         | CBLAS互換|
+| copy        | MKL           | cuBLAS         | CBLAS    |
 | transpose   | monolish      | monolish       | monolish |
 
 ## Dense mathematical functions of VML
@@ -188,7 +185,7 @@
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
-| copy        | MKL           | cuBLAS         | CBLAS互換|
+| copy        | MKL           | cuBLAS         | CBLAS    |
 
 ## CRS mathematical functions of VML
 
@@ -213,66 +210,3 @@
 | max(v,v)     |       MKL      |       monolish |       monolish |
 | min(v)       |       MKL      |       monolish |       monolish |
 | min(v,v)     |       MKL      |       monolish |       monolish |
-
-# Linear Solvers
-
-## Direct Solvers for for Dense matrix
-| func     | Intel                                        | NVIDIA                    | OSS                                    |
-|----------|----------------------------------------------|---------------------------|--------------------------------------- |
-| LU       | MKL                                          | cusolver                  | OpenBLAS+LAPACK                        |
-| Cholesky | MKL                                          | not impl.*                | OpenBLAS+LAPACK                        |
-| QR       | todo) not impl.->MKL                         | todo) not impl.->cusolver | todo) not impl. -> OpenBLAS+LAPACK     |
-
-- *) Cholesky is not impl. in cusolver 11.1
-
-## Direct Solvers for sparse matrix
-| func     | Intel                          | NVIDIA           | OSS                             |
-|----------|--------------------------------|------------------|-------------------------------- |
-| LU       | todo) not impl.->MKL           | not impl.*       | todo) not impl. -> MUMPS        |
-| Cholesky | todo) not impl.->MKL           | cusolver         | todo) not impl. -> ????         |
-| QR       | todo) not impl.->MKL           | cusolver         | todo) not impl. -> ????         |
-
-- *) sparse LU is not impl. in cusolver 11.1
-
-## Iterative solvers (only CRS now, We will support Dense)
-
-| func     | Intel          | NVIDIA         | OSS            |
-|----------|----------------|----------------|----------------|
-| CG       | monolish       | monolish       | monolish       |
-| BiCGSTAB | monolish       | monolish       | monolish       |
-| Jacobi   | monolish       | monolish       | monolish       |
-
-## Preconditioners of Sparse Linear solver
-
-| func   | Intel          | NVIDIA   | OSS      |
-|--------|----------------|----------|----------|
-| Jacobi | monolish       | monolish | monolish |
-
-# Standard Eigen Solvers
-
-## For dense matrix
-
-| func                     | Intel     | NVIDIA         | OSS             |
-|--------------------------|-----------|----------------|-----------------|
-| Devide and Conquer       | MKL       | cusolver       | OpenBLAS+LAPACK |
-
-## For sparse matrix
-
-| func                     | Intel     | NVIDIA         | OSS             |
-|--------------------------|-----------|----------------|-----------------|
-| LOBPCG                   | monolish  | monolish       | monolish        |
-
-# Generalized Eigen Solvers
-
-## For dense matrix
-
-| func                     | Intel     | NVIDIA         | OSS             |
-|--------------------------|-----------|----------------|-----------------|
-| Devide and Conquer       | MKL       | cusolver       | OpenBLAS+LAPACK |
-
-
-## For sparse matrix
-
-| func                     | Intel     | NVIDIA         | OSS             |
-|--------------------------|-----------|----------------|-----------------|
-| LOBPCG                   | monolish  | monolish       | monolish        |

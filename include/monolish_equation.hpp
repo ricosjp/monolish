@@ -13,7 +13,19 @@ namespace monolish {
 namespace equation {
 
 /**
- * @brief none solver class
+ * @brief none solver class(nothing to do)
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : true
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
  */
 template <typename MATRIX, typename Float>
 class none : public monolish::solver::solver<MATRIX, Float> {
@@ -21,10 +33,31 @@ public:
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+  /**
+   * @brief get solver name "monolish::equation::none"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::none"; }
 };
 
 /**
  * @brief CG solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
  */
 template <typename MATRIX, typename Float>
 class CG : public monolish::solver::solver<MATRIX, Float> {
@@ -48,10 +81,31 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::equation::CG"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::CG"; }
 };
 
 /**
  * @brief BiCGSTAB solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
  */
 template <typename MATRIX, typename Float>
 class BiCGSTAB : public monolish::solver::solver<MATRIX, Float> {
@@ -75,10 +129,31 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::equation::BiCGSTAB"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::BiCGSTAB"; }
 };
 
 /**
  * @brief Jacobi solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : true
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
  */
 template <typename MATRIX, typename Float>
 class Jacobi : public monolish::solver::solver<MATRIX, Float> {
@@ -96,10 +171,31 @@ public:
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  /**
+   * @brief get solver name "monolish::equation::Jacobi"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::Jacobi"; }
 };
 
 /**
- * @brief LU solver class (does not impl. now)
+ * @brief LU solver class (Dense, CPU only now)
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : false
+ * - Sparse / OSS : false
  */
 template <typename MATRIX, typename Float>
 class LU : public monolish::solver::solver<MATRIX, Float> {
@@ -121,11 +217,32 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::equation::LU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::LU"; }
 };
 
 /**
- * @brief QR solver class (GPU only now). can use set_tol(), get_tol(),
- * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
+ * @brief QR solver class (Dense, GPU only now). can use set_tol(), get_tol(),
+ * set_reorder(), get_singularity().
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : false
+ * - Dense / NVIDIA : false
+ * - Dense / OSS : false
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : false
  */
 template <typename MATRIX, typename Float>
 class QR : public monolish::solver::solver<MATRIX, Float> {
@@ -145,6 +262,7 @@ public:
 
   /**
    * @brief -1 if A is symmetric postive definite.
+   * default reorder algorithm is csrmetisnd
    */
   int get_sigularity() { return singularity; }
 
@@ -158,11 +276,32 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::equation::QR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::QR"; }
 };
 
 /**
- * @brief Cholesky solver class (CPU only now). can use set_tol(), get_tol(),
- * set_reorder(), get_singularity(). default reorder algorithm is csrmetisnd
+ * @brief Cholesky solver class.
+ * It can use set_tol(), get_tol(), set_reorder(), get_singularity().
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : false
+ * - Dense / OSS : true
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : false
  */
 template <typename MATRIX, typename Float>
 class Cholesky : public monolish::solver::solver<MATRIX, Float> {
@@ -177,6 +316,7 @@ public:
   /**
    * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce
    * zero fill-in.
+   * default reorder algorithm is csrmetisnd.
    */
   void set_reorder(int r) { reorder = r; }
 
@@ -197,6 +337,15 @@ public:
   void apply_precond(const vector<Float> &r, vector<Float> &z) {
     throw std::runtime_error("this precond. is not impl.");
   }
+
+  /**
+   * @brief get solver name "monolish::equation::Cholesky"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::Cholesky"; }
 };
 } // namespace equation
 } // namespace monolish
