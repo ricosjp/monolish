@@ -4,10 +4,10 @@ DESTDIR:=$(CURDIR)/debian/monolish
 	dh $@
 
 override_dh_auto_build:
-	MONOLISH_DIR=/usr dh_auto_build -- cpu gpu
+	MONOLISH_DIR=/usr dh_auto_build -- cpu clang_gpu_all
 
 override_dh_auto_install:
-	MONOLISH_DIR=/usr dh_auto_install
+	MONOLISH_DIR=/usr make install_cpu install_gpu_all
 
 override_dh_install:
 	dh_install --sourcedir=/

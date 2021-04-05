@@ -1,0 +1,120 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ monolish (0.13.0-1) UNRELEASED; urgency=medium
+ .
+   * Initial release.
+Author: Ryo IGARASHI <rigarash@ricos.co.jp>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2021-04-05
+
+--- monolish-0.13.0.orig/CMakeLists.txt
++++ monolish-0.13.0/CMakeLists.txt
+@@ -12,10 +12,15 @@ project(monolish CXX Fortran)
+ 
+ option(MONOLISH_USE_GPU "build GPU variant" OFF)
+ option(MONOLISH_USE_AVX "Require AVX" ON)
++option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
+ 
+ if(MONOLISH_USE_GPU)
+   if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+-    set(MONOLISH_TARGET monolish_gpu)
++    if (MONOLISH_FOR_PACKAGING)
++      set(MONOLISH_TARGET monolish_gpu_${GPU_CC})
++    else()
++      set(MONOLISH_TARGET monolish_gpu)
++    endif()
+   elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+     message(FATAL_ERROR "GPU mode cannot be enabled with gcc")
+   endif()
+@@ -44,24 +49,34 @@ if(MONOLISH_USE_AVX)
+   target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_AVX)
+ endif()
+ 
+-install(
+-  TARGETS ${MONOLISH_TARGET}
+-  LIBRARY
+-  DESTINATION lib
++if (MONOLISH_FOR_PACKAGING)
++  install(
++    TARGETS ${MONOLISH_TARGET}
++    LIBRARY
++    DESTINATION lib/monolish
+ )
++else()
++  install(
++    TARGETS ${MONOLISH_TARGET}
++    LIBRARY
++    DESTINATION lib
++)
++endif()
+ 
+ # OpenMP
+ find_package(OpenMP REQUIRED)
+ if(MONOLISH_USE_GPU)
+   # GPU offloading
+ 
+-  # get CC
+-  execute_process(
+-    COMMAND allgebra_get_device_cc
+-    OUTPUT_VARIABLE GPU_CC
+-    ERROR_QUIET
+-  )
+-  string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
++  if (NOT MONOLISH_FOR_PACKAGING)
++    # get CC
++    execute_process(
++      COMMAND allgebra_get_device_cc
++      OUTPUT_VARIABLE GPU_CC
++      ERROR_QUIET
++    )
++    string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
++  endif()
+   message(STATUS "GPU Compute Capability is ${GPU_CC}")
+ 
+   target_compile_options(${MONOLISH_TARGET} PRIVATE
+--- monolish-0.13.0.orig/Makefile
++++ monolish-0.13.0/Makefile
+@@ -135,3 +135,27 @@ document:
+ 		-v $(PWD):$(PWD)   \
+ 		-w $(PWD)          \
+ 		$(ALLGEBRA_IMAGE)/doxygen:20.10.1 doxygen Doxyfile
++
++device_cc := 35 37 50 52 53 60 61 62 70 75
++define template
++clang_gpu_$(1):
++	cmake $(MONOLISH_TOP) \
++		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
++		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
++		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
++		-DCMAKE_VERBOSE_MAKEFILE=1 \
++		-Bbuild_gpu_$(1) \
++		-DMONOLISH_USE_GPU=ON \
++		-DMONOLISH_FOR_PACKAGING=ON \
++		-DGPU_CC=$(1) \
++	&& cmake --build build_gpu_$(1) -j `nproc`
++
++install_gpu_$(1): clang_gpu_$(1)
++	cmake --build build_gpu_$(1) --target install
++endef
++
++$(foreach cc,$(device_cc),$(eval $(call template,$(cc))))
++
++clang_gpu_all: $(addprefix clang_gpu_,$(device_cc))
++
++install_gpu_all: $(addprefix install_gpu_,$(device_cc))
