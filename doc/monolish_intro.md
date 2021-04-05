@@ -1,7 +1,7 @@
 # What's is monolish? {#monolish_intro}
 
 ## Introduction
-monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
+monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vendor specific data transfer APIs, and vendor specific numerical algebra libraries.
 
 monolish is a vendor-independent open-source library written in C++ that aims to be a grand unified linear algebra library on any hardware.
 
@@ -11,7 +11,7 @@ However, these are not enough due to the growing needs of users.
 In particular, sparse matrix operations and machine learning kernels are not implemented.
 
 To solve this, the libraries (MKL, cusolver, etc.) by each hardware vendor extended functions.
-Sadly, these software APIs are not unified. Moreover, These are language or vender specific.
+Sadly, these software APIs are not unified. Moreover, These are language or vendor specific.
 
 The BLAS library, including MKL and CUDA libraries, is the perfect library in terms of performance, but the function names depend on the data type.
 Python numpy, Julia, Matlab, etc. define APIs that eliminate these dependencies and call BLAS in them.
