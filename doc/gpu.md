@@ -24,19 +24,19 @@ Whether the data has been transferred to the GPU can be obtained by the get\_dev
 
 The data mapped to the GPU is released from the GPU by recv() or device\_free().
 
-Most of the functions are executed on the CPU or GPU according to get\_device\_mem\_stat() .
+Most of the functions are executed on either CPU or GPU according to get\_device\_mem\_stat() .
 A copy constructor is special, it is a function that copies an instance of a class. So both CPU and GPU data will be copied.
 
 For developers, there is a nonfree\_recv() function that receives data from the GPU without freeing the GPU memory.
 However, in the current version, there is no way to explicitly change the status of GPU memory, so it is not useful for most users.
 
 GPU programs using monolish are implemented with the following flow in mind.
-1. First, the CPU generates data, and then
+1. First, generates data on CPU, and then
 2. Transfer data from CPU to GPU
 3. Calculate on GPU,
 4. Finally, receive data from GPU to CPU
 
-It is important to be aware that send and recv are not performed many times in order to reduce transfers.
+It is important to be aware that send() and recv() should not be performed many times in order to reduce transfers.
 
 ## Compute innerproduct on GPU
 A simple inner product program for GPU is shown below:
@@ -88,7 +88,7 @@ A description of this program is given below:
 - The scalar values are automatically synchronized between the CPU and GPU.
 - The BLAS and VML functions in monolish automatically call the GPU functions when they receive data that has already been sent.
 - When libmonolish\_cpu.so is linked, send() and recv() do nothing, the CPU and GPU code can be shared.
-- In this program, `x` and `y` do not need to receive to the CPU, so the memory management was left to the automatic release by the destructor.
+- In this program, `x` and `y` do not need to be received to CPU, so the memory management was left to the automatic release by the destructor.
 
 For a more advanced example, sample programs that implement CG methods using monolish::BLAS and monolish::VML can be found in `/sample/blas/cg_impl/`.
 
