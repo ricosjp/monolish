@@ -39,6 +39,7 @@ Unreleased
 - update readme https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/283
 - make clean to clean every generated files https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/287
 - Fix typo CMAKE_C_COMPILER -> CMAKE_CXX_COMPILER https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/289
+- check English in documentation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/298
 - Fix examples not to see MONOLISH_DIR https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/297
 
 0.13.0 - 2021/03/31

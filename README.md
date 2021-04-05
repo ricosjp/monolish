@@ -1,5 +1,5 @@
 # monolish: MONOlithic LIner equation Solvers for Highly-parallel architecture
-monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vender specific data transfer APIs, and vender specific numerical algebra libraries.
+monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vendor specific data transfer APIs, and vendor specific numerical algebra libraries.
 
 - Documentation: **URL**
 - Source code: https://github.com/ricosjp/monolish/
@@ -12,13 +12,13 @@ monolish is a linear equation solver library that monolithically fuses variable 
 
 ---
 
-monolish let developer be oblivious about:
+monolish let developer forget about:
 - Performance tuning
-- A various processor which executes library (Intel CPU, NVIDIA GPU, AMD CPU, ARM CPU, NEC SX-Aurora TSUBASA, etc.)
-- Vender specific data transfer APIs (host RAM to Device RAM)
-- Find bottlenecks and performance benchmark
+- Processor differences which execute library (Intel CPU, NVIDIA GPU, AMD CPU, ARM CPU, NEC SX-Aurora TSUBASA, etc.)
+- Vendor specific data transfer APIs (host RAM to Device RAM)
+- Finding bottlenecks and performance benchmarks
 - The argument data type of matrix/vector operations
-- Matrix structure and storage format
+- Matrix structures and storage formats
 - Cumbersome package dependency
 
 

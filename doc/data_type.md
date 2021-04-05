@@ -59,8 +59,8 @@ For example, We will implement ELL, JAD, and other storage formats, it will be i
 
 | func                          | COO (editable)              | Dense (editable/computable) | CRS (computable) |
 |-------------------------------|-----------------------------|------------------------------|---------------|
-| at                            | CPU                         | CPU                          | don't impl.   |
-| insert                        | CPU                         | CPU                          | don't impl.   |
+| at                            | CPU                         | CPU                          | not impl.     |
+| insert                        | CPU                         | CPU                          | not impl.     |
 | row()/col()/diag()            | CPU                         | CPU/GPU                      | CPU/GPU       |
 | type()                        | CPU                         | CPU                          | CPU           |
 | get_data_size()               | CPU                         | CPU                          | CPU           |

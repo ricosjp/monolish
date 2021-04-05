@@ -1,7 +1,7 @@
 # monolish: MONOlithic LIner equation Solvers for Highly-parallel architecture. {#mainpage}
 
 ## For users:
-- [What's is monolish?](@ref monolish_intro)
+- [What's monolish?](@ref monolish_intro)
 - [Installation](@ref install_guide)
   - [Installation using apt (for ubuntu XXX)](@ref install_guide)
   - [Build monolish from source code](@ref build_guide)
