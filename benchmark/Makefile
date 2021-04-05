@@ -8,7 +8,7 @@ COMMIT_MSG:=https://github.com/ricosjp/monolish/commit/$(CI_COMMIT_SHA)
 
 .PHONY: clone_result move_result commit_result
 
-all:intel_mkl
+all:cpu gpu
 
 clone_result:
 	- rm -rf $(BENCHMARK_DIR)
@@ -43,6 +43,11 @@ get_spec_nvidia:
 
 get_ci_info:
 	bash ./get_version_info.sh > version_info.tsv
+
+
+cpu: intel_mkl
+
+gpu: intel_gpu
 
 intel_mkl:
 	make -j -C vector_vml/ $@
