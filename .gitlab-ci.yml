@@ -363,13 +363,14 @@ gpu_avx_clang_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_gpu
-      - make gpu
-      - make run_gpu
+      - make get_spec_nvidia
+      - make nvidia
+      - make run_nvidia
     tags:
       - c8cbb8c6304d
     only:
       - schedules
+      - tags
 
 # intel cpu + mkl
 intel_avx_gcc_mkl_benchmark:
@@ -384,13 +385,14 @@ intel_avx_gcc_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
-      - make cpu
-      - make run_cpu
+      - make get_spec_intel_mkl
+      - make intel_mkl
+      - make run_intel_mkl
     tags:
       - 008cfa52494d
     only:
       - schedules
+      - tags
 
 # intel cpu + oss
 intel_avx_gcc_oss_benchmark:
@@ -405,13 +407,14 @@ intel_avx_gcc_oss_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
-      - make cpu
-      - make run_cpu
+      - make get_spec_intel_oss
+      - make intel_oss
+      - make run_intel_oss
     tags:
       - 008cfa52494d
     only:
       - schedules
+      - tags
 
 # AMD cpu + oss
 amd_avx_gcc_mkl_benchmark:
@@ -426,13 +429,14 @@ amd_avx_gcc_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
-      - make cpu
-      - make run_cpu
+      - make get_spec_amd_oss
+      - make amd_oss
+      - make run_amd_oss
     tags:
       - b42e99ecbde2
     only:
       - schedules
+      - tags
 
 #
 # docker and pages
@@ -483,6 +487,7 @@ benchmark_result:
         - make commit_result
     only:
       - schedules
+      - tags
 
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1
