@@ -49,19 +49,11 @@ if(MONOLISH_USE_AVX)
   target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_AVX)
 endif()
 
-if (MONOLISH_FOR_PACKAGING)
-  install(
-    TARGETS ${MONOLISH_TARGET}
-    LIBRARY
-    DESTINATION lib/monolish
+install(
+  TARGETS ${MONOLISH_TARGET}
+  LIBRARY
+  DESTINATION lib
 )
-else()
-  install(
-    TARGETS ${MONOLISH_TARGET}
-    LIBRARY
-    DESTINATION lib
-)
-endif()
 
 # OpenMP
 find_package(OpenMP REQUIRED)
