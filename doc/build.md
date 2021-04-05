@@ -1,4 +1,4 @@
-# Build monolish {#build_guide}
+# Build monolish from source code {#build_guide}
 
 # Introduction
 

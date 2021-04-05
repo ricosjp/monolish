@@ -4,7 +4,7 @@
 - [What's is monolish?](@ref monolish_intro)
 - [Installation](@ref install_guide)
   - [Installation using apt (for ubuntu XXX)](@ref install_guide)
-  - [Build and Install monolish (not recommended)](@ref build_guide)
+  - [Build monolish from source code](@ref build_guide)
 - [Data types](@ref data_type)
 - [Compile and run simple program on CPU](@ref cpu_dev)
 - [GPU device acceleration](@ref gpu_dev)
