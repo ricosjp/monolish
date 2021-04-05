@@ -146,6 +146,8 @@ clang_gpu_$(1):
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu_$(1) \
 		-DMONOLISH_USE_GPU=ON \
+		-DMONOLISH_FOR_PACKAGING=ON \
+		-DGPU_CC=$(1) \
 	&& cmake --build build_gpu_$(1) -j `nproc`
 
 install_gpu_$(1): clang_gpu_$(1)
