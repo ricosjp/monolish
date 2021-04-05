@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add build for users in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/296
 - add solver table in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/293
 - add gpu copy in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/293
 - add solver.name() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/291
