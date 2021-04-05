@@ -368,6 +368,9 @@ gpu_avx_clang_mkl_benchmark:
       - make run_nvidia
     tags:
       - c8cbb8c6304d
+    only:
+      - schedules
+      - tags
 
 # intel cpu + mkl
 intel_avx_gcc_mkl_benchmark:
@@ -387,6 +390,9 @@ intel_avx_gcc_mkl_benchmark:
       - make run_intel_mkl
     tags:
       - 008cfa52494d
+    only:
+      - schedules
+      - tags
 
 # intel cpu + oss
 intel_avx_gcc_oss_benchmark:
@@ -406,6 +412,9 @@ intel_avx_gcc_oss_benchmark:
       - make run_intel_oss
     tags:
       - 008cfa52494d
+    only:
+      - schedules
+      - tags
 
 # AMD cpu + oss
 amd_avx_gcc_mkl_benchmark:
@@ -425,6 +434,9 @@ amd_avx_gcc_mkl_benchmark:
       - make run_amd_oss
     tags:
       - b42e99ecbde2
+    only:
+      - schedules
+      - tags
 
 #
 # docker and pages
@@ -473,9 +485,9 @@ benchmark_result:
         - cd benchmark
         - make get_ci_info
         - make commit_result
-#     only:
-#       - schedules
-#       - tags
+    only:
+      - schedules
+      - tags
 
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:20.10.1

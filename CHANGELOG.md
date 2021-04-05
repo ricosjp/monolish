@@ -29,6 +29,7 @@ Unreleased
 - add doxygen documents in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
 
 ### Changed
+- support benchmark for each archtecture https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/295
 - change "make in" of MONOLISH_INSTALL_DIR https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/292
 
 ### Fixed
