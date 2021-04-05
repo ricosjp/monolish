@@ -2,12 +2,13 @@
 
 set -e
 
-if /usr/bin/allgebra_get_device_cc > /dev/null; then
+/usr/bin/allgebra_get_device_cc > /dev/null
+
+if [ $? != 0 ]; then
   exit 0
 fi
 
-pushd /usr/lib
-ln -s libmonolish_gpu_$(allgebra_get_device_cc).so libmonolish_gpu.so
-popd
+cd /usr/lib
+ln -s libmonolish_gpu_$(/usr/bin/allgebra_get_device_cc).so libmonolish_gpu.so
 
 exit 0
