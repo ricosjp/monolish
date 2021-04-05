@@ -25,7 +25,6 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   // MN = MK * KN
   const int M = A.get_row();
   const int N = B.get_col();
-  const int K = A.get_col();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU // CUDA11 will support SpMM
@@ -98,6 +97,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 #if MONOLISH_USE_MKL
     const double alpha = 1.0;
     const double beta = 0.0;
+    const int K = A.get_col();
     mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
                &N, &beta, Cd, &N);
 
@@ -178,7 +178,6 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   // MN = MK * KN
   const int M = A.get_row();
   const int N = B.get_col();
-  const int K = A.get_col();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_GPU
@@ -198,6 +197,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   } else {
 // MKL
 #if MONOLISH_USE_MKL
+    const int K = A.get_col();
     const float alpha = 1.0;
     const float beta = 0.0;
     mkl_scsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
