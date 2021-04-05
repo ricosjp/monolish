@@ -7,6 +7,7 @@ $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_6
 $ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 $ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 $ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+$ sudo apt install libcublas10=10.2.1.243-1
 \endcode
 
 Download deb file from Releases page and install as follows:
