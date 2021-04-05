@@ -4,7 +4,7 @@ CI_PIPELLINE_ID ?= 0
 BENCHMARK_DIR:=monolish_benchmark_result
 VERSION_DIR_NAME=$(CI_COMMIT_SHA)
 
-COMMIT_MSG:=https://gitlab.ritc.jp/ricos/monolish/-/commit/$(CI_COMMIT_SHA)
+COMMIT_MSG:=https://github.com/ricosjp/monolish/commit/$(CI_COMMIT_SHA)
 
 .PHONY: clone_result move_result commit_result
 
