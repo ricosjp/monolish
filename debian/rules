@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-#DEB_BUILD_OPTIONS=nostrip
 DESTDIR:=$(CURDIR)/debian/monolish
 %:
 	dh $@
@@ -13,6 +12,3 @@ override_dh_auto_install:
 override_dh_install:
 	dh_install --sourcedir=/
 	patchelf --force-rpath --set-rpath '/usr/lib/monolish' $(DESTDIR)/usr/lib/libmonolish_gpu.so
-
-override_dh_strip_nondeterminism:
-override_dh_strip:
