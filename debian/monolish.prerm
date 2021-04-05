@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -d
+set -e
 
 rm -f /usr/lib/libmonolish_gpu.so
 
