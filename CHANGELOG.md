@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.14.0 - 2021/04/05
+-----------
 ### Added
 - add build for users in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/296
 - add solver table in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/293
