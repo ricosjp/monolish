@@ -3,7 +3,7 @@
 ## For users:
 - [What's monolish?](@ref monolish_intro)
 - Installation
-  - [Installation using apt (for ubuntu XXX)](@ref install_guide)
+  - [Installation using apt (for ubuntu 20.04 and 20.10)](@ref install_guide)
   - [Build monolish from source code](@ref build_guide)
 - [Data types](@ref data_type)
 - [Compile and run simple program on CPU](@ref cpu_dev)
