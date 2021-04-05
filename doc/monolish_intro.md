@@ -70,26 +70,26 @@ In the future, imaginary numbers and high precision data types will be supported
 ### 2. Don't require users to change their programs due to changes in hardware architecture.
 
 monolish integrates vendor-implemented BLAS libraries and device communication APIs for each architecture.
-It provides a new BLAS/LAPACK/Sparse BLAS that monolithically integrates types, matrix formats, and vendor-specific APIs.
+It provides a new layer to BLAS/LAPACK/Sparse BLAS that monolithically integrates types, matrix formats, and vendor-specific APIs.
 
-To support AMD GPUs and Intel Xe, the internal device programs are implemented using OpenMP Offloading.
+To support AMD GPUs and Intel Xe with our own implementation, the internal device programs are implemented using OpenMP Offloading.
 
 ### 3. Don't require users to change their programs due to changes in the matrix storage format.
 
 In monolish, all matrix formats, including Dense matrix, are defined as sparse matrix format.
 
-The same interface is designed for all classes to minimize program changes due to the matrix storage format changes.
+The same interface is designed for all classes to minimize changes in user program due to the matrix storage format changes.
 
 ### 4. Don't implement functions that do not provide performance.
 
 It is important to have the same functionality in all classes.
-However, there are often operations that cannot be made faster in principle.
+However, there are operations that cannot be made faster in principle.
 For example, operations on columns of a matrix in CRS format.
 
 If a useful function is implemented, many users will use it even if its performance is low.
 In monolish, even if there is a bias in functionality between classes, functions that are not fast enough in principle are not implemented.
 
-We guarantee, as much as possible, that programs implemented with a combination of monolish functions will run faster.
+We guarantee, as much as possible, that programs implemented with a combination of monolish functions will run fast.
 
 
 ### 5. Don't allocate memory in ways that users cannot anticipate.
