@@ -31,15 +31,15 @@ intel_mkl: $(OBJS_INTEL_MKL)
 
 intel_oss: $(OBJS_INTEL_OSS)
 %_intel_oss.out: %.cpp ../benchmark_utils.hpp
-	make -B FUNC=$(<:.cpp=) ARCH=cpu -f ../test_cpu.mk
+	make -B FUNC=$(<:.cpp=) ARCH=intel_oss -f ../test_cpu.mk
 
 amd_oss: $(OBJS_AMD_OSS)
 %_amd_oss.out: %.cpp ../benchmark_utils.hpp
-	make -B FUNC=$(<:.cpp=) ARCH=cpu -f ../test_cpu.mk
+	make -B FUNC=$(<:.cpp=) ARCH=amd_oss -f ../test_cpu.mk
 
 nvidia: $(OBJS_NVIDIA)
 %_nvidia.out: %.cpp ../benchmark_utils.hpp
-	make -B FUNC=$(<:.cpp=) ARCH=gpu -f ../test_gpu.mk
+	make -B FUNC=$(<:.cpp=) ARCH=nvidia -f ../test_gpu.mk
 
 a64fx: $(OBJS_FX)
 %_a64fx.out: %.cpp ../benchmark_utils.hpp
