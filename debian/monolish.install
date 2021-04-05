@@ -1,4 +1,4 @@
 /usr/local/llvm-11.0.0/lib/libomp.so usr/lib/monolish
 /usr/local/llvm-11.0.0/lib/libomptarget.so usr/lib/monolish
 /usr/local/llvm-11.0.0/lib/libomptarget.rtl.cuda.so usr/lib/monolish
-/usr/bin/allbegra_get_device_cc usr/bin
+/usr/bin/allgebra_get_device_cc usr/bin
