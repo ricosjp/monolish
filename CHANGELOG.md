@@ -28,6 +28,7 @@ Unreleased
 - add samples in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/290
 - add github pages for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/288
 - add doxygen documents in english https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/286
+- add packaging setting in Makefile, CMakeLists.txt https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/285
 
 ### Changed
 - support benchmark for each archtecture https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/295

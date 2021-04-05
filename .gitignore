@@ -48,3 +48,6 @@ compile_commands.json
 
 # cmake
 benchmark/*/*.tsv
+
+# Debian packaging
+.pc/

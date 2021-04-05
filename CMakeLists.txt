@@ -12,10 +12,15 @@ project(monolish CXX Fortran)
 
 option(MONOLISH_USE_GPU "build GPU variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
+option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
 
 if(MONOLISH_USE_GPU)
   if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(MONOLISH_TARGET monolish_gpu)
+    if (MONOLISH_FOR_PACKAGING)
+      set(MONOLISH_TARGET monolish_gpu_${GPU_CC})
+    else()
+      set(MONOLISH_TARGET monolish_gpu)
+    endif()
   elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     message(FATAL_ERROR "GPU mode cannot be enabled with gcc")
   endif()
@@ -55,13 +60,15 @@ find_package(OpenMP REQUIRED)
 if(MONOLISH_USE_GPU)
   # GPU offloading
 
-  # get CC
-  execute_process(
-    COMMAND allgebra_get_device_cc
-    OUTPUT_VARIABLE GPU_CC
-    ERROR_QUIET
-  )
-  string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+  if (NOT MONOLISH_FOR_PACKAGING)
+    # get CC
+    execute_process(
+      COMMAND allgebra_get_device_cc
+      OUTPUT_VARIABLE GPU_CC
+      ERROR_QUIET
+    )
+    string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+  endif()
   message(STATUS "GPU Compute Capability is ${GPU_CC}")
 
   target_compile_options(${MONOLISH_TARGET} PRIVATE
