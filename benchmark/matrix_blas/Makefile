@@ -9,11 +9,19 @@ OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
 
 all: cpu
 
-cpu: $(OBJS_CPU)
+intel_mkl: $(OBJS_CPU)
 %_cpu.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=cpu -f ../test_cpu.mk
 
-gpu: $(OBJS_GPU)
+intel_oss: $(OBJS_CPU)
+%_cpu.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=cpu -f ../test_cpu.mk
+
+amd_oss: $(OBJS_CPU)
+%_cpu.out: %.cpp
+	make -B FUNC=$(<:.cpp=) ARCH=cpu -f ../test_cpu.mk
+
+nvidia: $(OBJS_GPU)
 %_gpu.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=gpu -f ../test_gpu.mk
 
@@ -25,21 +33,37 @@ sxat: $(OBJS_SX)
 %_sxat.out: %.cpp
 	make -B FUNC=$(<:.cpp=) ARCH=sxat -f ../test_sxat.mk
 
-run_cpu:
-	bash ./benchmark.sh matcopy cpu
-	bash ./benchmark.sh matadd cpu
-	bash ./benchmark.sh matsub cpu
-	bash ./benchmark.sh mscal cpu
-	bash ./benchmark.sh matvec cpu
-	bash ./benchmark.sh matmul cpu
+run_intel_mkl:
+	bash ./benchmark.sh matcopy intel_mkl
+	bash ./benchmark.sh matadd intel_mkl
+	bash ./benchmark.sh matsub intel_mkl
+	bash ./benchmark.sh mscal intel_mkl
+	bash ./benchmark.sh matvec intel_mkl
+	bash ./benchmark.sh matmul intel_mkl
+
+run_intel_oss:
+	bash ./benchmark.sh matcopy intel_oss
+	bash ./benchmark.sh matadd intel_oss
+	bash ./benchmark.sh matsub intel_oss
+	bash ./benchmark.sh mscal intel_oss
+	bash ./benchmark.sh matvec intel_oss
+	bash ./benchmark.sh matmul intel_oss
+
+run_amd_oss:
+	bash ./benchmark.sh matcopy amd_oss
+	bash ./benchmark.sh matadd amd_oss
+	bash ./benchmark.sh matsub amd_oss
+	bash ./benchmark.sh mscal amd_oss
+	bash ./benchmark.sh matvec amd_oss
+	bash ./benchmark.sh matmul amd_oss
  
-run_gpu:
-	bash ./benchmark.sh matcopy gpu
-	bash ./benchmark.sh matadd gpu
-	bash ./benchmark.sh matsub gpu
-	bash ./benchmark.sh mscal gpu
-	bash ./benchmark.sh matvec gpu
-	bash ./benchmark.sh matmul gpu
+run_nvidia:
+	bash ./benchmark.sh matcopy nvidia
+	bash ./benchmark.sh matadd nvidia
+	bash ./benchmark.sh matsub nvidia
+	bash ./benchmark.sh mscal nvidia
+	bash ./benchmark.sh matvec nvidia
+	bash ./benchmark.sh matmul nvidia
 
 run_a64fx:
 	bash ./benchmark.sh matcopy a64fx
