@@ -135,3 +135,25 @@ document:
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
 		$(ALLGEBRA_IMAGE)/doxygen:20.10.1 doxygen Doxyfile
+
+device_cc := 35 37 50 52 53 60 61 62 70 75
+define template
+clang_gpu_$(1):
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu_$(1) \
+		-DMONOLISH_USE_GPU=ON \
+	&& cmake --build build_gpu_$(1) -j `nproc`
+
+install_gpu_$(1): clang_gpu_$(1)
+	cmake --build build_gpu_$(1) --target install
+endef
+
+$(foreach cc,$(device_cc),$(eval $(call template,$(cc))))
+
+clang_gpu_all: $(addprefix clang_gpu_,$(device_cc))
+
+install_gpu_all: $(addprefix install_gpu_,$(device_cc))
