@@ -1,5 +1,6 @@
-monolish (0.13.0-1) UNRELEASED; urgency=medium
+monolish (0.14.0-1) UNRELEASED; urgency=medium
 
+  [ Ryo IGARASHI ]
   * Initial release. 
 
- -- Ryo IGARASHI <rigarash@ricos.co.jp>  Thu, 01 Apr 2021 03:44:12 +0000
+ -- Ryo IGARASHI <rigarash@ricos.co.jp>  Mon, 05 Apr 2021 08:28:21 +0000
