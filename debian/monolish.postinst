@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if /usr/bin/allgebra_get_device_cc > /dev/null; then
+  exit 0
+fi
+
+pushd /usr/lib
+ln -s libmonolish_gpu_$(allgebra_get_device_cc).so libmonolish_gpu.so
+popd
+
+exit 0

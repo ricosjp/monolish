@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -d
+
+rm -f /usr/lib/libmonolish_gpu.so
+
+exit 0
