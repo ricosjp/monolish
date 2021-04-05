@@ -1,7 +1,5 @@
 CXX=g++
-CXXFLAGS=-O3 -fopenmp
-INC=-I$(MONOLISH_DIR)/include/
-LIB=-L$(MONOLISH_DIR)/lib/ 
+CXXFLAGS=-O3
 
 all: cpu gpu
 
@@ -9,10 +7,10 @@ cpu: solver_cpu.out
 gpu: solver_gpu.out
 	
 solver_cpu.out: solver.cpp
-	$(CXX) $(INC) $(LIB) solver.cpp -o $@  -lmonolish_cpu
+	$(CXX) $(CXXFLAGS) solver.cpp -o $@  -lmonolish_cpu
 
 solver_gpu.out: solver.cpp
-	$(CXX) $(INC) $(LIB) solver.cpp -o $@  -lmonolish_gpu
+	$(CXX) $(CXXFLAGS) solver.cpp -o $@  -lmonolish_gpu
 
 run:
 	echo "run CPU"
