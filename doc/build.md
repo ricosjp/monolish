@@ -9,37 +9,56 @@ To share the development environment, the monolish development environment is pr
 
 If you want to add a feature that depends on a new library, please make a pull request to allgebra.
 
-## Enter to allgebra docker container
+## Enter to allgebra docker container and Building monolish
 
 - CPU, MKL
 ```
+git clone git@github.com:ricosjp/monolish.git
 make in_mkl_cpu
+make install
 ```
 
-- CPU, OSS
+- CPU, OSS (for AMD, ARM, Power)
 ```
+git clone git@github.com:ricosjp/monolish.git
 make in_oss_cpu
+make install
 ```
 
 - GPU, MKL
 ```
+git clone git@github.com:ricosjp/monolish.git
 make in_mkl_gpu
+make install
 ```
 
-- GPU, OSS
+- GPU, OSS (for NVIDIA GPU on AMD)
 ```
+git clone git@github.com:ricosjp/monolish.git
 make in_mkl_cpu
+make install
 ```
 
-## Build on allgebra
-## CPU 
+If Docker is not used, users need to install MKL, OpenBLAS, etc. which they depend on.
+
+## Build monolish for special hardware
+- NEC SX-Aurora TSUBASA
 ```
-> make cpu
-> make install
+git clone git@github.com:ricosjp/monolish.git
+make -f Makefile.sxat
 ```
 
-### GPU 
+- Fujitsu A64fx
 ```
-> make gpu
-> make install
+git clone git@github.com:ricosjp/monolish.git
+make -f Makefile.a64fx
 ```
+SXAT and A64fx do not require Docker.
+
+
+## AMD Radeon GPU and Intel Xe GPU
+Currently, it does not work because the code depends on NVIDIA CUDA libraries.
+
+OpenMP Offloading should work on these architecture, so it should be possible to make it work based on the design concept of monolish.
+
+These architectures will be supported in the future.
