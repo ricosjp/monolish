@@ -22,13 +22,6 @@ monolish let developer forget about:
 - Cumbersome package dependency
 
 
-# Build and Install
-## Download binary
-XXXXXXX
-
-## Build (for monolish Developpers)
-see [doc/installation.md](doc/installation.md)
-
 License
 --------
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)
