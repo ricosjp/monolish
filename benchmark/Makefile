@@ -32,6 +32,12 @@ commit_result: clone_result move_result
 get_spec_intel_mkl:
 	bash ./get_spec.sh > spec_intel_mkl.tsv
 
+get_spec_intel_oss:
+	bash ./get_spec.sh > spec_intel_oss.tsv
+
+get_spec_amd_oss:
+	bash ./get_spec.sh > spec_amd_oss.tsv
+
 get_spec_nvidia:
 	bash ./get_spec.sh > spec_nvidia.tsv
 

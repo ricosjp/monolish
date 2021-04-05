@@ -363,7 +363,7 @@ gpu_avx_clang_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_gpu
+      - make get_spec_nvidia
       - make nvidia
       - make run_gpu
     tags:
@@ -382,7 +382,7 @@ intel_avx_gcc_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
+      - make get_spec_intel_mkl
       - make intel_mkl
       - make run_cpu
     tags:
@@ -401,7 +401,7 @@ intel_avx_gcc_oss_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
+      - make get_spec_intel_oss
       - make intel_oss
       - make run_cpu
     tags:
@@ -420,7 +420,7 @@ amd_avx_gcc_mkl_benchmark:
         expire_in: 360min
     script:
       - cd benchmark
-      - make get_spec_cpu
+      - make get_spec_amd_oss
       - make amd_oss
       - make run_cpu
     tags:
