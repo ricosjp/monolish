@@ -18,6 +18,7 @@
 
 ## Meta information:
 - [Source code](https://github.com/ricosjp/monolish/)
+- [Documentation](https://ricosjp.github.io/monolish/)
 - [Bug reports](https://github.com/ricosjp/monolish/issues)
 - [Releases](https://github.com/ricosjp/monolish/releases)
 - [Changelog](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
