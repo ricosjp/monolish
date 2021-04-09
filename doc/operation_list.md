@@ -1,5 +1,5 @@
 # Implementation of matrix/vector operations{#oplist}
-monolish switches between `Intel`, `NVIDIA` and `OSS` at build time (see [here](@ref call_lib)).
+monolish switches between `MKL`, `NVIDIA` and `OSS` at build time (see [here](@ref call_lib)).
 
 This chapter explains what libraries are called by matrix and vector operations.
 
@@ -7,7 +7,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## BLAS Lv1
 
-| func  | Intel    | NVIDIA   | OSS       |
+| func  | MKL      | NVIDIA   | OSS       |
 |-------|----------|----------|-----------|
 | copy  | MKL      | cuBLAS   | CBLAS     |
 | sum   | monolish | monolish | monolish  |
@@ -22,7 +22,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## Extended BLAS Lv1
 
-| func                | Intel    | NVIDIA   | OSS      |
+| func                | MKL      | NVIDIA   | OSS      |
 |---------------------|----------|----------|----------|
 | matrix scale(Dense) | monolish | monolish | monolish |
 | matrix scale(CRS)   | monolish | monolish | monolish |
@@ -31,14 +31,14 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## BLAS Lv2 (matvec)
 
-| func  | Intel         | NVIDIA   | OSS       |
+| func  | MKL           | NVIDIA   | OSS       |
 |-------|---------------|----------|-----------|
 | Dense | MKL           | cuBLAS   | CBLAS     |
-| CRS   | MKL           | cuSparse | monolish  |
+| CRS   | MKL           | cuSPARSE | monolish  |
 
 ## BLAS Lv3 (matmul)
 
-| func        | Intel         | NVIDIA             | OSS           |
+| func        | MKL           | NVIDIA             | OSS           |
 |-------------|---------------|--------------------|---------------|
 | Dense-Dense | MKL           | cuBLAS             | CBLAS         |
 | CRS-Dense   | MKL           | monolish           | monolish(AVX) |
@@ -47,7 +47,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## Extended BLAS Lv3: Matrix add/sub (C=A+B)
 
-| func  | Intel    | NVIDIA   | OSS      |
+| func  | MKL      | NVIDIA   | OSS      |
 |-------|----------|----------|----------|
 | Dense | MKL      | monolish | monolish |
 | CRS   | MKL      | monolish | monolish |
@@ -56,7 +56,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## scalar-vector VML
 
-| func  | Intel         | NVIDIA           | OSS       |
+| func  | MKL           | NVIDIA           | OSS       |
 |-------|---------------|------------------|-----------|
 | add   | monolish      | monolish         | monolish  |
 | sub   | monolish      | monolish         | monolish  |
@@ -65,7 +65,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## vector-vector VML
 
-| func  | Intel         | NVIDIA           | OSS      |
+| func  | MKL           | NVIDIA           | OSS      |
 |-------|---------------|------------------|----------|
 | add   | MKL           | monolish         | monolish |
 | sub   | MKL           | monolish         | monolish |
@@ -76,7 +76,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## vector helper functions of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
@@ -84,7 +84,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## vector Mathematical functions of VML
 
-| func         | Intel          | NVIDIA         | OSS            |
+| func         | MKL            | NVIDIA         | OSS            |
 |--------------|----------------|----------------|----------------|
 | sin          |       MKL      |       monolish |       monolish |
 | sinh         |       MKL      |       monolish |       monolish |
@@ -110,7 +110,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## scalar-Dense operations of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | add         | MKL           | monolish       | monolish |
 | sub         | MKL           | monolish       | monolish |
@@ -119,7 +119,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## Dense-Dense operations of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | add         | MKL           | monolish       | monolish |
 | sub         | MKL           | monolish       | monolish |
@@ -128,7 +128,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## Dense helper functions of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
@@ -137,7 +137,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## Dense mathematical functions of VML
 
-| func         | Intel          | NVIDIA         | OSS            |
+| func         | MKL            | NVIDIA         | OSS            |
 |--------------|----------------|----------------|----------------|
 | sin          |       MKL      |       monolish |       monolish |
 | sinh         |       MKL      |       monolish |       monolish |
@@ -163,7 +163,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## scalar-CRS operations of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | add         | MKL           | monolish       | monolish |
 | sub         | MKL           | monolish       | monolish |
@@ -172,7 +172,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## CRS-Dense operations of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | add         | MKL           | monolish       | monolish |
 | sub         | MKL           | monolish       | monolish |
@@ -181,7 +181,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## CRS helper functions of VML
 
-| func        | Intel         | NVIDIA         | OSS      |
+| func        | MKL           | NVIDIA         | OSS      |
 |-------------|---------------|----------------|----------|
 | equal       | monolish      | monolish       | monolish |
 | not equal   | monolish      | monolish       | monolish |
@@ -189,7 +189,7 @@ This chapter explains what libraries are called by matrix and vector operations.
 
 ## CRS mathematical functions of VML
 
-| func         | Intel          | NVIDIA         | OSS            |
+| func         | MKL            | NVIDIA         | OSS            |
 |--------------|----------------|----------------|----------------|
 | sin          |       MKL      |       monolish |       monolish |
 | sinh         |       MKL      |       monolish |       monolish |
