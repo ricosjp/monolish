@@ -27,7 +27,7 @@ It is merged to master in gitlab in the company and mirrored to github.
 
 If the test fails, we share the result of gitlab CI on github issue.
 
-We want contributors to share their build and test environment on the issue, e.g. `OSS`, `Intel`, `NVIDIA`, etc.
+We want contributors to share their build and test environment on the issue, e.g. `MKL`, `OSS`, `NVIDIA`, etc.
 
 ### For RICOS member
 1. create an issue on github
