@@ -53,7 +53,7 @@ int main() {
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
   std::cout
-      << "A is Dense, solver is CG, precondition is Jacobi, precision is double"
+      << "A is CRS, solver is CG, precondition is Jacobi, precision is double"
       << std::endl;
   solve<monolish::matrix::CRS<double>,
         monolish::equation::CG<monolish::matrix::CRS<double>, double>,
