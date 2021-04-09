@@ -32,7 +32,7 @@ We dream that monolish will be used as a backend for python, Julia, etc. librari
 monolish solves cumbersome package management by Docker.
 
 monolish uses OpenMP Offloading for GPU acceleration. Currently, only NVIDIA GPUs are supported.
-By using OpenMP Offloading, it is possible to support AMD RADEON and Intel Xe in the future.
+By using OpenMP Offloading, it is possible to support AMD Radeon and Intel Xe in the future.
 
 ## Switching libraries {#call_lib}
 
@@ -44,7 +44,7 @@ The monolish uses these libraries as much as possible and implements the missing
 When compiling, monolish switches the function to be called if the MKL or CUDA libraries are available or not.
 monolish wwitch dependency libraries at compile time.
 
-The current monolish has four branches, `Intel`, `OSS`, `Intel + NVIDIA`, and `OSS + NVIDIA`, as shown in the following figure.
+The current monolish has four branches, `MKL`, `OSS`, `MKL + NVIDIA`, and `OSS + NVIDIA`, as shown in the following figure.
 
 The branch for the case where MKL or CUDA libraries are not available is called `OSS`.
 `OSS` is an implementation for architectures such as AMD, ARM, Power, etc.
@@ -90,6 +90,8 @@ If a useful function is implemented, many users will use it even if its performa
 In monolish, even if there is a bias in functionality between classes, functions that are not fast enough in principle are not implemented.
 
 We guarantee, as much as possible, that programs implemented with a combination of monolish functions will run fast.
+
+If a function is absolutely necessary, warn the user by writing the number of computation in the documentation.
 
 
 ### 5. Don't allocate memory in ways that users cannot anticipate.
