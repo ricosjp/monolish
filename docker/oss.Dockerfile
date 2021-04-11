@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-COPY examples/ /opt/monolish/examples/
+COPY ./monolish_examples/ /opt/monolish/examples/
 
 RUN apt-get update -y \
  && apt-get install -y wget python3-pip \

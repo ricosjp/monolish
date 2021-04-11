@@ -17,20 +17,31 @@ endif
 
 monolish: oss mkl oss_nvidia mkl_nvidia
 
-oss: $(MAKEFILE_DIR)/oss.Dockerfile
-	docker build -t $(REGISTRY)/$@:$(TAG) $(MONOLISH_TOP) -f $<
+oss: oss.Dockerfile
+	cp -r ../examples ./monolish_examples
+	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
+	rm -rf ./monolish_examples/ 
 
 mkl: $(MAKEFILE_DIR)/mkl.Dockerfile
-	docker build -t $(REGISTRY)/$@:$(TAG) $(MONOLISH_TOP) -f $<
+	cp -r ../examples ./monolish_examples
+	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
+	rm -rf ./monolish_examples/ 
 
 oss_nvidia: $(MAKEFILE_DIR)/oss_nvidia.Dockerfile
-	docker build -t $(REGISTRY)/$@:$(TAG) $(MONOLISH_TOP) -f $<
+	cp -r ../examples ./monolish_examples
+	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
+	rm -rf ./monolish_examples/ 
 
 mkl_nvidia: $(MAKEFILE_DIR)/mkl_nvidia.Dockerfile
-	docker build -t $(REGISTRY)/$@:$(TAG) $(MONOLISH_TOP) -f $<
+	cp -r ../examples ./monolish_examples
+	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
+	rm -rf ./monolish_examples/ 
 
 push: login monolish
-	docker push $(REGISTRY):$(TAG)
+	docker push $(REGISTRY)/oss:$(TAG)
+	docker push $(REGISTRY)/mkl:$(TAG)
+	docker push $(REGISTRY)/oss_nvidia:$(TAG)
+	docker push $(REGISTRY)/mkl_nvidia:$(TAG)
 
 in_oss: oss
 	docker run -it --rm --gpus all $(REGISTRY)/$<:$(TAG)
