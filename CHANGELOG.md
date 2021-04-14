@@ -26,7 +26,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### ADeprecated
-- del generate monolish container and doxygen at gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
+- del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 
 0.14.0 - 2021/04/05
 -----------
