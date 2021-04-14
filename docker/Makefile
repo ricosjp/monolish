@@ -5,7 +5,7 @@ TAG := latest
 MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 MONOLISH_TOP := $(shell dirname ${MAKEFILE_DIR})
 
-.PHONY: allgebra monolish oss mkl oss_nvidia mkl_nvidia
+.PHONY: allgebra monolish oss mkl oss_nvidia mkl_nvidia test_oss test_mkl test_oss_nvidia test_mkl_nvidia
 
 all: monolish
 
@@ -56,14 +56,24 @@ in_oss_nvidia: oss_nvidia
 in_mkl_nvidia: mkl_nvidia
 	docker run -it --rm --gpus all $(REGISTRY)/$<:$(TAG)
 
-test-cpu: monolish
-	docker run --rm                 \
-		-v $(MONOLISH_TOP)/test:/test \
-		-w /test                      \
-		$(REGISTRY):$(TAG) bash -c "make cpu; make run_cpu"
+test: test_oss test_mkl test_oss_nvidia test_mkl_nvidia
 
-test-gpu: monolish
-	docker run --rm --gpus all      \
-		-v $(MONOLISH_TOP)/test:/test \
-		-w /test                      \
-		$(REGISTRY):$(TAG) bash -c "make gpu; make run_gpu"
+test_oss:
+	docker run --rm                 \
+		-w /opt/monolish/examples/blas/innerproduct \
+		$(REGISTRY)/oss:$(TAG) bash -c "make cpu; ./innerproduct_cpu.out"
+
+test_mkl:
+	docker run --rm                 \
+		-w /opt/monolish/examples/blas/innerproduct \
+		$(REGISTRY)/mkl:$(TAG) bash -c "make cpu; ./innerproduct_cpu.out"
+
+test_oss_nvidia:
+	docker run --rm --gpus all                \
+		-w /opt/monolish/examples/blas/innerproduct \
+		$(REGISTRY)/oss_nvidia:$(TAG) bash -c "sh /usr/bin/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"
+
+test_mkl_nvidia:
+	docker run --rm --gpus all                \
+		-w /opt/monolish/examples/blas/innerproduct \
+		$(REGISTRY)/mkl_nvidia:$(TAG) bash -c "sh /usr/bin/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"

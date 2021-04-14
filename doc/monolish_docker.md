@@ -70,3 +70,8 @@ make in_oss_nvidia
 ```
 make mkl_nvidia
 ```
+
+# Testing monolish docker
+```
+make test
+```
