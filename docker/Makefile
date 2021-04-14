@@ -10,7 +10,7 @@ all: monolish
 
 login:
 ifeq ($(CI_BUILD_TOKEN),)
-	docker login $(CI_REGISTRY_IMAGE)
+	docker login $(REGISTRY)
 else
 	docker login -u gitlab-ci-token -p $(CI_BUILD_TOKEN) $(CI_REGISTRY)
 endif
@@ -44,10 +44,10 @@ push: login monolish
 	docker push $(REGISTRY)/mkl_nvidia:$(TAG)
 
 in_oss: oss
-	docker run -it --rm --gpus all $(REGISTRY)/$<:$(TAG)
+	docker run -it --rm $(REGISTRY)/$<:$(TAG)
 
 in_mkl: mkl
-	docker run -it --rm --gpus all $(REGISTRY)/$<:$(TAG)
+	docker run -it --rm $(REGISTRY)/$<:$(TAG)
 
 in_oss_nvidia: oss_nvidia
 	docker run -it --rm --gpus all $(REGISTRY)/$<:$(TAG)
