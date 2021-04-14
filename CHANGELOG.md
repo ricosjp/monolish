@@ -21,8 +21,12 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 - add build monolish_cpu on the local (and fix typo) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/300
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
+
+### ADeprecated
+- del generate monolish container and doxygen at gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 
 0.14.0 - 2021/04/05
 -----------

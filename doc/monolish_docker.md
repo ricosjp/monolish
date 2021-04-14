@@ -9,7 +9,7 @@ monolish is installed in the following locations:
 - /usr/lib/
 - /usr/include
 
-examples can be fount at:
+examples can be found at:
 - /opt/monolish/
 
 # Run monolish container
@@ -30,11 +30,15 @@ docker run -it --rm ghcr.io/ricosjp/monolish/mkl
 
 ## OSS+NVIDIA
 
+If there is not a GPU, `--gpus all` will fail
+
 ```
 docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia
 ```
 
 ## MKL+NVIDIA
+
+If there is not a GPU, `--gpus all` will fail
 
 ```
 docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia
