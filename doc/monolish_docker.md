@@ -1,9 +1,5 @@
 # monolish container {#monolish_docker}
-monolish container is a container for easy use of monolish based on ubuntu20.04
-
-The base OS and compiler are as follows:
-- Ubuntu 20.04
-- gcc 9.3.0
+monolish container is a container for easy use of monolish based on ubuntu.
 
 monolish is installed in the following locations:
 - /usr/lib/
