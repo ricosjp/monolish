@@ -1,6 +1,6 @@
 REGISTRY := ghcr.io/ricosjp/monolish
-TAG := 0.14.0
-#TAG := latest
+#TAG := 0.14.0
+TAG := latest
 
 MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 MONOLISH_TOP := $(shell dirname ${MAKEFILE_DIR})
@@ -71,9 +71,9 @@ test_mkl:
 test_oss_nvidia:
 	docker run --rm --gpus all                \
 		-w /opt/monolish/examples/blas/innerproduct \
-		$(REGISTRY)/oss_nvidia:$(TAG) bash -c "sh /usr/bin/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"
+		$(REGISTRY)/oss_nvidia:$(TAG) bash -c "sh /opt/monolish/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"
 
 test_mkl_nvidia:
 	docker run --rm --gpus all                \
 		-w /opt/monolish/examples/blas/innerproduct \
-		$(REGISTRY)/mkl_nvidia:$(TAG) bash -c "sh /usr/bin/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"
+		$(REGISTRY)/mkl_nvidia:$(TAG) bash -c "sh /opt/monolish/link_monolish_gpu.sh; make gpu; ./innerproduct_gpu.out"

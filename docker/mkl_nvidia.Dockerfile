@@ -15,8 +15,5 @@ RUN wget https://github.com/ricosjp/monolish/releases/download/0.14.0/monolish_0
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-COPY ./link_monolish_gpu.sh /usr/bin/link_monolish_gpu.sh
-
-RUN chmod a+x /usr/bin/link_monolish_gpu.sh
-
-CMD ["sh", "-c", "/usr/bin/link_monolish_gpu.sh"]
+COPY ./link_monolish_gpu.sh /opt/monolish/link_monolish_gpu.sh
+RUN chmod a+x /opt/monolish/link_monolish_gpu.sh
