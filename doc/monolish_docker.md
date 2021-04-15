@@ -32,12 +32,28 @@ If there is not a GPU, `--gpus all` will fail
 docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia
 ```
 
+Then, in execute the following command in monolish docker.
+The monolish library has `so` files for each # of Streaming multiprocessor (SM) of GPU.
+This script determines the # of SM of GPU 0 and makes a link to `libmonolish_gpu.so`.
+
+```
+sh /opt/monolish/link_monolish_gpu.sh
+```
+
 ## MKL+NVIDIA
 
 If there is not a GPU, `--gpus all` will fail
 
 ```
 docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia
+```
+
+Then, in execute the following command in monolish docker.
+The monolish library has `so` files for each # of Streaming multiprocessor (SM) of GPU.
+This script determines the # of SM of GPU 0 and makes a link to `libmonolish_gpu.so`.
+
+```
+sh /opt/monolish/link_monolish_gpu.sh
 ```
 
 # Build monolish container (for developpers)
