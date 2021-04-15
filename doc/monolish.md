@@ -4,7 +4,7 @@
 - [What's monolish?](@ref monolish_intro)
 - Installation
   - [Installation using apt (for ubuntu 20.04 and 20.10)](@ref install_guide)
-  - [Build monolish from source code](@ref build_guide)
+  - [Docker container with monolish installed](@ref monolish_docker)
 - [Data types](@ref data_type)
 - [Compile and run simple program on CPU](@ref cpu_dev)
 - [GPU device acceleration](@ref gpu_dev)
@@ -14,6 +14,7 @@
 - [View continuous benchmarking results](https://ricosjp.github.io/monolish_benchmark_result/)
 
 ## For developpers:
+- [Build monolish from source code](@ref build_guide)
 - [Contribution guide](@ref contribution) 
 
 ## Meta information:

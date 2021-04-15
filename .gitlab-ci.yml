@@ -438,44 +438,6 @@ amd_avx_gcc_mkl_benchmark:
       - schedules
       - tags
 
-#
-# docker and pages
-#
-docker:
-    # dependencies: require all tests
-    image: docker:latest
-    stage: deploy
-    services:
-        - docker:dind
-    script:
-        - apk add make
-        - make -C docker push
-    tags:
-        - docker
-        - gpu
-    only:
-      - master
-      - tags
-      - web
-
-pages:
-    dependencies:
-      - python-cpu
-      - python-gpu
-    image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
-    stage: deploy
-    script:
-        - rm -rf public html
-        - doxygen Doxyfile
-        - mv html public
-        - cp -r test/logger/logging/*.html public/
-    artifacts:
-        paths:
-            - public
-        expire_in: 360min
-    only:
-        - master
-
 benchmark_result:
     stage: deploy
     image: ${MKL_IMAGE}
