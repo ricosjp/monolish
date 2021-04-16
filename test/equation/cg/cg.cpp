@@ -117,17 +117,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if(monolish::util::build_with_gpu() == false){
+  if (monolish::util::build_with_gpu() == false) {
     std::cout << "LinearOperator, none" << std::endl;
 
     if (test<monolish::matrix::LinearOperator<double>, double,
-        monolish::equation::none<monolish::matrix::LinearOperator<double>, double>>(
-          file, check_ans, 1.0e-8) == false) {
+             monolish::equation::none<monolish::matrix::LinearOperator<double>,
+                                      double>>(file, check_ans, 1.0e-8) ==
+        false) {
       return 1;
     }
     if (test<monolish::matrix::LinearOperator<float>, float,
-        monolish::equation::none<monolish::matrix::LinearOperator<float>, float>>(
-          file, check_ans, 1.0e-4) == false) {
+             monolish::equation::none<monolish::matrix::LinearOperator<float>,
+                                      float>>(file, check_ans, 1.0e-4) ==
+        false) {
       return 1;
     }
   }
