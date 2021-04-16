@@ -28,7 +28,7 @@ Unreleased
 ### Changed
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
 
-### Deprecated
+### Removed
 - del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 
 0.14.0 - 2021/04/05
@@ -91,7 +91,7 @@ Unreleased
 - do not test Frank matrix with LOBPCG since nonreliable https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/266
 - update operation list for doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/263
 
-### Deprecated
+### Removed
 - delete return vector getvec function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/267
 - delete row/col vector arithmetics in Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/264
 
@@ -118,7 +118,7 @@ Unreleased
 - fix view1D VML offset bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/260
 - fix to allow nvprof in docker https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/256
 
-### Deprecated
+### Removed
 - delete std::vector row(), col(), diag() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/259
 - delete gpu cholesky https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/253
 
@@ -156,7 +156,7 @@ Unreleased
 - fix error check doxygen comment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/232
 - fix LOBPCG fail with sygvd() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/225
 
-### Deprecated
+### Removed
 - delete LinearOperator.copy https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/229
 
 0.11.0 - 2021/01/23
@@ -241,7 +241,7 @@ Unreleased
 - fix LOBPCG iteration logic https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/195
 - fix sxat, a64fx makefile bugs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/181
 
-### Deprecated
+### Removed
 - delete vector.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 - delete Dense.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
 - delete CRS.copy() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/202
