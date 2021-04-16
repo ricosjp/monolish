@@ -21,11 +21,13 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add test of equation in linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - add monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 - add build monolish_cpu on the local (and fix typo) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/300
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Changed
+- update solverlist for linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
 
 ### Removed
