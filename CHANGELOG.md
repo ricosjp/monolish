@@ -25,6 +25,9 @@ Unreleased
 - add build monolish_cpu on the local (and fix typo) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/300
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
+### Changed
+- Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
+
 ### ADeprecated
 - del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 
