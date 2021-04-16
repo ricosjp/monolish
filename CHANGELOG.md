@@ -28,7 +28,7 @@ Unreleased
 ### Changed
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
 
-### ADeprecated
+### Deprecated
 - del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
 
 0.14.0 - 2021/04/05
