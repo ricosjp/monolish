@@ -46,8 +46,9 @@ get_ci_info:
 
 
 cpu: intel_mkl
-
-gpu: intel_gpu
+gpu: run_nvidia
+run_cpu: run_intel_mkl
+run_gpu: run_nvidia
 
 intel_mkl:
 	make -j -C vector_vml/ $@
