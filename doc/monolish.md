@@ -15,6 +15,7 @@
 
 ## For developpers:
 - [Build monolish from source code](@ref build_guide)
+- [Testing and Benchmarking](@ref test_bench)
 - [Contribution guide](@ref contribution) 
 
 ## Meta information:
