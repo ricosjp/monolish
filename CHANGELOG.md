@@ -21,7 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add test and benchmark documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
+- add testing and benchmarking document https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - add create laplacian 2D 5point https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/304
 - add cg/bicgstab test of equation in linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - add monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
