@@ -559,6 +559,19 @@ template <typename T> matrix::COO<T> laplacian_matrix_1D(const int &M);
 template <typename T> T laplacian_matrix_1D_eigenvalue(const int &M, int N);
 
 /**
+ * @brief create two dimensional Laplacian matrix using the five point central
+ *difference scheme
+ * @param M # of grid point
+ * @param N # of grid point
+ * @note
+ * - # of computation: N*M
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ **/
+template <typename T>
+matrix::COO<T> laplacian_matrix_2D_5p(const int M, const int N);
+
+/**
  * @brief create Toeplitz-plus-Hankel matrix
  * @param M # of row and col
  * @param a0 value of diagonal elements
