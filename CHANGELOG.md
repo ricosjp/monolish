@@ -21,7 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add build option `MONOLISH_USE_MPI` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+- add MPI build test in gitlab-CI (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+- add build option `MONOLISH_USE_MPI` (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 - add testing and benchmarking document https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - add create laplacian 2D 5point https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/304
 - add cg/bicgstab test of equation in linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
