@@ -196,6 +196,10 @@ MPI_build_test:
     - sh ./install_mpi.sh
     - make install_mpi
   image: ${MKL_IMAGE}
+  tags:
+    - gpu
+    - nvidia0-sm_52
+    - avx
 
 #
 # Test Stage
