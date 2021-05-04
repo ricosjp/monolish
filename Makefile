@@ -27,8 +27,8 @@ clang_cpu:
 		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
 		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu \
-	cmake --build build_gpu -j `nproc`
+		-Bbuild_cpu \
+	cmake --build build_cpu -j `nproc`
 
 clang_gpu:
 	cmake $(MONOLISH_TOP) \
@@ -49,6 +49,8 @@ a64fx:
 sxat:
 	$(MAKE) -B -j -f Makefile.sxat
 
+install: install_cpu install_gpu
+
 install_cpu: cpu
 	cmake --build build_cpu --target install
 
@@ -61,8 +63,42 @@ install_sxat:
 install_a64fx: 
 	$(MAKE) -B -j -f Makefile.a64fx install
 
+########################################
 
-install: install_cpu install_gpu
+clang_cpu_mpi:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=mpicc \
+		-DCMAKE_CXX_COMPILER=mpic++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_cpu \
+		-DMONOLISH_USE_GPU=OFF \
+		-DMONOLISH_USE_MPI=ON
+	cmake --build build_cpu -j `nproc`
+
+clang_gpu_mpi:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=mpicc \
+		-DCMAKE_CXX_COMPILER=mpic++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu \
+		-DMONOLISH_USE_GPU=ON \
+		-DMONOLISH_USE_MPI=ON
+	cmake --build build_gpu -j `nproc`
+
+cpu_mpi: clang_cpu_mpi
+gpu_mpi: clang_gpu_mpi
+
+install_mpi: install_cpu_mpi install_gpu_mpi
+
+install_cpu_mpi: cpu_mpi
+	cmake --build build_cpu --target install
+
+install_gpu_mpi: gpu_mpi
+	cmake --build build_gpu --target install
+
+##########################################
 
 test_cpu: install_cpu
 	$(MAKE) -C test cpu
@@ -87,7 +123,7 @@ in_mkl_gpu:
 		--gpus all   \
 		--cap-add SYS_ADMIN \
 		-e MONOLISH_DIR=/opt/monolish/ \
-		-e LD_LIBRARY_PATH=/opt/monolish/lib \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib:/usr/local/lib/ \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
@@ -95,7 +131,7 @@ in_mkl_gpu:
 in_mkl_cpu:
 	docker run -it --rm \
 		-e MONOLISH_DIR=/opt/monolish/ \
-		-e LD_LIBRARY_PATH=/opt/monolish/lib \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib:/usr/local/lib/ \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/mkl:$(ALLGEBRA_TAG)
@@ -105,7 +141,7 @@ in_oss_gpu:
 		--gpus all   \
 		--cap-add SYS_ADMIN \
 		-e MONOLISH_DIR=/opt/monolish/ \
-		-e LD_LIBRARY_PATH=/opt/monolish/lib \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib:/usr/local/lib/ \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
@@ -113,7 +149,7 @@ in_oss_gpu:
 in_oss_cpu:
 	docker run -it --rm \
 		-e MONOLISH_DIR=/opt/monolish/ \
-		-e LD_LIBRARY_PATH=/opt/monolish/lib \
+		-e LD_LIBRARY_PATH=/opt/monolish/lib:/usr/local/lib/ \
 		-v $(MONOLISH_TOP):/monolish \
 		-w /monolish \
 		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG)
