@@ -11,6 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(monolish CXX Fortran)
 
 option(MONOLISH_USE_GPU "build GPU variant" OFF)
+option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
 

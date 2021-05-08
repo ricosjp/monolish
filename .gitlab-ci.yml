@@ -4,7 +4,7 @@ variables:
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
-    - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib
+    - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib:/usr/local/lib/
 
 stages:
     - build_lib
@@ -189,6 +189,17 @@ nogpu_noavx_gcc_oss_build_cmake:
     extends:
       - .nogpu_noavx_gcc_oss
       - .build_cmake
+
+MPI_build_test:
+  stage: build_lib
+  script:
+    - sh ./install_mpi.sh
+    - make install_mpi
+  image: ${MKL_IMAGE}
+  tags:
+    - gpu
+    - nvidia0-sm_52
+    - avx
 
 #
 # Test Stage
