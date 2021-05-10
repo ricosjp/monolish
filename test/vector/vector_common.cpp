@@ -1,5 +1,6 @@
 #include "../test_utils.hpp"
 #include "monolish_blas.hpp"
+#include <random>
 
 template <typename T> bool test(const size_t size) {
 
@@ -103,6 +104,15 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
   print_build_info();
+  if (monolish::util::build_with_gpu) {
+    std::cout << "# of GPU: " << monolish::util::get_num_devices() << std::endl;
+
+    std::random_device rnd;
+    int device = rnd() % monolish::util::get_num_devices();
+    monolish::util::set_default_device(device);
+    std::cout << "Setting default GPU number is " << device
+              << " (random select)" << std::endl;
+  }
 
   size_t size = atoi(argv[1]);
 
