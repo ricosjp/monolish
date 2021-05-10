@@ -21,6 +21,26 @@ namespace monolish {
 namespace util {
 
 /**
+ * @brief get the number of devices
+ * @return the number of devices (If the device is not found or the GPU is not
+ * enabled, return value is negative)
+ */
+int get_num_devices();
+
+/**
+ * @brief set default device number
+ * @return if the GPU is not enabled, return false
+ */
+bool set_default_device(size_t device_num);
+
+/**
+ * @brief get default device number
+ * @return the device number (If the device is not found or the GPU is not
+ * enabled, return value is negative)
+ */
+int get_default_device();
+
+/**
  * @brief get nrm |b-Ax|_2
  * @param A Dense matrix (size M x N)
  * @param x monolish vector (size N)
