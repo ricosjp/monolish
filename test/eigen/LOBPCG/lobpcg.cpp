@@ -398,5 +398,62 @@ int main(int argc, char **argv) {
           check_ans, 5.0e-4, 1.0e-6) == false) {
     return 1;
   }
+
+  std::cout << "LinearOperator" << std::endl;
+
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::LinearOperator<double>, double,
+          monolish::equation::none<monolish::matrix::LinearOperator<double>,
+                                   double>>(check_ans, 1.0e-3, 1.0e-5) ==
+      false) {
+    return 1;
+  }
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::LinearOperator<float>, float,
+          monolish::equation::none<monolish::matrix::LinearOperator<float>,
+                                   float>>(check_ans, 1.0e-3, 1.0e-5) ==
+      false) {
+    return 1;
+  }
+  /*
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::LinearOperator<double>, double,
+          monolish::equation::Jacobi<monolish::matrix::LinearOperator<double>,
+  double>>( check_ans, 1.0e-3, 1.0e-5) == false) { return 1;
+  }
+  if (test_tridiagonal_toeplitz<
+          monolish::matrix::LinearOperator<float>, float,
+          monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
+  float>>( check_ans, 1.0e-3, 1.0e-5) == false) { return 1;
+  }
+  */
+
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::LinearOperator<double>, double,
+          monolish::equation::none<monolish::matrix::LinearOperator<double>,
+                                   double>>(check_ans, 5.0e-4, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::LinearOperator<float>, float,
+          monolish::equation::none<monolish::matrix::LinearOperator<float>,
+                                   float>>(check_ans, 5.0e-4, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  /*
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::LinearOperator<double>, double,
+          monolish::equation::Jacobi<monolish::matrix::LinearOperator<double>,
+  double>>( check_ans, 5.0e-4, 1.0e-6) == false) { return 1;
+  }
+  if (test_toeplitz_plus_hankel<
+          monolish::matrix::LinearOperator<float>, float,
+          monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
+  float>>( check_ans, 5.0e-4, 1.0e-6) == false) { return 1;
+  }
+  */
+
   return 0;
 }
