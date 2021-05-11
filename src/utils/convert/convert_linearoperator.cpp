@@ -65,6 +65,33 @@ template <typename T> void LinearOperator<T>::convert(CRS<T> &crs) {
 template void LinearOperator<double>::convert(CRS<double> &crs);
 template void LinearOperator<float>::convert(CRS<float> &crs);
 
+template <typename T> void LinearOperator<T>::convert(Dense<T> &dense) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // todo dense err check (only square)
+
+  rowN = dense.get_row();
+  colN = dense.get_col();
+
+  gpu_status = dense.get_device_mem_stat();
+
+  set_matvec([&](const monolish::vector<T> &VEC) {
+    monolish::vector<T> vec(dense.get_row(), 0);
+    if (gpu_status) {
+      monolish::util::send(vec);
+    }
+    monolish::blas::matvec(dense, VEC, vec);
+    return vec;
+  });
+  rmatvec_init_flag = false;
+
+  logger.util_out();
+}
+
+template void LinearOperator<double>::convert(Dense<double> &crs);
+template void LinearOperator<float>::convert(Dense<float> &crs);
+
 template <typename T>
 void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
   if (!matvec_init_flag) {

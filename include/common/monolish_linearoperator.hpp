@@ -133,6 +133,10 @@ public:
 
   LinearOperator(CRS<Float> &crs) { convert(crs); }
 
+  void convert(Dense<Float> &dense);
+
+  LinearOperator(Dense<Float> &dense) { convert(dense); }
+
   void convert_to_Dense(Dense<Float> &dense) const;
 
   /**
