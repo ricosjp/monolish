@@ -3,9 +3,6 @@
 namespace monolish {
 namespace {
 
-
-
-
 template <typename F1, typename F2, typename F3>
 void Daxpy_core(const F1 alpha, const F2 &x, F3 &y) {
   Logger &logger = Logger::get_instance();
