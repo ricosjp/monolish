@@ -290,6 +290,14 @@ public:
   ~LinearOperator() {}
 
   /**
+   * @brief get diag. vector
+   * @param vec diag. vector
+   **/
+  void diag(vector<Float> &vec) const;
+  void diag(view1D<vector<Float>, Float> &vec) const;
+  void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+
+  /**
    * @brief operator copy
    * @return copied LinearOperator
    * @note
