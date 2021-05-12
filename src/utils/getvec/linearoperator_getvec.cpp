@@ -25,7 +25,7 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
       vector<T> vec_tmp(N, 0);
       vector<T> ans(M);
       vec_tmp[i] = 1;
-      util::send(cev_tmp);
+      util::send(vec_tmp);
       ans = matvec(vec_tmp);
       util::recv(ans);
       const T *ansd = ans.data();
@@ -74,7 +74,7 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
       vector<T> vec_tmp(N, 0);
       vector<T> ans(M);
       vec_tmp[i] = 1;
-      util::send(cev_tmp);
+      util::send(vec_tmp);
       ans = matvec(vec_tmp);
       util::recv(ans);
       const T *ansd = ans.data();
@@ -123,7 +123,7 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
       vector<T> vec_tmp(N, 0);
       vector<T> ans(M);
       vec_tmp[i] = 1;
-      util::send(cev_tmp);
+      util::send(vec_tmp);
       ans = matvec(vec_tmp);
       util::recv(ans);
       const T *ansd = ans.data();
