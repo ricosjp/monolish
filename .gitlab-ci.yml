@@ -465,7 +465,7 @@ clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:21.05.0
     stage: build_lib
     script:
-        - check-format.sh
+        - check_format.sh
     allow_failure: true
 
 keep-changelog:
