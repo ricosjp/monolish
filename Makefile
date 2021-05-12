@@ -1,7 +1,7 @@
 ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra
 ALLGEBRA_CUDA := cuda10_1
 ALLGEBRA_CC := clang11gcc7
-ALLGEBRA_TAG   := 20.12.2
+ALLGEBRA_TAG   := 21.05.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -163,14 +163,14 @@ format:
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		$(ALLGEBRA_IMAGE)/clang-format:20.10.1 /usr/bin/check-format.sh
+		$(ALLGEBRA_IMAGE)/clang-format:$(ALLGEBRA_TAG) /usr/bin/check_format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		$(ALLGEBRA_IMAGE)/doxygen:20.10.1 doxygen Doxyfile
+		$(ALLGEBRA_IMAGE)/doxygen:$(ALLGEBRA_TAG) doxygen Doxyfile
 
 device_cc := 35 37 50 52 53 60 61 62 70 75
 define template

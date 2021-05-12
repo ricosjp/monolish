@@ -35,6 +35,7 @@ Unreleased
 - clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - organize doc/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - update solverlist for linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
