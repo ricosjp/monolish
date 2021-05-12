@@ -1,7 +1,7 @@
 ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra
 ALLGEBRA_CUDA := cuda10_1
 ALLGEBRA_CC := clang11gcc7
-ALLGEBRA_TAG   := 20.12.2
+ALLGEBRA_TAG   := 21.05.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -24,8 +24,8 @@ gcc_cpu:
 clang_cpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.1/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.1/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_cpu \
 	cmake --build build_cpu -j `nproc`
@@ -33,8 +33,8 @@ clang_cpu:
 clang_gpu:
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.1/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.1/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
 		-DMONOLISH_USE_GPU=ON
@@ -163,22 +163,22 @@ format:
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		$(ALLGEBRA_IMAGE)/clang-format:20.10.1 /usr/bin/check-format.sh
+		$(ALLGEBRA_IMAGE)/clang-format:$(ALLGEBRA_TAG) /usr/bin/check_format.sh
 
 document:
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		$(ALLGEBRA_IMAGE)/doxygen:20.10.1 doxygen Doxyfile
+		$(ALLGEBRA_IMAGE)/doxygen:$(ALLGEBRA_TAG) doxygen Doxyfile
 
 device_cc := 35 37 50 52 53 60 61 62 70 75
 define template
 clang_gpu_$(1):
 	cmake $(MONOLISH_TOP) \
 		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.0/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.0/bin/clang++ \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-11.0.1/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.1/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu_$(1) \
 		-DMONOLISH_USE_GPU=ON \
