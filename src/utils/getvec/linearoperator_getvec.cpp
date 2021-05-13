@@ -11,7 +11,6 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = std::min(get_row(), get_col());
 
@@ -19,29 +18,31 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
+#if MONOLISH_USE_GPU // gpu
+    const size_t M = get_row();
+    vector<T> vec_tmp(N, 0);
+    vector<T> vec_ans(M);
+    T *vec_tmpd = vec_tmp.data();
+    util::recv(vec);
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
-      vec_tmp[i] = 1;
-      util::send(vec_tmp);
-      ans = matvec(vec_tmp);
-      util::recv(ans);
-      const T *ansd = ans.data();
-      vecd[i] = ansd[i];
+      vec_tmpd[i] = 1;
+      util::send(vec_tmp, vec_ans);
+      vec_ans = matvec(vec_tmp);
+      util::recv(vec_tmp, vec_ans);
+      vecd[i] = vec_ans.data()[i];
+      vec_tmpd[i] = 0;
     }
+    util::send(vec);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
+    vector<T> vec_tmp(N, 0);
 #pragma omp parallel for
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
       vec_tmp[i] = 1;
-      ans = matvec(vec_tmp);
-      vecd[i] = ans[i];
+      vecd[i] = matvec(vec_tmp)[i];
+      vec_tmp[i] = 0;
     }
   }
 
@@ -60,7 +61,6 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = std::min(get_row(), get_col());
 
@@ -68,29 +68,34 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
+#if MONOLISH_USE_GPU // gpu
+    //TODO
+    /*
+    const size_t M = get_row();
+    vector<T> vec_tmp(N, 0);
+    vector<T> vec_ans(M);
+    T *vec_tmpd = vec_tmp.data();
+    util::recv(vec);
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
-      vec_tmp[i] = 1;
-      util::send(vec_tmp);
-      ans = matvec(vec_tmp);
-      util::recv(ans);
-      const T *ansd = ans.data();
-      vecd[i] = ansd[i];
+      vec_tmpd[i] = 1;
+      util::send(vec_tmp, vec_ans);
+      vec_ans = matvec(vec_tmp);
+      util::recv(vec_tmp, vec_ans);
+      vecd[i] = vec_ans.data()[i];
+      vec_tmpd[i] = 0;
     }
+    util::send(vec);
+    */
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
+    vector<T> vec_tmp(N, 0);
 #pragma omp parallel for
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
       vec_tmp[i] = 1;
-      ans = matvec(vec_tmp);
-      vecd[i] = ans[i];
+      vecd[i] = matvec(vec_tmp)[i];
+      vec_tmp[i] = 0;
     }
   }
 
@@ -109,7 +114,6 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t M = get_row();
   const size_t N = get_col();
   const size_t Len = std::min(get_row(), get_col());
 
@@ -117,29 +121,34 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
-#pragma omp target teams distribute parallel for
+#if MONOLISH_USE_GPU // gpu
+    //TODO
+    /*
+    const size_t M = get_row();
+    vector<T> vec_tmp(N, 0);
+    vector<T> vec_ans(M);
+    T *vec_tmpd = vec_tmp.data();
+    util::recv(vec);
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
-      vec_tmp[i] = 1;
-      util::send(vec_tmp);
-      ans = matvec(vec_tmp);
-      util::recv(ans);
-      const T *ansd = ans.data();
-      vecd[i] = ansd[i];
+      vec_tmpd[i] = 1;
+      util::send(vec_tmp, vec_ans);
+      vec_ans = matvec(vec_tmp);
+      util::recv(vec_tmp, vec_ans);
+      vecd[i] = vec_ans.data()[i];
+      vec_tmpd[i] = 0;
     }
+    util::send(vec);
+    */
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
+    vector<T> vec_tmp(N, 0);
 #pragma omp parallel for
     for (size_t i = 0; i < Len; i++) {
-      vector<T> vec_tmp(N, 0);
-      vector<T> ans(M);
       vec_tmp[i] = 1;
-      ans = matvec(vec_tmp);
-      vecd[i] = ans[i];
+      vecd[i] = matvec(vec_tmp)[i];
+      vec_tmp[i] = 0;
     }
   }
 
