@@ -23,16 +23,18 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
-    util::recv(vec);
+    T *vec_ansd = vec_ans.data();
+    util::send(vec_tmp, vec_ans);
     for (size_t i = 0; i < Len; i++) {
-      vec_tmpd[i] = 1;
-      util::send(vec_tmp, vec_ans);
+#pragma omp target
+      { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
-      util::recv(vec_tmp, vec_ans);
-      vecd[i] = vec_ans.data()[i];
-      vec_tmpd[i] = 0;
+#pragma omp target
+      {
+        vecd[i] = vec_ansd[i];
+        vec_tmpd[i] = 0;
+      }
     }
-    util::send(vec);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
@@ -68,24 +70,23 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
-    //TODO
-    /*
+#if MONOLISH_USE_GPU // gp
     const size_t M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
-    util::recv(vec);
+    T *vec_ansd = vec_ans.data();
+    util::send(vec_tmp, vec_ans);
     for (size_t i = 0; i < Len; i++) {
-      vec_tmpd[i] = 1;
-      util::send(vec_tmp, vec_ans);
+#pragma omp target
+      { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
-      util::recv(vec_tmp, vec_ans);
-      vecd[i] = vec_ans.data()[i];
-      vec_tmpd[i] = 0;
+#pragma omp target
+      {
+        vecd[i] = vec_ansd[i];
+        vec_tmpd[i] = 0;
+      }
     }
-    util::send(vec);
-    */
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
@@ -122,23 +123,22 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 
   if (gpu_status == true) {
 #if MONOLISH_USE_GPU // gpu
-    //TODO
-    /*
     const size_t M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
-    util::recv(vec);
+    T *vec_ansd = vec_ans.data();
+    util::send(vec_tmp, vec_ans);
     for (size_t i = 0; i < Len; i++) {
-      vec_tmpd[i] = 1;
-      util::send(vec_tmp, vec_ans);
+#pragma omp target
+      { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
-      util::recv(vec_tmp, vec_ans);
-      vecd[i] = vec_ans.data()[i];
-      vec_tmpd[i] = 0;
+#pragma omp target
+      {
+        vecd[i] = vec_ansd[i];
+        vec_tmpd[i] = 0;
+      }
     }
-    util::send(vec);
-    */
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
