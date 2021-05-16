@@ -23,8 +23,6 @@ private:
   ~Comm(){};
 
 public:
-  size_t LogLevel = 0;
-
   Comm(const Comm &) = delete;
   Comm &operator=(const Comm &) = delete;
   Comm(Comm &&) = delete;
