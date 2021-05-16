@@ -71,7 +71,7 @@ clang_cpu_mpi:
 		-DCMAKE_C_COMPILER=mpicc \
 		-DCMAKE_CXX_COMPILER=mpic++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_cpu \
+		-Bbuild_cpu_mpi \
 		-DMONOLISH_USE_GPU=OFF \
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_cpu -j `nproc`
@@ -82,7 +82,7 @@ clang_gpu_mpi:
 		-DCMAKE_C_COMPILER=mpicc \
 		-DCMAKE_CXX_COMPILER=mpic++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu \
+		-Bbuild_gpu_mpi \
 		-DMONOLISH_USE_GPU=ON \
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_gpu -j `nproc`
@@ -97,6 +97,8 @@ install_cpu_mpi: cpu_mpi
 
 install_gpu_mpi: gpu_mpi
 	cmake --build build_gpu --target install
+
+install_all: install_cpu install_gpu install_cpu_mpi install_gpu_mpi
 
 ##########################################
 
