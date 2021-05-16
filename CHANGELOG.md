@@ -21,6 +21,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add make install_mpi and make install_all https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
+- add monolish::mpi test in test/mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
+- add monolish::mpi::Comm class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
 - add diag and Jacobi of LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/309
 - add Specifing GPU ID I/F https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/307
 - add MPI build test in gitlab-CI (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306

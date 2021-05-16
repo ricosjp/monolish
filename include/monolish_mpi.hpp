@@ -8,41 +8,37 @@ typedef struct ompi_communicator_t *MPI_Comm;
 #endif
 
 namespace monolish {
-  namespace mpi {
-    /**
-     * @brief MPI class (singleton)
-     */
-    class Comm {
-      private:
+namespace mpi {
+/**
+ * @brief MPI class (singleton)
+ */
+class Comm {
+private:
+  MPI_Comm comm;
 
-        MPI_Comm comm;
+  Comm(){};
 
-        Comm(){};
+  Comm(MPI_Comm external_comm) { comm = external_comm; }
 
-        Comm(MPI_Comm external_comm){
-          comm = external_comm;
-        }
+  ~Comm(){};
 
-        ~Comm() {};
+public:
+  size_t LogLevel = 0;
 
-      public:
-        size_t LogLevel = 0;
+  Comm(const Comm &) = delete;
+  Comm &operator=(const Comm &) = delete;
+  Comm(Comm &&) = delete;
+  Comm &operator=(Comm &&) = delete;
 
-        Comm(const Comm &) = delete;
-        Comm &operator=(const Comm &) = delete;
-        Comm(Comm &&) = delete;
-        Comm &operator=(Comm &&) = delete;
+  static Comm &get_instance() {
+    static Comm instance;
+    return instance;
+  }
 
-        static Comm &get_instance() {
-          static Comm instance;
-          return instance;
-        }
+  void Init();
+  void Init(int argc, char **argv);
 
-        void Init();
-        void Init(int argc, char** argv);
-
-        void Finalize();
-
-    };
-  } // namespace monolish
-}
+  void Finalize();
+};
+} // namespace mpi
+} // namespace monolish
