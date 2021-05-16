@@ -29,9 +29,9 @@ gpu_mpi:
 
 run:
 	./vector_blas_cpu.o 100000
-	mpirun -np 10 --allow-run-as-root ./vector_blas_cpu.o 100000
+	mpirun -np 2 --allow-run-as-root ./vector_blas_cpu.o 100000
 	./vector_blas_gpu.o 100000
-	mpirun -np 10 --allow-run-as-root ./vector_blas_gpu.o 100000
+	mpirun -np 2 --allow-run-as-root ./vector_blas_gpu.o 100000
 
 clean:
 	- rm *.o *.out
