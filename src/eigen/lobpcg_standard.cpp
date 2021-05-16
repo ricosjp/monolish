@@ -321,14 +321,14 @@ standard_eigen::LOBPCG<matrix::CRS<double>, double>::monolish_LOBPCG(
     matrix::CRS<double> &A, vector<double> &l, matrix::Dense<double> &x);
 template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::monolish_LOBPCG(
     matrix::CRS<float> &A, vector<float> &l, matrix::Dense<float> &x);
-// template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<double>,
-// double>::monolish_LOBPCG(
-//     matrix::LinearOperator<double> &A, double &l, vector<double> &x);
-// template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<float>,
-// float>::monolish_LOBPCG(
-//     matrix::LinearOperator<float> &A, float &l, vector<float> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::monolish_LOBPCG(
+    matrix::LinearOperator<double> &A, vector<double> &l,
+    matrix::Dense<double> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::monolish_LOBPCG(
+    matrix::LinearOperator<float> &A, vector<float> &l,
+    matrix::Dense<float> &x);
 
 template <typename MATRIX, typename T>
 int standard_eigen::LOBPCG<MATRIX, T>::solve(MATRIX &A, vector<T> &l,
@@ -353,11 +353,13 @@ template int standard_eigen::LOBPCG<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &l, matrix::Dense<double> &x);
 template int standard_eigen::LOBPCG<matrix::CRS<float>, float>::solve(
     matrix::CRS<float> &A, vector<float> &l, matrix::Dense<float> &x);
-// template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(
-//     matrix::LinearOperator<double> &A, double &l, vector<double> &x);
-// template int
-// standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::solve(
-//     matrix::LinearOperator<float> &A, float &l, vector<float> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<double>, double>::solve(
+    matrix::LinearOperator<double> &A, vector<double> &l,
+    matrix::Dense<double> &x);
+template int
+standard_eigen::LOBPCG<matrix::LinearOperator<float>, float>::solve(
+    matrix::LinearOperator<float> &A, vector<float> &l,
+    matrix::Dense<float> &x);
 
 } // namespace monolish

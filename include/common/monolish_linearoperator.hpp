@@ -133,6 +133,10 @@ public:
 
   LinearOperator(CRS<Float> &crs) { convert(crs); }
 
+  void convert(Dense<Float> &dense);
+
+  LinearOperator(Dense<Float> &dense) { convert(dense); }
+
   void convert_to_Dense(Dense<Float> &dense) const;
 
   /**
@@ -284,6 +288,14 @@ public:
    * - GPU acceleration: false
    * **/
   ~LinearOperator() {}
+
+  /**
+   * @brief get diag. vector
+   * @param vec diag. vector
+   **/
+  void diag(vector<Float> &vec) const;
+  void diag(view1D<vector<Float>, Float> &vec) const;
+  void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /**
    * @brief operator copy
