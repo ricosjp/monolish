@@ -2,10 +2,6 @@
 #include <omp.h>
 #include <vector>
 
-#if defined USE_MPI
-#include <mpi.h>
-#endif
-
 #include "./monolish_solver.hpp"
 #include "common/monolish_common.hpp"
 

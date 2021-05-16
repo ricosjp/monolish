@@ -193,7 +193,10 @@ nogpu_noavx_gcc_oss_build_cmake:
 MPI_build_test:
   stage: build_lib
   script:
-    - make install_mpi
+    - pwd
+    - ls
+    - make install_all
+    - cd test/mpi; make clean; make -j; make run
   image: ${MKL_IMAGE}
   tags:
     - gpu

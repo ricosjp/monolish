@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../include/monolish_mpi.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>

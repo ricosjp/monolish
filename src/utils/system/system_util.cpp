@@ -27,6 +27,14 @@ bool util::build_with_avx512() {
 #endif
 }
 
+bool util::build_with_mpi() {
+#if MONOLISH_USE_MPI
+  return true;
+#else
+  return false;
+#endif
+}
+
 bool util::build_with_gpu() {
 #if MONOLISH_USE_GPU
   return true;
