@@ -684,6 +684,11 @@ bool build_with_avx2();
 bool build_with_avx512();
 
 /**
+ * @brief get build option (true: enable MPI, false: disable MPI)
+ **/
+bool build_with_mpi();
+
+/**
  * @brief get build option (true: enable gpu, false: disable gpu)
  **/
 bool build_with_gpu();

@@ -2,20 +2,28 @@
 
 #if defined MONOLISH_USE_MPI
 #include <mpi.h>
+#else
+// MPI dammy
+typedef struct ompi_communicator_t *MPI_Comm;
 #endif
 
 namespace monolish {
-  namespace MPI {
+  namespace mpi {
     /**
      * @brief MPI class (singleton)
      */
     class Comm {
       private:
 
-        Comm() = default;
-        ~Comm() {};
-
         MPI_Comm comm;
+
+        Comm(){};
+
+        Comm(MPI_Comm external_comm){
+          comm = external_comm;
+        }
+
+        ~Comm() {};
 
       public:
         size_t LogLevel = 0;
@@ -29,6 +37,11 @@ namespace monolish {
           static Comm instance;
           return instance;
         }
+
+        void Init();
+        void Init(int argc, char** argv);
+
+        void Finalize();
 
     };
   } // namespace monolish
