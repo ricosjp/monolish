@@ -6,6 +6,7 @@
 #include <omp.h>
 #include <stdexcept>
 #include <typeinfo>
+#include "../../include/monolish_mpi.hpp"
 
 #ifdef MONOLISH_USE_MKL
 #include <mkl.h>
@@ -26,6 +27,7 @@
 using Sreg = __m256;
 using Dreg = __m256d;
 #endif
+
 
 namespace monolish {
 namespace internal {
