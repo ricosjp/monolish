@@ -194,6 +194,7 @@ MPI_build_test:
   stage: build_lib
   script:
     - make install_mpi
+    - cd test/mpi; make clean; make -j; make run
   image: ${MKL_IMAGE}
   tags:
     - gpu
