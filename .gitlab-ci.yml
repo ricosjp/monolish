@@ -194,8 +194,7 @@ MPI_build_test:
   stage: build_lib
   script:
     - pwd
-    - make clean
-    - pwd; ls
+    - ls
     - make install_all
     - cd test/mpi; make clean; make -j; make run
   image: ${MKL_IMAGE}
