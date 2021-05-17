@@ -18,8 +18,9 @@ jobs:
         mv html public
         git fetch --prune --unshallow
         for version in 0.14.0 0.13.0; do
-        git clone git@github.com:ricosjp/monolish.git -b $version
-        cd $version; doxygen; mv html ../public/$version/ cd -
+        git checkout $version
+        doxygen
+        mv html public/$version/ 
         done
       
     - name: deploy_pages
