@@ -16,14 +16,9 @@ jobs:
       run: |
         doxygen
         mv html public
-        ls
-        git status
         for version in 0.14.0 0.13.0; do
-        ls
-        git status
-        git checkout $version
-        doxygen 
-        mv html public/$version/
+        git clone git@github.com:ricosjp/monolish.git -b $version
+        cd $version; doxygen; mv html ../public/$version/ cd -
         done
       
     - name: deploy_pages
