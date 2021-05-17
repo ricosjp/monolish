@@ -47,6 +47,52 @@ bool test(const char *file, const int check_ans, const T tol) {
   return true;
 }
 
+template <typename MATRIX, typename T>
+bool test_linearoperator(const char *file, const int check_ans, const T tol) {
+  monolish::matrix::COO<T> COO(file);
+  monolish::matrix::Dense<T> A_dense(COO);
+
+  monolish::vector<T> ans(A_dense.get_row(), 1.0);
+  monolish::vector<T> b(A_dense.get_row(), 0.0);
+
+  // initial x is rand(0~1)
+  monolish::vector<T> x(A_dense.get_row(), 123.0);
+
+  monolish::util::send(A_dense, x, b, ans);
+
+  MATRIX A(A_dense);
+
+  // create answer
+  monolish::blas::matvec(A, ans, b);
+
+  monolish::equation::Jacobi<MATRIX, T> solver;
+
+  solver.set_tol(tol);
+  solver.set_lib(0);
+  solver.set_miniter(0);
+  solver.set_maxiter(10000);
+
+  solver.set_print_rhistory(true);
+  // solver.set_rhistory_filename("./a.txt");
+
+  if (monolish::util::solver_check(solver.solve(A, x, b))) {
+    return false;
+  }
+
+  // std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
+
+  ans.recv();
+  x.recv();
+
+  if (check_ans == 1) {
+    if (ans_check<T>(x.data(), ans.data(), x.size(), tol) == false) {
+      x.print_all();
+      return false;
+    };
+  }
+  return true;
+}
+
 int main(int argc, char **argv) {
 
   if (argc != 3) {
@@ -82,16 +128,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  //   std::cout << "LinearOperator, jacobi" << std::endl;
-  //
-  //   if (test<monolish::matrix::LinearOperator<double>, double>(
-  //           file, check_ans, 1.0e-8) == false) {
-  //     return 1;
-  //   }
-  //   if (test<monolish::matrix::LinearOperator<float>, float>(
-  //           file, check_ans, 1.0e-4) == false) {
-  //     return 1;
-  //   }
+  std::cout << "LinearOperator, jacobi" << std::endl;
+
+  if (test_linearoperator<monolish::matrix::LinearOperator<double>, double>(
+          file, check_ans, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_linearoperator<monolish::matrix::LinearOperator<float>, float>(
+          file, check_ans, 1.0e-4) == false) {
+    return 1;
+  }
 
   return 0;
 }
