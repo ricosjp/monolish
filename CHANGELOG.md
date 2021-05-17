@@ -37,6 +37,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Fixed
+- generate documents for each tag (at github-actions, this work was done on master)
 - clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 - LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 

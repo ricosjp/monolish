@@ -17,7 +17,7 @@ jobs:
         doxygen
         mv html public
         git fetch --prune --unshallow
-        for version in 0.14.0 0.13.0; do
+        for version in 0.14.0; do
         git checkout $version
         doxygen
         mv html public/$version/ 
