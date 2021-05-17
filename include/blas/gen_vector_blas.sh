@@ -166,7 +166,7 @@ echo "
  * @param x monolish vector\<$prec\> (size N)
  * @param y monolish vector\<$prec\> (size N)
  * @note
- * - # of computation: N
+ * - # of computation: 2N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -280,7 +280,7 @@ echo "
  * @param x monolish vector\<$prec\> (size N)
  * @param ans The result of the nrm1
  * @note
- * - # of computation: N
+ * - # of computation: 2N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0

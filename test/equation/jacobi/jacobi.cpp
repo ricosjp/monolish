@@ -62,36 +62,36 @@ int main(int argc, char **argv) {
 
   std::cout << "CRS, jacobi" << std::endl;
 
-  if (test<monolish::matrix::CRS<double>, double>(
-          file, check_ans, 1.0e-8) == false) {
+  if (test<monolish::matrix::CRS<double>, double>(file, check_ans, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test<monolish::matrix::CRS<float>, float>(
-          file, check_ans, 1.0e-4) == false) {
+  if (test<monolish::matrix::CRS<float>, float>(file, check_ans, 1.0e-4) ==
+      false) {
     return 1;
   }
 
   std::cout << "Dense, jacobi" << std::endl;
 
-  if (test<monolish::matrix::Dense<double>, double>(
-          file, check_ans, 1.0e-8) == false) {
+  if (test<monolish::matrix::Dense<double>, double>(file, check_ans, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test<monolish::matrix::Dense<float>, float>(
-          file, check_ans, 1.0e-4) == false) {
+  if (test<monolish::matrix::Dense<float>, float>(file, check_ans, 1.0e-4) ==
+      false) {
     return 1;
   }
 
-//   std::cout << "LinearOperator, jacobi" << std::endl;
-// 
-//   if (test<monolish::matrix::LinearOperator<double>, double>(
-//           file, check_ans, 1.0e-8) == false) {
-//     return 1;
-//   }
-//   if (test<monolish::matrix::LinearOperator<float>, float>(
-//           file, check_ans, 1.0e-4) == false) {
-//     return 1;
-//   }
+  //   std::cout << "LinearOperator, jacobi" << std::endl;
+  //
+  //   if (test<monolish::matrix::LinearOperator<double>, double>(
+  //           file, check_ans, 1.0e-8) == false) {
+  //     return 1;
+  //   }
+  //   if (test<monolish::matrix::LinearOperator<float>, float>(
+  //           file, check_ans, 1.0e-4) == false) {
+  //     return 1;
+  //   }
 
   return 0;
 }

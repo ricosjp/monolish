@@ -138,14 +138,14 @@ int main(int argc, char **argv) {
     std::cout << "LinearOperator, jacobi" << std::endl;
 
     if (test<monolish::matrix::LinearOperator<double>, double,
-             monolish::equation::Jacobi<monolish::matrix::LinearOperator<double>,
-                                      double>>(file, check_ans, 1.0e-8) ==
-        false) {
+             monolish::equation::Jacobi<
+                 monolish::matrix::LinearOperator<double>, double>>(
+            file, check_ans, 1.0e-8) == false) {
       return 1;
     }
     if (test<monolish::matrix::LinearOperator<float>, float,
              monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
-                                      float>>(file, check_ans, 1.0e-4) ==
+                                        float>>(file, check_ans, 1.0e-4) ==
         false) {
       return 1;
     }

@@ -399,7 +399,7 @@ float sum(const view1D<matrix::Dense<float>, float> &x);
  * @param x monolish vector\<float\> (size N)
  * @param y monolish vector\<float\> (size N)
  * @note
- * - # of computation: N
+ * - # of computation: 2N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -692,7 +692,7 @@ void nrm1(const view1D<matrix::Dense<float>, float> &x, float &ans);
  * @param x monolish vector\<float\> (size N)
  * @param ans The result of the nrm1
  * @note
- * - # of computation: N
+ * - # of computation: 2N
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
