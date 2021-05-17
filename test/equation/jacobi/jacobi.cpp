@@ -2,7 +2,7 @@
 #include "../include/monolish_blas.hpp"
 #include "../include/monolish_equation.hpp"
 
-template <typename MATRIX, typename T, typename PRECOND>
+template <typename MATRIX, typename T>
 bool test(const char *file, const int check_ans, const T tol) {
 
   monolish::matrix::COO<T> COO(file);
@@ -25,11 +25,6 @@ bool test(const char *file, const int check_ans, const T tol) {
   solver.set_lib(0);
   solver.set_miniter(0);
   solver.set_maxiter(10000);
-
-  // precond setting
-  PRECOND precond;
-  solver.set_create_precond(precond);
-  solver.set_apply_precond(precond);
 
   solver.set_print_rhistory(true);
   // solver.set_rhistory_filename("./a.txt");
@@ -65,55 +60,38 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test<monolish::matrix::CRS<double>, double,
-           monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-          file, check_ans, 1.0e-8) == false) {
-    return 1;
-  }
-  if (test<monolish::matrix::CRS<float>, float,
-           monolish::equation::none<monolish::matrix::CRS<float>, float>>(
-          file, check_ans, 1.0e-4) == false) {
-    return 1;
-  }
-
   std::cout << "CRS, jacobi" << std::endl;
 
-  if (test<monolish::matrix::CRS<double>, double,
-           monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
-          file, check_ans, 1.0e-8) == false) {
+  if (test<monolish::matrix::CRS<double>, double>(file, check_ans, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test<monolish::matrix::CRS<float>, float,
-           monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-          file, check_ans, 1.0e-4) == false) {
-    return 1;
-  }
-
-  std::cout << "Dense, none" << std::endl;
-
-  if (test<monolish::matrix::Dense<double>, double,
-           monolish::equation::none<monolish::matrix::Dense<double>, double>>(
-          file, check_ans, 1.0e-8) == false) {
-    return 1;
-  }
-  if (test<monolish::matrix::Dense<float>, float,
-           monolish::equation::none<monolish::matrix::Dense<float>, float>>(
-          file, check_ans, 1.0e-4) == false) {
+  if (test<monolish::matrix::CRS<float>, float>(file, check_ans, 1.0e-4) ==
+      false) {
     return 1;
   }
 
   std::cout << "Dense, jacobi" << std::endl;
 
-  if (test<monolish::matrix::Dense<double>, double,
-           monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
-          file, check_ans, 1.0e-8) == false) {
+  if (test<monolish::matrix::Dense<double>, double>(file, check_ans, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test<monolish::matrix::Dense<float>, float,
-           monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
-          file, check_ans, 1.0e-4) == false) {
+  if (test<monolish::matrix::Dense<float>, float>(file, check_ans, 1.0e-4) ==
+      false) {
     return 1;
   }
+
+  //   std::cout << "LinearOperator, jacobi" << std::endl;
+  //
+  //   if (test<monolish::matrix::LinearOperator<double>, double>(
+  //           file, check_ans, 1.0e-8) == false) {
+  //     return 1;
+  //   }
+  //   if (test<monolish::matrix::LinearOperator<float>, float>(
+  //           file, check_ans, 1.0e-4) == false) {
+  //     return 1;
+  //   }
 
   return 0;
 }

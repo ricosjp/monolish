@@ -17,27 +17,27 @@ In the future, we plan to implement a switch to call these libraries.
 
 ## Implementation status (solving / preconditioning) {#solverstatus}
 
-|                                                                          | Dense / MKL   | Dense / NVIDIA | Dense / OSS   | Sparse / MKL  | Sparse / NVIDIA | Sparse / OSS  | LinearOperator   / MKL | LinearOperator / NVIDIA | LinearOperator / OSS |
-|--------------------------------------------------------------------------|---------------|----------------|---------------|---------------|-----------------|---------------|------------------------|-------------------------|----------------------|
-| \@ref monolish::equation::LU   "LU"                                      | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
-| \@ref monolish::equation::QR   "QR"                                      | N / N         | N / N          | N / N         | N / N         | **Y** / N       | N / N         | N / N                  | N / N                   | N / N                |
-| \@ref monolish::equation::Cholesky   "Cholesky"                          | **Y** / N     | N / N          | **Y** / N     | N / N         | **Y** / N       | N / N         | N / N                  | N / N                   | N / N                |
-| \@ref monolish::equation::CG   "CG"                                      | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
-| \@ref monolish::equation::BiCGSTAB   "BiCGSTAB"                          | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
-| \@ref monolish::equation::Jacobi   "Jacobi"                              | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | **Y** / **Y** | N / N                  | N / N                   | N / N                |
-| \@ref monolish::standard_eigen::LOBPCG   "LOBPCG (standard_eigen)"       | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | N / N                  | N / N                   | N / N                |
-| \@ref monolish::standard_eigen::DC   "DC (standard_eigen)"               | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
-| \@ref monolish::generalized_eigen::LOBPCG   "LOBPCG (generalized_eigen)" | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | N / N                  | N / N                   | N / N                |
-| \@ref monolish::generalized_eigen::DC   "DC (generalized_eigen)"         | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
+|                                             | Dense / MKL   | Dense / NVIDIA | Dense / OSS   | Sparse / MKL  | Sparse / NVIDIA | Sparse / OSS  | LinearOperator   / MKL | LinearOperator / NVIDIA | LinearOperator / OSS |
+|---------------------------------------------|---------------|----------------|---------------|---------------|-----------------|---------------|------------------------|-------------------------|----------------------|
+| monolish::equation::LU                      | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
+| monolish::equation::QR                      | N / N         | N / N          | N / N         | N / N         | **Y** / N       | N / N         | N / N                  | N / N                   | N / N                |
+| monolish::equation::Cholesky                | **Y** / N     | N / N          | **Y** / N     | N / N         | **Y** / N       | N / N         | N / N                  | N / N                   | N / N                |
+| monolish::equation::CG                      | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
+| monolish::equation::BiCGSTAB                | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
+| monolish::equation::Jacobi                  | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | N / **Y**     | **Y** / **Y**          | N / N                   | N / **Y**            |
+| monolish::standard_eigen::LOBPCG            | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | N / N                  | N / N                   | N / N                |
+| monolish::standard_eigen::DC                | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
+| monolish::generalized_eigen::LOBPCG         | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | N / N                  | N / N                   | N / N                |
+| monolish::generalized_eigen::DC             | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
 
 # what libraries are called by solvers
 
 ## Direct Solvers for for Dense matrix
-| func     | MKL                                          | NVIDIA                    | OSS                                    |
-|----------|----------------------------------------------|---------------------------|--------------------------------------- |
-| LU       | MKL                                          | cuSOLVER                  | OpenBLAS+LAPACK                        |
-| Cholesky | MKL                                          | not impl.*                | OpenBLAS+LAPACK                        |
-| QR       | todo) not impl.->MKL                         | todo) not impl.->cuSOLVER | todo) not impl. -> OpenBLAS+LAPACK     |
+| func     | MKL                          | NVIDIA                    | OSS                                    |
+|----------|------------------------------|---------------------------|--------------------------------------- |
+| LU       | MKL                          | cuSOLVER                  | OpenBLAS+LAPACK                        |
+| Cholesky | MKL                          | not impl.*                | OpenBLAS+LAPACK                        |
+| QR       | todo) not impl.->MKL         | todo) not impl.->cuSOLVER | todo) not impl. -> OpenBLAS+LAPACK     |
 
 - *) Cholesky is not impl. in cuSOLVER 11.1
 
