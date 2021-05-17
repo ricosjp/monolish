@@ -17,7 +17,7 @@ jobs:
         doxygen
         mv html public
         for version in 0.14.0 0.13.0; do
-        git checkout -b tag $version
+        git checkout $version
         doxygen 
         mv html public/$version
         done
