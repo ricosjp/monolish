@@ -36,6 +36,8 @@ public:
   void Init();
   void Init(int argc, char **argv);
 
+  bool Initialized();
+
   void Finalize();
 };
 } // namespace mpi
