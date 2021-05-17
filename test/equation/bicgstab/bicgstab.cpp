@@ -132,5 +132,22 @@ int main(int argc, char **argv) {
     }
   }
 
+  if (monolish::util::build_with_gpu() == false) {
+    std::cout << "LinearOperator, jacobi" << std::endl;
+
+    if (test<monolish::matrix::LinearOperator<double>, double,
+             monolish::equation::Jacobi<monolish::matrix::LinearOperator<double>,
+                                      double>>(file, check_ans, 1.0e-8) ==
+        false) {
+      return 1;
+    }
+    if (test<monolish::matrix::LinearOperator<float>, float,
+             monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
+                                      float>>(file, check_ans, 1.0e-4) ==
+        false) {
+      return 1;
+    }
+  }
+
   return 0;
 }
