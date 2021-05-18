@@ -33,11 +33,13 @@ public:
     return instance;
   }
 
+  MPI_Comm get_comm(){
+    return comm;
+  }
+
   void Init();
   void Init(int argc, char **argv);
-
   bool Initialized();
-
   void Finalize();
 };
 } // namespace mpi
