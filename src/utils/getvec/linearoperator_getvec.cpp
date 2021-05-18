@@ -39,12 +39,15 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    vector<T> vec_tmp(N, 0);
-#pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
-      vec_tmp[i] = 1;
-      vecd[i] = matvec(vec_tmp)[i];
-      vec_tmp[i] = 0;
+#pragma omp parallel
+    {
+      vector<T> vec_tmp(N, 0);
+#pragma omp for
+      for (size_t i = 0; i < Len; i++) {
+        vec_tmp[i] = 1;
+        vecd[i] = matvec(vec_tmp)[i];
+        vec_tmp[i] = 0;
+      }
     }
   }
 
