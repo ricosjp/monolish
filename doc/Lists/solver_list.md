@@ -30,7 +30,7 @@ In the future, we plan to implement a switch to call these libraries.
 | monolish::generalized_eigen::LOBPCG         | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::generalized_eigen::DC             | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
 
-# what libraries are called by solvers
+# What libraries are called by solvers
 
 ## Direct Solvers for for Dense matrix
 | func     | MKL                          | NVIDIA                    | OSS                                    |
@@ -50,7 +50,7 @@ In the future, we plan to implement a switch to call these libraries.
 
 - *) sparse LU is not impl. in cuSOLVER 11.1
 
-## Iterative solvers (only CRS now, We will support Dense)
+## Iterative solvers (for Dense, Sparse)
 
 | func     | MKL            | NVIDIA         | OSS            |
 |----------|----------------|----------------|----------------|
@@ -58,7 +58,7 @@ In the future, we plan to implement a switch to call these libraries.
 | BiCGSTAB | monolish       | monolish       | monolish       |
 | Jacobi   | monolish       | monolish       | monolish       |
 
-## Preconditioners of Sparse Linear solver
+## Preconditioners (for Dense, Sparse)
 
 | func   | MKL            | NVIDIA   | OSS      |
 |--------|----------------|----------|----------|
