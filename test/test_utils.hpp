@@ -20,7 +20,12 @@ template <> std::string get_type<float>() { return "float"; }
 template <typename T>
 bool ans_check(const std::string &func, double result, double ans, double tol) {
 
-  double err = std::abs((result - ans) / ans);
+  double err = 1.0;
+  if (ans <= tol) {
+    err = std::abs(result - ans);
+  } else {
+    err = std::abs((result - ans) / ans);
+  }
 
   if (err < tol) {
     std::cout << func << "(" << get_type<T>() << ")" << std::flush;
@@ -47,7 +52,12 @@ bool ans_check(const T *result, const T *ans, int size, double tol) {
   bool check = true;
 
   for (int i = 0; i < size; i++) {
-    double err = std::abs((result[i] - ans[i]) / ans[i]);
+    double err = 1.0;
+    if (ans[i] <= tol) {
+      err = std::abs(result[i] - ans[i]);
+    } else {
+      err = std::abs((result[i] - ans[i]) / ans[i]);
+    }
     if (err >= tol) {
       check = false;
       num.push_back(i);
@@ -78,7 +88,12 @@ bool ans_check(const std::string &func, const T *result, const T *ans, int size,
   bool check = true;
 
   for (int i = 0; i < size; i++) {
-    double err = std::abs((result[i] - ans[i]) / ans[i]);
+    double err = 1.0;
+    if (ans[i] <= tol) {
+      err = std::abs(result[i] - ans[i]);
+    } else {
+      err = std::abs((result[i] - ans[i]) / ans[i]);
+    }
     if (err >= tol) {
       check = false;
       num.push_back(i);
@@ -113,7 +128,12 @@ bool ans_check(const std::string &func, const std::string &type,
   bool check = true;
 
   for (int i = 0; i < size; i++) {
-    double err = std::abs((result[i] - ans[i]) / ans[i]);
+    double err = 1.0;
+    if (ans[i] <= tol) {
+      err = std::abs(result[i] - ans[i]);
+    } else {
+      err = std::abs((result[i] - ans[i]) / ans[i]);
+    }
     if (err >= tol) {
       check = false;
       num.push_back(i);
