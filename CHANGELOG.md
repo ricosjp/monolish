@@ -47,6 +47,7 @@ Unreleased
 - organize doc/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - update solverlist for linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
+- Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 
 ### Removed
 - del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
