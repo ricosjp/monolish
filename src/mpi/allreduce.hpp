@@ -5,7 +5,7 @@ namespace monolish {
 namespace {
 template <typename T> T Allreduce_core(T val, MPI_Op op, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
   if (typeid(double) == typeid(val)) {
@@ -22,7 +22,7 @@ template <typename T> T Allreduce_core(T val, MPI_Op op, MPI_Comm comm) {
   }
 #endif
 
-  logger.func_out();
+  logger.util_out();
   return val;
 }
 } // namespace

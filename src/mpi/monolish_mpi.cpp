@@ -6,36 +6,49 @@ namespace monolish {
 namespace mpi {
 
 void Comm::Init() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   assert(MPI_Init(nullptr, nullptr) == MPI_SUCCESS);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   comm = MPI_COMM_WORLD;
 #endif
+  logger.util_out();
 }
 
 void Comm::Init(int argc, char **argv) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   assert(MPI_Init(&argc, &argv) == MPI_SUCCESS);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   comm = MPI_COMM_WORLD;
 #endif
+  logger.util_out();
 }
 
 bool Comm::Initialized() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   int flag;
   assert(MPI_Initialized(&flag) == MPI_SUCCESS);
+  logger.util_out();
   return (flag == 0) ? true : false;
 #endif
+  logger.util_out();
   return true;
 }
 
 void Comm::Finalize() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   assert(MPI_Finalize() == MPI_SUCCESS);
 #endif
+  logger.util_out();
 }
 
 double Comm::Allreduce(double val) {
