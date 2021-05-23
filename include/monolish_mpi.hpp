@@ -1,20 +1,41 @@
 #pragma once
 
+#include "common/monolish_common.hpp"
+#include <climits>
+
 #if defined MONOLISH_USE_MPI
 #include <mpi.h>
 #else
-// MPI dammy
-typedef struct ompi_communicator_t *MPI_Comm;
+// MPI dummy
+#include "mpi/mpi_dummy.hpp"
+#endif
+
+#if SIZE_MAX == ULONG_MAX
+#define MPI_SIZE_T MPI_UNSIGNED_LONG
+#elif SIZE_MAX == ULLONG_MAX
+#define MPI_SIZE_T MPI_UNSIGNED_LONG_LONG
+#elif SIZE_MAX == UINT_MAX
+#define MPI_SIZE_T MPI_UNSIGNED
 #endif
 
 namespace monolish {
+/**
+ * @brief
+ * C++ template MPI class, Functions of this class do nothing when MPI is
+ * disabled.
+ */
 namespace mpi {
 /**
  * @brief MPI class (singleton)
  */
 class Comm {
 private:
+  /**
+   * @brief MPI communicator, MPI_COMM_WORLD
+   */
   MPI_Comm comm;
+  int rank;
+  int size;
 
   Comm(){};
 
@@ -33,10 +54,48 @@ public:
     return instance;
   }
 
+  /**
+   * @brief get my rank number
+   * @return rank number
+   */
+  int get_rank() { return rank; }
+
+  /**
+   * @brief get the number of processes
+   * @return the number of prodessed
+   */
+  int get_size() { return size; }
+
+  /**
+   * @brief get communicator
+   * @return MPI_COMM_WORLD
+   */
+  MPI_Comm get_comm() { return comm; }
+
+  /**
+   * @brief Initialize the MPI execution environment
+   */
   void Init();
+
+  /**
+   * @brief Initialize the MPI execution environment
+   * @param argc Pointer to the number of arguments
+   * @param argv Pointer to the argument vector
+   * */
   void Init(int argc, char **argv);
 
+  /**
+   * @brief Indicates whether MPI_Init has been called
+   * @return true: initialized, false: not initialized
+   * */
+  bool Initialized();
+
+  /**
+   * @brief Terminates MPI execution environment
+   * */
   void Finalize();
+
+#include "mpi/allreduce.hpp"
 };
 } // namespace mpi
 } // namespace monolish

@@ -6,6 +6,11 @@
 #include <functional>
 
 namespace monolish {
+/**
+ * @brief
+ * Linear equation solvers for Dense and sparse matrix
+ * Scalar
+ */
 namespace equation {
 
 /**

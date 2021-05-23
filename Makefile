@@ -74,7 +74,7 @@ clang_cpu_mpi:
 		-Bbuild_cpu_mpi \
 		-DMONOLISH_USE_GPU=OFF \
 		-DMONOLISH_USE_MPI=ON
-	cmake --build build_cpu -j `nproc`
+	cmake --build build_cpu_mpi -j `nproc`
 
 clang_gpu_mpi:
 	cmake $(MONOLISH_TOP) \
@@ -85,7 +85,7 @@ clang_gpu_mpi:
 		-Bbuild_gpu_mpi \
 		-DMONOLISH_USE_GPU=ON \
 		-DMONOLISH_USE_MPI=ON
-	cmake --build build_gpu -j `nproc`
+	cmake --build build_gpu_mpi -j `nproc`
 
 cpu_mpi: clang_cpu_mpi
 gpu_mpi: clang_gpu_mpi
@@ -93,10 +93,10 @@ gpu_mpi: clang_gpu_mpi
 install_mpi: install_cpu_mpi install_gpu_mpi
 
 install_cpu_mpi: cpu_mpi
-	cmake --build build_cpu --target install
+	cmake --build build_cpu_mpi --target install
 
 install_gpu_mpi: gpu_mpi
-	cmake --build build_gpu --target install
+	cmake --build build_gpu_mpi --target install
 
 install_all: install_cpu install_gpu install_cpu_mpi install_gpu_mpi
 
