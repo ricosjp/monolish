@@ -57,7 +57,7 @@ monolish requires:
 - git
 - make
 - cmake 3.17 or higher
-- g++ or clang++ with C++14 support
+- g++ or clang++ with C++17 support
 - MKL or OpenBLAS
 
 

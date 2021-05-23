@@ -10,7 +10,7 @@ CXX ?= g++
 CXXFLAGS=-O3 -lm -std=c++17 -fopenmp -fPIC
 
 FXCXX ?= FCC
-FXCXXFLAGS=-Kfast,openmp,zfill,parallel,simd -std=c++14 -lm -SSL2BLAMP
+FXCXXFLAGS=-Kfast,openmp,zfill,parallel,simd -std=c++17 -lm -SSL2BLAMP
 
 LIB_CPU=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
 LIB_GPU=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_gpu

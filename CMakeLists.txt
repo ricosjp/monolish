@@ -57,7 +57,7 @@ target_sources(${MONOLISH_TARGET}
   ${MONOLISH_SOURCE_FILES}
 )
 
-set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 14)
+set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 17)
 target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall)
 
 install(

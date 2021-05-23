@@ -3,7 +3,7 @@ TARGET=./lib/libmonolish_sxat.so
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=nc++
-CXXFLAGS=-O3 -lm -fopenmp -pthread -std=c++14 -fPIC
+CXXFLAGS=-O3 -lm -fopenmp -pthread -std=c++17 -fPIC
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 
 LIBFLAGS = -shared 
@@ -32,6 +32,8 @@ SRCS +=$(notdir $(wildcard ./src/utils/*/*.cpp))
 
 SRCS +=$(notdir $(wildcard ./src/vml/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/vml/*/*.cpp))
+
+SRCS +=$(notdir $(wildcard ./src/mpi/*.cpp))
 
 #############################################################
 
@@ -78,6 +80,8 @@ vpath %.cpp ./src/utils/minus/
 vpath %.cpp ./src/vml/linearoperator/
 vpath %.cpp ./src/vml/matrix/
 vpath %.cpp ./src/vml/vector/
+
+vpath %.cpp ./src/mpi/
 
 #############################################################
 
