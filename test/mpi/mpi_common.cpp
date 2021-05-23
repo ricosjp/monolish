@@ -1,4 +1,17 @@
 #include "monolish_mpi.hpp"
+
+template <typename T> T test_sum(std::vector<T> &vec) {
+
+  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  double sum = 0;
+
+  for (size_t i = 0; i < vec.size(); i++) {
+    sum += vec[i];
+  }
+
+  return comm.Allreduce(sum);
+}
+
 int main(int argc, char **argv) {
 
   if (argc != 2) {
@@ -6,35 +19,36 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  size_t size = atoi(argv[1]);
+  std::cout << "size: " << size << std::endl;
+
+  // monolish::util::set_log_level(3);
+  // monolish::util::set_log_filename("./monolish_test_log.txt");
 
   monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
   comm.Init(argc, argv);
 
   int rank = comm.get_rank();
-  int size = comm.get_size();
+  int procs = comm.get_size();
 
-  std::cout << "I am" << rank << "/" << size << std::endl;
+  std::cout << "I am" << rank << "/" << procs << std::endl;
 
-  // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
+  std::vector<double> dvec(size, 1);
+  std::vector<float> fvec(size, 1);
+  std::vector<int> ivec(size, 1);
+  std::vector<size_t> svec(size, 1);
 
-  size_t size = atoi(argv[1]);
-  std::cout << "size: " << size << std::endl;
-
-  // nosend //
-  if (test_dot<double>(size, 1.0e-8) == false) {
-    return 1;
+  if (test_sum(dvec) != size * procs) {
+    std::cout << "error in double" << std::endl;
   }
-  if (test_dot<float>(size, 1.0e-4) == false) {
-    return 1;
+  if (test_sum(fvec) != size * procs) {
+    std::cout << "error in float" << std::endl;
   }
-
-  // send //
-  if (test_dot<double>(size, 1.0e-8) == false) {
-    return 1;
+  if (test_sum(ivec) != size * procs) {
+    std::cout << "error in int" << std::endl;
   }
-  if (test_dot<float>(size, 1.0e-4) == false) {
-    return 1;
+  if (test_sum(svec) != size * procs) {
+    std::cout << "error in size_t" << std::endl;
   }
 
   comm.Finalize();

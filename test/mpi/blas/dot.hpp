@@ -43,4 +43,3 @@ template <typename T> bool test_dot(const size_t size, double tol) {
 
   return ans_check<T>(__func__, result, ans, tol);
 }
-
