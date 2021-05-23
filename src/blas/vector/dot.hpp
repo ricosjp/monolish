@@ -35,6 +35,12 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   } else {
     ans = cblas_ddot(size, xd + xoffset, 1, yd + yoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
@@ -71,6 +77,12 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   } else {
     ans = cblas_sdot(size, xd + xoffset, 1, yd + yoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
