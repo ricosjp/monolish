@@ -6,11 +6,11 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
-  comm.Init(argc, argv);
-
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
+  
+  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  comm.Init(argc, argv);
 
   size_t size = atoi(argv[1]);
   std::cout << "size: " << size << std::endl;
