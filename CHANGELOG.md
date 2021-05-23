@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add MPI monolish::blas::dot() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
+- add get_rank(), get_size(), Allreduce() in monolish::mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
 - add jacobi preconditioner test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/311
 - add make install_mpi and make install_all https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
 - add monolish::mpi test in test/mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
