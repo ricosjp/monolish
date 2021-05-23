@@ -19,12 +19,20 @@
 #endif
 
 namespace monolish {
+/**
+ * @brief
+ * C++ template MPI class, Functions of this class do nothing when MPI is
+ * disabled.
+ */
 namespace mpi {
 /**
  * @brief MPI class (singleton)
  */
 class Comm {
 private:
+  /**
+   * @brief MPI communicator, MPI_COMM_WORLD
+   */
   MPI_Comm comm;
   int rank;
   int size;
@@ -46,14 +54,45 @@ public:
     return instance;
   }
 
-  int get_rank(){return rank;}
-  int get_size(){return size;}
+  /**
+   * @brief get my rank number
+   * @return rank number
+   */
+  int get_rank() { return rank; }
 
+  /**
+   * @brief get the number of processes
+   * @return the number of prodessed
+   */
+  int get_size() { return size; }
+
+  /**
+   * @brief get communicator
+   * @return MPI_COMM_WORLD
+   */
   MPI_Comm get_comm() { return comm; }
 
+  /**
+   * @brief Initialize the MPI execution environment
+   */
   void Init();
+
+  /**
+   * @brief Initialize the MPI execution environment
+   * @param argc Pointer to the number of arguments
+   * @param argv Pointer to the argument vector
+   * */
   void Init(int argc, char **argv);
+
+  /**
+   * @brief Indicates whether MPI_Init has been called
+   * @return true: initialized, false: not initialized
+   * */
   bool Initialized();
+
+  /**
+   * @brief Terminates MPI execution environment
+   * */
   void Finalize();
 
 #include "mpi/allreduce.hpp"

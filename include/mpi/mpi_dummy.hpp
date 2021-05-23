@@ -6,19 +6,19 @@ typedef struct ompi_communicator_t *MPI_Comm;
 typedef struct ompi_op_t *MPI_Op;
 
 #ifndef OMPI_DECLSPEC
-#  if defined(WIN32) || defined(_WIN32)
-#    if defined(OMPI_IMPORTS)
-#      define OMPI_DECLSPEC        __declspec(dllimport)
-#    else
-#      define OMPI_DECLSPEC
-#    endif  /* defined(OMPI_IMPORTS) */
-#  else
-#    if OPAL_C_HAVE_VISIBILITY == 1
-#       define OMPI_DECLSPEC __attribute__((visibility("default")))
-#    else
-#       define OMPI_DECLSPEC
-#    endif
-#  endif
+#if defined(WIN32) || defined(_WIN32)
+#if defined(OMPI_IMPORTS)
+#define OMPI_DECLSPEC __declspec(dllimport)
+#else
+#define OMPI_DECLSPEC
+#endif /* defined(OMPI_IMPORTS) */
+#else
+#if OPAL_C_HAVE_VISIBILITY == 1
+#define OMPI_DECLSPEC __attribute__((visibility("default")))
+#else
+#define OMPI_DECLSPEC
+#endif
+#endif
 #endif
 
 OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_null;
@@ -39,12 +39,13 @@ OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
 
 #if !OMPI_BUILDING
 #if defined(c_plusplus) || defined(__cplusplus)
-#define OMPI_PREDEFINED_GLOBAL(type, global) (static_cast<type> (static_cast<void *> (&(global))))
+#define OMPI_PREDEFINED_GLOBAL(type, global)                                   \
+  (static_cast<type>(static_cast<void *>(&(global))))
 #else
-#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type)((void *)&(global)))
 #endif
 #else
-#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) &(global))
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) & (global))
 #endif
 
 #define MPI_MAX OMPI_PREDEFINED_GLOBAL(MPI_Op, ompi_mpi_op_max)
