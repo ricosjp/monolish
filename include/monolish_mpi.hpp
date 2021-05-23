@@ -1,7 +1,7 @@
 #pragma once
 
-#include<climits>
-#include"common/monolish_common.hpp"
+#include "common/monolish_common.hpp"
+#include <climits>
 
 #if defined MONOLISH_USE_MPI
 #include <mpi.h>
@@ -11,11 +11,11 @@ typedef struct ompi_communicator_t *MPI_Comm;
 #endif
 
 #if SIZE_MAX == ULONG_MAX
-   #define MPI_SIZE_T MPI_UNSIGNED_LONG
+#define MPI_SIZE_T MPI_UNSIGNED_LONG
 #elif SIZE_MAX == ULLONG_MAX
-   #define MPI_SIZE_T MPI_UNSIGNED_LONG_LONG
+#define MPI_SIZE_T MPI_UNSIGNED_LONG_LONG
 #elif SIZE_MAX == UINT_MAX
-   #define MPI_SIZE_T MPI_UNSIGNED
+#define MPI_SIZE_T MPI_UNSIGNED
 #endif
 
 namespace monolish {
@@ -44,9 +44,7 @@ public:
     return instance;
   }
 
-  MPI_Comm get_comm(){
-    return comm;
-  }
+  MPI_Comm get_comm() { return comm; }
 
   void Init();
   void Init(int argc, char **argv);
@@ -54,7 +52,6 @@ public:
   void Finalize();
 
 #include "mpi/allreduce.hpp"
-
 };
 } // namespace mpi
 } // namespace monolish
