@@ -23,14 +23,15 @@ echo "
     bool Comm::Initialized() {
 #if defined MONOLISH_USE_MPI
       int flag;
-      assert(MPI_Initialized(&flag) == MPI_SUCCESS);;
+      assert(MPI_Initialized(&flag) == MPI_SUCCESS);
       return ( flag == 0 ) ? true : false;
 #endif
+    return true;
     }
 
     void Comm::Finalize() {
 #if defined MONOLISH_USE_MPI
-      assert(MPI_Finalize() == MPI_SUCCESS);;
+      assert(MPI_Finalize() == MPI_SUCCESS);
 #endif
     }
 "

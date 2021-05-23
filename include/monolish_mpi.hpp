@@ -6,8 +6,8 @@
 #if defined MONOLISH_USE_MPI
 #include <mpi.h>
 #else
-// MPI dammy
-typedef struct ompi_communicator_t *MPI_Comm;
+// MPI dummy
+#include "mpi/mpi_dummy.hpp"
 #endif
 
 #if SIZE_MAX == ULONG_MAX
@@ -26,6 +26,8 @@ namespace mpi {
 class Comm {
 private:
   MPI_Comm comm;
+  int rank;
+  int size;
 
   Comm(){};
 
@@ -43,6 +45,9 @@ public:
     static Comm instance;
     return instance;
   }
+
+  int get_rank(){return rank;}
+  int get_size(){return size;}
 
   MPI_Comm get_comm() { return comm; }
 
