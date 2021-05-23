@@ -44,6 +44,7 @@ Unreleased
 - LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 
 ### Changed
+- update C++14 --> C++17 in build scripts https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - organize doc/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
