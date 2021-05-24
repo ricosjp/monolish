@@ -44,7 +44,7 @@ Unreleased
 - clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
-- vector vml tol 1.0e-4 -> 1.0e-3 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
+- test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
 - Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
