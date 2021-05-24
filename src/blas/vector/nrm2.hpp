@@ -26,6 +26,12 @@ template <typename F1> double Dnrm2_core(const F1 &x) {
   } else {
     ans = cblas_dnrm2(size, xd + xoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
@@ -53,6 +59,12 @@ template <typename F1> float Snrm2_core(const F1 &x) {
   } else {
     ans = cblas_snrm2(size, xd + xoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
