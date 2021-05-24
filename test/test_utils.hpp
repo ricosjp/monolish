@@ -21,7 +21,7 @@ template <typename T>
 bool ans_check(const std::string &func, double result, double ans, double tol) {
 
   double err = 1.0;
-  if (ans <= tol) {
+  if (std::abs(ans) <= tol) {
     err = std::abs(result - ans);
   } else {
     err = std::abs((result - ans) / ans);
@@ -89,7 +89,7 @@ bool ans_check(const std::string &func, const T *result, const T *ans, int size,
 
   for (int i = 0; i < size; i++) {
     double err = 1.0;
-    if (ans[i] <= tol) {
+    if (std::abs(ans[i]) <= tol) {
       err = std::abs(result[i] - ans[i]);
     } else {
       err = std::abs((result[i] - ans[i]) / ans[i]);
@@ -129,7 +129,7 @@ bool ans_check(const std::string &func, const std::string &type,
 
   for (int i = 0; i < size; i++) {
     double err = 1.0;
-    if (ans[i] <= tol) {
+    if (std::abs(ans[i]) <= tol) {
       err = std::abs(result[i] - ans[i]);
     } else {
       err = std::abs((result[i] - ans[i]) / ans[i]);

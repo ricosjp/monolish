@@ -39,18 +39,18 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Fixed
+- LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 - generate documents for each tag (at github-actions, this work was done on master)
 - clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
-- LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 
 ### Changed
-- update C++14 --> C++17 in build scripts https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
+- test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
+- Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - organize doc/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - update solverlist for linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
 - Fix update logger author https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/302
-- Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 
 ### Removed
 - del generate monolish container and doxygen at gitlab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/301
