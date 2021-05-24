@@ -6,6 +6,7 @@
 #include "blas/nrm1.hpp"
 #include "blas/nrm2.hpp"
 #include "blas/scal.hpp"
+#include "blas/sum.hpp"
 #include "blas/xpay.hpp"
 
 int main(int argc, char **argv) {
@@ -33,6 +34,21 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_copy<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // sum//
+  if (test_sum<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sum<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_sum<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sum<float>(size, 1.0e-4) == false) {
     return 1;
   }
 

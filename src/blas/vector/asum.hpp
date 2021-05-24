@@ -25,6 +25,12 @@ template <typename F1> double Dasum_core(const F1 &x) {
   } else {
     ans = cblas_dasum(size, xd + xoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
@@ -52,6 +58,12 @@ template <typename F1> float Sasum_core(const F1 &x) {
   } else {
     ans = cblas_sasum(size, xd + xoffset, 1);
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
