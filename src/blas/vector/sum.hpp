@@ -29,6 +29,11 @@ template <typename F1> double Dsum_core(const F1 &x) {
     }
   }
 
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
+
   logger.func_out();
   return ans;
 }
@@ -58,6 +63,11 @@ template <typename F1> float Ssum_core(const F1 &x) {
       ans += xd[i + xoffset];
     }
   }
+
+#if MONOLISH_USE_MPI
+  mpi::Comm &comm = mpi::Comm::get_instance();
+  ans = comm.Allreduce(ans);
+#endif
 
   logger.func_out();
   return ans;
