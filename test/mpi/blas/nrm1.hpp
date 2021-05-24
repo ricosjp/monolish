@@ -1,4 +1,5 @@
 #include "../../test_utils.hpp"
+#include "monolish_mpi.hpp"
 
 template <typename T> T ans_nrm1(monolish::vector<T> &mx) {
   T ans = 0;
