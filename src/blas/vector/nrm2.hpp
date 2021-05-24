@@ -17,7 +17,10 @@ template <typename F1> double Dnrm2_core(const F1 &x) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { internal::check_CUDA(cublasDdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans)); }
+    {
+      internal::check_CUDA(
+          cublasDdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans));
+    }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -50,7 +53,10 @@ template <typename F1> float Snrm2_core(const F1 &x) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { internal::check_CUDA(cublasSdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans)); }
+    {
+      internal::check_CUDA(
+          cublasSdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans));
+    }
     cublasDestroy(h);
 #else
     throw std::runtime_error(

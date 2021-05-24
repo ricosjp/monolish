@@ -1,8 +1,8 @@
-#include "blas/sum.hpp"
 #include "blas/asum.hpp"
 #include "blas/dot.hpp"
 #include "blas/nrm1.hpp"
 #include "blas/nrm2.hpp"
+#include "blas/sum.hpp"
 
 int main(int argc, char **argv) {
 

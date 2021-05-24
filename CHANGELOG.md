@@ -21,6 +21,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add MPI sum(), asum(), nrm1(), nrm2() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316 https://github.com/ricosjp/monolish/issues/56
+- add monolish::blas::sum test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - add MPI monolish::blas::dot() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
 - add get_rank(), get_size(), Allreduce() in monolish::mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
 - add jacobi preconditioner test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/311
@@ -44,6 +46,7 @@ Unreleased
 - clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
 - Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
