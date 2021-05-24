@@ -17,14 +17,14 @@ template <typename F1> double Dnrm2_core(const F1 &x) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { internal::check_CUDA(cublasDnrm2(h, size, xd + xoffset, 1, &ans)); }
+    { internal::check_CUDA(cublasDdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_dnrm2(size, xd + xoffset, 1);
+    ans = cblas_ddot(size, xd + xoffset, 1, xd + xoffset, 1);
   }
 
 #if MONOLISH_USE_MPI
@@ -33,7 +33,7 @@ template <typename F1> double Dnrm2_core(const F1 &x) {
 #endif
 
   logger.func_out();
-  return ans;
+  return sqrt(ans);
 }
 
 template <typename F1> float Snrm2_core(const F1 &x) {
@@ -50,14 +50,14 @@ template <typename F1> float Snrm2_core(const F1 &x) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
-    { internal::check_CUDA(cublasSnrm2(h, size, xd + xoffset, 1, &ans)); }
+    { internal::check_CUDA(cublasSdot(h, size, xd + xoffset, 1, xd + xoffset, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_snrm2(size, xd + xoffset, 1);
+    ans = cblas_sdot(size, xd + xoffset, 1, xd + xoffset, 1);
   }
 
 #if MONOLISH_USE_MPI
@@ -66,7 +66,7 @@ template <typename F1> float Snrm2_core(const F1 &x) {
 #endif
 
   logger.func_out();
-  return ans;
+  return sqrt(ans);
 }
 } // namespace
 
