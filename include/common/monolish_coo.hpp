@@ -494,7 +494,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] const std::vector<int> &get_row_ptr() const { return row_index; }
+  [[nodiscard]] const std::vector<int> &get_row_ptr() const {
+    return row_index;
+  }
 
   /**
    * @brief get column index
@@ -504,7 +506,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] const std::vector<int> &get_col_ind() const { return col_index; }
+  [[nodiscard]] const std::vector<int> &get_col_ind() const {
+    return col_index;
+  }
 
   /**
    * @brief get value
@@ -621,7 +625,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  [[nodiscard]] bool equal(const COO<Float> &mat, bool compare_cpu_and_device = false) const;
+  [[nodiscard]] bool equal(const COO<Float> &mat,
+                           bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)

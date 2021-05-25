@@ -185,7 +185,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: true
    **/
-  [[nodiscard]] size_t get_device_mem_stat() const { return target.get_device_mem_stat(); }
+  [[nodiscard]] size_t get_device_mem_stat() const {
+    return target.get_device_mem_stat();
+  }
 
   /**
    * @brief returns a direct pointer to the original vector (dont include

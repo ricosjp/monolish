@@ -285,7 +285,7 @@ void random_vector(vector<T> &vec, const T min, const T max) {
 /**
  * @brief compare matrix structure
  **/
-template <typename T, typename U> 
+template <typename T, typename U>
 [[nodiscard]] bool is_same_structure(const T A, const U B) {
   return false;
 }
@@ -316,7 +316,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+[[nodiscard]] bool is_same_structure(const matrix::Dense<T> &A,
+                                     const matrix::Dense<T> &B);
 
 /**
  * @brief compare structure using col_index and row_index, M, and N
@@ -329,7 +330,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_structure(const matrix::COO<T> &A, const matrix::COO<T> &B);
+[[nodiscard]] bool is_same_structure(const matrix::COO<T> &A,
+                                     const matrix::COO<T> &B);
 
 /**
  * @brief compare structure using structure_hash, M, and N
@@ -342,7 +344,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_structure(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+[[nodiscard]] bool is_same_structure(const matrix::CRS<T> &A,
+                                     const matrix::CRS<T> &B);
 
 /**
  * @brief compare structure using M and N (same as is_same_size())
@@ -362,7 +365,8 @@ bool is_same_structure(const matrix::LinearOperator<T> &A,
  * @brief compare matrix structure
  **/
 template <typename T, typename... types>
-[[nodiscard]] bool is_same_structure(const T &A, const T &B, const types &... args) {
+[[nodiscard]] bool is_same_structure(const T &A, const T &B,
+                                     const types &... args) {
   return is_same_structure(A, B) && is_same_structure(A, args...);
 }
 
@@ -376,7 +380,8 @@ template <typename T, typename... types>
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T, typename U> [[nodiscard]] bool is_same_size(const T &x, const U &y) {
+template <typename T, typename U>
+[[nodiscard]] bool is_same_size(const T &x, const U &y) {
   return x.size() == y.size();
 }
 
@@ -391,7 +396,8 @@ template <typename T, typename U> [[nodiscard]] bool is_same_size(const T &x, co
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B);
+[[nodiscard]] bool is_same_size(const matrix::Dense<T> &A,
+                                const matrix::Dense<T> &B);
 
 /**
  * @brief compare row and col size
@@ -404,7 +410,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_size(const matrix::COO<T> &A, const matrix::COO<T> &B);
+[[nodiscard]] bool is_same_size(const matrix::COO<T> &A,
+                                const matrix::COO<T> &B);
 
 /**
  * @brief compare row and col size
@@ -417,7 +424,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] bool is_same_size(const matrix::CRS<T> &A, const matrix::CRS<T> &B);
+[[nodiscard]] bool is_same_size(const matrix::CRS<T> &A,
+                                const matrix::CRS<T> &B);
 
 /**
  * @brief compare row and col size
@@ -431,13 +439,14 @@ template <typename T>
  **/
 template <typename T>
 [[nodiscard]] bool is_same_size(const matrix::LinearOperator<T> &A,
-                  const matrix::LinearOperator<T> &B);
+                                const matrix::LinearOperator<T> &B);
 
 /**
  * @brief compare matrix size
  **/
 template <typename T, typename U, typename... types>
-[[nodiscard]] bool is_same_size(const T &arg1, const U &arg2, const types &... args) {
+[[nodiscard]] bool is_same_size(const T &arg1, const U &arg2,
+                                const types &... args) {
   return is_same_size(arg1, arg2) && is_same_size(arg1, args...);
 }
 
@@ -462,7 +471,7 @@ template <typename T, typename U>
  **/
 template <typename T, typename U, typename... types>
 [[nodiscard]] bool is_same_device_mem_stat(const T &arg1, const U &arg2,
-                             const types &... args) {
+                                           const types &... args) {
   return is_same_device_mem_stat(arg1, arg2) &&
          is_same_device_mem_stat(arg1, args...);
 }
@@ -483,7 +492,7 @@ template <typename T, typename U, typename... types>
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> band_matrix(const int M, const int N, const int W,
-                           const T diag_val, const T val);
+                                         const T diag_val, const T val);
 
 /**
  * @brief create random structure matrix (column number is decided by random)
@@ -498,7 +507,8 @@ template <typename T>
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> random_structure_matrix(const int M, const int N,
-                                       const int nnzrow, const T val);
+                                                     const int nnzrow,
+                                                     const T val);
 
 /**
  * @brief create band matrix
@@ -508,7 +518,7 @@ template <typename T>
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> [[nodiscard]] matrix::COO<T> eye(const int M);
+template <typename T>[[nodiscard]] matrix::COO<T> eye(const int M);
 
 /**
  * @brief create Frank matrix
@@ -518,7 +528,7 @@ template <typename T> [[nodiscard]] matrix::COO<T> eye(const int M);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> [[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
+template <typename T>[[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
 
 /**
  * @brief Nth eigenvalue from the bottom of MxM Frank matrix
@@ -529,7 +539,8 @@ template <typename T> [[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> [[nodiscard]] T frank_matrix_eigenvalue(const int &M, const int &N);
+template <typename T>
+[[nodiscard]] T frank_matrix_eigenvalue(const int &M, const int &N);
 
 /**
  * @brief create tridiagonal Toeplitz matrix
@@ -542,7 +553,8 @@ template <typename T> [[nodiscard]] T frank_matrix_eigenvalue(const int &M, cons
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a, T b);
+[[nodiscard]] matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a,
+                                                         T b);
 
 /**
  * @brief Nth smallest eigenvalue of MxM tridiagonal Toeplitz matrix
@@ -556,7 +568,8 @@ template <typename T>
  * - GPU acceleration: false
  **/
 template <typename T>
-[[nodiscard]] T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a, T b);
+[[nodiscard]] T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a,
+                                                       T b);
 
 /**
  * @brief create 1D Laplacian matrix
@@ -566,7 +579,8 @@ template <typename T>
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> [[nodiscard]] matrix::COO<T> laplacian_matrix_1D(const int &M);
+template <typename T>
+[[nodiscard]] matrix::COO<T> laplacian_matrix_1D(const int &M);
 
 /**
  * @brief Nth smallest eigenvalue of 1D Laplacian matrix
@@ -577,7 +591,8 @@ template <typename T> [[nodiscard]] matrix::COO<T> laplacian_matrix_1D(const int
  * - Multi-threading: false
  * - GPU acceleration: false
  **/
-template <typename T> [[nodiscard]] T laplacian_matrix_1D_eigenvalue(const int &M, int N);
+template <typename T>
+[[nodiscard]] T laplacian_matrix_1D_eigenvalue(const int &M, int N);
 
 /**
  * @brief create two dimensional Laplacian matrix using the five point central
@@ -606,7 +621,8 @@ template <typename T>
  * - GPU acceleration: false
  */
 template <typename T>
-[[nodiscard]] matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0, T a1, T a2);
+[[nodiscard]] matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0,
+                                                         T a1, T a2);
 
 /**
  * @brief Nth smallest eigenvalue of GEVP Ax=lBx of Toeplitz-plus-Hankel
@@ -621,8 +637,9 @@ template <typename T>
  * - GPU acceleration: false
  */
 template <typename T>
-[[nodiscard]] T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N, T a0, T a1, T a2,
-                                         T b0, T b1, T b2);
+[[nodiscard]] T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N,
+                                                       T a0, T a1, T a2, T b0,
+                                                       T b1, T b2);
 
 // send///////////////////
 

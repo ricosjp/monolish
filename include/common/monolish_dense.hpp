@@ -281,7 +281,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] double get_data_size() const { return get_nnz() * sizeof(Float) / 1.0e+9; }
+  [[nodiscard]] double get_data_size() const {
+    return get_nnz() * sizeof(Float) / 1.0e+9;
+  }
 
   /**
    * @brief get element A[i][j]
@@ -464,7 +466,7 @@ public:
    * - GPU acceleration: true
    **/
   [[nodiscard]] bool equal(const Dense<Float> &mat,
-             bool compare_cpu_and_device = false) const;
+                           bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)

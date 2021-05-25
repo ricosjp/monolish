@@ -421,7 +421,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    **/
-  [[nodiscard]] bool equal(const CRS<Float> &mat, bool compare_cpu_and_device = false) const;
+  [[nodiscard]] bool equal(const CRS<Float> &mat,
+                           bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)

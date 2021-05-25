@@ -174,7 +174,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)> get_matvec() const {
+  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)>
+  get_matvec() const {
     return matvec;
   }
 
@@ -186,7 +187,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)> get_rmatvec() const {
+  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)>
+  get_rmatvec() const {
     return rmatvec;
   }
 
