@@ -82,7 +82,7 @@ public:
   /**
    * @brief set communicator
    */
-  void set_comm(MPI_Comm external_comm) { comm = external_comm; }
+  void set_comm(MPI_Comm external_comm);
 
   /**
    * @brief Terminates MPI execution environment

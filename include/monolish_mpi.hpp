@@ -81,7 +81,7 @@ public:
   /**
    * @brief set communicator
    */
-  void set_comm(MPI_Comm external_comm) { comm = external_comm; }
+  void set_comm(MPI_Comm external_comm);
 
   /**
    * @brief Terminates MPI execution environment
@@ -105,138 +105,139 @@ public:
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] double Allreduce const(double val);
+  [[nodiscard]] double Allreduce(double val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] float Allreduce const(float val);
+  [[nodiscard]] float Allreduce(float val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] int Allreduce const(int val);
+  [[nodiscard]] int Allreduce(int val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] size_t Allreduce const(size_t val);
+  [[nodiscard]] size_t Allreduce(size_t val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] double Allreduce_sum const(double val);
+  [[nodiscard]] double Allreduce_sum(double val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] float Allreduce_sum const(float val);
+  [[nodiscard]] float Allreduce_sum(float val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] int Allreduce_sum const(int val);
+  [[nodiscard]] int Allreduce_sum(int val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] size_t Allreduce_sum const(size_t val);
+  [[nodiscard]] size_t Allreduce_sum(size_t val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] double Allreduce_prod const(double val);
+  [[nodiscard]] double Allreduce_prod(double val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] float Allreduce_prod const(float val);
+  [[nodiscard]] float Allreduce_prod(float val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] int Allreduce_prod const(int val);
+  [[nodiscard]] int Allreduce_prod(int val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] size_t Allreduce_prod const(size_t val);
+  [[nodiscard]] size_t Allreduce_prod(size_t val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] double Allreduce_max const(double val);
+  [[nodiscard]] double Allreduce_max(double val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] float Allreduce_max const(float val);
+  [[nodiscard]] float Allreduce_max(float val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] int Allreduce_max const(int val);
+  [[nodiscard]] int Allreduce_max(int val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] size_t Allreduce_max const(size_t val);
+  [[nodiscard]] size_t Allreduce_max(size_t val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] double Allreduce_min const(double val);
+  [[nodiscard]] double Allreduce_min(double val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] float Allreduce_min const(float val);
+  [[nodiscard]] float Allreduce_min(float val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] int Allreduce_min const(int val);
+  [[nodiscard]] int Allreduce_min(int val) const;
 
   /**
    * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
    * processes and distributes the result back to all processes.
    * @param val scalar value
    */
-  [[nodiscard]] size_t Allreduce_min const(size_t val);
-}
+  [[nodiscard]] size_t Allreduce_min(size_t val) const;
+};
+} // namespace monolish::mpi
