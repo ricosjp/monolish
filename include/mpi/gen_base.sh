@@ -73,6 +73,8 @@ public:
    * */
   bool Initialized() const;
 
+  ///////////////////////////////////////////
+
   /**
    * @brief get communicator
    * @return MPI_COMM_WORLD
@@ -100,4 +102,12 @@ public:
    * @return the number of prodessed
    */
   [[nodiscard]] int get_size() const;
+
+  ///////////////////////////////////////////
+
+  /**
+   * @brief Blocks until all processes in the communicator have reached this routine.
+   */
+  void Barrier() const;
+
 "
