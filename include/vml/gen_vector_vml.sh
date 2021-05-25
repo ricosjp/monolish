@@ -188,7 +188,7 @@ echo "
 */"
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    echo "$prec ${func[$i]}(const $arg1 &y);"
+    echo "[[nodiscard]] $prec ${func[$i]}(const $arg1 &y);"
   done
 done
 done

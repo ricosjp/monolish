@@ -114,7 +114,7 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    echo "$prec asum(const $arg1 &x);"
+    echo "[[nodiscard]] $prec asum(const $arg1 &x);"
   done
 done
 
@@ -152,7 +152,7 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    echo "$prec sum(const $arg1 &x);"
+    echo "[[nodiscard]] $prec sum(const $arg1 &x);"
   done
 done
 
@@ -246,7 +246,7 @@ echo "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      echo "$prec dot(const $arg1 &x, const $arg2 &y);"
+      echo "[[nodiscard]] $prec dot(const $arg1 &x, const $arg2 &y);"
     done
   done
 done
@@ -287,7 +287,7 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    echo "$prec nrm1(const $arg1 &x);"
+    echo "[[nodiscard]] $prec nrm1(const $arg1 &x);"
   done
 done
 
@@ -327,7 +327,7 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    echo "$prec nrm2(const $arg1 &x);"
+    echo "[[nodiscard]] $prec nrm2(const $arg1 &x);"
   done
 done
 

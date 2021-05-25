@@ -233,7 +233,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_row() const { return rowN; }
+  [[nodiscard]] size_t get_row() const { return rowN; }
 
   /**
    * @brief get # of col
@@ -242,7 +242,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_col() const { return colN; }
+  [[nodiscard]] size_t get_col() const { return colN; }
 
   /**
    * @brief get # of non-zeros
@@ -251,7 +251,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_nnz() const { return nnz; }
+  [[nodiscard]] size_t get_nnz() const { return nnz; }
 
   /**
    * @brief get format name "CRS"
@@ -260,7 +260,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string type() const { return "CRS"; }
+  [[nodiscard]] std::string type() const { return "CRS"; }
 
   /**
    * @brief compute index array hash (to compare structure)
@@ -276,7 +276,7 @@ public:
    * @note
    * - # of computation: 1
    */
-  size_t get_hash() const { return structure_hash; }
+  [[nodiscard]] size_t get_hash() const { return structure_hash; }
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -320,7 +320,7 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
 
   /**
    * @brief destructor of CRS matrix, free GPU memory
@@ -383,7 +383,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  double get_data_size() const {
+  [[nodiscard]] double get_data_size() const {
     return (get_nnz() * sizeof(Float) + (get_row() + 1) * sizeof(int) +
             get_nnz() * sizeof(int)) /
            1.0e+9;
@@ -421,7 +421,8 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    **/
-  bool equal(const CRS<Float> &mat, bool compare_cpu_and_device = false) const;
+  [[nodiscard]] bool equal(const CRS<Float> &mat,
+                           bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -434,7 +435,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator==(const CRS<Float> &mat) const;
+  [[nodiscard]] bool operator==(const CRS<Float> &mat) const;
 
   /**
    * @brief Comparing matricies (A != mat)
@@ -447,7 +448,7 @@ public:
    *   - if `gpu_status == true`; compare data on GPU
    *   - else; compare data on CPU
    **/
-  bool operator!=(const CRS<Float> &mat) const;
+  [[nodiscard]] bool operator!=(const CRS<Float> &mat) const;
 };
 } // namespace matrix
 } // namespace monolish

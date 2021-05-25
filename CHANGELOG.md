@@ -21,18 +21,11 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add MPI sum(), asum(), nrm1(), nrm2() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316 https://github.com/ricosjp/monolish/issues/56
-- add monolish::blas::sum test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
-- add MPI monolish::blas::dot() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
-- add get_rank(), get_size(), Allreduce() in monolish::mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
+- add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
+- add monolish::blas::sum test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317
 - add jacobi preconditioner test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/311
-- add make install_mpi and make install_all https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
-- add monolish::mpi test in test/mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
-- add monolish::mpi::Comm class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
 - add diag and Jacobi of LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/309
 - add Specifing GPU ID I/F https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/307
-- add MPI build test in gitlab-CI (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
-- add build option `MONOLISH_USE_MPI` (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 - add testing and benchmarking document https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/305
 - add create laplacian 2D 5point https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/304
 - add cg/bicgstab test of equation in linearoerator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/303
@@ -40,14 +33,25 @@ Unreleased
 - add build monolish_cpu on the local (and fix typo) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/300
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
+### Added (MPI trial implementation)
+- add MPI sum(), asum(), nrm1(), nrm2() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317 https://github.com/ricosjp/monolish/issues/56
+- add MPI monolish::blas::dot() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
+- add get_rank(), get_size(), Allreduce() in monolish::mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
+- add make install_mpi and make install_all https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
+- add monolish::mpi test in test/mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
+- add monolish::mpi::Comm class https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/310
+- add MPI build test in gitlab-CI (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+- add build option `MONOLISH_USE_MPI` (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+
 ### Fixed
-- LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
+- test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
+- LinearOperator diag() bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 - generate documents for each tag (at github-actions, this work was done on master)
-- clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+- Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
 - change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
-- test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
+- change C++ version C++14 --> C++17 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
 - Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
