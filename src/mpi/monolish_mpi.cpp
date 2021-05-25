@@ -50,6 +50,8 @@ void Comm::Finalize() {
   logger.util_out();
 }
 
+///////////////////////////////////////////////
+
 int Comm::get_rank() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -78,6 +80,18 @@ void Comm::set_comm(MPI_Comm external_comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   comm = external_comm;
+  logger.util_out();
+}
+
+///////////////////////////////////////////////
+
+void Comm::Barrier() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+#if defined MONOLISH_USE_MPI
+  MPI_Barrier(get_comm());
+  logger.util_out();
+#endif
   logger.util_out();
 }
 
