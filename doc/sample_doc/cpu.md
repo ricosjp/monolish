@@ -33,7 +33,7 @@ int main(){
   // x = {1,1,...,1}, length N
   monolish::vector<double> x(N, 1.0); 
 
-  // Random vector length N with values in the range 1.0 to 2.0
+  // Random vector length N with random values in the range 1.0 to 2.0
   monolish::vector<double> y(N, 1.0, 2.0); 
 
   // compute innerproduct
@@ -86,7 +86,7 @@ int main(){
   monolish::matrix::CRS<double> A(A_COO); // Create CRS format and convert from COO format
 
   // length A.row()
-  // Random vector length A.row() with values in the range 1.0 to 2.0
+  // Random vector length A.row() with random values in the range 1.0 to 2.0
   monolish::vector<double> x(A.get_row(), 1.0, 2.0); 
   monolish::vector<double> b(A.get_row(), 1.0, 2.0); 
 
