@@ -219,7 +219,7 @@ done
 #################################
 echo ""
 
-#matsub Dense
+#matmul Dense
 echo "
 /**
 * @brief Dense matrix multiplication: C = AB
@@ -236,7 +236,7 @@ for prec in double float; do
   echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
 done
 
-#matsub LinearOperator
+#matmul LinearOperator
 echo "
 /**
 * @brief LinearOperator multiplication: C = AB
@@ -252,7 +252,7 @@ for prec in double float; do
   echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<$prec> &C);"
 done
 
-#matsub CRS
+#matmul CRS
 echo "
 /**
 * @brief CRS and Dense matrix multiplication: C = AB
