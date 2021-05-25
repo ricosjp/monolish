@@ -156,7 +156,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  size_t get_row() const { return rowN; }
+  [[nodiscard]] size_t get_row() const { return rowN; }
 
   /**
    * @brief get # of col
@@ -165,7 +165,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  size_t get_col() const { return colN; }
+  [[nodiscard]] size_t get_col() const { return colN; }
 
   /**
    * @brief get multiplication function of matrix and vector
@@ -174,7 +174,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  std::function<vector<Float>(const vector<Float> &)> get_matvec() const {
+  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)> get_matvec() const {
     return matvec;
   }
 
@@ -186,7 +186,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  std::function<vector<Float>(const vector<Float> &)> get_rmatvec() const {
+  [[nodiscard]] std::function<vector<Float>(const vector<Float> &)> get_rmatvec() const {
     return rmatvec;
   }
 
@@ -197,7 +197,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  bool get_matvec_init_flag() const { return matvec_init_flag; }
+  [[nodiscard]] bool get_matvec_init_flag() const { return matvec_init_flag; }
 
   /**
    * @brief get flag that shows rmatvec is defined or not
@@ -206,7 +206,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  bool get_rmatvec_init_flag() const { return rmatvec_init_flag; }
+  [[nodiscard]] bool get_rmatvec_init_flag() const { return rmatvec_init_flag; }
 
   /**
    * @brief set multiplication function of matrix and vector
@@ -236,7 +236,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string type() const { return "LinearOperator"; }
+  [[nodiscard]] std::string type() const { return "LinearOperator"; }
 
   /**
    * @brief send data to GPU
@@ -274,7 +274,7 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  bool get_device_mem_stat() const { return gpu_status; };
+  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; };
 
   void set_device_mem_stat(bool status) {
     gpu_status = status;

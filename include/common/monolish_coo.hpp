@@ -318,7 +318,7 @@ public:
    * @warning
    * COO format can not use GPU function
    * **/
-  bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
 
   /**
    * @brief; free gpu mem.
@@ -391,7 +391,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j) const;
+  [[nodiscard]] Float at(const size_t i, const size_t j) const;
 
   /**
    * @brief Get matrix element (A(i,j))
@@ -400,7 +400,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  Float at(const size_t i, const size_t j) {
+  [[nodiscard]] Float at(const size_t i, const size_t j) {
     return static_cast<const COO *>(this)->at(i, j);
   };
 
@@ -426,7 +426,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_row() const { return rowN; }
+  [[nodiscard]] size_t get_row() const { return rowN; }
 
   /**
    * @brief get # of col
@@ -435,7 +435,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_col() const { return colN; }
+  [[nodiscard]] size_t get_col() const { return colN; }
 
   /**
    * @brief get # of non-zeros
@@ -444,7 +444,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  size_t get_nnz() const { return nnz; }
+  [[nodiscard]] size_t get_nnz() const { return nnz; }
 
   /**
    * @brief fill matrix elements with a scalar value
@@ -464,7 +464,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<int> &get_row_ptr() { return row_index; }
+  [[nodiscard]] std::vector<int> &get_row_ptr() { return row_index; }
 
   /**
    * @brief get column index
@@ -474,7 +474,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<int> &get_col_ind() { return col_index; }
+  [[nodiscard]] std::vector<int> &get_col_ind() { return col_index; }
 
   /**
    * @brief get value
@@ -484,7 +484,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::vector<Float> &get_val_ptr() { return val; }
+  [[nodiscard]] std::vector<Float> &get_val_ptr() { return val; }
 
   /**
    * @brief get row index
@@ -494,7 +494,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  const std::vector<int> &get_row_ptr() const { return row_index; }
+  [[nodiscard]] const std::vector<int> &get_row_ptr() const { return row_index; }
 
   /**
    * @brief get column index
@@ -504,7 +504,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  const std::vector<int> &get_col_ind() const { return col_index; }
+  [[nodiscard]] const std::vector<int> &get_col_ind() const { return col_index; }
 
   /**
    * @brief get value
@@ -514,7 +514,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  const std::vector<Float> &get_val_ptr() const { return val; }
+  [[nodiscard]] const std::vector<Float> &get_val_ptr() const { return val; }
 
   // Utility
   // ///////////////////////////////////////////////////////////////////////////
@@ -527,7 +527,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  COO &transpose();
+  [[nodiscard]] COO &transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)
@@ -557,7 +557,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string type() const { return "COO"; }
+  [[nodiscard]] std::string type() const { return "COO"; }
 
   /**
    * @brief get diag. vector
@@ -621,7 +621,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  bool equal(const COO<Float> &mat, bool compare_cpu_and_device = false) const;
+  [[nodiscard]] bool equal(const COO<Float> &mat, bool compare_cpu_and_device = false) const;
 
   /**
    * @brief Comparing matricies (A == mat)
@@ -632,7 +632,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  bool operator==(const COO<Float> &mat) const;
+  [[nodiscard]] bool operator==(const COO<Float> &mat) const;
 
   /**
    * @brief Comparing matricies (A != mat)
@@ -643,7 +643,7 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  bool operator!=(const COO<Float> &mat) const;
+  [[nodiscard]] bool operator!=(const COO<Float> &mat) const;
 
   /**
    * @brief insert element to (m, n)

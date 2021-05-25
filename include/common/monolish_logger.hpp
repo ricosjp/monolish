@@ -39,7 +39,7 @@ public:
   Logger(Logger &&) = delete;
   Logger &operator=(Logger &&) = delete;
 
-  static Logger &get_instance() {
+  [[nodiscard]] static Logger &get_instance() {
     static Logger instance;
     return instance;
   }
