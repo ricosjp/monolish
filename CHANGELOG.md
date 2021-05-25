@@ -21,7 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
+- add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
 - add monolish::blas::sum test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317
 - add jacobi preconditioner test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/311
 - add diag and Jacobi of LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/309
@@ -45,13 +45,13 @@ Unreleased
 
 ### Fixed
 - test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
-- LinearOperator diag bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
+- LinearOperator diag() bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 - generate documents for each tag (at github-actions, this work was done on master)
-- clang CPU bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
+- Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
 - change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
-- support C++17 fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
+- change C++ version C++14 --> C++17 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
 - Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
 - update clang 11.0.0 --> 11.0.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308
 - update allgebra 20.12.02-->21.05.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/308

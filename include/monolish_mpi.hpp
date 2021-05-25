@@ -23,6 +23,7 @@ namespace monolish {
  * @brief
  * C++ template MPI class, Functions of this class do nothing when MPI is
  * disabled.
+ * Functions in this class are under development. Many BLAS functions don't support MPI.
  */
 namespace mpi {
 /**
