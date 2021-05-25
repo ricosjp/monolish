@@ -34,6 +34,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added (MPI trial implementation)
+- add MPI gen scripts https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318
 - add MPI sum(), asum(), nrm1(), nrm2() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317 https://github.com/ricosjp/monolish/issues/56
 - add MPI monolish::blas::dot() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
 - add get_rank(), get_size(), Allreduce() in monolish::mpi https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/312
