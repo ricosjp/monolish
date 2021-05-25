@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
 - add monolish::blas::sum test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317
 - add jacobi preconditioner test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/311
 - add diag and Jacobi of LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/309
