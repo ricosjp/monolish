@@ -365,8 +365,8 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-double max(const matrix::Dense<double> &C);
-float max(const matrix::Dense<float> &C);
+[[nodiscard]] double max(const matrix::Dense<double> &C);
+[[nodiscard]] float max(const matrix::Dense<float> &C);
 
 /**
  * @brief Finds the smallest element in Dense matrix (min(C[0:nnz]))
@@ -377,8 +377,8 @@ float max(const matrix::Dense<float> &C);
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-double min(const matrix::Dense<double> &C);
-float min(const matrix::Dense<float> &C);
+[[nodiscard]] double min(const matrix::Dense<double> &C);
+[[nodiscard]] float min(const matrix::Dense<float> &C);
 
 /**
  * @brief reciprocal to Dense matrix elements (C[0:nnz] = 1 / A[0:nnz])

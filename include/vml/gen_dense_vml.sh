@@ -154,7 +154,7 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-    echo "$prec ${func[$i]}(const matrix::Dense<$prec> &C);"
+    echo "[[nodiscard]] $prec ${func[$i]}(const matrix::Dense<$prec> &C);"
 done
 done
 
