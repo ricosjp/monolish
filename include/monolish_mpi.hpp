@@ -94,13 +94,13 @@ public:
    * @brief get my rank number
    * @return rank number
    */
-  [[nodiscard]] int get_rank() const;
+  [[nodiscard]] int get_rank();
 
   /**
    * @brief get the number of processes
    * @return the number of prodessed
    */
-  [[nodiscard]] int get_size() const;
+  [[nodiscard]] int get_size();
 
   ///////////////////////////////////////////
 

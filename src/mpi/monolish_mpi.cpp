@@ -52,11 +52,11 @@ void Comm::Finalize() {
 
 ///////////////////////////////////////////////
 
-int Comm::get_rank() const {
+int Comm::get_rank() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_rank(get_comm(), &rank);
   logger.util_out();
   return rank;
 #endif
@@ -64,11 +64,11 @@ int Comm::get_rank() const {
   return 0;
 }
 
-int Comm::get_size() const {
+int Comm::get_size() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_size(get_comm(), &size);
   logger.util_out();
   return size;
 #endif
