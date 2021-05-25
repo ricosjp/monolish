@@ -87,7 +87,7 @@ void Comm::set_comm(MPI_Comm external_comm) {
 
 ///////////////////////////////////////////////
 
-void Comm::Barrier() {
+void Comm::Barrier() const{
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
