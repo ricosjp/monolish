@@ -2,17 +2,16 @@
 #include "../internal/monolish_internal.hpp"
 #include "allreduce.hpp"
 
-namespace monolish {
-namespace mpi {
+namespace monolish::mpi {
 
 void Comm::Init() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   assert(MPI_Init(nullptr, nullptr) == MPI_SUCCESS);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-  comm = MPI_COMM_WORLD;
+  if (comm == 0) {
+    comm = MPI_COMM_WORLD;
+  }
 #endif
   logger.util_out();
 }
@@ -22,14 +21,14 @@ void Comm::Init(int argc, char **argv) {
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
   assert(MPI_Init(&argc, &argv) == MPI_SUCCESS);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-  comm = MPI_COMM_WORLD;
+  if (comm == 0) {
+    comm = MPI_COMM_WORLD;
+  }
 #endif
   logger.util_out();
 }
 
-bool Comm::Initialized() {
+bool Comm::Initialized() const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 #if defined MONOLISH_USE_MPI
@@ -51,70 +50,100 @@ void Comm::Finalize() {
   logger.util_out();
 }
 
-double Comm::Allreduce(double val) {
+int Comm::get_rank() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+#if defined MONOLISH_USE_MPI
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  logger.util_out();
+  return rank;
+#endif
+  logger.util_out();
+  return 0;
+}
+
+int Comm::get_size() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+#if defined MONOLISH_USE_MPI
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  logger.util_out();
+  return size;
+#endif
+  logger.util_out();
+  return 1;
+}
+
+void Comm::set_comm(MPI_Comm external_comm) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  comm = external_comm;
+  logger.util_out();
+}
+
+double Comm::Allreduce(double val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-float Comm::Allreduce(float val) {
+float Comm::Allreduce(float val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-int Comm::Allreduce(int val) {
+int Comm::Allreduce(int val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-size_t Comm::Allreduce(size_t val) {
+size_t Comm::Allreduce(size_t val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
 
-double Comm::Allreduce_sum(double val) {
+double Comm::Allreduce_sum(double val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-float Comm::Allreduce_sum(float val) {
+float Comm::Allreduce_sum(float val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-int Comm::Allreduce_sum(int val) {
+int Comm::Allreduce_sum(int val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
-size_t Comm::Allreduce_sum(size_t val) {
+size_t Comm::Allreduce_sum(size_t val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }
 
-double Comm::Allreduce_prod(double val) {
+double Comm::Allreduce_prod(double val) const {
   return Allreduce_core(val, MPI_PROD, get_comm());
 }
-float Comm::Allreduce_prod(float val) {
+float Comm::Allreduce_prod(float val) const {
   return Allreduce_core(val, MPI_PROD, get_comm());
 }
-int Comm::Allreduce_prod(int val) {
+int Comm::Allreduce_prod(int val) const {
   return Allreduce_core(val, MPI_PROD, get_comm());
 }
-size_t Comm::Allreduce_prod(size_t val) {
+size_t Comm::Allreduce_prod(size_t val) const {
   return Allreduce_core(val, MPI_PROD, get_comm());
 }
 
-double Comm::Allreduce_max(double val) {
+double Comm::Allreduce_max(double val) const {
   return Allreduce_core(val, MPI_MAX, get_comm());
 }
-float Comm::Allreduce_max(float val) {
+float Comm::Allreduce_max(float val) const {
   return Allreduce_core(val, MPI_MAX, get_comm());
 }
-int Comm::Allreduce_max(int val) {
+int Comm::Allreduce_max(int val) const {
   return Allreduce_core(val, MPI_MAX, get_comm());
 }
-size_t Comm::Allreduce_max(size_t val) {
+size_t Comm::Allreduce_max(size_t val) const {
   return Allreduce_core(val, MPI_MAX, get_comm());
 }
 
-double Comm::Allreduce_min(double val) {
+double Comm::Allreduce_min(double val) const {
   return Allreduce_core(val, MPI_MIN, get_comm());
 }
-float Comm::Allreduce_min(float val) {
+float Comm::Allreduce_min(float val) const {
   return Allreduce_core(val, MPI_MIN, get_comm());
 }
-int Comm::Allreduce_min(int val) {
+int Comm::Allreduce_min(int val) const {
   return Allreduce_core(val, MPI_MIN, get_comm());
 }
-size_t Comm::Allreduce_min(size_t val) {
+size_t Comm::Allreduce_min(size_t val) const {
   return Allreduce_core(val, MPI_MIN, get_comm());
 }
 
-} // namespace mpi
-} // namespace monolish
+} // namespace monolish::mpi
