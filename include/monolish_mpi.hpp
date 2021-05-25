@@ -58,19 +58,19 @@ public:
    * @brief get my rank number
    * @return rank number
    */
-  int get_rank() { return rank; }
+  [[nodiscard]] int get_rank() { return rank; }
 
   /**
    * @brief get the number of processes
    * @return the number of prodessed
    */
-  int get_size() { return size; }
+  [[nodiscard]] int get_size() { return size; }
 
   /**
    * @brief get communicator
    * @return MPI_COMM_WORLD
    */
-  MPI_Comm get_comm() { return comm; }
+  [[nodiscard]] MPI_Comm get_comm() { return comm; }
 
   /**
    * @brief Initialize the MPI execution environment

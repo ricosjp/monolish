@@ -136,31 +136,31 @@ public:
    * @brief get library option
    * @return library number
    **/
-  int get_lib() const { return lib; }
+  [[nodiscard]] int get_lib() const { return lib; }
 
   /**
    * @brief get tolerance
    * @return tolerance
    **/
-  double get_tol() const { return tol; }
+  [[nodiscard]] double get_tol() const { return tol; }
 
   /**
    * @brief get maxiter
    * @return  maxiter
    **/
-  size_t get_maxiter() const { return maxiter; }
+  [[nodiscard]] size_t get_maxiter() const { return maxiter; }
 
   /**
    * @brief get miniter
    * @return  miniter
    **/
-  size_t get_miniter() const { return miniter; }
+  [[nodiscard]] size_t get_miniter() const { return miniter; }
 
   /**
    * @brief get residual method(default=0)
    * @return residual method number
    **/
-  size_t get_residual_method() const { return resid_method; }
+  [[nodiscard]] size_t get_residual_method() const { return resid_method; }
 
   /**
    * @brief get print rhistory status
