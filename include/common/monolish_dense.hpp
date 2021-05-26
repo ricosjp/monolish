@@ -463,6 +463,8 @@ public:
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
+   * @warning
+   * This function is only available for Dense.
    **/
   [[nodiscard]] Float *operator[](size_t m) {
     if (get_device_mem_stat()) {
