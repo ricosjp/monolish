@@ -464,11 +464,11 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] Float* operator[](size_t m) {
+  [[nodiscard]] Float *operator[](size_t m) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
     }
-    return val.data()+m*get_col();
+    return val.data() + m * get_col();
   }
 
   /**
