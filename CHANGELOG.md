@@ -53,6 +53,7 @@ Unreleased
 - Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- change C++17 simplified nested namespaces (namespace::namespace) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/321 https://github.com/ricosjp/monolish/issues/60
 - change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - change C++ version C++14 --> C++17 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
 - Use absolute tolerance when answer close to 0. https://github.com/ricosjp/monolish/issues/53 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/314
