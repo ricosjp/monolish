@@ -5,8 +5,7 @@
 #include "dense_matvec.hpp"
 #include "linearoperator_matvec.hpp"
 
-namespace monolish {
-namespace blas {
+namespace monolish::blas {
 
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             vector<double> &y) {
@@ -329,6 +328,4 @@ void rmatvec(const matrix::LinearOperator<float> &A,
              view1D<matrix::Dense<float>, float> &y) {
   rmatvec_core(A, x, y);
 }
-
-} // namespace blas
-} // namespace monolish
+} // namespace monolish::blas

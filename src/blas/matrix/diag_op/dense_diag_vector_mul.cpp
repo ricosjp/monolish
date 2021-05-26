@@ -1,8 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../internal/monolish_internal.hpp"
 
-namespace monolish {
-namespace matrix {
+namespace monolish::matrix {
 
 // mul vector
 
@@ -111,5 +110,4 @@ template void monolish::matrix::Dense<double>::diag_mul(
     const view1D<matrix::Dense<double>, double> &vec);
 template void monolish::matrix::Dense<float>::diag_mul(
     const view1D<matrix::Dense<float>, float> &vec);
-} // namespace matrix
-} // namespace monolish
+} // namespace monolish::matrix
