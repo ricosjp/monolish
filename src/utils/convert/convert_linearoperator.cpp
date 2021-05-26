@@ -30,7 +30,7 @@ template <typename T> void LinearOperator<T>::convert(COO<T> &coo) {
     monolish::blas::matvec(crs, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
 
   logger.util_out();
 }
@@ -57,7 +57,7 @@ template <typename T> void LinearOperator<T>::convert(CRS<T> &crs) {
     monolish::blas::matvec(crs, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
 
   logger.util_out();
 }
@@ -84,7 +84,7 @@ template <typename T> void LinearOperator<T>::convert(Dense<T> &dense) {
     monolish::blas::matvec(dense, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
 
   logger.util_out();
 }
@@ -94,7 +94,7 @@ template void LinearOperator<float>::convert(Dense<float> &crs);
 
 template <typename T>
 void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
-  if (!matvec_init_flag) {
+  if (!get_matvec_init_flag()) {
     Dense<T> A(rowN, colN);
     dense = A;
     return;
