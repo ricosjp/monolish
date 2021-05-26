@@ -4,12 +4,10 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
-namespace monolish {
-
 /**
  * @brief Liner solver base class
  **/
-namespace solver {
+namespace monolish::solver {
 
 /**
  * @brief Enum class defining how to handle initial vectors
@@ -199,6 +197,4 @@ public:
     apply_precond = apply;
   };
 };
-
-} // namespace solver
-} // namespace monolish
+} // namespace monolish::solver
