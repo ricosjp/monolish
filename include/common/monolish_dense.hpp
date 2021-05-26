@@ -456,6 +456,22 @@ public:
   void operator=(const Dense<Float> &mat);
 
   /**
+   * @brief reference to the pointer of the begining of the m-th row
+   * @param m Position of an pointer in the matrix
+   * @return pointer at the begining of m-th row
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float* operator[](size_t m) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
+    }
+    return val.data()+m*get_col();
+  }
+
+  /**
    * @brief Comparing matricies (A == mat)
    * @param mat Dense matrix
    * @param compare_cpu_and_device compare data on both CPU and GPU
