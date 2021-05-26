@@ -147,11 +147,21 @@ template <typename T> bool test() {
     std::cout << "col size mismatch" << std::endl;
     return false;
   }
+  monolish::matrix::Dense<T> expanded_Dense(expanded_COO);
   expanded_COO.insert(3, 3, 1.0);
+  expanded_Dense[3][3] = 1.0;
   if (expanded_COO.get_nnz() != 9) {
     std::cout << "nnz size mismatch" << std::endl;
     return false;
   }
+  {
+    monolish::matrix::Dense<T> expanded_Dense_after_insertion(expanded_COO);
+    if(expanded_Dense_after_insertion != expanded_Dense){
+      std::cout << "Dense matrix mismatch" << std::endl;
+      return false;
+    }
+  }
+
   // expanded.mtx
   //	| 1 | 2 | 3 | 0 |
   //	| 4 | 0 | 5 | 0 |
@@ -181,6 +191,8 @@ template <typename T> bool test() {
       return false;
     }
   }
+
+
 
   expanded_COO.insert(0, 0, 3.0);
   if (expanded_COO.get_nnz() != 10) {
