@@ -1,8 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../monolish_internal.hpp"
 
-namespace monolish {
-namespace internal {
+namespace monolish::internal {
 
 ///////////////////////
 //   vector utils    //
@@ -120,5 +119,4 @@ bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status) {
   return ans;
 }
 
-} // namespace internal
-} // namespace monolish
+} // namespace monolish::internal

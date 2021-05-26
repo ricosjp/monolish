@@ -410,7 +410,7 @@ public:
   [[nodiscard]] vector<Float> operator-();
 
   /**
-   * @brief refetrence to the element at position (v[i])
+   * @brief reference to the element at position (v[i])
    * @param i Position of an element in the vector
    * @return vector element (v[i])
    * @note

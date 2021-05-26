@@ -5,12 +5,10 @@
 #include "./monolish_solver.hpp"
 #include "common/monolish_common.hpp"
 
-namespace monolish {
-
 /**
  * @brief handling eigenvalues and eigenvectors
  **/
-namespace standard_eigen {
+namespace monolish::standard_eigen {
 
 /**
  * @brief LOBPCG solver
@@ -103,6 +101,4 @@ public:
    **/
   std::string name() const { return "monolish::standard_eigen::DC"; }
 };
-
-} // namespace standard_eigen
-} // namespace monolish
+} // namespace monolish::standard_eigen

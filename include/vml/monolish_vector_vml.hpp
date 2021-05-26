@@ -3,12 +3,11 @@
 
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace vml {
+namespace monolish::vml {
 
 /**
  * @brief element by element addition of vector a and vector b.
@@ -1129,6 +1128,4 @@ void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<vector<float>, float> &y);
 void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<matrix::Dense<float>, float> &y);
-
-} // namespace vml
-} // namespace monolish
+} // namespace monolish::vml

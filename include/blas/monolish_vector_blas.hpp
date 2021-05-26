@@ -2,13 +2,12 @@
 #pragma once
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace blas {
+namespace monolish::blas {
 
 /**
  * @brief element by element addition of vector a and vector b.
@@ -806,6 +805,4 @@ void xpay(const float alpha, const view1D<matrix::Dense<float>, float> &x,
           view1D<vector<float>, float> &y);
 void xpay(const float alpha, const view1D<matrix::Dense<float>, float> &x,
           view1D<matrix::Dense<float>, float> &y);
-
-} // namespace blas
-} // namespace monolish
+} // namespace monolish::blas

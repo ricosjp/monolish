@@ -264,7 +264,7 @@ public:
   }
 
   /**
-   * @brief refetrence to the element at position
+   * @brief reference to the element at position
    * @param i Position of an element in the vector
    * @return vector element (v[i])
    * @note

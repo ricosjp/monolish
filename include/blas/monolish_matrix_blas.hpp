@@ -2,13 +2,12 @@
 #pragma once
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace blas {
+namespace monolish::blas {
 
 /**
  * @brief Dense matrix copy (C=A)
@@ -231,6 +230,4 @@ void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C);
-
-} // namespace blas
-} // namespace monolish
+} // namespace monolish::blas

@@ -6,7 +6,7 @@ template <typename T> bool test() {
   const int NNZ = 8;
 
   monolish::matrix::Dense<T> list_dense(
-      3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9}); // create from initilizer_list
+      3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9}); // create from initializer_list
 
   // create C-pointer COO Matrix (same as test.mtx, but pointer is 0 origin!!)
   T *val_array = (T *)malloc(sizeof(T) * NNZ);

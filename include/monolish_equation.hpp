@@ -5,13 +5,12 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
-namespace monolish {
 /**
  * @brief
  * Linear equation solvers for Dense and sparse matrix
  * Scalar
  */
-namespace equation {
+namespace monolish::equation {
 
 /**
  * @brief none solver class(nothing to do)
@@ -348,5 +347,4 @@ public:
    **/
   std::string name() const { return "monolish::equation::Cholesky"; }
 };
-} // namespace equation
-} // namespace monolish
+} // namespace monolish::equation

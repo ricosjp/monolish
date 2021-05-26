@@ -7,13 +7,11 @@
 #include <mpi.h>
 #endif
 
-namespace monolish {
-namespace internal {
 /**
  * @brief
  * Linear Algebra Package for Dense Matrix
  */
-namespace lapack {
+namespace monolish::internal::lapack {
 
 //////////////////////////////////////////////////////
 //  Eigenvalue calculation
@@ -164,6 +162,4 @@ int sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv);
 int sytrs(const matrix::Dense<double> &A, vector<double> &B,
           const std::vector<int> &ipiv);
 
-} // namespace lapack
-} // namespace internal
-} // namespace monolish
+} // namespace monolish::internal::lapack
