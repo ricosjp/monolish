@@ -156,7 +156,7 @@ template <typename T> bool test() {
   }
   {
     monolish::matrix::Dense<T> expanded_Dense_after_insertion(expanded_COO);
-    if(expanded_Dense_after_insertion != expanded_Dense){
+    if (expanded_Dense_after_insertion != expanded_Dense) {
       std::cout << "Dense matrix mismatch" << std::endl;
       return false;
     }
@@ -191,8 +191,6 @@ template <typename T> bool test() {
       return false;
     }
   }
-
-
 
   expanded_COO.insert(0, 0, 3.0);
   if (expanded_COO.get_nnz() != 10) {
