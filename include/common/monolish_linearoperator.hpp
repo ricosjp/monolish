@@ -130,8 +130,8 @@ public:
    * @param M # of row
    * @param N # of col
    * @param MATMUL multiplication function of matrix and matrix
-   * @param RMATMUL multiplication function of (Hermitian) transposed  matrix and
-   * matrix
+   * @param RMATMUL multiplication function of (Hermitian) transposed  matrix
+   * and matrix
    * @note
    * - # of computation: 4 + 2 function
    * - Multi-threading: false
@@ -225,13 +225,42 @@ public:
   }
 
   /**
+   * @brief get multiplication function of matrix and matrix dense
+   * @note
+   * - # of computation: 1 function
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  [[nodiscard]] std::function<
+      matrix::Dense<Float>(const matrix::Dense<Float> &)>
+  get_matmul_dense() const {
+    return matmul_dense;
+  }
+
+  /**
+   * @brief get multiplication function of (Hermitian) transposed matrix and
+  matrix dense;
+   * @note
+   * - # of computation: 1 function
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  [[nodiscard]] std::function<
+      matrix::Dense<Float>(const matrix::Dense<Float> &)>
+  get_rmatmul_dense() const {
+    return rmatmul_dense;
+  }
+
+  /**
    * @brief get flag that shows matvec is defined or not
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  [[nodiscard]] bool get_matvec_init_flag() const { return !(matvec==nullptr); }
+  [[nodiscard]] bool get_matvec_init_flag() const {
+    return !(matvec == nullptr);
+  }
 
   /**
    * @brief get flag that shows rmatvec is defined or not
@@ -240,7 +269,31 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  [[nodiscard]] bool get_rmatvec_init_flag() const { return !(rmatvec==nullptr); }
+  [[nodiscard]] bool get_rmatvec_init_flag() const {
+    return !(rmatvec == nullptr);
+  }
+
+  /**
+   * @brief get flag that shows matmul_dense is defined or not
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  [[nodiscard]] bool get_matmul_dense_init_flag() const {
+    return !(matmul_dense == nullptr);
+  }
+
+  /**
+   * @brief get flag that shows rmatmul_dense is defined or not
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  [[nodiscard]] bool get_rmatmul_dense_init_flag() const {
+    return !(rmatmul_dense == nullptr);
+  }
 
   /**
    * @brief set multiplication function of matrix and vector
@@ -262,6 +315,29 @@ public:
    */
   void set_rmatvec(
       const std::function<vector<Float>(const vector<Float> &)> &RMATVEC);
+
+  /**
+   * @brief set multiplication function of matrix and matrix dense
+   * @note
+   * - # of computation: 1 + 1 function
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void set_matmul_dense(
+      const std::function<matrix::Dense<Float>(const matrix::Dense<Float> &)>
+          &MATMUL);
+
+  /**
+   * @brief set multiplication function of (Hermitian) transposed matrix and
+   * matrix dense
+   * @note
+   * - # of computation: 1 + 1 function
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void set_rmatmul_dense(
+      const std::function<matrix::Dense<Float>(const matrix::Dense<Float> &)>
+          &RMATMUL);
 
   /**
    * @brief get format name "LinearOperator"

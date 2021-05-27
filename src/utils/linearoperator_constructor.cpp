@@ -155,5 +155,27 @@ template void LinearOperator<double>::set_rmatvec(
 template void LinearOperator<float>::set_rmatvec(
     const std::function<vector<float>(const vector<float> &)> &RMATVEC);
 
+template <typename T>
+void LinearOperator<T>::set_matmul_dense(
+    const std::function<Dense<T>(const Dense<T> &)> &MATMUL) {
+  matmul_dense = MATMUL;
+}
+
+template void LinearOperator<double>::set_matmul_dense(
+    const std::function<Dense<double>(const Dense<double> &)> &MATMUL);
+template void LinearOperator<float>::set_matmul_dense(
+    const std::function<Dense<float>(const Dense<float> &)> &MATMUL);
+
+template <typename T>
+void LinearOperator<T>::set_rmatmul_dense(
+    const std::function<Dense<T>(const Dense<T> &)> &RMATMUL) {
+  rmatmul_dense = RMATMUL;
+}
+
+template void LinearOperator<double>::set_rmatmul_dense(
+    const std::function<Dense<double>(const Dense<double> &)> &RMATMUL);
+template void LinearOperator<float>::set_rmatmul_dense(
+    const std::function<Dense<float>(const Dense<float> &)> &RMATMUL);
+
 } // namespace matrix
 } // namespace monolish

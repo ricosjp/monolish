@@ -217,6 +217,21 @@ void matmul(const matrix::LinearOperator<float> &A,
             matrix::LinearOperator<float> &C);
 
 /**
+ * @brief LinearOperator multiplication: C = AB
+ * @param A LinearOperator (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void matmul(const matrix::LinearOperator<double> &A,
+            const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void matmul(const matrix::LinearOperator<float> &A,
+            const matrix::Dense<float> &B, matrix::Dense<float> &C);
+
+/**
  * @brief CRS and Dense matrix multiplication: C = AB
  * @param A CRS matrix (size M x K)
  * @param B Dense matrix (size K x N)

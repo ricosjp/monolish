@@ -252,6 +252,22 @@ for prec in double float; do
   echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<$prec> &C);"
 done
 
+#matmul LinearOperator
+echo "
+/**
+* @brief LinearOperator multiplication: C = AB
+* @param A LinearOperator (size M x K)
+* @param B Dense matrix (size K x N)
+* @param C Dense matrix (size M x N)
+* @note
+* - # of computation: ?
+* - Multi-threading: false
+* - GPU acceleration: false
+*/ "
+for prec in double float; do
+  echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+done
+
 #matsub CRS
 echo "
 /**

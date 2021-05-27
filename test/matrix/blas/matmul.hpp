@@ -74,8 +74,8 @@ bool test_send_matmul(const size_t M, const size_t N, const size_t K,
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_matmul_linearoperator(const size_t M, const size_t N,
-                                     const size_t K, double tol) {
+bool test_send_matmul_linearoperator_only(const size_t M, const size_t N,
+                                          const size_t K, double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K)) {
@@ -106,6 +106,46 @@ bool test_send_matmul_linearoperator(const size_t M, const size_t N,
   MAT_A A(A1);
   MAT_B B(B1);
   MAT_C C(C1);
+  monolish::blas::matmul(A, B, C);
+  C.recv();
+
+  monolish::matrix::COO<T> resultC(C);
+
+  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+                      ansC.get_nnz(), tol);
+}
+
+template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
+bool test_send_matmul_linearoperator(const size_t M, const size_t N,
+                                     const size_t K, double tol) {
+
+  size_t nnzrow = 27;
+  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K)) {
+    nnzrow = 27;
+  } else {
+    nnzrow = std::min({M, N}) - 1;
+  }
+
+  monolish::matrix::COO<T> seedA =
+      monolish::util::random_structure_matrix<T>(M, K, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedB =
+      monolish::util::random_structure_matrix<T>(K, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedC =
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+
+  monolish::matrix::CRS<T> A1(seedA);
+  MAT_B B(seedB);
+  MAT_C C(seedC);
+
+  monolish::matrix::Dense<T> AA(seedA);
+  monolish::matrix::Dense<T> BB(seedB);
+  monolish::matrix::Dense<T> CC(seedC);
+
+  ans_matmul(AA, BB, CC);
+  monolish::matrix::COO<T> ansC(CC);
+
+  monolish::util::send(A1, B, C);
+  MAT_A A(A1);
   monolish::blas::matmul(A, B, C);
   C.recv();
 
