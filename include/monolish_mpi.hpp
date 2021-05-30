@@ -105,149 +105,308 @@ public:
   ///////////////////////////////////////////
 
   /**
-   * @brief Blocks until all processes in the communicator have reached this
-   * routine.
+   * @brief Blocks until all processes in the communicator have reached this routine.
    */
   void Barrier() const;
 
-  /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce(double val) const;
+
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce (double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce (float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce (int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_sum(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce (size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_sum(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_sum (double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_sum(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_sum (float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_sum(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_sum (int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_prod(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_sum (size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_prod(float val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_prod (double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_prod(int val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_prod (float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_prod(size_t val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_prod (int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_max(double val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_prod (size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_max(float val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_max (double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_max(int val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_max (float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_max(size_t val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_max (int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_min(double val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_max (size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_min(float val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_min (double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_min(int val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_min (float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_min (int val) const;
+
+  /**
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_min (size_t val) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
    * @param val scalar value
+   * @param root root rank number
    */
-  [[nodiscard]] size_t Allreduce_min(size_t val) const;
+  void Bcast(double &val, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param val scalar value
+   * @param root root rank number
+   */
+  void Bcast(float &val, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param val scalar value
+   * @param root root rank number
+   */
+  void Bcast(int &val, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param val scalar value
+   * @param root root rank number
+   */
+  void Bcast(size_t &val, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec monolish vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(monolish::vector<double> &vec, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec monolish vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(monolish::vector<float> &vec, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec std::vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(std::vector<double> &vec, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec std::vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(std::vector<float> &vec, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec std::vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(std::vector<int> &vec, int root) const;
+
+  /**
+   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+   * @param vec std::vector (size N)
+   * @param root root rank number
+   */
+  void Bcast(std::vector<size_t> &vec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, std::vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, std::vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
+
+  /**
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, monolish vector (size N)
+   * @param recvvec recv data, monolish vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, monolish vector (size N)
+   * @param recvvec recv data, monolish vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, std::vector (size N)
+   * @param recvvec recv data, std::vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(std::vector<double> &sendvec, monolish::std<double> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, std::vector (size N)
+   * @param recvvec recv data, std::vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(std::vector<float> &sendvec, monolish::std<float> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, std::vector (size N)
+   * @param recvvec recv data, std::vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(std::vector<int> &sendvec, monolish::std<int> &recvvec, int root) const;
+
+  /**
+   * @brief MPI_Scatter, Sends data from one task to all tasks.
+   * The data is evenly divided and transmitted to each process.
+   * @param sendvec send data, std::vector (size N)
+   * @param recvvec recv data, std::vector (size N / # of procs)
+   * @param val root rank number
+   */
+  void Scatter(std::vector<size_t> &sendvec, monolish::std<size_t> &recvvec, int root) const;
 };
-} // namespace monolish::mpi
+}
