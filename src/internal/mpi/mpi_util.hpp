@@ -12,7 +12,7 @@ namespace monolish::internal::mpi {
     return MPI_INT;
   }
   if (typeid(size_t) == typeid(val)) {
-    return MPI_SIZE_T
+    return MPI_SIZE_T;
   }
   assert();
   }
