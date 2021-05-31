@@ -221,7 +221,7 @@ void matmul(const matrix::LinearOperator<float> &A,
  * @param B Dense matrix (size K x N)
  * @param C Dense matrix (size M x N)
  * @note
- * - # of computation: 2 functions
+ * - # of computation: ?
  * - Multi-threading: false
  * - GPU acceleration: false
  */
@@ -245,4 +245,19 @@ void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C);
+
+/**
+ * @brief LinearOperator multiplication: C = A^t B
+ * @param A LinearOperator (size K x M)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ */
+void rmatmul(const matrix::LinearOperator<double> &A,
+             const matrix::Dense<double> &B, matrix::Dense<double> &C);
+void rmatmul(const matrix::LinearOperator<float> &A,
+             const matrix::Dense<float> &B, matrix::Dense<float> &C);
 } // namespace monolish::blas
