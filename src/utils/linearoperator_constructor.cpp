@@ -20,8 +20,6 @@ LinearOperator<T>::LinearOperator(const size_t M, const size_t N) {
   rowN = M;
   colN = N;
   gpu_status = false;
-  matvec_init_flag = false;
-  rmatvec_init_flag = false;
   logger.util_out();
 }
 template LinearOperator<double>::LinearOperator(const size_t M, const size_t N);
@@ -37,8 +35,6 @@ LinearOperator<T>::LinearOperator(
   colN = N;
   gpu_status = false;
   matvec = MATVEC;
-  matvec_init_flag = true;
-  rmatvec_init_flag = false;
   logger.util_out();
 }
 
@@ -60,9 +56,7 @@ LinearOperator<T>::LinearOperator(
   colN = N;
   gpu_status = false;
   matvec = MATVEC;
-  matvec_init_flag = true;
   rmatvec = RMATVEC;
-  rmatvec_init_flag = true;
   logger.util_out();
 }
 
@@ -74,6 +68,50 @@ template LinearOperator<float>::LinearOperator(
     const size_t M, const size_t N,
     const std::function<vector<float>(const vector<float> &)> &MATVEC,
     const std::function<vector<float>(const vector<float> &)> &RMATVEC);
+
+template <typename T>
+LinearOperator<T>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<T>(const Dense<T> &)> &MATMUL) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  gpu_status = false;
+  matmul_dense = MATMUL;
+  logger.util_out();
+}
+
+template LinearOperator<double>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<double>(const Dense<double> &)> &MATMUL);
+template LinearOperator<float>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<float>(const Dense<float> &)> &MATMUL);
+
+template <typename T>
+LinearOperator<T>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<T>(const Dense<T> &)> &MATMUL,
+    const std::function<Dense<T>(const Dense<T> &)> &RMATMUL) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  rowN = M;
+  colN = N;
+  gpu_status = false;
+  matmul_dense = MATMUL;
+  rmatmul_dense = RMATMUL;
+  logger.util_out();
+}
+
+template LinearOperator<double>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<double>(const Dense<double> &)> &MATMUL,
+    const std::function<Dense<double>(const Dense<double> &)> &RMATMUL);
+template LinearOperator<float>::LinearOperator(
+    const size_t M, const size_t N,
+    const std::function<Dense<float>(const Dense<float> &)> &MATMUL,
+    const std::function<Dense<float>(const Dense<float> &)> &RMATMUL);
 
 // copy constructor
 template <typename T>
@@ -87,10 +125,7 @@ LinearOperator<T>::LinearOperator(const LinearOperator<T> &linearoperator) {
   gpu_status = linearoperator.get_device_mem_stat();
 
   matvec = linearoperator.get_matvec();
-  matvec_init_flag = linearoperator.get_matvec_init_flag();
-
   rmatvec = linearoperator.get_rmatvec();
-  rmatvec_init_flag = linearoperator.get_rmatvec_init_flag();
 }
 
 template LinearOperator<double>::LinearOperator(
@@ -102,7 +137,6 @@ template <typename T>
 void LinearOperator<T>::set_matvec(
     const std::function<vector<T>(const vector<T> &)> &MATVEC) {
   matvec = MATVEC;
-  matvec_init_flag = true;
 }
 
 template void LinearOperator<double>::set_matvec(
@@ -114,13 +148,34 @@ template <typename T>
 void LinearOperator<T>::set_rmatvec(
     const std::function<vector<T>(const vector<T> &)> &RMATVEC) {
   rmatvec = RMATVEC;
-  rmatvec_init_flag = true;
 }
 
 template void LinearOperator<double>::set_rmatvec(
     const std::function<vector<double>(const vector<double> &)> &RMATVEC);
 template void LinearOperator<float>::set_rmatvec(
     const std::function<vector<float>(const vector<float> &)> &RMATVEC);
+
+template <typename T>
+void LinearOperator<T>::set_matmul_dense(
+    const std::function<Dense<T>(const Dense<T> &)> &MATMUL) {
+  matmul_dense = MATMUL;
+}
+
+template void LinearOperator<double>::set_matmul_dense(
+    const std::function<Dense<double>(const Dense<double> &)> &MATMUL);
+template void LinearOperator<float>::set_matmul_dense(
+    const std::function<Dense<float>(const Dense<float> &)> &MATMUL);
+
+template <typename T>
+void LinearOperator<T>::set_rmatmul_dense(
+    const std::function<Dense<T>(const Dense<T> &)> &RMATMUL) {
+  rmatmul_dense = RMATMUL;
+}
+
+template void LinearOperator<double>::set_rmatmul_dense(
+    const std::function<Dense<double>(const Dense<double> &)> &RMATMUL);
+template void LinearOperator<float>::set_rmatmul_dense(
+    const std::function<Dense<float>(const Dense<float> &)> &RMATMUL);
 
 } // namespace matrix
 } // namespace monolish

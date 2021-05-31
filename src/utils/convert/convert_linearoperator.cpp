@@ -24,13 +24,20 @@ template <typename T> void LinearOperator<T>::convert(COO<T> &coo) {
 
   gpu_status = coo.get_device_mem_stat();
 
-  set_matvec([&](const monolish::vector<T> &VEC) {
+  set_matvec([&](const vector<T> &VEC) {
     CRS<T> crs(coo);
-    monolish::vector<T> vec(crs.get_row(), 0);
-    monolish::blas::matvec(crs, VEC, vec);
+    vector<T> vec(crs.get_row(), 0);
+    blas::matvec(crs, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
+  set_matmul_dense([&](const Dense<T> &MAT) {
+    CRS<T> crs(coo);
+    Dense<T> mat(crs.get_row(), MAT.get_col(), 0.0);
+    blas::matmul(crs, MAT, mat);
+    return mat;
+  });
+  rmatmul_dense = nullptr;
 
   logger.util_out();
 }
@@ -49,15 +56,24 @@ template <typename T> void LinearOperator<T>::convert(CRS<T> &crs) {
 
   gpu_status = crs.get_device_mem_stat();
 
-  set_matvec([&](const monolish::vector<T> &VEC) {
-    monolish::vector<T> vec(crs.get_row(), 0);
+  set_matvec([&](const vector<T> &VEC) {
+    vector<T> vec(crs.get_row(), 0);
     if (gpu_status) {
-      monolish::util::send(vec);
+      util::send(vec);
     }
-    monolish::blas::matvec(crs, VEC, vec);
+    blas::matvec(crs, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
+  set_matmul_dense([&](const Dense<T> &MAT) {
+    Dense<T> mat(crs.get_row(), MAT.get_col(), 0.0);
+    if (gpu_status) {
+      util::send(mat);
+    }
+    blas::matmul(crs, MAT, mat);
+    return mat;
+  });
+  rmatmul_dense = nullptr;
 
   logger.util_out();
 }
@@ -76,15 +92,24 @@ template <typename T> void LinearOperator<T>::convert(Dense<T> &dense) {
 
   gpu_status = dense.get_device_mem_stat();
 
-  set_matvec([&](const monolish::vector<T> &VEC) {
-    monolish::vector<T> vec(dense.get_row(), 0);
+  set_matvec([&](const vector<T> &VEC) {
+    vector<T> vec(dense.get_row(), 0);
     if (gpu_status) {
-      monolish::util::send(vec);
+      util::send(vec);
     }
-    monolish::blas::matvec(dense, VEC, vec);
+    blas::matvec(dense, VEC, vec);
     return vec;
   });
-  rmatvec_init_flag = false;
+  rmatvec = nullptr;
+  set_matmul_dense([&](const Dense<T> &MAT) {
+    Dense<T> mat(dense.get_row(), MAT.get_col(), 0.0);
+    if (gpu_status) {
+      util::send(mat);
+    }
+    blas::matmul(dense, MAT, mat);
+    return mat;
+  });
+  rmatmul_dense = nullptr;
 
   logger.util_out();
 }
@@ -94,7 +119,7 @@ template void LinearOperator<float>::convert(Dense<float> &crs);
 
 template <typename T>
 void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
-  if (!matvec_init_flag) {
+  if (!get_matvec_init_flag()) {
     Dense<T> A(rowN, colN);
     dense = A;
     return;
