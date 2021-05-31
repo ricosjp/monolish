@@ -1,8 +1,7 @@
 #include "../../../include/monolish_blas.hpp"
 #include "../monolish_internal.hpp"
 
-namespace monolish {
-namespace internal {
+namespace monolish::internal {
 ///////////////////////
 //   scalar-vector   //
 ///////////////////////
@@ -305,5 +304,4 @@ void vreciprocal(const size_t N, const float *a, float *y, bool gpu_status) {
   }
   logger.func_out();
 }
-} // namespace internal
-} // namespace monolish
+} // namespace monolish::internal

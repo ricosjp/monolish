@@ -38,6 +38,8 @@ int main(int argc, char **argv) {
   std::vector<int> ivec(size, 1);
   std::vector<size_t> svec(size, 1);
 
+  comm.Barrier();
+
   if (test_sum(dvec) != size * procs) {
     std::cout << "error in double" << std::endl;
   }

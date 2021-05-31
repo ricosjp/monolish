@@ -14,8 +14,7 @@
 #include "vecsub.hpp"
 #include "xpay.hpp"
 
-namespace monolish {
-namespace blas {
+namespace monolish::blas {
 
 void vecadd(const vector<double> &a, const vector<double> &b,
             vector<double> &y) {
@@ -1175,6 +1174,4 @@ void xpay(const float alpha, const view1D<matrix::Dense<float>, float> &x,
           view1D<matrix::Dense<float>, float> &y) {
   Sxpay_core(alpha, x, y);
 }
-
-} // namespace blas
-} // namespace monolish
+} // namespace monolish::blas

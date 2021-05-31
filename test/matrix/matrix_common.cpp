@@ -6,7 +6,7 @@ template <typename T> bool test() {
   const int NNZ = 8;
 
   monolish::matrix::Dense<T> list_dense(
-      3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9}); // create from initilizer_list
+      3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9}); // create from initializer_list
 
   // create C-pointer COO Matrix (same as test.mtx, but pointer is 0 origin!!)
   T *val_array = (T *)malloc(sizeof(T) * NNZ);
@@ -147,11 +147,21 @@ template <typename T> bool test() {
     std::cout << "col size mismatch" << std::endl;
     return false;
   }
+  monolish::matrix::Dense<T> expanded_Dense(expanded_COO);
   expanded_COO.insert(3, 3, 1.0);
+  expanded_Dense[3][3] = 1.0;
   if (expanded_COO.get_nnz() != 9) {
     std::cout << "nnz size mismatch" << std::endl;
     return false;
   }
+  {
+    monolish::matrix::Dense<T> expanded_Dense_after_insertion(expanded_COO);
+    if (expanded_Dense_after_insertion != expanded_Dense) {
+      std::cout << "Dense matrix mismatch" << std::endl;
+      return false;
+    }
+  }
+
   // expanded.mtx
   //	| 1 | 2 | 3 | 0 |
   //	| 4 | 0 | 5 | 0 |

@@ -3,12 +3,11 @@
 
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace vml {
+namespace monolish::vml {
 
 /**
  * @brief element by element addition CRS matrix A and
@@ -439,6 +438,4 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  */
 void reciprocal(const matrix::CRS<double> &a, matrix::CRS<double> &y);
 void reciprocal(const matrix::CRS<float> &a, matrix::CRS<float> &y);
-
-} // namespace vml
-} // namespace monolish
+} // namespace monolish::vml

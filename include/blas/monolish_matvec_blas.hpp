@@ -2,13 +2,12 @@
 #pragma once
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace blas {
+namespace monolish::blas {
 
 /**
  * @brief Dense matrix and vector multiplication: y = Ax
@@ -229,6 +228,4 @@ void rmatvec(const matrix::LinearOperator<float> &A,
 void rmatvec(const matrix::LinearOperator<float> &A,
              const view1D<matrix::Dense<float>, float> &x,
              view1D<matrix::Dense<float>, float> &y);
-
-} // namespace blas
-} // namespace monolish
+} // namespace monolish::blas

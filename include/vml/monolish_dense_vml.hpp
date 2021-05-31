@@ -3,12 +3,11 @@
 
 #include "../common/monolish_common.hpp"
 
-namespace monolish {
 /**
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace vml {
+namespace monolish::vml {
 
 /**
  * @brief element by element addition Dense matrix A and
@@ -391,6 +390,4 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  */
 void reciprocal(const matrix::Dense<double> &a, matrix::Dense<double> &y);
 void reciprocal(const matrix::Dense<float> &a, matrix::Dense<float> &y);
-
-} // namespace vml
-} // namespace monolish
+} // namespace monolish::vml

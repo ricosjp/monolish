@@ -1,8 +1,7 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../internal/monolish_internal.hpp"
 
-namespace monolish {
-namespace matrix {
+namespace monolish::matrix {
 
 // sub scalar
 template <typename T> void Dense<T>::diag_sub(const T alpha) {
@@ -34,5 +33,4 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
 template void monolish::matrix::Dense<double>::diag_sub(const double alpha);
 template void monolish::matrix::Dense<float>::diag_sub(const float alpha);
 
-} // namespace matrix
-} // namespace monolish
+} // namespace monolish::matrix

@@ -14,11 +14,10 @@
 #define MONOLISH_SOLVER_RESIDUAL_NAN -4
 #define MONOLISH_SOLVER_NOT_IMPL -10
 
-namespace monolish {
 /**
  * @brief monolish utilities
  */
-namespace util {
+namespace monolish::util {
 
 /**
  * @brief get the number of devices
@@ -728,5 +727,4 @@ auto device_free(T &x, Types &... args) {
  **/
 [[nodiscard]] bool build_with_cblas();
 
-} // namespace util
-} // namespace monolish
+} // namespace monolish::util

@@ -28,8 +28,7 @@ using Sreg = __m256;
 using Dreg = __m256d;
 #endif
 
-namespace monolish {
-namespace internal {
+namespace monolish::internal {
 
 #ifdef MONOLISH_USE_GPU
 auto checkError = [](auto result, auto func, auto file, auto line) {
@@ -148,5 +147,4 @@ size_t vhash(const size_t N, const int *y, const int seed_value,
 size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
              bool gpu_status);
 
-} // namespace internal
-} // namespace monolish
+} // namespace monolish::internal
