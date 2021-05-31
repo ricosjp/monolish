@@ -4,6 +4,7 @@ echo "#pragma once
 
 #include \"common/monolish_common.hpp\"
 #include <climits>
+#include <vector>
 
 #if defined MONOLISH_USE_MPI
 #include <mpi.h>

@@ -78,5 +78,5 @@ for prec in double float int size_t; do
    * @param recvvec recv data, std::vector (size N / # of procs)
    * @param val root rank number
    */
-  void Scatter(std::vector<$prec> &sendvec, monolish::std<$prec> &recvvec, int root) const;"
+  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root) const;"
 done
