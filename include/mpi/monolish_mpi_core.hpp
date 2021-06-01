@@ -213,73 +213,83 @@ public:
 [[nodiscard]] size_t Allreduce_min (size_t val) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(double &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(float &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(int &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(size_t &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   */
-  void Bcast(monolish::vector<double> &vec, int root) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Bcast(monolish::vector<double> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   */
-  void Bcast(monolish::vector<float> &vec, int root) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Bcast(monolish::vector<float> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<double> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<float> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<int> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<size_t> &vec, int root) const;
 
   /**
@@ -288,8 +298,13 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, std::vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
+  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -297,8 +312,13 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, std::vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
+  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -337,57 +357,67 @@ public:
   void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
   void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
   void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
   void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
   void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
 };
 }
