@@ -64,7 +64,7 @@ for prec in double float; do
    * @param vec monolish vector (size N)
    * @param root root rank number
    */
-  void Bcast(monolish::vector<$prec> &vec, int root) const;"
+  void Bcast(monolish::vector<$prec> &vec, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float int size_t; do
@@ -87,7 +87,7 @@ for prec in double float; do
   * @param recvvec recv data, std::vector (size N * # of procs)
   * @param val root rank number
   */
-  void Gather(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root) const;"
+  void Gather(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float int size_t; do
@@ -112,7 +112,7 @@ for prec in double float; do
    * @param recvvec recv data, monolish vector (size N / # of procs)
    * @param val root rank number
    */
-  void Scatter(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root) const;"
+  void Scatter(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float int size_t; do
