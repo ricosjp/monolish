@@ -7,8 +7,8 @@ CXXFLAGS=-O3 -lm -fopenmp -pthread -std=c++17 -fPIC -DUSE_SXAT
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 
 LIBFLAGS = -shared 
-BLAS_LIB = -I/opt/nec/ve/nlc/2.1.0/include/ 
-BLAS_LIB += -L/opt/nec/ve/nlc/2.1.0/lib/
+BLAS_LIB = -I/opt/nec/ve/nlc/2.3.0/include/ 
+BLAS_LIB += -L/opt/nec/ve/nlc/2.3.0/lib/
 BLAS_LIB += -lcblas -lblas_openmp
 
 ####################
