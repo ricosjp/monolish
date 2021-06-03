@@ -2,9 +2,9 @@ MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=nc++
 
-BLAS_LIB = -I/opt/nec/ve/nlc/2.1.0/include/ 
-BLAS_LIB += -L/opt/nec/ve/nlc/2.1.0/lib/
-BLAS_LIB += -lcblas -lblas_openmp
+BLAS_LIB = -I/opt/nec/ve/nlc/2.3.0/include/ 
+BLAS_LIB += -L/opt/nec/ve/nlc/2.3.0/lib/
+BLAS_LIB += -llapack -lcblas -lblas_openmp
 
 CXXFLAGS=-O3 -lm -fopenmp -pthread -std=c++17
 

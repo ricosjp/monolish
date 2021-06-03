@@ -1,4 +1,7 @@
 #pragma once
+#if USE_SXAT
+#undef _HAS_CPP17
+#endif
 #include "monolish_dense.hpp"
 #include "monolish_logger.hpp"
 #include "monolish_matrix.hpp"

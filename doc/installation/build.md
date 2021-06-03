@@ -108,8 +108,13 @@ OpenMP Offloading enabled clang is provided by the following allgebra container.
 - NEC SX-Aurora TSUBASA
 ```
 git clone git@github.com:ricosjp/monolish.git
-make -f Makefile.sxat
+make sxat
+make install_sxat
 ```
+
+We use `NEC nc++ 3.2.1` and `NEC NLC 2.3.0`.
+
+VE requires the setting of an environment variable `VE_LD_LIBRARY_PATH`.
 
 - Fujitsu A64fx
 ```
