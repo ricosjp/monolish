@@ -12,11 +12,11 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <memory>
 #include <omp.h>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
 #if USE_SXAT
 #undef _HAS_CPP17
