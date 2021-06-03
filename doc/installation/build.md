@@ -105,7 +105,9 @@ OpenMP Offloading enabled clang is provided by the following allgebra container.
 
 
 ## Build monolish for special hardware
-- NEC SX-Aurora TSUBASA
+SXAT and A64fx do not require Docker.
+
+### NEC SX-Aurora TSUBASA
 ```
 git clone git@github.com:ricosjp/monolish.git
 make sxat
@@ -116,13 +118,14 @@ We use `NEC nc++ 3.2.1` and `NEC NLC 2.3.0`.
 
 VE requires the setting of an environment variable `VE_LD_LIBRARY_PATH`.
 
-- Fujitsu A64fx
+### Fujitsu A64FX
 ```
 git clone git@github.com:ricosjp/monolish.git
-make -f Makefile.a64fx
+make a64fx
+make install_a64fx
 ```
-SXAT and A64fx do not require Docker.
 
+monolish only support fcc clang mode.
 
 ## AMD Radeon GPU and Intel Xe GPU
 Currently, it does not work because the code depends on NVIDIA CUDA libraries.
