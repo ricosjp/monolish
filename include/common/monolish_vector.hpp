@@ -14,12 +14,18 @@
 #include <iostream>
 #include <iterator>
 #include <omp.h>
-#include <random>
 #include <stdexcept>
 #include <string>
 #include <vector>
-
 #include <memory>
+
+#if USE_SXAT
+#undef _HAS_CPP17
+#endif
+#include <random>
+#if USE_SXAT
+#define _HAS_CPP17 1
+#endif
 
 #if defined USE_MPI
 #include <mpi.h>
