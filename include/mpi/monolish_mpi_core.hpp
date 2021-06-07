@@ -347,7 +347,8 @@ public:
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, std::vector (size N * # of procs)
    * @param val root rank number
-   * @param gpu_sync sync gpu data.
+   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
+   * communication, and finally sends recvvec.
    * @warning
    * When only_cpu flag is enabled and send data is on the GPU, data is received
    * from the GPU, MPI communication is performed, and finally data is sent to
@@ -364,7 +365,8 @@ public:
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, std::vector (size N * # of procs)
    * @param val root rank number
-   * @param gpu_sync sync gpu data.
+   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
+   * communication, and finally sends recvvec.
    * @warning
    * When only_cpu flag is enabled and send data is on the GPU, data is received
    * from the GPU, MPI communication is performed, and finally data is sent to

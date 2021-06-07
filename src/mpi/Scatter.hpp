@@ -28,7 +28,7 @@ void Scatter_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
 
 #if defined MONOLISH_USE_GPU
   if (gpu_sync == true) {
-    vec.recv();
+    sendvec.recv();
   }
 #endif
 
@@ -40,7 +40,7 @@ void Scatter_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
 
 #if defined MONOLISH_USE_GPU
   if (gpu_sync == true) {
-    vec.send();
+    recvvec.send();
   }
 #endif
 
