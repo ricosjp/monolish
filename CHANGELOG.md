@@ -36,6 +36,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added (MPI trial implementation)
+- add MPI Bcast, Gather, Scatter https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/325
 - add MPI Barrier https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318
 - add MPI gen scripts https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318
 - add MPI sum(), asum(), nrm1(), nrm2() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/317 https://github.com/ricosjp/monolish/issues/56
