@@ -3,8 +3,8 @@ TARGET=./lib/libmonolish_a64fx.so
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=FCC
-#CXXFLAGS = -Nclang -O3 -Ofast -fopenmp -std=c++17 -fPIC -fvectorize -Nlibomp
-CXXFLAGS = -Kfast,openmp,zfill,parallel,simd,reduction -std=c++17 -lm -fPIC -Kopenmp -Nlibomp
+CXXFLAGS = -Nclang -O3 -Ofast -fopenmp -std=c++17 -fPIC -fvectorize -Nlibomp
+#CXXFLAGS = -Kfast,openmp,zfill,parallel,simd,reduction -std=c++17 -lm -fPIC -Kopenmp -Nlibomp
 #CXXFLAGS	 += -Nsrc -Koptmsg=2
 CXXFLAGS += $(CXXFLAGS_EXTRA)
 
@@ -39,7 +39,7 @@ SRCS +=$(notdir $(wildcard ./src/utils/*/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/vml/*.cpp))
 SRCS +=$(notdir $(wildcard ./src/vml/*/*.cpp))
 
-SRCS +=$(notdir $(wildcard ./src/mpi/*.cpp))
+# SRCS +=$(notdir $(wildcard ./src/mpi/*.cpp))
 
 #############################################################
 
@@ -87,7 +87,7 @@ vpath %.cpp ./src/vml/linearoperator/
 vpath %.cpp ./src/vml/matrix/
 vpath %.cpp ./src/vml/vector/
 
-vpath %.cpp ./src/mpi/
+# vpath %.cpp ./src/mpi/
 
 #############################################################
 

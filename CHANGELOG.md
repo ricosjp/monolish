@@ -22,6 +22,7 @@ Unreleased
 -----------
 ### Added
 - add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/326 https://github.com/ricosjp/monolish/issues/61
+- support NEC nlc lapack for SXAT https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
 - add matmul function for LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/322
 - add operator [] for matrix::Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/320
 - add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
@@ -50,12 +51,16 @@ Unreleased
 - add build option `MONOLISH_USE_MPI` (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Fixed
+- fix filename typo internal/*/interger.cpp --> integer.cpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
+- avoid SXAT c++17 std::random bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
+- test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - test check_ans() bug fix https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - LinearOperator diag() bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/313
 - generate documents for each tag (at github-actions, this work was done on master)
 - Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- support stop fcc trad mode, and support fcc clang mode https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/324
 - change C++17 simplified nested namespaces (namespace::namespace) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/321 https://github.com/ricosjp/monolish/issues/60
 - change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
 - change C++ version C++14 --> C++17 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/315
