@@ -1,8 +1,8 @@
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=FCC
-CXXFLAGS=-Kfast,openmp,zfill,parallel,simd -std=c++17 -lm -SSL2BLAMP
-#CXXFLAGS=-Nclang -Ofast -fopenmp -std=c++17 -lm -SSL2BLAMP
+#CXXFLAGS=-Kfast,openmp,zfill,parallel,simd -std=c++17 -lm -SSL2BLAMP
+CXXFLAGS=-Nclang -Ofast -fopenmp -std=c++17 -lm -SSL2BLAMP
 
 LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_a64fx
 

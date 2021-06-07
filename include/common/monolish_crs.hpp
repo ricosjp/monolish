@@ -8,10 +8,17 @@
 #pragma once
 #include <exception>
 #include <omp.h>
-#include <random>
 #include <stdexcept>
 #include <string>
 #include <vector>
+
+#if USE_SXAT
+#undef _HAS_CPP17
+#endif
+#include <random>
+#if USE_SXAT
+#define _HAS_CPP17 1
+#endif
 
 namespace monolish {
 template <typename Float> class vector;
