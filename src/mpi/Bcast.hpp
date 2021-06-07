@@ -3,7 +3,7 @@
 
 namespace monolish {
 namespace {
-//vector
+//Scalar
 template <typename T> 
 void Bcast_core(T &val, int root, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
