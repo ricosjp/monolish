@@ -20,23 +20,27 @@ monolish: oss mkl oss_nvidia mkl_nvidia
 
 oss: oss.Dockerfile
 	cp -r ../examples ./monolish_examples
+	cp -r ../benchmark ./monolish_benchmark
 	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
-	rm -rf ./monolish_examples/ 
+	rm -rf ./monolish_examples/  monolish_benchmark/
 
 mkl: $(MAKEFILE_DIR)/mkl.Dockerfile
 	cp -r ../examples ./monolish_examples
+	cp -r ../benchmark ./monolish_benchmark
 	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
-	rm -rf ./monolish_examples/ 
+	rm -rf ./monolish_examples/  monolish_benchmark/
 
 oss_nvidia: $(MAKEFILE_DIR)/oss_nvidia.Dockerfile
 	cp -r ../examples ./monolish_examples
+	cp -r ../benchmark ./monolish_benchmark
 	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
-	rm -rf ./monolish_examples/ 
+	rm -rf ./monolish_examples/  monolish_benchmark/
 
 mkl_nvidia: $(MAKEFILE_DIR)/mkl_nvidia.Dockerfile
 	cp -r ../examples ./monolish_examples
+	cp -r ../benchmark ./monolish_benchmark
 	docker build -t $(REGISTRY)/$@:$(TAG) . -f $<
-	rm -rf ./monolish_examples/ 
+	rm -rf ./monolish_examples/  monolish_benchmark/
 
 push: login monolish
 	docker push $(REGISTRY)/oss:$(TAG)
