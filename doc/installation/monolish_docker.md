@@ -6,7 +6,7 @@ monolish is installed in the following locations:
 - /usr/include
 
 examples can be found at:
-- /opt/monolish/
+- /opt/monolish/examples/
 
 # Run monolish container
 Use the following command to enter the monolish docker container.
