@@ -272,29 +272,33 @@ public:
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<double> &vec, int root) const;
+  void Bcast(std::vector<double> &vec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<float> &vec, int root) const;
+  void Bcast(std::vector<float> &vec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<int> &vec, int root) const;
+  void Bcast(std::vector<int> &vec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<size_t> &vec, int root) const;
+  void Bcast(std::vector<size_t> &vec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -330,8 +334,9 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
+  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -339,8 +344,9 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
+  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -348,8 +354,9 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
+  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -357,8 +364,9 @@ public:
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
+  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -394,8 +402,9 @@ public:
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
+  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -403,8 +412,9 @@ public:
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
+  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -412,8 +422,9 @@ public:
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
+  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -421,7 +432,8 @@ public:
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
+  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 };
 }

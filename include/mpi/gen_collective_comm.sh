@@ -79,8 +79,9 @@ for prec in double float int size_t; do
   * @brief MPI_Bcast, Broadcasts a message from the process with rank "root" to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<$prec> &vec, int root) const;"
+  void Bcast(std::vector<$prec> &vec, int root, bool gpu_sync=false) const;"
 done
 
 ## Gather
@@ -109,8 +110,9 @@ for prec in double float int size_t; do
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root) const;"
+  void Gather(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 ## Scatter
@@ -139,6 +141,7 @@ for prec in double float int size_t; do
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root) const;"
+  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
