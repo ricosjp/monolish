@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/326 https://github.com/ricosjp/monolish/issues/61
 - add matmul function for LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/322
 - add operator [] for matrix::Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/320
 - add C++17 nodiscard attribute https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318 https://github.com/ricosjp/monolish/issues/58
