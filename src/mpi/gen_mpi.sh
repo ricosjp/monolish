@@ -154,6 +154,26 @@ for type in double float; do
   echo "void Comm::Bcast(monolish::vector<$type> &vec, int root, bool gpu_sync) const{ Bcast_core(vec, root, get_comm(), gpu_sync );}"
 done
 
+## Gather
+for type in double float; do
+  echo "void Comm::Gather(monolish::vector<$type> &sendvec, monolish::vector<$type> recvvec, int root, bool gpu_sync) const{ Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+done
+
+## Gather
+for type in double float int size_t; do
+  echo "void Comm::Gather(std::vector<$type> &sendvec, std::vector<$type> recvvec, int root, bool gpu_sync) const{ Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+done
+
+## Scatter
+for type in double float; do
+  echo "void Comm::Scatter(monolish::vector<$type> &sendvec, monolish::vector<$type> recvvec, int root, bool gpu_sync) const{ Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+done
+
+## Scatter
+for type in double float int size_t; do
+  echo "void Comm::Scatter(std::vector<$type> &sendvec, std::vector<$type> recvvec, int root, bool gpu_sync) const{ Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+done
+
 echo "
 }" 
 
