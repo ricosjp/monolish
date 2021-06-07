@@ -1,3 +1,4 @@
+#pragma once
 #include<typeinfo>
 #include<cstdlib>
 
