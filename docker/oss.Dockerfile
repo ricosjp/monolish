@@ -2,6 +2,7 @@ FROM ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/oss:21.05.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 COPY ./monolish_examples/ /opt/monolish/examples/
+COPY ./monolish_benchmark/ /opt/monolish/benchmark/
 
 RUN apt-get update -y \
  && apt-get install -y wget python3-pip \
