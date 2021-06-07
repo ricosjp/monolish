@@ -216,29 +216,33 @@ public:
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param val scalar value
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast(double &val, int root) const;
+  void Bcast(double &val, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param val scalar value
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast(float &val, int root) const;
+  void Bcast(float &val, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param val scalar value
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast(int &val, int root) const;
+  void Bcast(int &val, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
   * @param val scalar value
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast(size_t &val, int root) const;
+  void Bcast(size_t &val, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes

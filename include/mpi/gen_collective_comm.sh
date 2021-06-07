@@ -53,8 +53,9 @@ for prec in double float int size_t; do
   * @brief MPI_Bcast, Broadcasts a message from the process with rank "root" to all other processes
   * @param val scalar value
   * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast($prec &val, int root) const;"
+  void Bcast($prec &val, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float; do
