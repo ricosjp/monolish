@@ -1,25 +1,6 @@
 #!/bin/bash
 
 echo "#pragma once
-
-#include \"common/monolish_common.hpp\"
-#include <climits>
-
-#if defined MONOLISH_USE_MPI
-#include <mpi.h>
-#else
-// MPI dummy
-#include \"mpi/mpi_dummy.hpp\"
-#endif
-
-#if SIZE_MAX == ULONG_MAX
-#define MPI_SIZE_T MPI_UNSIGNED_LONG
-#elif SIZE_MAX == ULLONG_MAX
-#define MPI_SIZE_T MPI_UNSIGNED_LONG_LONG
-#elif SIZE_MAX == UINT_MAX
-#define MPI_SIZE_T MPI_UNSIGNED
-#endif
-
 /**
  * @brief
  * C++ template MPI class, Functions of this class do nothing when MPI is
