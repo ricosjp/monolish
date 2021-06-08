@@ -72,10 +72,12 @@ template <typename T>
 MPI_Status Recv_core(T val, int src, int tag, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  MPI_Status stat;
 
 #if defined MONOLISH_USE_MPI
+  MPI_Status stat;
   MPI_Recv(&val, 1, internal::mpi::get_type(val), src, tag, comm, &stat);
+#else
+  MPI_Status stat=0;
 #endif
 
   logger.util_out();
@@ -88,11 +90,13 @@ MPI_Status Recv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
                      bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  MPI_Status stat;
 
 #if defined MONOLISH_USE_MPI
+  MPI_Status stat;
   MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
            comm, &stat);
+#else
+  MPI_Status stat=0;
 #endif
 
   logger.util_out();
@@ -105,7 +109,6 @@ MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
                      bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  MPI_Status stat;
 
 #if defined MONOLISH_USE_GPU
   if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
@@ -114,8 +117,11 @@ MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
 #endif
 
 #if defined MONOLISH_USE_MPI
+  MPI_Status stat;
   MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
            comm, &stat);
+#else
+  MPI_Status stat=0;
 #endif
 
 #if defined MONOLISH_USE_GPU
