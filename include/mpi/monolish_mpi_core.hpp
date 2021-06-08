@@ -93,6 +93,218 @@ public:
 
 
   /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Send(double val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Send(float val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Send(int val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Send(size_t val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Send(std::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Send(std::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Send(std::vector<int> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Send(std::vector<size_t> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Send(monolish::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Send(monolish::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Recv(double val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Recv(float val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Recv(int val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  */ 
+void Recv(size_t val, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Recv(std::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Recv(std::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Recv(std::vector<int> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+  */ 
+void Recv(std::vector<size_t> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Recv(monolish::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param dest rank of destination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Recv(monolish::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+
+  /**
   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
   * @param val scalar value
   */ 
