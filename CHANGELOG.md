@@ -21,7 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/326 https://github.com/ricosjp/monolish/issues/61
+- add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/327 https://github.com/ricosjp/monolish/issues/61
 - support NEC nlc lapack for SXAT https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
 - add matmul function for LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/322
 - add operator [] for matrix::Dense https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/320
@@ -38,6 +38,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added (MPI trial implementation)
+- add MPI blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/328
 - add MPI Bcast, Gather, Scatter https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/325
 - add MPI Barrier https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318
 - add MPI gen scripts https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/318
