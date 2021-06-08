@@ -95,87 +95,87 @@ public:
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param val scalar value
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
   */ 
-void Send(double val, int dest, int tag, bool only_cpu = false) const;
+void Send(double val, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param val scalar value
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
   */ 
-void Send(float val, int dest, int tag, bool only_cpu = false) const;
+void Send(float val, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param val scalar value
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
   */ 
-void Send(int val, int dest, int tag, bool only_cpu = false) const;
+void Send(int val, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param val scalar value
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
   */ 
-void Send(size_t val, int dest, int tag, bool only_cpu = false) const;
+void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
   */ 
-void Send(std::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(std::vector<double> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
   */ 
-void Send(std::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(std::vector<float> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
   */ 
-void Send(std::vector<int> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(std::vector<int> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
   */ 
-void Send(std::vector<size_t> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(std::vector<size_t> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
   * @warning
@@ -183,12 +183,12 @@ void Send(std::vector<size_t> vec, int dest, int tag, bool only_cpu = false) con
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-void Send(monolish::vector<double> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(monolish::vector<double> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
   * @warning
@@ -196,7 +196,7 @@ void Send(monolish::vector<double> vec, int dest, int tag, bool only_cpu = false
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-void Send(monolish::vector<float> vec, int dest, int tag, bool only_cpu = false) const;
+void Send(monolish::vector<float> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Recv for scalar. Performs a blocking recv.

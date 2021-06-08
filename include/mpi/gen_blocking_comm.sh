@@ -6,12 +6,12 @@ for prec in double float int size_t; do
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param val scalar value
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
   */ "
-  echo "void Send($prec val, int dest, int tag, bool only_cpu = false) const;"
+  echo "void Send($prec val, int dst, int tag, bool only_cpu = false) const;"
 done
 
 for prec in double float int size_t; do
@@ -19,12 +19,12 @@ for prec in double float int size_t; do
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
   */ "
-  echo "void Send(std::vector<$prec> vec, int dest, int tag, bool only_cpu = false) const;"
+  echo "void Send(std::vector<$prec> vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
 for prec in double float; do
@@ -32,7 +32,7 @@ for prec in double float; do
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
   * @param vec std::vector (size N)
-  * @param dest rank of destination
+  * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
   * @warning
@@ -40,7 +40,7 @@ for prec in double float; do
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ "
-  echo "void Send(monolish::vector<$prec> vec, int dest, int tag, bool only_cpu = false) const;"
+  echo "void Send(monolish::vector<$prec> vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
 ## recv
