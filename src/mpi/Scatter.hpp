@@ -27,7 +27,7 @@ void Scatter_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
+  if ( (gpu_sync == true) && (vec.get_device_stat()==true) ) {
     sendvec.recv();
   }
 #endif
