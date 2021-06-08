@@ -10,7 +10,7 @@ namespace {
 
 // Scalar
 template <typename T>
-void Send_core(T &val, int dst, int tag, MPI_Comm comm, bool gpu_sync) {
+void Send_core(T val, int dst, int tag, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -65,33 +65,37 @@ void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm, bool g
 
 // Scalar
 template <typename T>
-void Recv_core(T &val, int src, int tag, MPI_Comm comm, bool gpu_sync) {
+MPI_Status Recv_core(T val, int src, int tag, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
-  MPI_Recv(&val, 1, internal::mpi::get_type(val), src, tag, comm);
+  MPI_Status stat;
+  MPI_Recv(&val, 1, internal::mpi::get_type(val), src, tag, comm, &stat);
 #endif
 
   logger.util_out();
+  return stat;
 }
 
 // std::vector
 template <typename T>
-void Recv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm, bool gpu_sync) {
+MPI_Status Recv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
-  MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag, comm);
+  MPI_Status stat;
+  MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag, comm, &stat);
 #endif
 
   logger.util_out();
+  return stat;
 }
 
 // monolish::vector
 template <typename T>
-void Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm, bool gpu_sync) {
+MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -102,7 +106,8 @@ void Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm, bool g
 #endif
 
 #if defined MONOLISH_USE_MPI
-  MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag, comm);
+  MPI_Status stat;
+  MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag, comm, &stat);
 #endif
 
 #if defined MONOLISH_USE_GPU
@@ -112,6 +117,7 @@ void Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm, bool g
 #endif
 
   logger.util_out();
+  return stat;
 }
 
 } // namespace
