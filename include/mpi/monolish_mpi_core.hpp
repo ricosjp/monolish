@@ -99,7 +99,6 @@ public:
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Send(double val, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -109,7 +108,6 @@ void Send(double val, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Send(float val, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -119,7 +117,6 @@ void Send(float val, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Send(int val, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -129,7 +126,6 @@ void Send(int val, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -139,7 +135,6 @@ void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Send(std::vector<double> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -149,7 +144,6 @@ void Send(std::vector<double> vec, int dst, int tag, bool only_cpu = false) cons
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Send(std::vector<float> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -159,7 +153,6 @@ void Send(std::vector<float> vec, int dst, int tag, bool only_cpu = false) const
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Send(std::vector<int> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -169,7 +162,6 @@ void Send(std::vector<int> vec, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Send(std::vector<size_t> vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
@@ -205,7 +197,6 @@ void Send(monolish::vector<float> vec, int dst, int tag, bool only_cpu = false) 
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Recv(double val, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -215,7 +206,6 @@ void Recv(double val, int src, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Recv(float val, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -225,7 +215,6 @@ void Recv(float val, int src, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Recv(int val, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -235,7 +224,6 @@ void Recv(int val, int src, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  */ 
 void Recv(size_t val, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -245,7 +233,6 @@ void Recv(size_t val, int src, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Recv(std::vector<double> vec, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -255,7 +242,6 @@ void Recv(std::vector<double> vec, int src, int tag, bool only_cpu = false) cons
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Recv(std::vector<float> vec, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -265,7 +251,6 @@ void Recv(std::vector<float> vec, int src, int tag, bool only_cpu = false) const
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Recv(std::vector<int> vec, int src, int tag, bool only_cpu = false) const;
 
   /**
@@ -275,7 +260,6 @@ void Recv(std::vector<int> vec, int src, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-  */ 
 void Recv(std::vector<size_t> vec, int src, int tag, bool only_cpu = false) const;
 
   /**

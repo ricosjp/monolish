@@ -9,8 +9,7 @@ for prec in double float int size_t; do
   * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  */
-  */ "
+  */"
   echo "void Send($prec val, int dst, int tag, bool only_cpu = false) const;"
 done
 
@@ -22,8 +21,7 @@ for prec in double float int size_t; do
   * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  */
-  */ "
+  */"
   echo "void Send(std::vector<$prec> vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
@@ -52,8 +50,7 @@ for prec in double float int size_t; do
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  */
-  */ "
+  */"
   echo "void Recv($prec val, int src, int tag, bool only_cpu = false) const;"
 done
 
@@ -65,8 +62,7 @@ for prec in double float int size_t; do
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  */
-  */ "
+  */"
   echo "void Recv(std::vector<$prec> vec, int src, int tag, bool only_cpu = false) const;"
 done
 
