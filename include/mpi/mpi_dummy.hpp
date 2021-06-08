@@ -37,9 +37,6 @@ OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_minloc;
 OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_replace;
 OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
 
-typedef OMPI_MPI_AINT_TYPE MPI_Aint;
-typedef OMPI_MPI_OFFSET_TYPE MPI_Offset;
-typedef OMPI_MPI_COUNT_TYPE MPI_Count;
 typedef struct ompi_communicator_t *MPI_Comm;
 typedef struct ompi_datatype_t *MPI_Datatype;
 typedef struct ompi_errhandler_t *MPI_Errhandler;
