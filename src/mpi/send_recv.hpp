@@ -23,7 +23,7 @@ void Send_core(T val, int dst, int tag, MPI_Comm comm, bool gpu_sync) {
 
 // std::vector
 template <typename T>
-void Send_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
+void Send_core(const std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
                bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -38,7 +38,7 @@ void Send_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 // monolish::vector
 template <typename T>
-void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
+void Send_core(const monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
                bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
