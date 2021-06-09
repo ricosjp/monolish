@@ -37,7 +37,7 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   }
 
 #if MONOLISH_USE_MPI
-  mpi::Comm &comm = mpi::Comm::get_instance();
+  mpi::comm &comm = mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 #endif
 
@@ -79,7 +79,7 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   }
 
 #if MONOLISH_USE_MPI
-  mpi::Comm &comm = mpi::Comm::get_instance();
+  mpi::comm &comm = mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 #endif
 

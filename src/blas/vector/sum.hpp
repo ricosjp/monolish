@@ -30,7 +30,7 @@ template <typename F1> double Dsum_core(const F1 &x) {
   }
 
 #if MONOLISH_USE_MPI
-  mpi::Comm &comm = mpi::Comm::get_instance();
+  mpi::comm &comm = mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 #endif
 
@@ -65,7 +65,7 @@ template <typename F1> float Ssum_core(const F1 &x) {
   }
 
 #if MONOLISH_USE_MPI
-  mpi::Comm &comm = mpi::Comm::get_instance();
+  mpi::comm &comm = mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 #endif
 
