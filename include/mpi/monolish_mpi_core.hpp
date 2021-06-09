@@ -11,27 +11,27 @@ namespace monolish::mpi {
 /**
  * @brief MPI class (singleton)
  */
-class Comm {
+class comm {
 private:
   /**
    * @brief MPI communicator, MPI_COMM_WORLD
    */
-  MPI_Comm comm = 0;
+  MPI_comm comm = 0;
   int rank = 0;
   int size = 1;
 
-  Comm(){};
+  comm(){};
 
-  ~Comm(){};
+  ~comm(){};
 
 public:
-  Comm(const Comm &) = delete;
-  Comm &operator=(const Comm &) = delete;
-  Comm(Comm &&) = delete;
-  Comm &operator=(Comm &&) = delete;
+  comm(const comm &) = delete;
+  comm &operator=(const comm &) = delete;
+  comm(comm &&) = delete;
+  comm &operator=(comm &&) = delete;
 
-  static Comm &get_instance() {
-    static Comm instance;
+  static comm &get_instance() {
+    static comm instance;
     return instance;
   }
 
