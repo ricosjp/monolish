@@ -17,12 +17,8 @@ private:
   /**
    * @brief MPI communicator, MPI_COMM_WORLD
    */
-  MPI_comm comm = 0;
-  int rank = 0;
-  int size = 1;
-
+  MPI_Comm my_comm = 0;
   comm(){};
-
   ~comm(){};
 
 public:
@@ -60,7 +56,7 @@ public:
    * @brief get communicator
    * @return MPI_COMM_WORLD
    */
-  [[nodiscard]] MPI_Comm get_comm() const { return comm; }
+  [[nodiscard]] MPI_Comm get_comm() const { return my_comm; }
 
   /**
    * @brief set communicator

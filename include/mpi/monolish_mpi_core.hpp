@@ -16,12 +16,8 @@ private:
   /**
    * @brief MPI communicator, MPI_COMM_WORLD
    */
-  MPI_comm comm = 0;
-  int rank = 0;
-  int size = 1;
-
+  MPI_Comm my_comm = 0;
   comm(){};
-
   ~comm(){};
 
 public:
@@ -59,7 +55,7 @@ public:
    * @brief get communicator
    * @return MPI_COMM_WORLD
    */
-  [[nodiscard]] MPI_Comm get_comm() const { return comm; }
+  [[nodiscard]] MPI_Comm get_comm() const { return my_comm; }
 
   /**
    * @brief set communicator
@@ -135,7 +131,7 @@ void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-void Send(const std::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(std::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
@@ -144,7 +140,7 @@ void Send(const std::vector<double> &vec, int dst, int tag, bool only_cpu = fals
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-void Send(const std::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(std::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
@@ -153,7 +149,7 @@ void Send(const std::vector<float> &vec, int dst, int tag, bool only_cpu = false
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-void Send(const std::vector<int> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(std::vector<int> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
@@ -162,7 +158,7 @@ void Send(const std::vector<int> &vec, int dst, int tag, bool only_cpu = false) 
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */
-void Send(const std::vector<size_t> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(std::vector<size_t> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
@@ -175,7 +171,7 @@ void Send(const std::vector<size_t> &vec, int dst, int tag, bool only_cpu = fals
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-void Send(const monolish::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(monolish::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Send for scalar. Performs a blocking send.
@@ -188,7 +184,7 @@ void Send(const monolish::vector<double> &vec, int dst, int tag, bool only_cpu =
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-void Send(const monolish::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
+void Send(monolish::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Recv for scalar. Performs a blocking recv.
@@ -518,7 +514,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Gather(const monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -532,7 +528,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Gather(const monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -542,7 +538,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(const std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -552,7 +548,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(const std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -562,7 +558,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(const std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Gather, Gathers vector from all processes
@@ -572,7 +568,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(const std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
+  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -586,7 +582,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Scatter(const monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -600,7 +596,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Scatter(const monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -610,7 +606,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(const std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -620,7 +616,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(const std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -630,7 +626,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(const std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
   * @brief MPI_Scatter, Sends data from one task to all tasks.
@@ -640,6 +636,6 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = 
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(const std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
+  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 };
 }
