@@ -5,7 +5,7 @@ namespace monolish {
 namespace {
 // std::vectror
 template <typename T>
-void Gather_core(const std::vector<T> &sendvec, std::vector<T> recvvec, int root,
+void Gather_core(std::vector<T> &sendvec, std::vector<T> recvvec, int root,
                  MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -21,7 +21,7 @@ void Gather_core(const std::vector<T> &sendvec, std::vector<T> recvvec, int root
 
 // monolish::vectror
 template <typename T>
-void Gather_core(const monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
+void Gather_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
                  int root, MPI_Comm comm, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
