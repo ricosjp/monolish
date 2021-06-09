@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  monolish::mpi::comm &comm = monolish::mpi::comm::get_instance();
   comm.Init(argc, argv);
 
   size_t size = atoi(argv[1]);
