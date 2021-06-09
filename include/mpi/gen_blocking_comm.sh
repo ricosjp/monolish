@@ -22,7 +22,7 @@ for prec in double float int size_t; do
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
   */"
-  echo "void Send(const std::vector<$prec> &vec, int dst, int tag, bool only_cpu = false) const;"
+  echo "void Send(std::vector<$prec> &vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
 for prec in double float; do
@@ -38,7 +38,7 @@ for prec in double float; do
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ "
-  echo "void Send(const monolish::vector<$prec> &vec, int dst, int tag, bool only_cpu = false) const;"
+  echo "void Send(monolish::vector<$prec> &vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
 ## recv

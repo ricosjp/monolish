@@ -99,7 +99,7 @@ for prec in double float; do
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Gather(const monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Gather(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float int size_t; do
@@ -112,7 +112,7 @@ for prec in double float int size_t; do
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(const std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Gather(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 ## Scatter
@@ -130,7 +130,7 @@ for prec in double float; do
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Scatter(const monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Scatter(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
 
 for prec in double float int size_t; do
@@ -143,5 +143,5 @@ for prec in double float int size_t; do
   * @param val root rank number
   * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(const std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
 done
