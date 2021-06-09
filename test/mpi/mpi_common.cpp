@@ -2,7 +2,7 @@
 
 template <typename T> T test_sum(std::vector<T> &vec) {
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  monolish::mpi::comm &comm = monolish::mpi::comm::get_instance();
   double sum = 0;
 
   for (size_t i = 0; i < vec.size(); i++) {
@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  monolish::mpi::comm &comm = monolish::mpi::comm::get_instance();
   comm.Init(argc, argv);
 
   int rank = comm.get_rank();

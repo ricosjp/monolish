@@ -12,7 +12,7 @@ T ans_dot(monolish::vector<T> &mx, monolish::vector<T> &my) {
     ans += mx[i] * my[i];
   }
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  monolish::mpi::comm &comm = monolish::mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 
   return ans;

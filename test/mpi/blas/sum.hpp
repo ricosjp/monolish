@@ -8,7 +8,7 @@ template <typename T> T ans_sum(monolish::vector<T> &mx) {
     ans += mx[i];
   }
 
-  monolish::mpi::Comm &comm = monolish::mpi::Comm::get_instance();
+  monolish::mpi::comm &comm = monolish::mpi::comm::get_instance();
   ans = comm.Allreduce(ans);
 
   return ans;
