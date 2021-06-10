@@ -82,671 +82,560 @@ public:
   ///////////////////////////////////////////
 
   /**
-   * @brief Blocks until all processes in the communicator have reached this
-   * routine.
+   * @brief Blocks until all processes in the communicator have reached this routine.
    */
   void Barrier() const;
 
-  /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Send(double val, int dst, int tag, bool only_cpu = false) const;
+
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Send(float val, int dst, int tag, bool only_cpu = false) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Send(double val, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Send(int val, int dst, int tag, bool only_cpu = false) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Send(float val, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Send(int val, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   */
-  void Send(std::vector<double> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Send(size_t val, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   */
-  void Send(std::vector<float> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Send(std::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   */
-  void Send(std::vector<int> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Send(std::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   */
-  void Send(std::vector<size_t> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Send(std::vector<int> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Send(monolish::vector<double> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Send(std::vector<size_t> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Send(monolish::vector<float> &vec, int dst, int tag,
-            bool only_cpu = false) const;
+  * @brief MPI_Send for monolish::vector. Performs a blocking send.
+  * @param vec monolish::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Send(monolish::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   * @return MPI status object
-   */
-  MPI_Status Recv(double val, int src, int tag, bool only_cpu = false) const;
+  * @brief MPI_Send for monolish::vector. Performs a blocking send.
+  * @param vec monolish::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Send(monolish::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   * @return MPI status object
-   */
-  MPI_Status Recv(float val, int src, int tag, bool only_cpu = false) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Recv(double val, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   * @return MPI status object
-   */
-  MPI_Status Recv(int val, int src, int tag, bool only_cpu = false) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Recv(float val, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   * @return MPI status object
-   */
-  MPI_Status Recv(size_t val, int src, int tag, bool only_cpu = false) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Recv(int val, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<double> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Recv(size_t val, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<float> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<int> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<size_t> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<int> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI
-   * communication, and finally recvs recvvec.
-   * @return MPI status object
-   * @warning
-   * When only_cpu flag is enabled and recv data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  MPI_Status Recv(monolish::vector<double> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<size_t> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI
-   * communication, and finally recvs recvvec.
-   * @return MPI status object
-   * @warning
-   * When only_cpu flag is enabled and recv data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  MPI_Status Recv(monolish::vector<float> &vec, int src, int tag,
-                  bool only_cpu = false) const;
+  * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @return MPI status object
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+MPI_Status Recv(monolish::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce(double val) const;
+  * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @return MPI status object
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_sum(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_sum(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_sum(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_sum(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_sum(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_sum(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_sum(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_prod(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_sum(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_prod(float val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_prod(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_prod(int val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_prod(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_prod(size_t val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_prod(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_max(double val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_prod(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_max(float val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_max(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_max(int val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_max(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_max(size_t val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_max(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_min(double val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_max(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_min(float val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_min(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_min(int val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_min(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_min(size_t val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_min(int val) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Bcast(double &val, int root, bool gpu_sync = false) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_min(size_t val) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Bcast(float &val, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  void Bcast(double &val, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Bcast(int &val, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  void Bcast(float &val, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because scalar is
-   * automatically synchronized.
-   */
-  void Bcast(size_t &val, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  void Bcast(int &val, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Bcast(monolish::vector<double> &vec, int root,
-             bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+  void Bcast(size_t &val, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data.This option does not work because std::vector
-   * is not support GPU.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Bcast(monolish::vector<float> &vec, int root,
-             bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Bcast(monolish::vector<double> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Bcast(std::vector<double> &vec, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Bcast(monolish::vector<float> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Bcast(std::vector<float> &vec, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Bcast(std::vector<double> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Bcast(std::vector<int> &vec, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Bcast(std::vector<float> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Bcast(std::vector<size_t> &vec, int root, bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Bcast(std::vector<int> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Gather(monolish::vector<double> &sendvec,
-              monolish::vector<double> &recvvec, int root,
-              bool gpu_sync = false) const;
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Bcast(std::vector<size_t> &vec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Gather(monolish::vector<float> &sendvec,
-              monolish::vector<float> &recvvec, int root,
-              bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec,
-              int root, bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec,
-              int root, bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root,
-              bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-              int root, bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Scatter(monolish::vector<double> &sendvec,
-               monolish::vector<double> &recvvec, int root,
-               bool gpu_sync = false) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI
-   * communication, and finally sends recvvec.
-   * @warning
-   * When only_cpu flag is enabled and send data is on the GPU, data is received
-   * from the GPU, MPI communication is performed, and finally data is sent to
-   * the GPU. If there is no GPU, or if there is no data on the GPU, no error
-   * will occur even if this flag is set to true.
-   */
-  void Scatter(monolish::vector<float> &sendvec,
-               monolish::vector<float> &recvvec, int root,
-               bool gpu_sync = false) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec,
-               int root, bool gpu_sync = false) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */
+  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec,
-               int root, bool gpu_sync = false) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root,
-               bool gpu_sync = false) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root, bool gpu_sync=false) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   * @param gpu_sync sync gpu data. This option does not work because
-   * std::vector is not support GPU
-   */
-  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-               int root, bool gpu_sync = false) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root, bool gpu_sync=false) const;
+
+  /**
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
+  */
+  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root, bool gpu_sync=false) const;
 };
-} // namespace monolish::mpi
+}
