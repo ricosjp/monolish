@@ -16,7 +16,7 @@ done
 for prec in double float int size_t; do
   echo "
   /**
-  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @brief MPI_Send for std::vector. Performs a blocking send.
   * @param vec std::vector (size N)
   * @param dst rank of dstination
   * @param tag message tag
@@ -28,8 +28,8 @@ done
 for prec in double float; do
   echo "
   /**
-  * @brief MPI_Send for scalar. Performs a blocking send.
-  * @param vec std::vector (size N)
+  * @brief MPI_Send for monolish::vector. Performs a blocking send.
+  * @param vec monolish::vector (size N)
   * @param dst rank of dstination
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
@@ -58,7 +58,7 @@ done
 for prec in double float int size_t; do
   echo "
   /**
-  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
   * @param vec std::vector (size N)
   * @param src rank of source
   * @param tag message tag
@@ -71,8 +71,8 @@ done
 for prec in double float; do
   echo "
   /**
-  * @brief MPI_Recv for scalar. Performs a blocking recv.
-  * @param vec std::vector (size N)
+  * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
+  * @param vec monolish::vector (size N)
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
