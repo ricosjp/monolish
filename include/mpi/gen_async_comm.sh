@@ -86,3 +86,8 @@ for prec in double float; do
   echo "MPI_Status Irecv(monolish::vector<$prec> &vec, int src, int tag, bool only_cpu = false) const;"
 done
 
+echo "
+/**
+* @brief Waits for all communications to complete.
+*/ "
+echo "void Waitall() const;"
