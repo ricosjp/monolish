@@ -17,6 +17,7 @@ private:
    * @brief MPI communicator, MPI_COMM_WORLD
    */
   MPI_Comm my_comm = 0;
+  std::vector<MPI_Request> requests;
   comm(){};
   ~comm(){};
 
@@ -78,6 +79,7 @@ public:
    * @return the number of prodessed
    */
   [[nodiscard]] int get_size();
+
 
   ///////////////////////////////////////////
 
@@ -293,6 +295,217 @@ MPI_Status Recv(monolish::vector<double> &vec, int src, int tag, bool only_cpu =
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
 MPI_Status Recv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Isend(double val, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Isend(float val, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Isend(int val, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  */
+void Isend(size_t val, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Isend(std::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Isend(std::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Isend(std::vector<int> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  */
+void Isend(std::vector<size_t> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a blocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Isend(monolish::vector<double> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Isend for scalar. Performs a blocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
+  * @warning
+  * When only_cpu flag is enabled and send data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+void Isend(monolish::vector<float> &vec, int dst, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Irecv(double val, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Irecv(float val, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Irecv(int val, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
+  * @return MPI status object
+  */
+MPI_Status Irecv(size_t val, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Irecv(std::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Irecv(std::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Irecv(std::vector<int> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
+  * @return MPI status object
+  */
+MPI_Status Irecv(std::vector<size_t> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @return MPI status object
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+MPI_Status Irecv(monolish::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
+
+  /**
+  * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
+  * @return MPI status object
+  * @warning
+  * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
+  * MPI communication is performed, and finally data is sent to the GPU.
+  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  */ 
+MPI_Status Irecv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
+
+/**
+* @brief Waits for all communications to complete.
+*/ 
+void Waitall() const;
 
   /**
   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.

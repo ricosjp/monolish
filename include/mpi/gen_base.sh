@@ -18,6 +18,7 @@ private:
    * @brief MPI communicator, MPI_COMM_WORLD
    */
   MPI_Comm my_comm = 0;
+  std::vector<MPI_Request> requests;
   comm(){};
   ~comm(){};
 
@@ -79,6 +80,7 @@ public:
    * @return the number of prodessed
    */
   [[nodiscard]] int get_size();
+
 
   ///////////////////////////////////////////
 
