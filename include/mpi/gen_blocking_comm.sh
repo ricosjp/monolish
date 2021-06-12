@@ -1,6 +1,6 @@
 #/bin/bash
 
-## send
+## Send
 for prec in double float int size_t; do
   echo "
   /**
@@ -41,7 +41,7 @@ for prec in double float; do
   echo "void Send(monolish::vector<$prec> &vec, int dst, int tag, bool only_cpu = false) const;"
 done
 
-## recv
+## Recv
 for prec in double float int size_t; do
   echo "
   /**
