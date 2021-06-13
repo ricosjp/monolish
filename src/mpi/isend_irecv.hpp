@@ -10,7 +10,8 @@ namespace {
 
 // Scalar
 template <typename T>
-void Isend_core(T val, int dst, int tag, MPI_Comm comm, std::vector<MPI_Request>& rq, bool gpu_sync) {
+void Isend_core(T val, int dst, int tag, MPI_Comm comm,
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -26,7 +27,7 @@ void Isend_core(T val, int dst, int tag, MPI_Comm comm, std::vector<MPI_Request>
 // std::vector
 template <typename T>
 void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-        std::vector<MPI_Request>& rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -34,7 +35,7 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
   MPI_Request request;
   rq.push_back(request);
   MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), dst, tag,
-           comm, &rq.back());
+            comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -43,7 +44,7 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 // monolish::vector
 template <typename T>
 void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-        std::vector<MPI_Request>& rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -57,7 +58,7 @@ void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 #if defined MONOLISH_USE_MPI
   MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), dst, tag,
-           comm, &rq.back());
+            comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -70,7 +71,7 @@ void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 // Scalar
 template <typename T>
 void Irecv_core(T val, int src, int tag, MPI_Comm comm,
-        std::vector<MPI_Request>& rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -87,7 +88,7 @@ void Irecv_core(T val, int src, int tag, MPI_Comm comm,
 // std::vector
 template <typename T>
 void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
-        std::vector<MPI_Request>& rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -95,7 +96,7 @@ void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
   MPI_Request request;
   rq.push_back(request);
   MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
-           comm, &rq.back());
+            comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -104,7 +105,7 @@ void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
 // monolish::vector
 template <typename T>
 void Irecv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
-        std::vector<MPI_Request>& rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq, bool gpu_sync) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -112,7 +113,7 @@ void Irecv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
   MPI_Request request;
   rq.push_back(request);
   MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
-           comm, &rq.back());
+            comm, &rq.back());
 #else
 #endif
 
@@ -125,7 +126,7 @@ void Irecv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
   logger.util_out();
 }
 
-void Waitall_core(std::vector<MPI_Request>& rq) {
+void Waitall_core(std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
