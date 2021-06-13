@@ -45,7 +45,7 @@ void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 #if defined MONOLISH_USE_GPU
   if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
-    vec.recv();
+    vec.nonfree_recv();
   }
 #endif
 
