@@ -110,12 +110,6 @@ MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if defined MONOLISH_USE_GPU
-  if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
-    vec.recv();
-  }
-#endif
-
 #if defined MONOLISH_USE_MPI
   MPI_Status stat;
   MPI_Recv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
