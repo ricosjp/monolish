@@ -4,6 +4,7 @@
 #include "Gather.hpp"
 #include "Scatter.hpp"
 #include "allreduce.hpp"
+#include "isend_irecv.hpp"
 #include "send_recv.hpp"
 
 namespace monolish::mpi {

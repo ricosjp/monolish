@@ -38,6 +38,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added (MPI trial implementation)
+- add MPI non-blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/330
 - delete unnecessary val https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/329
 - change MPI::Comm --> MPI::comm https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/329
 - add MPI blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/328

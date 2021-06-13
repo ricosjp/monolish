@@ -5,8 +5,9 @@ echo "#pragma once
  * @brief
  * C++ template MPI class, Functions of this class do nothing when MPI is
  * disabled.
- * Functions in this class are under development. Many BLAS functions don't
- * support MPI.
+ * Functions in this class are under development. Currently, Many BLAS functions don't support MPI.
+ * Functions of this class does not support GPU.
+ * The user needs to communicate with the GPU before and after the call to this function if necessary.
  */
 namespace monolish::mpi {
 /**
@@ -79,6 +80,7 @@ public:
    * @return the number of prodessed
    */
   [[nodiscard]] int get_size();
+
 
   ///////////////////////////////////////////
 
