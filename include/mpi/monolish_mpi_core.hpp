@@ -400,9 +400,8 @@ void Isend(monolish::vector<float> &vec, int dst, int tag, bool only_cpu = false
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  * @return MPI status object
   */
-MPI_Status Irecv(double val, int src, int tag, bool only_cpu = false) const;
+void Irecv(double val, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -410,9 +409,8 @@ MPI_Status Irecv(double val, int src, int tag, bool only_cpu = false) const;
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  * @return MPI status object
   */
-MPI_Status Irecv(float val, int src, int tag, bool only_cpu = false) const;
+void Irecv(float val, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -420,9 +418,8 @@ MPI_Status Irecv(float val, int src, int tag, bool only_cpu = false) const;
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  * @return MPI status object
   */
-MPI_Status Irecv(int val, int src, int tag, bool only_cpu = false) const;
+void Irecv(int val, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -430,9 +427,8 @@ MPI_Status Irecv(int val, int src, int tag, bool only_cpu = false) const;
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
-  * @return MPI status object
   */
-MPI_Status Irecv(size_t val, int src, int tag, bool only_cpu = false) const;
+void Irecv(size_t val, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -440,9 +436,8 @@ MPI_Status Irecv(size_t val, int src, int tag, bool only_cpu = false) const;
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  * @return MPI status object
   */
-MPI_Status Irecv(std::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(std::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -450,9 +445,8 @@ MPI_Status Irecv(std::vector<double> &vec, int src, int tag, bool only_cpu = fal
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  * @return MPI status object
   */
-MPI_Status Irecv(std::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(std::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -460,9 +454,8 @@ MPI_Status Irecv(std::vector<float> &vec, int src, int tag, bool only_cpu = fals
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  * @return MPI status object
   */
-MPI_Status Irecv(std::vector<int> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(std::vector<int> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -470,9 +463,8 @@ MPI_Status Irecv(std::vector<int> &vec, int src, int tag, bool only_cpu = false)
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  * @return MPI status object
   */
-MPI_Status Irecv(std::vector<size_t> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(std::vector<size_t> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
@@ -480,13 +472,12 @@ MPI_Status Irecv(std::vector<size_t> &vec, int src, int tag, bool only_cpu = fal
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
-  * @return MPI status object
   * @warning
   * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-MPI_Status Irecv(monolish::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(monolish::vector<double> &vec, int src, int tag, bool only_cpu = false) const;
 
   /**
   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
@@ -494,13 +485,12 @@ MPI_Status Irecv(monolish::vector<double> &vec, int src, int tag, bool only_cpu 
   * @param src rank of source
   * @param tag message tag
   * @param gpu_sync sync gpu data. It receives recvvec, then performs MPI communication, and finally recvs recvvec.
-  * @return MPI status object
   * @warning
   * When only_cpu flag is enabled and recv data is on the GPU, data is received from the GPU, 
   * MPI communication is performed, and finally data is sent to the GPU.
   * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */ 
-MPI_Status Irecv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
+void Irecv(monolish::vector<float> &vec, int src, int tag, bool only_cpu = false) const;
 
 /**
 * @brief Waits for all communications to complete.
