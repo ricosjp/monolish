@@ -5,8 +5,9 @@ echo "#pragma once
  * @brief
  * C++ template MPI class, Functions of this class do nothing when MPI is
  * disabled.
- * Functions in this class are under development. Many BLAS functions don't
- * support MPI.
+ * Functions in this class are under development. Currently, Many BLAS functions don't support MPI.
+ * Functions of this class does not support GPU.
+ * The user needs to communicate with the GPU before and after the call to this function if necessary.
  */
 namespace monolish::mpi {
 /**
@@ -18,7 +19,6 @@ private:
    * @brief MPI communicator, MPI_COMM_WORLD
    */
   MPI_Comm my_comm = 0;
-  std::vector<MPI_Request> requests;
   comm(){};
   ~comm(){};
 

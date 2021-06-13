@@ -18,6 +18,7 @@ private:
    */
   MPI_Comm my_comm = 0;
   std::vector<MPI_Request> requests;
+  std::vector<std::any> async_memory;
   comm(){};
   ~comm(){};
 
