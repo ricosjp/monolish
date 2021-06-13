@@ -54,12 +54,6 @@ void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
            comm);
 #endif
 
-#if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
-    vec.send();
-  }
-#endif
-
   logger.util_out();
 }
 
