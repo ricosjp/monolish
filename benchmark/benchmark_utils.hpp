@@ -57,11 +57,18 @@
 #define CRS_NNN_BENCH_MAX 3000
 #define CRS_NNN_BENCH_ITER += 500
 
-// order 2/3*N^3
+// LU, order 2/3*N^3
 #define LU_BENCH_ITER 10
 #define LU_NNN_BENCH_MIN 1000
 #define LU_NNN_BENCH_MAX 10000
 #define LU_NNN_BENCH_ITER += 1000
+
+// CG
+#define CG_BENCH_ITER 1
+#define CG_NN_BENCH_MIN 500
+#define CG_NN_BENCH_MAX 3000
+#define CG_NN_BENCH_ITER += 500
+#define CG_ITER 1000
 
 template <typename T> std::string get_type() {
   std::string type;

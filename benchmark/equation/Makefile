@@ -55,21 +55,27 @@ run_gpu: run_nvidia
 
 run_intel_mkl: intel_mkl
 	bash ./benchmark.sh LU intel_mkl
+	bash ./benchmark.sh CG intel_mkl
 
 run_intel_oss: intel_oss
 	bash ./benchmark.sh LU intel_oss
+	bash ./benchmark.sh CG intel_oss
 
 run_amd_oss: amd_oss
 	bash ./benchmark.sh LU amd_oss
- 
+	bash ./benchmark.sh CG amd_oss
+
 run_nvidia: nvidia
 	bash ./benchmark.sh LU nvidia
+	bash ./benchmark.sh CG nvidia
 
 run_a64fx: a64fx
 	bash ./benchmark.sh LU a64fx
+	bash ./benchmark.sh CG a64fx
 
 run_sxat: sxat
 	bash ./benchmark.sh LU sxat
+	bash ./benchmark.sh CG sxat
 
 clean:
 	- rm *.out

@@ -8,12 +8,9 @@ template <typename MAT_A, typename T>
 bool benchmark(const size_t size, const size_t iter) {
 
   MAT_A A(size, size, 0.0, 1.0);
-  monolish::vector<T> x(size, 123.0);
   monolish::vector<T> b(size, 123.0);
 
-  x.send();
-  b.send();
-  A.send();
+  monolish::util::send(A, b);
 
   monolish::equation::LU<MAT_A, T> LU_solver;
 
@@ -30,7 +27,6 @@ bool benchmark(const size_t size, const size_t iter) {
                1.0e+9;
 
   A.device_free();
-  x.device_free();
   b.device_free();
 
   double time = sec / iter;

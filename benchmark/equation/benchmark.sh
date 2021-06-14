@@ -18,9 +18,9 @@ case $1 in
     done
     ;;
   "CG" ) 
-    for format in ${FORMAT[@]}; do
+    for format in CRS; do
       echo start $1 $format $2
-      $PROFILER ./$1_$2.out $format $format $format | tee $1\_$format\_$format\_$format\_$2.tsv 
+      $PROFILER ./$1_$2.out $format | tee $1\_$format\_$2.tsv 
       if [ ${PIPESTATUS[0]} -ne 0 ]; then
         exit 1
       fi
