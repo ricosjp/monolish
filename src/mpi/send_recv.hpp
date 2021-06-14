@@ -9,8 +9,7 @@ namespace {
 ///////////////////////////
 
 // Scalar
-template <typename T>
-void Send_core(T val, int dst, int tag, MPI_Comm comm, bool gpu_sync) {
+template <typename T> void Send_core(T val, int dst, int tag, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -23,8 +22,7 @@ void Send_core(T val, int dst, int tag, MPI_Comm comm, bool gpu_sync) {
 
 // std::vector
 template <typename T>
-void Send_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-               bool gpu_sync) {
+void Send_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -38,16 +36,9 @@ void Send_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 // monolish::vector
 template <typename T>
-void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-               bool gpu_sync) {
+void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-
-#if defined MONOLISH_USE_GPU
-  if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
-    vec.nonfree_recv();
-  }
-#endif
 
 #if defined MONOLISH_USE_MPI
   MPI_Send(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), dst, tag,
@@ -63,7 +54,7 @@ void Send_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 // Scalar
 template <typename T>
-MPI_Status Recv_core(T val, int src, int tag, MPI_Comm comm, bool gpu_sync) {
+MPI_Status Recv_core(T val, int src, int tag, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -99,8 +90,8 @@ MPI_Status Recv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
 
 // monolish::vector
 template <typename T>
-MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
-                     bool gpu_sync) {
+MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag,
+                     MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -110,12 +101,6 @@ MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
            comm, &stat);
 #else
   MPI_Status stat = 0;
-#endif
-
-#if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
-    vec.send();
-  }
 #endif
 
   logger.util_out();

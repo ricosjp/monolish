@@ -53,9 +53,8 @@ for prec in double float int size_t; do
   * @brief MPI_Bcast, Broadcasts a message from the process with rank "root" to all other processes
   * @param val scalar value
   * @param root root rank number
-  * @param gpu_sync sync gpu data. This option does not work because scalar is automatically synchronized.
   */
-  void Bcast($prec &val, int root, bool gpu_sync=false) const;"
+  void Bcast($prec &val, int root) const;"
 done
 
 for prec in double float; do
@@ -64,13 +63,8 @@ for prec in double float; do
   * @brief MPI_Bcast, Broadcasts a message from the process with rank "root" to all other processes
   * @param vec monolish vector (size N)
   * @param root root rank number
-  * @param gpu_sync sync gpu data.This option does not work because std::vector is not support GPU.
-  * @warning
-  * When "only_cpu flag is enabled" and "send data is on the GPU", data is received from the GPU, 
-  * MPI communication is performed, and finally data is sent to the GPU.
-  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
   */
-  void Bcast(monolish::vector<$prec> &vec, int root, bool gpu_sync=false) const;"
+  void Bcast(monolish::vector<$prec> &vec, int root) const;"
 done
 
 for prec in double float int size_t; do
@@ -79,9 +73,8 @@ for prec in double float int size_t; do
   * @brief MPI_Bcast, Broadcasts a message from the process with rank "root" to all other processes
   * @param vec std::vector (size N)
   * @param root root rank number
-  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Bcast(std::vector<$prec> &vec, int root, bool gpu_sync=false) const;"
+  void Bcast(std::vector<$prec> &vec, int root) const;"
 done
 
 ## Gather
@@ -93,13 +86,11 @@ for prec in double float; do
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N * # of procs)
   * @param val root rank number
-  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
   * @warning
-  * When "only_cpu flag is enabled" and "send data is on the GPU", data is received from the GPU, 
-  * MPI communication is performed, and finally data is sent to the GPU.
-  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   */
-  void Gather(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Gather(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root) const;"
 done
 
 for prec in double float int size_t; do
@@ -110,9 +101,8 @@ for prec in double float int size_t; do
   * @param sendvec send data, std vector (size N)
   * @param recvvec recv data, std vector (size N * # of procs)
   * @param val root rank number
-  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Gather(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Gather(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root) const;"
 done
 
 ## Scatter
@@ -124,13 +114,11 @@ for prec in double float; do
   * @param sendvec send data, monolish vector (size N)
   * @param recvvec recv data, monolish vector (size N / # of procs)
   * @param val root rank number
-  * @param gpu_sync sync gpu data. It receives sendvec, then performs MPI communication, and finally sends recvvec.
   * @warning
-  * When "only_cpu flag is enabled" and "send data is on the GPU", data is received from the GPU, 
-  * MPI communication is performed, and finally data is sent to the GPU.
-  * If there is no GPU, or if there is no data on the GPU, no error will occur even if this flag is set to true.
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   */
-  void Scatter(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Scatter(monolish::vector<$prec> &sendvec, monolish::vector<$prec> &recvvec, int root) const;"
 done
 
 for prec in double float int size_t; do
@@ -141,7 +129,6 @@ for prec in double float int size_t; do
   * @param sendvec send data, std::vector (size N)
   * @param recvvec recv data, std::vector (size N / # of procs)
   * @param val root rank number
-  * @param gpu_sync sync gpu data. This option does not work because std::vector is not support GPU
   */
-  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root, bool gpu_sync=false) const;"
+  void Scatter(std::vector<$prec> &sendvec, std::vector<$prec> &recvvec, int root) const;"
 done

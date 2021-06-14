@@ -6,14 +6,15 @@ namespace {
 // std::vectror
 template <typename T>
 void Gather_core(std::vector<T> &sendvec, std::vector<T> recvvec, int root,
-                 MPI_Comm comm, bool gpu_sync) {
+                 MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
   MPI_Gather(sendvec.data(), sendvec.size(),
-             internal::mpi::get_type(sendvec[0]), recvvec.data(),
-             recvvec.size(), internal::mpi::get_type(recvvec[0]), root, comm);
+             internal::mpi::get_type(sendvec.data()[0]), recvvec.data(),
+             recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root,
+             comm);
 #endif
 
   logger.util_out();
@@ -22,26 +23,15 @@ void Gather_core(std::vector<T> &sendvec, std::vector<T> recvvec, int root,
 // monolish::vectror
 template <typename T>
 void Gather_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
-                 int root, MPI_Comm comm, bool gpu_sync) {
+                 int root, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if defined MONOLISH_USE_GPU
-  if ((gpu_sync == true) && (sendvec.get_device_mem_stat() == true)) {
-    sendvec.recv();
-  }
-#endif
-
 #if defined MONOLISH_USE_MPI
   MPI_Gather(sendvec.data(), sendvec.size(),
-             internal::mpi::get_type(sendvec[0]), recvvec.data(),
-             recvvec.size(), internal::mpi::get_type(recvvec[0]), root, comm);
-#endif
-
-#if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
-    recvvec.send();
-  }
+             internal::mpi::get_type(sendvec.data()[0]), recvvec.data(),
+             recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root,
+             comm);
 #endif
 
   logger.util_out();

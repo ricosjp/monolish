@@ -4,8 +4,7 @@
 namespace monolish {
 namespace {
 // Scalar
-template <typename T>
-void Bcast_core(T &val, int root, MPI_Comm comm, bool gpu_sync) {
+template <typename T> void Bcast_core(T &val, int root, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -18,13 +17,13 @@ void Bcast_core(T &val, int root, MPI_Comm comm, bool gpu_sync) {
 
 // std::vectror
 template <typename T>
-void Bcast_core(std::vector<T> &vec, int root, MPI_Comm comm, bool gpu_sync) {
+void Bcast_core(std::vector<T> &vec, int root, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
-  MPI_Bcast(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), root,
-            comm);
+  MPI_Bcast(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]),
+            root, comm);
 #endif
 
   logger.util_out();
@@ -32,26 +31,13 @@ void Bcast_core(std::vector<T> &vec, int root, MPI_Comm comm, bool gpu_sync) {
 
 // monolish::vectror
 template <typename T>
-void Bcast_core(monolish::vector<T> &vec, int root, MPI_Comm comm,
-                bool gpu_sync) {
+void Bcast_core(monolish::vector<T> &vec, int root, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if defined MONOLISH_USE_GPU
-  if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
-    vec.recv();
-  }
-#endif
-
 #if defined MONOLISH_USE_MPI
-  MPI_Bcast(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), root,
-            comm);
-#endif
-
-#if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
-    vec.send();
-  }
+  MPI_Bcast(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]),
+            root, comm);
 #endif
 
   logger.util_out();

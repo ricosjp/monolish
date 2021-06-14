@@ -11,7 +11,7 @@ namespace {
 // Scalar
 template <typename T>
 void Isend_core(T val, int dst, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -27,15 +27,15 @@ void Isend_core(T val, int dst, int tag, MPI_Comm comm,
 // std::vector
 template <typename T>
 void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), dst, tag,
-            comm, &rq.back());
+  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.dat()[0]), dst,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -44,21 +44,13 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 // monolish::vector
 template <typename T>
 void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#if defined MONOLISH_USE_GPU
-  MPI_Request request;
-  rq.push_back(request);
-  if ((gpu_sync == true) && (vec.get_device_mem_stat() == true)) {
-    vec.nonfree_recv();
-  }
-#endif
-
 #if defined MONOLISH_USE_MPI
-  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), dst, tag,
-            comm, &rq.back());
+  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), dst,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -71,7 +63,7 @@ void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 // Scalar
 template <typename T>
 void Irecv_core(T val, int src, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -79,7 +71,6 @@ void Irecv_core(T val, int src, int tag, MPI_Comm comm,
   MPI_Request request;
   rq.push_back(request);
   MPI_Irecv(&val, 1, internal::mpi::get_type(val), src, tag, comm, &rq.back());
-#else
 #endif
 
   logger.util_out();
@@ -88,15 +79,15 @@ void Irecv_core(T val, int src, int tag, MPI_Comm comm,
 // std::vector
 template <typename T>
 void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
-            comm, &rq.back());
+  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -105,22 +96,15 @@ void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
 // monolish::vector
 template <typename T>
 void Irecv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
-                std::vector<MPI_Request> &rq, bool gpu_sync) {
+                std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec[0]), src, tag,
-            comm, &rq.back());
-#else
-#endif
-
-#if defined MONOLISH_USE_GPU
-  if (gpu_sync == true) {
-    vec.send();
-  }
+  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();

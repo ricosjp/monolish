@@ -37,7 +37,8 @@ Unreleased
 - add build monolish_cpu on the local (and fix typo) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/300
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
-### Added (MPI trial implementation)
+### Added, Fixed, Changed (MPI trial implementation)
+- delete gpu_sync flag https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/331
 - add MPI non-blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/330
 - delete unnecessary val https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/329
 - change MPI::Comm --> MPI::comm https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/329

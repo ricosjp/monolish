@@ -102,81 +102,70 @@ void comm::Barrier() const {
   logger.util_out();
 }
 
-void comm::Send(double val, int dst, int tag, bool gpu_sync) const {
-  Send_core(val, dst, tag, get_comm(), gpu_sync);
+void comm::Send(double val, int dst, int tag) const {
+  Send_core(val, dst, tag, get_comm());
 }
-void comm::Send(float val, int dst, int tag, bool gpu_sync) const {
-  Send_core(val, dst, tag, get_comm(), gpu_sync);
+void comm::Send(float val, int dst, int tag) const {
+  Send_core(val, dst, tag, get_comm());
 }
-void comm::Send(int val, int dst, int tag, bool gpu_sync) const {
-  Send_core(val, dst, tag, get_comm(), gpu_sync);
+void comm::Send(int val, int dst, int tag) const {
+  Send_core(val, dst, tag, get_comm());
 }
-void comm::Send(size_t val, int dst, int tag, bool gpu_sync) const {
-  Send_core(val, dst, tag, get_comm(), gpu_sync);
-}
-
-void comm::Send(std::vector<double> &vec, int dst, int tag,
-                bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
-}
-void comm::Send(std::vector<float> &vec, int dst, int tag,
-                bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
-}
-void comm::Send(std::vector<int> &vec, int dst, int tag, bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
-}
-void comm::Send(std::vector<size_t> &vec, int dst, int tag,
-                bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
+void comm::Send(size_t val, int dst, int tag) const {
+  Send_core(val, dst, tag, get_comm());
 }
 
-void comm::Send(monolish::vector<double> &vec, int dst, int tag,
-                bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
+void comm::Send(std::vector<double> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
-void comm::Send(monolish::vector<float> &vec, int dst, int tag,
-                bool gpu_sync) const {
-  Send_core(vec, dst, tag, get_comm(), gpu_sync);
+void comm::Send(std::vector<float> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
-
-MPI_Status comm::Recv(double val, int src, int tag, bool gpu_sync) const {
-  return Recv_core(val, src, tag, get_comm(), gpu_sync);
+void comm::Send(std::vector<int> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
-MPI_Status comm::Recv(float val, int src, int tag, bool gpu_sync) const {
-  return Recv_core(val, src, tag, get_comm(), gpu_sync);
-}
-MPI_Status comm::Recv(int val, int src, int tag, bool gpu_sync) const {
-  return Recv_core(val, src, tag, get_comm(), gpu_sync);
-}
-MPI_Status comm::Recv(size_t val, int src, int tag, bool gpu_sync) const {
-  return Recv_core(val, src, tag, get_comm(), gpu_sync);
+void comm::Send(std::vector<size_t> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
 
-MPI_Status comm::Recv(std::vector<double> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
+void comm::Send(monolish::vector<double> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
-MPI_Status comm::Recv(std::vector<float> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
-}
-MPI_Status comm::Recv(std::vector<int> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
-}
-MPI_Status comm::Recv(std::vector<size_t> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
+void comm::Send(monolish::vector<float> &vec, int dst, int tag) const {
+  Send_core(vec, dst, tag, get_comm());
 }
 
-MPI_Status comm::Recv(monolish::vector<double> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
+MPI_Status comm::Recv(double val, int src, int tag) const {
+  return Recv_core(val, src, tag, get_comm());
 }
-MPI_Status comm::Recv(monolish::vector<float> &vec, int src, int tag,
-                      bool gpu_sync) const {
-  return Recv_core(vec, src, tag, get_comm(), gpu_sync);
+MPI_Status comm::Recv(float val, int src, int tag) const {
+  return Recv_core(val, src, tag, get_comm());
+}
+MPI_Status comm::Recv(int val, int src, int tag) const {
+  return Recv_core(val, src, tag, get_comm());
+}
+MPI_Status comm::Recv(size_t val, int src, int tag) const {
+  return Recv_core(val, src, tag, get_comm());
+}
+
+MPI_Status comm::Recv(std::vector<double> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
+}
+MPI_Status comm::Recv(std::vector<float> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
+}
+MPI_Status comm::Recv(std::vector<int> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
+}
+MPI_Status comm::Recv(std::vector<size_t> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
+}
+
+MPI_Status comm::Recv(monolish::vector<double> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
+}
+MPI_Status comm::Recv(monolish::vector<float> &vec, int src, int tag) const {
+  return Recv_core(vec, src, tag, get_comm());
 }
 
 double comm::Allreduce(double val) const {
@@ -244,93 +233,89 @@ size_t comm::Allreduce_min(size_t val) const {
   return Allreduce_core(val, MPI_MIN, get_comm());
 }
 
-void comm::Bcast(double &val, int root, bool gpu_sync) const {
-  Bcast_core(val, root, get_comm(), gpu_sync);
+void comm::Bcast(double &val, int root) const {
+  Bcast_core(val, root, get_comm());
 }
-void comm::Bcast(float &val, int root, bool gpu_sync) const {
-  Bcast_core(val, root, get_comm(), gpu_sync);
+void comm::Bcast(float &val, int root) const {
+  Bcast_core(val, root, get_comm());
 }
-void comm::Bcast(int &val, int root, bool gpu_sync) const {
-  Bcast_core(val, root, get_comm(), gpu_sync);
+void comm::Bcast(int &val, int root) const {
+  Bcast_core(val, root, get_comm());
 }
-void comm::Bcast(size_t &val, int root, bool gpu_sync) const {
-  Bcast_core(val, root, get_comm(), gpu_sync);
-}
-
-void comm::Bcast(std::vector<double> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
-}
-void comm::Bcast(std::vector<float> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
-}
-void comm::Bcast(std::vector<int> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
-}
-void comm::Bcast(std::vector<size_t> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
+void comm::Bcast(size_t &val, int root) const {
+  Bcast_core(val, root, get_comm());
 }
 
-void comm::Bcast(monolish::vector<double> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
+void comm::Bcast(std::vector<double> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
 }
-void comm::Bcast(monolish::vector<float> &vec, int root, bool gpu_sync) const {
-  Bcast_core(vec, root, get_comm(), gpu_sync);
+void comm::Bcast(std::vector<float> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
+}
+void comm::Bcast(std::vector<int> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
+}
+void comm::Bcast(std::vector<size_t> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
+}
+
+void comm::Bcast(monolish::vector<double> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
+}
+void comm::Bcast(monolish::vector<float> &vec, int root) const {
+  Bcast_core(vec, root, get_comm());
 }
 
 void comm::Gather(monolish::vector<double> &sendvec,
-                  monolish::vector<double> &recvvec, int root,
-                  bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  monolish::vector<double> &recvvec, int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Gather(monolish::vector<float> &sendvec,
-                  monolish::vector<float> &recvvec, int root,
-                  bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  monolish::vector<float> &recvvec, int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 
 void comm::Gather(std::vector<double> &sendvec, std::vector<double> &recvvec,
-                  int root, bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Gather(std::vector<float> &sendvec, std::vector<float> &recvvec,
-                  int root, bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Gather(std::vector<int> &sendvec, std::vector<int> &recvvec,
-                  int root, bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-                  int root, bool gpu_sync) const {
-  Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                  int root) const {
+  Gather_core(sendvec, recvvec, root, get_comm());
 }
 
 void comm::Scatter(monolish::vector<double> &sendvec,
-                   monolish::vector<double> &recvvec, int root,
-                   bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   monolish::vector<double> &recvvec, int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Scatter(monolish::vector<float> &sendvec,
-                   monolish::vector<float> &recvvec, int root,
-                   bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   monolish::vector<float> &recvvec, int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 
 void comm::Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec,
-                   int root, bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec,
-                   int root, bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec,
-                   int root, bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 void comm::Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-                   int root, bool gpu_sync) const {
-  Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync);
+                   int root) const {
+  Scatter_core(sendvec, recvvec, root, get_comm());
 }
 
 } // namespace monolish::mpi
