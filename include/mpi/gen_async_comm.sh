@@ -13,7 +13,7 @@ for prec in double float int size_t; do
   * @Warning
   * This function is not thread-safe.
   */"
-  echo "void Isend($prec val, int dst, int tag) const;"
+  echo "void Isend($prec val, int dst, int tag);"
 done
 
 for prec in double float int size_t; do
@@ -28,7 +28,7 @@ for prec in double float int size_t; do
   * @Warning
   * This function is not thread-safe.
   */"
-  echo "void Isend(std::vector<$prec> &vec, int dst, int tag) const;"
+  echo "void Isend(const std::vector<$prec> &vec, int dst, int tag);"
 done
 
 for prec in double float; do
@@ -45,7 +45,7 @@ for prec in double float; do
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ "
-  echo "void Isend(monolish::vector<$prec> &vec, int dst, int tag) const;"
+  echo "void Isend(const monolish::vector<$prec> &vec, int dst, int tag);"
 done
 
 
@@ -62,7 +62,7 @@ for prec in double float int size_t; do
   * @Warning
   * This function is not thread-safe.
   */"
-  echo "void Irecv($prec val, int src, int tag) const;"
+  echo "void Irecv($prec val, int src, int tag);"
 done
 
 for prec in double float int size_t; do
@@ -77,7 +77,7 @@ for prec in double float int size_t; do
   * @Warning
   * This function is not thread-safe.
   */"
-  echo "void Irecv(std::vector<$prec> &vec, int src, int tag) const;"
+  echo "void Irecv(std::vector<$prec> &vec, int src, int tag);"
 done
 
 for prec in double float; do
@@ -94,7 +94,7 @@ for prec in double float; do
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ "
-  echo "void Irecv(monolish::vector<$prec> &vec, int src, int tag) const;"
+  echo "void Irecv(monolish::vector<$prec> &vec, int src, int tag);"
 done
 
 echo "

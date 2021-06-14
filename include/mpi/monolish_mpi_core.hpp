@@ -284,7 +284,7 @@ MPI_Status Recv(monolish::vector<float> &vec, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(double val, int dst, int tag) const;
+void Isend(double val, int dst, int tag);
 
   /**
   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -296,7 +296,7 @@ void Isend(double val, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(float val, int dst, int tag) const;
+void Isend(float val, int dst, int tag);
 
   /**
   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -308,7 +308,7 @@ void Isend(float val, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(int val, int dst, int tag) const;
+void Isend(int val, int dst, int tag);
 
   /**
   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -320,7 +320,7 @@ void Isend(int val, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(size_t val, int dst, int tag) const;
+void Isend(size_t val, int dst, int tag);
 
   /**
   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -332,7 +332,7 @@ void Isend(size_t val, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(std::vector<double> &vec, int dst, int tag) const;
+void Isend(const std::vector<double> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -344,7 +344,7 @@ void Isend(std::vector<double> &vec, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(std::vector<float> &vec, int dst, int tag) const;
+void Isend(const std::vector<float> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -356,7 +356,7 @@ void Isend(std::vector<float> &vec, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(std::vector<int> &vec, int dst, int tag) const;
+void Isend(const std::vector<int> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -368,7 +368,7 @@ void Isend(std::vector<int> &vec, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Isend(std::vector<size_t> &vec, int dst, int tag) const;
+void Isend(const std::vector<size_t> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Isend for monolish::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -382,7 +382,7 @@ void Isend(std::vector<size_t> &vec, int dst, int tag) const;
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ 
-void Isend(monolish::vector<double> &vec, int dst, int tag) const;
+void Isend(const monolish::vector<double> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Isend for monolish::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
@@ -396,7 +396,7 @@ void Isend(monolish::vector<double> &vec, int dst, int tag) const;
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ 
-void Isend(monolish::vector<float> &vec, int dst, int tag) const;
+void Isend(const monolish::vector<float> &vec, int dst, int tag);
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -408,7 +408,7 @@ void Isend(monolish::vector<float> &vec, int dst, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(double val, int src, int tag) const;
+void Irecv(double val, int src, int tag);
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -420,7 +420,7 @@ void Irecv(double val, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(float val, int src, int tag) const;
+void Irecv(float val, int src, int tag);
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -432,7 +432,7 @@ void Irecv(float val, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(int val, int src, int tag) const;
+void Irecv(int val, int src, int tag);
 
   /**
   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
@@ -444,7 +444,7 @@ void Irecv(int val, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(size_t val, int src, int tag) const;
+void Irecv(size_t val, int src, int tag);
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -456,7 +456,7 @@ void Irecv(size_t val, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(std::vector<double> &vec, int src, int tag) const;
+void Irecv(std::vector<double> &vec, int src, int tag);
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -468,7 +468,7 @@ void Irecv(std::vector<double> &vec, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(std::vector<float> &vec, int src, int tag) const;
+void Irecv(std::vector<float> &vec, int src, int tag);
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -480,7 +480,7 @@ void Irecv(std::vector<float> &vec, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(std::vector<int> &vec, int src, int tag) const;
+void Irecv(std::vector<int> &vec, int src, int tag);
 
   /**
   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
@@ -492,7 +492,7 @@ void Irecv(std::vector<int> &vec, int src, int tag) const;
   * @Warning
   * This function is not thread-safe.
   */
-void Irecv(std::vector<size_t> &vec, int src, int tag) const;
+void Irecv(std::vector<size_t> &vec, int src, int tag);
 
   /**
   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
@@ -506,7 +506,7 @@ void Irecv(std::vector<size_t> &vec, int src, int tag) const;
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ 
-void Irecv(monolish::vector<double> &vec, int src, int tag) const;
+void Irecv(monolish::vector<double> &vec, int src, int tag);
 
   /**
   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
@@ -520,7 +520,7 @@ void Irecv(monolish::vector<double> &vec, int src, int tag) const;
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ 
-void Irecv(monolish::vector<float> &vec, int src, int tag) const;
+void Irecv(monolish::vector<float> &vec, int src, int tag);
 
 /**
 * @brief Waits for all communications to complete.
