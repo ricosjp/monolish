@@ -101,4 +101,4 @@ echo "
 /**
 * @brief Waits for all communications to complete.
 */ "
-echo "void Waitall() const;"
+echo "void Waitall();"

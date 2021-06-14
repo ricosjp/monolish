@@ -525,7 +525,7 @@ void Irecv(monolish::vector<float> &vec, int src, int tag);
 /**
 * @brief Waits for all communications to complete.
 */ 
-void Waitall() const;
+void Waitall();
 
   /**
   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
