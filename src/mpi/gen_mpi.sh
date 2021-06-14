@@ -108,21 +108,21 @@ void comm::Barrier() const{
 
 ## Send
 for type in double float int size_t; do
-  echo "void comm::Send($type val, int dst, int tag, bool gpu_sync) const{ Send_core(val, dst, tag, get_comm(), gpu_sync );}"
+  echo "void comm::Send($type val, int dst, int tag) const{ Send_core(val, dst, tag, get_comm());}"
 done
 
 echo ""
 
 ## Send
 for type in double float int size_t; do
-  echo "void comm::Send(std::vector<$type> &vec, int dst, int tag, bool gpu_sync) const{ Send_core(vec, dst, tag, get_comm(), gpu_sync );}"
+  echo "void comm::Send(std::vector<$type> &vec, int dst, int tag) const{ Send_core(vec, dst, tag, get_comm());}"
 done
 
 echo ""
 
 ## Send
 for type in double float; do
-  echo "void comm::Send(monolish::vector<$type> &vec, int dst, int tag, bool gpu_sync) const{ Send_core(vec, dst, tag, get_comm(), gpu_sync );}"
+  echo "void comm::Send(monolish::vector<$type> &vec, int dst, int tag) const{ Send_core(vec, dst, tag, get_comm());}"
 done
 
 echo ""
@@ -131,21 +131,21 @@ echo ""
 
 ## Recv
 for type in double float int size_t; do
-  echo "MPI_Status comm::Recv($type val, int src, int tag, bool gpu_sync) const{ return Recv_core(val, src, tag, get_comm(), gpu_sync );}"
+  echo "MPI_Status comm::Recv($type val, int src, int tag) const{ return Recv_core(val, src, tag, get_comm());}"
 done
 
 echo ""
 
 ## Recv
 for type in double float int size_t; do
-  echo "MPI_Status comm::Recv(std::vector<$type> &vec, int src, int tag, bool gpu_sync) const{ return Recv_core(vec, src, tag, get_comm(), gpu_sync );}"
+  echo "MPI_Status comm::Recv(std::vector<$type> &vec, int src, int tag) const{ return Recv_core(vec, src, tag, get_comm());}"
 done
 
 echo ""
 
 ## Recv
 for type in double float; do
-  echo "MPI_Status comm::Recv(monolish::vector<$type> &vec, int src, int tag, bool gpu_sync) const{ return Recv_core(vec, src, tag, get_comm(), gpu_sync );}"
+  echo "MPI_Status comm::Recv(monolish::vector<$type> &vec, int src, int tag) const{ return Recv_core(vec, src, tag, get_comm());}"
 done
 
 echo ""
@@ -191,21 +191,21 @@ echo ""
 
 ## Bcast
 for type in double float int size_t; do
-  echo "void comm::Bcast($type &val, int root, bool gpu_sync) const{ Bcast_core(val, root, get_comm(), gpu_sync );}"
+  echo "void comm::Bcast($type &val, int root) const{ Bcast_core(val, root, get_comm());}"
 done
 
 echo ""
 
 ## Bcast
 for type in double float int size_t; do
-  echo "void comm::Bcast(std::vector<$type> &vec, int root, bool gpu_sync) const{ Bcast_core(vec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Bcast(std::vector<$type> &vec, int root) const{ Bcast_core(vec, root, get_comm());}"
 done
 
 echo ""
 
 ## Bcast
 for type in double float; do
-  echo "void comm::Bcast(monolish::vector<$type> &vec, int root, bool gpu_sync) const{ Bcast_core(vec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Bcast(monolish::vector<$type> &vec, int root) const{ Bcast_core(vec, root, get_comm());}"
 done
 
 echo ""
@@ -214,14 +214,14 @@ echo ""
 
 ## Gather
 for type in double float; do
-  echo "void comm::Gather(monolish::vector<$type> &sendvec, monolish::vector<$type> &recvvec, int root, bool gpu_sync) const{ Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Gather(monolish::vector<$type> &sendvec, monolish::vector<$type> &recvvec, int root) const{ Gather_core(sendvec, recvvec, root, get_comm());}"
 done
 
 echo ""
 
 ## Gather
 for type in double float int size_t; do
-  echo "void comm::Gather(std::vector<$type> &sendvec, std::vector<$type> &recvvec, int root, bool gpu_sync) const{ Gather_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Gather(std::vector<$type> &sendvec, std::vector<$type> &recvvec, int root) const{ Gather_core(sendvec, recvvec, root, get_comm());}"
 done
 
 echo ""
@@ -230,14 +230,14 @@ echo ""
 
 ## Scatter
 for type in double float; do
-  echo "void comm::Scatter(monolish::vector<$type> &sendvec, monolish::vector<$type> &recvvec, int root, bool gpu_sync) const{ Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Scatter(monolish::vector<$type> &sendvec, monolish::vector<$type> &recvvec, int root) const{ Scatter_core(sendvec, recvvec, root, get_comm());}"
 done
 
 echo ""
 
 ## Scatter
 for type in double float int size_t; do
-  echo "void comm::Scatter(std::vector<$type> &sendvec, std::vector<$type> &recvvec, int root, bool gpu_sync) const{ Scatter_core(sendvec, recvvec, root, get_comm(), gpu_sync );}"
+  echo "void comm::Scatter(std::vector<$type> &sendvec, std::vector<$type> &recvvec, int root) const{ Scatter_core(sendvec, recvvec, root, get_comm());}"
 done
 
 echo "
