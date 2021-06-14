@@ -4,10 +4,9 @@
  * @brief
  * C++ template MPI class, Functions of this class do nothing when MPI is
  * disabled.
- * Functions in this class are under development. Currently, Many BLAS functions
- * don't support MPI. Functions of this class does not support GPU. The user
- * needs to communicate with the GPU before and after the call to this function
- * if necessary.
+ * Functions in this class are under development. Currently, Many BLAS functions don't support MPI.
+ * Functions of this class does not support GPU.
+ * The user needs to communicate with the GPU before and after the call to this function if necessary.
  */
 namespace monolish::mpi {
 /**
@@ -23,6 +22,7 @@ private:
   ~comm(){};
 
 public:
+  std::vector<MPI_Request> requests;
   comm(const comm &) = delete;
   comm &operator=(const comm &) = delete;
   comm(comm &&) = delete;
@@ -81,867 +81,759 @@ public:
    */
   [[nodiscard]] int get_size();
 
+
   ///////////////////////////////////////////
 
   /**
-   * @brief Blocks until all processes in the communicator have reached this
-   * routine.
+   * @brief Blocks until all processes in the communicator have reached this routine.
    */
   void Barrier() const;
 
-  /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(double val, int dst, int tag) const;
+
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(float val, int dst, int tag) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(double val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(int val, int dst, int tag) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(float val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for scalar. Performs a blocking send.
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(size_t val, int dst, int tag) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(int val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for std::vector. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(std::vector<double> &vec, int dst, int tag) const;
+  * @brief MPI_Send for scalar. Performs a blocking send.
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(size_t val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for std::vector. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(std::vector<float> &vec, int dst, int tag) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(std::vector<double> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for std::vector. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(std::vector<int> &vec, int dst, int tag) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(std::vector<float> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for std::vector. Performs a blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   */
-  void Send(std::vector<size_t> &vec, int dst, int tag) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(std::vector<int> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for monolish::vector. Performs a blocking send.
-   * @param vec monolish::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Send(monolish::vector<double> &vec, int dst, int tag) const;
+  * @brief MPI_Send for std::vector. Performs a blocking send.
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  */
+void Send(std::vector<size_t> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Send for monolish::vector. Performs a blocking send.
-   * @param vec monolish::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Send(monolish::vector<float> &vec, int dst, int tag) const;
+  * @brief MPI_Send for monolish::vector. Performs a blocking send.
+  * @param vec monolish::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */ 
+void Send(monolish::vector<double> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(double val, int src, int tag) const;
+  * @brief MPI_Send for monolish::vector. Performs a blocking send.
+  * @param vec monolish::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */ 
+void Send(monolish::vector<float> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(float val, int src, int tag) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(double val, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(int val, int src, int tag) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(float val, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for scalar. Performs a blocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(size_t val, int src, int tag) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(int val, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for std::vector. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<double> &vec, int src, int tag) const;
+  * @brief MPI_Recv for scalar. Performs a blocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(size_t val, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for std::vector. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<float> &vec, int src, int tag) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<double> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for std::vector. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<int> &vec, int src, int tag) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<float> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for std::vector. Performs a blocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   */
-  MPI_Status Recv(std::vector<size_t> &vec, int src, int tag) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<int> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
-   * @param vec monolish::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  MPI_Status Recv(monolish::vector<double> &vec, int src, int tag) const;
+  * @brief MPI_Recv for std::vector. Performs a blocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  */
+MPI_Status Recv(std::vector<size_t> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
-   * @param vec monolish::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @return MPI status object
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  MPI_Status Recv(monolish::vector<float> &vec, int src, int tag) const;
+  * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */ 
+MPI_Status Recv(monolish::vector<double> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(double val, int dst, int tag) const;
+  * @brief MPI_Recv for monolish::vector. Performs a blocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @return MPI status object
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */ 
+MPI_Status Recv(monolish::vector<float> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(float val, int dst, int tag) const;
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(double val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(int val, int dst, int tag) const;
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(float val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param val scalar value
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(size_t val, int dst, int tag) const;
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(int val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(std::vector<double> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param val scalar value
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(size_t val, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(std::vector<float> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(std::vector<double> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(std::vector<int> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(std::vector<float> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
-   * stored internally. All requests are synchronized by Waitall().
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(std::vector<size_t> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(std::vector<int> &vec, int dst, int tag) const;
 
   /**
-   * @brief send for monolish::vector. Performs a non-blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(monolish::vector<double> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Isend(std::vector<size_t> &vec, int dst, int tag) const;
 
   /**
-   * @brief send for monolish::vector. Performs a non-blocking send.
-   * @param vec std::vector (size N)
-   * @param dst rank of dstination
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  MPI_Request send(monolish::vector<float> &vec, int dst, int tag) const;
+  * @brief MPI_Isend for monolish::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  * This function is not thread-safe.
+  */ 
+void Isend(monolish::vector<double> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(double val, int src, int tag) const;
+  * @brief MPI_Isend for monolish::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
+  * @param vec std::vector (size N)
+  * @param dst rank of dstination
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  * This function is not thread-safe.
+  */ 
+void Isend(monolish::vector<float> &vec, int dst, int tag) const;
 
   /**
-   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(float val, int src, int tag) const;
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(double val, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(int val, int src, int tag) const;
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(float val, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
-   * @param val scalar value
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(size_t val, int src, int tag) const;
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(int val, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(std::vector<double> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for scalar. Performs a nonblocking recv.
+  * @param val scalar value
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(size_t val, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(std::vector<float> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(std::vector<double> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(std::vector<int> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(std::vector<float> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
-   * @param vec std::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(std::vector<size_t> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(std::vector<int> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
-   * @param vec monolish::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(monolish::vector<double> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for std::vector. Performs a nonblocking recv.
+  * @param vec std::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * This function is not thread-safe.
+  */
+void Irecv(std::vector<size_t> &vec, int src, int tag) const;
 
   /**
-   * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
-   * @param vec monolish::vector (size N)
-   * @param src rank of source
-   * @param tag message tag
-   * @note
-   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
-   * by using Waitall() function.
-   * @Warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function. This function is not thread-safe.
-   */
-  void Irecv(monolish::vector<float> &vec, int src, int tag) const;
+  * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  * This function is not thread-safe.
+  */ 
+void Irecv(monolish::vector<double> &vec, int src, int tag) const;
 
   /**
-   * @brief Waits for all communications to complete.
-   */
-  void Waitall() const;
+  * @brief MPI_Irecv for monolish::vector. Performs a nonblocking recv.
+  * @param vec monolish::vector (size N)
+  * @param src rank of source
+  * @param tag message tag
+  * @note
+  * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
+  * @Warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  * This function is not thread-safe.
+  */ 
+void Irecv(monolish::vector<float> &vec, int src, int tag) const;
+
+/**
+* @brief Waits for all communications to complete.
+*/ 
+void Waitall() const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_sum(double val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_sum(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_sum(float val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_sum(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_sum(int val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_sum(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_sum(size_t val) const;
+  * @brief MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_sum(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_prod(double val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_prod(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_prod(float val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_prod(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_prod(int val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_prod(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_prod(size_t val) const;
+  * @brief MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_prod(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_max(double val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_max(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_max(float val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_max(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_max(int val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_max(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_max(size_t val) const;
+  * @brief MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_max(size_t val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] double Allreduce_min(double val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] double Allreduce_min(double val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] float Allreduce_min(float val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] float Allreduce_min(float val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] int Allreduce_min(int val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] int Allreduce_min(int val) const;
 
   /**
-   * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all
-   * processes and distributes the result back to all processes.
-   * @param val scalar value
-   */
-  [[nodiscard]] size_t Allreduce_min(size_t val) const;
+  * @brief MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result back to all processes.
+  * @param val scalar value
+  */ 
+[[nodiscard]] size_t Allreduce_min(size_t val) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(double &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(float &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(int &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param val scalar value
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param val scalar value
+  * @param root root rank number
+  */
   void Bcast(size_t &val, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  */
   void Bcast(monolish::vector<double> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec monolish vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec monolish vector (size N)
+  * @param root root rank number
+  */
   void Bcast(monolish::vector<float> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<double> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<float> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<int> &vec, int root) const;
 
   /**
-   * @brief MPI_Bcast, Broadcasts a message from the process with rank root to
-   * all other processes
-   * @param vec std::vector (size N)
-   * @param root root rank number
-   */
+  * @brief MPI_Bcast, Broadcasts a message from the process with rank root to all other processes
+  * @param vec std::vector (size N)
+  * @param root root rank number
+  */
   void Bcast(std::vector<size_t> &vec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Gather(monolish::vector<double> &sendvec,
-              monolish::vector<double> &recvvec, int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */
+  void Gather(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Gather(monolish::vector<float> &sendvec,
-              monolish::vector<float> &recvvec, int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N * # of procs)
+  * @param val root rank number
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */
+  void Gather(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   */
-  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec,
-              int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   */
-  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec,
-              int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   */
-  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec,
-              int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Gather, Gathers vector from all processes
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std vector (size N)
-   * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
-   */
-  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-              int root) const;
+  * @brief MPI_Gather, Gathers vector from all processes
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std vector (size N)
+  * @param recvvec recv data, std vector (size N * # of procs)
+  * @param val root rank number
+  */
+  void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Scatter(monolish::vector<double> &sendvec,
-               monolish::vector<double> &recvvec, int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */
+  void Scatter(monolish::vector<double> &sendvec, monolish::vector<double> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, monolish vector (size N)
-   * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
-   * @warning
-   * MPI functions do not support GPUs.
-   * The user needs to send and receive data to and from the GPU before and
-   * after the MPI function.
-   */
-  void Scatter(monolish::vector<float> &sendvec,
-               monolish::vector<float> &recvvec, int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, monolish vector (size N)
+  * @param recvvec recv data, monolish vector (size N / # of procs)
+  * @param val root rank number
+  * @warning
+  * MPI functions do not support GPUs.
+  * The user needs to send and receive data to and from the GPU before and after the MPI function.
+  */
+  void Scatter(monolish::vector<float> &sendvec, monolish::vector<float> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec,
-               int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
+  void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec,
-               int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
+  void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec,
-               int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
+  void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec, int root) const;
 
   /**
-   * @brief MPI_Scatter, Sends data from one task to all tasks.
-   * The data is evenly divided and transmitted to each process.
-   * @param sendvec send data, std::vector (size N)
-   * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
-   */
-  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
-               int root) const;
+  * @brief MPI_Scatter, Sends data from one task to all tasks.
+  * The data is evenly divided and transmitted to each process.
+  * @param sendvec send data, std::vector (size N)
+  * @param recvvec recv data, std::vector (size N / # of procs)
+  * @param val root rank number
+  */
+  void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec, int root) const;
 };
-} // namespace monolish::mpi
+}
