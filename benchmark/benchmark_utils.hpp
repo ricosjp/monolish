@@ -1,4 +1,5 @@
 #include "monolish_blas.hpp"
+#include "monolish_equation.hpp"
 #include "monolish_vml.hpp"
 
 #include <algorithm>
@@ -55,6 +56,11 @@
 #define CRS_NNN_BENCH_MIN 1000
 #define CRS_NNN_BENCH_MAX 3000
 #define CRS_NNN_BENCH_ITER += 500
+
+// order 2/3*N^3
+#define LU_NNN_BENCH_MIN 1000
+#define LU_NNN_BENCH_MAX 5000
+#define LU_NNN_BENCH_ITER += 1000
 
 template <typename T> std::string get_type() {
   std::string type;
