@@ -22,8 +22,9 @@ private:
   comm(){};
   ~comm(){};
 
-public:
   std::vector<MPI_Request> requests;
+
+public:
   comm(const comm &) = delete;
   comm &operator=(const comm &) = delete;
   comm(comm &&) = delete;
