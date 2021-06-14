@@ -13,7 +13,8 @@ void Scatter_core(std::vector<T> &sendvec, std::vector<T> recvvec, int root,
 #if defined MONOLISH_USE_MPI
   MPI_Scatter(sendvec.data(), sendvec.size(),
               internal::mpi::get_type(sendvec.data()[0]), recvvec.data(),
-              recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root, comm);
+              recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root,
+              comm);
 #endif
 
   logger.util_out();
@@ -29,7 +30,8 @@ void Scatter_core(monolish::vector<T> &sendvec, monolish::vector<T> recvvec,
 #if defined MONOLISH_USE_MPI
   MPI_Scatter(sendvec.data(), sendvec.size(),
               internal::mpi::get_type(sendvec.data()[0]), recvvec.data(),
-              recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root, comm);
+              recvvec.size(), internal::mpi::get_type(recvvec.data()[0]), root,
+              comm);
 #endif
 
   logger.util_out();

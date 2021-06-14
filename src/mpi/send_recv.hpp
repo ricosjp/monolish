@@ -9,8 +9,7 @@ namespace {
 ///////////////////////////
 
 // Scalar
-template <typename T>
-void Send_core(T val, int dst, int tag, MPI_Comm comm) {
+template <typename T> void Send_core(T val, int dst, int tag, MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -91,7 +90,8 @@ MPI_Status Recv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
 
 // monolish::vector
 template <typename T>
-MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm) {
+MPI_Status Recv_core(monolish::vector<T> &vec, int src, int tag,
+                     MPI_Comm comm) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

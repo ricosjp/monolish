@@ -34,8 +34,8 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.dat()[0]), dst, tag,
-            comm, &rq.back());
+  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.dat()[0]), dst,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -49,8 +49,8 @@ void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
   logger.util_in(monolish_func);
 
 #if defined MONOLISH_USE_MPI
-  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), dst, tag,
-            comm, &rq.back());
+  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), dst,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -86,8 +86,8 @@ void Irecv_core(std::vector<T> &vec, int src, int tag, MPI_Comm comm,
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src, tag,
-            comm, &rq.back());
+  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
@@ -103,8 +103,8 @@ void Irecv_core(monolish::vector<T> &vec, int src, int tag, MPI_Comm comm,
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src, tag,
-            comm, &rq.back());
+  MPI_Irecv(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), src,
+            tag, comm, &rq.back());
 #endif
 
   logger.util_out();
