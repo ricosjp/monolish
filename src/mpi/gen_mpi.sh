@@ -152,6 +152,59 @@ echo ""
 
 ##############################################################################
 
+## Isend
+for type in double float int size_t; do
+    echo "void comm::Isend($type val, int dst, int tag) { Isend_core(val, dst, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+## Isend
+for type in double float int size_t; do
+  echo "void comm::Isend(const std::vector<$type> &vec, int dst, int tag) { Isend_core(vec, dst, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+## Isend
+for type in double float; do
+    echo "void comm::Isend(const monolish::vector<$type> &vec, int dst, int tag) { Isend_core(vec, dst, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+##############################################################################
+
+## Irecv
+for type in double float int size_t; do
+  echo "void comm::Irecv($type val, int src, int tag) { Irecv_core(val, src, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+## Irecv
+for type in double float int size_t; do
+  echo "void comm::Irecv(std::vector<$type> &vec, int src, int tag) { Irecv_core(vec, src, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+## Irecv
+for type in double float; do
+  echo "void comm::Irecv(monolish::vector<$type> &vec, int src, int tag) { Irecv_core(vec, src, tag, get_comm(), requests);}"
+done
+
+echo ""
+
+##############################################################################
+
+## Waitall
+  echo "void comm::Waitall() { Waitall_core(requests);}"
+
+echo ""
+
+##############################################################################
+
 ## allreduce
 for type in double float int size_t; do
     echo "$type comm::Allreduce($type val) const{ return Allreduce_core(val, MPI_SUM, get_comm() );}"

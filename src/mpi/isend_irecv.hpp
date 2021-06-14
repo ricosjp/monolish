@@ -26,7 +26,7 @@ void Isend_core(T val, int dst, int tag, MPI_Comm comm,
 
 // std::vector
 template <typename T>
-void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
+void Isend_core(const std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
                 std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -34,7 +34,7 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 #if defined MONOLISH_USE_MPI
   MPI_Request request;
   rq.push_back(request);
-  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.dat()[0]), dst,
+  MPI_Isend(vec.data(), vec.size(), internal::mpi::get_type(vec.data()[0]), dst,
             tag, comm, &rq.back());
 #endif
 
@@ -43,7 +43,7 @@ void Isend_core(std::vector<T> &vec, int dst, int tag, MPI_Comm comm,
 
 // monolish::vector
 template <typename T>
-void Isend_core(monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
+void Isend_core(const monolish::vector<T> &vec, int dst, int tag, MPI_Comm comm,
                 std::vector<MPI_Request> &rq) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
