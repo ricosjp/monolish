@@ -44,7 +44,6 @@ typedef struct ompi_file_t *MPI_File;
 typedef struct ompi_group_t *MPI_Group;
 typedef struct ompi_info_t *MPI_Info;
 typedef struct ompi_op_t *MPI_Op;
-typedef struct ompi_request_t *MPI_Request;
 typedef struct ompi_message_t *MPI_Message;
 typedef struct ompi_win_t *MPI_Win;
 typedef struct mca_base_var_enum_t *MPI_T_enum;
