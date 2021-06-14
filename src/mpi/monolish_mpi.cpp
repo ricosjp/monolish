@@ -168,6 +168,74 @@ MPI_Status comm::Recv(monolish::vector<float> &vec, int src, int tag) const {
   return Recv_core(vec, src, tag, get_comm());
 }
 
+void comm::Isend(double val, int dst, int tag) {
+  Isend_core(val, dst, tag, get_comm(), requests);
+}
+void comm::Isend(float val, int dst, int tag) {
+  Isend_core(val, dst, tag, get_comm(), requests);
+}
+void comm::Isend(int val, int dst, int tag) {
+  Isend_core(val, dst, tag, get_comm(), requests);
+}
+void comm::Isend(size_t val, int dst, int tag) {
+  Isend_core(val, dst, tag, get_comm(), requests);
+}
+
+void comm::Isend(const std::vector<double> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+void comm::Isend(const std::vector<float> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+void comm::Isend(const std::vector<int> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+void comm::Isend(const std::vector<size_t> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+
+void comm::Isend(const monolish::vector<double> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+void comm::Isend(const monolish::vector<float> &vec, int dst, int tag) {
+  Isend_core(vec, dst, tag, get_comm(), requests);
+}
+
+void comm::Irecv(double val, int src, int tag) {
+  Irecv_core(val, src, tag, get_comm(), requests);
+}
+void comm::Irecv(float val, int src, int tag) {
+  Irecv_core(val, src, tag, get_comm(), requests);
+}
+void comm::Irecv(int val, int src, int tag) {
+  Irecv_core(val, src, tag, get_comm(), requests);
+}
+void comm::Irecv(size_t val, int src, int tag) {
+  Irecv_core(val, src, tag, get_comm(), requests);
+}
+
+void comm::Irecv(std::vector<double> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+void comm::Irecv(std::vector<float> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+void comm::Irecv(std::vector<int> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+void comm::Irecv(std::vector<size_t> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+
+void comm::Irecv(monolish::vector<double> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+void comm::Irecv(monolish::vector<float> &vec, int src, int tag) {
+  Irecv_core(vec, src, tag, get_comm(), requests);
+}
+
+void comm::Waitall() { Waitall_core(requests); }
+
 double comm::Allreduce(double val) const {
   return Allreduce_core(val, MPI_SUM, get_comm());
 }

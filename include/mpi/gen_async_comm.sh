@@ -11,11 +11,9 @@ for prec in double float int size_t; do
   * @note
   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
   * @Warning
-  * MPI functions do not support GPUs.
-  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */"
-  echo "MPI_Request send($prec val, int dst, int tag) const;"
+  echo "void Isend($prec val, int dst, int tag);"
 done
 
 for prec in double float int size_t; do
@@ -28,17 +26,15 @@ for prec in double float int size_t; do
   * @note
   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
   * @Warning
-  * MPI functions do not support GPUs.
-  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */"
-  echo "MPI_Request send(std::vector<$prec> &vec, int dst, int tag) const;"
+  echo "void Isend(const std::vector<$prec> &vec, int dst, int tag);"
 done
 
 for prec in double float; do
   echo "
   /**
-  * @brief send for monolish::vector. Performs a non-blocking send.
+  * @brief MPI_Isend for monolish::vector. Performs a nonblocking send. Requests are stored internally. All requests are synchronized by Waitall().
   * @param vec std::vector (size N)
   * @param dst rank of dstination
   * @param tag message tag
@@ -49,7 +45,7 @@ for prec in double float; do
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ "
-  echo "MPI_Request send(monolish::vector<$prec> &vec, int dst, int tag) const;"
+  echo "void Isend(const monolish::vector<$prec> &vec, int dst, int tag);"
 done
 
 
@@ -64,11 +60,9 @@ for prec in double float int size_t; do
   * @note
   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
   * @Warning
-  * MPI functions do not support GPUs.
-  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */"
-  echo "void Irecv($prec val, int src, int tag) const;"
+  echo "void Irecv($prec val, int src, int tag);"
 done
 
 for prec in double float int size_t; do
@@ -81,11 +75,9 @@ for prec in double float int size_t; do
   * @note
   * There is not MPI_Wait() in monolish::mpi, all communication is synchronized by using Waitall() function.
   * @Warning
-  * MPI functions do not support GPUs.
-  * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */"
-  echo "void Irecv(std::vector<$prec> &vec, int src, int tag) const;"
+  echo "void Irecv(std::vector<$prec> &vec, int src, int tag);"
 done
 
 for prec in double float; do
@@ -102,11 +94,11 @@ for prec in double float; do
   * The user needs to send and receive data to and from the GPU before and after the MPI function.
   * This function is not thread-safe.
   */ "
-  echo "void Irecv(monolish::vector<$prec> &vec, int src, int tag) const;"
+  echo "void Irecv(monolish::vector<$prec> &vec, int src, int tag);"
 done
 
 echo "
 /**
 * @brief Waits for all communications to complete.
 */ "
-echo "void Waitall() const;"
+echo "void Waitall();"
