@@ -2,7 +2,9 @@
 #include "unistd.h"
 
 #define FUNC "LU"
-#define DENSE_PERF 2.0/3.0*((double)size/1000*(double)size/1000*(double)size/1000) / time
+#define DENSE_PERF                                                             \
+  2.0 / 3.0 *                                                                  \
+      ((double)size / 1000 * (double)size / 1000 * (double)size / 1000) / time
 
 template <typename MAT_A, typename T>
 bool benchmark(const size_t size, const size_t iter) {
@@ -15,7 +17,6 @@ bool benchmark(const size_t size, const size_t iter) {
   monolish::equation::LU<MAT_A, T> LU_solver;
 
   auto start = std::chrono::system_clock::now();
-
 
   for (int i = 0; i < iter; i++) {
     LU_solver.solve(A, b);
@@ -50,10 +51,10 @@ int main(int argc, char **argv) {
   }
 
   if ((strcmp(argv[1], "Dense") != 0)) {
-      return 1;
+    return 1;
   }
 
-  std::cout << "func\tkind\tprec\tsize\ttime[sec]\tperf[GFLOPS]"<< std::endl;
+  std::cout << "func\tkind\tprec\tsize\ttime[sec]\tperf[GFLOPS]" << std::endl;
 
   size_t iter = LU_BENCH_ITER;
 
@@ -61,13 +62,15 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_filename("./monolish_log.txt");
 
   // Dense
-  for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX; size LU_NNN_BENCH_ITER) {
+  for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;
+       size LU_NNN_BENCH_ITER) {
     benchmark<monolish::matrix::Dense<float>, float>(size, iter);
     sleep(1);
   }
 
-  for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX; size LU_NNN_BENCH_ITER) {
-    benchmark<monolish::matrix::Dense<double>,double>(size, iter);
+  for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;
+       size LU_NNN_BENCH_ITER) {
+    benchmark<monolish::matrix::Dense<double>, double>(size, iter);
   }
 
   return 0;

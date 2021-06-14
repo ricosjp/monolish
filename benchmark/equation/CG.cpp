@@ -2,17 +2,20 @@
 #include "unistd.h"
 
 #define FUNC "CG"
-#define DENSE_PERF 2.0/3.0*((double)size/1000*(double)size/1000*(double)size/1000) / time
+#define DENSE_PERF                                                             \
+  2.0 / 3.0 *                                                                  \
+      ((double)size / 1000 * (double)size / 1000 * (double)size / 1000) / time
 
 template <typename MAT_A, typename T>
 bool benchmark(const size_t size, const size_t iter) {
 
-  monolish::matrix::COO<T> COO = monolish::util::laplacian_matrix_2D_5p<T>(size, size);
+  monolish::matrix::COO<T> COO =
+      monolish::util::laplacian_matrix_2D_5p<T>(size, size);
   MAT_A A(COO);
   monolish::vector<T> x(A.get_row(), 123.0);
   monolish::vector<T> b(A.get_row(), 1.0);
 
-  //std::cout << A.get_row() << "," << A.get_nnz() << std::endl;
+  // std::cout << A.get_row() << "," << A.get_nnz() << std::endl;
 
   monolish::util::send(A, x, b);
 
@@ -21,7 +24,7 @@ bool benchmark(const size_t size, const size_t iter) {
   CG_solver.set_miniter(CG_ITER);
   CG_solver.set_maxiter(CG_ITER);
   CG_solver.set_tol(-100);
-  //CG_solver.set_print_rhistory(true);
+  // CG_solver.set_print_rhistory(true);
 
   auto start = std::chrono::system_clock::now();
 
@@ -44,7 +47,7 @@ bool benchmark(const size_t size, const size_t iter) {
   std::cout << size << "\t" << std::flush;
   std::cout << CG_ITER << "\t" << std::flush;
   std::cout << time << "\t" << std::flush;
-  std::cout << time/CG_ITER << "\t" << std::endl;
+  std::cout << time / CG_ITER << "\t" << std::endl;
 
   return true;
 }
@@ -57,10 +60,11 @@ int main(int argc, char **argv) {
   }
 
   if ((strcmp(argv[1], "CRS") != 0)) {
-      return 1;
+    return 1;
   }
 
-  std::cout << "func\ttprec\tsize\titer\ttime[sec]\ttime/iter[sec]"<< std::endl;
+  std::cout << "func\ttprec\tsize\titer\ttime[sec]\ttime/iter[sec]"
+            << std::endl;
 
   size_t iter = CG_BENCH_ITER;
 
@@ -68,13 +72,15 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_filename("./monolish_log.txt");
 
   // CRS
-  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX; size CG_NN_BENCH_ITER) {
+  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
+       size CG_NN_BENCH_ITER) {
     benchmark<monolish::matrix::CRS<float>, float>(size, iter);
     sleep(1);
   }
 
-  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX; size CG_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<double>,double>(size, iter);
+  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
+       size CG_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<double>, double>(size, iter);
   }
 
   return 0;
