@@ -35,6 +35,7 @@ OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_replace;
 OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
 
 using MPI_Status = int;
+using MPI_Request = int;
 // typedef struct ompi_status_public_t MPI_Status;
 typedef struct ompi_communicator_t *MPI_Comm;
 typedef struct ompi_datatype_t *MPI_Datatype;
