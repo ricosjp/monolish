@@ -1,5 +1,4 @@
 #include "../benchmark_utils.hpp"
-#include "unistd.h"
 
 #define FUNC "LU"
 #define DENSE_PERF                                                             \
@@ -65,7 +64,6 @@ int main(int argc, char **argv) {
   for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;
        size LU_NNN_BENCH_ITER) {
     benchmark<monolish::matrix::Dense<float>, float>(size, iter);
-    sleep(1);
   }
 
   for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;

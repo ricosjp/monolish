@@ -58,10 +58,10 @@
 #define CRS_NNN_BENCH_ITER += 500
 
 // LU, order 2/3*N^3
-#define LU_BENCH_ITER 10
-#define LU_NNN_BENCH_MIN 1000
-#define LU_NNN_BENCH_MAX 10000
-#define LU_NNN_BENCH_ITER += 1000
+#define LU_BENCH_ITER 1
+#define LU_NNN_BENCH_MIN 5000
+#define LU_NNN_BENCH_MAX 30000
+#define LU_NNN_BENCH_ITER += 5000
 
 // CG
 #define CG_BENCH_ITER 1
