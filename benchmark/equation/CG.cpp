@@ -1,5 +1,4 @@
 #include "../benchmark_utils.hpp"
-#include "unistd.h"
 
 #define FUNC "CG"
 #define DENSE_PERF                                                             \
@@ -75,7 +74,6 @@ int main(int argc, char **argv) {
   for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
        size CG_NN_BENCH_ITER) {
     benchmark<monolish::matrix::CRS<float>, float>(size, iter);
-    sleep(1);
   }
 
   for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
