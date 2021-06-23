@@ -39,6 +39,7 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added, Fixed, Changed (MPI trial implementation)
+- update monolish-log-viewer 0.1.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/335 https://github.com/ricosjp/monolish/issues/59
 - change I/F of MPI non-blocking communication Isend/Irecv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/332
 - delete gpu_sync flag https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/331
 - add MPI non-blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/330
