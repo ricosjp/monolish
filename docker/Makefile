@@ -13,7 +13,7 @@ login:
 ifeq ($(CI_BUILD_TOKEN),)
 	docker login $(REGISTRY)
 else
-	docker login -u gitlab-ci-token -p $(CI_BUILD_TOKEN) $(CI_REGISTRY)
+	docker login -u hishinuma -p ${GITHUB_TOKEN_HISHINUMA} $(REGISTRY)
 endif
 
 monolish: oss mkl oss_nvidia mkl_nvidia

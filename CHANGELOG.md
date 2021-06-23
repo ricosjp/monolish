@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- build monolish container latest in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/336
 - add CG, LU Benchmarks https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/333 https://github.com/ricosjp/monolish/issues/63
 - add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/327 https://github.com/ricosjp/monolish/issues/61
 - support NEC nlc lapack for SXAT https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
@@ -39,7 +40,6 @@ Unreleased
 - add contribution approval flow https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/299
 
 ### Added, Fixed, Changed (MPI trial implementation)
-- update monolish-log-viewer 0.1.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/335 https://github.com/ricosjp/monolish/issues/59
 - change I/F of MPI non-blocking communication Isend/Irecv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/332
 - delete gpu_sync flag https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/331
 - add MPI non-blocking communication Send/Recv https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/330
@@ -69,6 +69,7 @@ Unreleased
 - Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- update monolish-log-viewer 0.1.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/335 https://github.com/ricosjp/monolish/issues/59
 - support stop fcc trad mode, and support fcc clang mode https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/324
 - change C++17 simplified nested namespaces (namespace::namespace) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/321 https://github.com/ricosjp/monolish/issues/60
 - change nrm2 --> dot() and sqrt for MPI https://github.com/ricosjp/monolish/issues/57 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/316
