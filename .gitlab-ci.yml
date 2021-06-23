@@ -466,6 +466,7 @@ monolish_docker:
     stage: deploy
     image: docker:latest
     script:
+        - apk add coreutils make
         - cd docker; make push -j
     only:
       - master
