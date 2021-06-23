@@ -464,7 +464,7 @@ benchmark_result:
 
 monolish_docker:
     stage: deploy
-    image: ${MKL_IMAGE}
+    image: docker:latest
     script:
         - cd docker; make push -j
     only:
