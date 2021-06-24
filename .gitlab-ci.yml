@@ -465,8 +465,10 @@ benchmark_result:
 monolish_docker:
     stage: deploy
     image: docker:latest
+    services:
+        - docker:dind
     script:
-        - apk add coreutils make
+        - apk add coreutils apt-utils make
         - cd docker; make push -j
     only:
       - master
