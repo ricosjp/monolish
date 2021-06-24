@@ -468,7 +468,7 @@ monolish_docker:
     services:
         - docker:dind
     script:
-        - apk add coreutils apt-utils make
+        - apk add coreutils make
         - cd docker; make push 
     only:
       - master
