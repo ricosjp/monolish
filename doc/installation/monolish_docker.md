@@ -8,6 +8,9 @@ monolish is installed in the following locations:
 examples can be found at:
 - /opt/monolish/examples/
 
+benchmarks can be found at:
+- /opt/monolish/benchmark/
+
 # Run monolish container
 Use the following command to enter the monolish docker container.
 Please refer to the next section to see how to run the sample.
@@ -15,21 +18,21 @@ Please refer to the next section to see how to run the sample.
 ## OSS
 
 ```
-docker run -it --rm ghcr.io/ricosjp/monolish/oss
+docker run -it --rm ghcr.io/ricosjp/monolish/oss:latest
 ```
 
 ## MKL
 
 ```
-docker run -it --rm ghcr.io/ricosjp/monolish/mkl
+docker run -it --rm ghcr.io/ricosjp/monolish/mkl:latest
 ```
 
 ## OSS+NVIDIA
 
-If there is not a GPU, `--gpus all` will fail
+If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia:latest
 ```
 
 Then, in execute the following command in monolish docker.
@@ -42,10 +45,10 @@ sh /opt/monolish/link_monolish_gpu.sh
 
 ## MKL+NVIDIA
 
-If there is not a GPU, `--gpus all` will fail
+If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia:latest
 ```
 
 Then, in execute the following command in monolish docker.
