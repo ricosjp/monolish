@@ -59,6 +59,7 @@ Unreleased
 - add build option `MONOLISH_USE_MPI` (beta) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Fixed
+- fix examples reference bug fix and clean makefile https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/339
 - change LU benchmark size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/324
 - fix filename typo internal/*/interger.cpp --> integer.cpp https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
 - avoid SXAT c++17 std::random bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/323
