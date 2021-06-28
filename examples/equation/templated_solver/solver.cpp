@@ -42,7 +42,7 @@ void solve() {
   }
 
   // Recv. from GPU
-  monolish::util::send(x);
+  monolish::util::recv(x);
 
   // output x to standard output
   x.print_all();
