@@ -1,5 +1,5 @@
 MONOLISH_DIR?=$(HOME)/lib/monolish
-LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
+LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
 
 CXX=g++
 CXXFLAGS=-O3
@@ -10,10 +10,10 @@ cpu: cg_cpu.out run_cpu
 gpu: cg_gpu.out run_gpu
 	
 cg_cpu.out: cg.cpp
-	$(CXX) $(CXXFLAGS) cg.cpp -o $@ -lmonolish_cpu $(LIBS)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_cpu 
 
 cg_gpu.out: cg.cpp
-	$(CXX) $(CXXFLAGS) cg.cpp -o $@ -lmonolish_gpu $(LIBS)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_gpu
 
 run_cpu:
 	echo "run CPU"

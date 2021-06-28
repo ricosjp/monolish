@@ -1,5 +1,5 @@
 MONOLISH_DIR?=$(HOME)/lib/monolish
-LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
+LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
 
 CXX=g++
 CXXFLAGS=-O3
@@ -10,10 +10,10 @@ cpu: solver_cpu.out run_cpu
 gpu: solver_gpu.out run_gpu
 	
 solver_cpu.out: solver.cpp
-	$(CXX) $(CXXFLAGS) solver.cpp -o $@  -lmonolish_cpu $(LIBS)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_cpu 
 
 solver_gpu.out: solver.cpp
-	$(CXX) $(CXXFLAGS) solver.cpp -o $@  -lmonolish_gpu $(LIBS)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_gpu
 
 run_cpu:
 	echo "run CPU"
