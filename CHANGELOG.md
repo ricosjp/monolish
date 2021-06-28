@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add gitlab-CI test of examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/341
 - add only_cpu sample code https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/340
 - build monolish container latest in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/336
 - add CG, LU Benchmarks https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/333 https://github.com/ricosjp/monolish/issues/63
