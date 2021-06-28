@@ -7,7 +7,6 @@ MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: cpu gpu gcc_cpu clang_cpu clang_gpu test_cpu test_gpu install install_cpu install_gpu in format document
 
-MONOLISH_DIR ?= $(DESTDIR)
 MONOLISH_DIR ?= $(HOME)/lib/monolish
 
 all: cpu gpu
