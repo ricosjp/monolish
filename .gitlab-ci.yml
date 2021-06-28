@@ -363,11 +363,9 @@ python-gpu:
 #
 .examples:
   stage: examples
-    expire_in: 360min
-    when: always
 
 # gpu mkl
-gpu_avx_clang_mkl:
+gpu_avx_clang_mkl_examples:
     extends:
       - .gpu_avx_clang_mkl
       - .examples
@@ -376,7 +374,7 @@ gpu_avx_clang_mkl:
     script:
       - make -C examples/ gpu
 
-gpu_noavx_clang_mkl:
+gpu_noavx_clang_mkl_examples:
     extends:
       - .gpu_noavx_clang_mkl
       - .examples
@@ -386,7 +384,7 @@ gpu_noavx_clang_mkl:
       - make -C examples/ gpu
 
 # cpu mkl
-nogpu_avx_gcc_mkl:
+nogpu_avx_gcc_mkl_examples:
     extends:
       - .nogpu_avx_gcc_mkl
       - .examples
@@ -395,7 +393,7 @@ nogpu_avx_gcc_mkl:
     script:
       - make -C examples/ cpu
 
-nogpu_noavx_gcc_mkl:
+nogpu_noavx_gcc_mkl_examples:
     extends:
       - .nogpu_noavx_gcc_mkl
       - .examples
@@ -404,7 +402,7 @@ nogpu_noavx_gcc_mkl:
     script:
       - make -C examples/ cpu
 
-nogpu_avx_clang_mkl:
+nogpu_avx_clang_mkl_examples:
     extends:
       - .nogpu_avx_clang_mkl
       - .examples
@@ -413,7 +411,7 @@ nogpu_avx_clang_mkl:
     script:
       - make -C examples/ cpu
 
-nogpu_noavx_clang_mkl:
+nogpu_noavx_clang_mkl_examples:
     extends:
       - .nogpu_noavx_clang_mkl
       - .examples
@@ -423,7 +421,7 @@ nogpu_noavx_clang_mkl:
       - make -C examples/ cpu
 
 # cpu oss
-nogpu_avx_gcc_oss:
+nogpu_avx_gcc_oss_examples:
     extends:
       - .nogpu_avx_gcc_oss
       - .examples
@@ -432,7 +430,7 @@ nogpu_avx_gcc_oss:
     script:
       - make -C examples/ cpu
 
-nogpu_noavx_gcc_oss:
+nogpu_noavx_gcc_oss_examples:
     extends:
       - .nogpu_noavx_gcc_oss
       - .examples
@@ -441,7 +439,7 @@ nogpu_noavx_gcc_oss:
     script:
       - make -C examples/ cpu
 
-nogpu_avx_clang_oss:
+nogpu_avx_clang_oss_examples:
     extends:
       - .nogpu_avx_clang_oss
       - .examples
@@ -450,7 +448,7 @@ nogpu_avx_clang_oss:
     script:
       - make -C examples/ cpu
 
-nogpu_noavx_clang_oss:
+nogpu_noavx_clang_oss_examples:
     extends:
       - .nogpu_noavx_clang_oss
       - .examples
