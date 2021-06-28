@@ -41,8 +41,8 @@ int main() {
   // solver.set_rhistory_filename("./a.txt");
 
   // Solve Ax=b by CG with jacobi
-  if(monolish::util::solver_check(solver.solve(A, x, b))){
-      return 1;
+  if (monolish::util::solver_check(solver.solve(A, x, b))) {
+    return 1;
   }
 
   // Recv x from GPU

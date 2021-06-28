@@ -37,8 +37,8 @@ void solve() {
   // solver.set_rhistory_filename("./a.txt");
 
   // Solve
-  if(monolish::util::solver_check(solver.solve(A, x, b))){
-      return;
+  if (monolish::util::solver_check(solver.solve(A, x, b))) {
+    return;
   }
 
   // Recv. from GPU
