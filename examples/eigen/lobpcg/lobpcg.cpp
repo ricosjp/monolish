@@ -54,7 +54,9 @@ int main() {
   // solver.set_rhistory_filename("./a.txt");
 
   // Solve
-  monolish::util::solver_check(solver.solve(A, eigs, eigvecs));
+  if (monolish::util::solver_check(solver.solve(A, eigs, eigvecs))) {
+    return 1;
+  };
 
   // Recv eigenvalues and eigenvectors from GPU
   monolish::util::recv(eigs, eigvecs);

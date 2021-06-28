@@ -10,8 +10,8 @@ not need for users to implement it.
 */
 
 template <typename MATRIX, typename Float>
-void my_cg(const MATRIX A, monolish::vector<Float> x,
-           const monolish::vector<Float> b) {
+void my_cg(const MATRIX &A, monolish::vector<Float> &x,
+           const monolish::vector<Float> &b) {
   monolish::Logger &logger = monolish::Logger::get_instance();
   logger.solver_in(monolish_func);
 
