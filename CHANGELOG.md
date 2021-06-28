@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add only_cpu sample code https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/340
 - build monolish container latest in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/336
 - add CG, LU Benchmarks https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/333 https://github.com/ricosjp/monolish/issues/63
 - add benchmark/ to monolish container https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/327 https://github.com/ricosjp/monolish/issues/61
@@ -70,6 +71,7 @@ Unreleased
 - Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- add include sample code in doxygben https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/340
 - update monolish docker document https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/337
 - update monolish-log-viewer 0.1.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/335 https://github.com/ricosjp/monolish/issues/59
 - support stop fcc trad mode, and support fcc clang mode https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/324
