@@ -17,9 +17,6 @@ void solve() {
   monolish::vector<FLOAT> x(A.get_row(), 1.0, 2.0);
   monolish::vector<FLOAT> b(A.get_row(), 1.0, 2.0);
 
-  // Send to GPU
-  monolish::util::send(A, x, b);
-
   // Create solver
   SOLVER solver;
 
@@ -40,9 +37,6 @@ void solve() {
   if (monolish::util::solver_check(solver.solve(A, x, b))) {
     return;
   }
-
-  // Recv. from GPU
-  monolish::util::recv(x);
 
   // output x to standard output
   x.print_all();

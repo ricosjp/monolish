@@ -4,24 +4,16 @@ LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
 CXX=g++
 CXXFLAGS=-O3
 
-all: cpu gpu
+all: cpu
 
-cpu: cg_cpu.out run_cpu
-gpu: cg_gpu.out run_gpu
+cpu: solver_cpu.out run_cpu
 	
-cg_cpu.out: cg.cpp
+solver_cpu.out: solver.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_cpu 
-
-cg_gpu.out: cg.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_gpu 
 
 run_cpu:
 	echo "run CPU"
-	./cg_cpu.out
-
-run_gpu:
-	echo "run GPU"
-	./cg_gpu.out
+	./solver_cpu.out
 
 clean:
 	rm *.out

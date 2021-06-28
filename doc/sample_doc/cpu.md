@@ -13,37 +13,15 @@ monolish has the following 7 namespaces in addition to the monolish namespace:
 
 This chapter describes a sample program using monolish that runs on the CPU.
 
-Sample programs that run on the GPU can be found at `sample/`. They work on the CPU and GPU.
+Sample programs that run on the GPU can be found at `examples/`. They work on CPU and GPU.
 The programs running on the GPU are described in the next chapter.
+
+Sample programs for CPU can be found at `examples/cpu_only`. They only work on the CPU.
 
 ## Compute innerproduct 
 First, a simple inner product program is shown below:
 
-\code{.cpp}
-#include<iostream>
-#include<monolish_blas.hpp>
-int main(){
-
-  // Output log if you need
-  // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_log.txt");
-  
-  size_t N = 100;
-
-  // x = {1,1,...,1}, length N
-  monolish::vector<double> x(N, 1.0); 
-
-  // Random vector length N with random values in the range 1.0 to 2.0
-  monolish::vector<double> y(N, 1.0, 2.0); 
-
-  // compute innerproduct
-  double ans = monolish::blas::dot(x, y); 
-
-  std::cout << ans << std::endl;
-
-  return 0;
-}
-\endcode
+\include cpu_only/innerproduct/innerproduct.cpp
 
 This program can be compiled by the following command.
 ```
@@ -68,56 +46,7 @@ The number of threads is specified by the `OMP_NUM_THREADS` environment variable
 ## Solve Ax=b
 The following is a sample program that solves a linear equation; Ax=b using the conjugate gradient method with jacobi preconditioner.
 
-\code{.cpp}
-#include<iostream>
-#include<monolish_equation.hpp>
-
-int main(){
-
-  // Output log if you need
-  // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_log.txt");
-
-  monolish::matrix::COO<double> A_COO("sample.mtx"); // Input from file
-
-  // Edit the matrix as needed //
-  // Execute A_COO.sort() after editing the matrix //
-
-  monolish::matrix::CRS<double> A(A_COO); // Create CRS format and convert from COO format
-
-  // length A.row()
-  // Random vector length A.row() with random values in the range 1.0 to 2.0
-  monolish::vector<double> x(A.get_row(), 1.0, 2.0); 
-  monolish::vector<double> b(A.get_row(), 1.0, 2.0); 
-
-  // Create CG class
-  monolish::equation::CG<monolish::matrix::CRS<double>, double> solver; 
-
-  // Create jacobi preconditioner
-  monolish::equation::Jacobi<monolish::matrix::CRS<double>, double> precond; 
-
-  // Set preconditioner to CG solver
-  solver.set_create_precond(precond); 
-  solver.set_apply_precond(precond);
-
-  // if you need residual history
-  // solver.set_print_rhistory(true);
-  // solver.set_rhistory_filename("./a.txt");
-
-  // Set solver options
-  solver.set_tol(1.0e-12);
-  solver.set_maxiter(A.get_row()); 
-
-  // Solve Ax=b by CG with jacobi
-  monolish::util::solver_check(solver.solve(A, x, b)); 
-
-  // Show answer
-  x.print_all();
-  
-  return 0;
-}
-\endcode
-
+\include cpu_only/cg/cg.cpp
 
 ### Matrix creation
 
@@ -160,78 +89,6 @@ Since monolish is designed so that the matrix and solver classes all have the sa
 
 A templated program is shown below.
 
-\code{.cpp}
-#include<iostream>
-#include"monolish_blas.hpp"
-#include"monolish_equation.hpp"
-
-// Template a matrix format, solver and preconditioer.
-template<typename MATRIX, typename SOLVER, typename PRECOND, typename FLOAT>
-void solve(){
-  monolish::matrix::COO<FLOAT> A_COO("sample.mtx"); // Input from file
-
-  // Edit the matrix as needed //
-  // Execute A_COO.sort() after editing the matrix //
-  
-  MATRIX A(A_COO); // Create CRS format and convert from COO format
-
-  // Length A.row()
-  // Random vector length A.row() with values in the range 1.0 to 2.0
-  monolish::vector<FLOAT> x(A.get_row(), 1.0, 2.0); 
-  monolish::vector<FLOAT> b(A.get_row(), 1.0, 2.0); 
-
-  // Create solver
-  SOLVER solver; 
-
-  // Create preconditioner
-  PRECOND precond;
-  solver.set_create_precond(precond);
-  solver.set_apply_precond(precond);
-
-  // Set solver options
-  solver.set_tol(1.0e-12);
-  solver.set_maxiter(A.get_row());
-
-  // if you need residual history
-  // solver.set_print_rhistory(true);
-  // solver.set_rhistory_filename("./a.txt");
-
-  // Solve
-  monolish::util::solver_check(solver.solve(A, x, b)); 
-
-  // output x to standard output
-  x.print_all();
-}
-
-int main(){
-
-  // output log if you need
-  // monolish::util::set_log_level(3);
-  // monolish::util::set_log_filename("./monolish_test_log.txt");
-
-  std::cout <<  "A is CRS, solver is CG, precondition is Jacobi, precision is double" << std::endl;
-  solve<
-    monolish::matrix::CRS<double>, 
-    monolish::equation::CG<monolish::matrix::CRS<double>,double>,
-    monolish::equation::Jacobi<monolish::matrix::CRS<double>,double>,
-    double>();
-
-  std::cout << "A is Dense, solver is BiCGSTAB, precondition is none, precision is float" << std::endl;
-  solve<
-    monolish::matrix::Dense<float>, 
-    monolish::equation::BiCGSTAB<monolish::matrix::Dense<float>,float>,
-    monolish::equation::none<monolish::matrix::Dense<float>,float>,
-    float>();
-
-  std::cout << "A is Dense, solver is LU, precondition is none, precision is double" << std::endl;
-  solve<
-    monolish::matrix::Dense<double>, 
-    monolish::equation::LU<monolish::matrix::Dense<double>,double>,
-    monolish::equation::none<monolish::matrix::Dense<double>,double>,
-    double>();
-
-  return 0;
-}
-\endcode
+\include cpu_only/templated_solver/solver.cpp
 
 This program is templated so that the function that solves Ax=b is not oblivious to the matrix storage format or data type.
