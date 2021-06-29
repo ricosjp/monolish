@@ -123,7 +123,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   std::copy(value.data(), value.data() + nnz, val.begin());
 
   if (value.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     send();
     const T *data = value.data();
     T *vald = val.data();
@@ -163,7 +163,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     send();
     internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),

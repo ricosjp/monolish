@@ -25,7 +25,7 @@ int internal::lapack::sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
   }
 
   if (A.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cudaDeviceSynchronize();
     cusolverDnHandle_t h;
     internal::check_CUDA(cusolverDnCreate(&h));

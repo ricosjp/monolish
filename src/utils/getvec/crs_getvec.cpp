@@ -20,7 +20,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   const int *cold = col_ind.data();
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
@@ -71,7 +71,7 @@ template <typename T> void CRS<T>::diag(view1D<vector<T>, T> &vec) const {
   const int *cold = col_ind.data();
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
@@ -125,7 +125,7 @@ void CRS<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   const int *cold = col_ind.data();
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
@@ -178,7 +178,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     const int *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
@@ -225,7 +225,7 @@ void CRS<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     const int *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
@@ -274,7 +274,7 @@ void CRS<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     const int *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
@@ -322,7 +322,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
@@ -376,7 +376,7 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;
@@ -432,7 +432,7 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < n; i++) {
       vecd[i] = 0;

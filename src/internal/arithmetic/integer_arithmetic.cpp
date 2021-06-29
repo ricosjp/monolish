@@ -13,7 +13,7 @@ void vcopy(const size_t N, const int *a, int *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = a[i];
@@ -38,7 +38,7 @@ void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = a[i];
@@ -65,7 +65,7 @@ bool vequal(const size_t N, const int *a, const int *y, bool gpu_status) {
   bool ans = true;
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       if (y[i] != a[i]) {
@@ -96,7 +96,7 @@ bool vequal(const size_t N, const size_t *a, const size_t *y, bool gpu_status) {
   bool ans = true;
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       if (y[i] != a[i]) {

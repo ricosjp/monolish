@@ -11,7 +11,7 @@ template <typename T, typename U> void view1D<T, U>::fill(U value) {
   logger.util_in(monolish_func);
   U *val = data();
   if (get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = first; i < last; i++) {
       val[i] = value;

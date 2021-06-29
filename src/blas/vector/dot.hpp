@@ -19,7 +19,7 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
@@ -61,7 +61,7 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)

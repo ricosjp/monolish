@@ -91,7 +91,7 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   resize(vec.size());
 
   // gpu copy and recv
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
     internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
@@ -113,7 +113,7 @@ vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
   resize(vec.size());
 
   // gpu copy and recv
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
     internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
@@ -136,7 +136,7 @@ vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
   resize(vec.size());
 
   // gpu copy and recv
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
     internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),

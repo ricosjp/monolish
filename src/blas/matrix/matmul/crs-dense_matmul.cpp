@@ -27,8 +27,8 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   const int N = B.get_col();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU // CUDA11 will support SpMM
-#if 0                // row major SpMM is not supported in cuda 10.2
+#if MONOLISH_USE_NVIDIA_GPU // CUDA11 will support SpMM
+#if 0                       // row major SpMM is not supported in cuda 10.2
     size_t nnz = A.get_nnz();
 
     cusparseHandle_t sp_handle;
@@ -180,7 +180,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   const int N = B.get_col();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t j = 0; j < N; j++) {
       for (size_t i = 0; i < M; i++) {

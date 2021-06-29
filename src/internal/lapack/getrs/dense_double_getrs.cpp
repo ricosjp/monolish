@@ -29,7 +29,7 @@ int internal::lapack::getrs(const matrix::Dense<double> &A, vector<double> &B,
   const char trans = 'N';
 
   if (A.get_device_mem_stat() == true && B.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     int ipivl = ipiv.size();
     cudaDeviceSynchronize();
     cusolverDnHandle_t h;

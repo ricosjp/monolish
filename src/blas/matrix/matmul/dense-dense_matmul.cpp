@@ -27,7 +27,7 @@ void blas::matmul(const matrix::Dense<double> &A,
   const double beta = 0.0;
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(Ad, Bd, Cd)
@@ -71,7 +71,7 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   const float beta = 0.0;
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(Ad, Bd, Cd)

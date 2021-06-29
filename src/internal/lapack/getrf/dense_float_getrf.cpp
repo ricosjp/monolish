@@ -25,7 +25,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
   int *ipivd = ipiv.data();
 
   if (A.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     int ipivl = ipiv.size();
     cudaDeviceSynchronize();
     cusolverDnHandle_t h;

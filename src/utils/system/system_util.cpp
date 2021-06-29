@@ -36,7 +36,7 @@ bool util::build_with_mpi() {
 }
 
 bool util::build_with_gpu() {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   return true;
 #else
   return false;

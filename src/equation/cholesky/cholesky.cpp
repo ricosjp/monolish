@@ -13,7 +13,7 @@ int equation::Cholesky<MATRIX, T>::solve(MATRIX &A, vector<T> &x,
 
   int ret = -1;
 
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
   if (lib == 1) {
     ret = cusolver_Cholesky(A, x, b);
   } else {

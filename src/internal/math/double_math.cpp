@@ -12,7 +12,7 @@ void vsqrt(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::sqrt(a[i]);
@@ -43,7 +43,7 @@ void vpow(const size_t N, const double *a, const double *b, double *y,
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::pow(a[i], b[i]);
@@ -71,7 +71,7 @@ void vpow(const size_t N, const double *a, const double alpha, double *y,
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::pow(a[i], alpha);
@@ -101,7 +101,7 @@ void vsin(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::sin(a[i]);
@@ -128,7 +128,7 @@ void vsinh(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::sinh(a[i]);
@@ -155,7 +155,7 @@ void vasin(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::asin(a[i]);
@@ -181,7 +181,7 @@ void vasinh(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::asinh(a[i]);
@@ -211,7 +211,7 @@ void vtan(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::tan(a[i]);
@@ -238,7 +238,7 @@ void vtanh(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::tanh(a[i]);
@@ -265,7 +265,7 @@ void vatan(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::atan(a[i]);
@@ -291,7 +291,7 @@ void vatanh(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::atanh(a[i]);
@@ -321,7 +321,7 @@ void vceil(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::ceil(a[i]);
@@ -348,7 +348,7 @@ void vfloor(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::floor(a[i]);
@@ -378,7 +378,7 @@ void vsign(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = -1 * a[i];
@@ -405,7 +405,7 @@ double vmax(const size_t N, const double *y, bool gpu_status) {
   double max = y[0];
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(max : max)
     for (size_t i = 0; i < N; i++) {
       if (y[i] > max) {
@@ -434,7 +434,7 @@ void vmax(const size_t N, const double *a, const double *b, double *y,
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::max(a[i], b[i]);
@@ -462,7 +462,7 @@ double vmin(const size_t N, const double *y, bool gpu_status) {
   double min = y[0];
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(min : min)
     for (size_t i = 0; i < N; i++) {
       if (y[i] < min) {
@@ -490,7 +490,7 @@ void vmin(const size_t N, const double *a, const double *b, double *y,
   logger.func_in(monolish_func);
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < N; i++) {
       y[i] = std::min(a[i], b[i]);

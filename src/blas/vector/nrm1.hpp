@@ -13,7 +13,7 @@ template <typename F1> double Dnrm1_core(const F1 &x) {
   const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
     for (size_t i = 0; i < size; i++) {
       ans += std::abs(xd[i + xoffset]);
@@ -48,7 +48,7 @@ template <typename F1> float Snrm1_core(const F1 &x) {
   const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(+ : ans) map (tofrom: ans)
     for (size_t i = 0; i < size; i++) {
       ans += std::abs(xd[i + xoffset]);

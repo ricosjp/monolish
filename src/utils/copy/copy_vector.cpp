@@ -30,7 +30,7 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
 #endif
   } else {
@@ -54,7 +54,7 @@ void vector<T>::operator=(const view1D<vector<T>, T> &vec) {
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
                     true);
 #endif
@@ -81,7 +81,7 @@ void vector<T>::operator=(const view1D<matrix::Dense<T>, T> &vec) {
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
                     true);
 #endif

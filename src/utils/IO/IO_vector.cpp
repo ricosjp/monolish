@@ -21,7 +21,7 @@ template <typename T> void vector<T>::print_all(bool force_cpu) const {
   const T *vald = val.data();
 
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     const size_t N = val.size();
 #pragma omp target
     for (size_t i = 0; i < N; i++) {

@@ -18,7 +18,7 @@ template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   assert(Len == vec.size());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] *= vecd[i];
@@ -53,7 +53,7 @@ template <typename T> void Dense<T>::diag_mul(const view1D<vector<T>, T> &vec) {
   assert(Len == vec.size());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] *= vecd[i];
@@ -89,7 +89,7 @@ void Dense<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
   assert(Len == vec.size());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] *= vecd[i];

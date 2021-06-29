@@ -16,7 +16,7 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
   int info = 0;
   int size = static_cast<int>(A.get_row());
   int lwork = -1;
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
   cudaDeviceSynchronize();
   cusolverDnHandle_t h;
   internal::check_CUDA(cusolverDnCreate(&h));
@@ -61,7 +61,7 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
   info = devinfo[0];
   monolish::util::recv(A, W);
   cusolverDnDestroy(h);
-#else // MONOLISH_USE_GPU
+#else // MONOLISH_USE_NVIDIA_GPU
   std::vector<float> work(1);
   int liwork = -1;
   std::vector<int> iwork(1);
