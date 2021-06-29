@@ -9,7 +9,7 @@ int equation::QR<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
 
   int ret = -1;
 
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
   if (lib == 1) {
     ret = cusolver_QR(A, x, b);
   } else {

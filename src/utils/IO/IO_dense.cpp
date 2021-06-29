@@ -19,7 +19,7 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
   logger.util_in(monolish_func);
 
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     const T *vald = val.data();
 #pragma omp target
     for (size_t i = 0; i < get_row(); i++) {

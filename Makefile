@@ -36,7 +36,7 @@ clang_gpu:
 		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.1/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu \
-		-DMONOLISH_USE_GPU=ON
+		-DMONOLISH_USE_NVIDIA_GPU=ON
 	cmake --build build_gpu -j `nproc`
 
 cpu: gcc_cpu
@@ -71,7 +71,7 @@ clang_cpu_mpi:
 		-DCMAKE_CXX_COMPILER=mpic++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_cpu_mpi \
-		-DMONOLISH_USE_GPU=OFF \
+		-DMONOLISH_USE_NVIDIA_GPU=OFF \
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_cpu_mpi -j `nproc`
 
@@ -82,7 +82,7 @@ clang_gpu_mpi:
 		-DCMAKE_CXX_COMPILER=mpic++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu_mpi \
-		-DMONOLISH_USE_GPU=ON \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_gpu_mpi -j `nproc`
 
@@ -182,7 +182,7 @@ clang_gpu_$(1):
 		-DCMAKE_CXX_COMPILER=/usr/local/llvm-11.0.1/bin/clang++ \
 		-DCMAKE_VERBOSE_MAKEFILE=1 \
 		-Bbuild_gpu_$(1) \
-		-DMONOLISH_USE_GPU=ON \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
 		-DMONOLISH_FOR_PACKAGING=ON \
 		-DGPU_CC=$(1) \
 	&& cmake --build build_gpu_$(1) -j `nproc`

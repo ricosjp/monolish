@@ -18,7 +18,7 @@ void view1D<monolish::vector<double>, double>::print_all(bool force_cpu) const {
 
   double *val = target.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
     for (size_t i = first; i < last; i++) {
       printf("%f\n", val[i]);
@@ -43,7 +43,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(
 
   double *val = target.val.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
     for (size_t i = first; i < last; i++) {
       printf("%f\n", val[i]);
@@ -67,7 +67,7 @@ void view1D<monolish::vector<float>, float>::print_all(bool force_cpu) const {
 
   float *val = target.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
     for (size_t i = first; i < last; i++) {
       printf("%f\n", val[i]);
@@ -92,7 +92,7 @@ void view1D<monolish::matrix::Dense<float>, float>::print_all(
 
   float *val = target.val.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
     for (size_t i = first; i < last; i++) {
       printf("%f\n", val[i]);

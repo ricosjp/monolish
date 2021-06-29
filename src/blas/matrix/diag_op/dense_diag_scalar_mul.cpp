@@ -13,7 +13,7 @@ template <typename T> void Dense<T>::diag_mul(const T alpha) {
   const size_t Len = get_row() > get_col() ? get_row() : get_col();
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < Len; i++) {
       vald[N * i + i] *= alpha;

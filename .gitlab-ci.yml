@@ -19,7 +19,7 @@ stages:
     variables:
         PREFIX: "gpu_avx"
         TEST_TARGET: "gpu"
-        MONOLISH_USE_GPU: "ON"
+        MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -33,7 +33,7 @@ stages:
     variables:
         PREFIX: "gpu_noavx"
         TEST_TARGET: "gpu"
-        MONOLISH_USE_GPU: "ON"
+        MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -47,7 +47,7 @@ stages:
     variables:
         PREFIX: "nogpu_avx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -59,7 +59,7 @@ stages:
     variables:
         PREFIX: "nogpu_noavx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -69,7 +69,7 @@ stages:
     variables:
         PREFIX: "nogpu_avx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
         CC: "/usr/bin/gcc"
         CXX: "/usr/bin/g++"
@@ -81,7 +81,7 @@ stages:
     variables:
         PREFIX: "nogpu_noavx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/bin/gcc"
         CXX: "/usr/bin/g++"
@@ -92,7 +92,7 @@ stages:
     variables:
         PREFIX: "nogpu_avx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -104,7 +104,7 @@ stages:
     variables:
         PREFIX: "nogpu_noavx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/local/llvm-11.0.1/bin/clang"
         CXX: "/usr/local/llvm-11.0.1/bin/clang++"
@@ -114,7 +114,7 @@ stages:
     variables:
         PREFIX: "nogpu_avx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
         CC: "/usr/bin/gcc"
         CXX: "/usr/bin/g++"
@@ -126,7 +126,7 @@ stages:
     variables:
         PREFIX: "nogpu_noavx"
         TEST_TARGET: "cpu"
-        MONOLISH_USE_GPU: "OFF"
+        MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
         CC: "/usr/bin/gcc"
         CXX: "/usr/bin/g++"
@@ -138,7 +138,7 @@ stages:
 .build_cmake:
     stage: build_lib
     script:
-        - cmake -Bbuild . -DMONOLISH_USE_GPU=${MONOLISH_USE_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
+        - cmake -Bbuild . -DMONOLISH_USE_NVIDIA_GPU=${MONOLISH_USE_NVIDIA_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
         - make -C test -j $(nproc) ${TEST_TARGET}
     artifacts:

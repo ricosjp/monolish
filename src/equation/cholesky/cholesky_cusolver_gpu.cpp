@@ -2,7 +2,7 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../internal/monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
 #include "cusolverSp.h"
 #endif
 
@@ -14,7 +14,7 @@ int equation::Cholesky<matrix::CRS<double>, double>::cusolver_Cholesky(
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);
 
@@ -58,7 +58,7 @@ int equation::Cholesky<matrix::CRS<float>, float>::cusolver_Cholesky(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
 
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);

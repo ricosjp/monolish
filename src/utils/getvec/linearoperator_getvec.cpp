@@ -18,7 +18,7 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     const size_t M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
@@ -73,7 +73,7 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gp
+#if MONOLISH_USE_NVIDIA_GPU // gp
     const size_t M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
@@ -125,7 +125,7 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     const size_t M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);

@@ -12,7 +12,7 @@ template <typename F1> double Dasum_core(const F1 &x) {
   const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)
@@ -45,7 +45,7 @@ template <typename F1> float Sasum_core(const F1 &x) {
   const size_t xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd)

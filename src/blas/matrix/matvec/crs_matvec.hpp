@@ -23,7 +23,7 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
     cudaDeviceSynchronize();
@@ -97,7 +97,7 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU // gpu
+#if MONOLISH_USE_NVIDIA_GPU // gpu
     cusparseHandle_t sp_handle;
     cusparseCreate(&sp_handle);
     cudaDeviceSynchronize();

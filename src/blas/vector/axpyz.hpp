@@ -21,7 +21,7 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   const size_t zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
@@ -57,7 +57,7 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   const size_t zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];

@@ -19,7 +19,7 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
@@ -53,7 +53,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
   const size_t yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];

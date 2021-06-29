@@ -25,7 +25,7 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd, vald)
@@ -69,7 +69,7 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
   const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd, vald)

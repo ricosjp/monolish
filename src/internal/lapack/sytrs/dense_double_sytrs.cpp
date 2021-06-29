@@ -29,7 +29,7 @@ int internal::lapack::sytrs(const matrix::Dense<double> &A, vector<double> &B,
   //   }
   //
   //   if (A.get_device_mem_stat() == true && B.get_device_mem_stat() == true) {
-  // #if MONOLISH_USE_GPU
+  // #if MONOLISH_USE_NVIDIA_GPU
   //     cudaDeviceSynchronize();
   //     cusolverDnHandle_t h;
   //     internal::check_CUDA(cusolverDnCreate(&h));

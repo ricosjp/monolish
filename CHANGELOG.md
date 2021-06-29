@@ -72,6 +72,7 @@ Unreleased
 - Fix clang CPU build script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/306
 
 ### Changed
+- change build flag MONOLISH_USE_GPU --> MONOLISH_USE_NVIDIA_GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/342 https://github.com/ricosjp/monolish/issues/62
 - add include sample code in doxygben https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/340
 - update monolish docker document https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/337
 - update monolish-log-viewer 0.1.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/335 https://github.com/ricosjp/monolish/issues/59

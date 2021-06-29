@@ -19,7 +19,7 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   logger.util_in(monolish_func);
 
   if (get_device_mem_stat() == true && force_cpu == false) {
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
     const T *vald = val.data();
     const int *indexd = col_ind.data();
     const int *ptrd = row_ptr.data();

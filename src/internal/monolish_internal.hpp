@@ -14,7 +14,7 @@
 #include <cblas.h>
 #endif
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
 #include "cusparse.h"
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
@@ -30,7 +30,7 @@ using Dreg = __m256d;
 
 namespace monolish::internal {
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
 auto checkError = [](auto result, auto func, auto file, auto line) {
   if (result) {
     fprintf(stderr, "CUDA error at %s:%d code=%d(%s) \"%s\" \n", file, line,

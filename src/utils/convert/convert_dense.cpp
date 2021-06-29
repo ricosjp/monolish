@@ -38,7 +38,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   colN = mat.get_col();
   nnz = mat.get_nnz();
 
-#if MONOLISH_USE_GPU
+#if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     throw std::runtime_error(
         "error can not convert CRS->CRS when gpu_status == true");

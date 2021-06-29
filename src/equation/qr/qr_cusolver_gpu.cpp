@@ -2,7 +2,7 @@
 #include "../../../include/monolish_equation.hpp"
 #include "../../internal/monolish_internal.hpp"
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
 #include "cusolverSp.h"
 #endif
 
@@ -14,7 +14,7 @@ int equation::QR<matrix::CRS<double>, double>::cusolver_QR(
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);
 
@@ -60,7 +60,7 @@ int equation::QR<matrix::CRS<float>, float>::cusolver_QR(matrix::CRS<float> &A,
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-#ifdef MONOLISH_USE_GPU
+#ifdef MONOLISH_USE_NVIDIA_GPU
   cusolverSpHandle_t sp_handle;
   cusolverSpCreate(&sp_handle);
 
