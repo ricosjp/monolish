@@ -10,13 +10,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Fortran is needed when using find_package(BLAS)
 project(monolish CXX Fortran)
 
-option(MONOLISH_USE_GPU "build GPU variant" OFF)
+option(MONOLISH_USE_NVIDIA_GPU "build NVIDIA GPU variant" OFF)
 option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
 
 if(MONOLISH_USE_MPI)
-  if(MONOLISH_USE_GPU)
+  if(MONOLISH_USE_NVIDIA_GPU)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
       if (MONOLISH_FOR_PACKAGING)
         set(MONOLISH_TARGET monolish_gpu_mpi_${GPU_CC})
@@ -30,7 +30,7 @@ if(MONOLISH_USE_MPI)
     set(MONOLISH_TARGET monolish_cpu_mpi)
   endif()
 else()
-  if(MONOLISH_USE_GPU)
+  if(MONOLISH_USE_NVIDIA_GPU)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
       if (MONOLISH_FOR_PACKAGING)
         set(MONOLISH_TARGET monolish_gpu_${GPU_CC})
@@ -85,7 +85,7 @@ install(
 
 # OpenMP
 find_package(OpenMP REQUIRED)
-if(MONOLISH_USE_GPU)
+if(MONOLISH_USE_NVIDIA_GPU)
   # GPU offloading
 
   if (NOT MONOLISH_FOR_PACKAGING)
@@ -147,8 +147,8 @@ else()
   endif()
 endif()
 
-if(MONOLISH_USE_GPU)
-  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_GPU)
+if(MONOLISH_USE_NVIDIA_GPU)
+  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_NVIDIA_GPU)
   # Link CUDA libraries
   find_package(CUDAToolkit REQUIRED)
   target_link_libraries(${MONOLISH_TARGET}
