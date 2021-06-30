@@ -24,15 +24,15 @@ int main(int argc, char **argv) {
   if (test_sum<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sum<float>(size, 1.0e-4) == false) {
+  if (test_sum<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
   // send //
-  if (test_sum<double>(size, 1.0e-8) == false) {
+  if (test_send_sum<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_sum<float>(size, 1.0e-4) == false) {
+  if (test_send_sum<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
@@ -40,15 +40,15 @@ int main(int argc, char **argv) {
   if (test_asum<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_asum<float>(size, 1.0e-4) == false) {
+  if (test_asum<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
   // send //
-  if (test_asum<double>(size, 1.0e-8) == false) {
+  if (test_send_asum<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_asum<float>(size, 1.0e-4) == false) {
+  if (test_send_asum<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
@@ -56,15 +56,15 @@ int main(int argc, char **argv) {
   if (test_dot<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_dot<float>(size, 1.0e-4) == false) {
+  if (test_dot<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
   // send //
-  if (test_dot<double>(size, 1.0e-8) == false) {
+  if (test_send_dot<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_dot<float>(size, 1.0e-4) == false) {
+  if (test_send_dot<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
@@ -72,15 +72,15 @@ int main(int argc, char **argv) {
   if (test_nrm1<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_nrm1<float>(size, 1.0e-4) == false) {
+  if (test_nrm1<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
   // send //
-  if (test_nrm1<double>(size, 1.0e-8) == false) {
+  if (test_send_nrm1<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_nrm1<float>(size, 1.0e-4) == false) {
+  if (test_send_nrm1<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
@@ -88,15 +88,15 @@ int main(int argc, char **argv) {
   if (test_nrm2<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_nrm2<float>(size, 1.0e-4) == false) {
+  if (test_nrm2<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
   // send //
-  if (test_nrm2<double>(size, 1.0e-8) == false) {
+  if (test_send_nrm2<double>(size, 1.0e-8) == false) {
     return 1;
   }
-  if (test_nrm2<float>(size, 1.0e-4) == false) {
+  if (test_send_nrm2<float>(size, 1.0e-3) == false) {
     return 1;
   }
 
