@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+
+0.14.1 - 2021/07/08
+-----------
 ### Added
 - add gitlab-CI test of examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/341
 - add only_cpu sample code https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/340
