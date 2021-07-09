@@ -26,6 +26,7 @@ Unreleased
 
 ### Fixed
 - delete unnecessary device free https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
+- delete gpu matrix transpose test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
 
 ### Changed
 - update clang 11.0.0 --> 12.0.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344 https://github.com/ricosjp/monolish/issues/64
