@@ -1,6 +1,6 @@
 variables:
-  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:21.05.0
-  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/oss:21.05.0
+  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/mkl:21.06.1
+  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/oss:21.06.1
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -574,14 +574,14 @@ monolish_docker:
       - master
 
 clang_format:
-    image: ghcr.io/ricosjp/allgebra/clang-format:21.05.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
     stage: build_lib
     script:
         - check_format.sh
     allow_failure: true
 
 keep-changelog:
-    image: ghcr.io/ricosjp/allgebra/clang-format:21.05.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
     stage: build_lib
     script:
         - bash -c "! git diff --exit-code origin/master CHANGELOG.md"
