@@ -25,10 +25,12 @@ Unreleased
 ### Added, Fixed, Changed (MPI trial implementation)
 
 ### Fixed
+- delete unnecessary device free https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
 
 ### Changed
 - update clang 11.0.0 --> 12.0.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344 https://github.com/ricosjp/monolish/issues/64
 - update allgebra 20.05.0--> 21.06.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344 https://github.com/ricosjp/monolish/issues/64
+- change std::copy --> internal::vcopy in transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
 
 0.14.1 - 2021/07/08
 -----------
