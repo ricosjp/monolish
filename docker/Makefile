@@ -1,5 +1,5 @@
 REGISTRY := ghcr.io/ricosjp/monolish
-#TAG := 0.14.0
+#TAG := 0.14.1
 TAG := latest
 
 MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
