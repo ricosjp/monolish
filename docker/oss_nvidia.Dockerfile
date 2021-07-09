@@ -1,4 +1,4 @@
-FROM ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/oss:21.05.0
+FROM ghcr.io/ricosjp/allgebra/cuda10_1/clang12/oss:21.06.1
 
 ENV DEBIAN_FRONTEND=noninteractive
 COPY ./monolish_examples/ /opt/monolish/examples/

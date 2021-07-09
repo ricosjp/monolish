@@ -48,7 +48,7 @@ run_gpu:
 	bash ./test.sh matrix_common gpu
 	bash ./test.sh matrix_convert gpu
 	bash ./test.sh matrix_compare gpu
-	bash ./test.sh matrix_transpose gpu
+	# bash ./test.sh matrix_transpose gpu
 	bash ./test.sh matrix_blas gpu
 	bash ./test.sh matrix_vml gpu
 	bash ./test.sh matrix_subvec_op gpu

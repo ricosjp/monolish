@@ -1,6 +1,6 @@
 variables:
-  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/mkl:21.05.0
-  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang11gcc7/oss:21.05.0
+  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/mkl:21.06.1
+  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/oss:21.06.1
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -21,8 +21,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     tags:
         - gpu
         - nvidia0-sm_61
@@ -35,8 +35,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     tags:
         - gpu
         - nvidia0-sm_61
@@ -49,8 +49,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     tags:
         - avx
     image: ${MKL_IMAGE}
@@ -61,8 +61,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     image: ${MKL_IMAGE}
 
 .nogpu_avx_gcc_mkl:
@@ -94,8 +94,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     tags:
         - avx
     image: ${OSS_IMAGE}
@@ -106,8 +106,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-11.0.1/bin/clang"
-        CXX: "/usr/local/llvm-11.0.1/bin/clang++"
+        CC: "/usr/local/llvm-12.0.0/bin/clang"
+        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
     image: ${OSS_IMAGE}
 
 .nogpu_avx_gcc_oss:
@@ -574,14 +574,14 @@ monolish_docker:
       - master
 
 clang_format:
-    image: ghcr.io/ricosjp/allgebra/clang-format:21.05.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
     stage: build_lib
     script:
         - check_format.sh
     allow_failure: true
 
 keep-changelog:
-    image: ghcr.io/ricosjp/allgebra/clang-format:21.05.0
+    image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
     stage: build_lib
     script:
         - bash -c "! git diff --exit-code origin/master CHANGELOG.md"

@@ -148,7 +148,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
     if (A.get_device_mem_stat() == true) {
       wxp.nonfree_recv();
-      twxp.device_free();
+      // twxp.device_free();
     }
     twxp.transpose(wxp);
     if (A.get_device_mem_stat() == true) {
