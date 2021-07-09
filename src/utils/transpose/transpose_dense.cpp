@@ -15,7 +15,7 @@ template <typename T> Dense<T> &Dense<T>::transpose() {
       B.val[i * B.get_col() + j] = val[j * B.get_row() + i];
     }
   }
-  std::copy(B.val.data(), B.val.data() + nnz, val.begin());
+  internal::vcopy(nnz, B.val.data(), val.data(), gpu_status);
   set_row(B.get_row());
   set_col(B.get_col());
   logger.util_out();
