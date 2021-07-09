@@ -354,7 +354,7 @@ int main(int argc, char **argv) {
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
-  
+
   switch (argc) {
   case 1:
     check_ans = 1;
