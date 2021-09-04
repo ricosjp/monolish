@@ -199,7 +199,7 @@ MPI_build_test:
   image: ${MKL_IMAGE}
   tags:
     - gpu
-    - nvidia0-sm_52
+    - nvidia0-sm_61
     - avx
 
 #
