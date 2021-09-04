@@ -191,17 +191,17 @@ nogpu_noavx_gcc_oss_build_cmake:
       - .nogpu_noavx_gcc_oss
       - .build_cmake
 
-MPI_build_test:
-  stage: build_lib
-  script:
-    - nvidia-smi
-    - make install_all
-    - cd test/mpi; make clean; make -j; make run
-  image: ${MKL_IMAGE}
-  tags:
-    - 2-gpu
-    - nvidia0-sm_61
-    - avx
+# MPI_build_test:
+#   stage: build_lib
+#   script:
+#     - nvidia-smi
+#     - make install_all
+#     - cd test/mpi; make clean; make -j; make run
+#   image: ${MKL_IMAGE}
+#   tags:
+#     - 2-gpu
+#     - nvidia0-sm_61
+#     - avx
 
 #
 # Test Stage

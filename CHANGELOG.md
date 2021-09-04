@@ -35,6 +35,7 @@ Unreleased
 
 ### Fixed
 - Specify poetry version 1.1.7 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/345
+- stop MPI test (see https://github.com/ricosjp/monolish/issues/67) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/345
 
 0.14.1 - 2021/07/08
 -----------
