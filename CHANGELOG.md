@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add publications in doxygen https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/346
 
 ### Added, Fixed, Changed (MPI trial implementation)
 
