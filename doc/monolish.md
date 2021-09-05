@@ -22,6 +22,9 @@
 - [Testing and Benchmarking](@ref test_bench)
 - [Contribution guide](@ref contribution) 
 
+## Citations:
+- [Publications](@ref publications)
+
 ## Meta information:
 - [Source code](https://github.com/ricosjp/monolish/)
 - [Documentation](https://ricosjp.github.io/monolish/)
