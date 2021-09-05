@@ -4,6 +4,7 @@ monolish is a linear equation solver library that monolithically fuses variable 
 - Documentation: https://ricosjp.github.io/monolish/
 - Source code: https://github.com/ricosjp/monolish/
 - Contribution guide : https://ricosjp.github.io/monolish/da/dce/contribution.html
+- Publications: https://ricosjp.github.io/monolish/de/d26/publications.html
 - Bug reports: https://github.com/ricosjp/monolish/issues
 - Releases: https://github.com/ricosjp/monolish/releases
 - Changelog: https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md
@@ -21,6 +22,18 @@ monolish let developer forget about:
 - Matrix structures and storage formats
 - Cumbersome package dependency
 
+Installation
+---
+The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
+
+To use pre-built monolish, use apt or Docker Container with monolish installed.
+- [Installation using apt (for ubuntu 20.04 and 20.10)](https://ricosjp.github.io/monolish/d5/d38/install_guide.html)
+- [Docker container with monolish installed](https://ricosjp.github.io/monolish/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+
+To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
+
+See below for how to build on algebra.
+- [Build monolish from source code](https://ricosjp.github.io/monolish/da/d20/build_guide.html)
 
 License
 --------
