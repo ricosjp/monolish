@@ -56,7 +56,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 #if MONOLISH_USE_MKL
     int m = A.get_row();
     int n = A.get_col();
-    int nnz = A.get_nnz();
     const double alpha = 1.0;
     const double beta = 0.0;
 
