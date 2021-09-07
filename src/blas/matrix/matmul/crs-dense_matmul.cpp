@@ -98,8 +98,16 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     const double alpha = 1.0;
     const double beta = 0.0;
     const int K = A.get_col();
-    mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
-               &N, &beta, Cd, &N);
+
+//  sparse_matrix_t mklA;
+//  struct matrix_descr descrA;
+//  descrA.type = SPARSE_MATRIX_TYPE_GENERAL;
+//  mkl_sparse_d_create_csr(&mklA, SPARSE_INDEX_BASE_ZERO, M, K, (int*)rowd, (int*)rowd+1, (int*)cold, (double*)vald);
+//  mkl_sparse_set_mm_hint (mklA, SPARSE_OPERATION_NON_TRANSPOSE, descrA, 100); // We haven't seen any performance improvement by using hint.
+//  mkl_sparse_d_mm(SPARSE_OPERATION_NON_TRANSPOSE, alpha, mklA, descrA, SPARSE_LAYOUT_ROW_MAJOR, 
+//              Bd, N, K, beta, Cd, N);
+
+    mkl_dcsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd, &N, &beta, Cd, &N);
 
 // OSS
 #else
