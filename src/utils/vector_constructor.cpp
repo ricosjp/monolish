@@ -29,27 +29,28 @@ template <typename T> vector<T>::vector(const size_t N, const T value) {
 template vector<double>::vector(const size_t N, const double value);
 template vector<float>::vector(const size_t N, const float value);
 
-
 template <typename T>
 void util::random_vector(vector<T> &vec, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
 #pragma omp parallel
-    {
-        std::random_device random;
-        std::mt19937 mt(random());
-        std::uniform_real_distribution<> rand(min, max);
+  {
+    std::random_device random;
+    std::mt19937 mt(random());
+    std::uniform_real_distribution<> rand(min, max);
 
 #pragma omp for
-        for (size_t i = 0; i < vec.size(); i++) {
-            vec[i] = rand(mt);
-        }
+    for (size_t i = 0; i < vec.size(); i++) {
+      vec[i] = rand(mt);
     }
+  }
   logger.util_out();
 }
-template void util::random_vector(vector<double> &vec, const double min, const double max);
-template void util::random_vector(vector<float> &vec, const float min, const float max);
+template void util::random_vector(vector<double> &vec, const double min,
+                                  const double max);
+template void util::random_vector(vector<float> &vec, const float min,
+                                  const float max);
 
 template <typename T> vector<T>::vector(const T *start, const T *end) {
   Logger &logger = Logger::get_instance();
@@ -69,14 +70,14 @@ vector<T>::vector(const size_t N, const T min, const T max) {
   resize(N);
 #pragma omp parallel
   {
-      std::random_device random;
-      std::mt19937 mt(random());
-      std::uniform_real_distribution<> rand(min, max);
+    std::random_device random;
+    std::mt19937 mt(random());
+    std::uniform_real_distribution<> rand(min, max);
 
 #pragma omp for
-      for (size_t i = 0; i < val.size(); i++) {
-          val[i] = rand(mt);
-      }
+    for (size_t i = 0; i < val.size(); i++) {
+      val[i] = rand(mt);
+    }
   }
   logger.util_out();
 }
