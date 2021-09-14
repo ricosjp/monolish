@@ -267,20 +267,11 @@ void set_log_filename(const std::string filename);
  * @note the ramdom number generator is random generator is mt19937
  * @note
  * - # of computation: N
- * - Multi-threading: false
+ * - Multi-threading: true
  * - GPU acceleration: false
  **/
 template <typename T>
-void random_vector(vector<T> &vec, const T min, const T max) {
-  // rand (0~1)
-  std::random_device random;
-  std::mt19937 mt(random());
-  std::uniform_real_distribution<> rand(min, max);
-
-  for (size_t i = 0; i < vec.size(); i++) {
-    vec[i] = rand(mt);
-  }
-}
+void random_vector(vector<T> &vec, const T min, const T max);
 
 // is_same //////////////////
 
