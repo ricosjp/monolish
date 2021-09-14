@@ -117,13 +117,16 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
 
   val.resize(nnz);
 
-  std::random_device random;
-  std::mt19937 mt(random());
-  std::uniform_real_distribution<> rand(min, max);
+#pragma omp parallel
+  {
+    std::random_device random;
+    std::mt19937 mt(random());
+    std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp parallel for
-  for (size_t i = 0; i < val.size(); i++) {
-    val[i] = rand(mt);
+#pragma omp for
+    for (size_t i = 0; i < val.size(); i++) {
+      val[i] = rand(mt);
+    }
   }
   logger.util_out();
 }
