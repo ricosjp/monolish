@@ -10,9 +10,9 @@ RUN apt-get update -y \
  pip3 install monolish-log-viewer==0.1.1
 
 # install libmonolish_gpu.so
-RUN wget https://github.com/ricosjp/monolish/releases/download/0.14.1/monolish_0.14.1-1+oss+nvidia_amd64.deb \
- && apt install -y ./monolish_0.14.1-1+oss+nvidia_amd64.deb \
- && rm ./monolish_0.14.1-1+oss+nvidia_amd64.deb \
+RUN wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb \
+ && apt install -y ./monolish_0.14.2-1+oss+nvidia_amd64.deb \
+ && rm ./monolish_0.14.2-1+oss+nvidia_amd64.deb \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 

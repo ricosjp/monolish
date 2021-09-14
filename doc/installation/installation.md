@@ -5,8 +5,8 @@
 Download deb file from Releases page and install as follows:
 \code{shell}
 $ sudo apt update && sudo apt install wget
-$ wget https://github.com/ricosjp/monolish/releases/download/0.14.1/monolish_0.14.1-1+oss_amd64.deb
-$ sudo apt install ./monolish_0.14.1-1+oss_amd64.deb
+$ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss_amd64.deb
+$ sudo apt install ./monolish_0.14.2-1+oss_amd64.deb
 \endcode
 
 - +oss is `OSS` variant
@@ -26,8 +26,8 @@ $ sudo apt install libcublas10=10.2.1.243-1
 Download deb file from Releases page and install as follows:
 \code{shell}
 $ sudo apt update && sudo apt install wget
-$ wget https://github.com/ricosjp/monolish/releases/download/0.14.1/monolish_0.14.1-1+oss+nvidia_amd64.deb
-$ sudo apt install ./monolish_0.14.1-1+oss+nvidia_amd64.deb
+$ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb
+$ sudo apt install ./monolish_0.14.2-1+oss+nvidia_amd64.deb
 \endcode
 
 - +oss+nvidia is `OSS`+`NVIDIA` variant
