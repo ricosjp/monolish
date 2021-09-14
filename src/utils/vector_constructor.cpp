@@ -45,13 +45,16 @@ vector<T>::vector(const size_t N, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   resize(N);
-  std::random_device random;
-  std::mt19937 mt(random());
-  std::uniform_real_distribution<> rand(min, max);
+#pragma omp parallel
+  {
+      std::random_device random;
+      std::mt19937 mt(random());
+      std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp parallel for
-  for (size_t i = 0; i < val.size(); i++) {
-    val[i] = rand(mt);
+#pragma omp for
+      for (size_t i = 0; i < val.size(); i++) {
+          val[i] = rand(mt);
+      }
   }
   logger.util_out();
 }
