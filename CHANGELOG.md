@@ -26,6 +26,7 @@ Unreleased
 ### Added, Fixed, Changed (MPI trial implementation)
 
 ### Fixed
+- fix typo random_stracture.cpp -> random_structure.cpp  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/349 https://github.com/ricosjp/monolish/issues/71
 - fix deprecated MKL SpMV  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344 https://github.com/ricosjp/monolish/issues/65
 - delete unnecessary device free https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
 - delete gpu matrix transpose test https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/344
