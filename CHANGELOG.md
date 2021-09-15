@@ -249,7 +249,7 @@ Unreleased
 0.11.0 - 2021/01/23
 -----------
 ### Added
-- LinerOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/210
+- LinearOperator https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/210
 - LOBPCG/DC works on GPU, too https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/220
 - add vector is_same_size, is_same_structure https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224
 - add is_same_size https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/224

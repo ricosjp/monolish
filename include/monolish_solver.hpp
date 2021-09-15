@@ -5,7 +5,7 @@
 #include <functional>
 
 /**
- * @brief Liner solver base class
+ * @brief Linear solver base class
  **/
 namespace monolish::solver {
 
