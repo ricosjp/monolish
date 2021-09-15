@@ -1,4 +1,4 @@
-# monolish: MONOlithic LIner equation Solvers for Highly-parallel architecture. {#mainpage}
+# monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture. {#mainpage}
 
 ## Past versions
 - [0.14.2](https://ricosjp.github.io/monolish/0.14.2/)

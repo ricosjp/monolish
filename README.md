@@ -1,4 +1,4 @@
-# monolish: MONOlithic LIner equation Solvers for Highly-parallel architecture
+# monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture
 monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vendor specific data transfer APIs, and vendor specific numerical algebra libraries.
 
 - Documentation: https://ricosjp.github.io/monolish/
