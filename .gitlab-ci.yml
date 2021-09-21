@@ -3,7 +3,7 @@ variables:
   OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/oss:21.09.0
 
 before_script:
-    - apt update -y; apt install gfortran
+    - apt update -y; apt install -y gfortran
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
     - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib:/usr/local/lib/
 
