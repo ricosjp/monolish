@@ -1,6 +1,6 @@
 variables:
-  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/mkl:21.06.1
-  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/oss:21.06.1
+  MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
+  OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/oss:21.09.0
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
