@@ -24,30 +24,68 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-//     cusparseHandle_t sp_handle;
-//     cusparseCreate(&sp_handle);
-//     cudaDeviceSynchronize();
-// 
-//     cusparseMatDescr_t descr = 0;
-//     cusparseCreateMatDescr(&descr);
-//     cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
-//     cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
-//     cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
-// 
-//     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-// 
-//     const int m = A.get_row();
-//     const int n = A.get_col();
-//     const double alpha = 1.0;
-//     const double beta = 0.0;
-//     const int nnz = A.get_nnz();
-// 
-// #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
-//     {
-//       internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
-//                                           descr, vald, rowd, cold, xd + xoffset,
-//                                           &beta, yd + yoffset));
-//     }
+#if MONOLISH_USE_OLD_CUDA //cuda10.x
+    cusparseHandle_t sp_handle;
+    cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
+
+    cusparseMatDescr_t descr = 0;
+    cusparseCreateMatDescr(&descr);
+    cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
+    cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
+    cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
+
+    const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+    const int m = A.get_row();
+    const int n = A.get_col();
+    const double alpha = 1.0;
+    const double beta = 0.0;
+    const int nnz = A.get_nnz();
+
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
+    {
+      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd + xoffset,
+                                          &beta, yd + yoffset));
+    }
+
+#else //cuda11.x
+      const int m = A.get_row();
+      const int n = A.get_col();
+      const double alpha = 1.0;
+      const double beta = 0.0;
+      const int nnz = A.get_nnz();
+
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
+      {
+          cusparseSpMatDescr_t matA;
+          cusparseDnVecDescr_t vecX, vecY;
+
+          cusparseHandle_t sp_handle;
+          cusparseCreate(&sp_handle);
+          cudaDeviceSynchronize();
+
+          cusparseCreateCsr(&matA, m, n, nnz,
+                  (void*)rowd, (void*)cold, (void*)vald,
+                  CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
+                  CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F);
+          cusparseCreateDnVec(&vecX, n, (void*)xd, CUDA_R_64F);
+          cusparseCreateDnVec(&vecY, m, (void*)yd, CUDA_R_64F);
+
+          void* buffer = NULL;
+          size_t buffersize = 0;
+          cusparseSpMV_bufferSize(
+                  sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+                  &alpha, matA, vecX, &beta, vecY, CUDA_R_64F,
+                  CUSPARSE_MV_ALG_DEFAULT, &buffersize);
+          cudaMalloc(&buffer, buffersize);
+          cusparseSpMV(
+                  sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+                  &alpha, matA, vecX, &beta, vecY, CUDA_R_64F,
+                  CUSPARSE_MV_ALG_DEFAULT, buffer);
+      }
+#endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
@@ -107,30 +145,67 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-//     cusparseHandle_t sp_handle;
-//     cusparseCreate(&sp_handle);
-//     cudaDeviceSynchronize();
-// 
-//     cusparseMatDescr_t descr = 0;
-//     cusparseCreateMatDescr(&descr);
-//     cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
-//     cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
-//     cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
-// 
-//     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-// 
-//     const int m = A.get_row();
-//     const int n = A.get_col();
-//     const int nnz = A.get_nnz();
-//     const float alpha = 1.0;
-//     const float beta = 0.0;
-// 
-// #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
-//     {
-//       internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
-//                                           descr, vald, rowd, cold, xd + xoffset,
-//                                           &beta, yd + yoffset));
-//     }
+#if MONOLISH_USE_OLD_CUDA //cuda10.x
+    cusparseHandle_t sp_handle;
+    cusparseCreate(&sp_handle);
+    cudaDeviceSynchronize();
+
+    cusparseMatDescr_t descr = 0;
+    cusparseCreateMatDescr(&descr);
+    cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
+    cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
+    cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
+
+    const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+    const int m = A.get_row();
+    const int n = A.get_col();
+    const int nnz = A.get_nnz();
+    const float alpha = 1.0;
+    const float beta = 0.0;
+
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
+    {
+      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
+                                          descr, vald, rowd, cold, xd + xoffset,
+                                          &beta, yd + yoffset));
+    }
+#else //cuda11.x
+      const int m = A.get_row();
+      const int n = A.get_col();
+      const float alpha = 1.0;
+      const float beta = 0.0;
+      const int nnz = A.get_nnz();
+
+#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
+      {
+          cusparseSpMatDescr_t matA;
+          cusparseDnVecDescr_t vecX, vecY;
+
+          cusparseHandle_t sp_handle;
+          cusparseCreate(&sp_handle);
+          cudaDeviceSynchronize();
+
+          cusparseCreateCsr(&matA, m, n, nnz,
+                  (void*)rowd, (void*)cold, (void*)vald,
+                  CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
+                  CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
+          cusparseCreateDnVec(&vecX, n, (void*)xd, CUDA_R_32F);
+          cusparseCreateDnVec(&vecY, m, (void*)yd, CUDA_R_32F);
+
+          void* buffer = NULL;
+          size_t buffersize = 0;
+          cusparseSpMV_bufferSize(
+                  sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+                  &alpha, matA, vecX, &beta, vecY, CUDA_R_32F,
+                  CUSPARSE_MV_ALG_DEFAULT, &buffersize);
+          cudaMalloc(&buffer, buffersize);
+          cusparseSpMV(
+                  sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+                  &alpha, matA, vecX, &beta, vecY, CUDA_R_32F,
+                  CUSPARSE_MV_ALG_DEFAULT, buffer);
+      }
+#endif //cuda version
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
