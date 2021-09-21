@@ -21,8 +21,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     tags:
         - gpu
         - nvidia0-sm_61
@@ -35,8 +35,8 @@ stages:
         TEST_TARGET: "gpu"
         MONOLISH_USE_NVIDIA_GPU: "ON"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     tags:
         - gpu
         - nvidia0-sm_61
@@ -49,8 +49,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     tags:
         - avx
     image: ${MKL_IMAGE}
@@ -61,8 +61,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     image: ${MKL_IMAGE}
 
 .nogpu_avx_gcc_mkl:
@@ -94,8 +94,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "ON"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     tags:
         - avx
     image: ${OSS_IMAGE}
@@ -106,8 +106,8 @@ stages:
         TEST_TARGET: "cpu"
         MONOLISH_USE_NVIDIA_GPU: "OFF"
         MONOLISH_USE_AVX: "OFF"
-        CC: "/usr/local/llvm-12.0.0/bin/clang"
-        CXX: "/usr/local/llvm-12.0.0/bin/clang++"
+        CC: "/usr/local/llvm-12.0.1/bin/clang"
+        CXX: "/usr/local/llvm-12.0.1/bin/clang++"
     image: ${OSS_IMAGE}
 
 .nogpu_avx_gcc_oss:
