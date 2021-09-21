@@ -103,11 +103,13 @@ if(MONOLISH_USE_NVIDIA_GPU)
     -fopenmp
     -fopenmp-targets=nvptx64
     -Xopenmp-target -march=sm_${GPU_CC}
+    -Wno-unknown-cuda-version
   )
   target_link_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
     -Xopenmp-target -march=sm_${GPU_CC}
+    -Wno-unknown-cuda-version
   )
 else()
   target_compile_options(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
