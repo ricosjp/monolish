@@ -20,6 +20,12 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 Unreleased
 -----------
+### Added
+
+### Fixed
+- fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
+
+### Changed
 
 0.14.2 - 2021/09/14
 -----------
