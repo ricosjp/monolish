@@ -26,6 +26,8 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- [update allgebra 21.09.0] cuda 10.1 -> cuda11.4  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352
+- [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352
 
 0.14.2 - 2021/09/14
 -----------
