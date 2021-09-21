@@ -69,8 +69,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F);
-      cusparseCreateDnVec(&vecX, n, (void *)(xd+xoffset), CUDA_R_64F);
-      cusparseCreateDnVec(&vecY, m, (void *)(yd+yoffset), CUDA_R_64F);
+      cusparseCreateDnVec(&vecX, n, (void *)(xd + xoffset), CUDA_R_64F);
+      cusparseCreateDnVec(&vecY, m, (void *)(yd + yoffset), CUDA_R_64F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
@@ -190,8 +190,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
-      cusparseCreateDnVec(&vecX, n, (void *)(xd+xoffset), CUDA_R_32F);
-      cusparseCreateDnVec(&vecY, m, (void *)(yd+yoffset), CUDA_R_32F);
+      cusparseCreateDnVec(&vecX, n, (void *)(xd + xoffset), CUDA_R_32F);
+      cusparseCreateDnVec(&vecY, m, (void *)(yd + yoffset), CUDA_R_32F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
