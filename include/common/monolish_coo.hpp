@@ -538,7 +538,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] COO &transpose();
+  COO &transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)
