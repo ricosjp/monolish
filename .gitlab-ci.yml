@@ -3,7 +3,6 @@ variables:
   OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/oss:21.09.0
 
 before_script:
-    - apt update -y; apt install -y gfortran
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
     - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib:/usr/local/lib/
 
@@ -139,6 +138,7 @@ stages:
 .build_cmake:
     stage: build_lib
     script:
+        - apt update -y; apt install -y gfortran
         - cmake -Bbuild . -DMONOLISH_USE_NVIDIA_GPU=${MONOLISH_USE_NVIDIA_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
         - cmake --build build --target install -- -j $(nproc) VERBOSE=1
         - make -C test -j $(nproc) ${TEST_TARGET}
