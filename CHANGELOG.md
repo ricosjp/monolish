@@ -24,6 +24,7 @@ Unreleased
 
 ### Fixed
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
+- fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
 
 ### Changed
 - [support cuda11.x] cuda11.x cusparse generic API for CRS SpMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65 https://github.com/ricosjp/monolish/issues/75
