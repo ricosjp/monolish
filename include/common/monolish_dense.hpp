@@ -259,7 +259,8 @@ public:
    * - Multi-threading: yes
    * - GPU acceleration: false
    * - If matrix is non-square, This function need MxN temporary matriax.
-   * - This function transposes in place, it's performance is lower than A.transpose(B).
+   * - This function transposes in place, it's performance is lower than
+   *A.transpose(B).
    **/
   void transpose();
 

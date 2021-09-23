@@ -65,17 +65,19 @@ bool test_transpose(const size_t M, const size_t N, double tol) {
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {
       if (ansA.at(i, j) != ansAT.at(j, i)) {
-        std::cout << "A(" << i << "," << j << ")=" << ansA.at(i,j) << ", A^T(" << j << "," << i << ")=" << ansAT.at(j, i) << std::endl;
+        std::cout << "A(" << i << "," << j << ")=" << ansA.at(i, j) << ", A^T("
+                  << j << "," << i << ")=" << ansAT.at(j, i) << std::endl;
         std::cout << "Error!!" << std::endl;
-        std::cout << __func__ << "(" << A.type() << ")" << ": fail" << std::endl;
+        std::cout << __func__ << "(" << A.type() << ")"
+                  << ": fail" << std::endl;
         return false;
       }
     }
   }
 
-  std::cout << __func__ << "(" << A.type() << ")" << ": pass" << std::endl;
+  std::cout << __func__ << "(" << A.type() << ")"
+            << ": pass" << std::endl;
   return true;
-
 }
 
 template <typename MAT, typename T>
@@ -97,7 +99,8 @@ bool test_transpose_elements(const size_t M, const size_t N, double tol) {
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {
       if (A.at(i, j) != B.at(j, i)) {
-        std::cout << __func__ << "(" << A.type() << ")" << ": fail" << std::endl;
+        std::cout << __func__ << "(" << A.type() << ")"
+                  << ": fail" << std::endl;
         return false;
       }
     }
