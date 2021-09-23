@@ -538,17 +538,17 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  COO &transpose();
+  void transpose();
 
   /**
-   * @brief create transposed matrix from COO matrix (A = B^T)
+   * @brief create transposed matrix from COO matrix (B = A^T)
    * @param B COO matrix
    * @note
    * - # of computation: 3 * nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void transpose(COO &B) const;
+  void transpose(const COO &B);
 
   /**
    * @brief Memory data space required by the matrix
