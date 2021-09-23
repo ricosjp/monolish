@@ -23,8 +23,8 @@ template <typename T> void &Dense<T>::transpose() {
   
   logger.util_out();
 }
-template Dense<double> &Dense<double>::transpose();
-template Dense<float> &Dense<float>::transpose();
+template void Dense<double>::transpose();
+template void Dense<float>::transpose();
 
 template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   Logger &logger = Logger::get_instance();
