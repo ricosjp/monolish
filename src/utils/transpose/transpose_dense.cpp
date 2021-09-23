@@ -12,14 +12,14 @@ template <typename T> void &Dense<T>::transpose() {
   size_t M = get_row();
   size_t N = get_col();
 
-  for (int i = 0; i < M; i++){
+  for (size_t i = 0; i < M; i++){
 #pragma omp parallel for
-      for (int j = i+1; j < N; j++) {
-          swap(A[i*M+j], A[j*N+i]);
+      for (size_t j = i+1; j < N; j++) {
+          std::swap(val[i*M+j], val[j*N+i]);
       }
   }
-  set_row(col);
-  set_col(row);
+  set_row(N);
+  set_col(M);
   
   logger.util_out();
 }
