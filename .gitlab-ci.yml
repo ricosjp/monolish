@@ -573,7 +573,7 @@ monolish_docker:
         - apk add coreutils make
         - cd docker; make push 
     only:
-      - master
+      - tags
 
 clang_format:
     image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
