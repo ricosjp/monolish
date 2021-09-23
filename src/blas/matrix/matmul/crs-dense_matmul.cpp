@@ -185,7 +185,8 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
-#if MONOLISH_USE_OLD_CUDA // cuda10.x
+// CUDA11.4 SpMM has bug
+//#if MONOLISH_USE_OLD_CUDA // cuda10.x
 #pragma omp target teams distribute parallel for
     for (int j = 0; j < N; j++) {
       for (int i = 0; i < M; i++) {
@@ -196,47 +197,47 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
         Cd[i * N + j] = tmp;
       }
     }
-#else
-
-    size_t nnz = A.get_nnz();
-    const double alpha = 1.0;
-    const double beta = 0.0;
-
-#pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
-    {
-      cusparseHandle_t sp_handle;
-      cusparseCreate(&sp_handle);
-      cudaDeviceSynchronize();
-      const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-
-      cusparseSpMatDescr_t matA;
-      cusparseDnMatDescr_t matB, matC;
-      void *dBuffer = NULL;
-      size_t buffersize = 0;
-
-      cusparseCreateCsr(&matA, M, K, nnz, (void *)rowd, (void *)cold,
-                        (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-                        CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
-      cusparseCreateDnMat(&matB, K, N, N, (void *)Bd, CUDA_R_32F,
-                          CUSPARSE_ORDER_ROW);
-      cusparseCreateDnMat(&matC, M, N, N, (void *)Cd, CUDA_R_32F,
-                          CUSPARSE_ORDER_ROW);
-
-      cusparseSpMM_bufferSize(sp_handle, trans, trans, &alpha, matA, matB,
-                              &beta, matC, CUDA_R_32F,
-                              CUSPARSE_SPMM_ALG_DEFAULT, &buffersize);
-
-      cudaMalloc(&dBuffer, buffersize);
-
-      cusparseSpMM(sp_handle, trans, trans, &alpha, matA, matB, &beta, matC,
-                   CUDA_R_32F, CUSPARSE_SPMM_ALG_DEFAULT, dBuffer);
-
-      cusparseDestroySpMat(matA);
-      cusparseDestroyDnMat(matB);
-      cusparseDestroyDnMat(matC);
-      cudaFree(dBuffer);
-    }
-#endif
+// #else
+//
+//     size_t nnz = A.get_nnz();
+//     const double alpha = 1.0;
+//     const double beta = 0.0;
+//
+// #pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
+//     {
+//       cusparseHandle_t sp_handle;
+//       cusparseCreate(&sp_handle);
+//       cudaDeviceSynchronize();
+//       const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+//
+//       cusparseSpMatDescr_t matA;
+//       cusparseDnMatDescr_t matB, matC;
+//       void *dBuffer = NULL;
+//       size_t buffersize = 0;
+//
+//       cusparseCreateCsr(&matA, M, K, nnz, (void *)rowd, (void *)cold,
+//                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
+//                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
+//       cusparseCreateDnMat(&matB, K, N, N, (void *)Bd, CUDA_R_32F,
+//                           CUSPARSE_ORDER_ROW);
+//       cusparseCreateDnMat(&matC, M, N, N, (void *)Cd, CUDA_R_32F,
+//                           CUSPARSE_ORDER_ROW);
+//
+//       cusparseSpMM_bufferSize(sp_handle, trans, trans, &alpha, matA, matB,
+//                               &beta, matC, CUDA_R_32F,
+//                               CUSPARSE_SPMM_ALG_DEFAULT, &buffersize);
+//
+//       cudaMalloc(&dBuffer, buffersize);
+//
+//       cusparseSpMM(sp_handle, trans, trans, &alpha, matA, matB, &beta, matC,
+//                    CUDA_R_32F, CUSPARSE_SPMM_ALG_DEFAULT, dBuffer);
+//
+//       cusparseDestroySpMat(matA);
+//       cusparseDestroyDnMat(matB);
+//       cusparseDestroyDnMat(matC);
+//       cudaFree(dBuffer);
+//     }
+// #endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
