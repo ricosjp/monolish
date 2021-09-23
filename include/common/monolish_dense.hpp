@@ -253,8 +253,7 @@ public:
   [[nodiscard]] std::string type() const { return "Dense"; }
 
   /**
-   * @brief get transposed matrix (A^T)
-   * @return tranposed matrix A^T
+   * @brief get transposed matrix (A=A^T)
    * @note
    * - # of computation: M*N
    * - Multi-threading: false
@@ -262,7 +261,7 @@ public:
    * @warning
    * This function need to allocate tmp. matrix (size M x N)
    **/
-  Dense &transpose();
+  void &transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)

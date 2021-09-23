@@ -6,20 +6,22 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> Dense<T> &Dense<T>::transpose() {
+template <typename T> void &Dense<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  Dense<T> B(get_col(), get_row());
-  for (size_t i = 0; i < B.get_row(); ++i) {
-    for (size_t j = 0; j < B.get_col(); ++j) {
-      B.val[i * B.get_col() + j] = val[j * B.get_row() + i];
-    }
+  size_t M = get_row();
+  size_t N = get_col();
+
+  for (int i = 0; i < M; i++){
+#pragma omp parallel for
+      for (int j = i+1; j < N; j++) {
+          swap(A[i*M+j], A[j*N+i]);
+      }
   }
-  internal::vcopy(nnz, B.val.data(), val.data(), gpu_status);
-  set_row(B.get_row());
-  set_col(B.get_col());
+  set_row(col);
+  set_col(row);
+  
   logger.util_out();
-  return *this;
 }
 template Dense<double> &Dense<double>::transpose();
 template Dense<float> &Dense<float>::transpose();
