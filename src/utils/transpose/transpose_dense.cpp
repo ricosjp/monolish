@@ -9,17 +9,29 @@ namespace matrix {
 template <typename T> void Dense<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+
   size_t M = get_row();
   size_t N = get_col();
-
-  for (size_t i = 0; i < M; i++){
+  if(M == N){
+      for (size_t i = 0; i < M; i++){
 #pragma omp parallel for
-      for (size_t j = i+1; j < N; j++) {
-          std::swap(val[i*M+j], val[j*N+i]);
+          for (size_t j = i+1; j < M; j++) {
+              std::swap(val[i*M+j], val[j*M+i]);
+          }
       }
   }
-  set_row(N);
-  set_col(M);
+  else{
+      Dense<T> B(N,M);
+      for (size_t n = 0; n < M*N; ++n) {
+          size_t i = n/get_row();
+          size_t j = n%get_row();
+          B.val[n] = val[get_col()*j + i];
+      }
+      internal::vcopy(M*N, B.val.data(), val.data(), false);
+      set_row(N);
+      set_col(M);
+
+  }
   
   logger.util_out();
 }
@@ -33,11 +45,12 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   set_col(B.get_row());
   val.resize(B.get_row() * B.get_col());
 
-  for (size_t i = 0; i < get_row(); ++i) {
-    for (size_t j = 0; j < get_col(); ++j) {
-      val[i * get_col() + j] = B.val[j * get_row() + i];
+#pragma omp parallel for
+  for (size_t n = 0; n < get_row() * get_col(); ++n) {
+      size_t i = n/get_col();
+      size_t j = n%get_col();
+      val[n] = B.val[get_row()*j + i];
     }
-  }
   logger.util_out();
 }
 template void Dense<double>::transpose(const Dense<double> &B);
