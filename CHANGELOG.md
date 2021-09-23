@@ -28,6 +28,7 @@ Unreleased
 
 ### Changed
 - [gitlab CI] monolish-docker stage when master --> when tags
+- uses CUDA11 cuSPRASE SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/355 https://github.com/ricosjp/monolish/issues/76
 - remove nodiscard of COO.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/354 https://github.com/ricosjp/monolish/issues/74
 - [support cuda11.x] cuda11.x cusparse generic API for CRS SpMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65 https://github.com/ricosjp/monolish/issues/75
 - [update allgebra 21.09.0] cuda 10.1 -> cuda11.4  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
