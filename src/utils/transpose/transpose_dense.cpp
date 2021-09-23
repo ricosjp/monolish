@@ -6,23 +6,35 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> Dense<T> &Dense<T>::transpose() {
+template <typename T> void Dense<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  Dense<T> B(get_col(), get_row());
-  for (size_t i = 0; i < B.get_row(); ++i) {
-    for (size_t j = 0; j < B.get_col(); ++j) {
-      B.val[i * B.get_col() + j] = val[j * B.get_row() + i];
+
+  size_t M = get_row();
+  size_t N = get_col();
+  if (M == N) {
+    for (size_t i = 0; i < M; i++) {
+#pragma omp parallel for
+      for (size_t j = i + 1; j < M; j++) {
+        std::swap(val[i * M + j], val[j * M + i]);
+      }
     }
+  } else {
+    Dense<T> B(N, M);
+    for (size_t n = 0; n < M * N; ++n) {
+      size_t i = n / get_row();
+      size_t j = n % get_row();
+      B.val[n] = val[get_col() * j + i];
+    }
+    internal::vcopy(M * N, B.val.data(), val.data(), false);
+    set_row(N);
+    set_col(M);
   }
-  internal::vcopy(nnz, B.val.data(), val.data(), gpu_status);
-  set_row(B.get_row());
-  set_col(B.get_col());
+
   logger.util_out();
-  return *this;
 }
-template Dense<double> &Dense<double>::transpose();
-template Dense<float> &Dense<float>::transpose();
+template void Dense<double>::transpose();
+template void Dense<float>::transpose();
 
 template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   Logger &logger = Logger::get_instance();
@@ -31,10 +43,11 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   set_col(B.get_row());
   val.resize(B.get_row() * B.get_col());
 
-  for (size_t i = 0; i < get_row(); ++i) {
-    for (size_t j = 0; j < get_col(); ++j) {
-      val[i * get_col() + j] = B.val[j * get_row() + i];
-    }
+#pragma omp parallel for
+  for (size_t n = 0; n < get_row() * get_col(); ++n) {
+    size_t i = n / get_col();
+    size_t j = n % get_col();
+    val[n] = B.val[get_row() * j + i];
   }
   logger.util_out();
 }

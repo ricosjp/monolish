@@ -253,23 +253,23 @@ public:
   [[nodiscard]] std::string type() const { return "Dense"; }
 
   /**
-   * @brief get transposed matrix (A^T)
-   * @return tranposed matrix A^T
+   * @brief get transposed matrix (A = A^T)
    * @note
-   * - # of computation: M*N
-   * - Multi-threading: false
+   * - # of computation: M*N/2-M (square) or M*N (non-square)
+   * - Multi-threading: yes
    * - GPU acceleration: false
-   * @warning
-   * This function need to allocate tmp. matrix (size M x N)
+   * - If matrix is non-square, This function need MxN temporary matriax.
+   * - This function transposes in place, it's performance is lower than
+   *A.transpose(B).
    **/
-  Dense &transpose();
+  void transpose();
 
   /**
    * @brief create transposed matrix from COO matrix (A = B^T)
    * @param B COO matrix
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
+   * - Multi-threading: yes
    * - GPU acceleration: false
    **/
   void transpose(const Dense &B);

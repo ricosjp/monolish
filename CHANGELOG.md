@@ -27,6 +27,12 @@ Unreleased
 - fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
 
 ### Changed
+- change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
+    - `Dense Dense::transpose()` // return A^T -->  `void Dense::transpose()` // A=A^T
+    - `void Dense::transpose(const Dense B)` // A=B^T, this function is not changed
+    - `COO COO::transpose()` // return A^T --> `void COO::transpose()` // A=A^T
+    - `void COO::transpose(COO B) const` // B=A^T -->  `void COO::transpose(const COO B)` // A=B^T
+- OPenMP parallelized transpose() functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
 - [gitlab CI] monolish-docker stage when master --> when tags
 - uses CUDA11 cuSPRASE SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/355 https://github.com/ricosjp/monolish/issues/76
 - remove nodiscard of COO.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/354 https://github.com/ricosjp/monolish/issues/74

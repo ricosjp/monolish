@@ -77,7 +77,7 @@ template <typename T> bool test() {
     monolish::matrix::COO<T> transposed_COO1 = addr_COO;
     monolish::matrix::COO<T> transposed_COO2;
     transposed_COO1.transpose();
-    addr_COO.transpose(transposed_COO2);
+    transposed_COO2.transpose(addr_COO);
     std::ostringstream oss1;
     std::streambuf *p_cout_streambuf = std::cout.rdbuf();
     std::cout.rdbuf(oss1.rdbuf());

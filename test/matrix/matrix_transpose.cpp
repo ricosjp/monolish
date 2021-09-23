@@ -57,22 +57,26 @@ bool test_transpose(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  A.transpose();
+  monolish::matrix::Dense<T> ansA(A);
 
-  if (A.get_row() != N || A.get_col() != M) {
-    std::cout << "transpose error, transA.row = " << A.get_row()
-              << ", transA.col = " << A.get_col() << std::endl;
-    return false;
+  A.transpose();
+  monolish::matrix::Dense<T> ansAT(A);
+
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      if (ansA.at(i, j) != ansAT.at(j, i)) {
+        std::cout << "A(" << i << "," << j << ")=" << ansA.at(i, j) << ", A^T("
+                  << j << "," << i << ")=" << ansAT.at(j, i) << std::endl;
+        std::cout << "Error!!" << std::endl;
+        std::cout << __func__ << "(" << A.type() << ")"
+                  << ": fail" << std::endl;
+        return false;
+      }
+    }
   }
 
-  A.transpose();
-
-  monolish::matrix::COO<T> ansA(A);
-  if (ans_check<T>(__func__, A.type(), seedA.val.data(), ansA.val.data(),
-                   ansA.get_nnz(), tol) == false) {
-    return false;
-  };
-
+  std::cout << __func__ << "(" << A.type() << ")"
+            << ": pass" << std::endl;
   return true;
 }
 
@@ -95,6 +99,8 @@ bool test_transpose_elements(const size_t M, const size_t N, double tol) {
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {
       if (A.at(i, j) != B.at(j, i)) {
+        std::cout << __func__ << "(" << A.type() << ")"
+                  << ": fail" << std::endl;
         return false;
       }
     }
