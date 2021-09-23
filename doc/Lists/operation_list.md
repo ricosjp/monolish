@@ -41,9 +41,9 @@ This chapter explains what libraries are called by matrix and vector operations.
 | func        | MKL           | NVIDIA             | OSS           |
 |-------------|---------------|--------------------|---------------|
 | Dense-Dense | MKL           | cuBLAS             | CBLAS         |
-| CRS-Dense   | MKL           | monolish           | monolish(AVX) |
+| CRS-Dense   | MKL           | cuSPARSE/monolish* | monolish(AVX) |
 
-- Todo) support CRS-Dense SpMM by NVIDIA cusparse (Rowmajor SpMM need cuda 11.x)
+- *) cuSPARSE single precision SpMM of CUDA 11.4 did not work.
 
 ## Extended BLAS Lv3: Matrix add/sub (C=A+B)
 
