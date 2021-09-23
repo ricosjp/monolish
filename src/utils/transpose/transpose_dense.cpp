@@ -6,7 +6,7 @@
 namespace monolish {
 namespace matrix {
 
-template <typename T> void &Dense<T>::transpose() {
+template <typename T> void Dense<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   size_t M = get_row();
