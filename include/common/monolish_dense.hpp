@@ -256,10 +256,8 @@ public:
    * @brief get transposed matrix (A=A^T)
    * @note
    * - # of computation: M*N
-   * - Multi-threading: false
+   * - Multi-threading: yes
    * - GPU acceleration: false
-   * @warning
-   * This function need to allocate tmp. matrix (size M x N)
    **/
   void &transpose();
 
