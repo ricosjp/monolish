@@ -21,6 +21,7 @@ template <typename T> void Dense<T>::transpose() {
     }
   } else {
     Dense<T> B(N, M);
+#pragma omp parallel for
     for (size_t n = 0; n < M * N; ++n) {
       size_t i = n / get_row();
       size_t j = n % get_row();
