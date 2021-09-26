@@ -534,7 +534,7 @@ public:
    * @brief get transposed matrix (A^T)
    * @return tranposed matrix A^T
    * @note
-   * - # of computation: 2
+   * - # of computation: 2 * nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
