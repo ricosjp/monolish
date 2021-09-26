@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
