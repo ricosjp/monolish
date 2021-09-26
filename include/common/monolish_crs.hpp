@@ -382,6 +382,26 @@ public:
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief get transposed matrix (A^T)
+   * @return tranposed matrix A^T
+   * @note
+   * - # of computation: 2 * nnz + 2N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   * - need temporary CRS matrix (the same size as A)
+   **/
+  void transpose();
+
+  /**
+   * @brief create transposed matrix from COO matrix (B = A^T)
+   * @param B COO matrix
+   * @note
+   * - # of computation: 2 * nnz + 2N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void transpose(const CRS &B);
 
   /*
    * @brief Memory data space required by the matrix

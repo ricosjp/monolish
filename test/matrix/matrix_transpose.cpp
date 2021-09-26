@@ -93,12 +93,15 @@ bool test_transpose_elements(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  MAT B(N, M); // N*M matrix
+  MAT B; // N*M matrix
   B.transpose(A);
+
+  monolish::matrix::Dense<T> ansA(A);
+  monolish::matrix::Dense<T> ansAt(B);
 
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {
-      if (A.at(i, j) != B.at(j, i)) {
+      if (ansA.at(i, j) != ansAt.at(j, i)) {
         std::cout << __func__ << "(" << A.type() << ")"
                   << ": fail" << std::endl;
         return false;
@@ -146,6 +149,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_transpose<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_send_transpose<monolish::matrix::CRS<float>, float>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+
   if (test_transpose<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
       false) {
     return 1;
@@ -166,6 +179,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_transpose<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+
+  if (test_transpose<monolish::matrix::CRS<float>, float>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+
   if (test_transpose_elements<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-6) == false) {
     return 1;
@@ -182,6 +205,16 @@ int main(int argc, char **argv) {
   }
 
   if (test_transpose_elements<monolish::matrix::COO<float>, float>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+
+  if (test_transpose_elements<monolish::matrix::CRS<float>, float>(
           M, N, 1.0e-6) == false) {
     return 1;
   }
