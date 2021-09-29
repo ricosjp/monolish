@@ -29,6 +29,7 @@ Unreleased
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
 
 ### Changed
+- Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
 - change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
     - `Dense Dense::transpose()` // return A^T -->  `void Dense::transpose()` // A=A^T
     - `void Dense::transpose(const Dense B)` // A=B^T, this function is not changed

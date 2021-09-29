@@ -1,6 +1,7 @@
 variables:
   MKL_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
   OSS_IMAGE: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/oss:21.09.0
+  POETRY_IMAGE: ghcr.io/ricosjp/allgebra/poetry:21.09.0
 
 before_script:
     - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
@@ -314,48 +315,39 @@ nogpu_noavx_clang_oss:
 pytest:
     needs: []
     stage: python
-    image: ${MKL_IMAGE}
+    image: ${POETRY_IMAGE}
     script:
-      # FIXME Python setup should be moved into allgebra
-      - apt update && apt install -y python3-pip
-      - python3 -m pip install "poetry==1.1.7"
-      # Test monolish_log_viewer
       - cd python
       - poetry install
       - make test_logger
-python-cpu:
+
+.logging_artifact:
     artifacts:
       paths:
         - test/logger/logging
       expire_in: 360min
       when: always
+
+python-cpu:
+    image: ${POETRY_IMAGE}
+    stage: python
+    extends:
+      - .logging_artifact
     needs:
       - nogpu_avx_gcc_mkl
-    image: ${MKL_IMAGE}
-    stage: python
     script:
-      # FIXME Python setup should be moved into allgebra
-      - apt update && apt install -y python3-pip
-      - python3 -m pip install "poetry==1.1.7"
-      # Test monolish_log_viewer
       - cd python
       - poetry install
       - make log_cpu
+
 python-gpu:
-    artifacts:
-      paths:
-        - test/logger/logging
-      expire_in: 360min
-      when: always
+    image: ${POETRY_IMAGE}
+    stage: python
+    extends:
+      - .logging_artifact
     needs:
       - gpu_avx_clang_mkl
-    image: ${MKL_IMAGE}
-    stage: python
     script:
-      # FIXME Python setup should be moved into allgebra
-      - apt update && apt install -y python3-pip
-      - python3 -m pip install "poetry==1.1.7"
-      # Test monolish_log_viewer
       - cd python
       - poetry install
       - make log_gpu
