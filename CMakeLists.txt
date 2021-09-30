@@ -91,24 +91,31 @@ if(MONOLISH_USE_NVIDIA_GPU)
   if (NOT MONOLISH_FOR_PACKAGING)
     # get CC
     execute_process(
-      COMMAND allgebra_get_device_cc
+      COMMAND bash -c allgebra_get_device_cc
       OUTPUT_VARIABLE GPU_CC
       ERROR_QUIET
     )
     string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+
+    # get compile_option (for cc86, see #82, #83)
+    execute_process(
+      COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
+      OUTPUT_VARIABLE GPU_COMPILE_OPTION
+      ERROR_QUIET
+    )
   endif()
   message(STATUS "GPU Compute Capability is ${GPU_CC}")
 
   target_compile_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC}
+    -Xopenmp-target -march=sm_${GPU_COMPILE_OPTION}
     -Wno-unknown-cuda-version
   )
   target_link_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC}
+    -Xopenmp-target -march=sm_${GPU_COMPILE_OPTION}
     -Wno-unknown-cuda-version
   )
 else()
