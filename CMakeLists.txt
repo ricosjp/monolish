@@ -100,22 +100,28 @@ if(MONOLISH_USE_NVIDIA_GPU)
     # get compile_option (for cc86, see #82, #83)
     execute_process(
       COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
-      OUTPUT_VARIABLE GPU_COMPILE_OPTION
+      OUTPUT_VARIABLE GPU_CC_AMENDED
       ERROR_QUIET
     )
+    string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
   endif()
   message(STATUS "GPU Compute Capability is ${GPU_CC}")
+
+  # for cc86
+  if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
+      message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
+  endif()
 
   target_compile_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_COMPILE_OPTION}
+    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
     -Wno-unknown-cuda-version
   )
   target_link_options(${MONOLISH_TARGET} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_COMPILE_OPTION}
+    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
     -Wno-unknown-cuda-version
   )
 else()
