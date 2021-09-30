@@ -91,7 +91,7 @@ if(MONOLISH_USE_NVIDIA_GPU)
   if (NOT MONOLISH_FOR_PACKAGING)
     # get CC
     execute_process(
-      COMMAND bash -c allgebra_get_device_cc
+      COMMAND allgebra_get_device_cc
       OUTPUT_VARIABLE GPU_CC
       ERROR_QUIET
     )
