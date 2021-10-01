@@ -1,6 +1,6 @@
 #include "./equation_kernel.hpp"
-#define SOLVER CG
-#define SOLVER_NAME "CG"
+#define SOLVER BiCGSTAB
+#define SOLVER_NAME "BiCGSTAB"
 #define D_TOL 1.0e-8
 #define S_TOL 1.0e-4
 #define PRECOND 1
