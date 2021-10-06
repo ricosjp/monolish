@@ -17,11 +17,12 @@ option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
 
+# FIXME: OpenMP Offloading in GCC is broken.
+#        See https://gitlab.ritc.jp/ricos/omp-offload-bug for detail
 if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  message(SEND_ERROR "MONOLISH_USE_NVIDIA_GPU is only acceptable for clang")
+  message(SEND_ERROR "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
-# Library naming rule
 if(MONOLISH_USE_MPI)
   if(MONOLISH_USE_NVIDIA_GPU)
     if (MONOLISH_FOR_PACKAGING)
