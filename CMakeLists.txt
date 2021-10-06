@@ -6,6 +6,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # clangd setting
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# FIXME: Add option for building static library
+set(BUILD_SHARED_LIBS ON)
 
 project(monolish
   VERSION 0.15.0
