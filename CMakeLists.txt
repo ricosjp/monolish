@@ -44,6 +44,24 @@ else()
   endif()
 endif()
 
+file(GLOB_RECURSE MONOLISH_SOURCE_FILES
+  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+  src/*.cpp
+)
+add_library(${MONOLISH_TARGET} ${MONOLISH_SOURCE_FILES})
+set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 17)
+target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall)
+install(
+  TARGETS ${MONOLISH_TARGET}
+  LIBRARY
+  DESTINATION lib
+)
+install(
+  DIRECTORY include/
+  DESTINATION include
+  FILES_MATCHING PATTERN "*.hpp"
+)
+
 # AVX
 if(MONOLISH_USE_AVX)
   target_compile_options(${MONOLISH_TARGET} PRIVATE "-mavx")
@@ -146,22 +164,3 @@ if(MONOLISH_USE_NVIDIA_GPU)
     CUDA::cudart
   )
 endif()
-
-file(GLOB_RECURSE MONOLISH_SOURCE_FILES
-  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-  src/*.cpp
-)
-add_library(${MONOLISH_TARGET} ${MONOLISH_SOURCE_FILES})
-set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 17)
-target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall)
-install(
-  TARGETS ${MONOLISH_TARGET}
-  LIBRARY
-  DESTINATION lib
-)
-
-install(
-  DIRECTORY include/
-  DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp"
-)
