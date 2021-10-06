@@ -7,8 +7,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # clangd setting
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Fortran is needed when using find_package(BLAS)
-project(monolish CXX Fortran)
+project(monolish
+  VERSION 0.15.0
+  LANGUAGES CXX Fortran # Fortran is needed when using find_package(BLAS)
+)
 
 option(MONOLISH_USE_NVIDIA_GPU "build NVIDIA GPU variant" OFF)
 option(MONOLISH_USE_MPI "build MPI variant" OFF)
