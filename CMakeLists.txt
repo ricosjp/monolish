@@ -77,12 +77,6 @@ if(MONOLISH_USE_MPI)
   target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_MPI)
 endif()
 
-install(
-  TARGETS ${MONOLISH_TARGET}
-  LIBRARY
-  DESTINATION lib
-)
-
 # OpenMP
 find_package(OpenMP REQUIRED)
 if(MONOLISH_USE_NVIDIA_GPU)
