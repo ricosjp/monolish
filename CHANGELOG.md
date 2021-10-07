@@ -22,6 +22,7 @@ Unreleased
 -----------
 ### Added
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
+- collect iterative solver tests in `test/equation/iterative` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/362
 
 ### Fixed
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
