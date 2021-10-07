@@ -18,17 +18,21 @@ a64fx:
 	make -j -C iterative/ a64fx
 	make -j -C dense_lu/ a64fx
 	make -j -C dense_cholesky/ a64fx
+	#make -j -C sparse_qr/ a64fx
+	#make -j -C sparse_cholesky/ a64fx
 
 sxat:
 	make -j -C iterative/ sxat
 	make -j -C dense_lu/ sxat
 	make -j -C dense_cholesky/ sxat
+	#make -j -C sparse_qr/ sxat
+	#make -j -C sparse_cholesky/ sxat
 
 run_cpu:
 	make -j -C iterative/ run_cpu
 	make -j -C dense_lu/ run_cpu
 	make -j -C dense_cholesky/ run_cpu
-	# make -j -C sparse_qr/ run_gpu
+	#make -j -C sparse_qr/ run_cpu
 	#make -j -C sparse_cholesky/ run_cpu
 
 run_gpu:
@@ -40,9 +44,17 @@ run_gpu:
 
 run_a64fx:
 	make -j -C iterative/ run_a64fx
+	make -j -C dense_lu/ run_a64fx
+	make -j -C dense_cholesky/ run_a64fx
+	#make -j -C sparse_qr/ run_a64fx
+	#make -j -C sparse_cholesky/ run_a64fx
 
 run_sxat:
 	make -j -C iterative/ run_sxat
+	make -j -C dense_lu/ run_sxat
+	make -j -C dense_cholesky/ run_sxat
+	#make -j -C sparse_qr/ run_sxat
+	#make -j -C sparse_cholesky/ run_sxat
 	
 clean:
 	- make -j -C iterative/ clean
