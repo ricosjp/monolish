@@ -42,6 +42,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::none"; }
+
+  /**
+   * @brief get solver name "none"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "none"; }
 };
 
 /**
@@ -90,6 +99,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::CG"; }
+
+  /**
+   * @brief get solver name "CG"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "CG"; }
 };
 
 /**
@@ -138,6 +156,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::BiCGSTAB"; }
+
+  /**
+   * @brief get solver name "BiCGSTAB"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "BiCGSTAB"; }
 };
 
 /**
@@ -180,6 +207,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::Jacobi"; }
+
+  /**
+   * @brief get solver name "Jacobi"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "Jacobi"; }
 };
 
 /**
@@ -226,6 +262,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::LU"; }
+
+  /**
+   * @brief get solver name "LU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "LU"; }
 };
 
 /**
@@ -285,6 +330,15 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::QR"; }
+
+  /**
+   * @brief get solver name "QR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "QR"; }
 };
 
 /**
@@ -346,5 +400,14 @@ public:
    * - GPU acceleration: false
    **/
   std::string name() const { return "monolish::equation::Cholesky"; }
+
+  /**
+   * @brief get solver name "Cholesky"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "Cholesky"; }
 };
 } // namespace monolish::equation
