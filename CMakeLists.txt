@@ -25,6 +25,35 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(SEND_ERROR "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
+file(GLOB_RECURSE MONOLISH_SOURCE_FILES
+  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+  src/*.cpp
+)
+install(
+  DIRECTORY include/
+  DESTINATION include
+  FILES_MATCHING PATTERN "*.hpp"
+)
+
+function(set_common_properties target)
+  set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
+  target_compile_options(${target} PRIVATE -g -O3 -Wall)
+  # AVX
+  if(MONOLISH_USE_AVX)
+    target_compile_options(${target} PRIVATE "-mavx")
+    target_compile_definitions(${target} PRIVATE MONOLISH_USE_AVX)
+  endif()
+  # MPI
+  if(MONOLISH_USE_MPI)
+    target_compile_definitions(${target} PRIVATE MONOLISH_USE_MPI)
+  endif()
+  install(
+    TARGETS ${target}
+    LIBRARY
+    DESTINATION lib
+  )
+endfunction(set_common_properties)
+
 if(MONOLISH_USE_MPI)
   if(MONOLISH_USE_NVIDIA_GPU)
     if (MONOLISH_FOR_PACKAGING)
@@ -47,34 +76,8 @@ else()
   endif()
 endif()
 
-file(GLOB_RECURSE MONOLISH_SOURCE_FILES
-  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-  src/*.cpp
-)
 add_library(${MONOLISH_TARGET} ${MONOLISH_SOURCE_FILES})
-set_property(TARGET ${MONOLISH_TARGET} PROPERTY CXX_STANDARD 17)
-target_compile_options(${MONOLISH_TARGET} PRIVATE -g -O3 -Wall)
-install(
-  TARGETS ${MONOLISH_TARGET}
-  LIBRARY
-  DESTINATION lib
-)
-install(
-  DIRECTORY include/
-  DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp"
-)
-
-# AVX
-if(MONOLISH_USE_AVX)
-  target_compile_options(${MONOLISH_TARGET} PRIVATE "-mavx")
-  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_AVX)
-endif()
-
-# MPI
-if(MONOLISH_USE_MPI)
-  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_MPI)
-endif()
+set_common_properties(${MONOLISH_TARGET})
 
 # OpenMP
 find_package(OpenMP REQUIRED)
