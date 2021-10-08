@@ -21,13 +21,14 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
+- add `solver_name()` function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/363
 - collect iterative solver tests in `test/equation/iterative` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/362
+- add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
-- fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
-- fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
+- fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
+- fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
