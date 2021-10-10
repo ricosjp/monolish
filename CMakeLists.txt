@@ -168,29 +168,25 @@ if(MONOLISH_USE_NVIDIA_GPU)
   )
 
   if(NOT MONOLISH_NVIDIA_GPU_ARCH)
-    if(COMMAND allgebra_get_device_cc)
-      # Detect host CUDA architectures for using in OpenMP Offloading compile
-      #
-      # clang requires CUDA architecture flag e.g. `-march=sm_80`
-      # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
-      execute_process(
-        COMMAND allgebra_get_device_cc
-        RESULT_VARIABLE exit_code
-        OUTPUT_VARIABLE gpu_cc
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-      )
-      if(NOT exit_code EQUAL 0)
-        message(SEND_ERROR "Failed to detect host NVIDIA GPU architecture by allgebra_get_device_cc")
-      endif()
-      # clang does not support sm_86 yet
-      if("${gpu_cc}" EQUAL "86")
-        message(WARNING "Clang does not support sm_86 yet. Default to sm_80.")
-        set(gpu_cc "80")
-      endif()
-      set(gpu_arch "sm_${gpu_cc}")
-    else()
-      message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc is not found.")
+    # Detect host CUDA architectures for using in OpenMP Offloading compile
+    #
+    # clang requires CUDA architecture flag e.g. `-march=sm_80`
+    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
+    execute_process(
+      COMMAND allgebra_get_device_cc
+      RESULT_VARIABLE exit_code
+      OUTPUT_VARIABLE gpu_cc
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    if(NOT exit_code EQUAL 0)
+      message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc failed to detect host GPU architecture.")
     endif()
+    # clang does not support sm_86 yet
+    if("${gpu_cc}" EQUAL "86")
+      message(WARNING "Clang does not support sm_86 yet. Default to sm_80.")
+      set(gpu_cc "80")
+    endif()
+    set(gpu_arch "sm_${gpu_cc}")
   else()
     set(gpu_arch "${MONOLISH_NVIDIA_GPU_ARCH}")
   endif()
@@ -200,13 +196,13 @@ if(MONOLISH_USE_NVIDIA_GPU)
   target_compile_options(${monolish_gpu_target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${gpu_arch}
+    -Xopenmp-target -march=${gpu_arch}
     -Wno-unknown-cuda-version
   )
   target_link_options(${monolish_gpu_target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${gpu_arch}
+    -Xopenmp-target -march=${gpu_arch}
     -Wno-unknown-cuda-version
   )
 
