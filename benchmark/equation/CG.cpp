@@ -1,11 +1,6 @@
 #include "../benchmark_utils.hpp"
 
-#define FUNC "CG"
-#define DENSE_PERF                                                             \
-  2.0 / 3.0 *                                                                  \
-      ((double)size / 1000 * (double)size / 1000 * (double)size / 1000) / time
-
-template <typename MAT_A, typename T, typename PRECOND>
+template <typename MAT_A, typename T, typename SOLVER, typename PRECOND>
 bool benchmark(const size_t size, const size_t iter) {
 
   monolish::matrix::COO<T> COO =
@@ -18,12 +13,12 @@ bool benchmark(const size_t size, const size_t iter) {
 
   monolish::util::send(A, x, b);
 
-  monolish::equation::CG<MAT_A, T> solver;
+  SOLVER solver;
 
-  solver.set_miniter(CG_ITER);
-  solver.set_maxiter(CG_ITER);
+  solver.set_miniter(ITERARIVE_SOLVER_ITER);
+  solver.set_maxiter(ITERARIVE_SOLVER_ITER);
   solver.set_tol(-100);
-  // CG_solver.set_print_rhistory(true);
+  // ITERARIVE_SOLVER_solver.set_print_rhistory(true);
   
   PRECOND precond;
   solver.set_create_precond(precond);
@@ -48,9 +43,9 @@ bool benchmark(const size_t size, const size_t iter) {
   std::cout << solver.solver_name() << "(" << precond.solver_name() << "," << A.type() << ")\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << size << "\t" << std::flush;
-  std::cout << CG_ITER << "\t" << std::flush;
+  std::cout << ITERARIVE_SOLVER_ITER << "\t" << std::flush;
   std::cout << time << "\t" << std::flush;
-  std::cout << time / CG_ITER << "\t" << std::endl;
+  std::cout << time / ITERARIVE_SOLVER_ITER << "\t" << std::endl;
 
   return true;
 }
@@ -69,19 +64,37 @@ int main(int argc, char **argv) {
   std::cout << "func\ttprec\tsize\titer\ttime[sec]\ttime/iter[sec]"
             << std::endl;
 
-  size_t iter = CG_BENCH_ITER;
+  size_t iter = ITERARIVE_SOLVER_BENCH_ITER;
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_log.txt");
 
-  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
-       size CG_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<float>, float, monolish::equation::none<monolish::matrix::CRS<float>, float>>(size, iter);
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<float>, float, 
+        monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+        monolish::equation::none<monolish::matrix::CRS<float>, float>>(size, iter);
   }
 
-  for (size_t size = CG_NN_BENCH_MIN; size <= CG_NN_BENCH_MAX;
-       size CG_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<double>, double, monolish::equation::none<monolish::matrix::CRS<double>, double>>(size, iter);
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<double>, double, 
+        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+        monolish::equation::none<monolish::matrix::CRS<double>, double>>(size, iter);
+  }
+
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<float>, float,
+        monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+        monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(size, iter);
+  }
+
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<double>, double, 
+        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+        monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(size, iter);
   }
 
   return 0;
