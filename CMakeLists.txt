@@ -52,6 +52,24 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(SEND_ERROR "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
+# Find external packages
+find_package(OpenMP REQUIRED)
+find_package(MKL)
+# Not use FindBLAS and FindLAPACK if MKL is already found
+if(NOT MKL_FOUND)
+  find_package(BLAS REQUIRED)
+  find_package(LAPACK)
+  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+  find_path(BLAS_INCLUDE_DIRS
+    NAMES cblas.h
+    HINTS
+      /usr/include
+      /usr/local/include
+      /usr/include/openblas
+  )
+endif()
+
 file(GLOB_RECURSE monolish_sources
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
@@ -78,27 +96,13 @@ function(set_common_properties target)
     target_compile_definitions(${target} PRIVATE MONOLISH_USE_MPI)
   endif()
   # BLAS/LAPACK
-  find_package(MKL)
   if(MKL_FOUND)
-    # Not use FindBLAS and FindLAPACK if MKL is already found
     target_include_directories(${target} PRIVATE ${MKL_INCLUDE_PATH})
     target_link_libraries(${target} PRIVATE ${MKL_LIBRARIES})
     target_compile_definitions(${target} PRIVATE MONOLISH_USE_MKL)
   else()
-    find_package(BLAS REQUIRED)
-    # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-    # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-    find_path(BLAS_INCLUDE_DIRS
-      NAMES cblas.h
-      HINTS
-        /usr/include
-        /usr/local/include
-        /usr/include/openblas
-    )
     target_include_directories(${target} PRIVATE ${BLAS_INCLUDE_DIRS})
     target_link_libraries(${target} PRIVATE ${BLAS_LIBRARIES})
-
-    find_package(LAPACK)
     if(LAPACK_FOUND)
       target_include_directories(${target} PRIVATE ${LAPACK_INCLUDE_DIRS})
       target_link_libraries(${target} PRIVATE ${LAPACK_LIBRARIES})
@@ -106,9 +110,6 @@ function(set_common_properties target)
     endif()
   endif()
 endfunction(set_common_properties)
-
-# OpenMP is required for all cases
-find_package(OpenMP REQUIRED)
 
 # monolish on CPU
 if(NOT MONOLISH_USE_NVIDIA_GPU)
