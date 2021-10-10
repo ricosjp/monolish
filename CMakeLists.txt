@@ -225,8 +225,10 @@ if(MONOLISH_USE_NVIDIA_GPU)
       DESTINATION lib
     )
   else()
-    # Build for every CUDA architectures
-    foreach(gpu_cc IN ITEMS 35 37 50 52 53 60 61 62 70 75 80)
+    # Build for every CUDA architectures after Maxwell
+    # `sm_53` and `sm_62` are ommited since there is no GPU in
+    # https://developer.nvidia.com/cuda-gpus
+    foreach(gpu_cc IN ITEMS 52 60 61 70 75 80)
       set(target "${monolish_gpu_target}_${gpu_cc}")
       message(STATUS "Add ${target} target")
       add_library(${target} ${monolish_sources})
