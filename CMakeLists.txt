@@ -52,10 +52,12 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(SEND_ERROR "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
-file(GLOB_RECURSE MONOLISH_SOURCE_FILES
+file(GLOB_RECURSE monolish_sources
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
+
+# C++ headers
 install(
   DIRECTORY include/
   DESTINATION include
@@ -69,131 +71,126 @@ function(set_common_properties target)
   if(MONOLISH_USE_AVX)
     target_compile_options(${target} PRIVATE "-mavx")
     target_compile_definitions(${target} PRIVATE MONOLISH_USE_AVX)
+    set(MKL_VML_AVX TRUE)
   endif()
   # MPI
   if(MONOLISH_USE_MPI)
     target_compile_definitions(${target} PRIVATE MONOLISH_USE_MPI)
   endif()
+  # BLAS/LAPACK
+  find_package(MKL)
+  if(MKL_FOUND)
+    # Not use FindBLAS and FindLAPACK if MKL is already found
+    target_include_directories(${target} PRIVATE ${MKL_INCLUDE_PATH})
+    target_link_libraries(${target} PRIVATE ${MKL_LIBRARIES})
+    target_compile_definitions(${target} PRIVATE MONOLISH_USE_MKL)
+  else()
+    find_package(BLAS REQUIRED)
+    # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
+    # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
+    find_path(BLAS_INCLUDE_DIRS
+      NAMES cblas.h
+      HINTS
+        /usr/include
+        /usr/local/include
+        /usr/include/openblas
+    )
+    target_include_directories(${target} PRIVATE ${BLAS_INCLUDE_DIRS})
+    target_link_libraries(${target} PRIVATE ${BLAS_LIBRARIES})
+
+    find_package(LAPACK)
+    if(LAPACK_FOUND)
+      target_include_directories(${target} PRIVATE ${LAPACK_INCLUDE_DIRS})
+      target_link_libraries(${target} PRIVATE ${LAPACK_LIBRARIES})
+      target_compile_definitions(${target} PRIVATE MONOLISH_USE_LAPACK)
+    endif()
+  endif()
+endfunction(set_common_properties)
+
+# OpenMP is required for all cases
+find_package(OpenMP REQUIRED)
+
+# monolish on CPU
+if(NOT MONOLISH_USE_NVIDIA_GPU)
+  add_library(${monolish_cpu_target} ${monolish_sources})
+  set_common_properties(${monolish_cpu_target})
+  # XXX: Should we use the imported target `OpenMP::OpenMP_CXX`?
+  target_compile_options(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_options(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_FLAGS})
+  target_link_libraries(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_LIBRARIES})
   install(
-    TARGETS ${target}
+    TARGETS ${monolish_cpu_target}
     LIBRARY
     DESTINATION lib
   )
-endfunction(set_common_properties)
-
-if(MONOLISH_USE_MPI)
-  if(MONOLISH_USE_NVIDIA_GPU)
-    if (MONOLISH_FOR_PACKAGING)
-      set(MONOLISH_TARGET monolish_gpu_mpi_${GPU_CC})
-    else()
-      set(MONOLISH_TARGET monolish_gpu_mpi)
-    endif()
-  else()
-    set(MONOLISH_TARGET monolish_cpu_mpi)
-  endif()
-else()
-  if(MONOLISH_USE_NVIDIA_GPU)
-    if (MONOLISH_FOR_PACKAGING)
-      set(MONOLISH_TARGET monolish_gpu_${GPU_CC})
-    else()
-      set(MONOLISH_TARGET monolish_gpu)
-    endif()
-  else()
-    set(MONOLISH_TARGET monolish_cpu)
-  endif()
 endif()
 
-add_library(${MONOLISH_TARGET} ${MONOLISH_SOURCE_FILES})
-set_common_properties(${MONOLISH_TARGET})
-
-# OpenMP
-find_package(OpenMP REQUIRED)
+# monolish with NVIDIA GPU
 if(MONOLISH_USE_NVIDIA_GPU)
-  # GPU offloading
-
-  if (NOT MONOLISH_FOR_PACKAGING)
-    # get CC
-    execute_process(
-      COMMAND allgebra_get_device_cc
-      OUTPUT_VARIABLE GPU_CC
-      ERROR_QUIET
-    )
-    string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
-
-    # get compile_option (for cc86, see #82, #83)
-    execute_process(
-      COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
-      OUTPUT_VARIABLE GPU_CC_AMENDED
-      ERROR_QUIET
-    )
-    string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
-  endif()
-  message(STATUS "GPU Compute Capability is ${GPU_CC}")
-
-  # for cc86
-  if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
-      message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
-  endif()
-
-  target_compile_options(${MONOLISH_TARGET} PRIVATE
-    -fopenmp
-    -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
-    -Wno-unknown-cuda-version
-  )
-  target_link_options(${MONOLISH_TARGET} PRIVATE
-    -fopenmp
-    -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
-    -Wno-unknown-cuda-version
-  )
-else()
-  target_compile_options(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${OpenMP_CXX_LIBRARIES})
-endif()
-
-# MKL
-if(MONOLISH_USE_AVX)
-  set(MKL_VML_AVX TRUE)
-endif()
-find_package(MKL)
-if(MKL_FOUND)
-  # Not use FindBLAS and FindLAPACK if MKL is already found
-  target_include_directories(${MONOLISH_TARGET} PRIVATE ${MKL_INCLUDE_PATH})
-  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${MKL_LIBRARIES})
-  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_MKL)
-else()
-  find_package(BLAS REQUIRED)
-  # BLAS_INCLUDE_DIRS is missing in FindBLAS.cmake.
-  # see https://gitlab.kitware.com/cmake/cmake/-/issues/20268
-  find_path(BLAS_INCLUDE_DIRS
-    NAMES cblas.h
-    HINTS
-      /usr/include
-      /usr/local/include
-      /usr/include/openblas
-  )
-  target_include_directories(${MONOLISH_TARGET} PRIVATE ${BLAS_INCLUDE_DIRS})
-  target_link_libraries(${MONOLISH_TARGET} PRIVATE ${BLAS_LIBRARIES})
-
-  find_package(LAPACK)
-  if(LAPACK_FOUND)
-    target_include_directories(${MONOLISH_TARGET} PRIVATE ${LAPACK_INCLUDE_DIRS})
-    target_link_libraries(${MONOLISH_TARGET} PRIVATE ${LAPACK_LIBRARIES})
-    target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_LAPACK)
-  endif()
-endif()
-
-if(MONOLISH_USE_NVIDIA_GPU)
-  target_compile_definitions(${MONOLISH_TARGET} PRIVATE MONOLISH_USE_NVIDIA_GPU)
-  # Link CUDA libraries
   find_package(CUDAToolkit REQUIRED)
-  target_link_libraries(${MONOLISH_TARGET}
-    PRIVATE
+
+  set(monolish_gpu_target "monolish_gpu")
+  if(MONOLISH_USE_MPI)
+    set(monolish_gpu_target ${monolish_gpu_target}_mpi)
+  endif()
+
+  add_library(${monolish_gpu_target} ${monolish_sources})
+  set_common_properties(${monolish_gpu_target})
+  target_compile_definitions(${monolish_gpu_target}
+  PRIVATE
+    MONOLISH_USE_NVIDIA_GPU
+  )
+  target_link_libraries(${monolish_gpu_target}
+  PRIVATE
     CUDA::cublas
     CUDA::cusolver
     CUDA::cusparse
     CUDA::cudart
+  )
+
+  # Detect host CUDA architectures for using in OpenMP Offloading compile
+  #
+  # clang requires CUDA architecture flag e.g. `-march=sm_80`
+  # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
+  execute_process(
+    COMMAND allgebra_get_device_cc
+    OUTPUT_VARIABLE GPU_CC
+    ERROR_QUIET
+  )
+  string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+  # get compile_option (for cc86, see #82, #83)
+  execute_process(
+    COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
+    OUTPUT_VARIABLE GPU_CC_AMENDED
+    ERROR_QUIET
+  )
+  string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
+  # for cc86
+  if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
+    message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
+  endif()
+
+  # OpenMP Offloading setting
+  target_compile_options(${monolish_gpu_target} PRIVATE
+    -fopenmp
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
+    -Wno-unknown-cuda-version
+  )
+  target_link_options(${monolish_gpu_target} PRIVATE
+    -fopenmp
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
+    -Wno-unknown-cuda-version
+  )
+
+  # Build monolish for every architectures
+  if(MONOLISH_FOR_PACKAGING)
+  endif()
+
+  install(
+    TARGETS ${monolish_gpu_target}
+    LIBRARY
+    DESTINATION lib
   )
 endif()
