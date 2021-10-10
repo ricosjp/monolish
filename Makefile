@@ -67,6 +67,9 @@ install_cpu: cpu
 install_gpu: gpu
 	cmake --build build_gpu --target install
 
+install_gpu_all: clang_gpu_all
+	cmake --build build_gpu_all --target install
+
 install_sxat: 
 	$(MAKE) -B -j -f Makefile.sxat install
 
@@ -119,6 +122,9 @@ install_cpu_mpi: cpu_mpi
 
 install_gpu_mpi: gpu_mpi
 	cmake --build build_gpu_mpi --target install
+
+install_gpu_mpi_all: clang_gpu_mpi_all
+	cmake --build build_gpu_mpi_all --target install
 
 install_all: install_cpu install_gpu install_cpu_mpi install_gpu_mpi
 
