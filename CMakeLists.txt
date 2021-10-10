@@ -82,6 +82,9 @@ if(NOT MKL_FOUND)
       /usr/include/openblas
   )
 endif()
+if(MONOLISH_USE_NVIDIA_GPU)
+  find_package(CUDAToolkit REQUIRED)
+endif()
 
 file(GLOB_RECURSE monolish_sources
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
@@ -145,8 +148,6 @@ endif()
 
 # monolish with NVIDIA GPU
 if(MONOLISH_USE_NVIDIA_GPU)
-  find_package(CUDAToolkit REQUIRED)
-
   set(monolish_gpu_target "monolish_gpu")
   if(MONOLISH_USE_MPI)
     set(monolish_gpu_target ${monolish_gpu_target}_mpi)
