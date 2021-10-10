@@ -157,29 +157,30 @@ if(MONOLISH_USE_NVIDIA_GPU)
     CUDA::cudart
   )
 
-  if("${MONOLISH_NVIDIA_GPU_ARCH}" EQUAL "")
-    # Detect host CUDA architectures for using in OpenMP Offloading compile
-    #
-    # clang requires CUDA architecture flag e.g. `-march=sm_80`
-    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
-    execute_process(
-      COMMAND allgebra_get_device_cc
-      OUTPUT_VARIABLE GPU_CC
-      ERROR_QUIET
-    )
-    string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
-    # get compile_option (for cc86, see #82, #83)
-    execute_process(
-      COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
-      OUTPUT_VARIABLE GPU_CC_AMENDED
-      ERROR_QUIET
-    )
-    string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
-    # for cc86
-    if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
-      message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
+  if(NOT MONOLISH_NVIDIA_GPU_ARCH)
+    if(COMMAND allgebra_get_device_cc)
+      # Detect host CUDA architectures for using in OpenMP Offloading compile
+      #
+      # clang requires CUDA architecture flag e.g. `-march=sm_80`
+      # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
+      execute_process(
+        COMMAND allgebra_get_device_cc
+        RESULT_VARIABLE exit_code
+        OUTPUT_VARIABLE gpu_cc
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+      )
+      if(NOT exit_code EQUAL 0)
+        message(SEND_ERROR "Failed to detect host NVIDIA GPU architecture by allgebra_get_device_cc")
+      endif()
+      # clang does not support sm_86 yet
+      if("${gpu_cc}" EQUAL "86")
+        message(WARNING "Clang does not support sm_86 yet. Default to sm_80.")
+        set(gpu_cc "80")
+      endif()
+      set(gpu_arch "sm_${gpu_cc}")
+    else()
+      message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc is not found.")
     endif()
-    set(gpu_arch "sm_${GPU_CC_AMENDED}")
   else()
     set(gpu_arch "${MONOLISH_NVIDIA_GPU_ARCH}")
   endif()
