@@ -44,10 +44,10 @@ project(monolish
 #
 # Build options
 #
-option(MONOLISH_USE_NVIDIA_GPU "build NVIDIA GPU variant" OFF)
-option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
-option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
+option(MONOLISH_USE_MPI "Build with MPI" OFF)
+option(MONOLISH_USE_NVIDIA_GPU "Build with NVIDIA GPU" OFF)
+option(MONOLISH_NVIDIA_GPU_ARCH_ALL "Build library for all known CUDA architectures" OFF)
 set(MONOLISH_NVIDIA_GPU_ARCH ""
   CACHE STRING
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
@@ -64,7 +64,7 @@ endif()
 
 # Detect host NVIDIA GPU architecture if not specified
 # since clang requires CUDA architecture flag e.g. `-march=sm_80`
-if(MONOLISH_USE_NVIDIA_GPU)
+if(MONOLISH_USE_NVIDIA_GPU AND NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
   if(NOT MONOLISH_NVIDIA_GPU_ARCH)
     # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
     execute_process(
@@ -157,7 +157,7 @@ function(set_common_properties target)
   endif()
 endfunction()
 
-function(set_gpu_properties target)
+function(set_gpu_properties target gpu_arch)
   target_compile_definitions(${target}
   PRIVATE
     MONOLISH_USE_NVIDIA_GPU
@@ -173,13 +173,13 @@ function(set_gpu_properties target)
   target_compile_options(${target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=${nvidia_gpu_arch}
+    -Xopenmp-target -march=${gpu_arch}
     -Wno-unknown-cuda-version
   )
   target_link_options(${target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=${nvidia_gpu_arch}
+    -Xopenmp-target -march=${gpu_arch}
     -Wno-unknown-cuda-version
   )
 endfunction()
@@ -214,16 +214,29 @@ if(MONOLISH_USE_NVIDIA_GPU)
     set(monolish_gpu_target ${monolish_gpu_target}_mpi)
   endif()
 
-  add_library(${monolish_gpu_target} ${monolish_sources})
-  set_common_properties(${monolish_gpu_target})
-  set_gpu_properties(${monolish_gpu_target})
-  install(
-    TARGETS ${monolish_gpu_target}
-    LIBRARY
-    DESTINATION lib
-  )
-
-  # Build monolish for every architectures
-  if(MONOLISH_FOR_PACKAGING)
+  if(NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
+    # Build for specified or detected architecture
+    add_library(${monolish_gpu_target} ${monolish_sources})
+    set_common_properties(${monolish_gpu_target})
+    set_gpu_properties(${monolish_gpu_target} ${nvidia_gpu_arch})
+    install(
+      TARGETS ${monolish_gpu_target}
+      LIBRARY
+      DESTINATION lib
+    )
+  else()
+    # Build for every CUDA architectures
+    foreach(gpu_cc IN ITEMS 35 37 50 52 53 60 61 62 70 75 80)
+      set(target "${monolish_gpu_target}_${gpu_cc}")
+      message(STATUS "Add ${target} target")
+      add_library(${target} ${monolish_sources})
+      set_common_properties(${target})
+      set_gpu_properties(${target} "sm_${gpu_cc}")
+      install(
+        TARGETS ${target}
+        LIBRARY
+        DESTINATION lib
+      )
+    endforeach()
   endif()
 endif()
