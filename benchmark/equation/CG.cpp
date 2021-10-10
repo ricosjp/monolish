@@ -19,7 +19,7 @@ bool benchmark(const size_t size, const size_t iter) {
   solver.set_maxiter(ITERARIVE_SOLVER_ITER);
   solver.set_tol(-100);
   // ITERARIVE_SOLVER_solver.set_print_rhistory(true);
-  
+
   PRECOND precond;
   solver.set_create_precond(precond);
   solver.set_apply_precond(precond);
@@ -40,7 +40,8 @@ bool benchmark(const size_t size, const size_t iter) {
   b.device_free();
 
   double time = sec / iter;
-  std::cout << solver.solver_name() << "(" << precond.solver_name() << "," << A.type() << ")\t" << std::flush;
+  std::cout << solver.solver_name() << "(" << precond.solver_name() << ","
+            << A.type() << ")\t" << std::flush;
   std::cout << get_type<T>() << "\t" << std::flush;
   std::cout << size << "\t" << std::flush;
   std::cout << ITERARIVE_SOLVER_ITER << "\t" << std::flush;
@@ -69,32 +70,41 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_log.txt");
 
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
-       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<float>, float, 
-        monolish::equation::CG<monolish::matrix::CRS<float>, float>,
-        monolish::equation::none<monolish::matrix::CRS<float>, float>>(size, iter);
-  }
-
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
-       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<double>, double, 
-        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
-        monolish::equation::none<monolish::matrix::CRS<double>, double>>(size, iter);
-  }
-
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
        size ITERARIVE_SOLVER_NN_BENCH_ITER) {
     benchmark<monolish::matrix::CRS<float>, float,
-        monolish::equation::CG<monolish::matrix::CRS<float>, float>,
-        monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(size, iter);
+              monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+              monolish::equation::none<monolish::matrix::CRS<float>, float>>(
+        size, iter);
   }
 
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN; size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
        size ITERARIVE_SOLVER_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<double>, double, 
+    benchmark<monolish::matrix::CRS<double>, double,
+              monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+              monolish::equation::none<monolish::matrix::CRS<double>, double>>(
+        size, iter);
+  }
+
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<float>, float,
+              monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+              monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
+        size, iter);
+  }
+
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<
+        monolish::matrix::CRS<double>, double,
         monolish::equation::CG<monolish::matrix::CRS<double>, double>,
-        monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(size, iter);
+        monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
+        size, iter);
   }
 
   return 0;

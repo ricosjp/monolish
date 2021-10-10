@@ -63,13 +63,15 @@ int main(int argc, char **argv) {
   for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;
        size LU_NNN_BENCH_ITER) {
     benchmark<monolish::matrix::Dense<float>, float,
-        monolish::equation::LU<monolish::matrix::Dense<float>, float>>(size, iter);
+              monolish::equation::LU<monolish::matrix::Dense<float>, float>>(
+        size, iter);
   }
 
   for (size_t size = LU_NNN_BENCH_MIN; size <= LU_NNN_BENCH_MAX;
        size LU_NNN_BENCH_ITER) {
     benchmark<monolish::matrix::Dense<double>, double,
-        monolish::equation::LU<monolish::matrix::Dense<double>, double>>(size, iter);
+              monolish::equation::LU<monolish::matrix::Dense<double>, double>>(
+        size, iter);
   }
 
   return 0;
