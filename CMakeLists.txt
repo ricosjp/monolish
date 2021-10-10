@@ -62,6 +62,32 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
+# Detect host NVIDIA GPU architecture if not specified
+# since clang requires CUDA architecture flag e.g. `-march=sm_80`
+if(MONOLISH_USE_NVIDIA_GPU)
+  if(NOT MONOLISH_NVIDIA_GPU_ARCH)
+    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
+    execute_process(
+      COMMAND allgebra_get_device_cc
+      RESULT_VARIABLE exit_code
+      OUTPUT_VARIABLE gpu_cc
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    if(NOT exit_code EQUAL 0)
+      message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc failed to detect host GPU architecture.")
+    endif()
+    # clang does not support sm_86 yet
+    if("${gpu_cc}" EQUAL "86")
+      message(WARNING "Clang does not support sm_86 yet. Default to sm_80.")
+      set(gpu_cc "80")
+    endif()
+    set(nvidia_gpu_arch "sm_${gpu_cc}")
+  else()
+    set(nvidia_gpu_arch "${MONOLISH_NVIDIA_GPU_ARCH}")
+  endif()
+  message(STATUS "NVIDIA GPU Architecture for OpenMP Offloading = ${nvidia_gpu_arch}")
+endif()
+
 #
 # Find external packages
 #
@@ -86,18 +112,22 @@ if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
 endif()
 
+#
+# Glob source files
+#
 file(GLOB_RECURSE monolish_sources
   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/*.cpp
 )
-
-# C++ headers
 install(
   DIRECTORY include/
   DESTINATION include
   FILES_MATCHING PATTERN "*.hpp"
 )
 
+#
+# Target properties
+#
 function(set_common_properties target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
   target_compile_options(${target} PRIVATE -g -O3 -Wall)
@@ -125,7 +155,38 @@ function(set_common_properties target)
       target_compile_definitions(${target} PRIVATE MONOLISH_USE_LAPACK)
     endif()
   endif()
-endfunction(set_common_properties)
+endfunction()
+
+function(set_gpu_properties target)
+  target_compile_definitions(${target}
+  PRIVATE
+    MONOLISH_USE_NVIDIA_GPU
+  )
+  target_link_libraries(${target}
+  PRIVATE
+    CUDA::cublas
+    CUDA::cusolver
+    CUDA::cusparse
+    CUDA::cudart
+  )
+  # OpenMP Offloading setting
+  target_compile_options(${target} PRIVATE
+    -fopenmp
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=${nvidia_gpu_arch}
+    -Wno-unknown-cuda-version
+  )
+  target_link_options(${target} PRIVATE
+    -fopenmp
+    -fopenmp-targets=nvptx64
+    -Xopenmp-target -march=${nvidia_gpu_arch}
+    -Wno-unknown-cuda-version
+  )
+endfunction()
+
+#
+# Define targets
+#
 
 # monolish on CPU
 if(NOT MONOLISH_USE_NVIDIA_GPU)
@@ -155,64 +216,14 @@ if(MONOLISH_USE_NVIDIA_GPU)
 
   add_library(${monolish_gpu_target} ${monolish_sources})
   set_common_properties(${monolish_gpu_target})
-  target_compile_definitions(${monolish_gpu_target}
-  PRIVATE
-    MONOLISH_USE_NVIDIA_GPU
-  )
-  target_link_libraries(${monolish_gpu_target}
-  PRIVATE
-    CUDA::cublas
-    CUDA::cusolver
-    CUDA::cusparse
-    CUDA::cudart
-  )
-
-  if(NOT MONOLISH_NVIDIA_GPU_ARCH)
-    # Detect host CUDA architectures for using in OpenMP Offloading compile
-    #
-    # clang requires CUDA architecture flag e.g. `-march=sm_80`
-    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
-    execute_process(
-      COMMAND allgebra_get_device_cc
-      RESULT_VARIABLE exit_code
-      OUTPUT_VARIABLE gpu_cc
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-    if(NOT exit_code EQUAL 0)
-      message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc failed to detect host GPU architecture.")
-    endif()
-    # clang does not support sm_86 yet
-    if("${gpu_cc}" EQUAL "86")
-      message(WARNING "Clang does not support sm_86 yet. Default to sm_80.")
-      set(gpu_cc "80")
-    endif()
-    set(gpu_arch "sm_${gpu_cc}")
-  else()
-    set(gpu_arch "${MONOLISH_NVIDIA_GPU_ARCH}")
-  endif()
-  message(STATUS "NVIDIA GPU Architecture for OpenMP Offloading = ${gpu_arch}")
-
-  # OpenMP Offloading setting
-  target_compile_options(${monolish_gpu_target} PRIVATE
-    -fopenmp
-    -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=${gpu_arch}
-    -Wno-unknown-cuda-version
-  )
-  target_link_options(${monolish_gpu_target} PRIVATE
-    -fopenmp
-    -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=${gpu_arch}
-    -Wno-unknown-cuda-version
-  )
-
-  # Build monolish for every architectures
-  if(MONOLISH_FOR_PACKAGING)
-  endif()
-
+  set_gpu_properties(${monolish_gpu_target})
   install(
     TARGETS ${monolish_gpu_target}
     LIBRARY
     DESTINATION lib
   )
+
+  # Build monolish for every architectures
+  if(MONOLISH_FOR_PACKAGING)
+  endif()
 endif()
