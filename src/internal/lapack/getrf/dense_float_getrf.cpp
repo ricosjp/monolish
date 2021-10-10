@@ -54,6 +54,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
     cudaDeviceSynchronize();
     info = devinfo[0];
     cusolverDnDestroy(h);
+#pragma omp target exit data map(from : ipivd [0:ipivl])
 
 #else
     throw std::runtime_error(
