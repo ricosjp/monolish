@@ -113,6 +113,10 @@ endfunction(set_common_properties)
 
 # monolish on CPU
 if(NOT MONOLISH_USE_NVIDIA_GPU)
+  set(monolish_cpu_target "monolish_cpu")
+  if(MONOLISH_USE_MPI)
+    set(monolish_cpu_target ${monolish_cpu_target}_mpi)
+  endif()
   add_library(${monolish_cpu_target} ${monolish_sources})
   set_common_properties(${monolish_cpu_target})
   # XXX: Should we use the imported target `OpenMP::OpenMP_CXX`?
