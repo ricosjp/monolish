@@ -45,11 +45,15 @@ option(MONOLISH_USE_NVIDIA_GPU "build NVIDIA GPU variant" OFF)
 option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_FOR_PACKAGING "build for packaging" OFF)
+set(MONOLISH_NVIDIA_GPU_ARCH ""
+  CACHE STRING
+  "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
+)
 
 # FIXME: OpenMP Offloading in GCC is broken.
 #        See https://gitlab.ritc.jp/ricos/omp-offload-bug for detail
 if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  message(SEND_ERROR "OpenMP Offloading in monolish is only supported with clang")
+  message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
 # Find external packages
@@ -153,39 +157,45 @@ if(MONOLISH_USE_NVIDIA_GPU)
     CUDA::cudart
   )
 
-  # Detect host CUDA architectures for using in OpenMP Offloading compile
-  #
-  # clang requires CUDA architecture flag e.g. `-march=sm_80`
-  # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
-  execute_process(
-    COMMAND allgebra_get_device_cc
-    OUTPUT_VARIABLE GPU_CC
-    ERROR_QUIET
-  )
-  string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
-  # get compile_option (for cc86, see #82, #83)
-  execute_process(
-    COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
-    OUTPUT_VARIABLE GPU_CC_AMENDED
-    ERROR_QUIET
-  )
-  string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
-  # for cc86
-  if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
-    message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
+  if("${MONOLISH_NVIDIA_GPU_ARCH}" EQUAL "")
+    # Detect host CUDA architectures for using in OpenMP Offloading compile
+    #
+    # clang requires CUDA architecture flag e.g. `-march=sm_80`
+    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
+    execute_process(
+      COMMAND allgebra_get_device_cc
+      OUTPUT_VARIABLE GPU_CC
+      ERROR_QUIET
+    )
+    string(REGEX REPLACE "\n$" "" GPU_CC "${GPU_CC}")
+    # get compile_option (for cc86, see #82, #83)
+    execute_process(
+      COMMAND bash -c "if [ `allgebra_get_device_cc` -eq 86 ]; then printf 80; else allgebra_get_device_cc; fi"
+      OUTPUT_VARIABLE GPU_CC_AMENDED
+      ERROR_QUIET
+    )
+    string(REGEX REPLACE "\n$" "" GPU_CC_AMENDED "${GPU_CC_AMENDED}")
+    # for cc86
+    if(NOT("${GPU_CC}" EQUAL "${GPU_CC_AMENDED}"))
+      message(STATUS "Clang does not support Compute Capability ${GPU_CC}. Instead, compile for Compute Capability ${GPU_CC_AMENDED}.")
+    endif()
+    set(gpu_arch "sm_${GPU_CC_AMENDED}")
+  else()
+    set(gpu_arch "${MONOLISH_NVIDIA_GPU_ARCH}")
   endif()
+  message(STATUS "NVIDIA GPU Architecture for OpenMP Offloading = ${gpu_arch}")
 
   # OpenMP Offloading setting
   target_compile_options(${monolish_gpu_target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
+    -Xopenmp-target -march=sm_${gpu_arch}
     -Wno-unknown-cuda-version
   )
   target_link_options(${monolish_gpu_target} PRIVATE
     -fopenmp
     -fopenmp-targets=nvptx64
-    -Xopenmp-target -march=sm_${GPU_CC_AMENDED}
+    -Xopenmp-target -march=sm_${gpu_arch}
     -Wno-unknown-cuda-version
   )
 
