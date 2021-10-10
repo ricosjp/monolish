@@ -41,6 +41,9 @@ project(monolish
   LANGUAGES CXX Fortran # Fortran is needed when using find_package(BLAS)
 )
 
+#
+# Build options
+#
 option(MONOLISH_USE_NVIDIA_GPU "build NVIDIA GPU variant" OFF)
 option(MONOLISH_USE_MPI "build MPI variant" OFF)
 option(MONOLISH_USE_AVX "Require AVX" ON)
@@ -50,16 +53,22 @@ set(MONOLISH_NVIDIA_GPU_ARCH ""
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
 )
 
+#
+# Validate options
+#
 # FIXME: OpenMP Offloading in GCC is broken.
 #        See https://gitlab.ritc.jp/ricos/omp-offload-bug for detail
 if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
+#
 # Find external packages
+#
 find_package(OpenMP REQUIRED)
+# See cmake/FindMKL.cmake
 find_package(MKL)
-# Not use FindBLAS and FindLAPACK if MKL is already found
+# Do not use FindBLAS.cmake and FindLAPACK.cmake if MKL is already found
 if(NOT MKL_FOUND)
   find_package(BLAS REQUIRED)
   find_package(LAPACK)
