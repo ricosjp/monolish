@@ -56,6 +56,7 @@ intel_mkl:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 intel_oss:
 	make -j -C vector_vml/ $@
@@ -63,6 +64,7 @@ intel_oss:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 amd_oss:
 	make -j -C vector_vml/ $@
@@ -70,6 +72,7 @@ amd_oss:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 nvidia:
 	make -j -C vector_vml/ $@
@@ -77,6 +80,7 @@ nvidia:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 a64fx:
 	make -j -C vector_vml/ $@
@@ -84,6 +88,7 @@ a64fx:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 sxat:
 	make -j -C vector_vml/ $@
@@ -91,6 +96,7 @@ sxat:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_intel_mkl:
 	make -j -C vector_vml/ $@
@@ -98,6 +104,7 @@ run_intel_mkl:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_intel_oss:
 	make -j -C vector_vml/ $@
@@ -105,6 +112,7 @@ run_intel_oss:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_amd_oss:
 	make -j -C vector_vml/ $@
@@ -112,6 +120,7 @@ run_amd_oss:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_nvidia:
 	make -j -C vector_vml/ $@
@@ -119,6 +128,7 @@ run_nvidia:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_a64fx:
 	make -j -C vector_vml/ $@
@@ -126,6 +136,7 @@ run_a64fx:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 run_sxat:
 	make -j -C vector_vml/ $@
@@ -133,12 +144,14 @@ run_sxat:
 	make -j -C matrix_common/ $@
 	make -j -C matrix_vml/ $@
 	make -j -C matrix_blas/ $@
+	make -j -C equation/ $@
 
 clean:
 	make -j -C vector_vml/ clean
 	make -j -C vector_blas/ clean
 	make -j -C matrix_common/ clean
-	make -j -C matrix_vml/ $@
+	make -j -C matrix_vml/ clean
 	make -j -C matrix_blas/ clean
+	make -j -C equation/ clean
 	- rm -rf $(BENCHMARK_DIR)
 	- rm commit_msg_tmp.txt

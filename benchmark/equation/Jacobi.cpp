@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
        size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
        size ITERARIVE_SOLVER_NN_BENCH_ITER) {
     benchmark<monolish::matrix::CRS<float>, float,
-              monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+              monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>,
               monolish::equation::none<monolish::matrix::CRS<float>, float>>(
         size, iter);
   }
@@ -83,27 +83,8 @@ int main(int argc, char **argv) {
        size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
        size ITERARIVE_SOLVER_NN_BENCH_ITER) {
     benchmark<monolish::matrix::CRS<double>, double,
-              monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+              monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>,
               monolish::equation::none<monolish::matrix::CRS<double>, double>>(
-        size, iter);
-  }
-
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
-       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
-       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
-    benchmark<monolish::matrix::CRS<float>, float,
-              monolish::equation::CG<monolish::matrix::CRS<float>, float>,
-              monolish::equation::Jacobi<monolish::matrix::CRS<float>, float>>(
-        size, iter);
-  }
-
-  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
-       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
-       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
-    benchmark<
-        monolish::matrix::CRS<double>, double,
-        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
-        monolish::equation::Jacobi<monolish::matrix::CRS<double>, double>>(
         size, iter);
   }
 

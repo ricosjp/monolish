@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- refactoring and add BiCGSTAB and Jacobi benchmarks in `benchmark/equation/` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/365
 - add `solver_name()` function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/363
 - collect iterative solver tests in `test/equation/iterative` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/362
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24

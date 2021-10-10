@@ -63,7 +63,7 @@ run_cpu:
 	$(foreach var,$(OBJS_CPU), $(call RUN,$(var)))
 
 run_gpu:
-	$(foreach var,$(OBJS_CPU), $(call RUN,$(var)))
+	$(foreach var,$(OBJS_GPU), $(call RUN,$(var)))
 
 run_intel_mkl:
 	$(foreach var,$(OBJS_INTEL_MKL), $(call RUN,$(var)))
