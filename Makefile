@@ -39,6 +39,17 @@ clang_gpu:
 		-DMONOLISH_USE_NVIDIA_GPU=ON
 	cmake --build build_gpu -j `nproc`
 
+clang_gpu_all:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-12.0.1/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-12.0.1/bin/clang++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu_all \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON
+	cmake --build build_gpu_all -j `nproc`
+
 cpu: gcc_cpu
 gpu: clang_gpu
 
@@ -85,6 +96,18 @@ clang_gpu_mpi:
 		-DMONOLISH_USE_NVIDIA_GPU=ON \
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_gpu_mpi -j `nproc`
+
+clang_gpu_mpi_all:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=mpicc \
+		-DCMAKE_CXX_COMPILER=mpic++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu_mpi_all \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON \
+		-DMONOLISH_USE_MPI=ON
+	cmake --build build_gpu_mpi_all -j `nproc`
 
 cpu_mpi: clang_cpu_mpi
 gpu_mpi: clang_gpu_mpi
