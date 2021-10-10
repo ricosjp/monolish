@@ -54,7 +54,6 @@ int internal::lapack::sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
     cudaDeviceSynchronize();
     info = devinfo[0];
     cusolverDnDestroy(h);
-#pragma omp target exit data map(release : ipivd [0:M])
 
 #else
     throw std::runtime_error(
