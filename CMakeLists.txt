@@ -66,9 +66,8 @@ endif()
 # since clang requires CUDA architecture flag e.g. `-march=sm_80`
 if(MONOLISH_USE_NVIDIA_GPU AND NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
   if(NOT MONOLISH_NVIDIA_GPU_ARCH)
-    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
     execute_process(
-      COMMAND allgebra_get_device_cc
+      COMMAND nvcc --run cmake/get_device_cc.cu --run-args 0
       RESULT_VARIABLE exit_code
       OUTPUT_VARIABLE gpu_cc
       OUTPUT_STRIP_TRAILING_WHITESPACE
