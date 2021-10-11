@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "cpu",
+      "displayName": "Monolish with CPU",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/cpu",
+      "cacheVariables": {}
+    },
+    {
+      "name": "cpu-mpi",
+      "displayName": "Monolish with CPU and MPI",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/cpu-mpi",
+      "cacheVariables": {
+        "MONOLISH_USE_MPI": "ON"
+      }
+    },
+    {
+      "name": "gpu",
+      "displayName": "Monolish with GPU",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/gpu",
+      "cacheVariables": {
+        "MONOLISH_USE_NVIDIA_GPU": "ON"
+      }
+    },
+    {
+      "name": "gpu-mpi",
+      "displayName": "Monolish with GPU and MPI",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/gpu-mpi",
+      "cacheVariables": {
+        "MONOLISH_USE_MPI": "ON",
+        "MONOLISH_USE_NVIDIA_GPU": "ON"
+      }
+    },
+    {
+      "name": "package",
+      "displayName": "Monolish with GPU for all CUDA architecture",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/package",
+      "cacheVariables": {
+        "MONOLISH_USE_NVIDIA_GPU": "ON",
+        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
+      }
+    }
+  ]
+}
