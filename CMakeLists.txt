@@ -66,12 +66,16 @@ endif()
 # since clang requires CUDA architecture flag e.g. `-march=sm_80`
 if(MONOLISH_USE_NVIDIA_GPU AND NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
   if(NOT MONOLISH_NVIDIA_GPU_ARCH)
-    # FIXME: Merge `allgebra_get_device_cc` into monolish to keep independency from allgebra
     execute_process(
-      COMMAND allgebra_get_device_cc
+      COMMAND nvcc
+        -o get_device_cc
+        --run
+        --run-args 0
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/get_device_cc.cu
       RESULT_VARIABLE exit_code
       OUTPUT_VARIABLE gpu_cc
       OUTPUT_STRIP_TRAILING_WHITESPACE
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
     if(NOT exit_code EQUAL 0)
       message(SEND_ERROR "NVIDIA GPU architecture is not specified, and allgebra_get_device_cc failed to detect host GPU architecture.")
