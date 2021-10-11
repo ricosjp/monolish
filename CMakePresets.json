@@ -44,7 +44,7 @@
       "binaryDir": "${sourceDir}/build/package",
       "cacheVariables": {
         "MONOLISH_USE_NVIDIA_GPU": "ON",
-        "MONOLISH_NVIDIA_GPU_ALL": "ON"
+        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
       }
     }
   ]
