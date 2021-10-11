@@ -39,6 +39,17 @@ clang_gpu:
 		-DMONOLISH_USE_NVIDIA_GPU=ON
 	cmake --build build_gpu -j `nproc`
 
+clang_gpu_all:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=/usr/local/llvm-12.0.1/bin/clang \
+		-DCMAKE_CXX_COMPILER=/usr/local/llvm-12.0.1/bin/clang++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu_all \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON
+	cmake --build build_gpu_all -j `nproc`
+
 cpu: gcc_cpu
 gpu: clang_gpu
 
@@ -55,6 +66,9 @@ install_cpu: cpu
 
 install_gpu: gpu
 	cmake --build build_gpu --target install
+
+install_gpu_all: clang_gpu_all
+	cmake --build build_gpu_all --target install
 
 install_sxat: 
 	$(MAKE) -B -j -f Makefile.sxat install
@@ -86,6 +100,18 @@ clang_gpu_mpi:
 		-DMONOLISH_USE_MPI=ON
 	cmake --build build_gpu_mpi -j `nproc`
 
+clang_gpu_mpi_all:
+	cmake $(MONOLISH_TOP) \
+		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+		-DCMAKE_C_COMPILER=mpicc \
+		-DCMAKE_CXX_COMPILER=mpic++ \
+		-DCMAKE_VERBOSE_MAKEFILE=1 \
+		-Bbuild_gpu_mpi_all \
+		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON \
+		-DMONOLISH_USE_MPI=ON
+	cmake --build build_gpu_mpi_all -j `nproc`
+
 cpu_mpi: clang_cpu_mpi
 gpu_mpi: clang_gpu_mpi
 
@@ -96,6 +122,9 @@ install_cpu_mpi: cpu_mpi
 
 install_gpu_mpi: gpu_mpi
 	cmake --build build_gpu_mpi --target install
+
+install_gpu_mpi_all: clang_gpu_mpi_all
+	cmake --build build_gpu_mpi_all --target install
 
 install_all: install_cpu install_gpu install_cpu_mpi install_gpu_mpi
 
@@ -172,27 +201,3 @@ document:
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
 		$(ALLGEBRA_IMAGE)/doxygen:$(ALLGEBRA_TAG) doxygen Doxyfile
-
-device_cc := 35 37 50 52 53 60 61 62 70 75
-define template
-clang_gpu_$(1):
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-12.0.1/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-12.0.1/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu_$(1) \
-		-DMONOLISH_USE_NVIDIA_GPU=ON \
-		-DMONOLISH_FOR_PACKAGING=ON \
-		-DGPU_CC=$(1) \
-	&& cmake --build build_gpu_$(1) -j `nproc`
-
-install_gpu_$(1): clang_gpu_$(1)
-	cmake --build build_gpu_$(1) --target install
-endef
-
-$(foreach cc,$(device_cc),$(eval $(call template,$(cc))))
-
-clang_gpu_all: $(addprefix clang_gpu_,$(device_cc))
-
-install_gpu_all: $(addprefix install_gpu_,$(device_cc))
