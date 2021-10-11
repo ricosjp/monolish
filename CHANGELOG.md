@@ -28,6 +28,7 @@ Unreleased
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
+- Revise Keep-Changelog CI job https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/369
 - fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
 - fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
