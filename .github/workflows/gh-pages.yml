@@ -29,7 +29,7 @@ jobs:
       run: |
         export tag_name=$(basename ${{ github.ref }})
         rm -rf public/${tag_name}
-        mv html public/{$tag_name}
+        mv html public/${tag_name}
 
     - name: deploy_pages
       uses: peaceiris/actions-gh-pages@v3
