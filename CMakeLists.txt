@@ -258,3 +258,13 @@ if(MONOLISH_USE_NVIDIA_GPU)
     endforeach()
   endif()
 endif()
+
+#
+# Packaging
+#
+# Sell also the "CPack DEB Generator" page
+# https://cmake.org/cmake/help/latest/cpack_gen/deb.html
+#
+set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
+set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+include(CPack)
