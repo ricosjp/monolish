@@ -15,20 +15,20 @@ Quick start guide
 The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
 
 To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04 and 20.10)](https://ricosjp.github.io/monolish/d5/d38/install_guide.html)
-- [Docker container with monolish installed](https://ricosjp.github.io/monolish/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+- [Installation using apt (for ubuntu 20.04 and 20.10)](https://ricosjp.github.io/monolish/master/d5/d38/install_guide.html)
+- [Docker container with monolish installed](https://ricosjp.github.io/monolish/master/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
 
 To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
 
 See below for how to build on allgebra.
-- [Build monolish from source code](https://ricosjp.github.io/monolish/da/d20/build_guide.html)
+- [Build monolish from source code](https://ricosjp.github.io/monolish/master/da/d20/build_guide.html)
 
 Documentation and Links
 ---
 - Documentation: https://ricosjp.github.io/monolish/
 - Source code: https://github.com/ricosjp/monolish/
-- Contribution guide : https://ricosjp.github.io/monolish/da/dce/contribution.html
-- Publications: https://ricosjp.github.io/monolish/de/d26/publications.html
+- Contribution guide : https://ricosjp.github.io/monolish/master/da/dce/contribution.html
+- Publications: https://ricosjp.github.io/monolish/master/de/d26/publications.html
 - Bug reports: https://github.com/ricosjp/monolish/issues
 - Releases: https://github.com/ricosjp/monolish/releases
 - Changelog: https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md
