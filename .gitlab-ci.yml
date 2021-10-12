@@ -583,3 +583,11 @@ keep-changelog:
     except:
         - master
         - tags
+
+markdown-link-check:
+    image: node:16
+    stage: build_lib
+    script:
+        - npm install -g markdown-link-check
+        - markdown-link-check README.md
+    allow_failure: true
