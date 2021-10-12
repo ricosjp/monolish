@@ -148,7 +148,7 @@ install(
 #
 function(set_common_properties target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
-  target_compile_options(${target} PRIVATE -g -O3 -Wall)
+  target_compile_options(${target} PRIVATE -O3 -Wall)
   # AVX
   if(MONOLISH_USE_AVX)
     target_compile_options(${target} PRIVATE "-mavx")
@@ -269,4 +269,13 @@ endif()
 #
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6, libgcc-s1, libgomp1, libstdc++6")
+if(MKL_FOUND)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, intel-mkl")
+else()
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libopenblas0")
+endif()
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-11-4, cuda-cusolver-11-4, cuda-cusparse-11-4, libcublas11-4, libelf1")
+endif()
 include(CPack)
