@@ -39,6 +39,8 @@ set(BUILD_SHARED_LIBS ON)
 project(monolish
   VERSION 0.15.0
   LANGUAGES CXX Fortran # Fortran is needed when using find_package(BLAS)
+  HOMEPAGE_URL "https://github.com/ricosjp/monolish"
+  DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
 
 #
