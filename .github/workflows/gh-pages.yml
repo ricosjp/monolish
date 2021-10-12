@@ -1,28 +1,36 @@
-name: github pages
+name: GitHub Pages
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  document:
+    runs-on: ubuntu-20.04
     container:
         image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
     steps:
     - uses: actions/checkout@v2
-    - name: doxygen
-      shell: bash
+
+    - name: Generate document for current commit
+      run: doxygen
+
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        path: public
+
+    - name: Update master document
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
-        doxygen
-        mv html public
-        git fetch --prune --unshallow
-        for version in 0.14.2 0.14.1 0.14.0; do
-        git checkout $version
-        doxygen
-        mv html public/$version/ 
-        done
-      
+        rm -rf public/master
+        mv html public/master
+
+    - name: Update tag document
+      if: ${{ startsWith(github.ref, 'refs/tags' ) }}
+      run: |
+        export tag_name=$(basename ${{ github.ref }})
+        rm -rf public/${tag_name}
+        mv html public/{$tag_name}
+
     - name: deploy_pages
       uses: peaceiris/actions-gh-pages@v3
       with:
