@@ -48,6 +48,7 @@ option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_USE_MPI "Build with MPI" OFF)
 option(MONOLISH_USE_NVIDIA_GPU "Build with NVIDIA GPU" OFF)
 option(MONOLISH_NVIDIA_GPU_ARCH_ALL "Build library for all known CUDA architectures" OFF)
+option(MONOLISH_CCACHE_BUILD "Use ccache" ON)
 set(MONOLISH_NVIDIA_GPU_ARCH ""
   CACHE STRING
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
@@ -60,6 +61,17 @@ set(MONOLISH_NVIDIA_GPU_ARCH ""
 #        See https://gitlab.ritc.jp/ricos/omp-offload-bug for detail
 if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
+endif()
+
+# Build llvm with ccache if the package is present
+if(MONOLISH_CCACHE_BUILD)
+  find_program(CCACHE_PROGRAM ccache)
+  if(CCACHE_PROGRAM)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_PROGRAM})
+    message(STATUS "Found ccache: ${CCACHE_PROGRAM}")
+  else()
+    message(WARNING "Unable to find the program ccache.")
+  endif()
 endif()
 
 # Detect host NVIDIA GPU architecture if not specified
