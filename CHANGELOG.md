@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- `MONOLISH_CCACHE_BUILD` flag to enable ccache https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/371
 - Add CMakePresets.json https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/368
 - refactoring and add BiCGSTAB and Jacobi benchmarks in `benchmark/equation/` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/365
 - add `solver_name()` function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/363
