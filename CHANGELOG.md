@@ -28,6 +28,7 @@ Unreleased
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
+- Revise GitHub Pages deployment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/370
 - Revise Keep-Changelog CI job https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/369
 - fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
