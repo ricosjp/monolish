@@ -45,6 +45,9 @@ template void
 equation::Jacobi<matrix::LinearOperator<double>, double>::create_precond(
     matrix::LinearOperator<double> &A);
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 template <typename MATRIX, typename T>
 void equation::Jacobi<MATRIX, T>::apply_precond(const vector<T> &r,
                                                 vector<T> &z) {
@@ -153,6 +156,9 @@ equation::Jacobi<matrix::LinearOperator<double>, double>::monolish_Jacobi(
 template int
 equation::Jacobi<matrix::LinearOperator<float>, float>::monolish_Jacobi(
     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 template <typename MATRIX, typename T>
 int equation::Jacobi<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
