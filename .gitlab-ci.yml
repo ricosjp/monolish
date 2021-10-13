@@ -16,8 +16,7 @@ stages:
     - deploy
 
 include:
-  - local:
-    - ci/build.yml
+  - local: ci/build.yml
 
 #
 # Test Stage
