@@ -5,7 +5,7 @@ before_script:
 stages:
   - build_lib
   - test
-  - examples
+  - example
   - benchmark
   - python
   - develop

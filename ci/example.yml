@@ -1,18 +1,13 @@
 #
 # example Stage
 #
-.example:
-  stage: example
-
 .example_gpu:
-  extends:
-    - .example
+  stage: example
   script:
     - make -C example/ gpu
 
 .example_cpu:
-  extends:
-    - .example
+  stage: example
   script:
     - make -C example/ cpu
 
