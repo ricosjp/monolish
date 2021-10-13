@@ -43,7 +43,7 @@ project(monolish
   DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
 
-# Check the repository is on git-tag or not
+# Get last relase tag, and count the number of commit from there
 execute_process(
   COMMAND git describe --tags --abbrev=0
   OUTPUT_VARIABLE git_last_tag
