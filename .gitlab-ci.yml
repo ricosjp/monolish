@@ -9,6 +9,7 @@ stages:
   - examples
   - benchmark
   - deploy
+  - develop
 
 include:
   - local: ci/env.yml
@@ -17,5 +18,5 @@ include:
   - local: ci/python.yml
   - local: ci/example.yml
   - local: ci/benchmark.yml
-  - local: ci/dev.yml
   - local: ci/docker.yml
+  - local: ci/develop.yml

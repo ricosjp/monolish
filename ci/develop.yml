@@ -1,24 +1,29 @@
+.develop:
+  stage: develop
+  allow_failure: true
+  needs: []
+
 clang-format:
+  extends:
+    - .develop
   image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
-  stage: build_lib
   script:
     - check_format.sh
-  allow_failure: true
 
 keep-changelog:
+  extends:
+    - .develop
   image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
-  stage: build_lib
   script:
     - bash -c "! git diff --exit-code origin/master... CHANGELOG.md"
-  allow_failure: true
   except:
     - master
     - tags
 
 markdown-link-check:
+  extends:
+    - .develop
   image: node:16
-  stage: build_lib
   script:
     - npm install -g markdown-link-check
     - markdown-link-check README.md
-  allow_failure: true
