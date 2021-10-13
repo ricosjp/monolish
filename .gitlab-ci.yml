@@ -5,11 +5,11 @@ before_script:
 stages:
   - build_lib
   - test
-  - python
   - examples
   - benchmark
-  - deploy
+  - python
   - develop
+  - deploy
 
 include:
   - local: ci/env.yml
