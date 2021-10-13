@@ -16,6 +16,7 @@ stages:
     - deploy
 
 include:
+  - local: ci/env.yml
   - local: ci/build.yml
 
 #
