@@ -4,12 +4,12 @@
 .example_gpu:
   stage: example
   script:
-    - make -C example/ gpu
+    - make -C examples/ gpu
 
 .example_cpu:
   stage: example
   script:
-    - make -C example/ cpu
+    - make -C examples/ cpu
 
 # gpu mkl
 gpu_avx_clang_mkl_examples:
