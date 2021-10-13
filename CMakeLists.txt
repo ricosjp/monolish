@@ -81,12 +81,11 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
-# Build llvm with ccache if the package is present
+# Build with ccache
 if(MONOLISH_CCACHE_BUILD)
   find_program(CCACHE_PROGRAM ccache)
   if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_PROGRAM})
-    message(STATUS "Found ccache: ${CCACHE_PROGRAM}")
   else()
     message(WARNING "Unable to find the program ccache.")
   endif()
