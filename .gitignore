@@ -35,6 +35,7 @@ python/dist/
 
 # cmake
 build*/
+package/
 
 # Doxygen
 html/
