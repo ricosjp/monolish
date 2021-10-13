@@ -1,14 +1,9 @@
 #
 # Test Python module
 #
-pytest:
-  needs: []
+.python:
   stage: python
-  image: ${POETRY_IMAGE}
-  script:
-    - cd python
-    - poetry install
-    - make test_logger
+  image: ghcr.io/ricosjp/allgebra/poetry:21.09.0
 
 .logging_artifact:
   artifacts:
@@ -17,10 +12,18 @@ pytest:
     expire_in: 360min
     when: always
 
-python-cpu:
-  image: ${POETRY_IMAGE}
-  stage: python
+pytest:
   extends:
+    - .python
+  needs: []
+  script:
+    - cd python
+    - poetry install
+    - make test_logger
+
+python-cpu:
+  extends:
+    - .python
     - .logging_artifact
   needs:
     - nogpu_avx_gcc_mkl
@@ -30,9 +33,8 @@ python-cpu:
     - make log_cpu
 
 python-gpu:
-  image: ${POETRY_IMAGE}
-  stage: python
   extends:
+    - .python
     - .logging_artifact
   needs:
     - gpu_avx_clang_mkl
