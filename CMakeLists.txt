@@ -43,7 +43,7 @@ project(monolish
   DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
 
-# Get last relase tag, and count the number of commit from there
+# Get last release tag, and count the number of commit from there
 execute_process(
   COMMAND git describe --tags --abbrev=0
   OUTPUT_VARIABLE git_last_tag
@@ -57,7 +57,7 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-message(STATUS "Nuumber of commits from last release = ${git_dev_commits}")
+message(STATUS "Number of commits from last release = ${git_dev_commits}")
 
 #
 # Build options
