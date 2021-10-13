@@ -1,0 +1,42 @@
+#
+# Test Python module
+#
+pytest:
+  needs: []
+  stage: python
+  image: ${POETRY_IMAGE}
+  script:
+    - cd python
+    - poetry install
+    - make test_logger
+
+.logging_artifact:
+  artifacts:
+    paths:
+      - test/logger/logging
+    expire_in: 360min
+    when: always
+
+python-cpu:
+  image: ${POETRY_IMAGE}
+  stage: python
+  extends:
+    - .logging_artifact
+  needs:
+    - nogpu_avx_gcc_mkl
+  script:
+    - cd python
+    - poetry install
+    - make log_cpu
+
+python-gpu:
+  image: ${POETRY_IMAGE}
+  stage: python
+  extends:
+    - .logging_artifact
+  needs:
+    - gpu_avx_clang_mkl
+  script:
+    - cd python
+    - poetry install
+    - make log_gpu
