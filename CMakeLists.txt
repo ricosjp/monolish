@@ -39,7 +39,25 @@ set(BUILD_SHARED_LIBS ON)
 project(monolish
   VERSION 0.15.0
   LANGUAGES CXX Fortran # Fortran is needed when using find_package(BLAS)
+  HOMEPAGE_URL "https://github.com/ricosjp/monolish"
+  DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
+
+# Get last release tag, and count the number of commit from there
+execute_process(
+  COMMAND git describe --tags --abbrev=0
+  OUTPUT_VARIABLE git_last_tag
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+message(STATUS "Last release = ${git_last_tag}")
+execute_process(
+  COMMAND git rev-list ${git_last_tag}.. --count
+  OUTPUT_VARIABLE git_dev_commits
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+message(STATUS "Number of commits from last release = ${git_dev_commits}")
 
 #
 # Build options
@@ -63,12 +81,11 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
-# Build llvm with ccache if the package is present
+# Build with ccache
 if(MONOLISH_CCACHE_BUILD)
   find_program(CCACHE_PROGRAM ccache)
   if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_PROGRAM})
-    message(STATUS "Found ccache: ${CCACHE_PROGRAM}")
   else()
     message(WARNING "Unable to find the program ccache.")
   endif()
@@ -146,7 +163,7 @@ install(
 #
 function(set_common_properties target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
-  target_compile_options(${target} PRIVATE -g -O3 -Wall)
+  target_compile_options(${target} PRIVATE -O3 -Wall)
   # AVX
   if(MONOLISH_USE_AVX)
     target_compile_options(${target} PRIVATE "-mavx")
@@ -258,3 +275,50 @@ if(MONOLISH_USE_NVIDIA_GPU)
     endforeach()
   endif()
 endif()
+
+#
+# Packaging
+#
+# Sell also the "CPack DEB Generator" page
+# https://cmake.org/cmake/help/latest/cpack_gen/deb.html
+#
+set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
+set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+set(CPACK_SYSTEM_NAME "amd64")
+if(git_dev_commits)
+  # For non-tagged commit
+  set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-dev.${git_dev_commits}")
+  # if git_dev_commits == 0, it means current HEAD is tag.
+  # Then the `CPACK_PACKAGE_VERSION` should be its default value `PROJECT_VERSION`
+endif()
+if(MKL_FOUND)
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+mkl")
+else()
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+oss")
+endif()
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+nvidia")
+endif()
+
+# Set dependencies for .deb
+#
+# The package names are packages in nvidia/cuda image based on Ubuntu 20.04
+# distributed on DocekrHub. They may different for other `*.deb`-based Linux distributions.
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6, libgcc-s1, libgomp1, libstdc++6")
+if(MKL_FOUND)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, intel-mkl")
+else()
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libopenblas0")
+endif()
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(postfix "${CUDAToolkit_VERSION_MAJOR}-${CUDAToolkit_VERSION_MINOR}")
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-${postfix}, libcusolver-${postfix}, libcusparse-${postfix}, libcublas-${postfix}, libelf1")
+  unset(postfix)
+endif()
+# Use Debian default naming convention
+# See https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
+# FIXME: Add RPM setting
+
+include(CPack)
