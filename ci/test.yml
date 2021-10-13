@@ -9,104 +9,94 @@
     expire_in: 360min
     when: always
 
-# gpu mkl
+.test_cpu:
+  extends:
+    - .test
+  script:
+    - make -C test/ run_cpu
+
+.test_gpu:
+  extends:
+    - .test
+  script:
+    - make -C test/ run_gpu
+
 gpu_avx_clang_mkl:
   extends:
     - .mkl_image
     - .gpu_avx_clang
-    - .test
+    - .test_gpu
   needs:
     - "gpu_avx_clang_mkl_build_cmake"
-  script:
-    - make -C test/ run_gpu
 
 gpu_noavx_clang_mkl:
   extends:
     - .mkl_image
     - .gpu_noavx_clang
-    - .test
+    - .test_gpu
   needs:
     - "gpu_noavx_clang_mkl_build_cmake"
-  script:
-    - make -C test/ run_gpu
 
-# cpu mkl
 nogpu_avx_gcc_mkl:
   extends:
     - .mkl_image
     - .nogpu_avx_gcc
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_avx_gcc_mkl_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_noavx_gcc_mkl:
   extends:
     - .mkl_image
     - .nogpu_noavx_gcc
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_noavx_gcc_mkl_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_avx_clang_mkl:
   extends:
     - .mkl_image
     - .nogpu_avx_clang
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_avx_clang_mkl_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_noavx_clang_mkl:
   extends:
     - .mkl_image
     - .nogpu_noavx_clang
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_noavx_clang_mkl_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_avx_gcc_oss:
   extends:
     - .oss_image
     - .nogpu_avx_gcc
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_avx_gcc_oss_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_noavx_gcc_oss:
   extends:
     - .oss_image
     - .nogpu_noavx_gcc
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_noavx_gcc_oss_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_avx_clang_oss:
   extends:
     - .oss_image
     - .nogpu_avx_clang
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_avx_clang_oss_build_cmake"
-  script:
-    - make -C test/ run_cpu
 
 nogpu_noavx_clang_oss:
   extends:
     - .oss_image
     - .nogpu_noavx_clang
-    - .test
+    - .test_cpu
   needs:
     - "nogpu_noavx_clang_oss_build_cmake"
-  script:
-    - make -C test/ run_cpu

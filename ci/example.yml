@@ -1,107 +1,98 @@
 #
-# examples Stage
+# example Stage
 #
-.examples:
-  stage: examples
+.example:
+  stage: example
+
+.example_gpu:
+  extends:
+    - .example
+  script:
+    - make -C example/ gpu
+
+.example_cpu:
+  extends:
+    - .example
+  script:
+    - make -C example/ cpu
 
 # gpu mkl
 gpu_avx_clang_mkl_examples:
   extends:
     - .mkl_image
     - .gpu_avx_clang
-    - .examples
+    - .example_gpu
   needs:
     - "gpu_avx_clang_mkl_build_cmake"
-  script:
-    - make -C examples/ gpu
 
 gpu_noavx_clang_mkl_examples:
   extends:
     - .mkl_image
     - .gpu_noavx_clang
-    - .examples
+    - .example_gpu
   needs:
     - "gpu_noavx_clang_mkl_build_cmake"
-  script:
-    - make -C examples/ gpu
 
-# cpu mkl
 nogpu_avx_gcc_mkl_examples:
   extends:
     - .mkl_image
     - .nogpu_avx_gcc
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_avx_gcc_mkl_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_noavx_gcc_mkl_examples:
   extends:
     - .mkl_image
     - .nogpu_noavx_gcc
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_noavx_gcc_mkl_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_avx_clang_mkl_examples:
   extends:
     - .mkl_image
     - .nogpu_avx_clang
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_avx_clang_mkl_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_noavx_clang_mkl_examples:
   extends:
     - .mkl_image
     - .nogpu_noavx_clang
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_noavx_clang_mkl_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_avx_gcc_oss_examples:
   extends:
     - .oss_image
     - .nogpu_avx_gcc
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_avx_gcc_oss_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_noavx_gcc_oss_examples:
   extends:
     - .oss_image
     - .nogpu_noavx_gcc
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_noavx_gcc_oss_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_avx_clang_oss_examples:
   extends:
     - .oss_image
     - .nogpu_avx_clang
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_avx_clang_oss_build_cmake"
-  script:
-    - make -C examples/ cpu
 
 nogpu_noavx_clang_oss_examples:
   extends:
     - .oss_image
     - .nogpu_noavx_clang
-    - .examples
+    - .example_cpu
   needs:
     - "nogpu_noavx_clang_oss_build_cmake"
-  script:
-    - make -C examples/ cpu
