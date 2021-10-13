@@ -284,6 +284,26 @@ endif()
 #
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+set(CPACK_SYSTEM_NAME "amd64")
+if(git_dev_commits)
+  # For non-tagged commit
+  set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-dev.${git_dev_commits}")
+  # if git_dev_commits == 0, it means current HEAD is tag.
+  # Then the `CPACK_PACKAGE_VERSION` should be its default value `PROJECT_VERSION`
+endif()
+if(MKL_FOUND)
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+mkl")
+else()
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+oss")
+endif()
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+nvidia")
+endif()
+
+# Set dependencies for .deb
+#
+# The package names are packages in nvidia/cuda image based on Ubuntu 20.04
+# distributed on DocekrHub. They may different for other `*.deb`-based Linux distributions.
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6, libgcc-s1, libgomp1, libstdc++6")
 if(MKL_FOUND)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, intel-mkl")
@@ -293,4 +313,10 @@ endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-11-4, libcusolver-11-4, libcusparse-11-4, libcublas-11-4, libelf1")
 endif()
+# Use Debian default naming convention
+# See https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
+# FIXME: Add RPM setting
+
 include(CPack)
