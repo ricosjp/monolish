@@ -16,43 +16,53 @@
 
 gpu_avx_clang_mkl_build_cmake:
   extends:
-    - .gpu_avx_clang_mkl
+    - .mkl_image
+    - .gpu_avx_clang
     - .build_cmake
 gpu_noavx_clang_mkl_build_cmake:
   extends:
-    - .gpu_noavx_clang_mkl
+    - .mkl_image
+    - .gpu_noavx_clang
     - .build_cmake
 nogpu_avx_clang_mkl_build_cmake:
   extends:
-    - .nogpu_avx_clang_mkl
+    - .mkl_image
+    - .nogpu_avx_clang
     - .build_cmake
 nogpu_noavx_clang_mkl_build_cmake:
   extends:
-    - .nogpu_noavx_clang_mkl
+    - .mkl_image
+    - .nogpu_noavx_clang
     - .build_cmake
 nogpu_avx_gcc_mkl_build_cmake:
   extends:
-    - .nogpu_avx_gcc_mkl
+    - .mkl_image
+    - .nogpu_avx_gcc
     - .build_cmake
 nogpu_noavx_gcc_mkl_build_cmake:
   extends:
-    - .nogpu_noavx_gcc_mkl
+    - .mkl_image
+    - .nogpu_noavx_gcc
     - .build_cmake
 nogpu_avx_clang_oss_build_cmake:
   extends:
-    - .nogpu_avx_clang_oss
+    - .oss_image
+    - .nogpu_avx_clang
     - .build_cmake
 nogpu_noavx_clang_oss_build_cmake:
   extends:
-    - .nogpu_noavx_clang_oss
+    - .oss_image
+    - .nogpu_noavx_clang
     - .build_cmake
 nogpu_avx_gcc_oss_build_cmake:
   extends:
-    - .nogpu_avx_gcc_oss
+    - .oss_image
+    - .nogpu_avx_gcc
     - .build_cmake
 nogpu_noavx_gcc_oss_build_cmake:
   extends:
-    - .nogpu_noavx_gcc_oss
+    - .oss_image
+    - .nogpu_noavx_gcc
     - .build_cmake
 
 # MPI_build_test:
