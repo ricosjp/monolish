@@ -17,3 +17,16 @@ markdown-link-check:
   script:
     - npm install -g markdown-link-check
     - markdown-link-check README.md
+
+keep-changelog:
+  extends:
+    - .develop
+  image: alpine:latest
+  before_script:
+    - apk add git
+  script:
+    - git fetch
+    - "! git diff --exit-code origin/latest CHANGELOG.md"
+  except:
+    - master
+    - tags
