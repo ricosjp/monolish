@@ -6,7 +6,8 @@
 gpu_avx_clang_mkl_benchmark:
   stage: benchmark
   extends:
-    - .gpu_avx_clang_mkl
+    - .mkl_image
+    - .gpu_avx_clang
   needs:
     - "gpu_avx_clang_mkl_build_cmake"
   artifacts:
@@ -28,7 +29,8 @@ gpu_avx_clang_mkl_benchmark:
 intel_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
-    - .nogpu_avx_gcc_mkl
+    - .mkl_image
+    - .nogpu_avx_gcc
   needs:
     - "nogpu_avx_gcc_mkl_build_cmake"
   artifacts:
@@ -50,7 +52,8 @@ intel_avx_gcc_mkl_benchmark:
 intel_avx_gcc_oss_benchmark:
   stage: benchmark
   extends:
-    - .nogpu_avx_gcc_oss
+    - .oss_image
+    - .nogpu_avx_gcc
   needs:
     - "nogpu_avx_gcc_oss_build_cmake"
   artifacts:
@@ -72,7 +75,8 @@ intel_avx_gcc_oss_benchmark:
 amd_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
-    - .nogpu_avx_gcc_oss
+    - .oss_image
+    - .nogpu_avx_gcc
   needs:
     - "nogpu_avx_gcc_oss_build_cmake"
   artifacts:
@@ -92,7 +96,8 @@ amd_avx_gcc_mkl_benchmark:
 
 benchmark_result:
   stage: deploy
-  image: ${MKL_IMAGE}
+  extends:
+    - .mkl_image
   script:
       - git config --global user.name "monolish_ci_runner"
       - git config --global user.email "monolish_ci_runner@example.jp"
