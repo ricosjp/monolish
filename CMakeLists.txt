@@ -43,6 +43,22 @@ project(monolish
   DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
 
+# Check the repository is on git-tag or not
+execute_process(
+  COMMAND git describe --tags --abbrev=0
+  OUTPUT_VARIABLE git_last_tag
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+message(STATUS "Last release = ${git_last_tag}")
+execute_process(
+  COMMAND git rev-list ${git_last_tag}.. --count
+  OUTPUT_VARIABLE git_dev_commits
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+message(STATUS "Nuumber of commits from last release = ${git_dev_commits}")
+
 #
 # Build options
 #
