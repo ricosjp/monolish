@@ -19,18 +19,6 @@
       }
     },
     {
-      "name": "cpu-none-none-package",
-      "generator": "Ninja",
-      "displayName": "monolish with CPU for packaging",
-      "binaryDir": "${sourceDir}/package/cpu-none-none",
-      "cacheVariables": {
-        "MONOLISH_USE_AVX": "OFF",
-        "MONOLISH_USE_MPI": "OFF",
-        "MONOLISH_USE_NVIDIA_GPU": "OFF",
-        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
-      }
-    },
-    {
       "name": "cpu-none-mpi",
       "generator": "Ninja",
       "displayName": "monolish with CPU, MPI",
@@ -40,18 +28,6 @@
         "MONOLISH_USE_MPI": "ON",
         "MONOLISH_USE_NVIDIA_GPU": "OFF",
         "MONOLISH_NVIDIA_GPU_ARCH_ALL": "OFF"
-      }
-    },
-    {
-      "name": "cpu-none-mpi-package",
-      "generator": "Ninja",
-      "displayName": "monolish with CPU, MPI for packaging",
-      "binaryDir": "${sourceDir}/package/cpu-none-mpi",
-      "cacheVariables": {
-        "MONOLISH_USE_AVX": "OFF",
-        "MONOLISH_USE_MPI": "ON",
-        "MONOLISH_USE_NVIDIA_GPU": "OFF",
-        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
       }
     },
     {
@@ -67,18 +43,6 @@
       }
     },
     {
-      "name": "cpu-avx-none-package",
-      "generator": "Ninja",
-      "displayName": "monolish with CPU, AVX for packaging",
-      "binaryDir": "${sourceDir}/package/cpu-avx-none",
-      "cacheVariables": {
-        "MONOLISH_USE_AVX": "ON",
-        "MONOLISH_USE_MPI": "OFF",
-        "MONOLISH_USE_NVIDIA_GPU": "OFF",
-        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
-      }
-    },
-    {
       "name": "cpu-avx-mpi",
       "generator": "Ninja",
       "displayName": "monolish with CPU, AVX, MPI",
@@ -88,18 +52,6 @@
         "MONOLISH_USE_MPI": "ON",
         "MONOLISH_USE_NVIDIA_GPU": "OFF",
         "MONOLISH_NVIDIA_GPU_ARCH_ALL": "OFF"
-      }
-    },
-    {
-      "name": "cpu-avx-mpi-package",
-      "generator": "Ninja",
-      "displayName": "monolish with CPU, AVX, MPI for packaging",
-      "binaryDir": "${sourceDir}/package/cpu-avx-mpi",
-      "cacheVariables": {
-        "MONOLISH_USE_AVX": "ON",
-        "MONOLISH_USE_MPI": "ON",
-        "MONOLISH_USE_NVIDIA_GPU": "OFF",
-        "MONOLISH_NVIDIA_GPU_ARCH_ALL": "ON"
       }
     },
     {
@@ -115,10 +67,10 @@
       }
     },
     {
-      "name": "gpu-none-none-package",
+      "name": "gpu-none-none-all",
       "generator": "Ninja",
-      "displayName": "monolish with GPU for packaging",
-      "binaryDir": "${sourceDir}/package/gpu-none-none",
+      "displayName": "monolish with GPU for all CUDA arch",
+      "binaryDir": "${sourceDir}/build/gpu-none-none-all",
       "cacheVariables": {
         "MONOLISH_USE_AVX": "OFF",
         "MONOLISH_USE_MPI": "OFF",
@@ -139,10 +91,10 @@
       }
     },
     {
-      "name": "gpu-none-mpi-package",
+      "name": "gpu-none-mpi-all",
       "generator": "Ninja",
-      "displayName": "monolish with GPU, MPI for packaging",
-      "binaryDir": "${sourceDir}/package/gpu-none-mpi",
+      "displayName": "monolish with GPU for all CUDA arch, MPI",
+      "binaryDir": "${sourceDir}/build/gpu-none-mpi-all",
       "cacheVariables": {
         "MONOLISH_USE_AVX": "OFF",
         "MONOLISH_USE_MPI": "ON",
@@ -163,10 +115,10 @@
       }
     },
     {
-      "name": "gpu-avx-none-package",
+      "name": "gpu-avx-none-all",
       "generator": "Ninja",
-      "displayName": "monolish with GPU, AVX for packaging",
-      "binaryDir": "${sourceDir}/package/gpu-avx-none",
+      "displayName": "monolish with GPU for all CUDA arch, AVX",
+      "binaryDir": "${sourceDir}/build/gpu-avx-none-all",
       "cacheVariables": {
         "MONOLISH_USE_AVX": "ON",
         "MONOLISH_USE_MPI": "OFF",
@@ -187,10 +139,10 @@
       }
     },
     {
-      "name": "gpu-avx-mpi-package",
+      "name": "gpu-avx-mpi-all",
       "generator": "Ninja",
-      "displayName": "monolish with GPU, AVX, MPI for packaging",
-      "binaryDir": "${sourceDir}/package/gpu-avx-mpi",
+      "displayName": "monolish with GPU for all CUDA arch, AVX, MPI",
+      "binaryDir": "${sourceDir}/build/gpu-avx-mpi-all",
       "cacheVariables": {
         "MONOLISH_USE_AVX": "ON",
         "MONOLISH_USE_MPI": "ON",
