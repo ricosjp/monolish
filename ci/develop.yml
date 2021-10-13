@@ -10,16 +10,6 @@ clang-format:
   script:
     - check_format.sh
 
-keep-changelog:
-  extends:
-    - .develop
-  image: ghcr.io/ricosjp/allgebra/clang-format:21.06.1
-  script:
-    - bash -c "! git diff --exit-code origin/master... -- CHANGELOG.md"
-  except:
-    - master
-    - tags
-
 markdown-link-check:
   extends:
     - .develop
