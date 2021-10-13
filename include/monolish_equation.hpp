@@ -274,6 +274,57 @@ public:
 };
 
 /**
+ * @brief SOR solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : true
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
+ */
+template <typename MATRIX, typename Float>
+class SOR : public monolish::solver::solver<MATRIX, Float> {
+private:
+  int monolish_SOR(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+public:
+  /**
+   * @brief solve Ax = b by jacobi method(lib=0: monolish)
+   * @param[in] A CRS format Matrix
+   * @param[in] x solution vector
+   * @param[in] b right hand vector
+   * @return error code (only 0 now)
+   **/
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A);
+  void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  /**
+   * @brief get solver name "monolish::equation::SOR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::SOR"; }
+
+  /**
+   * @brief get solver name "SOR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "SOR"; }
+};
+
+/**
  * @brief QR solver class (Dense, GPU only now). can use set_tol(), get_tol(),
  * set_reorder(), get_singularity().
  * @note
