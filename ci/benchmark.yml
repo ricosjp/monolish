@@ -1,0 +1,104 @@
+#
+# benchmark
+#
+
+# intel cpu + intel gpu + mkl
+gpu_avx_clang_mkl_benchmark:
+  stage: benchmark
+  extends:
+    - .gpu_avx_clang_mkl
+  needs:
+    - "gpu_avx_clang_mkl_build_cmake"
+  artifacts:
+      paths:
+          - benchmark/
+      expire_in: 360min
+  script:
+    - cd benchmark
+    - make get_spec_nvidia
+    - make nvidia
+    - make run_nvidia
+  tags:
+    - c8cbb8c6304d
+  only:
+    - schedules
+    - tags
+
+# intel cpu + mkl
+intel_avx_gcc_mkl_benchmark:
+  stage: benchmark
+  extends:
+    - .nogpu_avx_gcc_mkl
+  needs:
+    - "nogpu_avx_gcc_mkl_build_cmake"
+  artifacts:
+      paths:
+          - benchmark/
+      expire_in: 360min
+  script:
+    - cd benchmark
+    - make get_spec_intel_mkl
+    - make intel_mkl
+    - make run_intel_mkl
+  tags:
+    - 008cfa52494d
+  only:
+    - schedules
+    - tags
+
+# intel cpu + oss
+intel_avx_gcc_oss_benchmark:
+  stage: benchmark
+  extends:
+    - .nogpu_avx_gcc_oss
+  needs:
+    - "nogpu_avx_gcc_oss_build_cmake"
+  artifacts:
+      paths:
+          - benchmark/
+      expire_in: 360min
+  script:
+    - cd benchmark
+    - make get_spec_intel_oss
+    - make intel_oss
+    - make run_intel_oss
+  tags:
+    - 008cfa52494d
+  only:
+    - schedules
+    - tags
+
+# AMD cpu + oss
+amd_avx_gcc_mkl_benchmark:
+  stage: benchmark
+  extends:
+    - .nogpu_avx_gcc_oss
+  needs:
+    - "nogpu_avx_gcc_oss_build_cmake"
+  artifacts:
+      paths:
+          - benchmark/
+      expire_in: 360min
+  script:
+    - cd benchmark
+    - make get_spec_amd_oss
+    - make amd_oss
+    - make run_amd_oss
+  tags:
+    - b42e99ecbde2
+  only:
+    - schedules
+    - tags
+
+benchmark_result:
+  stage: deploy
+  image: ${MKL_IMAGE}
+  script:
+      - git config --global user.name "monolish_ci_runner"
+      - git config --global user.email "monolish_ci_runner@example.jp"
+      - cd benchmark
+      - make get_ci_info
+      - make commit_result
+  only:
+    - schedules
+    - tags
