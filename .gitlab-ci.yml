@@ -23,14 +23,4 @@ include:
   - local: ci/example.yml
   - local: ci/benchmark.yml
   - local: ci/dev.yml
-
-monolish_docker:
-    stage: deploy
-    image: docker:latest
-    services:
-        - docker:dind
-    script:
-        - apk add coreutils make
-        - cd docker; make push 
-    only:
-      - tags
+  - local: ci/docker.yml
