@@ -4,16 +4,16 @@ variables:
   POETRY_IMAGE: ghcr.io/ricosjp/allgebra/poetry:21.09.0
 
 before_script:
-    - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
-    - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib:/usr/local/lib/
+  - export MONOLISH_DIR="${CI_PROJECT_DIR}/${PREFIX}"
+  - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MONOLISH_DIR}/lib:/usr/local/lib/
 
 stages:
-    - build_lib
-    - test
-    - python
-    - examples
-    - benchmark
-    - deploy
+  - build_lib
+  - test
+  - python
+  - examples
+  - benchmark
+  - deploy
 
 include:
   - local: ci/env.yml
