@@ -38,6 +38,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- GitLab CI YAML is split into ci/*.yml https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/373
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
 - Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
 - change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79

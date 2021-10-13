@@ -1,0 +1,102 @@
+#
+# Test Stage
+#
+.test:
+  stage: test
+  artifacts:
+    paths:
+      - test/logger/logging
+    expire_in: 360min
+    when: always
+
+.test_cpu:
+  extends:
+    - .test
+  script:
+    - make -C test/ run_cpu
+
+.test_gpu:
+  extends:
+    - .test
+  script:
+    - make -C test/ run_gpu
+
+gpu_avx_clang_mkl:
+  extends:
+    - .mkl_image
+    - .gpu_avx_clang
+    - .test_gpu
+  needs:
+    - "gpu_avx_clang_mkl_build_cmake"
+
+gpu_noavx_clang_mkl:
+  extends:
+    - .mkl_image
+    - .gpu_noavx_clang
+    - .test_gpu
+  needs:
+    - "gpu_noavx_clang_mkl_build_cmake"
+
+nogpu_avx_gcc_mkl:
+  extends:
+    - .mkl_image
+    - .nogpu_avx_gcc
+    - .test_cpu
+  needs:
+    - "nogpu_avx_gcc_mkl_build_cmake"
+
+nogpu_noavx_gcc_mkl:
+  extends:
+    - .mkl_image
+    - .nogpu_noavx_gcc
+    - .test_cpu
+  needs:
+    - "nogpu_noavx_gcc_mkl_build_cmake"
+
+nogpu_avx_clang_mkl:
+  extends:
+    - .mkl_image
+    - .nogpu_avx_clang
+    - .test_cpu
+  needs:
+    - "nogpu_avx_clang_mkl_build_cmake"
+
+nogpu_noavx_clang_mkl:
+  extends:
+    - .mkl_image
+    - .nogpu_noavx_clang
+    - .test_cpu
+  needs:
+    - "nogpu_noavx_clang_mkl_build_cmake"
+
+nogpu_avx_gcc_oss:
+  extends:
+    - .oss_image
+    - .nogpu_avx_gcc
+    - .test_cpu
+  needs:
+    - "nogpu_avx_gcc_oss_build_cmake"
+
+nogpu_noavx_gcc_oss:
+  extends:
+    - .oss_image
+    - .nogpu_noavx_gcc
+    - .test_cpu
+  needs:
+    - "nogpu_noavx_gcc_oss_build_cmake"
+
+nogpu_avx_clang_oss:
+  extends:
+    - .oss_image
+    - .nogpu_avx_clang
+    - .test_cpu
+  needs:
+    - "nogpu_avx_clang_oss_build_cmake"
+
+nogpu_noavx_clang_oss:
+  extends:
+    - .oss_image
+    - .nogpu_noavx_clang
+    - .test_cpu
+  needs:
+    - "nogpu_noavx_clang_oss_build_cmake"
