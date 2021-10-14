@@ -121,7 +121,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
         blas::axpyz(-1.0,t,b,r);
 		nrm2 = blas::nrm2(r);
 
-        util::recv(A, t, r, d);
+        util::recv(t, r, d);
 
 		for(int i=0;i<A.get_row();i++)
 		{
@@ -135,7 +135,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
  			t[i] = tmp * d[i];
         }
 
-        util::send(A, t, r, d);
+        util::send(t, r, d);
 
         blas::axpy(1.0,t,x);
 
