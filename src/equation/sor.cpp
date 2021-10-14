@@ -122,31 +122,19 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
 		nrm2 = blas::nrm2(r);
 
         util::recv(A, t, r, d);
-#pragma omp parallel for
+
 		for(int i=0;i<A.get_row();i++)
 		{
 			auto tmp = r[i];
 			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
 			{
-                if(i>A.col_ind[j] && (i+j)/2 == 0){ // lower
+                if(i>A.col_ind[j]){ // lower
                     tmp -= A.val[j] * t[A.col_ind[j]];
                 }
 			}
  			t[i] = tmp * d[i];
         }
 
-#pragma omp parallel for
-		for(int i=0;i<A.get_row();i++)
-		{
-            auto tmp = t[i];
-			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
-			{
-                if(i>A.col_ind[j] && (i+j)/2 == 1){ // lower
-                    tmp -= A.val[j] * t[A.col_ind[j]];
-                }
-			}
- 			t[i] = tmp * d[i];
-		}
         util::send(A, t, r, d);
 
         blas::axpy(1.0,t,x);
