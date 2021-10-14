@@ -13,18 +13,20 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  if (A.get_row() != A.get_col()) {
-    throw std::runtime_error("error A.row != A.col");
-  }
-
-  this->precond.M.resize(A.get_row());
-  // send M
-  if (A.get_device_mem_stat() == true) {
-    this->precond.M.send();
-  }
-
-  A.diag(this->precond.M);
-  vml::reciprocal(this->precond.M, this->precond.M);
+// not impl.
+//
+//   if (A.get_row() != A.get_col()) {
+//     throw std::runtime_error("error A.row != A.col");
+//   }
+// 
+//   this->precond.M.resize(A.get_row());
+//   // send M
+//   if (A.get_device_mem_stat() == true) {
+//     this->precond.M.send();
+//   }
+// 
+//   A.diag(this->precond.M);
+//   vml::reciprocal(this->precond.M, this->precond.M);
 
   logger.solver_out();
 }
@@ -54,7 +56,8 @@ void equation::SOR<MATRIX, T>::apply_precond(const vector<T> &r,
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  vml::mul(this->precond.M, r, z); // x = Ab
+// not impl. now
+//   vml::mul(this->precond.M, r, z); // x = Ab
 
   logger.solver_out();
 }
@@ -112,45 +115,43 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
   this->precond.create_precond(A);
         
   for(size_t iter = 0; iter < this->get_maxiter(); iter++){
-#if 0
-      T nrm2 = 0.0;
-      for(int i = 0; i < A.get_row(); i++){
-          T tmp = x[i];
-          x[i] = b[i];
-          for(int j = A.row_ptr.data()[i]; j < A.row_ptr.data()[i+1]; j++){
-              int col = A.col_ind.data()[j];
-              x[i] -= (col != i ? A.val.data()[j] * x[col] : 0.0);
-          }
-          x[i] /= d[i];
-
-          x[i] = tmp+w*(x[i]-tmp);
-
-          nrm2 += fabs((tmp-x[i])/tmp); 
-      }
-#else
 		/* x += (D/w-L)^{-1}(b - Ax) */
         this->precond.apply_precond(x, s);
         blas::matvec(A,s,t);
         blas::axpyz(-1.0,t,b,r);
 		nrm2 = blas::nrm2(r);
 
+        util::recv(A, t, r, d);
+#pragma omp parallel for
 		for(int i=0;i<A.get_row();i++)
 		{
 			auto tmp = r[i];
 			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
 			{
-                if(i>A.col_ind[j]){ // lower
+                if(i>A.col_ind[j] && (i+j)/2 == 0){ // lower
                     tmp -= A.val[j] * t[A.col_ind[j]];
                 }
 			}
-			t[i] = tmp * d[i];
+ 			t[i] = tmp * d[i];
+        }
+
+#pragma omp parallel for
+		for(int i=0;i<A.get_row();i++)
+		{
+            auto tmp = t[i];
+			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
+			{
+                if(i>A.col_ind[j] && (i+j)/2 == 1){ // lower
+                    tmp -= A.val[j] * t[A.col_ind[j]];
+                }
+			}
+ 			t[i] = tmp * d[i];
 		}
-        t.send();
+        util::send(A, t, r, d);
 
         blas::axpy(1.0,t,x);
 
 		nrm2 = nrm2 * bnrm2;
-#endif
       
         if (this->get_print_rhistory() == true) {
             *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
@@ -166,7 +167,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
   }
 
   logger.solver_out();
-  return MONOLISH_SOLVER_NOT_IMPL;
+  return MONOLISH_SOLVER_MAXITER;
 }
 // template int equation::SOR<matrix::Dense<double>, double>::monolish_SOR(
 //     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
