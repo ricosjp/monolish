@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-.build_cmake:
+.build:
   stage: build_lib
   script:
     - apt update -y; apt install -y gfortran
@@ -14,56 +14,56 @@
       - test/
     expire_in: 360min
 
-gpu_avx_clang_mkl_build_cmake:
+gpu_avx_clang_mkl_build:
   extends:
     - .mkl_image
     - .gpu_avx_clang
-    - .build_cmake
-gpu_noavx_clang_mkl_build_cmake:
+    - .build
+gpu_noavx_clang_mkl_build:
   extends:
     - .mkl_image
     - .gpu_noavx_clang
-    - .build_cmake
-nogpu_avx_clang_mkl_build_cmake:
+    - .build
+nogpu_avx_clang_mkl_build:
   extends:
     - .mkl_image
     - .nogpu_avx_clang
-    - .build_cmake
-nogpu_noavx_clang_mkl_build_cmake:
+    - .build
+nogpu_noavx_clang_mkl_build:
   extends:
     - .mkl_image
     - .nogpu_noavx_clang
-    - .build_cmake
-nogpu_avx_gcc_mkl_build_cmake:
+    - .build
+nogpu_avx_gcc_mkl_build:
   extends:
     - .mkl_image
     - .nogpu_avx_gcc
-    - .build_cmake
-nogpu_noavx_gcc_mkl_build_cmake:
+    - .build
+nogpu_noavx_gcc_mkl_build:
   extends:
     - .mkl_image
     - .nogpu_noavx_gcc
-    - .build_cmake
-nogpu_avx_clang_oss_build_cmake:
+    - .build
+nogpu_avx_clang_oss_build:
   extends:
     - .oss_image
     - .nogpu_avx_clang
-    - .build_cmake
-nogpu_noavx_clang_oss_build_cmake:
+    - .build
+nogpu_noavx_clang_oss_build:
   extends:
     - .oss_image
     - .nogpu_noavx_clang
-    - .build_cmake
-nogpu_avx_gcc_oss_build_cmake:
+    - .build
+nogpu_avx_gcc_oss_build:
   extends:
     - .oss_image
     - .nogpu_avx_gcc
-    - .build_cmake
-nogpu_noavx_gcc_oss_build_cmake:
+    - .build
+nogpu_noavx_gcc_oss_build:
   extends:
     - .oss_image
     - .nogpu_noavx_gcc
-    - .build_cmake
+    - .build
 
 # MPI_build_test:
 #   stage: build_lib

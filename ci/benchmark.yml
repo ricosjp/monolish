@@ -9,7 +9,7 @@ gpu_avx_clang_mkl_benchmark:
     - .mkl_image
     - .gpu_avx_clang
   needs:
-    - "gpu_avx_clang_mkl_build_cmake"
+    - "gpu_avx_clang_mkl_build"
   artifacts:
       paths:
           - benchmark/
@@ -32,7 +32,7 @@ intel_avx_gcc_mkl_benchmark:
     - .mkl_image
     - .nogpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_mkl_build_cmake"
+    - "nogpu_avx_gcc_mkl_build"
   artifacts:
       paths:
           - benchmark/
@@ -55,7 +55,7 @@ intel_avx_gcc_oss_benchmark:
     - .oss_image
     - .nogpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_oss_build_cmake"
+    - "nogpu_avx_gcc_oss_build"
   artifacts:
       paths:
           - benchmark/
@@ -78,7 +78,7 @@ amd_avx_gcc_mkl_benchmark:
     - .oss_image
     - .nogpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_oss_build_cmake"
+    - "nogpu_avx_gcc_oss_build"
   artifacts:
       paths:
           - benchmark/

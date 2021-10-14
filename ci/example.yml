@@ -18,7 +18,7 @@ gpu_avx_clang_mkl_examples:
     - .gpu_avx_clang
     - .example_gpu
   needs:
-    - "gpu_avx_clang_mkl_build_cmake"
+    - "gpu_avx_clang_mkl_build"
 
 gpu_noavx_clang_mkl_examples:
   extends:
@@ -26,7 +26,7 @@ gpu_noavx_clang_mkl_examples:
     - .gpu_noavx_clang
     - .example_gpu
   needs:
-    - "gpu_noavx_clang_mkl_build_cmake"
+    - "gpu_noavx_clang_mkl_build"
 
 nogpu_avx_gcc_mkl_examples:
   extends:
@@ -34,7 +34,7 @@ nogpu_avx_gcc_mkl_examples:
     - .nogpu_avx_gcc
     - .example_cpu
   needs:
-    - "nogpu_avx_gcc_mkl_build_cmake"
+    - "nogpu_avx_gcc_mkl_build"
 
 nogpu_noavx_gcc_mkl_examples:
   extends:
@@ -42,7 +42,7 @@ nogpu_noavx_gcc_mkl_examples:
     - .nogpu_noavx_gcc
     - .example_cpu
   needs:
-    - "nogpu_noavx_gcc_mkl_build_cmake"
+    - "nogpu_noavx_gcc_mkl_build"
 
 nogpu_avx_clang_mkl_examples:
   extends:
@@ -50,7 +50,7 @@ nogpu_avx_clang_mkl_examples:
     - .nogpu_avx_clang
     - .example_cpu
   needs:
-    - "nogpu_avx_clang_mkl_build_cmake"
+    - "nogpu_avx_clang_mkl_build"
 
 nogpu_noavx_clang_mkl_examples:
   extends:
@@ -58,7 +58,7 @@ nogpu_noavx_clang_mkl_examples:
     - .nogpu_noavx_clang
     - .example_cpu
   needs:
-    - "nogpu_noavx_clang_mkl_build_cmake"
+    - "nogpu_noavx_clang_mkl_build"
 
 nogpu_avx_gcc_oss_examples:
   extends:
@@ -66,7 +66,7 @@ nogpu_avx_gcc_oss_examples:
     - .nogpu_avx_gcc
     - .example_cpu
   needs:
-    - "nogpu_avx_gcc_oss_build_cmake"
+    - "nogpu_avx_gcc_oss_build"
 
 nogpu_noavx_gcc_oss_examples:
   extends:
@@ -74,7 +74,7 @@ nogpu_noavx_gcc_oss_examples:
     - .nogpu_noavx_gcc
     - .example_cpu
   needs:
-    - "nogpu_noavx_gcc_oss_build_cmake"
+    - "nogpu_noavx_gcc_oss_build"
 
 nogpu_avx_clang_oss_examples:
   extends:
@@ -82,7 +82,7 @@ nogpu_avx_clang_oss_examples:
     - .nogpu_avx_clang
     - .example_cpu
   needs:
-    - "nogpu_avx_clang_oss_build_cmake"
+    - "nogpu_avx_clang_oss_build"
 
 nogpu_noavx_clang_oss_examples:
   extends:
@@ -90,4 +90,4 @@ nogpu_noavx_clang_oss_examples:
     - .nogpu_noavx_clang
     - .example_cpu
   needs:
-    - "nogpu_noavx_clang_oss_build_cmake"
+    - "nogpu_noavx_clang_oss_build"
