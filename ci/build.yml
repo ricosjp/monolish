@@ -11,7 +11,7 @@
     - cd build/${PRESET}
     - rm -rf *.deb
     - cpack -G DEB
-    - apt install -y ./$(find *.deb)
+    - apt install -y ./$(find . -name "*.deb")
     - cd -
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:

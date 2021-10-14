@@ -4,13 +4,13 @@
 .example_gpu:
   stage: example
   script:
-    - apt install -y ./$(find *.deb)
+    - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ gpu
 
 .example_cpu:
   stage: example
   script:
-    - apt install -y ./$(find *.deb)
+    - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ cpu
 
 # gpu mkl
