@@ -9,8 +9,9 @@
     - cmake --preset=${PRESET}
     - cmake --build build/${PRESET}
     - cd build/${PRESET}
+    - rm -rf *.deb
     - cpack -G DEB
-    - apt install -y $(find *.deb)
+    - apt install -y ./$(find *.deb)
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
     paths:
