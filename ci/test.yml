@@ -14,12 +14,14 @@
   extends:
     - .test
   script:
+    - apt install -y ./$(find *.deb)
     - make -C test/ run_cpu
 
 .test_gpu:
   extends:
     - .test
   script:
+    - apt install -y ./$(find *.deb)
     - make -C test/ run_gpu
 
 gpu_avx_clang_mkl:
