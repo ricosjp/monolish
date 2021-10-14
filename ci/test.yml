@@ -8,6 +8,7 @@
       - test/logger/logging
     expire_in: 360min
     when: always
+  retry: 2
 
 .test_cpu:
   extends:
