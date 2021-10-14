@@ -102,19 +102,19 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
   int color = 2;
 
   for(size_t iter = 0; iter < this->get_maxiter(); iter++){
-      // 現在の値を代入して，次の解候補を計算
       T nrm2 = 0.0;
       for(int i = 0; i < A.get_row(); i++){
           T tmp = x[i];
           x[i] = b[i];
           for(int j = A.row_ptr.data()[i]; j < A.row_ptr.data()[i+1]; j++){
-              x[i] -= (A.col_ind.data()[j] != i ? A.val.data()[j] * x[A.col_ind.data()[j]] : 0.0);
+              int col = A.col_ind.data()[j];
+              x[i] -= (col != i ? A.val.data()[j] * x[col] : 0.0);
           }
           x[i] /= d[i];
 
           x[i] = tmp+w*(x[i]-tmp);
 
-          nrm2 += fabs((tmp-x[i])/tmp);    // 相対誤差の場合
+          nrm2 += fabs((tmp-x[i])/tmp); 
       }
 
       if (this->get_print_rhistory() == true) {
