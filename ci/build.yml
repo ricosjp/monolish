@@ -12,6 +12,7 @@
     - rm -rf *.deb
     - cpack -G DEB
     - apt install -y ./$(find *.deb)
+    - cd -
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
     paths:
