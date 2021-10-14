@@ -94,14 +94,25 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
                              "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
+  vector<T> r(A.get_row(), 0.0);
+  vector<T> t(A.get_row(), 0.0);
+  vector<T> s(A.get_row(), 0.0);
   vector<T> d(A.get_row(), 0.0);
-  util::send(d);
+  util::send(r, t, s, d);
 
-  T w = 1.0;
+  T w = 1.0 / this->get_omega();
   A.diag(d);
-  int color = 2;
+  blas::scal(w, d);
+  vml::reciprocal(d, d);
 
+  auto bnrm2 = blas::nrm2(b);
+  bnrm2   = 1.0 / bnrm2;
+  T nrm2 = 0.0;
+
+  this->precond.create_precond(A);
+        
   for(size_t iter = 0; iter < this->get_maxiter(); iter++){
+#if 0
       T nrm2 = 0.0;
       for(int i = 0; i < A.get_row(); i++){
           T tmp = x[i];
@@ -116,18 +127,42 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
 
           nrm2 += fabs((tmp-x[i])/tmp); 
       }
+#else
+		/* x += (D/w-L)^{-1}(b - Ax) */
+        this->precond.apply_precond(x, s);
+        blas::matvec(A,s,t);
+        blas::axpyz(-1.0,t,b,r);
+		nrm2 = blas::nrm2(r);
 
-      if (this->get_print_rhistory() == true) {
-          *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
-              << std::endl;
-      }
-      if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
-          logger.solver_out();
-          return MONOLISH_SOLVER_SUCCESS;
-      }
-      if (std::isnan(nrm2)) {
-          return MONOLISH_SOLVER_RESIDUAL_NAN;
-      }
+		for(int i=0;i<A.get_row();i++)
+		{
+			auto tmp = r[i];
+			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
+			{
+                if(i>A.col_ind[j]){ // lower
+                    tmp -= A.val[j] * t[A.col_ind[j]];
+                }
+			}
+			t[i] = tmp * d[i];
+		}
+        t.send();
+
+        blas::axpy(1.0,t,x);
+
+		nrm2 = nrm2 * bnrm2;
+#endif
+      
+        if (this->get_print_rhistory() == true) {
+            *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
+                << std::endl;
+        }
+        if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
+            logger.solver_out();
+            return MONOLISH_SOLVER_SUCCESS;
+        }
+        if (std::isnan(nrm2)) {
+            return MONOLISH_SOLVER_RESIDUAL_NAN;
+        }
   }
 
   logger.solver_out();

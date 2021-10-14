@@ -292,6 +292,7 @@ template <typename MATRIX, typename Float>
 class SOR : public monolish::solver::solver<MATRIX, Float> {
 private:
   int monolish_SOR(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  Float omega = 1.9;
 
 public:
   /**
@@ -304,6 +305,9 @@ public:
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  Float get_omega(){return omega;};
+  void set_omega(Float o){omega = o;};
 
   /**
    * @brief get solver name "monolish::equation::SOR"
