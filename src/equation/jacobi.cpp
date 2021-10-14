@@ -138,7 +138,7 @@ int equation::Jacobi<MATRIX, T>::monolish_Jacobi(MATRIX &A, vector<T> &x,
   }
 
   logger.solver_out();
-  return MONOLISH_SOLVER_NOT_IMPL;
+  return MONOLISH_SOLVER_MAXITER;
 }
 template int equation::Jacobi<matrix::Dense<double>, double>::monolish_Jacobi(
     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
