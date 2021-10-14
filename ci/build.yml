@@ -11,12 +11,13 @@
     - cd build/${PRESET}
     - rm -rf *.deb
     - cpack -G DEB
+    - mv *.deb ${CI_PROJECT_DIR}
+    - cd ${CI_PROJECT_DIR}
     - apt install -y ./$(find . -name "*.deb")
-    - cd -
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
     paths:
-      - build/${PREFIX}
+      - "*.deb"
       - test/
     expire_in: 360min
 
