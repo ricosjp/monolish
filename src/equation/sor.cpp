@@ -94,68 +94,61 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
                              "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
-  vector<T> r(A.get_row(), 0.0);
-  vector<T> t(A.get_row(), 0.0);
-  vector<T> s(A.get_row(), 0.0);
   vector<T> d(A.get_row(), 0.0);
-  util::send(r, t, s, d);
+  util::send(d);
 
-  auto bnrm2 = blas::nrm2(b);
-  bnrm2 = 1.0 / bnrm2;
-  T nrm2 = 0.0;
-
+  T w = 1.0;
   A.diag(d);
-  vml::reciprocal(d, d); // d[i] = 1/d[i]
+  int color = 2;
 
-  this->precond.create_precond(A);
+  for(size_t iter = 0; iter < this->get_maxiter(); iter++){
+      // 現在の値を代入して，次の解候補を計算
+      T nrm2 = 0.0;
+      for(int i = 0; i < A.get_row(); i++){
+          T tmp = x[i];
+          x[i] = b[i];
+          for(int j = A.row_ptr.data()[i]; j < A.row_ptr.data()[i+1]; j++){
+              x[i] -= (A.col_ind.data()[j] != i ? A.val.data()[j] * x[A.col_ind.data()[j]] : 0.0);
+          }
+          x[i] /= d[i];
 
-  for (size_t iter = 0; iter < this->get_maxiter(); iter++) {
+          x[i] = tmp+w*(x[i]-tmp);
 
-    /* x += D^{-1}(b - Ax) */
-    this->precond.apply_precond(x, s);
-    blas::copy(x, s);
-    blas::matvec(A, s, t);
-    blas::axpyz(-1, t, b, r);
-    nrm2 = blas::nrm2(r);
-    vml::mul(r, d, r);
-    vml::add(x, r, x);
+          nrm2 += fabs((tmp-x[i])/tmp);    // 相対誤差の場合
+      }
 
-    nrm2 = nrm2 * bnrm2;
-
-    if (this->get_print_rhistory() == true) {
-      *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
-                             << std::endl;
-    }
-
-    if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
-      logger.solver_out();
-      return MONOLISH_SOLVER_SUCCESS;
-    }
-
-    if (std::isnan(nrm2)) {
-      return MONOLISH_SOLVER_RESIDUAL_NAN;
-    }
+      if (this->get_print_rhistory() == true) {
+          *this->rhistory_stream << iter + 1 << "\t" << std::scientific << nrm2
+              << std::endl;
+      }
+      if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
+          logger.solver_out();
+          return MONOLISH_SOLVER_SUCCESS;
+      }
+      if (std::isnan(nrm2)) {
+          return MONOLISH_SOLVER_RESIDUAL_NAN;
+      }
   }
 
   logger.solver_out();
   return MONOLISH_SOLVER_NOT_IMPL;
 }
-template int equation::SOR<matrix::Dense<double>, double>::monolish_SOR(
-    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
-template int equation::SOR<matrix::Dense<float>, float>::monolish_SOR(
-    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::SOR<matrix::Dense<double>, double>::monolish_SOR(
+//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+// template int equation::SOR<matrix::Dense<float>, float>::monolish_SOR(
+//     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
 
 template int equation::SOR<matrix::CRS<double>, double>::monolish_SOR(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 template int equation::SOR<matrix::CRS<float>, float>::monolish_SOR(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-template int
-equation::SOR<matrix::LinearOperator<double>, double>::monolish_SOR(
-    matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
-template int
-equation::SOR<matrix::LinearOperator<float>, float>::monolish_SOR(
-    matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
+// template int
+// equation::SOR<matrix::LinearOperator<double>, double>::monolish_SOR(
+//     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+// template int
+// equation::SOR<matrix::LinearOperator<float>, float>::monolish_SOR(
+//     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -174,18 +167,18 @@ int equation::SOR<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   return ret; // err code
 }
 
-template int equation::SOR<matrix::Dense<float>, float>::solve(
-    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
-template int equation::SOR<matrix::Dense<double>, double>::solve(
-    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+// template int equation::SOR<matrix::Dense<float>, float>::solve(
+//     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::SOR<matrix::Dense<double>, double>::solve(
+//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 
 template int equation::SOR<matrix::CRS<float>, float>::solve(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 template int equation::SOR<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
-template int equation::SOR<matrix::LinearOperator<float>, float>::solve(
-    matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
-template int equation::SOR<matrix::LinearOperator<double>, double>::solve(
-    matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+// template int equation::SOR<matrix::LinearOperator<float>, float>::solve(
+//     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::SOR<matrix::LinearOperator<double>, double>::solve(
+//     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 } // namespace monolish
