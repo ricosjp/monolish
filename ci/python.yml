@@ -26,7 +26,7 @@ python-cpu:
     - .python
     - .logging_artifact
   needs:
-    - nogpu_avx_gcc_mkl
+    - cpu_avx_gcc_mkl
   script:
     - cd python
     - poetry install

@@ -30,9 +30,9 @@ intel_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
     - .mkl_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_mkl_build"
+    - "cpu_avx_gcc_mkl_build"
   artifacts:
       paths:
           - benchmark/
@@ -53,9 +53,9 @@ intel_avx_gcc_oss_benchmark:
   stage: benchmark
   extends:
     - .oss_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_oss_build"
+    - "cpu_avx_gcc_oss_build"
   artifacts:
       paths:
           - benchmark/
@@ -76,9 +76,9 @@ amd_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
     - .oss_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
   needs:
-    - "nogpu_avx_gcc_oss_build"
+    - "cpu_avx_gcc_oss_build"
   artifacts:
       paths:
           - benchmark/

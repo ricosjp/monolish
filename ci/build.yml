@@ -4,13 +4,17 @@
 .build:
   stage: build_lib
   script:
-    - apt update -y; apt install -y gfortran
-    - cmake -Bbuild . -DMONOLISH_USE_NVIDIA_GPU=${MONOLISH_USE_NVIDIA_GPU} -DMONOLISH_USE_AVX=${MONOLISH_USE_AVX} -DCMAKE_INSTALL_PREFIX=${MONOLISH_DIR}
-    - cmake --build build --target install -- -j $(nproc) VERBOSE=1
+    - apt update
+    - apt install -y gfortran
+    - cmake --preset=${PRESET}
+    - cmake --build build
+    - cd build/${PRESET}
+    - cpack -G DEB
+    - apt install $(find *.deb)
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
     paths:
-      - ${PREFIX}
+      - build/${PREFIX}
       - test/
     expire_in: 360min
 
@@ -24,45 +28,45 @@ gpu_noavx_clang_mkl_build:
     - .mkl_image
     - .gpu_noavx_clang
     - .build
-nogpu_avx_clang_mkl_build:
+cpu_avx_clang_mkl_build:
   extends:
     - .mkl_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .build
-nogpu_noavx_clang_mkl_build:
+cpu_none_clang_mkl_build:
   extends:
     - .mkl_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .build
-nogpu_avx_gcc_mkl_build:
+cpu_avx_gcc_mkl_build:
   extends:
     - .mkl_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .build
-nogpu_noavx_gcc_mkl_build:
+cpu_none_gcc_mkl_build:
   extends:
     - .mkl_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .build
-nogpu_avx_clang_oss_build:
+cpu_avx_clang_oss_build:
   extends:
     - .oss_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .build
-nogpu_noavx_clang_oss_build:
+cpu_none_clang_oss_build:
   extends:
     - .oss_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .build
-nogpu_avx_gcc_oss_build:
+cpu_avx_gcc_oss_build:
   extends:
     - .oss_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .build
-nogpu_noavx_gcc_oss_build:
+cpu_none_gcc_oss_build:
   extends:
     - .oss_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .build
 
 # MPI_build_test:

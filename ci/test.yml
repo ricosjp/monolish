@@ -38,66 +38,66 @@ gpu_noavx_clang_mkl:
   needs:
     - "gpu_noavx_clang_mkl_build"
 
-nogpu_avx_gcc_mkl:
+cpu_avx_gcc_mkl:
   extends:
     - .mkl_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .test_cpu
   needs:
-    - "nogpu_avx_gcc_mkl_build"
+    - "cpu_avx_gcc_mkl_build"
 
-nogpu_noavx_gcc_mkl:
+cpu_none_gcc_mkl:
   extends:
     - .mkl_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .test_cpu
   needs:
-    - "nogpu_noavx_gcc_mkl_build"
+    - "cpu_none_gcc_mkl_build"
 
-nogpu_avx_clang_mkl:
+cpu_avx_clang_mkl:
   extends:
     - .mkl_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .test_cpu
   needs:
-    - "nogpu_avx_clang_mkl_build"
+    - "cpu_avx_clang_mkl_build"
 
-nogpu_noavx_clang_mkl:
+cpu_none_clang_mkl:
   extends:
     - .mkl_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .test_cpu
   needs:
-    - "nogpu_noavx_clang_mkl_build"
+    - "cpu_none_clang_mkl_build"
 
-nogpu_avx_gcc_oss:
+cpu_avx_gcc_oss:
   extends:
     - .oss_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .test_cpu
   needs:
-    - "nogpu_avx_gcc_oss_build"
+    - "cpu_avx_gcc_oss_build"
 
-nogpu_noavx_gcc_oss:
+cpu_none_gcc_oss:
   extends:
     - .oss_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .test_cpu
   needs:
-    - "nogpu_noavx_gcc_oss_build"
+    - "cpu_none_gcc_oss_build"
 
-nogpu_avx_clang_oss:
+cpu_avx_clang_oss:
   extends:
     - .oss_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .test_cpu
   needs:
-    - "nogpu_avx_clang_oss_build"
+    - "cpu_avx_clang_oss_build"
 
-nogpu_noavx_clang_oss:
+cpu_none_clang_oss:
   extends:
     - .oss_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .test_cpu
   needs:
-    - "nogpu_noavx_clang_oss_build"
+    - "cpu_none_clang_oss_build"
