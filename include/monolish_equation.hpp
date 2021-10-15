@@ -168,57 +168,6 @@ public:
 };
 
 /**
- * @brief Jacobi solver class
- * @note
- * attribute:
- * - solver : true
- * - preconditioner : true
- * @note
- * input / archtecture
- * - Dense / Intel : true
- * - Dense / NVIDIA : true
- * - Dense / OSS : true
- * - Sparse / Intel : true
- * - Sparse / NVIDIA : true
- * - Sparse / OSS : true
- */
-template <typename MATRIX, typename Float>
-class Jacobi : public monolish::solver::solver<MATRIX, Float> {
-private:
-  int monolish_Jacobi(MATRIX &A, vector<Float> &x, vector<Float> &b);
-
-public:
-  /**
-   * @brief solve Ax = b by jacobi method(lib=0: monolish)
-   * @param[in] A CRS format Matrix
-   * @param[in] x solution vector
-   * @param[in] b right hand vector
-   * @return error code (only 0 now)
-   **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
-  void create_precond(MATRIX &A);
-  void apply_precond(const vector<Float> &r, vector<Float> &z);
-
-  /**
-   * @brief get solver name "monolish::equation::Jacobi"
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  std::string name() const { return "monolish::equation::Jacobi"; }
-
-  /**
-   * @brief get solver name "Jacobi"
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  std::string solver_name() const { return "Jacobi"; }
-};
-
-/**
  * @brief LU solver class (Dense, CPU only now)
  * @note
  * attribute:
@@ -271,6 +220,118 @@ public:
    * - GPU acceleration: false
    **/
   std::string solver_name() const { return "LU"; }
+};
+
+/**
+ * @brief Jacobi solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : true
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
+ */
+template <typename MATRIX, typename Float>
+class Jacobi : public monolish::solver::solver<MATRIX, Float> {
+private:
+  int monolish_Jacobi(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+public:
+  /**
+   * @brief solve Ax = b by jacobi method(lib=0: monolish)
+   * @param[in] A CRS format Matrix
+   * @param[in] x solution vector
+   * @param[in] b right hand vector
+   * @return error code (only 0 now)
+   **/
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A);
+  void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  /**
+   * @brief get solver name "monolish::equation::Jacobi"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::Jacobi"; }
+
+  /**
+   * @brief get solver name "Jacobi"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "Jacobi"; }
+};
+
+/**
+ * @brief SOR solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : true
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : true
+ * @warning
+ * SOR is not completely parallelized.
+ * The part of solving the lower triangular matrix is performed sequentially.
+ * On the GPU, one vector is received before the lower triangular matrix solving
+ * process, and one vector is sent after the process.
+ */
+template <typename MATRIX, typename Float>
+class SOR : public monolish::solver::solver<MATRIX, Float> {
+private:
+  int monolish_SOR(MATRIX &A, vector<Float> &x, vector<Float> &b);
+
+public:
+  /**
+   * @brief solve Ax = b by SOR method(lib=0: monolish)
+   * @param[in] A CRS format Matrix
+   * @param[in] x solution vector
+   * @param[in] b right hand vector
+   * @return error code (only 0 now)
+   * @warning
+   * SOR is not completely parallelized.
+   * The part of solving the lower triangular matrix is performed sequentially.
+   * On the GPU, one vector is received before the lower triangular matrix
+   *solving process, and one vector is sent after the process.
+   **/
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A);
+  void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  /**
+   * @brief get solver name "monolish::equation::SOR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::SOR"; }
+
+  /**
+   * @brief get solver name "SOR"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "SOR"; }
 };
 
 /**

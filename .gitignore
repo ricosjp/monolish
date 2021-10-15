@@ -51,3 +51,4 @@ benchmark/*/*.tsv
 
 # Debian packaging
 .pc/
+*x*x*.mtx

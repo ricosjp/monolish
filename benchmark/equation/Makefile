@@ -54,48 +54,56 @@ run_cpu: cpu
 	bash ./benchmark.sh CG cpu CRS
 	bash ./benchmark.sh BiCGSTAB cpu CRS
 	bash ./benchmark.sh Jacobi cpu CRS
+	bash ./benchmark.sh SOR cpu CRS
 
 run_gpu: 
 	bash ./benchmark.sh LU gpu Dense
 	bash ./benchmark.sh CG gpu CRS
 	bash ./benchmark.sh BiCGSTAB gpu CRS
 	bash ./benchmark.sh Jacobi gpu CRS
+	bash ./benchmark.sh SOR gpu CRS
 
 run_intel_mkl: intel_mkl
 	bash ./benchmark.sh LU intel_mkl Dense
 	bash ./benchmark.sh CG intel_mkl CRS
 	bash ./benchmark.sh BiCGSTAB intel_mkl CRS
 	bash ./benchmark.sh Jacobi intel_mkl CRS
+	bash ./benchmark.sh SOR intel_mkl CRS
 
 run_intel_oss: intel_oss
 	bash ./benchmark.sh LU intel_oss Dense
 	bash ./benchmark.sh CG intel_oss CRS
 	bash ./benchmark.sh BiCGSTAB intel_oss CRS
 	bash ./benchmark.sh Jacobi intel_oss CRS
+	bash ./benchmark.sh SOR intel_oss CRS
 
 run_amd_oss: amd_oss
 	bash ./benchmark.sh LU amd_oss Dense
 	bash ./benchmark.sh CG amd_oss CRS
 	bash ./benchmark.sh BiCGSTAB amd_oss CRS
 	bash ./benchmark.sh Jacobi amd_oss CRS
+	bash ./benchmark.sh SOR amd_oss CRS
 
 run_nvidia: nvidia
 	bash ./benchmark.sh LU nvidia Dense
 	bash ./benchmark.sh CG nvidia CRS
 	bash ./benchmark.sh BiCGSTAB nvidia CRS
 	bash ./benchmark.sh Jacobi nvidia CRS
+	bash ./benchmark.sh SOR nvidia CRS
 
 run_a64fx: a64fx
 	bash ./benchmark.sh LU a64fx Dense
 	bash ./benchmark.sh CG a64fx CRS
 	bash ./benchmark.sh BiCGSTAB a64fx CRS
 	bash ./benchmark.sh Jacobi a64fx CRS
+	bash ./benchmark.sh SOR a64fx CRS
 
 run_sxat: sxat
 	bash ./benchmark.sh LU sxat Dense
 	bash ./benchmark.sh CG sxat CRS
 	bash ./benchmark.sh BiCGSTAB sxat CRS
 	bash ./benchmark.sh Jacobi sxat CRS
+	bash ./benchmark.sh SOR sxat CRS
 
 clean:
 	- rm *.out

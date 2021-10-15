@@ -24,7 +24,8 @@ In the future, we plan to implement a switch to call these libraries.
 | monolish::equation::Cholesky                | **Y** / N     | N / N          | **Y** / N     | N / N         | **Y** / N       | N / N         | N / N                  | N / N                   | N / N                |
 | monolish::equation::CG                      | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::equation::BiCGSTAB                | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
-| monolish::equation::Jacobi                  | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | N / **Y**     | **Y** / **Y**          | N / N                   | **Y** / **Y**        |
+| monolish::equation::Jacobi                  | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | **Y** / **Y** | **Y** / **Y**          | N / N                   | **Y** / **Y**        |
+| monolish::equation::SOR                     | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | N / N                  | N / N                   | N / N                |
 | monolish::standard_eigen::LOBPCG            | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::standard_eigen::DC                | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
 | monolish::generalized_eigen::LOBPCG         | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
@@ -57,6 +58,7 @@ In the future, we plan to implement a switch to call these libraries.
 | CG       | monolish       | monolish       | monolish       |
 | BiCGSTAB | monolish       | monolish       | monolish       |
 | Jacobi   | monolish       | monolish       | monolish       |
+| SOR      | monolish       | monolish       | monolish       |
 
 ## Preconditioners (for Dense, Sparse)
 

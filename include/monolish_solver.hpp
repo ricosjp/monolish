@@ -26,6 +26,8 @@ template <typename MATRIX, typename Float> class precondition;
  **/
 template <typename MATRIX, typename Float> class solver {
 private:
+  Float omega = 1.9; // for SOR
+
 protected:
   int lib = 0;
   double tol = 1.0e-8;
@@ -171,6 +173,23 @@ public:
    * @return current handling scheme of initial vector
    */
   initvec_scheme get_initvec_scheme() const { return initvecscheme; }
+
+  /**
+   * @brief set the relaxation coefficient omega for SOR method (0 < w < 2,
+   * Default: 1.9)
+   * @parm[in] w input omega value
+   * @note
+   * This variable is only used in SOR method
+   */
+  void set_omega(Float w) { omega = w; };
+
+  /**
+   * @brief get the relaxation coefficient omega for SOR method (Default: 1.9)
+   * @return The relaxation coefficient of SOR
+   * @note
+   * This variable is only used in SOR method
+   */
+  Float get_omega() { return omega; };
 };
 
 /**
