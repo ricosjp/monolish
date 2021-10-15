@@ -2,6 +2,7 @@
 #include "../../include/monolish_equation.hpp"
 #include "../../include/monolish_vml.hpp"
 #include "../internal/monolish_internal.hpp"
+#include "./kernel/sor_kernel.hpp"
 
 namespace monolish {
 
@@ -124,17 +125,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
 
         r.nonfree_recv();
 
-		for(int i=0;i<A.get_row();i++)
-		{
-			auto tmp = r.data()[i];
-			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
-			{
-                if(i>A.col_ind[j]){ // lower
-                    tmp -= A.val[j] * t.data()[A.col_ind[j]];
-                }
-			}
- 			t.data()[i] = tmp * d.data()[i];
-        }
+        sor_kernel_lower(A, d, t, r);
 
         util::send(t);
 
@@ -158,10 +149,10 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-// template int equation::SOR<matrix::Dense<double>, double>::monolish_SOR(
-//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
-// template int equation::SOR<matrix::Dense<float>, float>::monolish_SOR(
-//     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+template int equation::SOR<matrix::Dense<double>, double>::monolish_SOR(
+    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+template int equation::SOR<matrix::Dense<float>, float>::monolish_SOR(
+    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
 
 template int equation::SOR<matrix::CRS<double>, double>::monolish_SOR(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
@@ -192,10 +183,10 @@ int equation::SOR<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
   return ret; // err code
 }
 
-// template int equation::SOR<matrix::Dense<float>, float>::solve(
-//     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
-// template int equation::SOR<matrix::Dense<double>, double>::solve(
-//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
+template int equation::SOR<matrix::Dense<float>, float>::solve(
+    matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+template int equation::SOR<matrix::Dense<double>, double>::solve(
+    matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 
 template int equation::SOR<matrix::CRS<float>, float>::solve(
     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
