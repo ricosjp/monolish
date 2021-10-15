@@ -29,24 +29,25 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
   //   A.diag(this->precond.M);
   //   vml::reciprocal(this->precond.M, this->precond.M);
 
+  throw std::runtime_error("error ssor precond is not impl.");
   logger.solver_out();
 }
-// template void equation::SOR<matrix::Dense<float>, float>::create_precond(
-//     matrix::Dense<float> &A);
-// template void equation::SOR<matrix::Dense<double>, double>::create_precond(
-//     matrix::Dense<double> &A);
-//
-// template void equation::SOR<matrix::CRS<float>, float>::create_precond(
-//     matrix::CRS<float> &A);
-// template void equation::SOR<matrix::CRS<double>, double>::create_precond(
-//     matrix::CRS<double> &A);
-//
-// template void
-// equation::SOR<matrix::LinearOperator<float>, float>::create_precond(
-//     matrix::LinearOperator<float> &A);
-// template void
-// equation::SOR<matrix::LinearOperator<double>, double>::create_precond(
-//     matrix::LinearOperator<double> &A);
+template void equation::SOR<matrix::Dense<float>, float>::create_precond(
+    matrix::Dense<float> &A);
+template void equation::SOR<matrix::Dense<double>, double>::create_precond(
+    matrix::Dense<double> &A);
+
+template void equation::SOR<matrix::CRS<float>, float>::create_precond(
+    matrix::CRS<float> &A);
+template void equation::SOR<matrix::CRS<double>, double>::create_precond(
+    matrix::CRS<double> &A);
+
+template void
+equation::SOR<matrix::LinearOperator<float>, float>::create_precond(
+    matrix::LinearOperator<float> &A);
+template void
+equation::SOR<matrix::LinearOperator<double>, double>::create_precond(
+    matrix::LinearOperator<double> &A);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,24 +60,25 @@ void equation::SOR<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   // not impl. now
   //   vml::mul(this->precond.M, r, z); // x = Ab
 
+  throw std::runtime_error("error ssor precond is not impl.");
   logger.solver_out();
 }
-// template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
-//     const vector<float> &r, vector<float> &z);
-// template void equation::SOR<matrix::Dense<double>, double>::apply_precond(
-//     const vector<double> &r, vector<double> &z);
-//
-// template void equation::SOR<matrix::CRS<float>, float>::apply_precond(
-//     const vector<float> &r, vector<float> &z);
-// template void equation::SOR<matrix::CRS<double>, double>::apply_precond(
-//     const vector<double> &r, vector<double> &z);
-//
-// template void
-// equation::SOR<matrix::LinearOperator<float>, float>::apply_precond(
-//     const vector<float> &r, vector<float> &z);
-// template void
-// equation::SOR<matrix::LinearOperator<double>, double>::apply_precond(
-//     const vector<double> &r, vector<double> &z);
+template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void equation::SOR<matrix::Dense<double>, double>::apply_precond(
+    const vector<double> &r, vector<double> &z);
+
+template void equation::SOR<matrix::CRS<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void equation::SOR<matrix::CRS<double>, double>::apply_precond(
+    const vector<double> &r, vector<double> &z);
+
+template void
+equation::SOR<matrix::LinearOperator<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void
+equation::SOR<matrix::LinearOperator<double>, double>::apply_precond(
+    const vector<double> &r, vector<double> &z);
 
 ////////////////////////////
 // solver
