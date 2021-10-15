@@ -21,6 +21,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- add SOR solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/376
 - Create deb package by cpack https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/372
 - `MONOLISH_CCACHE_BUILD` flag to enable ccache https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/371
 - Add CMakePresets.json https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/368
