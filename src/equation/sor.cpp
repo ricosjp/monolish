@@ -107,6 +107,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
   A.diag(d);
   blas::scal(w, d);
   vml::reciprocal(d, d);
+  d.nonfree_recv();
 
   auto bnrm2 = blas::nrm2(b);
   bnrm2   = 1.0 / bnrm2;
@@ -121,21 +122,21 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
         blas::axpyz(-1.0,t,b,r);
 		nrm2 = blas::nrm2(r);
 
-        util::recv(t, r, d);
+        r.nonfree_recv();
 
 		for(int i=0;i<A.get_row();i++)
 		{
-			auto tmp = r[i];
+			auto tmp = r.data()[i];
 			for(int j=A.row_ptr[i];j<A.row_ptr[i+1];j++)
 			{
                 if(i>A.col_ind[j]){ // lower
-                    tmp -= A.val[j] * t[A.col_ind[j]];
+                    tmp -= A.val[j] * t.data()[A.col_ind[j]];
                 }
 			}
- 			t[i] = tmp * d[i];
+ 			t.data()[i] = tmp * d.data()[i];
         }
 
-        util::send(t, r, d);
+        util::send(t);
 
         blas::axpy(1.0,t,x);
 
