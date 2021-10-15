@@ -1,0 +1,95 @@
+#
+# example Stage
+#
+.example_gpu:
+  stage: example
+  script:
+    - apt install -y ./$(find . -name "*.deb")
+    - make -C examples/ gpu
+
+.example_cpu:
+  stage: example
+  script:
+    - apt install -y ./$(find . -name "*.deb")
+    - make -C examples/ cpu
+
+# gpu mkl
+gpu_avx_clang_mkl_examples:
+  extends:
+    - .mkl_image
+    - .gpu_avx_clang
+    - .example_gpu
+  needs:
+    - "gpu_avx_clang_mkl_build"
+
+gpu_noavx_clang_mkl_examples:
+  extends:
+    - .mkl_image
+    - .gpu_noavx_clang
+    - .example_gpu
+  needs:
+    - "gpu_noavx_clang_mkl_build"
+
+cpu_avx_gcc_mkl_examples:
+  extends:
+    - .mkl_image
+    - .cpu_avx_gcc
+    - .example_cpu
+  needs:
+    - "cpu_avx_gcc_mkl_build"
+
+cpu_none_gcc_mkl_examples:
+  extends:
+    - .mkl_image
+    - .cpu_none_gcc
+    - .example_cpu
+  needs:
+    - "cpu_none_gcc_mkl_build"
+
+cpu_avx_clang_mkl_examples:
+  extends:
+    - .mkl_image
+    - .cpu_avx_clang
+    - .example_cpu
+  needs:
+    - "cpu_avx_clang_mkl_build"
+
+cpu_none_clang_mkl_examples:
+  extends:
+    - .mkl_image
+    - .cpu_none_clang
+    - .example_cpu
+  needs:
+    - "cpu_none_clang_mkl_build"
+
+cpu_avx_gcc_oss_examples:
+  extends:
+    - .oss_image
+    - .cpu_avx_gcc
+    - .example_cpu
+  needs:
+    - "cpu_avx_gcc_oss_build"
+
+cpu_none_gcc_oss_examples:
+  extends:
+    - .oss_image
+    - .cpu_none_gcc
+    - .example_cpu
+  needs:
+    - "cpu_none_gcc_oss_build"
+
+cpu_avx_clang_oss_examples:
+  extends:
+    - .oss_image
+    - .cpu_avx_clang
+    - .example_cpu
+  needs:
+    - "cpu_avx_clang_oss_build"
+
+cpu_none_clang_oss_examples:
+  extends:
+    - .oss_image
+    - .cpu_none_clang
+    - .example_cpu
+  needs:
+    - "cpu_none_clang_oss_build"

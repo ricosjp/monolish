@@ -1,0 +1,10 @@
+monolish_docker:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - apk add coreutils make
+    - cd docker; make push 
+  only:
+    - tags
