@@ -358,6 +358,7 @@ configure_file(Doxyfile.in Doxyfile)
 add_custom_target(document
   COMMAND doxygen
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  COMMENT "Generate document by doxygen"
 )
 
 #
