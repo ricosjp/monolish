@@ -175,12 +175,13 @@ public:
   initvec_scheme get_initvec_scheme() const { return initvecscheme; }
 
   /**
-   * @brief set the relaxation coefficient omega for SOR method (0 < w < 2, Default: 1.9)
+   * @brief set the relaxation coefficient omega for SOR method (0 < w < 2,
+   * Default: 1.9)
    * @parm[in] w input omega value
    * @note
    * This variable is only used in SOR method
    */
-  void set_omega(Float w){omega = w;};
+  void set_omega(Float w) { omega = w; };
 
   /**
    * @brief get the relaxation coefficient omega for SOR method (Default: 1.9)
@@ -188,8 +189,7 @@ public:
    * @note
    * This variable is only used in SOR method
    */
-  Float get_omega(){return omega;};
-
+  Float get_omega() { return omega; };
 };
 
 /**

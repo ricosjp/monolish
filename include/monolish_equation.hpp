@@ -290,7 +290,8 @@ public:
  * @warning
  * SOR is not completely parallelized.
  * The part of solving the lower triangular matrix is performed sequentially.
- * On the GPU, one vector is received before the lower triangular matrix solving process, and one vector is sent after the process.
+ * On the GPU, one vector is received before the lower triangular matrix solving
+ * process, and one vector is sent after the process.
  */
 template <typename MATRIX, typename Float>
 class SOR : public monolish::solver::solver<MATRIX, Float> {
@@ -307,7 +308,8 @@ public:
    * @warning
    * SOR is not completely parallelized.
    * The part of solving the lower triangular matrix is performed sequentially.
-   * On the GPU, one vector is received before the lower triangular matrix solving process, and one vector is sent after the process.
+   * On the GPU, one vector is received before the lower triangular matrix
+   *solving process, and one vector is sent after the process.
    **/
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
