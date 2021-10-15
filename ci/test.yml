@@ -14,12 +14,14 @@
   extends:
     - .test
   script:
+    - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_cpu
 
 .test_gpu:
   extends:
     - .test
   script:
+    - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_gpu
 
 gpu_avx_clang_mkl:
@@ -28,7 +30,7 @@ gpu_avx_clang_mkl:
     - .gpu_avx_clang
     - .test_gpu
   needs:
-    - "gpu_avx_clang_mkl_build_cmake"
+    - "gpu_avx_clang_mkl_build"
 
 gpu_noavx_clang_mkl:
   extends:
@@ -36,68 +38,68 @@ gpu_noavx_clang_mkl:
     - .gpu_noavx_clang
     - .test_gpu
   needs:
-    - "gpu_noavx_clang_mkl_build_cmake"
+    - "gpu_noavx_clang_mkl_build"
 
-nogpu_avx_gcc_mkl:
+cpu_avx_gcc_mkl:
   extends:
     - .mkl_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .test_cpu
   needs:
-    - "nogpu_avx_gcc_mkl_build_cmake"
+    - "cpu_avx_gcc_mkl_build"
 
-nogpu_noavx_gcc_mkl:
+cpu_none_gcc_mkl:
   extends:
     - .mkl_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .test_cpu
   needs:
-    - "nogpu_noavx_gcc_mkl_build_cmake"
+    - "cpu_none_gcc_mkl_build"
 
-nogpu_avx_clang_mkl:
+cpu_avx_clang_mkl:
   extends:
     - .mkl_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .test_cpu
   needs:
-    - "nogpu_avx_clang_mkl_build_cmake"
+    - "cpu_avx_clang_mkl_build"
 
-nogpu_noavx_clang_mkl:
+cpu_none_clang_mkl:
   extends:
     - .mkl_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .test_cpu
   needs:
-    - "nogpu_noavx_clang_mkl_build_cmake"
+    - "cpu_none_clang_mkl_build"
 
-nogpu_avx_gcc_oss:
+cpu_avx_gcc_oss:
   extends:
     - .oss_image
-    - .nogpu_avx_gcc
+    - .cpu_avx_gcc
     - .test_cpu
   needs:
-    - "nogpu_avx_gcc_oss_build_cmake"
+    - "cpu_avx_gcc_oss_build"
 
-nogpu_noavx_gcc_oss:
+cpu_none_gcc_oss:
   extends:
     - .oss_image
-    - .nogpu_noavx_gcc
+    - .cpu_none_gcc
     - .test_cpu
   needs:
-    - "nogpu_noavx_gcc_oss_build_cmake"
+    - "cpu_none_gcc_oss_build"
 
-nogpu_avx_clang_oss:
+cpu_avx_clang_oss:
   extends:
     - .oss_image
-    - .nogpu_avx_clang
+    - .cpu_avx_clang
     - .test_cpu
   needs:
-    - "nogpu_avx_clang_oss_build_cmake"
+    - "cpu_avx_clang_oss_build"
 
-nogpu_noavx_clang_oss:
+cpu_none_clang_oss:
   extends:
     - .oss_image
-    - .nogpu_noavx_clang
+    - .cpu_none_clang
     - .test_cpu
   needs:
-    - "nogpu_noavx_clang_oss_build_cmake"
+    - "cpu_none_clang_oss_build"
