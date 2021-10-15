@@ -278,7 +278,7 @@ public:
  * @note
  * attribute:
  * - solver : true
- * - preconditioner : true
+ * - preconditioner : false
  * @note
  * input / archtecture
  * - Dense / Intel : true
@@ -287,6 +287,10 @@ public:
  * - Sparse / Intel : true
  * - Sparse / NVIDIA : true
  * - Sparse / OSS : true
+ * @warning
+ * SOR is not completely parallelized.
+ * The part of solving the lower triangular matrix is performed sequentially.
+ * On the GPU, one vector is received before the lower triangular matrix solving process, and one vector is sent after the process.
  */
 template <typename MATRIX, typename Float>
 class SOR : public monolish::solver::solver<MATRIX, Float> {
@@ -300,6 +304,10 @@ public:
    * @param[in] x solution vector
    * @param[in] b right hand vector
    * @return error code (only 0 now)
+   * @warning
+   * SOR is not completely parallelized.
+   * The part of solving the lower triangular matrix is performed sequentially.
+   * On the GPU, one vector is received before the lower triangular matrix solving process, and one vector is sent after the process.
    **/
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
