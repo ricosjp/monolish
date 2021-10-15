@@ -352,6 +352,15 @@ if(MONOLISH_USE_NVIDIA_GPU)
 endif()
 
 #
+# document target
+#
+configure_file(Doxyfile.in Doxyfile)
+add_custom_target(document
+  COMMAND doxygen
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+#
 # Packaging
 #
 # Sell also the "CPack DEB Generator" page
