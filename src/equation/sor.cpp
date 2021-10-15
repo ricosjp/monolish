@@ -37,8 +37,8 @@ template void equation::SOR<matrix::Dense<float>, float>::create_precond(
 template void equation::SOR<matrix::Dense<double>, double>::create_precond(
     matrix::Dense<double> &A);
 
-template void equation::SOR<matrix::CRS<float>, float>::create_precond(
-    matrix::CRS<float> &A);
+template void
+equation::SOR<matrix::CRS<float>, float>::create_precond(matrix::CRS<float> &A);
 template void equation::SOR<matrix::CRS<double>, double>::create_precond(
     matrix::CRS<double> &A);
 
@@ -68,8 +68,9 @@ template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
 template void equation::SOR<matrix::Dense<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
-template void equation::SOR<matrix::CRS<float>, float>::apply_precond(
-    const vector<float> &r, vector<float> &z);
+template void
+equation::SOR<matrix::CRS<float>, float>::apply_precond(const vector<float> &r,
+                                                        vector<float> &z);
 template void equation::SOR<matrix::CRS<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
