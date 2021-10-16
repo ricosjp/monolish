@@ -50,14 +50,18 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-message(STATUS "Last release = ${git_last_tag}")
 execute_process(
   COMMAND git rev-list ${git_last_tag}.. --count
   OUTPUT_VARIABLE git_dev_commits
   OUTPUT_STRIP_TRAILING_WHITESPACE
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-message(STATUS "Number of commits from last release = ${git_dev_commits}")
+if(git_dev_commits)
+  set(package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
+else()
+  set(package_version "${PROJECT_VERSION}")
+endif()
+message(STATUS "monolish version = ${package_version}")
 
 #
 # Build options
@@ -70,6 +74,10 @@ option(MONOLISH_CCACHE_BUILD "Use ccache" ON)
 set(MONOLISH_NVIDIA_GPU_ARCH ""
   CACHE STRING
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
+)
+set(MONOLISH_CONTAINER_REGISTRY "ghcr.io/ricosjp/monolish"
+  CACHE STRING
+  "Container registry where monolish container will be uploaded"
 )
 
 #
@@ -140,10 +148,15 @@ if(NOT MKL_FOUND)
       /usr/local/include
       /usr/include/openblas
   )
+  set(monolish_backend "oss")
+else()
+  set(monolish_backend "mkl")
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
+  set(monolish_backend "${monolish_backend}+nvidia")
 endif()
+message(STATUS "Backend = ${monolish_backend}")
 
 #
 # Glob source files
@@ -284,24 +297,8 @@ endif()
 #
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+set(CPACK_PACKAGE_VERSION "${package_version}+${monolish_backend}")
 set(CPACK_SYSTEM_NAME "amd64")
-if(git_dev_commits)
-  set(package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
-else()
-  set(package_version "${PROJECT_VERSION}")
-endif()
-set(CPACK_PACKAGE_VERSION "${package_version}")
-
-if(MKL_FOUND)
-  set(backend "mkl")
-else()
-  set(backend "oss")
-endif()
-if(MONOLISH_USE_NVIDIA_GPU)
-  set(backend "${backend}+nvidia")
-endif()
-set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+${backend}")
-
 set(CPACK_GENERATOR "DEB")
 
 # Set dependencies for .deb
@@ -334,12 +331,10 @@ include(CPack)
 # Build container
 #
 configure_file(docker/Dockerfile.in Dockerfile)
-set(MONOLISH_CONTAINER_REGISTRY "ghcr.io/ricosjp/monolish")
 add_custom_target(docker
   COMMAND docker build
-    -t ${MONOLISH_CONTAINER_REGISTRY}/${backend}:${package_version}
+    -t ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version}
     ${CMAKE_CURRENT_BINARY_DIR}
-  VERBATIM
   COMMENT "Build container"
 )
 add_dependencies(docker package)
