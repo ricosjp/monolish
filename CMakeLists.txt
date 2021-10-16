@@ -336,4 +336,3 @@ add_custom_target(docker
   COMMAND docker build -t ${docker_tag} ${CMAKE_CURRENT_BINARY_DIR}
   COMMENT "Build container ${docker_tag}"
 )
-add_dependencies(docker package)
