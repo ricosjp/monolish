@@ -5,6 +5,7 @@
     - docker:dind
   script:
     - docker-compose build
+    - docker-compose push monolish
 
 mkl_docker:
   extends:
