@@ -1,4 +1,4 @@
-FROM ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
+FROM ${MONOLISH_CONTAINER_BASE_IMAGE}:${MONOLISH_CONTAINER_BASE_TAG}
 
 RUN apt-get update -y \
  && apt-get install -y python3-pip \

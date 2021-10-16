@@ -66,18 +66,41 @@ message(STATUS "monolish version = ${package_version}")
 #
 # Build options
 #
+function(option_string name default help)
+  set(${name} ${default} CACHE STRING ${help})
+  # environment variable takes priority
+  if(DEFINED ENV{${name}})
+    message(STATUS "Overwrite by env variable: ${name}=$ENV{${name}}")
+    set(${name} "$ENV{${name}}" CACHE STRING ${help} FORCE)
+  endif()
+endfunction()
+
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_USE_MPI "Build with MPI" OFF)
 option(MONOLISH_USE_NVIDIA_GPU "Build with NVIDIA GPU" OFF)
 option(MONOLISH_NVIDIA_GPU_ARCH_ALL "Build library for all known CUDA architectures" OFF)
 option(MONOLISH_CCACHE_BUILD "Use ccache" ON)
-set(MONOLISH_NVIDIA_GPU_ARCH ""
-  CACHE STRING
+option_string(
+  MONOLISH_NVIDIA_GPU_ARCH
+  ""
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
 )
-set(MONOLISH_CONTAINER_REGISTRY "ghcr.io/ricosjp/monolish"
-  CACHE STRING
+
+# For container
+option_string(
+  MONOLISH_CONTAINER_REGISTRY
+  "ghcr.io/ricosjp/monolish"
   "Container registry where monolish container will be uploaded"
+)
+option_string(
+  MONOLISH_CONTAINER_BASE_IMAGE
+  "ghcr.io/ricosjp/allgebra/cuda11_4/mkl"
+  "Base image upon which monolish container will be created"
+)
+option_string(
+  MONOLISH_CONTAINER_BASE_TAG
+  "21.09.0"
+  "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
 #
@@ -330,9 +353,10 @@ include(CPack)
 #
 # Build container
 #
-configure_file(docker/Dockerfile.in Dockerfile)
 set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version})
+configure_file(docker/Dockerfile.in Dockerfile)
+configure_file(docker/compose.yml.in compose.yml)
 add_custom_target(docker
-  COMMAND docker build -t ${docker_tag} ${CMAKE_CURRENT_BINARY_DIR}
+  COMMAND docker-compose build
   COMMENT "Build container ${docker_tag}"
 )
