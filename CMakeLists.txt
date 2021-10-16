@@ -286,19 +286,23 @@ set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_SYSTEM_NAME "amd64")
 if(git_dev_commits)
-  # For non-tagged commit
-  set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-dev.${git_dev_commits}")
-  # if git_dev_commits == 0, it means current HEAD is tag.
-  # Then the `CPACK_PACKAGE_VERSION` should be its default value `PROJECT_VERSION`
-endif()
-if(MKL_FOUND)
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+mkl")
+  set(package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
 else()
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+oss")
+  set(package_version "${PROJECT_VERSION}")
+endif()
+set(CPACK_PACKAGE_VERSION "${package_version}")
+
+if(MKL_FOUND)
+  set(backend "mkl")
+else()
+  set(backend "oss")
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+nvidia")
+  set(backend "${backend}+nvidia")
 endif()
+set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+${backend}")
+
+set(CPACK_GENERATOR "DEB")
 
 # Set dependencies for .deb
 #
@@ -315,10 +319,27 @@ if(MONOLISH_USE_NVIDIA_GPU)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-${postfix}, libcusolver-${postfix}, libcusparse-${postfix}, libcublas-${postfix}, libelf1")
   unset(postfix)
 endif()
-# Use Debian default naming convention
-# See https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
-set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
+# Although `DEB-DEFAULT` should be preferred, this value will be used in following process.
+# Here we define it manually.
+#
+# https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
+set(CPACK_DEBIAN_FILE_NAME "monolish_${CPACK_PACKAGE_VERSION}_${CPACK_SYSTEM_NAME}.deb")
 
 # FIXME: Add RPM setting
 
 include(CPack)
+
+#
+# Build container
+#
+configure_file(docker/Dockerfile.in Dockerfile)
+set(MONOLISH_CONTAINER_REGISTRY "ghcr.io/ricosjp/monolish")
+add_custom_target(docker
+  COMMAND docker build
+    -t ${MONOLISH_CONTAINER_REGISTRY}/${backend}:${package_version}
+    ${CMAKE_CURRENT_BINARY_DIR}
+  VERBATIM
+  COMMENT "Build container"
+)
+add_dependencies(docker package)

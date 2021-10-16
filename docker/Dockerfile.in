@@ -1,0 +1,9 @@
+FROM ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
+
+RUN apt-get update -y \
+ && apt-get install -y python3-pip \
+ && apt-get clean && \
+ pip3 install monolish-log-viewer==0.1.1
+
+COPY ${CPACK_DEBIAN_FILE_NAME} /
+RUN apt install -y /${CPACK_DEBIAN_FILE_NAME}
