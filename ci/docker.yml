@@ -1,9 +1,31 @@
-mkl_docker:
+.docker:
   stage: deploy
   image: docker/compose:1.29.1
   services:
     - docker:dind
-  needs:
-    - cpu_avx_gcc_mkl_build
   script:
     - docker-compose build
+
+mkl_docker:
+  extends:
+    - .docker
+  needs:
+    - cpu_avx_gcc_mkl_build
+
+oss_docker:
+  extends:
+    - .docker
+  needs:
+    - cpu_avx_gcc_oss_build
+
+mkl_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_avx_clang_mkl_build
+
+oss_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_avx_clang_oss_build
