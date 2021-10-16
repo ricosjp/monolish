@@ -53,22 +53,22 @@ solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
     equation::Jacobi<matrix::LinearOperator<float>, float> &p);
 
 // SOR
-template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
-    equation::SOR<matrix::Dense<double>, double> &p);
-template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
-    equation::SOR<matrix::Dense<float>, float> &p);
+// template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
+//     equation::SOR<matrix::Dense<double>, double> &p);
+// template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
+//     equation::SOR<matrix::Dense<float>, float> &p);
 
 template void solver::solver<matrix::CRS<double>, double>::set_create_precond(
     equation::SOR<matrix::CRS<double>, double> &p);
 template void solver::solver<matrix::CRS<float>, float>::set_create_precond(
     equation::SOR<matrix::CRS<float>, float> &p);
 
-template void
-solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
-    equation::SOR<matrix::LinearOperator<double>, double> &p);
-template void
-solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
-    equation::SOR<matrix::LinearOperator<float>, float> &p);
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<float>, float> &p);
 
 /////
 template <typename MATRIX, typename T>
@@ -118,20 +118,20 @@ solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
     equation::Jacobi<matrix::LinearOperator<float>, float> &p);
 
 // SOR
-template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
-    equation::SOR<matrix::Dense<double>, double> &p);
-template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
-    equation::SOR<matrix::Dense<float>, float> &p);
+// template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
+//     equation::SOR<matrix::Dense<double>, double> &p);
+// template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
+//     equation::SOR<matrix::Dense<float>, float> &p);
 
 template void solver::solver<matrix::CRS<double>, double>::set_apply_precond(
     equation::SOR<matrix::CRS<double>, double> &p);
 template void solver::solver<matrix::CRS<float>, float>::set_apply_precond(
     equation::SOR<matrix::CRS<float>, float> &p);
 
-template void
-solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
-    equation::SOR<matrix::LinearOperator<double>, double> &p);
-template void
-solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
-    equation::SOR<matrix::LinearOperator<float>, float> &p);
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
+//     equation::SOR<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
+//     equation::SOR<matrix::LinearOperator<float>, float> &p);
 } // namespace monolish
