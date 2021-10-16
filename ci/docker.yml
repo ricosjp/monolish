@@ -1,12 +1,9 @@
 mkl_docker:
   stage: deploy
-  image: docker:latest
+  image: docker/compose:1.29.1
   services:
     - docker:dind
   needs:
     - cpu_avx_gcc_mkl_build
   script:
-    - apk add cmake
-    - cmake --preset=cpu-avx-none
-    - mv *.deb build/cpu-avx-none/
-    - cmake --build build/cpu-avx-none --target docker
+    - docker-compose build
