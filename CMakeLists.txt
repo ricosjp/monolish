@@ -193,6 +193,14 @@ install(
   DESTINATION include
   FILES_MATCHING PATTERN "*.hpp"
 )
+install(
+  DIRECTORY examples/
+  DESTINATION share/monolish/examples
+)
+install(
+  DIRECTORY benchmark/
+  DESTINATION share/monolish/benchmark
+)
 
 #
 # Target properties
