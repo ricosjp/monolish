@@ -40,6 +40,22 @@ gpu_noavx_clang_mkl:
   needs:
     - "gpu_noavx_clang_mkl_build"
 
+gpu_avx_clang_oss:
+  extends:
+    - .oss_image
+    - .gpu_avx_clang
+    - .test_gpu
+  needs:
+    - "gpu_avx_clang_oss_build"
+
+gpu_noavx_clang_oss:
+  extends:
+    - .oss_image
+    - .gpu_noavx_clang
+    - .test_gpu
+  needs:
+    - "gpu_noavx_clang_oss_build"
+
 cpu_avx_gcc_mkl:
   extends:
     - .mkl_image

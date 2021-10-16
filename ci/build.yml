@@ -7,17 +7,15 @@
     - apt update
     - apt install -y gfortran
     - cmake --preset=${PRESET}
-    - cmake --build build/${PRESET}
-    - cd build/${PRESET}
-    - rm -rf *.deb
-    - cpack -G DEB
-    - mv *.deb ${CI_PROJECT_DIR}
-    - cd ${CI_PROJECT_DIR}
+    - cmake --build build/${PRESET} --target package
+    - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
     - apt install -y ./$(find . -name "*.deb")
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
     paths:
       - "*.deb"
+      - Dockerfile
+      - compose.yml
       - test/
     expire_in: 360min
 
@@ -29,6 +27,16 @@ gpu_avx_clang_mkl_build:
 gpu_noavx_clang_mkl_build:
   extends:
     - .mkl_image
+    - .gpu_noavx_clang
+    - .build
+gpu_avx_clang_oss_build:
+  extends:
+    - .oss_image
+    - .gpu_avx_clang
+    - .build
+gpu_noavx_clang_oss_build:
+  extends:
+    - .oss_image
     - .gpu_noavx_clang
     - .build
 cpu_avx_clang_mkl_build:
