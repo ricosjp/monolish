@@ -6,4 +6,5 @@ RUN apt-get update -y \
  pip3 install monolish-log-viewer==0.1.1
 
 COPY ${CPACK_DEBIAN_FILE_NAME} /
-RUN apt install -y /${CPACK_DEBIAN_FILE_NAME}
+RUN apt install -y /${CPACK_DEBIAN_FILE_NAME} \
+ && rm ${CPACK_DEBIAN_FILE_NAME}

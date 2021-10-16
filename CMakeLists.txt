@@ -331,10 +331,9 @@ include(CPack)
 # Build container
 #
 configure_file(docker/Dockerfile.in Dockerfile)
+set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version})
 add_custom_target(docker
-  COMMAND docker build
-    -t ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version}
-    ${CMAKE_CURRENT_BINARY_DIR}
-  COMMENT "Build container"
+  COMMAND docker build -t ${docker_tag} ${CMAKE_CURRENT_BINARY_DIR}
+  COMMENT "Build container ${docker_tag}"
 )
 add_dependencies(docker package)
