@@ -1,98 +1,86 @@
 #
 # benchmark
 #
+.intel_runner:
+  tags:
+    - 008cfa52494d
+.amd_runner:
+  tags:
+    - b42e99ecbde2
+.gpu_runner:
+  tags:
+    - c8cbb8c6304d
 
-# intel cpu + intel gpu + mkl
-gpu_avx_clang_mkl_benchmark:
+.benchmark:
   stage: benchmark
+  artifacts:
+    paths:
+      - benchmark/
+    expire_in: 360min
+  only:
+    - schedules
+    - tags
+  before_script:
+    - apt install -y ./$(find . -name "*.deb")
+
+gpu_avx_clang_mkl_benchmark:
   extends:
     - .mkl_image
     - .gpu_avx_clang
+    - .gpu_runner
+    - .benchmark
   needs:
     - "gpu_avx_clang_mkl_build"
-  artifacts:
-      paths:
-          - benchmark/
-      expire_in: 360min
   script:
     - cd benchmark
     - make get_spec_nvidia
     - make nvidia
     - make run_nvidia
-  tags:
-    - c8cbb8c6304d
-  only:
-    - schedules
-    - tags
 
-# intel cpu + mkl
 intel_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
     - .mkl_image
     - .cpu_avx_gcc
+    - .intel_runner
+    - .benchmark
   needs:
     - "cpu_avx_gcc_mkl_build"
-  artifacts:
-      paths:
-          - benchmark/
-      expire_in: 360min
   script:
     - cd benchmark
     - make get_spec_intel_mkl
     - make intel_mkl
     - make run_intel_mkl
-  tags:
-    - 008cfa52494d
-  only:
-    - schedules
-    - tags
 
-# intel cpu + oss
 intel_avx_gcc_oss_benchmark:
   stage: benchmark
   extends:
     - .oss_image
     - .cpu_avx_gcc
+    - .intel_runner
+    - .benchmark
   needs:
     - "cpu_avx_gcc_oss_build"
-  artifacts:
-      paths:
-          - benchmark/
-      expire_in: 360min
   script:
     - cd benchmark
     - make get_spec_intel_oss
     - make intel_oss
     - make run_intel_oss
-  tags:
-    - 008cfa52494d
-  only:
-    - schedules
-    - tags
 
-# AMD cpu + oss
 amd_avx_gcc_mkl_benchmark:
   stage: benchmark
   extends:
     - .oss_image
     - .cpu_avx_gcc
+    - .amd_runner
+    - .benchmark
   needs:
     - "cpu_avx_gcc_oss_build"
-  artifacts:
-      paths:
-          - benchmark/
-      expire_in: 360min
   script:
     - cd benchmark
     - make get_spec_amd_oss
     - make amd_oss
     - make run_amd_oss
-  tags:
-    - b42e99ecbde2
-  only:
-    - schedules
-    - tags
 
 benchmark_result:
   stage: deploy
