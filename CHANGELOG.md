@@ -39,6 +39,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Use MONOLISH_NVIDIA_GPU_ARCH while CI instead of detecting GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/382
 - Build CPU containers using cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/379
 - Use cmake preset and deb package while CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/377
 - GitLab CI YAML is split into ci/*.yml https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/373
