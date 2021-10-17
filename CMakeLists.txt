@@ -402,10 +402,10 @@ include(CPack)
 #
 # Build container
 #
-set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${monolish_package_version})
+set(monolish_docker_image ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${monolish_package_version})
 configure_file(docker/Dockerfile.in Dockerfile)
 configure_file(docker/compose.yml.in compose.yml)
 add_custom_target(docker
   COMMAND docker-compose build
-  COMMENT "Build container ${docker_tag}"
+  COMMENT "Build container ${monolish_docker_image}"
 )
