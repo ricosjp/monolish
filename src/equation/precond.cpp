@@ -53,10 +53,10 @@ solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
     equation::Jacobi<matrix::LinearOperator<float>, float> &p);
 
 // SOR
-// template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
-//     equation::SOR<matrix::Dense<double>, double> &p);
-// template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
-//     equation::SOR<matrix::Dense<float>, float> &p);
+template void solver::solver<matrix::Dense<double>, double>::set_create_precond(
+    equation::SOR<matrix::Dense<double>, double> &p);
+template void solver::solver<matrix::Dense<float>, float>::set_create_precond(
+    equation::SOR<matrix::Dense<float>, float> &p);
 
 template void solver::solver<matrix::CRS<double>, double>::set_create_precond(
     equation::SOR<matrix::CRS<double>, double> &p);
@@ -118,10 +118,10 @@ solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
     equation::Jacobi<matrix::LinearOperator<float>, float> &p);
 
 // SOR
-// template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
-//     equation::SOR<matrix::Dense<double>, double> &p);
-// template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
-//     equation::SOR<matrix::Dense<float>, float> &p);
+template void solver::solver<matrix::Dense<double>, double>::set_apply_precond(
+    equation::SOR<matrix::Dense<double>, double> &p);
+template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
+    equation::SOR<matrix::Dense<float>, float> &p);
 
 template void solver::solver<matrix::CRS<double>, double>::set_apply_precond(
     equation::SOR<matrix::CRS<double>, double> &p);
