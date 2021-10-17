@@ -25,7 +25,7 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
       this->precond.M.send();
     }
   
-  T w = 1.0 / this->get_omega();
+  T w =  this->get_omega();
   A.diag(this->precond.M);
   blas::scal(w, this->precond.M);
   vml::reciprocal(this->precond.M, this->precond.M);
@@ -34,10 +34,10 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
 
   logger.solver_out();
 }
-// template void equation::SOR<matrix::Dense<float>, float>::create_precond(
-//     matrix::Dense<float> &A);
-// template void equation::SOR<matrix::Dense<double>, double>::create_precond(
-//     matrix::Dense<double> &A);
+template void equation::SOR<matrix::Dense<float>, float>::create_precond(
+    matrix::Dense<float> &A);
+template void equation::SOR<matrix::Dense<double>, double>::create_precond(
+    matrix::Dense<double> &A);
 
 template void
 equation::SOR<matrix::CRS<float>, float>::create_precond(matrix::CRS<float> &A);
@@ -59,16 +59,14 @@ void equation::SOR<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  this->precond.A->print_all();
-
-  throw std::runtime_error("error SOR precond is not impl.");
+  sor_kernel_precond(*this->precond.A, this->precond.M, z, r);
 
   logger.solver_out();
 }
-// template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
-//     const vector<float> &r, vector<float> &z);
-// template void equation::SOR<matrix::Dense<double>, double>::apply_precond(
-//     const vector<double> &r, vector<double> &z);
+template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
+    const vector<float> &r, vector<float> &z);
+template void equation::SOR<matrix::Dense<double>, double>::apply_precond(
+    const vector<double> &r, vector<double> &z);
 
 template void
 equation::SOR<matrix::CRS<float>, float>::apply_precond(const vector<float> &r,
@@ -131,7 +129,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
 
     sor_kernel_lower(A, d, t, r);
 
-    util::send(t);
+    t.send();
 
     blas::axpy(1.0, t, x);
 
