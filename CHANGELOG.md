@@ -37,6 +37,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Update Doxyfile to 1.8.17, and disable warning for non-document contents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/383
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
 - Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
 - change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
