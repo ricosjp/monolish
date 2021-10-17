@@ -37,5 +37,51 @@ void sor_kernel_lower(const monolish::matrix::Dense<T> &A, const vector<T> &D,
   }
   logger.func_out();
 }
+
+template <typename T>
+void sor_kernel_precond(const monolish::matrix::CRS<T> &A, const vector<T> &D,
+        vector<T> &x, const vector<T> &b) {
+
+    Logger &logger = Logger::get_instance();
+    logger.func_in(monolish_func);
+
+//     b.nonfree_recv();
+
+    for (int i = 0; i < (int)A.get_row(); i++) {
+        auto tmp = b.data()[i];
+        for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
+            if (i > A.col_ind[j]) { // lower
+                //printf("lower %d %d %f\n", i, A.col_ind[j], x.data()[A.col_ind[j]]);
+                tmp += A.val[j] * x.data()[A.col_ind[j]];
+            }
+        }
+            x.data()[i]   = tmp * D.data()[i];
+    }
+    for (int i = (int)A.get_row(); i >= 0; i--) {
+        auto tmp = 0.0;
+        for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
+            if (i < A.col_ind[j] ){ //upper
+                //printf("upper %d %d %f\n", i, A.col_ind[j], x.data()[A.col_ind[j]]);
+                tmp -= A.val[j] * x.data()[A.col_ind[j]];
+                
+            }
+        }
+            x.data()[i]  -= tmp * D.data()[i];
+            //printf("tmp %f %f %f\n", tmp,x.data()[i], D.data()[i]);
+    }
+//     x.send();
+
+    logger.func_out();
+}
+template <typename T>
+void sor_kernel_precond(const monolish::matrix::Dense<T> &A, const vector<T> &D,
+        vector<T> &x, const vector<T> &b) {
+
+    Logger &logger = Logger::get_instance();
+    logger.func_in(monolish_func);
+
+
+    logger.func_out();
+}
 } // namespace
 } // namespace monolish
