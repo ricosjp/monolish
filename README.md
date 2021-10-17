@@ -35,6 +35,11 @@ Documentation and Links
 - monolish log viewer: https://pypi.org/project/monolish-log-viewer/
 - monolish benchmark result: https://ricosjp.github.io/monolish_benchmark_result/
 
+External projects
+---
+- [gomalish](https://github.com/AtelierArith/gomalish) : Julia interface of monolish (by @AtelierArith)
+- [haskell-monolish](https://github.com/lotz84/haskell-monolish) : Haskell interface of monolish (by @lotz84)
+
 License
 --------
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)
