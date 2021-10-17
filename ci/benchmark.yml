@@ -17,6 +17,9 @@
     paths:
       - benchmark/
     expire_in: 360min
+  only:
+    - schedules
+    - tags
   before_script:
     - apt install -y ./$(find . -name "*.deb")
 
