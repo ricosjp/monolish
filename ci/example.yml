@@ -6,6 +6,9 @@
   script:
     - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ gpu
+  tags:
+    - gpu
+    - nvidia0-sm_61
 
 .example_cpu:
   stage: example

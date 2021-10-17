@@ -23,6 +23,9 @@
   script:
     - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_gpu
+  tags:
+    - gpu
+    - nvidia0-sm_61
 
 gpu_avx_clang_mkl:
   extends:
