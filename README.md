@@ -37,8 +37,8 @@ Documentation and Links
 
 External projects
 ---
-- [gomalish](https://github.com/AtelierArith/gomalish) : Julia interface of monolish (by @AtelierArith)
-- [haskell-monolish](https://github.com/lotz84/haskell-monolish) : Haskell interface of monolish (by @lotz84)
+- [gomalish](https://github.com/AtelierArith/gomalish) : Julia interface of monolish
+- [haskell-monolish](https://github.com/lotz84/haskell-monolish) : Haskell interface of monolish
 
 License
 --------
