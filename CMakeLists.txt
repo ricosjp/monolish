@@ -50,26 +50,57 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-message(STATUS "Last release = ${git_last_tag}")
 execute_process(
   COMMAND git rev-list ${git_last_tag}.. --count
   OUTPUT_VARIABLE git_dev_commits
   OUTPUT_STRIP_TRAILING_WHITESPACE
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-message(STATUS "Number of commits from last release = ${git_dev_commits}")
+if(git_dev_commits)
+  set(package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
+else()
+  set(package_version "${PROJECT_VERSION}")
+endif()
+message(STATUS "monolish version = ${package_version}")
 
 #
 # Build options
 #
+function(option_string name default help)
+  set(${name} ${default} CACHE STRING ${help})
+  # environment variable takes priority
+  if(DEFINED ENV{${name}})
+    message(STATUS "Overwrite by env variable: ${name}=$ENV{${name}}")
+    set(${name} "$ENV{${name}}" CACHE STRING ${help} FORCE)
+  endif()
+endfunction()
+
 option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_USE_MPI "Build with MPI" OFF)
 option(MONOLISH_USE_NVIDIA_GPU "Build with NVIDIA GPU" OFF)
 option(MONOLISH_NVIDIA_GPU_ARCH_ALL "Build library for all known CUDA architectures" OFF)
 option(MONOLISH_CCACHE_BUILD "Use ccache" ON)
-set(MONOLISH_NVIDIA_GPU_ARCH ""
-  CACHE STRING
+option_string(
+  MONOLISH_NVIDIA_GPU_ARCH
+  ""
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
+)
+
+# For container
+option_string(
+  MONOLISH_CONTAINER_REGISTRY
+  "ghcr.io/ricosjp/monolish"
+  "Container registry where monolish container will be uploaded"
+)
+option_string(
+  MONOLISH_CONTAINER_BASE_IMAGE
+  "ghcr.io/ricosjp/allgebra/cuda11_4/mkl"
+  "Base image upon which monolish container will be created"
+)
+option_string(
+  MONOLISH_CONTAINER_BASE_TAG
+  "21.09.0"
+  "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
 #
@@ -140,10 +171,15 @@ if(NOT MKL_FOUND)
       /usr/local/include
       /usr/include/openblas
   )
+  set(monolish_backend "oss")
+else()
+  set(monolish_backend "mkl")
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
+  set(monolish_backend "${monolish_backend}+nvidia")
 endif()
+message(STATUS "Backend = ${monolish_backend}")
 
 #
 # Glob source files
@@ -156,6 +192,14 @@ install(
   DIRECTORY include/
   DESTINATION include
   FILES_MATCHING PATTERN "*.hpp"
+)
+install(
+  DIRECTORY examples/
+  DESTINATION share/monolish/examples
+)
+install(
+  DIRECTORY benchmark/
+  DESTINATION share/monolish/benchmark
 )
 
 #
@@ -284,21 +328,9 @@ endif()
 #
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
+set(CPACK_PACKAGE_VERSION "${package_version}+${monolish_backend}")
 set(CPACK_SYSTEM_NAME "amd64")
-if(git_dev_commits)
-  # For non-tagged commit
-  set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-dev.${git_dev_commits}")
-  # if git_dev_commits == 0, it means current HEAD is tag.
-  # Then the `CPACK_PACKAGE_VERSION` should be its default value `PROJECT_VERSION`
-endif()
-if(MKL_FOUND)
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+mkl")
-else()
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+oss")
-endif()
-if(MONOLISH_USE_NVIDIA_GPU)
-  set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+nvidia")
-endif()
+set(CPACK_GENERATOR "DEB")
 
 # Set dependencies for .deb
 #
@@ -315,10 +347,24 @@ if(MONOLISH_USE_NVIDIA_GPU)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-${postfix}, libcusolver-${postfix}, libcusparse-${postfix}, libcublas-${postfix}, libelf1")
   unset(postfix)
 endif()
-# Use Debian default naming convention
-# See https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
-set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
+# Although `DEB-DEFAULT` should be preferred, this value will be used in following process.
+# Here we define it manually.
+#
+# https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
+set(CPACK_DEBIAN_FILE_NAME "monolish_${CPACK_PACKAGE_VERSION}_${CPACK_SYSTEM_NAME}.deb")
 
 # FIXME: Add RPM setting
 
 include(CPack)
+
+#
+# Build container
+#
+set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version})
+configure_file(docker/Dockerfile.in Dockerfile)
+configure_file(docker/compose.yml.in compose.yml)
+add_custom_target(docker
+  COMMAND docker-compose build
+  COMMENT "Build container ${docker_tag}"
+)

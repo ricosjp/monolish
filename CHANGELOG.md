@@ -31,16 +31,13 @@ Unreleased
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
-- Revise GitHub Pages deployment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/370
-- Revise Keep-Changelog CI job https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/369
 - fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
 - fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
-- Use cmake preset and deb package while CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/377
-- GitLab CI YAML is split into ci/*.yml https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/373
+- Update Doxyfile to 1.8.17, and disable warning for non-document contents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/383
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
 - Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
 - change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
@@ -49,12 +46,21 @@ Unreleased
     - `COO COO::transpose()` // return A^T --> `void COO::transpose()` // A=A^T
     - `void COO::transpose(COO B) const` // B=A^T -->  `void COO::transpose(const COO B)` // A=B^T
 - OpenMP parallelized transpose() functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
-- [gitlab CI] monolish-docker stage when master --> when tags
 - uses CUDA11 cuSPRASE SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/355 https://github.com/ricosjp/monolish/issues/76
 - remove nodiscard of COO.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/354 https://github.com/ricosjp/monolish/issues/74
 - [support cuda11.x] cuda11.x cusparse generic API for CRS SpMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65 https://github.com/ricosjp/monolish/issues/75
 - [update allgebra 21.09.0] cuda 10.1 -> cuda11.4  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
 - [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
+
+### Changed in CI
+- Use MONOLISH_NVIDIA_GPU_ARCH while CI instead of detecting GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/382
+- Fix CI setting of benchmark https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/381
+- Build CPU containers using cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/379
+- Use cmake preset and deb package while CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/377
+- GitLab CI YAML is split into ci/*.yml https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/373
+- Revise GitHub Pages deployment https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/370
+- Revise Keep-Changelog CI job https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/369
+- monolish-docker stage when master --> when tags
 
 0.14.2 - 2021/09/14
 -----------

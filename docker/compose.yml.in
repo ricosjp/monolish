@@ -1,0 +1,4 @@
+services:
+  monolish:
+    image: ${docker_tag}
+    build: .

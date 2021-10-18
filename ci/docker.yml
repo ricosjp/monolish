@@ -1,10 +1,21 @@
-monolish_docker:
+.docker:
   stage: deploy
-  image: docker:latest
+  image: docker/compose:1.29.1
   services:
     - docker:dind
   script:
-    - apk add coreutils make
-    - cd docker; make push 
-  only:
-    - tags
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker-compose build
+    - docker-compose push monolish
+
+mkl_docker:
+  extends:
+    - .docker
+  needs:
+    - cpu_avx_gcc_mkl_build
+
+oss_docker:
+  extends:
+    - .docker
+  needs:
+    - cpu_avx_gcc_oss_build

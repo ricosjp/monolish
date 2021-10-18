@@ -6,6 +6,9 @@
   script:
     - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ gpu
+  tags:
+    - gpu
+    - nvidia0-sm_61
 
 .example_cpu:
   stage: example
@@ -13,7 +16,6 @@
     - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ cpu
 
-# gpu mkl
 gpu_avx_clang_mkl_examples:
   extends:
     - .mkl_image
@@ -29,6 +31,22 @@ gpu_noavx_clang_mkl_examples:
     - .example_gpu
   needs:
     - "gpu_noavx_clang_mkl_build"
+
+gpu_avx_clang_oss_examples:
+  extends:
+    - .oss_image
+    - .gpu_avx_clang
+    - .example_gpu
+  needs:
+    - "gpu_avx_clang_oss_build"
+
+gpu_noavx_clang_oss_examples:
+  extends:
+    - .oss_image
+    - .gpu_noavx_clang
+    - .example_gpu
+  needs:
+    - "gpu_noavx_clang_oss_build"
 
 cpu_avx_gcc_mkl_examples:
   extends:

@@ -23,6 +23,9 @@
   script:
     - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_gpu
+  tags:
+    - gpu
+    - nvidia0-sm_61
 
 gpu_avx_clang_mkl:
   extends:
@@ -39,6 +42,22 @@ gpu_noavx_clang_mkl:
     - .test_gpu
   needs:
     - "gpu_noavx_clang_mkl_build"
+
+gpu_avx_clang_oss:
+  extends:
+    - .oss_image
+    - .gpu_avx_clang
+    - .test_gpu
+  needs:
+    - "gpu_avx_clang_oss_build"
+
+gpu_noavx_clang_oss:
+  extends:
+    - .oss_image
+    - .gpu_noavx_clang
+    - .test_gpu
+  needs:
+    - "gpu_noavx_clang_oss_build"
 
 cpu_avx_gcc_mkl:
   extends:
