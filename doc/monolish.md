@@ -8,7 +8,7 @@
 ## For users:
 - [What's monolish?](@ref monolish_intro)
 - Installation
-  - [Installation using apt (for ubuntu 20.04 and 20.10)](@ref install_guide)
+  - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
   - [Docker container with monolish installed](@ref monolish_docker)
 - [Data types](@ref data_type)
 - [Compile and run simple program on CPU](@ref cpu_dev)

@@ -1,5 +1,7 @@
 # Installation using apt {#install_guide}
 
+This page describes how to install pre-build monolish onto Ubuntu 20.04 LTS.
+
 ## For CPU
 
 Download deb file from Releases page and install as follows:

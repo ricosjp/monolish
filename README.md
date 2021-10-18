@@ -15,7 +15,7 @@ Quick start guide
 The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
 
 To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04 and 20.10)](https://ricosjp.github.io/monolish/master/d5/d38/install_guide.html)
+- [Installation using apt (for ubuntu 20.04)](https://ricosjp.github.io/monolish/master/d5/d38/install_guide.html)
 - [Docker container with monolish installed](https://ricosjp.github.io/monolish/master/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
 
 To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
