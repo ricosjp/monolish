@@ -30,6 +30,8 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
   blas::scal(w, this->precond.M);
   vml::reciprocal(this->precond.M, this->precond.M);
 
+  this->precond.M.recv(); // sor does not work on gpu now
+
   this->precond.A = &A;
 
   logger.solver_out();
