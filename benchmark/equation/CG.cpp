@@ -107,5 +107,24 @@ int main(int argc, char **argv) {
         size, iter);
   }
 
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<monolish::matrix::CRS<float>, float,
+              monolish::equation::CG<monolish::matrix::CRS<float>, float>,
+              monolish::equation::SOR<monolish::matrix::CRS<float>, float>>(
+        size, iter);
+  }
+
+  for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+       size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+       size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+    benchmark<
+        monolish::matrix::CRS<double>, double,
+        monolish::equation::CG<monolish::matrix::CRS<double>, double>,
+        monolish::equation::SOR<monolish::matrix::CRS<double>, double>>(
+        size, iter);
+  }
+
   return 0;
 }
