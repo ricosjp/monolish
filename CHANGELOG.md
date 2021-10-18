@@ -38,6 +38,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Delete CUDA version in doxygen installation page https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
 - Update Doxyfile to 1.8.17, and disable warning for non-document contents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/383
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
 - Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
@@ -54,6 +55,7 @@ Unreleased
 - [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
 
 ### Changed in CI
+- Generate doxygen HTML and setup [view app] button for Merge Request https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
 - Fix AVX tag https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/385
 - Use MONOLISH_NVIDIA_GPU_ARCH while CI instead of detecting GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/382
 - Fix CI setting of benchmark https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/381
