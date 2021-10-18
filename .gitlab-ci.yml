@@ -1,10 +1,10 @@
 stages:
+  - develop
   - build_lib
   - test
   - example
   - benchmark
   - python
-  - develop
   - deploy
 
 include:
