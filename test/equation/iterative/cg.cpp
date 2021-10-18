@@ -68,67 +68,99 @@ int main(int argc, char **argv) {
   }
 #endif
 
-//   std::cout << "Dense, " SOLVER_NAME << ", none" << std::endl;
-// 
-//   if (test<monolish::matrix::Dense<double>, double,
-//            monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
-//            monolish::equation::none<monolish::matrix::Dense<double>, double>>(
-//           file, check_ans, D_TOL) == false) {
-//     return 1;
-//   }
-//   if (test<monolish::matrix::Dense<float>, float,
-//            monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
-//            monolish::equation::none<monolish::matrix::Dense<float>, float>>(
-//           file, check_ans, S_TOL) == false) {
-//     return 1;
-//   }
-// 
-// #if PRECOND == 1
-//   std::cout << "Dense, " SOLVER_NAME << ", Jacobi" << std::endl;
-// 
-//   if (test<monolish::matrix::Dense<double>, double,
-//            monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
-//            monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
-//           file, check_ans, D_TOL) == false) {
-//     return 1;
-//   }
-//   if (test<monolish::matrix::Dense<float>, float,
-//            monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
-//            monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
-//           file, check_ans, S_TOL) == false) {
-//     return 1;
-//   }
-// #endif
-// 
-//   if (monolish::util::build_with_gpu() == false) {
-//     std::cout << "LinearOperator, " SOLVER_NAME << ", none" << std::endl;
+  std::cout << "Dense, " SOLVER_NAME << ", none" << std::endl;
+
+  if (test<monolish::matrix::Dense<double>, double,
+           monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
+           monolish::equation::none<monolish::matrix::Dense<double>, double>>(
+          file, check_ans, D_TOL) == false) {
+    return 1;
+  }
+  if (test<monolish::matrix::Dense<float>, float,
+           monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
+           monolish::equation::none<monolish::matrix::Dense<float>, float>>(
+          file, check_ans, S_TOL) == false) {
+    return 1;
+  }
+
+#if PRECOND == 1
+  std::cout << "Dense, " SOLVER_NAME << ", Jacobi" << std::endl;
+
+  if (test<monolish::matrix::Dense<double>, double,
+           monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
+           monolish::equation::Jacobi<monolish::matrix::Dense<double>, double>>(
+          file, check_ans, D_TOL) == false) {
+    return 1;
+  }
+  if (test<monolish::matrix::Dense<float>, float,
+           monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
+           monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
+          file, check_ans, S_TOL) == false) {
+    return 1;
+  }
+
+  std::cout << "Dense, " SOLVER_NAME << ", SOR" << std::endl;
+  if (test<monolish::matrix::Dense<double>, double,
+           monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
+           monolish::equation::SOR<monolish::matrix::Dense<double>, double>>(
+          file, check_ans, D_TOL) == false) {
+    return 1;
+  }
+  if (test<monolish::matrix::Dense<float>, float,
+           monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
+           monolish::equation::SOR<monolish::matrix::Dense<float>, float>>(
+          file, check_ans, S_TOL) == false) {
+    return 1;
+  }
+#endif
+
+  if (monolish::util::build_with_gpu() == false) {
+    std::cout << "LinearOperator, " SOLVER_NAME << ", none" << std::endl;
+
+    if (test<monolish::matrix::LinearOperator<double>, double,
+             monolish::equation::SOLVER<
+                 monolish::matrix::LinearOperator<double>, double>,
+             monolish::equation::none<monolish::matrix::LinearOperator<double>,
+                                      double>>(file, check_ans, D_TOL) ==
+        false) {
+      return 1;
+    }
+    if (test<monolish::matrix::LinearOperator<float>, float,
+             monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
+                                        float>,
+             monolish::equation::none<monolish::matrix::LinearOperator<float>,
+                                      float>>(file, check_ans, S_TOL) ==
+        false) {
+      return 1;
+    }
+  }
+
+#if PRECOND == 1
+  if (monolish::util::build_with_gpu() == false) {
+    std::cout << "LinearOperator, " SOLVER_NAME << ", Jacobi" << std::endl;
+
+    if (test<monolish::matrix::LinearOperator<double>, double,
+             monolish::equation::SOLVER<
+                 monolish::matrix::LinearOperator<double>, double>,
+             monolish::equation::Jacobi<
+                 monolish::matrix::LinearOperator<double>, double>>(
+            file, check_ans, D_TOL) == false) {
+      return 1;
+    }
+    if (test<monolish::matrix::LinearOperator<float>, float,
+             monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
+                                        float>,
+             monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
+                                        float>>(file, check_ans, S_TOL) ==
+        false) {
+      return 1;
+    }
+//     std::cout << "LinearOperator, " SOLVER_NAME << ", SOR" << std::endl;
 // 
 //     if (test<monolish::matrix::LinearOperator<double>, double,
 //              monolish::equation::SOLVER<
 //                  monolish::matrix::LinearOperator<double>, double>,
-//              monolish::equation::none<monolish::matrix::LinearOperator<double>,
-//                                       double>>(file, check_ans, D_TOL) ==
-//         false) {
-//       return 1;
-//     }
-//     if (test<monolish::matrix::LinearOperator<float>, float,
-//              monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
-//                                         float>,
-//              monolish::equation::none<monolish::matrix::LinearOperator<float>,
-//                                       float>>(file, check_ans, S_TOL) ==
-//         false) {
-//       return 1;
-//     }
-//   }
-// 
-// #if PRECOND == 1
-//   if (monolish::util::build_with_gpu() == false) {
-//     std::cout << "LinearOperator, " SOLVER_NAME << ", Jacobi" << std::endl;
-// 
-//     if (test<monolish::matrix::LinearOperator<double>, double,
-//              monolish::equation::SOLVER<
-//                  monolish::matrix::LinearOperator<double>, double>,
-//              monolish::equation::Jacobi<
+//              monolish::equation::SOR<
 //                  monolish::matrix::LinearOperator<double>, double>>(
 //             file, check_ans, D_TOL) == false) {
 //       return 1;
@@ -136,13 +168,13 @@ int main(int argc, char **argv) {
 //     if (test<monolish::matrix::LinearOperator<float>, float,
 //              monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
 //                                         float>,
-//              monolish::equation::Jacobi<monolish::matrix::LinearOperator<float>,
+//              monolish::equation::SOR<monolish::matrix::LinearOperator<float>,
 //                                         float>>(file, check_ans, S_TOL) ==
 //         false) {
 //       return 1;
 //     }
-//   }
-// #endif
+  }
+#endif
 
   return 0;
 }
