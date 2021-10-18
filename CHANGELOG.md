@@ -53,6 +53,7 @@ Unreleased
 - [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
 
 ### Changed in CI
+- Fix AVX tag https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/385
 - Use MONOLISH_NVIDIA_GPU_ARCH while CI instead of detecting GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/382
 - Fix CI setting of benchmark https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/381
 - Build CPU containers using cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/379
