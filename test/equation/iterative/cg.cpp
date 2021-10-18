@@ -51,6 +51,21 @@ int main(int argc, char **argv) {
           file, check_ans, S_TOL) == false) {
     return 1;
   }
+
+  std::cout << "CRS, " SOLVER_NAME << ", SOR" << std::endl;
+
+  if (test<monolish::matrix::CRS<double>, double,
+           monolish::equation::SOLVER<monolish::matrix::CRS<double>, double>,
+           monolish::equation::SOR<monolish::matrix::CRS<double>, double>>(
+          file, check_ans, D_TOL) == false) {
+    return 1;
+  }
+  if (test<monolish::matrix::CRS<float>, float,
+           monolish::equation::SOLVER<monolish::matrix::CRS<float>, float>,
+           monolish::equation::SOR<monolish::matrix::CRS<float>, float>>(
+          file, check_ans, S_TOL) == false) {
+    return 1;
+  }
 #endif
 
   std::cout << "Dense, " SOLVER_NAME << ", none" << std::endl;
@@ -80,6 +95,20 @@ int main(int argc, char **argv) {
   if (test<monolish::matrix::Dense<float>, float,
            monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
            monolish::equation::Jacobi<monolish::matrix::Dense<float>, float>>(
+          file, check_ans, S_TOL) == false) {
+    return 1;
+  }
+
+  std::cout << "Dense, " SOLVER_NAME << ", SOR" << std::endl;
+  if (test<monolish::matrix::Dense<double>, double,
+           monolish::equation::SOLVER<monolish::matrix::Dense<double>, double>,
+           monolish::equation::SOR<monolish::matrix::Dense<double>, double>>(
+          file, check_ans, D_TOL) == false) {
+    return 1;
+  }
+  if (test<monolish::matrix::Dense<float>, float,
+           monolish::equation::SOLVER<monolish::matrix::Dense<float>, float>,
+           monolish::equation::SOR<monolish::matrix::Dense<float>, float>>(
           file, check_ans, S_TOL) == false) {
     return 1;
   }
@@ -126,6 +155,25 @@ int main(int argc, char **argv) {
         false) {
       return 1;
     }
+    //     std::cout << "LinearOperator, " SOLVER_NAME << ", SOR" << std::endl;
+    //
+    //     if (test<monolish::matrix::LinearOperator<double>, double,
+    //              monolish::equation::SOLVER<
+    //                  monolish::matrix::LinearOperator<double>, double>,
+    //              monolish::equation::SOR<
+    //                  monolish::matrix::LinearOperator<double>, double>>(
+    //             file, check_ans, D_TOL) == false) {
+    //       return 1;
+    //     }
+    //     if (test<monolish::matrix::LinearOperator<float>, float,
+    //              monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
+    //                                         float>,
+    //              monolish::equation::SOR<monolish::matrix::LinearOperator<float>,
+    //                                         float>>(file, check_ans, S_TOL)
+    //                                         ==
+    //         false) {
+    //       return 1;
+    //     }
   }
 #endif
 

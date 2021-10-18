@@ -14,22 +14,26 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  // not impl.
-  //
-  //   if (A.get_row() != A.get_col()) {
-  //     throw std::runtime_error("error A.row != A.col");
-  //   }
-  //
-  //   this->precond.M.resize(A.get_row());
-  //   // send M
-  //   if (A.get_device_mem_stat() == true) {
-  //     this->precond.M.send();
-  //   }
-  //
-  //   A.diag(this->precond.M);
-  //   vml::reciprocal(this->precond.M, this->precond.M);
+  if (A.get_row() != A.get_col()) {
+    throw std::runtime_error("error A.row != A.col");
+  }
 
-  throw std::runtime_error("error ssor precond is not impl.");
+  this->precond.M.resize(A.get_row());
+
+  // send M
+  if (A.get_device_mem_stat() == true) {
+    this->precond.M.send();
+  }
+
+  T w = this->get_omega();
+  A.diag(this->precond.M);
+  blas::scal(w, this->precond.M);
+  vml::reciprocal(this->precond.M, this->precond.M);
+
+  this->precond.M.recv(); // sor does not work on gpu now
+
+  this->precond.A = &A;
+
   logger.solver_out();
 }
 template void equation::SOR<matrix::Dense<float>, float>::create_precond(
@@ -42,12 +46,12 @@ equation::SOR<matrix::CRS<float>, float>::create_precond(matrix::CRS<float> &A);
 template void equation::SOR<matrix::CRS<double>, double>::create_precond(
     matrix::CRS<double> &A);
 
-template void
-equation::SOR<matrix::LinearOperator<float>, float>::create_precond(
-    matrix::LinearOperator<float> &A);
-template void
-equation::SOR<matrix::LinearOperator<double>, double>::create_precond(
-    matrix::LinearOperator<double> &A);
+// template void
+// equation::SOR<matrix::LinearOperator<float>, float>::create_precond(
+//     matrix::LinearOperator<float> &A);
+// template void
+// equation::SOR<matrix::LinearOperator<double>, double>::create_precond(
+//     matrix::LinearOperator<double> &A);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -57,10 +61,8 @@ void equation::SOR<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  // not impl. now
-  //   vml::mul(this->precond.M, r, z); // x = Ab
+  sor_kernel_precond(*this->precond.A, this->precond.M, z, r);
 
-  throw std::runtime_error("error ssor precond is not impl.");
   logger.solver_out();
 }
 template void equation::SOR<matrix::Dense<float>, float>::apply_precond(
@@ -74,12 +76,12 @@ equation::SOR<matrix::CRS<float>, float>::apply_precond(const vector<float> &r,
 template void equation::SOR<matrix::CRS<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
-template void
-equation::SOR<matrix::LinearOperator<float>, float>::apply_precond(
-    const vector<float> &r, vector<float> &z);
-template void
-equation::SOR<matrix::LinearOperator<double>, double>::apply_precond(
-    const vector<double> &r, vector<double> &z);
+// template void
+// equation::SOR<matrix::LinearOperator<float>, float>::apply_precond(
+//     const vector<float> &r, vector<float> &z);
+// template void
+// equation::SOR<matrix::LinearOperator<double>, double>::apply_precond(
+//     const vector<double> &r, vector<double> &z);
 
 ////////////////////////////
 // solver
@@ -129,7 +131,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
 
     sor_kernel_lower(A, d, t, r);
 
-    util::send(t);
+    t.send();
 
     blas::axpy(1.0, t, x);
 

@@ -28,6 +28,7 @@ bool test(const char *file, const int check_ans, const T tol) {
 
   // precond setting
   PRECOND precond;
+  precond.set_omega(1.9);
   solver.set_create_precond(precond);
   solver.set_apply_precond(precond);
 

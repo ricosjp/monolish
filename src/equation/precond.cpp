@@ -63,12 +63,12 @@ template void solver::solver<matrix::CRS<double>, double>::set_create_precond(
 template void solver::solver<matrix::CRS<float>, float>::set_create_precond(
     equation::SOR<matrix::CRS<float>, float> &p);
 
-template void
-solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
-    equation::SOR<matrix::LinearOperator<double>, double> &p);
-template void
-solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
-    equation::SOR<matrix::LinearOperator<float>, float> &p);
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<float>, float> &p);
 
 /////
 template <typename MATRIX, typename T>
@@ -128,10 +128,10 @@ template void solver::solver<matrix::CRS<double>, double>::set_apply_precond(
 template void solver::solver<matrix::CRS<float>, float>::set_apply_precond(
     equation::SOR<matrix::CRS<float>, float> &p);
 
-template void
-solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
-    equation::SOR<matrix::LinearOperator<double>, double> &p);
-template void
-solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
-    equation::SOR<matrix::LinearOperator<float>, float> &p);
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
+//     equation::SOR<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
+//     equation::SOR<matrix::LinearOperator<float>, float> &p);
 } // namespace monolish

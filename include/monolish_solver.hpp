@@ -177,7 +177,7 @@ public:
   /**
    * @brief set the relaxation coefficient omega for SOR method (0 < w < 2,
    * Default: 1.9)
-   * @parm[in] w input omega value
+   * @param[in] w input omega value
    * @note
    * This variable is only used in SOR method
    */
@@ -199,7 +199,7 @@ template <typename MATRIX, typename Float> class precondition {
 private:
 public:
   vector<Float> M;
-  MATRIX tmpA;
+  MATRIX *A;
 
   std::function<void(MATRIX &)> create_precond;
   std::function<void(const vector<Float> &r, vector<Float> &z)> apply_precond;
