@@ -10,6 +10,17 @@ clang-format:
   script:
     - check_format.sh
 
+doxygen:
+  extends:
+    - .develop
+  image: ghcr.io/ricosjp/allgebra/doxygen:21.10.2
+  script:
+    - doxygen
+  artifacts:
+    paths:
+      - html/
+    expire_in: 1 day
+
 markdown-link-check:
   extends:
     - .develop
