@@ -155,24 +155,25 @@ int main(int argc, char **argv) {
         false) {
       return 1;
     }
-//     std::cout << "LinearOperator, " SOLVER_NAME << ", SOR" << std::endl;
-// 
-//     if (test<monolish::matrix::LinearOperator<double>, double,
-//              monolish::equation::SOLVER<
-//                  monolish::matrix::LinearOperator<double>, double>,
-//              monolish::equation::SOR<
-//                  monolish::matrix::LinearOperator<double>, double>>(
-//             file, check_ans, D_TOL) == false) {
-//       return 1;
-//     }
-//     if (test<monolish::matrix::LinearOperator<float>, float,
-//              monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
-//                                         float>,
-//              monolish::equation::SOR<monolish::matrix::LinearOperator<float>,
-//                                         float>>(file, check_ans, S_TOL) ==
-//         false) {
-//       return 1;
-//     }
+    //     std::cout << "LinearOperator, " SOLVER_NAME << ", SOR" << std::endl;
+    //
+    //     if (test<monolish::matrix::LinearOperator<double>, double,
+    //              monolish::equation::SOLVER<
+    //                  monolish::matrix::LinearOperator<double>, double>,
+    //              monolish::equation::SOR<
+    //                  monolish::matrix::LinearOperator<double>, double>>(
+    //             file, check_ans, D_TOL) == false) {
+    //       return 1;
+    //     }
+    //     if (test<monolish::matrix::LinearOperator<float>, float,
+    //              monolish::equation::SOLVER<monolish::matrix::LinearOperator<float>,
+    //                                         float>,
+    //              monolish::equation::SOR<monolish::matrix::LinearOperator<float>,
+    //                                         float>>(file, check_ans, S_TOL)
+    //                                         ==
+    //         false) {
+    //       return 1;
+    //     }
   }
 #endif
 

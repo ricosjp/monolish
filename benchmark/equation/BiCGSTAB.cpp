@@ -123,8 +123,8 @@ int main(int argc, char **argv) {
     benchmark<
         monolish::matrix::CRS<double>, double,
         monolish::equation::BiCGSTAB<monolish::matrix::CRS<double>, double>,
-        monolish::equation::SOR<monolish::matrix::CRS<double>, double>>(
-        size, iter);
+        monolish::equation::SOR<monolish::matrix::CRS<double>, double>>(size,
+                                                                        iter);
   }
 
   return 0;

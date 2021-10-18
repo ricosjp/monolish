@@ -14,18 +14,18 @@ void equation::SOR<MATRIX, T>::create_precond(MATRIX &A) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-    if (A.get_row() != A.get_col()) {
-      throw std::runtime_error("error A.row != A.col");
-    }
+  if (A.get_row() != A.get_col()) {
+    throw std::runtime_error("error A.row != A.col");
+  }
 
-    this->precond.M.resize(A.get_row());
+  this->precond.M.resize(A.get_row());
 
-    // send M
-    if (A.get_device_mem_stat() == true) {
-      this->precond.M.send();
-    }
-  
-  T w =  this->get_omega();
+  // send M
+  if (A.get_device_mem_stat() == true) {
+    this->precond.M.send();
+  }
+
+  T w = this->get_omega();
   A.diag(this->precond.M);
   blas::scal(w, this->precond.M);
   vml::reciprocal(this->precond.M, this->precond.M);
