@@ -52,7 +52,7 @@ void sor_kernel_precond(const monolish::matrix::CRS<T> &A, const vector<T> &D,
         auto tmp = b_tmp.data()[i];
         for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
             if (i > A.col_ind[j]) { // lower
-                tmp += A.val[j] * x.data()[A.col_ind[j]];
+                tmp -= A.val[j] * x.data()[A.col_ind[j]];
             }
         }
             x.data()[i]   = tmp * D.data()[i];
@@ -61,7 +61,7 @@ void sor_kernel_precond(const monolish::matrix::CRS<T> &A, const vector<T> &D,
         auto tmp = 0.0;
         for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
             if (i < A.col_ind[j] ){ //upper
-                tmp -= A.val[j] * x.data()[A.col_ind[j]];
+                tmp += A.val[j] * x.data()[A.col_ind[j]];
                 
             }
         }
