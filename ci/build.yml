@@ -2,7 +2,7 @@
 # Build stage
 #
 .build:
-  stage: build_lib
+  stage: build
   script:
     - apt update
     - apt install -y gfortran

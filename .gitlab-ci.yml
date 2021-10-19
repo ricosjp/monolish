@@ -1,6 +1,6 @@
 stages:
   - develop
-  - build_lib
+  - build
   - test
   - example
   - benchmark
