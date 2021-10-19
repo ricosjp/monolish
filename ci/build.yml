@@ -27,7 +27,7 @@
       - Dockerfile
       - compose.yml
       - test/
-    expire_in: 360min
+    expire_in: 1 day
   needs: []
 
 .build_all:
@@ -45,8 +45,10 @@
       - "*.deb"
       - Dockerfile
       - compose.yml
-    expire_in: 360min
+    expire_in: 1 day
   needs: []
+  tags:
+    - cpu-ge-8
 
 gpu_avx_mkl_build:
   extends:
