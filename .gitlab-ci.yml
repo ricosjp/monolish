@@ -10,6 +10,7 @@ stages:
 include:
   - local: ci/env.yml
   - local: ci/build.yml
+  - local: ci/build_generated.yml
   - local: ci/test.yml
   - local: ci/python.yml
   - local: ci/example.yml
