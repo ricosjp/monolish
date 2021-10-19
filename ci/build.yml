@@ -30,7 +30,7 @@
     expire_in: 1 day
   needs: []
 
-.build_all:
+.build_deb:
   stage: build
   extends:
     - .ccache
@@ -47,22 +47,27 @@
       - compose.yml
     expire_in: 1 day
   needs: []
+  # only:
+  #   - master
+  #   - tags
+
+.build_deb_all:
+  extends:
+    - .build_deb
+  variables:
+    PRESET: "gpu-avx-none-all"
   tags:
     - cpu-ge-8
-  only:
-    - master
-    - tags
 
 gpu_all_mkl_build:
   extends:
     - .mkl_image
-    - .gpu_all
-    - .build_all
+    - .build_deb_all
+
 gpu_all_oss_build:
   extends:
     - .oss_image
-    - .gpu_all
-    - .build_all
+    - .build_deb_all
 
 # MPI_build_test:
 #   stage: build_lib

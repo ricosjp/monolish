@@ -19,10 +19,27 @@ def generate_build_config():
     print(yaml.dump(targets))
 
 
+def generate_build_deb_config():
+    targets = {
+        f"gpu_sm_{sm}_{math}_build": {
+            "extends": [f".{math}_image", ".build"],
+            "variables": {
+                "PRESET": "gpu-avx-none",
+                "MONOLISH_NVIDIA_GPU_ARCH": f"sm_{sm}",
+            },
+        }
+        for math in ["mkl", "oss"]
+        for sm in ["52", "60", "61", "70", "75", "80"]
+    }
+    print(yaml.dump(targets))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("target", choices=["build"])
+    parser.add_argument("target", choices=["build", "build_deb"])
     args = parser.parse_args()
 
     if args.target == "build":
         generate_build_config()
+    if args.target == "build_deb":
+        generate_build_deb_config()
