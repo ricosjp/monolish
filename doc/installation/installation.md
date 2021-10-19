@@ -1,39 +1,56 @@
 # Installation using apt {#install_guide}
 
+This page describes how to install pre-build monolish onto Ubuntu 20.04 LTS.
+Following commands assumes `wget` command exists. It can be installed by
+
+\code{shell}
+$ sudo apt update
+$ sudo apt install -y wget
+\endcode
+
 ## For CPU
 
-Download deb file from Releases page and install as follows:
+monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/0.14.2):
+
 \code{shell}
-$ sudo apt update && sudo apt install wget
 $ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss_amd64.deb
-$ sudo apt install ./monolish_0.14.2-1+oss_amd64.deb
+$ sudo apt install -y ./monolish_0.14.2-1+oss_amd64.deb
 \endcode
 
-- +oss is `OSS` variant
-- +mkl is `MKL` variant
+There are two variants according to backend BLAS and LAPACK implementation:
 
-## For GPU
-First, you need to enable CUDA 10.1 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:
+- [+oss](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss_amd64.deb) means it uses OpenBLAS
+- [+mkl](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+mkl_amd64.deb) means it uses Intel MKL
+
+## For NVIDIA GPU
+
+monolish for NVIDIA GPU depends on CUDA, but monolish deb package does not contains CUDA libraries.
+This deb assumes CUDA apt repository is enabled, and tries to get CUDA libraries from there.
+You can enable the CUDA apt repository as following:
+
 \code{shell}
-$ sudo apt update && sudo apt install wget gnupg software-properties-common
-$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-$ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-$ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-$ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
-$ sudo apt install libcublas10=10.2.1.243-1
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+$ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+$ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+$ sudo apt-get update
 \endcode
 
-Download deb file from Releases page and install as follows:
+See https://developer.nvidia.com/cuda-downloads for more detail.
+
+monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/0.14.2):
+
 \code{shell}
-$ sudo apt update && sudo apt install wget
 $ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb
-$ sudo apt install ./monolish_0.14.2-1+oss+nvidia_amd64.deb
+$ sudo apt install -y ./monolish_0.14.2-1+oss+nvidia_amd64.deb
 \endcode
 
-- +oss+nvidia is `OSS`+`NVIDIA` variant
-- +mkl+nvidia is `MKL`+`NVIDIA` variant
+There are two variants according to backend BLAS and LAPACK implementation for CPU:
 
-cuSPARSE, cuSOLVER libraries dependencies are automatically resolved via apt.
+- [+oss+nvidia](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb) means it uses OpenBLAS and CUDA
+- [+mkl+nvidia](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+mkl+nvidia_amd64.deb) means it uses Intel MKL and CUDA
+
+CUDA libraries will be installed as its dependencies.
 
 ## Other Archtectures or OS
 See [here](@ref build_guide).

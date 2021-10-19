@@ -18,6 +18,7 @@
       - compose.yml
       - test/
     expire_in: 360min
+  needs: []
 
 gpu_avx_clang_mkl_build:
   extends:
