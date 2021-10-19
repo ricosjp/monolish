@@ -46,7 +46,7 @@ get_ci_info:
 
 
 cpu: intel_mkl
-gpu: run_nvidia
+gpu: nvidia
 run_cpu: run_intel_mkl
 run_gpu: run_nvidia
 
