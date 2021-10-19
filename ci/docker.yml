@@ -7,6 +7,9 @@
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker-compose build
     - docker-compose push monolish
+  only:
+    - master
+    - tags
 
 mkl_docker:
   extends:
@@ -19,3 +22,15 @@ oss_docker:
     - .docker
   needs:
     - cpu_avx_gcc_oss_build
+
+mkl_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_all_mkl_build
+
+oss_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_all_oss_build

@@ -13,45 +13,45 @@
     - apt install -y ./$(find . -name "*.deb")
     - make -C examples/ cpu
 
-gpu_avx_clang_mkl_examples:
+gpu_avx_mkl_examples:
   extends:
     - .mkl_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .example_gpu
   needs:
-    - "gpu_avx_clang_mkl_build"
+    - "gpu_avx_mkl_build"
   tags:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_clang_mkl_examples:
+gpu_none_mkl_examples:
   extends:
     - .mkl_image
-    - .gpu_noavx_clang
+    - .gpu_none
     - .example_gpu
   needs:
-    - "gpu_noavx_clang_mkl_build"
+    - "gpu_none_mkl_build"
   tags:
     - nvidia0-sm_61
 
-gpu_avx_clang_oss_examples:
+gpu_avx_oss_examples:
   extends:
     - .oss_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .example_gpu
   needs:
-    - "gpu_avx_clang_oss_build"
+    - "gpu_avx_oss_build"
   tags:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_clang_oss_examples:
+gpu_none_oss_examples:
   extends:
     - .oss_image
-    - .gpu_noavx_clang
+    - .gpu_none
     - .example_gpu
   needs:
-    - "gpu_noavx_clang_oss_build"
+    - "gpu_none_oss_build"
   tags:
     - nvidia0-sm_61
 
@@ -73,23 +73,23 @@ cpu_none_gcc_mkl_examples:
   needs:
     - "cpu_none_gcc_mkl_build"
 
-cpu_avx_clang_mkl_examples:
+cpu_avx_mkl_examples:
   extends:
     - .mkl_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .example_cpu
   needs:
-    - "cpu_avx_clang_mkl_build"
+    - "cpu_avx_mkl_build"
   tags:
     - avx
 
-cpu_none_clang_mkl_examples:
+cpu_none_mkl_examples:
   extends:
     - .mkl_image
-    - .cpu_none_clang
+    - .cpu_none
     - .example_cpu
   needs:
-    - "cpu_none_clang_mkl_build"
+    - "cpu_none_mkl_build"
 
 cpu_avx_gcc_oss_examples:
   extends:
@@ -109,20 +109,20 @@ cpu_none_gcc_oss_examples:
   needs:
     - "cpu_none_gcc_oss_build"
 
-cpu_avx_clang_oss_examples:
+cpu_avx_oss_examples:
   extends:
     - .oss_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .example_cpu
   needs:
-    - "cpu_avx_clang_oss_build"
+    - "cpu_avx_oss_build"
   tags:
     - avx
 
-cpu_none_clang_oss_examples:
+cpu_none_oss_examples:
   extends:
     - .oss_image
-    - .cpu_none_clang
+    - .cpu_none
     - .example_cpu
   needs:
-    - "cpu_none_clang_oss_build"
+    - "cpu_none_oss_build"

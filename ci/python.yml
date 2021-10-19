@@ -37,7 +37,7 @@ python-gpu:
     - .python
     - .logging_artifact
   needs:
-    - gpu_avx_clang_mkl
+    - gpu_avx_mkl
   script:
     - cd python
     - poetry install

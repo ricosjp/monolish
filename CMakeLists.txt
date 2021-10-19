@@ -177,7 +177,12 @@ else()
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
-  set(monolish_backend "${monolish_backend}+nvidia")
+  set(monolish_backend "${monolish_backend}-nvidia")
+  if(NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
+    # Remove `_` since it should be a special charactor for deb filename
+    string(REPLACE "_" "" gpu_arch ${nvidia_gpu_arch})
+    set(monolish_backend "${monolish_backend}-${gpu_arch}")
+  endif()
 endif()
 message(STATUS "Backend = ${monolish_backend}")
 
