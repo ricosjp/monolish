@@ -1,6 +1,8 @@
 gather_deb:
   stage: deploy
   needs:
+    - cpu_avx_gcc_mkl_build
+    - cpu_avx_gcc_oss_build
     - gpu_sm_52_mkl_build
     - gpu_sm_60_mkl_build
     - gpu_sm_61_mkl_build
@@ -16,7 +18,7 @@ gather_deb:
     - gpu_all_mkl_build
     - gpu_all_oss_build
   script:
-    - rm -rf Dockerfile compose.yml
+    - rm -rf Dockerfile compose.yml test/
   artifacts:
     paths:
       - "*.deb"
