@@ -35,13 +35,13 @@ gpu_avx_mkl:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_mkl:
+gpu_none_mkl:
   extends:
     - .mkl_image
-    - .gpu_noavx
+    - .gpu_none
     - .test_gpu
   needs:
-    - "gpu_noavx_mkl_build"
+    - "gpu_none_mkl_build"
   tags:
     - nvidia0-sm_61
 
@@ -56,13 +56,13 @@ gpu_avx_oss:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_oss:
+gpu_none_oss:
   extends:
     - .oss_image
-    - .gpu_noavx
+    - .gpu_none
     - .test_gpu
   needs:
-    - "gpu_noavx_oss_build"
+    - "gpu_none_oss_build"
   tags:
     - nvidia0-sm_61
 
