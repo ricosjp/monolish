@@ -1,8 +1,18 @@
 #
 # Build stage
 #
+.ccache:
+  variables:
+    CCACHE_DIR: ${CI_PROJECT_DIR}/ccache
+  cache:
+    key: ccache
+    paths:
+      - ${CI_PROJECT_DIR}/ccache
+
 .build:
   stage: build
+  extends:
+    - .ccache
   script:
     - apt update
     - apt install -y gfortran ccache
@@ -19,12 +29,24 @@
       - test/
     expire_in: 360min
   needs: []
-  variables:
-    CCACHE_DIR: ${CI_PROJECT_DIR}/ccache
-  cache:
-    key: ccache
+
+.build_all:
+  stage: build
+  extends:
+    - .ccache
+  script:
+    - apt update
+    - apt install -y gfortran ccache
+    - cmake --preset=${PRESET}
+    - cmake --build build/${PRESET} --target package
+    - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
+  artifacts:
     paths:
-      - ${CI_PROJECT_DIR}/ccache
+      - "*.deb"
+      - Dockerfile
+      - compose.yml
+    expire_in: 360min
+  needs: []
 
 gpu_avx_mkl_build:
   extends:
@@ -50,12 +72,12 @@ gpu_all_mkl_build:
   extends:
     - .mkl_image
     - .gpu_all
-    - .build
+    - .build_all
 gpu_all_oss_build:
   extends:
     - .oss_image
     - .gpu_all
-    - .build
+    - .build_all
 cpu_avx_mkl_build:
   extends:
     - .mkl_image
