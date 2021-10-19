@@ -1,5 +1,5 @@
 .package:
-  stage: build
+  stage: package
   extends:
     - .ccache
   script:
