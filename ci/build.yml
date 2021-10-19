@@ -40,6 +40,16 @@ gpu_none_oss_build:
     - .oss_image
     - .gpu_none
     - .build
+gpu_all_mkl_build:
+  extends:
+    - .mkl_image
+    - .gpu_all
+    - .build
+gpu_all_oss_build:
+  extends:
+    - .oss_image
+    - .gpu_all
+    - .build
 cpu_avx_mkl_build:
   extends:
     - .mkl_image
