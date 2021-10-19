@@ -23,14 +23,14 @@
   before_script:
     - apt install -y ./$(find . -name "*.deb")
 
-gpu_avx_clang_mkl_benchmark:
+gpu_avx_mkl_benchmark:
   extends:
     - .mkl_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .gpu_runner
     - .benchmark
   needs:
-    - "gpu_avx_clang_mkl_build"
+    - "gpu_avx_mkl_build"
   script:
     - cd benchmark
     - make get_spec_nvidia

@@ -20,35 +20,35 @@
     expire_in: 360min
   needs: []
 
-gpu_avx_clang_mkl_build:
+gpu_avx_mkl_build:
   extends:
     - .mkl_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .build
-gpu_noavx_clang_mkl_build:
+gpu_noavx_mkl_build:
   extends:
     - .mkl_image
-    - .gpu_noavx_clang
+    - .gpu_noavx
     - .build
-gpu_avx_clang_oss_build:
+gpu_avx_oss_build:
   extends:
     - .oss_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .build
-gpu_noavx_clang_oss_build:
+gpu_noavx_oss_build:
   extends:
     - .oss_image
-    - .gpu_noavx_clang
+    - .gpu_noavx
     - .build
-cpu_avx_clang_mkl_build:
+cpu_avx_mkl_build:
   extends:
     - .mkl_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .build
-cpu_none_clang_mkl_build:
+cpu_none_mkl_build:
   extends:
     - .mkl_image
-    - .cpu_none_clang
+    - .cpu_none
     - .build
 cpu_avx_gcc_mkl_build:
   extends:
@@ -60,15 +60,15 @@ cpu_none_gcc_mkl_build:
     - .mkl_image
     - .cpu_none_gcc
     - .build
-cpu_avx_clang_oss_build:
+cpu_avx_oss_build:
   extends:
     - .oss_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .build
-cpu_none_clang_oss_build:
+cpu_none_oss_build:
   extends:
     - .oss_image
-    - .cpu_none_clang
+    - .cpu_none
     - .build
 cpu_avx_gcc_oss_build:
   extends:

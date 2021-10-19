@@ -24,45 +24,45 @@
     - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_gpu
 
-gpu_avx_clang_mkl:
+gpu_avx_mkl:
   extends:
     - .mkl_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .test_gpu
   needs:
-    - "gpu_avx_clang_mkl_build"
+    - "gpu_avx_mkl_build"
   tags:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_clang_mkl:
+gpu_noavx_mkl:
   extends:
     - .mkl_image
-    - .gpu_noavx_clang
+    - .gpu_noavx
     - .test_gpu
   needs:
-    - "gpu_noavx_clang_mkl_build"
+    - "gpu_noavx_mkl_build"
   tags:
     - nvidia0-sm_61
 
-gpu_avx_clang_oss:
+gpu_avx_oss:
   extends:
     - .oss_image
-    - .gpu_avx_clang
+    - .gpu_avx
     - .test_gpu
   needs:
-    - "gpu_avx_clang_oss_build"
+    - "gpu_avx_oss_build"
   tags:
     - avx
     - nvidia0-sm_61
 
-gpu_noavx_clang_oss:
+gpu_noavx_oss:
   extends:
     - .oss_image
-    - .gpu_noavx_clang
+    - .gpu_noavx
     - .test_gpu
   needs:
-    - "gpu_noavx_clang_oss_build"
+    - "gpu_noavx_oss_build"
   tags:
     - nvidia0-sm_61
 
@@ -84,23 +84,23 @@ cpu_none_gcc_mkl:
   needs:
     - "cpu_none_gcc_mkl_build"
 
-cpu_avx_clang_mkl:
+cpu_avx_mkl:
   extends:
     - .mkl_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .test_cpu
   needs:
-    - "cpu_avx_clang_mkl_build"
+    - "cpu_avx_mkl_build"
   tags:
     - avx
 
-cpu_none_clang_mkl:
+cpu_none_mkl:
   extends:
     - .mkl_image
-    - .cpu_none_clang
+    - .cpu_none
     - .test_cpu
   needs:
-    - "cpu_none_clang_mkl_build"
+    - "cpu_none_mkl_build"
 
 cpu_avx_gcc_oss:
   extends:
@@ -120,20 +120,20 @@ cpu_none_gcc_oss:
   needs:
     - "cpu_none_gcc_oss_build"
 
-cpu_avx_clang_oss:
+cpu_avx_oss:
   extends:
     - .oss_image
-    - .cpu_avx_clang
+    - .cpu_avx
     - .test_cpu
   needs:
-    - "cpu_avx_clang_oss_build"
+    - "cpu_avx_oss_build"
   tags:
     - avx
 
-cpu_none_clang_oss:
+cpu_none_oss:
   extends:
     - .oss_image
-    - .cpu_none_clang
+    - .cpu_none
     - .test_cpu
   needs:
-    - "cpu_none_clang_oss_build"
+    - "cpu_none_oss_build"
