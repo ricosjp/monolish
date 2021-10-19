@@ -178,6 +178,11 @@ endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
   set(monolish_backend "${monolish_backend}-nvidia")
+  if(NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
+    # Remove `_` since it should be a special charactor for deb filename
+    string(REPLACE "_" "" gpu_arch ${nvidia_gpu_arch})
+    set(monolish_backend "${monolish_backend}-${gpu_arch}")
+  endif()
 endif()
 message(STATUS "Backend = ${monolish_backend}")
 
@@ -330,11 +335,6 @@ set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_PACKAGE_VERSION "${package_version}+${monolish_backend}")
 set(CPACK_SYSTEM_NAME "amd64")
-if(MONOLISH_USE_NVIDIA_GPU AND NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
-  # `_` should be a special charactor for deb filename
-  string(REPLACE "_" "" gpu_arch ${nvidia_gpu_arch})
-  set(CPACK_SYSTEM_NAME "${CPACK_SYSTEM_NAME}-${gpu_arch}")
-endif()
 set(CPACK_GENERATOR "DEB")
 
 # Set dependencies for .deb
