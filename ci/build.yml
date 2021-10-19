@@ -5,7 +5,7 @@
   stage: build
   script:
     - apt update
-    - apt install -y gfortran
+    - apt install -y gfortran ccache
     - cmake --preset=${PRESET}
     - cmake --build build/${PRESET} --target package
     - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
@@ -19,6 +19,12 @@
       - test/
     expire_in: 360min
   needs: []
+  variables:
+    CCACHE_DIR: ${CI_PROJECT_DIR}/ccache
+  cache:
+    key: ccache
+    paths:
+      - ${CI_PROJECT_DIR}/ccache
 
 gpu_avx_mkl_build:
   extends:
