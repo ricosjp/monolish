@@ -7,12 +7,13 @@ import yaml
 
 def generate_build_config():
     targets = {
-        f"{p}_{avx}_{math}_build": {
-            "extends": [f".{math}_image", f".{p}_{avx}", ".build"]
+        f"{p}_{avx}{compiler}_{math}_build": {
+            "extends": [f".{math}_image", f".{p}_{avx}{compiler}", ".build"]
         }
         for p in ["cpu", "gpu"]
         for avx in ["none", "avx"]
         for math in ["mkl", "oss"]
+        for compiler in ["", "_gcc"]
     }
     print(yaml.dump(targets))
 
