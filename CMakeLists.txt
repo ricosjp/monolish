@@ -177,7 +177,7 @@ else()
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   find_package(CUDAToolkit REQUIRED)
-  set(monolish_backend "${monolish_backend}+nvidia")
+  set(monolish_backend "${monolish_backend}-nvidia")
 endif()
 message(STATUS "Backend = ${monolish_backend}")
 

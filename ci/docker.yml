@@ -19,3 +19,15 @@ oss_docker:
     - .docker
   needs:
     - cpu_avx_gcc_oss_build
+
+mkl_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_all_mkl_build
+
+oss_nvidia_docker:
+  extends:
+    - .docker
+  needs:
+    - gpu_all_oss_build
