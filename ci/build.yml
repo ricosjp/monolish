@@ -49,6 +49,9 @@
   needs: []
   tags:
     - cpu-ge-8
+  only:
+    - master
+    - tags
 
 gpu_avx_mkl_build:
   extends:

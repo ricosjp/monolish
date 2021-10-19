@@ -7,6 +7,9 @@
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker-compose build
     - docker-compose push monolish
+  only:
+    - master
+    - tags
 
 mkl_docker:
   extends:
