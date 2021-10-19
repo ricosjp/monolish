@@ -14,6 +14,7 @@ def generate_build_config():
         for avx in ["none", "avx"]
         for math in ["mkl", "oss"]
         for compiler in ["", "_gcc"]
+        if not (p == "gpu" and compiler == "_gcc")
     }
     print(yaml.dump(targets))
 

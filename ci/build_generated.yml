@@ -38,16 +38,6 @@ cpu_none_oss_build:
   - .oss_image
   - .cpu_none
   - .build
-gpu_avx_gcc_mkl_build:
-  extends:
-  - .mkl_image
-  - .gpu_avx_gcc
-  - .build
-gpu_avx_gcc_oss_build:
-  extends:
-  - .oss_image
-  - .gpu_avx_gcc
-  - .build
 gpu_avx_mkl_build:
   extends:
   - .mkl_image
@@ -57,16 +47,6 @@ gpu_avx_oss_build:
   extends:
   - .oss_image
   - .gpu_avx
-  - .build
-gpu_none_gcc_mkl_build:
-  extends:
-  - .mkl_image
-  - .gpu_none_gcc
-  - .build
-gpu_none_gcc_oss_build:
-  extends:
-  - .oss_image
-  - .gpu_none_gcc
   - .build
 gpu_none_mkl_build:
   extends:
