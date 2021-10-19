@@ -18,3 +18,4 @@ include:
   - local: ci/benchmark.yml
   - local: ci/docker.yml
   - local: ci/develop.yml
+  - local: ci/deploy.yml
