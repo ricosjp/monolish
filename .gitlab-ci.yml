@@ -17,6 +17,7 @@ include:
   - local: ci/example.yml
   - local: ci/benchmark.yml
   - local: ci/docker.yml
+  - local: ci/docker_generated.yml
   - local: ci/develop.yml
   - local: ci/package.yml
   - local: ci/package_generated.yml

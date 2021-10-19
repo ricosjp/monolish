@@ -34,12 +34,24 @@ def generate_package_config():
     print(yaml.dump(targets))
 
 
+def generate_docker_config():
+    targets = {
+        f"{math}_nvidia_sm_{sm}_docker": {
+            "extends": [".docker"],
+            "needs": [f"gpu_sm_{sm}_{math}_build"],
+        }
+        for math in ["mkl", "oss"]
+        for sm in ["52", "60", "61", "70", "75", "80"]
+    }
+    print(yaml.dump(targets))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("target", choices=["build", "package"])
+    parser.add_argument("target", choices=["build", "package", "docker"])
     args = parser.parse_args()
-
-    if args.target == "build":
-        generate_build_config()
-    if args.target == "package":
-        generate_package_config()
+    {
+        "build": generate_build_config,
+        "package": generate_package_config,
+        "docker": generate_docker_config,
+    }[args.target]()
