@@ -1,84 +1,84 @@
 gpu_sm_52_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_52
     PRESET: gpu-avx-none
 gpu_sm_52_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_52
     PRESET: gpu-avx-none
 gpu_sm_60_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_60
     PRESET: gpu-avx-none
 gpu_sm_60_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_60
     PRESET: gpu-avx-none
 gpu_sm_61_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_61
     PRESET: gpu-avx-none
 gpu_sm_61_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_61
     PRESET: gpu-avx-none
 gpu_sm_70_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_70
     PRESET: gpu-avx-none
 gpu_sm_70_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_70
     PRESET: gpu-avx-none
 gpu_sm_75_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_75
     PRESET: gpu-avx-none
 gpu_sm_75_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_75
     PRESET: gpu-avx-none
 gpu_sm_80_mkl_build:
   extends:
   - .mkl_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_80
     PRESET: gpu-avx-none
 gpu_sm_80_oss_build:
   extends:
   - .oss_image
-  - .build
+  - .build_deb
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_80
     PRESET: gpu-avx-none

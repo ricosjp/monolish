@@ -22,7 +22,7 @@ def generate_build_config():
 def generate_build_deb_config():
     targets = {
         f"gpu_sm_{sm}_{math}_build": {
-            "extends": [f".{math}_image", ".build"],
+            "extends": [f".{math}_image", ".build_deb"],
             "variables": {
                 "PRESET": "gpu-avx-none",
                 "MONOLISH_NVIDIA_GPU_ARCH": f"sm_{sm}",
