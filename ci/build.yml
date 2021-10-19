@@ -30,45 +30,6 @@
     expire_in: 1 day
   needs: []
 
-.build_deb:
-  stage: build
-  extends:
-    - .ccache
-  script:
-    - apt update
-    - apt install -y gfortran ccache
-    - cmake --preset=${PRESET}
-    - cmake --build build/${PRESET} --target package
-    - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
-  artifacts:
-    paths:
-      - "*.deb"
-      - Dockerfile
-      - compose.yml
-    expire_in: 1 day
-  needs: []
-  # only:
-  #   - master
-  #   - tags
-
-.build_deb_all:
-  extends:
-    - .build_deb
-  variables:
-    PRESET: "gpu-avx-none-all"
-  tags:
-    - cpu-ge-8
-
-gpu_all_mkl_build:
-  extends:
-    - .mkl_image
-    - .build_deb_all
-
-gpu_all_oss_build:
-  extends:
-    - .oss_image
-    - .build_deb_all
-
 # MPI_build_test:
 #   stage: build_lib
 #   script:
