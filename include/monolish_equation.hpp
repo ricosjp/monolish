@@ -332,7 +332,7 @@ public:
 };
 
 /**
- * @brief QR solver class. 
+ * @brief QR solver class.
  * @note
  * attribute:
  * - solver : true
@@ -407,7 +407,6 @@ private:
   int cusolver_Cholesky(MATRIX &A, vector<double> &x, vector<double> &b);
 
 public:
-
   /**
    * @brief solve Ax=b
    */

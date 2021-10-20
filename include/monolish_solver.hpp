@@ -26,10 +26,6 @@ template <typename MATRIX, typename Float> class precondition;
  **/
 template <typename MATRIX, typename Float> class solver {
 private:
-  Float omega = 1.9; // for SOR
-  int singularity;
-  int reorder = 3;
-
 protected:
   int lib = 0;
   double tol = 1.0e-8;
@@ -41,8 +37,11 @@ protected:
   std::ostream *rhistory_stream;
   initvec_scheme initvecscheme = initvec_scheme::RANDOM;
 
-  Float get_residual(vector<Float> &x);
+  Float omega = 1.9; // for SOR
+  int singularity; // for sparse LU/QR/Cholesky
+  int reorder = 3// for sparse LU/QR/Cholesky;
 
+  Float get_residual(vector<Float> &x);
   precondition<MATRIX, Float> precond;
 
 public:
@@ -216,7 +215,6 @@ public:
    * This variable is only used in sparse QR/Cholesky for GPU
    */
   int get_sigularity() { return singularity; }
-
 };
 
 /**
