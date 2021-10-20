@@ -39,6 +39,8 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- move get_singularity and set_reorder in LU/QR/Cholesky to monolish::equation::solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/392 https://github.com/ricosjp/monolish/issues/85
+- Delete CUDA version in doxygen installation page https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
 - Delete CUDA version in doxygen installation page https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
 - Update Doxyfile to 1.8.17, and disable warning for non-document contents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/383
 - support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
