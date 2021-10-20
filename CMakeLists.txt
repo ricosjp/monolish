@@ -97,7 +97,7 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
-if(NOT DEFINED MONOLISH_PACKAGE_VERSION)
+if(NOT MONOLISH_PACKAGE_VERSION)
   # Get last release tag by `git describe`
   execute_process(
     COMMAND git describe --tags --abbrev=0
