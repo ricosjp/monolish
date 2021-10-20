@@ -168,61 +168,6 @@ public:
 };
 
 /**
- * @brief LU solver class (Dense, CPU only now)
- * @note
- * attribute:
- * - solver : true
- * - preconditioner : false
- * @note
- * input / archtecture
- * - Dense / Intel : true
- * - Dense / NVIDIA : true
- * - Dense / OSS : true
- * - Sparse / Intel : false
- * - Sparse / NVIDIA : false
- * - Sparse / OSS : false
- */
-template <typename MATRIX, typename Float>
-class LU : public monolish::solver::solver<MATRIX, Float> {
-private:
-  int lib = 1; // lib is 1
-  int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
-  int cusolver_LU(MATRIX &A, vector<double> &x, vector<double> &b);
-  int singularity;
-  int reorder = 3;
-
-public:
-  void set_reorder(int r) { reorder = r; }
-  int get_sigularity() { return singularity; }
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
-  int solve(MATRIX &A, vector<Float> &xb);
-  void create_precond(MATRIX &A) {
-    throw std::runtime_error("this precond. is not impl.");
-  }
-  void apply_precond(const vector<Float> &r, vector<Float> &z) {
-    throw std::runtime_error("this precond. is not impl.");
-  }
-
-  /**
-   * @brief get solver name "monolish::equation::LU"
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  std::string name() const { return "monolish::equation::LU"; }
-
-  /**
-   * @brief get solver name "LU"
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  std::string solver_name() const { return "LU"; }
-};
-
-/**
  * @brief Jacobi solver class
  * @note
  * attribute:
@@ -335,8 +280,59 @@ public:
 };
 
 /**
- * @brief QR solver class (Dense, GPU only now). can use set_tol(), get_tol(),
- * set_reorder(), get_singularity().
+ * @brief LU solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : true
+ * - Dense / NVIDIA : true
+ * - Dense / OSS : true
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : false
+ * - Sparse / OSS : false
+ */
+template <typename MATRIX, typename Float>
+class LU : public monolish::solver::solver<MATRIX, Float> {
+private:
+  int lib = 1; // lib is 1
+  int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
+  int cusolver_LU(MATRIX &A, vector<double> &x, vector<double> &b);
+
+public:
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  int solve(MATRIX &A, vector<Float> &xb);
+
+  void create_precond(MATRIX &A) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+  void apply_precond(const vector<Float> &r, vector<Float> &z) {
+    throw std::runtime_error("this precond. is not impl.");
+  }
+
+  /**
+   * @brief get solver name "monolish::equation::LU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::LU"; }
+
+  /**
+   * @brief get solver name "LU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "LU"; }
+};
+
+/**
+ * @brief QR solver class. 
  * @note
  * attribute:
  * - solver : true
@@ -356,22 +352,8 @@ private:
   int lib = 1; // lib is 1
   int cusolver_QR(MATRIX &A, vector<double> &x, vector<double> &b);
   int cusolver_QR(MATRIX &A, vector<float> &x, vector<float> &b);
-  int singularity;
-  int reorder = 3;
 
 public:
-  /**
-   * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce
-   * zero fill-in.
-   */
-  void set_reorder(int r) { reorder = r; }
-
-  /**
-   * @brief -1 if A is symmetric postive definite.
-   * default reorder algorithm is csrmetisnd
-   */
-  int get_sigularity() { return singularity; }
-
   /**
    * @brief solve Ax=b
    */
@@ -404,7 +386,6 @@ public:
 
 /**
  * @brief Cholesky solver class.
- * It can use set_tol(), get_tol(), set_reorder(), get_singularity().
  * @note
  * attribute:
  * - solver : true
@@ -424,21 +405,8 @@ private:
   int lib = 1; // lib is 1
   int cusolver_Cholesky(MATRIX &A, vector<float> &x, vector<float> &b);
   int cusolver_Cholesky(MATRIX &A, vector<double> &x, vector<double> &b);
-  int singularity;
-  int reorder = 3;
 
 public:
-  /**
-   * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce
-   * zero fill-in.
-   * default reorder algorithm is csrmetisnd.
-   */
-  void set_reorder(int r) { reorder = r; }
-
-  /**
-   * @brief -1 if A is symmetric postive definite.
-   */
-  int get_sigularity() { return singularity; }
 
   /**
    * @brief solve Ax=b
@@ -471,4 +439,5 @@ public:
    **/
   std::string solver_name() const { return "Cholesky"; }
 };
+
 } // namespace monolish::equation

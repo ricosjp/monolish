@@ -27,6 +27,8 @@ template <typename MATRIX, typename Float> class precondition;
 template <typename MATRIX, typename Float> class solver {
 private:
   Float omega = 1.9; // for SOR
+  int singularity;
+  int reorder = 3;
 
 protected:
   int lib = 0;
@@ -190,6 +192,31 @@ public:
    * This variable is only used in SOR method
    */
   Float get_omega() { return omega; };
+
+  /**
+   * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce
+   * zero fill-in.
+   * @note
+   * This variable is only used in sparse QR/Cholesky for GPU
+   */
+  void set_reorder(int r) { reorder = r; }
+
+  /**
+   * @brief 0: no ordering 1: symrcm, 2: symamd, 3: csrmetisnd is used to reduce
+   * zero fill-in.
+   * @note
+   * This variable is only used in sparse QR/Cholesky for GPU
+   */
+  int get_reorder() { return reorder; }
+
+  /**
+   * @brief -1 if A is symmetric postive definite.
+   * default reorder algorithm is csrmetisnd
+   * @note
+   * This variable is only used in sparse QR/Cholesky for GPU
+   */
+  int get_sigularity() { return singularity; }
+
 };
 
 /**
