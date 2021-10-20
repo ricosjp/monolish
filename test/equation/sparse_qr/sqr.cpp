@@ -39,6 +39,12 @@ bool test(const char *file, const int check_ans, const T tol) {
       return false;
     };
   }
+
+  std::cout << "Pass in "
+            << "sparse QR"
+            << "(" << get_type<T>() << ")"
+            << " precision" << std::endl;
+
   return true;
 }
 
