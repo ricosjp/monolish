@@ -43,26 +43,6 @@ project(monolish
   DESCRIPTION "MONOlithic LInear equation Solvers for Highly-parallel architecture."
 )
 
-# Get last release tag, and count the number of commit from there
-execute_process(
-  COMMAND git describe --tags --abbrev=0
-  OUTPUT_VARIABLE git_last_tag
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-execute_process(
-  COMMAND git rev-list ${git_last_tag}.. --count
-  OUTPUT_VARIABLE git_dev_commits
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-if(git_dev_commits)
-  set(package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
-else()
-  set(package_version "${PROJECT_VERSION}")
-endif()
-message(STATUS "monolish version = ${package_version}")
-
 #
 # Build options
 #
@@ -84,6 +64,11 @@ option_string(
   MONOLISH_NVIDIA_GPU_ARCH
   ""
   "NVIDIA GPU architecture used while OpenMP Offloading. e.g. sm_52"
+)
+option_string(
+  MONOLISH_PACKAGE_VERSION
+  ""
+  "Package version for deb and containers."
 )
 
 # For container
@@ -111,6 +96,43 @@ option_string(
 if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
+
+if(NOT MONOLISH_PACKAGE_VERSION)
+  # Get last release tag by `git describe`
+  execute_process(
+    COMMAND git describe --tags --abbrev=0
+    OUTPUT_VARIABLE git_last_tag
+    RESULT_VARIABLE exit_code
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  )
+  if(NOT exit_code EQUAL 0)
+    message(SEND_ERROR "`git describe` command failed. Cannot generate package version.")
+  endif()
+
+  # count the number of commit from there by `git rev-list`
+  execute_process(
+    COMMAND git rev-list ${git_last_tag}.. --count
+    OUTPUT_VARIABLE git_dev_commits
+    RESULT_VARIABLE exit_code
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  )
+  if(NOT exit_code EQUAL 0)
+    message(SEND_ERROR "`git rev-list` command failed. Cannot generate package version.")
+  endif()
+
+  # If the current commit is equal to last tag,
+  # it must be a release commit.
+  if(git_dev_commits EQUAL 0)
+    set(monolish_package_version "${PROJECT_VERSION}")
+  else()
+    set(monolish_package_version "${PROJECT_VERSION}-dev.${git_dev_commits}")
+  endif()
+else()
+  set(monolish_package_version ${MONOLISH_PACKAGE_VERSION})
+endif()
+message(STATUS "monolish package version = ${monolish_package_version}")
 
 # Build with ccache
 if(MONOLISH_CCACHE_BUILD)
@@ -333,7 +355,7 @@ endif()
 #
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
-set(CPACK_PACKAGE_VERSION "${package_version}+${monolish_backend}")
+set(CPACK_PACKAGE_VERSION "${monolish_package_version}+${monolish_backend}")
 set(CPACK_SYSTEM_NAME "amd64")
 set(CPACK_GENERATOR "DEB")
 
@@ -366,7 +388,7 @@ include(CPack)
 #
 # Build container
 #
-set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${package_version})
+set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${monolish_package_version})
 configure_file(docker/Dockerfile.in Dockerfile)
 configure_file(docker/compose.yml.in compose.yml)
 add_custom_target(docker
