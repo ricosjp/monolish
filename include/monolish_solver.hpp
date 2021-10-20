@@ -38,10 +38,10 @@ protected:
   initvec_scheme initvecscheme = initvec_scheme::RANDOM;
 
   Float omega = 1.9; // for SOR
-  int singularity; // for sparse LU/QR/Cholesky
-  int reorder = 3// for sparse LU/QR/Cholesky;
+  int singularity;   // for sparse LU/QR/Cholesky
+  int reorder = 3;    // for sparse LU/QR/Cholesky;
 
-  Float get_residual(vector<Float> &x);
+  Float get_residual(vector<Float> & x);
   precondition<MATRIX, Float> precond;
 
 public:
