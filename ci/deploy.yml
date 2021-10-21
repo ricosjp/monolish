@@ -1,4 +1,6 @@
 gather_deb:
+  extends:
+    - .release
   stage: deploy
   needs:
     - cpu_avx_gcc_mkl_build
@@ -23,6 +25,3 @@ gather_deb:
     paths:
       - "*.deb"
     expire_in: 1 day
-  # only:
-  #   - master
-  #   - tags
