@@ -97,30 +97,34 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   message(WARNING "OpenMP Offloading in monolish is only supported with clang")
 endif()
 
+function(check_exec)
+  cmake_parse_arguments(CHECK_EXEC "" "OUTPUT_VARIABLE;ERROR_MSG" "COMMAND" ${ARGN})
+  execute_process(
+    COMMAND ${CHECK_EXEC_COMMAND}
+    OUTPUT_VARIABLE ${CHECK_EXEC_OUTPUT_VARIABLE}
+    RESULT_VARIABLE exit_code
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  )
+  if(NOT exit_code EQUAL 0)
+    message(SEND_ERROR ${CHECK_EXEC_ERROR_MSG})
+  endif()
+  set(${CHECK_EXEC_OUTPUT_VARIABLE} "${${CHECK_EXEC_OUTPUT_VARIABLE}}" PARENT_SCOPE)
+endfunction(check_exec)
+
 if(NOT MONOLISH_PACKAGE_VERSION)
   # Get last release tag by `git describe`
-  execute_process(
+  check_exec(
     COMMAND git describe --tags --abbrev=0
     OUTPUT_VARIABLE git_last_tag
-    RESULT_VARIABLE exit_code
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    ERROR_MSG "`git describe` command failed. Cannot generate package version."
   )
-  if(NOT exit_code EQUAL 0)
-    message(SEND_ERROR "`git describe` command failed. Cannot generate package version.")
-  endif()
-
   # count the number of commit from there by `git rev-list`
-  execute_process(
+  check_exec(
     COMMAND git rev-list ${git_last_tag}.. --count
     OUTPUT_VARIABLE git_dev_commits
-    RESULT_VARIABLE exit_code
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    ERROR_MSG "`git rev-list` command failed. Cannot generate package version."
   )
-  if(NOT exit_code EQUAL 0)
-    message(SEND_ERROR "`git rev-list` command failed. Cannot generate package version.")
-  endif()
 
   # If the current commit is equal to last tag,
   # it must be a release commit.
