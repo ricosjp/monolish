@@ -15,6 +15,8 @@
       - compose.yml
     expire_in: 1 day
   needs: []
+  variables:
+    GIT_DEPTH: 10000
   # only:
   #   - master
   #   - tags
@@ -26,6 +28,7 @@
     PRESET: "gpu-avx-none-all"
   tags:
     - cpu-ge-8
+  timeout: 3 hours
 
 gpu_all_mkl_build:
   extends:
