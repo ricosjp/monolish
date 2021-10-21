@@ -113,17 +113,17 @@ function(check_exec)
 endfunction(check_exec)
 
 if(NOT MONOLISH_PACKAGE_VERSION)
-  # Get last release tag by `git describe`
+  # Get the hash of the last release
   check_exec(
-    COMMAND git describe --tags --abbrev=0
-    OUTPUT_VARIABLE git_last_tag
-    ERROR_MSG "`git describe` command failed. Cannot generate package version."
+    COMMAND git rev-list --tags --max-count=1
+    OUTPUT_VARIABLE git_last_tag_hash
+    ERROR_MSG "Cannot get hash of last release"
   )
-  # count the number of commit from there by `git rev-list`
+  # count the number of commit from the last release
   check_exec(
-    COMMAND git rev-list ${git_last_tag}.. --count
+    COMMAND git rev-list ${git_last_tag_hash}.. --count
     OUTPUT_VARIABLE git_dev_commits
-    ERROR_MSG "`git rev-list` command failed. Cannot generate package version."
+    ERROR_MSG "Failed to count commit numbers from last release"
   )
 
   # If the current commit is equal to last tag,
