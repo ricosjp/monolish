@@ -2,6 +2,7 @@
   stage: package
   extends:
     - .ccache
+    - .release
   script:
     - apt update
     - apt install -y gfortran ccache
@@ -17,9 +18,6 @@
   needs: []
   variables:
     GIT_DEPTH: 10000
-  # only:
-  #   - master
-  #   - tags
 
 .package_all:
   extends:
