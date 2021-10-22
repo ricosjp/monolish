@@ -23,7 +23,7 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (int i = 0; i < iter; i++) {
-    monolish::vml::min(A);
+    auto t = monolish::vml::min(A);
   }
 
   auto end = std::chrono::system_clock::now();

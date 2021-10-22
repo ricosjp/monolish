@@ -32,6 +32,7 @@ Unreleased
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
+- fix benchmark warnig https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
 - fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390
 - fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
 - dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
