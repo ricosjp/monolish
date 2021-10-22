@@ -180,7 +180,7 @@ public:
 
   /**
    * @brief Create LinearOperator from LinearOperator
-   * @param LinearOperator format LinearOperator
+   * @param linearoperator format LinearOperator
    * @note
    * - # of computation: 4 + 2 functions
    * - Multi-threading: false
