@@ -388,6 +388,6 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-void reciprocal(const matrix::Dense<double> &a, matrix::Dense<double> &y);
-void reciprocal(const matrix::Dense<float> &a, matrix::Dense<float> &y);
+void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 } // namespace monolish::vml

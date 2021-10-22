@@ -1,10 +1,3 @@
-/**
- * @author RICOS Co. Ltd.
- * @file monolish_vector.h
- * @brief declare vector class
- * @date 2019
- **/
-
 #pragma once
 #include <exception>
 #include <omp.h>
@@ -121,6 +114,7 @@ public:
    * @param colind n-origin col_ind, which stores the column numbers of the
    *non-zero elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
+   * @param origin n-origin
    * @note
    * - # of computation: (M+1)+2nnz + (M+1)+nnz (compute hash) + nnz(compute
    *origin)

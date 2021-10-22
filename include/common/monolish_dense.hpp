@@ -1,10 +1,3 @@
-/**
- * @autor RICOS Co. Ltd.
- * @file monolish_vector.h
- * @brief declare vector class
- * @date 2019
- **/
-
 #pragma once
 #include "monolish_matrix.hpp"
 
@@ -218,7 +211,7 @@ public:
 
   /**
    * @brief Set row number
-   * @param M # of row
+   * @param N # of row
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
@@ -227,7 +220,7 @@ public:
 
   /**
    * @brief Set column number
-   * @param N # of col
+   * @param M # of col
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
@@ -236,7 +229,7 @@ public:
 
   /**
    * @brief Set # of non-zero elements
-   * @param NNZ # of non-zero elements
+   * @param NZ # of non-zero elements
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false

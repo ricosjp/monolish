@@ -1,10 +1,3 @@
-/**
- * @author RICOS Co. Ltd.
- * @file monolish_matrix.hpp
- * @brief declare matrix class
- * @date 2020
- **/
-
 #pragma once
 
 namespace monolish {

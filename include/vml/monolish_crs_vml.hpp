@@ -436,6 +436,6 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  * @warning
  * A, B, and C must be same non-zero structure
  */
-void reciprocal(const matrix::CRS<double> &a, matrix::CRS<double> &y);
-void reciprocal(const matrix::CRS<float> &a, matrix::CRS<float> &y);
+void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
+void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 } // namespace monolish::vml

@@ -288,8 +288,8 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
             view1D<matrix::Dense<float>, float> &y);
 
 /**
- * @brief vector\<float\> copy (y=a)
- * @param a monolish vector\<float\> (size N)
+ * @brief vector\<float\> copy (y=x)
+ * @param x monolish vector\<float\> (size N)
  * @param y monolish vector\<float\> (size N)
  * @note
  * - # of computation: N
@@ -327,7 +327,7 @@ void copy(const view1D<matrix::Dense<float>, float> &x,
 /**
  * @brief vector\<float\> asum (absolute sum)
  * @param x monolish vector\<float\> (size N)
- * @return The result of the asum
+ * @param ans The result of the asum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -344,7 +344,7 @@ void asum(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief vector\<float\> asum (absolute sum)
  * @param x monolish vector\<float\> (size N)
- * @param ans The result of the asum
+ * @return The result of the asum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -361,7 +361,7 @@ void asum(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief vector\<float\> sum
  * @param x monolish vector\<float\> (size N)
- * @return The result of the sum
+ * @param ans The result of the sum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -378,7 +378,7 @@ void sum(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief vector\<float\> sum
  * @param x monolish vector\<float\> (size N)
- * @param ans The result of the sum
+ * @return The result of the sum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -587,7 +587,7 @@ void axpyz(const float alpha, const view1D<matrix::Dense<float>, float> &x,
  * @brief inner product (dot)
  * @param x monolish vector\<float\> (size N)
  * @param y monolish vector\<float\> (size N)
- * @return The result of the inner product product of x and y
+ * @param ans The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -633,7 +633,7 @@ void dot(const view1D<matrix::Dense<float>, float> &x,
  * @brief inner product (dot)
  * @param x monolish vector\<float\> (size N)
  * @param y monolish vector\<float\> (size N)
- * @param ans The result of the inner product product of x and y
+ * @return The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -678,7 +678,7 @@ void dot(const view1D<matrix::Dense<float>, float> &x,
 /**
  * @brief nrm1: sum(abs(x[0:N]))
  * @param x monolish vector\<float\> (size N)
- * @return The result of the nrm1
+ * @param ans The result of the nrm1
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -695,7 +695,7 @@ void nrm1(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief nrm1: sum(abs(x[0:N]))
  * @param x monolish vector\<float\> (size N)
- * @param ans The result of the nrm1
+ * @return The result of the nrm1
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -712,7 +712,7 @@ void nrm1(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief nrm2: ||x||_2
  * @param x monolish vector\<float\> (size N)
- * @return The result of the nrm2
+ * @param ans The result of the nrm2
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -729,7 +729,7 @@ void nrm2(const view1D<matrix::Dense<float>, float> &x, float &ans);
 /**
  * @brief nrm2: ||x||_2
  * @param x monolish vector\<float\> (size N)
- * @param ans The result of the nrm2
+ * @return The result of the nrm2
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
