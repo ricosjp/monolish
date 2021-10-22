@@ -29,8 +29,6 @@
       - test/
     expire_in: 1 day
   needs: []
-  variables:
-    GIT_DEPTH: 10000
 
 # MPI_build_test:
 #   stage: build_lib

@@ -1,4 +1,4 @@
 services:
   monolish:
-    image: ${docker_tag}
+    image: ${monolish_docker_image}
     build: .

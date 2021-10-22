@@ -6,12 +6,15 @@ jobs:
   document:
     runs-on: ubuntu-20.04
     container:
-        image: ghcr.io/ricosjp/allgebra/doxygen:20.10.1
+      image: ghcr.io/ricosjp/allgebra/cuda10_1/clang12/oss:21.09.0
     steps:
     - uses: actions/checkout@v2
 
     - name: Generate document for current commit
-      run: doxygen
+      run: |
+        cmake --preset=cpu-none-none
+        cmake --build build/cpu-none-none --target document
+        mv build/cpu-none-none/html .
 
     - uses: actions/checkout@v2
       with:

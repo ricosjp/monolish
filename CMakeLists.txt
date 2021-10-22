@@ -352,6 +352,26 @@ if(MONOLISH_USE_NVIDIA_GPU)
 endif()
 
 #
+# document target
+#
+set(monolish_release_url           "https://github.com/ricosjp/monolish/releases/tag/${PROJECT_VERSION}")
+set(monolish_release_download_base "https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}")
+set(monolish_deb_oss        "monolish_${PROJECT_VERSION}+oss_amd64.deb")
+set(monolish_deb_mkl        "monolish_${PROJECT_VERSION}+mkl_amd64.deb")
+set(monolish_deb_oss_nvidia "monolish_${PROJECT_VERSION}+oss-nvidia_amd64.deb")
+set(monolish_deb_mkl_nvidia "monolish_${PROJECT_VERSION}+mkl-nvidia_amd64.deb")
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/doc/installation/installation.md.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/doc/installation/installation.md
+)
+configure_file(Doxyfile.in Doxyfile)
+add_custom_target(document
+  COMMAND doxygen
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  COMMENT "Generate document by doxygen"
+)
+
+#
 # Packaging
 #
 # Sell also the "CPack DEB Generator" page
@@ -392,10 +412,10 @@ include(CPack)
 #
 # Build container
 #
-set(docker_tag ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${monolish_package_version})
+set(monolish_docker_image ${MONOLISH_CONTAINER_REGISTRY}/${monolish_backend}:${monolish_package_version})
 configure_file(docker/Dockerfile.in Dockerfile)
 configure_file(docker/compose.yml.in compose.yml)
 add_custom_target(docker
   COMMAND docker-compose build
-  COMMENT "Build container ${docker_tag}"
+  COMMENT "Build container ${monolish_docker_image}"
 )
