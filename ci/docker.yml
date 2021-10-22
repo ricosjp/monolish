@@ -3,13 +3,12 @@
   image: docker/compose:1.29.1
   services:
     - docker:dind
+  extends:
+    - .release
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker-compose build
     - docker-compose push monolish
-  only:
-    - master
-    - tags
 
 mkl_docker:
   extends:

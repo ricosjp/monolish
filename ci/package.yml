@@ -1,0 +1,40 @@
+.package:
+  stage: package
+  extends:
+    - .ccache
+    - .release
+  script:
+    - apt update
+    - apt install -y gfortran ccache
+    - cmake --preset=${PRESET}
+    - cmake --build build/${PRESET} --target package
+    - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
+  artifacts:
+    paths:
+      - "*.deb"
+      - Dockerfile
+      - compose.yml
+    expire_in: 1 day
+  needs: []
+  variables:
+    GIT_DEPTH: 10000
+
+.package_all:
+  extends:
+    - .package
+  variables:
+    PRESET: "gpu-avx-none-all"
+  tags:
+    - cpu-ge-8
+  timeout: 3 hours
+
+gpu_all_mkl_build:
+  extends:
+    - .mkl_image
+    - .package_all
+
+gpu_all_oss_build:
+  extends:
+    - .oss_image
+    - .package_all
+

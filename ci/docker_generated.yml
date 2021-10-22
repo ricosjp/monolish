@@ -1,0 +1,61 @@
+mkl_nvidia_sm_52_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_52_mkl_build
+mkl_nvidia_sm_60_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_60_mkl_build
+mkl_nvidia_sm_61_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_61_mkl_build
+mkl_nvidia_sm_70_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_70_mkl_build
+mkl_nvidia_sm_75_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_75_mkl_build
+mkl_nvidia_sm_80_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_80_mkl_build
+oss_nvidia_sm_52_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_52_oss_build
+oss_nvidia_sm_60_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_60_oss_build
+oss_nvidia_sm_61_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_61_oss_build
+oss_nvidia_sm_70_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_70_oss_build
+oss_nvidia_sm_75_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_75_oss_build
+oss_nvidia_sm_80_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_80_oss_build
+

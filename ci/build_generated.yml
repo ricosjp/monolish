@@ -1,0 +1,61 @@
+cpu_avx_gcc_mkl_build:
+  extends:
+  - .mkl_image
+  - .cpu_avx_gcc
+  - .build
+cpu_avx_gcc_oss_build:
+  extends:
+  - .oss_image
+  - .cpu_avx_gcc
+  - .build
+cpu_avx_mkl_build:
+  extends:
+  - .mkl_image
+  - .cpu_avx
+  - .build
+cpu_avx_oss_build:
+  extends:
+  - .oss_image
+  - .cpu_avx
+  - .build
+cpu_none_gcc_mkl_build:
+  extends:
+  - .mkl_image
+  - .cpu_none_gcc
+  - .build
+cpu_none_gcc_oss_build:
+  extends:
+  - .oss_image
+  - .cpu_none_gcc
+  - .build
+cpu_none_mkl_build:
+  extends:
+  - .mkl_image
+  - .cpu_none
+  - .build
+cpu_none_oss_build:
+  extends:
+  - .oss_image
+  - .cpu_none
+  - .build
+gpu_avx_mkl_build:
+  extends:
+  - .mkl_image
+  - .gpu_avx
+  - .build
+gpu_avx_oss_build:
+  extends:
+  - .oss_image
+  - .gpu_avx
+  - .build
+gpu_none_mkl_build:
+  extends:
+  - .mkl_image
+  - .gpu_none
+  - .build
+gpu_none_oss_build:
+  extends:
+  - .oss_image
+  - .gpu_none
+  - .build
+
