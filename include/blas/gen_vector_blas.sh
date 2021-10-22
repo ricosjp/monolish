@@ -60,8 +60,8 @@ done
 ## copy
 echo "
 /**
- * @brief vector\<$prec\> copy (y=a)
- * @param a monolish vector\<$prec\> (size N)
+ * @brief vector\<$prec\> copy (y=x)
+ * @param x monolish vector\<$prec\> (size N)
  * @param y monolish vector\<$prec\> (size N)
  * @note
  * - # of computation: N
@@ -84,7 +84,7 @@ echo "
 /**
  * @brief vector\<$prec\> asum (absolute sum)
  * @param x monolish vector\<$prec\> (size N)
- * @return The result of the asum
+ * @param ans The result of the asum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -104,7 +104,7 @@ echo "
 /**
  * @brief vector\<$prec\> asum (absolute sum)
  * @param x monolish vector\<$prec\> (size N)
- * @param ans The result of the asum
+ * @return The result of the asum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -122,7 +122,7 @@ echo "
 /**
  * @brief vector\<$prec\> sum
  * @param x monolish vector\<$prec\> (size N)
- * @return The result of the sum
+ * @param ans The result of the sum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -142,7 +142,7 @@ echo "
 /**
  * @brief vector\<$prec\> sum
  * @param x monolish vector\<$prec\> (size N)
- * @param ans The result of the sum
+ * @return The result of the sum
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -212,7 +212,7 @@ echo "
  * @brief inner product (dot)
  * @param x monolish vector\<$prec\> (size N)
  * @param y monolish vector\<$prec\> (size N)
- * @return The result of the inner product product of x and y
+ * @param ans The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -235,7 +235,7 @@ echo "
  * @brief inner product (dot)
  * @param x monolish vector\<$prec\> (size N)
  * @param y monolish vector\<$prec\> (size N)
- * @param ans The result of the inner product product of x and y
+ * @return The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -257,7 +257,7 @@ echo "
 /**
  * @brief nrm1: sum(abs(x[0:N]))
  * @param x monolish vector\<$prec\> (size N)
- * @return The result of the nrm1
+ * @param ans The result of the nrm1
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -277,7 +277,7 @@ echo "
 /**
  * @brief nrm1: sum(abs(x[0:N]))
  * @param x monolish vector\<$prec\> (size N)
- * @param ans The result of the nrm1
+ * @return The result of the nrm1
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -297,7 +297,7 @@ echo "
 /**
  * @brief nrm2: ||x||_2
  * @param x monolish vector\<$prec\> (size N)
- * @return The result of the nrm2
+ * @param ans The result of the nrm2
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -317,7 +317,7 @@ echo "
 /**
  * @brief nrm2: ||x||_2
  * @param x monolish vector\<$prec\> (size N)
- * @param ans The result of the nrm2
+ * @return The result of the nrm2
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
