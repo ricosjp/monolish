@@ -286,7 +286,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(double val, int dst, int tag);
@@ -300,7 +300,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(float val, int dst, int tag);
@@ -314,7 +314,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(int val, int dst, int tag);
@@ -328,7 +328,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(size_t val, int dst, int tag);
@@ -342,7 +342,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(const std::vector<double> &vec, int dst, int tag);
@@ -356,7 +356,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(const std::vector<float> &vec, int dst, int tag);
@@ -370,7 +370,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(const std::vector<int> &vec, int dst, int tag);
@@ -384,7 +384,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Isend(const std::vector<size_t> &vec, int dst, int tag);
@@ -398,7 +398,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
    * after the MPI function. This function is not thread-safe.
@@ -414,7 +414,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
    * after the MPI function. This function is not thread-safe.
@@ -429,7 +429,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(double val, int src, int tag);
@@ -442,7 +442,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(float val, int src, int tag);
@@ -455,7 +455,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(int val, int src, int tag);
@@ -468,7 +468,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(size_t val, int src, int tag);
@@ -481,7 +481,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(std::vector<double> &vec, int src, int tag);
@@ -494,7 +494,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(std::vector<float> &vec, int src, int tag);
@@ -507,7 +507,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(std::vector<int> &vec, int src, int tag);
@@ -520,7 +520,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * This function is not thread-safe.
    */
   void Irecv(std::vector<size_t> &vec, int src, int tag);
@@ -533,7 +533,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
    * after the MPI function. This function is not thread-safe.
@@ -548,7 +548,7 @@ public:
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
    * by using Waitall() function.
-   * @Warning
+   * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
    * after the MPI function. This function is not thread-safe.
@@ -785,7 +785,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
@@ -799,7 +799,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, monolish vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
@@ -813,7 +813,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std vector (size N)
    * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Gather(std::vector<double> &sendvec, std::vector<double> &recvvec,
               int root) const;
@@ -823,7 +823,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std vector (size N)
    * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Gather(std::vector<float> &sendvec, std::vector<float> &recvvec,
               int root) const;
@@ -833,7 +833,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std vector (size N)
    * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Gather(std::vector<int> &sendvec, std::vector<int> &recvvec,
               int root) const;
@@ -843,7 +843,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std vector (size N)
    * @param recvvec recv data, std vector (size N * # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Gather(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
               int root) const;
@@ -853,7 +853,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
@@ -867,7 +867,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, monolish vector (size N)
    * @param recvvec recv data, monolish vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    * @warning
    * MPI functions do not support GPUs.
    * The user needs to send and receive data to and from the GPU before and
@@ -881,7 +881,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std::vector (size N)
    * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Scatter(std::vector<double> &sendvec, std::vector<double> &recvvec,
                int root) const;
@@ -891,7 +891,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std::vector (size N)
    * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Scatter(std::vector<float> &sendvec, std::vector<float> &recvvec,
                int root) const;
@@ -901,7 +901,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std::vector (size N)
    * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Scatter(std::vector<int> &sendvec, std::vector<int> &recvvec,
                int root) const;
@@ -911,7 +911,7 @@ public:
    * The data is evenly divided and transmitted to each process.
    * @param sendvec send data, std::vector (size N)
    * @param recvvec recv data, std::vector (size N / # of procs)
-   * @param val root rank number
+   * @param root root rank number
    */
   void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
                int root) const;
