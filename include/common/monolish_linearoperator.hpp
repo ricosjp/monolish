@@ -1,10 +1,3 @@
-/**
- * @author fockl
- * @file monolish_linearoperator.h
- * @brief declare linearoperator class
- * @date 2021
- **/
-
 #pragma once
 #include <exception>
 #include <functional>

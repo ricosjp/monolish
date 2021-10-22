@@ -1,10 +1,3 @@
-/**
- * @author RICOS Co. Ltd.
- * @file monolish_vector.h
- * @brief declare vector class
- * @date 2019
- **/
-
 #pragma once
 #include <exception>
 #include <omp.h>

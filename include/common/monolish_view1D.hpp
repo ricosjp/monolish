@@ -1,10 +1,3 @@
-/**
- * @autor RICOS Co. Ltd.
- * @file monolish_view1D.h
- * @brief declare view 1D class
- * @date 2019
- **/
-
 #pragma once
 #include "./monolish_logger.hpp"
 #include <cassert>
