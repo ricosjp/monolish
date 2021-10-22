@@ -172,7 +172,7 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void reciprocal(const matrix::Dense<$prec> &a, matrix::Dense<$prec> &y);"
+  echo "void reciprocal(const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
 done
 
 echo "}"

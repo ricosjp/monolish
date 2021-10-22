@@ -188,7 +188,7 @@ echo "
  * A, B, and C must be same non-zero structure
 */ "
 for prec in double float; do
-  echo "void reciprocal(const matrix::CRS<$prec> &a, matrix::CRS<$prec> &y);"
+  echo "void reciprocal(const matrix::CRS<$prec> &A, matrix::CRS<$prec> &C);"
 done
 
 echo "}"
