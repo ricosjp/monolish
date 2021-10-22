@@ -47,13 +47,11 @@ protected:
 public:
   /**
    * @brief create solver class
-   * @param[in]
    **/
   solver(){};
 
   /**
    * @brief delete solver class
-   * @param[in]
    **/
   ~solver() {
     if (rhistory_stream != &std::cout && rhistory_file.empty() != true) {
@@ -63,25 +61,25 @@ public:
 
   /**
    * @brief set precondition create fucntion
-   * @param[in] f function
+   * @param[in] p solver class for precondition
    **/
   template <class PRECOND> void set_create_precond(PRECOND &p);
 
   /**
    * @brief set precondition apply fucntion
-   * @param[in] f function
+   * @param[in] p solver class for precondition
    **/
   template <class PRECOND> void set_apply_precond(PRECOND &p);
 
   /**
    * @brief set library option (to change library, monolish, cusolver, etc.)
-   * @param[in] library number
+   * @param[in] l library number
    **/
   void set_lib(int l) { lib = l; }
 
   /**
    * @brief set tolerance (default:1.0e-8)
-   * @param[in] tol tolerance
+   * @param[in] t tolerance
    **/
   void set_tol(double t) { tol = t; }
 
