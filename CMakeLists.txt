@@ -354,6 +354,10 @@ endif()
 #
 # document target
 #
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/doc/installation/installation.md.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/doc/installation/installation.md
+)
 configure_file(Doxyfile.in Doxyfile)
 add_custom_target(document
   COMMAND doxygen

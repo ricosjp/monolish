@@ -10,17 +10,17 @@ $ sudo apt install -y wget
 
 ## For CPU
 
-monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/0.14.2):
+monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/${PROJECT_VERSION}):
 
 \code{shell}
-$ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss_amd64.deb
-$ sudo apt install -y ./monolish_0.14.2-1+oss_amd64.deb
+$ wget https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+oss_amd64.deb
+$ sudo apt install -y ./monolish_${PROJECT_VERSION}-1+oss_amd64.deb
 \endcode
 
 There are two variants according to backend BLAS and LAPACK implementation:
 
-- [+oss](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss_amd64.deb) means it uses OpenBLAS
-- [+mkl](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+mkl_amd64.deb) means it uses Intel MKL
+- [+oss](https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+oss_amd64.deb) means it uses OpenBLAS
+- [+mkl](https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+mkl_amd64.deb) means it uses Intel MKL
 
 ## For NVIDIA GPU
 
@@ -38,17 +38,17 @@ $ sudo apt-get update
 
 See https://developer.nvidia.com/cuda-downloads for more detail.
 
-monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/0.14.2):
+monolish deb file can be downloaded from [GitHub Release page](https://github.com/ricosjp/monolish/releases/tag/${PROJECT_VERSION}):
 
 \code{shell}
-$ wget https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb
-$ sudo apt install -y ./monolish_0.14.2-1+oss+nvidia_amd64.deb
+$ wget https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+oss+nvidia_amd64.deb
+$ sudo apt install -y ./monolish_${PROJECT_VERSION}-1+oss+nvidia_amd64.deb
 \endcode
 
 There are two variants according to backend BLAS and LAPACK implementation for CPU:
 
-- [+oss+nvidia](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+oss+nvidia_amd64.deb) means it uses OpenBLAS and CUDA
-- [+mkl+nvidia](https://github.com/ricosjp/monolish/releases/download/0.14.2/monolish_0.14.2-1+mkl+nvidia_amd64.deb) means it uses Intel MKL and CUDA
+- [+oss+nvidia](https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+oss+nvidia_amd64.deb) means it uses OpenBLAS and CUDA
+- [+mkl+nvidia](https://github.com/ricosjp/monolish/releases/download/${PROJECT_VERSION}/monolish_${PROJECT_VERSION}-1+mkl+nvidia_amd64.deb) means it uses Intel MKL and CUDA
 
 CUDA libraries will be installed as its dependencies.
 
