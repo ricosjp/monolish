@@ -12,6 +12,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install doxygen and graphviz
+      run: |
+        apt update
+        apt install -y doxygen graphviz
+
     - name: Generate document for current commit
       run: |
         cmake --preset=cpu-none-none
