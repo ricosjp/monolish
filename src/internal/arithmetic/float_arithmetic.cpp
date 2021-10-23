@@ -14,7 +14,7 @@ void vadd(const size_t N, const float *a, const float alpha, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] + alpha;
     }
 #else
@@ -23,7 +23,7 @@ void vadd(const size_t N, const float *a, const float alpha, float *y,
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] + alpha;
     }
   }
@@ -39,7 +39,7 @@ void vsub(const size_t N, const float *a, const float alpha, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] - alpha;
     }
 #else
@@ -48,7 +48,7 @@ void vsub(const size_t N, const float *a, const float alpha, float *y,
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] - alpha;
     }
   }
@@ -64,7 +64,7 @@ void vmul(const size_t N, const float *a, const float alpha, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] * alpha;
     }
 #else
@@ -73,7 +73,7 @@ void vmul(const size_t N, const float *a, const float alpha, float *y,
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] * alpha;
     }
   }
@@ -89,7 +89,7 @@ void vdiv(const size_t N, const float *a, const float alpha, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] / alpha;
     }
 #else
@@ -98,7 +98,7 @@ void vdiv(const size_t N, const float *a, const float alpha, float *y,
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] / alpha;
     }
   }
@@ -117,7 +117,7 @@ void vadd(const size_t N, const float *a, const float *b, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] + b[i];
     }
 #else
@@ -129,7 +129,7 @@ void vadd(const size_t N, const float *a, const float *b, float *y,
     vsAdd(N, a, b, y);
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] + b[i];
     }
 #endif
@@ -146,7 +146,7 @@ void vsub(const size_t N, const float *a, const float *b, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] - b[i];
     }
 #else
@@ -158,7 +158,7 @@ void vsub(const size_t N, const float *a, const float *b, float *y,
     vsSub(N, a, b, y);
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] - b[i];
     }
 #endif
@@ -175,7 +175,7 @@ void vmul(const size_t N, const float *a, const float *b, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] * b[i];
     }
 #else
@@ -187,7 +187,7 @@ void vmul(const size_t N, const float *a, const float *b, float *y,
     vsMul(N, a, b, y);
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] * b[i];
     }
 #endif
@@ -204,7 +204,7 @@ void vdiv(const size_t N, const float *a, const float *b, float *y,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] / b[i];
     }
 #else
@@ -216,7 +216,7 @@ void vdiv(const size_t N, const float *a, const float *b, float *y,
     vsDiv(N, a, b, y);
 #else
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = a[i] / b[i];
     }
 #endif
@@ -260,7 +260,7 @@ bool vequal(const size_t N, const float *a, const float *y, bool gpu_status) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       if (y[i] != a[i]) {
         ans = false;
       }
@@ -271,7 +271,7 @@ bool vequal(const size_t N, const float *a, const float *y, bool gpu_status) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       if (y[i] != a[i]) {
         ans = false;
       }
@@ -289,7 +289,7 @@ void vreciprocal(const size_t N, const float *a, float *y, bool gpu_status) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = 1.0 / a[i];
     }
 #else
@@ -298,7 +298,7 @@ void vreciprocal(const size_t N, const float *a, float *y, bool gpu_status) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = 1.0 / a[i];
     }
   }
