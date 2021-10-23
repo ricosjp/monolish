@@ -16,25 +16,25 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   const double *vald = A.val.data();
-  const int *rowd = A.row_ptr.data();
-  const int *cold = A.col_ind.data();
+  const auto rowd = A.row_ptr.data();
+  const auto cold = A.col_ind.data();
 
   const double *Bd = B.val.data();
   double *Cd = C.val.data();
 
   // MN = MK * KN
-  const int M = A.get_row();
-  const int N = B.get_col();
-  const int K = A.get_col();
+  const int M = (int)A.get_row();
+  const int N = (int)B.get_col();
+  const int K = (int)A.get_col();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // CUDA11 will support SpMM
 #if MONOLISH_USE_OLD_CUDA   // cuda10.x
 #pragma omp target teams distribute parallel for
-    for (int j = 0; j < N; j++) {
-      for (int i = 0; i < M; i++) {
+    for (auto j = decltype(N){0}; j < N; j++) {
+      for (auto i = decltype(M){0}; i < M; i++) {
         double tmp = 0;
-        for (int k = rowd[i]; k < rowd[i + 1]; k++) {
+        for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
         Cd[i * N + j] = tmp;
@@ -42,9 +42,9 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
     }
 #else
 
-    size_t nnz = A.get_nnz();
-    const double alpha = 1.0;
-    const double beta = 0.0;
+    auto nnz = A.get_nnz();
+    auto alpha = 1.0;
+    auto beta = 0.0;
 
 #pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
     {
@@ -107,26 +107,26 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 // OSS
 #else
 #if USE_AVX // avx_cpu
-    const int vecL = 4;
+    const auto vecL = 4;
 
 #pragma omp parallel for
-    for (int i = 0; i < (int)(M * N); i++) {
+    for (auto i = decltype(M){0}; i < M * N; i++) {
       Cd[i] = 0.0;
     }
 
 #pragma omp parallel for
-    for (int i = 0; i < (int)M; i++) {
-      int start = (int)rowd[i];
-      int end = (int)rowd[i + 1];
-      const int Cr = i * N;
-      for (int k = start; k < end; k++) {
-        const int Br = N * cold[k];
+    for (auto i = decltype(M){0}; i < M; i++) {
+      auto start = (int)rowd[i];
+      auto end = (int)rowd[i + 1];
+      auto Cr = i * N;
+      for (auto k = start; k < end; k++) {
+        auto Br = N * cold[k];
         const Dreg Av = SIMD_FUNC(broadcast_sd)(&vald[k]);
         Dreg tv, Bv, Cv;
         int j;
-        for (j = 0; j < (int)N - (vecL - 1); j += vecL) {
-          const int BB = Br + j;
-          const int CC = Cr + j;
+        for (j = 0; j < N - (vecL - 1); j += vecL) {
+           auto BB = Br + j;
+           auto CC = Cr + j;
 
           Bv = SIMD_FUNC(loadu_pd)((double *)&Bd[BB]);
           Cv = SIMD_FUNC(loadu_pd)((double *)&Cd[CC]);
@@ -135,19 +135,19 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
           SIMD_FUNC(storeu_pd)((double *)&Cd[CC], Cv);
         }
 
-        for (; j < (int)N; j++) {
+        for (; j < N; j++) {
           Cd[Cr + j] += vald[k] * Bd[Br + j];
         }
       }
     }
 #else // Scalar_cpu
 #pragma omp parallel for
-    for (int j = 0; j < (int)N; j++) {
-      for (int i = 0; i < (int)M; i++) {
+    for (auto j = decltype(N){0}; j < N; j++) {
+      for (auto i = decltype(M){0}; i < M; i++) {
         double tmp = 0;
-        int start = (int)rowd[i];
-        int end = (int)rowd[i + 1];
-        for (int k = start; k < end; k++) {
+        auto start = (int)rowd[i];
+        auto end = (int)rowd[i + 1];
+        for (auto k = start; k < end; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
         Cd[i * N + j] = tmp;
@@ -172,8 +172,8 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   const float *vald = A.val.data();
-  const int *rowd = A.row_ptr.data();
-  const int *cold = A.col_ind.data();
+  const auto *rowd = A.row_ptr.data();
+  const auto *cold = A.col_ind.data();
 
   const float *Bd = B.val.data();
   float *Cd = C.val.data();
@@ -188,10 +188,10 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
 // CUDA11.4 SpMM has bug
 //#if MONOLISH_USE_OLD_CUDA // cuda10.x
 #pragma omp target teams distribute parallel for
-    for (int j = 0; j < N; j++) {
-      for (int i = 0; i < M; i++) {
+    for (auto j = decltype(N){0}; j < N; j++) {
+      for (auto i = decltype(M){0}; i < M; i++) {
         float tmp = 0;
-        for (int k = rowd[i]; k < rowd[i + 1]; k++) {
+        for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
         Cd[i * N + j] = tmp;
@@ -255,15 +255,15 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
                      // const int vecL = 8;
 
 #pragma omp parallel for
-    for (int i = 0; i < (int)(M * N); i++) {
+    for (auto i = decltype(M){0}; i < M * N; i++) {
       Cd[i] = 0.0;
     }
 
 #pragma omp parallel for
-    for (int i = 0; i < (int)M; i++) {
-      int start = (int)rowd[i];
-      int end = (int)rowd[i + 1];
-      const int Cr = i * N;
+    for (auto i = decltype(M){0}; i < M; i++) {
+      auto start = (int)rowd[i];
+      auto end = (int)rowd[i + 1];
+      auto Cr = i * N;
       for (int k = start; k < end; k++) {
         const int Br = N * cold[k];
         const Sreg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
@@ -314,12 +314,12 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
     }
 #else // Scalar_cpu
 #pragma omp parallel for
-    for (int j = 0; j < (int)N; j++) {
-      for (int i = 0; i < (int)M; i++) {
-        double tmp = 0;
-        int start = (int)rowd[i];
-        int end = (int)rowd[i + 1];
-        for (int k = start; k < end; k++) {
+    for (auto j = decltype(N){0}; j < N; j++) {
+      for (auto i = decltype(M){0}; i < M; i++) {
+        float tmp = 0;
+        auto start = (int)rowd[i];
+        auto end = (int)rowd[i + 1];
+        for (auto k = start; k < end; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
         Cd[i * N + j] = tmp;
