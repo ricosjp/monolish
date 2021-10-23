@@ -1,8 +1,8 @@
-CC=`allgebra_get_device_cc`
+#!/bin/bash
+set -eu
 
-rm -f /usr/lib/libmonolish_gpu.so
-ln -s /usr/lib/libmonolish_gpu_$CC.so /usr/lib/libmonolish_gpu.so
-
+gpu_cc=$(nvcc -o /usr/share/monolish/get_device_cc --run --run-args 0 /usr/share/monolish/get_device_cc.cu)
 nvidia-smi -L
-echo "Compute Capability of GPU 0 is $CC"
-echo "set /usr/lib/libmonolish_gpu.so -> /usr/lib/libmonolish_gpu_$CC.so"
+echo -e "Compute Capability of GPU 0 is ${gpu_cc}"
+
+update-alternatives --set monolish /usr/lib/libmonolish_gpu_${gpu_cc}.so 
