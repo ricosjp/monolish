@@ -48,12 +48,18 @@ set(CPACK_DEBIAN_FILE_NAME "monolish_${CPACK_PACKAGE_VERSION}_${CPACK_SYSTEM_NAM
 if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
   list(JOIN monolish_nvidia_gpu_arch_supported " " monolish_nvidia_gpu_arch_supported_str)
   configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/package/postinst.in
-    ${CMAKE_CURRENT_SOURCE_DIR}/package/postinst
+    ${PROJECT_SOURCE_DIR}/package/postinst.in
+    ${PROJECT_SOURCE_DIR}/package/postinst
+    @ONLY
+  )
+  install(FILES
+    ${PROJECT_SOURCE_DIR}/package/get_device_cc.cu
+    ${PROJECT_SOURCE_DIR}/package/link_monolish_gpu.sh
+    DESTINATION share/monolish/
   )
   # Add post-install script for update-alternative
   set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
-    ${CMAKE_CURRENT_SOURCE_DIR}/package/postinst
+    ${PROJECT_SOURCE_DIR}/package/postinst
   )
 endif()
 
