@@ -1,0 +1,8 @@
+#!/bin/bash
+
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_52.so 0
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_60.so 0
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_61.so 0
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_70.so 0
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_75.so 0
+update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_80.so 0

@@ -45,6 +45,13 @@ endif()
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
 set(CPACK_DEBIAN_FILE_NAME "monolish_${CPACK_PACKAGE_VERSION}_${CPACK_SYSTEM_NAME}.deb")
 
+if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
+  # Add post-install script for update-alternative
+  set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
+    ${CMAKE_CURRENT_SOURCE_DIR}/package/postinst
+  )
+endif()
+
 # FIXME: Add RPM setting
 
 include(CPack)
