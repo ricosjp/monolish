@@ -2,3 +2,6 @@ services:
   monolish:
     image: ${monolish_docker_image}
     build: .
+  monolish-release:
+    image: ${monolish_docker_release_image}
+    build: .
