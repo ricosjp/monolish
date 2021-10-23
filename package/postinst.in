@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for sm in ${monolish_nvidia_gpu_arch_supported_str}; do
+  update-alternatives --install /usr/lib/libmonolish_gpu.so monolish /usr/lib/libmonolish_gpu_${sm}.so 0
+done
