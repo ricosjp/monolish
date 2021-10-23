@@ -15,15 +15,15 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   const double *xd = x.data();
   const double *yd = y.data();
   double *zd = z.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
-  const size_t zoffset = z.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
+  const auto zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
 #else
@@ -32,7 +32,7 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
   }
@@ -51,15 +51,15 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   const float *xd = x.data();
   const float *yd = y.data();
   float *zd = z.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
-  const size_t zoffset = z.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
+  const auto zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
 #else
@@ -68,7 +68,7 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
     }
   }
