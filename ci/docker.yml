@@ -7,20 +7,9 @@
     - .release
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker-compose build monolish
-    - docker-compose push monolish
-
-.docker_release:
-  stage: deploy
-  image: docker/compose:1.29.1
-  services:
-    - docker:dind
-  extends:
-    - .release
-  script:
     - docker login -u t-hishinuma -p ${GITHUB_TOKEN_HISHINUMA} ghcr.io/ricosjp
-    - docker-compose build monolish-release
-    - docker-compose push monolish-release
+    - docker-compose build
+    - docker-compose push
 
 mkl_docker:
   extends:
@@ -43,29 +32,5 @@ mkl_nvidia_docker:
 oss_nvidia_docker:
   extends:
     - .docker
-  needs:
-    - gpu_all_oss_build
-
-mkl_docker_release:
-  extends:
-    - .docker_release
-  needs:
-    - cpu_avx_gcc_mkl_build
-
-oss_docker_release:
-  extends:
-    - .docker_release
-  needs:
-    - cpu_avx_gcc_oss_build
-
-mkl_nvidia_docker_release:
-  extends:
-    - .docker_release
-  needs:
-    - gpu_all_mkl_build
-
-oss_nvidia_docker_release:
-  extends:
-    - .docker_release
   needs:
     - gpu_all_oss_build
