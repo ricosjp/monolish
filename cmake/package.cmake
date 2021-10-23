@@ -54,6 +54,9 @@ if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
   )
   install(FILES
     ${PROJECT_SOURCE_DIR}/package/get_device_cc.cu
+    DESTINATION share/monolish/
+  )
+  install(PROGRAMS
     ${PROJECT_SOURCE_DIR}/package/link_monolish_gpu.sh
     DESTINATION share/monolish/
   )
