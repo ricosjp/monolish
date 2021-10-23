@@ -74,7 +74,7 @@ include(CPack)
 # Build container
 #
 set(monolish_docker_image registry.ritc.jp/ricos/monolish/${monolish_backend}:${monolish_package_version})
-set(monolish_docker_release_image ghcr.io/ricos/monolish/${monolish_backend}:${monolish_package_version})
+set(monolish_docker_release_image ghcr.io/ricosjp/monolish/${monolish_backend}:${monolish_package_version})
 check_exec(
   COMMAND git rev-parse --short HEAD
   OUTPUT_VARIABLE git_hash
