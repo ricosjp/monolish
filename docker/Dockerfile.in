@@ -16,7 +16,7 @@ RUN apt install -y /${CPACK_DEBIAN_FILE_NAME} \
 LABEL maintainer="RICOS Co. Ltd." \
   org.opencontainers.image.vendor="RICOS Co. Ltd." \
   org.opencontainers.image.description="monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture" \
-  org.opencontainers.image.url="https://github.com/ricosjp/monolish" \
+  org.opencontainers.image.source="https://github.com/ricosjp/monolish" \
   org.opencontainers.image.licenses="Apache-2.0" \
   org.opencontainers.image.version="${monolish_package_version}" \
   org.opencontainers.image.revision="${git_hash}" \
