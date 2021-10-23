@@ -7,7 +7,7 @@ if(MONOLISH_USE_NVIDIA_GPU AND NOT MONOLISH_NVIDIA_GPU_ARCH_ALL)
         -o get_device_cc
         --run
         --run-args 0
-        ${PROJECT_SOURCE_DIR}/cmake/get_device_cc.cu
+        ${PROJECT_SOURCE_DIR}/package/get_device_cc.cu
       RESULT_VARIABLE exit_code
       OUTPUT_VARIABLE gpu_cc
       OUTPUT_STRIP_TRAILING_WHITESPACE

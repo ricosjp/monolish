@@ -45,6 +45,27 @@ endif()
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html#variable:CPACK_DEBIAN_FILE_NAME
 set(CPACK_DEBIAN_FILE_NAME "monolish_${CPACK_PACKAGE_VERSION}_${CPACK_SYSTEM_NAME}.deb")
 
+if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
+  list(JOIN monolish_nvidia_gpu_arch_supported " " monolish_nvidia_gpu_arch_supported_str)
+  configure_file(
+    ${PROJECT_SOURCE_DIR}/package/postinst.in
+    ${PROJECT_SOURCE_DIR}/package/postinst
+    @ONLY
+  )
+  install(FILES
+    ${PROJECT_SOURCE_DIR}/package/get_device_cc.cu
+    DESTINATION share/monolish/
+  )
+  install(PROGRAMS
+    ${PROJECT_SOURCE_DIR}/package/link_monolish_gpu.sh
+    DESTINATION share/monolish/
+  )
+  # Add post-install script for update-alternative
+  set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
+    ${PROJECT_SOURCE_DIR}/package/postinst
+  )
+endif()
+
 # FIXME: Add RPM setting
 
 include(CPack)

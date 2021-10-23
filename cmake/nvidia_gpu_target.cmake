@@ -48,7 +48,8 @@ if(MONOLISH_USE_NVIDIA_GPU)
     # Build for every CUDA architectures after Maxwell
     # `sm_53` and `sm_62` are ommited since there is no GPU in
     # https://developer.nvidia.com/cuda-gpus
-    foreach(gpu_cc IN ITEMS 52 60 61 70 75 80)
+    set(monolish_nvidia_gpu_arch_supported 52 60 61 70 75 80)
+    foreach(gpu_cc IN LISTS monolish_nvidia_gpu_arch_supported)
       set(target "${monolish_gpu_target}_${gpu_cc}")
       message(STATUS "Add ${target} target")
       add_library(${target} ${monolish_sources})
