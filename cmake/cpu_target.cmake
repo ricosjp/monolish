@@ -2,7 +2,7 @@
 # Glob source files
 #
 file(GLOB_RECURSE monolish_sources
-  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+  RELATIVE ${PROJECT_SOURCE_DIR}
   src/*.cpp
 )
 
