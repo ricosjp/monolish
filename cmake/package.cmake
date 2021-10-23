@@ -1,9 +1,22 @@
 #
 # Packaging
 #
+install(
+  DIRECTORY include/
+  DESTINATION include
+  FILES_MATCHING PATTERN "*.hpp"
+)
+install(
+  DIRECTORY examples/
+  DESTINATION share/monolish/examples
+)
+install(
+  DIRECTORY benchmark/
+  DESTINATION share/monolish/benchmark
+)
+
 # Sell also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
-#
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_PACKAGE_VERSION "${monolish_package_version}+${monolish_backend}")
