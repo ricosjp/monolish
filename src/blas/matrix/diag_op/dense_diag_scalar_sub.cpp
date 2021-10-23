@@ -9,13 +9,13 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
   logger.func_in(monolish_func);
 
   T *vald = val.data();
-  const size_t N = get_col();
-  const size_t Len = get_row() > get_col() ? get_row() : get_col();
+  const auto N = get_col();
+  const auto Len = get_row() > get_col() ? get_row() : get_col();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vald[N * i + i] -= alpha;
     }
 #else
@@ -23,7 +23,7 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vald[N * i + i] -= alpha;
     }
   }
