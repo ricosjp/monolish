@@ -14,15 +14,15 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
   assert(A.get_col() == x.size());
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const double *xd = x.data();
-  double *yd = y.data();
-  const double *vald = A.val.data();
-  const size_t m = A.get_row();
-  const size_t n = A.get_col();
+  const auto *xd = x.data();
+  auto *yd = y.data();
+  const auto *vald = A.val.data();
+  const auto m = A.get_row();
+  const auto n = A.get_col();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
   const double alpha = 1.0;
   const double beta = 0.0;
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -58,15 +58,15 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
   assert(A.get_col() == x.size());
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const float *xd = x.data();
-  float *yd = y.data();
-  const float *vald = A.val.data();
-  const size_t n = A.get_row();
-  const size_t m = A.get_col();
+  const auto *xd = x.data();
+  auto *yd = y.data();
+  const auto *vald = A.val.data();
+  const auto n = A.get_row();
+  const auto m = A.get_col();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
   const float alpha = 1.0;
   const float beta = 0.0;
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

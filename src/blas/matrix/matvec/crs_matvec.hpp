@@ -16,11 +16,11 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 
   const double *vald = A.val.data();
   const double *xd = x.data();
-  const int *rowd = A.row_ptr.data();
-  const int *cold = A.col_ind.data();
+  const auto *rowd = A.row_ptr.data();
+  const auto *cold = A.col_ind.data();
   double *yd = y.data();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
@@ -37,11 +37,11 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
 
     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
-    const int m = A.get_row();
-    const int n = A.get_col();
+    const auto m = A.get_row();
+    const auto n = A.get_col();
     const double alpha = 1.0;
     const double beta = 0.0;
-    const int nnz = A.get_nnz();
+    const auto nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
@@ -51,11 +51,11 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
     }
 
 #else // cuda11.x
-    const int m = A.get_row();
-    const int n = A.get_col();
+    const auto m = A.get_row();
+    const auto n = A.get_col();
     const double alpha = 1.0;
     const double beta = 0.0;
-    const int nnz = A.get_nnz();
+    const auto nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
@@ -93,8 +93,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
   } else {
     // MKL
 #if MONOLISH_USE_MKL
-    int m = A.get_row();
-    int n = A.get_col();
+    auto m = A.get_row();
+    auto n = A.get_col();
     const double alpha = 1.0;
     const double beta = 0.0;
 
@@ -112,9 +112,9 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y) {
     // OSS
 #else
 #pragma omp parallel for
-    for (int i = 0; i < (int)A.get_row(); i++) {
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
       double ytmp = 0.0;
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         ytmp += vald[j] * (xd + xoffset)[cold[j]];
       }
       yd[i + yoffset] = ytmp;
@@ -138,11 +138,11 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 
   const float *vald = A.val.data();
   const float *xd = x.data();
-  const int *rowd = A.row_ptr.data();
-  const int *cold = A.col_ind.data();
+  const auto *rowd = A.row_ptr.data();
+  const auto *cold = A.col_ind.data();
   float *yd = y.data();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
@@ -159,9 +159,9 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
 
     const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
-    const int m = A.get_row();
-    const int n = A.get_col();
-    const int nnz = A.get_nnz();
+    const auto m = A.get_row();
+    const auto n = A.get_col();
+    const auto nnz = A.get_nnz();
     const float alpha = 1.0;
     const float beta = 0.0;
 
@@ -172,11 +172,11 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
                                           &beta, yd + yoffset));
     }
 #else // cuda11.x
-    const int m = A.get_row();
-    const int n = A.get_col();
+    const auto m = A.get_row();
+    const auto n = A.get_col();
     const float alpha = 1.0;
     const float beta = 0.0;
-    const int nnz = A.get_nnz();
+    const auto nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
     {
@@ -214,8 +214,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
   } else {
     // MKL
 #if MONOLISH_USE_MKL
-    const int m = A.get_row();
-    const int n = A.get_col();
+    const auto m = A.get_row();
+    const auto n = A.get_col();
     const float alpha = 1.0;
     const float beta = 0.0;
 
@@ -233,9 +233,9 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y) {
     // OSS
 #else
 #pragma omp parallel for
-    for (int i = 0; i < (int)A.get_row(); i++) {
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
       float ytmp = 0.0;
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         ytmp += vald[j] * (xd + xoffset)[cold[j]];
       }
       yd[i + yoffset] = ytmp;
