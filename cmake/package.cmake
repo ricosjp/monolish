@@ -85,8 +85,8 @@ check_exec(
   OUTPUT_VARIABLE build_date
   ERROR_MSG "Failed to current date"
 )
-configure_file(docker/Dockerfile.in Dockerfile)
-configure_file(docker/compose.yml.in compose.yml)
+configure_file(package/Dockerfile.in Dockerfile)
+configure_file(package/compose.yml.in compose.yml)
 add_custom_target(docker
   COMMAND docker-compose build
   COMMENT "Build container ${monolish_docker_image}"
