@@ -41,6 +41,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Split CMakeLists.txt into sub cmake script https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/395
 - Generate installation document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/378
 - move get_singularity and set_reorder in LU/QR/Cholesky to monolish::equation::solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/392 https://github.com/ricosjp/monolish/issues/85
 - MONOLISH_PACKAGE_VERSION is added, SEND_ERROR if git command fails https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/391
