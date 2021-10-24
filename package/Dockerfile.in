@@ -1,0 +1,23 @@
+FROM ${MONOLISH_CONTAINER_BASE_IMAGE}:${MONOLISH_CONTAINER_BASE_TAG}
+
+RUN apt-get update -y \
+ && apt-get install -y python3-pip \
+ && apt-get clean && \
+ pip3 install monolish-log-viewer==0.1.1
+
+COPY ${CPACK_DEBIAN_FILE_NAME} /
+RUN apt install -y /${CPACK_DEBIAN_FILE_NAME} \
+ && rm ${CPACK_DEBIAN_FILE_NAME}
+
+#
+# Annotations based on OCI specification
+# https://github.com/opencontainers/image-spec/blob/master/annotations.md
+#
+LABEL maintainer="RICOS Co. Ltd." \
+  org.opencontainers.image.vendor="RICOS Co. Ltd." \
+  org.opencontainers.image.description="monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture" \
+  org.opencontainers.image.source="https://github.com/ricosjp/monolish" \
+  org.opencontainers.image.licenses="Apache-2.0" \
+  org.opencontainers.image.version="${monolish_package_version}" \
+  org.opencontainers.image.revision="${git_hash}" \
+  org.opencontainers.image.created="${build_date}"

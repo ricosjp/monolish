@@ -63,6 +63,7 @@ Unreleased
 - [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
 
 ### Changed in CI
+- Push to ghcr.io from GitLab CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/397
 - Generate all deb for specfic GPU arch https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/389
 - Generate deb for all GPU arch https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/386
 - Generate doxygen HTML and setup [view app] button for Merge Request https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
