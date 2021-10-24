@@ -19,7 +19,7 @@ size_t vhash(const size_t N, const int *y, const int seed_value,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(^ : seed)
-    for (auto i = decltype{N}(0); i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
 #else
@@ -28,7 +28,7 @@ size_t vhash(const size_t N, const int *y, const int seed_value,
 #endif
   } else {
 #pragma omp parallel for reduction(^ : seed)
-    for (auto i = decltype{N}(0); i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
   }
@@ -48,7 +48,7 @@ size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for reduction(^ : seed)
-    for (auto i = decltype{N}(0); i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
 #else
@@ -57,7 +57,7 @@ size_t vhash(const size_t N, const size_t *y, const size_t seed_value,
 #endif
   } else {
 #pragma omp parallel for reduction(^ : seed)
-    for (auto i = decltype{N}(0); i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
   }
