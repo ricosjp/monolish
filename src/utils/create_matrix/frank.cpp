@@ -8,8 +8,8 @@ template <typename T> matrix::COO<T> util::frank_matrix(const int &M) {
   logger.util_in(monolish_func);
 
   matrix::COO<T> mat(M, M);
-  for (int i = 0; i < M; ++i) {
-    for (int j = 0; j < M; ++j) {
+  for (auto i = decltype(M){0}; i < M; i++) {
+    for (auto j = decltype(M){0}; j < M; j++) {
       T val = M - std::max(i, j);
       mat.insert(i, j, val);
     }

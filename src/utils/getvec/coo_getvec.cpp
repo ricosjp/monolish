@@ -9,16 +9,16 @@ template <typename T> void COO<T>::diag(vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t s = get_row() > get_col() ? get_col() : get_row();
+  auto s = get_row() > get_col() ? get_col() : get_row();
   assert(s == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == get_col_ind()[nz]) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == get_col_ind()[i]) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
 
@@ -31,16 +31,16 @@ template <typename T> void COO<T>::diag(view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t s = get_row() > get_col() ? get_col() : get_row();
+  auto s = get_row() > get_col() ? get_col() : get_row();
   assert(s == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == get_col_ind()[nz]) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == get_col_ind()[i]) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -55,16 +55,16 @@ void COO<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t s = get_row() > get_col() ? get_col() : get_row();
+  auto s = get_row() > get_col() ? get_col() : get_row();
   assert(s == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == get_col_ind()[nz]) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == get_col_ind()[i]) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
 
@@ -82,13 +82,13 @@ template <typename T> void COO<T>::row(const size_t r, vector<T> &vec) const {
 
   assert(get_col() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == static_cast<int>(r)) {
-      vec[get_col_ind()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == static_cast<int>(r)) {
+      vec[get_col_ind()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -105,13 +105,13 @@ void COO<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
 
   assert(get_col() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == static_cast<int>(r)) {
-      vec[get_col_ind()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == static_cast<int>(r)) {
+      vec[get_col_ind()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -130,13 +130,13 @@ void COO<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
 
   assert(get_col() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_row_ptr()[nz] == static_cast<int>(r)) {
-      vec[get_col_ind()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_row_ptr()[i] == static_cast<int>(r)) {
+      vec[get_col_ind()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -153,13 +153,13 @@ template <typename T> void COO<T>::col(const size_t c, vector<T> &vec) const {
 
   assert(get_row() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_col_ind()[nz] == static_cast<int>(c)) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_col_ind()[i] == static_cast<int>(c)) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -176,13 +176,13 @@ void COO<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
 
   assert(get_row() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_col_ind()[nz] == static_cast<int>(c)) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_col_ind()[i] == static_cast<int>(c)) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();
@@ -201,13 +201,13 @@ void COO<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
 
   assert(get_row() == vec.size());
 
-  for (size_t i = 0; i < vec.size(); i++) {
+  for (auto i = decltype(vec.size()){0}; i < vec.size(); i++) {
     vec[i] = 0;
   }
 
-  for (size_t nz = 0; nz < get_nnz(); ++nz) {
-    if (get_col_ind()[nz] == static_cast<int>(c)) {
-      vec[get_row_ptr()[nz]] = get_val_ptr()[nz];
+  for (auto i = decltype(vec.size()){0}; i < get_nnz(); i++) {
+    if (get_col_ind()[i] == static_cast<int>(c)) {
+      vec[get_row_ptr()[i]] = get_val_ptr()[i];
     }
   }
   logger.func_out();

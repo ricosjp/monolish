@@ -14,9 +14,9 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   double ans = 0;
   const double *xd = x.data();
   const double *yd = y.data();
-  const size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  const auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -56,9 +56,9 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   float ans = 0;
   const float *xd = x.data();
   const float *yd = y.data();
-  const size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  const auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

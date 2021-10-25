@@ -9,7 +9,7 @@ template <typename T> matrix::COO<T> util::eye(const int M) {
 
   matrix::COO<T> mat(M, M);
 
-  for (int i = 0; i < M; i++) {
+  for (auto i = decltype(M){0}; i < M; i++) {
     mat.insert(i, i, 1.0);
   }
 

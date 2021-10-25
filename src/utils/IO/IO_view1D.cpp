@@ -20,7 +20,7 @@ void view1D<monolish::vector<double>, double>::print_all(bool force_cpu) const {
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       printf("%f\n", val[i]);
     }
 #else
@@ -28,7 +28,7 @@ void view1D<monolish::vector<double>, double>::print_all(bool force_cpu) const {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       printf("%f\n", val[i]);
     }
   }
@@ -45,7 +45,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       printf("%f\n", val[i]);
     }
 #else
@@ -53,7 +53,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       printf("%f\n", val[i]);
     }
   }

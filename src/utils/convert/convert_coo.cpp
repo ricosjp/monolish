@@ -18,9 +18,8 @@ template <typename T> void COO<T>::convert(const CRS<T> &crs) {
   col_index.resize(nnz);
   val.resize(nnz);
 
-  for (size_t i = 0; i < get_row(); i++) {
-    for (size_t j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i + 1];
-         j++) {
+  for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+    for (auto j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i + 1]; j++) {
       row_index[j] = i;
       col_index[j] = crs.col_ind[j];
       val[j] = crs.val[j];
@@ -43,8 +42,8 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
   val.resize(0);
   size_t nz = 0;
 
-  for (size_t i = 0; i < dense.get_row(); i++) {
-    for (size_t j = 0; j < dense.get_col(); j++) {
+  for (auto i = decltype(dense.get_row()){0}; i < dense.get_row(); i++) {
+    for (auto j = decltype(dense.get_col()){0}; j < dense.get_col(); j++) {
       if (dense.at(i, j) != 0) {
         row_index.push_back(i);
         col_index.push_back(j);

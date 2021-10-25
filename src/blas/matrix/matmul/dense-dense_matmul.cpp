@@ -15,14 +15,14 @@ void blas::matmul(const matrix::Dense<double> &A,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const double *Ad = A.val.data();
-  const double *Bd = B.val.data();
-  double *Cd = C.val.data();
+  const auto *Ad = A.val.data();
+  const auto *Bd = B.val.data();
+  auto *Cd = C.val.data();
 
   // MN = MK * KN
-  const size_t m = A.get_row();
-  const size_t n = B.get_col();
-  const size_t k = A.get_col();
+  const auto m = A.get_row();
+  const auto n = B.get_col();
+  const auto k = A.get_col();
   const double alpha = 1.0;
   const double beta = 0.0;
 
@@ -59,14 +59,14 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const float *Ad = A.val.data();
-  const float *Bd = B.val.data();
-  float *Cd = C.val.data();
+  const auto *Ad = A.val.data();
+  const auto *Bd = B.val.data();
+  auto *Cd = C.val.data();
 
   // MN = MK * KN
-  const size_t m = A.get_row();
-  const size_t n = B.get_col();
-  const size_t k = A.get_col();
+  const auto m = A.get_row();
+  const auto n = B.get_col();
+  const auto k = A.get_col();
   const float alpha = 1.0;
   const float beta = 0.0;
 

@@ -19,10 +19,10 @@ matrix::COO<T> util::random_structure_matrix(const int M, const int N,
   std::random_device seed;
   std::default_random_engine rng(seed());
 
-  for (int i = 0; i < M; i++) {
+  for (auto i = decltype(M){0}; i < M; i++) {
     std::uniform_int_distribution<> dist_pos(0, N - 1);
-    for (int j = 0; j < nnzrow; j++) {
-      int c = dist_pos(rng);
+    for (auto j = decltype(nnzrow){0}; j < nnzrow; j++) {
+      auto c = dist_pos(rng);
       if (mat.at(i, c) != 0)
         j--;
       mat.insert(i, c, val);

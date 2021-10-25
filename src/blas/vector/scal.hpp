@@ -8,8 +8,8 @@ template <typename F1, typename F2> void Dscal_core(const F1 alpha, F2 &x) {
   logger.func_in(monolish_func);
 
   double *xd = x.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -33,8 +33,8 @@ template <typename F1, typename F2> void Sscal_core(const F1 alpha, F2 &x) {
   logger.func_in(monolish_func);
 
   float *xd = x.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

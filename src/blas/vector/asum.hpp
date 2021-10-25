@@ -8,8 +8,8 @@ template <typename F1> double Dasum_core(const F1 &x) {
 
   double ans = 0;
   const double *xd = x.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -41,8 +41,8 @@ template <typename F1> float Sasum_core(const F1 &x) {
 
   float ans = 0;
   const float *xd = x.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

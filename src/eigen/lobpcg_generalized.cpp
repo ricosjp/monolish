@@ -74,7 +74,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   std::vector<view1D<matrix::Dense<T>, T>> BWp;
   std::vector<view1D<matrix::Dense<T>, T>> BXp;
   std::vector<view1D<matrix::Dense<T>, T>> BPp;
-  for (std::size_t i = 0; i < m; ++i) {
+  for (auto i = decltype(m){0}; i < m; ++i) {
     w.push_back(view1D<matrix::Dense<T>, T>(wxp, i * n, (i + 1) * n));
     x.push_back(view1D<matrix::Dense<T>, T>(wxp, (m + i) * n, (m + i + 1) * n));
     p.push_back(
@@ -107,7 +107,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
   if (this->get_initvec_scheme() == monolish::solver::initvec_scheme::RANDOM) {
     // Preparing initial input to be orthonormal to each other
-    for (std::size_t i = 0; i < m; ++i) {
+    for (auto i = decltype(m){0}; i < m; ++i) {
       T minval = 0.0;
       T maxval = 1.0;
       util::random_vector(r, minval, maxval);
@@ -118,7 +118,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
   } else { // initvec_scheme::USER
     // Copy User-supplied xinout to x
-    for (std::size_t i = 0; i < m; ++i) {
+    for (auto i = decltype(m){0}; i < m; ++i) {
       view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
       blas::copy(xinout_i, x[i]);
     }
@@ -129,7 +129,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
                          vtmp2, zero, xinout);
   }
 
-  for (std::size_t i = 0; i < m; ++i) {
+  for (auto i = decltype(m){0}; i < m; ++i) {
     // X = A x
     blas::matvec(A, x[i], X[i]);
     // BX = B x
@@ -158,7 +158,8 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     monolish::util::send(Sbm);
   }
 
-  for (std::size_t iter = 0; iter < this->get_maxiter(); iter++) {
+  for (auto iter = decltype(this->get_maxiter()){0}; iter < this->get_maxiter();
+       iter++) {
     if (A.get_device_mem_stat() == true) {
       monolish::util::send(Sam, lambda);
     }
@@ -233,7 +234,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     blas::copy(WXP, WXP_p);
     blas::copy(BWXP, BWXP_p);
     vector<T> residual(m);
-    for (std::size_t i = 0; i < m; ++i) {
+    for (auto i = decltype(m){0}; i < m; ++i) {
       // copy current eigenvalue results
       l[i] = lambda[i];
 
@@ -247,7 +248,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       if (iter == 0 || is_singular) {
         b.resize(3 * m);
         // b[2m]...b[3m-1] is not calculated so explicitly set to 0
-        for (std::size_t j = 2 * m; j < 3 * m; ++j) {
+        for (auto j = decltype(m){2 * m}; j < 3 * m; ++j) {
           b[j] = 0.0;
         }
       }
@@ -258,7 +259,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       blas::copy(zero, BP[i]);
       blas::copy(zero, BX[i]);
 
-      for (std::size_t j = 0; j < m; ++j) {
+      for (auto j = decltype(m){0}; j < m; ++j) {
         // x[i] = \Sum_j b[j] w[j] + b[m+j] x[j] + b[2m+j] p[j], normalize
         // p[i] = \Sum_j b[j] w[j]               + b[2m+j] p[j], normalize
         blas::axpy(b[j], wp[j], p[i]);
@@ -310,7 +311,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
                                << std::scientific << residual[i] << std::endl;
       }
       if (std::isnan(residual[i])) {
-        for (std::size_t j = 0; j < m; ++j) {
+        for (auto j = decltype(m){0}; j < m; ++j) {
           view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
           blas::copy(x[j], xinout_j);
         }
@@ -328,7 +329,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     // early return when residual is small enough
     if (vml::max(residual) < this->get_tol() &&
         this->get_miniter() < iter + 1) {
-      for (std::size_t i = 0; i < m; ++i) {
+      for (auto i = decltype(m){0}; i < m; ++i) {
         view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
         blas::copy(x[i], xinout_i);
       }
@@ -352,7 +353,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       BWXP_p.set_row(3 * m);
     }
   }
-  for (std::size_t i = 0; i < m; ++i) {
+  for (auto i = decltype(m){0}; i < m; ++i) {
     view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
     blas::copy(x[i], xinout_i);
   }

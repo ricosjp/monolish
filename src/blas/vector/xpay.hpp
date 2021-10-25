@@ -14,14 +14,14 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 
   const double *xd = x.data();
   double *yd = y.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
@@ -30,7 +30,7 @@ void Dxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }
@@ -48,14 +48,14 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 
   const float *xd = x.data();
   float *yd = y.data();
-  size_t size = x.size();
-  const size_t xoffset = x.get_offset();
-  const size_t yoffset = y.get_offset();
+  auto size = x.size();
+  const auto xoffset = x.get_offset();
+  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
 #else
@@ -64,7 +64,7 @@ void Sxpay_core(const F1 alpha, const F2 &x, F3 &y) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < size; i++) {
+    for (auto i = decltype(size){0}; i < size; i++) {
       yd[i + yoffset] = xd[i + xoffset] + alpha * yd[i + yoffset];
     }
   }

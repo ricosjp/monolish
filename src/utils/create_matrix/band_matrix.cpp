@@ -17,10 +17,10 @@ matrix::COO<T> util::band_matrix(const int M, const int N, const int W,
 
   int ww = W;
 
-  for (int i = 0; i < M; i++) {
-    int start = (i < ww ? 0 : i - ww);
-    int end = (N <= (i + ww + 1) ? N : i + ww + 1);
-    for (int j = start; j < end; j++) {
+  for (auto i = decltype(M){0}; i < M; i++) {
+    auto start = (i < ww ? 0 : i - ww);
+    auto end = (N <= (i + ww + 1) ? N : i + ww + 1);
+    for (auto j = start; j < end; j++) {
       if (i == j)
         mat.insert(i, j, diag_val);
       else

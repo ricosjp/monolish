@@ -22,7 +22,7 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 
   row_ptr[0] = 0;
   size_t c_row = 0;
-  for (size_t i = 0; i < coo.get_nnz(); i++) {
+  for (auto i = decltype(coo.get_nnz()){0}; i < coo.get_nnz(); i++) {
 
     if ((int)c_row == coo.row_index[i]) {
       row_ptr[c_row + 1] = i + 1;

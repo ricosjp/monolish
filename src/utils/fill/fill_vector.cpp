@@ -14,7 +14,7 @@ template <typename T> void vector<T>::fill(T value) {
     T *vald = val.data();
     auto N = val.size();
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < get_nnz(); i++) {
       vald[i] = value;
     }
 #else
@@ -23,7 +23,7 @@ template <typename T> void vector<T>::fill(T value) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < val.size(); i++) {
+    for (auto i = decltype(val.size()){0}; i < get_nnz(); i++) {
       val[i] = value;
     }
   }
