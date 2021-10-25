@@ -126,7 +126,7 @@ void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
   }
 
   std::vector<T> values(rowN * colN);
-  for (size_t i = 0; i < colN; ++i) {
+  for (auto i = decltype(colN){0}; i < colN; ++i) {
     std::vector<T> vec_tmp(colN, 0);
     vec_tmp[i] = 1;
     vector<T> vec(vec_tmp);
@@ -138,7 +138,7 @@ void LinearOperator<T>::convert_to_Dense(Dense<T> &dense) const {
     if (gpu_status) {
       util::recv(ans);
     }
-    for (size_t j = 0; j < rowN; ++j) {
+    for (auto j = decltype(rowN){0}; j < rowN; ++j) {
       values[j * colN + i] = ans[j];
     }
   }

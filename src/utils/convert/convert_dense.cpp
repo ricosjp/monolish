@@ -16,11 +16,11 @@ template <typename T> void Dense<T>::convert(const COO<T> &coo) {
   val.resize(get_row() * get_col());
 
 #pragma omp parallel for
-  for (size_t i = 0; i < get_nnz(); i++) {
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
     val[i] = 0.0;
   }
 
-  for (size_t i = 0; i < coo.get_nnz(); i++) {
+  for (auto i = decltype(coo.get_nnz()){0}; i < coo.get_nnz(); i++) {
     insert(coo.row_index[i], coo.col_index[i], coo.val[i]);
   }
   logger.util_out();
