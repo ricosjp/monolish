@@ -11,6 +11,10 @@ configure_file(
   ${PROJECT_SOURCE_DIR}/doc/installation/installation.md.in
   ${PROJECT_SOURCE_DIR}/doc/installation/installation.md
 )
+configure_file(
+  ${PROJECT_SOURCE_DIR}/doc/installation/monolish_docker.md.in
+  ${PROJECT_SOURCE_DIR}/doc/installation/monolish_docker.md
+)
 configure_file(Doxyfile.in Doxyfile)
 add_custom_target(document
   COMMAND doxygen
