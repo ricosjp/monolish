@@ -32,7 +32,7 @@ docker run -it --rm ghcr.io/ricosjp/monolish/mkl:${PROJECT_VERSION}
 If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia:${PROJECT_VERSION}
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss-nvidia:${PROJECT_VERSION}
 ```
 
 Then, in execute the following command in monolish docker.
@@ -48,7 +48,7 @@ This script determines the CC of GPU 0 and makes a link to `libmonolish_gpu.so`.
 If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia:${PROJECT_VERSION}
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl-nvidia:${PROJECT_VERSION}
 ```
 
 Then, in execute the following command in monolish docker.
