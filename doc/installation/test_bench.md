@@ -25,9 +25,9 @@ The results are output to each directory in tsv format.
 If need to collect results in a single directory:
 
 ```
-	mkdir -p result/
-	cp *.tsv result/
-	cp */*.tsv result/
+mkdir -p result/
+cp *.tsv result/
+cp */*.tsv result/
 ```
 
 ### For CPU

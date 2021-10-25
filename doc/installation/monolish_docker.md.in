@@ -18,13 +18,13 @@ Please refer to the next section to see how to run the sample.
 ## OSS
 
 ```
-docker run -it --rm ghcr.io/ricosjp/monolish/oss:latest
+docker run -it --rm ghcr.io/ricosjp/monolish/oss:${PROJECT_VERSION}
 ```
 
 ## MKL
 
 ```
-docker run -it --rm ghcr.io/ricosjp/monolish/mkl:latest
+docker run -it --rm ghcr.io/ricosjp/monolish/mkl:${PROJECT_VERSION}
 ```
 
 ## OSS+NVIDIA
@@ -32,7 +32,7 @@ docker run -it --rm ghcr.io/ricosjp/monolish/mkl:latest
 If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss_nvidia:latest
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/oss-nvidia:${PROJECT_VERSION}
 ```
 
 Then, in execute the following command in monolish docker.
@@ -48,7 +48,7 @@ This script determines the CC of GPU 0 and makes a link to `libmonolish_gpu.so`.
 If there is not a GPU, `--gpus all` will fail.
 
 ```
-docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl_nvidia:latest
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl-nvidia:${PROJECT_VERSION}
 ```
 
 Then, in execute the following command in monolish docker.
@@ -77,7 +77,7 @@ make mkl
 ## OSS+NVIDIA
 
 ```
-make in_oss_nvidia
+make oss_nvidia
 ```
 
 ## MKL+NVIDIA
