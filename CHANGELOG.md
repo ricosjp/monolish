@@ -42,6 +42,7 @@ Unreleased
 - fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Generate monolish container document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/399
 - Use update-alternative to switch libmonolish_gpu.so https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/396
 - Split CMakeLists.txt into sub cmake script https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/395
 - Generate installation document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/378
