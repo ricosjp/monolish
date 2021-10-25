@@ -21,45 +21,46 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- add CRS/Dense SOR precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/380
-- add CRS/Dense SOR solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/376
+- Add CRS/Dense SOR precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/380
+- Add CRS/Dense SOR solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/376
 - Create deb package by cpack https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/372
 - `MONOLISH_CCACHE_BUILD` flag to enable ccache https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/371
 - Add CMakePresets.json https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/368
-- refactoring and add BiCGSTAB and Jacobi benchmarks in `benchmark/equation/` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/365
-- add `solver_name()` function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/363
-- collect iterative solver tests in `test/equation/iterative` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/362
-- add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
+- Refactoring and add BiCGSTAB and Jacobi benchmarks in `benchmark/equation/` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/365
+- Add `solver_name()` function https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/363
+- Collect iterative solver tests in `test/equation/iterative` https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/362
+- Add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
-- rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
-- fix doxygen warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/394
-- fix benchmark warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
-- fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390
-- fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
-- dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
-- fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
-- fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
+- Rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
+- Fix doxygen warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/394
+- Fix benchmark warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
+- Fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390
+- Fix memory leak of cusolver direct solver (getrf, sytrf) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/364
+- The Dense transpose() is not parallelized for non-square. https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356
+- Fix bug, install gfortran in gitlab-CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/353
+- Fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Change monolish container name oss_nvidia -> oss-nvidia, mkl_nvidia -> mkl-nvidia https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398
 - Generate monolish container document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/399
 - Use update-alternative to switch libmonolish_gpu.so https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/396
 - Split CMakeLists.txt into sub cmake script https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/395
 - Generate installation document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/378
-- move get_singularity and set_reorder in LU/QR/Cholesky to monolish::equation::solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/392 https://github.com/ricosjp/monolish/issues/85
+- Move get_singularity and set_reorder in LU/QR/Cholesky to monolish::equation::solver https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/392 https://github.com/ricosjp/monolish/issues/85
 - MONOLISH_PACKAGE_VERSION is added, SEND_ERROR if git command fails https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/391
 - Delete CUDA version in doxygen installation page https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/384
 - Update Doxyfile to 1.8.17, and disable warning for non-document contents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/383
-- support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
+- Support NVIDIA GPU CC=86 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/361 https://github.com/ricosjp/monolish/issues/82
 - Use allgebra/poetry image for testing Python logger https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/360
-- change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
+- Change transpose() function API https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
     - `Dense Dense::transpose()` // return A^T -->  `void Dense::transpose()` // A=A^T
     - `void Dense::transpose(const Dense B)` // A=B^T, this function is not changed
     - `COO COO::transpose()` // return A^T --> `void COO::transpose()` // A=A^T
     - `void COO::transpose(COO B) const` // B=A^T -->  `void COO::transpose(const COO B)` // A=B^T
 - OpenMP parallelized transpose() functions https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/356 https://github.com/ricosjp/monolish/issues/79
-- uses CUDA11 cuSPRASE SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/355 https://github.com/ricosjp/monolish/issues/76
-- remove nodiscard of COO.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/354 https://github.com/ricosjp/monolish/issues/74
+- Uses CUDA11 cuSPRASE SpMM https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/355 https://github.com/ricosjp/monolish/issues/76
+- Remove nodiscard of COO.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/354 https://github.com/ricosjp/monolish/issues/74
 - [support cuda11.x] cuda11.x cusparse generic API for CRS SpMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65 https://github.com/ricosjp/monolish/issues/75
 - [update allgebra 21.09.0] cuda 10.1 -> cuda11.4  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
 - [update allgebra 21.09.0] clang 12.0.0 -> clang12.0.1  https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/352 https://github.com/ricosjp/monolish/issues/65
