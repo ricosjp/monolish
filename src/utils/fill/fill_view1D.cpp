@@ -13,7 +13,7 @@ template <typename T, typename U> void view1D<T, U>::fill(U value) {
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       val[i] = value;
     }
 #else
@@ -22,7 +22,7 @@ template <typename T, typename U> void view1D<T, U>::fill(U value) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = first; i < last; i++) {
+    for (auto i = first; i < last; i++) {
       val[i] = value;
     }
   }

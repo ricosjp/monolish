@@ -14,7 +14,7 @@ template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
   // since last inserted element is effective elements,
   // checking from last element is necessary
   if (nnz != 0) {
-    for (size_t k = nnz; k > 0; --k) {
+    for (auto k = nnz; k > 0; --k) {
       if (row_index[k - 1] == (int)i && col_index[k - 1] == (int)j) {
         return val[k - 1];
       }
@@ -28,8 +28,8 @@ template float COO<float>::at(const size_t i, const size_t j) const;
 // insert //
 template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
-  size_t rownum = m;
-  size_t colnum = n;
+  auto rownum = m;
+  auto colnum = n;
   assert(rownum <= get_row());
   assert(colnum <= get_col());
 
@@ -51,11 +51,11 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
     return;
   }
 
-  int l = lo;
-  int h = hi;
-  int p = hi;
-  int p1 = row_index[p];
-  int p2 = col_index[p];
+  auto l = lo;
+  auto h = hi;
+  auto p = hi;
+  auto p1 = row_index[p];
+  auto p2 = col_index[p];
   double p3 = val[p];
 
   do {
@@ -70,7 +70,7 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
       h = h - 1;
     }
     if (l < h) {
-      int t = row_index[l];
+      auto t = row_index[l];
       row_index[l] = row_index[h];
       row_index[h] = t;
 
@@ -118,7 +118,7 @@ template <typename T> void COO<T>::sort(bool merge) {
   /*  Remove duplicates */
   if (merge) {
     size_t k = 0;
-    for (size_t i = 1; i < nnz; i++) {
+    for (auto i = decltype(nnz){1}; i < nnz; i++) {
       if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
         k++;
         row_index[k] = row_index[i];

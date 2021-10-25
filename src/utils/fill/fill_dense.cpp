@@ -13,7 +13,7 @@ template <typename T> void Dense<T>::fill(T value) {
 #if MONOLISH_USE_NVIDIA_GPU
     T *vald = val.data();
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
+    for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       vald[i] = value;
     }
 #else
@@ -22,7 +22,7 @@ template <typename T> void Dense<T>::fill(T value) {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < get_nnz(); i++) {
+    for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       val[i] = value;
     }
   }
