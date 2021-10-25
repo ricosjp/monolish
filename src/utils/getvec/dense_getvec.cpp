@@ -12,8 +12,8 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -21,7 +21,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
@@ -29,7 +29,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
   }
@@ -46,8 +46,8 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -55,7 +55,7 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
@@ -63,7 +63,7 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
   }
@@ -83,8 +83,8 @@ void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -92,7 +92,7 @@ void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
@@ -100,7 +100,7 @@ void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
   }
@@ -120,7 +120,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
+  const auto N = get_col();
 
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -128,7 +128,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
@@ -136,7 +136,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
   }
@@ -156,7 +156,7 @@ void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
+  const auto N = get_col();
 
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -164,7 +164,7 @@ void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
@@ -172,7 +172,7 @@ void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
   }
@@ -194,7 +194,7 @@ void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t N = get_col();
+  const auto N = get_col();
 
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -202,7 +202,7 @@ void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
@@ -210,7 +210,7 @@ void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < N; i++) {
+    for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
   }
@@ -230,8 +230,8 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t M = get_row();
-  const size_t N = get_col();
+  const auto M = get_row();
+  const auto N = get_col();
 
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -239,7 +239,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
@@ -247,7 +247,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
   }
@@ -267,8 +267,8 @@ void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t M = get_row();
-  const size_t N = get_col();
+  const auto M = get_row();
+  const auto N = get_col();
 
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -276,7 +276,7 @@ void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
@@ -284,7 +284,7 @@ void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
   }
@@ -306,8 +306,8 @@ void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const size_t M = get_row();
-  const size_t N = get_col();
+  const auto M = get_row();
+  const auto N = get_col();
 
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -315,7 +315,7 @@ void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
@@ -323,7 +323,7 @@ void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < M; i++) {
+    for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
   }

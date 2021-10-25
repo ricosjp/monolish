@@ -11,21 +11,21 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const size_t M = get_row();
+    const auto M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
     T *vec_ansd = vec_ans.data();
     util::send(vec_tmp, vec_ans);
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
 #pragma omp target
       { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
@@ -43,7 +43,7 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
     {
       vector<T> vec_tmp(N, 0);
 #pragma omp for
-      for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
         vec_tmp[i] = 1;
         vecd[i] = matvec(vec_tmp)[i];
         vec_tmp[i] = 0;
@@ -66,21 +66,21 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gp
-    const size_t M = get_row();
+    const auto M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
     T *vec_ansd = vec_ans.data();
     util::send(vec_tmp, vec_ans);
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
 #pragma omp target
       { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
@@ -96,7 +96,7 @@ void LinearOperator<T>::diag(view1D<vector<T>, T> &vec) const {
   } else {
     vector<T> vec_tmp(N, 0);
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vec_tmp[i] = 1;
       vecd[i] = matvec(vec_tmp)[i];
       vec_tmp[i] = 0;
@@ -118,21 +118,21 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const size_t N = get_col();
-  const size_t Len = std::min(get_row(), get_col());
+  const auto N = get_col();
+  const auto Len = std::min(get_row(), get_col());
 
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const size_t M = get_row();
+    const auto M = get_row();
     vector<T> vec_tmp(N, 0);
     vector<T> vec_ans(M);
     T *vec_tmpd = vec_tmp.data();
     T *vec_ansd = vec_ans.data();
     util::send(vec_tmp, vec_ans);
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
 #pragma omp target
       { vec_tmpd[i] = 1; }
       vec_ans = matvec(vec_tmp);
@@ -148,7 +148,7 @@ void LinearOperator<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   } else {
     vector<T> vec_tmp(N, 0);
 #pragma omp parallel for
-    for (size_t i = 0; i < Len; i++) {
+    for (auto i = decltype(Len){0}; i < Len; i++) {
       vec_tmp[i] = 1;
       vecd[i] = matvec(vec_tmp)[i];
       vec_tmp[i] = 0;

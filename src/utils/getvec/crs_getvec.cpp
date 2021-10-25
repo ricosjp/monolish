@@ -9,25 +9,25 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
+  auto n = get_row() < get_col() ? rowN : colN;
   T *vecd = vec.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -38,12 +38,12 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -60,25 +60,25 @@ template <typename T> void CRS<T>::diag(view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
+  auto n = get_row() < get_col() ? rowN : colN;
   T *vecd = vec.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -89,12 +89,12 @@ template <typename T> void CRS<T>::diag(view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -114,25 +114,25 @@ void CRS<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row() < get_col() ? rowN : colN;
+  auto n = get_row() < get_col() ? rowN : colN;
   T *vecd = vec.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -143,12 +143,12 @@ void CRS<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)i == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -168,25 +168,25 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row();
+  auto n = get_row();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
+  const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const int *indexd = col_ind.data();
+    const auto *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[indexd[j]] = vald[j];
     }
 #else
@@ -194,11 +194,11 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[col_ind[j]] = vald[j];
     }
   }
@@ -215,25 +215,25 @@ void CRS<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row();
+  auto n = get_row();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
+  const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const int *indexd = col_ind.data();
+    const auto *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[indexd[j]] = vald[j];
     }
 #else
@@ -241,11 +241,11 @@ void CRS<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[col_ind[j]] = vald[j];
     }
   }
@@ -264,25 +264,25 @@ void CRS<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_row();
+  auto n = get_row();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
+  const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const int *indexd = col_ind.data();
+    const auto *indexd = col_ind.data();
 
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[indexd[j]] = vald[j];
     }
 #else
@@ -290,11 +290,11 @@ void CRS<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (int j = rowd[r]; j < rowd[r + 1]; j++) {
+    for (auto j = rowd[r]; j < rowd[r + 1]; j++) {
       vecd[col_ind[j]] = vald[j];
     }
   }
@@ -311,12 +311,12 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_col();
+  auto n = get_col();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -324,12 +324,12 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -340,12 +340,12 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -365,12 +365,12 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_col();
+  auto n = get_col();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -378,12 +378,12 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -394,12 +394,12 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -421,12 +421,12 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  size_t n = get_col();
+  auto n = get_col();
   T *vecd = vec.data();
 
   const T *vald = val.data();
-  const int *rowd = row_ptr.data();
-  const int *cold = col_ind.data();
+  const auto *rowd = row_ptr.data();
+  const auto *cold = col_ind.data();
 
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
@@ -434,12 +434,12 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp target teams distribute parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
@@ -450,12 +450,12 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
 #endif
   } else {
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
       vecd[i] = 0;
     }
 #pragma omp parallel for
-    for (size_t i = 0; i < n; i++) {
-      for (int j = rowd[i]; j < rowd[i + 1]; j++) {
+    for (auto i = decltype(n){0}; i < n; i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
         if ((int)c == cold[j]) {
           vecd[i] = vald[j];
         }
