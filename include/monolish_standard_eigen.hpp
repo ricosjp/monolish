@@ -30,7 +30,7 @@ class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
   [[nodiscad]] int monolish_LOBPCG(MATRIX &A, vector<Float> &lambda,
-                      matrix::Dense<Float> &x);
+                                   matrix::Dense<Float> &x);
 
 public:
   /**
@@ -41,7 +41,8 @@ public:
    * @param[in] x corresponding eigenvectors in Dense matrix format
    * @return error code (only 0 now)
    **/
-  [[nodiscad]] int solve(MATRIX &A, vector<Float> &lambda, matrix::Dense<Float> &x);
+  [[nodiscad]] int solve(MATRIX &A, vector<Float> &lambda,
+                         matrix::Dense<Float> &x);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -58,7 +59,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscad]] std::string name() const { return "monolish::standard_eigen::LOBPCG"; }
+  [[nodiscad]] std::string name() const {
+    return "monolish::standard_eigen::LOBPCG";
+  }
 
   /**
    * @brief get solver name "LOBPCG"
@@ -108,7 +111,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscad]] std::string name() const { return "monolish::standard_eigen::DC"; }
+  [[nodiscad]] std::string name() const {
+    return "monolish::standard_eigen::DC";
+  }
 
   /**
    * @brief get solver name "DC"
