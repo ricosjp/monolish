@@ -52,6 +52,15 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscad]] std::string name() const { return "monolish::generalized_eigen::LOBPCG"; }
+
+  /**
+   * @brief get solver name "LOBPCG"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string solver_name() const { return "LOBPCG"; }
 };
 
 /**
@@ -93,6 +102,15 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscad]] std::string name() const { return "monolish::generalized_eigen::DC"; }
+
+  /**
+   * @brief get solver name "DC"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string solver_name() const { return "DC"; }
 };
 
 } // namespace monolish::generalized_eigen
