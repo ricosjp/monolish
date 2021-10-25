@@ -23,21 +23,21 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
     const T *vald = val.data();
 #pragma omp target
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-        for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
-            printf("%lu %lu %f\n", i + 1, j + 1, vald[i * get_col() + j]);
-        }
+      for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
+        printf("%lu %lu %f\n", i + 1, j + 1, vald[i * get_col() + j]);
+      }
     }
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
-              std::cout << i + 1 << " " << j + 1 << " " << val[i * get_col() + j]
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
+        std::cout << i + 1 << " " << j + 1 << " " << val[i * get_col() + j]
                   << std::endl;
-          }
       }
+    }
   }
 
   logger.util_out();

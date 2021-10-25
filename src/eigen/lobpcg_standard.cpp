@@ -128,7 +128,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     monolish::util::send(Sbm);
   }
 
-  for (auto iter = decltype(this->get_maxiter()){0}; iter < this->get_maxiter(); iter++) {
+  for (auto iter = decltype(this->get_maxiter()){0}; iter < this->get_maxiter();
+       iter++) {
     if (A.get_device_mem_stat() == true) {
       monolish::util::send(Sam, lambda);
     }

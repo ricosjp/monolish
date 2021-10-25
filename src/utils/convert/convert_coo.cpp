@@ -19,8 +19,7 @@ template <typename T> void COO<T>::convert(const CRS<T> &crs) {
   val.resize(nnz);
 
   for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-    for (auto j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i + 1];
-         j++) {
+    for (auto j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i + 1]; j++) {
       row_index[j] = i;
       col_index[j] = crs.col_ind[j];
       val[j] = crs.val[j];

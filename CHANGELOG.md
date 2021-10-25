@@ -32,6 +32,7 @@ Unreleased
 - add CRS.transpose() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/359 https://github.com/ricosjp/monolish/issues/24
 
 ### Fixed
+- rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
 - fix doxygen warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/394
 - fix benchmark warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
 - fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390

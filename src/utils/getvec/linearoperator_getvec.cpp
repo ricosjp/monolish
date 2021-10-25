@@ -43,7 +43,7 @@ template <typename T> void LinearOperator<T>::diag(vector<T> &vec) const {
     {
       vector<T> vec_tmp(N, 0);
 #pragma omp for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
+      for (auto i = decltype(Len){0}; i < Len; i++) {
         vec_tmp[i] = 1;
         vecd[i] = matvec(vec_tmp)[i];
         vec_tmp[i] = 0;

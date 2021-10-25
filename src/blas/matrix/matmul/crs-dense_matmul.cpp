@@ -125,8 +125,8 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
         Dreg tv, Bv, Cv;
         int j;
         for (j = 0; j < N - (vecL - 1); j += vecL) {
-           auto BB = Br + j;
-           auto CC = Cr + j;
+          auto BB = Br + j;
+          auto CC = Cr + j;
 
           Bv = SIMD_FUNC(loadu_pd)((double *)&Bd[BB]);
           Cv = SIMD_FUNC(loadu_pd)((double *)&Cd[CC]);
