@@ -79,7 +79,7 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
@@ -136,7 +136,7 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
@@ -193,7 +193,7 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
@@ -249,7 +249,7 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    * @warning
    * SOR is not completely parallelized.
    * The part of solving the lower triangular matrix is performed sequentially.
