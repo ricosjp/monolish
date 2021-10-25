@@ -20,7 +20,7 @@ template <typename T> void COO<T>::print_all(bool force_cpu) const {
   std::cout << std::scientific;
   std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (size_t i = 0; i < nnz; i++) {
+  for (auto i = decltype(nnz){0}; i < nnz; i++) {
     std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
               << std::endl;
   }
@@ -36,7 +36,7 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   out << std::scientific;
   out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (size_t i = 0; i < nnz; i++) {
+  for (auto i = decltype(nnz){0}; i < nnz; i++) {
     out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
         << std::endl;
   }
@@ -56,7 +56,7 @@ template <typename T> void COO<T>::output_mm(const std::string filename) const {
       << std::endl;
   out << rowN << " " << colN << " " << nnz << std::endl;
 
-  for (size_t i = 0; i < nnz; i++) {
+  for (auto i = decltype(nnz){0}; i < nnz; i++) {
     out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
         << std::endl;
   }
@@ -135,8 +135,8 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   val.resize(nnz, 0.0);
 
   // set values
-  for (size_t i = 0; i < nnz; i++) {
-    size_t ix, jx;
+  for (auto i = decltype(nnz){0}; i < nnz; i++) {
+    decltype(nnz) ix, jx;
     T value;
 
     getline(ifs, buf);

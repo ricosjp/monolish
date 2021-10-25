@@ -21,12 +21,12 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
     const T *vald = val.data();
-    const int *indexd = col_ind.data();
-    const int *ptrd = row_ptr.data();
+    const auto *indexd = col_ind.data();
+    const auto *ptrd = row_ptr.data();
 
 #pragma omp target
-    for (size_t i = 0; i < get_row(); i++) {
-      for (size_t j = (size_t)ptrd[i]; j < (size_t)ptrd[i + 1]; j++) {
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = ptrd[i]; j < ptrd[i + 1]; j++) {
         printf("%lu %d %f\n", i + 1, indexd[j] + 1, vald[j]);
       }
     }
@@ -35,8 +35,8 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    for (size_t i = 0; i < get_row(); i++) {
-      for (size_t j = (size_t)row_ptr[i]; j < (size_t)row_ptr[i + 1]; j++) {
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = row_ptr[i]; j < row_ptr[i + 1]; j++) {
         std::cout << i + 1 << " " << col_ind[j] + 1 << " " << val[j]
                   << std::endl;
       }
