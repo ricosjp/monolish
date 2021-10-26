@@ -32,7 +32,7 @@ class none : public monolish::solver::solver<MATRIX, Float> {
 public:
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
   /**
    * @brief get solver name "monolish::equation::none"
@@ -41,7 +41,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::none"; }
+  [[nodiscard]] std::string name() const { return "monolish::equation::none"; }
 
   /**
    * @brief get solver name "none"
@@ -50,7 +50,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "none"; }
+  [[nodiscard]] std::string solver_name() const { return "none"; }
 };
 
 /**
@@ -71,7 +71,7 @@ public:
 template <typename MATRIX, typename Float>
 class CG : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_CG(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int monolish_CG(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
 public:
   /**
@@ -79,9 +79,10 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see
+   *https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -98,7 +99,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::CG"; }
+  [[nodiscard]] std::string name() const { return "monolish::equation::CG"; }
 
   /**
    * @brief get solver name "CG"
@@ -107,7 +108,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "CG"; }
+  [[nodiscard]] std::string solver_name() const { return "CG"; }
 };
 
 /**
@@ -128,7 +129,8 @@ public:
 template <typename MATRIX, typename Float>
 class BiCGSTAB : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_BiCGSTAB(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int monolish_BiCGSTAB(MATRIX &A, vector<Float> &x,
+                                      vector<Float> &b);
 
 public:
   /**
@@ -136,9 +138,10 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see
+   *https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -155,7 +158,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::BiCGSTAB"; }
+  [[nodiscard]] std::string name() const {
+    return "monolish::equation::BiCGSTAB";
+  }
 
   /**
    * @brief get solver name "BiCGSTAB"
@@ -164,7 +169,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "BiCGSTAB"; }
+  [[nodiscard]] std::string solver_name() const { return "BiCGSTAB"; }
 };
 
 /**
@@ -185,7 +190,8 @@ public:
 template <typename MATRIX, typename Float>
 class Jacobi : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_Jacobi(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int monolish_Jacobi(MATRIX &A, vector<Float> &x,
+                                    vector<Float> &b);
 
 public:
   /**
@@ -193,9 +199,10 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see
+   *https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
 
@@ -206,7 +213,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::Jacobi"; }
+  [[nodiscard]] std::string name() const {
+    return "monolish::equation::Jacobi";
+  }
 
   /**
    * @brief get solver name "Jacobi"
@@ -215,7 +224,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "Jacobi"; }
+  [[nodiscard]] std::string solver_name() const { return "Jacobi"; }
 };
 
 /**
@@ -241,7 +250,7 @@ public:
 template <typename MATRIX, typename Float>
 class SOR : public monolish::solver::solver<MATRIX, Float> {
 private:
-  int monolish_SOR(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int monolish_SOR(MATRIX &A, vector<Float> &x, vector<Float> &b);
 
 public:
   /**
@@ -249,14 +258,15 @@ public:
    * @param[in] A CRS format Matrix
    * @param[in] x solution vector
    * @param[in] b right hand vector
-   * @return error code (only 0 now)
+   * @return error code, see
+   *https://github.com/ricosjp/monolish/blob/master/include/common/monolish_common.hpp
    * @warning
    * SOR is not completely parallelized.
    * The part of solving the lower triangular matrix is performed sequentially.
    * On the GPU, one vector is received before the lower triangular matrix
    *solving process, and one vector is sent after the process.
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
 
@@ -267,7 +277,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::SOR"; }
+  [[nodiscard]] std::string name() const { return "monolish::equation::SOR"; }
 
   /**
    * @brief get solver name "SOR"
@@ -276,7 +286,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "SOR"; }
+  [[nodiscard]] std::string solver_name() const { return "SOR"; }
 };
 
 /**
@@ -298,12 +308,13 @@ template <typename MATRIX, typename Float>
 class LU : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
-  int cusolver_LU(MATRIX &A, vector<double> &x, vector<double> &b);
+  [[nodiscard]] int mumps_LU(MATRIX &A, vector<double> &x, vector<double> &b);
+  [[nodiscard]] int cusolver_LU(MATRIX &A, vector<double> &x,
+                                vector<double> &b);
 
 public:
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
-  int solve(MATRIX &A, vector<Float> &xb);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &xb);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -319,7 +330,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::LU"; }
+  [[nodiscard]] std::string name() const { return "monolish::equation::LU"; }
 
   /**
    * @brief get solver name "LU"
@@ -328,7 +339,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "LU"; }
+  [[nodiscard]] std::string solver_name() const { return "LU"; }
 };
 
 /**
@@ -350,14 +361,15 @@ template <typename MATRIX, typename Float>
 class QR : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int cusolver_QR(MATRIX &A, vector<double> &x, vector<double> &b);
-  int cusolver_QR(MATRIX &A, vector<float> &x, vector<float> &b);
+  [[nodiscard]] int cusolver_QR(MATRIX &A, vector<double> &x,
+                                vector<double> &b);
+  [[nodiscard]] int cusolver_QR(MATRIX &A, vector<float> &x, vector<float> &b);
 
 public:
   /**
    * @brief solve Ax=b
    */
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
   }
@@ -372,7 +384,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::QR"; }
+  [[nodiscard]] std::string name() const { return "monolish::equation::QR"; }
 
   /**
    * @brief get solver name "QR"
@@ -381,7 +393,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "QR"; }
+  [[nodiscard]] std::string solver_name() const { return "QR"; }
 };
 
 /**
@@ -403,15 +415,17 @@ template <typename MATRIX, typename Float>
 class Cholesky : public monolish::solver::solver<MATRIX, Float> {
 private:
   int lib = 1; // lib is 1
-  int cusolver_Cholesky(MATRIX &A, vector<float> &x, vector<float> &b);
-  int cusolver_Cholesky(MATRIX &A, vector<double> &x, vector<double> &b);
+  [[nodiscard]] int cusolver_Cholesky(MATRIX &A, vector<float> &x,
+                                      vector<float> &b);
+  [[nodiscard]] int cusolver_Cholesky(MATRIX &A, vector<double> &x,
+                                      vector<double> &b);
 
 public:
   /**
    * @brief solve Ax=b
    */
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
-  int solve(MATRIX &A, vector<Float> &xb);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &xb);
 
   void create_precond(matrix::CRS<Float> &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -427,7 +441,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::equation::Cholesky"; }
+  [[nodiscard]] std::string name() const {
+    return "monolish::equation::Cholesky";
+  }
 
   /**
    * @brief get solver name "Cholesky"
@@ -436,7 +452,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string solver_name() const { return "Cholesky"; }
+  [[nodiscard]] std::string solver_name() const { return "Cholesky"; }
 };
 
 } // namespace monolish::equation

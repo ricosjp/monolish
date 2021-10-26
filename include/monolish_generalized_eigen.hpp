@@ -29,12 +29,12 @@ template <typename MATRIX, typename Float>
 class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
-  int monolish_LOBPCG(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                      matrix::Dense<Float> &x, int itype);
+  [[nodiscad]] int monolish_LOBPCG(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                                   matrix::Dense<Float> &x, int itype);
 
 public:
-  int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-            matrix::Dense<Float> &x, int itype);
+  [[nodiscad]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                         matrix::Dense<Float> &x, int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -51,7 +51,18 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::generalized_eigen::LOBPCG"; }
+  [[nodiscad]] std::string name() const {
+    return "monolish::generalized_eigen::LOBPCG";
+  }
+
+  /**
+   * @brief get solver name "LOBPCG"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string solver_name() const { return "LOBPCG"; }
 };
 
 /**
@@ -72,10 +83,12 @@ public:
 template <typename MATRIX, typename Float>
 class DC : public solver::solver<MATRIX, Float> {
 private:
-  int LAPACK_DC(MATRIX &A, MATRIX &B, vector<Float> &lambda, int itype);
+  [[nodiscad]] int LAPACK_DC(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                             int itype);
 
 public:
-  int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda, int itype);
+  [[nodiscad]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                         int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -92,7 +105,18 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  std::string name() const { return "monolish::generalized_eigen::DC"; }
+  [[nodiscad]] std::string name() const {
+    return "monolish::generalized_eigen::DC";
+  }
+
+  /**
+   * @brief get solver name "DC"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string solver_name() const { return "DC"; }
 };
 
 } // namespace monolish::generalized_eigen
