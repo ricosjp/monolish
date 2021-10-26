@@ -17,8 +17,16 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 - 日本語でも英語でも良い事にする
 
 -->
-
 Unreleased
+-----------
+### Added
+
+### Fixed
+
+### Changed
+- Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/404
+
+0.15.0 - 2021/10/26
 -----------
 ### Added
 - Add CRS/Dense SOR precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/380
@@ -42,6 +50,10 @@ Unreleased
 - Fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Installtion of monolish for GPU with apt does not support https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/403
+- Add nodiscard to solve() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/400
+- Version table in README https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/402
+- Add libomp and libomptarget in deb file https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/401
 - Change monolish container name oss_nvidia -> oss-nvidia, mkl_nvidia -> mkl-nvidia https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398
 - Generate monolish container document by cmake https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/399
 - Use update-alternative to switch libmonolish_gpu.so https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/396
