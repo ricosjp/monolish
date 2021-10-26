@@ -10,6 +10,9 @@ monolish let developer forget about:
 - Matrix structures and storage formats
 - Cumbersome package dependency
 
+Documents
+----------
+
 | monolish version | Release Note | Document |
 |:-----------------|:-------------|:---------|
 | master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
