@@ -24,6 +24,7 @@ Unreleased
 ### Fixed
 
 ### Changed
+- Prepare for the next release 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/404
 
 0.15.0 - 2021/10/26
 -----------
