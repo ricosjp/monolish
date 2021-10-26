@@ -31,7 +31,7 @@ ubuntu_test:
     - .test
   script:
     - apt update
-    - apt install -y ./$(find . -name "*.deb")
+    - apt install -y make ./$(find . -name "*.deb")
     - make -C test/ run_cpu
   needs:
     - cpu_avx_oss_build
