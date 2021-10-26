@@ -10,9 +10,6 @@ monolish let developer forget about:
 - Matrix structures and storage formats
 - Cumbersome package dependency
 
-Documents
-----------
-
 | monolish version | Release Note | Document |
 |:-----------------|:-------------|:---------|
 | master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
@@ -33,15 +30,11 @@ To share the development environment, the monolish development environment is pr
 See below for how to build on allgebra.
 - [Build monolish from source code](https://ricosjp.github.io/monolish/master/da/d20/build_guide.html)
 
-Documentation and Links
----
-- Documentation: https://ricosjp.github.io/monolish/
+Links
+-----
 - Source code: https://github.com/ricosjp/monolish/
-- Contribution guide : https://ricosjp.github.io/monolish/master/da/dce/contribution.html
-- Publications: https://ricosjp.github.io/monolish/master/de/d26/publications.html
 - Bug reports: https://github.com/ricosjp/monolish/issues
 - Releases: https://github.com/ricosjp/monolish/releases
-- Changelog: https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md
 - monolish log viewer: https://pypi.org/project/monolish-log-viewer/
 - monolish benchmark result: https://ricosjp.github.io/monolish_benchmark_result/
 
