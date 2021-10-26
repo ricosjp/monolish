@@ -17,19 +17,6 @@ monolish let developer forget about:
 | 0.14.1 | [![badge](https://img.shields.io/badge/Release-0.14.1-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.1) | [![badge](https://img.shields.io/badge/Document-0.14.1-blue)](https://ricosjp.github.io/monolish/0.14.1/) |
 | 0.14.0 | [![badge](https://img.shields.io/badge/Release-0.14.0-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.0) | [![badge](https://img.shields.io/badge/Document-0.14.0-blue)](https://ricosjp.github.io/monolish/0.14.0/) |
 
-Quick start guide
----
-The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
-
-To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04)](https://ricosjp.github.io/monolish/master/d5/d38/install_guide.html)
-- [Docker container with monolish installed](https://ricosjp.github.io/monolish/master/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
-
-To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
-
-See below for how to build on allgebra.
-- [Build monolish from source code](https://ricosjp.github.io/monolish/master/da/d20/build_guide.html)
-
 Links
 -----
 - Source code: https://github.com/ricosjp/monolish/
