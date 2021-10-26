@@ -14,7 +14,7 @@ Documents
 ----------
 
 | monolish version | Release Note | Document |
-|:-----------------|:------------:|:--------:|
+|:-----------------|:-------------|:---------|
 | master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
 | 0.14.2 | [![badge](https://img.shields.io/badge/Release-0.14.2-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.2) | [![badge](https://img.shields.io/badge/Document-0.14.2-blue)](https://ricosjp.github.io/monolish/0.14.2/) |
 | 0.14.1 | [![badge](https://img.shields.io/badge/Release-0.14.1-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.1) | [![badge](https://img.shields.io/badge/Document-0.14.1-blue)](https://ricosjp.github.io/monolish/0.14.1/) |
