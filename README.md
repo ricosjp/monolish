@@ -10,6 +10,16 @@ monolish let developer forget about:
 - Matrix structures and storage formats
 - Cumbersome package dependency
 
+Documents
+----------
+
+| monolish version | Release Note | Document |
+|:-----------------|:------------:|:--------:|
+| master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
+| 0.14.2 | [![badge](https://img.shields.io/badge/Release-0.14.2-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.2) | [![badge](https://img.shields.io/badge/Document-0.14.2-blue)](https://ricosjp.github.io/monolish/0.14.2/) |
+| 0.14.1 | [![badge](https://img.shields.io/badge/Release-0.14.1-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.1) | [![badge](https://img.shields.io/badge/Document-0.14.1-blue)](https://ricosjp.github.io/monolish/0.14.1/) |
+| 0.14.0 | [![badge](https://img.shields.io/badge/Release-0.14.0-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.0) | [![badge](https://img.shields.io/badge/Document-0.14.0-blue)](https://ricosjp.github.io/monolish/0.14.0/) |
+
 Quick start guide
 ---
 The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
