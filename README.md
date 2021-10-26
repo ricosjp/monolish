@@ -10,28 +10,21 @@ monolish let developer forget about:
 - Matrix structures and storage formats
 - Cumbersome package dependency
 
-Quick start guide
----
-The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
+Documents
+----------
 
-To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04)](https://ricosjp.github.io/monolish/master/d5/d38/install_guide.html)
-- [Docker container with monolish installed](https://ricosjp.github.io/monolish/master/d6/d6f/monolish_docker.html) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+| monolish version | Release Note | Document |
+|:-----------------|:-------------|:---------|
+| master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
+| 0.14.2 | [![badge](https://img.shields.io/badge/Release-0.14.2-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.2) | [![badge](https://img.shields.io/badge/Document-0.14.2-blue)](https://ricosjp.github.io/monolish/0.14.2/) |
+| 0.14.1 | [![badge](https://img.shields.io/badge/Release-0.14.1-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.1) | [![badge](https://img.shields.io/badge/Document-0.14.1-blue)](https://ricosjp.github.io/monolish/0.14.1/) |
+| 0.14.0 | [![badge](https://img.shields.io/badge/Release-0.14.0-green)](https://github.com/ricosjp/monolish/releases/tag/0.14.0) | [![badge](https://img.shields.io/badge/Document-0.14.0-blue)](https://ricosjp.github.io/monolish/0.14.0/) |
 
-To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
-
-See below for how to build on allgebra.
-- [Build monolish from source code](https://ricosjp.github.io/monolish/master/da/d20/build_guide.html)
-
-Documentation and Links
----
-- Documentation: https://ricosjp.github.io/monolish/
+Links
+-----
 - Source code: https://github.com/ricosjp/monolish/
-- Contribution guide : https://ricosjp.github.io/monolish/master/da/dce/contribution.html
-- Publications: https://ricosjp.github.io/monolish/master/de/d26/publications.html
 - Bug reports: https://github.com/ricosjp/monolish/issues
 - Releases: https://github.com/ricosjp/monolish/releases
-- Changelog: https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md
 - monolish log viewer: https://pypi.org/project/monolish-log-viewer/
 - monolish benchmark result: https://ricosjp.github.io/monolish_benchmark_result/
 
