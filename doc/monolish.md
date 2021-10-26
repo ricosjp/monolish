@@ -42,9 +42,4 @@ See below for how to build on allgebra.
 - [Lisence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
 - [monolish log viewer](https://pypi.org/project/monolish-log-viewer/)
 
-## Past versions
-- [0.14.2](https://ricosjp.github.io/monolish/0.14.2/)
-- [0.14.1](https://ricosjp.github.io/monolish/0.14.1/)
-- [0.14.0](https://ricosjp.github.io/monolish/0.14.0/)
-
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)
