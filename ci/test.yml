@@ -24,6 +24,20 @@
     - apt install -y ./$(find . -name "*.deb")
     - make -C test/ run_gpu
 
+ubuntu_test:
+  image: ubuntu:20.04
+  extends:
+    - .cpu_avx
+    - .test
+  script:
+    - apt update
+    - apt install -y make ./$(find . -name "*.deb")
+    - make -C test/ run_cpu
+  needs:
+    - cpu_avx_oss_build
+  tags:
+    - avx
+
 gpu_avx_mkl:
   extends:
     - .mkl_image
