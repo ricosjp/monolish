@@ -28,7 +28,11 @@ ubuntu_test:
   image: ubuntu:20.04
   extends:
     - .cpu_avx
-    - .test_cpu
+    - .test
+  script:
+    - apt update
+    - apt install -y ./$(find . -name "*.deb")
+    - make -C test/ run_cpu
   needs:
     - cpu_avx_oss_build
   tags:
