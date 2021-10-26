@@ -15,6 +15,25 @@ install(
   DESTINATION share/monolish/benchmark
 )
 
+#
+# Install OpenMP runtime library (libomp and libomptarget)
+#
+# FIXME: This should use libomp distributed by ubuntu
+foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
+  if(name STREQUAL "omp")
+    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
+  endif()
+endforeach(name)
+if(MONOLISH_USE_NVIDIA_GPU)
+  find_library(
+    OpenMP_omptarget_LIBRARY
+    libomptarget.so
+  HINTS
+    /usr/local/llvm-12.0.1/lib
+  )
+  install(PROGRAMS ${OpenMP_omptarget_LIBRARY} TYPE LIB)
+endif()
+
 # Sell also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")

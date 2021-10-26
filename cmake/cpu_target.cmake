@@ -47,11 +47,6 @@ if(NOT MONOLISH_USE_NVIDIA_GPU)
   set_common_properties(${monolish_cpu_target})
   target_link_libraries(${monolish_cpu_target} PRIVATE OpenMP::OpenMP_CXX)
 
-  foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-    if(name STREQUAL "omp")
-      install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
-    endif()
-  endforeach(name)
   install(
     TARGETS ${monolish_cpu_target}
     LIBRARY
