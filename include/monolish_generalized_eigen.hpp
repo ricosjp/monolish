@@ -29,12 +29,12 @@ template <typename MATRIX, typename Float>
 class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
-  [[nodiscad]] int monolish_LOBPCG(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                                   matrix::Dense<Float> &x, int itype);
+  [[nodiscard]] int monolish_LOBPCG(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                                    matrix::Dense<Float> &x, int itype);
 
 public:
-  [[nodiscad]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                         matrix::Dense<Float> &x, int itype);
+  [[nodiscard]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                          matrix::Dense<Float> &x, int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -51,7 +51,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscad]] std::string name() const {
+  [[nodiscard]] std::string name() const {
     return "monolish::generalized_eigen::LOBPCG";
   }
 
@@ -83,12 +83,12 @@ public:
 template <typename MATRIX, typename Float>
 class DC : public solver::solver<MATRIX, Float> {
 private:
-  [[nodiscad]] int LAPACK_DC(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                             int itype);
+  [[nodiscard]] int LAPACK_DC(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                              int itype);
 
 public:
-  [[nodiscad]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                         int itype);
+  [[nodiscard]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
+                          int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -105,7 +105,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscad]] std::string name() const {
+  [[nodiscard]] std::string name() const {
     return "monolish::generalized_eigen::DC";
   }
 

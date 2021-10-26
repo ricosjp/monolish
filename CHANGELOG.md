@@ -24,9 +24,11 @@ Unreleased
 ### Fixed
 
 ### Changed
-- Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/404
+- Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/405
 
-0.15.0 - 2021/10/26
+
+
+0.15.0 - 2021/10/27
 -----------
 ### Added
 - Add CRS/Dense SOR precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/380
