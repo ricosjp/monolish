@@ -17,8 +17,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 - 日本語でも英語でも良い事にする
 
 -->
-
-0.15.0 - 2021/10/26
+Unreleased
 -----------
 ### Added
 
@@ -26,7 +25,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 
 ### Changed
 
-Unreleased
+0.15.0 - 2021/10/26
 -----------
 ### Added
 - Add CRS/Dense SOR precondition https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/380
