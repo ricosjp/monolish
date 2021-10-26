@@ -33,7 +33,6 @@ Unreleased
 
 ### Fixed
 - Rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
-- Rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
 - Fix doxygen warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/394
 - Fix benchmark warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
 - Fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390
