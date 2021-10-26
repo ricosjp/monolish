@@ -28,35 +28,6 @@ In the current version, monolish for GPU cannot be installed with apt.
 
 Please use the container with [docker container with monolish installed](@ref monolish_docker).
 
-# monolish for NVIDIA GPU depends on CUDA, but monolish deb package does not contains CUDA libraries.
-# This deb assumes CUDA apt repository is enabled, and tries to get CUDA libraries from there.
-# You can enable the CUDA apt repository as following:
-# 
-# \code{shell}
-# $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-# $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-# $ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
-# $ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
-# $ sudo apt-get update
-# \endcode
-# 
-# See https://developer.nvidia.com/cuda-downloads for more detail.
-# 
-# monolish deb file can be downloaded from [GitHub Release page][release]:
-# 
-# \code{shell}
-# $ wget ${monolish_release_download_base}/${monolish_deb_oss_nvidia}
-# $ sudo apt install -y ./${monolish_deb_oss_nvidia}
-# \endcode
-# 
-# There are two variants according to backend BLAS and LAPACK implementation for CPU:
-# 
-# - [+oss-nvidia][deb_oss_nvidia] means it uses OpenBLAS and CUDA
-# - [+mkl-nvidia][deb_mkl_nvidia] means it uses Intel MKL and CUDA
-# 
-# CUDA libraries will be installed as its dependencies.
-
-## Other Archtectures or OS
 See [here](@ref build_guide).
 
 [release]: ${monolish_release_url}
