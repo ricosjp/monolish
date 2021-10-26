@@ -2,7 +2,7 @@ MONOLISH_DIR?=$(HOME)/lib/monolish
 LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
 
 CXX=g++
-CXXFLAGS=-O3
+CXXFLAGS=-O3 -Wall
 
 all: cpu
 

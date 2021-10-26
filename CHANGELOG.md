@@ -43,6 +43,7 @@ Unreleased
 
 ### Changed
 - Installtion of monolish for GPU with apt does not support https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/403
+- Add nodiscard to solve() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/400
 - Version table in README https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/402
 - Add libomp and libomptarget in deb file https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/401
 - Change monolish container name oss_nvidia -> oss-nvidia, mkl_nvidia -> mkl-nvidia https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398
