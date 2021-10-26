@@ -45,10 +45,13 @@ if(NOT MONOLISH_USE_NVIDIA_GPU)
   endif()
   add_library(${monolish_cpu_target} ${monolish_sources})
   set_common_properties(${monolish_cpu_target})
-  # XXX: Should we use the imported target `OpenMP::OpenMP_CXX`?
-  target_compile_options(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_options(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_FLAGS})
-  target_link_libraries(${monolish_cpu_target} PRIVATE ${OpenMP_CXX_LIBRARIES})
+  target_link_libraries(${monolish_cpu_target} PRIVATE OpenMP::OpenMP_CXX)
+
+  foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
+    if(name STREQUAL "omp")
+      install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
+    endif()
+  endforeach(name)
   install(
     TARGETS ${monolish_cpu_target}
     LIBRARY
