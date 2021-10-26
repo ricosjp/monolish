@@ -33,6 +33,7 @@ Unreleased
 
 ### Fixed
 - Rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
+- Rewrite int/size_t -> decltype() in src/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398 https://github.com/ricosjp/monolish/issues/87
 - Fix doxygen warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/394
 - Fix benchmark warnigs https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/393 https://github.com/ricosjp/monolish/issues/80
 - Fix benchmark script bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/390
@@ -42,6 +43,7 @@ Unreleased
 - Fix typo in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/351
 
 ### Changed
+- Installtion of monolish for GPU with apt does not support https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/403
 - Version table in README https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/402
 - Add libomp and libomptarget in deb file https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/401
 - Change monolish container name oss_nvidia -> oss-nvidia, mkl_nvidia -> mkl-nvidia https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/398
