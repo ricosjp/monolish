@@ -30,7 +30,7 @@ class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
   [[nodiscard]] int monolish_LOBPCG(MATRIX &A, vector<Float> &lambda,
-                                   matrix::Dense<Float> &x);
+                                    matrix::Dense<Float> &x);
 
 public:
   /**
@@ -42,7 +42,7 @@ public:
    * @return error code (only 0 now)
    **/
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &lambda,
-                         matrix::Dense<Float> &x);
+                          matrix::Dense<Float> &x);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");

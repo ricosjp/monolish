@@ -30,11 +30,11 @@ class LOBPCG : public solver::solver<MATRIX, Float> {
 private:
   // TODO: support multiple lambda(eigenvalue)s
   [[nodiscard]] int monolish_LOBPCG(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                                   matrix::Dense<Float> &x, int itype);
+                                    matrix::Dense<Float> &x, int itype);
 
 public:
   [[nodiscard]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                         matrix::Dense<Float> &x, int itype);
+                          matrix::Dense<Float> &x, int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");
@@ -84,11 +84,11 @@ template <typename MATRIX, typename Float>
 class DC : public solver::solver<MATRIX, Float> {
 private:
   [[nodiscard]] int LAPACK_DC(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                             int itype);
+                              int itype);
 
 public:
   [[nodiscard]] int solve(MATRIX &A, MATRIX &B, vector<Float> &lambda,
-                         int itype);
+                          int itype);
 
   void create_precond(MATRIX &A) {
     throw std::runtime_error("this precond. is not impl.");

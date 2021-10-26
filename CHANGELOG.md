@@ -22,6 +22,7 @@ Unreleased
 ### Added
 
 ### Fixed
+- fix typo nodiscad -> nodiscard https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/405
 
 ### Changed
 - Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/404
