@@ -1,16 +1,25 @@
 # monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture. {#mainpage}
 
 ## Quick start guide
-The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
 
-To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04)](@ref install_guide)
-- [Docker container with monolish installed](@ref monolish_docker) ([container registry](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+monolish pre-build library and examples are composed in a container:
 
-To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
+```
+docker run -it --rm ghcr.io/ricosjp/monolish/mkl:${PROJECT_VERSION}
+cd /usr/share/monolish/examples/blas/innerproduct
+make cpu
+```
 
-See below for how to build on allgebra.
-- [Build monolish from source code](@ref build_guide)
+There are also GPU-enabled images:
+
+```
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl-nvidia:${PROJECT_VERSION}
+/usr/share/monolish/link_monolish_gpu.sh
+cd /usr/share/monolish/examples/blas/innerproduct
+make gpu
+```
+
+Be sure that you need to detect your GPU architecture (e.g. Ampare, Volta, ...) by `link_monolish_gpu.sh` script.
 
 ## For Users
 - [What's monolish?](@ref monolish_intro)
