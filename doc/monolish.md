@@ -5,14 +5,14 @@ The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offl
 
 To use pre-built monolish, use apt or Docker Container with monolish installed.
 - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
-- [Docker container with monolish installed](@ref monolish_docker) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+- [Docker container with monolish installed](@ref monolish_docker) ([container registry](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
 
 To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
 
 See below for how to build on allgebra.
 - [Build monolish from source code](@ref build_guide)
 
-## For users:
+## For Users
 - [What's monolish?](@ref monolish_intro)
 - Installation
   - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
@@ -25,21 +25,21 @@ See below for how to build on allgebra.
 - [Performance logging and find bottlenecks](@ref logger)
 - [View continuous benchmarking results](https://ricosjp.github.io/monolish_benchmark_result/)
 
-## For developpers:
+## For Developers
 - [Build monolish from source code](@ref build_guide)
 - [Testing and Benchmarking](@ref test_bench)
 - [Contribution guide](@ref contribution) 
 
-## Citations:
+## Citations
 - [Publications](@ref publications)
 
-## Meta information:
+## Links
 - [Source code](https://github.com/ricosjp/monolish/)
 - [Documentation](https://ricosjp.github.io/monolish/)
 - [Bug reports](https://github.com/ricosjp/monolish/issues)
 - [Releases](https://github.com/ricosjp/monolish/releases)
 - [Changelog](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
-- [Lisence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
+- [Licence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
 - [monolish log viewer](https://pypi.org/project/monolish-log-viewer/)
 
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)
