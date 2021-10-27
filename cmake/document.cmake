@@ -9,17 +9,18 @@ set(monolish_deb_oss_nvidia "monolish_${PROJECT_VERSION}+oss-nvidia_amd64.deb")
 set(monolish_deb_mkl_nvidia "monolish_${PROJECT_VERSION}+mkl-nvidia_amd64.deb")
 
 #
-# Eval templates in doc/
+# Eval all markdowns in doc/
 #
 file(GLOB_RECURSE
-  monolish_doc_templates
+  monolish_markdown_documents
   RELATIVE ${PROJECT_SOURCE_DIR}
-  ${PROJECT_SOURCE_DIR}/doc/**/*.in
+  doc/*.md
 )
-foreach(template IN LISTS monolish_doc_templates)
-  string(REPLACE ".in" "" dest ${template})
-  message(STATUS "Generate ${dest}")
-  configure_file(${PROJECT_SOURCE_DIR}/${template} ${PROJECT_SOURCE_DIR}/${dest})
+foreach(md IN LISTS monolish_markdown_documents)
+  configure_file(
+    ${PROJECT_SOURCE_DIR}/${md}
+    ${CMAKE_CURRENT_BINARY_DIR}/${md}
+  )
 endforeach()
 
 configure_file(Doxyfile.in Doxyfile)
