@@ -24,9 +24,8 @@ Unreleased
 ### Fixed
 
 ### Changed
+- Rewrite quick start guide https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/406
 - Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/405
-
-
 
 0.15.0 - 2021/10/27
 -----------
