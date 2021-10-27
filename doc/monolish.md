@@ -21,18 +21,28 @@ make gpu
 
 Be sure that you need to detect your GPU architecture (e.g. Ampare, Volta, ...) by `link_monolish_gpu.sh` script.
 
+These compiles following example code:
+
+@include blas/innerproduct/innerproduct.cpp
+
+Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for more examples.
+
 ## For Users
 - [What's monolish?](@ref monolish_intro)
-- Installation
-  - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
-  - [Docker container with monolish installed](@ref monolish_docker)
+
+### Installation
+- [Installation using apt (for ubuntu 20.04)](@ref install_guide)
+- [Docker container with monolish installed](@ref monolish_docker)
+
+### Examples
+- [CPU Examples](@ref cpu_dev)
+- [GPU Examples](@ref gpu_dev)
+
+### API Overview
 - [Data types](@ref data_type)
-- [Compile and run simple program on CPU](@ref cpu_dev)
-- [GPU device acceleration](@ref gpu_dev)
-- [Matrix/vector operations](@ref oplist)
-- [Linear solvers](@ref solverlist)
+- [Supported Operations](@ref oplist)
+- [Linear Solvers](@ref solverlist)
 - [Performance logging and find bottlenecks](@ref logger)
-- [View continuous benchmarking results](https://ricosjp.github.io/monolish_benchmark_result/)
 
 ## For Developers
 - [Build monolish from source code](@ref build_guide)
@@ -50,5 +60,6 @@ Be sure that you need to detect your GPU architecture (e.g. Ampare, Volta, ...) 
 - [Changelog](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
 - [Licence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
 - [monolish log viewer](https://pypi.org/project/monolish-log-viewer/)
+- [Continuous benchmarking](https://ricosjp.github.io/monolish_benchmark_result/)
 
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)
