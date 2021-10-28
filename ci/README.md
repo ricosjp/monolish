@@ -2,10 +2,17 @@ GitLab CI settings
 ==================
 
 - [Root .gitlab-ci.yml](../.gitlab-ci.yml)
-- [GitLab CI YAML reference](https://docs.gitlab.com/ee/ci/yaml/)
+  - This loads actual settings defined in this directory using [include:local](https://docs.gitlab.com/ee/ci/yaml/#includelocal) feature
+- You should open [GitLab CI YAML reference](https://docs.gitlab.com/ee/ci/yaml/) when editing this directory.
+- monolish uses GitLab CI heavily for better developing process, but it is accessible only for RICOS members.
 
 Stages
------
+------
+
+monolish CI utilizes [needs](https://docs.gitlab.com/ee/ci/yaml/#needs) feature to represent dependencies between jobs,
+and the stage ordering does not represent execution order.
+Independent jobs run in parallel as far as usable runner exists.
+Following stages exist only for semantic grouping.
 
 ### develop
 
