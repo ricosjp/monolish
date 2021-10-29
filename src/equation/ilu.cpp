@@ -18,17 +18,20 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
     throw std::runtime_error("error A.row != A.col");
   }
 
-  this->precond.M.resize(A.get_row());
+#if MONOLISH_USE_NVIDIA_GPU
+#else
+    throw std::runtime_error("ILU on CPU does not impl.");
+#endif
 
-  // send M
-  if (A.get_device_mem_stat() == true) {
-    this->precond.M.send();
-  }
 
-  T w = this->get_omega();
-  A.diag(this->precond.M);
-  blas::scal(w, this->precond.M);
-  vml::reciprocal(this->precond.M, this->precond.M);
+
+
+
+
+
+
+
+
 
   this->precond.M.recv(); // sor does not work on gpu now
 
@@ -102,6 +105,140 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
                              "x.get_device_mem_stat != b.get_device_mem_stat");
   }
 
+#if MONOLISH_USE_NVIDIA_GPU
+  auto M = A.get_row();
+  auto nnz = A.get_nnz();
+  T* d_x = x.data();
+  T* d_b = b.data();
+
+  monolish::vector<T> tmp(x.size(),0.0);
+  tmp.send();
+  T* d_tmp = tmp.data();
+
+  int* d_csrRowPtr = A.row_ptr.data();
+  int* d_csrColInd = A.col_ind.data();
+  T* d_csrVal = A.val.data();
+
+  cusparseHandle_t handle;
+  cusparseCreate(&handle);
+  cudaDeviceSynchronize();
+
+  int pBufferSize_M;
+  int pBufferSize_L;
+  int pBufferSize_U;
+  int pBufferSize;
+  void *pBuffer = this->buf;
+
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp)
+  {
+  int structural_zero;
+  int numerical_zero;
+  const T alpha = 1.0;
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseOperation_t trans_L  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+  const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+  // step 1: create a descriptor which contains
+  cusparseMatDescr_t descr_M = 0;
+  csrilu02Info_t info_M  = 0;
+  cusparseCreateMatDescr(&descr_M);
+  cusparseSetMatIndexBase(descr_M, CUSPARSE_INDEX_BASE_ZERO);
+  cusparseSetMatType(descr_M, CUSPARSE_MATRIX_TYPE_GENERAL);
+
+  cusparseMatDescr_t descr_L = 0;
+  csrsv2Info_t  info_L  = 0;
+  cusparseCreateMatDescr(&descr_L);
+  cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
+  cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
+  cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
+  cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
+
+  cusparseMatDescr_t descr_U = 0;
+  csrsv2Info_t  info_U  = 0;
+  cusparseCreateMatDescr(&descr_U);
+  cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
+  cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
+  cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
+  cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
+
+  // step 2: create a empty info structure
+  // we need one info for csrilu02 and two info's for csrsv2
+  cusparseCreateCsrilu02Info(&info_M);
+  cusparseCreateCsrsv2Info(&info_L);
+  cusparseCreateCsrsv2Info(&info_U);
+
+  // step 3: query how much memory used in csrilu02 and csrsv2, and allocate the buffer
+      cusparseDcsrilu02_bufferSize(handle, M, nnz,
+              descr_M, d_csrVal, d_csrRowPtr, d_csrColInd, info_M, &pBufferSize_M);
+      cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz,
+              descr_L, d_csrVal, d_csrRowPtr, d_csrColInd, info_L, &pBufferSize_L);
+      cusparseDcsrsv2_bufferSize(handle, trans_U, M, nnz,
+              descr_U, d_csrVal, d_csrRowPtr, d_csrColInd, info_U, &pBufferSize_U);
+
+      pBufferSize = std::max(pBufferSize_M, std::max(pBufferSize_L, pBufferSize_U));
+      cudaMalloc((void**)&pBuffer, pBufferSize);
+      // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
+
+      // step 4: perform analysis of incomplete Cholesky on M
+      //         perform analysis of triangular solve on L
+      //         perform analysis of triangular solve on U
+      // The lower(upper) triangular part of M has the same sparsity pattern as L(U),
+      // we can do analysis of csrilu0 and csrsv2 simultaneously.
+
+      cusparseDcsrilu02_analysis(handle, M, nnz, descr_M,
+              d_csrVal, d_csrRowPtr, d_csrColInd, info_M,
+              policy_M, pBuffer);
+      auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
+
+      if (CUSPARSE_STATUS_ZERO_PIVOT == status){
+          printf("A(%d,%d) is missing\n", structural_zero, structural_zero);
+      }
+
+      cusparseDcsrsv2_analysis(handle, trans_L, M, nnz, descr_L,
+              d_csrVal, d_csrRowPtr, d_csrColInd,
+              info_L, policy_L, pBuffer);
+
+      cusparseDcsrsv2_analysis(handle, trans_U, M, nnz, descr_U,
+              d_csrVal, d_csrRowPtr, d_csrColInd,
+              info_U, policy_U, pBuffer);
+
+      // step 5: M = L * U
+      cusparseDcsrilu02(handle, M, nnz, descr_M,
+              d_csrVal, d_csrRowPtr, d_csrColInd, info_M, policy_M, pBuffer);
+      status = cusparseXcsrilu02_zeroPivot(handle, info_M, &numerical_zero);
+      if (CUSPARSE_STATUS_ZERO_PIVOT == status){
+          printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
+      }
+
+      // step 6: solve L*z = x
+      cusparseDcsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L,
+              d_csrVal, d_csrRowPtr, d_csrColInd, info_L,
+              d_b, d_tmp, policy_L, pBuffer);
+
+      // step 7: solve U*y = z
+      cusparseDcsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U,
+              d_csrVal, d_csrRowPtr, d_csrColInd, info_U,
+              d_tmp, d_x, policy_U, pBuffer);
+
+      // step 6: free resources
+      cudaFree(pBuffer);
+      cusparseDestroyMatDescr(descr_M);
+      cusparseDestroyMatDescr(descr_L);
+      cusparseDestroyMatDescr(descr_U);
+      cusparseDestroyCsrilu02Info(info_M);
+      cusparseDestroyCsrsv2Info(info_L);
+      cusparseDestroyCsrsv2Info(info_U);
+      cusparseDestroy(handle);
+  }
+
+#else
+    throw std::runtime_error("ILU on CPU does not impl.");
+#endif
+
 
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
@@ -113,8 +250,8 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
 
 template int equation::ILU<matrix::CRS<double>, double>::cusparse_ILU(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-template int equation::ILU<matrix::CRS<float>, float>::cusparse_ILU(
-    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::ILU<matrix::CRS<float>, float>::cusparse_ILU(
+//     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
 // template int
 // equation::ILU<matrix::LinearOperator<double>, double>::monolish_ILU(
@@ -145,8 +282,8 @@ int equation::ILU<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
 // template int equation::ILU<matrix::Dense<double>, double>::solve(
 //     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 
-template int equation::ILU<matrix::CRS<float>, float>::solve(
-    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::ILU<matrix::CRS<float>, float>::solve(
+//     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 template int equation::ILU<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
