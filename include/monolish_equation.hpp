@@ -308,6 +308,7 @@ template <typename MATRIX, typename Float>
 class ILU : public monolish::solver::solver<MATRIX, Float> {
 private:
   int cusparse_ILU(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void* buf;
 
 public:
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
