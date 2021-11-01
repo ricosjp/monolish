@@ -1,27 +1,20 @@
-MONOLISH_DIR?=$(HOME)/lib/monolish
-LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
+CXX      ?= g++
+CXXFLAGS ?= -O3 -Wall
 
-CXX=g++
-CXXFLAGS=-O3 -Wall
+.PHONY: cpu gpu
+all: cpu
 
-all: cpu gpu
-
-cpu: solver_cpu.out run_cpu
-gpu: solver_gpu.out run_gpu
-	
 solver_cpu.out: solver.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_cpu 
+	$(CXX) $(CXXFLAGS) $< -o $@ -lmonolish_cpu
 
 solver_gpu.out: solver.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_gpu
+	$(CXX) $(CXXFLAGS) $< -o $@ -lmonolish_gpu
 
-run_cpu:
-	echo "run CPU"
-	./solver_cpu.out
+cpu: solver_cpu.out
+	./$<
 
-run_gpu:
-	echo "run GPU"
-	./solver_gpu.out
+gpu: solver_gpu.out
+	./$<
 
 clean:
 	rm *.out
