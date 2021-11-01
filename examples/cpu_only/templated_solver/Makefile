@@ -1,19 +1,14 @@
-MONOLISH_DIR?=$(HOME)/lib/monolish
-LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/
+CXX      ?= g++
+CXXFLAGS ?= -O3 -Wall
 
-CXX=g++
-CXXFLAGS=-O3 -Wall
-
+.PHONY: cpu
 all: cpu
 
-cpu: solver_cpu.out run_cpu
-	
 solver_cpu.out: solver.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS) -lmonolish_cpu 
+	$(CXX) $(CXXFLAGS) $< -o $@ -lmonolish_cpu
 
-run_cpu:
-	echo "run CPU"
-	./solver_cpu.out
+cpu: solver_cpu.out
+	./$<
 
 clean:
 	rm *.out
