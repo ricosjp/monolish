@@ -44,9 +44,14 @@ Generated library and test executables are passed to next stages as artifacts.
 
 - [test.yml](./test.yml)
 
+Run executables in [test/](../test) directory built in the build step.
+
 ### example
 
 - [example.yml](./example.yml)
+
+Build and run executables in [examples/](../examples) directory using deb file built in the build step.
+Different from test step, it compiles example codes.
 
 ### benchmark
 
@@ -55,6 +60,8 @@ Generated library and test executables are passed to next stages as artifacts.
 ### python
 
 - [python.yml](./python.yml)
+
+Test log handling tools developed in [python/](../python).
 
 ### package
 
