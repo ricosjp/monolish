@@ -23,6 +23,7 @@ Unreleased
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
+- Remove `MONOLISH_DIR` variable in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/408
 
 ### Changed
 - Rewrite quick start guide https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/406
