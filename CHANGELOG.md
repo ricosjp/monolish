@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
 
