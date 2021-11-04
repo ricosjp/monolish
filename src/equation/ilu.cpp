@@ -28,12 +28,12 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   cudaDeviceSynchronize();
 
   // step 1: create a descriptor which contains
-  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
-  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
-  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
-  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
-  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
-  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
+  cusparseMatDescr_t descr_M = 0;
+  csrilu02Info_t info_M  = 0;
+  cusparseMatDescr_t descr_L = 0;
+  csrsv2Info_t  info_L  = 0;
+  cusparseMatDescr_t descr_U = 0;
+  csrsv2Info_t  info_U  = 0;
 
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
@@ -48,11 +48,22 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
-          bufsize, handle);
+          this->bufsize, handle);
 
+  this->matM = descr_M;
+  this->infoM = info_M;
+
+  this->matL = descr_L;
+  this->infoL = info_L;
+
+  this->matU = descr_U;
+  this->infoU = info_U;
+
+  this->precond.A = &A;
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
 #endif
+
 
   logger.solver_out();
 }
@@ -81,7 +92,48 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  //sor_kernel_precond(*this->precond.A, this->precond.M, z, r);
+#if MONOLISH_USE_NVIDIA_GPU
+  T* d_z = z.data();
+  T* d_r = (T*)r.data();
+
+  monolish::vector<T> tmp(z.size(),0.0);
+  tmp.send();
+  T* d_tmp = tmp.data();
+
+  cusparseHandle_t handle;
+  cusparseCreate(&handle);
+  cudaDeviceSynchronize();
+
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
+  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
+
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
+  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
+
+  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
+  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
+
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseOperation_t trans_L  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+  cusolver_ilu(*this->precond.A, 
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          this->bufsize, handle);
+
+  cusolver_ilu_solve(*this->precond.A,
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          d_z, d_r, d_tmp, this->bufsize, handle);
+
+#else
+    throw std::runtime_error("ILU on CPU does not impl.");
+#endif
 
   logger.solver_out();
 }
