@@ -211,6 +211,7 @@ bool cusolver_ilu_solve(
               d_csrVal, d_csrRowPtr, d_csrColInd, info_U,
               d_tmp, d_x, policy_U, pBuffer);
 
+      cudaFree(pBuffer);
   }
 
   logger.func_out();
