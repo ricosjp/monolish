@@ -307,6 +307,7 @@ bool cusolver_ilu(
 
       if (CUSPARSE_STATUS_ZERO_PIVOT == status){
           printf("A(%d,%d) is missing\n", structural_zero, structural_zero);
+          throw std::runtime_error("ILU error.");
       }
 
       cusparseScsrsv2_analysis(handle, trans_L, M, nnz, descr_L,
@@ -323,6 +324,7 @@ bool cusolver_ilu(
       status = cusparseXcsrilu02_zeroPivot(handle, info_M, &numerical_zero);
       if (CUSPARSE_STATUS_ZERO_PIVOT == status){
           printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
+          throw std::runtime_error("ILU error.");
       }
       cudaFree(pBuffer);
   }
