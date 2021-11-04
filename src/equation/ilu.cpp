@@ -73,9 +73,8 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 // template void equation::ILU<matrix::Dense<double>, double>::apply_precond(
 //     const vector<double> &r, vector<double> &z);
 
-template void
-equation::ILU<matrix::CRS<float>, float>::apply_precond(const vector<float> &r,
-                                                        vector<float> &z);
+template void equation::ILU<matrix::CRS<float>, float>::apply_precond(
+        const vector<float> &r, vector<float> &z);
 template void equation::ILU<matrix::CRS<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
@@ -116,15 +115,14 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusparseHandle_t handle;
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
-  void* M_Mat = 0;
 
   // step 1: create a descriptor which contains
-  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)M_Mat;
-  csrilu02Info_t info_M  = 0;
-  cusparseMatDescr_t descr_L = 0;
-  csrsv2Info_t  info_L  = 0;
-  cusparseMatDescr_t descr_U = 0;
-  csrsv2Info_t  info_U  = 0;
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
+  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
+  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
+  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
+  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
 
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
@@ -154,31 +152,22 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
-// template int equation::ILU<matrix::Dense<double>, double>::monolish_ILU(
-//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 // template int equation::ILU<matrix::Dense<float>, float>::monolish_ILU(
 //     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
+// template int equation::ILU<matrix::Dense<double>, double>::monolish_ILU(
+//     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 
+template int equation::ILU<matrix::CRS<float>, float>::cusparse_ILU(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 template int equation::ILU<matrix::CRS<double>, double>::cusparse_ILU(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
-// template int equation::ILU<matrix::CRS<float>, float>::cusparse_ILU(
-//     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 
-// template int
-// equation::ILU<matrix::LinearOperator<double>, double>::monolish_ILU(
-//     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 // template int
 // equation::ILU<matrix::LinearOperator<float>, float>::monolish_ILU(
 //     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-//
-template <typename MATRIX, typename T>
-void equation::ILU<MATRIX, T>::free_buffer() {
-    std::cout << "I am destructor of ILU" << std::endl;
-}
-template void equation::ILU<matrix::CRS<double>, double>::free_buffer();
+// template int
+// equation::ILU<matrix::LinearOperator<double>, double>::monolish_ILU(
+//     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -202,8 +191,8 @@ int equation::ILU<MATRIX, T>::solve(MATRIX &A, vector<T> &x, vector<T> &b) {
 // template int equation::ILU<matrix::Dense<double>, double>::solve(
 //     matrix::Dense<double> &A, vector<double> &x, vector<double> &b);
 
-// template int equation::ILU<matrix::CRS<float>, float>::solve(
-//     matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
+template int equation::ILU<matrix::CRS<float>, float>::solve(
+    matrix::CRS<float> &A, vector<float> &x, vector<float> &b);
 template int equation::ILU<matrix::CRS<double>, double>::solve(
     matrix::CRS<double> &A, vector<double> &x, vector<double> &b);
 
