@@ -2,7 +2,7 @@
 #include "../../include/monolish_equation.hpp"
 #include "../../include/monolish_vml.hpp"
 #include "../internal/monolish_internal.hpp"
-#include "./kernel/sor_kernel.hpp"
+#include "./kernel/ilu_kernel.hpp"
 
 namespace monolish {
 
@@ -64,7 +64,7 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-  sor_kernel_precond(*this->precond.A, this->precond.M, z, r);
+  //sor_kernel_precond(*this->precond.A, this->precond.M, z, r);
 
   logger.solver_out();
 }
@@ -129,49 +129,50 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   int pBufferSize;
   void *pBuffer = this->buf;
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp)
-  {
   int structural_zero;
   int numerical_zero;
   const T alpha = 1.0;
+
+  // step 1: create a descriptor which contains
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  cusparseMatDescr_t descr_M = 0;
+  csrilu02Info_t info_M  = 0;
 
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   const cusparseOperation_t trans_L  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  cusparseMatDescr_t descr_L = 0;
+  csrsv2Info_t  info_L  = 0;
 
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
-
-  // step 1: create a descriptor which contains
-  cusparseMatDescr_t descr_M = 0;
-  csrilu02Info_t info_M  = 0;
-  cusparseCreateMatDescr(&descr_M);
-  cusparseSetMatIndexBase(descr_M, CUSPARSE_INDEX_BASE_ZERO);
-  cusparseSetMatType(descr_M, CUSPARSE_MATRIX_TYPE_GENERAL);
-
-  cusparseMatDescr_t descr_L = 0;
-  csrsv2Info_t  info_L  = 0;
-  cusparseCreateMatDescr(&descr_L);
-  cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
-  cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
-  cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
-  cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
-
   cusparseMatDescr_t descr_U = 0;
   csrsv2Info_t  info_U  = 0;
-  cusparseCreateMatDescr(&descr_U);
-  cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
-  cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
-  cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
-  cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
 
-  // step 2: create a empty info structure
-  // we need one info for csrilu02 and two info's for csrsv2
-  cusparseCreateCsrilu02Info(&info_M);
-  cusparseCreateCsrsv2Info(&info_L);
-  cusparseCreateCsrsv2Info(&info_U);
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp)
+  {
+      cusparseCreateMatDescr(&descr_M);
+      cusparseSetMatIndexBase(descr_M, CUSPARSE_INDEX_BASE_ZERO);
+      cusparseSetMatType(descr_M, CUSPARSE_MATRIX_TYPE_GENERAL);
 
-  // step 3: query how much memory used in csrilu02 and csrsv2, and allocate the buffer
+      cusparseCreateMatDescr(&descr_L);
+      cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
+      cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
+      cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
+      cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
+
+      cusparseCreateMatDescr(&descr_U);
+      cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
+      cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
+      cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
+      cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
+
+      // step 2: create a empty info structure
+      // we need one info for csrilu02 and two info's for csrsv2
+      cusparseCreateCsrilu02Info(&info_M);
+      cusparseCreateCsrsv2Info(&info_L);
+      cusparseCreateCsrsv2Info(&info_U);
+
+      // step 3: query how much memory used in csrilu02 and csrsv2, and allocate the buffer
       cusparseDcsrilu02_bufferSize(handle, M, nnz,
               descr_M, d_csrVal, d_csrRowPtr, d_csrColInd, info_M, &pBufferSize_M);
       cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz,
@@ -180,8 +181,12 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
               descr_U, d_csrVal, d_csrRowPtr, d_csrColInd, info_U, &pBufferSize_U);
 
       pBufferSize = std::max(pBufferSize_M, std::max(pBufferSize_L, pBufferSize_U));
-      cudaMalloc((void**)&pBuffer, pBufferSize);
+  }
+
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
+  {
       // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
+      cudaMalloc((void**)&pBuffer, pBufferSize);
 
       // step 4: perform analysis of incomplete Cholesky on M
       //         perform analysis of triangular solve on L
@@ -213,7 +218,12 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
       if (CUSPARSE_STATUS_ZERO_PIVOT == status){
           printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
       }
+  }
 
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
+  {
+      // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
+      cudaMalloc((void**)&pBuffer, pBufferSize);
       // step 6: solve L*z = x
       cusparseDcsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L,
               d_csrVal, d_csrRowPtr, d_csrColInd, info_L,
@@ -238,7 +248,6 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
 #endif
-
 
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
