@@ -123,7 +123,6 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
 
-
   // step 1: create a descriptor which contains
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   cusparseMatDescr_t descr_M = 0;
@@ -154,7 +153,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
           descr_U, info_U, policy_U, trans_U,
           d_x, d_b, d_tmp, bufsize, handle);
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
+#pragma omp target data use_device_ptr(pBuffer)
   {
       // step 6: free resources
       cudaFree(pBuffer);
