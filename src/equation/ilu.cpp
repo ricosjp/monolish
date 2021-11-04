@@ -123,10 +123,6 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
 
-  int pBufferSize_M;
-  int pBufferSize_L;
-  int pBufferSize_U;
-  int pBufferSize;
   void *pBuffer = this->buf;
 
   int structural_zero;
@@ -149,25 +145,12 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   csrsv2Info_t  info_U  = 0;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
-
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp)
-  {
-
-      // step 3: query how much memory used in csrilu02 and csrsv2, and allocate the buffer
-      cusparseDcsrilu02_bufferSize(handle, M, nnz,
-              descr_M, d_csrVal, d_csrRowPtr, d_csrColInd, info_M, &pBufferSize_M);
-      cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz,
-              descr_L, d_csrVal, d_csrRowPtr, d_csrColInd, info_L, &pBufferSize_L);
-      cusparseDcsrsv2_bufferSize(handle, trans_U, M, nnz,
-              descr_U, d_csrVal, d_csrRowPtr, d_csrColInd, info_U, &pBufferSize_U);
-
-      pBufferSize = std::max(pBufferSize_M, std::max(pBufferSize_L, pBufferSize_U));
-  }
+  auto bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
   {
       // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-      cudaMalloc((void**)&pBuffer, pBufferSize);
+      cudaMalloc((void**)&pBuffer, bufsize);
 
       // step 4: perform analysis of incomplete Cholesky on M
       //         perform analysis of triangular solve on L
@@ -204,7 +187,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
   {
       // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-      cudaMalloc((void**)&pBuffer, pBufferSize);
+      cudaMalloc((void**)&pBuffer, bufsize);
       // step 6: solve L*z = x
       cusparseDcsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L,
               d_csrVal, d_csrRowPtr, d_csrColInd, info_L,

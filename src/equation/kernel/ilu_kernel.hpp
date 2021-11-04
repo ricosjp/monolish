@@ -51,6 +51,48 @@ void cusolver_ilu_create_descr(
 
   logger.func_out();
 }
+
+int cusolver_ilu_get_buffersize(
+        matrix::CRS<double> &A,
+        const cusparseMatDescr_t &descr_M,
+        const csrilu02Info_t &info_M,
+        const cusparseMatDescr_t &descr_L,
+        const csrsv2Info_t &info_L,
+        const cusparseOperation_t &trans_L,
+        const cusparseMatDescr_t &descr_U,
+        const csrsv2Info_t &info_U,
+        const cusparseOperation_t &trans_U,
+        const cusparseHandle_t &handle) {
+
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  auto M = A.get_row();
+  auto nnz = A.get_nnz();
+  int* d_csrRowPtr = A.row_ptr.data();
+  int* d_csrColInd = A.col_ind.data();
+  auto* d_csrVal = A.val.data();
+
+  int bufsize;
+  int bufsize_M;
+  int bufsize_L;
+  int bufsize_U;
+
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
+  {
+      cusparseDcsrilu02_bufferSize(handle, M, nnz,
+              descr_M, d_csrVal, d_csrRowPtr, d_csrColInd, info_M, &bufsize_M);
+      cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz,
+              descr_L, d_csrVal, d_csrRowPtr, d_csrColInd, info_L, &bufsize_L);
+      cusparseDcsrsv2_bufferSize(handle, trans_U, M, nnz,
+              descr_U, d_csrVal, d_csrRowPtr, d_csrColInd, info_U, &bufsize_U);
+
+      bufsize = std::max(bufsize_M, std::max(bufsize_L, bufsize_U));
+  }
+
+  logger.func_out();
+  return bufsize;
+}
 #endif
 
 } // namespace
