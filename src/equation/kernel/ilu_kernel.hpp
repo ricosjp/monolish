@@ -5,7 +5,7 @@ namespace monolish {
 namespace {
 
 #if MONOLISH_USE_NVIDIA_GPU
-void ilu_cusolver_get_bufsize(
+void cusolver_ilu_create_descr(
         matrix::CRS<double> &A,
         cusparseMatDescr_t &descr_M,
         csrilu02Info_t &info_M,
@@ -23,14 +23,6 @@ void ilu_cusolver_get_bufsize(
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
   auto* d_csrVal = A.val.data();
-
-  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
-
-  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
-  const cusparseOperation_t trans_L  = CUSPARSE_OPERATION_NON_TRANSPOSE;
-
-  const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-  const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {

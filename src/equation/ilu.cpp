@@ -148,29 +148,10 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusparseMatDescr_t descr_U = 0;
   csrsv2Info_t  info_U  = 0;
 
+  cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
+
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp)
   {
-      cusparseCreateMatDescr(&descr_M);
-      cusparseSetMatIndexBase(descr_M, CUSPARSE_INDEX_BASE_ZERO);
-      cusparseSetMatType(descr_M, CUSPARSE_MATRIX_TYPE_GENERAL);
-
-      cusparseCreateMatDescr(&descr_L);
-      cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
-      cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
-      cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
-      cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
-
-      cusparseCreateMatDescr(&descr_U);
-      cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
-      cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
-      cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
-      cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
-
-      // step 2: create a empty info structure
-      // we need one info for csrilu02 and two info's for csrsv2
-      cusparseCreateCsrilu02Info(&info_M);
-      cusparseCreateCsrsv2Info(&info_L);
-      cusparseCreateCsrsv2Info(&info_U);
 
       // step 3: query how much memory used in csrilu02 and csrsv2, and allocate the buffer
       cusparseDcsrilu02_bufferSize(handle, M, nnz,
