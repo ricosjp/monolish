@@ -18,7 +18,51 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
     throw std::runtime_error("error A.row != A.col");
   }
 
+  if (A.get_device_mem_stat() != true){
+    throw std::runtime_error("ILU on CPU does not impl.");
+  }
+
 #if MONOLISH_USE_NVIDIA_GPU
+  T* d_x = x.data();
+  T* d_b = b.data();
+
+  monolish::vector<T> tmp(x.size(),0.0);
+  tmp.send();
+  T* d_tmp = tmp.data();
+
+  cusparseHandle_t handle;
+  cusparseCreate(&handle);
+  cudaDeviceSynchronize();
+
+  // step 1: create a descriptor which contains
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
+  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
+  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
+  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
+  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
+
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseOperation_t trans_L  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+  cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
+  auto bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
+
+  cusolver_ilu(A, 
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          bufsize, handle);
+
+  cusolver_ilu_solve(A, 
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          d_x, d_b, d_tmp, bufsize, handle);
+
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
 #endif
@@ -102,6 +146,10 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
       A.get_device_mem_stat() != b.get_device_mem_stat()) {
     throw std::runtime_error("error, A.get_device_mem_stat != "
                              "x.get_device_mem_stat != b.get_device_mem_stat");
+  }
+
+  if (A.get_device_mem_stat() != true){
+    throw std::runtime_error("ILU on CPU does not impl.");
   }
 
 #if MONOLISH_USE_NVIDIA_GPU
