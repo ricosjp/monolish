@@ -310,6 +310,7 @@ private:
   int cusparse_ILU(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void *matM=0, *matL=0, *matU=0;
   void *infoM=0, *infoL=0, *infoU=0;
+  int bufsize;
 
 public:
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);

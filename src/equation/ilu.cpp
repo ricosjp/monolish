@@ -23,13 +23,6 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   }
 
 #if MONOLISH_USE_NVIDIA_GPU
-  T* d_x = x.data();
-  T* d_b = b.data();
-
-  monolish::vector<T> tmp(x.size(),0.0);
-  tmp.send();
-  T* d_tmp = tmp.data();
-
   cusparseHandle_t handle;
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
@@ -49,7 +42,7 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
-  auto bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
+  this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
   cusolver_ilu(A, 
           descr_M, info_M, policy_M, 
@@ -57,29 +50,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
           descr_U, info_U, policy_U, trans_U,
           bufsize, handle);
 
-  cusolver_ilu_solve(A, 
-          descr_M, info_M, policy_M, 
-          descr_L, info_L, policy_L, trans_L, 
-          descr_U, info_U, policy_U, trans_U,
-          d_x, d_b, d_tmp, bufsize, handle);
-
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
 #endif
-
-
-
-
-
-
-
-
-
-
-
-  this->precond.M.recv(); // sor does not work on gpu now
-
-  this->precond.A = &A;
 
   logger.solver_out();
 }
@@ -90,8 +63,8 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
 
 template void
 equation::ILU<matrix::CRS<float>, float>::create_precond(matrix::CRS<float> &A);
-template void equation::ILU<matrix::CRS<double>, double>::create_precond(
-    matrix::CRS<double> &A);
+template void 
+equation::ILU<matrix::CRS<double>, double>::create_precond(matrix::CRS<double> &A);
 
 // template void
 // equation::ILU<matrix::LinearOperator<float>, float>::create_precond(
@@ -179,7 +152,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
-  auto bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
+  this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
   cusolver_ilu(A, 
           descr_M, info_M, policy_M, 
@@ -198,7 +171,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
 #endif
 
   logger.solver_out();
-  return MONOLISH_SOLVER_MAXITER;
+  return MONOLISH_SOLVER_SUCCESS;
 }
 // template int equation::ILU<matrix::Dense<float>, float>::monolish_ILU(
 //     matrix::Dense<float> &A, vector<float> &x, vector<float> &b);
