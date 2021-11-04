@@ -113,12 +113,6 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   tmp.send();
   T* d_tmp = tmp.data();
 
-  double* pBuffer;
-
-  int* d_csrRowPtr = A.row_ptr.data();
-  int* d_csrColInd = A.col_ind.data();
-  T* d_csrVal = A.val.data();
-
   cusparseHandle_t handle;
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
@@ -153,10 +147,9 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
           descr_U, info_U, policy_U, trans_U,
           d_x, d_b, d_tmp, bufsize, handle);
 
-#pragma omp target data use_device_ptr(pBuffer)
+#pragma omp target data use_device_ptr(descr_M, descr_L, descr_U, info_M, info_L, info_U, handle)
   {
       // step 6: free resources
-      cudaFree(pBuffer);
       cusparseDestroyMatDescr(descr_M);
       cusparseDestroyMatDescr(descr_L);
       cusparseDestroyMatDescr(descr_U);
