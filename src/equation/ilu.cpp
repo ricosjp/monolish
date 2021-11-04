@@ -106,14 +106,14 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   }
 
 #if MONOLISH_USE_NVIDIA_GPU
-  auto M = A.get_row();
-  auto nnz = A.get_nnz();
   T* d_x = x.data();
   T* d_b = b.data();
 
   monolish::vector<T> tmp(x.size(),0.0);
   tmp.send();
   T* d_tmp = tmp.data();
+
+  double* pBuffer;
 
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
@@ -123,11 +123,6 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
 
-  void *pBuffer = this->buf;
-
-  int structural_zero;
-  int numerical_zero;
-  const T alpha = 1.0;
 
   // step 1: create a descriptor which contains
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
@@ -147,57 +142,20 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
   auto bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
-  {
-      // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-      cudaMalloc((void**)&pBuffer, bufsize);
+  cusolver_ilu(A, 
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          bufsize, handle);
 
-      // step 4: perform analysis of incomplete Cholesky on M
-      //         perform analysis of triangular solve on L
-      //         perform analysis of triangular solve on U
-      // The lower(upper) triangular part of M has the same sparsity pattern as L(U),
-      // we can do analysis of csrilu0 and csrsv2 simultaneously.
-
-      cusparseDcsrilu02_analysis(handle, M, nnz, descr_M,
-              d_csrVal, d_csrRowPtr, d_csrColInd, info_M,
-              policy_M, pBuffer);
-      auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
-
-      if (CUSPARSE_STATUS_ZERO_PIVOT == status){
-          printf("A(%d,%d) is missing\n", structural_zero, structural_zero);
-      }
-
-      cusparseDcsrsv2_analysis(handle, trans_L, M, nnz, descr_L,
-              d_csrVal, d_csrRowPtr, d_csrColInd,
-              info_L, policy_L, pBuffer);
-
-      cusparseDcsrsv2_analysis(handle, trans_U, M, nnz, descr_U,
-              d_csrVal, d_csrRowPtr, d_csrColInd,
-              info_U, policy_U, pBuffer);
-
-      // step 5: M = L * U
-      cusparseDcsrilu02(handle, M, nnz, descr_M,
-              d_csrVal, d_csrRowPtr, d_csrColInd, info_M, policy_M, pBuffer);
-      status = cusparseXcsrilu02_zeroPivot(handle, info_M, &numerical_zero);
-      if (CUSPARSE_STATUS_ZERO_PIVOT == status){
-          printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
-      }
-  }
+  cusolver_ilu_solve(A, 
+          descr_M, info_M, policy_M, 
+          descr_L, info_L, policy_L, trans_L, 
+          descr_U, info_U, policy_U, trans_U,
+          d_x, d_b, d_tmp, bufsize, handle);
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, d_x, d_b, d_tmp, pBuffer)
   {
-      // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-      cudaMalloc((void**)&pBuffer, bufsize);
-      // step 6: solve L*z = x
-      cusparseDcsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L,
-              d_csrVal, d_csrRowPtr, d_csrColInd, info_L,
-              d_b, d_tmp, policy_L, pBuffer);
-
-      // step 7: solve U*y = z
-      cusparseDcsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U,
-              d_csrVal, d_csrRowPtr, d_csrColInd, info_U,
-              d_tmp, d_x, policy_U, pBuffer);
-
       // step 6: free resources
       cudaFree(pBuffer);
       cusparseDestroyMatDescr(descr_M);
