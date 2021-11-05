@@ -191,6 +191,7 @@ int cusolver_ilu_get_buffersize(
 
 bool cusolver_ilu(
         matrix::CRS<double> &A,
+        double* d_csrVal,
         const cusparseMatDescr_t &descr_M,
         const csrilu02Info_t &info_M,
         const cusparseSolvePolicy_t &policy_M,
@@ -212,7 +213,7 @@ bool cusolver_ilu(
   auto nnz = A.get_nnz();
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
-  auto* d_csrVal = A.val.data();
+  //auto* d_csrVal = A.val.data();
 
   double* pBuffer;
   int structural_zero;
@@ -262,6 +263,7 @@ bool cusolver_ilu(
 
 bool cusolver_ilu(
         matrix::CRS<float> &A,
+        float* d_csrVal,
         const cusparseMatDescr_t &descr_M,
         const csrilu02Info_t &info_M,
         const cusparseSolvePolicy_t &policy_M,
@@ -283,7 +285,7 @@ bool cusolver_ilu(
   auto nnz = A.get_nnz();
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
-  auto* d_csrVal = A.val.data();
+  //auto* d_csrVal = A.val.data();
 
   double* pBuffer;
   int structural_zero;
@@ -338,6 +340,7 @@ bool cusolver_ilu(
 
 bool cusolver_ilu_solve(
         matrix::CRS<double> &A,
+        double* d_csrVal,
         const cusparseMatDescr_t &descr_M,
         const csrilu02Info_t &info_M,
         const cusparseSolvePolicy_t &policy_M,
@@ -362,7 +365,7 @@ bool cusolver_ilu_solve(
   auto nnz = A.get_nnz();
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
-  auto* d_csrVal = A.val.data();
+  //auto* d_csrVal = A.val.data();
 
   double* pBuffer;
   const double alpha = 1.0;
@@ -391,6 +394,7 @@ bool cusolver_ilu_solve(
 
 bool cusolver_ilu_solve(
         matrix::CRS<float> &A,
+        float* d_csrVal,
         const cusparseMatDescr_t &descr_M,
         const csrilu02Info_t &info_M,
         const cusparseSolvePolicy_t &policy_M,
@@ -415,7 +419,7 @@ bool cusolver_ilu_solve(
   auto nnz = A.get_nnz();
   int* d_csrRowPtr = A.row_ptr.data();
   int* d_csrColInd = A.col_ind.data();
-  auto* d_csrVal = A.val.data();
+  //auto* d_csrVal = A.val.data();
 
   float* pBuffer;
   const float alpha = 1.0;

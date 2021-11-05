@@ -44,7 +44,14 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
   this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
-  cusolver_ilu(A, 
+  this->precond.M.resize(A.get_nnz());
+#pragma omp parallel for
+  for(size_t i=0; i<A.get_nnz(); i++){
+      this->precond.M.data()[i] = A.val.data()[i];
+  }
+  this->precond.M.send();
+
+  cusolver_ilu(A, this->precond.M.data(),
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
@@ -63,7 +70,6 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
 #endif
-
 
   logger.solver_out();
 }
@@ -106,10 +112,8 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 
   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
   csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
-
   cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
   csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
-
   cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
   csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
 
@@ -119,13 +123,8 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
-  cusolver_ilu(*this->precond.A, 
-          descr_M, info_M, policy_M, 
-          descr_L, info_L, policy_L, trans_L, 
-          descr_U, info_U, policy_U, trans_U,
-          this->bufsize, handle);
 
-  cusolver_ilu_solve(*this->precond.A,
+  cusolver_ilu_solve(*this->precond.A, this->precond.M.data(),
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
@@ -206,13 +205,17 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
   this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
-  cusolver_ilu(A, 
+  monolish::vector<T> tmpval(A.val);
+  tmpval.send();
+
+  cusolver_ilu(A, tmpval.data(),
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
           bufsize, handle);
 
-  cusolver_ilu_solve(A, 
+
+  cusolver_ilu_solve(A, tmpval.data(),
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
