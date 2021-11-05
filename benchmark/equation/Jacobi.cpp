@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::cout << "func\ttprec\tsize\titer\ttime[sec]\ttime/iter[sec]"
+  std::cout << "func\tprec\tsize\titer\ttime[sec]\ttime/iter[sec]"
             << std::endl;
 
   size_t iter = ITERARIVE_SOLVER_BENCH_ITER;
