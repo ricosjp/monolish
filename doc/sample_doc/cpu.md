@@ -1,4 +1,4 @@
-# Compile and run simple program on CPU {#cpu_dev}
+# CPU Examples {#cpu_dev}
 
 ## Namespace and header files
 The monolish namespace contains monolish::vector and monolish::view1D.

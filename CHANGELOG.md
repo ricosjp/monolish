@@ -20,13 +20,15 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
+- fix 2D5P Laplace matrix creation unsorted bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/412
+- Remove `MONOLISH_DIR` variable in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/408
 
 ### Changed
+- Rewrite quick start guide https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/406
 - Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/405
-
-
 
 0.15.0 - 2021/10/27
 -----------

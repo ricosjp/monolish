@@ -1,45 +1,65 @@
 # monolish: MONOlithic LInear equation Solvers for Highly-parallel architecture. {#mainpage}
 
 ## Quick start guide
-The GPU implementation requires OpenMP Offloading in clang. Enabling OpenMP Offloading requires an option to be specified when building clang. This is not practical.
 
-To use pre-built monolish, use apt or Docker Container with monolish installed.
-- [Installation using apt (for ubuntu 20.04)](@ref install_guide)
-- [Docker container with monolish installed](@ref monolish_docker) ([container registory](https://github.com/orgs/ricosjp/packages?repo_name=monolish))
+monolish pre-build library and examples are composed in a container:
 
-To share the development environment, the monolish development environment is provided in an [allgebra Docker container](https://github.com/ricosjp/allgebra).
+```
+docker run -it --rm ghcr.io/ricosjp/monolish/mkl:${PROJECT_VERSION}
+cd /usr/share/monolish/examples/blas/innerproduct
+make cpu
+```
 
-See below for how to build on allgebra.
-- [Build monolish from source code](@ref build_guide)
+There are also GPU-enabled images:
 
-## For users:
+```
+docker run -it --rm --gpus all ghcr.io/ricosjp/monolish/mkl-nvidia:${PROJECT_VERSION}
+/usr/share/monolish/link_monolish_gpu.sh
+cd /usr/share/monolish/examples/blas/innerproduct
+make gpu
+```
+
+Be sure that you need to detect your GPU architecture (e.g. Ampare, Volta, ...) by `link_monolish_gpu.sh` script.
+
+These compiles following example code:
+
+@include blas/innerproduct/innerproduct.cpp
+
+Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for more examples.
+
+## For Users
 - [What's monolish?](@ref monolish_intro)
-- Installation
-  - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
-  - [Docker container with monolish installed](@ref monolish_docker)
-- [Data types](@ref data_type)
-- [Compile and run simple program on CPU](@ref cpu_dev)
-- [GPU device acceleration](@ref gpu_dev)
-- [Matrix/vector operations](@ref oplist)
-- [Linear solvers](@ref solverlist)
-- [Performance logging and find bottlenecks](@ref logger)
-- [View continuous benchmarking results](https://ricosjp.github.io/monolish_benchmark_result/)
 
-## For developpers:
+### Installation
+- [Installation using apt (for ubuntu 20.04)](@ref install_guide)
+- [Docker container with monolish installed](@ref monolish_docker)
+
+### Examples
+- [CPU Examples](@ref cpu_dev)
+- [GPU Examples](@ref gpu_dev)
+
+### API Overview
+- [Data types](@ref data_type)
+- [Supported Operations](@ref oplist)
+- [Linear Solvers](@ref solverlist)
+- [Performance logging and find bottlenecks](@ref logger)
+
+## For Developers
 - [Build monolish from source code](@ref build_guide)
 - [Testing and Benchmarking](@ref test_bench)
 - [Contribution guide](@ref contribution) 
 
-## Citations:
+## Citations
 - [Publications](@ref publications)
 
-## Meta information:
+## Links
 - [Source code](https://github.com/ricosjp/monolish/)
 - [Documentation](https://ricosjp.github.io/monolish/)
 - [Bug reports](https://github.com/ricosjp/monolish/issues)
 - [Releases](https://github.com/ricosjp/monolish/releases)
 - [Changelog](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
-- [Lisence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
+- [Licence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
 - [monolish log viewer](https://pypi.org/project/monolish-log-viewer/)
+- [Continuous benchmarking](https://ricosjp.github.io/monolish_benchmark_result/)
 
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)

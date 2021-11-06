@@ -41,6 +41,9 @@ matrix::COO<T> util::laplacian_matrix_2D_5p(const int m, const int n) {
       ctr++;
     }
   }
+
+  mat.sort(false);
+
   logger.util_out();
 
   return mat;

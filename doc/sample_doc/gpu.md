@@ -1,4 +1,4 @@
-# GPU device acceleration {#gpu_dev}
+# GPU Examples {#gpu_dev}
 
 ## Introduction
 The following four classes have the `computable` attribute:
