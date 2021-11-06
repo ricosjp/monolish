@@ -42,7 +42,7 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
-  this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
+  bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
   this->precond.M.resize(A.get_nnz());
 #pragma omp parallel for
@@ -55,16 +55,16 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
-          this->bufsize, handle);
+          bufsize, handle);
 
-  this->matM = descr_M;
-  this->infoM = info_M;
+  matM = descr_M;
+  infoM = info_M;
 
-  this->matL = descr_L;
-  this->infoL = info_L;
+  matL = descr_L;
+  infoL = info_L;
 
-  this->matU = descr_U;
-  this->infoU = info_U;
+  matU = descr_U;
+  infoU = info_U;
 
   this->precond.A = &A;
 #else
@@ -110,12 +110,12 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   cusparseCreate(&handle);
   cudaDeviceSynchronize();
 
-  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
-  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
-  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
-  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
-  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
-  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
+  csrilu02Info_t info_M  = (csrilu02Info_t)infoM;
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
+  csrsv2Info_t  info_L  = (csrsv2Info_t)infoL;
+  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)matU;
+  csrsv2Info_t  info_U  = (csrsv2Info_t)infoU;
 
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
@@ -128,7 +128,7 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
           descr_M, info_M, policy_M, 
           descr_L, info_L, policy_L, trans_L, 
           descr_U, info_U, policy_U, trans_U,
-          d_z, d_r, d_tmp, this->bufsize, handle);
+          d_z, d_r, d_tmp, bufsize, handle);
 
 #else
     throw std::runtime_error("ILU on CPU does not impl.");
@@ -189,12 +189,12 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   cudaDeviceSynchronize();
 
   // step 1: create a descriptor which contains
-  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)this->matM;
-  csrilu02Info_t info_M  = (csrilu02Info_t)this->infoM;
-  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)this->matL;
-  csrsv2Info_t  info_L  = (csrsv2Info_t)this->infoL;
-  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)this->matU;
-  csrsv2Info_t  info_U  = (csrsv2Info_t)this->infoU;
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
+  csrilu02Info_t info_M  = (csrilu02Info_t)infoM;
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
+  csrsv2Info_t  info_L  = (csrsv2Info_t)infoL;
+  cusparseMatDescr_t descr_U = (cusparseMatDescr_t)matU;
+  csrsv2Info_t  info_U  = (csrsv2Info_t)infoU;
 
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
@@ -203,7 +203,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   const cusparseOperation_t trans_U  = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U, info_U, handle);
-  this->bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
+  bufsize = cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L, descr_U, info_U, trans_U, handle);
 
   monolish::vector<T> tmpval(A.val);
   tmpval.send();
