@@ -232,7 +232,7 @@ public:
  * @note
  * attribute:
  * - solver : true
- * - preconditioner : false
+ * - preconditioner : true
  * @note
  * input / archtecture
  * - Dense / Intel : true
@@ -287,6 +287,58 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] std::string solver_name() const { return "SOR"; }
+};
+
+/**
+ * @brief Incomplete LU solver class
+ * @note
+ * attribute:
+ * - solver : true
+ * - preconditioner : false
+ * @note
+ * input / archtecture
+ * - Dense / Intel : false
+ * - Dense / NVIDIA : false
+ * - Dense / OSS : false
+ * - Sparse / Intel : false
+ * - Sparse / NVIDIA : true
+ * - Sparse / OSS : false
+ */
+template <typename MATRIX, typename Float>
+class ILU : public monolish::solver::solver<MATRIX, Float> {
+private:
+  int cusparse_ILU(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void *matM = 0, *matL = 0, *matU = 0;
+  void *infoM = 0, *infoL = 0, *infoU = 0;
+  int bufsize;
+
+public:
+  /**
+   * @brief solve with incomprete LU factorization
+   * @warning
+   * This solves Ax = b incompletely. In many cases the answer is wrong.
+   **/
+  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  void create_precond(MATRIX &A);
+  void apply_precond(const vector<Float> &r, vector<Float> &z);
+
+  /**
+   * @brief get solver name "monolish::equation::ILU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string name() const { return "monolish::equation::ILU"; }
+
+  /**
+   * @brief get solver name "ILU"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  std::string solver_name() const { return "ILU"; }
 };
 
 /**
