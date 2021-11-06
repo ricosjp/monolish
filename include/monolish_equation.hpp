@@ -297,12 +297,12 @@ public:
  * - preconditioner : false
  * @note
  * input / archtecture
- * - Dense / Intel : true
- * - Dense / NVIDIA : true
- * - Dense / OSS : true
- * - Sparse / Intel : true
+ * - Dense / Intel : false
+ * - Dense / NVIDIA : false
+ * - Dense / OSS : false
+ * - Sparse / Intel : false
  * - Sparse / NVIDIA : true
- * - Sparse / OSS : true
+ * - Sparse / OSS : false
  */
 template <typename MATRIX, typename Float>
 class ILU : public monolish::solver::solver<MATRIX, Float> {
@@ -313,6 +313,11 @@ private:
   int bufsize;
 
 public:
+  /**
+   * @brief solve with incomprete LU factorization
+   * @warning
+   * This solves Ax = b incompletely. In many cases the answer is wrong.
+   **/
   int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
