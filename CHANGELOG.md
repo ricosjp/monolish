@@ -23,7 +23,8 @@ Unreleased
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
-- fix 2D5P Laplace matrix creation unsorted bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/412
+- Improve perf of 2d5p Laplace matrix creation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/413
+- Fix 2d5p Laplace matrix creation unsorted bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/412
 - Remove `MONOLISH_DIR` variable in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/408
 
 ### Changed
