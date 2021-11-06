@@ -21,8 +21,9 @@ matrix::COO<T> util::laplacian_matrix_2D_5p(const int m, const int n) {
       mat.insert(ii, jj, -1.0);
       ctr++;
     }
-    if (i < n - 1) {
-      jj = ii + m;
+
+    if (j > 0) {
+      jj = ii - 1;
       mat.insert(ii, jj, -1.0);
       ctr++;
     }
@@ -30,19 +31,18 @@ matrix::COO<T> util::laplacian_matrix_2D_5p(const int m, const int n) {
     mat.insert(ii, ii, 4.0);
     ctr++;
 
-    if (j > 0) {
-      jj = ii - 1;
-      mat.insert(ii, jj, -1.0);
-      ctr++;
-    }
     if (j < m - 1) {
       jj = ii + 1;
       mat.insert(ii, jj, -1.0);
       ctr++;
     }
-  }
 
-  mat.sort(false);
+    if (i < n - 1) {
+      jj = ii + m;
+      mat.insert(ii, jj, -1.0);
+      ctr++;
+    }
+  }
 
   logger.util_out();
 
