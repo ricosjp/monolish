@@ -311,6 +311,7 @@ private:
   void *matM = 0, *matL = 0, *matU = 0;
   void *infoM = 0, *infoL = 0, *infoU = 0;
   int bufsize;
+  monolish::vector<Float> buf;
 
 public:
   /**
