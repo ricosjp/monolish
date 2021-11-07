@@ -14,8 +14,6 @@ void cusolver_ilu_create_descr(
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  auto M = A.get_row();
-  auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
   auto *d_csrVal = A.val.data();
@@ -57,8 +55,6 @@ void cusolver_ilu_create_descr(
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  auto M = A.get_row();
-  auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
   auto *d_csrVal = A.val.data();
@@ -187,7 +183,6 @@ bool cusolver_ilu(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  // auto* d_csrVal = A.val.data();
 
   double *pBuffer;
   int structural_zero;
@@ -250,7 +245,6 @@ bool cusolver_ilu(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  // auto* d_csrVal = A.val.data();
 
   double *pBuffer;
   int structural_zero;
@@ -319,7 +313,6 @@ bool cusolver_ilu_solve(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  // auto* d_csrVal = A.val.data();
 
   double *pBuffer;
   const double alpha = 1.0;
