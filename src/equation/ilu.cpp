@@ -35,14 +35,15 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   cusparseMatDescr_t descr_U = 0;
   csrsv2Info_t info_U = 0;
 
-  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
-  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U,
                             info_U, handle);
+
   bufsize =
       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_U, info_U, trans_U, handle);
@@ -118,8 +119,8 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   cusparseMatDescr_t descr_U = (cusparseMatDescr_t)matU;
   csrsv2Info_t info_U = (csrsv2Info_t)infoU;
 
-  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
-  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
