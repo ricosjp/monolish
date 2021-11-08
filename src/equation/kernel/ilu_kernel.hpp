@@ -357,7 +357,6 @@ bool cusolver_ilu_solve(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  // auto* d_csrVal = A.val.data();
 
   float *pBuffer;
   const float alpha = 1.0;
