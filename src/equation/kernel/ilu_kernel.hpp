@@ -294,11 +294,12 @@ bool cusolver_ilu_solve(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    double *d_x, double *d_b, double *d_tmp, vector<double> buf,
+    double *d_x, double *d_b, double *d_tmp, vector<double> &buf,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
+  std::cout<< "6" << std::endl;
 
   auto M = A.get_row();
   auto nnz = A.get_nnz();
@@ -333,7 +334,7 @@ bool cusolver_ilu_solve(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    float *d_x, float *d_b, float *d_tmp, vector<double> buf,
+    float *d_x, float *d_b, float *d_tmp, vector<double> &buf,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
