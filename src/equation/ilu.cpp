@@ -48,6 +48,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_U, info_U, trans_U, handle);
 
+  buf.resize(bufsize);
+  buf.send();
+
   this->precond.M.resize(A.get_nnz());
 #pragma omp parallel for
   for (size_t i = 0; i < A.get_nnz(); i++) {
@@ -55,9 +58,10 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   }
   this->precond.M.send();
 
-//   cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
-//                info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
-//                bufsize, handle);
+
+  cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
+               info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
+               buf, handle);
 
   matM = descr_M;
   infoM = info_M;
@@ -125,10 +129,10 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
-//   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
-//                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
-//                      info_U, policy_U, trans_U, d_z, d_r, d_tmp, bufsize,
-//                      handle);
+  cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
+                     policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
+                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf,
+                     handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
