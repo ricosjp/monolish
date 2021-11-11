@@ -184,10 +184,6 @@ bool cusolver_ilu(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-//   double *pBuffer;
-//   // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-//   cudaMalloc((void **)&pBuffer, bufsize);
-
   double* pBuffer = buf.data();
 
   int structural_zero;
