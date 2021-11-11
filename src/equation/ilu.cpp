@@ -73,6 +73,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   infoU = info_U;
 
   this->precond.A = &A;
+
+  zbuf.resize(A.get_row());
+  zbuf.send();
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
 #endif
@@ -107,10 +110,11 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 #if MONOLISH_USE_NVIDIA_GPU
   T *d_z = z.data();
   T *d_r = (T *)r.data();
+  T *d_tmp = zbuf.data();
 
-  monolish::vector<T> tmp(z.size(), 0.0);
-  tmp.send();
-  T *d_tmp = tmp.data();
+//   monolish::vector<T> tmp(z.size(), 0.0);
+//   tmp.send();
+//   T *d_tmp = tmp.data();
 
   cusparseHandle_t handle;
   cusparseCreate(&handle);

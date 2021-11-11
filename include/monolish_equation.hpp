@@ -312,6 +312,7 @@ private:
   void *infoM = 0, *infoL = 0, *infoU = 0;
   int bufsize;
   monolish::vector<double> buf;
+  monolish::vector<Float> zbuf;
 
 public:
   /**
