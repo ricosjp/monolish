@@ -72,6 +72,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   matU = descr_U;
   infoU = info_U;
 
+  cusparse_handle = handle;
+  std::cout << cusparse_handle << std::endl;
+
   this->precond.A = &A;
 
   zbuf.resize(A.get_row());
@@ -108,17 +111,17 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   logger.solver_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
+  double start = omp_get_wtime();
   T *d_z = z.data();
   T *d_r = (T *)r.data();
   T *d_tmp = zbuf.data();
+  std::cout << "1: " << omp_get_wtime() - start << std::endl;
+  std::cout << cusparse_handle << std::endl;
 
-//   monolish::vector<T> tmp(z.size(), 0.0);
-//   tmp.send();
-//   T *d_tmp = tmp.data();
-
-  cusparseHandle_t handle;
+  cusparseHandle_t handle = (cusparseHandle_t)cusparse_handle;
   cusparseCreate(&handle);
-  cudaDeviceSynchronize();
+
+  std::cout << "2: " << omp_get_wtime() - start << std::endl;
 
   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
   csrilu02Info_t info_M = (csrilu02Info_t)infoM;
@@ -127,16 +130,19 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   cusparseMatDescr_t descr_U = (cusparseMatDescr_t)matU;
   csrsv2Info_t info_U = (csrsv2Info_t)infoU;
 
+  std::cout << "3: " << omp_get_wtime() - start << std::endl;
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  std::cout << "4: " << omp_get_wtime() - start << std::endl;
 
   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
                      info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf,
                      handle);
+  std::cout << "5: " << omp_get_wtime() - start << std::endl;
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
@@ -223,13 +229,13 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   monolish::vector<double> buf(bufsize);
   buf.send();
 
-  cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
-               handle);
-
-  cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-                     info_L, policy_L, trans_L, descr_U, info_U, policy_U,
-                     trans_U, d_x, d_b, d_tmp, buf, handle);
+//   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
+//                policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
+//                handle);
+// 
+//   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
+//                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
+//                      trans_U, d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
