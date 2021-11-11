@@ -299,7 +299,6 @@ bool cusolver_ilu_solve(
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
-  std::cout<< "6" << std::endl;
 
   auto M = A.get_row();
   auto nnz = A.get_nnz();
