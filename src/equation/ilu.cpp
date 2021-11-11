@@ -55,9 +55,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   }
   this->precond.M.send();
 
-  cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
-               info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
-               bufsize, handle);
+//   cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
+//                info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
+//                bufsize, handle);
 
   matM = descr_M;
   infoM = info_M;
@@ -125,10 +125,10 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
 
-  cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
-                     policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
-                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, bufsize,
-                     handle);
+//   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
+//                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
+//                      info_U, policy_U, trans_U, d_z, d_r, d_tmp, bufsize,
+//                      handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
@@ -212,13 +212,16 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   monolish::vector<T> tmpval(A.val);
   tmpval.send();
 
+  monolish::vector<double> buf(bufsize);
+  buf.send();
+
   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, bufsize,
+               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
                handle);
 
   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
-                     trans_U, d_x, d_b, d_tmp, bufsize, handle);
+                     trans_U, d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
