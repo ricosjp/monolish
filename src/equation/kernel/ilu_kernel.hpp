@@ -174,7 +174,7 @@ bool cusolver_ilu(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    const int bufsize, const cusparseHandle_t &handle) {
+    vector<double> &buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -184,21 +184,22 @@ bool cusolver_ilu(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  double *pBuffer;
+//   double *pBuffer;
+//   // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
+//   cudaMalloc((void **)&pBuffer, bufsize);
+
+  double* pBuffer = buf.data();
+
   int structural_zero;
   int numerical_zero;
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, pBuffer)
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
     //         perform analysis of triangular solve on U
     // The lower(upper) triangular part of M has the same sparsity pattern as
     // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
-
-    // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-    cudaMalloc((void **)&pBuffer, bufsize);
-
     cusparseDcsrilu02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
@@ -222,7 +223,6 @@ bool cusolver_ilu(
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
     }
-    cudaFree(pBuffer);
   }
 
   logger.func_out();
@@ -236,7 +236,7 @@ bool cusolver_ilu(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    const int bufsize, const cusparseHandle_t &handle) {
+    vector<double> buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -246,20 +246,17 @@ bool cusolver_ilu(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  double *pBuffer;
+  double* pBuffer = buf.data();
   int structural_zero;
   int numerical_zero;
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, pBuffer)
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
     //         perform analysis of triangular solve on U
     // The lower(upper) triangular part of M has the same sparsity pattern as
     // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
-
-    // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-    cudaMalloc((void **)&pBuffer, bufsize);
 
     cusparseScsrilu02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
@@ -286,7 +283,6 @@ bool cusolver_ilu(
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
       throw std::runtime_error("ILU error.");
     }
-    cudaFree(pBuffer);
   }
 
   logger.func_out();
@@ -303,7 +299,7 @@ bool cusolver_ilu_solve(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    double *d_x, double *d_b, double *d_tmp, const int bufsize,
+    double *d_x, double *d_b, double *d_tmp, vector<double> buf,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -314,15 +310,12 @@ bool cusolver_ilu_solve(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  double *pBuffer;
+  double *pBuffer = buf.data();
   const double alpha = 1.0;
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd,     \
                                        d_x, d_b, d_tmp, pBuffer)
   {
-    // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-    cudaMalloc((void **)&pBuffer, bufsize);
-
     // step 6: solve L*tmp = b
     cusparseDcsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L, d_csrVal,
                           d_csrRowPtr, d_csrColInd, info_L, d_b, d_tmp,
@@ -332,8 +325,6 @@ bool cusolver_ilu_solve(
     cusparseDcsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U, d_csrVal,
                           d_csrRowPtr, d_csrColInd, info_U, d_tmp, d_x,
                           policy_U, pBuffer);
-
-    cudaFree(pBuffer);
   }
 
   logger.func_out();
@@ -347,7 +338,7 @@ bool cusolver_ilu_solve(
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
     const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
-    float *d_x, float *d_b, float *d_tmp, const int bufsize,
+    float *d_x, float *d_b, float *d_tmp, vector<double> buf,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -358,15 +349,12 @@ bool cusolver_ilu_solve(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  float *pBuffer;
+  double *pBuffer = buf.data();
   const float alpha = 1.0;
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd,     \
                                        d_x, d_b, d_tmp, pBuffer)
   {
-    // pBuffer returned by cudaMalloc is automatically aligned to 128 bytes.
-    cudaMalloc((void **)&pBuffer, bufsize);
-
     // step 6: solve L*tmp = b
     cusparseScsrsv2_solve(handle, trans_L, M, nnz, &alpha, descr_L, d_csrVal,
                           d_csrRowPtr, d_csrColInd, info_L, d_b, d_tmp,
@@ -376,8 +364,6 @@ bool cusolver_ilu_solve(
     cusparseScsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U, d_csrVal,
                           d_csrRowPtr, d_csrColInd, info_U, d_tmp, d_x,
                           policy_U, pBuffer);
-
-    cudaFree(pBuffer);
   }
 
   logger.func_out();
