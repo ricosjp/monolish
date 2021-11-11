@@ -253,7 +253,6 @@ bool cusolver_ilu(
     //         perform analysis of triangular solve on U
     // The lower(upper) triangular part of M has the same sparsity pattern as
     // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
-
     cusparseScsrilu02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
