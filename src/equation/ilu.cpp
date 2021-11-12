@@ -58,7 +58,6 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   }
   this->precond.M.send();
 
-
   cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
                info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
                buf, handle);
@@ -132,8 +131,7 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 
   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
-                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf,
-                     handle);
+                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
@@ -220,13 +218,14 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   monolish::vector<double> buf(bufsize);
   buf.send();
 
-//   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-//                policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
-//                handle);
-// 
-//   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-//                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
-//                      trans_U, d_x, d_b, d_tmp, buf, handle);
+  //   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
+  //   info_L,
+  //                policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
+  //                handle);
+  //
+  //   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
+  //                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
+  //                      trans_U, d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");

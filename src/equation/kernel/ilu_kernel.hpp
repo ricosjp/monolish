@@ -184,12 +184,13 @@ bool cusolver_ilu(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  double* pBuffer = buf.data();
+  double *pBuffer = buf.data();
 
   int structural_zero;
   int numerical_zero;
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, pBuffer)
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd,     \
+                                       pBuffer)
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
@@ -242,11 +243,12 @@ bool cusolver_ilu(
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
 
-  double* pBuffer = buf.data();
+  double *pBuffer = buf.data();
   int structural_zero;
   int numerical_zero;
 
-#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd, pBuffer)
+#pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd,     \
+                                       pBuffer)
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
