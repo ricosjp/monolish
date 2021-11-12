@@ -48,6 +48,9 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_U, info_U, trans_U, handle);
 
+  buf.resize(bufsize);
+  buf.send();
+
   this->precond.M.resize(A.get_nnz());
 #pragma omp parallel for
   for (size_t i = 0; i < A.get_nnz(); i++) {
@@ -57,7 +60,7 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
 
   cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
                info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
-               bufsize, handle);
+               buf, handle);
 
   matM = descr_M;
   infoM = info_M;
@@ -68,7 +71,12 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   matU = descr_U;
   infoU = info_U;
 
+  cusparse_handle = handle;
+
   this->precond.A = &A;
+
+  zbuf.resize(A.get_row());
+  zbuf.send();
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
 #endif
@@ -101,16 +109,12 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   logger.solver_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
+  double start = omp_get_wtime();
   T *d_z = z.data();
   T *d_r = (T *)r.data();
+  T *d_tmp = zbuf.data();
 
-  monolish::vector<T> tmp(z.size(), 0.0);
-  tmp.send();
-  T *d_tmp = tmp.data();
-
-  cusparseHandle_t handle;
-  cusparseCreate(&handle);
-  cudaDeviceSynchronize();
+  cusparseHandle_t handle = (cusparseHandle_t)cusparse_handle;
 
   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
   csrilu02Info_t info_M = (csrilu02Info_t)infoM;
@@ -127,8 +131,7 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 
   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
-                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, bufsize,
-                     handle);
+                     info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
@@ -212,13 +215,16 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   monolish::vector<T> tmpval(A.val);
   tmpval.send();
 
+  monolish::vector<double> buf(bufsize);
+  buf.send();
+
   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, bufsize,
+               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
                handle);
 
   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
-                     trans_U, d_x, d_b, d_tmp, bufsize, handle);
+                     trans_U, d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
