@@ -218,14 +218,13 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
   monolish::vector<double> buf(bufsize);
   buf.send();
 
-  //   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-  //   info_L,
-  //                policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
-  //                handle);
-  //
-  //   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-  //                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
-  //                      trans_U, d_x, d_b, d_tmp, buf, handle);
+  cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
+               policy_L, trans_L, descr_U, info_U, policy_U, trans_U, buf,
+               handle);
+
+  cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
+                     info_L, policy_L, trans_L, descr_U, info_U, policy_U,
+                     trans_U, d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
