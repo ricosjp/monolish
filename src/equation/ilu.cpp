@@ -116,7 +116,6 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   T *d_tmp = zbuf.data();
 
   cusparseHandle_t handle = (cusparseHandle_t)cusparse_handle;
-  cusparseCreate(&handle);
 
   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
   csrilu02Info_t info_M = (csrilu02Info_t)infoM;
