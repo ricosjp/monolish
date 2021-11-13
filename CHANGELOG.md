@@ -20,11 +20,12 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
-- Add IC solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/415
+- Add IC solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/416
 - Add ILU solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/411 https://github.com/ricosjp/monolish/issues/42
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
+- Fix calling create_precond() multiple times bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/417 https://github.com/ricosjp/monolish/issues/93
 - Improve the perf of ILU solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/414 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/415
 - Improve perf of 2d5p Laplace matrix creation https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/413
 - Fix 2d5p Laplace matrix creation unsorted bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/412
