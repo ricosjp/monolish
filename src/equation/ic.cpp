@@ -194,7 +194,7 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
 
   // step 1: create a descriptor which contains
   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
-  csrilu02Info_t info_M = (csrilu02Info_t)infoM;
+  csric02Info_t info_M = (csric02Info_t)infoM;
   cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
   csrsv2Info_t info_L = (csrsv2Info_t)infoL;
   cusparseMatDescr_t descr_Lt = (cusparseMatDescr_t)matLt;
@@ -204,12 +204,12 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseSolvePolicy_t policy_Lt = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
-  const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
 
   cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, descr_Lt,
                             info_Lt, handle);
   bufsize =
-      cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
+      cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_Lt, info_Lt, trans_Lt, handle);
 
   monolish::vector<T> tmpval(A.val);

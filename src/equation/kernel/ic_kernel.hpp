@@ -6,7 +6,7 @@ namespace {
 
 #if MONOLISH_USE_NVIDIA_GPU
 void cusolver_ic_create_descr(
-    matrix::CRS<double> &A, cusparseMatDescr_t &descr_M, csrilu02Info_t &info_M,
+    matrix::CRS<double> &A, cusparseMatDescr_t &descr_M, csric02Info_t &info_M,
     cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
     cusparseMatDescr_t &descr_Lt, csrsv2Info_t &info_Lt,
     const cusparseHandle_t &handle) {
@@ -31,8 +31,8 @@ void cusolver_ic_create_descr(
     cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_NON_UNIT);
 
     // step 2: create a empty info structure
-    // we need one info for csrilu02 and two info's for csrsv2
-    cusparseCreateCsrilu02Info(&info_M);
+    // we need one info for csric02 and two info's for csrsv2
+    cusparseCreateCsric02Info(&info_M);
     cusparseCreateCsrsv2Info(&info_L);
     cusparseCreateCsrsv2Info(&info_Lt);
   }
@@ -41,7 +41,7 @@ void cusolver_ic_create_descr(
 }
 
 void cusolver_ic_create_descr(
-    matrix::CRS<float> &A, cusparseMatDescr_t &descr_M, csrilu02Info_t &info_M,
+    matrix::CRS<float> &A, cusparseMatDescr_t &descr_M, csric02Info_t &info_M,
     cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
     cusparseMatDescr_t &descr_Lt, csrsv2Info_t &info_Lt,
     const cusparseHandle_t &handle) {
@@ -66,8 +66,8 @@ void cusolver_ic_create_descr(
     cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_NON_UNIT);
 
     // step 2: create a empty info structure
-    // we need one info for csrilu02 and two info's for csrsv2
-    cusparseCreateCsrilu02Info(&info_M);
+    // we need one info for csric02 and two info's for csrsv2
+    cusparseCreateCsric02Info(&info_M);
     cusparseCreateCsrsv2Info(&info_L);
     cusparseCreateCsrsv2Info(&info_Lt);
   }
@@ -78,12 +78,12 @@ void cusolver_ic_create_descr(
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-int cusolver_ilu_get_buffersize(
+int cusolver_ic_get_buffersize(
     matrix::CRS<double> &A, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseMatDescr_t &descr_L,
+    const csric02Info_t &info_M, const cusparseMatDescr_t &descr_L,
     const csrsv2Info_t &info_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseOperation_t &trans_U, const cusparseHandle_t &handle) {
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseOperation_t &trans_Lt, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -97,30 +97,30 @@ int cusolver_ilu_get_buffersize(
   int bufsize;
   int bufsize_M;
   int bufsize_L;
-  int bufsize_U;
+  int bufsize_Lt;
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
-    cusparseDcsrilu02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseDcsric02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                  d_csrColInd, info_M, &bufsize_M);
     cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz, descr_L, d_csrVal,
                                d_csrRowPtr, d_csrColInd, info_L, &bufsize_L);
-    cusparseDcsrsv2_bufferSize(handle, trans_U, M, nnz, descr_U, d_csrVal,
-                               d_csrRowPtr, d_csrColInd, info_U, &bufsize_U);
+    cusparseDcsrsv2_bufferSize(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
+                               d_csrRowPtr, d_csrColInd, info_Lt, &bufsize_Lt);
 
-    bufsize = std::max(bufsize_M, std::max(bufsize_L, bufsize_U));
+    bufsize = std::max(bufsize_M, std::max(bufsize_L, bufsize_Lt));
   }
 
   logger.func_out();
   return bufsize;
 }
 
-int cusolver_ilu_get_buffersize(
+int cusolver_ic_get_buffersize(
     matrix::CRS<float> &A, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseMatDescr_t &descr_L,
+    const csric02Info_t &info_M, const cusparseMatDescr_t &descr_L,
     const csrsv2Info_t &info_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseOperation_t &trans_U, const cusparseHandle_t &handle) {
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseOperation_t &trans_Lt, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -134,18 +134,18 @@ int cusolver_ilu_get_buffersize(
   int bufsize;
   int bufsize_M;
   int bufsize_L;
-  int bufsize_U;
+  int bufsize_Lt;
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
-    cusparseScsrilu02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseScsric02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                  d_csrColInd, info_M, &bufsize_M);
     cusparseScsrsv2_bufferSize(handle, trans_L, M, nnz, descr_L, d_csrVal,
                                d_csrRowPtr, d_csrColInd, info_L, &bufsize_L);
-    cusparseScsrsv2_bufferSize(handle, trans_U, M, nnz, descr_U, d_csrVal,
-                               d_csrRowPtr, d_csrColInd, info_U, &bufsize_U);
+    cusparseScsrsv2_bufferSize(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
+                               d_csrRowPtr, d_csrColInd, info_Lt, &bufsize_Lt);
 
-    bufsize = std::max(bufsize_M, std::max(bufsize_L, bufsize_U));
+    bufsize = std::max(bufsize_M, std::max(bufsize_L, bufsize_Lt));
   }
 
   logger.func_out();
@@ -157,7 +157,7 @@ int cusolver_ilu_get_buffersize(
 
 bool cusolver_ilu(
     matrix::CRS<double> &A, double *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
+    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
@@ -185,9 +185,9 @@ bool cusolver_ilu(
     //         perform analysis of triangular solve on U
     // The lower(upper) triangular part of M has the same sparsity pattern as
     // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
-    cusparseDcsrilu02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseDcsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
-    auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
+    auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
 
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("A(%d,%d) is missing\n", structural_zero, structural_zero);
@@ -202,9 +202,9 @@ bool cusolver_ilu(
                              pBuffer);
 
     // step 5: M = L * U
-    cusparseDcsrilu02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseDcsric02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                       d_csrColInd, info_M, policy_M, pBuffer);
-    status = cusparseXcsrilu02_zeroPivot(handle, info_M, &numerical_zero);
+    status = cusparseXcsric02_zeroPivot(handle, info_M, &numerical_zero);
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
     }
@@ -216,7 +216,7 @@ bool cusolver_ilu(
 
 bool cusolver_ilu(
     matrix::CRS<float> &A, float *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
+    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
@@ -243,9 +243,9 @@ bool cusolver_ilu(
     //         perform analysis of triangular solve on U
     // The lower(upper) triangular part of M has the same sparsity pattern as
     // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
-    cusparseScsrilu02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseScsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
-    auto status = cusparseXcsrilu02_zeroPivot(handle, info_M, &structural_zero);
+    auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
 
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("A(%d,%d) is missing\n", structural_zero, structural_zero);
@@ -261,9 +261,9 @@ bool cusolver_ilu(
                              pBuffer);
 
     // step 5: M = L * U
-    cusparseScsrilu02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
+    cusparseScsric02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                       d_csrColInd, info_M, policy_M, pBuffer);
-    status = cusparseXcsrilu02_zeroPivot(handle, info_M, &numerical_zero);
+    status = cusparseXcsric02_zeroPivot(handle, info_M, &numerical_zero);
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
       throw std::runtime_error("IC error.");
@@ -279,7 +279,7 @@ bool cusolver_ilu(
 
 bool cusolver_ilu_solve(
     matrix::CRS<double> &A, double *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
+    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
@@ -318,7 +318,7 @@ bool cusolver_ilu_solve(
 
 bool cusolver_ilu_solve(
     matrix::CRS<float> &A, float *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csrilu02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
+    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
     const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
