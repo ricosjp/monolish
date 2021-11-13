@@ -1,4 +1,4 @@
-FUNC=silu
+FUNC=sic
 all:
 	make -B FUNC=$(FUNC) ARCH=cpu -f ../../test_cpu.mk
 
