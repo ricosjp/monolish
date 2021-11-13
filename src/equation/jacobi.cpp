@@ -17,6 +17,7 @@ void equation::Jacobi<MATRIX, T>::create_precond(MATRIX &A) {
     throw std::runtime_error("error A.row != A.col");
   }
 
+  this->precond.M.device_free();
   this->precond.M.resize(A.get_row());
   // send M
   if (A.get_device_mem_stat() == true) {

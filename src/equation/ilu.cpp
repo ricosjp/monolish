@@ -48,9 +48,11 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_U, info_U, trans_U, handle);
 
+  buf.device_free();
   buf.resize(bufsize);
   buf.send();
 
+  this->precond.M.device_free();
   this->precond.M.resize(A.get_nnz());
 #pragma omp parallel for
   for (size_t i = 0; i < A.get_nnz(); i++) {
@@ -75,6 +77,7 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
 
   this->precond.A = &A;
 
+  zbuf.device_free();
   zbuf.resize(A.get_row());
   zbuf.send();
 #else
