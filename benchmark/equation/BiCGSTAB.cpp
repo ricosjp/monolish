@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
           monolish::matrix::CRS<float>, float,
           monolish::equation::BiCGSTAB<monolish::matrix::CRS<float>, float>,
           monolish::equation::IC<monolish::matrix::CRS<float>, float>>(size,
-                                                                        iter);
+                                                                       iter);
     }
 
     for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
           monolish::matrix::CRS<double>, double,
           monolish::equation::BiCGSTAB<monolish::matrix::CRS<double>, double>,
           monolish::equation::IC<monolish::matrix::CRS<double>, double>>(size,
-                                                                          iter);
+                                                                         iter);
     }
   }
 
