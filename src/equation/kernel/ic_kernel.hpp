@@ -5,11 +5,12 @@ namespace monolish {
 namespace {
 
 #if MONOLISH_USE_NVIDIA_GPU
-void cusolver_ic_create_descr(
-    matrix::CRS<float> &A, cusparseMatDescr_t &descr_M, csric02Info_t &info_M,
-    cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
-    csrsv2Info_t &info_Lt,
-    const cusparseHandle_t &handle) {
+void cusolver_ic_create_descr(matrix::CRS<float> &A,
+                              cusparseMatDescr_t &descr_M,
+                              csric02Info_t &info_M,
+                              cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
+                              csrsv2Info_t &info_Lt,
+                              const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -40,11 +41,12 @@ void cusolver_ic_create_descr(
   logger.func_out();
 }
 
-void cusolver_ic_create_descr(
-    matrix::CRS<double> &A, cusparseMatDescr_t &descr_M, csric02Info_t &info_M,
-    cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
-    csrsv2Info_t &info_Lt,
-    const cusparseHandle_t &handle) {
+void cusolver_ic_create_descr(matrix::CRS<double> &A,
+                              cusparseMatDescr_t &descr_M,
+                              csric02Info_t &info_M,
+                              cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
+                              csrsv2Info_t &info_Lt,
+                              const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -82,8 +84,8 @@ int cusolver_ic_get_buffersize(
     matrix::CRS<float> &A, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseMatDescr_t &descr_L,
     const csrsv2Info_t &info_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseOperation_t &trans_Lt, const cusparseHandle_t &handle) {
+    const csrsv2Info_t &info_Lt, const cusparseOperation_t &trans_Lt,
+    const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -102,7 +104,7 @@ int cusolver_ic_get_buffersize(
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
     cusparseScsric02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                                 d_csrColInd, info_M, &bufsize_M);
+                                d_csrColInd, info_M, &bufsize_M);
     cusparseScsrsv2_bufferSize(handle, trans_L, M, nnz, descr_L, d_csrVal,
                                d_csrRowPtr, d_csrColInd, info_L, &bufsize_L);
     cusparseScsrsv2_bufferSize(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
@@ -119,8 +121,8 @@ int cusolver_ic_get_buffersize(
     matrix::CRS<double> &A, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseMatDescr_t &descr_L,
     const csrsv2Info_t &info_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseOperation_t &trans_Lt, const cusparseHandle_t &handle) {
+    const csrsv2Info_t &info_Lt, const cusparseOperation_t &trans_Lt,
+    const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -139,7 +141,7 @@ int cusolver_ic_get_buffersize(
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
     cusparseDcsric02_bufferSize(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                                 d_csrColInd, info_M, &bufsize_M);
+                                d_csrColInd, info_M, &bufsize_M);
     cusparseDcsrsv2_bufferSize(handle, trans_L, M, nnz, descr_L, d_csrVal,
                                d_csrRowPtr, d_csrColInd, info_L, &bufsize_L);
     cusparseDcsrsv2_bufferSize(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
@@ -155,14 +157,16 @@ int cusolver_ic_get_buffersize(
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-bool cusolver_ic(
-    matrix::CRS<float> &A, float *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
-    const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
-    const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
-    vector<double> buf, const cusparseHandle_t &handle) {
+bool cusolver_ic(matrix::CRS<float> &A, float *d_csrVal,
+                 const cusparseMatDescr_t &descr_M, const csric02Info_t &info_M,
+                 const cusparseSolvePolicy_t &policy_M,
+                 const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
+                 const cusparseSolvePolicy_t &policy_L,
+                 const cusparseOperation_t &trans_L,
+                 const csrsv2Info_t &info_Lt,
+                 const cusparseSolvePolicy_t &policy_Lt,
+                 const cusparseOperation_t &trans_Lt, vector<double> buf,
+                 const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -185,7 +189,7 @@ bool cusolver_ic(
     // The lower triangular part of M has the same sparsity pattern as L, so
     // we can do analysis of csric02 and csrsv2 simultaneously.
     cusparseScsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                               d_csrColInd, info_M, policy_M, pBuffer);
+                              d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
 
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
@@ -201,9 +205,9 @@ bool cusolver_ic(
                              d_csrRowPtr, d_csrColInd, info_Lt, policy_Lt,
                              pBuffer);
 
-    // step 5: M = L * Lt 
+    // step 5: M = L * Lt
     cusparseScsric02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                      d_csrColInd, info_M, policy_M, pBuffer);
+                     d_csrColInd, info_M, policy_M, pBuffer);
     status = cusparseXcsric02_zeroPivot(handle, info_M, &numerical_zero);
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
@@ -215,14 +219,16 @@ bool cusolver_ic(
   return true;
 }
 
-bool cusolver_ic(
-    matrix::CRS<double> &A, double *d_csrVal, const cusparseMatDescr_t &descr_M,
-    const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
-    const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
-    const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
-    vector<double> &buf, const cusparseHandle_t &handle) {
+bool cusolver_ic(matrix::CRS<double> &A, double *d_csrVal,
+                 const cusparseMatDescr_t &descr_M, const csric02Info_t &info_M,
+                 const cusparseSolvePolicy_t &policy_M,
+                 const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
+                 const cusparseSolvePolicy_t &policy_L,
+                 const cusparseOperation_t &trans_L,
+                 const csrsv2Info_t &info_Lt,
+                 const cusparseSolvePolicy_t &policy_Lt,
+                 const cusparseOperation_t &trans_Lt, vector<double> &buf,
+                 const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -246,7 +252,7 @@ bool cusolver_ic(
     // The lower triangular part of M has the same sparsity pattern as L, so
     // we can do analysis of csric02 and csrsv2 simultaneously.
     cusparseDcsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                               d_csrColInd, info_M, policy_M, pBuffer);
+                              d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
 
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
@@ -261,9 +267,9 @@ bool cusolver_ic(
                              d_csrRowPtr, d_csrColInd, info_Lt, policy_Lt,
                              pBuffer);
 
-    // step 5: M = L * Lt 
+    // step 5: M = L * Lt
     cusparseDcsric02(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
-                      d_csrColInd, info_M, policy_M, pBuffer);
+                     d_csrColInd, info_M, policy_M, pBuffer);
     status = cusparseXcsric02_zeroPivot(handle, info_M, &numerical_zero);
     if (CUSPARSE_STATUS_ZERO_PIVOT == status) {
       printf("U(%d,%d) is zero\n", numerical_zero, numerical_zero);
@@ -282,10 +288,9 @@ bool cusolver_ic_solve(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
-    float *d_x, float *d_b, float *d_tmp, vector<double> &buf,
-    const cusparseHandle_t &handle) {
+    const csrsv2Info_t &info_Lt, const cusparseSolvePolicy_t &policy_Lt,
+    const cusparseOperation_t &trans_Lt, float *d_x, float *d_b, float *d_tmp,
+    vector<double> &buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -321,10 +326,9 @@ bool cusolver_ic_solve(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const csrsv2Info_t &info_Lt,
-    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
-    double *d_x, double *d_b, double *d_tmp, vector<double> &buf,
-    const cusparseHandle_t &handle) {
+    const csrsv2Info_t &info_Lt, const cusparseSolvePolicy_t &policy_Lt,
+    const cusparseOperation_t &trans_Lt, double *d_x, double *d_b,
+    double *d_tmp, vector<double> &buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);

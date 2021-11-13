@@ -40,12 +40,11 @@ void equation::IC<MATRIX, T>::create_precond(MATRIX &A) {
   const cusparseSolvePolicy_t policy_Lt = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
   const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
 
-  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, 
-                            info_Lt, handle);
+  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, info_Lt,
+                           handle);
 
-  bufsize =
-      cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
-                                  info_Lt, trans_Lt, handle);
+  bufsize = cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L,
+                                       trans_L, info_Lt, trans_Lt, handle);
 
   buf.resize(bufsize);
   buf.send();
@@ -58,8 +57,8 @@ void equation::IC<MATRIX, T>::create_precond(MATRIX &A) {
   this->precond.M.send();
 
   cusolver_ic(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
-               info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt,
-               buf, handle);
+              info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt, buf,
+              handle);
 
   matM = descr_M;
   infoM = info_M;
@@ -127,8 +126,8 @@ void equation::IC<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
 
   cusolver_ic_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
-                     policy_M, descr_L, info_L, policy_L, trans_L, 
-                     info_Lt, policy_Lt, trans_Lt, d_z, d_r, d_tmp, buf, handle);
+                    policy_M, descr_L, info_L, policy_L, trans_L, info_Lt,
+                    policy_Lt, trans_Lt, d_z, d_r, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("IC on CPU does not impl.");
@@ -143,7 +142,7 @@ void equation::IC<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
 
 template void
 equation::IC<matrix::CRS<float>, float>::apply_precond(const vector<float> &r,
-                                                        vector<float> &z);
+                                                       vector<float> &z);
 template void equation::IC<matrix::CRS<double>, double>::apply_precond(
     const vector<double> &r, vector<double> &z);
 
@@ -160,7 +159,7 @@ template void equation::IC<matrix::CRS<double>, double>::apply_precond(
 
 template <typename MATRIX, typename T>
 int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
-                                           vector<T> &b) {
+                                         vector<T> &b) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
@@ -202,11 +201,10 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
   const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
 
-  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L,
-                            info_Lt, handle);
-  bufsize =
-      cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
-                                  info_Lt, trans_Lt, handle);
+  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, info_Lt,
+                           handle);
+  bufsize = cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L,
+                                       trans_L, info_Lt, trans_Lt, handle);
 
   monolish::vector<T> tmpval(A.val);
   tmpval.send();
@@ -215,12 +213,11 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   buf.send();
 
   cusolver_ic(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-               policy_L, trans_L, info_Lt, policy_Lt, trans_Lt, buf,
-               handle);
+              policy_L, trans_L, info_Lt, policy_Lt, trans_Lt, buf, handle);
 
   cusolver_ic_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-                     info_L, policy_L, trans_L, info_Lt, policy_Lt,
-                     trans_Lt, d_x, d_b, d_tmp, buf, handle);
+                    info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt,
+                    d_x, d_b, d_tmp, buf, handle);
 
 #else
   throw std::runtime_error("IC on CPU does not impl.");
