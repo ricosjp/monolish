@@ -90,6 +90,26 @@ template void solver::solver<matrix::CRS<float>, float>::set_create_precond(
 // solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
 //     equation::SOR<matrix::LinearOperator<float>, float> &p);
 
+// IC
+// template void solver::solver<matrix::Dense<double>,
+// double>::set_create_precond(
+//     equation::IC<matrix::Dense<double>, double> &p);
+// template void solver::solver<matrix::Dense<float>,
+// float>::set_create_precond(
+//     equation::IC<matrix::Dense<float>, float> &p);
+
+template void solver::solver<matrix::CRS<double>, double>::set_create_precond(
+    equation::IC<matrix::CRS<double>, double> &p);
+template void solver::solver<matrix::CRS<float>, float>::set_create_precond(
+    equation::IC<matrix::CRS<float>, float> &p);
+
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_create_precond(
+//     equation::SOR<matrix::LinearOperator<float>, float> &p);
+
 /////
 template <typename MATRIX, typename T>
 template <class PRECOND>
@@ -173,4 +193,23 @@ template void solver::solver<matrix::CRS<float>, float>::set_apply_precond(
 // template void
 // solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
 //     equation::ILU<matrix::LinearOperator<float>, float> &p);
+
+// IC
+// template void solver::solver<matrix::Dense<double>,
+// double>::set_apply_precond(
+//     equation::IC<matrix::Dense<double>, double> &p);
+// template void solver::solver<matrix::Dense<float>, float>::set_apply_precond(
+//     equation::IC<matrix::Dense<float>, float> &p);
+
+template void solver::solver<matrix::CRS<double>, double>::set_apply_precond(
+    equation::IC<matrix::CRS<double>, double> &p);
+template void solver::solver<matrix::CRS<float>, float>::set_apply_precond(
+    equation::IC<matrix::CRS<float>, float> &p);
+
+// template void
+// solver::solver<matrix::LinearOperator<double>, double>::set_apply_precond(
+//     equation::IC<matrix::LinearOperator<double>, double> &p);
+// template void
+// solver::solver<matrix::LinearOperator<float>, float>::set_apply_precond(
+//     equation::IC<matrix::LinearOperator<float>, float> &p);
 } // namespace monolish
