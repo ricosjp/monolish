@@ -68,23 +68,6 @@ int main(int argc, char **argv) {
   }
 
   if (monolish::util::build_with_gpu() == true) {
-    std::cout << "CRS, " SOLVER_NAME << ", ILU" << std::endl;
-
-    if (test<monolish::matrix::CRS<double>, double,
-             monolish::equation::SOLVER<monolish::matrix::CRS<double>, double>,
-             monolish::equation::ILU<monolish::matrix::CRS<double>, double>>(
-            file, check_ans, D_TOL) == false) {
-      return 1;
-    }
-    if (test<monolish::matrix::CRS<float>, float,
-             monolish::equation::SOLVER<monolish::matrix::CRS<float>, float>,
-             monolish::equation::ILU<monolish::matrix::CRS<float>, float>>(
-            file, check_ans, S_TOL) == false) {
-      return 1;
-    }
-  }
-
-  if (monolish::util::build_with_gpu() == true) {
     std::cout << "CRS, " SOLVER_NAME << ", IC" << std::endl;
 
     if (test<monolish::matrix::CRS<double>, double,
@@ -96,6 +79,23 @@ int main(int argc, char **argv) {
     if (test<monolish::matrix::CRS<float>, float,
              monolish::equation::SOLVER<monolish::matrix::CRS<float>, float>,
              monolish::equation::IC<monolish::matrix::CRS<float>, float>>(
+            file, check_ans, S_TOL) == false) {
+      return 1;
+    }
+  }
+
+  if (monolish::util::build_with_gpu() == true) {
+    std::cout << "CRS, " SOLVER_NAME << ", ILU" << std::endl;
+
+    if (test<monolish::matrix::CRS<double>, double,
+             monolish::equation::SOLVER<monolish::matrix::CRS<double>, double>,
+             monolish::equation::ILU<monolish::matrix::CRS<double>, double>>(
+            file, check_ans, D_TOL) == false) {
+      return 1;
+    }
+    if (test<monolish::matrix::CRS<float>, float,
+             monolish::equation::SOLVER<monolish::matrix::CRS<float>, float>,
+             monolish::equation::ILU<monolish::matrix::CRS<float>, float>>(
             file, check_ans, S_TOL) == false) {
       return 1;
     }
