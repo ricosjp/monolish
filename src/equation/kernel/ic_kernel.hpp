@@ -155,7 +155,7 @@ int cusolver_ic_get_buffersize(
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-bool cusolver_ilu(
+bool cusolver_ic(
     matrix::CRS<float> &A, float *d_csrVal, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
@@ -215,7 +215,7 @@ bool cusolver_ilu(
   return true;
 }
 
-bool cusolver_ilu(
+bool cusolver_ic(
     matrix::CRS<double> &A, double *d_csrVal, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
@@ -277,7 +277,7 @@ bool cusolver_ilu(
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-bool cusolver_ilu_solve(
+bool cusolver_ic_solve(
     matrix::CRS<float> &A, float *d_csrVal, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
@@ -316,7 +316,7 @@ bool cusolver_ilu_solve(
   return true;
 }
 
-bool cusolver_ilu_solve(
+bool cusolver_ic_solve(
     matrix::CRS<double> &A, double *d_csrVal, const cusparseMatDescr_t &descr_M,
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,

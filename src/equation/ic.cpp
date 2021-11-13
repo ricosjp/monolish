@@ -14,72 +14,70 @@ void equation::IC<MATRIX, T>::create_precond(MATRIX &A) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-//   if (A.get_row() != A.get_col()) {
-//     throw std::runtime_error("error A.row != A.col");
-//   }
-// 
-//   if (A.get_device_mem_stat() != true) {
-//     throw std::runtime_error("IC on CPU does not impl.");
-//   }
-// 
-// #if MONOLISH_USE_NVIDIA_GPU
-//   cusparseHandle_t handle;
-//   cusparseCreate(&handle);
-//   cudaDeviceSynchronize();
-// 
-//   // step 1: create a descriptor which contains
-//   cusparseMatDescr_t descr_M = 0;
-//   csrilu02Info_t info_M = 0;
-//   cusparseMatDescr_t descr_L = 0;
-//   csrsv2Info_t info_L = 0;
-//   cusparseMatDescr_t descr_U = 0;
-//   csrsv2Info_t info_U = 0;
-// 
-//   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
-//   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
-// 
-//   cusolver_ilu_create_descr(A, descr_M, info_M, descr_L, info_L, descr_U,
-//                             info_U, handle);
-// 
-//   bufsize =
-//       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
-//                                   descr_U, info_U, trans_U, handle);
-// 
-//   buf.resize(bufsize);
-//   buf.send();
-// 
-//   this->precond.M.resize(A.get_nnz());
-// #pragma omp parallel for
-//   for (size_t i = 0; i < A.get_nnz(); i++) {
-//     this->precond.M.data()[i] = A.val.data()[i];
-//   }
-//   this->precond.M.send();
-// 
-//   cusolver_ilu(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
-//                info_L, policy_L, trans_L, descr_U, info_U, policy_U, trans_U,
-//                buf, handle);
-// 
-//   matM = descr_M;
-//   infoM = info_M;
-// 
-//   matL = descr_L;
-//   infoL = info_L;
-// 
-//   matU = descr_U;
-//   infoU = info_U;
-// 
-//   cusparse_handle = handle;
-// 
-//   this->precond.A = &A;
-// 
-//   zbuf.resize(A.get_row());
-//   zbuf.send();
-// #else
-//   throw std::runtime_error("IC on CPU does not impl.");
-// #endif
+  if (A.get_row() != A.get_col()) {
+    throw std::runtime_error("error A.row != A.col");
+  }
+
+  if (A.get_device_mem_stat() != true) {
+    throw std::runtime_error("IC on CPU does not impl.");
+  }
+
+#if MONOLISH_USE_NVIDIA_GPU
+  cusparseHandle_t handle;
+  cusparseCreate(&handle);
+  cudaDeviceSynchronize();
+
+  // step 1: create a descriptor which contains
+  cusparseMatDescr_t descr_M = 0;
+  csric02Info_t info_M = 0;
+  cusparseMatDescr_t descr_L = 0;
+  csrsv2Info_t info_L = 0;
+  csrsv2Info_t info_Lt = 0;
+
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  const cusparseSolvePolicy_t policy_Lt = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
+
+  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, 
+                            info_Lt, handle);
+
+  bufsize =
+      cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
+                                  info_Lt, trans_Lt, handle);
+
+  buf.resize(bufsize);
+  buf.send();
+
+  this->precond.M.resize(A.get_nnz());
+#pragma omp parallel for
+  for (size_t i = 0; i < A.get_nnz(); i++) {
+    this->precond.M.data()[i] = A.val.data()[i];
+  }
+  this->precond.M.send();
+
+  cusolver_ic(A, this->precond.M.data(), descr_M, info_M, policy_M, descr_L,
+               info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt,
+               buf, handle);
+
+  matM = descr_M;
+  infoM = info_M;
+
+  matL = descr_L;
+  infoL = info_L;
+
+  infoLt = info_Lt;
+
+  cusparse_handle = handle;
+
+  this->precond.A = &A;
+
+  zbuf.resize(A.get_row());
+  zbuf.send();
+#else
+  throw std::runtime_error("IC on CPU does not impl.");
+#endif
 
   logger.solver_out();
 }
@@ -108,34 +106,33 @@ void equation::IC<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   Logger &logger = Logger::get_instance();
   logger.solver_in(monolish_func);
 
-// #if MONOLISH_USE_NVIDIA_GPU
-//   double start = omp_get_wtime();
-//   T *d_z = z.data();
-//   T *d_r = (T *)r.data();
-//   T *d_tmp = zbuf.data();
-// 
-//   cusparseHandle_t handle = (cusparseHandle_t)cusparse_handle;
-// 
-//   cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
-//   csrilu02Info_t info_M = (csrilu02Info_t)infoM;
-//   cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
-//   csrsv2Info_t info_L = (csrsv2Info_t)infoL;
-//   cusparseMatDescr_t descr_U = (cusparseMatDescr_t)matU;
-//   csrsv2Info_t info_U = (csrsv2Info_t)infoU;
-// 
-//   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
-//   const cusparseSolvePolicy_t policy_U = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
-//   const cusparseOperation_t trans_U = CUSPARSE_OPERATION_NON_TRANSPOSE;
-// 
-//   cusolver_ilu_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
-//                      policy_M, descr_L, info_L, policy_L, trans_L, descr_U,
-//                      info_U, policy_U, trans_U, d_z, d_r, d_tmp, buf, handle);
-// 
-// #else
-//   throw std::runtime_error("IC on CPU does not impl.");
-// #endif
+#if MONOLISH_USE_NVIDIA_GPU
+  double start = omp_get_wtime();
+  T *d_z = z.data();
+  T *d_r = (T *)r.data();
+  T *d_tmp = zbuf.data();
+
+  cusparseHandle_t handle = (cusparseHandle_t)cusparse_handle;
+
+  cusparseMatDescr_t descr_M = (cusparseMatDescr_t)matM;
+  csric02Info_t info_M = (csric02Info_t)infoM;
+  cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
+  csrsv2Info_t info_L = (csrsv2Info_t)infoL;
+  csrsv2Info_t info_Lt = (csrsv2Info_t)infoLt;
+
+  const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseSolvePolicy_t policy_L = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
+  const cusparseSolvePolicy_t policy_Lt = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+  const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
+
+  cusolver_ic_solve(*this->precond.A, this->precond.M.data(), descr_M, info_M,
+                     policy_M, descr_L, info_L, policy_L, trans_L, 
+                     info_Lt, policy_Lt, trans_Lt, d_z, d_r, d_tmp, buf, handle);
+
+#else
+  throw std::runtime_error("IC on CPU does not impl.");
+#endif
 
   logger.solver_out();
 }
@@ -217,11 +214,11 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   monolish::vector<double> buf(bufsize);
   buf.send();
 
-  cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
+  cusolver_ic(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
                policy_L, trans_L, info_Lt, policy_Lt, trans_Lt, buf,
                handle);
 
-  cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
+  cusolver_ic_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
                      info_L, policy_L, trans_L, info_Lt, policy_Lt,
                      trans_Lt, d_x, d_b, d_tmp, buf, handle);
 
