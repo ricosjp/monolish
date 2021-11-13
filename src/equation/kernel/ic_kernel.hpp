@@ -160,8 +160,8 @@ bool cusolver_ilu(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
     vector<double> &buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -182,9 +182,9 @@ bool cusolver_ilu(
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
-    //         perform analysis of triangular solve on U
-    // The lower(upper) triangular part of M has the same sparsity pattern as
-    // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
+    //         perform analysis of triangular solve on L'
+    // The lower triangular part of M has the same sparsity pattern as L, so
+    // we can do analysis of csric02 and csrsv2 simultaneously.
     cusparseDcsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
@@ -197,8 +197,8 @@ bool cusolver_ilu(
                              d_csrRowPtr, d_csrColInd, info_L, policy_L,
                              pBuffer);
 
-    cusparseDcsrsv2_analysis(handle, trans_U, M, nnz, descr_U, d_csrVal,
-                             d_csrRowPtr, d_csrColInd, info_U, policy_U,
+    cusparseDcsrsv2_analysis(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
+                             d_csrRowPtr, d_csrColInd, info_Lt, policy_Lt,
                              pBuffer);
 
     // step 5: M = L * U
@@ -219,8 +219,8 @@ bool cusolver_ilu(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
     vector<double> buf, const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -240,9 +240,9 @@ bool cusolver_ilu(
   {
     // step 4: perform analysis of incomplete Cholesky on M
     //         perform analysis of triangular solve on L
-    //         perform analysis of triangular solve on U
-    // The lower(upper) triangular part of M has the same sparsity pattern as
-    // L(U), we can do analysis of csrilu0 and csrsv2 simultaneously.
+    //         perform analysis of triangular solve on L'
+    // The lower triangular part of M has the same sparsity pattern as L, so
+    // we can do analysis of csric02 and csrsv2 simultaneously.
     cusparseScsric02_analysis(handle, M, nnz, descr_M, d_csrVal, d_csrRowPtr,
                                d_csrColInd, info_M, policy_M, pBuffer);
     auto status = cusparseXcsric02_zeroPivot(handle, info_M, &structural_zero);
@@ -256,8 +256,8 @@ bool cusolver_ilu(
                              d_csrRowPtr, d_csrColInd, info_L, policy_L,
                              pBuffer);
 
-    cusparseScsrsv2_analysis(handle, trans_U, M, nnz, descr_U, d_csrVal,
-                             d_csrRowPtr, d_csrColInd, info_U, policy_U,
+    cusparseScsrsv2_analysis(handle, trans_Lt, M, nnz, descr_L, d_csrVal,
+                             d_csrRowPtr, d_csrColInd, info_Lt, policy_Lt,
                              pBuffer);
 
     // step 5: M = L * U
