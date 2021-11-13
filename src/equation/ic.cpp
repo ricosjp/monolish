@@ -197,7 +197,6 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   csric02Info_t info_M = (csric02Info_t)infoM;
   cusparseMatDescr_t descr_L = (cusparseMatDescr_t)matL;
   csrsv2Info_t info_L = (csrsv2Info_t)infoL;
-  cusparseMatDescr_t descr_Lt = (cusparseMatDescr_t)matLt;
   csrsv2Info_t info_Lt = (csrsv2Info_t)infoLt;
 
   const cusparseSolvePolicy_t policy_M = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
@@ -206,11 +205,11 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   const cusparseOperation_t trans_L = CUSPARSE_OPERATION_NON_TRANSPOSE;
   const cusparseOperation_t trans_Lt = CUSPARSE_OPERATION_TRANSPOSE;
 
-  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L, descr_Lt,
+  cusolver_ic_create_descr(A, descr_M, info_M, descr_L, info_L,
                             info_Lt, handle);
   bufsize =
       cusolver_ic_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
-                                  descr_Lt, info_Lt, trans_Lt, handle);
+                                  info_Lt, trans_Lt, handle);
 
   monolish::vector<T> tmpval(A.val);
   tmpval.send();
@@ -219,11 +218,11 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
   buf.send();
 
   cusolver_ilu(A, tmpval.data(), descr_M, info_M, policy_M, descr_L, info_L,
-               policy_L, trans_L, descr_Lt, info_Lt, policy_Lt, trans_Lt, buf,
+               policy_L, trans_L, info_Lt, policy_Lt, trans_Lt, buf,
                handle);
 
   cusolver_ilu_solve(A, tmpval.data(), descr_M, info_M, policy_M, descr_L,
-                     info_L, policy_L, trans_L, descr_Lt, info_Lt, policy_Lt,
+                     info_L, policy_L, trans_L, info_Lt, policy_Lt,
                      trans_Lt, d_x, d_b, d_tmp, buf, handle);
 
 #else
