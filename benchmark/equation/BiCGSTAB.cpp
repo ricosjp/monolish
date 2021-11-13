@@ -133,6 +133,28 @@ int main(int argc, char **argv) {
       benchmark<
           monolish::matrix::CRS<float>, float,
           monolish::equation::BiCGSTAB<monolish::matrix::CRS<float>, float>,
+          monolish::equation::IC<monolish::matrix::CRS<float>, float>>(size,
+                                                                       iter);
+    }
+
+    for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+         size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+         size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+      benchmark<
+          monolish::matrix::CRS<double>, double,
+          monolish::equation::BiCGSTAB<monolish::matrix::CRS<double>, double>,
+          monolish::equation::IC<monolish::matrix::CRS<double>, double>>(size,
+                                                                         iter);
+    }
+  }
+
+  if (monolish::util::build_with_gpu() == true) {
+    for (size_t size = ITERARIVE_SOLVER_NN_BENCH_MIN;
+         size <= ITERARIVE_SOLVER_NN_BENCH_MAX;
+         size ITERARIVE_SOLVER_NN_BENCH_ITER) {
+      benchmark<
+          monolish::matrix::CRS<float>, float,
+          monolish::equation::BiCGSTAB<monolish::matrix::CRS<float>, float>,
           monolish::equation::ILU<monolish::matrix::CRS<float>, float>>(size,
                                                                         iter);
     }
