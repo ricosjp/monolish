@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Add IC solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/415
 - Add ILU solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/411 https://github.com/ricosjp/monolish/issues/42
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
