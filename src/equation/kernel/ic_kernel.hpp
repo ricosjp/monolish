@@ -282,8 +282,8 @@ bool cusolver_ilu_solve(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
     double *d_x, double *d_b, double *d_tmp, vector<double> &buf,
     const cusparseHandle_t &handle) {
 
@@ -307,9 +307,9 @@ bool cusolver_ilu_solve(
                           policy_L, pBuffer);
 
     // step 7: solve U*x = tmp
-    cusparseDcsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U, d_csrVal,
-                          d_csrRowPtr, d_csrColInd, info_U, d_tmp, d_x,
-                          policy_U, pBuffer);
+    cusparseDcsrsv2_solve(handle, trans_Lt, M, nnz, &alpha, descr_L, d_csrVal,
+                          d_csrRowPtr, d_csrColInd, info_Lt, d_tmp, d_x,
+                          policy_Lt, pBuffer);
   }
 
   logger.func_out();
@@ -321,8 +321,8 @@ bool cusolver_ilu_solve(
     const csric02Info_t &info_M, const cusparseSolvePolicy_t &policy_M,
     const cusparseMatDescr_t &descr_L, const csrsv2Info_t &info_L,
     const cusparseSolvePolicy_t &policy_L, const cusparseOperation_t &trans_L,
-    const cusparseMatDescr_t &descr_U, const csrsv2Info_t &info_U,
-    const cusparseSolvePolicy_t &policy_U, const cusparseOperation_t &trans_U,
+    const cusparseMatDescr_t &descr_Lt, const csrsv2Info_t &info_Lt,
+    const cusparseSolvePolicy_t &policy_Lt, const cusparseOperation_t &trans_Lt,
     float *d_x, float *d_b, float *d_tmp, vector<double> &buf,
     const cusparseHandle_t &handle) {
 
@@ -346,9 +346,9 @@ bool cusolver_ilu_solve(
                           policy_L, pBuffer);
 
     // step 7: solve U*x = tmp
-    cusparseScsrsv2_solve(handle, trans_U, M, nnz, &alpha, descr_U, d_csrVal,
-                          d_csrRowPtr, d_csrColInd, info_U, d_tmp, d_x,
-                          policy_U, pBuffer);
+    cusparseScsrsv2_solve(handle, trans_Lt, M, nnz, &alpha, descr_L, d_csrVal,
+                          d_csrRowPtr, d_csrColInd, info_Lt, d_tmp, d_x,
+                          policy_Lt, pBuffer);
   }
 
   logger.func_out();
