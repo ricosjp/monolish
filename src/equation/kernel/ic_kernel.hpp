@@ -5,10 +5,10 @@ namespace monolish {
 namespace {
 
 #if MONOLISH_USE_NVIDIA_GPU
-void cusolver_ilu_create_descr(
+void cusolver_ic_create_descr(
     matrix::CRS<double> &A, cusparseMatDescr_t &descr_M, csrilu02Info_t &info_M,
     cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
-    cusparseMatDescr_t &descr_U, csrsv2Info_t &info_U,
+    cusparseMatDescr_t &descr_Lt, csrsv2Info_t &info_Lt,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -28,28 +28,22 @@ void cusolver_ilu_create_descr(
     cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
     cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
     cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
-    cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
-
-    cusparseCreateMatDescr(&descr_U);
-    cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
-    cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
-    cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
-    cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
+    cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_NON_UNIT);
 
     // step 2: create a empty info structure
     // we need one info for csrilu02 and two info's for csrsv2
     cusparseCreateCsrilu02Info(&info_M);
     cusparseCreateCsrsv2Info(&info_L);
-    cusparseCreateCsrsv2Info(&info_U);
+    cusparseCreateCsrsv2Info(&info_Lt);
   }
 
   logger.func_out();
 }
 
-void cusolver_ilu_create_descr(
+void cusolver_ic_create_descr(
     matrix::CRS<float> &A, cusparseMatDescr_t &descr_M, csrilu02Info_t &info_M,
     cusparseMatDescr_t &descr_L, csrsv2Info_t &info_L,
-    cusparseMatDescr_t &descr_U, csrsv2Info_t &info_U,
+    cusparseMatDescr_t &descr_Lt, csrsv2Info_t &info_Lt,
     const cusparseHandle_t &handle) {
 
   Logger &logger = Logger::get_instance();
@@ -69,19 +63,13 @@ void cusolver_ilu_create_descr(
     cusparseSetMatIndexBase(descr_L, CUSPARSE_INDEX_BASE_ZERO);
     cusparseSetMatType(descr_L, CUSPARSE_MATRIX_TYPE_GENERAL);
     cusparseSetMatFillMode(descr_L, CUSPARSE_FILL_MODE_LOWER);
-    cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_UNIT);
-
-    cusparseCreateMatDescr(&descr_U);
-    cusparseSetMatIndexBase(descr_U, CUSPARSE_INDEX_BASE_ZERO);
-    cusparseSetMatType(descr_U, CUSPARSE_MATRIX_TYPE_GENERAL);
-    cusparseSetMatFillMode(descr_U, CUSPARSE_FILL_MODE_UPPER);
-    cusparseSetMatDiagType(descr_U, CUSPARSE_DIAG_TYPE_NON_UNIT);
+    cusparseSetMatDiagType(descr_L, CUSPARSE_DIAG_TYPE_NON_UNIT);
 
     // step 2: create a empty info structure
     // we need one info for csrilu02 and two info's for csrsv2
     cusparseCreateCsrilu02Info(&info_M);
     cusparseCreateCsrsv2Info(&info_L);
-    cusparseCreateCsrsv2Info(&info_U);
+    cusparseCreateCsrsv2Info(&info_Lt);
   }
 
   logger.func_out();
