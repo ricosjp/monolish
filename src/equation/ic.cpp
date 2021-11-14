@@ -277,8 +277,7 @@ template int equation::IC<matrix::CRS<double>, double>::solve(
 // template int equation::IC<matrix::LinearOperator<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 
-template <typename MATRIX, typename T>
-equation::IC<MATRIX, T>::~IC() {
+template <typename MATRIX, typename T> equation::IC<MATRIX, T>::~IC() {
   cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
   cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
 
