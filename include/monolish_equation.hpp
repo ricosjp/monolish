@@ -371,6 +371,7 @@ private:
   monolish::vector<Float> zbuf;
 
 public:
+  ~ILU();
   /**
    * @brief solve with incomprete LU factorization
    * @warning
@@ -423,6 +424,7 @@ private:
                                 vector<double> &b);
 
 public:
+  ~ILU();
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   [[nodiscard]] int solve(MATRIX &A, vector<Float> &xb);
 
