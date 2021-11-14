@@ -67,7 +67,6 @@ void equation::IC<MATRIX, T>::create_precond(MATRIX &A) {
 
   matL = descr_L;
   infoL = info_L;
-
   infoLt = info_Lt;
 
   cusparse_handle = handle;
@@ -222,6 +221,12 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
                     info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt,
                     d_x, d_b, d_tmp, buf, handle);
 
+  cusparseDestroyMatDescr(descr_M);
+  cusparseDestroyMatDescr(descr_L);
+  cusparseDestroyCsric02Info(info_M);
+  cusparseDestroyCsrsv2Info(info_L);
+  cusparseDestroyCsrsv2Info(info_Lt);
+  cusparseDestroy(handle);
 #else
   throw std::runtime_error("IC on CPU does not impl.");
 #endif
@@ -277,5 +282,21 @@ template int equation::IC<matrix::CRS<double>, double>::solve(
 //     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 // template int equation::IC<matrix::LinearOperator<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+
+template <typename MATRIX, typename T> equation::IC<MATRIX, T>::~IC() {
+#if MONOLISH_USE_NVIDIA_GPU
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
+
+  cusparseDestroyCsric02Info((csric02Info_t)infoM);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoL);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoLt);
+
+  cusparseDestroy((cusparseHandle_t)cusparse_handle);
+#endif
+}
+
+template equation::IC<matrix::CRS<float>, float>::~IC();
+template equation::IC<matrix::CRS<double>, double>::~IC();
 
 } // namespace monolish

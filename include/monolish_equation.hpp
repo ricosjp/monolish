@@ -316,12 +316,13 @@ private:
   monolish::vector<Float> zbuf;
 
 public:
+  ~IC();
   /**
    * @brief solve with incomprete Cholesky factorization
    * @warning
    * This solves Ax = b incompletely. In many cases the answer is wrong.
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
 
@@ -371,12 +372,13 @@ private:
   monolish::vector<Float> zbuf;
 
 public:
+  ~ILU();
   /**
    * @brief solve with incomprete LU factorization
    * @warning
    * This solves Ax = b incompletely. In many cases the answer is wrong.
    **/
-  int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
+  [[nodiscard]] int solve(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void create_precond(MATRIX &A);
   void apply_precond(const vector<Float> &r, vector<Float> &z);
 

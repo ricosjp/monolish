@@ -229,6 +229,14 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
                      trans_U, d_x, d_b, d_tmp, buf, handle);
 
+  cusparseDestroyMatDescr(descr_M);
+  cusparseDestroyMatDescr(descr_L);
+  cusparseDestroyMatDescr(descr_U);
+  cusparseDestroyCsrilu02Info(info_M);
+  cusparseDestroyCsrsv2Info(info_L);
+  cusparseDestroyCsrsv2Info(info_U);
+  cusparseDestroy(handle);
+
 #else
   throw std::runtime_error("ILU on CPU does not impl.");
 #endif
@@ -284,5 +292,22 @@ template int equation::ILU<matrix::CRS<double>, double>::solve(
 //     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 // template int equation::ILU<matrix::LinearOperator<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+//
+template <typename MATRIX, typename T> equation::ILU<MATRIX, T>::~ILU() {
+#if MONOLISH_USE_NVIDIA_GPU
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matU);
+
+  cusparseDestroyCsrilu02Info((csrilu02Info_t)infoM);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoL);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoU);
+
+  cusparseDestroy((cusparseHandle_t)cusparse_handle);
+#endif
+}
+
+template equation::ILU<matrix::CRS<float>, float>::~ILU();
+template equation::ILU<matrix::CRS<double>, double>::~ILU();
 
 } // namespace monolish
