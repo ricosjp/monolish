@@ -293,6 +293,7 @@ template int equation::ILU<matrix::CRS<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 //
 template <typename MATRIX, typename T> equation::ILU<MATRIX, T>::~ILU() {
+#if MONOLISH_USE_NVIDIA_GPU
   cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
   cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
   cusparseDestroyMatDescr((cusparseMatDescr_t)matU);
@@ -302,6 +303,7 @@ template <typename MATRIX, typename T> equation::ILU<MATRIX, T>::~ILU() {
   cusparseDestroyCsrsv2Info((csrsv2Info_t)infoU);
 
   cusparseDestroy((cusparseHandle_t)cusparse_handle);
+#endif
 }
 
 template equation::ILU<matrix::CRS<float>, float>::~ILU();

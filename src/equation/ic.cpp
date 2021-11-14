@@ -278,6 +278,7 @@ template int equation::IC<matrix::CRS<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
 
 template <typename MATRIX, typename T> equation::IC<MATRIX, T>::~IC() {
+#if MONOLISH_USE_NVIDIA_GPU
   cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
   cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
 
@@ -286,6 +287,7 @@ template <typename MATRIX, typename T> equation::IC<MATRIX, T>::~IC() {
   cusparseDestroyCsrsv2Info((csrsv2Info_t)infoLt);
 
   cusparseDestroy((cusparseHandle_t)cusparse_handle);
+#endif
 }
 
 template equation::IC<matrix::CRS<float>, float>::~IC();
