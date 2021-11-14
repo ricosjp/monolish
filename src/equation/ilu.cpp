@@ -229,16 +229,17 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
                      info_L, policy_L, trans_L, descr_U, info_U, policy_U,
                      trans_U, d_x, d_b, d_tmp, buf, handle);
 
-#else
-  throw std::runtime_error("ILU on CPU does not impl.");
-#endif
-
   cusparseDestroyMatDescr(descr_M);
   cusparseDestroyMatDescr(descr_L);
+  cusparseDestroyMatDescr(descr_U);
   cusparseDestroyCsrilu02Info(info_M);
   cusparseDestroyCsrsv2Info(info_L);
   cusparseDestroyCsrsv2Info(info_U);
   cusparseDestroy(handle);
+
+#else
+  throw std::runtime_error("ILU on CPU does not impl.");
+#endif
 
   logger.solver_out();
   return MONOLISH_SOLVER_SUCCESS;

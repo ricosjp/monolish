@@ -221,6 +221,12 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
                     info_L, policy_L, trans_L, info_Lt, policy_Lt, trans_Lt,
                     d_x, d_b, d_tmp, buf, handle);
 
+  cusparseDestroyMatDescr(descr_M);
+  cusparseDestroyMatDescr(descr_L);
+  cusparseDestroyCsrilu02Info(info_M);
+  cusparseDestroyCsrsv2Info(info_L);
+  cusparseDestroyCsrsv2Info(info_Lt);
+  cusparseDestroy(handle);
 #else
   throw std::runtime_error("IC on CPU does not impl.");
 #endif
