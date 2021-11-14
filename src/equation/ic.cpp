@@ -67,7 +67,6 @@ void equation::IC<MATRIX, T>::create_precond(MATRIX &A) {
 
   matL = descr_L;
   infoL = info_L;
-
   infoLt = info_Lt;
 
   cusparse_handle = handle;
@@ -277,5 +276,20 @@ template int equation::IC<matrix::CRS<double>, double>::solve(
 //     matrix::LinearOperator<float> &A, vector<float> &x, vector<float> &b);
 // template int equation::IC<matrix::LinearOperator<double>, double>::solve(
 //     matrix::LinearOperator<double> &A, vector<double> &x, vector<double> &b);
+
+template <typename MATRIX, typename T>
+equation::IC<MATRIX, T>::~IC() {
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matM);
+  cusparseDestroyMatDescr((cusparseMatDescr_t)matL);
+
+  cusparseDestroyCsric02Info((csric02Info_t)infoM);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoL);
+  cusparseDestroyCsrsv2Info((csrsv2Info_t)infoLt);
+
+  cusparseDestroy((cusparseHandle_t)cusparse_handle);
+}
+
+template equation::IC<matrix::CRS<float>, float>::~IC();
+template equation::IC<matrix::CRS<double>, double>::~IC();
 
 } // namespace monolish
