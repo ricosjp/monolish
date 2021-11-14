@@ -223,7 +223,7 @@ int equation::IC<MATRIX, T>::cusparse_IC(MATRIX &A, vector<T> &x,
 
   cusparseDestroyMatDescr(descr_M);
   cusparseDestroyMatDescr(descr_L);
-  cusparseDestroyCsrilu02Info(info_M);
+  cusparseDestroyCsric02Info(info_M);
   cusparseDestroyCsrsv2Info(info_L);
   cusparseDestroyCsrsv2Info(info_Lt);
   cusparseDestroy(handle);
