@@ -4,8 +4,6 @@
     - .ccache
     - .release
   script:
-    - apt update
-    - apt install -y gfortran ccache
     - cmake --preset=${PRESET}
     - cmake --build build/${PRESET} --target package
     - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}

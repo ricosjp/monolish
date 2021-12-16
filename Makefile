@@ -1,7 +1,7 @@
 ALLGEBRA_IMAGE := ghcr.io/ricosjp/allgebra
-ALLGEBRA_CUDA := cuda11_4
-ALLGEBRA_CC := clang12
-ALLGEBRA_TAG   := 21.09.0
+ALLGEBRA_CUDA  := cuda11_4
+ALLGEBRA_CC    := clang12
+ALLGEBRA_TAG   := 21.12.0
 
 MONOLISH_TOP := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -196,8 +196,11 @@ format:
 		$(ALLGEBRA_IMAGE)/clang-format:$(ALLGEBRA_TAG) /usr/bin/check_format.sh
 
 document:
+	rm -rf $(PWD)/build/document $(PWD)/html
 	docker run -it --rm  \
 		-u `id -u`:`id -g` \
 		-v $(PWD):$(PWD)   \
 		-w $(PWD)          \
-		$(ALLGEBRA_IMAGE)/doxygen:$(ALLGEBRA_TAG) doxygen Doxyfile
+		$(ALLGEBRA_IMAGE)/$(ALLGEBRA_CUDA)/$(ALLGEBRA_CC)/oss:$(ALLGEBRA_TAG) bash -c "cmake -Bbuild/document .; cmake --build build/document --target document"
+	mv $(PWD)/build/document/html $(PWD)
+
