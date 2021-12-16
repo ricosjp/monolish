@@ -13,10 +13,7 @@ clang-format:
 doxygen:
   extends:
     - .develop
-  image: registry.ritc.jp/ricos/allgebra/cuda11_4-clang12-oss:21.09.0
   script:
-    - apt update
-    - apt install -y gfortran doxygen graphviz
     - cmake --preset=cpu-none-none
     - cmake --build build/cpu-none-none --target document
     - rm -rf html/
