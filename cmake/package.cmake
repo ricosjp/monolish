@@ -24,11 +24,13 @@ foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
     install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
   endif()
 endforeach()
-# FIXME: This assumes the packaging will be done on allgebra container.
 if(MONOLISH_USE_NVIDIA_GPU)
+  if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
+    message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
+  endif()
   install(PROGRAMS
-    /usr/local/llvm-12.0.1/lib/libomptarget.so
-    /usr/local/llvm-12.0.1/lib/libomptarget.rtl.cuda.so
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
     TYPE LIB
   )
 endif()
