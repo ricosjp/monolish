@@ -23,15 +23,16 @@ foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
   if(name STREQUAL "omp")
     install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
   endif()
-endforeach(name)
+endforeach()
 if(MONOLISH_USE_NVIDIA_GPU)
-  find_library(
-    OpenMP_omptarget_LIBRARY
-    libomptarget.so
-  HINTS
-    /usr/local/llvm-13.0.0/lib
+  if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
+    message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
+  endif()
+  install(PROGRAMS
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
+    TYPE LIB
   )
-  install(PROGRAMS ${OpenMP_omptarget_LIBRARY} TYPE LIB)
 endif()
 
 # Sell also the "CPack DEB Generator" page

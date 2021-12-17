@@ -25,6 +25,7 @@ Unreleased
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
+- Add libomptarget.rtl.cuda.so in GPU deb package https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/420
 - Fix memory leak of IC/ILU precond https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/418 
 - Fix calling create_precond() multiple times bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/417 https://github.com/ricosjp/monolish/issues/93
 - Improve the perf of ILU solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/414 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/415
