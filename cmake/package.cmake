@@ -29,7 +29,7 @@ if(MONOLISH_USE_NVIDIA_GPU)
     OpenMP_omptarget_LIBRARY
     libomptarget.so
   HINTS
-    /usr/local/llvm-12.0.1/lib
+    /usr/local/llvm-13.0.0/lib
   )
   install(PROGRAMS ${OpenMP_omptarget_LIBRARY} TYPE LIB)
 endif()
