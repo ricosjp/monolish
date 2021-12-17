@@ -33,6 +33,7 @@ Unreleased
 - Remove `MONOLISH_DIR` variable in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/408
 
 ### Changed
+- Update LLVM13.0.0 in allgebra 21.12.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/421
 - Use allgebra 21.12.0 for monolish containers and CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/419
 - Rewrite quick start guide https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/406
 - Start developing 0.15.1 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/405
