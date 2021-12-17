@@ -19,19 +19,13 @@ install(
 # Install OpenMP runtime library (libomp and libomptarget)
 #
 # FIXME: This should use libomp distributed by ubuntu
-foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-  if(name STREQUAL "omp")
-    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
-  endif()
-endforeach(name)
 if(MONOLISH_USE_NVIDIA_GPU)
-  find_library(
-    OpenMP_omptarget_LIBRARY
-    libomptarget.so
-  HINTS
-    /usr/local/llvm-12.0.1/lib
+  install(PROGRAMS
+    /usr/local/llvm-12.0.1/lib/libomp.so
+    /usr/local/llvm-12.0.1/lib/libomptarget.so
+    /usr/local/llvm-12.0.1/lib/libomptarget.rtl.cuda.so
+    TYPE LIB
   )
-  install(PROGRAMS ${OpenMP_omptarget_LIBRARY} TYPE LIB)
 endif()
 
 # Sell also the "CPack DEB Generator" page
