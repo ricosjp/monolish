@@ -13,6 +13,13 @@ function(set_gpu_properties target gpu_arch)
     CUDA::cusparse
     CUDA::cudart
   )
+  # FIXME: clang will support sm_86 on LLVM 13.0.1
+  if(gpu_arch STREQUAL "sm_86")
+    message(WARNING
+      "Clang does not support sm_86 yet. Default to sm_80."
+    )
+    set(gpu_arch "sm_80")
+  endif()
   # OpenMP Offloading setting
   target_compile_options(${target} PRIVATE
     -fopenmp
@@ -48,7 +55,7 @@ if(MONOLISH_USE_NVIDIA_GPU)
     # Build for every CUDA architectures after Maxwell
     # `sm_53` and `sm_62` are ommited since there is no GPU in
     # https://developer.nvidia.com/cuda-gpus
-    set(monolish_nvidia_gpu_arch_supported 52 60 61 70 75 80)
+    set(monolish_nvidia_gpu_arch_supported 52 60 61 70 75 80 86)
     foreach(gpu_cc IN LISTS monolish_nvidia_gpu_arch_supported)
       set(target "${monolish_gpu_target}_${gpu_cc}")
       message(STATUS "Add ${target} target")
