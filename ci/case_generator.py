@@ -29,7 +29,7 @@ def generate_package_config():
             },
         }
         for math in ["mkl", "oss"]
-        for sm in ["52", "60", "61", "70", "75", "80"]
+        for sm in ["52", "60", "61", "70", "75", "80", "86"]
     }
     print(yaml.dump(targets))
 
@@ -41,7 +41,7 @@ def generate_docker_config():
             "needs": [f"gpu_sm_{sm}_{math}_build"],
         }
         for math in ["mkl", "oss"]
-        for sm in ["52", "60", "61", "70", "75", "80"]
+        for sm in ["52", "60", "61", "70", "75", "80", "86"]
     }
     print(yaml.dump(targets))
 
