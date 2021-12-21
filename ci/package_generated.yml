@@ -82,4 +82,18 @@ gpu_sm_80_oss_build:
   variables:
     MONOLISH_NVIDIA_GPU_ARCH: sm_80
     PRESET: gpu-avx-none
+gpu_sm_86_mkl_build:
+  extends:
+  - .mkl_image
+  - .package
+  variables:
+    MONOLISH_NVIDIA_GPU_ARCH: sm_86
+    PRESET: gpu-avx-none
+gpu_sm_86_oss_build:
+  extends:
+  - .oss_image
+  - .package
+  variables:
+    MONOLISH_NVIDIA_GPU_ARCH: sm_86
+    PRESET: gpu-avx-none
 

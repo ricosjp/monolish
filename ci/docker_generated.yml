@@ -28,6 +28,11 @@ mkl_nvidia_sm_80_docker:
   - .docker
   needs:
   - gpu_sm_80_mkl_build
+mkl_nvidia_sm_86_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_86_mkl_build
 oss_nvidia_sm_52_docker:
   extends:
   - .docker
@@ -58,4 +63,9 @@ oss_nvidia_sm_80_docker:
   - .docker
   needs:
   - gpu_sm_80_oss_build
+oss_nvidia_sm_86_docker:
+  extends:
+  - .docker
+  needs:
+  - gpu_sm_86_oss_build
 
