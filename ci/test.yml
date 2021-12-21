@@ -51,7 +51,7 @@ gpu_deb_test:
     - gpu_avx_oss_build
   tags:
     - avx
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_avx_mkl:
   extends:
@@ -62,7 +62,7 @@ gpu_avx_mkl:
     - "gpu_avx_mkl_build"
   tags:
     - avx
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_none_mkl:
   extends:
@@ -72,7 +72,7 @@ gpu_none_mkl:
   needs:
     - "gpu_none_mkl_build"
   tags:
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_avx_oss:
   extends:
@@ -83,7 +83,7 @@ gpu_avx_oss:
     - "gpu_avx_oss_build"
   tags:
     - avx
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_none_oss:
   extends:
@@ -93,7 +93,7 @@ gpu_none_oss:
   needs:
     - "gpu_none_oss_build"
   tags:
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 cpu_avx_gcc_mkl:
   extends:

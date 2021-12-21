@@ -22,7 +22,7 @@ gpu_avx_mkl_examples:
     - "gpu_avx_mkl_build"
   tags:
     - avx
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_none_mkl_examples:
   extends:
@@ -32,7 +32,7 @@ gpu_none_mkl_examples:
   needs:
     - "gpu_none_mkl_build"
   tags:
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_avx_oss_examples:
   extends:
@@ -43,7 +43,7 @@ gpu_avx_oss_examples:
     - "gpu_avx_oss_build"
   tags:
     - avx
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 gpu_none_oss_examples:
   extends:
@@ -53,7 +53,7 @@ gpu_none_oss_examples:
   needs:
     - "gpu_none_oss_build"
   tags:
-    - nvidia0-sm_86
+    - nvidia0-sm_61
 
 cpu_avx_gcc_mkl_examples:
   extends:
