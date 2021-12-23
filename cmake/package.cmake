@@ -47,15 +47,27 @@ set(CPACK_GENERATOR "DEB")
 #
 # The package names are packages in nvidia/cuda image based on Ubuntu 20.04
 # distributed on DocekrHub. They may different for other `*.deb`-based Linux distributions.
-set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6, libgcc-s1, libgomp1, libstdc++6")
+set(monolish_deb_dependencies
+  libc6
+  libgcc-s1
+  libgomp1
+  libstdc++6
+  )
 if(MKL_FOUND)
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, intel-mkl")
+  list(APPEND monolish_deb_dependencies intel-mkl)
 else()
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libopenblas0-openmp")
+  list(APPEND monolish_deb_dependencies libopenblas0-openmp)
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   set(postfix "${CUDAToolkit_VERSION_MAJOR}-${CUDAToolkit_VERSION_MINOR}")
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-${postfix}, libcusolver-${postfix}, libcusparse-${postfix}, libcublas-${postfix}, libelf1")
+  list(APPEND
+    monolish_deb_dependencies
+    cuda-cudart-${postfix}
+    libcusolver-${postfix}
+    libcusparse-${postfix}
+    libcublas-${postfix}
+    libelf1
+    )
   unset(postfix)
 endif()
 
@@ -85,6 +97,8 @@ if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
     ${PROJECT_SOURCE_DIR}/package/postinst
   )
 endif()
+
+string(JOIN ", " CPACK_DEBIAN_PACKAGE_DEPENDS ${monolish_deb_dependencies})
 
 # FIXME: Add RPM setting
 
