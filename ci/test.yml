@@ -53,6 +53,17 @@ gpu_deb_test:
     - avx
     - nvidia0-sm_61
 
+deb_install_both:
+  image: nvidia/cuda:11.4.1-devel-ubuntu20.04
+  extends:
+    - .test
+  script:
+    - apt update
+    - apt install -y make ./$(find . -name "*.deb")
+  needs:
+    - cpu_avx_oss_build
+    - gpu_avx_oss_build
+
 gpu_avx_mkl:
   extends:
     - .mkl_image
