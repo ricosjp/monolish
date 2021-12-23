@@ -35,7 +35,6 @@ set(monolish_deb_dependencies
   libgcc-s1
   libgomp1
   libstdc++6
-  monolish-dev
   )
 if(MKL_FOUND)
   list(APPEND monolish_deb_dependencies intel-mkl)
