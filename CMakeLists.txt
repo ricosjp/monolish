@@ -46,9 +46,15 @@ project(monolish
 # Be sure that include order is not commutable
 include(cmake/option.cmake)
 include(cmake/version.cmake)
-include(cmake/detect_gpu.cmake)
-include(cmake/backend.cmake)
-include(cmake/cpu_target.cmake)
-include(cmake/nvidia_gpu_target.cmake)
+
+# Do not build anything if `MONOLISH_PACKAGE_DEV` is ON
+if(NOT MONOLISH_PACKAGE_DEV)
+  include(cmake/detect_gpu.cmake)
+  include(cmake/backend.cmake)
+  include(cmake/cpu_target.cmake)
+  include(cmake/nvidia_gpu_target.cmake)
+endif()
+
 include(cmake/document.cmake)
 include(cmake/package.cmake)
+include(cmake/container.cmake)

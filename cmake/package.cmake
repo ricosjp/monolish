@@ -1,38 +1,42 @@
 #
 # Packaging
 #
-install(
-  DIRECTORY include/
-  DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp"
-)
-install(
-  DIRECTORY examples/
-  DESTINATION share/monolish/examples
-)
-install(
-  DIRECTORY benchmark/
-  DESTINATION share/monolish/benchmark
-)
+if(MONOLISH_PACKAGE_DEV)
+  install(
+    DIRECTORY include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.hpp"
+  )
+  install(
+    DIRECTORY examples/
+    DESTINATION share/monolish/examples
+  )
+  install(
+    DIRECTORY benchmark/
+    DESTINATION share/monolish/benchmark
+  )
+endif()
 
 #
 # Install OpenMP runtime library (libomp and libomptarget)
 #
 # FIXME: This should use libomp distributed by ubuntu
-foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-  if(name STREQUAL "omp")
-    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
+if(NOT MONOLISH_PACKAGE_DEV)
+  foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
+    if(name STREQUAL "omp")
+      install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
+    endif()
+  endforeach()
+  if(MONOLISH_USE_NVIDIA_GPU)
+    if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
+      message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
+    endif()
+    install(PROGRAMS
+      $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
+      $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
+      TYPE LIB
+    )
   endif()
-endforeach()
-if(MONOLISH_USE_NVIDIA_GPU)
-  if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
-    message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
-  endif()
-  install(PROGRAMS
-    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
-    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
-    TYPE LIB
-  )
 endif()
 
 # Sell also the "CPack DEB Generator" page
@@ -103,25 +107,3 @@ string(JOIN ", " CPACK_DEBIAN_PACKAGE_DEPENDS ${monolish_deb_dependencies})
 # FIXME: Add RPM setting
 
 include(CPack)
-
-#
-# Build container
-#
-set(monolish_docker_image registry.ritc.jp/ricos/monolish/${monolish_backend}:${monolish_package_version})
-set(monolish_docker_release_image ghcr.io/ricosjp/monolish/${monolish_backend}:${monolish_package_version})
-check_exec(
-  COMMAND git rev-parse --short HEAD
-  OUTPUT_VARIABLE git_hash
-  ERROR_MSG "Failed to get git hash"
-)
-check_exec(
-  COMMAND date --rfc-3339=second
-  OUTPUT_VARIABLE build_date
-  ERROR_MSG "Failed to current date"
-)
-configure_file(package/Dockerfile.in Dockerfile)
-configure_file(package/compose.yml.in compose.yml)
-add_custom_target(docker
-  COMMAND docker-compose build
-  COMMENT "Build container ${monolish_docker_image}"
-)
