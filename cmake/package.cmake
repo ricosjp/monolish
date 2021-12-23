@@ -1,45 +1,24 @@
 #
-# Packaging
-#
-if(MONOLISH_PACKAGE_DEV)
-  install(
-    DIRECTORY include/
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.hpp"
-  )
-  install(
-    DIRECTORY examples/
-    DESTINATION share/monolish/examples
-  )
-  install(
-    DIRECTORY benchmark/
-    DESTINATION share/monolish/benchmark
-  )
-endif()
-
-#
 # Install OpenMP runtime library (libomp and libomptarget)
 #
 # FIXME: This should use libomp distributed by ubuntu
-if(NOT MONOLISH_PACKAGE_DEV)
-  foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-    if(name STREQUAL "omp")
-      install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
-    endif()
-  endforeach()
-  if(MONOLISH_USE_NVIDIA_GPU)
-    if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
-      message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
-    endif()
-    install(PROGRAMS
-      $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
-      $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
-      TYPE LIB
-    )
+foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
+  if(name STREQUAL "omp")
+    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
   endif()
+endforeach()
+if(MONOLISH_USE_NVIDIA_GPU)
+  if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
+    message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
+  endif()
+  install(PROGRAMS
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
+    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
+    TYPE LIB
+  )
 endif()
 
-# Sell also the "CPack DEB Generator" page
+# See also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
@@ -56,6 +35,7 @@ set(monolish_deb_dependencies
   libgcc-s1
   libgomp1
   libstdc++6
+  monolish-dev
   )
 if(MKL_FOUND)
   list(APPEND monolish_deb_dependencies intel-mkl)
