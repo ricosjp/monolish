@@ -15,7 +15,7 @@ install(
   DESTINATION share/monolish/benchmark
 )
 
-set(CPACK_PACKAGE_NAME "monolish-dev")
+set(CPACK_PACKAGE_NAME "libmonolish-dev")
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_PACKAGE_VERSION "${monolish_package_version}")

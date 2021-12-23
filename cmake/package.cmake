@@ -20,6 +20,11 @@ endif()
 
 # See also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(CPACK_PACKAGE_NAME "libmonolish-nvidia-gpu")
+else()
+  set(CPACK_PACKAGE_NAME "libmonolish-cpu")
+endif()
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_PACKAGE_VERSION "${monolish_package_version}+${monolish_backend}")
