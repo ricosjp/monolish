@@ -47,8 +47,8 @@ project(monolish
 include(cmake/option.cmake)
 include(cmake/version.cmake)
 
-# Do not build anything if `MONOLISH_PACKAGE_DEV` is ON
-if(NOT MONOLISH_PACKAGE_DEV)
+# Do not build anything if `MONOLISH_PACKAGE_COMMON` is ON
+if(NOT MONOLISH_PACKAGE_COMMON)
   include(cmake/detect_gpu.cmake)
   include(cmake/backend.cmake)
   include(cmake/cpu_target.cmake)
