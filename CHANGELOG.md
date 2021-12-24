@@ -19,6 +19,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 -->
 Unreleased
 -----------
+
+0.15.0 - 2021/12/25
+-----------
 ### Added
 - Add explanation of IC and ILU in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/425 https://github.com/ricosjp/monolish/issues/94
 - Support sm_86 GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/422
