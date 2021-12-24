@@ -20,7 +20,13 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
-0.15.0 - 2021/12/25
+0.15.2 - 2021/12/25
+-----------
+
+### Changed
+- Start developing 0.15.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/429
+
+0.15.1 - 2021/12/25
 -----------
 ### Added
 - Add explanation of IC and ILU in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/425 https://github.com/ricosjp/monolish/issues/94
