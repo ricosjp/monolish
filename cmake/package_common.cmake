@@ -18,11 +18,13 @@ install(
 #
 # Install OpenMP runtime library (libomp)
 #
-foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-  if(name STREQUAL "omp")
-    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
-  endif()
-endforeach()
+if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
+  message(SEND_ERROR "Packaging must run in allgebra container")
+endif()
+install(PROGRAMS
+  $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomp.so
+  TYPE LIB
+)
 
 set(CPACK_PACKAGE_NAME "libmonolish-common")
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
