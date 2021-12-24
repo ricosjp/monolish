@@ -7,12 +7,12 @@
   },
   "configurePresets": [
     {
-      "name": "package-dev",
+      "name": "package-common",
       "generator": "Ninja",
-      "displayName": "Create monolish-dev.deb",
-      "binaryDir": "${sourceDir}/build/dev",
+      "displayName": "Create libmonolish-common package",
+      "binaryDir": "${sourceDir}/build/package-common",
       "cacheVariables": {
-        "MONOLISH_PACKAGE_DEV": "ON"
+        "MONOLISH_PACKAGE_COMMON": "ON"
       }
     },
     {
