@@ -1,12 +1,6 @@
 #
-# Install OpenMP runtime library (libomp and libomptarget)
+# Install OpenMP runtime library for NVIDIA GPU (libomptarget)
 #
-# FIXME: This should use libomp distributed by ubuntu
-foreach(name IN LISTS OpenMP_CXX_LIB_NAMES)
-  if(name STREQUAL "omp")
-    install(PROGRAMS ${OpenMP_${name}_LIBRARY} TYPE LIB)
-  endif()
-endforeach()
 if(MONOLISH_USE_NVIDIA_GPU)
   if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
     message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
