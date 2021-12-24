@@ -16,13 +16,17 @@ install(
 )
 
 #
-# Install OpenMP runtime library (libomp)
+# Install OpenMP runtime library (libomp, libomptarget)
+#
+# FIXME: libomp* should be an independent deb package.
 #
 if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
   message(SEND_ERROR "Packaging must run in allgebra container")
 endif()
 install(PROGRAMS
   $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomp.so
+  $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
+  $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
   TYPE LIB
 )
 

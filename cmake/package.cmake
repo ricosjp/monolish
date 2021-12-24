@@ -1,17 +1,3 @@
-#
-# Install OpenMP runtime library for NVIDIA GPU (libomptarget)
-#
-if(MONOLISH_USE_NVIDIA_GPU)
-  if(NOT DEFINED ENV{ALLGEBRA_LLVM_INSTALL_DIR})
-    message(SEND_ERROR "Packaging of GPU variant must run in allgebra container")
-  endif()
-  install(PROGRAMS
-    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.so
-    $ENV{ALLGEBRA_LLVM_INSTALL_DIR}/lib/libomptarget.rtl.cuda.so
-    TYPE LIB
-  )
-endif()
-
 # See also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
 if(MONOLISH_USE_NVIDIA_GPU)
