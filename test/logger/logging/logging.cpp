@@ -29,7 +29,9 @@ int main(int argc, char **argv) {
   solver.set_tol(1.0e-12);
   solver.set_maxiter(A.get_row());
 
-  solver.solve(A, x, b);
+  if (monolish::util::solver_check(solver.solve(A, x, b))) {
+    return false;
+  }
 
   return 0;
 }
