@@ -35,6 +35,7 @@ Unreleased
 - Remove `MONOLISH_DIR` variable in examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/408
 
 ### Changed
+- OpenMP runtimes are composed in libmonolish-common package https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/424
 - deb file split into shared library and others https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/423
 - Update LLVM13.0.0 in allgebra 21.12.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/421
 - Use allgebra 21.12.0 for monolish containers and CI https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/419
