@@ -25,7 +25,9 @@ bool Cholesky_test(const char *file, const int check_ans, const T tol) {
   monolish::blas::matvec(A, ans, b);
 
   // solve
-  Cholesky_solver.solve(A, b);
+  if (monolish::util::solver_check(Cholesky_solver.solve(A, b))) {
+    return false;
+  }
 
   x = b;
 

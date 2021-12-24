@@ -25,7 +25,9 @@ bool LU_test(const char *file, const int check_ans, const T tol) {
   monolish::blas::matvec(A, ans, b);
 
   // solve
-  LU_solver.solve(A, b);
+  if (monolish::util::solver_check(LU_solver.solve(A, b))) {
+    return false;
+  }
 
   x = b;
 
