@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Add explanation of IC and ILU in documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/425 https://github.com/ricosjp/monolish/issues/94
 - Support sm_86 GPU https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/422
 - Add IC solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/416
 - Add ILU solver and preconditioner https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/411 https://github.com/ricosjp/monolish/issues/42
