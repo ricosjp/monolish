@@ -7,6 +7,15 @@
   },
   "configurePresets": [
     {
+      "name": "package-dev",
+      "generator": "Ninja",
+      "displayName": "Create monolish-dev.deb",
+      "binaryDir": "${sourceDir}/build/dev",
+      "cacheVariables": {
+        "MONOLISH_PACKAGE_DEV": "ON"
+      }
+    },
+    {
       "name": "cpu-none-none",
       "generator": "Ninja",
       "displayName": "monolish with CPU",

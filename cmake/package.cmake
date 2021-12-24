@@ -1,21 +1,4 @@
 #
-# Packaging
-#
-install(
-  DIRECTORY include/
-  DESTINATION include
-  FILES_MATCHING PATTERN "*.hpp"
-)
-install(
-  DIRECTORY examples/
-  DESTINATION share/monolish/examples
-)
-install(
-  DIRECTORY benchmark/
-  DESTINATION share/monolish/benchmark
-)
-
-#
 # Install OpenMP runtime library (libomp and libomptarget)
 #
 # FIXME: This should use libomp distributed by ubuntu
@@ -35,8 +18,13 @@ if(MONOLISH_USE_NVIDIA_GPU)
   )
 endif()
 
-# Sell also the "CPack DEB Generator" page
+# See also the "CPack DEB Generator" page
 # https://cmake.org/cmake/help/latest/cpack_gen/deb.html
+if(MONOLISH_USE_NVIDIA_GPU)
+  set(CPACK_PACKAGE_NAME "libmonolish-nvidia-gpu")
+else()
+  set(CPACK_PACKAGE_NAME "libmonolish-cpu")
+endif()
 set(CPACK_PACKAGE_VENDOR "RICOS Co. Ltd.")
 set(CPACK_PACKAGE_CONTACT "Toshiki Teramura <toshiki.teramura@gmail.com>")
 set(CPACK_PACKAGE_VERSION "${monolish_package_version}+${monolish_backend}")
@@ -47,15 +35,27 @@ set(CPACK_GENERATOR "DEB")
 #
 # The package names are packages in nvidia/cuda image based on Ubuntu 20.04
 # distributed on DocekrHub. They may different for other `*.deb`-based Linux distributions.
-set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6, libgcc-s1, libgomp1, libstdc++6")
+set(monolish_deb_dependencies
+  libc6
+  libgcc-s1
+  libgomp1
+  libstdc++6
+  )
 if(MKL_FOUND)
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, intel-mkl")
+  list(APPEND monolish_deb_dependencies intel-mkl)
 else()
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libopenblas0-openmp")
+  list(APPEND monolish_deb_dependencies libopenblas0-openmp)
 endif()
 if(MONOLISH_USE_NVIDIA_GPU)
   set(postfix "${CUDAToolkit_VERSION_MAJOR}-${CUDAToolkit_VERSION_MINOR}")
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, cuda-cudart-${postfix}, libcusolver-${postfix}, libcusparse-${postfix}, libcublas-${postfix}, libelf1")
+  list(APPEND
+    monolish_deb_dependencies
+    cuda-cudart-${postfix}
+    libcusolver-${postfix}
+    libcusparse-${postfix}
+    libcublas-${postfix}
+    libelf1
+    )
   unset(postfix)
 endif()
 
@@ -86,28 +86,8 @@ if(MONOLISH_NVIDIA_GPU_ARCH_ALL)
   )
 endif()
 
+string(JOIN ", " CPACK_DEBIAN_PACKAGE_DEPENDS ${monolish_deb_dependencies})
+
 # FIXME: Add RPM setting
 
 include(CPack)
-
-#
-# Build container
-#
-set(monolish_docker_image registry.ritc.jp/ricos/monolish/${monolish_backend}:${monolish_package_version})
-set(monolish_docker_release_image ghcr.io/ricosjp/monolish/${monolish_backend}:${monolish_package_version})
-check_exec(
-  COMMAND git rev-parse --short HEAD
-  OUTPUT_VARIABLE git_hash
-  ERROR_MSG "Failed to get git hash"
-)
-check_exec(
-  COMMAND date --rfc-3339=second
-  OUTPUT_VARIABLE build_date
-  ERROR_MSG "Failed to current date"
-)
-configure_file(package/Dockerfile.in Dockerfile)
-configure_file(package/compose.yml.in compose.yml)
-add_custom_target(docker
-  COMMAND docker-compose build
-  COMMENT "Build container ${monolish_docker_image}"
-)

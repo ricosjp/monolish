@@ -14,6 +14,7 @@ option(MONOLISH_USE_AVX "Require AVX" ON)
 option(MONOLISH_USE_MPI "Build with MPI" OFF)
 option(MONOLISH_USE_NVIDIA_GPU "Build with NVIDIA GPU" OFF)
 option(MONOLISH_NVIDIA_GPU_ARCH_ALL "Build library for all known CUDA architectures" OFF)
+option(MONOLISH_PACKAGE_DEV "Create development package including C++ header and examples" OFF)
 option(MONOLISH_CCACHE_BUILD "Use ccache" ON)
 option_string(
   MONOLISH_NVIDIA_GPU_ARCH
