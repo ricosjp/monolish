@@ -13,8 +13,9 @@ $ sudo apt install -y wget
 monolish deb file can be downloaded from [GitHub Release page][release]:
 
 \code{shell}
+$ wget ${monolish_release_download_base}/${monolish_deb_common}
 $ wget ${monolish_release_download_base}/${monolish_deb_oss}
-$ sudo apt install -y ./${monolish_deb_oss}
+$ sudo apt install -y ./${monolish_deb_common} ./${monolish_deb_oss}
 \endcode
 
 There are two variants according to backend BLAS and LAPACK implementation:
@@ -23,15 +24,27 @@ There are two variants according to backend BLAS and LAPACK implementation:
 - [+mkl][deb_mkl] means it uses Intel MKL
 
 ## For NVIDIA GPU
+First, you need to nable CUDA 11.4 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:e
 
-In the current version, monolish for GPU cannot be installed with apt.
+\code{shell}
+$ sudo apt install -y gnupg software-properties-common
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+$ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+$ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+$ sudo apt install -y cuda-11-4
+\endcode
 
-Please use the container with [docker container with monolish installed](@ref monolish_docker).
+\code{shell}
+$ wget ${monolish_release_download_base}/${monolish_deb_common}
+$ wget ${monolish_release_download_base}/${monolish_deb_oss_nvidia}
+$ sudo apt install -y ./${monolish_deb_common} ./${monolish_deb_oss_nvidia}
+\endcode
 
-See [here](@ref build_guide).
 
 [release]: ${monolish_release_url}
 [deb_oss]: ${monolish_release_download_base}/${monolish_deb_oss}
 [deb_mkl]: ${monolish_release_download_base}/${monolish_deb_mkl}
 [deb_oss_nvidia]: ${monolish_release_download_base}/${monolish_deb_oss_nvidia}
 [deb_mkl_nvidia]: ${monolish_release_download_base}/${monolish_deb_mkl_nvidia}
+[deb_common]: ${monolish_release_download_base}/${monolish_deb_common}
