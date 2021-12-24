@@ -27,6 +27,7 @@ Unreleased
 - Document for GitLab CI process https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/407
 
 ### Fixed
+- Fix warning of nodiscard in test/ and benchmark/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/428 https://github.com/ricosjp/monolish/issues/96
 - Add GPU install guide https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/427
 - Fix Makefile bug by (https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/423) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/426
 - Add libomptarget.rtl.cuda.so in GPU deb package https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/420
