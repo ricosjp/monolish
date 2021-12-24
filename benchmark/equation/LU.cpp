@@ -17,7 +17,7 @@ bool benchmark(const size_t size, const size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (int i = 0; i < iter; i++) {
-    solver.solve(A, b);
+    bool flag = monolish::util::solver_check(solver.solve(A, b));
   }
 
   auto end = std::chrono::system_clock::now();
