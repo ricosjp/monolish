@@ -17,9 +17,9 @@
     - cmake --preset=${PRESET}
     - cmake --build build/${PRESET} --target package
     - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
-    - cmake --preset=package-dev
-    - cmake --build build/dev --target package
-    - mv build/dev/*.deb ${CI_PROJECT_DIR}
+    - cmake --preset=package-common
+    - cmake --build build/package-common --target package
+    - mv build/package-common/*.deb ${CI_PROJECT_DIR}
     - apt install -y ./$(find . -name "*.deb")
     - make -C test -j $(nproc) ${TEST_TARGET}
   artifacts:
