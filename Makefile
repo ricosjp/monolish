@@ -64,12 +64,18 @@ install: install_cpu install_gpu
 
 install_cpu: cpu
 	cmake --build build_cpu --target install
+	cmake --preset=package-common -DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR)
+	cmake --build build/package-common --target install
 
 install_gpu: gpu
 	cmake --build build_gpu --target install
+	cmake --preset=package-common -DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR)
+	cmake --build build/package-common --target install
 
 install_gpu_all: clang_gpu_all
 	cmake --build build_gpu_all --target install
+	cmake --preset=package-common -DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR)
+	cmake --build build/package-common --target install
 
 install_sxat: 
 	$(MAKE) -B -j -f Makefile.sxat install
