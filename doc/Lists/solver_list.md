@@ -25,12 +25,15 @@ In the future, we plan to implement a switch to call these libraries.
 | monolish::equation::CG                      | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::equation::BiCGSTAB                | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::equation::Jacobi                  | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | **Y** / **Y** | **Y** / **Y**          | N / N                   | **Y** / **Y**        |
-| monolish::equation::SOR                     | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | **Y** / **Y** | N / N                  | N / N                   | N / N                |
+| monolish::equation::SOR*                    | **Y** / **Y** | **Y** / **Y**  | **Y** / **Y** | **Y** / **Y** | **Y** / **Y**   | **Y** / **Y** | N / N                  | N / N                   | N / N                |
 | monolish::equation::ILU                     | N / N         | N / N          | N / N         | N / N         | **Y** / **Y**   | N / N         | N / N                  | N / N                   | N / N                |
+| monolish::equation::IC                      | N / N         | N / N          | N / N         | N / N         | **Y** / **Y**   | N / N         | N / N                  | N / N                   | N / N                |
 | monolish::standard_eigen::LOBPCG            | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::standard_eigen::DC                | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
 | monolish::generalized_eigen::LOBPCG         | **Y** / N     | **Y** / N      | **Y** / N     | **Y** / N     | **Y** / N       | **Y** / N     | **Y** / N              | N / N                   | **Y** / N            |
 | monolish::generalized_eigen::DC             | **Y** / N     | **Y** / N      | **Y** / N     | N / N         | N / N           | N / N         | N / N                  | N / N                   | N / N                |
+
+- *) SOR is not parallelization.
 
 # What libraries are called by solvers
 
@@ -48,6 +51,7 @@ In the future, we plan to implement a switch to call these libraries.
 |----------|--------------------------------|------------------|-------------------------------- |
 | LU       | todo) not impl.->MKL           | not impl.*       | todo) not impl. -> MUMPS        |
 | ILU      | todo) not impl.->monolish      | cuSPARSE         | todo) not impl. -> ????         |
+| IC       | todo) not impl.->monolish      | cuSPARSE         | todo) not impl. -> ????         |
 | Cholesky | todo) not impl.->MKL           | cuSOLVER         | todo) not impl. -> ????         |
 | QR       | todo) not impl.->MKL           | cuSOLVER         | todo) not impl. -> ????         |
 
@@ -74,8 +78,9 @@ In the future, we plan to implement a switch to call these libraries.
 | func     | MKL            | NVIDIA   | OSS       |
 |----------|----------------|----------|-----------|
 | Jacobi   | monolish       | monolish | monolish  |
-| SOR      | monolish       | monolish | monolish  |
+| SOR     | monolish       | monolish | monolish  |
 | ILU      | not impl.      | cuSPARSE | not impl. |
+| IC       | not impl.      | cuSPARSE | not impl. |
 
 # Standard Eigen Solvers
 
