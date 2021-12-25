@@ -19,6 +19,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 -->
 Unreleased
 -----------
+### Fixed
+- Fix Serious monolish container bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/430
 
 ### Changed
 - Start developing 0.15.2 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/429
