@@ -5,6 +5,10 @@ RUN apt-get update -y \
  && apt-get clean && \
  pip3 install monolish-log-viewer==0.1.1
 
+COPY monolish_common_${MONOLISH_CONTAINER_BASE_TAG}.deb /
+RUN apt install -y /monolish_common_${MONOLISH_CONTAINER_BASE_TAG}.deb \
+ && rm /monolish_common_${MONOLISH_CONTAINER_BASE_TAG}.deb
+
 COPY ${CPACK_DEBIAN_FILE_NAME} /
 RUN apt install -y /${CPACK_DEBIAN_FILE_NAME} \
  && rm ${CPACK_DEBIAN_FILE_NAME}
