@@ -24,7 +24,7 @@ There are two variants according to backend BLAS and LAPACK implementation:
 - [+mkl][deb_mkl] means it uses Intel MKL
 
 ## For NVIDIA GPU
-First, you need to nable CUDA 11.4 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:e
+First, you need to nable CUDA 11.4 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:
 
 \code{shell}
 $ sudo apt install -y gnupg software-properties-common
