@@ -30,6 +30,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   // n is the dimension of the original space
   const std::size_t n = A.get_col();
 
+  T resid;
+
   // Internal memory
   // currently 6m+(6m+3m+4) vectors are used
   matrix::Dense<T> wxp(3 * m, n);
@@ -269,6 +271,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
           view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
           blas::copy(x[j], xinout_j);
         }
+        this->final_iter = iter+1;
+        this->final_resid = residual[i];
         logger.solver_out();
         return MONOLISH_SOLVER_RESIDUAL_NAN;
       }
@@ -278,13 +282,16 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       blas::matvec(A, w[i], W[i]);
     }
 
+    resid = vml::max(residual);
     // early return when residual is small enough
-    if (vml::max(residual) < this->get_tol() &&
+    if (resid < this->get_tol() &&
         this->get_miniter() < iter + 1) {
       for (auto i = decltype(m){0}; i < m; ++i) {
         view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
         blas::copy(x[i], xinout_i);
       }
+      this->final_iter = iter+1;
+      this->final_resid = resid;
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
@@ -307,6 +314,8 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
     blas::copy(x[i], xinout_i);
   }
+  this->final_iter = this->maxiter;
+  this->final_resid = resid;
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
