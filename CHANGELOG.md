@@ -21,6 +21,7 @@ Unreleased
 -----------
 
 ### Fixed
+- remove unnecessary omp_get_wtime() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432
 - fix logger bug in equations https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432
 
 ### Changed
