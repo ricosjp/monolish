@@ -21,8 +21,9 @@ Unreleased
 -----------
 
 ### Fixed
-- remove unnecessary omp_get_wtime() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432
-- fix logger bug in equations https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432
+- Fix logger gpu sync bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/433 https://github.com/ricosjp/monolish/issues/106
+- Remove unnecessary function call https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432 https://github.com/ricosjp/monolish/issues/105
+- Fix logger bug in equations https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432 https://github.com/ricosjp/monolish/issues/104
 
 ### Changed
 - Start developing 0.15.3 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/431

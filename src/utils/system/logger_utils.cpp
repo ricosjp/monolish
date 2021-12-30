@@ -10,6 +10,10 @@ void Logger::solver_in(const std::string func_name) {
       pStream = &std::cout;
     }
 
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
+
     // init
     calls.push_back(func_name);
     times.push_back(std::chrono::system_clock::now());
@@ -37,6 +41,10 @@ void Logger::solver_out() {
     if (filename.empty()) {
       pStream = &std::cout;
     }
+
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
 
     // start
     *pStream << "- {" << std::flush;
@@ -72,6 +80,10 @@ void Logger::func_in(const std::string func_name) {
       pStream = &std::cout;
     }
 
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
+
     calls.push_back(func_name);
     times.push_back(std::chrono::system_clock::now());
   }
@@ -82,6 +94,10 @@ void Logger::func_out() {
     if (filename.empty()) {
       pStream = &std::cout;
     }
+
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
 
     // start
     *pStream << "- {" << std::flush;
@@ -115,6 +131,11 @@ void Logger::util_in(const std::string func_name) {
     if (filename.empty()) {
       pStream = &std::cout;
     }
+
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
+
     calls.push_back(func_name);
     times.push_back(std::chrono::system_clock::now());
   }
@@ -125,6 +146,10 @@ void Logger::util_out() {
     if (filename.empty()) {
       pStream = &std::cout;
     }
+
+#if MONOLISH_USE_NVIDIA_GPU
+    cudaDeviceSynchronize();
+#endif
 
     // start
     *pStream << "- {" << std::flush;
