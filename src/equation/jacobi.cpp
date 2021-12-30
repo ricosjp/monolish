@@ -134,6 +134,7 @@ int equation::Jacobi<MATRIX, T>::monolish_Jacobi(MATRIX &A, vector<T> &x,
     }
 
     if (std::isnan(nrm2)) {
+      logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
   }
