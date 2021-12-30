@@ -19,6 +19,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 -->
 Unreleased
 -----------
+### Added
+- Add get_final_resid() and get_final_iter() in equations and eigens https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/433 https://github.com/ricosjp/monolish/issues/103
 
 ### Fixed
 - Fix logger gpu sync bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/433 https://github.com/ricosjp/monolish/issues/106

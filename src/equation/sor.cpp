@@ -143,15 +143,21 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
                              << std::endl;
     }
     if (nrm2 < this->get_tol() && this->get_miniter() <= iter + 1) {
+      this->final_iter = iter + 1;
+      this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
     if (std::isnan(nrm2)) {
+      this->final_iter = iter + 1;
+      this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
   }
 
+  this->final_iter = this->maxiter;
+  this->final_resid = this->get_residual(r);
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }

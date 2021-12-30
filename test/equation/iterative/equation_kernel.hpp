@@ -36,8 +36,12 @@ bool test(const char *file, const int check_ans, const T tol) {
   // solver.set_rhistory_filename("./rhistroy.txt");
 
   if (monolish::util::solver_check(solver.solve(A, x, b))) {
+    std::cout << "final iter: " << solver.get_final_iter() << std::endl;
+    std::cout << "final resid: " << solver.get_final_residual() << std::endl;
     return false;
   }
+  std::cout << "final iter:" << solver.get_final_iter() << std::endl;
+  std::cout << "final resid:" << solver.get_final_residual() << std::endl;
 
   // std::cout << monolish::util::get_residual_l2(A,x,b) << std::endl;
 

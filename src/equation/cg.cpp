@@ -65,16 +65,22 @@ int equation::CG<MATRIX, T>::monolish_CG(MATRIX &A, vector<T> &x,
     }
 
     if (resid < this->get_tol() && this->get_miniter() <= iter + 1) {
+      this->final_iter = iter + 1;
+      this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
 
     if (std::isnan(resid)) {
+      this->final_iter = iter + 1;
+      this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
   }
 
+  this->final_iter = this->maxiter;
+  this->final_resid = this->get_residual(r);
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
 }
