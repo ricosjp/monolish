@@ -271,7 +271,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
           view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
           blas::copy(x[j], xinout_j);
         }
-        this->final_iter = iter+1;
+        this->final_iter = iter + 1;
         this->final_resid = residual[i];
         logger.solver_out();
         return MONOLISH_SOLVER_RESIDUAL_NAN;
@@ -284,13 +284,12 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
 
     resid = vml::max(residual);
     // early return when residual is small enough
-    if (resid < this->get_tol() &&
-        this->get_miniter() < iter + 1) {
+    if (resid < this->get_tol() && this->get_miniter() < iter + 1) {
       for (auto i = decltype(m){0}; i < m; ++i) {
         view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
         blas::copy(x[i], xinout_i);
       }
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = resid;
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;

@@ -317,7 +317,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
           view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
           blas::copy(x[j], xinout_j);
         }
-        this->final_iter = iter+1;
+        this->final_iter = iter + 1;
         this->final_resid = residual[i];
         logger.solver_out();
         return MONOLISH_SOLVER_RESIDUAL_NAN;
@@ -338,7 +338,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
         view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
         blas::copy(x[i], xinout_i);
       }
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = resid;
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;

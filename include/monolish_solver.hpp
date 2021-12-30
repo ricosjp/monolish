@@ -217,8 +217,8 @@ public:
    */
   int get_sigularity() { return singularity; }
 
-  double get_final_residual(){return final_resid;}
-  size_t get_final_iter(){return final_iter;}
+  double get_final_residual() { return final_resid; }
+  size_t get_final_iter() { return final_iter; }
 };
 
 /**

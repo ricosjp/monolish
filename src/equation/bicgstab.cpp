@@ -56,7 +56,7 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     rho = blas::dot(r, r0);
 
     if (rho == 0.0) {
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_BREAKDOWN;
@@ -91,7 +91,7 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     omega = blas::dot(t, s) / blas::dot(t, t);
 
     if (omega == 0.0) {
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_BREAKDOWN;
@@ -112,14 +112,14 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     }
 
     if (resid < this->get_tol() && this->get_miniter() <= iter + 1) {
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_SUCCESS;
     }
 
     if (std::isnan(resid)) {
-      this->final_iter = iter+1;
+      this->final_iter = iter + 1;
       this->final_resid = this->get_residual(r);
       logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
