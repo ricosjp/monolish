@@ -143,7 +143,7 @@ int equation::Jacobi<MATRIX, T>::monolish_Jacobi(MATRIX &A, vector<T> &x,
     }
   }
 
-  this->final_iter = iter+1;
+  this->final_iter = this->maxiter;
   this->final_resid = this->get_residual(r);
   logger.solver_out();
   return MONOLISH_SOLVER_MAXITER;
