@@ -37,6 +37,9 @@ protected:
   std::ostream *rhistory_stream;
   initvec_scheme initvecscheme = initvec_scheme::RANDOM;
 
+  double final_resid = 0;
+  size_t final_iter = 0;
+
   Float omega = 1.9; // for SOR
   int singularity;   // for sparse LU/QR/Cholesky
   int reorder = 3;   // for sparse LU/QR/Cholesky;
@@ -213,6 +216,9 @@ public:
    * This variable is only used in sparse QR/Cholesky for GPU
    */
   int get_sigularity() { return singularity; }
+
+  double get_final_residual(){return final_resid;}
+  size_t get_final_iter(){return final_iter;}
 };
 
 /**
