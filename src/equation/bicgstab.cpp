@@ -56,8 +56,8 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     rho = blas::dot(r, r0);
 
     if (rho == 0.0) {
-      printf("breakdown\n");
-      return 0;
+      logger.solver_out();
+      return MONOLISH_SOLVER_BREAKDOWN;
     }
 
     if (iter == 0) {
@@ -89,6 +89,7 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     omega = blas::dot(t, s) / blas::dot(t, t);
 
     if (omega == 0.0) {
+      logger.solver_out();
       return MONOLISH_SOLVER_BREAKDOWN;
     }
 
@@ -112,6 +113,7 @@ int equation::BiCGSTAB<MATRIX, T>::monolish_BiCGSTAB(MATRIX &A, vector<T> &x,
     }
 
     if (std::isnan(resid)) {
+      logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
 

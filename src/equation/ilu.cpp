@@ -112,7 +112,6 @@ void equation::ILU<MATRIX, T>::apply_precond(const vector<T> &r, vector<T> &z) {
   logger.solver_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  double start = omp_get_wtime();
   T *d_z = z.data();
   T *d_r = (T *)r.data();
   T *d_tmp = zbuf.data();

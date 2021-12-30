@@ -147,6 +147,7 @@ int equation::SOR<MATRIX, T>::monolish_SOR(MATRIX &A, vector<T> &x,
       return MONOLISH_SOLVER_SUCCESS;
     }
     if (std::isnan(nrm2)) {
+      logger.solver_out();
       return MONOLISH_SOLVER_RESIDUAL_NAN;
     }
   }
