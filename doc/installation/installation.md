@@ -35,10 +35,20 @@ $ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cud
 $ sudo apt install -y cuda-11-4
 \endcode
 
+Then, install monolish by following steps:
+
 \code{shell}
 $ wget ${monolish_release_download_base}/${monolish_deb_common}
 $ wget ${monolish_release_download_base}/${monolish_deb_oss_nvidia}
 $ sudo apt install -y ./${monolish_deb_common} ./${monolish_deb_oss_nvidia}
+\endcode
+
+monolish for GPU has shared libraries for each generation of GPU.
+Following commands set the path to the shared library for generation of GPU #0.
+
+\code{shell}
+$ export PATH=$PATH:/usr/local/cuda-11.4/bin/
+$ /usr/share/monolish/link_monolish_gpu.sh
 \endcode
 
 
