@@ -19,7 +19,7 @@ namespace monolish::equation {
  */
 
 /**
- * \defgroup equation monolish::equation
+ * \defgroup equation Linear equations
  * monolish no equation dayo
  * @{
  */
@@ -66,7 +66,7 @@ public:
 };
 
 /**
- * \defgroup cg CG
+ * \defgroup cg monolish::equation::CG
  * @brief CG solver 
  * @{
  */
@@ -130,7 +130,7 @@ public:
 /**@}*/
 
 /**
- * \defgroup bicgstab BiCGSTAB
+ * \defgroup bicgstab monolish::equation::BiCGSTAB
  * @brief BiCGSTAB solver
  * @{
  */

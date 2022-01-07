@@ -32,7 +32,7 @@ template <typename Float> class LinearOperator;
 /**
  * \defgroup Classes Basic Classes
  * @{
- * \defgroup COO COO
+ * \defgroup COO monolsh::matrix::COO
  * @brief Coodinate (COO) format Matrix
  * @{
  */

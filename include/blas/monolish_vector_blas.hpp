@@ -17,7 +17,7 @@ namespace monolish::blas {
 
 
 /**
- * \defgroup vecadd vecadd
+ * \defgroup vecadd monolish::blas::vecadd
  * vector add
  * @brief element by element addition of vector a and vector b.
  * @{
@@ -90,7 +90,7 @@ void vecadd(const view1D<matrix::Dense<float>,float> &a, const view1D<matrix::De
 /**@}*/
 
 /**
- * \defgroup vecsub vecsub
+ * \defgroup vecsub monolish::blas::vecsub
  * @brief element by element subtract of vector a and vector b.
  * @{
  */
@@ -162,7 +162,7 @@ void vecsub(const view1D<matrix::Dense<float>,float> &a, const view1D<matrix::De
 /**@}*/
 
 /**
- * \defgroup copy copy
+ * \defgroup copy monolish::blas::copy
  * @brief vector copy (y=x)
  * @{
  */
@@ -197,7 +197,7 @@ void copy(const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<floa
 /**@}*/
 
 /**
- * \defgroup asum asum
+ * \defgroup asum monolish::blas::asum
  * @brief vector absolute sum
  * @{
  */
@@ -237,7 +237,7 @@ void asum(const view1D<matrix::Dense<float>,float> &x, float &ans);
 /**@}*/
 
 /**
- * \defgroup sum sum
+ * \defgroup sum monolish::blas::sum
  * @brief vector sum
  * @{
  */
@@ -277,7 +277,7 @@ void sum(const view1D<matrix::Dense<float>,float> &x, float &ans);
 /**@}*/
 
 /**
- * \defgroup axpy axpy
+ * \defgroup axpy monolish::blas::axpy
  * @brief axpy: y = ax + y
  * @{
  */

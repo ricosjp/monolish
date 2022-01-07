@@ -29,7 +29,7 @@ namespace monolish {
 /**
  * \defgroup Classes Basic Classes
  * @{
- * \defgroup vector vector
+ * \defgroup vector monolish::vector
  * @brief vector class
  * @{
  */

@@ -13,13 +13,7 @@ namespace monolish::blas {
 
 echo "
 /**
- * \defgroup Functions monolish Functions
- * monolish no function dayo
- * @{
- */
-/**
- * \defgroup BLAS monolish::blas
- * monolish no blas dayo
+ * @addtogroup BLASLV1 
  * @{
  */
 "
@@ -28,7 +22,7 @@ echo "
 
 echo "
 /**
- * \defgroup vecadd vecadd
+ * \defgroup vecadd monolish::blas::vecadd
  * vector add
  * @brief element by element addition of vector a and vector b.
  * @{
@@ -58,7 +52,7 @@ echo "/**@}*/"
 ## vecsub
 echo "
 /**
- * \defgroup vecsub vecsub
+ * \defgroup vecsub monolish::blas::vecsub
  * @brief element by element subtract of vector a and vector b.
  * @{
  */
@@ -88,7 +82,7 @@ echo "/**@}*/"
 ## copy
 echo "
 /**
- * \defgroup copy copy
+ * \defgroup copy monolish::blas::copy
  * @brief vector copy (y=x)
  * @{
  */
@@ -114,7 +108,7 @@ echo "/**@}*/"
 ## asum
 echo "
 /**
- * \defgroup asum asum
+ * \defgroup asum monolish::blas::asum
  * @brief vector absolute sum
  * @{
  */
@@ -157,7 +151,7 @@ echo "/**@}*/"
 ## sum
 echo "
 /**
- * \defgroup sum sum
+ * \defgroup sum monolish::blas::sum
  * @brief vector sum
  * @{
  */
@@ -200,7 +194,7 @@ echo "/**@}*/"
 ## axpy
 echo "
 /**
- * \defgroup axpy axpy
+ * \defgroup axpy monolish::blas::axpy
  * @brief axpy: y = ax + y
  * @{
  */
@@ -223,9 +217,6 @@ for prec in double float; do
   done
 done
 
-echo "/**@}*/"
-
-echo "/**@}*/"
 echo "/**@}*/"
 
 ## axpyz
@@ -420,5 +411,6 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 
 echo "}"

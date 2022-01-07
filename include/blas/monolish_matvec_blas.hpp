@@ -15,7 +15,7 @@ namespace monolish::blas {
  */
 
 /**
- * \defgroup matvec matvec
+ * \defgroup matvec monolish::blas::matvec
  * matrix vector multiplication
  * @{
  */
