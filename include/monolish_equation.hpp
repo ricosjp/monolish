@@ -13,6 +13,18 @@
 namespace monolish::equation {
 
 /**
+ * \defgroup Solvers Solvers
+ * monolish no function dayo
+ * @{
+ */
+
+/**
+ * \defgroup equation monolish::equation
+ * monolish no equation dayo
+ * @{
+ */
+
+/**
  * @brief none solver class(nothing to do)
  * @note
  * attribute:
@@ -53,6 +65,11 @@ public:
   [[nodiscard]] std::string solver_name() const { return "none"; }
 };
 
+/**
+ * \defgroup cg CG
+ * @brief CG solver 
+ * @{
+ */
 /**
  * @brief CG solver class
  * @note
@@ -110,6 +127,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "CG"; }
 };
+/**@}*/
+
+/**
+ * \defgroup bicgstab BiCGSTAB
+ * @brief BiCGSTAB solver
+ * @{
+ */
 
 /**
  * @brief BiCGSTAB solver class
@@ -171,6 +195,7 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "BiCGSTAB"; }
 };
+/**@}*/
 
 /**
  * @brief Jacobi solver class
@@ -566,5 +591,7 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "Cholesky"; }
 };
+/**@}*/
+/**@}*/
 
 } // namespace monolish::equation

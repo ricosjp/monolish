@@ -30,6 +30,14 @@ template <typename Float> class CRS;
 template <typename Float> class LinearOperator;
 
 /**
+ * \defgroup Classes Basic Classes
+ * @{
+ * \defgroup COO COO
+ * @brief Coodinate (COO) format Matrix
+ * @{
+ */
+
+/**
  * @brief Coodinate (COO) format Matrix (need to sort)
  * @note
  * - Multi-threading: true
@@ -681,6 +689,8 @@ public:
    **/
   void sort(bool merge);
 };
+/**@}*/
+/**@}*/
 
 } // namespace matrix
 } // namespace monolish

@@ -10,6 +10,16 @@
 namespace monolish::blas {
 
 /**
+ * @addtogroup BLASLV2 
+ * @{
+ */
+
+/**
+ * \defgroup matvec matvec
+ * matrix vector multiplication
+ * @{
+ */
+/**
  * @brief Dense matrix and vector multiplication: y = Ax
  * @param A Dense matrix (size M x N)
  * @param x monolish vector (size M)
@@ -174,6 +184,7 @@ void matvec(const matrix::LinearOperator<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y);
 
+/**@}*/
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax
  * @param A LinearOperator (size M x N)
@@ -228,4 +239,5 @@ void rmatvec(const matrix::LinearOperator<float> &A,
 void rmatvec(const matrix::LinearOperator<float> &A,
              const view1D<matrix::Dense<float>, float> &x,
              view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 } // namespace monolish::blas

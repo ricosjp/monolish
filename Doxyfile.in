@@ -829,7 +829,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT = ${PROJECT_SOURCE_DIR}/include/ \
+INPUT = ${PROJECT_SOURCE_DIR}/include/monolish_doxygen_list.hpp \
+        ${PROJECT_SOURCE_DIR}/include/ \
         ${CMAKE_CURRENT_BINARY_DIR}/doc/
 
 # This tag can be used to specify the character encoding of the source files

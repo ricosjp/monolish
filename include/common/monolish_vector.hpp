@@ -27,6 +27,14 @@
 namespace monolish {
 
 /**
+ * \defgroup Classes Basic Classes
+ * @{
+ * \defgroup vector vector
+ * @brief vector class
+ * @{
+ */
+
+/**
  * @brief vector class
  * @note
  * - Multi-threading: true
@@ -541,4 +549,6 @@ public:
    **/
   bool operator!=(const view1D<matrix::Dense<Float>, Float> &vec) const;
 };
+/**@}*/
+/**@}*/
 } // namespace monolish
