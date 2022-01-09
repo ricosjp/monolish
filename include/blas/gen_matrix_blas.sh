@@ -44,7 +44,7 @@ echo "/**@}*/"
 ## copy CRS
 echo "
 /**
- * \defgroup mat_copy_crs monolish::blas::copy (Dense)
+ * \defgroup mat_copy_crs monolish::blas::copy (CRS)
  * @brief CRS matrix copy (y=a)
  * @{
  */

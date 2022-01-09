@@ -36,7 +36,7 @@ void copy(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 /**@}*/
 
 /**
- * \defgroup mat_copy_crs monolish::blas::copy (Dense)
+ * \defgroup mat_copy_crs monolish::blas::copy (CRS)
  * @brief CRS matrix copy (y=a)
  * @{
  */
