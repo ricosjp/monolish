@@ -50,7 +50,6 @@ void matvec(const matrix::Dense<float> &A, const view1D<vector<float>,float> &x,
 void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,float> &x, vector<float> &y);
 void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
-
 /**@}*/
 
 /**
@@ -87,7 +86,6 @@ void matvec(const matrix::CRS<float> &A, const view1D<vector<float>,float> &x, v
 void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float> &x, vector<float> &y);
 void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
-
 /**@}*/
 
 /**
@@ -123,7 +121,6 @@ void matvec(const matrix::LinearOperator<float> &A, const view1D<vector<float>,f
 void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, vector<float> &y);
 void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
-
 /**@}*/
 
 /**

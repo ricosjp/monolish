@@ -44,7 +44,6 @@ for prec in double float; do
   done
 done
 
-echo ""
 echo "/**@}*/"
 
 ## matvec CRS
@@ -73,7 +72,6 @@ for prec in double float; do
   done
 done
 
-echo ""
 echo "/**@}*/"
 
 ## matvec LinearOperator
@@ -101,7 +99,6 @@ for prec in double float; do
   done
 done
 
-echo ""
 echo "/**@}*/"
 
 ## rmatvec LinearOperator
