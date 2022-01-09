@@ -18,7 +18,6 @@ namespace monolish::blas {
 
 /**
  * \defgroup vecadd monolish::blas::vecadd
- * vector add
  * @brief element by element addition of vector a and vector b.
  * @{
  */
@@ -167,9 +166,9 @@ void vecsub(const view1D<matrix::Dense<float>,float> &a, const view1D<matrix::De
  * @{
  */
 /**
- * @brief vector\<float\> copy (y=x)
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
+ * @brief vector copy (y=x)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -202,8 +201,8 @@ void copy(const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<floa
  * @{
  */
 /**
- * @brief vector\<float\> asum (absolute sum)
- * @param x monolish vector\<float\> (size N)
+ * @brief vector absolute sum
+ * @param x monolish vector (size N)
  * @param ans The result of the asum
  * @note
  * - # of computation: N
@@ -219,8 +218,8 @@ void asum(const view1D<vector<float>,float> &x, float &ans);
 void asum(const view1D<matrix::Dense<float>,float> &x, float &ans);
 
 /**
- * @brief vector\<float\> asum (absolute sum)
- * @param x monolish vector\<float\> (size N)
+ * @brief vector absolute sum
+ * @param x monolish vector (size N)
  * @return The result of the asum
  * @note
  * - # of computation: N
@@ -242,8 +241,8 @@ void asum(const view1D<matrix::Dense<float>,float> &x, float &ans);
  * @{
  */
 /**
- * @brief vector\<float\> sum
- * @param x monolish vector\<float\> (size N)
+ * @brief vector sum
+ * @param x monolish vector (size N)
  * @param ans The result of the sum
  * @note
  * - # of computation: N
@@ -284,8 +283,8 @@ void sum(const view1D<matrix::Dense<float>,float> &x, float &ans);
 /**
  * @brief axpy: y = ax + y
  * @param alpha scalar value
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -312,12 +311,18 @@ void axpy(const float alpha, const view1D<matrix::Dense<float>,float> &x, view1D
 void axpy(const float alpha, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
 /**@}*/
 
+
+/**
+ * \defgroup axpyz monolish::blas::axpyz
+ * @brief axpy: z = ax + y
+ * @{
+ */
 /**
  * @brief axpyz: z = ax + y
  * @param alpha scalar value
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
- * @param z monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @param z monolish vector (size N)
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -378,12 +383,18 @@ void axpyz(const float alpha, const view1D<matrix::Dense<float>,float> &x, const
 void axpyz(const float alpha, const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense<float>,float> &y, vector<float> &z);
 void axpyz(const float alpha, const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense<float>,float> &y, view1D<vector<float>,float> &z);
 void axpyz(const float alpha, const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense<float>,float> &y, view1D<matrix::Dense<float>,float> &z);
+/**@}*/
 
 
 /**
+ * \defgroup dot monolish::blas::dot
  * @brief inner product (dot)
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
+ * @{
+ */
+/**
+ * @brief inner product (dot)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
  * @param ans The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
@@ -413,8 +424,8 @@ void dot(const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense
 
 /**
  * @brief inner product (dot)
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
  * @return The result of the inner product product of x and y
  * @note
  * - # of computation: 2N
@@ -440,11 +451,17 @@ void dot(const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense
 [[nodiscard]] float dot(const view1D<matrix::Dense<float>,float> &x, const vector<float> &y);
 [[nodiscard]] float dot(const view1D<matrix::Dense<float>,float> &x, const view1D<vector<float>,float> &y);
 [[nodiscard]] float dot(const view1D<matrix::Dense<float>,float> &x, const view1D<matrix::Dense<float>,float> &y);
+/**@}*/
 
 
 /**
+ * \defgroup nrm1 monolish::blas::nrm1
  * @brief nrm1: sum(abs(x[0:N]))
- * @param x monolish vector\<float\> (size N)
+ * @{
+ */
+/**
+ * @brief nrm1: sum(abs(x[0:N]))
+ * @param x monolish vector (size N)
  * @param ans The result of the nrm1
  * @note
  * - # of computation: N
@@ -462,7 +479,7 @@ void nrm1(const view1D<matrix::Dense<float>,float> &x, float &ans);
 
 /**
  * @brief nrm1: sum(abs(x[0:N]))
- * @param x monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
  * @return The result of the nrm1
  * @note
  * - # of computation: 2N
@@ -476,11 +493,17 @@ void nrm1(const view1D<matrix::Dense<float>,float> &x, float &ans);
 [[nodiscard]] float nrm1(const vector<float> &x);
 [[nodiscard]] float nrm1(const view1D<vector<float>,float> &x);
 [[nodiscard]] float nrm1(const view1D<matrix::Dense<float>,float> &x);
+/**@}*/
 
 
 /**
+ * \defgroup nrm2 monolish::blas::nrm2
  * @brief nrm2: ||x||_2
- * @param x monolish vector\<float\> (size N)
+ * @{
+ */
+/**
+ * @brief nrm2: ||x||_2
+ * @param x monolish vector (size N)
  * @param ans The result of the nrm2
  * @note
  * - # of computation: 2N
@@ -498,7 +521,7 @@ void nrm2(const view1D<matrix::Dense<float>,float> &x, float &ans);
 
 /**
  * @brief nrm2: ||x||_2
- * @param x monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
  * @return The result of the nrm2
  * @note
  * - # of computation: 2N
@@ -512,12 +535,18 @@ void nrm2(const view1D<matrix::Dense<float>,float> &x, float &ans);
 [[nodiscard]] float nrm2(const vector<float> &x);
 [[nodiscard]] float nrm2(const view1D<vector<float>,float> &x);
 [[nodiscard]] float nrm2(const view1D<matrix::Dense<float>,float> &x);
+/**@}*/
 
 
 /**
+ * \defgroup scal monolish::blas::scal
+ * @brief scal: x = alpha * x
+ * @{
+ */
+/**
  * @brief scal: x = alpha * x
  * @param alpha scalar value
- * @param x monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
  * @note
  * - # of computation: N
  * - Multi-threading: true
@@ -530,13 +559,19 @@ void scal(const double alpha, view1D<matrix::Dense<double>,double> &x);
 void scal(const float alpha, vector<float> &x);
 void scal(const float alpha, view1D<vector<float>,float> &x);
 void scal(const float alpha, view1D<matrix::Dense<float>,float> &x);
+/**@}*/
 
 
 /**
+ * \defgroup xpay monolish::blas::xpay
+ * @brief xpay: y = x + ay
+ * @{
+ */
+/**
  * @brief xpay: y = x + ay
  * @param alpha scalar value
- * @param x monolish vector\<float\> (size N)
- * @param y monolish vector\<float\> (size N)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
  * @note
  * - # of computation: 2N
  * - Multi-threading: true
@@ -561,5 +596,6 @@ void xpay(const float alpha, const view1D<vector<float>,float> &x, view1D<matrix
 void xpay(const float alpha, const view1D<matrix::Dense<float>,float> &x, vector<float> &y);
 void xpay(const float alpha, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void xpay(const float alpha, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
+/**@}*/
 /**@}*/
 }
