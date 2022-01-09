@@ -161,7 +161,7 @@ void vecsub(const view1D<matrix::Dense<float>,float> &a, const view1D<matrix::De
 /**@}*/
 
 /**
- * \defgroup copy monolish::blas::copy
+ * \defgroup copy monolish::blas::copy (vector)
  * @brief vector copy (y=x)
  * @{
  */

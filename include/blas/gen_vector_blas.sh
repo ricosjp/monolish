@@ -81,7 +81,7 @@ echo "/**@}*/"
 ## copy
 echo "
 /**
- * \defgroup copy monolish::blas::copy
+ * \defgroup copy monolish::blas::copy (vector)
  * @brief vector copy (y=x)
  * @{
  */
