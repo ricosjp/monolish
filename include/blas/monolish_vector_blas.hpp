@@ -11,7 +11,7 @@ namespace monolish::blas {
 
 
 /**
- * @addtogroup BLASLV1 
+ * @addtogroup BLASLV1
  * @{
  */
 
