@@ -11,6 +11,17 @@ namespace monolish::blas {
 
 
 /**
+ * @addtogroup BLASLV2
+ * @{
+ */
+
+
+/**
+ * \defgroup matvec_dense monolish::blas::matvec (Dense)
+ * @brief Dense matrix and vector multiplication: y = Ax
+ * @{
+ */
+/**
  * @brief Dense matrix and vector multiplication: y = Ax
  * @param A Dense matrix (size M x N)
  * @param x monolish vector (size M)
@@ -40,9 +51,15 @@ void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,flo
 void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::Dense<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
 
+/**@}*/
 
 /**
- * @brief sparse matrix (CRS) and vector multiplication: y = Ax
+ * \defgroup matvec_crs monolish::blas::matvec (CRS)
+ * @brief CRS format sparse matrix and vector multiplication: y = Ax
+ * @{
+ */
+/**
+ * @brief CRS format sparse matrix and vector multiplication: y = Ax
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
  * @param y monolish vector (size M)
@@ -71,7 +88,13 @@ void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float
 void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::CRS<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
 
+/**@}*/
 
+/**
+ * \defgroup matvec_LO monolish::blas::matvec (LinearOperator)
+ * @brief LinearOperator matrix and vector multiplication: y = Ax
+ * @{
+ */
 /**
  * @brief matrix (LinearOperator) and vector multiplication: y = Ax
  * @param A LinearOperator (size M x N)
@@ -101,8 +124,15 @@ void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<f
 void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void matvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
 
+/**@}*/
+
 /**
- * @brief matrix (LinearOperator) and vector multiplication: y = Ax
+ * \defgroup rmatvec_LO monolish::blas::rmatvec (LinearOperator)
+ * @brief Adjoint LinearOperator matrix and vector multiplication: y = A^Hx
+ * @{
+ */
+/**
+ * @brief Adjoint LinearOperator matrix and vector multiplication: y = A^Hx
  * @param A LinearOperator (size M x N)
  * @param x monolish vector (size N)
  * @param y monolish vector (size M)
@@ -129,4 +159,6 @@ void rmatvec(const matrix::LinearOperator<float> &A, const view1D<vector<float>,
 void rmatvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, vector<float> &y);
 void rmatvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<vector<float>,float> &y);
 void rmatvec(const matrix::LinearOperator<float> &A, const view1D<matrix::Dense<float>,float> &x, view1D<matrix::Dense<float>,float> &y);
+/**@}*/
+/**@}*/
 }
