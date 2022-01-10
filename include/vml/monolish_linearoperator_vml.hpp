@@ -11,8 +11,18 @@ namespace monolish::vml {
 
 
 /**
- * @brief element by element addition LinearOperator matrix A and
- * LinearOperator matrix B.
+ * @addtogroup LO_VML
+ * @{
+ */
+
+
+/**
+ * \defgroup vml_LOadd monolish::vml::add
+ * @brief element by element addition LinearOperator matrix A and LinearOperator matrix B.
+ * @{
+ */
+/**
+ * @brief element by element addition LinearOperator matrix A and LinearOperator matrix B.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param B monolish LinearOperator Matrix (size M x N)
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -23,10 +33,15 @@ namespace monolish::vml {
 */ 
 void add(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<double> &C);
 void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
+/**@}*/
 
 /**
- * @brief element by element subtract LinearOperator matrix A and
- * LinearOperator matrix B.
+ * \defgroup vml_LOsub monolish::vml::sub
+ * @brief element by element subtract LinearOperator matrix A and LinearOperator matrix B.
+ * @{
+ */
+/**
+ * @brief element by element subtract LinearOperator matrix A and LinearOperator matrix B.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param B monolish LinearOperator Matrix (size M x N)
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -37,11 +52,16 @@ void add(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
 */ 
 void sub(const matrix::LinearOperator<double> &A, const matrix::LinearOperator<double> &B, matrix::LinearOperator<double> &C);
 void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<float> &B, matrix::LinearOperator<float> &C);
+/**@}*/
 
 
 /**
- * @brief element by element addition LinearOperator matrix A and
- * LinearOperator matrix B.
+ * \defgroup vml_sLOadd monolish::vml::add
+ * @brief element by element addition scalar alpha and LinearOperator matrix A.
+ * @{
+ */
+/**
+ * @brief element by element addition scalar alpha and LinearOperator matrix A.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -52,10 +72,15 @@ void sub(const matrix::LinearOperator<float> &A, const matrix::LinearOperator<fl
 */ 
 void add(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
 void add(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+/**@}*/
 
 /**
- * @brief element by element subtract LinearOperator matrix A and
- * LinearOperator matrix B.
+ * \defgroup vml_sLOsub monolish::vml::sub
+ * @brief element by element subtract scalar alpha and LinearOperator matrix A.
+ * @{
+ */
+/**
+ * @brief element by element subtract scalar alpha and LinearOperator matrix A.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -66,10 +91,15 @@ void add(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
 */ 
 void sub(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
 void sub(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+/**@}*/
 
 /**
- * @brief element by element multiplication LinearOperator matrix A and
- * LinearOperator matrix B.
+ * \defgroup vml_sLOmul monolish::vml::mul
+ * @brief element by element multiplication scalar alpha and LinearOperator matrix A.
+ * @{
+ */
+/**
+ * @brief element by element multiplication scalar alpha and LinearOperator matrix A.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -80,10 +110,15 @@ void sub(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
 */ 
 void mul(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
 void mul(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+/**@}*/
 
 /**
- * @brief element by element division LinearOperator matrix A and
- * LinearOperator matrix B.
+ * \defgroup vml_sLOdiv monolish::vml::div
+ * @brief element by element division scalar alpha and LinearOperator matrix A.
+ * @{
+ */
+/**
+ * @brief element by element division scalar alpha and LinearOperator matrix A.
  * @param A monolish LinearOperator Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish LinearOperator Matrix (size M x N)
@@ -94,4 +129,6 @@ void mul(const matrix::LinearOperator<float> &A, const float &alpha, matrix::Lin
 */ 
 void div(const matrix::LinearOperator<double> &A, const double &alpha, matrix::LinearOperator<double> &C);
 void div(const matrix::LinearOperator<float> &A, const float &alpha, matrix::LinearOperator<float> &C);
+/**@}*/
+/**@}*/
 }
