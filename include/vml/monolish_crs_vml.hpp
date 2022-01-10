@@ -11,6 +11,17 @@ namespace monolish::vml {
 
 
 /**
+ * @addtogroup CRS_VML
+ * @{
+ */
+
+
+/**
+ * \defgroup vml_crsadd monolish::vml::add
+ * @brief element by element addition CRS matrix A and CRS matrix B.
+ * @{
+ */
+/**
  * @brief element by element addition CRS matrix A and
  * CRS matrix B.
  * @param A monolish CRS Matrix (size M x N)
@@ -26,7 +37,13 @@ namespace monolish::vml {
 */ 
 void add(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crssub monolish::vml::sub
+ * @brief element by element subtract CRS matrix A and CRS matrix B.
+ * @{
+ */
 /**
  * @brief element by element subtract CRS matrix A and
  * CRS matrix B.
@@ -43,7 +60,13 @@ void add(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void sub(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsmul monolish::vml::mul
+ * @brief element by element multiplication CRS matrix A and CRS matrix B.
+ * @{
+ */
 /**
  * @brief element by element multiplication CRS matrix A and
  * CRS matrix B.
@@ -60,7 +83,13 @@ void sub(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void mul(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsdiv monolish::vml::div
+ * @brief element by element division CRS matrix A and CRS matrix B.
+ * @{
+ */
 /**
  * @brief element by element division CRS matrix A and
  * CRS matrix B.
@@ -77,11 +106,16 @@ void mul(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void div(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
 
 /**
- * @brief element by element addition CRS matrix A and
- * CRS matrix B.
+ * \defgroup vml_scrsadd monolish::vml::add
+ * @brief element by element addition scalar alpha and CRS matrix A.
+ * @{
+ */
+/**
+ * @brief element by element addition scalar alpha and CRS matrix A.
  * @param A monolish CRS Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish CRS Matrix (size M x N)
@@ -95,10 +129,15 @@ void div(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void add(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C);
 void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
 
 /**
- * @brief element by element subtract CRS matrix A and
- * CRS matrix B.
+ * \defgroup vml_scrssub monolish::vml::sub
+ * @brief element by element subtract scalar alpha and CRS matrix A.
+ * @{
+ */
+/**
+ * @brief element by element subtract scalar alpha and CRS matrix A.
  * @param A monolish CRS Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish CRS Matrix (size M x N)
@@ -112,10 +151,15 @@ void add(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 */ 
 void sub(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C);
 void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
 
 /**
- * @brief element by element multiplication CRS matrix A and
- * CRS matrix B.
+ * \defgroup vml_scrsmul monolish::vml::mul
+ * @brief element by element multiplication scalar alpha and CRS matrix A.
+ * @{
+ */
+/**
+ * @brief element by element multiplication scalar alpha and CRS matrix A.
  * @param A monolish CRS Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish CRS Matrix (size M x N)
@@ -129,10 +173,15 @@ void sub(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 */ 
 void mul(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C);
 void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
 
 /**
- * @brief element by element division CRS matrix A and
- * CRS matrix B.
+ * \defgroup vml_scrsdiv monolish::vml::div
+ * @brief element by element division scalar alpha and CRS matrix A.
+ * @{
+ */
+/**
+ * @brief element by element division scalar alpha and CRS matrix A.
  * @param A monolish CRS Matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish CRS Matrix (size M x N)
@@ -146,10 +195,16 @@ void mul(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 */ 
 void div(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C);
 void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
 
 
 /**
- *@brief power to CRS matrix elements CRS matrix (C[0:N] = pow(A[0:N], B[0:N]))
+ * \defgroup vml_crspow monolish::vml::pow
+ * @brief power to CRS matrix elements (C[0:N] = pow(A[0:N], B[0:N]))
+ * @{
+ */
+/**
+ *@brief power to CRS matrix elements (C[0:N] = pow(A[0:N], B[0:N]))
  * @param A monolish CRS Matrix (size M x N)
  * @param B monolish CRS Matrix (size M x N)
  * @param C monolish CRS Matrix (size M x N)
@@ -162,7 +217,13 @@ void div(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 */ 
 void pow(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_scrspow monolish::vml::pow
+ * @brief power to CRS matrix elements by scalar value (C[0:N] = pow(A[0:N], alpha))
+ * @{
+ */
 /**
  * @brief power to CRS matrix elements by scalar value (C[0:N] = pow(A[0:N], alpha))
  * @param A monolish CRS Matrix (size M x N)
@@ -177,8 +238,14 @@ void pow(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void pow(const matrix::CRS<double> &A, const double alpha, matrix::CRS<double> &C);
 void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
 
 
+/**
+ * \defgroup vml_crssin monolish::vml::sin
+ * @brief sin to CRS matrix elements (C[0:nnz] = sin(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief sin to CRS matrix elements (C[0:nnz] = sin(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -192,7 +259,13 @@ void pow(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
 */ 
 void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crssqrt monolish::vml::sqrt
+ * @brief sqrt to CRS matrix elements (C[0:nnz] = sqrt(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief sqrt to CRS matrix elements (C[0:nnz] = sqrt(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -206,7 +279,13 @@ void sin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void sqrt(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crssinh monolish::vml::sinh
+ * @brief sinh to CRS matrix elements (C[0:nnz] = sinh(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief sinh to CRS matrix elements (C[0:nnz] = sinh(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -220,7 +299,13 @@ void sqrt(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void sinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsasin monolish::vml::asin
+ * @brief asin to CRS matrix elements (C[0:nnz] = asin(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief asin to CRS matrix elements (C[0:nnz] = asin(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -234,7 +319,13 @@ void sinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void asin(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsasinh monolish::vml::asinh
+ * @brief asinh to CRS matrix elements (C[0:nnz] = asinh(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief asinh to CRS matrix elements (C[0:nnz] = asinh(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -248,7 +339,13 @@ void asin(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void asinh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crstan monolish::vml::tan
+ * @brief tan to CRS matrix elements (C[0:nnz] = tan(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief tan to CRS matrix elements (C[0:nnz] = tan(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -262,7 +359,13 @@ void asinh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void tan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crstanh monolish::vml::tanh
+ * @brief tanh to CRS matrix elements (C[0:nnz] = tanh(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief tanh to CRS matrix elements (C[0:nnz] = tanh(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -276,7 +379,13 @@ void tan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void tanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsatan monolish::vml::atan
+ * @brief atan to CRS matrix elements (C[0:nnz] = atan(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief atan to CRS matrix elements (C[0:nnz] = atan(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -290,7 +399,13 @@ void tanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void atan(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsatanh monolish::vml::atanh
+ * @brief atanh to CRS matrix elements (C[0:nnz] = atanh(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief atanh to CRS matrix elements (C[0:nnz] = atanh(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -304,7 +419,13 @@ void atan(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void atanh(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsceil monolish::vml::ceil
+ * @brief ceil to CRS matrix elements (C[0:nnz] = ceil(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief ceil to CRS matrix elements (C[0:nnz] = ceil(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -318,7 +439,13 @@ void atanh(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void ceil(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsfloor monolish::vml::floor
+ * @brief floor to CRS matrix elements (C[0:nnz] = floor(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief floor to CRS matrix elements (C[0:nnz] = floor(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -332,7 +459,13 @@ void ceil(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void floor(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crssign monolish::vml::sign
+ * @brief sign to CRS matrix elements (C[0:nnz] = sign(A[0:nnz]))
+ * @{
+ */
 /**
  * @brief sign to CRS matrix elements (C[0:nnz] = sign(A[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -346,8 +479,14 @@ void floor(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void sign(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 
 
+/**
+ * \defgroup vml_crscrsmax monolish::vml::max
+ * @brief Create a new CRS matrix with greatest elements of two matrices (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
+ * @{
+ */
 /**
  * @brief Create a new CRS matrix with greatest elements of two matrices (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -363,7 +502,13 @@ void sign(const matrix::CRS<float> &A, matrix::CRS<float> &C);
 */ 
 void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crscrsmin monolish::vml::min
+ * @brief Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
+ * @{
+ */
 /**
  * @brief Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
  * @param A monolish CRS matrix (size M x N)
@@ -379,8 +524,14 @@ void max(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B, matrix::CRS<double> &C);
 void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<float> &C);
+/**@}*/
 
 
+/**
+ * \defgroup vml_crsmax monolish::vml::max
+ * @brief Finds the greatest element in CRS matrix (max(C[0:nnz]))
+ * @{
+ */
 /**
  * @brief Finds the greatest element in CRS matrix (max(C[0:nnz]))
  * @param C monolish CRS matrix (size M x N)
@@ -394,7 +545,13 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 [[nodiscard]] double max(const matrix::CRS<double> &C);
 [[nodiscard]] float max(const matrix::CRS<float> &C);
+/**@}*/
 
+/**
+ * \defgroup vml_crsmin monolish::vml::min
+ * @brief Finds the smallest element in CRS matrix (min(C[0:nnz]))
+ * @{
+ */
 /**
  * @brief Finds the smallest element in CRS matrix (min(C[0:nnz]))
  * @param C monolish CRS matrix (size M x N)
@@ -408,8 +565,14 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 [[nodiscard]] double min(const matrix::CRS<double> &C);
 [[nodiscard]] float min(const matrix::CRS<float> &C);
+/**@}*/
 
 
+/**
+ * \defgroup vml_crsreciprocal monolish::vml::reciprocal
+ * @brief reciprocal to CRS matrix elements (C[0:nnz] = 1 / A[0:nnz])
+ * @{
+ */
 /**
  * @brief reciprocal to CRS matrix elements (C[0:nnz] = 1 / A[0:nnz])
  * @param A monolish CRS matrix (size M x N)
@@ -423,4 +586,5 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B, matrix::CRS<f
 */ 
 void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C);
 void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C);
+/**@}*/
 }
