@@ -48,6 +48,7 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 done
 
 echo ""
@@ -56,7 +57,12 @@ echo ""
 for i in ${!detail[@]}; do
 echo "
 /**
- * @brief element by element ${detail[$i]} of vector a and vector b.
+ * \defgroup vml_svec${func[$i]} monolish::vml::${func[$i]}
+ * @brief element by element ${detail[$i]} of scalar alpha and vector a.
+ * @{
+ */
+/**
+ * @brief element by element ${detail[$i]} of scalar alpha and vector a.
  * @param a monolish vector (size N)
  * @param alpha scalar value
  * @param y monolish vector (size N)
@@ -73,6 +79,7 @@ echo "
       done
     done
   done
+echo "/**@}*/"
 done
 
 echo ""
@@ -80,6 +87,11 @@ echo ""
 
 ## vector-vector pow
 echo "
+/**
+ * \defgroup vml_vecpow monolish::vml::pow
+ * @brief power to vector elements by double precision vector(y[0:N] = pow(a[0:N], b[0]:N]))
+ * @{
+ */
 /**
  * @brief power to vector elements by double precision vector
  *(y[0:N] = pow(a[0:N], b[0]:N]))
@@ -101,11 +113,15 @@ for prec in double float; do
     done
   done
 done
-
-echo ""
+echo "/**@}*/"
 
 ## scalar-vector pow
 echo "
+/**
+ * \defgroup vml_svecpow monolish::vml::pow
+ * @brief power to vector elements by double precision scalar value (y[0:N] = pow(a[0:N], alpha))
+ * @{
+ */
 /**
  * @brief power to vector elements by double precision scalar
  *value (y[0:N] = pow(a[0:N], alpha))
@@ -126,7 +142,7 @@ for prec in double float; do
   done
 done
 
-echo ""
+echo "/**@}*/"
 #############################################
 
 
@@ -134,6 +150,11 @@ echo ""
 math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign)
 for math in ${math[@]}; do
 echo "
+/**
+ * \defgroup vml_vec$math monolish::vml::$math
+ * @brief $math to vector elements (y[0:N] = $math(a[0:N]))
+ * @{
+ */
 /**
  * @brief $math to vector elements (y[0:N] = $math(a[0:N]))
  * @param a monolish vector (size N)
@@ -150,6 +171,7 @@ echo "
       done
     done
   done
+echo "/**@}*/"
 done
 
 echo ""
@@ -160,6 +182,11 @@ detail=(greatest smallest)
 func=(max min)
 for i in ${!detail[@]}; do
 echo "
+/**
+ * \defgroup vml_vvec${func[$i]} monolish::vml::${func[$i]}
+ * @brief Create a new vector with ${detail[$i]} elements of two matrices (y[0:N] = ${func[$i]}(a[0:N], b[0:N]))
+ * @{
+ */
 /**
  * @brief Create a new vector with ${detail[$i]} elements of two matrices (y[0:N] = ${func[$i]}(a[0:N], b[0:N]))
  * @param a monolish vector (size N)
@@ -180,6 +207,7 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 done
 
 echo ""
@@ -189,6 +217,11 @@ detail=(greatest smallest)
 func=(max min)
 for i in ${!detail[@]}; do
 echo "
+/**
+ * \defgroup vml_vec${func[$i]} monolish::vml::${func[$i]}
+ * @brief Finds the ${detail[$i]} element in vector (${func[$i]}(y[0:N]))
+ * @{
+ */
 /**
  * @brief Finds the ${detail[$i]} element in vector (${func[$i]}(y[0:N]))
  * @param y monolish vector (size N)
@@ -203,6 +236,7 @@ for prec in double float; do
     echo "[[nodiscard]] $prec ${func[$i]}(const $arg1 &y);"
   done
 done
+echo "/**@}*/"
 done
 
 echo ""
@@ -212,7 +246,12 @@ echo ""
 math=reciprocal
 echo "
 /**
- * @brief reciprocal to double precision vector elements (y[0:N] = 1 / a[0:N])
+ * \defgroup vml_vec$math monolish::vml::$math
+ * @brief $math to double precision vector elements (y[0:N] = 1 / a[0:N])
+ * @{
+ */
+/**
+ * @brief $math to double precision vector elements (y[0:N] = 1 / a[0:N])
  * @param a monolish vector (size N)
  * @param y monolish vector (size N)
  * @note
@@ -227,6 +266,7 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 
 echo "/**@}*/"
 echo "}"
