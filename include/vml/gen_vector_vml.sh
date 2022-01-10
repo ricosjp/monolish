@@ -89,7 +89,7 @@ echo ""
 echo "
 /**
  * \defgroup vml_vecpow monolish::vml::pow
- * @brief power to vector elements by double precision vector(y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to vector elements by double precision vector (y[0:N] = pow(a[0:N], b[0]:N]))
  * @{
  */
 /**

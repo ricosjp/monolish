@@ -412,7 +412,7 @@ void div(const view1D<vector<float>,float> &a, const float alpha, view1D<vector<
 
 /**
  * \defgroup vml_vecpow monolish::vml::pow
- * @brief power to vector elements by double precision vector(y[0:N] = pow(a[0:N], b[0]:N]))
+ * @brief power to vector elements by double precision vector (y[0:N] = pow(a[0:N], b[0]:N]))
  * @{
  */
 /**
