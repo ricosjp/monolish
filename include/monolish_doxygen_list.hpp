@@ -1,7 +1,8 @@
 /**
  * \defgroup Classes Basic Classes
  * \defgroup Operations BLAS
- * @brief Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and Scalar
+ * @brief Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix,
+ * Vector and Scalar
  * @{
  * \defgroup BLASLV1 Vector Operations
  * @brief BLAS Lv1 vector operations
@@ -20,7 +21,7 @@
  * \defgroup CRS_VML VML for CRS
  * @brief VML for CRS matrix
  * \defgroup LO_VML VML for LinearOperator
- * @brief VML for LinearOperator 
+ * @brief VML for LinearOperator
  * @}
  * \defgroup Solvers Solvers
-*/
+ */
