@@ -39,10 +39,11 @@ Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for mor
 - [GPU Examples](@ref gpu_dev)
 
 ### API Overview
-- [Data types](@ref data_type)
-- [Supported Operations](@ref oplist)
-- [Linear Solvers](@ref solverlist)
-- [Performance logging and find bottlenecks](@ref logger)
+- [**Modules**](./modules.html)
+  - [Data types](@ref data_type)
+  - [Supported Operations](@ref oplist)
+  - [Linear Solvers](@ref solverlist)
+  - [Performance logging and find bottlenecks](@ref logger)
 
 ## For Developers
 - [Build monolish from source code](@ref build_guide)
@@ -53,13 +54,13 @@ Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for mor
 - [Publications](@ref publications)
 
 ## Links
-- [Source code](https://github.com/ricosjp/monolish/)
-- [Documentation](https://ricosjp.github.io/monolish/)
-- [Bug reports](https://github.com/ricosjp/monolish/issues)
-- [Releases](https://github.com/ricosjp/monolish/releases)
-- [Changelog](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
-- [Licence](https://github.com/ricosjp/monolish/blob/master/LICENSE)
-- [monolish log viewer](https://pypi.org/project/monolish-log-viewer/)
-- [Continuous benchmarking](https://ricosjp.github.io/monolish_benchmark_result/)
+- [**Source code**](https://github.com/ricosjp/monolish/)
+- [**Documentation**](https://ricosjp.github.io/monolish/)
+- [**Bug reports**](https://github.com/ricosjp/monolish/issues)
+- [**Releases**](https://github.com/ricosjp/monolish/releases)
+- [**Changelog**](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md)
+- [**Licence**](https://github.com/ricosjp/monolish/blob/master/LICENSE)
+- [**monolish log viewer**](https://pypi.org/project/monolish-log-viewer/)
+- [**Continuous benchmarking**](https://ricosjp.github.io/monolish_benchmark_result/)
 
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)

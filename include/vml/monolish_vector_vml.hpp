@@ -10,6 +10,16 @@
 namespace monolish::vml {
 
 /**
+ * @addtogroup Vector_VML
+ * @{
+ */
+
+/**
+ * \defgroup vml_vecadd monolish::vml::add
+ * @brief element by element addition of vector a and vector b.
+ * @{
+ */
+/**
  * @brief element by element addition of vector a and vector b.
  * @param a monolish vector (size N)
  * @param b monolish vector (size N)
@@ -144,7 +154,13 @@ void add(const view1D<matrix::Dense<float>, float> &a,
 void add(const view1D<matrix::Dense<float>, float> &a,
          const view1D<matrix::Dense<float>, float> &b,
          view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecsub monolish::vml::sub
+ * @brief element by element subtract of vector a and vector b.
+ * @{
+ */
 /**
  * @brief element by element subtract of vector a and vector b.
  * @param a monolish vector (size N)
@@ -280,7 +296,13 @@ void sub(const view1D<matrix::Dense<float>, float> &a,
 void sub(const view1D<matrix::Dense<float>, float> &a,
          const view1D<matrix::Dense<float>, float> &b,
          view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecmul monolish::vml::mul
+ * @brief element by element multiplication of vector a and vector b.
+ * @{
+ */
 /**
  * @brief element by element multiplication of vector a and vector b.
  * @param a monolish vector (size N)
@@ -416,7 +438,13 @@ void mul(const view1D<matrix::Dense<float>, float> &a,
 void mul(const view1D<matrix::Dense<float>, float> &a,
          const view1D<matrix::Dense<float>, float> &b,
          view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecdiv monolish::vml::div
+ * @brief element by element division of vector a and vector b.
+ * @{
+ */
 /**
  * @brief element by element division of vector a and vector b.
  * @param a monolish vector (size N)
@@ -552,9 +580,15 @@ void div(const view1D<matrix::Dense<float>, float> &a,
 void div(const view1D<matrix::Dense<float>, float> &a,
          const view1D<matrix::Dense<float>, float> &b,
          view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
 /**
- * @brief element by element addition of vector a and vector b.
+ * \defgroup vml_svecadd monolish::vml::add
+ * @brief element by element addition of scalar alpha and vector a.
+ * @{
+ */
+/**
+ * @brief element by element addition of scalar alpha and vector a.
  * @param a monolish vector (size N)
  * @param alpha scalar value
  * @param y monolish vector (size N)
@@ -578,9 +612,15 @@ void add(const view1D<vector<float>, float> &a, const float alpha,
          vector<float> &y);
 void add(const view1D<vector<float>, float> &a, const float alpha,
          view1D<vector<float>, float> &y);
+/**@}*/
 
 /**
- * @brief element by element subtract of vector a and vector b.
+ * \defgroup vml_svecsub monolish::vml::sub
+ * @brief element by element subtract of scalar alpha and vector a.
+ * @{
+ */
+/**
+ * @brief element by element subtract of scalar alpha and vector a.
  * @param a monolish vector (size N)
  * @param alpha scalar value
  * @param y monolish vector (size N)
@@ -604,9 +644,15 @@ void sub(const view1D<vector<float>, float> &a, const float alpha,
          vector<float> &y);
 void sub(const view1D<vector<float>, float> &a, const float alpha,
          view1D<vector<float>, float> &y);
+/**@}*/
 
 /**
- * @brief element by element multiplication of vector a and vector b.
+ * \defgroup vml_svecmul monolish::vml::mul
+ * @brief element by element multiplication of scalar alpha and vector a.
+ * @{
+ */
+/**
+ * @brief element by element multiplication of scalar alpha and vector a.
  * @param a monolish vector (size N)
  * @param alpha scalar value
  * @param y monolish vector (size N)
@@ -630,9 +676,15 @@ void mul(const view1D<vector<float>, float> &a, const float alpha,
          vector<float> &y);
 void mul(const view1D<vector<float>, float> &a, const float alpha,
          view1D<vector<float>, float> &y);
+/**@}*/
 
 /**
- * @brief element by element division of vector a and vector b.
+ * \defgroup vml_svecdiv monolish::vml::div
+ * @brief element by element division of scalar alpha and vector a.
+ * @{
+ */
+/**
+ * @brief element by element division of scalar alpha and vector a.
  * @param a monolish vector (size N)
  * @param alpha scalar value
  * @param y monolish vector (size N)
@@ -656,7 +708,14 @@ void div(const view1D<vector<float>, float> &a, const float alpha,
          vector<float> &y);
 void div(const view1D<vector<float>, float> &a, const float alpha,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecpow monolish::vml::pow
+ * @brief power to vector elements by double precision vector (y[0:N] =
+ * pow(a[0:N], b[0]:N]))
+ * @{
+ */
 /**
  * @brief power to vector elements by double precision vector
  *(y[0:N] = pow(a[0:N], b[0]:N]))
@@ -701,7 +760,14 @@ void pow(const view1D<vector<float>, float> &a,
 void pow(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_svecpow monolish::vml::pow
+ * @brief power to vector elements by double precision scalar value (y[0:N] =
+ * pow(a[0:N], alpha))
+ * @{
+ */
 /**
  * @brief power to vector elements by double precision scalar
  *value (y[0:N] = pow(a[0:N], alpha))
@@ -728,7 +794,13 @@ void pow(const view1D<vector<float>, float> &a, const float alpha,
          vector<float> &y);
 void pow(const view1D<vector<float>, float> &a, const float alpha,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecsin monolish::vml::sin
+ * @brief sin to vector elements (y[0:N] = sin(a[0:N]))
+ * @{
+ */
 /**
  * @brief sin to vector elements (y[0:N] = sin(a[0:N]))
  * @param a monolish vector (size N)
@@ -748,7 +820,13 @@ void sin(const vector<float> &a, view1D<vector<float>, float> &y);
 void sin(const view1D<vector<float>, float> &a, vector<float> &y);
 void sin(const view1D<vector<float>, float> &a,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecsqrt monolish::vml::sqrt
+ * @brief sqrt to vector elements (y[0:N] = sqrt(a[0:N]))
+ * @{
+ */
 /**
  * @brief sqrt to vector elements (y[0:N] = sqrt(a[0:N]))
  * @param a monolish vector (size N)
@@ -768,7 +846,13 @@ void sqrt(const vector<float> &a, view1D<vector<float>, float> &y);
 void sqrt(const view1D<vector<float>, float> &a, vector<float> &y);
 void sqrt(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecsinh monolish::vml::sinh
+ * @brief sinh to vector elements (y[0:N] = sinh(a[0:N]))
+ * @{
+ */
 /**
  * @brief sinh to vector elements (y[0:N] = sinh(a[0:N]))
  * @param a monolish vector (size N)
@@ -788,7 +872,13 @@ void sinh(const vector<float> &a, view1D<vector<float>, float> &y);
 void sinh(const view1D<vector<float>, float> &a, vector<float> &y);
 void sinh(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecasin monolish::vml::asin
+ * @brief asin to vector elements (y[0:N] = asin(a[0:N]))
+ * @{
+ */
 /**
  * @brief asin to vector elements (y[0:N] = asin(a[0:N]))
  * @param a monolish vector (size N)
@@ -808,7 +898,13 @@ void asin(const vector<float> &a, view1D<vector<float>, float> &y);
 void asin(const view1D<vector<float>, float> &a, vector<float> &y);
 void asin(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecasinh monolish::vml::asinh
+ * @brief asinh to vector elements (y[0:N] = asinh(a[0:N]))
+ * @{
+ */
 /**
  * @brief asinh to vector elements (y[0:N] = asinh(a[0:N]))
  * @param a monolish vector (size N)
@@ -828,7 +924,13 @@ void asinh(const vector<float> &a, view1D<vector<float>, float> &y);
 void asinh(const view1D<vector<float>, float> &a, vector<float> &y);
 void asinh(const view1D<vector<float>, float> &a,
            view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vectan monolish::vml::tan
+ * @brief tan to vector elements (y[0:N] = tan(a[0:N]))
+ * @{
+ */
 /**
  * @brief tan to vector elements (y[0:N] = tan(a[0:N]))
  * @param a monolish vector (size N)
@@ -848,7 +950,13 @@ void tan(const vector<float> &a, view1D<vector<float>, float> &y);
 void tan(const view1D<vector<float>, float> &a, vector<float> &y);
 void tan(const view1D<vector<float>, float> &a,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vectanh monolish::vml::tanh
+ * @brief tanh to vector elements (y[0:N] = tanh(a[0:N]))
+ * @{
+ */
 /**
  * @brief tanh to vector elements (y[0:N] = tanh(a[0:N]))
  * @param a monolish vector (size N)
@@ -868,7 +976,13 @@ void tanh(const vector<float> &a, view1D<vector<float>, float> &y);
 void tanh(const view1D<vector<float>, float> &a, vector<float> &y);
 void tanh(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecatan monolish::vml::atan
+ * @brief atan to vector elements (y[0:N] = atan(a[0:N]))
+ * @{
+ */
 /**
  * @brief atan to vector elements (y[0:N] = atan(a[0:N]))
  * @param a monolish vector (size N)
@@ -888,7 +1002,13 @@ void atan(const vector<float> &a, view1D<vector<float>, float> &y);
 void atan(const view1D<vector<float>, float> &a, vector<float> &y);
 void atan(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecatanh monolish::vml::atanh
+ * @brief atanh to vector elements (y[0:N] = atanh(a[0:N]))
+ * @{
+ */
 /**
  * @brief atanh to vector elements (y[0:N] = atanh(a[0:N]))
  * @param a monolish vector (size N)
@@ -908,7 +1028,13 @@ void atanh(const vector<float> &a, view1D<vector<float>, float> &y);
 void atanh(const view1D<vector<float>, float> &a, vector<float> &y);
 void atanh(const view1D<vector<float>, float> &a,
            view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecceil monolish::vml::ceil
+ * @brief ceil to vector elements (y[0:N] = ceil(a[0:N]))
+ * @{
+ */
 /**
  * @brief ceil to vector elements (y[0:N] = ceil(a[0:N]))
  * @param a monolish vector (size N)
@@ -928,7 +1054,13 @@ void ceil(const vector<float> &a, view1D<vector<float>, float> &y);
 void ceil(const view1D<vector<float>, float> &a, vector<float> &y);
 void ceil(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecfloor monolish::vml::floor
+ * @brief floor to vector elements (y[0:N] = floor(a[0:N]))
+ * @{
+ */
 /**
  * @brief floor to vector elements (y[0:N] = floor(a[0:N]))
  * @param a monolish vector (size N)
@@ -948,7 +1080,13 @@ void floor(const vector<float> &a, view1D<vector<float>, float> &y);
 void floor(const view1D<vector<float>, float> &a, vector<float> &y);
 void floor(const view1D<vector<float>, float> &a,
            view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecsign monolish::vml::sign
+ * @brief sign to vector elements (y[0:N] = sign(a[0:N]))
+ * @{
+ */
 /**
  * @brief sign to vector elements (y[0:N] = sign(a[0:N]))
  * @param a monolish vector (size N)
@@ -968,7 +1106,14 @@ void sign(const vector<float> &a, view1D<vector<float>, float> &y);
 void sign(const view1D<vector<float>, float> &a, vector<float> &y);
 void sign(const view1D<vector<float>, float> &a,
           view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vvecmax monolish::vml::max
+ * @brief Create a new vector with greatest elements of two matrices (y[0:N] =
+ * max(a[0:N], b[0:N]))
+ * @{
+ */
 /**
  * @brief Create a new vector with greatest elements of two matrices (y[0:N] =
  * max(a[0:N], b[0:N]))
@@ -1013,7 +1158,14 @@ void max(const view1D<vector<float>, float> &a,
 void max(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vvecmin monolish::vml::min
+ * @brief Create a new vector with smallest elements of two matrices (y[0:N] =
+ * min(a[0:N], b[0:N]))
+ * @{
+ */
 /**
  * @brief Create a new vector with smallest elements of two matrices (y[0:N] =
  * min(a[0:N], b[0:N]))
@@ -1058,7 +1210,13 @@ void min(const view1D<vector<float>, float> &a,
 void min(const view1D<vector<float>, float> &a,
          const view1D<vector<float>, float> &b,
          view1D<vector<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecmax monolish::vml::max
+ * @brief Finds the greatest element in vector (max(y[0:N]))
+ * @{
+ */
 /**
  * @brief Finds the greatest element in vector (max(y[0:N]))
  * @param y monolish vector (size N)
@@ -1074,7 +1232,13 @@ void min(const view1D<vector<float>, float> &a,
 [[nodiscard]] float max(const vector<float> &y);
 [[nodiscard]] float max(const view1D<vector<float>, float> &y);
 [[nodiscard]] float max(const view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecmin monolish::vml::min
+ * @brief Finds the smallest element in vector (min(y[0:N]))
+ * @{
+ */
 /**
  * @brief Finds the smallest element in vector (min(y[0:N]))
  * @param y monolish vector (size N)
@@ -1090,7 +1254,13 @@ void min(const view1D<vector<float>, float> &a,
 [[nodiscard]] float min(const vector<float> &y);
 [[nodiscard]] float min(const view1D<vector<float>, float> &y);
 [[nodiscard]] float min(const view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
+/**
+ * \defgroup vml_vecreciprocal monolish::vml::reciprocal
+ * @brief reciprocal to double precision vector elements (y[0:N] = 1 / a[0:N])
+ * @{
+ */
 /**
  * @brief reciprocal to double precision vector elements (y[0:N] = 1 / a[0:N])
  * @param a monolish vector (size N)
@@ -1128,4 +1298,6 @@ void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<vector<float>, float> &y);
 void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<matrix::Dense<float>, float> &y);
+/**@}*/
+/**@}*/
 } // namespace monolish::vml

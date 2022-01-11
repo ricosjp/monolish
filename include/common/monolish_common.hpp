@@ -21,17 +21,23 @@
  * @brief monolish utilities
  */
 namespace monolish::util {
+/**
+ * @addtogroup utils
+ * @{
+ */
 
 /**
  * @brief get the number of devices
  * @return the number of devices (If the device is not found or the GPU is not
  * enabled, return value is negative)
+ * @ingroup GPUutil
  */
 int get_num_devices();
 
 /**
  * @brief set default device number
  * @return if the GPU is not enabled, return false
+ * @ingroup GPUutil
  */
 bool set_default_device(size_t device_num);
 
@@ -39,8 +45,14 @@ bool set_default_device(size_t device_num);
  * @brief get default device number
  * @return the device number (If the device is not found or the GPU is not
  * enabled, return value is negative)
+ * @ingroup GPUutil
  */
 int get_default_device();
+
+/**
+ * @addtogroup Other
+ * @{
+ */
 
 /**
  * @brief get nrm |b-Ax|_2
@@ -225,9 +237,12 @@ float get_residual_l2(const matrix::LinearOperator<float> &A,
 float get_residual_l2(const matrix::LinearOperator<float> &A,
                       const view1D<matrix::Dense<float>, float> &x,
                       const view1D<matrix::Dense<float>, float> &y);
+/**@}*/
+
 /**
  * @brief check error
  * @param[in] err solver err code
+ * @ingroup errcheck
  * @note
  * - MONOLISH_SOLVER_SUCCESS 0
  * - MONOLISH_SOLVER_SIZE_ERROR -1
@@ -238,7 +253,8 @@ float get_residual_l2(const matrix::LinearOperator<float> &A,
  */
 [[nodiscard]] bool solver_check(const int err);
 
-/// Logger utils ///////////////////////////////
+// logger
+
 /**
  * @brief Specifying the log level
  * @param Level loglevel
@@ -248,12 +264,14 @@ float get_residual_l2(const matrix::LinearOperator<float> &A,
  *operators..etc.)
  * 3. logging solvers and BLAS functions and utils (send, recv,
  *allocation...etc.)
+ * @ingroup logger
  **/
 void set_log_level(const size_t Level);
 
 /**
  * @brief Specifying the log finename
  * @param filename the log filename
+ * @ingroup logger
  **/
 void set_log_filename(const std::string filename);
 
@@ -269,6 +287,7 @@ void set_log_filename(const std::string filename);
  * - # of computation: N
  * - Multi-threading: true
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 void random_vector(vector<T> &vec, const T min, const T max);
@@ -277,6 +296,7 @@ void random_vector(vector<T> &vec, const T min, const T max);
 
 /**
  * @brief compare matrix structure
+ * @ingroup compare
  **/
 template <typename T, typename U>
 [[nodiscard]] bool is_same_structure(const T A, const U B) {
@@ -292,6 +312,7 @@ template <typename T, typename U>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_structure(const vector<T> &x, const vector<T> &y) {
@@ -307,6 +328,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_structure(const matrix::Dense<T> &A,
@@ -321,6 +343,7 @@ template <typename T>
  * - # of computation: 2nnz
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_structure(const matrix::COO<T> &A,
@@ -335,6 +358,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_structure(const matrix::CRS<T> &A,
@@ -349,6 +373,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 bool is_same_structure(const matrix::LinearOperator<T> &A,
@@ -356,6 +381,7 @@ bool is_same_structure(const matrix::LinearOperator<T> &A,
 
 /**
  * @brief compare matrix structure
+ * @ingroup compare
  **/
 template <typename T, typename... types>
 [[nodiscard]] bool is_same_structure(const T &A, const T &B,
@@ -372,6 +398,7 @@ template <typename T, typename... types>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T, typename U>
 [[nodiscard]] bool is_same_size(const T &x, const U &y) {
@@ -387,6 +414,7 @@ template <typename T, typename U>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_size(const matrix::Dense<T> &A,
@@ -401,6 +429,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_size(const matrix::COO<T> &A,
@@ -415,6 +444,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_size(const matrix::CRS<T> &A,
@@ -429,6 +459,7 @@ template <typename T>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T>
 [[nodiscard]] bool is_same_size(const matrix::LinearOperator<T> &A,
@@ -436,6 +467,7 @@ template <typename T>
 
 /**
  * @brief compare matrix size
+ * @ingroup compare
  **/
 template <typename T, typename U, typename... types>
 [[nodiscard]] bool is_same_size(const T &arg1, const U &arg2,
@@ -449,6 +481,7 @@ template <typename T, typename U, typename... types>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T, typename U>
 [[nodiscard]] bool is_same_device_mem_stat(const T &arg1, const U &arg2) {
@@ -461,6 +494,7 @@ template <typename T, typename U>
  * - # of computation: 1
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup compare
  **/
 template <typename T, typename U, typename... types>
 [[nodiscard]] bool is_same_device_mem_stat(const T &arg1, const U &arg2,
@@ -482,6 +516,7 @@ template <typename T, typename U, typename... types>
  * - # of computation: M*W
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> band_matrix(const int M, const int N, const int W,
@@ -497,6 +532,7 @@ template <typename T>
  * - # of computation: M*nnzrow
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> random_structure_matrix(const int M, const int N,
@@ -510,6 +546,7 @@ template <typename T>
  * - # of computation: M
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>[[nodiscard]] matrix::COO<T> eye(const int M);
 
@@ -520,6 +557,7 @@ template <typename T>[[nodiscard]] matrix::COO<T> eye(const int M);
  * - # of computation: M^2
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>[[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
 
@@ -531,6 +569,7 @@ template <typename T>[[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
  * - # of computation: O(1)
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] T frank_matrix_eigenvalue(const int &M, const int &N);
@@ -544,6 +583,7 @@ template <typename T>
  * - # of computation: M
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> tridiagonal_toeplitz_matrix(const int &M, T a,
@@ -559,6 +599,7 @@ template <typename T>
  * - # of computation: O(1)
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] T tridiagonal_toeplitz_matrix_eigenvalue(const int &M, int N, T a,
@@ -571,6 +612,7 @@ template <typename T>
  * - # of computation: M
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> laplacian_matrix_1D(const int &M);
@@ -583,6 +625,7 @@ template <typename T>
  * - # of computation: O(1)
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] T laplacian_matrix_1D_eigenvalue(const int &M, int N);
@@ -596,6 +639,7 @@ template <typename T>
  * - # of computation: N*M
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  **/
 template <typename T>
 [[nodiscard]] matrix::COO<T> laplacian_matrix_2D_5p(const int M, const int N);
@@ -612,6 +656,7 @@ template <typename T>
  * - both A and B of the GEVP have same structure
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  */
 template <typename T>
 [[nodiscard]] matrix::COO<T> toeplitz_plus_hankel_matrix(const int &M, T a0,
@@ -628,6 +673,7 @@ template <typename T>
  * - # of computation: O(1)
  * - Multi-threading: false
  * - GPU acceleration: false
+ * @ingroup gendata
  */
 template <typename T>
 [[nodiscard]] T toeplitz_plus_hankel_matrix_eigenvalue(const int &M, int N,
@@ -638,11 +684,13 @@ template <typename T>
 
 /**
  * @brief send data to GPU
+ * @ingroup GPUutil
  **/
 template <typename T> auto send(T &x) { x.send(); }
 
 /**
  * @brief send datas to GPU
+ * @ingroup GPUutil
  **/
 template <typename T, typename... Types> auto send(T &x, Types &... args) {
   x.send();
@@ -652,11 +700,13 @@ template <typename T, typename... Types> auto send(T &x, Types &... args) {
 // recv///////////////////
 /**
  * @brief recv. and free data from GPU
+ * @ingroup GPUutil
  **/
 template <typename T> auto recv(T &x) { x.recv(); }
 
 /**
  * @brief recv. and free datas to GPU
+ * @ingroup GPUutil
  **/
 template <typename T, typename... Types> auto recv(T &x, Types &... args) {
   x.recv();
@@ -667,11 +717,13 @@ template <typename T, typename... Types> auto recv(T &x, Types &... args) {
 
 /**
  * @brief free data of GPU
+ * @ingroup GPUutil
  **/
 template <typename T> auto device_free(T &x) { x.device_free(); }
 
 /**
  * @brief free datas of GPU
+ * @ingroup GPUutil
  **/
 template <typename T, typename... Types>
 auto device_free(T &x, Types &... args) {
@@ -681,44 +733,53 @@ auto device_free(T &x, Types &... args) {
 
 /**
  * @brief get build option (true: with avx, false: without avx)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_avx();
 
 /**
  * @brief get build option (true: with avx2, false: without avx2)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_avx2();
 
 /**
  * @brief get build option (true: with avx512, false: without avx512)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_avx512();
 
 /**
  * @brief get build option (true: enable MPI, false: disable MPI)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_mpi();
 
 /**
  * @brief get build option (true: enable gpu, false: disable gpu)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_gpu();
 
 /**
  * @brief get build option (true: with intel mkl, false: without intel mkl)
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_mkl();
 
 /**
  * @brief get build option (true: with lapack, false: without lapack (=with
  *intel mkl))
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_lapack();
 
 /**
  * @brief get build option (true: with cblas, false: without cblas (=with intel
  *mkl))
+ * @ingroup build_options
  **/
 [[nodiscard]] bool build_with_cblas();
+/**@}*/
 
 } // namespace monolish::util

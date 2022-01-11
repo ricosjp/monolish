@@ -22,6 +22,11 @@ template <typename Float> class COO;
 template <typename Float> class CRS;
 
 /**
+ * @addtogroup LO_class
+ * @{
+ */
+
+/**
  * @brief Linear Operator imitating Matrix
  * @note
  * - Multi-threading: depends on matvec/rmatvec functions
@@ -417,5 +422,7 @@ public:
    */
   void operator=(const LinearOperator<Float> &mat);
 };
+/**@}*/
+
 } // namespace matrix
 } // namespace monolish

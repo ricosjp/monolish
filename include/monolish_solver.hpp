@@ -22,6 +22,10 @@ enum class initvec_scheme {
 template <typename MATRIX, typename Float> class precondition;
 
 /**
+ * @addtogroup solver_base
+ * @{
+ */
+/**
  * @brief solver base class
  **/
 template <typename MATRIX, typename Float> class solver {
@@ -245,4 +249,5 @@ public:
     apply_precond = apply;
   };
 };
+/**@}*/
 } // namespace monolish::solver

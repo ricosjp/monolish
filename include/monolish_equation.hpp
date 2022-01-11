@@ -8,10 +8,19 @@
 /**
  * @brief
  * Linear equation solvers for Dense and sparse matrix
- * Scalar
  */
 namespace monolish::equation {
 
+/**
+ * @addtogroup equations
+ * @{
+ */
+
+/**
+ * \defgroup none monolish::equation::none
+ * @brief none solver (nothing to do)
+ * @{
+ */
 /**
  * @brief none solver class(nothing to do)
  * @note
@@ -52,7 +61,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "none"; }
 };
+/**@}*/
 
+/**
+ * \defgroup cg monolish::equation::CG
+ * @brief CG solver
+ * @{
+ */
 /**
  * @brief CG solver class
  * @note
@@ -110,6 +125,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "CG"; }
 };
+/**@}*/
+
+/**
+ * \defgroup bicgstab monolish::equation::BiCGSTAB
+ * @brief BiCGSTAB solver
+ * @{
+ */
 
 /**
  * @brief BiCGSTAB solver class
@@ -171,7 +193,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "BiCGSTAB"; }
 };
+/**@}*/
 
+/**
+ * \defgroup jacobi monolish::equation::Jacobi
+ * @brief Jacobi solver class
+ * @{
+ */
 /**
  * @brief Jacobi solver class
  * @note
@@ -226,7 +254,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "Jacobi"; }
 };
+/**@}*/
 
+/**
+ * \defgroup sor monolish::equation::SOR
+ * @brief SOR solver class
+ * @{
+ */
 /**
  * @brief SOR solver class
  * @note
@@ -288,7 +322,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "SOR"; }
 };
+/**@}*/
 
+/**
+ * \defgroup IC monolish::equation::IC
+ * @brief Incomplete Cholesky solver class
+ * @{
+ */
 /**
  * @brief Incomplete Cholesky solver class
  * @note
@@ -344,7 +384,13 @@ public:
    **/
   std::string solver_name() const { return "IC"; }
 };
+/**@}*/
 
+/**
+ * \defgroup ILU monolish::equation::ILU
+ * @brief Incomplete LU solver class
+ * @{
+ */
 /**
  * @brief Incomplete LU solver class
  * @note
@@ -400,7 +446,13 @@ public:
    **/
   std::string solver_name() const { return "ILU"; }
 };
+/**@}*/
 
+/**
+ * \defgroup LU monolish::equation::LU
+ * @brief LU solver class
+ * @{
+ */
 /**
  * @brief LU solver class
  * @note
@@ -453,7 +505,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "LU"; }
 };
+/**@}*/
 
+/**
+ * \defgroup QR monolish::equation::QR
+ * @brief QR solver class
+ * @{
+ */
 /**
  * @brief QR solver class.
  * @note
@@ -507,7 +565,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "QR"; }
 };
+/**@}*/
 
+/**
+ * \defgroup chol monolish::equation::Cholesky
+ * @brief Cholesky solver class.
+ * @{
+ */
 /**
  * @brief Cholesky solver class.
  * @note
@@ -566,5 +630,7 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "Cholesky"; }
 };
+/**@}*/
+/**@}*/
 
 } // namespace monolish::equation

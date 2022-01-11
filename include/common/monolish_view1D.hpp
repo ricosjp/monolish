@@ -33,6 +33,11 @@ template <typename Float> class LinearOperator;
 } // namespace matrix
 
 /**
+ * @addtogroup View1D_class
+ * @{
+ */
+
+/**
  * @brief 1D view class
  * @note
  * - Multi-threading: true
@@ -288,5 +293,6 @@ public:
    **/
   void fill(Float value);
 };
+/**@}*/
 
 } // namespace monolish

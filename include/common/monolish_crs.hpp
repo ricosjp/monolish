@@ -21,6 +21,11 @@ template <typename Float> class Dense;
 template <typename Float> class COO;
 
 /**
+ * @addtogroup CRS_class
+ * @{
+ */
+
+/**
  * @brief Compressed Row Storage (CRS) format Matrix
  * @note
  * - Multi-threading: true
@@ -471,5 +476,7 @@ public:
    **/
   [[nodiscard]] bool operator!=(const CRS<Float> &mat) const;
 };
+/**@}*/
+
 } // namespace matrix
 } // namespace monolish
