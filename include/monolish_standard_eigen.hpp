@@ -11,6 +11,16 @@
 namespace monolish::standard_eigen {
 
 /**
+ * @addtogroup sEigen
+ * @{
+ */
+
+/**
+ * \defgroup sLOBPCG monolish::standard_eigen::LOBPCG
+ * @brief LOBPCG solver
+ * @{
+ */
+/**
  * @brief LOBPCG solver
  * @note
  * attribute:
@@ -72,7 +82,13 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "LOBPCG"; }
 };
+/**@}*/
 
+/**
+ * \defgroup sDC monolish::standard_eigen::DC
+ * @brief Devide and Conquer solver
+ * @{
+ */
 /**
  * @brief Devide and Conquer solver
  * @note
@@ -124,4 +140,5 @@ public:
    **/
   [[nodiscard]] std::string solver_name() const { return "DC"; }
 };
+/**@}*/
 } // namespace monolish::standard_eigen
