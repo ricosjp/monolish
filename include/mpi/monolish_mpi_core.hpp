@@ -11,6 +11,10 @@
  */
 namespace monolish::mpi {
 /**
+ * @addtogroup MPI
+ * @{
+ */
+/**
  * @brief MPI class (singleton)
  */
 class comm {
@@ -916,4 +920,5 @@ public:
   void Scatter(std::vector<size_t> &sendvec, std::vector<size_t> &recvvec,
                int root) const;
 };
+/**@}*/
 } // namespace monolish::mpi
