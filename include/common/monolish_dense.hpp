@@ -5,6 +5,12 @@ namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
 namespace matrix {
+
+/**
+ * @addtogroup Dense_class
+ * @{
+ */
+
 /**
  * @brief Dense format Matrix
  * @note
@@ -595,5 +601,7 @@ public:
   void diag_div(const view1D<vector<Float>, Float> &vec);
   void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
 };
+/**@}*/
+
 } // namespace matrix
 } // namespace monolish

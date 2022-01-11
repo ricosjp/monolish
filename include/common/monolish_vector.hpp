@@ -27,10 +27,7 @@
 namespace monolish {
 
 /**
- * \defgroup Classes Basic Classes
- * @{
- * \defgroup vector monolish::vector
- * @brief vector class
+ * @addtogroup Vector_class
  * @{
  */
 
@@ -549,6 +546,5 @@ public:
    **/
   bool operator!=(const view1D<matrix::Dense<Float>, Float> &vec) const;
 };
-/**@}*/
 /**@}*/
 } // namespace monolish

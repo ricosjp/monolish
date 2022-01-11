@@ -30,10 +30,7 @@ template <typename Float> class CRS;
 template <typename Float> class LinearOperator;
 
 /**
- * \defgroup Classes Basic Classes
- * @{
- * \defgroup COO monolsh::matrix::COO
- * @brief Coodinate (COO) format Matrix
+ * @addtogroup COO_class
  * @{
  */
 
@@ -689,7 +686,6 @@ public:
    **/
   void sort(bool merge);
 };
-/**@}*/
 /**@}*/
 
 } // namespace matrix
