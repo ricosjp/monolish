@@ -1,5 +1,6 @@
 /**
  * \defgroup Classes Basic Classes
+ * @brief see @ref data_type page
  * @{
  * \defgroup Vector_class monolsh::vector
  * @brief vector class
@@ -24,7 +25,7 @@
 /**
  * \defgroup Operations BLAS
  * @brief Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix,
- * Vector and Scalar
+ * Vector and Scalar (see @ref oplist page)
  * @{
  * \defgroup BLASLV1 Vector Operations
  * @brief BLAS Lv1 vector operations
@@ -40,7 +41,7 @@
 /**
  * \defgroup VML VML
  * @brief Vector Math Library (VML) for Dense Matrix, Sparse Matrix, Vector and
- * Scalar
+ * Scalar (see @ref oplist page)
  * @{
  * \defgroup Vector_VML VML for Vector
  * @brief VML for vector
@@ -58,7 +59,7 @@
 
 /**
  * \defgroup Solvers Solvers
- * @brief Linear equation solvers for Dense and sparse matrix
+ * @brief Linear equation solvers for Dense and sparse matrix (see @ref solverlist page)
  * @{
  * \defgroup solver_base Base Class
  * @brief Solver base class
@@ -76,6 +77,20 @@
 
 /**
  * \defgroup utils Utilities
+ * @brief Utilitie functions
+ * @{
+ * \defgroup check Check errors
+ * @brief error check functions
+ *
+ * \defgroup GPU Control GPU devices
+ * @brief send, recv, and others..
+ *
+ * \defgroup Logger Performance logger
+ * @brief see @ref logger page
+ *
+ * \defgroup Build_options Get build options
+ * @brief get status of build options (SIMD, BLAS, enable GPU device, etc.)
+ * @}
  */
 
 /**
