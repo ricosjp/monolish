@@ -59,7 +59,8 @@
 
 /**
  * \defgroup Solvers Solvers
- * @brief Linear equation solvers for Dense and sparse matrix (see @ref solverlist page).
+ * @brief Linear equation solvers for Dense and sparse matrix (see @ref
+ * solverlist page).
  * @{
  * \defgroup solver_base Base Class
  * @brief Solver base class.
@@ -97,7 +98,7 @@
  * \defgroup compare Compare data
  * @brief Compare data.
  *
- * \defgroup Other Other 
+ * \defgroup Other Other
  * @brief Other utilitie functions.
  * @}
  */

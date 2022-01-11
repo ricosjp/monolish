@@ -253,7 +253,7 @@ float get_residual_l2(const matrix::LinearOperator<float> &A,
  */
 [[nodiscard]] bool solver_check(const int err);
 
-//logger
+// logger
 
 /**
  * @brief Specifying the log level
