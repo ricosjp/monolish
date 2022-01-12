@@ -25,6 +25,7 @@ Unreleased
 - Add get_final_resid() and get_final_iter() in equations and eigens https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/433 https://github.com/ricosjp/monolish/issues/103
 
 ### Fixed
+- Fix LOBPCG warning https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/437 https://github.com/ricosjp/monolish/issues/109
 - Fix logger gpu sync bug https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/433 https://github.com/ricosjp/monolish/issues/106
 - Remove unnecessary function call https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432 https://github.com/ricosjp/monolish/issues/105
 - Fix logger bug in equations https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/432 https://github.com/ricosjp/monolish/issues/104
