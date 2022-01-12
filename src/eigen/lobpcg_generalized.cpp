@@ -35,7 +35,7 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   // n is the dimension of the original space
   const std::size_t n = A.get_col();
 
-  T resid;
+  T resid = 0.0;
 
   // Internal memory
   // currently 9m+(9m+3m+4) vectors are used
