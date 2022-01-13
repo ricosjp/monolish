@@ -19,6 +19,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 -->
 Unreleased
 -----------
+
+0.15.3 - 2022/01/13
+-----------
 ### Added
 - Refactoring documents https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/436 https://github.com/ricosjp/monolish/issues/108
 - Add explanation of link_monolish_gpu.sh https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/434 https://github.com/ricosjp/monolish/issues/102
