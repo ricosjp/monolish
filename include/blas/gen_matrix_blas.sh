@@ -307,49 +307,34 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
-#matmul LinearOperator
+#matmul_* Dense
+for TA in N T; do
+for TB in N T; do
+for TC in N T; do
 echo "
 /**
- * \defgroup mm_LO monolish::blas::matmul (LO, LO, LO)
- * @brief LinearOperator multiplication: C = AB
+ * \defgroup mm_dense_$TA$TB$TC monolish::blas::matmul_$TA$TB$TC (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^$TC = A^$TA B^$TB
  * @{
  */
 /**
- * @brief LinearOperator multiplication: C = AB
- * @param A LinearOperator (size M x K)
- * @param B LinearOperator (size K x N)
- * @param C LinearOperator (size M x N)
- * @note
- * - # of computation: 2 functions
- * - Multi-threading: false
- * - GPU acceleration: false
-*/ "
-for prec in double float; do
-  echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<$prec> &C);"
-done
-echo "/**@}*/"
-
-#matmul LinearOperator
-echo "
-/**
- * \defgroup mm_LO_dense monolish::blas::matmul (LO, Dense, Dense)
- * @brief LinearOperator and Dense multiplication: C = AB
- * @{
- */
-/**
- * @brief LinearOperator and Dense multiplication: C = AB
- * @param A LinearOperator (size M x K)
+ * @brief Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * @param A Dense matrix (size M x K)
  * @param B Dense matrix (size K x N)
  * @param C Dense matrix (size M x N)
  * @note
- * - # of computation: ?
- * - Multi-threading: false
- * - GPU acceleration: false
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  echo "void matmul_$TA$TB$TC(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
+done
+done
+done
 
 #matmul CRS
 echo "
@@ -374,7 +359,80 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
-#rmatmul LinearOperator
+#matmul CRS
+for TA in N T; do
+for TB in N T; do
+for TC in N T; do
+echo "
+/**
+ * \defgroup mm_crs_dense_$TA$TB$TC monolish::blas::matmul_$TA$TB$TC (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void matmul$TA$TB$TC(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+done
+done
+done
+
+#matmul LinearOperator
+echo "
+/**
+ * \defgroup mm_LO monolish::blas::matmul (LO, LO, LO)
+ * @brief LinearOperator multiplication: C = AB
+ * @{
+ */
+/**
+ * @brief LinearOperator multiplication: C = AB
+ * @param A LinearOperator (size M x K)
+ * @param B LinearOperator (size K x N)
+ * @param C LinearOperator (size M x N)
+ * @note
+ * - # of computation: 2 functions
+ * - Multi-threading: false
+ * - GPU acceleration: false
+*/ "
+for prec in double float; do
+  echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::LinearOperator<$prec> &B, matrix::LinearOperator<$prec> &C);"
+done
+echo "/**@}*/"
+
+#matmul LinearOperator and Dense
+echo "
+/**
+ * \defgroup mm_LO_dense monolish::blas::matmul (LO, Dense, Dense)
+ * @brief LinearOperator and Dense multiplication: C = AB
+ * @{
+ */
+/**
+ * @brief LinearOperator and Dense multiplication: C = AB
+ * @param A LinearOperator (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: false
+ * - GPU acceleration: false
+*/ "
+for prec in double float; do
+  echo "void matmul(const matrix::LinearOperator<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+#rmatmul LinearOperator and Dense
 echo "
 /**
  * \defgroup rmm_LO monolish::blas::rmatmul (LO, Dense, Dense)
