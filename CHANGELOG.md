@@ -19,6 +19,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 -->
 Unreleased
 -----------
+### Added
+- Generate transpose matvec,matmul headers https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439 https://github.com/ricosjp/monolish/issues/107
+
 ### Changed
 - Start developing 0.15.4 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/438
 
