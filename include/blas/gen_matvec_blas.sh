@@ -100,7 +100,7 @@ for prec in double float; do
   done
 done
 
-## matvec CRS
+## matvec_* CRS
 for trans in N T; do
     echo "
     /**
