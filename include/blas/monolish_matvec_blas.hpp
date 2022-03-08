@@ -74,6 +74,130 @@ void matvec(const matrix::Dense<float> &A,
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y);
+
+/**
+ * \defgroup matvec_dense_N monolish::blas::matvec_N (Dense)
+ * @brief Dense matrix and vector multiplication: y = A^N x
+ * @{
+ */
+/**
+ * @brief Dense matrix and vector multiplication: y = A^N x
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
+              vector<double> &y);
+void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, vector<double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              vector<double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
+              vector<float> &y);
+void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, vector<float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+
+/**
+ * \defgroup matvec_dense_T monolish::blas::matvec_T (Dense)
+ * @brief Dense matrix and vector multiplication: y = A^T x
+ * @{
+ */
+/**
+ * @brief Dense matrix and vector multiplication: y = A^T x
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
+              vector<double> &y);
+void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, vector<double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              vector<double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
+              vector<float> &y);
+void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, vector<float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 
 /**
@@ -134,6 +258,130 @@ void matvec(const matrix::CRS<float> &A,
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y);
+
+/**
+ * \defgroup matvec_crs_N monolish::blas::matvec_N (CRS)
+ * @brief CRS format sparse matrix and vector multiplication: y = A^N x
+ * @{
+ */
+/**
+ * @brief CRS format sparse matrix and vector multiplication: y = A^N x
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
+              vector<double> &y);
+void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, vector<double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              vector<double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_N(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
+              vector<float> &y);
+void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, vector<float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_N(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+
+/**
+ * \defgroup matvec_crs_T monolish::blas::matvec_T (CRS)
+ * @brief CRS format sparse matrix and vector multiplication: y = A^T x
+ * @{
+ */
+/**
+ * @brief CRS format sparse matrix and vector multiplication: y = A^T x
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
+              vector<double> &y);
+void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, vector<double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              vector<double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<vector<double>, double> &y);
+void matvec_T(const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              view1D<matrix::Dense<double>, double> &y);
+void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
+              vector<float> &y);
+void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, vector<float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<vector<float>, float> &y);
+void matvec_T(const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 
 /**
