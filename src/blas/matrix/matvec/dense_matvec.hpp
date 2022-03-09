@@ -5,7 +5,7 @@ namespace monolish {
 namespace {
 // double ///////////////////
 template <typename VEC1, typename VEC2>
-void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
+void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y, bool trans) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -49,7 +49,7 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y) {
 
 // float ///////////////////
 template <typename VEC1, typename VEC2>
-void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y) {
+void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y, bool trans) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
