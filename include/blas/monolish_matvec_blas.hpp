@@ -74,6 +74,7 @@ void matvec(const matrix::Dense<float> &A,
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
 /**
  * \defgroup matvec_dense_N monolish::blas::matvec_N (Dense)
@@ -136,6 +137,7 @@ void matvec_N(const matrix::Dense<float> &A,
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
 /**
  * \defgroup matvec_dense_T monolish::blas::matvec_T (Dense)
@@ -258,6 +260,7 @@ void matvec(const matrix::CRS<float> &A,
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
 /**
  * \defgroup matvec_crs_N monolish::blas::matvec_N (CRS)
@@ -320,6 +323,7 @@ void matvec_N(const matrix::CRS<float> &A,
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y);
+/**@}*/
 
 /**
  * \defgroup matvec_crs_T monolish::blas::matvec_T (CRS)
