@@ -29,19 +29,6 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // CUDA11 will support SpMM
-#if MONOLISH_USE_OLD_CUDA   // cuda10.x
-#pragma omp target teams distribute parallel for
-    for (auto j = decltype(N){0}; j < N; j++) {
-      for (auto i = decltype(M){0}; i < M; i++) {
-        double tmp = 0;
-        for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
-          tmp += vald[k] * Bd[N * cold[k] + j];
-        }
-        Cd[i * N + j] = tmp;
-      }
-    }
-#else
-
     auto nnz = A.get_nnz();
     auto alpha = 1.0;
     auto beta = 0.0;
@@ -80,7 +67,6 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
       cusparseDestroyDnMat(matC);
       cudaFree(dBuffer);
     }
-#endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
