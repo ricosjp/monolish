@@ -25,33 +25,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-#if MONOLISH_USE_OLD_CUDA   // cuda10.x
-    cusparseHandle_t sp_handle;
-    cusparseCreate(&sp_handle);
-    cudaDeviceSynchronize();
-
-    cusparseMatDescr_t descr = 0;
-    cusparseCreateMatDescr(&descr);
-    cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
-    cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
-    cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
-
-    const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-
-    const auto m = A.get_row();
-    const auto n = A.get_col();
-    const double alpha = 1.0;
-    const double beta = 0.0;
-    const auto nnz = A.get_nnz();
-
-#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
-    {
-      internal::check_CUDA(cusparseDcsrmv(sp_handle, trans, m, n, nnz, &alpha,
-                                          descr, vald, rowd, cold, xd + xoffset,
-                                          &beta, yd + yoffset));
-    }
-
-#else // cuda11.x
     const auto m = A.get_row();
     const auto n = A.get_col();
     const double alpha = 1.0;
@@ -87,7 +60,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
       cusparseDestroyDnVec(vecY);
       cudaFree(buffer);
     }
-#endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
@@ -148,32 +120,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-#if MONOLISH_USE_OLD_CUDA   // cuda10.x
-    cusparseHandle_t sp_handle;
-    cusparseCreate(&sp_handle);
-    cudaDeviceSynchronize();
-
-    cusparseMatDescr_t descr = 0;
-    cusparseCreateMatDescr(&descr);
-    cusparseSetMatIndexBase(descr, CUSPARSE_INDEX_BASE_ZERO);
-    cusparseSetMatFillMode(descr, CUSPARSE_FILL_MODE_LOWER);
-    cusparseSetMatDiagType(descr, CUSPARSE_DIAG_TYPE_UNIT);
-
-    const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-
-    const auto m = A.get_row();
-    const auto n = A.get_col();
-    const auto nnz = A.get_nnz();
-    const float alpha = 1.0;
-    const float beta = 0.0;
-
-#pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
-    {
-      internal::check_CUDA(cusparseScsrmv(sp_handle, trans, m, n, nnz, &alpha,
-                                          descr, vald, rowd, cold, xd + xoffset,
-                                          &beta, yd + yoffset));
-    }
-#else // cuda11.x
     const auto m = A.get_row();
     const auto n = A.get_col();
     const float alpha = 1.0;
@@ -209,7 +155,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
       cusparseDestroyDnVec(vecY);
       cudaFree(buffer);
     }
-#endif // cuda version
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
