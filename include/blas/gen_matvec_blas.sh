@@ -43,6 +43,7 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 
 ## matvec_* Dense
 for trans in N T; do
@@ -70,9 +71,8 @@ for trans in N T; do
             done
         done
     done
-done
-
 echo "/**@}*/"
+done
 
 ## matvec CRS
 echo "
@@ -99,6 +99,7 @@ for prec in double float; do
     done
   done
 done
+echo "/**@}*/"
 
 ## matvec_* CRS
 for trans in N T; do
@@ -126,9 +127,9 @@ for trans in N T; do
             done
         done
     done
+echo "/**@}*/"
 done
 
-echo "/**@}*/"
 
 ## matvec LinearOperator
 echo "

@@ -310,15 +310,14 @@ echo "/**@}*/"
 #matmul_* Dense
 for TA in N T; do
 for TB in N T; do
-for TC in N T; do
 echo "
 /**
- * \defgroup mm_dense_$TA$TB$TC monolish::blas::matmul_$TA$TB$TC (Dense, Dense, Dense)
- * @brief Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * \defgroup mm_dense_$TA$TB monolish::blas::matmul_$TA$TB (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C = A^$TA B^$TB
  * @{
  */
 /**
- * @brief Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * @brief Dense matrix multiplication: C = A^$TA B^$TB
  * @param A Dense matrix (size M x K)
  * @param B Dense matrix (size K x N)
  * @param C Dense matrix (size M x N)
@@ -329,10 +328,9 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul_$TA$TB$TC(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  echo "void matmul_$TA$TB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
-done
 done
 done
 
@@ -362,15 +360,14 @@ echo "/**@}*/"
 #matmul CRS
 for TA in N T; do
 for TB in N T; do
-for TC in N T; do
 echo "
 /**
- * \defgroup mm_crs_dense_$TA$TB$TC monolish::blas::matmul_$TA$TB$TC (CRS, Dense, Dense)
- * @brief CRS and Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * \defgroup mm_crs_dense_$TA$TB monolish::blas::matmul_$TA$TB (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
  * @{
  */
 /**
- * @brief CRS and Dense matrix multiplication: C^$TC = A^$TA B^$TB
+ * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
  * @param A CRS matrix (size M x K)
  * @param B Dense matrix (size K x N)
  * @param C Dense matrix (size M x N)
@@ -381,10 +378,9 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul$TA$TB$TC(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  echo "void matmul$TA$TB(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
-done
 done
 done
 
