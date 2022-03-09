@@ -275,6 +275,380 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 /**@}*/
 
 /**
+ * \defgroup mm_dense_NNN monolish::blas::matmul_NNN (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^N = A^N B^N
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^N = A^N B^N
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_NNN(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_NNN(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_NNT monolish::blas::matmul_NNT (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^T = A^N B^N
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^T = A^N B^N
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_NNT(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_NNT(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_NTN monolish::blas::matmul_NTN (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^N = A^N B^T
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^N = A^N B^T
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_NTN(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_NTN(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_NTT monolish::blas::matmul_NTT (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^T = A^N B^T
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^T = A^N B^T
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_NTT(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_NTT(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_TNN monolish::blas::matmul_TNN (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^N = A^T B^N
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^N = A^T B^N
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_TNN(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_TNN(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_TNT monolish::blas::matmul_TNT (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^T = A^T B^N
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^T = A^T B^N
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_TNT(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_TNT(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_TTN monolish::blas::matmul_TTN (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^N = A^T B^T
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^N = A^T B^T
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_TTN(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_TTN(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense_TTT monolish::blas::matmul_TTT (Dense, Dense, Dense)
+ * @brief Dense matrix multiplication: C^T = A^T B^T
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C^T = A^T B^T
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul_TTT(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+                matrix::Dense<double> &C);
+void matmul_TTT(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+                matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense monolish::blas::matmul (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C = AB
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C = AB
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+            matrix::Dense<double> &C);
+void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+            matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_NNN monolish::blas::matmul_NNN (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^N = A^N B^N
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^N = A^N B^N
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulNNN(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulNNN(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_NNT monolish::blas::matmul_NNT (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^T = A^N B^N
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^T = A^N B^N
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulNNT(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulNNT(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_NTN monolish::blas::matmul_NTN (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^N = A^N B^T
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^N = A^N B^T
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulNTN(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulNTN(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_NTT monolish::blas::matmul_NTT (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^T = A^N B^T
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^T = A^N B^T
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulNTT(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulNTT(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_TNN monolish::blas::matmul_TNN (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^N = A^T B^N
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^N = A^T B^N
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulTNN(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulTNN(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_TNT monolish::blas::matmul_TNT (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^T = A^T B^N
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^T = A^T B^N
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulTNT(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulTNT(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_TTN monolish::blas::matmul_TTN (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^N = A^T B^T
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^N = A^T B^T
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulTTN(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulTTN(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense_TTT monolish::blas::matmul_TTT (CRS, Dense, Dense)
+ * @brief CRS and Dense matrix multiplication: C^T = A^T B^T
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C^T = A^T B^T
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmulTTT(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+               matrix::Dense<double> &C);
+void matmulTTT(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup mm_LO monolish::blas::matmul (LO, LO, LO)
  * @brief LinearOperator multiplication: C = AB
  * @{
@@ -316,28 +690,6 @@ void matmul(const matrix::LinearOperator<double> &A,
             const matrix::Dense<double> &B, matrix::Dense<double> &C);
 void matmul(const matrix::LinearOperator<float> &A,
             const matrix::Dense<float> &B, matrix::Dense<float> &C);
-/**@}*/
-
-/**
- * \defgroup mm_crs_dense monolish::blas::matmul (CRS, Dense, Dense)
- * @brief CRS and Dense matrix multiplication: C = AB
- * @{
- */
-/**
- * @brief CRS and Dense matrix multiplication: C = AB
- * @param A CRS matrix (size M x K)
- * @param B Dense matrix (size K x N)
- * @param C Dense matrix (size M x N)
- * @note
- * - # of computation: 2*N*nnz
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
- */
-void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
-            matrix::Dense<double> &C);
-void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
-            matrix::Dense<float> &C);
 /**@}*/
 
 /**

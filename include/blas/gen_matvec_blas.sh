@@ -44,6 +44,34 @@ for prec in double float; do
   done
 done
 
+## matvec_* Dense
+for trans in N T; do
+    echo "
+    /**
+    * \defgroup matvec_dense_$trans monolish::blas::matvec_$trans (Dense)
+    * @brief Dense matrix and vector multiplication: y = A^$trans x
+    * @{
+    */
+    /**
+    * @brief Dense matrix and vector multiplication: y = A^$trans x
+    * @param A Dense matrix (size M x N)
+    * @param x monolish vector (size M)
+    * @param y monolish vector (size M)
+    * @note
+    * - # of computation: MN
+    * - Multi-threading: true
+    * - GPU acceleration: true
+    *    - # of data transfer: 0
+    */ "
+    for prec in double float; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+                echo "void matvec_$trans(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
+            done
+        done
+    done
+done
+
 echo "/**@}*/"
 
 ## matvec CRS
@@ -70,6 +98,34 @@ for prec in double float; do
       echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
+done
+
+## matvec_* CRS
+for trans in N T; do
+    echo "
+    /**
+    * \defgroup matvec_crs_$trans monolish::blas::matvec_$trans (CRS)
+    * @brief CRS format sparse matrix and vector multiplication: y = A^$trans x
+    * @{
+    */
+    /**
+    * @brief CRS format sparse matrix and vector multiplication: y = A^$trans x
+    * @param A CRS matrix (size M x N)
+    * @param x monolish vector (size M)
+    * @param y monolish vector (size M)
+    * @note
+    * - # of computation: 2nnz
+    * - Multi-threading: true
+    * - GPU acceleration: true
+    *    - # of data transfer: 0
+    */ "
+    for prec in double float; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+                echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
+            done
+        done
+    done
 done
 
 echo "/**@}*/"
