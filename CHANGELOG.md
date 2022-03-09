@@ -23,6 +23,7 @@ Unreleased
 - Generate transpose matvec,matmul headers https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439 https://github.com/ricosjp/monolish/issues/107
 
 ### Changed
+- Update allgebra 21.12.1 -> 22.02.0 (LLVM 13.0.0 -> 13.0.1) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/440 https://github.com/ricosjp/monolish/issues/113
 - Start developing 0.16.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/438
 
 0.15.3 - 2022/01/13
