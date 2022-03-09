@@ -29,6 +29,9 @@ Unreleased
 - Update allgebra 21.12.1 -> 22.02.0 (LLVM 13.0.0 -> 13.0.1) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/440 https://github.com/ricosjp/monolish/issues/113
 - Start developing 0.16.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/438
 
+### Removed
+- Drop SpMM/SpMV of CUDA 10.x support https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/443
+
 0.15.3 - 2022/01/13
 -----------
 ### Added
