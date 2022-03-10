@@ -2,14 +2,13 @@
 
 namespace monolish {
 namespace {
-    std::string get_matvec_name(std::string func, bool flag){
-        if(flag==true){
-            return func+"_T";
-        }
-        else{
-            return func+"_N";
-        }
-    }
+std::string get_matvec_name(std::string func, bool flag) {
+  if (flag == true) {
+    return func + "_T";
+  } else {
+    return func + "_N";
+  }
+}
 // double ///////////////////
 template <typename VEC1, typename VEC2>
 void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
@@ -39,17 +38,17 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
 #pragma omp target data use_device_ptr(xd, yd, vald)
     {
       // cublas is col major
-      internal::check_CUDA(cublasDgemv(h, internal::get_cublas_trans(!transA), n, m, &alpha, vald, n,
-                                       xd + xoffset, 1, &beta, yd + yoffset,
-                                       1));
+      internal::check_CUDA(cublasDgemv(h, internal::get_cublas_trans(!transA),
+                                       n, m, &alpha, vald, n, xd + xoffset, 1,
+                                       &beta, yd + yoffset, 1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_dgemv(CblasRowMajor, internal::get_cblas_trans(transA), m, n, alpha, vald, n, xd + xoffset,
-                1, beta, yd + yoffset, 1);
+    cblas_dgemv(CblasRowMajor, internal::get_cblas_trans(transA), m, n, alpha,
+                vald, n, xd + xoffset, 1, beta, yd + yoffset, 1);
   }
 
   logger.func_out();
@@ -84,17 +83,17 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
 #pragma omp target data use_device_ptr(xd, yd, vald)
     {
       // cublas is col major
-      internal::check_CUDA(cublasSgemv(h, internal::get_cublas_trans(!transA), m, n, &alpha, vald, m,
-                                       xd + xoffset, 1, &beta, yd + yoffset,
-                                       1));
+      internal::check_CUDA(cublasSgemv(h, internal::get_cublas_trans(!transA),
+                                       m, n, &alpha, vald, m, xd + xoffset, 1,
+                                       &beta, yd + yoffset, 1));
     }
     cublasDestroy(h);
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
-    cblas_sgemv(CblasRowMajor, internal::get_cblas_trans(transA), n, m, alpha, vald, m, xd + xoffset,
-                1, beta, yd + yoffset, 1);
+    cblas_sgemv(CblasRowMajor, internal::get_cblas_trans(transA), n, m, alpha,
+                vald, m, xd + xoffset, 1, beta, yd + yoffset, 1);
   }
 
   logger.func_out();

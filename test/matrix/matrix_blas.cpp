@@ -242,8 +242,8 @@ int main(int argc, char **argv) {
   }
 
   // matvec_N Dense//
-  if (test_send_matvec_N<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
+  if (test_send_matvec_N<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
   if (test_send_matvec_N<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
@@ -260,8 +260,8 @@ int main(int argc, char **argv) {
   }
 
   // matvec_T Dense//
-  if (test_send_matvec_T<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
+  if (test_send_matvec_T<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
   if (test_send_matvec_T<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
