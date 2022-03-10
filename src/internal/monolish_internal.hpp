@@ -43,6 +43,14 @@ auto checkError = [](auto result, auto func, auto file, auto line) {
 #define check_CUDA(val) checkError((val), #val, __FILE__, __LINE__)
 #endif
 
+// blas util //
+CBLAS_TRANSPOSE get_cblas_trans(bool flag);
+#ifdef MONOLISH_USE_NVIDIA_GPU
+cusparseOperation_t get_cuspasrse_trans(bool flag);
+cublasOperation_t get_cublas_trans(bool flag);
+#endif
+
+// VML //
 // scalar-vector
 void vadd(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
