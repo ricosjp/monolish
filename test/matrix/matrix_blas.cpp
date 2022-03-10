@@ -2,6 +2,8 @@
 #include "blas/matmul.hpp"
 #include "blas/matsub.hpp"
 #include "blas/matvec.hpp"
+#include "blas/matvec_N.hpp"
+#include "blas/matvec_T.hpp"
 #include "blas/mm_copy.hpp"
 #include "blas/mscal.hpp"
 
@@ -235,6 +237,42 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_matvec<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // matvec_N Dense//
+  if (test_send_matvec_N<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matvec_N<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_N<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_N<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // matvec_T Dense//
+  if (test_send_matvec_T<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matvec_T<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_T<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_T<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
       false) {
     return 1;
   }
