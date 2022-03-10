@@ -1,14 +1,22 @@
 #pragma once
 
 namespace monolish {
-
 namespace {
+    std::string get_matvec_name(bool flag){
+        std::string func = monolish_func;
+        if(flag==true){
+            return func+"_T";
+        }
+        else{
+            return func+"_N";
+        }
+    }
 // double ///////////////////
 template <typename VEC1, typename VEC2>
 void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
                   bool transA) {
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.func_in(get_matvec_name(transA));
 
   // err, M = MN * N
   assert(A.get_row() == y.size());
@@ -53,7 +61,7 @@ template <typename VEC1, typename VEC2>
 void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
                   bool transA) {
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.func_in(get_matvec_name(transA));
 
   // err, M = MN * N
   assert(A.get_row() == y.size());
