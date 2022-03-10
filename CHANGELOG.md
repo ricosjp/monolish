@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Impl. get_blas_trans_flag() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/444
 - Impl. matvec_N https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/442
 - Generate trans flag in matvec https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/442
 - Drop C trans (NNN->NN) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/441
