@@ -45,7 +45,16 @@ case $1 in
       fi
     done
     ;;
-  "matvec" ) 
+  "matvec_N" ) 
+    for format in ${FORMAT[@]}; do
+      echo start $1 $format $2
+      $PROFILER ./$1_$2.out $format | tee $1\_$format\_$2.tsv
+      if [ ${PIPESTATUS[0]} -ne 0 ]; then
+        exit 1
+      fi
+    done
+    ;;
+  "matvec_T" ) 
     for format in ${FORMAT[@]}; do
       echo start $1 $format $2
       $PROFILER ./$1_$2.out $format | tee $1\_$format\_$2.tsv
