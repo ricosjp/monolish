@@ -1,6 +1,6 @@
 #include "../benchmark_utils.hpp"
 
-#define FUNC "matvec"
+#define FUNC "matvec_N"
 #define DENSE_PERF 2 * M *N / time / 1.0e+9
 #define CRS_PERF 2 * M *nnzrow / time / 1.0e+9
 
@@ -27,7 +27,7 @@ bool benchmark(const size_t M, const size_t N, size_t iter) {
   auto start = std::chrono::system_clock::now();
 
   for (int i = 0; i < iter; i++) {
-    monolish::blas::matvec(A, x, y);
+    monolish::blas::matvec_N(A, x, y);
   }
 
   auto end = std::chrono::system_clock::now();

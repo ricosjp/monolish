@@ -58,7 +58,8 @@ run_intel_mkl: intel_mkl
 	bash ./benchmark.sh matadd intel_mkl
 	bash ./benchmark.sh matsub intel_mkl
 	bash ./benchmark.sh mscal intel_mkl
-	bash ./benchmark.sh matvec intel_mkl
+	bash ./benchmark.sh matvec_N intel_mkl
+	bash ./benchmark.sh matvec_T intel_mkl
 	bash ./benchmark.sh matmul intel_mkl
 
 run_intel_oss: intel_oss
@@ -66,7 +67,8 @@ run_intel_oss: intel_oss
 	bash ./benchmark.sh matadd intel_oss
 	bash ./benchmark.sh matsub intel_oss
 	bash ./benchmark.sh mscal intel_oss
-	bash ./benchmark.sh matvec intel_oss
+	bash ./benchmark.sh matvec_N intel_oss
+	bash ./benchmark.sh matvec_T intel_oss
 	bash ./benchmark.sh matmul intel_oss
 
 run_amd_oss: amd_oss
@@ -74,7 +76,8 @@ run_amd_oss: amd_oss
 	bash ./benchmark.sh matadd amd_oss
 	bash ./benchmark.sh matsub amd_oss
 	bash ./benchmark.sh mscal amd_oss
-	bash ./benchmark.sh matvec amd_oss
+	bash ./benchmark.sh matvec_N amd_oss
+	bash ./benchmark.sh matvec_T amd_oss
 	bash ./benchmark.sh matmul amd_oss
  
 run_nvidia: nvidia
@@ -82,7 +85,8 @@ run_nvidia: nvidia
 	bash ./benchmark.sh matadd nvidia
 	bash ./benchmark.sh matsub nvidia
 	bash ./benchmark.sh mscal nvidia
-	bash ./benchmark.sh matvec nvidia
+	bash ./benchmark.sh matvec_N nvidia
+	bash ./benchmark.sh matvec_T nvidia
 	bash ./benchmark.sh matmul nvidia
 
 run_a64fx: a64fx
@@ -90,7 +94,8 @@ run_a64fx: a64fx
 	bash ./benchmark.sh matadd a64fx
 	bash ./benchmark.sh matsub a64fx
 	bash ./benchmark.sh mscal a64fx
-	bash ./benchmark.sh matvec a64fx
+	bash ./benchmark.sh matvec_N a64fx
+	bash ./benchmark.sh matvec_T a64fx
 	bash ./benchmark.sh matmul a64fx
 
 run_sxat: sxat
@@ -98,7 +103,8 @@ run_sxat: sxat
 	bash ./benchmark.sh matadd sxat
 	bash ./benchmark.sh matsub sxat
 	bash ./benchmark.sh mscal sxat
-	bash ./benchmark.sh matvec sxat
+	bash ./benchmark.sh matvec_N sxat
+	bash ./benchmark.sh matvec_T sxat
 	bash ./benchmark.sh matmul sxat
 
 clean:
