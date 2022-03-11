@@ -21,7 +21,7 @@ void ans_matvec_T(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
 
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
-      y[i] += A.val[N * j + i] * x[j];
+      y[i] += A.val[N * i + j] * x[j];
     }
   }
 }
@@ -41,13 +41,14 @@ bool test_send_matvec_T(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  monolish::vector<T> x(A.get_col(), 0.0, 1.0);
-  monolish::vector<T> y(A.get_row(), 0.0, 1.0);
+  monolish::vector<T> x(A.get_row(), 0.0, 1.0);
+  monolish::vector<T> y(A.get_col(), 0.0, 1.0);
 
-  monolish::vector<T> ansy(A.get_row());
+  monolish::vector<T> ansy(A.get_col());
   ansy = y;
 
   monolish::matrix::Dense<T> AA(seedA);
+  AA.transpose();
   ans_matvec_T(AA, x, ansy);
 
   monolish::util::send(A, x, y);
@@ -72,13 +73,14 @@ bool test_matvec_T(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  monolish::vector<T> x(A.get_col(), 0.0, 1.0);
-  monolish::vector<T> y(A.get_row(), 0.0, 1.0);
+  monolish::vector<T> x(A.get_row(), 0.0, 1.0);
+  monolish::vector<T> y(A.get_col(), 0.0, 1.0);
 
-  monolish::vector<T> ansy(A.get_row());
+  monolish::vector<T> ansy(A.get_col());
   ansy = y;
 
   monolish::matrix::Dense<T> AA(seedA);
+  AA.transpose();
   ans_matvec_T(AA, x, ansy);
 
   monolish::blas::matvec_T(A, x, y);
