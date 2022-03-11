@@ -17,8 +17,14 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
   logger.func_in(get_matvec_name(monolish_func, transA));
 
   // err, M = MN * N
-  assert(A.get_row() == y.size());
-  assert(A.get_col() == x.size());
+  if(transA){
+      assert(A.get_row() == x.size());
+      assert(A.get_col() == y.size());
+  }
+  else{
+      assert(A.get_row() == y.size());
+      assert(A.get_col() == x.size());
+  }
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const auto *xd = x.data();
@@ -62,8 +68,14 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
   logger.func_in(get_matvec_name(monolish_func, transA));
 
   // err, M = MN * N
-  assert(A.get_row() == y.size());
-  assert(A.get_col() == x.size());
+  if(transA){
+      assert(A.get_row() == x.size());
+      assert(A.get_col() == y.size());
+  }
+  else{
+      assert(A.get_row() == y.size());
+      assert(A.get_col() == x.size());
+  }
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const auto *xd = x.data();
