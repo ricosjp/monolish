@@ -23,8 +23,7 @@ matrix::COO<T> util::band_matrix(const int M, const int N, const int W,
     for (auto j = start; j < end; j++) {
       if (i == j && diag_val != 0) {
         mat.insert(i, j, diag_val);
-      }
-      else if (val != 0){
+      } else if (val != 0) {
         mat.insert(i, j, val);
       }
     }
@@ -44,7 +43,8 @@ template matrix::COO<float> util::band_matrix(const int M, const int N,
 
 template <typename T>
 matrix::COO<T> util::asym_band_matrix(const int M, const int N, const int W,
-                                 const T diag_val, const T Uval, const T Lval) {
+                                      const T diag_val, const T Uval,
+                                      const T Lval) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -60,13 +60,11 @@ matrix::COO<T> util::asym_band_matrix(const int M, const int N, const int W,
     auto start = (i < ww ? 0 : i - ww);
     auto end = (N <= (i + ww + 1) ? N : i + ww + 1);
     for (auto j = start; j < end; j++) {
-      if (i == j && diag_val != 0){
+      if (i == j && diag_val != 0) {
         mat.insert(i, j, diag_val);
-      }
-      else if(i < j && Uval != 0){ // Upper
+      } else if (i < j && Uval != 0) { // Upper
         mat.insert(i, j, Uval);
-      }
-      else if(i > j && Lval != 0){ // Lower
+      } else if (i > j && Lval != 0) { // Lower
         mat.insert(i, j, Lval);
       }
     }
@@ -77,12 +75,13 @@ matrix::COO<T> util::asym_band_matrix(const int M, const int N, const int W,
   return mat;
 }
 template matrix::COO<double> util::asym_band_matrix(const int M, const int N,
-                                               const int W,
-                                               const double diag_val,
-                                               const double Uval,
-                                               const double Lval);
+                                                    const int W,
+                                                    const double diag_val,
+                                                    const double Uval,
+                                                    const double Lval);
 template matrix::COO<float> util::asym_band_matrix(const int M, const int N,
-                                              const int W, const float diag_val,
-                                              const float Uval,
-                                              const float Lval);
+                                                   const int W,
+                                                   const float diag_val,
+                                                   const float Uval,
+                                                   const float Lval);
 } // namespace monolish

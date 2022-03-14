@@ -537,8 +537,9 @@ template <typename T>
  * @ingroup gendata
  **/
 template <typename T>
-[[nodiscard]] matrix::COO<T> asym_band_matrix(const int M, const int N, const int W,
-                                         const T diag_val, const T Uval, const T Lval);
+[[nodiscard]] matrix::COO<T> asym_band_matrix(const int M, const int N,
+                                              const int W, const T diag_val,
+                                              const T Uval, const T Lval);
 
 /**
  * @brief create random structure matrix (column number is decided by random)
