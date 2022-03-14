@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Impl. asym_band_matrix() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446 
 - Impl. transposed gemv(matvec_N(Dense)) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/445 https://github.com/ricosjp/monolish/issues/107
 - Impl. get_blas_trans_flag() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/444 https://github.com/ricosjp/monolish/issues/107
 - Impl. matvec_N https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/442 https://github.com/ricosjp/monolish/issues/107
@@ -28,6 +29,8 @@ Unreleased
 - Generate transpose matvec,matmul headers https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439 https://github.com/ricosjp/monolish/issues/107
 
 ### Changed
+- Change create_asym_band_matrix() in transposed GEMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446 
+- Skip zero elements in create_band_matrix() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446 
 - Change benchmark target matvec->matvec_N https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/445 https://github.com/ricosjp/monolish/issues/107
 - Update allgebra 21.12.1 -> 22.02.0 (LLVM 13.0.0 -> 13.0.1) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/440 https://github.com/ricosjp/monolish/issues/113
 - Start developing 0.16.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/438

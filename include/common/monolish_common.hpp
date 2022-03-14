@@ -523,6 +523,25 @@ template <typename T>
                                          const T diag_val, const T val);
 
 /**
+ * @brief create asymmetric band matrix
+ * @param M # of Row
+ * @param N # of col.
+ * @param W half-bandwidth (bandwidth is 2*W+1)
+ * @param diag_val value of diagonal elements
+ * @param Uval value of upper non-diagonal elements
+ * @param Lval value of lower non-diagonal elements
+ * @note
+ * - # of computation: M*W
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup gendata
+ **/
+template <typename T>
+[[nodiscard]] matrix::COO<T> asym_band_matrix(const int M, const int N,
+                                              const int W, const T diag_val,
+                                              const T Uval, const T Lval);
+
+/**
  * @brief create random structure matrix (column number is decided by random)
  * @param M # of Row
  * @param N # of col.
