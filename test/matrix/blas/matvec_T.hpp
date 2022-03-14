@@ -37,7 +37,7 @@ bool test_send_matvec_T(const size_t M, const size_t N, double tol) {
   }
 
   monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+      monolish::util::asym_band_matrix<T>(M, N, nnzrow, 1.0, -1.0, 0.0);
 
   MAT A(seedA); // M*N matrix
 
@@ -69,7 +69,7 @@ bool test_matvec_T(const size_t M, const size_t N, double tol) {
   }
 
   monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+      monolish::util::asym_band_matrix<T>(M, N, nnzrow, 1.0, -1.0, 0.0);
 
   MAT A(seedA); // M*N matrix
 
