@@ -59,8 +59,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
                               &alpha, matA, vecX, &beta, vecY, CUDA_R_64F,
                               CUSPARSE_MV_ALG_DEFAULT, &buffersize);
       cudaMalloc(&buffer, buffersize);
-      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha, matA,
-                   vecX, &beta, vecY, CUDA_R_64F, CUSPARSE_MV_ALG_DEFAULT,
+      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha,
+                   matA, vecX, &beta, vecY, CUDA_R_64F, CUSPARSE_MV_ALG_DEFAULT,
                    buffer);
       cusparseDestroySpMat(matA);
       cusparseDestroyDnVec(vecX);
@@ -91,17 +91,16 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
 
     // OSS
 #else
-    if(transA==true){
-    }
-    else{
+    if (transA == true) {
+    } else {
 #pragma omp parallel for
-        for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-            double ytmp = 0.0;
-            for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                ytmp += vald[j] * (xd + xoffset)[cold[j]];
-            }
-            yd[i + yoffset] = ytmp;
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        double ytmp = 0.0;
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          ytmp += vald[j] * (xd + xoffset)[cold[j]];
         }
+        yd[i + yoffset] = ytmp;
+      }
     }
 #endif
   }
@@ -165,8 +164,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
                               &alpha, matA, vecX, &beta, vecY, CUDA_R_32F,
                               CUSPARSE_MV_ALG_DEFAULT, &buffersize);
       cudaMalloc(&buffer, buffersize);
-      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha, matA,
-                   vecX, &beta, vecY, CUDA_R_32F, CUSPARSE_MV_ALG_DEFAULT,
+      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha,
+                   matA, vecX, &beta, vecY, CUDA_R_32F, CUSPARSE_MV_ALG_DEFAULT,
                    buffer);
       cusparseDestroySpMat(matA);
       cusparseDestroyDnVec(vecX);
@@ -197,17 +196,16 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
 
     // OSS
 #else
-    if(transA==true){
-    }
-    else{
+    if (transA == true) {
+    } else {
 #pragma omp parallel for
-    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-      float ytmp = 0.0;
-      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        ytmp += vald[j] * (xd + xoffset)[cold[j]];
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        float ytmp = 0.0;
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          ytmp += vald[j] * (xd + xoffset)[cold[j]];
+        }
+        yd[i + yoffset] = ytmp;
       }
-      yd[i + yoffset] = ytmp;
-    }
     }
 #endif
   }

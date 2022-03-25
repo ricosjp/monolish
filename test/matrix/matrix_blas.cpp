@@ -307,7 +307,8 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
-  if (test_matvec_T<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) == false) {
+  if (test_matvec_T<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
     return 1;
   }
 

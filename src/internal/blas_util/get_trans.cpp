@@ -10,7 +10,7 @@ CBLAS_TRANSPOSE get_cblas_trans(bool flag) {
   }
 }
 
-sparse_operation_t get_sparseblas_trans(bool flag){
+sparse_operation_t get_sparseblas_trans(bool flag) {
   if (flag == true) {
     return SPARSE_OPERATION_TRANSPOSE;
   } else {
