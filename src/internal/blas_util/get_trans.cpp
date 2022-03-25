@@ -10,6 +10,14 @@ CBLAS_TRANSPOSE get_cblas_trans(bool flag) {
   }
 }
 
+sparse_operation_t get_sparseblas_trans(bool flag){
+  if (flag == true) {
+    return SPARSE_OPERATION_TRANSPOSE;
+  } else {
+    return SPARSE_OPERATION_NON_TRANSPOSE;
+  }
+}
+
 #ifdef MONOLISH_USE_NVIDIA_GPU
 cusparseOperation_t get_cuspasrse_trans(bool flag) {
   if (flag == true) {
@@ -26,6 +34,7 @@ cublasOperation_t get_cublas_trans(bool flag) {
     return CUBLAS_OP_N;
   }
 }
+
 #endif
 
 } // namespace monolish::internal
