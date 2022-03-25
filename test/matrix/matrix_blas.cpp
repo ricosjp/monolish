@@ -294,6 +294,23 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // matvec_T CRS//
+  if (test_send_matvec_T<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matvec_T<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_T<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_T<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
   // matvec LinearOperator//
   if (test_send_matvec_linearoperator<monolish::matrix::LinearOperator<double>,
                                       double>(M, N, 1.0e-6) == false) {
