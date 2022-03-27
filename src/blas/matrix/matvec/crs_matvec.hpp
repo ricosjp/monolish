@@ -208,6 +208,16 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
     // OSS
 #else
     if (transA == true) {
+#pragma omp parallel for
+          for (auto i = decltype(y.size()){0}; i < y.size(); i++) {
+                  (yd+yoffset)[i] = 0.0;
+          }
+
+          for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+              for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+                  (yd+yoffset)[cold[j]] += vald[j] * (xd + xoffset)[i];
+              }
+          }
     } else {
 #pragma omp parallel for
       for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
