@@ -20,6 +20,7 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 ### Added
+- Impl. transposed SpMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/447 
 - Impl. asym_band_matrix() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446 
 - Impl. transposed gemv(matvec_N(Dense)) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/445 https://github.com/ricosjp/monolish/issues/107
 - Impl. get_blas_trans_flag() https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/444 https://github.com/ricosjp/monolish/issues/107
