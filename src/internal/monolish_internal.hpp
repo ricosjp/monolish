@@ -45,7 +45,9 @@ auto checkError = [](auto result, auto func, auto file, auto line) {
 
 // blas util //
 CBLAS_TRANSPOSE get_cblas_trans(bool flag);
+#ifdef MONOLISH_USE_MKL
 sparse_operation_t get_sparseblas_trans(bool flag);
+#endif
 #ifdef MONOLISH_USE_NVIDIA_GPU
 cusparseOperation_t get_cuspasrse_trans(bool flag);
 cublasOperation_t get_cublas_trans(bool flag);
