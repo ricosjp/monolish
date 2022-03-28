@@ -6,13 +6,18 @@ namespace {
 // double ///////////////////
 template <typename VEC1, typename VEC2>
 void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
-                  bool AtransA) {
+                  bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
   // err, M = MN * N
-  assert(A.get_row() == y.size());
-  assert(A.get_col() == x.size());
+  if (transA) {
+    assert(A.get_row() == x.size());
+    assert(A.get_col() == y.size());
+  } else {
+    assert(A.get_row() == y.size());
+    assert(A.get_col() == x.size());
+  }
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const double *vald = A.val.data();
@@ -25,8 +30,10 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
-    const auto m = A.get_row();
-    const auto n = A.get_col();
+    auto m = A.get_row();
+    auto n = A.get_col();
+    auto xn = x.size();
+    auto yn = y.size();
     const double alpha = 1.0;
     const double beta = 0.0;
     const auto nnz = A.get_nnz();
@@ -43,17 +50,17 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F);
-      cusparseCreateDnVec(&vecX, n, (void *)(xd + xoffset), CUDA_R_64F);
-      cusparseCreateDnVec(&vecY, m, (void *)(yd + yoffset), CUDA_R_64F);
+      cusparseCreateDnVec(&vecX, xn, (void *)(xd + xoffset), CUDA_R_64F);
+      cusparseCreateDnVec(&vecY, yn, (void *)(yd + yoffset), CUDA_R_64F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
-      cusparseSpMV_bufferSize(sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+      cusparseSpMV_bufferSize(sp_handle, internal::get_cuspasrse_trans(transA),
                               &alpha, matA, vecX, &beta, vecY, CUDA_R_64F,
                               CUSPARSE_MV_ALG_DEFAULT, &buffersize);
       cudaMalloc(&buffer, buffersize);
-      cusparseSpMV(sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA,
-                   vecX, &beta, vecY, CUDA_R_64F, CUSPARSE_MV_ALG_DEFAULT,
+      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha,
+                   matA, vecX, &beta, vecY, CUDA_R_64F, CUSPARSE_MV_ALG_DEFAULT,
                    buffer);
       cusparseDestroySpMat(matA);
       cusparseDestroyDnVec(vecX);
@@ -79,18 +86,32 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
                             (int *)rowd + 1, (int *)cold, (double *)vald);
     // mkl_sparse_set_mv_hint (mklA, SPARSE_OPERATION_NON_TRANSPOSE, descrA,
     // 100); // We haven't seen any performance improvement by using hint.
-    mkl_sparse_d_mv(SPARSE_OPERATION_NON_TRANSPOSE, alpha, mklA, descrA,
+    mkl_sparse_d_mv(internal::get_sparseblas_trans(transA), alpha, mklA, descrA,
                     xd + xoffset, beta, yd + yoffset);
 
     // OSS
 #else
+    if (transA == true) {
 #pragma omp parallel for
-    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-      double ytmp = 0.0;
-      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        ytmp += vald[j] * (xd + xoffset)[cold[j]];
+      for (auto i = decltype(y.size()){0}; i < y.size(); i++) {
+        (yd + yoffset)[i] = 0.0;
       }
-      yd[i + yoffset] = ytmp;
+
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          (yd + yoffset)[cold[j]] += vald[j] * (xd + xoffset)[i];
+        }
+      }
+
+    } else {
+#pragma omp parallel for
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        double ytmp = 0.0;
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          ytmp += vald[j] * (xd + xoffset)[cold[j]];
+        }
+        yd[i + yoffset] = ytmp;
+      }
     }
 #endif
   }
@@ -106,8 +127,13 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
   logger.func_in(monolish_func);
 
   // err, M = MN * N
-  assert(A.get_row() == y.size());
-  assert(A.get_col() == x.size());
+  if (transA) {
+    assert(A.get_row() == x.size());
+    assert(A.get_col() == y.size());
+  } else {
+    assert(A.get_row() == y.size());
+    assert(A.get_col() == x.size());
+  }
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const float *vald = A.val.data();
@@ -122,6 +148,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
 #if MONOLISH_USE_NVIDIA_GPU // gpu
     const auto m = A.get_row();
     const auto n = A.get_col();
+    auto xn = x.size();
+    auto yn = y.size();
     const float alpha = 1.0;
     const float beta = 0.0;
     const auto nnz = A.get_nnz();
@@ -138,17 +166,17 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
-      cusparseCreateDnVec(&vecX, n, (void *)(xd + xoffset), CUDA_R_32F);
-      cusparseCreateDnVec(&vecY, m, (void *)(yd + yoffset), CUDA_R_32F);
+      cusparseCreateDnVec(&vecX, xn, (void *)(xd + xoffset), CUDA_R_32F);
+      cusparseCreateDnVec(&vecY, yn, (void *)(yd + yoffset), CUDA_R_32F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
-      cusparseSpMV_bufferSize(sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+      cusparseSpMV_bufferSize(sp_handle, internal::get_cuspasrse_trans(transA),
                               &alpha, matA, vecX, &beta, vecY, CUDA_R_32F,
                               CUSPARSE_MV_ALG_DEFAULT, &buffersize);
       cudaMalloc(&buffer, buffersize);
-      cusparseSpMV(sp_handle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA,
-                   vecX, &beta, vecY, CUDA_R_32F, CUSPARSE_MV_ALG_DEFAULT,
+      cusparseSpMV(sp_handle, internal::get_cuspasrse_trans(transA), &alpha,
+                   matA, vecX, &beta, vecY, CUDA_R_32F, CUSPARSE_MV_ALG_DEFAULT,
                    buffer);
       cusparseDestroySpMat(matA);
       cusparseDestroyDnVec(vecX);
@@ -174,18 +202,31 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
                             (int *)rowd + 1, (int *)cold, (float *)vald);
     // mkl_sparse_set_mv_hint (mklA, SPARSE_OPERATION_NON_TRANSPOSE, descrA,
     // 100); // We haven't seen any performance improvement by using hint.
-    mkl_sparse_s_mv(SPARSE_OPERATION_NON_TRANSPOSE, alpha, mklA, descrA,
+    mkl_sparse_s_mv(internal::get_sparseblas_trans(transA), alpha, mklA, descrA,
                     xd + xoffset, beta, yd + yoffset);
 
     // OSS
 #else
+    if (transA == true) {
 #pragma omp parallel for
-    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-      float ytmp = 0.0;
-      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        ytmp += vald[j] * (xd + xoffset)[cold[j]];
+      for (auto i = decltype(y.size()){0}; i < y.size(); i++) {
+        (yd + yoffset)[i] = 0.0;
       }
-      yd[i + yoffset] = ytmp;
+
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          (yd + yoffset)[cold[j]] += vald[j] * (xd + xoffset)[i];
+        }
+      }
+    } else {
+#pragma omp parallel for
+      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+        float ytmp = 0.0;
+        for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+          ytmp += vald[j] * (xd + xoffset)[cold[j]];
+        }
+        yd[i + yoffset] = ytmp;
+      }
     }
 #endif
   }
