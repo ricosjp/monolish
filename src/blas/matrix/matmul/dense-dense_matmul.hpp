@@ -2,12 +2,29 @@
 #include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
+namespace {
+std::string get_matmul_name(std::string func, bool transA, bool transB) {
+  func += "_";
+  if (transA == true) {
+    func += "T";
+  } else {
+    func += "N";
+  }
+  if (transB == true) {
+    func += "T";
+  } else {
+    func += "N";
+  }
+  return func;
+}
 
 // double ///////////////////
-void blas::matmul(const matrix::Dense<double> &A,
-                  const matrix::Dense<double> &B, matrix::Dense<double> &C) {
+void Dense_Dense_Dmatmul_core(const matrix::Dense<double> &A,
+                              const matrix::Dense<double> &B,
+                              matrix::Dense<double> &C, bool transA,
+                              bool transB) {
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.func_in(get_matmul_name(monolish_func, transA, transB));
 
   // err
   assert(A.get_col() == B.get_row());
@@ -48,10 +65,12 @@ void blas::matmul(const matrix::Dense<double> &A,
 }
 
 // float ///////////////////
-void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
-                  matrix::Dense<float> &C) {
+void Dense_Dense_Smatmul_core(const matrix::Dense<float> &A,
+                              const matrix::Dense<float> &B,
+                              matrix::Dense<float> &C, bool transA,
+                              bool transB) {
   Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+  logger.func_in(get_matmul_name(monolish_func, transA, transB));
 
   // err
   assert(A.get_col() == B.get_row());
@@ -91,4 +110,5 @@ void blas::matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 
   logger.func_out();
 }
+} // namespace
 } // namespace monolish
