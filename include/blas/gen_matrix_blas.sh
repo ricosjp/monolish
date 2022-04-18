@@ -308,31 +308,31 @@ done
 echo "/**@}*/"
 
 #matmul_* Dense
-for TA in N T; do
-for TB in N T; do
-echo "
-/**
- * \defgroup mm_dense_$TA$TB monolish::blas::matmul_$TA$TB (Dense, Dense, Dense)
- * @brief Dense matrix multiplication: C = A^$TA B^$TB
- * @{
- */
-/**
- * @brief Dense matrix multiplication: C = A^$TA B^$TB
- * @param A Dense matrix (size M x K)
- * @param B Dense matrix (size K x N)
- * @param C Dense matrix (size M x N)
- * @note
- * - # of computation: 2MNK
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
-*/ "
-for prec in double float; do
-  echo "void matmul_$TA$TB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
-done
-echo "/**@}*/"
-done
-done
+# for TA in N T; do
+# for TB in N T; do
+# echo "
+# /**
+#  * \defgroup mm_dense_$TA$TB monolish::blas::matmul_$TA$TB (Dense, Dense, Dense)
+#  * @brief Dense matrix multiplication: C = A^$TA B^$TB
+#  * @{
+#  */
+# /**
+#  * @brief Dense matrix multiplication: C = A^$TA B^$TB
+#  * @param A Dense matrix (size M x K)
+#  * @param B Dense matrix (size K x N)
+#  * @param C Dense matrix (size M x N)
+#  * @note
+#  * - # of computation: 2MNK
+#  * - Multi-threading: true
+#  * - GPU acceleration: true
+#  *    - # of data transfer: 0
+# */ "
+# for prec in double float; do
+#   echo "void matmul_$TA$TB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+# done
+# echo "/**@}*/"
+# done
+# done
 
 #matmul CRS
 echo "
@@ -357,32 +357,32 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
-#matmul CRS
-for TA in N T; do
-for TB in N T; do
-echo "
-/**
- * \defgroup mm_crs_dense_$TA$TB monolish::blas::matmul_$TA$TB (CRS, Dense, Dense)
- * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
- * @{
- */
-/**
- * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
- * @param A CRS matrix (size M x K)
- * @param B Dense matrix (size K x N)
- * @param C Dense matrix (size M x N)
- * @note
- * - # of computation: 2*N*nnz
- * - Multi-threading: true
- * - GPU acceleration: true
- *    - # of data transfer: 0
-*/ "
-for prec in double float; do
-  echo "void matmul$TA$TB(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
-done
-echo "/**@}*/"
-done
-done
+#matmul_* CRS
+# for TA in N T; do
+# for TB in N T; do
+# echo "
+# /**
+#  * \defgroup mm_crs_dense_$TA$TB monolish::blas::matmul_$TA$TB (CRS, Dense, Dense)
+#  * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
+#  * @{
+#  */
+# /**
+#  * @brief CRS and Dense matrix multiplication: C = A^$TA B^$TB
+#  * @param A CRS matrix (size M x K)
+#  * @param B Dense matrix (size K x N)
+#  * @param C Dense matrix (size M x N)
+#  * @note
+#  * - # of computation: 2*N*nnz
+#  * - Multi-threading: true
+#  * - GPU acceleration: true
+#  *    - # of data transfer: 0
+# */ "
+# for prec in double float; do
+#   echo "void matmul$TA$TB(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+# done
+# echo "/**@}*/"
+# done
+# done
 
 #matmul LinearOperator
 echo "
