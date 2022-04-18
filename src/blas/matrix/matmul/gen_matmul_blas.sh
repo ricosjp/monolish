@@ -32,78 +32,25 @@ done
 
 echo ""
 
-## matvec_* Dense
-for transA in N T; do
-    for transB in N T; do
-        for prec in double float; do
-            if [ $prec = "double" ]
-            then
-                TA=`TRANSPOSE_BOOL $transA`
-                TB=`TRANSPOSE_BOOL $transB`
-                echo "void matmul_$transA$transB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Dmatmul_core(A, B, C, $TA, $TB);}"
-            else
-                TA=`TRANSPOSE_BOOL $transA`
-                TB=`TRANSPOSE_BOOL $transB`
-                echo "void matmul_$transA$transB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Smatmul_core(A, B, C, $TA, $TB);}"
-            fi
-        done
-    done
-done
-
-echo ""
-
-# ## matvec CRS
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#       if [ $prec = "double" ]
-#       then
-#         echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, false);}"
-#       else
-#         echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, false);}"
-#       fi
-#     done
-#   done
-# done
-# 
-# echo ""
-# 
-# ## matvec CRS
-# for trans in N T; do
-#     for prec in double float; do
-#         for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#             for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#                 if [ $prec = "double" ]
-#                 then
-#                     T=`TRANSPOSE_BOOL $trans`
-#                     echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, $T);}"
-#                 else
-#                     T=`TRANSPOSE_BOOL $trans`
-#                     echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, $T);}"
-#                 fi
-#             done
+# ## matmul_* Dense
+# for transA in N T; do
+#     for transB in N T; do
+#         for prec in double float; do
+#             if [ $prec = "double" ]
+#             then
+#                 TA=`TRANSPOSE_BOOL $transA`
+#                 TB=`TRANSPOSE_BOOL $transB`
+#                 echo "void matmul_$transA$transB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Dmatmul_core(A, B, C, $TA, $TB);}"
+#             else
+#                 TA=`TRANSPOSE_BOOL $transA`
+#                 TB=`TRANSPOSE_BOOL $transB`
+#                 echo "void matmul_$transA$transB(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Smatmul_core(A, B, C, $TA, $TB);}"
+#             fi
 #         done
 #     done
 # done
 # 
 # echo ""
-# 
-# ## matvec LinearOperator
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#       echo "void matvec(const matrix::LinearOperator<$prec> &A, const $arg1 &x, $arg2 &y){matvec_core(A, x, y);}"
-#     done
-#   done
-# done
-# 
-# ## rmatvec LinearOperator
-# for prec in double float; do
-#   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-#       echo "void rmatvec(const matrix::LinearOperator<$prec> &A, const $arg1 &x, $arg2 &y){rmatvec_core(A, x, y);}"
-#     done
-#   done
-# done
+
 
 echo "}"
