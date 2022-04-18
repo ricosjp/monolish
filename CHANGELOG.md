@@ -38,6 +38,7 @@ Unreleased
 - Start developing 0.16.0 https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/438
 
 ### Removed
+- Drop transposed matrix-matrix operations (I will impl. 0.16.1) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/449
 - Drop SpMM/SpMV of CUDA 10.x support https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/443
 
 0.15.3 - 2022/01/13
