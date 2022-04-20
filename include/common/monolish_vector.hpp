@@ -154,7 +154,7 @@ public:
    * @param max rand max
    * @note
    * - # of computation: N
-   * - Multi-threading: true
+   * - Multi-threading: false
    * - GPU acceleration: false
    **/
   vector(const size_t N, const Float min, const Float max);

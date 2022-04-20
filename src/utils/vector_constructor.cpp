@@ -35,17 +35,14 @@ void util::random_vector(vector<T> &vec, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#pragma omp parallel
-  {
-    std::random_device random;
-    std::mt19937 mt(random()+omp_get_thread_num());
-    std::uniform_real_distribution<> rand(min, max);
+  std::random_device random;
+  std::mt19937 mt(random());
+  std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp for
-    for (size_t i = 0; i < vec.size(); i++) {
+  for (size_t i = 0; i < vec.size(); i++) {
       vec[i] = rand(mt);
-    }
   }
+
   logger.util_out();
 }
 template void util::random_vector(vector<double> &vec, const double min,
@@ -58,17 +55,15 @@ vector<T>::vector(const size_t N, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   resize(N);
-#pragma omp parallel
-  {
-    std::random_device random;
-    std::mt19937 mt(random()+omp_get_thread_num());
-    std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp for
-    for (size_t i = 0; i < val.size(); i++) {
+  std::random_device random;
+  std::mt19937 mt(random());
+  std::uniform_real_distribution<> rand(min, max);
+
+  for (size_t i = 0; i < val.size(); i++) {
       val[i] = rand(mt);
-    }
   }
+
   logger.util_out();
 }
 template vector<double>::vector(const size_t N, const double min,
