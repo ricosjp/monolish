@@ -167,7 +167,7 @@ public:
    * @param seed random seed
    * @note
    * - # of computation: N
-   * - Multi-threading: true
+   * - Multi-threading: false
    * - GPU acceleration: false
    **/
   vector(const size_t N, const Float min, const Float max, const std::uint32_t seed);

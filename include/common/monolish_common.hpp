@@ -301,7 +301,7 @@ void random_vector(vector<T> &vec, const T min, const T max);
  * @note the ramdom number generator is random generator is mt19937
  * @note
  * - # of computation: N
- * - Multi-threading: true
+ * - Multi-threading: false
  * - GPU acceleration: false
  * @ingroup gendata
  **/
