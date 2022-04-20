@@ -117,23 +117,45 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
 
   val.resize(nnz);
 
-#pragma omp parallel
-  {
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
+  std::random_device random;
+  std::mt19937 mt(random());
+  std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp for
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
-    }
+  for (size_t i = 0; i < val.size(); i++) {
+    val[i] = rand(mt);
   }
+
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N, const double min,
                               const double max);
 template Dense<float>::Dense(const size_t M, const size_t N, const float min,
                              const float max);
+
+template <typename T>
+Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max,
+                const std::uint32_t seed) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  set_row(M);
+  set_col(N);
+  set_nnz(M * N);
+
+  val.resize(nnz);
+
+  std::mt19937 mt(seed);
+  std::uniform_real_distribution<> rand(min, max);
+
+  for (size_t i = 0; i < val.size(); i++) {
+    val[i] = rand(mt);
+  }
+
+  logger.util_out();
+}
+template Dense<double>::Dense(const size_t M, const size_t N, const double min,
+                              const double max, const std::uint32_t seed);
+template Dense<float>::Dense(const size_t M, const size_t N, const float min,
+                             const float max, const std::uint32_t seed);
 
 template <typename T>
 Dense<T>::Dense(const size_t M, const size_t N, const T value) {

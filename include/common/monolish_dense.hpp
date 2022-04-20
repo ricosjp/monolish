@@ -165,6 +165,21 @@ public:
   Dense(const size_t M, const size_t N, const Float min, const Float max);
 
   /**
+   * @brief Create random dense matrix from dense matrix
+   * @param M # of row
+   * @param N # of col
+   * @param min rand min
+   * @param max rand max
+   * @param seed random seed
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  Dense(const size_t M, const size_t N, const Float min, const Float max,
+        const std::uint32_t seed);
+
+  /**
    * @brief Create construct dense matrix
    * @param M # of row
    * @param N # of col
