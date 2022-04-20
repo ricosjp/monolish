@@ -29,7 +29,7 @@ template <typename T> vector<T>::vector(const size_t N, const T value) {
 template vector<double>::vector(const size_t N, const double value);
 template vector<float>::vector(const size_t N, const float value);
 
-//random
+// random
 template <typename T>
 void util::random_vector(vector<T> &vec, const T min, const T max) {
   Logger &logger = Logger::get_instance();
@@ -40,7 +40,7 @@ void util::random_vector(vector<T> &vec, const T min, const T max) {
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < vec.size(); i++) {
-      vec[i] = rand(mt);
+    vec[i] = rand(mt);
   }
 
   logger.util_out();
@@ -61,7 +61,7 @@ vector<T>::vector(const size_t N, const T min, const T max) {
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
+    val[i] = rand(mt);
   }
 
   logger.util_out();
@@ -71,9 +71,10 @@ template vector<double>::vector(const size_t N, const double min,
 template vector<float>::vector(const size_t N, const float min,
                                const float max);
 
-//random_seed
+// random_seed
 template <typename T>
-void util::random_vector(vector<T> &vec, const T min, const T max, const std::uint32_t seed) {
+void util::random_vector(vector<T> &vec, const T min, const T max,
+                         const std::uint32_t seed) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -81,7 +82,7 @@ void util::random_vector(vector<T> &vec, const T min, const T max, const std::ui
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < vec.size(); i++) {
-      vec[i] = rand(mt);
+    vec[i] = rand(mt);
   }
 
   logger.util_out();
@@ -92,7 +93,8 @@ template void util::random_vector(vector<float> &vec, const float min,
                                   const float max, const std::uint32_t seed);
 
 template <typename T>
-vector<T>::vector(const size_t N, const T min, const T max, const std::uint32_t seed) {
+vector<T>::vector(const size_t N, const T min, const T max,
+                  const std::uint32_t seed) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   resize(N);
@@ -101,15 +103,15 @@ vector<T>::vector(const size_t N, const T min, const T max, const std::uint32_t 
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
+    val[i] = rand(mt);
   }
 
   logger.util_out();
 }
 template vector<double>::vector(const size_t N, const double min,
-                               const double max, const std::uint32_t seed);
-template vector<float>::vector(const size_t N, const float min,
-                               const float max, const std::uint32_t seed);
+                                const double max, const std::uint32_t seed);
+template vector<float>::vector(const size_t N, const float min, const float max,
+                               const std::uint32_t seed);
 
 // start-end
 template <typename T> vector<T>::vector(const T *start, const T *end) {
