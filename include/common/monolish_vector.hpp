@@ -159,6 +159,19 @@ public:
    **/
   vector(const size_t N, const Float min, const Float max);
 
+  /**
+   * @brief create N length rand(min~max) vector with random seed
+   * @param N vector length
+   * @param min rand min
+   * @param max rand max
+   * @param seed random seed
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  vector(const size_t N, const Float min, const Float max, const std::uint32_t seed);
+
   // communication
   // ///////////////////////////////////////////////////////////////////////////
   /**
