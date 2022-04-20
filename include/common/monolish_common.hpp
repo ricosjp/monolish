@@ -306,7 +306,8 @@ void random_vector(vector<T> &vec, const T min, const T max);
  * @ingroup gendata
  **/
 template <typename T>
-void random_vector(vector<T> &vec, const T min, const T max, const std::uint32_t seed);
+void random_vector(vector<T> &vec, const T min, const T max,
+                   const std::uint32_t seed);
 
 // is_same //////////////////
 
