@@ -292,6 +292,23 @@ void set_log_filename(const std::string filename);
 template <typename T>
 void random_vector(vector<T> &vec, const T min, const T max);
 
+/**
+ * @brief create random vector with random seed
+ * @param vec allocated vector
+ * @param min min. of random
+ * @param max min. of random
+ * @param seed random seed
+ * @note the ramdom number generator is random generator is mt19937
+ * @note
+ * - # of computation: N
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup gendata
+ **/
+template <typename T>
+void random_vector(vector<T> &vec, const T min, const T max,
+                   const std::uint32_t seed);
+
 // is_same //////////////////
 
 /**

@@ -29,22 +29,20 @@ template <typename T> vector<T>::vector(const size_t N, const T value) {
 template vector<double>::vector(const size_t N, const double value);
 template vector<float>::vector(const size_t N, const float value);
 
+// random
 template <typename T>
 void util::random_vector(vector<T> &vec, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-#pragma omp parallel
-  {
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
+  std::random_device random;
+  std::mt19937 mt(random());
+  std::uniform_real_distribution<> rand(min, max);
 
-#pragma omp for
-    for (size_t i = 0; i < vec.size(); i++) {
-      vec[i] = rand(mt);
-    }
+  for (size_t i = 0; i < vec.size(); i++) {
+    vec[i] = rand(mt);
   }
+
   logger.util_out();
 }
 template void util::random_vector(vector<double> &vec, const double min,
@@ -52,6 +50,70 @@ template void util::random_vector(vector<double> &vec, const double min,
 template void util::random_vector(vector<float> &vec, const float min,
                                   const float max);
 
+template <typename T>
+vector<T>::vector(const size_t N, const T min, const T max) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  resize(N);
+
+  std::random_device random;
+  std::mt19937 mt(random());
+  std::uniform_real_distribution<> rand(min, max);
+
+  for (size_t i = 0; i < val.size(); i++) {
+    val[i] = rand(mt);
+  }
+
+  logger.util_out();
+}
+template vector<double>::vector(const size_t N, const double min,
+                                const double max);
+template vector<float>::vector(const size_t N, const float min,
+                               const float max);
+
+// random_seed
+template <typename T>
+void util::random_vector(vector<T> &vec, const T min, const T max,
+                         const std::uint32_t seed) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  std::mt19937 mt(seed);
+  std::uniform_real_distribution<> rand(min, max);
+
+  for (size_t i = 0; i < vec.size(); i++) {
+    vec[i] = rand(mt);
+  }
+
+  logger.util_out();
+}
+template void util::random_vector(vector<double> &vec, const double min,
+                                  const double max, const std::uint32_t seed);
+template void util::random_vector(vector<float> &vec, const float min,
+                                  const float max, const std::uint32_t seed);
+
+template <typename T>
+vector<T>::vector(const size_t N, const T min, const T max,
+                  const std::uint32_t seed) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  resize(N);
+
+  std::mt19937 mt(seed);
+  std::uniform_real_distribution<> rand(min, max);
+
+  for (size_t i = 0; i < val.size(); i++) {
+    val[i] = rand(mt);
+  }
+
+  logger.util_out();
+}
+template vector<double>::vector(const size_t N, const double min,
+                                const double max, const std::uint32_t seed);
+template vector<float>::vector(const size_t N, const float min, const float max,
+                               const std::uint32_t seed);
+
+// start-end
 template <typename T> vector<T>::vector(const T *start, const T *end) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -62,29 +124,6 @@ template <typename T> vector<T>::vector(const T *start, const T *end) {
 }
 template vector<double>::vector(const double *start, const double *end);
 template vector<float>::vector(const float *start, const float *end);
-
-template <typename T>
-vector<T>::vector(const size_t N, const T min, const T max) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  resize(N);
-#pragma omp parallel
-  {
-    std::random_device random;
-    std::mt19937 mt(random());
-    std::uniform_real_distribution<> rand(min, max);
-
-#pragma omp for
-    for (size_t i = 0; i < val.size(); i++) {
-      val[i] = rand(mt);
-    }
-  }
-  logger.util_out();
-}
-template vector<double>::vector(const size_t N, const double min,
-                                const double max);
-template vector<float>::vector(const size_t N, const float min,
-                               const float max);
 
 // copy constructor
 template <typename T> vector<T>::vector(const std::vector<T> &vec) {
