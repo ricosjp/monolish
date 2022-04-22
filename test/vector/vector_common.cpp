@@ -24,7 +24,7 @@ template <typename T> bool test(const size_t size) {
   monolish::vector<T> list = {1.0, 2.0, 3.0};
 
   // monolish::vector random(1.0~2.0) vector
-  monolish::vector<T> randvec(size, 1.0, 2.0);
+  monolish::vector<T> randvec(size, 1.0, 2.0, test_random_engine());
 
   // equal operator (z = rand(1~2)) on cpu
   z = randvec;
