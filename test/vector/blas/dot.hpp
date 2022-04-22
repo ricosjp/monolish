@@ -16,8 +16,8 @@ T ans_dot(monolish::vector<T> &mx, monolish::vector<T> &my) {
 
 template <typename T> bool test_send_dot(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
 
   T ans = ans_dot(x, y);
 
@@ -29,8 +29,8 @@ template <typename T> bool test_send_dot(const size_t size, double tol) {
 
 template <typename T> bool test_dot(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
 
   T ans = ans_dot(x, y);
 

@@ -10,7 +10,7 @@ template <typename T> void ans_scal(double alpha, monolish::vector<T> &mx) {
 template <typename T> bool test_send_scal(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansx = x;
   ans_scal(alpha, ansx);
@@ -25,7 +25,7 @@ template <typename T> bool test_send_scal(const size_t size, double tol) {
 template <typename T> bool test_scal(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansx = x;
   ans_scal(alpha, ansx);

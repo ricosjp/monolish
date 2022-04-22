@@ -15,8 +15,8 @@ void ans_xpay(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my) {
 template <typename T> bool test_send_xpay(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansy = y;
   ans_xpay(alpha, x, ansy);
@@ -31,8 +31,8 @@ template <typename T> bool test_send_xpay(const size_t size, double tol) {
 template <typename T> bool test_xpay(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansy = y;
   ans_xpay(alpha, x, ansy);

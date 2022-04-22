@@ -13,7 +13,7 @@ template <typename T> T ans_nrm2(monolish::vector<T> &mx) {
 
 template <typename T> bool test_send_nrm2(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   auto ans = ans_nrm2(x);
   monolish::util::send(x);
@@ -24,7 +24,7 @@ template <typename T> bool test_send_nrm2(const size_t size, double tol) {
 
 template <typename T> bool test_nrm2(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   auto result = monolish::blas::nrm2(x);
   auto ans = ans_nrm2(x);

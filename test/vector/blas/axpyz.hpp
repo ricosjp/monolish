@@ -15,9 +15,9 @@ void ans_axpyz(double alpha, monolish::vector<T> &mx, monolish::vector<T> &my,
 template <typename T> bool test_send_axpyz(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
-  monolish::vector<T> z(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> z(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansz = z;
   ans_axpyz(alpha, x, y, ansz);
@@ -32,9 +32,9 @@ template <typename T> bool test_send_axpyz(const size_t size, double tol) {
 template <typename T> bool test_axpyz(const size_t size, double tol) {
 
   T alpha = 123.0;
-  monolish::vector<T> x(size, 0.0, 1.0);
-  monolish::vector<T> y(size, 0.0, 1.0);
-  monolish::vector<T> z(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.0, 1.0, test_random_engine());
+  monolish::vector<T> z(size, 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansz = z;
   ans_axpyz(alpha, x, y, ansz);
