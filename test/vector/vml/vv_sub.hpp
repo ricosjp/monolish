@@ -14,8 +14,8 @@ void ans_vvsub(monolish::vector<T> &mx, monolish::vector<T> &my,
 
 template <typename T> bool test_send_vvsub(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 1.0);
-  monolish::vector<T> y(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp(ans);
@@ -30,8 +30,8 @@ template <typename T> bool test_send_vvsub(const size_t size, double tol) {
 
 template <typename T> bool test_vvsub(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 1.0);
-  monolish::vector<T> y(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp(ans);

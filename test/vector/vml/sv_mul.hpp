@@ -14,7 +14,7 @@ void ans_svmul(monolish::vector<T> &mx, T value, monolish::vector<T> &ans) {
 template <typename T> bool test_send_svmul(const size_t size, double tol) {
 
   T value = 123.0;
-  monolish::vector<T> x(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp(ans);
@@ -30,7 +30,7 @@ template <typename T> bool test_send_svmul(const size_t size, double tol) {
 template <typename T> bool test_svmul(const size_t size, double tol) {
 
   T value = 123.0;
-  monolish::vector<T> x(size, 0.1, 1.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans(size, 321.0);
 
   monolish::vector<T> ans_tmp(ans);
