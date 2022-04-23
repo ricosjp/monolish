@@ -12,7 +12,7 @@ bool test(const char *file, const int check_ans, const T tol) {
   monolish::vector<T> b(A.get_row(), 0.0);
 
   // initial x is rand(0~1)
-  monolish::vector<T> x(A.get_row(), 0, 0.1);
+  monolish::vector<T> x(A.get_row(), 0.0, 1.0, test_random_engine());
 
   monolish::util::send(A, x, b, ans);
 
