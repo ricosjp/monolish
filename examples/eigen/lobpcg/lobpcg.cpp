@@ -23,7 +23,7 @@ int main() {
   size_t eignum = 2;
 
   // Random vector length N with random values in the range 1.0 to 2.0
-  // random seed is 123 (mt19937)
+  // Random seed is 123 (mt19937)
   monolish::vector<double> eigs(eignum, 1.0, 2.0, 123);
 
   // Dense matrix, the size is eignum * A.get_row() for eigenvectors

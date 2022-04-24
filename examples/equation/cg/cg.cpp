@@ -17,7 +17,7 @@ int main() {
 
   // Length A.row()
   // Random vector length A.row() with random values in the range 1.0 to 2.0
-  // random seed is 123 and 321 (mt19937)
+  // Random seeds are 123 and 321 (mt19937)
   monolish::vector<double> x(A.get_row(), 1.0, 2.0, 123);
   monolish::vector<double> b(A.get_row(), 1.0, 2.0, 321);
 
