@@ -21,7 +21,8 @@ void my_cg(const MATRIX &A, monolish::vector<Float> &x,
   monolish::vector<Float> p(A.get_row(), 0.0);
   monolish::vector<Float> q(A.get_row(), 0.0);
 
-  monolish::util::send(r, p, q); // sent r, p, q to GPU
+  // sent r, p, q to GPU
+  monolish::util::send(r, p, q); 
 
   // r = b-Ax
   monolish::blas::matvec(A, x, q);
@@ -90,8 +91,8 @@ int main(int argc, char **argv) {
   std::cout << "# of nnz  : " << A.get_nnz() << std::endl;
   std::cout << "===============================" << std::endl;
 
-  // initial x is rand(0~1)
-  monolish::vector<double> x(A.get_row(), 0.0, 1.0);
+  // initial x is rand(0~1), seed is 123
+  monolish::vector<double> x(A.get_row(), 0.0, 1.0, 123);
 
   // initial b is {1, 1, 1, ...,1}
   monolish::vector<double> b(A.get_row(), 1.0);
