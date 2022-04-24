@@ -12,8 +12,8 @@ int main() {
   // Edit the matrix as needed //
   // Execute A_COO.sort() after editing the matrix //
 
-  monolish::matrix::CRS<double> A(
-      A_COO); // Create CRS format and convert from COO format
+  // Create CRS format matrix and convert from COO format matrix
+  monolish::matrix::CRS<double> A(A_COO);
 
   // Length A.row()
   // Random vector length A.row() with random values in the range 1.0 to 2.0
