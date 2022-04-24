@@ -91,7 +91,8 @@ int main(int argc, char **argv) {
   std::cout << "# of nnz  : " << A.get_nnz() << std::endl;
   std::cout << "===============================" << std::endl;
 
-  // initial x is rand(0~1), seed is 123
+  // initial x is rand(0~1)
+  // random seed is 123 (mt19937)
   monolish::vector<double> x(A.get_row(), 0.0, 1.0, 123);
 
   // initial b is {1, 1, 1, ...,1}

@@ -11,7 +11,8 @@ int main() {
   // x = {1,1,...,1}, length N
   monolish::vector<double> x(N, 1.0);
 
-  // Random vector length N with random values in the range 1.0 to 2.0, seed is 123
+  // Random vector length N with random values in the range 1.0 to 2.0
+  // random seed is 123 (mt19937)
   monolish::vector<double> y(N, 1.0, 2.0, 123);
 
   // send data to GPU
