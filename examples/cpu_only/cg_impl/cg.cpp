@@ -89,7 +89,8 @@ int main(int argc, char **argv) {
   std::cout << "===============================" << std::endl;
 
   // initial x is rand(0~1)
-  monolish::vector<double> x(A.get_row(), 0.0, 1.0);
+  // random seed is 123 (mt19937)
+  monolish::vector<double> x(A.get_row(), 0.0, 1.0, 123);
 
   // initial b is {1, 1, 1, ...,1}
   monolish::vector<double> b(A.get_row(), 1.0);
