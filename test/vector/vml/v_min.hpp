@@ -6,7 +6,7 @@ template <typename T> T ans_vmin(monolish::vector<T> &ans) {
 
 template <typename T> bool test_send_vmin(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 10.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
 
   T ans = ans_vmin(x);
 
@@ -18,7 +18,7 @@ template <typename T> bool test_send_vmin(const size_t size, double tol) {
 
 template <typename T> bool test_vmin(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 10.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
 
   T ans = ans_vmin(x);
 

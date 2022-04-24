@@ -8,7 +8,7 @@ template <typename T> void ans_vtan(monolish::vector<T> &ans) {
 
 template <typename T> bool test_send_vtan(const size_t size, double tol) {
 
-  monolish::vector<T> ans(size, 0.1, 10.0);
+  monolish::vector<T> ans(size, 0.1, 1.0, test_random_engine());
 
   monolish::vector<T> ans_tmp(ans);
   ans_vtan(ans_tmp);
@@ -22,7 +22,7 @@ template <typename T> bool test_send_vtan(const size_t size, double tol) {
 
 template <typename T> bool test_vtan(const size_t size, double tol) {
 
-  monolish::vector<T> ans(size, 0.1, 10.0);
+  monolish::vector<T> ans(size, 0.1, 1.0, test_random_engine());
 
   monolish::vector<T> ans_tmp(ans);
   ans_vtan(ans_tmp);

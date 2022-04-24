@@ -41,8 +41,8 @@ bool test_send_matvec_T(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  monolish::vector<T> x(A.get_row(), 0.0, 1.0);
-  monolish::vector<T> y(A.get_col(), 0.0, 1.0);
+  monolish::vector<T> x(A.get_row(), 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(A.get_col(), 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansy(A.get_col());
   ansy = y;
@@ -73,8 +73,8 @@ bool test_matvec_T(const size_t M, const size_t N, double tol) {
 
   MAT A(seedA); // M*N matrix
 
-  monolish::vector<T> x(A.get_row(), 0.0, 1.0);
-  monolish::vector<T> y(A.get_col(), 0.0, 1.0);
+  monolish::vector<T> x(A.get_row(), 0.0, 1.0, test_random_engine());
+  monolish::vector<T> y(A.get_col(), 0.0, 1.0, test_random_engine());
 
   monolish::vector<T> ansy(A.get_col());
   ansy = y;

@@ -13,9 +13,9 @@ void ans_vvmax(monolish::vector<T> &mx, monolish::vector<T> &my,
 
 template <typename T> bool test_send_vvmax(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 10.0);
-  monolish::vector<T> y(size, 0.1, 10.0);
-  monolish::vector<T> ans(size, 0.1, 10.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> ans(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans_tmp(ans);
 
   ans_vvmax(x, y, ans_tmp);
@@ -29,9 +29,9 @@ template <typename T> bool test_send_vvmax(const size_t size, double tol) {
 
 template <typename T> bool test_vvmax(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.1, 10.0);
-  monolish::vector<T> y(size, 0.1, 10.0);
-  monolish::vector<T> ans(size, 0.1, 10.0);
+  monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> y(size, 0.1, 1.0, test_random_engine());
+  monolish::vector<T> ans(size, 0.1, 1.0, test_random_engine());
   monolish::vector<T> ans_tmp(ans);
 
   ans_vvmax(x, y, ans_tmp);

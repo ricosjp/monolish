@@ -12,13 +12,14 @@ int main() {
   // Edit the matrix as needed //
   // Execute A_COO.sort() after editing the matrix //
 
-  monolish::matrix::CRS<double> A(
-      A_COO); // Create CRS format and convert from COO format
+  // Create CRS format matrix and convert from COO format matrix
+  monolish::matrix::CRS<double> A(A_COO);
 
   // Length A.row()
   // Random vector length A.row() with random values in the range 1.0 to 2.0
-  monolish::vector<double> x(A.get_row(), 1.0, 2.0);
-  monolish::vector<double> b(A.get_row(), 1.0, 2.0);
+  // Random seeds are 123 and 321 (mt19937)
+  monolish::vector<double> x(A.get_row(), 1.0, 2.0, 123);
+  monolish::vector<double> b(A.get_row(), 1.0, 2.0, 321);
 
   // Create CG class
   monolish::equation::CG<monolish::matrix::CRS<double>, double> solver;

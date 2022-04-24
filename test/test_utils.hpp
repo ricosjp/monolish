@@ -17,6 +17,9 @@ template <typename T> std::string get_type();
 template <> std::string get_type<double>() { return "double"; }
 template <> std::string get_type<float>() { return "float"; }
 
+// global random engine for test
+std::mt19937 test_random_engine(1234);
+
 template <typename T>
 bool ans_check(const std::string &func, double result, double ans, double tol) {
 

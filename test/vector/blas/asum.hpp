@@ -12,7 +12,7 @@ template <typename T> T ans_asum(monolish::vector<T> &mx) {
 
 template <typename T> bool test_send_asum(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   auto ans = ans_asum(x);
   monolish::util::send(x);
@@ -23,7 +23,7 @@ template <typename T> bool test_send_asum(const size_t size, double tol) {
 
 template <typename T> bool test_asum(const size_t size, double tol) {
 
-  monolish::vector<T> x(size, 0.0, 1.0);
+  monolish::vector<T> x(size, 0.0, 1.0, test_random_engine());
 
   auto result = monolish::blas::asum(x);
   auto ans = ans_asum(x);
