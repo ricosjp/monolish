@@ -7,7 +7,8 @@
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace monolish::blas {
+namespace monolish {
+namespace blas {
 
 /**
  * @addtogroup BLASLV1
@@ -883,4 +884,5 @@ void xpay(const float alpha, const view1D<matrix::Dense<float>, float> &x,
           view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 /**@}*/
-} // namespace monolish::blas
+} // namespace blas
+} // namespace monolish

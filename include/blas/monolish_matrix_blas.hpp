@@ -7,7 +7,8 @@
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace monolish::blas {
+namespace monolish {
+namespace blas {
 
 /**
  * @addtogroup BLASLV3
@@ -361,4 +362,5 @@ void rmatmul(const matrix::LinearOperator<float> &A,
              const matrix::Dense<float> &B, matrix::Dense<float> &C);
 /**@}*/
 /**@}*/
-} // namespace monolish::blas
+} // namespace blas
+} // namespace monolish
