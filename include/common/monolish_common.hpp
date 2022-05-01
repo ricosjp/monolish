@@ -20,7 +20,8 @@
 /**
  * @brief monolish utilities
  */
-namespace monolish::util {
+namespace monolish {
+    namespace util {
 /**
  * @addtogroup utils
  * @{
@@ -818,4 +819,5 @@ auto device_free(T &x, Types &... args) {
 [[nodiscard]] bool build_with_cblas();
 /**@}*/
 
-} // namespace monolish::util
+}
+}
