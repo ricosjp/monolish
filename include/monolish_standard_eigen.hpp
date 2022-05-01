@@ -9,7 +9,7 @@
  * @brief handling eigenvalues and eigenvectors
  **/
 namespace monolish {
-    namespace standard_eigen {
+namespace standard_eigen {
 
 /**
  * @addtogroup sEigen
@@ -142,5 +142,5 @@ public:
   [[nodiscard]] std::string solver_name() const { return "DC"; }
 };
 /**@}*/
-}
-}
+} // namespace standard_eigen
+} // namespace monolish

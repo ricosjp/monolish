@@ -251,5 +251,5 @@ public:
   };
 };
 /**@}*/
-}
-}
+} // namespace solver
+} // namespace monolish

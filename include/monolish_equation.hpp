@@ -634,5 +634,5 @@ public:
 /**@}*/
 /**@}*/
 
-}
-}
+} // namespace equation
+} // namespace monolish
