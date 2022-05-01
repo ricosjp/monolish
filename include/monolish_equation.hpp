@@ -9,7 +9,8 @@
  * @brief
  * Linear equation solvers for Dense and sparse matrix
  */
-namespace monolish::equation {
+namespace monolish {
+namespace equation {
 
 /**
  * @addtogroup equations
@@ -633,4 +634,5 @@ public:
 /**@}*/
 /**@}*/
 
-} // namespace monolish::equation
+}
+}

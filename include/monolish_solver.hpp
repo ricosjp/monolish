@@ -7,7 +7,8 @@
 /**
  * @brief Linear solver base class
  **/
-namespace monolish::solver {
+namespace monolish {
+namespace solver {
 
 /**
  * @brief Enum class defining how to handle initial vectors
@@ -250,4 +251,5 @@ public:
   };
 };
 /**@}*/
-} // namespace monolish::solver
+}
+}
