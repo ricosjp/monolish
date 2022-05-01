@@ -723,13 +723,13 @@ template <typename T>
  * @brief send data to GPU
  * @ingroup GPUutil
  **/
-template <typename T> auto send(T &x) { x.send(); }
+template <typename T> void send(T &x) { x.send(); }
 
 /**
  * @brief send datas to GPU
  * @ingroup GPUutil
  **/
-template <typename T, typename... Types> auto send(T &x, Types &... args) {
+template <typename T, typename... Types> void send(T &x, Types &... args) {
   x.send();
   send(args...);
 }
@@ -739,13 +739,13 @@ template <typename T, typename... Types> auto send(T &x, Types &... args) {
  * @brief recv. and free data from GPU
  * @ingroup GPUutil
  **/
-template <typename T> auto recv(T &x) { x.recv(); }
+template <typename T> void recv(T &x) { x.recv(); }
 
 /**
  * @brief recv. and free datas to GPU
  * @ingroup GPUutil
  **/
-template <typename T, typename... Types> auto recv(T &x, Types &... args) {
+template <typename T, typename... Types> void recv(T &x, Types &... args) {
   x.recv();
   recv(args...);
 }
@@ -756,14 +756,14 @@ template <typename T, typename... Types> auto recv(T &x, Types &... args) {
  * @brief free data of GPU
  * @ingroup GPUutil
  **/
-template <typename T> auto device_free(T &x) { x.device_free(); }
+template <typename T> void device_free(T &x) { x.device_free(); }
 
 /**
  * @brief free datas of GPU
  * @ingroup GPUutil
  **/
 template <typename T, typename... Types>
-auto device_free(T &x, Types &... args) {
+void device_free(T &x, Types &... args) {
   x.device_free();
   device_free(args...);
 }
