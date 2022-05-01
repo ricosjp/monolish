@@ -32,6 +32,7 @@ Unreleased
 - Generate transpose matvec,matmul headers https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439 https://github.com/ricosjp/monolish/issues/107
 
 ### Changed
+- Change C++17 -> C++11 in headers, tests, and examples (user requiments changed to C++11) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/452
 - Specify random seed in test/ and examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/451
 - Change parallel to sequential in random vector/matrix generations (for reproducibility) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450
 - Change create_asym_band_matrix() in transposed GEMV https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446

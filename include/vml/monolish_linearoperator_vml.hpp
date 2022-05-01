@@ -7,7 +7,8 @@
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace monolish::vml {
+namespace monolish {
+namespace vml {
 
 /**
  * @addtogroup LO_VML
@@ -150,4 +151,5 @@ void div(const matrix::LinearOperator<float> &A, const float &alpha,
          matrix::LinearOperator<float> &C);
 /**@}*/
 /**@}*/
-} // namespace monolish::vml
+} // namespace vml
+} // namespace monolish

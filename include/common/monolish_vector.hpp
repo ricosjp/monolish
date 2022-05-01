@@ -321,7 +321,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] auto size() const { return val.size(); }
+  [[nodiscard]] size_t size() const { return val.size(); }
 
   /**
    * @brief get vector size
@@ -329,7 +329,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] auto get_nnz() const { return val.size(); }
+  [[nodiscard]] size_t get_nnz() const { return val.size(); }
 
   /**
    * @brief fill vector elements with a scalar value

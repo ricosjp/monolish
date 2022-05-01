@@ -8,7 +8,8 @@
 /**
  * @brief handling eigenvalues and eigenvectors
  **/
-namespace monolish::generalized_eigen {
+namespace monolish {
+namespace generalized_eigen {
 
 /**
  * @addtogroup gEigen
@@ -135,4 +136,5 @@ public:
   [[nodiscard]] std::string solver_name() const { return "DC"; }
 };
 /**@}*/
-} // namespace monolish::generalized_eigen
+} // namespace generalized_eigen
+} // namespace monolish

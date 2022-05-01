@@ -1,5 +1,6 @@
 CXX      ?= g++
-CXXFLAGS ?= -O3 -Wall -std=c++17
+# monlish requires C++11
+CXXFLAGS ?= -O3 -Wall -std=c++11
 LDFLAGS ?=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ 
 
 .PHONY: cpu gpu
