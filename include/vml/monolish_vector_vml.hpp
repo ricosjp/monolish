@@ -7,7 +7,8 @@
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace monolish::vml {
+namespace monolish {
+namespace vml {
 
 /**
  * @addtogroup Vector_VML
@@ -1300,4 +1301,5 @@ void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 /**@}*/
-} // namespace monolish::vml
+} // namespace vml
+} // namespace monolish

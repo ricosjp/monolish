@@ -7,7 +7,8 @@
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace monolish::vml {
+namespace monolish {
+namespace vml {
 
 /**
  * @addtogroup Dense_VML
@@ -552,4 +553,5 @@ void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C);
 void reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 /**@}*/
 /**@}*/
-} // namespace monolish::vml
+} // namespace vml
+} // namespace monolish
