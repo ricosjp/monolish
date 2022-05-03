@@ -6,14 +6,14 @@
 clang-format:
   extends:
     - .develop
-  image: ghcr.io/ricosjp/allgebra/clang-format:22.02.0
+  image: ghcr.io/ricosjp/allgebra/clang-format:22.05.0
   script:
     - check_format.sh
 
 doxygen:
   extends:
     - .develop
-  image: registry.ritc.jp/ricos/allgebra/cuda11_4-clang13-oss:22.02.0
+  image: registry.ritc.jp/ricos/allgebra/cuda11_4-clang13-oss:22.05.0
   script:
     - cmake --preset=cpu-none-none
     - cmake --build build/cpu-none-none --target document
