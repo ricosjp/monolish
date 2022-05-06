@@ -6,7 +6,7 @@ jobs:
   document:
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/ricosjp/allgebra/cuda11_4/clang13/oss:22.02.0
+      image: ghcr.io/ricosjp/allgebra/cuda11_4/clang13/oss:22.05.0
     steps:
     - uses: actions/checkout@v2
       with:

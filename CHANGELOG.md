@@ -32,6 +32,7 @@ Unreleased
 - Generate transpose matvec,matmul headers https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439 https://github.com/ricosjp/monolish/issues/107
 
 ### Changed
+- Update allgebra 21.02.0 -> 22.05.0 (CUDA GPG key is updated) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/453　https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/454 https://github.com/ricosjp/monolish/issues/118
 - Change C++17 -> C++11 in headers, tests, and examples (user requiments changed to C++11) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/452
 - Specify random seed in test/ and examples/ https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/451
 - Change parallel to sequential in random vector/matrix generations (for reproducibility) https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450
