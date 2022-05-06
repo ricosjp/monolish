@@ -19,6 +19,7 @@ jobs:
 
     - name: Generate document for current commit
       run: |
+        git config -global --add safe.directory /__w/monolish/monolish/
         cmake --preset=cpu-none-none
         cmake --build build/cpu-none-none --target document
         mv build/cpu-none-none/html .
