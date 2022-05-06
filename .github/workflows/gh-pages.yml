@@ -17,9 +17,11 @@ jobs:
         apt update
         apt install -y doxygen graphviz
 
+    - name: work around permission issue
+      run: git config --global --add safe.directory /__w/monolish/monolish
+
     - name: Generate document for current commit
       run: |
-        sudo chown -R root:root $GITHUB_WORKSPACE
         cmake --preset=cpu-none-none
         cmake --build build/cpu-none-none --target document
         mv build/cpu-none-none/html .
