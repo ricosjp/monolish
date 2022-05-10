@@ -3,7 +3,7 @@
 #
 .python:
   stage: python
-  image: ghcr.io/ricosjp/allgebra/poetry:22.05.0
+  image: ghcr.io/ricosjp/allgebra/poetry:22.05.1
 
 .logging_artifact:
   artifacts:
