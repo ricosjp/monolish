@@ -6,7 +6,7 @@
 clang-format:
   extends:
     - .develop
-  image: ghcr.io/ricosjp/allgebra/clang-format:22.05.1
+  image: registry.ritc.jp/ricos/allgebra/cuda11_4-clang13-oss:22.05.1
   script:
     - check_format.sh
 
