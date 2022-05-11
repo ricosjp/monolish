@@ -12,47 +12,37 @@ MONOLISH_DIR ?= $(HOME)/lib/monolish
 
 all: cpu gpu
 
+cpu: gcc_cpu
+gpu: clang_gpu
+
 gcc_cpu:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/bin/gcc \
-		-DCMAKE_CXX_COMPILER=/usr/bin/g++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
+	cmake $(MONOLISH_TOP)\
+		--preset=cpu-avx-none \
+		-DCMAKE_CXX_COMPILER=g++ \
 		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 clang_cpu:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_cpu \
+		--preset=cpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
+		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 clang_gpu:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu \
-		-DMONOLISH_USE_NVIDIA_GPU=ON
+		--preset=gpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
+		-Bbuild_gpu
 	cmake --build build_gpu -j `nproc`
 
 clang_gpu_all:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu_all \
-		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		--preset=gpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
 		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON
+		-Bbuild_gpu_all \
 	cmake --build build_gpu_all -j `nproc`
-
-cpu: gcc_cpu
-gpu: clang_gpu
 
 a64fx:
 	$(MAKE) -B -j4 -f Makefile.a64fx
