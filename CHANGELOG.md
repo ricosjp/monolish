@@ -35,6 +35,7 @@ Unreleased
 
 ### Changed
 
+- Use cmake preset in Makefile <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/456> <https://github.com/ricosjp/monolish/issues/120>
 - Update allgebra 21.02.0 -> 22.05.1 (integrate tools) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/455> <https://github.com/ricosjp/monolish/issues/119>
 - Update allgebra 21.02.0 -> 22.05.0 (CUDA GPG key is updated) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/453> <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/454> <https://github.com/ricosjp/monolish/issues/118>
 - Change C++17 -> C++11 in headers, tests, and examples (user requiments changed to C++11) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/452>

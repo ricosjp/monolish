@@ -12,55 +12,46 @@ MONOLISH_DIR ?= $(HOME)/lib/monolish
 
 all: cpu gpu
 
+##########################################
+
+cpu: gcc_cpu
+gpu: clang_gpu
+install: install_cpu install_gpu
+
 gcc_cpu:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/bin/gcc \
-		-DCMAKE_CXX_COMPILER=/usr/bin/g++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
+	cmake $(MONOLISH_TOP)\
+		--preset=cpu-avx-none \
+		-DCMAKE_CXX_COMPILER=g++ \
 		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 clang_cpu:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_cpu \
+		--preset=cpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
+		-Bbuild_cpu
 	cmake --build build_cpu -j `nproc`
 
 clang_gpu:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu \
-		-DMONOLISH_USE_NVIDIA_GPU=ON
+		--preset=gpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
+		-Bbuild_gpu
 	cmake --build build_gpu -j `nproc`
 
 clang_gpu_all:
 	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
-		-DCMAKE_C_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang \
-		-DCMAKE_CXX_COMPILER=/usr/local/llvm-$(LLVM_DIR)/bin/clang++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu_all \
-		-DMONOLISH_USE_NVIDIA_GPU=ON \
+		--preset=gpu-avx-none \
+		-DCMAKE_CXX_COMPILER=clang++ \
 		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON
+		-Bbuild_gpu_all \
 	cmake --build build_gpu_all -j `nproc`
-
-cpu: gcc_cpu
-gpu: clang_gpu
 
 a64fx:
 	$(MAKE) -B -j4 -f Makefile.a64fx
 
 sxat:
 	$(MAKE) -B -j -f Makefile.sxat
-
-install: install_cpu install_gpu
 
 install_cpu: cpu
 	cmake --build build_cpu --target install
@@ -85,44 +76,34 @@ install_a64fx:
 
 ########################################
 
+cpu_mpi: clang_cpu_mpi
+gpu_mpi: clang_gpu_mpi
+install_mpi: install_cpu_mpi install_gpu_mpi
+
 clang_cpu_mpi:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+	cmake $(MONOLISH_TOP)\
+		--preset=cpu-avx-mpi \
 		-DCMAKE_C_COMPILER=mpicc \
 		-DCMAKE_CXX_COMPILER=mpic++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_cpu_mpi \
-		-DMONOLISH_USE_NVIDIA_GPU=OFF \
-		-DMONOLISH_USE_MPI=ON
+		-Bbuild_cpu_mpi
 	cmake --build build_cpu_mpi -j `nproc`
 
 clang_gpu_mpi:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+	cmake $(MONOLISH_TOP)\
+		--preset=gpu-avx-mpi \
 		-DCMAKE_C_COMPILER=mpicc \
 		-DCMAKE_CXX_COMPILER=mpic++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu_mpi \
-		-DMONOLISH_USE_NVIDIA_GPU=ON \
-		-DMONOLISH_USE_MPI=ON
+		-Bbuild_gpu_mpi
 	cmake --build build_gpu_mpi -j `nproc`
 
 clang_gpu_mpi_all:
-	cmake $(MONOLISH_TOP) \
-		-DCMAKE_INSTALL_PREFIX=$(MONOLISH_DIR) \
+	cmake $(MONOLISH_TOP)\
+		--preset=gpu-avx-mpi \
 		-DCMAKE_C_COMPILER=mpicc \
 		-DCMAKE_CXX_COMPILER=mpic++ \
-		-DCMAKE_VERBOSE_MAKEFILE=1 \
-		-Bbuild_gpu_mpi_all \
-		-DMONOLISH_USE_NVIDIA_GPU=ON \
 		-DMONOLISH_NVIDIA_GPU_ARCH_ALL=ON \
-		-DMONOLISH_USE_MPI=ON
+		-Bbuild_gpu_mpi_all 
 	cmake --build build_gpu_mpi_all -j `nproc`
-
-cpu_mpi: clang_cpu_mpi
-gpu_mpi: clang_gpu_mpi
-
-install_mpi: install_cpu_mpi install_gpu_mpi
 
 install_cpu_mpi: cpu_mpi
 	cmake --build build_cpu_mpi --target install
@@ -137,6 +118,10 @@ install_all: install_cpu install_gpu install_cpu_mpi install_gpu_mpi
 
 ##########################################
 
+test:
+	test_cpu
+	test_gpu
+
 test_cpu: install_cpu
 	$(MAKE) -C test cpu
 	$(MAKE) -C test run_cpu
@@ -145,15 +130,13 @@ test_gpu: install_gpu
 	$(MAKE) -C test gpu
 	$(MAKE) -C test run_gpu
 
-test:
-	test_cpu
-	test_gpu
-
 clean:
 	- rm -rf build*/
 	- $(MAKE) -f Makefile.a64fx clean
 	- $(MAKE) -f Makefile.sxat clean
 	- $(MAKE) -C test/ clean
+
+##########################################
 
 in_mkl_gpu:
 	docker run -it --rm \
