@@ -403,7 +403,7 @@ bool is_same_structure(const matrix::LinearOperator<T> &A,
  **/
 template <typename T, typename... types>
 [[nodiscard]] bool is_same_structure(const T &A, const T &B,
-                                     const types &... args) {
+                                     const types &...args) {
   return is_same_structure(A, B) && is_same_structure(A, args...);
 }
 
@@ -489,7 +489,7 @@ template <typename T>
  **/
 template <typename T, typename U, typename... types>
 [[nodiscard]] bool is_same_size(const T &arg1, const U &arg2,
-                                const types &... args) {
+                                const types &...args) {
   return is_same_size(arg1, arg2) && is_same_size(arg1, args...);
 }
 
@@ -516,7 +516,7 @@ template <typename T, typename U>
  **/
 template <typename T, typename U, typename... types>
 [[nodiscard]] bool is_same_device_mem_stat(const T &arg1, const U &arg2,
-                                           const types &... args) {
+                                           const types &...args) {
   return is_same_device_mem_stat(arg1, arg2) &&
          is_same_device_mem_stat(arg1, args...);
 }
@@ -585,7 +585,7 @@ template <typename T>
  * - GPU acceleration: false
  * @ingroup gendata
  **/
-template <typename T>[[nodiscard]] matrix::COO<T> eye(const int M);
+template <typename T> [[nodiscard]] matrix::COO<T> eye(const int M);
 
 /**
  * @brief create Frank matrix
@@ -596,7 +596,7 @@ template <typename T>[[nodiscard]] matrix::COO<T> eye(const int M);
  * - GPU acceleration: false
  * @ingroup gendata
  **/
-template <typename T>[[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
+template <typename T> [[nodiscard]] matrix::COO<T> frank_matrix(const int &M);
 
 /**
  * @brief Nth eigenvalue from the bottom of MxM Frank matrix
@@ -729,7 +729,7 @@ template <typename T> void send(T &x) { x.send(); }
  * @brief send datas to GPU
  * @ingroup GPUutil
  **/
-template <typename T, typename... Types> void send(T &x, Types &... args) {
+template <typename T, typename... Types> void send(T &x, Types &...args) {
   x.send();
   send(args...);
 }
@@ -745,7 +745,7 @@ template <typename T> void recv(T &x) { x.recv(); }
  * @brief recv. and free datas to GPU
  * @ingroup GPUutil
  **/
-template <typename T, typename... Types> void recv(T &x, Types &... args) {
+template <typename T, typename... Types> void recv(T &x, Types &...args) {
   x.recv();
   recv(args...);
 }
@@ -763,7 +763,7 @@ template <typename T> void device_free(T &x) { x.device_free(); }
  * @ingroup GPUutil
  **/
 template <typename T, typename... Types>
-void device_free(T &x, Types &... args) {
+void device_free(T &x, Types &...args) {
   x.device_free();
   device_free(args...);
 }
