@@ -103,9 +103,7 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo, T value) {
             col_index.begin());
 
   val.resize(nnz);
-  for (auto i = decltype(nnz){0}; i < nnz; i++) {
-    val[i] = value;
-  }
+  internal::vbroadcast(val.size(), value, val.data(), false);
 
   logger.util_out();
 }
