@@ -101,6 +101,11 @@ void vcopy(const size_t N, const double *a, double *y, bool gpu_status);
 void vcopy(const size_t N, const int *a, int *y, bool gpu_status);
 void vcopy(const size_t N, const size_t *a, size_t *y, bool gpu_status);
 
+void vbroadcast(const size_t N, float alpha, float *y, bool gpu_status);
+void vbroadcast(const size_t N, double alpha, double *y, bool gpu_status);
+void vbroadcast(const size_t N, int alpha, int *y, bool gpu_status);
+void vbroadcast(const size_t N, size_t alpha, size_t *y, bool gpu_status);
+
 bool vequal(const size_t N, const float *a, const float *y, bool gpu_status);
 bool vequal(const size_t N, const double *a, const double *y, bool gpu_status);
 bool vequal(const size_t N, const int *a, const int *y, bool gpu_status);

@@ -250,6 +250,29 @@ void vcopy(const size_t N, const double *a, double *y, bool gpu_status) {
   logger.func_out();
 }
 
+// y[i] = alpha
+void vbroadcast(const size_t N, double alpha, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_NVIDIA_GPU
+#pragma omp target teams distribute parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = alpha;
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = alpha;
+    }
+  }
+  logger.func_out();
+}
+
 // y[i] == a[i]
 bool vequal(const size_t N, const double *a, const double *y, bool gpu_status) {
   Logger &logger = Logger::get_instance();
