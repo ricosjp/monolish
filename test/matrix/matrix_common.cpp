@@ -358,6 +358,13 @@ template <typename T> bool fixed_size_test() {
     }
   }
 
+  // initialization constructor
+  monolish::matrix::COO<T> B(A, 0.0);
+  if (monolish::util::is_same_structure(A, B) != true && A == B) {
+    std::cout << "init constructor error" << std::endl;
+    return false;
+  }
+
   std::cout << "Pass in " << get_type<T>() << " precision" << std::endl;
   return true;
 }
