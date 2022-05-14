@@ -22,6 +22,7 @@ Unreleased
 
 ### Added
 
+- Add internal::vbroadcast (y[i] = alpha) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/458>
 - Add cmake option list in doxygen <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/457>
 - Add specifing random seed in random vector/matrix generations <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450>
 - Add code generate scripts for transposed GEMM <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/448>
