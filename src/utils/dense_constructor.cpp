@@ -201,5 +201,29 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
 template Dense<double>::Dense(const Dense<double> &mat);
 template Dense<float>::Dense(const Dense<float> &mat);
 
+// initialization constructor///////////////////////////////
+template <typename T> Dense<T>::Dense(const Dense<T> &mat, T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(mat.get_nnz());
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+  nnz = mat.get_nnz();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vbroadcast(get_nnz(), value, val.data(), true);
+  }
+#endif
+  internal::vbroadcast(get_nnz(), value, val.data(), false);
+
+  logger.util_out();
+}
+template Dense<double>::Dense(const Dense<double> &mat, double value);
+template Dense<float>::Dense(const Dense<float> &mat, float value);
+
 } // namespace matrix
 } // namespace monolish

@@ -206,6 +206,21 @@ public:
   CRS(const CRS<Float> &mat);
 
   /**
+   * @brief Create CRS matrix of the same size as input matrix
+   * @param mat input CRS matrix
+   * @param value the value to initialize elements
+   * @note
+   * - # of computation: (M+1)+2nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer:  (M+1)+2nnz (only allocation)
+   *        - if `mat.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  CRS(const CRS<Float> &mat, Float value);
+
+  /**
    * @brief Set CRS array from std::vector
    * @param M # of row
    * @param N # of col

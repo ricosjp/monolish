@@ -215,6 +215,17 @@ public:
   COO(const matrix::COO<Float> &coo);
 
   /**
+   * @brief Initialize COO matrix of the same size as input matrix
+   * @param coo input COO matrix
+   * @param value the value to initialize elements
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  COO(const matrix::COO<Float> &coo, Float value);
+
+  /**
    * @brief Create COO matrix from CRS matrix
    * @param crs input COO matrix
    * @note
@@ -235,7 +246,7 @@ public:
   COO(const matrix::CRS<Float> &crs) { convert(crs); }
 
   /**
-   * @brief Create COO matrix from Dense matrix
+   * @brief Create COO matrix from Dense matrix (drop zero)
    * @param dense input Dense matrix (size M x N)
    * @note
    * - # of computation: 3NM
@@ -245,7 +256,7 @@ public:
   void convert(const matrix::Dense<Float> &dense);
 
   /**
-   * @brief Create COO matrix from Dense matrix
+   * @brief Create COO matrix from Dense matrix (drop zero)
    * @param dense input Dense matrix (size M x N)
    * @note
    * - # of computation: 3NM

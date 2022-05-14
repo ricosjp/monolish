@@ -92,6 +92,21 @@ public:
   Dense(const Dense<Float> &dense);
 
   /**
+   * @brief Create Dense matrix of the same size as input matrix
+   * @param dense input Dense matrix
+   * @param value the value to initialize elements
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M+N (onlu allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  Dense(const Dense<Float> &dense, Float value);
+
+  /**
    * @brief Allocate dense matrix
    * @param M # of row
    * @param N # of col

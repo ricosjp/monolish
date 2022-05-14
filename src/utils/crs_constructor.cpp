@@ -185,5 +185,41 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
 }
 template CRS<double>::CRS(const CRS<double> &mat);
 template CRS<float>::CRS(const CRS<float> &mat);
+
+// initialization constructor
+template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val.resize(mat.get_nnz());
+  col_ind.resize(mat.get_nnz());
+  row_ptr.resize(mat.get_row() + 1);
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+  nnz = mat.get_nnz();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                    true);
+    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                    true);
+    internal::vbroadcast(val.size(), value, val.data(), true);
+  }
+#endif
+
+  internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
+                  false);
+  internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
+                  false);
+  internal::vbroadcast(val.size(), value, val.data(), false);
+
+  compute_hash();
+  logger.util_out();
+}
+template CRS<double>::CRS(const CRS<double> &mat, double value);
+template CRS<float>::CRS(const CRS<float> &mat, float value);
 } // namespace matrix
 } // namespace monolish
