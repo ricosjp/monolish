@@ -22,6 +22,7 @@ Unreleased
 
 ### Added
 
+- Add Initialize constructors that create the same size matrix as input matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/458>
 - Add internal::vbroadcast (y[i] = alpha) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/458>
 - Add cmake option list in doxygen <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/457>
 - Add specifing random seed in random vector/matrix generations <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450>
