@@ -166,6 +166,7 @@ public:
    * @param max rand max
    * @param seed random seed
    * @note
+   * The ramdom number generator is random generator is mt19937
    * - # of computation: N
    * - Multi-threading: false
    * - GPU acceleration: false

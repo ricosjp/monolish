@@ -173,6 +173,7 @@ public:
    * @param min rand min
    * @param max rand max
    * @note
+   * The ramdom number generator is random generator is mt19937
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: false
