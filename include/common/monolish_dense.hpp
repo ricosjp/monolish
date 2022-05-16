@@ -294,8 +294,8 @@ public:
   void transpose();
 
   /**
-   * @brief create transposed matrix from COO matrix (A = B^T)
-   * @param B COO matrix
+   * @brief create transposed matrix from Dense format matrix (A = B^T)
+   * @param B Dense format matrix
    * @note
    * - # of computation: M*N
    * - Multi-threading: yes

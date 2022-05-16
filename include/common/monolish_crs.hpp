@@ -408,8 +408,8 @@ public:
   void transpose();
 
   /**
-   * @brief create transposed matrix from COO matrix (B = A^T)
-   * @param B COO matrix
+   * @brief create transposed matrix from CRS format matrix (B = A^T)
+   * @param B CRS format matrix
    * @note
    * - # of computation: 2 * nnz + 2N
    * - Multi-threading: false
