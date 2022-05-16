@@ -15,7 +15,7 @@ To solve this, the libraries (MKL, cusolver, etc.) by each hardware vendor exten
 Sadly, these software APIs are not unified. Moreover, These are language or vendor specific.
 
 The BLAS library, including MKL and CUDA libraries, is the perfect library in terms of performance, but the function names depend on the data type.
-Python numpy, Julia, Matlab, etc. define APIs that eliminate these dependencies and call BLAS in them.
+Python Numpy, Julia, Matlab, etc. define APIs that eliminate these dependencies and call BLAS in them.
 Fast Sparse BLAS is implemented in MKL and CUDA Libraries.
 Sadly, there is no open-source Sparse BLAS library that works on all hardware.
 However, due to the needs of application users, the Python and Julia libraries have implemented Sparse BLAS on their own.
