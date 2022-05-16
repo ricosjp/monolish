@@ -98,7 +98,7 @@ public:
   /**
    * @brief MPI_Send for scalar. Performs a blocking send.
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(double val, int dst, int tag) const;
@@ -106,7 +106,7 @@ public:
   /**
    * @brief MPI_Send for scalar. Performs a blocking send.
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(float val, int dst, int tag) const;
@@ -114,7 +114,7 @@ public:
   /**
    * @brief MPI_Send for scalar. Performs a blocking send.
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(int val, int dst, int tag) const;
@@ -122,7 +122,7 @@ public:
   /**
    * @brief MPI_Send for scalar. Performs a blocking send.
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(size_t val, int dst, int tag) const;
@@ -130,7 +130,7 @@ public:
   /**
    * @brief MPI_Send for std::vector. Performs a blocking send.
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(std::vector<double> &vec, int dst, int tag) const;
@@ -138,7 +138,7 @@ public:
   /**
    * @brief MPI_Send for std::vector. Performs a blocking send.
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(std::vector<float> &vec, int dst, int tag) const;
@@ -146,7 +146,7 @@ public:
   /**
    * @brief MPI_Send for std::vector. Performs a blocking send.
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(std::vector<int> &vec, int dst, int tag) const;
@@ -154,7 +154,7 @@ public:
   /**
    * @brief MPI_Send for std::vector. Performs a blocking send.
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    */
   void Send(std::vector<size_t> &vec, int dst, int tag) const;
@@ -162,7 +162,7 @@ public:
   /**
    * @brief MPI_Send for monolish::vector. Performs a blocking send.
    * @param vec monolish::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @warning
    * MPI functions do not support GPUs.
@@ -174,7 +174,7 @@ public:
   /**
    * @brief MPI_Send for monolish::vector. Performs a blocking send.
    * @param vec monolish::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @warning
    * MPI functions do not support GPUs.
@@ -285,7 +285,7 @@ public:
    * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -299,7 +299,7 @@ public:
    * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -313,7 +313,7 @@ public:
    * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -327,7 +327,7 @@ public:
    * @brief MPI_Isend for scalar. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param val scalar value
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -341,7 +341,7 @@ public:
    * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -355,7 +355,7 @@ public:
    * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -369,7 +369,7 @@ public:
    * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -383,7 +383,7 @@ public:
    * @brief MPI_Isend for std::vector. Performs a nonblocking send. Requests are
    * stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -397,7 +397,7 @@ public:
    * @brief MPI_Isend for monolish::vector. Performs a nonblocking send.
    * Requests are stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized
@@ -413,7 +413,7 @@ public:
    * @brief MPI_Isend for monolish::vector. Performs a nonblocking send.
    * Requests are stored internally. All requests are synchronized by Waitall().
    * @param vec std::vector (size N)
-   * @param dst rank of dstination
+   * @param dst rank of destination
    * @param tag message tag
    * @note
    * There is not MPI_Wait() in monolish::mpi, all communication is synchronized

@@ -28,7 +28,7 @@ namespace generalized_eigen {
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -89,7 +89,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
