@@ -101,3 +101,8 @@ However, they often require to allocate memory in the function for the return ve
 users cannot anticipate this allocation.
 
 In monolish, we do not implement functions that allocate memory in a way that is not intuitively expected by the user.
+
+### 5. Does not take care of memory release
+
+All classes of monolish are based on RAII (Resource Acquisition Is Initialization).
+monolish does not require the user to take care of memory allocation and deallocation through various constructors and destructors.
