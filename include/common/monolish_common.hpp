@@ -18,7 +18,7 @@
 #define MONOLISH_SOLVER_NOT_IMPL -10
 
 /**
- * @brief monolish namespace
+ * @brief monolish namespaces
  */
 namespace monolish {
 /**

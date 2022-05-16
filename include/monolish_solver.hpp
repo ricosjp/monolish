@@ -4,10 +4,10 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
+namespace monolish {
 /**
  * @brief Linear solver base class
  **/
-namespace monolish {
 namespace solver {
 
 /**
