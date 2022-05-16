@@ -18,9 +18,12 @@
 #define MONOLISH_SOLVER_NOT_IMPL -10
 
 /**
- * @brief monolish utilities
+ * @brief monolish namespace
  */
 namespace monolish {
+/**
+ * @brief monolish utilities
+ */
 namespace util {
 /**
  * @addtogroup utils
