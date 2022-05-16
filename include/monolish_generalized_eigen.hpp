@@ -5,10 +5,10 @@
 #include "./monolish_solver.hpp"
 #include "common/monolish_common.hpp"
 
+namespace monolish {
 /**
  * @brief handling eigenvalues and eigenvectors
  **/
-namespace monolish {
 namespace generalized_eigen {
 
 /**

@@ -5,11 +5,11 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
+namespace monolish {
 /**
  * @brief
  * Linear equation solvers for Dense and sparse matrix
  */
-namespace monolish {
 namespace equation {
 
 /**
