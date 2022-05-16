@@ -453,7 +453,7 @@ public:
   void operator=(const CRS<Float> &mat);
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat CRS matrix
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
@@ -466,7 +466,7 @@ public:
                            bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat CRS matrix
    * @return true or false
    * @note
@@ -479,7 +479,7 @@ public:
   [[nodiscard]] bool operator==(const CRS<Float> &mat) const;
 
   /**
-   * @brief Comparing matricies (A != mat)
+   * @brief Comparing matrices (A != mat)
    * @param mat CRS matrix
    * @return true or false
    * @note

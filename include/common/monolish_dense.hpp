@@ -99,7 +99,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M+N (onlu allocation)
+   *    - # of data transfer: M+N (only allocation)
    *        - if `dense.gpu_status == true`; coping data on CPU and GPU
    *respectively
    *        - else; coping data only on CPU
@@ -287,7 +287,7 @@ public:
    * - # of computation: M*N/2-M (square) or M*N (non-square)
    * - Multi-threading: yes
    * - GPU acceleration: false
-   * - If matrix is non-square, This function need MxN temporary matriax.
+   * - If matrix is non-square, This function need MxN temporary matrix.
    * - This function transposes in place, it's performance is lower than
    *A.transpose(B).
    **/
@@ -503,7 +503,7 @@ public:
   }
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat Dense matrix
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
@@ -516,7 +516,7 @@ public:
                            bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat Dense matrix
    * @return true or false
    * @note
@@ -529,7 +529,7 @@ public:
   [[nodiscard]] bool operator==(const Dense<Float> &mat) const;
 
   /**
-   * @brief Comparing matricies (A != mat)
+   * @brief Comparing matrices (A != mat)
    * @param mat Dense matrix
    * @return true or false
    * @note

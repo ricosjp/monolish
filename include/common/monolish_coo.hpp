@@ -632,7 +632,7 @@ public:
   void operator=(const COO<Float> &mat);
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat COO matrix
    * @param compare_cpu_and_device Unused options for integrity
    * @return true or false
@@ -645,7 +645,7 @@ public:
                            bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat COO matrix
    * @return true or false
    * @note
@@ -656,7 +656,7 @@ public:
   [[nodiscard]] bool operator==(const COO<Float> &mat) const;
 
   /**
-   * @brief Comparing matricies (A != mat)
+   * @brief Comparing matrices (A != mat)
    * @param mat COO matrix
    * @return true or false
    * @note
