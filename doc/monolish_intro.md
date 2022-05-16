@@ -1,12 +1,13 @@
 # What is monolish? {#monolish_intro}
 
 ## Introduction
+
 monolish is a linear equation solver library that monolithically fuses variable data type, matrix structures, matrix data format, vendor specific data transfer APIs, and vendor specific numerical algebra libraries.
 
 monolish is a vendor-independent open-source library written in C++ that aims to be a grand unified linear algebra library on any hardware.
 
-BLAS has 150+ functions and LAPACK has 1000+ functions. 
-These are complete software for dense matrix operations. 
+BLAS has 150+ functions and LAPACK has 1000+ functions.
+These are complete software for dense matrix operations.
 However, these are not enough due to the growing needs of users.
 In particular, sparse matrix operations and machine learning kernels are not implemented.
 
@@ -39,10 +40,10 @@ By using OpenMP Offloading, it is possible to support AMD Radeon and Intel Xe in
 The first goal of monolish is to implement the basic operations that allow the BLAS, Sparse BLAS, and VML functions of the MKL and CUDA libraries to work on any hardware environment.
 
 On Intel CPUs and NVIDIA GPUs, MKL and CUDA libraries are the fastest.
-The monolish uses these libraries as much as possible and implements the missing functions by itself. 
+The monolish uses these libraries as much as possible and implements the missing functions by itself.
 
 When compiling, monolish switches the function to be called if the MKL or CUDA libraries are available or not.
-monolish wwitch dependency libraries at compile time.
+monolish switches dependency libraries at compile time.
 
 The current monolish has four branches, `MKL`, `OSS`, `MKL + NVIDIA`, and `OSS + NVIDIA`, as shown in the following figure.
 
@@ -57,7 +58,7 @@ We plan to increase the number of libraries switching branches for AMD, ARM, and
 
 ![](img/call_blas.png)
 
-## Development policy for high performance 
+## Development policy for high performance
 
 monolish has five development policies.
 
@@ -67,20 +68,20 @@ Override functions and do not implement datatype-dependent functions.
 
 In the future, imaginary numbers and high precision data types will be supported.
 
-### 2. Don't require users to change their programs due to changes in hardware architecture.
+### 2. Don't require users to change their programs due to changes in hardware architecture
 
 monolish integrates vendor-implemented BLAS libraries and device communication APIs for each architecture.
 It provides a new layer to BLAS/LAPACK/Sparse BLAS that monolithically integrates types, matrix formats, and vendor-specific APIs.
 
 To support AMD GPUs and Intel Xe with our own implementation, the internal device programs are implemented using OpenMP Offloading.
 
-### 3. Don't require users to change their programs due to changes in the matrix storage format.
+### 3. Don't require users to change their programs due to changes in the matrix storage format
 
 In monolish, all matrix formats, including Dense matrix, are defined as sparse matrix format.
 
 The same interface is designed for all classes to minimize changes in user program due to the matrix storage format changes.
 
-### 4. Don't implement functions that do not provide performance.
+### 4. Don't implement functions that do not provide performance
 
 It is important to have the same functionality in all classes.
 However, there are operations that cannot be made faster in principle.
@@ -93,8 +94,7 @@ We guarantee, as much as possible, that programs implemented with a combination 
 
 If a function is absolutely necessary, warn the user by writing the number of computation in the documentation.
 
-
-### 5. Don't allocate memory in ways that users cannot anticipate.
+### 5. Don't allocate memory in ways that users cannot anticipate
 
 Compound functions and operator overloading are useful.
 However, they often require to allocate memory in the function for the return vector or matrix internally.

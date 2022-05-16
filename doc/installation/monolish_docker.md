@@ -1,17 +1,22 @@
 # monolish container {#monolish_docker}
+
 monolish container is a container for easy use of monolish based on ubuntu.
 
 monolish is installed in the following locations:
+
 - /usr/lib/
 - /usr/include/
 
 examples can be found at:
+
 - /usr/share/monolish/examples/
 
 benchmarks can be found at:
+
 - /usr/share/monolish/benchmark/
 
 # Run monolish container
+
 Use the following command to enter the monolish docker container.
 Please refer to the next section to see how to run the sample.
 
@@ -59,8 +64,9 @@ This script determines the CC of GPU 0 and makes a link to `libmonolish_gpu.so`.
 /usr/share/monolish/link_monolish_gpu.sh
 ```
 
-# Build monolish container (for developpers)
-In `monolish/docker` : 
+# Build monolish container (for developers)
+
+In `monolish/docker` :
 
 ## OSS
 
@@ -87,6 +93,7 @@ make mkl_nvidia
 ```
 
 # Testing monolish docker
+
 ```
 make test
 ```
