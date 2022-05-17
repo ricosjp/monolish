@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.16.0 - 2022/05/17
+-----------
+
 ### Added
 
 - Add Initialize constructors that create the same size matrix as input matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/458>
