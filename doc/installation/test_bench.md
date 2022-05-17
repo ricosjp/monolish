@@ -1,6 +1,9 @@
-# Tesing and Benchmarking {#test_bench}
+# Testing and Benchmarking {#test_bench}
+
 ## Testing
+
 The program for the test can be found at `test/`.
+
 ### For CPU
 
 ```
@@ -18,6 +21,7 @@ make run_gpu
 ```
 
 ## Benchmarking
+
 The program for the test can be found at `benchmark/`.
 The benchmark size is defined in `benchmark_utils.hpp`.
 

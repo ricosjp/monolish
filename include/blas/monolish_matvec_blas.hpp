@@ -2,12 +2,12 @@
 #pragma once
 #include "../common/monolish_common.hpp"
 
+namespace monolish {
 /**
  * @brief
  * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
  * Scalar
  */
-namespace monolish {
 namespace blas {
 
 /**

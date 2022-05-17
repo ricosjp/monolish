@@ -55,7 +55,7 @@ In the current version, it is necessary to specify the path to MONOLISH_DIR in o
 g++ -L/opt/monolish/lib/ -I /opt/monolish/include/ sample.cpp -lmonolish_cpu
 ```
 
-## CMake build options
+## CMake options
 
 - **MONOLISH_USE_AVX**: _BOOL_ (defalut: ON)
   - Enable x86/64 SIMD AVX.
@@ -63,7 +63,7 @@ g++ -L/opt/monolish/lib/ -I /opt/monolish/include/ sample.cpp -lmonolish_cpu
   - Use ccache
 - **MONOLISH_USE_MPI**: _BOOL_ (default: OFF)
   - Enable MPI.
-  - MPI functions are under development. We do not recommend that users use this option.**
+  - MPI functions are under development. We do not recommend that users use this option.
 - **MONOLISH_PACKAGE_COMMON**: _BOOL_ (default:OFF)
   - Create libmonolish package, common contents of any backend
 - **MONOLISH_USE_NVIDIA_GPU**: _BOOL_ (default: OFF)

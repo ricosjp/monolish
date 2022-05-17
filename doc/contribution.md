@@ -14,7 +14,7 @@ monolish is tested on the RICOS gitlab server using gitlab CI since Github Actio
 
 Currently, the gitlab server in RICOS is internal, so the pull request needs to be approved by someone in RICOS.
 
-### For contributer (without RICOS co. Ltd.)
+### For contributor (without RICOS co. Ltd.)
 1. Create an issue on github
 2. Submit a pull request from github
 

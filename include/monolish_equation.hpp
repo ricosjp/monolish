@@ -5,11 +5,11 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
+namespace monolish {
 /**
  * @brief
  * Linear equation solvers for Dense and sparse matrix
  */
-namespace monolish {
 namespace equation {
 
 /**
@@ -29,7 +29,7 @@ namespace equation {
  * - solver : true
  * - preconditioner : true
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -76,7 +76,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -141,7 +141,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -208,7 +208,7 @@ public:
  * - solver : true
  * - preconditioner : true
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -269,7 +269,7 @@ public:
  * - solver : true
  * - preconditioner : true
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -337,7 +337,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : false
  * - Dense / NVIDIA : false
  * - Dense / OSS : false
@@ -359,7 +359,7 @@ private:
 public:
   ~IC();
   /**
-   * @brief solve with incomprete Cholesky factorization
+   * @brief solve with incomplete Cholesky factorization
    * @warning
    * This solves Ax = b incompletely. In many cases the answer is wrong.
    **/
@@ -399,7 +399,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : false
  * - Dense / NVIDIA : false
  * - Dense / OSS : false
@@ -421,7 +421,7 @@ private:
 public:
   ~ILU();
   /**
-   * @brief solve with incomprete LU factorization
+   * @brief solve with incomplete LU factorization
    * @warning
    * This solves Ax = b incompletely. In many cases the answer is wrong.
    **/
@@ -461,7 +461,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -520,7 +520,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : false
  * - Dense / NVIDIA : false
  * - Dense / OSS : false
@@ -580,7 +580,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : false
  * - Dense / OSS : true
