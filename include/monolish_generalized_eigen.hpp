@@ -5,10 +5,10 @@
 #include "./monolish_solver.hpp"
 #include "common/monolish_common.hpp"
 
+namespace monolish {
 /**
  * @brief handling eigenvalues and eigenvectors
  **/
-namespace monolish {
 namespace generalized_eigen {
 
 /**
@@ -28,7 +28,7 @@ namespace generalized_eigen {
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true
@@ -89,7 +89,7 @@ public:
  * - solver : true
  * - preconditioner : false
  * @note
- * input / archtecture
+ * input / architecture
  * - Dense / Intel : true
  * - Dense / NVIDIA : true
  * - Dense / OSS : true

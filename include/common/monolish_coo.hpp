@@ -351,7 +351,7 @@ public:
   // ///////////////////////////////////////////////////////////////////////////
 
   /**
-   * @brief Create COO matrix from MatrixMatrket format file (only real general)
+   * @brief Create COO matrix from MatrixMarket format file (only real general)
    * (MatrixMarket format: https://math.nist.gov/MatrixMarket/formats.html)
    * @param filename MatrixMarket format file name
    * @note
@@ -361,7 +361,7 @@ public:
   void input_mm(const std::string filename);
 
   /**
-   * @brief Create COO matrix from MatrixMatrket format file (only real general)
+   * @brief Create COO matrix from MatrixMarket format file (only real general)
    * (MatrixMarket format: https://math.nist.gov/MatrixMarket/formats.html)
    * @param filename MatrixMarket format file name
    * @note
@@ -494,7 +494,7 @@ public:
 
   /**
    * @brief get value
-   * @return velue
+   * @return value
    * @note
    * - # of computation: nnz
    * - Multi-threading: false
@@ -528,7 +528,7 @@ public:
 
   /**
    * @brief get value
-   * @return velue
+   * @return value
    * @note
    * - # of computation: nnz
    * - Multi-threading: false
@@ -632,7 +632,7 @@ public:
   void operator=(const COO<Float> &mat);
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat COO matrix
    * @param compare_cpu_and_device Unused options for integrity
    * @return true or false
@@ -645,7 +645,7 @@ public:
                            bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param mat COO matrix
    * @return true or false
    * @note
@@ -656,7 +656,7 @@ public:
   [[nodiscard]] bool operator==(const COO<Float> &mat) const;
 
   /**
-   * @brief Comparing matricies (A != mat)
+   * @brief Comparing matrices (A != mat)
    * @param mat COO matrix
    * @return true or false
    * @note
@@ -689,7 +689,7 @@ private:
 public:
   /**
    * @brief sort COO matrix elements (and merge elements)
-   * @param merge neet to merge (true or false)
+   * @param merge need to merge (true or false)
    * @note
    * - # of computation: 3nnz x log(3nnz) ~ 3nnz^2
    * - Multi-threading: false

@@ -4,10 +4,10 @@
 #include "common/monolish_common.hpp"
 #include <functional>
 
+namespace monolish {
 /**
  * @brief Linear solver base class
  **/
-namespace monolish {
 namespace solver {
 
 /**
@@ -68,13 +68,13 @@ public:
   }
 
   /**
-   * @brief set precondition create fucntion
+   * @brief set precondition create function
    * @param[in] p solver class for precondition
    **/
   template <class PRECOND> void set_create_precond(PRECOND &p);
 
   /**
-   * @brief set precondition apply fucntion
+   * @brief set precondition apply function
    * @param[in] p solver class for precondition
    **/
   template <class PRECOND> void set_apply_precond(PRECOND &p);
@@ -105,7 +105,7 @@ public:
 
   /**
    * @brief set residual method (default=0)
-   * @param[in] r residualt method number (0:nrm2)
+   * @param[in] r residual method number (0:nrm2)
    **/
   void set_residual_method(size_t r) { resid_method = r; }
 
@@ -215,12 +215,12 @@ public:
   int get_reorder() { return reorder; }
 
   /**
-   * @brief -1 if A is symmetric postive definite.
+   * @brief -1 if A is symmetric positive definite.
    * default reorder algorithm is csrmetisnd
    * @note
    * This variable is only used in sparse QR/Cholesky for GPU
    */
-  int get_sigularity() { return singularity; }
+  int get_singularity() { return singularity; }
 
   double get_final_residual() { return final_resid; }
   size_t get_final_iter() { return final_iter; }

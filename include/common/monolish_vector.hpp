@@ -166,6 +166,7 @@ public:
    * @param max rand max
    * @param seed random seed
    * @note
+   * The ramdom number generator is random generator is mt19937
    * - # of computation: N
    * - Multi-threading: false
    * - GPU acceleration: false
@@ -444,7 +445,7 @@ public:
   }
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param vec vector
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
@@ -457,7 +458,7 @@ public:
              bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
+   * @brief Comparing matrices (A == mat)
    * @param vec view1D from monolish::vector
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
@@ -470,8 +471,8 @@ public:
              bool compare_cpu_and_device = false) const;
 
   /**
-   * @brief Comparing matricies (A == mat)
-   * @param vec vieq1D from monolish::matrix::Dense
+   * @brief Comparing matrices (A == mat)
+   * @param vec view1D from monolish::matrix::Dense
    * @param compare_cpu_and_device compare data on both CPU and GPU
    * @return true or false
    * @note

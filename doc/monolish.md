@@ -28,32 +28,39 @@ These compiles following example code:
 Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for more examples.
 
 ## For Users
+
 - [What's monolish?](@ref monolish_intro)
 
 ### Installation
+
 - [Installation using apt (for ubuntu 20.04)](@ref install_guide)
 - [Docker container with monolish installed](@ref monolish_docker)
 
 ### Examples
+
 - [CPU Examples](@ref cpu_dev)
 - [GPU Examples](@ref gpu_dev)
 
 ### API Overview
+
 - [**Modules**](./modules.html)
   - [Data types](@ref data_type)
-  - [Supported Operations](@ref oplist)
+  - [Implementation list of each operations](@ref oplist)
   - [Linear Solvers](@ref solverlist)
   - [Performance logging and find bottlenecks](@ref logger)
 
 ## For Developers
+
 - [Build monolish from source code](@ref build_guide)
 - [Testing and Benchmarking](@ref test_bench)
-- [Contribution guide](@ref contribution) 
+- [Contribution guide](@ref contribution)
 
 ## Citations
+
 - [Publications](@ref publications)
 
 ## Links
+
 - [**Source code**](https://github.com/ricosjp/monolish/)
 - [**Documentation**](https://ricosjp.github.io/monolish/)
 - [**Bug reports**](https://github.com/ricosjp/monolish/issues)

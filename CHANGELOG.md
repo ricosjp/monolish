@@ -39,6 +39,11 @@ Unreleased
 - Drop C trans (NNN->NN) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/441> <https://github.com/ricosjp/monolish/issues/107>
 - Generate transpose matvec,matmul headers <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439> <https://github.com/ricosjp/monolish/issues/107>
 
+### Fixed
+- Update and Fix document <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/449> <https://github.com/ricosjp/monolish/issues/116>
+- Change parallel to sequential in random vector/matrix generations (for reproducibility) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450>
+- Change create_asym_band_matrix() in transposed GEMV <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446>
+
 ### Changed
 
 - Use cmake preset in Makefile <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/456> <https://github.com/ricosjp/monolish/issues/120>
@@ -46,8 +51,6 @@ Unreleased
 - Update allgebra 21.02.0 -> 22.05.0 (CUDA GPG key is updated) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/453> <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/454> <https://github.com/ricosjp/monolish/issues/118>
 - Change C++17 -> C++11 in headers, tests, and examples (user requiments changed to C++11) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/452>
 - Specify random seed in test/ and examples/ <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/451>
-- Change parallel to sequential in random vector/matrix generations (for reproducibility) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450>
-- Change create_asym_band_matrix() in transposed GEMV <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446>
 - Skip zero elements in create_band_matrix() <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446>
 - Change benchmark target matvec->matvec_N <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/445> <https://github.com/ricosjp/monolish/issues/107>
 - Update allgebra 21.12.1 -> 22.02.0 (LLVM 13.0.0 -> 13.0.1) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/440> <https://github.com/ricosjp/monolish/issues/113>

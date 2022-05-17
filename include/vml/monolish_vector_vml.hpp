@@ -3,11 +3,11 @@
 
 #include "../common/monolish_common.hpp"
 
+namespace monolish {
 /**
  * @brief
  * Vector and Matrix element-wise math library
  */
-namespace monolish {
 namespace vml {
 
 /**
