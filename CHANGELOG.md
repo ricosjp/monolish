@@ -40,6 +40,7 @@ Unreleased
 - Generate transpose matvec,matmul headers <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/439> <https://github.com/ricosjp/monolish/issues/107>
 
 ### Fixed
+
 - Update and Fix document <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/449> <https://github.com/ricosjp/monolish/issues/116>
 - Change parallel to sequential in random vector/matrix generations (for reproducibility) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/450>
 - Change create_asym_band_matrix() in transposed GEMV <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/446>
