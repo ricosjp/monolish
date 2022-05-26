@@ -25,7 +25,7 @@
     - make -C test/ run_gpu
 
 cpu_deb_test:
-  image: ubuntu:20.04
+  image: ubuntu:22.04
   extends:
     - .cpu_avx
     - .test
@@ -39,7 +39,7 @@ cpu_deb_test:
     - avx
 
 gpu_deb_test:
-  image: nvidia/cuda:11.4.1-devel-ubuntu20.04
+  image: nvidia/cuda:11.7.0-devel-ubuntu22.04
   extends:
     - .gpu_avx
     - .test
@@ -54,7 +54,7 @@ gpu_deb_test:
     - nvidia0-sm_61
 
 both_deb_test:
-  image: nvidia/cuda:11.4.1-devel-ubuntu20.04
+  image: nvidia/cuda:11.7.0-devel-ubuntu22.04
   extends:
     - .test
   script:
