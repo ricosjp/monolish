@@ -22,6 +22,7 @@ Unreleased
 
 ### Changed
 
+- Update poetry.lock (poetry update) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/460>
 - Update allgebra 20.05.1 -> 20.05.4 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/460>
   - Ubuntu 20.04 -> 22.04
   - CUDA 11.6.0 -> 11.7.1
