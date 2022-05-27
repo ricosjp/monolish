@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Changed
+- Start developing 0.16.2 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
+
 0.16.1 - 2022/05/27
 -----------
 
