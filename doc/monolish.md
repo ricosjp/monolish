@@ -70,4 +70,8 @@ Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for mor
 - [**monolish log viewer**](https://pypi.org/project/monolish-log-viewer/)
 - [**Continuous benchmarking**](https://ricosjp.github.io/monolish_benchmark_result/)
 
+## Developer's memo (in Japanese)
+
+- [Release flow](@ref release_flow)
+
 Copyright 2021 [RICOS Co. Ltd.](https://www.ricos.co.jp/)

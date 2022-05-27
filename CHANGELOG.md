@@ -22,14 +22,15 @@ Unreleased
 
 ### Changed
 
-- Update poetry.lock (poetry update) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/460>
-- Update allgebra 20.05.1 -> 20.05.4 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/460>
+- Update document (write developpers memo) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/462>
+- Update poetry.lock (poetry update) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/461>
+- Update allgebra 20.05.1 -> 20.05.4 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/461>
   - Ubuntu 20.04 -> 22.04
   - CUDA 11.6.0 -> 11.7.1
   - gcc 10 -> 11
   - cmake 3.21 -> 3.23
   - OpenMPI 4.1.0 -> 4.1.3
-- Start developing 0.16.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/459>
+- Start developing 0.16.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/460>
 
 0.16.0 - 2022/05/17
 -----------
