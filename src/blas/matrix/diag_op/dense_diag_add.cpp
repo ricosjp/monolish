@@ -33,8 +33,7 @@ template <typename T> void Dense<T>::diag_add(const T alpha) {
 template void monolish::matrix::Dense<double>::diag_add(const double alpha);
 template void monolish::matrix::Dense<float>::diag_add(const float alpha);
 
-
-// add vector 
+// add vector
 template <typename T> void Dense<T>::diag_add(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -69,7 +68,6 @@ template void
 monolish::matrix::Dense<double>::diag_add(const vector<double> &vec);
 template void
 monolish::matrix::Dense<float>::diag_add(const vector<float> &vec);
-
 
 // add viwe1D<vector>
 template <typename T> void Dense<T>::diag_add(const view1D<vector<T>, T> &vec) {
@@ -106,7 +104,6 @@ template void monolish::matrix::Dense<double>::diag_add(
     const view1D<vector<double>, double> &vec);
 template void monolish::matrix::Dense<float>::diag_add(
     const view1D<vector<float>, float> &vec);
-
 
 // add viwe1D<Dense>
 template <typename T>
