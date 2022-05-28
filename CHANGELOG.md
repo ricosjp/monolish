@@ -21,6 +21,7 @@ Unreleased
 -----------
 
 ### Changed
+- Organize Dense_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/464>
 - Start developing 0.16.2 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
 
 0.16.1 - 2022/05/27
