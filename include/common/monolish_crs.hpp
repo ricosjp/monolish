@@ -395,7 +395,96 @@ public:
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
 
-  /////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief Scalar and diag. vector of CRS format matrix add
+   * @param alpha scalar
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_add(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of CRS format matrix sub
+   * @param alpha scalar
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_sub(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of CRS format matrix mul
+   * @param alpha scalar
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_mul(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of CRS format matrix div
+   * @param alpha scalar
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_div(const Float alpha);
+
+  /**
+   * @brief Vector and diag. vector of CRS format matrix add
+   * @param vec vector
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_add(const vector<Float> &vec);
+  void diag_add(const view1D<vector<Float>, Float> &vec);
+  void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of CRS format matrix sub
+   * @param vec vector
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_sub(const vector<Float> &vec);
+  void diag_sub(const view1D<vector<Float>, Float> &vec);
+  void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of CRS format matrix mul
+   * @param vec vector
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_mul(const vector<Float> &vec);
+  void diag_mul(const view1D<vector<Float>, Float> &vec);
+  void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of CRS format matrix div
+   * @param vec vector
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_div(const vector<Float> &vec);
+  void diag_div(const view1D<vector<Float>, Float> &vec);
+  void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
+
+/////////////////////////////////////////////////////////////////////////////
   /**
    * @brief get transposed matrix (A^T)
    * @return tranposed matrix A^T
