@@ -545,7 +545,7 @@ public:
   /////////////////////////////////////////////
 
   /**
-   * @brief Scalar and diag. vector of dense matrix add
+   * @brief Scalar and diag. vector of Dense format matrix add
    * @param alpha scalar
    * @note
    * - # of computation: M
@@ -555,7 +555,7 @@ public:
   void diag_add(const Float alpha);
 
   /**
-   * @brief Scalar and diag. vector of dense matrix sub
+   * @brief Scalar and diag. vector of Dense format matrix sub
    * @param alpha scalar
    * @note
    * - # of computation: M
@@ -565,7 +565,7 @@ public:
   void diag_sub(const Float alpha);
 
   /**
-   * @brief Scalar and diag. vector of dense matrix mul
+   * @brief Scalar and diag. vector of Dense format matrix mul
    * @param alpha scalar
    * @note
    * - # of computation: M
@@ -575,7 +575,7 @@ public:
   void diag_mul(const Float alpha);
 
   /**
-   * @brief Scalar and diag. vector of dense matrix div
+   * @brief Scalar and diag. vector of Dense format matrix div
    * @param alpha scalar
    * @note
    * - # of computation: M
@@ -585,7 +585,7 @@ public:
   void diag_div(const Float alpha);
 
   /**
-   * @brief Vector and diag. vector of dense matrix add
+   * @brief Vector and diag. vector of Dense format matrix add
    * @param vec vector
    * @note
    * - # of computation: M
@@ -597,7 +597,7 @@ public:
   void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
 
   /**
-   * @brief Vector and diag. vector of dense matrix sub
+   * @brief Vector and diag. vector of Dense format matrix sub
    * @param vec vector
    * @note
    * - # of computation: M
@@ -609,7 +609,7 @@ public:
   void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
 
   /**
-   * @brief Vector and diag. vector of dense matrix mul
+   * @brief Vector and diag. vector of Dense format matrix mul
    * @param vec vector
    * @note
    * - # of computation: M
@@ -621,7 +621,7 @@ public:
   void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
 
   /**
-   * @brief Vector and diag. vector of dense matrix div
+   * @brief Vector and diag. vector of Dense format matrix div
    * @param vec vector
    * @note
    * - # of computation: M
