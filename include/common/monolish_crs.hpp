@@ -403,6 +403,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_add(const Float alpha);
 
@@ -413,6 +416,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_sub(const Float alpha);
 
@@ -423,6 +429,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_mul(const Float alpha);
 
@@ -433,6 +442,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_div(const Float alpha);
 
@@ -443,6 +455,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_add(const vector<Float> &vec);
   void diag_add(const view1D<vector<Float>, Float> &vec);
@@ -455,6 +470,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_sub(const vector<Float> &vec);
   void diag_sub(const view1D<vector<Float>, Float> &vec);
@@ -467,6 +485,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_mul(const vector<Float> &vec);
   void diag_mul(const view1D<vector<Float>, Float> &vec);
@@ -479,6 +500,9 @@ public:
    * - # of computation: nnz
    * - Multi-threading: true
    * - GPU acceleration: true
+   * @warning
+   * This function only works on existing diagonal elements. 
+   * If diagonal element is not entered, this function skip it (does not insert element).
    **/
   void diag_div(const vector<Float> &vec);
   void diag_div(const view1D<vector<Float>, Float> &vec);
