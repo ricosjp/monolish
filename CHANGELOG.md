@@ -20,7 +20,12 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Added
+
+- Add CRS_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/465>
+
 ### Changed
+
 - Organize Dense_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/464>
 - Start developing 0.16.2 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
 

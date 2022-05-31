@@ -10,9 +10,11 @@ template <typename T> void ans_subvec_op(monolish::vector<T> &vec) {
   }
 }
 
-template <typename T>
+template <typename MAT, typename T>
 bool test_diag(const size_t M, const size_t N, double tol) {
-  monolish::matrix::Dense<T> A(M, N, 10.0); // M*N matrix
+  monolish::matrix::Dense<T> seed_dense(M, N, 10.0); // M*N matrix
+  monolish::matrix::COO<T> seed_coo(seed_dense);
+  MAT A(seed_coo);
 
   monolish::vector<T> vec(A.get_row(), 2.0);
   monolish::vector<T> ansvec(A.get_row(), 2.0);
@@ -45,10 +47,18 @@ int main(int argc, char **argv) {
 
   std::cout << "M=" << M << ", N=" << N << std::endl;
 
-  if (test_diag<double>(M, M, 1.0e-8) == false) {
+  if (test_diag<monolish::matrix::Dense<double>, double>(M, M, 1.0e-8) ==
+      false) {
     return 1;
   }
-  if (test_diag<float>(M, M, 1.0e-8) == false) {
+  if (test_diag<monolish::matrix::Dense<float>, float>(M, M, 1.0e-8) == false) {
+    return 1;
+  }
+
+  if (test_diag<monolish::matrix::CRS<double>, double>(M, M, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_diag<monolish::matrix::CRS<float>, float>(M, M, 1.0e-8) == false) {
     return 1;
   }
 
