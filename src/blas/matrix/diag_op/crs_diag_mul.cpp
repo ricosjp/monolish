@@ -16,25 +16,25 @@ template <typename T> void CRS<T>::diag_mul(const T alpha) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= alpha;
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= alpha;
+        }
       }
+    }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= alpha;
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= alpha;
+        }
       }
+    }
   }
 
   logger.func_out();
@@ -58,33 +58,32 @@ template <typename T> void CRS<T>::diag_mul(const vector<T> &vec) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
   }
 
   logger.func_out();
 }
 template void
 monolish::matrix::CRS<double>::diag_mul(const vector<double> &vec);
-template void
-monolish::matrix::CRS<float>::diag_mul(const vector<float> &vec);
+template void monolish::matrix::CRS<float>::diag_mul(const vector<float> &vec);
 
 // mul viwe1D<vector>
 template <typename T> void CRS<T>::diag_mul(const view1D<vector<T>, T> &vec) {
@@ -102,33 +101,33 @@ template <typename T> void CRS<T>::diag_mul(const view1D<vector<T>, T> &vec) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
   }
 
   logger.func_out();
 }
 template void monolish::matrix::CRS<double>::diag_mul(
     const view1D<vector<double>, double> &vec);
-template void monolish::matrix::CRS<float>::diag_mul(
-    const view1D<vector<float>, float> &vec);
+template void
+monolish::matrix::CRS<float>::diag_mul(const view1D<vector<float>, float> &vec);
 
 // mul viwe1D<Dense>
 template <typename T>
@@ -147,25 +146,25 @@ void CRS<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              if(i == cold[j]) {
-                  vald[j] *= vecd[i];
-              }
-          }
+    for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        if (i == cold[j]) {
+          vald[j] *= vecd[i];
+        }
       }
+    }
   }
 
   logger.func_out();

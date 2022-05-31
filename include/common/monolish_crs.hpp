@@ -395,7 +395,7 @@ public:
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
 
-/////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
   /**
    * @brief Scalar and diag. vector of CRS format matrix add
    * @param alpha scalar
@@ -404,8 +404,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_add(const Float alpha);
 
@@ -417,8 +418,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_sub(const Float alpha);
 
@@ -430,8 +432,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_mul(const Float alpha);
 
@@ -443,8 +446,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_div(const Float alpha);
 
@@ -456,8 +460,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_add(const vector<Float> &vec);
   void diag_add(const view1D<vector<Float>, Float> &vec);
@@ -471,8 +476,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_sub(const vector<Float> &vec);
   void diag_sub(const view1D<vector<Float>, Float> &vec);
@@ -486,8 +492,9 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_mul(const vector<Float> &vec);
   void diag_mul(const view1D<vector<Float>, Float> &vec);
@@ -501,14 +508,15 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: true
    * @warning
-   * This function only works on existing diagonal elements. 
-   * If diagonal element is not entered, this function skip it (does not insert element).
+   * This function only works on existing diagonal elements.
+   * If diagonal element is not entered, this function skip it (does not insert
+   *element).
    **/
   void diag_div(const vector<Float> &vec);
   void diag_div(const view1D<vector<Float>, Float> &vec);
   void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
 
-/////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
   /**
    * @brief get transposed matrix (A^T)
    * @return tranposed matrix A^T
