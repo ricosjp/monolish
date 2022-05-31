@@ -47,7 +47,8 @@ int main(int argc, char **argv) {
 
   std::cout << "M=" << M << ", N=" << N << std::endl;
 
-  if (test_diag<monolish::matrix::Dense<double>, double>(M, M, 1.0e-8) == false) {
+  if (test_diag<monolish::matrix::Dense<double>, double>(M, M, 1.0e-8) ==
+      false) {
     return 1;
   }
   if (test_diag<monolish::matrix::Dense<float>, float>(M, M, 1.0e-8) == false) {
