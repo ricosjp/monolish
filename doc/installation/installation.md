@@ -4,7 +4,7 @@ This page describes how to install pre-build monolish onto Ubuntu 22.04 LTS.
 Following commands assumes `wget` command exists. It can be installed by
 
 \code{shell}
-$ sudo apt update
+$ sudo apt update -y
 $ sudo apt install -y wget
 \endcode
 
