@@ -35,12 +35,12 @@ option_string(
 )
 option_string(
   MONOLISH_CONTAINER_BASE_IMAGE
-  "ghcr.io/ricosjp/allgebra/cuda11_7/clang13/mkl"
+  "ghcr.io/ricosjp/allgebra/cuda11_7/clang14/mkl"
   "Base image upon which monolish container will be created"
 )
 option_string(
   MONOLISH_CONTAINER_BASE_TAG
-  "22.05.4"
+  "22.05.5"
   "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
