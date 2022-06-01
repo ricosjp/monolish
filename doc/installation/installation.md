@@ -24,7 +24,7 @@ There are two variants according to backend BLAS and LAPACK implementation:
 - [+mkl][deb_mkl] means it uses Intel MKL
 
 ## For NVIDIA GPU
-First, you need to nable CUDA 11.4 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:
+First, you need to nable CUDA 11.7 repository to enable cuBLAS, cuSPARSE, cuSOLVER using following steps:
 
 \code{shell}
 $ sudo apt install -y gnupg software-properties-common
@@ -47,7 +47,7 @@ monolish for GPU has shared libraries for each generation of GPU.
 Following commands set the path to the shared library for generation of GPU #0.
 
 \code{shell}
-$ export PATH=$PATH:/usr/local/cuda-11.4/bin/
+$ export PATH=$PATH:/usr/local/cuda-11.7/bin/
 $ /usr/share/monolish/link_monolish_gpu.sh
 \endcode
 
