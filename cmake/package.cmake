@@ -13,7 +13,7 @@ set(CPACK_GENERATOR "DEB")
 
 # Set dependencies for .deb
 #
-# The package names are packages in nvidia/cuda image based on Ubuntu 20.04
+# The package names are packages in nvidia/cuda image based on Ubuntu 22.04
 # distributed on DocekrHub. They may different for other `*.deb`-based Linux distributions.
 set(monolish_deb_dependencies
   libc6

@@ -33,7 +33,7 @@ Please see [CPU Examples](@ref cpu_dev) and [GPU Examples](@ref gpu_dev) for mor
 
 ### Installation
 
-- [Installation using apt (for ubuntu 20.04)](@ref install_guide)
+- [Installation using apt (for ubuntu 22.04)](@ref install_guide)
 - [Docker container with monolish installed](@ref monolish_docker)
 
 ### Examples

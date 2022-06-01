@@ -78,9 +78,9 @@ g++ -L/opt/monolish/lib/ -I /opt/monolish/include/ sample.cpp -lmonolish_cpu
   - Specify Package version for deb and containers.
 - **MONOLISH_CONTAINER_REGISTRY**: _STRING_ (default: `ghcr.io/ricosjp/monolish`)
   - Container registry where monolish container will be uploaded.
-- **MONOLISH_CONTAINER_BASE_IMAGE**: _STRING_ (default: `ghcr.io/ricosjp/allgebra/cuda11_7/clang13/mkl`)
+- **MONOLISH_CONTAINER_BASE_IMAGE**: _STRING_ (default: `ghcr.io/ricosjp/allgebra/cuda11_7/clang14/mkl`)
   - Base image upon which monolish container will be created.
-- **MONOLISH_CONTAINER_BASE_TAG**: _STRING_ (default: `22.05.4`)
+- **MONOLISH_CONTAINER_BASE_TAG**: _STRING_ (default: `22.05.5`)
   - Tag of MONOLISH_CONTAINER_BASE_IMAGE
 
 ## Build monolish on the local for CPU (Ubuntu)
