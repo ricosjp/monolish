@@ -13,7 +13,7 @@ clang-format:
 doxygen:
   extends:
     - .develop
-  image: registry.ritc.jp/ricos/allgebra/cuda11_7-clang14-oss:22.05.5
+  image: registry.ritc.jp/ricos/allgebra/cuda11_7-clang13-oss:22.05.4 #FIXME doxygen+clang14 bug
   script:
     - cmake --preset=cpu-none-none
     - cmake --build build/cpu-none-none --target document
