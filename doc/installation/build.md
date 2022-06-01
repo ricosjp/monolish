@@ -91,17 +91,16 @@ monolish requires:
 
 - git
 - make
-- cmake 3.17 or higher
+- cmake 3.23 or higher
 - g++ or clang++ with C++17 support
 - MKL or OpenBLAS
 
 ### Install make, cmake, and compilers
 
-Install cmake 3.18:
+Install cmake 3.23:
 
 ```
-curl -LO https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz \ && tar xf cmake-3.18.4-Linux-x86_64.tar.gz \ && mv cmake-3.18.4-Linux-x86_64/bin/* /usr/bin/ \ && mv cmake-3.18.4-Linux-x86_64/share/cmake-3.18 /usr/share/ \ && rm -rf cmake-3.18.4-Linux-x86_64*
-
+curl -LO https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1-linux-x86_64.tar.gz && tar xf cmake-3.23.1-linux-x86_64.tar.gz && mv cmake-3.23.1-linux-x86_64/bin/* /usr/bin/ && mv cmake-3.23.1-linux-x86_64/share/cmake-3.23 /usr/share/ && rm -rf cmake-3.23.1-linux-x86_64*
 ```
 
 Install gcc, g++, make:
