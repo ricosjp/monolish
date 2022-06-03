@@ -11,14 +11,13 @@ template <typename T> void CRS<T>::diag_div(const T alpha) {
   T *vald = val.data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
-  const auto N = get_col();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= alpha;
         }
       }
@@ -30,7 +29,7 @@ template <typename T> void CRS<T>::diag_div(const T alpha) {
 #pragma omp parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= alpha;
         }
       }
@@ -60,7 +59,7 @@ template <typename T> void CRS<T>::diag_div(const vector<T> &vec) {
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
@@ -72,7 +71,7 @@ template <typename T> void CRS<T>::diag_div(const vector<T> &vec) {
 #pragma omp parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
@@ -103,7 +102,7 @@ template <typename T> void CRS<T>::diag_div(const view1D<vector<T>, T> &vec) {
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
@@ -115,7 +114,7 @@ template <typename T> void CRS<T>::diag_div(const view1D<vector<T>, T> &vec) {
 #pragma omp parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
@@ -148,7 +147,7 @@ void CRS<T>::diag_div(const view1D<matrix::Dense<T>, T> &vec) {
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
@@ -160,7 +159,7 @@ void CRS<T>::diag_div(const view1D<matrix::Dense<T>, T> &vec) {
 #pragma omp parallel for
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        if (i == cold[j]) {
+        if ((int)i == cold[j]) {
           vald[j] /= vecd[i];
         }
       }
