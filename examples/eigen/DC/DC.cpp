@@ -21,8 +21,8 @@ int main() {
   monolish::eigen::DC<monolish::matrix::Dense<double>, double> solver;
 
   // Solve
-  if(monolish::util::solver_check(solver.solve(A, lambda))){
-      return 1;
+  if (monolish::util::solver_check(solver.solve(A, lambda))) {
+    return 1;
   }
 
   lambda.print_all();
