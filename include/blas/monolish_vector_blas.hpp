@@ -16,6 +16,49 @@ namespace blas {
  */
 
 /**
+ * \defgroup copy monolish::blas::copy (vector)
+ * @brief vector copy (y=x)
+ * @{
+ */
+/**
+ * @brief vector copy (y=x)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void copy(const vector<double> &x, vector<double> &y);
+void copy(const vector<double> &x, view1D<vector<double>, double> &y);
+void copy(const vector<double> &x, view1D<matrix::Dense<double>, double> &y);
+void copy(const view1D<vector<double>, double> &x, vector<double> &y);
+void copy(const view1D<vector<double>, double> &x,
+          view1D<vector<double>, double> &y);
+void copy(const view1D<vector<double>, double> &x,
+          view1D<matrix::Dense<double>, double> &y);
+void copy(const view1D<matrix::Dense<double>, double> &x, vector<double> &y);
+void copy(const view1D<matrix::Dense<double>, double> &x,
+          view1D<vector<double>, double> &y);
+void copy(const view1D<matrix::Dense<double>, double> &x,
+          view1D<matrix::Dense<double>, double> &y);
+void copy(const vector<float> &x, vector<float> &y);
+void copy(const vector<float> &x, view1D<vector<float>, float> &y);
+void copy(const vector<float> &x, view1D<matrix::Dense<float>, float> &y);
+void copy(const view1D<vector<float>, float> &x, vector<float> &y);
+void copy(const view1D<vector<float>, float> &x,
+          view1D<vector<float>, float> &y);
+void copy(const view1D<vector<float>, float> &x,
+          view1D<matrix::Dense<float>, float> &y);
+void copy(const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
+void copy(const view1D<matrix::Dense<float>, float> &x,
+          view1D<vector<float>, float> &y);
+void copy(const view1D<matrix::Dense<float>, float> &x,
+          view1D<matrix::Dense<float>, float> &y);
+/**@}*/
+
+/**
  * \defgroup vecadd monolish::blas::vecadd
  * @brief element by element addition of vector a and vector b.
  * @{
@@ -306,12 +349,13 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
 /**@}*/
 
 /**
- * \defgroup copy monolish::blas::copy (vector)
- * @brief vector copy (y=x)
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
  * @{
  */
 /**
- * @brief vector copy (y=x)
+ * @brief element by element multiplication: y = alpha * x
+ * @param alpha scalar value
  * @param x monolish vector (size N)
  * @param y monolish vector (size N)
  * @note
@@ -320,32 +364,182 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void copy(const vector<double> &x, vector<double> &y);
-void copy(const vector<double> &x, view1D<vector<double>, double> &y);
-void copy(const vector<double> &x, view1D<matrix::Dense<double>, double> &y);
-void copy(const view1D<vector<double>, double> &x, vector<double> &y);
-void copy(const view1D<vector<double>, double> &x,
-          view1D<vector<double>, double> &y);
-void copy(const view1D<vector<double>, double> &x,
-          view1D<matrix::Dense<double>, double> &y);
-void copy(const view1D<matrix::Dense<double>, double> &x, vector<double> &y);
-void copy(const view1D<matrix::Dense<double>, double> &x,
-          view1D<vector<double>, double> &y);
-void copy(const view1D<matrix::Dense<double>, double> &x,
-          view1D<matrix::Dense<double>, double> &y);
-void copy(const vector<float> &x, vector<float> &y);
-void copy(const vector<float> &x, view1D<vector<float>, float> &y);
-void copy(const vector<float> &x, view1D<matrix::Dense<float>, float> &y);
-void copy(const view1D<vector<float>, float> &x, vector<float> &y);
-void copy(const view1D<vector<float>, float> &x,
-          view1D<vector<float>, float> &y);
-void copy(const view1D<vector<float>, float> &x,
-          view1D<matrix::Dense<float>, float> &y);
-void copy(const view1D<matrix::Dense<float>, float> &x, vector<float> &y);
-void copy(const view1D<matrix::Dense<float>, float> &x,
-          view1D<vector<float>, float> &y);
-void copy(const view1D<matrix::Dense<float>, float> &x,
-          view1D<matrix::Dense<float>, float> &y);
+void times(const double alpha, const vector<double> &x, vector<double> y);
+void times(const double alpha, const vector<double> &x,
+           view1D<vector<double>, double> y);
+void times(const double alpha, const vector<double> &x,
+           view1D<matrix::Dense<double>, double> y);
+void times(const double alpha, const view1D<vector<double>, double> &x,
+           vector<double> y);
+void times(const double alpha, const view1D<vector<double>, double> &x,
+           view1D<vector<double>, double> y);
+void times(const double alpha, const view1D<vector<double>, double> &x,
+           view1D<matrix::Dense<double>, double> y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+           vector<double> y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+           view1D<vector<double>, double> y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
+           view1D<matrix::Dense<double>, double> y);
+void times(const float alpha, const vector<float> &x, vector<float> y);
+void times(const float alpha, const vector<float> &x,
+           view1D<vector<float>, float> y);
+void times(const float alpha, const vector<float> &x,
+           view1D<matrix::Dense<float>, float> y);
+void times(const float alpha, const view1D<vector<float>, float> &x,
+           vector<float> y);
+void times(const float alpha, const view1D<vector<float>, float> &x,
+           view1D<vector<float>, float> y);
+void times(const float alpha, const view1D<vector<float>, float> &x,
+           view1D<matrix::Dense<float>, float> y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+           vector<float> y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+           view1D<vector<float>, float> y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
+           view1D<matrix::Dense<float>, float> y);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief element by element addition of vector a and vector b.
+ * @param a monolish vector (size N)
+ * @param b monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times(const vector<double> &a, const vector<double> &b, vector<double> &y);
+void times(const vector<double> &a, const vector<double> &b,
+           view1D<vector<double>, double> &y);
+void times(const vector<double> &a, const vector<double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           vector<double> &y);
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           vector<double> &y);
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           view1D<vector<double>, double> &y);
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b, vector<double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, vector<double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, view1D<vector<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b, vector<double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y);
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const vector<float> &a, const vector<float> &b, vector<float> &y);
+void times(const vector<float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y);
+void times(const vector<float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           vector<float> &y);
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           vector<float> &y);
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           vector<float> &y);
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b, vector<float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           vector<float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b, vector<float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b, vector<float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y);
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 
 /**
