@@ -121,12 +121,13 @@ echo "
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */ "
-for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      echo "void times(const $prec alpha, const $arg1 &x, $arg2 y);"
-  done
-done
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+             echo "void times(const $prec alpha, const $arg1 &x, $arg2 y);"
+         done
+     done
+ done
 
 echo "/**@}*/"
 echo ""
@@ -149,15 +150,15 @@ echo "
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */ "
-for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-        echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y);"
-      done
-    done
-  done
-done
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+             for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+                 echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y);"
+             done
+         done
+     done
+ done
 echo "/**@}*/"
 
 ## asum
