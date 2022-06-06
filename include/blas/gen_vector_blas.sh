@@ -19,8 +19,33 @@ echo "
  */
 "
 
-## vecadd
+## copy
+echo "
+/**
+ * \defgroup copy monolish::blas::copy (vector)
+ * @brief vector copy (y=x)
+ * @{
+ */
+/**
+ * @brief vector copy (y=x)
+ * @param x monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+      echo "void copy(const $arg1 &x, $arg2 &y);"
+    done
+  done
+done
+echo "/**@}*/"
 
+## vecadd
 echo "
 /**
  * \defgroup vecadd monolish::blas::vecadd
@@ -78,17 +103,17 @@ echo "void vecsub(const $arg1 &a, const $arg2 &b, $arg3 &y);"
 done
 echo "/**@}*/"
 
-
-## copy
+## times vector
 echo "
 /**
- * \defgroup copy monolish::blas::copy (vector)
- * @brief vector copy (y=x)
+ * \defgroup vecadd monolish::blas::vecadd
+ * @brief element by element addition of vector a and vector b.
  * @{
  */
 /**
- * @brief vector copy (y=x)
- * @param x monolish vector (size N)
+ * @brief element by element addition of vector a and vector b.
+ * @param a monolish vector (size N)
+ * @param b monolish vector (size N)
  * @param y monolish vector (size N)
  * @note
  * - # of computation: N
@@ -99,11 +124,40 @@ echo "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      echo "void copy(const $arg1 &x, $arg2 &y);"
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y);"
+      done
     done
   done
 done
 echo "/**@}*/"
+
+## times scalar
+echo "
+/**
+ * \defgroup scal monolish::blas::scal
+ * @brief scal: x = alpha * x
+ * @{
+ */
+/**
+ * @brief scal: x = alpha * x
+ * @param alpha scalar value
+ * @param x monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+      echo "void scal(const $prec alpha, const $arg1 &x, $arg2 y);"
+  done
+done
+
+echo "/**@}*/"
+echo ""
 
 ## asum
 echo "
