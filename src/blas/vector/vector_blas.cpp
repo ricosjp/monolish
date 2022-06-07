@@ -10,6 +10,7 @@
 #include "nrm2.hpp"
 #include "scal.hpp"
 #include "sum.hpp"
+#include "times.hpp"
 #include "vecadd.hpp"
 #include "vecsub.hpp"
 #include "xpay.hpp"
@@ -251,7 +252,7 @@ void vecadd(const view1D<matrix::Dense<float>, float> &a,
             view1D<matrix::Dense<float>, float> &y) {
   vecadd_core(a, b, y);
 }
-
+//////////////////////////////////
 void vecsub(const vector<double> &a, const vector<double> &b,
             vector<double> &y) {
   vecsub_core(a, b, y);
@@ -487,7 +488,312 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
             view1D<matrix::Dense<float>, float> &y) {
   vecsub_core(a, b, y);
 }
-
+//////////////////////////////////
+void times(const double &alpha, const vector<double> &b, vector<double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const vector<double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const vector<double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<vector<double>, double> &b,
+           vector<double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<matrix::Dense<double>, double> &b,
+           vector<double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const double &alpha, const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const vector<float> &b, vector<float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const vector<float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<vector<float>, float> &b,
+           vector<float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<matrix::Dense<float>, float> &b,
+           vector<float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+void times(const float &alpha, const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(alpha, b, y);
+}
+//////////////////////////////////
+void times(const vector<double> &a, const vector<double> &b,
+           vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a, const vector<double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a, const vector<double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a, const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a, const vector<double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const vector<double> &b, view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<vector<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b, vector<double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<vector<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<double>, double> &a,
+           const view1D<matrix::Dense<double>, double> &b,
+           view1D<matrix::Dense<double>, double> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const vector<float> &b, vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const vector<float> &a, const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b, vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b, vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<vector<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a, const vector<float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b, vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<vector<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b, vector<float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<vector<float>, float> &y) {
+  times_core(a, b, y);
+}
+void times(const view1D<matrix::Dense<float>, float> &a,
+           const view1D<matrix::Dense<float>, float> &b,
+           view1D<matrix::Dense<float>, float> &y) {
+  times_core(a, b, y);
+}
+//////////////////////////////////
 void copy(const vector<double> &x, vector<double> &y) { copy_core(x, y); }
 void copy(const vector<double> &x, view1D<vector<double>, double> &y) {
   copy_core(x, y);
@@ -546,7 +852,7 @@ void copy(const view1D<matrix::Dense<float>, float> &x,
           view1D<matrix::Dense<float>, float> &y) {
   copy_core(x, y);
 }
-
+//////////////////////////////////
 double asum(const vector<double> &x) { return Dasum_core(x); }
 double asum(const view1D<vector<double>, double> &x) { return Dasum_core(x); }
 double asum(const view1D<matrix::Dense<double>, double> &x) {
@@ -557,7 +863,7 @@ float asum(const view1D<vector<float>, float> &x) { return Sasum_core(x); }
 float asum(const view1D<matrix::Dense<float>, float> &x) {
   return Sasum_core(x);
 }
-
+//////////////////////////////////
 void asum(const vector<double> &x, double &ans) { ans = asum(x); }
 void asum(const view1D<vector<double>, double> &x, double &ans) {
   ans = asum(x);
@@ -570,7 +876,7 @@ void asum(const view1D<vector<float>, float> &x, float &ans) { ans = asum(x); }
 void asum(const view1D<matrix::Dense<float>, float> &x, float &ans) {
   ans = asum(x);
 }
-
+//////////////////////////////////
 double sum(const vector<double> &x) { return Dsum_core(x); }
 double sum(const view1D<vector<double>, double> &x) { return Dsum_core(x); }
 double sum(const view1D<matrix::Dense<double>, double> &x) {
@@ -579,7 +885,7 @@ double sum(const view1D<matrix::Dense<double>, double> &x) {
 float sum(const vector<float> &x) { return Ssum_core(x); }
 float sum(const view1D<vector<float>, float> &x) { return Ssum_core(x); }
 float sum(const view1D<matrix::Dense<float>, float> &x) { return Ssum_core(x); }
-
+//////////////////////////////////
 void sum(const vector<double> &x, double &ans) { ans = sum(x); }
 void sum(const view1D<vector<double>, double> &x, double &ans) { ans = sum(x); }
 void sum(const view1D<matrix::Dense<double>, double> &x, double &ans) {
@@ -590,7 +896,7 @@ void sum(const view1D<vector<float>, float> &x, float &ans) { ans = sum(x); }
 void sum(const view1D<matrix::Dense<float>, float> &x, float &ans) {
   ans = sum(x);
 }
-
+//////////////////////////////////
 void axpy(const double alpha, const vector<double> &x, vector<double> &y) {
   Daxpy_core(alpha, x, y);
 }
@@ -661,7 +967,7 @@ void axpy(const float alpha, const view1D<matrix::Dense<float>, float> &x,
           view1D<matrix::Dense<float>, float> &y) {
   Saxpy_core(alpha, x, y);
 }
-
+//////////////////////////////////
 void axpyz(const double alpha, const vector<double> &x, const vector<double> &y,
            vector<double> &z) {
   Daxpyz_core(alpha, x, y, z);
@@ -902,7 +1208,7 @@ void axpyz(const float alpha, const view1D<matrix::Dense<float>, float> &x,
            view1D<matrix::Dense<float>, float> &z) {
   Saxpyz_core(alpha, x, y, z);
 }
-
+//////////////////////////////////
 double dot(const vector<double> &x, const vector<double> &y) {
   return Ddot_core(x, y);
 }
@@ -969,7 +1275,7 @@ float dot(const view1D<matrix::Dense<float>, float> &x,
           const view1D<matrix::Dense<float>, float> &y) {
   return Sdot_core(x, y);
 }
-
+//////////////////////////////////
 void dot(const vector<double> &x, const vector<double> &y, double &ans) {
   ans = dot(x, y);
 }
@@ -1040,7 +1346,7 @@ void dot(const view1D<matrix::Dense<float>, float> &x,
          const view1D<matrix::Dense<float>, float> &y, float &ans) {
   ans = dot(x, y);
 }
-
+//////////////////////////////////
 double nrm1(const vector<double> &x) { return Dnrm1_core(x); }
 double nrm1(const view1D<vector<double>, double> &x) { return Dnrm1_core(x); }
 double nrm1(const view1D<matrix::Dense<double>, double> &x) {
@@ -1051,7 +1357,7 @@ float nrm1(const view1D<vector<float>, float> &x) { return Snrm1_core(x); }
 float nrm1(const view1D<matrix::Dense<float>, float> &x) {
   return Snrm1_core(x);
 }
-
+//////////////////////////////////
 void nrm1(const vector<double> &x, double &ans) { ans = nrm1(x); }
 void nrm1(const view1D<vector<double>, double> &x, double &ans) {
   ans = nrm1(x);
@@ -1064,7 +1370,7 @@ void nrm1(const view1D<vector<float>, float> &x, float &ans) { ans = nrm1(x); }
 void nrm1(const view1D<matrix::Dense<float>, float> &x, float &ans) {
   ans = nrm1(x);
 }
-
+//////////////////////////////////
 double nrm2(const vector<double> &x) { return Dnrm2_core(x); }
 double nrm2(const view1D<vector<double>, double> &x) { return Dnrm2_core(x); }
 double nrm2(const view1D<matrix::Dense<double>, double> &x) {
@@ -1075,7 +1381,7 @@ float nrm2(const view1D<vector<float>, float> &x) { return Snrm2_core(x); }
 float nrm2(const view1D<matrix::Dense<float>, float> &x) {
   return Snrm2_core(x);
 }
-
+//////////////////////////////////
 void nrm2(const vector<double> &x, double &ans) { ans = nrm2(x); }
 void nrm2(const view1D<vector<double>, double> &x, double &ans) {
   ans = nrm2(x);
@@ -1088,7 +1394,7 @@ void nrm2(const view1D<vector<float>, float> &x, float &ans) { ans = nrm2(x); }
 void nrm2(const view1D<matrix::Dense<float>, float> &x, float &ans) {
   ans = nrm2(x);
 }
-
+//////////////////////////////////
 void scal(const double alpha, vector<double> &x) { Dscal_core(alpha, x); }
 void scal(const double alpha, view1D<vector<double>, double> &x) {
   Dscal_core(alpha, x);
@@ -1103,7 +1409,7 @@ void scal(const float alpha, view1D<vector<float>, float> &x) {
 void scal(const float alpha, view1D<matrix::Dense<float>, float> &x) {
   Sscal_core(alpha, x);
 }
-
+//////////////////////////////////
 void xpay(const double alpha, const vector<double> &x, vector<double> &y) {
   Dxpay_core(alpha, x, y);
 }
