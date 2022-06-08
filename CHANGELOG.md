@@ -22,10 +22,11 @@ Unreleased
 
 ### Added
 
+- Add vector times <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/469> <https://github.com/ricosjp/monolish/issues/124>
 - Add CRS_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/123>
 
 ### Fixed
-- Fix some warnings <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/467> <https://github.com/ricosjp/monolish/issues/128>
+- Fix some warnings <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468> <https://github.com/ricosjp/monolish/issues/128>
 
 ### Changed
 

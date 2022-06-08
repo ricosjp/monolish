@@ -137,6 +137,56 @@ for prec in double float; do
 done
 
 echo "/**@}*/"
+
+##############################################
+# times scalar (almost same as mscal)
+
+# times scalar Dense
+echo "
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix times: C = alpha * A
+ * @param alpha scalar value
+ * @param A Dense matrix (size M x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void times(const $prec alpha, const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+# times scalar CRS
+echo "
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief CRS matrix times: C = alpha * A
+ * @param alpha scalar value
+ * @param A CRS matrix (size M x N)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void times(const $prec alpha, const matrix::CRS<$prec> &A, matrix::CRS<$prec> &C);"
+done
+echo "/**@}*/"
+
 ##############################################
 
 #matadd Dense
