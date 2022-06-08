@@ -364,40 +364,40 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void times(const double alpha, const vector<double> &x, vector<double> y);
-void times(const double alpha, const vector<double> &x,
-           view1D<vector<double>, double> y);
-void times(const double alpha, const vector<double> &x,
-           view1D<matrix::Dense<double>, double> y);
-void times(const double alpha, const view1D<vector<double>, double> &x,
-           vector<double> y);
-void times(const double alpha, const view1D<vector<double>, double> &x,
-           view1D<vector<double>, double> y);
-void times(const double alpha, const view1D<vector<double>, double> &x,
-           view1D<matrix::Dense<double>, double> y);
-void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
-           vector<double> y);
-void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
-           view1D<vector<double>, double> y);
-void times(const double alpha, const view1D<matrix::Dense<double>, double> &x,
-           view1D<matrix::Dense<double>, double> y);
-void times(const float alpha, const vector<float> &x, vector<float> y);
-void times(const float alpha, const vector<float> &x,
-           view1D<vector<float>, float> y);
-void times(const float alpha, const vector<float> &x,
-           view1D<matrix::Dense<float>, float> y);
-void times(const float alpha, const view1D<vector<float>, float> &x,
-           vector<float> y);
-void times(const float alpha, const view1D<vector<float>, float> &x,
-           view1D<vector<float>, float> y);
-void times(const float alpha, const view1D<vector<float>, float> &x,
-           view1D<matrix::Dense<float>, float> y);
-void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
-           vector<float> y);
-void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
-           view1D<vector<float>, float> y);
-void times(const float alpha, const view1D<matrix::Dense<float>, float> &x,
-           view1D<matrix::Dense<float>, float> y);
+void times(const double alpha, const vector<double> &a, vector<double> &y);
+void times(const double alpha, const vector<double> &a,
+           view1D<vector<double>, double> &y);
+void times(const double alpha, const vector<double> &a,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const double alpha, const view1D<vector<double>, double> &a,
+           vector<double> &y);
+void times(const double alpha, const view1D<vector<double>, double> &a,
+           view1D<vector<double>, double> &y);
+void times(const double alpha, const view1D<vector<double>, double> &a,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &a,
+           vector<double> &y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &a,
+           view1D<vector<double>, double> &y);
+void times(const double alpha, const view1D<matrix::Dense<double>, double> &a,
+           view1D<matrix::Dense<double>, double> &y);
+void times(const float alpha, const vector<float> &a, vector<float> &y);
+void times(const float alpha, const vector<float> &a,
+           view1D<vector<float>, float> &y);
+void times(const float alpha, const vector<float> &a,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const float alpha, const view1D<vector<float>, float> &a,
+           vector<float> &y);
+void times(const float alpha, const view1D<vector<float>, float> &a,
+           view1D<vector<float>, float> &y);
+void times(const float alpha, const view1D<vector<float>, float> &a,
+           view1D<matrix::Dense<float>, float> &y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &a,
+           vector<float> &y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &a,
+           view1D<vector<float>, float> &y);
+void times(const float alpha, const view1D<matrix::Dense<float>, float> &a,
+           view1D<matrix::Dense<float>, float> &y);
 /**@}*/
 
 /**

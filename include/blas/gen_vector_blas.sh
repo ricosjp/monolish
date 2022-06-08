@@ -124,7 +124,7 @@ echo "
  for prec in double float; do
      for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
          for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-             echo "void times(const $prec alpha, const $arg1 &a, $arg2 y);"
+             echo "void times(const $prec alpha, const $arg1 &a, $arg2 &y);"
          done
      done
  done
