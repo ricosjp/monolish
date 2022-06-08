@@ -4,7 +4,7 @@ namespace monolish {
 namespace {
 
 template <typename F1, typename F2, typename F3>
-void times_scalar_core(const F1 &alpha, const F2 &a, F3 &y) {
+void times_scalar_core(const F1 alpha, const F2 &a, F3 &y) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
