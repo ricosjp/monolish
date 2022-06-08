@@ -49,7 +49,7 @@ echo "//////////////////////////////////"
 for prec in double float; do
     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
         for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-            echo "void times(const $prec &alpha, const $arg1 &b, $arg2 &y){times_core(alpha, b, y);}"
+            echo "void times(const $prec &alpha, const $arg1 &b, $arg2 &y){times_scalar_core(alpha, b, y);}"
         done
     done
 done
@@ -61,7 +61,7 @@ for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
       for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-        echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y){times_core(a, b, y);}"
+        echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y){times_vector_core(a, b, y);}"
       done
     done
   done
