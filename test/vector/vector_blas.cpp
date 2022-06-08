@@ -7,6 +7,8 @@
 #include "blas/nrm2.hpp"
 #include "blas/scal.hpp"
 #include "blas/sum.hpp"
+#include "blas/times_scalar.hpp"
+#include "blas/times_vector.hpp"
 #include "blas/xpay.hpp"
 
 int main(int argc, char **argv) {
@@ -169,6 +171,36 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_scal<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // scalar_times//
+  if (test_scalar_times<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_scalar_times<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_scalar_times<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_times<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vector_times//
+  if (test_vector_times<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vector_times<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_vector_times<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vector_times<float>(size, 1.0e-4) == false) {
     return 1;
   }
 
