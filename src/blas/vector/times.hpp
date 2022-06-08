@@ -15,8 +15,8 @@ void times_scalar_core(const F1 &alpha, const F2 &a, F3 &y) {
   assert(util::is_same_size(a, y));
   assert(util::is_same_device_mem_stat(a, y));
 
-  internal::vmul(y.size(), a.data() + aoffset, alpha,
-                 y.data() + yoffset, y.get_device_mem_stat());
+  internal::vmul(y.size(), a.data() + aoffset, alpha, y.data() + yoffset,
+                 y.get_device_mem_stat());
 
   logger.func_out();
 }
