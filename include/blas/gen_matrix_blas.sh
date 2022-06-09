@@ -181,6 +181,8 @@ echo "
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure
 */ "
 for prec in double float; do
   echo "void times(const $prec alpha, const matrix::CRS<$prec> &A, matrix::CRS<$prec> &C);"
@@ -252,7 +254,7 @@ echo "
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
 */ "
 for prec in double float; do
   echo "void matadd(const matrix::CRS<$prec> &A, const matrix::CRS<$prec> &B, matrix::CRS<$prec> &C);"
@@ -325,7 +327,7 @@ echo "
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
 */ "
 for prec in double float; do
   echo "void matsub(const matrix::CRS<$prec> &A, const matrix::CRS<$prec> &B, matrix::CRS<$prec> &C);"

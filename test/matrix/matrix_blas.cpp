@@ -6,6 +6,7 @@
 #include "blas/matvec_T.hpp"
 #include "blas/mm_copy.hpp"
 #include "blas/mscal.hpp"
+#include "blas/scalar_times.hpp"
 
 int main(int argc, char **argv) {
 
@@ -171,57 +172,6 @@ int main(int argc, char **argv) {
           M, N, 1.0e-4) == false) {
     return 1;
   }
-
-  // mscal Dense//
-  if (test_send_mscal<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
-      false) {
-    return 1;
-  }
-  if (test_send_mscal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
-      false) {
-    return 1;
-  }
-  if (test_mscal<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
-      false) {
-    return 1;
-  }
-  if (test_mscal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
-      false) {
-    return 1;
-  }
-
-  // mscal CRS//
-  if (test_send_mscal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
-    return 1;
-  }
-  if (test_send_mscal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
-      false) {
-    return 1;
-  }
-  if (test_mscal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
-      false) {
-    return 1;
-  }
-  if (test_mscal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
-    return 1;
-  }
-
-  // mscal LinearOperator//
-  /* TODO mscal implementation
-  if (test_send_mscal<monolish::matrix::LinearOperator<double>, double>(M,
-  N, 1.0e-8) == false) { return 1;
-  }
-  if (test_send_mscal<monolish::matrix::LinearOperator<float>, float>(M,
-  N, 1.0e-4) == false) { return 1;
-  }
-  if (test_mscal<monolish::matrix::LinearOperator<double>, double>(M, N, 1.0e-8)
-  == false) { return 1;
-  }
-  if (test_mscal<monolish::matrix::LinearOperator<float>, float>(M, N, 1.0e-4)
-  == false) { return 1;
-  }
-  */
 
   // matvec Dense//
   if (test_send_matvec<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
@@ -498,5 +448,99 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // mscal Dense//
+  if (test_send_mscal<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mscal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mscal<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mscal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // mscal CRS//
+  if (test_send_mscal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mscal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mscal<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mscal<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mscal LinearOperator//
+  /* TODO mscal implementation
+  if (test_send_mscal<monolish::matrix::LinearOperator<double>, double>(M,
+  N, 1.0e-8) == false) { return 1;
+  }
+  if (test_send_mscal<monolish::matrix::LinearOperator<float>, float>(M,
+  N, 1.0e-4) == false) { return 1;
+  }
+  if (test_mscal<monolish::matrix::LinearOperator<double>, double>(M, N, 1.0e-8)
+  == false) { return 1;
+  }
+  if (test_mscal<monolish::matrix::LinearOperator<float>, float>(M, N, 1.0e-4)
+  == false) { return 1;
+  }
+  */
+
+  // matadd Dense//
+  if (test_send_scalar_times<monolish::matrix::Dense<double>,
+                             monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_times<monolish::matrix::Dense<float>,
+                             monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::matrix::Dense<double>,
+                        monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::matrix::Dense<float>,
+                        monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // scalar_times CRS//
+  if (test_send_scalar_times<monolish::matrix::CRS<double>,
+                             monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_times<monolish::matrix::CRS<float>,
+                             monolish::matrix::CRS<float>, float>(
+          M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::matrix::CRS<double>,
+                        monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::matrix::CRS<float>,
+                        monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
   return 0;
 }

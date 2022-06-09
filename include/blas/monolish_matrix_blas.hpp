@@ -115,6 +115,52 @@ void mscal(const float alpha, matrix::CRS<float> &A);
 /**@}*/
 
 /**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix times: C = alpha * A
+ * @param alpha scalar value
+ * @param A Dense matrix (size M x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times(const double alpha, const matrix::Dense<double> &A,
+           matrix::Dense<double> &C);
+void times(const float alpha, const matrix::Dense<float> &A,
+           matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief CRS matrix times: C = alpha * A
+ * @param alpha scalar value
+ * @param A CRS matrix (size M x N)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure
+ */
+void times(const double alpha, const matrix::CRS<double> &A,
+           matrix::CRS<double> &C);
+void times(const float alpha, const matrix::CRS<float> &A,
+           matrix::CRS<float> &C);
+/**@}*/
+
+/**
  * \defgroup madd_dense monolish::blas::matadd (Dense)
  * @brief Dense matrix addition: C = A + B
  * @{
@@ -175,7 +221,7 @@ void matadd(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
  */
 void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
@@ -245,7 +291,7 @@ void matsub(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
  */
 void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
