@@ -151,6 +151,8 @@ void times(const float alpha, const matrix::Dense<float> &A,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A, B, and C must be same non-zero structure
  */
 void times(const double alpha, const matrix::CRS<double> &A,
            matrix::CRS<double> &C);
@@ -219,7 +221,7 @@ void matadd(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
  */
 void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
@@ -289,7 +291,7 @@ void matsub(const matrix::LinearOperator<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  * @warning
- * A and B must be same non-zero structure
+ * A, B, and C must be same non-zero structure
  */
 void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
             matrix::CRS<double> &C);
