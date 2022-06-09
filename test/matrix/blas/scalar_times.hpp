@@ -2,7 +2,7 @@
 
 template <typename T>
 void ans_scalar_times(const T alpha, const monolish::matrix::Dense<T> &A,
-                monolish::matrix::Dense<T> &C) {
+                      monolish::matrix::Dense<T> &C) {
 
   if (A.get_row() != C.get_row()) {
     std::runtime_error("A.row != C.row");
