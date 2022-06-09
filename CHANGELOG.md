@@ -22,7 +22,9 @@ Unreleased
 
 ### Added
 
-- Add vector times <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/469> <https://github.com/ricosjp/monolish/issues/124>
+- Add times for scalar-matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/470> <https://github.com/ricosjp/monolish/issues/124>
+- Add times for vector-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/469> <https://github.com/ricosjp/monolish/issues/124>
+- Add times for scalar-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/469> <https://github.com/ricosjp/monolish/issues/124>
 - Add CRS_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/123>
 
 ### Fixed
