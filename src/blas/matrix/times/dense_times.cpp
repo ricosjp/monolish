@@ -5,7 +5,8 @@ namespace monolish {
 
 namespace {
 
-template <typename T> void times_core(const T alpha, const matrix::Dense<T> &A, matrix::Dense<T> &C) {
+template <typename T>
+void times_core(const T alpha, const matrix::Dense<T> &A, matrix::Dense<T> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -20,11 +21,13 @@ template <typename T> void times_core(const T alpha, const matrix::Dense<T> &A, 
 } // namespace
 
 namespace blas {
-void times(const double alpha, const matrix::Dense<double> &A, matrix::Dense<double> &C) {
+void times(const double alpha, const matrix::Dense<double> &A,
+           matrix::Dense<double> &C) {
   times_core(alpha, A, C);
 }
 
-void times(const float alpha, const matrix::Dense<float> &A, matrix::Dense<float> &C) {
+void times(const float alpha, const matrix::Dense<float> &A,
+           matrix::Dense<float> &C) {
   times_core(alpha, A, C);
 }
 } // namespace blas
