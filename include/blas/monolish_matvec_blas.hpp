@@ -63,6 +63,8 @@ void times_row(const matrix::Dense<float> &A,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
  */
 void times_row(const matrix::CRS<double> &A, const vector<double> &x,
                matrix::CRS<double> &C);
@@ -128,6 +130,8 @@ void times_col(const matrix::Dense<float> &A,
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
  */
 void times_col(const matrix::CRS<double> &A, const vector<double> &x,
                matrix::CRS<double> &C);
