@@ -44,7 +44,7 @@ echo "
  done
  echo "/**@}*/"
 
-## matrix Dense times_row
+## matrix CRS times_row
 echo "
 /**
  * \defgroup times monolish::blas::times
@@ -65,6 +65,56 @@ echo "
  for prec in double float; do
      for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::CRS\<$prec\>,$prec\>; do
          echo "void times_row(const matrix::CRS<$prec> &A, const $arg1 &x, matrix::CRS<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+## matrix Dense times_col
+echo "
+/**
+ * \defgroup times monolish::blas::times
+ * @brief column-wise element by element multiplication
+ * @{
+ */
+ /**
+ * @brief Dense matrix and vector times: C[i][j] = A[i][j] * x[i]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         echo "void times_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+## matrix CRS times_col
+echo "
+/**
+ * \defgroup times monolish::blas::times
+ * @brief column-wise element by element multiplication
+ * @{
+ */
+ /**
+ * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::CRS\<$prec\>,$prec\>; do
+         echo "void times_col(const matrix::CRS<$prec> &A, const $arg1 &x, matrix::CRS<$prec> &C);"
      done
  done
  echo "/**@}*/"
