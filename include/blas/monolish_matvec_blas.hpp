@@ -16,6 +16,136 @@ namespace blas {
  */
 
 /**
+ * \defgroup times monolish::blas::times
+ * @brief row-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_row(const matrix::Dense<double> &A, const vector<double> &x,
+               matrix::Dense<double> &C);
+void times_row(const matrix::Dense<double> &A,
+               const view1D<vector<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_row(const matrix::Dense<double> &A,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_row(const matrix::Dense<float> &A, const vector<float> &x,
+               matrix::Dense<float> &C);
+void times_row(const matrix::Dense<float> &A,
+               const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void times_row(const matrix::Dense<float> &A,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief row-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_row(const matrix::CRS<double> &A, const vector<double> &x,
+               matrix::CRS<double> &C);
+void times_row(const matrix::CRS<double> &A,
+               const view1D<vector<double>, double> &x, matrix::CRS<double> &C);
+void times_row(const matrix::CRS<double> &A,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C);
+void times_row(const matrix::CRS<float> &A, const vector<float> &x,
+               matrix::CRS<float> &C);
+void times_row(const matrix::CRS<float> &A,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
+void times_row(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief column-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix and vector times: C[i][j] = A[i][j] * x[i]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_col(const matrix::Dense<double> &A, const vector<double> &x,
+               matrix::Dense<double> &C);
+void times_col(const matrix::Dense<double> &A,
+               const view1D<vector<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_col(const matrix::Dense<double> &A,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_col(const matrix::Dense<float> &A, const vector<float> &x,
+               matrix::Dense<float> &C);
+void times_col(const matrix::Dense<float> &A,
+               const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void times_col(const matrix::Dense<float> &A,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief column-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_col(const matrix::CRS<double> &A, const vector<double> &x,
+               matrix::CRS<double> &C);
+void times_col(const matrix::CRS<double> &A,
+               const view1D<vector<double>, double> &x, matrix::CRS<double> &C);
+void times_col(const matrix::CRS<double> &A,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C);
+void times_col(const matrix::CRS<float> &A, const vector<float> &x,
+               matrix::CRS<float> &C);
+void times_col(const matrix::CRS<float> &A,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
+void times_col(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C);
+/**@}*/
+
+/**
  * \defgroup matvec_dense monolish::blas::matvec (Dense)
  * @brief Dense matrix and vector multiplication: y = Ax
  * @{
