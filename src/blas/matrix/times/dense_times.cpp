@@ -28,7 +28,7 @@ void times_row_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, x, C));
-  assert(A.get_row() == x.size());
+  assert(A.get_col() == x.size());
 
   const auto *Ad = A.val.data();
   const auto m = A.get_row();
@@ -70,7 +70,7 @@ void times_col_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, x, C));
-  assert(A.get_col() == x.size());
+  assert(A.get_row() == x.size());
 
   const auto *Ad = A.val.data();
   const auto m = A.get_row();
