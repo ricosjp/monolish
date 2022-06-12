@@ -7,6 +7,7 @@
 #include "blas/mm_copy.hpp"
 #include "blas/mscal.hpp"
 #include "blas/scalar_times.hpp"
+#include "blas/times_row.hpp"
 
 int main(int argc, char **argv) {
 
@@ -539,6 +540,24 @@ int main(int argc, char **argv) {
   }
   if (test_scalar_times<monolish::matrix::CRS<float>,
                         monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times row Dense//
+  if (test_send_times_row<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
       false) {
     return 1;
   }
