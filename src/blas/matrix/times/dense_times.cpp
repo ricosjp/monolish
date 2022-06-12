@@ -43,7 +43,7 @@ void times_row_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 #pragma omp target teams distribute parallel for
       for (auto i = decltype(m){0}; i < m; i++) {
           for (auto j = decltype(n){0}; j < n; j++) {
-              Cd[i * m + j] = Ad[i * m + j] * xd[j + xoffset];
+              Cd[i * n + j] = Ad[i * n + j] * xd[j + xoffset];
           }
       }
 #else
@@ -54,7 +54,7 @@ void times_row_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 #pragma omp parallel for
       for (auto i = decltype(m){0}; i < m; i++) {
           for (auto j = decltype(n){0}; j < n; j++) {
-              Cd[i * m + j] = Ad[i * m + j] * xd[j + xoffset];
+              Cd[i * n + j] = Ad[i * n + j] * xd[j + xoffset];
           }
       }
   }
@@ -85,7 +85,7 @@ void times_col_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 #pragma omp target teams distribute parallel for
       for (auto i = decltype(m){0}; i < m; i++) {
           for (auto j = decltype(n){0}; j < n; j++) {
-              Cd[i * m + j] = Ad[i * m + j] * xd[i + xoffset];
+              Cd[i * n + j] = Ad[i * n + j] * xd[i + xoffset];
           }
       }
 #else
@@ -96,7 +96,7 @@ void times_col_core(const matrix::Dense<T> &A, const VEC &x, matrix::Dense<T> &C
 #pragma omp parallel for
       for (auto i = decltype(m){0}; i < m; i++) {
           for (auto j = decltype(n){0}; j < n; j++) {
-              Cd[i * m + j] = Ad[i * m + j] * xd[i + xoffset];
+              Cd[i * n + j] = Ad[i * n + j] * xd[i + xoffset];
           }
       }
   }
