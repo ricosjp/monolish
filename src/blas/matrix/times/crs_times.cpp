@@ -42,22 +42,22 @@ void times_row_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              Cd[j] = Ad[j] * xd[j + xoffset];
-          }
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        Cd[j] = Ad[j] * xd[j + xoffset];
       }
+    }
 #else
-      throw std::runtime_error(
-              "error USE_GPU is false, but get_device_mem_stat() == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              Cd[j] = Ad[j] * xd[j + xoffset];
-          }
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        Cd[j] = Ad[j] * xd[j + xoffset];
       }
+    }
   }
 
   logger.func_out();
@@ -84,22 +84,22 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              Cd[j] = Ad[j] * xd[j + xoffset];
-          }
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        Cd[j] = Ad[j] * xd[j + xoffset];
       }
+    }
 #else
-      throw std::runtime_error(
-              "error USE_GPU is false, but get_device_mem_stat() == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
-      for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
-          for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-              Cd[j] = Ad[j] * xd[j + xoffset];
-          }
+    for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
+      for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
+        Cd[j] = Ad[j] * xd[j + xoffset];
       }
+    }
   }
 
   logger.func_out();
@@ -117,20 +117,62 @@ void times(const float alpha, const matrix::CRS<float> &A,
 }
 
 // vector-matrix_row times all //
-void times_row(const matrix::CRS<double> &A, const vector<double> &x, matrix::CRS<double> &C) { times_row_core(A, x, C); }
-void times_row(const matrix::CRS<double> &A, const view1D<vector<double>, double> &x, matrix::CRS<double> &C) { times_row_core(A, x, C); }
-void times_row(const matrix::CRS<double> &A, const view1D<matrix::CRS<double>, double> &x, matrix::CRS<double> &C) { times_row_core(A, x, C); }
-void times_row(const matrix::CRS<float> &A, const vector<float> &x, matrix::CRS<float> &C) { times_row_core(A, x, C); }
-void times_row(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x, matrix::CRS<float> &C) { times_row_core(A, x, C); }
-void times_row(const matrix::CRS<float> &A, const view1D<matrix::CRS<float>, float> &x, matrix::CRS<float> &C) { times_row_core(A, x, C); }
+void times_row(const matrix::CRS<double> &A, const vector<double> &x,
+               matrix::CRS<double> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<double> &A,
+               const view1D<vector<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<double> &A,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<float> &A, const vector<float> &x,
+               matrix::CRS<float> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<float> &A,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_row_core(A, x, C);
+}
 
 // vector-matrix_col times all //
-void times_col(const matrix::CRS<double> &A, const vector<double> &x, matrix::CRS<double> &C) { times_col_core(A, x, C); }
-void times_col(const matrix::CRS<double> &A, const view1D<vector<double>, double> &x, matrix::CRS<double> &C) { times_col_core(A, x, C); }
-void times_col(const matrix::CRS<double> &A, const view1D<matrix::CRS<double>, double> &x, matrix::CRS<double> &C) { times_col_core(A, x, C); }
-void times_col(const matrix::CRS<float> &A, const vector<float> &x, matrix::CRS<float> &C) { times_col_core(A, x, C); }
-void times_col(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x, matrix::CRS<float> &C) { times_col_core(A, x, C); }
-void times_col(const matrix::CRS<float> &A, const view1D<matrix::CRS<float>, float> &x, matrix::CRS<float> &C) { times_col_core(A, x, C); }
+void times_col(const matrix::CRS<double> &A, const vector<double> &x,
+               matrix::CRS<double> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<double> &A,
+               const view1D<vector<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<double> &A,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<float> &A, const vector<float> &x,
+               matrix::CRS<float> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<float> &A,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_col_core(A, x, C);
+}
 
 } // namespace blas
 } // namespace monolish
