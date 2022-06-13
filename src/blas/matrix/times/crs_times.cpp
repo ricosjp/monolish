@@ -77,7 +77,6 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
     const auto *Ad = A.val.data();
     auto *Cd = C.val.data();
     const auto *rowd = A.row_ptr.data();
-    const auto *cold = A.col_ind.data();
     const auto n = A.get_row();
 
     const auto *xd = x.data();
@@ -88,7 +87,7 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
 #pragma omp target teams distribute parallel for
         for (auto i = decltype(n){0}; i < n; i++) {
             for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[cold[i] + xoffset];
+                Cd[j] = Ad[j] * xd[i + xoffset];
             }
         }
 #else
@@ -99,7 +98,7 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
 #pragma omp parallel for
         for (auto i = decltype(n){0}; i < n; i++) {
             for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[cold[i] + xoffset];
+                Cd[j] = Ad[j] * xd[i + xoffset];
             }
         }
     }
