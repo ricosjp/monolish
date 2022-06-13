@@ -7,9 +7,10 @@
 #include "blas/mm_copy.hpp"
 #include "blas/mscal.hpp"
 #include "blas/scalar_times.hpp"
+#include "blas/times_col.hpp"
+#include "blas/times_row.hpp"
 
 int main(int argc, char **argv) {
-
   if (argc != 4) {
     std::cout << "error!, $1:M, $2:N, $3:K" << std::endl;
     return 1;
@@ -491,7 +492,8 @@ int main(int argc, char **argv) {
   if (test_send_mscal<monolish::matrix::LinearOperator<float>, float>(M,
   N, 1.0e-4) == false) { return 1;
   }
-  if (test_mscal<monolish::matrix::LinearOperator<double>, double>(M, N, 1.0e-8)
+  if (test_mscal<monolish::matrix::LinearOperator<double>, double>(M,
+  N, 1.0e-8)
   == false) { return 1;
   }
   if (test_mscal<monolish::matrix::LinearOperator<float>, float>(M, N, 1.0e-4)
@@ -539,6 +541,78 @@ int main(int argc, char **argv) {
   }
   if (test_scalar_times<monolish::matrix::CRS<float>,
                         monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times row Dense//
+  if (test_send_times_row<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times row CRS//
+  if (test_send_times_row<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times col Dense//
+  if (test_send_times_col<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_col<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_col<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times col CRS//
+  if (test_send_times_col<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_col<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_times_col<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_col<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
       false) {
     return 1;
   }
