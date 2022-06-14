@@ -17,7 +17,6 @@ void times_row_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
     assert(A.get_col() == x.size());
 
     const auto *Ad = A.val.data();
-    const auto m = A.get_row();
     const auto n = A.get_col();
     auto *Cd = C.val.data();
 
