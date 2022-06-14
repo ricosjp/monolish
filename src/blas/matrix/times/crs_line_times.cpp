@@ -15,6 +15,7 @@ void times_row_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_col() == x.size());
+  assert(A.get_row() >= num);
 
   const auto *Ad = A.val.data();
   auto *Cd = C.val.data();
@@ -54,6 +55,7 @@ void times_col_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_row() == x.size());
+  assert(A.get_col() >= num);
 
   const auto *Ad = A.val.data();
   auto *Cd = C.val.data();
