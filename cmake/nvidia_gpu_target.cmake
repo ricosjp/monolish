@@ -13,13 +13,6 @@ function(set_gpu_properties target gpu_arch)
     CUDA::cusparse
     CUDA::cudart
   )
-  # FIXME: clang will support sm_86 on LLVM 13.0.1
-  if(gpu_arch STREQUAL "sm_86")
-    message(WARNING
-      "Clang does not support sm_86 yet. Default to sm_80."
-    )
-    set(gpu_arch "sm_80")
-  endif()
   # OpenMP Offloading setting
   target_compile_options(${target} PRIVATE
     -fopenmp
