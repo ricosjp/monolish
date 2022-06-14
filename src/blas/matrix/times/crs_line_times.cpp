@@ -20,7 +20,6 @@ void times_row_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
     auto *Cd = C.val.data();
     const auto *rowd = A.row_ptr.data();
     const auto *cold = A.col_ind.data();
-    const auto n = A.get_row();
 
     const auto *xd = x.data();
     const auto xoffset = x.get_offset();
