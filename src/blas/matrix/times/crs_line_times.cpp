@@ -28,10 +28,8 @@ void times_row_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
     if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-        for (auto i = decltype(n){0}; i < n; i++) {
-            for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[cold[j] + xoffset];
-            }
+        for (auto j = rowd[num]; j < rowd[num + 1]; j++) {
+            Cd[j] = Ad[j] * xd[cold[j] + xoffset];
         }
 #else
         throw std::runtime_error(
@@ -39,10 +37,8 @@ void times_row_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
 #endif
     } else {
 #pragma omp parallel for
-        for (auto i = decltype(n){0}; i < n; i++) {
-            for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[cold[j] + xoffset];
-            }
+        for (auto j = rowd[num]; j < rowd[num + 1]; j++) {
+            Cd[j] = Ad[j] * xd[cold[j] + xoffset];
         }
     }
 
@@ -73,7 +69,9 @@ void times_col_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
 #pragma omp target teams distribute parallel for
         for (auto i = decltype(n){0}; i < n; i++) {
             for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[i + xoffset];
+                if (j == num) {
+                    Cd[j] = Ad[j] * xd[i + xoffset];
+                }
             }
         }
 #else
@@ -84,7 +82,9 @@ void times_col_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
 #pragma omp parallel for
         for (auto i = decltype(n){0}; i < n; i++) {
             for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                Cd[j] = Ad[j] * xd[i + xoffset];
+                if (j == num) {
+                    Cd[j] = Ad[j] * xd[i + xoffset];
+                }
             }
         }
     }
