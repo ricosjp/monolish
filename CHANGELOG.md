@@ -30,6 +30,7 @@ Unreleased
 - Add CRS_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/123>
 
 ### Fixed
+- Support clang sm86 target <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/473> <https://github.com/ricosjp/monolish/issues/83>
 - Fix some warnings <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468> <https://github.com/ricosjp/monolish/issues/128>
 
 ### Changed
