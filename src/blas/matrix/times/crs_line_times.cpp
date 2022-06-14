@@ -82,7 +82,7 @@ void times_col_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
 #pragma omp parallel for
         for (auto i = decltype(n){0}; i < n; i++) {
             for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-                if (j == num) {
+                if (cold[j] == num) {
                     Cd[j] = Ad[j] * xd[i + xoffset];
                 }
             }
