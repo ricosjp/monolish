@@ -666,21 +666,21 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // vector_times col Dense//
-    if (test_send_times_col<monolish::matrix::Dense<double>, double>(
+    // vector_times col_line Dense//
+    if (test_send_times_col_line<monolish::matrix::Dense<double>, double>(
             M, N, 1.0e-6) == false) {
         return 1;
     }
-    if (test_send_times_col<monolish::matrix::Dense<float>, float>(
+    if (test_send_times_col_line<monolish::matrix::Dense<float>, float>(
             M, N, 1.0e-3) == false) {
         return 1;
     }
-    if (test_times_col<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-        false) {
+    if (test_times_col_line<monolish::matrix::Dense<double>, double>(
+            M, N, 1.0e-6) == false) {
         return 1;
     }
-    if (test_times_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-        false) {
+    if (test_times_col_line<monolish::matrix::Dense<float>, float>(
+            M, N, 1.0e-3) == false) {
         return 1;
     }
 
