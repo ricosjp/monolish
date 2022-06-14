@@ -54,6 +54,41 @@ void times_row(const matrix::Dense<float> &A,
  * @{
  */
 /**
+ * @brief Specified row of dense matrix and vector times: C[num][j] = A[num][j]
+ * * x[j]
+ * @param A Dense matrix (size M x N)
+ * @param num row number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_row(const matrix::Dense<double> &A, const size_t num,
+               const vector<double> &x, matrix::Dense<double> &C);
+void times_row(const matrix::Dense<double> &A, const size_t num,
+               const view1D<vector<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_row(const matrix::Dense<double> &A, const size_t num,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_row(const matrix::Dense<float> &A, const size_t num,
+               const vector<float> &x, matrix::Dense<float> &C);
+void times_row(const matrix::Dense<float> &A, const size_t num,
+               const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void times_row(const matrix::Dense<float> &A, const size_t num,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief row-wise element by element multiplication
+ * @{
+ */
+/**
  * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
@@ -78,6 +113,42 @@ void times_row(const matrix::CRS<float> &A, const vector<float> &x,
 void times_row(const matrix::CRS<float> &A,
                const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
 void times_row(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief row-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief Specified row of CRS matrix and vector times: C[num][j] = A[num][j] *
+ * x[j]
+ * @param A CRS matrix (size M x N)
+ * @param num row number
+ * @param x monolish vector (size M)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz of specified row
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */
+void times_row(const matrix::CRS<double> &A, const size_t num,
+               const vector<double> &x, matrix::CRS<double> &C);
+void times_row(const matrix::CRS<double> &A, const size_t num,
+               const view1D<vector<double>, double> &x, matrix::CRS<double> &C);
+void times_row(const matrix::CRS<double> &A, const size_t num,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C);
+void times_row(const matrix::CRS<float> &A, const size_t num,
+               const vector<float> &x, matrix::CRS<float> &C);
+void times_row(const matrix::CRS<float> &A, const size_t num,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
+void times_row(const matrix::CRS<float> &A, const size_t num,
                const view1D<matrix::CRS<float>, float> &x,
                matrix::CRS<float> &C);
 /**@}*/
@@ -117,6 +188,41 @@ void times_col(const matrix::Dense<float> &A,
 
 /**
  * \defgroup times monolish::blas::times
+ * @brief row-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief Specified col of dense matrix and vector times: C[i][num] = A[i][num]
+ * * x[j]
+ * @param A Dense matrix (size M x N)
+ * @param num column number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: M
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_col(const matrix::Dense<double> &A, const size_t num,
+               const vector<double> &x, matrix::Dense<double> &C);
+void times_col(const matrix::Dense<double> &A, const size_t num,
+               const view1D<vector<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_col(const matrix::Dense<double> &A, const size_t num,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::Dense<double> &C);
+void times_col(const matrix::Dense<float> &A, const size_t num,
+               const vector<float> &x, matrix::Dense<float> &C);
+void times_col(const matrix::Dense<float> &A, const size_t num,
+               const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void times_col(const matrix::Dense<float> &A, const size_t num,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
  * @brief column-wise element by element multiplication
  * @{
  */
@@ -145,6 +251,42 @@ void times_col(const matrix::CRS<float> &A, const vector<float> &x,
 void times_col(const matrix::CRS<float> &A,
                const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
 void times_col(const matrix::CRS<float> &A,
+               const view1D<matrix::CRS<float>, float> &x,
+               matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief column-wise element by element multiplication
+ * @{
+ */
+/**
+ * @brief Specified row of CRS matrix and vector times: C[i][num] = A[i][num] *
+ * x[j]
+ * @param A CRS matrix (size M x N)
+ * @param num column number
+ * @param x monolish vector (size M)
+ * @param C CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */
+void times_col(const matrix::CRS<double> &A, const size_t num,
+               const vector<double> &x, matrix::CRS<double> &C);
+void times_col(const matrix::CRS<double> &A, const size_t num,
+               const view1D<vector<double>, double> &x, matrix::CRS<double> &C);
+void times_col(const matrix::CRS<double> &A, const size_t num,
+               const view1D<matrix::CRS<double>, double> &x,
+               matrix::CRS<double> &C);
+void times_col(const matrix::CRS<float> &A, const size_t num,
+               const vector<float> &x, matrix::CRS<float> &C);
+void times_col(const matrix::CRS<float> &A, const size_t num,
+               const view1D<vector<float>, float> &x, matrix::CRS<float> &C);
+void times_col(const matrix::CRS<float> &A, const size_t num,
                const view1D<matrix::CRS<float>, float> &x,
                matrix::CRS<float> &C);
 /**@}*/

@@ -8,7 +8,9 @@
 #include "blas/mscal.hpp"
 #include "blas/scalar_times.hpp"
 #include "blas/times_col.hpp"
+#include "blas/times_col_line.hpp"
 #include "blas/times_row.hpp"
+#include "blas/times_row_line.hpp"
 
 int main(int argc, char **argv) {
   if (argc != 4) {
@@ -616,5 +618,78 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
+
+  // vector_times row_line Dense//
+  if (test_send_times_row_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_row_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_times row_line CRS//
+  if (test_send_times_row_line<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row_line<monolish::matrix::CRS<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_row_line<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_line<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_times col_line Dense//
+  if (test_send_times_col_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_col_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_col_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_times col_line CRS//
+  if (test_send_times_col_line<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_col_line<monolish::matrix::CRS<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_col_line<monolish::matrix::CRS<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_line<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
   return 0;
 }

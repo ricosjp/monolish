@@ -22,6 +22,7 @@ Unreleased
 
 ### Added
 
+- Add times for vector-matrix_line <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/472> <https://github.com/ricosjp/monolish/issues/124>
 - Add times for vector-matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/471> <https://github.com/ricosjp/monolish/issues/124>
 - Add times for scalar-matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/470> <https://github.com/ricosjp/monolish/issues/124>
 - Add times for vector-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/469> <https://github.com/ricosjp/monolish/issues/124>
