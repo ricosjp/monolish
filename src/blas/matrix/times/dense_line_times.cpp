@@ -27,10 +27,8 @@ void times_row_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
     if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
-        for (auto i = decltype(m){0}; i < m; i++) {
-            for (auto j = decltype(n){0}; j < n; j++) {
-                Cd[i * n + j] = Ad[i * n + j] * xd[j + xoffset];
-            }
+        for (auto j = decltype(n){0}; j < n; j++) {
+            Cd[num * n + j] = Ad[num * n + j] * xd[j + xoffset];
         }
 #else
         throw std::runtime_error(
@@ -38,10 +36,8 @@ void times_row_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
 #endif
     } else {
 #pragma omp parallel for
-        for (auto i = decltype(m){0}; i < m; i++) {
-            for (auto j = decltype(n){0}; j < n; j++) {
-                Cd[i * n + j] = Ad[i * n + j] * xd[j + xoffset];
-            }
+        for (auto j = decltype(n){0}; j < n; j++) {
+            Cd[num * n + j] = Ad[num * n + j] * xd[j + xoffset];
         }
     }
 
