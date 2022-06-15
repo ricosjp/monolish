@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.16.2 - 2022/06/15
+-----------
+
 ### Added
 
 - Add times for vector-matrix_line <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/472> <https://github.com/ricosjp/monolish/issues/124>
