@@ -11,12 +11,14 @@ gather_deb:
     - gpu_sm_70_mkl_build
     - gpu_sm_75_mkl_build
     - gpu_sm_80_mkl_build
+    - gpu_sm_86_mkl_build
     - gpu_sm_52_oss_build
     - gpu_sm_60_oss_build
     - gpu_sm_61_oss_build
     - gpu_sm_70_oss_build
     - gpu_sm_75_oss_build
     - gpu_sm_80_oss_build
+    - gpu_sm_86_oss_build
     - gpu_all_mkl_build
     - gpu_all_oss_build
   script:
