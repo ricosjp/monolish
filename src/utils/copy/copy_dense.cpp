@@ -45,5 +45,27 @@ template void Dense<double>::set_ptr(const size_t M, const size_t N,
 template void Dense<float>::set_ptr(const size_t M, const size_t N,
                                     const std::vector<float> &value);
 
+template <typename T>
+void Dense<T>::copy_small_to_large_memory(const Dense<Float> &mat){
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_device_mem_stat(*this, mat));
+  assert(this->get_nnz() >= mat.get_nnz());
+
+  // gpu copy
+  this->rowN = mat.rowN;
+  this->colN = mat.colN;
+  this->nnz = mat.nnz;
+  if (mat.get_device_mem_stat()) {
+    internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
+  } else {
+    internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+  }
+
+  logger.util_out();
+}
+
 } // namespace matrix
 } // namespace monolish
