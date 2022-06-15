@@ -36,7 +36,7 @@ Unreleased
 
 ### Changed
 
-- Update clang14.0.4->clang14.0.5 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/475> <https://github.com/ricosjp/monolish/issues/131>
+- Update clang14.0.4->clang14.0.5 (allgebra 22.06.0) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/475> <https://github.com/ricosjp/monolish/issues/131>
 - Update clang13.0.1->clang14.0.4 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/467> <https://github.com/ricosjp/monolish/issues/125>
 - Organize Dense_diag_op <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/464>
 - Start developing 0.16.2 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
