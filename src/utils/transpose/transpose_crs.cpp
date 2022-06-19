@@ -49,6 +49,8 @@ template <typename T> void CRS<T>::transpose() {
     row_ptr[i] = sum;
     sum = tmp;
   }
+
+  compute_hash();
   logger.util_out();
 }
 template void CRS<double>::transpose();
@@ -95,6 +97,8 @@ template <typename T> void CRS<T>::transpose(const CRS &B) {
     row_ptr[i] = sum;
     sum = tmp;
   }
+
+  compute_hash();
 
   logger.util_out();
 }
