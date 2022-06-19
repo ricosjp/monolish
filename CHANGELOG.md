@@ -21,6 +21,7 @@ Unreleased
 -----------
 
 ### Changed
+- add compute_hash after transpose <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/465> <https://github.com/ricosjp/monolish/issues/135>
 - Start developing 0.16.3 for fix bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/464>
 - Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
 
