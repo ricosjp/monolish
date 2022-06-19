@@ -21,6 +21,7 @@ Unreleased
 -----------
 
 ### Fixed
+- fix diag_op bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/467> <https://github.com/ricosjp/monolish/issues/136>
 - fix document typo <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/134>
 
 ### Changed

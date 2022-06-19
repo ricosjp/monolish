@@ -10,7 +10,7 @@ template <typename T> void Dense<T>::diag_sub(const T alpha) {
 
   T *vald = val.data();
   const auto N = get_col();
-  const auto Len = get_row() > get_col() ? get_row() : get_col();
+  const auto Len = get_row() < get_col() ? get_row() : get_col();
 
   if (gpu_status == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
@@ -42,7 +42,7 @@ template <typename T> void Dense<T>::diag_sub(const vector<T> &vec) {
 
   T *vald = val.data();
   const auto N = get_col();
-  const auto Len = get_row() > get_col() ? get_row() : get_col();
+  const auto Len = get_row() < get_col() ? get_row() : get_col();
 
   assert(Len == vec.size());
 
@@ -78,7 +78,7 @@ template <typename T> void Dense<T>::diag_sub(const view1D<vector<T>, T> &vec) {
 
   T *vald = val.data();
   const auto N = get_col();
-  const auto Len = get_row() > get_col() ? get_row() : get_col();
+  const auto Len = get_row() < get_col() ? get_row() : get_col();
 
   assert(Len == vec.size());
 
@@ -115,7 +115,7 @@ void Dense<T>::diag_sub(const view1D<matrix::Dense<T>, T> &vec) {
 
   T *vald = val.data();
   const auto N = get_col();
-  const auto Len = get_row() > get_col() ? get_row() : get_col();
+  const auto Len = get_row() < get_col() ? get_row() : get_col();
 
   assert(Len == vec.size());
 
