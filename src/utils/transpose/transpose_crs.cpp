@@ -100,7 +100,7 @@ void CRS<T>::transpose(const CRS &B) {
         sum = tmp;
     }
 
-    B.compute_hash();
+    compute_hash();
 
     logger.util_out();
 }
