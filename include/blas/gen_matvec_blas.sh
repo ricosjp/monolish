@@ -23,11 +23,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief row-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Dense matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @brief Row-wise Dense matrix and vector times: 
+ * C[i][j] = A[i][j] * x[j]
  * @param A Dense matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C Dense matrix (size M x N)
@@ -47,11 +48,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief row-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Specified row of dense matrix and vector times: C[num][j] = A[num][j] * x[j]
+ * @brief Specified row of dense matrix and vector times: 
+ * C[num][j] = A[num][j] * x[j]
  * @param A Dense matrix (size M x N)
  * @param num row number
  * @param x monolish vector (size M)
@@ -73,11 +75,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief row-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @brief Row-wise CRS matrix and vector times: 
+ * C[i][j] = A[i][j] * x[j]
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C CRS matrix (size M x N)
@@ -99,11 +102,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief row-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Specified row of CRS matrix and vector times: C[num][j] = A[num][j] * x[j]
+ * @brief Specified row of CRS matrix and vector times: 
+ * C[num][j] = A[num][j] * x[j]
  * @param A CRS matrix (size M x N)
  * @param num row number
  * @param x monolish vector (size M)
@@ -127,11 +131,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief column-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Dense matrix and vector times: C[i][j] = A[i][j] * x[i]
+ * @brief Column-wise Dense matrix and vector times: 
+ * C[i][j] = A[i][j] * x[i]
  * @param A Dense matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C Dense matrix (size M x N)
@@ -151,11 +156,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief row-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Specified col of dense matrix and vector times: C[i][num] = A[i][num] * x[j]
+ * @brief Specified col of dense matrix and vector times: 
+ * C[i][num] = A[i][num] * x[j]
  * @param A Dense matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
@@ -177,11 +183,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief column-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief CRS matrix and vector times: C[i][j] = A[i][j] * x[j]
+ * @brief Column-wise CRS matrix and vector times: 
+ * C[i][j] = A[i][j] * x[j]
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C CRS matrix (size M x N)
@@ -203,11 +210,12 @@ echo "
 echo "
 /**
  * \defgroup times monolish::blas::times
- * @brief column-wise element by element multiplication
+ * @brief element by element multiplication
  * @{
  */
  /**
- * @brief Specified row of CRS matrix and vector times: C[i][num] = A[i][num] * x[j]
+ * @brief Specified row of CRS matrix and vector times: 
+ * C[i][num] = A[i][num] * x[j]
  * @param A CRS matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
