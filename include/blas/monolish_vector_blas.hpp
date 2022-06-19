@@ -354,7 +354,7 @@ void vecsub(const view1D<matrix::Dense<float>, float> &a,
  * @{
  */
 /**
- * @brief element by element multiplication: y = alpha * x
+ * @brief element by element multiplication: y[i] = alpha * a[i]
  * @param alpha scalar value
  * @param x monolish vector (size N)
  * @param y monolish vector (size N)
@@ -406,7 +406,7 @@ void times(const float alpha, const view1D<matrix::Dense<float>, float> &a,
  * @{
  */
 /**
- * @brief element by element addition of vector a and vector b.
+ * @brief element by element multiplication: y[i] = a[i] * b[i]
  * @param a monolish vector (size N)
  * @param b monolish vector (size N)
  * @param y monolish vector (size N)
