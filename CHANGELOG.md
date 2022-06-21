@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.16.3 - 2022/06/21
+-----------
+
 ### Fixed
 - fix diag_op bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/467> <https://github.com/ricosjp/monolish/issues/136>
 - fix document typo <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/134>
