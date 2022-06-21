@@ -18,6 +18,7 @@ Documents
 | monolish version | Release Note | Document |
 |:-----------------|:-------------|:---------|
 | master | [![badge](https://img.shields.io/badge/CHANGELOG-unreleased-yellow)](https://github.com/ricosjp/monolish/blob/master/CHANGELOG.md#unreleased) | [![badge](https://img.shields.io/badge/Document-master-blue)](https://ricosjp.github.io/monolish/master/) |
+| 0.16.3 | [![badge](https://img.shields.io/badge/Release-0.16.3-green)](https://github.com/ricosjp/monolish/releases/tag/0.16.3) | [![badge](https://img.shields.io/badge/Document-0.16.3-blue)](https://ricosjp.github.io/monolish/0.16.3/) |
 | 0.16.2 | [![badge](https://img.shields.io/badge/Release-0.16.2-green)](https://github.com/ricosjp/monolish/releases/tag/0.16.2) | [![badge](https://img.shields.io/badge/Document-0.16.2-blue)](https://ricosjp.github.io/monolish/0.16.2/) |
 | 0.16.1 | [![badge](https://img.shields.io/badge/Release-0.16.1-green)](https://github.com/ricosjp/monolish/releases/tag/0.16.1) | [![badge](https://img.shields.io/badge/Document-0.16.1-blue)](https://ricosjp.github.io/monolish/0.16.1/) |
 | 0.16.0 | [![badge](https://img.shields.io/badge/Release-0.16.0-green)](https://github.com/ricosjp/monolish/releases/tag/0.16.0) | [![badge](https://img.shields.io/badge/Document-0.16.0-blue)](https://ricosjp.github.io/monolish/0.16.0/) |
