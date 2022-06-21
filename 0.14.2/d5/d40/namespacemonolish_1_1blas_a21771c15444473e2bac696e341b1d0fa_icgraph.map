@@ -1,0 +1,5 @@
+<map id="monolish::blas::axpyz" name="monolish::blas::axpyz">
+<area shape="rect" id="node1" title="axpyz: z = ax + y" alt="" coords="236,57,400,84"/>
+<area shape="rect" id="node2" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="15,5,178,61"/>
+<area shape="rect" id="node3" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="5,86,188,127"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="monolish::vector::get_device_mem_stat" name="monolish::vector::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="261,231,421,273"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a66a917b2c818620371cf62b17f90a15d" title="Create COO matrix from monolish::vector." alt="" coords="6,5,213,32"/>
+<area shape="rect" id="node3" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="28,56,191,112"/>
+<area shape="rect" id="node4" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#acf6f67d48e90f2e49c7570a1fb371fc9" title=" " alt="" coords="36,137,183,178"/>
+<area shape="rect" id="node5" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="18,202,201,243"/>
+<area shape="rect" id="node6" href="$d7/d15/classmonolish_1_1vector.html#a0a6c023b59e2592f47dc06ce6a64021e" title="reference to the element at position (v[i])" alt="" coords="7,268,211,295"/>
+<area shape="rect" id="node7" href="$d7/d15/classmonolish_1_1vector.html#aa046031d996039edac66358151bf2a71" title="Add a new element at the end of the vector (only CPU)" alt="" coords="5,319,213,345"/>
+<area shape="rect" id="node8" href="$d7/d15/classmonolish_1_1vector.html#ac9570301c895e41cac139ea35e8d2d09" title="resize vector (only CPU)" alt="" coords="20,369,199,396"/>
+<area shape="rect" id="node9" href="$d7/d15/classmonolish_1_1vector.html#ab8ffc2070f54ff3dae4dd4e0ac781ca0" title="destructor of vector, free GPU memory" alt="" coords="40,421,179,462"/>
+</map>

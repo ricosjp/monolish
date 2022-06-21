@@ -1,0 +1,8 @@
+<map id="monolish::mpi::comm::Init" name="monolish::mpi::comm::Init">
+<area shape="rect" id="node1" title="Initialize the MPI execution environment." alt="" coords="5,115,169,156"/>
+<area shape="rect" id="node2" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#aafe15be48e2a7f51e4949fa1945a406d" title="get communicator" alt="" coords="217,5,381,47"/>
+<area shape="rect" id="node3" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="443,77,606,119"/>
+<area shape="rect" id="node4" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a18f35e2b2c52ce184e7dbe762924cd58" title="set communicator" alt="" coords="217,173,381,215"/>
+<area shape="rect" id="node5" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="433,169,616,195"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="429,223,620,250"/>
+</map>

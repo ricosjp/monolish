@@ -1,0 +1,5 @@
+<map id="monolish::vector::size" name="monolish::vector::size">
+<area shape="rect" id="node1" title="get vector size" alt="" coords="216,35,381,61"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#a594beaad6dfc6f6ba8429b21f875431c" title="returns a end iterator" alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#af1f4a3d852b56b65d316bfc4649abbe6" title="compare structure of vector (same as is_same_size())" alt="" coords="21,57,152,98"/>
+</map>

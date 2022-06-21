@@ -1,0 +1,9 @@
+<map id="monolish::util::random_structure_matrix" name="monolish::util::random_structure_matrix">
+<area shape="rect" id="node1" title="create random structure matrix (column number is decided by random)" alt="" coords="5,137,175,178"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ad1f217abe22c7889b40584896ff4f65a" title="Get matrix element (A(i,j))" alt="" coords="223,5,413,32"/>
+<area shape="rect" id="node3" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="475,57,638,98"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#adbaf0d3634e9d2d215de2230bb3575ab" title="insert element to (m, n)" alt="" coords="233,275,403,317"/>
+<area shape="rect" id="node5" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a20d890720cddde2c525ba90e354e7390" title="sort COO matrix elements (and merge elements)" alt="" coords="233,107,403,149"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="465,129,648,156"/>
+<area shape="rect" id="node7" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="461,195,652,221"/>
+</map>

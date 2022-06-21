@@ -1,0 +1,5 @@
+<map id="monolish::matrix::COO::get_device_mem_stat" name="monolish::matrix::COO::get_device_mem_stat">
+<area shape="rect" id="node1" title="false; // true: sended, false: not send" alt="" coords="224,39,399,80"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a0cab4a40770e7c86116af19e63c2d87f" title="Comparing matricies (A == mat)" alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a583cd1adc1dd3574b46577637c84d3d8" title="; free gpu mem." alt="" coords="5,71,176,112"/>
+</map>

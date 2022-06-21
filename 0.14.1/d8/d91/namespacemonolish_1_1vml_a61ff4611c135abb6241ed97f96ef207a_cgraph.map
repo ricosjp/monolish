@@ -1,0 +1,20 @@
+<map id="monolish::vml::sub" name="monolish::vml::sub">
+<area shape="rect" id="node1" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="5,485,152,512"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#aef99c3780252651fc76292f2517e1383" title="axpy: y = ax + y" alt="" coords="237,5,394,32"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#aea4c671e0c5db7e2d45c00461f598ce3" title="free data of GPU" alt="" coords="218,56,413,83"/>
+<area shape="rect" id="node4" href="$d0/dda/classmonolish_1_1_logger.html#aa107a265a4cc5837a50d70d9728524f2" title=" " alt="" coords="221,107,410,133"/>
+<area shape="rect" id="node5" href="$d0/dda/classmonolish_1_1_logger.html#a8160d177efc08a4fd3aefe7d0ed57c2f" title=" " alt="" coords="216,157,415,184"/>
+<area shape="rect" id="node6" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#abe4ae3660bb4cb693e9ae5e37e10cdf9" title="get # of col" alt="" coords="225,209,406,250"/>
+<area shape="rect" id="node7" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a172b48445dbaf5c881f891b746ba3e78" title="true: sended, false: not send" alt="" coords="200,274,431,315"/>
+<area shape="rect" id="node8" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="234,339,397,381"/>
+<area shape="rect" id="node9" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ac1e056db763f530045d436d04d9ea770" title="get flag that shows matvec is defined or not" alt="" coords="204,405,427,446"/>
+<area shape="rect" id="node10" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a3fb7f904f293b16faae6db7e398e7be8" title="get flag that shows rmatvec is defined or not" alt="" coords="225,471,406,527"/>
+<area shape="rect" id="node11" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ac028d6dd72f05d0c38f3a883b35c2537" title="get # of row" alt="" coords="225,551,406,593"/>
+<area shape="rect" id="node12" href="$d0/d47/namespacemonolish_1_1util.html#af4e06d09382ca39b9e8e11c477bd9c24" title="compare same device memory status" alt="" coords="221,617,409,658"/>
+<area shape="rect" id="node13" href="$d0/d47/namespacemonolish_1_1util.html#ad822e9be1a0dee51685be1509167bae1" title="compare size of vector or 1Dview (same as is_same_structure())" alt="" coords="250,682,381,723"/>
+<area shape="rect" id="node14" href="$d5/d40/namespacemonolish_1_1blas.html#af6a50e19542f56b0af893a0727610f8b" title="Dense matrix and vector multiplication: y = Ax." alt="" coords="481,784,655,811"/>
+<area shape="rect" id="node15" href="$d5/d40/namespacemonolish_1_1blas.html#abbaf3ff3490732d66a7991d086eb349f" title="matrix (LinearOperator) and vector multiplication: y = Ax" alt="" coords="479,944,657,971"/>
+<area shape="rect" id="node16" href="$d0/d47/namespacemonolish_1_1util.html#a443028761156f38418e7552d0860021d" title="send data to GPU" alt="" coords="240,864,391,891"/>
+<area shape="rect" id="node17" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ad836b65e804fbc5d5e66ba3f963600fb" title="set multiplication function of matrix and vector" alt="" coords="225,747,406,789"/>
+<area shape="rect" id="node18" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a4d2a671eb57675fed76eaae9843d6f6a" title="set multiplication function of (Hermitian) transposed matrix and vector" alt="" coords="225,966,406,1007"/>
+</map>

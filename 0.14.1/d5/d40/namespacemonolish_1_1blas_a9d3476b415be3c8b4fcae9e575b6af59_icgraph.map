@@ -1,0 +1,6 @@
+<map id="monolish::blas::sum" name="monolish::blas::sum">
+<area shape="rect" id="node1" title="vector&lt;float&gt; sum" alt="" coords="207,56,360,83"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#aaa75faaa4143d4c528bdd3925775e7e7" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="9,5,155,32"/>
+<area shape="rect" id="node3" href="$d8/d91/namespacemonolish_1_1vml.html#aa07b1e375c7f511b48a1f818e37242e9" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="9,56,155,83"/>
+<area shape="rect" id="node4" href="$d5/d40/namespacemonolish_1_1blas.html#ac7a594a0755ddde62f8529cf14d26ad8" title=" " alt="" coords="5,107,159,133"/>
+</map>

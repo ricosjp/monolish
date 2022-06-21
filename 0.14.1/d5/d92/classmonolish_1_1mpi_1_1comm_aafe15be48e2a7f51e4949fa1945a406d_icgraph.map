@@ -1,0 +1,19 @@
+<map id="monolish::mpi::comm::get_comm" name="monolish::mpi::comm::get_comm">
+<area shape="rect" id="node1" title="get communicator" alt="" coords="217,496,381,537"/>
+<area shape="rect" id="node2" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a62f367362945a64adb79a7aaca22edb3" title="MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result bac..." alt="" coords="5,5,169,47"/>
+<area shape="rect" id="node3" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a2e991233756b9aba2dd0ce77b73d77ae" title="MPI_Allreduce (MPI_MAX) for scalar. Combines values from all processes and distributes the result bac..." alt="" coords="5,71,169,112"/>
+<area shape="rect" id="node4" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a7fb19a4e739c43855697c08559eabaf0" title="MPI_Allreduce (MPI_MIN) for scalar. Combines values from all processes and distributes the result bac..." alt="" coords="5,136,169,177"/>
+<area shape="rect" id="node5" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a795067bca2765bedf80dc45c990ea44b" title="MPI_Allreduce (MPI_PROD) for scalar. Combines values from all processes and distributes the result ba..." alt="" coords="5,201,169,243"/>
+<area shape="rect" id="node6" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#ae1129d2bbbd7f4164aa855855f9309eb" title="MPI_Allreduce (MPI_SUM) for scalar. Combines values from all processes and distributes the result bac..." alt="" coords="5,267,169,308"/>
+<area shape="rect" id="node7" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a0195df1bf200684c45486bb989aa006b" title="Blocks until all processes in the communicator have reached this routine." alt="" coords="5,332,169,373"/>
+<area shape="rect" id="node8" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a2d01d4ebd409122a072bfc9ce747298a" title="MPI_Bcast, Broadcasts a message from the process with rank root to all other processes." alt="" coords="5,397,169,439"/>
+<area shape="rect" id="node9" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a6a7664a12d97d70d8947d7bc4f8f647a" title="MPI_Gather, Gathers vector from all processes The data is evenly divided and transmitted to each proc..." alt="" coords="5,463,169,504"/>
+<area shape="rect" id="node10" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#ae585064884f362c9ad001fab245e4358" title="get my rank number" alt="" coords="5,528,169,569"/>
+<area shape="rect" id="node11" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#aa5569f45fa4d020ba177a04ab484a4d0" title="get the number of processes" alt="" coords="5,593,169,635"/>
+<area shape="rect" id="node12" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#ae2bf172f05c716699e67552be730e229" title="Initialize the MPI execution environment." alt="" coords="5,659,169,700"/>
+<area shape="rect" id="node13" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a25930486ec062c301de9174f7bf4671a" title="MPI_Irecv for scalar. Performs a nonblocking recv." alt="" coords="5,724,169,765"/>
+<area shape="rect" id="node14" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a7de1d8783cf8ae1c0a32e30ef55ef73d" title="MPI_Isend for scalar. Performs a nonblocking send. Requests are stored internally...." alt="" coords="5,789,169,831"/>
+<area shape="rect" id="node15" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#a0f48c31afd06a511d4d9d8720e9bced0" title="MPI_Recv for scalar. Performs a blocking recv." alt="" coords="5,855,169,896"/>
+<area shape="rect" id="node16" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#af36732157cd3c02e42ee4f73241b6e50" title="MPI_Scatter, Sends data from one task to all tasks. The data is evenly divided and transmitted to eac..." alt="" coords="5,920,169,961"/>
+<area shape="rect" id="node17" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#aa4df38030d3340430f522ec90bce7494" title="MPI_Send for scalar. Performs a blocking send." alt="" coords="5,985,169,1027"/>
+</map>

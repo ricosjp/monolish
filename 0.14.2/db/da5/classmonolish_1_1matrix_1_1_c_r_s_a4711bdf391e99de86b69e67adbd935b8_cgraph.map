@@ -1,0 +1,5 @@
+<map id="monolish::matrix::CRS::get_data_size" name="monolish::matrix::CRS::get_data_size">
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,172,80"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a8f3313f687b1d6408256d422af0b9d41" title="get # of non&#45;zeros" alt="" coords="220,5,387,47"/>
+<area shape="rect" id="node3" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#aa8e03523f2a39059a0efd1cc7623e2c8" title="get # of row" alt="" coords="220,71,387,112"/>
+</map>

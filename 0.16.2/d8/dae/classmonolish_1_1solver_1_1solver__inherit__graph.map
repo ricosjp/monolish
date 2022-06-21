@@ -1,0 +1,17 @@
+<map id="monolish::solver::solver&lt; MATRIX, Float &gt;" name="monolish::solver::solver&lt; MATRIX, Float &gt;">
+<area shape="rect" id="node1" title="solver base class" alt="" coords="1272,5,1456,464"/>
+<area shape="rect" id="node2" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html" title="BiCGSTAB solver class." alt="" coords="5,578,179,758"/>
+<area shape="rect" id="node3" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html" title="CG solver class." alt="" coords="203,585,373,751"/>
+<area shape="rect" id="node4" href="$d6/d4a/classmonolish_1_1equation_1_1_cholesky.html" title="Cholesky solver class." alt="" coords="397,563,560,773"/>
+<area shape="rect" id="node5" href="$d5/d72/classmonolish_1_1equation_1_1_i_c.html" title="Incomplete Cholesky solver class." alt="" coords="585,519,749,817"/>
+<area shape="rect" id="node6" href="$d4/da7/classmonolish_1_1equation_1_1_i_l_u.html" title="Incomplete LU solver class." alt="" coords="773,512,945,824"/>
+<area shape="rect" id="node7" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html" title="Jacobi solver class." alt="" coords="969,585,1159,751"/>
+<area shape="rect" id="node8" href="$da/da4/classmonolish_1_1equation_1_1_l_u.html" title="LU solver class." alt="" coords="1184,571,1352,765"/>
+<area shape="rect" id="node9" href="$de/d01/classmonolish_1_1equation_1_1_q_r.html" title="QR solver class." alt="" coords="1376,578,1547,758"/>
+<area shape="rect" id="node10" href="$d2/d4e/classmonolish_1_1equation_1_1_s_o_r.html" title="SOR solver class." alt="" coords="1571,585,1749,751"/>
+<area shape="rect" id="node11" href="$d0/ddf/classmonolish_1_1equation_1_1none.html" title="none solver class(nothing to do)" alt="" coords="1774,593,1957,743"/>
+<area shape="rect" id="node12" href="$d8/d2c/classmonolish_1_1generalized__eigen_1_1_d_c.html" title="Devide and Conquer solver." alt="" coords="1981,585,2195,751"/>
+<area shape="rect" id="node13" href="$dd/dd5/classmonolish_1_1generalized__eigen_1_1_l_o_b_p_c_g.html" title="LOBPCG solver." alt="" coords="2219,578,2413,758"/>
+<area shape="rect" id="node14" href="$d5/dfa/classmonolish_1_1standard__eigen_1_1_d_c.html" title="Devide and Conquer solver." alt="" coords="2438,578,2599,758"/>
+<area shape="rect" id="node15" href="$df/df2/classmonolish_1_1standard__eigen_1_1_l_o_b_p_c_g.html" title="LOBPCG solver." alt="" coords="2624,578,2819,758"/>
+</map>

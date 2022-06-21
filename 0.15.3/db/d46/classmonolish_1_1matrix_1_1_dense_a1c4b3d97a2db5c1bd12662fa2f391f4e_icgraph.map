@@ -1,0 +1,5 @@
+<map id="monolish::matrix::Dense::get_device_mem_stat" name="monolish::matrix::Dense::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="236,39,419,80"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a36be063ccc17aaddf9307d3336ce7589" title="reference to the pointer of the begining of the m&#45;th row" alt="" coords="5,5,188,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a5ce7be5e5fdc7b74caefec1515b4f1b2" title="destructor of CRS matrix, free GPU memory" alt="" coords="5,71,188,112"/>
+</map>
