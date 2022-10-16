@@ -294,7 +294,7 @@ public:
     }
     if(vad_create_flag){
       Float *tmp = new Float[N];
-      std::size_t copy_size = std::min(vad_nnz, N);
+      size_t copy_size = std::min(vad_nnz, N);
       for (size_t i = 0; i < copy_size; i++){
         tmp[i] = vad[i];
       }
