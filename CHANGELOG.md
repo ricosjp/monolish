@@ -20,11 +20,20 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
-0.17.0 - 2022/06/15
+### Changed
+- Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468>
+
+0.16.3 - 2022/06/21
 -----------
 
+### Fixed
+- fix diag_op bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/467> <https://github.com/ricosjp/monolish/issues/136>
+- fix document typo <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/466> <https://github.com/ricosjp/monolish/issues/134>
+
 ### Changed
-- Start developing 0.16.2 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
+- Add compute_hash after transpose <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/465> <https://github.com/ricosjp/monolish/issues/135>
+- Start developing 0.16.3 for fix bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/464>
+- Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/463>
 
 0.16.2 - 2022/06/15
 -----------
