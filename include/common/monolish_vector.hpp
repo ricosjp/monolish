@@ -42,7 +42,28 @@ private:
   /**
    * @brief size N vector data
    **/
-  std::vector<Float> val;
+  //std::vector<Float> val;
+
+  /**
+   * @brief vector data pointer
+   */
+  Float* vad = nullptr;
+
+  /**
+   * @brief vector size
+   */
+  std::size_t vad_nnz = 0;
+
+  /**
+   * @brief alloced vector size
+   */
+  std::size_t alloc_nnz = 0;
+
+  /**
+   * @brief vector create flag;
+   */
+  bool vad_create_flag = false;
+
 
   /**
    * @brief true: sended, false: not send
@@ -233,6 +254,9 @@ public:
     if (get_device_mem_stat()) {
       device_free();
     }
+    if(vad_create_flag){
+      delete [] vad;
+    }
   }
 
   [[nodiscard]] size_t get_offset() const { return 0; }
@@ -246,7 +270,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *data() const { return val.data(); }
+  [[nodiscard]] const Float *data() const { return vad; }
 
   /**
    * @brief returns a direct pointer to the vector
@@ -254,7 +278,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *data() { return val.data(); }
+  [[nodiscard]] Float *data() { return vad; }
 
   /**
    * @brief resize vector (only CPU)
@@ -268,7 +292,17 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
-    val.resize(N);
+    if(vad_create_flag){
+      Float *tmp = new Float[N];
+      std::size_t copy_size = std::min(vad_nnz, N);
+      for (size_t i = 0; i < copy_size; i++){
+        tmp[i] = vad[i];
+      }
+      delete [] vad;
+      vad = tmp;
+      alloc_nnz = N;
+      vad_nnz = N;
+    }
   }
 
   /**
@@ -281,7 +315,13 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use push_back");
     }
-    val.push_back(val);
+    if(vad_create_flag){
+      if(vad_nnz >= alloc_nnz){
+        resize(2*alloc_nnz+1);
+      }
+      vad[vad_nnz] = val;
+      vad_nnz++;
+    }
   }
 
   /**
@@ -290,7 +330,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *begin() const { return val.data(); }
+  [[nodiscard]] const Float *begin() const { return vad; }
 
   /**
    * @brief returns a begin iterator
@@ -298,7 +338,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return val.data(); }
+  [[nodiscard]] Float *begin() { return vad; }
 
   /**
    * @brief returns a end iterator
@@ -306,7 +346,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return val.data() + size(); }
+  [[nodiscard]] const Float *end() const { return vad + size(); }
 
   /**
    * @brief returns a end iterator
@@ -314,7 +354,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return val.data() + size(); }
+  [[nodiscard]] Float *end() { return vad + size(); }
 
   /**
    * @brief get vector size
@@ -322,7 +362,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] size_t size() const { return val.size(); }
+  [[nodiscard]] size_t size() const { return vad_nnz; }
 
   /**
    * @brief get vector size
@@ -330,7 +370,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] size_t get_nnz() const { return val.size(); }
+  [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
 
   /**
    * @brief fill vector elements with a scalar value
@@ -441,7 +481,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return val[i];
+    return vad[i];
   }
 
   /**

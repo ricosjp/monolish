@@ -18,11 +18,11 @@ template <typename T> void vector<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  const T *vald = val.data();
+  const T *vald = vad;
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const auto N = val.size();
+    const auto N = size();
 #pragma omp target
     for (auto i = decltype(N){0}; i < N; i++) {
       printf("%f\n", vald[i]);
@@ -32,7 +32,7 @@ template <typename T> void vector<T>::print_all(bool force_cpu) const {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    for (size_t i = 0; i < val.size(); i++) {
+    for (size_t i = 0; i < size(); i++) {
       std::cout << vald[i] << std::endl;
     }
   }
@@ -49,8 +49,8 @@ template <typename T> void vector<T>::print_all(std::string filename) const {
   if (!ofs) {
     throw std::runtime_error("error file cant open");
   }
-  for (const auto v : val) {
-    ofs << v << std::endl;
+  for (size_t i = 0; i < size(); i++) {
+    ofs << vad[i] << std::endl;
   }
   logger.util_out();
 }

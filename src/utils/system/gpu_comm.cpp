@@ -10,8 +10,8 @@ template <typename T> void vector<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *d = val.data();
-  const auto N = val.size();
+  const T *d = vad;
+  const auto N = size();
 
   if (gpu_status == true) {
 #pragma omp target update to(d [0:N])
@@ -30,8 +30,8 @@ template <typename T> void vector<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *d = val.data();
-    const auto N = val.size();
+    T *d = vad;
+    const auto N = size();
 
 #pragma omp target exit data map(from : d [0:N])
 
@@ -48,8 +48,8 @@ template <typename T> void vector<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *d = val.data();
-    const auto N = val.size();
+    T *d = vad;
+    const auto N = size();
 #pragma omp target update from(d [0:N])
   }
 #endif
@@ -63,8 +63,8 @@ template <typename T> void vector<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *d = val.data();
-    const auto N = val.size();
+    const T *d = vad;
+    const auto N = size();
 #pragma omp target exit data map(release : d [0:N])
     gpu_status = false;
   }
