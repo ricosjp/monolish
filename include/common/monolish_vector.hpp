@@ -71,7 +71,9 @@ private:
   mutable bool gpu_status = false;
 
 public:
-  vector() {}
+  vector() {
+    vad_create_flag = true;
+  }
 
   // constructor ///////////////////////////////////////////////////////
   /**
