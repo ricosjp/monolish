@@ -17,7 +17,6 @@ template <typename T> void CRS<T>::transpose() {
 
   row_ptr.resize(B.get_col() + 1);
   col_ind.resize(B.get_nnz());
-  resize(B.get_nnz());
 
   std::fill(row_ptr.data(), row_ptr.data() + B.get_col() + 1, 0.0);
   for (size_t i = 0; i < vad_nnz; i++) {
@@ -62,9 +61,17 @@ template <typename T> void CRS<T>::transpose(const CRS &B) {
   rowN = B.get_col();
   colN = B.get_row();
 
+  //TODO size check
   row_ptr.resize(B.get_col() + 1);
   col_ind.resize(B.get_nnz());
-  resize(B.get_nnz());
+  if(get_device_mem_stat()){
+    if(get_nnz() != B.get_nnz()){
+      throw std::runtime_error("Error: different nnz size GPU matrix cant use transpose");
+    }
+  }else{
+    vad_create_flag = true;
+    resize(B.get_nnz());
+  }
 
   std::fill(row_ptr.data(), row_ptr.data() + B.get_col() + 1, 0.0);
   for (size_t i = 0; i < vad_nnz; i++) {

@@ -42,8 +42,14 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   logger.util_in(monolish_func);
   set_row(B.get_col());
   set_col(B.get_row());
-  vad_create_flag = true;
-  resize(B.get_row() * B.get_col());
+  if(get_device_mem_stat()){
+    if(get_nnz() != B.get_nnz()){
+      throw std::runtime_error("Error: different nnz size GPU matrix cant use transpose");
+    }
+  }else{
+    vad_create_flag = true;
+    resize(B.get_row() * B.get_col());
+  }
 
 #pragma omp parallel for
   for (size_t n = 0; n < get_row() * get_col(); ++n) {
