@@ -55,7 +55,7 @@ private:
   /**
    * @brief # of non-zero element
    */
-  size_t nnz;
+  //size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -79,11 +79,32 @@ public:
    * @brief Coodinate format value array, which stores values of the non-zero
    * elements (size nnz)
    */
-  std::vector<Float> val;
+  //std::vector<Float> val;
+  
+  /**
+   * @brief Dense format value pointer
+   */
+  Float* vad = nullptr;
+
+  /**
+   * @brief # of non-zero element
+   */
+  size_t vad_nnz = 0;
+
+  /**
+   * @brief alloced matrix size
+   */
+  std::size_t alloc_nnz = 0;
+
+  /**
+   * @brief matrix create flag;
+   */
+  bool vad_create_flag = false;
 
   COO()
-      : rowN(0), colN(0), nnz(0), gpu_status(false), row_index(), col_index(),
-        val() {}
+      : rowN(0), colN(0), gpu_status(false), row_index(), col_index(), vad_nnz(0){
+          vad_create_flag = true;
+        }
 
   /**
    * @brief Initialize M x N COO matrix
@@ -95,8 +116,9 @@ public:
    * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N)
-      : rowN(M), colN(N), nnz(0), gpu_status(false), row_index(), col_index(),
-        val() {}
+      : rowN(M), colN(N), gpu_status(false), row_index(), col_index(), vad_nnz(0){
+          vad_create_flag = true;
+        }
 
   /**
    * @brief Create COO matrix from array
@@ -243,7 +265,10 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  COO(const matrix::CRS<Float> &crs) { convert(crs); }
+  COO(const matrix::CRS<Float> &crs) {
+    vad_create_flag = true;
+    convert(crs);
+  }
 
   /**
    * @brief Create COO matrix from Dense matrix (drop zero)
@@ -263,11 +288,15 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  COO(const matrix::Dense<Float> &dense) { convert(dense); }
+  COO(const matrix::Dense<Float> &dense) {
+    vad_create_flag = true;
+    convert(dense);
+  }
 
   void convert(const matrix::LinearOperator<Float> &linearoperator);
 
   COO(const matrix::LinearOperator<Float> &linearoperator) {
+    vad_create_flag = true;
     convert(linearoperator);
   }
 
@@ -299,7 +328,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void set_nnz(const size_t NNZ) { nnz = NNZ; };
+  //void set_nnz(const size_t NNZ) { vad_nnz = NNZ; };
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -345,7 +374,42 @@ public:
     if (get_device_mem_stat()) {
       device_free();
     }
+    if(vad_create_flag){
+      delete [] vad;
+    }
   }
+
+  /**
+   * @brief resize matrix value
+   * @param N matrix size
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void resize(size_t N, Float val = 0){
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU matrix cant use resize");
+    }
+    if(vad_create_flag){
+      Float *tmp = new Float[N];
+      size_t copy_size = std::min(vad_nnz, N);
+      for (size_t i=0; i<copy_size; ++i){
+        tmp[i] = vad[i];
+      }
+      for(size_t i=copy_size; i<N; ++i){
+        tmp[i] = val;
+      }
+      delete [] vad;
+      vad = tmp;
+      alloc_nnz = N;
+      vad_nnz = N;
+    }else{
+      throw std::runtime_error("Error, not create vector cant use resize");
+    }
+  }
+
+
 
   // I/O
   // ///////////////////////////////////////////////////////////////////////////
@@ -460,7 +524,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] size_t get_nnz() const { return nnz; }
+  [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
 
   /**
    * @brief fill matrix elements with a scalar value
@@ -500,7 +564,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] std::vector<Float> &get_val_ptr() { return val; }
+  [[nodiscard]] std::vector<Float> get_val_ptr() {
+    std::vector<Float> val(vad_nnz);
+    for(size_t i=0; i<vad_nnz; ++i){
+      val[i] = vad[i];
+    }
+    return val;
+  }
 
   /**
    * @brief get row index
@@ -534,7 +604,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] const std::vector<Float> &get_val_ptr() const { return val; }
+  [[nodiscard]] const std::vector<Float> get_val_ptr() const {
+    std::vector<Float> val(vad_nnz);
+    for(size_t i=0; i<vad_nnz; ++i){
+      val[i] = vad[i];
+    }
+    return val;
+  }
 
   // Utility
   // ///////////////////////////////////////////////////////////////////////////

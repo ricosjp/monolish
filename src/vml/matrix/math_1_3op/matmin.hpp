@@ -12,7 +12,7 @@ void mmmin_core(const F1 &A, const F2 &B, F3 &C) {
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vmin(C.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+  internal::vmin(C.get_nnz(), A.vad, B.vad, C.vad,
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -22,7 +22,7 @@ template <typename F1, typename F2> F2 mmin_core(const F1 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  F2 min = internal::vmin(C.get_nnz(), C.val.data(), C.get_device_mem_stat());
+  F2 min = internal::vmin(C.get_nnz(), C.vad, C.get_device_mem_stat());
 
   logger.func_out();
   if (typeid(F1) == typeid(matrix::Dense<F2>)) {

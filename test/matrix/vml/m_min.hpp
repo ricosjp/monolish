@@ -2,7 +2,7 @@
 #include "monolish_blas.hpp"
 
 template <typename T> T ans_min(monolish::matrix::Dense<T> &A) {
-  return *(std::min_element(A.val.begin(), A.val.end()));
+  return *(std::min_element(A.vad, A.vad+A.get_nnz()));
 }
 
 template <typename MAT, typename T>

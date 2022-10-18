@@ -16,7 +16,7 @@ void matadd_core(const matrix::CRS<F> &A, const matrix::CRS<F> &B,
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vadd(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+  internal::vadd(A.get_nnz(), A.vad, B.vad, C.vad,
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -33,7 +33,7 @@ void matsub_core(const matrix::CRS<F> &A, const matrix::CRS<F> &B,
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+  internal::vsub(A.get_nnz(), A.vad, B.vad, C.vad,
                  A.get_device_mem_stat());
 
   logger.func_out();

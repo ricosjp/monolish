@@ -8,7 +8,7 @@ template <typename T> void Dense<T>::diag_div(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = val.data();
+  T *vald = vad;
   const auto N = get_col();
   const auto Len = get_row() < get_col() ? get_row() : get_col();
 
@@ -40,7 +40,7 @@ template <typename T> void Dense<T>::diag_div(const vector<T> &vec) {
 
   const T *vecd = vec.data();
 
-  T *vald = val.data();
+  T *vald = vad;
   const auto N = get_col();
   const auto Len = get_row() < get_col() ? get_row() : get_col();
 
@@ -76,7 +76,7 @@ template <typename T> void Dense<T>::diag_div(const view1D<vector<T>, T> &vec) {
 
   const T *vecd = vec.data();
 
-  T *vald = val.data();
+  T *vald = vad;
   const auto N = get_col();
   const auto Len = get_row() < get_col() ? get_row() : get_col();
 
@@ -113,7 +113,7 @@ void Dense<T>::diag_div(const view1D<matrix::Dense<T>, T> &vec) {
 
   const T *vecd = vec.data();
 
-  T *vald = val.data();
+  T *vald = vad;
   const auto N = get_col();
   const auto Len = get_row() < get_col() ? get_row() : get_col();
 

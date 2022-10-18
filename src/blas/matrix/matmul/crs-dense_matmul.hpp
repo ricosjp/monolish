@@ -15,12 +15,12 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const double *vald = A.val.data();
+  const double *vald = A.vad;
   const auto rowd = A.row_ptr.data();
   const auto cold = A.col_ind.data();
 
-  const double *Bd = B.val.data();
-  double *Cd = C.val.data();
+  const double *Bd = B.vad;
+  double *Cd = C.vad;
 
   // MN = MK * KN
   const int M = (int)A.get_row();
@@ -157,12 +157,12 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const float *vald = A.val.data();
+  const float *vald = A.vad;
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
 
-  const float *Bd = B.val.data();
-  float *Cd = C.val.data();
+  const float *Bd = B.vad;
+  float *Cd = C.vad;
 
   // MN = MK * KN
   const int M = A.get_row();

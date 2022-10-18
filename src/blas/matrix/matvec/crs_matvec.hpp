@@ -20,7 +20,7 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
   }
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const double *vald = A.val.data();
+  const double *vald = A.vad;
   const double *xd = x.data();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
@@ -136,7 +136,7 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
   }
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const float *vald = A.val.data();
+  const float *vald = A.vad;
   const float *xd = x.data();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();

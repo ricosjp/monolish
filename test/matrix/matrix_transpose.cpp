@@ -35,7 +35,7 @@ bool test_send_transpose(const size_t M, const size_t N, double tol) {
     A.recv();
 
   monolish::matrix::COO<T> ansA(A);
-  if (ans_check<T>(__func__, A.type(), seedA.val.data(), ansA.val.data(),
+  if (ans_check<T>(__func__, A.type(), seedA.vad, ansA.vad,
                    ansA.get_nnz(), tol) == false) {
     return false;
   };

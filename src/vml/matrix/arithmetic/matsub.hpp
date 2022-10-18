@@ -12,7 +12,7 @@ void smsub_core(const F1 &A, const F2 alpha, F3 &C) {
   assert(util::is_same_size(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vsub(A.get_nnz(), A.val.data(), alpha, C.val.data(),
+  internal::vsub(A.get_nnz(), A.vad, alpha, C.vad,
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -28,7 +28,7 @@ void mmsub_core(const F1 &A, const F2 &B, F3 &C) {
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vsub(A.get_nnz(), A.val.data(), B.val.data(), C.val.data(),
+  internal::vsub(A.get_nnz(), A.vad, B.vad, C.vad,
                  C.get_device_mem_stat());
 
   logger.func_out();

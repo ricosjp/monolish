@@ -22,13 +22,13 @@ void ans_matmul(const monolish::matrix::Dense<T> &A,
   int K = A.get_col();
 
   for (int i = 0; i < C.get_nnz(); i++) {
-    C.val[i] = 0;
+    C.vad[i] = 0;
   }
 
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
       for (int k = 0; k < K; k++) {
-        C.val[i * N + j] += A.val[i * K + k] * B.val[k * N + j];
+        C.vad[i * N + j] += A.vad[i * K + k] * B.vad[k * N + j];
       }
     }
   }
@@ -69,7 +69,7 @@ bool test_send_matmul(const size_t M, const size_t N, const size_t K,
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
                       ansC.get_nnz(), tol);
 }
 
@@ -111,7 +111,7 @@ bool test_send_matmul_linearoperator_only(const size_t M, const size_t N,
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
                       ansC.get_nnz(), tol);
 }
 
@@ -151,7 +151,7 @@ bool test_send_matmul_linearoperator(const size_t M, const size_t N,
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
                       ansC.get_nnz(), tol);
 }
 
@@ -187,6 +187,6 @@ bool test_matmul(const size_t M, const size_t N, const size_t K, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
                       ansC.get_nnz(), tol);
 }

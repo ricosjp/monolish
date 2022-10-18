@@ -19,41 +19,34 @@ bool test_convert(const size_t M, const size_t N) {
   monolish::matrix::COO<T> result_coo(mat);
 
   // check source == dest.
-  bool check = true;
+  if (result_coo.get_row() != ans_coo.get_row() ||
+      result_coo.get_col() != ans_coo.get_col() ||
+      result_coo.get_nnz() != ans_coo.get_nnz()) {
+
+    std::cout << "error, row, col, nnz are different(COO2" << mat.type()
+              << ")" << std::endl;
+    std::cout << result_coo.get_row() << " != " << ans_coo.get_row()
+              << std::endl;
+    std::cout << result_coo.get_col() << " != " << ans_coo.get_col()
+              << std::endl;
+    std::cout << result_coo.get_nnz() << " != " << ans_coo.get_nnz()
+              << std::endl;
+
+    return false;
+  }
   for (size_t i = 0; i < ans_coo.get_nnz(); i++) {
-    if (result_coo.get_row() != ans_coo.get_row() ||
-        result_coo.get_col() != ans_coo.get_col() ||
-        result_coo.get_nnz() != ans_coo.get_nnz()) {
 
-      std::cout << "error, row, col, nnz are different(COO2" << mat.type()
-                << ")" << std::endl;
-      std::cout << result_coo.get_row() << " != " << ans_coo.get_row()
-                << std::endl;
-      std::cout << result_coo.get_col() << " != " << ans_coo.get_col()
-                << std::endl;
-      std::cout << result_coo.get_nnz() << " != " << ans_coo.get_nnz()
-                << std::endl;
-
-      std::cout << "==ans==" << std::endl;
-      ans_coo.print_all();
-      std::cout << "==result==" << std::endl;
-      result_coo.print_all();
-
-      check = false;
-      break;
-    }
-
-    if (result_coo.val[i] != ans_coo.val[i] ||
+    if (result_coo.vad[i] != ans_coo.vad[i] ||
         result_coo.row_index[i] != ans_coo.row_index[i] ||
         result_coo.col_index[i] != ans_coo.col_index[i]) {
 
       std::cout << i << "\t" << result_coo.row_index[i] << ","
-                << result_coo.col_index[i] << "," << result_coo.val[i]
+                << result_coo.col_index[i] << "," << result_coo.vad[i]
                 << std::flush;
       std::cout << ", (ans: " << ans_coo.row_index[i] << ","
-                << ans_coo.col_index[i] << "," << ans_coo.val[i] << ")"
+                << ans_coo.col_index[i] << "," << ans_coo.vad[i] << ")"
                 << std::endl;
-      check = false;
+      return false;
     }
   }
 
@@ -61,7 +54,7 @@ bool test_convert(const size_t M, const size_t N) {
             << std::flush;
   std::cout << ": pass" << std::endl;
 
-  return check;
+  return true;
 }
 
 int main(int argc, char **argv) {

@@ -84,7 +84,7 @@ public:
     first = start;
     last = end;
     range = last - first;
-    target_data = A.val.data();
+    target_data = A.vad;
   }
 
   /**

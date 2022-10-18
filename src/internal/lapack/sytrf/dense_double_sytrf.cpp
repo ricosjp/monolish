@@ -15,7 +15,7 @@ int internal::lapack::sytrf(matrix::Dense<double> &A, std::vector<int> &ipiv) {
 
   int info = 0;
   const int M = (int)A.get_row(); // square(symmetic)
-  double *Ad = A.val.data();
+  double *Ad = A.vad;
   int *ipivd = ipiv.data();
   const char U = 'U';
 

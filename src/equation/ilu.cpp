@@ -56,7 +56,7 @@ void equation::ILU<MATRIX, T>::create_precond(MATRIX &A) {
   this->precond.M.resize(A.get_nnz());
 #pragma omp parallel for
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    this->precond.M.data()[i] = A.val.data()[i];
+    this->precond.M.data()[i] = A.vad[i];
   }
   this->precond.M.send();
 
@@ -214,7 +214,7 @@ int equation::ILU<MATRIX, T>::cusparse_ILU(MATRIX &A, vector<T> &x,
       cusolver_ilu_get_buffersize(A, descr_M, info_M, descr_L, info_L, trans_L,
                                   descr_U, info_U, trans_U, handle);
 
-  monolish::vector<T> tmpval(A.val);
+  monolish::vector<T> tmpval(A.vad, A.vad+A.vad_nnz);
   tmpval.send();
 
   monolish::vector<double> buf(bufsize);

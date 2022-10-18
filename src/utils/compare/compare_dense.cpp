@@ -22,12 +22,12 @@ bool Dense<T>::equal(const Dense<T> &mat, bool compare_cpu_and_device) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
+    if (!(internal::vequal(get_nnz(), vad, mat.vad, true))) {
       return false;
     }
   } else if (get_device_mem_stat() == false ||
              compare_cpu_and_device == false) {
-    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
+    if (!(internal::vequal(get_nnz(), vad, mat.vad, false))) {
       return false;
     }
   }

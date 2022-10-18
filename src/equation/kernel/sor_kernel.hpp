@@ -12,7 +12,7 @@ void sor_kernel_lower(const monolish::matrix::CRS<T> &A, const vector<T> &D,
     auto tmp = b.data()[i];
     for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
       if (i > A.col_ind[j]) { // lower
-        tmp -= A.val[j] * x.data()[A.col_ind[j]];
+        tmp -= A.vad[j] * x.data()[A.col_ind[j]];
       } else {
         break;
       }
@@ -31,7 +31,7 @@ void sor_kernel_lower(const monolish::matrix::Dense<T> &A, const vector<T> &D,
   for (int i = 0; i < (int)A.get_row(); i++) {
     auto tmp = b.data()[i];
     for (int j = 0; j < i; j++) {
-      tmp -= A.val[i * A.get_col() + j] * x.data()[j];
+      tmp -= A.vad[i * A.get_col() + j] * x.data()[j];
     }
     x.data()[i] = tmp * D.data()[i];
   }
@@ -52,7 +52,7 @@ void sor_kernel_precond(const monolish::matrix::CRS<T> &A, const vector<T> &D,
     auto tmp = b_tmp.data()[i];
     for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
       if (i > A.col_ind[j]) { // lower
-        tmp -= A.val[j] * x.data()[A.col_ind[j]];
+        tmp -= A.vad[j] * x.data()[A.col_ind[j]];
       }
     }
     x.data()[i] = tmp * D.data()[i];
@@ -61,7 +61,7 @@ void sor_kernel_precond(const monolish::matrix::CRS<T> &A, const vector<T> &D,
     auto tmp = 0.0;
     for (int j = A.row_ptr[i]; j < A.row_ptr[i + 1]; j++) {
       if (i < A.col_ind[j]) { // upper
-        tmp += A.val[j] * x.data()[A.col_ind[j]];
+        tmp += A.vad[j] * x.data()[A.col_ind[j]];
       }
     }
     x.data()[i] -= tmp * D.data()[i];
@@ -84,14 +84,14 @@ void sor_kernel_precond(const monolish::matrix::Dense<T> &A, const vector<T> &D,
   for (int i = 0; i < (int)A.get_row(); i++) {
     auto tmp = b_tmp.data()[i];
     for (int j = 0; j < i; j++) {
-      tmp -= A.val[i * A.get_col() + j] * x.data()[j];
+      tmp -= A.vad[i * A.get_col() + j] * x.data()[j];
     }
     x.data()[i] = tmp * D.data()[i];
   }
   for (int i = (int)A.get_row() - 1; i >= 0; i--) {
     auto tmp = 0.0;
     for (int j = (int)A.get_col(); j > i; j--) {
-      tmp += A.val[i * A.get_col() + j] * x.data()[j];
+      tmp += A.vad[i * A.get_col() + j] * x.data()[j];
     }
     x.data()[i] -= tmp * D.data()[i];
   }

@@ -4,7 +4,7 @@
 template <typename T> void ans_sinh(monolish::matrix::Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.val[i] = std::sinh(A.val[i]);
+    A.vad[i] = std::sinh(A.vad[i]);
   }
 }
 
@@ -30,7 +30,7 @@ bool test_send_msinh(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
                       AA.get_nnz(), tol);
 }
 
@@ -54,6 +54,6 @@ bool test_msinh(const size_t M, const size_t N, double tol) {
   monolish::vml::sinh(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
                       AA.get_nnz(), tol);
 }

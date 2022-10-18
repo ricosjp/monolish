@@ -20,7 +20,7 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const T *vald = val.data();
+    const T *vald = vad;
 #pragma omp target
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
@@ -34,7 +34,7 @@ template <typename T> void Dense<T>::print_all(bool force_cpu) const {
   } else {
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = decltype(get_col()){0}; j < get_col(); j++) {
-        std::cout << i + 1 << " " << j + 1 << " " << val[i * get_col() + j]
+        std::cout << i + 1 << " " << j + 1 << " " << vad[i * get_col() + j]
                   << std::endl;
       }
     }

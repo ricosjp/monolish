@@ -290,7 +290,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void resize(size_t N) {
+  void resize(size_t N, Float val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
@@ -300,10 +300,15 @@ public:
       for (size_t i = 0; i < copy_size; i++){
         tmp[i] = vad[i];
       }
+      for (size_t i = copy_size; i < N; i++){
+        tmp[i] = val;
+      }
       delete [] vad;
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
+    }else{
+      throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
 
@@ -319,10 +324,15 @@ public:
     }
     if(vad_create_flag){
       if(vad_nnz >= alloc_nnz){
-        resize(2*alloc_nnz+1);
+        size_t tmp = vad_nnz;
+        alloc_nnz = 2*alloc_nnz+1;
+        resize(alloc_nnz);
+        vad_nnz = tmp;
       }
       vad[vad_nnz] = val;
       vad_nnz++;
+    }else{
+      throw std::runtime_error("Error, not create vector cant use push_back");
     }
   }
 

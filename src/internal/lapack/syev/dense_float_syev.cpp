@@ -37,7 +37,7 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
     throw std::runtime_error("uplo should be U or L");
   }
   monolish::util::send(A, W);
-  float *Avald = A.val.data();
+  float *Avald = A.vad;
   float *Wd = W.data();
 #pragma omp target data use_device_ptr(Avald, Wd)
   {
@@ -66,7 +66,7 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
   int liwork = -1;
   std::vector<int> iwork(1);
   // workspace query; no error returned
-  ssyevd_(jobz, uplo, &size, A.val.data(), &size, W.data(), work.data(), &lwork,
+  ssyevd_(jobz, uplo, &size, A.vad, &size, W.data(), work.data(), &lwork,
           iwork.data(), &liwork, &info);
 
   // workspace preparation
@@ -75,7 +75,7 @@ int internal::lapack::syevd(matrix::Dense<float> &A, vector<float> &W,
   liwork = iwork[0];
   iwork.resize(liwork);
   // actual calculation
-  ssyevd_(jobz, uplo, &size, A.val.data(), &size, W.data(), work.data(), &lwork,
+  ssyevd_(jobz, uplo, &size, A.vad, &size, W.data(), work.data(), &lwork,
           iwork.data(), &liwork, &info);
 #endif
   logger.func_out();

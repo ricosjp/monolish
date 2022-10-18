@@ -2,7 +2,7 @@
 #include "monolish_blas.hpp"
 
 template <typename T> T ans_max(monolish::matrix::Dense<T> &A) {
-  return *(std::max_element(A.val.begin(), A.val.end()));
+  return *(std::max_element(A.vad, A.vad+A.get_nnz()));
 }
 
 template <typename MAT, typename T>

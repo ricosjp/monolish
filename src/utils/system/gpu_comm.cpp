@@ -91,7 +91,7 @@ template <typename T> void matrix::CRS<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *vald = val.data();
+  const T *vald = vad;
   const auto *cold = col_ind.data();
   const auto *rowd = row_ptr.data();
   const auto N = get_row();
@@ -116,7 +116,7 @@ template <typename T> void matrix::CRS<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
+    T *vald = vad;
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
     auto N = get_row();
@@ -137,7 +137,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
+    T *vald = vad;
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
     auto N = get_row();
@@ -156,7 +156,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *vald = val.data();
+    const T *vald = vad;
     const auto *cold = col_ind.data();
     const auto *rowd = row_ptr.data();
     const auto N = get_row();
@@ -188,7 +188,7 @@ template <typename T> void matrix::Dense<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *vald = val.data();
+  const T *vald = vad;
   const auto nnz = get_nnz();
 
   if (gpu_status == true) {
@@ -208,7 +208,7 @@ template <typename T> void matrix::Dense<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
+    T *vald = vad;
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
@@ -225,7 +225,7 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = val.data();
+    T *vald = vad;
     auto nnz = get_nnz();
 
 #pragma omp target update from(vald [0:nnz])
@@ -241,7 +241,7 @@ template <typename T> void matrix::Dense<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *vald = val.data();
+    const T *vald = vad;
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])

@@ -4,7 +4,7 @@
 template <typename T> void ans_reciprocal(monolish::matrix::Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.val[i] = 1 / A.val[i];
+    A.vad[i] = 1 / A.vad[i];
   }
 }
 
@@ -30,7 +30,7 @@ bool test_send_mreciprocal(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
                       AA.get_nnz(), tol);
 }
 
@@ -54,6 +54,6 @@ bool test_mreciprocal(const size_t M, const size_t N, double tol) {
   monolish::vml::reciprocal(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
                       AA.get_nnz(), tol);
 }

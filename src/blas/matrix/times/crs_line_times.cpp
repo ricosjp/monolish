@@ -17,8 +17,8 @@ void times_row_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
   assert(A.get_col() == x.size());
   assert(A.get_row() >= num);
 
-  const auto *Ad = A.val.data();
-  auto *Cd = C.val.data();
+  const auto *Ad = A.vad;
+  auto *Cd = C.vad;
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
 
@@ -57,8 +57,8 @@ void times_col_core(const matrix::CRS<T> &A, const size_t num, const VEC &x,
   assert(A.get_row() == x.size());
   assert(A.get_col() >= num);
 
-  const auto *Ad = A.val.data();
-  auto *Cd = C.val.data();
+  const auto *Ad = A.vad;
+  auto *Cd = C.vad;
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
   const auto n = A.get_row();

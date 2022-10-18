@@ -21,7 +21,7 @@ void ans_matvec(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
 
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
-      y[i] += A.val[N * i + j] * x[j];
+      y[i] += A.vad[N * i + j] * x[j];
     }
   }
 }

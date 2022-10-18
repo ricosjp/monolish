@@ -21,7 +21,7 @@ int internal::lapack::getrf(matrix::Dense<float> &A, std::vector<int> &ipiv) {
   int info = 0;
   const int M = (int)A.get_row();
   const int N = (int)A.get_col();
-  float *Ad = A.val.data();
+  float *Ad = A.vad;
   int *ipivd = ipiv.data();
 
   if (A.get_device_mem_stat()) {
