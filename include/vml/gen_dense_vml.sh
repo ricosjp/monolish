@@ -236,6 +236,32 @@ done
 echo ""
 #############################################
 
+## Dense matrix 
+echo "
+/**
+* \defgroup vml_dnsaslu monolish::vml::alo
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+*/ "
+for prec in double float; do
+  echo "void alo(const matrix::Dense<$prec> &A, const $prec alpha, const $prec beta, const matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+echo ""
+#############################################
+
 ## reciprocal
 echo "
 /**

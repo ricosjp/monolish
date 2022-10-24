@@ -557,5 +557,34 @@ void vmin(const size_t N, const double *a, const double alpha, double *y,
   logger.func_out();
 }
 
+//////////////
+// alo
+//////////////
+void valo(const size_t N, const double *a, const double alpha,
+          const double beta, double *y, bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  double gamma = beta - alpha;
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_NVIDIA_GPU
+#pragma omp target teams distribute parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = alpha * a[i] + gamma * std::min(a[i], (double)0.0);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = alpha * a[i] + gamma * std::min(a[i], (double)0.0);
+    }
+  }
+  logger.func_out();
+}
+
 } // namespace internal
 } // namespace monolish

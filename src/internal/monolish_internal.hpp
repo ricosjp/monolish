@@ -138,6 +138,8 @@ void vmax(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
 void vmin(const size_t N, const double *a, const double alpha, double *y,
           bool gpu_status);
+void valo(const size_t N, const double *a, const double alpha,
+          const double beta, double *y, bool gpu_status);
 
 void vsqrt(const size_t N, const float *a, float *y, bool gpu_status);
 void vpow(const size_t N, const float *a, const float *b, float *y,
@@ -165,6 +167,8 @@ void vmax(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
 void vmin(const size_t N, const float *a, const float alpha, float *y,
           bool gpu_status);
+void valo(const size_t N, const float *a, const float alpha, const float beta,
+          float *y, bool gpu_status);
 
 size_t vhash(const size_t N, const int *y, const int seed_value,
              bool gpu_status);

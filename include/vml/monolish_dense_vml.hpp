@@ -584,6 +584,30 @@ void min(const matrix::Dense<float> &A, const float alpha,
 /**@}*/
 
 /**
+ * \defgroup vml_dnsaslu monolish::vml::alo
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void alo(const matrix::Dense<double> &A, const double alpha, const double beta,
+         const matrix::Dense<double> &C);
+void alo(const matrix::Dense<float> &A, const float alpha, const float beta,
+         const matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup vml_dnsreciprocal monolish::vml::reciprocal
  * @brief Compute reciprocal to Dense matrix elements (C[0:nnz] = 1 / A[0:nnz])
  * @{

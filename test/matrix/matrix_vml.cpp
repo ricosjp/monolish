@@ -29,6 +29,8 @@
 #include "vml/sm_min.hpp"
 #include "vml/sm_pow.hpp"
 
+#include "vml/m_alo.hpp"
+
 int main(int argc, char **argv) {
 
   if (argc != 4) {
@@ -625,6 +627,27 @@ int main(int argc, char **argv) {
   if (test_sm_min<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  // m_alo Dense //
+  if (test_send_m_alo<monolish::matrix::Dense<double>,
+                      monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_m_alo<monolish::matrix::Dense<float>,
+                      monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_m_alo<monolish::matrix::Dense<double>,
+                 monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_m_alo<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
+                 float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 

@@ -8,6 +8,7 @@
 #include "./math_1_3op/matmax.hpp"
 #include "./math_1_3op/matmin.hpp"
 #include "./math_1_3op/matpow.hpp"
+#include "./math_2op/matalo.hpp"
 #include "./math_2op/matasin.hpp"
 #include "./math_2op/matasinh.hpp"
 #include "./math_2op/matatan.hpp"
@@ -106,6 +107,15 @@ void pow(const matrix::Dense<double> &A, const double alpha,
 void pow(const matrix::Dense<float> &A, const float alpha,
          matrix::Dense<float> &C) {
   smpow_core(A, alpha, C);
+}
+
+void alo(const matrix::Dense<double> &A, const double alpha, const double beta,
+         matrix::Dense<double> &C) {
+  malo_core(A, alpha, beta, C);
+}
+void alo(const matrix::Dense<float> &A, const float alpha, const float beta,
+         matrix::Dense<float> &C) {
+  malo_core(A, alpha, beta, C);
 }
 
 void sin(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
@@ -315,6 +325,15 @@ void pow(const matrix::CRS<double> &A, const double alpha,
 void pow(const matrix::CRS<float> &A, const float alpha,
          matrix::CRS<float> &C) {
   smpow_core(A, alpha, C);
+}
+
+void alo(const matrix::CRS<double> &A, const double alpha, const double beta,
+         matrix::CRS<double> &C) {
+  malo_core(A, alpha, beta, C);
+}
+void alo(const matrix::CRS<float> &A, const float alpha, const float beta,
+         matrix::CRS<float> &C) {
+  malo_core(A, alpha, beta, C);
 }
 
 void sin(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
