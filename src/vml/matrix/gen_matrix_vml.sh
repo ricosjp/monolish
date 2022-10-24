@@ -57,6 +57,7 @@ for prec in double float; do
   echo "void pow(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mmpow_core(A, B, C);}"
 done
 
+## matrix-scalar pow
 for prec in double float; do
   echo "void pow(const matrix::$MAT<$prec> &A, const $prec alpha, matrix::$MAT<$prec> &C){smpow_core(A, alpha, C);}"
 done
@@ -80,6 +81,17 @@ funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
     echo "void ${func}(const matrix::$MAT<$prec> &A, const matrix::$MAT<$prec> &B, matrix::$MAT<$prec> &C){mm${func}_core(A, B, C);}"
+  done
+done
+
+echo ""
+
+## matrix-scalar max min
+detail=(greatest smallest)
+funcs=(max min)
+for func in ${funcs[@]}; do
+  for prec in double float; do
+    echo "void ${func}(const matrix::$MAT<$prec> &A, const $prec alpha, matrix::$MAT<$prec> &C){sm${func}_core(A, alpha, C);}"
   done
 done
 

@@ -179,6 +179,35 @@ done
 
 echo ""
 
+## matrix-scalar max min
+detail=(greatest smallest)
+func=(max min)
+for i in ${!detail[@]}; do
+echo "
+/**
+* \defgroup vml_sdns${func[$i]} monolish::vml::${func[$i]}
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or constant (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or constant (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const $prec alpha, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+done
+
+echo ""
+
 ## Dense matrix max min
 detail=(greatest smallest)
 func=(max min)

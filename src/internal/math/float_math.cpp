@@ -452,6 +452,34 @@ void vmax(const size_t N, const float *a, const float *b, float *y,
   logger.func_out();
 }
 
+void vmax(const size_t N, const float *a, const float b, float *y,
+          bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  const float *bd = &b;
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_NVIDIA_GPU
+#pragma omp target enter data map(to : bd [0:1])
+#pragma omp target teams distribute parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = std::max(a[i], bd[0]);
+    }
+#pragma omp target exit data map(from : bd [0:1])
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = std::max(a[i], bd[0]);
+    }
+  }
+  logger.func_out();
+}
+
 //////////////
 // min
 //////////////
@@ -484,6 +512,7 @@ float vmin(const size_t N, const float *y, bool gpu_status) {
   logger.func_out();
   return min;
 }
+
 void vmin(const size_t N, const float *a, const float *b, float *y,
           bool gpu_status) {
   Logger &logger = Logger::get_instance();
@@ -503,6 +532,34 @@ void vmin(const size_t N, const float *a, const float *b, float *y,
 #pragma omp parallel for
     for (auto i = decltype(N){0}; i < N; i++) {
       y[i] = std::min(a[i], b[i]);
+    }
+  }
+  logger.func_out();
+}
+
+void vmin(const size_t N, const float *a, const float b, float *y,
+          bool gpu_status) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  const float *bd = &b;
+
+  if (gpu_status == true) {
+#if MONOLISH_USE_NVIDIA_GPU
+#pragma omp target enter data map(to : bd [0:1])
+#pragma omp target teams distribute parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = std::min(a[i], bd[0]);
+    }
+#pragma omp target exit data map(from : bd [0:1])
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+#pragma omp parallel for
+    for (auto i = decltype(N){0}; i < N; i++) {
+      y[i] = std::min(a[i], bd[0]);
     }
   }
   logger.func_out();

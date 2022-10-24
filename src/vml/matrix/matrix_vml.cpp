@@ -204,6 +204,23 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
   mmmin_core(A, B, C);
 }
 
+void max(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C) {
+  smmax_core(A, alpha, C);
+}
+void max(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C) {
+  smmax_core(A, alpha, C);
+}
+void min(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C) {
+  smmin_core(A, alpha, C);
+}
+void min(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C) {
+  smmin_core(A, alpha, C);
+}
+
 double max(const matrix::Dense<double> &C) {
   return mmax_core<matrix::Dense<double>, double>(C);
 }
@@ -394,6 +411,23 @@ void min(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
 void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
          matrix::CRS<float> &C) {
   mmmin_core(A, B, C);
+}
+
+void max(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C) {
+  smmax_core(A, alpha, C);
+}
+void max(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C) {
+  smmax_core(A, alpha, C);
+}
+void min(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C) {
+  smmin_core(A, alpha, C);
+}
+void min(const matrix::CRS<float> &A, const float alpha,
+         matrix::CRS<float> &C) {
+  smmin_core(A, alpha, C);
 }
 
 double max(const matrix::CRS<double> &C) {

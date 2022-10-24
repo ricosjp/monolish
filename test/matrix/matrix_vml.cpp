@@ -25,6 +25,8 @@
 #include "vml/mm_max.hpp"
 #include "vml/mm_min.hpp"
 #include "vml/mm_pow.hpp"
+#include "vml/sm_max.hpp"
+#include "vml/sm_min.hpp"
 #include "vml/sm_pow.hpp"
 
 int main(int argc, char **argv) {
@@ -577,6 +579,50 @@ int main(int argc, char **argv) {
   }
   if (test_mm_min<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // sm_max Dense//
+  if (test_send_sm_max<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_max<monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_max<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_max<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // mm_min Dense//
+  if (test_send_sm_min<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_sm_min<monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_min<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_sm_min<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
