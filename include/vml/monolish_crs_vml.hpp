@@ -547,6 +547,56 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
 /**@}*/
 
 /**
+ * \defgroup vml_scrsmax monolish::vml::max
+ * @brief Create a new CRS matrix with greatest elements of CRS matrix or scalar
+ * (C[0:nnz] = max(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new CRS matrix with greatest elements of CRS matrix or scalar
+ * (C[0:nnz] = max(A[0:nnz], alpha))
+ * @param A monolish CRS matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */
+void max(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C);
+void max(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup vml_scrsmin monolish::vml::min
+ * @brief Create a new CRS matrix with smallest elements of CRS matrix or scalar
+ * (C[0:nnz] = min(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new CRS matrix with smallest elements of CRS matrix or scalar
+ * (C[0:nnz] = min(A[0:nnz], alpha))
+ * @param A monolish CRS matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */
+void min(const matrix::CRS<double> &A, const double alpha,
+         matrix::CRS<double> &C);
+void min(const matrix::CRS<float> &A, const float alpha, matrix::CRS<float> &C);
+/**@}*/
+
+/**
  * \defgroup vml_crsmax monolish::vml::max
  * @brief Finds the greatest element in CRS matrix (max(C[0:nnz]))
  * @{
@@ -584,6 +634,30 @@ void min(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
  */
 [[nodiscard]] double min(const matrix::CRS<double> &C);
 [[nodiscard]] float min(const matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup vml_scrsalo monolish::vml::alo
+ * @brief Asymmetric linear operation to CRS matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to CRS matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish CRS matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void alo(const matrix::CRS<double> &A, const double alpha, const double beta,
+         matrix::CRS<double> &C);
+void alo(const matrix::CRS<float> &A, const float alpha, const float beta,
+         matrix::CRS<float> &C);
 /**@}*/
 
 /**

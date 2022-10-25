@@ -179,6 +179,35 @@ done
 
 echo ""
 
+## matrix-scalar max min
+detail=(greatest smallest)
+func=(max min)
+for i in ${!detail[@]}; do
+echo "
+/**
+* \defgroup vml_sdns${func[$i]} monolish::vml::${func[$i]}
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const $prec alpha, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+done
+
+echo ""
+
 ## Dense matrix max min
 detail=(greatest smallest)
 func=(max min)
@@ -203,6 +232,32 @@ for prec in double float; do
 done
 echo "/**@}*/"
 done
+
+echo ""
+#############################################
+
+## Dense matrix alo
+echo "
+/**
+* \defgroup vml_sdnsalo monolish::vml::alo
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+*/ "
+for prec in double float; do
+  echo "void alo(const matrix::Dense<$prec> &A, const $prec alpha, const $prec beta, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
 
 echo ""
 #############################################

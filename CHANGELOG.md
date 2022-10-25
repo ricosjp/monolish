@@ -20,6 +20,10 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Added
+
+- Add max/min/alo for scalar-matrix/scalar-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/482> <https://github.com/ricosjp/monolish/issues/713>
+
 ### Changed
 - Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468>
 
