@@ -2,14 +2,13 @@
 
 template <typename T>
 void ans_svmin(monolish::vector<T> &mx, const T alpha,
-                monolish::vector<T> &ans) {
-  for(size_t i = 0; i < mx.size(); i++) {
+               monolish::vector<T> &ans) {
+  for (size_t i = 0; i < mx.size(); i++) {
     ans[i] = std::min(mx[i], alpha);
   }
 }
 
-template <typename T>
-bool test_send_svmin(const size_t size, double tol) {
+template <typename T> bool test_send_svmin(const size_t size, double tol) {
 
   monolish::vector<T> x(size, 0.1, 1.0, test_random_engine());
   T alpha = 0.5;
