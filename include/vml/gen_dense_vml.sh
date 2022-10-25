@@ -186,11 +186,11 @@ for i in ${!detail[@]}; do
 echo "
 /**
 * \defgroup vml_sdns${func[$i]} monolish::vml::${func[$i]}
- * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or constant (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
  * @{
  */
 /**
- * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or constant (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @brief Create a new Dense matrix with ${detail[$i]} elements of Dense matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
  * @param A monolish Dense matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish Dense matrix (size M x N)
@@ -236,10 +236,10 @@ done
 echo ""
 #############################################
 
-## Dense matrix 
+## Dense matrix alo
 echo "
 /**
-* \defgroup vml_dnsaslu monolish::vml::alo
+* \defgroup vml_sdnsalo monolish::vml::alo
  * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
  * @{
  */

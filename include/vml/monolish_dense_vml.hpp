@@ -502,12 +502,12 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 /**
  * \defgroup vml_sdnsmax monolish::vml::max
  * @brief Create a new Dense matrix with greatest elements of Dense matrix or
- * constant (C[0:nnz] = max(A[0:nnz], alpha))
+ * scalar (C[0:nnz] = max(A[0:nnz], alpha))
  * @{
  */
 /**
  * @brief Create a new Dense matrix with greatest elements of Dense matrix or
- * constant (C[0:nnz] = max(A[0:nnz], alpha))
+ * scalar (C[0:nnz] = max(A[0:nnz], alpha))
  * @param A monolish Dense matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish Dense matrix (size M x N)
@@ -526,12 +526,12 @@ void max(const matrix::Dense<float> &A, const float alpha,
 /**
  * \defgroup vml_sdnsmin monolish::vml::min
  * @brief Create a new Dense matrix with smallest elements of Dense matrix or
- * constant (C[0:nnz] = min(A[0:nnz], alpha))
+ * scalar (C[0:nnz] = min(A[0:nnz], alpha))
  * @{
  */
 /**
  * @brief Create a new Dense matrix with smallest elements of Dense matrix or
- * constant (C[0:nnz] = min(A[0:nnz], alpha))
+ * scalar (C[0:nnz] = min(A[0:nnz], alpha))
  * @param A monolish Dense matrix (size M x N)
  * @param alpha scalar value
  * @param C monolish Dense matrix (size M x N)
@@ -584,7 +584,7 @@ void min(const matrix::Dense<float> &A, const float alpha,
 /**@}*/
 
 /**
- * \defgroup vml_dnsaslu monolish::vml::alo
+ * \defgroup vml_sdnsalo monolish::vml::alo
  * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha
  * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
  * @{

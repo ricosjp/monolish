@@ -1214,6 +1214,74 @@ void min(const view1D<vector<float>, float> &a,
 /**@}*/
 
 /**
+ * \defgroup vml_svecmax monolish::vml::max
+ * @brief Create a new vector with greatest elements of vector or scalar (y[0:N]
+ * = max(a[0:N], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new vector with greatest elements of vector or scalar (y[0:N]
+ * = max(a[0:N], alpha))
+ * @param a monolish vector (size N)
+ * @param alpha scalar value
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void max(const vector<double> &a, const double alpha, vector<double> &y);
+void max(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y);
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y);
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y);
+void max(const vector<float> &a, const float alpha, vector<float> &y);
+void max(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y);
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y);
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y);
+/**@}*/
+
+/**
+ * \defgroup vml_svecmin monolish::vml::min
+ * @brief Create a new vector with smallest elements of vector or scalar (y[0:N]
+ * = min(a[0:N], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new vector with smallest elements of vector or scalar (y[0:N]
+ * = min(a[0:N], alpha))
+ * @param a monolish vector (size N)
+ * @param alpha scalar value
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void min(const vector<double> &a, const double alpha, vector<double> &y);
+void min(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y);
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y);
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y);
+void min(const vector<float> &a, const float alpha, vector<float> &y);
+void min(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y);
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y);
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y);
+/**@}*/
+
+/**
  * \defgroup vml_vecmax monolish::vml::max
  * @brief Finds the greatest element in vector (max(y[0:N]))
  * @{
@@ -1255,6 +1323,42 @@ void min(const view1D<vector<float>, float> &a,
 [[nodiscard]] float min(const vector<float> &y);
 [[nodiscard]] float min(const view1D<vector<float>, float> &y);
 [[nodiscard]] float min(const view1D<matrix::Dense<float>, float> &y);
+/**@}*/
+
+/**
+ * \defgroup vml_svecalo monolish::vml::alo
+ * @brief Asymmetric linear operation to vector elements (y[0:nnz] = alpha
+ * max(a[0:nnz], 0) + beta min(a[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to vector elements (y[0:nnz] = alpha
+ * max(a[0:nnz], 0) + beta min(a[0:nnz], 0))
+ * @param a monolish vector (size N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void alo(const vector<double> &a, const double alpha, const double beta,
+         vector<double> &y);
+void alo(const vector<double> &a, const double alpha, const double beta,
+         view1D<vector<double>, double> &y);
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, vector<double> &y);
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, view1D<vector<double>, double> &y);
+void alo(const vector<float> &a, const float alpha, const float beta,
+         vector<float> &y);
+void alo(const vector<float> &a, const float alpha, const float beta,
+         view1D<vector<float>, float> &y);
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, vector<float> &y);
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, view1D<vector<float>, float> &y);
 /**@}*/
 
 /**
