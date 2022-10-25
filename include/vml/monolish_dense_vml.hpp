@@ -602,9 +602,9 @@ void min(const matrix::Dense<float> &A, const float alpha,
  * - GPU acceleration: true
  */
 void alo(const matrix::Dense<double> &A, const double alpha, const double beta,
-         const matrix::Dense<double> &C);
+         matrix::Dense<double> &C);
 void alo(const matrix::Dense<float> &A, const float alpha, const float beta,
-         const matrix::Dense<float> &C);
+         matrix::Dense<float> &C);
 /**@}*/
 
 /**

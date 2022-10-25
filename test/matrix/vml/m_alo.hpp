@@ -1,17 +1,17 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_m_alo(const monolish::matrix::Dense<T> &A, const T alpha,
-                const T beta, monolish::matrix::Dense<T> &C) {
+void ans_m_alo(const monolish::matrix::Dense<T> &A, const T alpha, const T beta,
+               monolish::matrix::Dense<T> &C) {
 
   // MN=MN+MN
   int M = A.get_row();
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    if(A.val[i] > 0){
+    if (A.val[i] > 0) {
       C.val[i] = alpha * A.val[i];
-    }else{
+    } else {
       C.val[i] = beta * A.val[i];
     }
   }

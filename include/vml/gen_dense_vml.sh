@@ -255,7 +255,7 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void alo(const matrix::Dense<$prec> &A, const $prec alpha, const $prec beta, const matrix::Dense<$prec> &C);"
+  echo "void alo(const matrix::Dense<$prec> &A, const $prec alpha, const $prec beta, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
 
