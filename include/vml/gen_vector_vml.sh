@@ -213,6 +213,39 @@ done
 
 echo ""
 
+## vector-scalar max min
+detail=(greatest smallest)
+func=(max min)
+for i in ${!detail[@]}; do
+echo "
+/**
+ * \defgroup vml_svec${func[$i]} monolish::vml::${func[$i]}
+ * @brief Create a new vector with ${detail[$i]} elements of vector or scalar (y[0:N] = ${func[$i]}(a[0:N], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new vector with ${detail[$i]} elements of vector or scalar (y[0:N] = ${func[$i]}(a[0:N], alpha))
+ * @param a monolish vector (size N)
+ * @param alpha scalar value
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/"
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+      echo "void ${func[$i]}(const $arg1 &a, const $prec alpha, $arg2 &y);"
+    done
+  done
+done
+echo "/**@}*/"
+done
+
+echo ""
+
 ## vector max min
 detail=(greatest smallest)
 func=(max min)
@@ -239,6 +272,36 @@ for prec in double float; do
 done
 echo "/**@}*/"
 done
+
+echo ""
+#############################################
+
+## vector alo
+echo "
+/**
+* \defgroup vml_svecalo monolish::vml::alo
+ * @brief Asymmetric linear operation to vector elements (y[0:nnz] = alpha max(a[0:nnz], 0) + beta min(a[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to vector elements (y[0:nnz] = alpha max(a[0:nnz], 0) + beta min(a[0:nnz], 0))
+ * @param a monolish vector (size N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+*/ "
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+      echo "void alo(const $arg1 &a, const $prec alpha, const $prec beta, $arg2 &y);"
+    done
+  done
+done
+echo "/**@}*/"
 
 echo ""
 #############################################

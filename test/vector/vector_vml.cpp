@@ -10,6 +10,8 @@
 #include "vml/vv_mul.hpp"
 #include "vml/vv_sub.hpp"
 
+#include "vml/sv_max.hpp"
+#include "vml/sv_min.hpp"
 #include "vml/sv_pow.hpp"
 #include "vml/v_asin.hpp"
 #include "vml/v_asinh.hpp"
@@ -29,6 +31,8 @@
 #include "vml/vv_max.hpp"
 #include "vml/vv_min.hpp"
 #include "vml/vv_pow.hpp"
+
+#include "vml/v_alo.hpp"
 
 int main(int argc, char **argv) {
 
@@ -457,6 +461,48 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vvmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // svmax //
+  if (test_svmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_svmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_svmax<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_svmax<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // svmin //
+  if (test_svmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_svmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_svmin<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_svmin<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // v_alo //
+  if (test_valo<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_valo<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_valo<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_valo<float>(size, 1.0e-4) == false) {
     return 1;
   }
 

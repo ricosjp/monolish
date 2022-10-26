@@ -8,6 +8,7 @@
 #include "./math_1_3op/vecmax.hpp"
 #include "./math_1_3op/vecmin.hpp"
 #include "./math_1_3op/vecpow.hpp"
+#include "./math_2op/vecalo.hpp"
 #include "./math_2op/vecasin.hpp"
 #include "./math_2op/vecasinh.hpp"
 #include "./math_2op/vecatan.hpp"
@@ -1539,6 +1540,39 @@ void pow(const view1D<matrix::Dense<float>, float> &a, const float alpha,
   svpow_core(a, alpha, y);
 }
 
+void alo(const vector<double> &a, const double alpha, const double beta,
+         vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<double> &a, const double alpha, const double beta,
+         view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+
 void sin(const vector<double> &a, vector<double> &y) { vsin_core(a, y); }
 void sin(const vector<double> &a, view1D<vector<double>, double> &y) {
   vsin_core(a, y);
@@ -2765,6 +2799,67 @@ void min(const view1D<matrix::Dense<float>, float> &a,
          const view1D<matrix::Dense<float>, float> &b,
          view1D<matrix::Dense<float>, float> &y) {
   vvmin_core(a, b, y);
+}
+
+void max(const vector<double> &a, const double alpha, vector<double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<float> &a, const float alpha, vector<float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmax_core(a, alpha, y);
+}
+void min(const vector<double> &a, const double alpha, vector<double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<float> &a, const float alpha, vector<float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmin_core(a, alpha, y);
 }
 
 double max(const vector<double> &y) {

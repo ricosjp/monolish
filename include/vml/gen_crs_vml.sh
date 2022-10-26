@@ -192,6 +192,37 @@ done
 
 echo ""
 
+## matrix-scalar max min
+detail=(greatest smallest)
+func=(max min)
+for i in ${!detail[@]}; do
+echo "
+/**
+ * \defgroup vml_scrs${func[$i]} monolish::vml::${func[$i]}
+ * @brief Create a new CRS matrix with ${detail[$i]} elements of CRS matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new CRS matrix with ${detail[$i]} elements of CRS matrix or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
+ * @param A monolish CRS matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+*/ "
+for prec in double float; do
+  echo "void ${func[$i]}(const matrix::CRS<$prec> &A, const $prec alpha, matrix::CRS<$prec> &C);"
+done
+echo "/**@}*/"
+done
+
+echo ""
+
 ## CRS matrix max min
 detail=(greatest smallest)
 func=(max min)
@@ -218,6 +249,32 @@ for prec in double float; do
 done
 echo "/**@}*/"
 done
+
+echo ""
+#############################################
+
+## CRS matrix alo
+echo "
+/**
+* \defgroup vml_scrsalo monolish::vml::alo
+ * @brief Asymmetric linear operation to CRS matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to CRS matrix elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish CRS matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish CRS matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+*/ "
+for prec in double float; do
+  echo "void alo(const matrix::CRS<$prec> &A, const $prec alpha, const $prec beta, matrix::CRS<$prec> &C);"
+done
+echo "/**@}*/"
 
 echo ""
 #############################################
