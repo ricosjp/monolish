@@ -23,6 +23,8 @@ Unreleased
 ### Added
 
 - Add max/min/alo for scalar-matrix/scalar-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/482> <https://github.com/ricosjp/monolish/issues/713>
+- Add exp for vector/Dense-matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/483> <https://github.com/ricosjp/monolish/issues/716>
+
 
 ### Changed
 - Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468>

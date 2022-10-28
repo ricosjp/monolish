@@ -1110,6 +1110,32 @@ void sign(const view1D<vector<float>, float> &a,
 /**@}*/
 
 /**
+ * \defgroup vml_vecexp monolish::vml::exp
+ * @brief exp to vector elements (y[0:N] = exp(a[0:N]))
+ * @{
+ */
+/**
+ * @brief exp to vector elements (y[0:N] = exp(a[0:N]))
+ * @param a monolish vector (size N)
+ * @param y monolish vector (size N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void exp(const vector<double> &a, vector<double> &y);
+void exp(const vector<double> &a, view1D<vector<double>, double> &y);
+void exp(const view1D<vector<double>, double> &a, vector<double> &y);
+void exp(const view1D<vector<double>, double> &a,
+         view1D<vector<double>, double> &y);
+void exp(const vector<float> &a, vector<float> &y);
+void exp(const vector<float> &a, view1D<vector<float>, float> &y);
+void exp(const view1D<vector<float>, float> &a, vector<float> &y);
+void exp(const view1D<vector<float>, float> &a,
+         view1D<vector<float>, float> &y);
+/**@}*/
+
+/**
  * \defgroup vml_vvecmax monolish::vml::max
  * @brief Create a new vector with greatest elements of two matrices (y[0:N] =
  * max(a[0:N], b[0:N]))

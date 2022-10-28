@@ -124,7 +124,7 @@ echo "/**@}*/"
 echo ""
 #############################################
 ## 2arg math
-math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign)
+math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign exp)
 for math in ${math[@]}; do
 echo "
 /**

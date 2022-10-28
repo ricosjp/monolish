@@ -14,6 +14,7 @@
 #include "./math_2op/vecatan.hpp"
 #include "./math_2op/vecatanh.hpp"
 #include "./math_2op/vecceil.hpp"
+#include "./math_2op/vecexp.hpp"
 #include "./math_2op/vecfloor.hpp"
 #include "./math_2op/vecreciprocal.hpp"
 #include "./math_2op/vecsign.hpp"
@@ -2334,6 +2335,64 @@ void reciprocal(const view1D<matrix::Dense<float>, float> &a,
 void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<matrix::Dense<float>, float> &y) {
   vreciprocal_core(a, y);
+}
+void exp(const vector<double> &a, vector<double> &y) { vexp_core(a, y); }
+void exp(const vector<double> &a, view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<double> &a, view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a, vector<double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a,
+         view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a,
+         view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a, vector<double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a,
+         view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a,
+         view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<float> &a, vector<float> &y) { vexp_core(a, y); }
+void exp(const vector<float> &a, view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<float> &a, view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a, vector<float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a,
+         view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a,
+         view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a, vector<float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a,
+         view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a,
+         view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
 }
 
 void max(const vector<double> &a, const vector<double> &b, vector<double> &y) {
