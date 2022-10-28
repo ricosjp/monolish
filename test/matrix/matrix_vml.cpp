@@ -12,6 +12,7 @@
 #include "vml/m_atan.hpp"
 #include "vml/m_atanh.hpp"
 #include "vml/m_ceil.hpp"
+#include "vml/m_exp.hpp"
 #include "vml/m_floor.hpp"
 #include "vml/m_max.hpp"
 #include "vml/m_min.hpp"
@@ -497,6 +498,23 @@ int main(int argc, char **argv) {
   }
   if (test_mreciprocal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  // mexp Dense //
+  if (test_send_mexp<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mexp<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mexp<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mexp<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -1074,6 +1092,24 @@ int main(int argc, char **argv) {
       false) {
     return 1;
   }
+
+  // mexp CRS //
+  /*
+  if (test_send_mexp<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mexp<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mexp<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mexp<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  */
 
   // mmax CRS //
   if (test_send_mmax<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==

@@ -128,6 +128,7 @@ void vatanh(const size_t N, const double *a, double *y, bool gpu_status);
 void vceil(const size_t N, const double *a, double *y, bool gpu_status);
 void vfloor(const size_t N, const double *a, double *y, bool gpu_status);
 void vsign(const size_t N, const double *a, double *y, bool gpu_status);
+void vexp(const size_t N, const double *a, double *y, bool gpu_status);
 double vmax(const size_t N, const double *y, bool gpu_status);
 double vmin(const size_t N, const double *y, bool gpu_status);
 void vmax(const size_t N, const double *a, const double *b, double *y,
@@ -157,6 +158,7 @@ void vatanh(const size_t N, const float *a, float *y, bool gpu_status);
 void vceil(const size_t N, const float *a, float *y, bool gpu_status);
 void vfloor(const size_t N, const float *a, float *y, bool gpu_status);
 void vsign(const size_t N, const float *a, float *y, bool gpu_status);
+void vexp(const size_t N, const float *a, float *y, bool gpu_status);
 float vmax(const size_t N, const float *y, bool gpu_status);
 float vmin(const size_t N, const float *y, bool gpu_status);
 void vmax(const size_t N, const float *a, const float *b, float *y,
