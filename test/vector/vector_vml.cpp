@@ -18,6 +18,7 @@
 #include "vml/v_atan.hpp"
 #include "vml/v_atanh.hpp"
 #include "vml/v_ceil.hpp"
+#include "vml/v_exp.hpp"
 #include "vml/v_floor.hpp"
 #include "vml/v_max.hpp"
 #include "vml/v_min.hpp"
@@ -405,6 +406,20 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_send_vreciprocal<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // vexp //
+  if (test_vexp<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_vexp<float>(size, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_send_vexp<double>(size, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_vexp<float>(size, 1.0e-4) == false) {
     return 1;
   }
 

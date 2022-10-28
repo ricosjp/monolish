@@ -14,6 +14,7 @@
 #include "./math_2op/matatan.hpp"
 #include "./math_2op/matatanh.hpp"
 #include "./math_2op/matceil.hpp"
+#include "./math_2op/matexp.hpp"
 #include "./math_2op/matfloor.hpp"
 #include "./math_2op/matreciprocal.hpp"
 #include "./math_2op/matsign.hpp"
@@ -195,6 +196,12 @@ void reciprocal(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
 }
 void reciprocal(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
   mreciprocal_core(A, C);
+}
+void exp(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
+  mexp_core(A, C);
+}
+void exp(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
+  mexp_core(A, C);
 }
 
 void max(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
@@ -414,6 +421,9 @@ void reciprocal(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
 void reciprocal(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
   mreciprocal_core(A, C);
 }
+// void exp(const matrix::CRS<double> &A, matrix::CRS<double> &C){mexp_core(A,
+// C);} void exp(const matrix::CRS<float> &A, matrix::CRS<float>
+// &C){mexp_core(A, C);}
 
 void max(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
          matrix::CRS<double> &C) {

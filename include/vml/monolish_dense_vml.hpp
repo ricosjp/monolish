@@ -452,6 +452,24 @@ void sign(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 /**@}*/
 
 /**
+ * \defgroup vml_dnsexp monolish::vml::exp
+ * @brief exp to Dense matrix elements (C[0:nnz] = exp(A[0:nnz]))
+ * @{
+ */
+/**
+ * @brief exp to Dense matrix elements (C[0:nnz] = exp(A[0:nnz]))
+ * @param A monolish Dense matrix (size M x N)
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void exp(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void exp(const matrix::Dense<float> &A, matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup vml_dnsdnsmax monolish::vml::max
  * @brief Create a new Dense matrix with greatest elements of two matrices
  * (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
