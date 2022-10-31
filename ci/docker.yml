@@ -7,9 +7,8 @@
     - .release
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - echo ${RICOS_GITHUB}
     - docker login -u ricos-info -p ${RICOS_GITHUB} ghcr.io/ricosjp
-    - docker login -u t-hishinuma -p ${GITHUB_TOKEN_HISHINUMA} ghcr.io/ricosjp
+      #- docker login -u t-hishinuma -p ${GITHUB_TOKEN_HISHINUMA} ghcr.io/ricosjp
     - docker-compose build
     - docker-compose push
 
