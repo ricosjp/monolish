@@ -1541,39 +1541,6 @@ void pow(const view1D<matrix::Dense<float>, float> &a, const float alpha,
   svpow_core(a, alpha, y);
 }
 
-void alo(const vector<double> &a, const double alpha, const double beta,
-         vector<double> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const vector<double> &a, const double alpha, const double beta,
-         view1D<vector<double>, double> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const view1D<vector<double>, double> &a, const double alpha,
-         const double beta, vector<double> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const view1D<vector<double>, double> &a, const double alpha,
-         const double beta, view1D<vector<double>, double> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const vector<float> &a, const float alpha, const float beta,
-         vector<float> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const vector<float> &a, const float alpha, const float beta,
-         view1D<vector<float>, float> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const view1D<vector<float>, float> &a, const float alpha,
-         const float beta, vector<float> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-void alo(const view1D<vector<float>, float> &a, const float alpha,
-         const float beta, view1D<vector<float>, float> &y) {
-  vecalo_core(a, alpha, beta, y);
-}
-
 void sin(const vector<double> &a, vector<double> &y) { vsin_core(a, y); }
 void sin(const vector<double> &a, view1D<vector<double>, double> &y) {
   vsin_core(a, y);
@@ -2952,6 +2919,39 @@ float min(const view1D<vector<float>, float> &y) {
 }
 float min(const view1D<matrix::Dense<float>, float> &y) {
   return vmin_core<view1D<matrix::Dense<float>, float>, float>(y);
+}
+
+void alo(const vector<double> &a, const double alpha, const double beta,
+         vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<double> &a, const double alpha, const double beta,
+         view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
 }
 
 } // namespace vml
