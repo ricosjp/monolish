@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Fixed
+- Add missings declaration in the include file of vml <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/485> <https://github.com/ricosjp/monolish/issues/718>
+
 ### Added
 
 - Add max/min/alo for scalar-matrix/scalar-vector <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/482> <https://github.com/ricosjp/monolish/issues/713>
