@@ -83,18 +83,6 @@ done
 echo ""
 #############################################
 
-## scalar-vector alo 
-for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      echo "void alo(const $arg1 &a, const $prec alpha, const $prec beta, $arg2 &y){vecalo_core(a, alpha, beta, y);}"
-    done
-  done
-done
-
-echo ""
-#############################################
-
 ## 2arg math
 math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign reciprocal exp)
 for math in ${math[@]}; do
@@ -152,6 +140,19 @@ done
 
 echo ""
 #############################################
+
+## scalar-vector alo 
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+      echo "void alo(const $arg1 &a, const $prec alpha, const $prec beta, $arg2 &y){vecalo_core(a, alpha, beta, y);}"
+    done
+  done
+done
+
+echo ""
+#############################################
+
 
 echo "
 } // namespace blas
