@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.17.0 - 2022/11/15
+-----------
+
 ### Fixed
 - Add missings declaration in the include file of vml <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/485> <https://github.com/ricosjp/monolish/issues/718>
 
