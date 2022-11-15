@@ -32,6 +32,7 @@ Unreleased
 ### Changed
 - Start developing 0.17.0 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/468>
 - Use new token to push docker container into RICOS github container registry <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/484> <https://github.com/ricosjp/monolish/issues/714>
+- Move include folder path  <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/486> <https://github.com/ricosjp/monolish/issues/719>
 
 0.16.3 - 2022/06/21
 -----------
