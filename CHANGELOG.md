@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Added
+- Add reshape for dense matrix  <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/488> <https://github.com/ricosjp/monolish/issues/720>
+
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>
 
