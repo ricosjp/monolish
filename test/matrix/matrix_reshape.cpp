@@ -15,12 +15,14 @@ bool test_send_reshape(const size_t M, const size_t N, double tol) {
 
   monolish::util::send(A);
   A.reshape(N, M);
-  if(A.get_row() != N || A.get_col() != M){
-    std::cout << "reshape error, reshapeA.row = " << A.get_row() << ", reshapeA.col = " << A.get_col() << std::endl;
+  if (A.get_row() != N || A.get_col() != M) {
+    std::cout << "reshape error, reshapeA.row = " << A.get_row()
+              << ", reshapeA.col = " << A.get_col() << std::endl;
     return false;
   }
 
-  std::cout << __func__ << "(" << A.type() << ")" << " : pass" << std::endl;
+  std::cout << __func__ << "(" << A.type() << ")"
+            << " : pass" << std::endl;
 
   return true;
 }
@@ -39,18 +41,20 @@ bool test_reshape(const size_t M, const size_t N, double tol) {
   MAT A(seedA);
 
   A.reshape(N, M);
-  if(A.get_row() != N || A.get_col() != M){
-    std::cout << "reshape error, reshapeA.row = " << A.get_row() << ", reshapeA.col = " << A.get_col() << std::endl;
+  if (A.get_row() != N || A.get_col() != M) {
+    std::cout << "reshape error, reshapeA.row = " << A.get_row()
+              << ", reshapeA.col = " << A.get_col() << std::endl;
     return false;
   }
 
-  std::cout << __func__ << "(" << A.type() << ")" << " : pass" << std::endl;
+  std::cout << __func__ << "(" << A.type() << ")"
+            << " : pass" << std::endl;
 
   return true;
 }
 
-int main(int argc, char** argv){
-  if(argc != 3) {
+int main(int argc, char **argv) {
+  if (argc != 3) {
     std::cout << "$1: row, $2: col" << std::endl;
     return 1;
   }
@@ -60,20 +64,20 @@ int main(int argc, char** argv){
 
   std::cout << "M=" << M << ", N=" << N << std::endl;
 
-  if(test_send_reshape<monolish::matrix::Dense<double>, double>(
-        M, N, 1.0e-6) == false){
+  if (test_send_reshape<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
     return 1;
   }
-  if(test_send_reshape<monolish::matrix::Dense<float>, float>(
-        M, N, 1.0e-6) == false){
+  if (test_send_reshape<monolish::matrix::Dense<float>, float>(M, N, 1.0e-6) ==
+      false) {
     return 1;
   }
-  if(test_reshape<monolish::matrix::Dense<double>, double>(
-        M, N, 1.0e-6) == false){
+  if (test_reshape<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
     return 1;
   }
-  if(test_reshape<monolish::matrix::Dense<float>, float>(
-        M, N, 1.0e-6) == false){
+  if (test_reshape<monolish::matrix::Dense<float>, float>(M, N, 1.0e-6) ==
+      false) {
     return 1;
   }
 
