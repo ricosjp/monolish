@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "common/monolish_common.hpp"
+#include "monolish/common/monolish_common.hpp"
 #include <functional>
 
 namespace monolish {

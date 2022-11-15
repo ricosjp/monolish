@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "./monolish_solver.hpp"
-#include "common/monolish_common.hpp"
+#include "monolish/common/monolish_common.hpp"
 
 namespace monolish {
 /**

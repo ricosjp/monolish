@@ -1,6 +1,6 @@
-#include "../../../include/common/monolish_dense.hpp"
-#include "../../../include/common/monolish_logger.hpp"
-#include "../../../include/common/monolish_matrix.hpp"
+#include "../../../include/monolish/common/monolish_dense.hpp"
+#include "../../../include/monolish/common/monolish_logger.hpp"
+#include "../../../include/monolish/common/monolish_matrix.hpp"
 #include "../../internal/monolish_internal.hpp"
 
 #include <cassert>
