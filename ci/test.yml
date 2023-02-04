@@ -14,14 +14,18 @@
   extends:
     - .test
   script:
+    - apt update
     - apt install -y ./$(find . -name "*.deb")
+    - apt install -y valgrind
     - make -C test/ run_cpu
 
 .test_gpu:
   extends:
     - .test
   script:
+    - apt update
     - apt install -y ./$(find . -name "*.deb")
+    - apt install -y valgrind
     - make -C test/ run_gpu
 
 cpu_deb_test:
@@ -32,6 +36,7 @@ cpu_deb_test:
   script:
     - apt update
     - apt install -y make ./$(find . -name "*.deb")
+    - apt install -y valgrind
     - make -C test/ run_cpu
   needs:
     - cpu_avx_oss_build
@@ -46,6 +51,7 @@ gpu_deb_test:
   script:
     - apt update
     - apt install -y make ./$(find . -name "*.deb")
+    - apt install -y valgrind
     - make -C test/ run_gpu
   needs:
     - gpu_avx_oss_build
@@ -60,6 +66,7 @@ both_deb_test:
   script:
     - apt update
     - apt install -y make ./$(find . -name "*.deb")
+    - apt install -y valgrind
     - make -C test/ run_cpu
     - make -C test/ run_gpu
   needs:
