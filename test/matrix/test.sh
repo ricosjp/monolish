@@ -11,7 +11,7 @@ TEST_A=$(($RANDOM%50+50)) #50~100
 TEST_B=$(($RANDOM%50+50)) #50~100
 MAT_TEST_SIZE=($TEST_A $TEST_B)
 
-PROFILER="valgrind --leak-check=full"
+PROFILER="valgrind -v --leak-check=full --error-exitcode=1"
 
 case $1 in
     "matrix_common" ) 
