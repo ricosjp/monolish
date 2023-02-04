@@ -14,10 +14,10 @@
   extends:
     - .ccache
   script:
-    - cmake --preset=${PRESET}
+    - cmake -DDEBUG_MODE=ON --preset=${PRESET}
     - cmake --build build/${PRESET} --target package
     - mv build/${PRESET}/{*.deb,Dockerfile,compose.yml} ${CI_PROJECT_DIR}
-    - cmake --preset=package-common
+    - cmake -DDEBUG_MODE=ON --preset=package-common
     - cmake --build build/package-common --target package
     - mv build/package-common/*.deb ${CI_PROJECT_DIR}
     - apt install -y ./$(find . -name "*.deb")

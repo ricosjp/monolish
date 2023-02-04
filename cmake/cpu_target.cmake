@@ -12,6 +12,9 @@ file(GLOB_RECURSE monolish_sources
 function(set_common_properties target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
   target_compile_options(${target} PRIVATE -O3 -Wall)
+  if(DEBUG_MODE)
+    target_compile_options(${target} PRIVATE -g)
+  endif()
   # AVX
   if(MONOLISH_USE_AVX)
     target_compile_options(${target} PRIVATE "-mavx")

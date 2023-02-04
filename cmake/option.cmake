@@ -44,6 +44,8 @@ option_string(
   "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
+option(DEBUG_MODE "Compile for debug" OFF)
+
 #
 # Validate options
 #
