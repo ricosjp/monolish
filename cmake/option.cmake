@@ -45,6 +45,9 @@ option_string(
 )
 
 option(DEBUG_MODE "Compile for debug" OFF)
+if(DEBUG_MODE)
+  message(STATUS "Set for DEBUG MODE")
+endif()
 
 #
 # Validate options
