@@ -7,12 +7,12 @@ OBJS_FX=$(addprefix ./, $(SRCS:.cpp=_a64fx.out))
 OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
 .PHONY = cpu gpu a64fx sxat run_cpu run_gpu run_sx run_a64fx clean
 
-PROFILER="valgrind -v --leak-check=full --error-exitcode=1"
+PROFILER=valgrind -v --leak-check=full --error-exitcode=1
 
 VEC_TEST_SIZE = $(shell bash -c 'echo $$(($$RANDOM%10000+1000))')
 
 define RUN
-	$($PROFILER) $(1) $(VEC_TEST_SIZE)
+	$(PROFILER) $(1) $(VEC_TEST_SIZE)
 
 endef
 
