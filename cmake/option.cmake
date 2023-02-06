@@ -44,8 +44,8 @@ option_string(
   "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
-option(DEBUG_MODE "Compile for debug" OFF)
-if(DEBUG_MODE)
+option(MONOLISH_DEBUG_MODE "Compile for debug" OFF)
+if(MONOLISH_DEBUG_MODE)
   message(STATUS "Set for DEBUG MODE")
 endif()
 

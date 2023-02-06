@@ -4,7 +4,7 @@
 template <typename T>
 void ans_copy(monolish::vector<T> &mx, monolish::vector<T> &my) {
   if (mx.size() != my.size()) {
-    throw std::runtime_error("x.size != y.size");
+    throw std::runtime_error("x.size(%zu) != y.size(%zu)", mx.size(), my.size());
   }
 
   for (size_t i = 0; i < mx.size(); i++) {
