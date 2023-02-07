@@ -309,6 +309,31 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matmul<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(
+          M, N, K, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matmul<monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(
+          M, N, K, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_matmul<monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, K, 3, 2,
+                                                           1.0e-8) == false) {
+    return 1;
+  }
+  if (test_matmul<monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, K, 3, 2,
+                                                         1.0e-4) == false) {
+    return 1;
+  }
+
   // matmul CRS//
   if (test_send_matmul<monolish::matrix::CRS<double>,
                        monolish::matrix::Dense<double>,
@@ -331,6 +356,29 @@ int main(int argc, char **argv) {
   if (test_matmul<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, K, 1.0e-4) ==
       false) {
+    return 1;
+  }
+  if (test_send_matmul<monolish::matrix::CRS<double>,
+                       monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(
+          M, N, K, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matmul<monolish::matrix::CRS<float>,
+                       monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(
+          M, N, K, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_matmul<monolish::matrix::CRS<double>,
+                  monolish::matrix::Dense<double>,
+                  monolish::matrix::Dense<double>, double>(M, N, K, 3, 2,
+                                                           1.0e-8) == false) {
+    return 1;
+  }
+  if (test_matmul<monolish::matrix::CRS<float>, monolish::matrix::Dense<float>,
+                  monolish::matrix::Dense<float>, float>(M, N, K, 3, 2,
+                                                         1.0e-4) == false) {
     return 1;
   }
 

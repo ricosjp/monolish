@@ -360,6 +360,30 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
+echo "
+/**
+ * \defgroup mm_dense monolish::blas::matmul (Float, Dense, Dense, Float, Dense)
+ * @brief Dense matrix multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C = aAB+bC
+ * @param a Float
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param b Float
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void matmul($prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, $prec &b, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
 #matmul_* Dense
 # for TA in N T; do
 # for TB in N T; do
@@ -407,6 +431,30 @@ echo "
 */ "
 for prec in double float; do
   echo "void matmul(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup mm_crs_dense monolish::blas::matmul (Float, CRS, Dense, Float, Dense)
+ * @brief CRS and Dense matrix multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C = aAB+bC
+ * @param a Float
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param b Float
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void matmul($prec &a, const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, $prec &b, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
 
