@@ -11,10 +11,7 @@ file(GLOB_RECURSE monolish_sources
 #
 function(set_common_properties target)
   set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)
-  target_compile_options(${target} PUBLIC -O3 -Wall -fPIC)
-  #if(MONOLISH_DEBUG_MODE)
-  #	  target_compile_options(${target} PUBLIC -g)
-  #endif()
+  target_compile_options(${target} PRIVATE -O3 -Wall)
   # AVX
   if(MONOLISH_USE_AVX)
     target_compile_options(${target} PRIVATE "-mavx")
@@ -48,7 +45,7 @@ if(NOT MONOLISH_USE_NVIDIA_GPU)
   endif()
   add_library(${monolish_cpu_target} ${monolish_sources})
   set_common_properties(${monolish_cpu_target})
-  target_link_libraries(${monolish_cpu_target} PUBLIC OpenMP::OpenMP_CXX)
+  target_link_libraries(${monolish_cpu_target} PRIVATE OpenMP::OpenMP_CXX)
 
   install(
     TARGETS ${monolish_cpu_target}

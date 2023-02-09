@@ -44,11 +44,6 @@ option_string(
   "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
-option(MONOLISH_DEBUG_MODE "Compile for debug" OFF)
-if(MONOLISH_DEBUG_MODE)
-  message(STATUS "Set for DEBUG MODE")
-endif()
-
 #
 # Validate options
 #
