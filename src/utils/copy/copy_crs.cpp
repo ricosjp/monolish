@@ -22,14 +22,14 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.vad_nnz, mat.data(), data(), true);
+    internal::vcopy(mat.get_nnz(), mat.data(), data(), true);
 #endif
   } else {
     internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
                     false);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     false);
-    internal::vcopy(mat.vad_nnz, mat.data(), data(), false);
+    internal::vcopy(mat.get_nnz(), mat.data(), data(), false);
   }
 
   logger.util_out();

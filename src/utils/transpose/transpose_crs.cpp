@@ -10,7 +10,7 @@ template <typename T> void CRS<T>::transpose() {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  CRS<T> B(rowN, colN, vad_nnz, row_ptr.data(), col_ind.data(), data());
+  CRS<T> B(rowN, colN, get_nnz(), row_ptr.data(), col_ind.data(), data());
 
   rowN = B.get_col();
   colN = B.get_row();
@@ -19,7 +19,7 @@ template <typename T> void CRS<T>::transpose() {
   col_ind.resize(B.get_nnz());
 
   std::fill(row_ptr.data(), row_ptr.data() + B.get_col() + 1, 0.0);
-  for (size_t i = 0; i < vad_nnz; i++) {
+  for (size_t i = 0; i < get_nnz(); i++) {
     row_ptr[B.col_ind[i]]++;
   }
 
@@ -72,7 +72,7 @@ template <typename T> void CRS<T>::transpose(const CRS &B) {
   resize(B.get_nnz());
 
   std::fill(row_ptr.data(), row_ptr.data() + B.get_col() + 1, 0.0);
-  for (size_t i = 0; i < vad_nnz; i++) {
+  for (size_t i = 0; i < get_nnz(); i++) {
     row_ptr[B.col_ind[i]]++;
   }
 

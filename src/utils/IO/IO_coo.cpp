@@ -20,7 +20,7 @@ template <typename T> void COO<T>::print_all(bool force_cpu) const {
   std::cout << std::scientific;
   std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (auto i = decltype(vad_nnz){0}; i < vad_nnz; i++) {
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
     std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
               << std::endl;
   }
@@ -37,7 +37,7 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   out << std::scientific;
   out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (auto i = decltype(vad_nnz){0}; i < vad_nnz; i++) {
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
     out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
         << std::endl;
   }
@@ -55,9 +55,9 @@ template <typename T> void COO<T>::output_mm(const std::string filename) const {
 
   out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL)
       << std::endl;
-  out << rowN << " " << colN << " " << vad_nnz << std::endl;
+  out << rowN << " " << colN << " " << get_nnz() << std::endl;
 
-  for (auto i = decltype(vad_nnz){0}; i < vad_nnz; i++) {
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
     out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
         << std::endl;
   }

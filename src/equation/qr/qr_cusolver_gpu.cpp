@@ -30,7 +30,7 @@ int equation::QR<matrix::CRS<double>, double>::cusolver_QR(
   int n = A.get_row();
   int nnz = A.get_nnz();
 
-  double *Dval = A.vad;
+  double *Dval = A.data();
   int *Dptr = A.row_ptr.data();
   int *Dind = A.col_ind.data();
 
@@ -76,7 +76,7 @@ int equation::QR<matrix::CRS<float>, float>::cusolver_QR(matrix::CRS<float> &A,
   int n = A.get_row();
   int nnz = A.get_nnz();
 
-  float *Dval = A.vad;
+  float *Dval = A.data();
   int *Dptr = A.row_ptr.data();
   int *Dind = A.col_ind.data();
 
