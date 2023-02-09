@@ -1,7 +1,7 @@
 MONOLISH_DIR?=$(HOME)/lib/monolish
 
 CXX=g++
-CXXFLAGS=-O3 -g -fopenmp -lm -std=c++11
+CXXFLAGS=-O3 -lm -std=c++11
 
 LIBS=-I $(MONOLISH_DIR)/include/ -L$(MONOLISH_DIR)/lib/ -lmonolish_cpu
 
