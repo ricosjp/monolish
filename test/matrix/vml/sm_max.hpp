@@ -9,7 +9,7 @@ void ans_sm_max(const monolish::matrix::Dense<T> &A, const T alpha,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.val[i] = std::max(A.val[i], alpha);
+    C.data()[i] = std::max(A.data()[i], alpha);
   }
 }
 
@@ -35,7 +35,7 @@ bool test_send_sm_max(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }
 
@@ -59,6 +59,6 @@ bool test_sm_max(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }

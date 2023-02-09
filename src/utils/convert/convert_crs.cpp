@@ -15,7 +15,7 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 
   resize(coo.get_nnz());
   for(size_t i=0; i<coo.get_nnz(); ++i){
-    vad[i] = coo.vad[i];
+    data()[i] = coo.data()[i];
   }
   col_ind = coo.col_index;
 
@@ -59,7 +59,7 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
                     false);
     internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(),
                     false);
-    internal::vcopy(crs.get_nnz(), crs.vad, vad, false);
+    internal::vcopy(crs.get_nnz(), crs.data(), data(), false);
   }
 
   logger.util_out();

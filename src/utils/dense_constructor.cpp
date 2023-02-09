@@ -31,7 +31,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T *value) {
 
   vad_create_flag = true;
   resize(M*N);
-  std::copy(value, value + get_nnz(), vad);
+  std::copy(value, value + get_nnz(), data());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -48,7 +48,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> &value) {
 
   vad_create_flag = true;
   resize(M*N);
-  std::copy(value.begin(), value.end(), vad);
+  std::copy(value.begin(), value.end(), data());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -65,13 +65,13 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
 
   vad_create_flag = true;
   resize(M*N);
-  std::copy(value.data(), value.data() + get_nnz(), vad);
+  std::copy(value.data(), value.data() + get_nnz(), data());
 
   if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
     send();
     const T *data = value.data();
-    T *vald = vad;
+    T *vald = data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = data[i];
@@ -99,7 +99,7 @@ Dense<T>::Dense(const size_t M, const size_t N,
 
   vad_create_flag = true;
   resize(M*N);
-  std::copy(list.begin(), list.end(), vad);
+  std::copy(list.begin(), list.end(), data());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -122,7 +122,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    vad[i] = rand(mt);
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -147,7 +147,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max,
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    vad[i] = rand(mt);
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -169,7 +169,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T value) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < get_nnz(); i++) {
-    vad[i] = value;
+    data()[i] = value;
   }
 
   logger.util_out();
@@ -192,10 +192,10 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     send();
-    internal::vcopy(get_nnz(), mat.vad, vad, true);
+    internal::vcopy(get_nnz(), mat.data(), data(), true);
   }
 #endif
-  internal::vcopy(get_nnz(), mat.vad, vad, false);
+  internal::vcopy(get_nnz(), mat.data(), data(), false);
 
   logger.util_out();
 }
@@ -216,10 +216,10 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat, T value) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     send();
-    internal::vbroadcast(get_nnz(), value, vad, true);
+    internal::vbroadcast(get_nnz(), value, data(), true);
   }
 #endif
-  internal::vbroadcast(get_nnz(), value, vad, false);
+  internal::vbroadcast(get_nnz(), value, data(), false);
 
   logger.util_out();
 }

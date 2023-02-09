@@ -11,7 +11,7 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
   const auto Len = std::min(get_row(), get_col());
 
@@ -45,7 +45,7 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
   const auto Len = std::min(get_row(), get_col());
 
@@ -82,7 +82,7 @@ void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
   const auto Len = std::min(get_row(), get_col());
 
@@ -119,7 +119,7 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
 
   assert(N == vec.size());
@@ -155,7 +155,7 @@ void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
 
   assert(N == vec.size());
@@ -193,7 +193,7 @@ void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto N = get_col();
 
   assert(N == vec.size());
@@ -229,7 +229,7 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto M = get_row();
   const auto N = get_col();
 
@@ -266,7 +266,7 @@ void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto M = get_row();
   const auto N = get_col();
 
@@ -305,7 +305,7 @@ void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
 
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto M = get_row();
   const auto N = get_col();
 

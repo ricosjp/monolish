@@ -12,7 +12,7 @@ void smadd_core(const F1 &A, const F2 alpha, F3 &C) {
   assert(util::is_same_size(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vadd(A.get_nnz(), A.vad, alpha, C.vad,
+  internal::vadd(A.get_nnz(), A.data(), alpha, C.data(),
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -28,7 +28,7 @@ void mmadd_core(const F1 &A, const F2 &B, F3 &C) {
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vadd(A.get_nnz(), A.vad, B.vad, C.vad,
+  internal::vadd(A.get_nnz(), A.data(), B.data(), C.data(),
                  C.get_device_mem_stat());
 
   logger.func_out();

@@ -21,7 +21,7 @@ template <typename T> void COO<T>::convert(const CRS<T> &crs) {
     for (auto j = (size_t)crs.row_ptr[i]; j < (size_t)crs.row_ptr[i + 1]; j++) {
       row_index[j] = i;
       col_index[j] = crs.col_ind[j];
-      vad[j] = crs.vad[j];
+      data()[j] = crs.data()[j];
     }
   }
 
@@ -46,7 +46,7 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
       if (dense.at(i, j) != 0) {
         row_index.push_back(i);
         col_index.push_back(j);
-        vad[nz] = dense.at(i, j);
+        data()[nz] = dense.at(i, j);
         nz++;
       }
     }

@@ -17,9 +17,9 @@ void times_row_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
   assert(A.get_col() == x.size());
   assert(A.get_row() >= num);
 
-  const auto *Ad = A.vad;
+  const auto *Ad = A.data();
   const auto n = A.get_col();
-  auto *Cd = C.vad;
+  auto *Cd = C.data();
 
   const auto *xd = x.data();
   const auto xoffset = x.get_offset();
@@ -56,10 +56,10 @@ void times_col_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
   assert(A.get_row() == x.size());
   assert(A.get_col() >= num);
 
-  const auto *Ad = A.vad;
+  const auto *Ad = A.data();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.vad;
+  auto *Cd = C.data();
 
   const auto *xd = x.data();
   const auto xoffset = x.get_offset();

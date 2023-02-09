@@ -17,7 +17,7 @@ void ans_mm_add(const monolish::matrix::Dense<T> &A,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.vad[i] = A.vad[i] + B.vad[i];
+    C.data()[i] = A.data()[i] + B.data()[i];
   }
 }
 
@@ -44,7 +44,7 @@ bool test_send_mm_add(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }
 
@@ -69,6 +69,6 @@ bool test_mm_add(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }

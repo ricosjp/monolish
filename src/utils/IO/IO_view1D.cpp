@@ -41,7 +41,7 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  double *val = target.vad;
+  double *val = target.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target
@@ -90,7 +90,7 @@ void view1D<monolish::matrix::Dense<float>, float>::print_all(
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  float *val = target.vad;
+  float *val = target.data();
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target

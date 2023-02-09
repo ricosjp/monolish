@@ -37,7 +37,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
   std::copy(colind, colind + NNZ, col_ind.begin());
-  std::copy(value, value + NNZ, vad);
+  std::copy(value, value + NNZ, data());
   compute_hash();
   logger.util_out();
 }
@@ -62,7 +62,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
   std::copy(colind, colind + NNZ, col_ind.begin());
-  std::copy(value, value + NNZ, vad);
+  std::copy(value, value + NNZ, data());
 
 #pragma omp parallel for
   for (size_t i = 0; i < NNZ; i++) {
@@ -93,7 +93,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
-  std::copy(value.data(), value.data() + value.size(), vad);
+  std::copy(value.data(), value.data() + value.size(), data());
   compute_hash();
   logger.util_out();
 }
@@ -120,13 +120,13 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
-  std::copy(value.data(), value.data() + value.size(), vad);
+  std::copy(value.data(), value.data() + value.size(), data());
 
   if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
     send();
     const T *data = value.data();
-    T *vald = vad;
+    T *vald = data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = data[i];
@@ -170,7 +170,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.get_nnz(), mat.vad, vad, true);
+    internal::vcopy(mat.get_nnz(), mat.data(), data(), true);
   }
 #endif
 
@@ -178,7 +178,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                   false);
   internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                   false);
-  internal::vcopy(mat.get_nnz(), mat.vad, vad, false);
+  internal::vcopy(mat.get_nnz(), mat.data(), data(), false);
 
   compute_hash();
   logger.util_out();
@@ -206,7 +206,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vbroadcast(mat.get_nnz(), value, vad, true);
+    internal::vbroadcast(mat.get_nnz(), value, data(), true);
   }
 #endif
 
@@ -214,7 +214,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
                   false);
   internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                   false);
-  internal::vbroadcast(mat.get_nnz(), value, vad, false);
+  internal::vbroadcast(mat.get_nnz(), value, data(), false);
 
   compute_hash();
   logger.util_out();

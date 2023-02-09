@@ -46,7 +46,7 @@ template <typename Float> class LinearOperator;
 template <typename TYPE, typename Float> class view1D {
 private:
   TYPE &target;
-  Float *target_data;
+  Float* target_data;
   size_t first;
   size_t last;
   size_t range;
@@ -84,7 +84,7 @@ public:
     first = start;
     last = end;
     range = last - first;
-    target_data = A.vad;
+    target_data = A.data();
   }
 
   /**

@@ -18,7 +18,7 @@ int internal::lapack::sytrs(const matrix::Dense<float> &A, vector<float> &B,
   const int M = (int)A.get_row();
   const int N = (int)A.get_col();
   const int nrhs = 1;
-  const float *Ad = A.vad;
+  const float *Ad = A.data();
   float *Bd = B.data();
   const int *ipivd = ipiv.data();
   const char U = 'U';

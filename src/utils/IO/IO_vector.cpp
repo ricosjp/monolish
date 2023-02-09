@@ -18,7 +18,7 @@ template <typename T> void vector<T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  const T *vald = vad;
+  const T *vald = data();
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -50,7 +50,7 @@ template <typename T> void vector<T>::print_all(std::string filename) const {
     throw std::runtime_error("error file cant open");
   }
   for (size_t i = 0; i < size(); i++) {
-    ofs << vad[i] << std::endl;
+    ofs << data()[i] << std::endl;
   }
   logger.util_out();
 }

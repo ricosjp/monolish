@@ -26,7 +26,7 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
 
   std::copy(row, row + NNZ, row_index.begin());
   std::copy(col, col + NNZ, col_index.begin());
-  std::copy(value, value + NNZ, vad);
+  std::copy(value, value + NNZ, data());
   logger.util_out();
 }
 template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ,
@@ -50,7 +50,7 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
 
   std::copy(row, row + NNZ, row_index.begin());
   std::copy(col, col + NNZ, col_index.begin());
-  std::copy(value, value + NNZ, vad);
+  std::copy(value, value + NNZ, data());
 
 #pragma omp parallel for
   for (size_t i = 0; i < NNZ; i++) {
@@ -81,7 +81,7 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
             row_index.begin());
   std::copy(coo.col_index.data(), coo.col_index.data() + coo.get_nnz(),
             col_index.begin());
-  std::copy(coo.vad, coo.vad + coo.get_nnz(), vad);
+  std::copy(coo.data(), coo.data() + coo.get_nnz(), data());
   logger.util_out();
 }
 template COO<double>::COO(const matrix::COO<double> &coo);
@@ -105,7 +105,7 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo, T value) {
 
   vad_create_flag = true;
   resize(coo.get_nnz());
-  internal::vbroadcast(coo.get_nnz(), value, vad, false);
+  internal::vbroadcast(coo.get_nnz(), value, data(), false);
 
   logger.util_out();
 }

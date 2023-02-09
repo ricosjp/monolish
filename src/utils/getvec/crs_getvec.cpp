@@ -15,7 +15,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -66,7 +66,7 @@ template <typename T> void CRS<T>::diag(view1D<vector<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -120,7 +120,7 @@ void CRS<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -171,7 +171,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   auto n = get_row();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
@@ -218,7 +218,7 @@ void CRS<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   auto n = get_row();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
@@ -267,7 +267,7 @@ void CRS<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   auto n = get_row();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
 
   assert(n == vec.size());
@@ -314,7 +314,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   auto n = get_col();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -368,7 +368,7 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   auto n = get_col();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -424,7 +424,7 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   auto n = get_col();
   T *vecd = vec.data();
 
-  const T *vald = vad;
+  const T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 

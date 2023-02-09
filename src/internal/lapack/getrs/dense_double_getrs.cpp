@@ -23,7 +23,7 @@ int internal::lapack::getrs(const matrix::Dense<double> &A, vector<double> &B,
   const int M = (int)A.get_row();
   const int N = (int)A.get_col();
   const int K = 1;
-  const double *Ad = A.vad;
+  const double *Ad = A.data();
   double *Bd = B.data();
   const int *ipivd = ipiv.data();
   const char trans = 'N';

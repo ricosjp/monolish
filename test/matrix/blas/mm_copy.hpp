@@ -5,7 +5,7 @@ void ans_mm_copy(const monolish::matrix::Dense<T> &A,
                  monolish::matrix::Dense<T> &C) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.vad[i] = A.vad[i];
+    C.data()[i] = A.data()[i];
   }
 }
 
@@ -37,7 +37,7 @@ bool test_send_mm_copy(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }
 
@@ -67,6 +67,6 @@ bool test_mm_copy(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.vad, ansC.vad,
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }

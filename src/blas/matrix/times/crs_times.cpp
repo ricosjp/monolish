@@ -15,7 +15,7 @@ void times_core(const T alpha, const matrix::CRS<T> &A, matrix::CRS<T> &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vmul(A.get_nnz(), A.vad, alpha, C.vad,
+  internal::vmul(A.get_nnz(), A.data(), alpha, C.data(),
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -31,8 +31,8 @@ void times_row_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_col() == x.size());
 
-  const auto *Ad = A.vad;
-  auto *Cd = C.vad;
+  const auto *Ad = A.data();
+  auto *Cd = C.data();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
   const auto n = A.get_row();
@@ -74,8 +74,8 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_row() == x.size());
 
-  const auto *Ad = A.vad;
-  auto *Cd = C.vad;
+  const auto *Ad = A.data();
+  auto *Cd = C.data();
   const auto *rowd = A.row_ptr.data();
   const auto n = A.get_row();
 

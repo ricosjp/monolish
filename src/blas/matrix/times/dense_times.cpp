@@ -14,7 +14,7 @@ void times_core(const T alpha, const matrix::Dense<T> &A, matrix::Dense<T> &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vmul(A.get_nnz(), A.vad, alpha, C.vad,
+  internal::vmul(A.get_nnz(), A.data(), alpha, C.data(),
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -31,10 +31,10 @@ void times_row_core(const matrix::Dense<T> &A, const VEC &x,
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_col() == x.size());
 
-  const auto *Ad = A.vad;
+  const auto *Ad = A.data();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.vad;
+  auto *Cd = C.data();
 
   const auto *xd = x.data();
   const auto xoffset = x.get_offset();
@@ -74,10 +74,10 @@ void times_col_core(const matrix::Dense<T> &A, const VEC &x,
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_row() == x.size());
 
-  const auto *Ad = A.vad;
+  const auto *Ad = A.data();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.vad;
+  auto *Cd = C.data();
 
   const auto *xd = x.data();
   const auto xoffset = x.get_offset();

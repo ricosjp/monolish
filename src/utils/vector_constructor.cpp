@@ -23,7 +23,7 @@ template <typename T> vector<T>::vector(const size_t N, const T value) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < N; i++) {
-    vad[i] = value;
+    data()[i] = value;
   }
 
   logger.util_out();
@@ -64,7 +64,7 @@ vector<T>::vector(const size_t N, const T min, const T max) {
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < N; i++) {
-    vad[i] = rand(mt);
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -107,7 +107,7 @@ vector<T>::vector(const size_t N, const T min, const T max,
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < N; i++) {
-    vad[i] = rand(mt);
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -124,7 +124,7 @@ template <typename T> vector<T>::vector(const T *start, const T *end) {
   size_t size = (end - start);
   vad_create_flag = true;
   resize(size);
-  std::copy(start, end, vad);
+  std::copy(start, end, data());
   logger.util_out();
 }
 template vector<double>::vector(const double *start, const double *end);
@@ -136,7 +136,7 @@ template <typename T> vector<T>::vector(const std::vector<T> &vec) {
   logger.util_in(monolish_func);
   vad_create_flag = true;
   resize(vec.size());
-  std::copy(vec.begin(), vec.end(), vad);
+  std::copy(vec.begin(), vec.end(), data());
   logger.util_out();
 }
 
@@ -149,7 +149,7 @@ template <typename T> vector<T>::vector(const std::initializer_list<T> &list) {
   logger.util_in(monolish_func);
   vad_create_flag = true;
   resize(list.size());
-  std::copy(list.begin(), list.end(), vad);
+  std::copy(list.begin(), list.end(), data());
   logger.util_out();
 }
 
@@ -167,10 +167,10 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.vad, vad, true);
+    internal::vcopy(vec.size(), vec.data(), data(), true);
   }
 #endif
-  internal::vcopy(vec.size(), vec.vad, vad, false);
+  internal::vcopy(vec.size(), vec.data(), data(), false);
 
   logger.util_out();
 }
@@ -190,11 +190,11 @@ vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     true);
   }
 #endif
-  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad, false);
+  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
 
   logger.util_out();
 }
@@ -214,11 +214,11 @@ vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     true);
   }
 #endif
-  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad, false);
+  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
 
   logger.util_out();
 }

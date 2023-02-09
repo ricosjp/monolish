@@ -15,7 +15,7 @@ template <typename T> vector<T> vector<T>::operator-() {
     ans.send();
   }
 
-  internal::vmul(size(), vad, -1, ans.data(), gpu_status);
+  internal::vmul(size(), data(), -1, ans.data(), gpu_status);
   logger.func_out();
   return ans;
 }

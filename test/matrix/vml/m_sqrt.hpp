@@ -4,7 +4,7 @@
 template <typename T> void ans_sqrt(monolish::matrix::Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.vad[i] = std::sqrt(A.vad[i]);
+    A.data()[i] = std::sqrt(A.data()[i]);
   }
 }
 
@@ -30,7 +30,7 @@ bool test_send_msqrt(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
                       AA.get_nnz(), tol);
 }
 
@@ -54,6 +54,6 @@ bool test_msqrt(const size_t M, const size_t N, double tol) {
   monolish::vml::sqrt(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.vad, AA.vad,
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
                       AA.get_nnz(), tol);
 }

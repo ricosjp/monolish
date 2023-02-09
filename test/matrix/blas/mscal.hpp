@@ -4,7 +4,7 @@ template <typename T>
 void ans_mscal(const double alpha, monolish::matrix::Dense<T> &A) {
 
   for (int i = 0; i < A.get_nnz(); i++)
-    A.vad[i] = alpha * A.vad[i];
+    A.data()[i] = alpha * A.data()[i];
 }
 
 template <typename MAT, typename T>
@@ -31,7 +31,7 @@ bool test_send_mscal(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::COO<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.vad, ansA.vad,
+  return ans_check<T>(__func__, A.type(), resultA.data(), ansA.data(),
                       ansA.get_nnz(), tol);
 }
 
@@ -57,6 +57,6 @@ bool test_mscal(const size_t M, const size_t N, double tol) {
   monolish::blas::mscal(alpha, A);
   monolish::matrix::COO<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.vad, ansA.vad,
+  return ans_check<T>(__func__, A.type(), resultA.data(), ansA.data(),
                       ansA.get_nnz(), tol);
 }

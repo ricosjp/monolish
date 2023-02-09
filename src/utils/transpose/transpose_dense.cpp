@@ -16,7 +16,7 @@ template <typename T> void Dense<T>::transpose() {
     for (size_t i = 0; i < M; i++) {
 #pragma omp parallel for
       for (size_t j = i + 1; j < M; j++) {
-        std::swap(vad[i * M + j], vad[j * M + i]);
+        std::swap(data()[i * M + j], data()[j * M + i]);
       }
     }
   } else {
@@ -25,9 +25,9 @@ template <typename T> void Dense<T>::transpose() {
     for (size_t n = 0; n < M * N; ++n) {
       size_t i = n / get_row();
       size_t j = n % get_row();
-      B.vad[n] = vad[get_col() * j + i];
+      B.data()[n] = data()[get_col() * j + i];
     }
-    internal::vcopy(M * N, B.vad, vad, false);
+    internal::vcopy(M * N, B.data(), data(), false);
     set_row(N);
     set_col(M);
   }
@@ -55,7 +55,7 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   for (size_t n = 0; n < get_row() * get_col(); ++n) {
     size_t i = n / get_col();
     size_t j = n % get_col();
-    vad[n] = B.vad[get_row() * j + i];
+    data()[n] = B.data()[get_row() * j + i];
   }
   logger.util_out();
 }

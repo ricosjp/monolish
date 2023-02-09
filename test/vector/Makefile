@@ -10,7 +10,8 @@ OBJS_SX=$(addprefix ./, $(SRCS:.cpp=_sxat.out))
 VEC_TEST_SIZE = $(shell bash -c 'echo $$(($$RANDOM%10000+1000))')
 
 define RUN
-	$(1) $(VEC_TEST_SIZE)
+	$(PROFILER) $(1) $(VEC_TEST_SIZE)
+
 endef
 
 all: cpu

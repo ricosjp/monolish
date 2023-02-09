@@ -17,11 +17,11 @@ template <typename T> void Dense<T>::convert(const COO<T> &coo) {
 
 #pragma omp parallel for
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-    vad[i] = 0.0;
+    data()[i] = 0.0;
   }
 
   for (auto i = decltype(coo.get_nnz()){0}; i < coo.get_nnz(); i++) {
-    insert(coo.row_index[i], coo.col_index[i], coo.vad[i]);
+    insert(coo.row_index[i], coo.col_index[i], coo.data()[i]);
   }
   logger.util_out();
 }
@@ -44,7 +44,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
         "error can not convert CRS->CRS when gpu_status == true");
   }
 #endif
-  internal::vcopy(get_nnz(), mat.vad, vad, false);
+  internal::vcopy(get_nnz(), mat.data(), data(), false);
 
   logger.util_out();
 }

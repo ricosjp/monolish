@@ -13,7 +13,7 @@ template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
 
   vad_create_flag = true;
   resize(vec.size());
-  std::copy(vec.begin(), vec.end(), vad);
+  std::copy(vec.begin(), vec.end(), data());
 
   logger.util_out();
 }
@@ -32,10 +32,10 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.vad, vad, true);
+    internal::vcopy(vec.size(), vec.data(), data(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.vad, vad, false);
+    internal::vcopy(vec.size(), vec.data(), data(), false);
   }
 
   logger.util_out();
@@ -56,11 +56,11 @@ void vector<T>::operator=(const view1D<vector<T>, T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     false);
   }
 
@@ -83,11 +83,11 @@ void vector<T>::operator=(const view1D<matrix::Dense<T>, T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), vad,
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
                     false);
   }
 

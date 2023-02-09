@@ -22,14 +22,14 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.vad_nnz, mat.vad, vad, true);
+    internal::vcopy(mat.vad_nnz, mat.data(), data(), true);
 #endif
   } else {
     internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
                     false);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     false);
-    internal::vcopy(mat.vad_nnz, mat.vad, vad, false);
+    internal::vcopy(mat.vad_nnz, mat.data(), data(), false);
   }
 
   logger.util_out();
@@ -48,7 +48,7 @@ void CRS<T>::set_ptr(const size_t M, const size_t N,
   row_ptr = rowptr;
   resize(value.size());
   for(size_t i=0; i<value.size(); ++i){
-    vad[i] = value[i];
+    data()[i] = value[i];
   }
 
   rowN = M;

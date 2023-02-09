@@ -48,7 +48,7 @@ public:
   /**
    * @brief Dense format value pointer
    */
-  Float* vad = nullptr;
+  std::shared_ptr<Float[]> vad;
 
   /**
    * @brief # of non-zero element (M * N)
@@ -444,10 +444,23 @@ public:
     if (get_device_mem_stat()) {
       device_free();
     }
-    if(vad_create_flag){
-      delete [] vad;
-    }
   }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A const pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *data() const { return vad.get(); }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *data() { return vad.get(); }
 
   /**
    * @brief resize matrix value
@@ -462,15 +475,14 @@ public:
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
     if(vad_create_flag){
-      Float *tmp = new Float[N];
+      std::shared_ptr<Float[]> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
       for (size_t i=0; i<copy_size; ++i){
-        tmp[i] = vad[i];
+        tmp.get()[i] = vad.get()[i];
       }
       for (size_t i=copy_size; i<N; ++i){
-        tmp[i] = val;
+        tmp.get()[i] = val;
       }
-      delete [] vad;
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
@@ -559,7 +571,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
     }
-    return vad + m * get_col();
+    return vad.get() + m * get_col();
   }
 
   /**

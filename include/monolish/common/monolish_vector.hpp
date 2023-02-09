@@ -47,7 +47,7 @@ private:
   /**
    * @brief vector data pointer
    */
-  Float* vad = nullptr;
+  std::shared_ptr<Float[]> vad;
 
   /**
    * @brief vector size
@@ -256,9 +256,6 @@ public:
     if (get_device_mem_stat()) {
       device_free();
     }
-    if(vad_create_flag){
-      delete [] vad;
-    }
   }
 
   [[nodiscard]] size_t get_offset() const { return 0; }
@@ -272,7 +269,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *data() const { return vad; }
+  [[nodiscard]] const Float *data() const { return vad.get(); }
 
   /**
    * @brief returns a direct pointer to the vector
@@ -280,7 +277,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *data() { return vad; }
+  [[nodiscard]] Float *data() { return vad.get(); }
 
   /**
    * @brief resize vector (only CPU)
@@ -295,15 +292,14 @@ public:
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
     if(vad_create_flag){
-      Float *tmp = new Float[N];
+      std::shared_ptr<Float[]> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
       for (size_t i = 0; i < copy_size; i++){
-        tmp[i] = vad[i];
+        tmp.get()[i] = vad.get()[i];
       }
       for (size_t i = copy_size; i < N; i++){
-        tmp[i] = val;
+        tmp.get()[i] = val;
       }
-      delete [] vad;
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
@@ -329,7 +325,7 @@ public:
         resize(alloc_nnz);
         vad_nnz = tmp;
       }
-      vad[vad_nnz] = val;
+      vad.get()[vad_nnz] = val;
       vad_nnz++;
     }else{
       throw std::runtime_error("Error, not create vector cant use push_back");
@@ -342,7 +338,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *begin() const { return vad; }
+  [[nodiscard]] const Float *begin() const { return vad.get(); }
 
   /**
    * @brief returns a begin iterator
@@ -350,7 +346,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return vad; }
+  [[nodiscard]] Float *begin() { return vad.get(); }
 
   /**
    * @brief returns a end iterator
@@ -358,7 +354,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return vad + size(); }
+  [[nodiscard]] const Float *end() const { return vad.get() + size(); }
 
   /**
    * @brief returns a end iterator
@@ -366,7 +362,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return vad + size(); }
+  [[nodiscard]] Float *end() { return vad.get() + size(); }
 
   /**
    * @brief get vector size
@@ -493,7 +489,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return vad[i];
+    return vad.get()[i];
   }
 
   /**
