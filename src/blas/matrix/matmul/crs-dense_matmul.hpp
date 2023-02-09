@@ -4,7 +4,8 @@
 namespace monolish {
 
 // double ///////////////////
-void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+void blas::matmul(const double &a, const matrix::CRS<double> &A,
+                  const matrix::Dense<double> &B, const double &b,
                   matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -30,8 +31,8 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // CUDA11 will support SpMM
     auto nnz = A.get_nnz();
-    auto alpha = 1.0;
-    auto beta = 0.0;
+    auto alpha = a;
+    auto beta = b;
 
 #pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
     {
@@ -73,8 +74,8 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   } else {
 // MKL
 #if MONOLISH_USE_MKL
-    const double alpha = 1.0;
-    const double beta = 0.0;
+    const double alpha = a;
+    const double beta = b;
 
     //  sparse_matrix_t mklA;
     //  struct matrix_descr descrA;
@@ -97,7 +98,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
 
 #pragma omp parallel for
     for (auto i = decltype(M){0}; i < M * N; i++) {
-      Cd[i] = 0.0;
+      Cd[i] = b * Cd[i];
     }
 
 #pragma omp parallel for
@@ -107,7 +108,8 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
       auto Cr = i * N;
       for (auto k = start; k < end; k++) {
         auto Br = N * cold[k];
-        const Dreg Av = SIMD_FUNC(broadcast_sd)(&vald[k]);
+        auto avald = a * vald[k];
+        const Dreg Av = SIMD_FUNC(broadcast_sd)(&avald);
         Dreg tv, Bv, Cv;
         int j;
         for (j = 0; j < N - (vecL - 1); j += vecL) {
@@ -122,7 +124,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
         }
 
         for (; j < N; j++) {
-          Cd[Cr + j] += vald[k] * Bd[Br + j];
+          Cd[Cr + j] += a * vald[k] * Bd[Br + j];
         }
       }
     }
@@ -136,7 +138,7 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
         for (auto k = start; k < end; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
-        Cd[i * N + j] = tmp;
+        Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
       }
     }
 #endif
@@ -145,8 +147,14 @@ void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
   logger.func_out();
 }
 
+void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+                  matrix::Dense<double> &C) {
+  return matmul(1.0, A, B, 0.0, C);
+}
+
 // float ///////////////////
-void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+void blas::matmul(const float &a, const matrix::CRS<float> &A,
+                  const matrix::Dense<float> &B, const float &b,
                   matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
@@ -180,7 +188,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
         for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
-        Cd[i * N + j] = tmp;
+        Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
       }
     }
 // #else
@@ -230,8 +238,8 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   } else {
 // MKL
 #if MONOLISH_USE_MKL
-    const float alpha = 1.0;
-    const float beta = 0.0;
+    const float alpha = a;
+    const float beta = b;
     mkl_scsrmm("N", &M, &N, &K, &alpha, "G__C", vald, cold, rowd, rowd + 1, Bd,
                &N, &beta, Cd, &N);
 
@@ -242,7 +250,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
 
 #pragma omp parallel for
     for (auto i = decltype(M){0}; i < M * N; i++) {
-      Cd[i] = 0.0;
+      Cd[i] = b * Cd[i];
     }
 
 #pragma omp parallel for
@@ -252,7 +260,8 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
       auto Cr = i * N;
       for (int k = start; k < end; k++) {
         const int Br = N * cold[k];
-        const Sreg Av = SIMD_FUNC(broadcast_ss)(&vald[k]);
+        auto avald = a * vald[k];
+        const Sreg Av = SIMD_FUNC(broadcast_ss)(&avald);
         Sreg tv, Bv, Cv;
         int j;
         for (j = 0; j < (int)N - 31; j += 32) {
@@ -294,7 +303,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
           SIMD_FUNC(storeu_ps)((float *)&Cd[CC], Cv);
         }
         for (; j < (int)N; j++) {
-          Cd[Cr + j] += vald[k] * Bd[Br + j];
+          Cd[Cr + j] += a * vald[k] * Bd[Br + j];
         }
       }
     }
@@ -308,7 +317,7 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
         for (auto k = start; k < end; k++) {
           tmp += vald[k] * Bd[N * cold[k] + j];
         }
-        Cd[i * N + j] = tmp;
+        Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
       }
     }
 #endif
@@ -316,4 +325,10 @@ void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
   }
   logger.func_out();
 }
+
+void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+                  matrix::Dense<float> &C) {
+  return matmul(1.0, A, B, 0.0, C);
+}
+
 } // namespace monolish

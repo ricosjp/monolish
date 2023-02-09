@@ -8,11 +8,13 @@
 #include "./math_1_3op/vecmax.hpp"
 #include "./math_1_3op/vecmin.hpp"
 #include "./math_1_3op/vecpow.hpp"
+#include "./math_2op/vecalo.hpp"
 #include "./math_2op/vecasin.hpp"
 #include "./math_2op/vecasinh.hpp"
 #include "./math_2op/vecatan.hpp"
 #include "./math_2op/vecatanh.hpp"
 #include "./math_2op/vecceil.hpp"
+#include "./math_2op/vecexp.hpp"
 #include "./math_2op/vecfloor.hpp"
 #include "./math_2op/vecreciprocal.hpp"
 #include "./math_2op/vecsign.hpp"
@@ -2301,6 +2303,64 @@ void reciprocal(const view1D<matrix::Dense<float>, float> &a,
                 view1D<matrix::Dense<float>, float> &y) {
   vreciprocal_core(a, y);
 }
+void exp(const vector<double> &a, vector<double> &y) { vexp_core(a, y); }
+void exp(const vector<double> &a, view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<double> &a, view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a, vector<double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a,
+         view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<double>, double> &a,
+         view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a, vector<double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a,
+         view1D<vector<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<double>, double> &a,
+         view1D<matrix::Dense<double>, double> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<float> &a, vector<float> &y) { vexp_core(a, y); }
+void exp(const vector<float> &a, view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const vector<float> &a, view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a, vector<float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a,
+         view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<vector<float>, float> &a,
+         view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a, vector<float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a,
+         view1D<vector<float>, float> &y) {
+  vexp_core(a, y);
+}
+void exp(const view1D<matrix::Dense<float>, float> &a,
+         view1D<matrix::Dense<float>, float> &y) {
+  vexp_core(a, y);
+}
 
 void max(const vector<double> &a, const vector<double> &b, vector<double> &y) {
   vvmax_core(a, b, y);
@@ -2767,6 +2827,67 @@ void min(const view1D<matrix::Dense<float>, float> &a,
   vvmin_core(a, b, y);
 }
 
+void max(const vector<double> &a, const double alpha, vector<double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<float> &a, const float alpha, vector<float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y) {
+  svmax_core(a, alpha, y);
+}
+void max(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmax_core(a, alpha, y);
+}
+void min(const vector<double> &a, const double alpha, vector<double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         vector<double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<double>, double> &a, const double alpha,
+         view1D<vector<double>, double> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<float> &a, const float alpha, vector<float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const vector<float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         vector<float> &y) {
+  svmin_core(a, alpha, y);
+}
+void min(const view1D<vector<float>, float> &a, const float alpha,
+         view1D<vector<float>, float> &y) {
+  svmin_core(a, alpha, y);
+}
+
 double max(const vector<double> &y) {
   return vmax_core<vector<double>, double>(y);
 }
@@ -2798,6 +2919,39 @@ float min(const view1D<vector<float>, float> &y) {
 }
 float min(const view1D<matrix::Dense<float>, float> &y) {
   return vmin_core<view1D<matrix::Dense<float>, float>, float>(y);
+}
+
+void alo(const vector<double> &a, const double alpha, const double beta,
+         vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<double> &a, const double alpha, const double beta,
+         view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, vector<double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<double>, double> &a, const double alpha,
+         const double beta, view1D<vector<double>, double> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const vector<float> &a, const float alpha, const float beta,
+         view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, vector<float> &y) {
+  vecalo_core(a, alpha, beta, y);
+}
+void alo(const view1D<vector<float>, float> &a, const float alpha,
+         const float beta, view1D<vector<float>, float> &y) {
+  vecalo_core(a, alpha, beta, y);
 }
 
 } // namespace vml

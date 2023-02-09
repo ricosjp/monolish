@@ -18,6 +18,22 @@ void mmmax_core(const F1 &A, const F2 &B, F3 &C) {
   logger.func_out();
 }
 
+template <typename F1, typename F2, typename F3>
+void smmax_core(const F1 &A, const F2 alpha, F3 &C) {
+  Logger &logger = Logger::get_instance();
+  logger.func_in(monolish_func);
+
+  // err
+  assert(util::is_same_size(A, C));
+  assert(util::is_same_structure(A, C));
+  assert(util::is_same_device_mem_stat(A, C));
+
+  internal::vmax(C.get_nnz(), A.val.data(), alpha, C.val.data(),
+                 C.get_device_mem_stat());
+
+  logger.func_out();
+}
+
 template <typename F1, typename F2> F2 mmax_core(const F1 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);

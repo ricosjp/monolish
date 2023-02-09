@@ -50,6 +50,14 @@ case $1 in
         done
         ;;
 
+    "matrix_reshape" ) 
+        for M in ${MAT_TEST_SIZE[@]}; do
+            for N in ${MAT_TEST_SIZE[@]}; do
+                $PROFILER ./$1_$2.out $M $N || exit 1
+            done
+        done
+        ;;
+
     "matrix_transpose" ) 
         for M in ${MAT_TEST_SIZE[@]}; do
             for N in ${MAT_TEST_SIZE[@]}; do

@@ -601,6 +601,16 @@ public:
    **/
   [[nodiscard]] bool operator!=(const Dense<Float> &mat) const;
 
+  /**
+   * @brief Reshape matrix
+   * @param mat Dense matrix
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void reshape(const size_t row, const size_t col);
+
   /////////////////////////////////////////////
 
   /**

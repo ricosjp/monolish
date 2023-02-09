@@ -10,11 +10,21 @@ namespace monolish::blas {
 
 void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C) {
-  Dense_Dense_Dmatmul_core(A, B, C, false, false);
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
 }
 void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C) {
-  Dense_Dense_Smatmul_core(A, B, C, false, false);
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
 }
 
 } // namespace monolish::blas

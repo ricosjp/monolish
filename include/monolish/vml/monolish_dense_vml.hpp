@@ -452,6 +452,24 @@ void sign(const matrix::Dense<float> &A, matrix::Dense<float> &C);
 /**@}*/
 
 /**
+ * \defgroup vml_dnsexp monolish::vml::exp
+ * @brief exp to Dense matrix elements (C[0:nnz] = exp(A[0:nnz]))
+ * @{
+ */
+/**
+ * @brief exp to Dense matrix elements (C[0:nnz] = exp(A[0:nnz]))
+ * @param A monolish Dense matrix (size M x N)
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void exp(const matrix::Dense<double> &A, matrix::Dense<double> &C);
+void exp(const matrix::Dense<float> &A, matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup vml_dnsdnsmax monolish::vml::max
  * @brief Create a new Dense matrix with greatest elements of two matrices
  * (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
@@ -500,6 +518,54 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 /**@}*/
 
 /**
+ * \defgroup vml_sdnsmax monolish::vml::max
+ * @brief Create a new Dense matrix with greatest elements of Dense matrix or
+ * scalar (C[0:nnz] = max(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new Dense matrix with greatest elements of Dense matrix or
+ * scalar (C[0:nnz] = max(A[0:nnz], alpha))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void max(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C);
+void max(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup vml_sdnsmin monolish::vml::min
+ * @brief Create a new Dense matrix with smallest elements of Dense matrix or
+ * scalar (C[0:nnz] = min(A[0:nnz], alpha))
+ * @{
+ */
+/**
+ * @brief Create a new Dense matrix with smallest elements of Dense matrix or
+ * scalar (C[0:nnz] = min(A[0:nnz], alpha))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha scalar value
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void min(const matrix::Dense<double> &A, const double alpha,
+         matrix::Dense<double> &C);
+void min(const matrix::Dense<float> &A, const float alpha,
+         matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup vml_dnsmax monolish::vml::max
  * @brief Finds the greatest element in Dense matrix (max(C[0:nnz]))
  * @{
@@ -533,6 +599,30 @@ void min(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
  */
 [[nodiscard]] double min(const matrix::Dense<double> &C);
 [[nodiscard]] float min(const matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup vml_sdnsalo monolish::vml::alo
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @{
+ */
+/**
+ * @brief Asymmetric linear operation to Dense matrix elements (C[0:nnz] = alpha
+ * max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
+ * @param A monolish Dense matrix (size M x N)
+ * @param alpha linear coefficient in positive range
+ * @param beta linear coefficient in negative range
+ * @param C monolish Dense matrix (size M x N)
+ * @note
+ * - # of computation: M*N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ */
+void alo(const matrix::Dense<double> &A, const double alpha, const double beta,
+         matrix::Dense<double> &C);
+void alo(const matrix::Dense<float> &A, const float alpha, const float beta,
+         matrix::Dense<float> &C);
 /**@}*/
 
 /**
