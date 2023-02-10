@@ -16,7 +16,7 @@ template <typename T> Dense<T>::Dense(const size_t M, const size_t N) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N);
@@ -30,7 +30,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T *value) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
   std::copy(value, value + get_nnz(), data());
   logger.util_out();
 }
@@ -47,7 +47,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> &value) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
   std::copy(value.begin(), value.end(), data());
   logger.util_out();
 }
@@ -64,7 +64,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
   std::copy(value.data(), value.data() + get_nnz(), data());
 
   if (value.get_device_mem_stat() == true) {
@@ -98,7 +98,7 @@ Dense<T>::Dense(const size_t M, const size_t N,
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
   std::copy(list.begin(), list.end(), data());
   logger.util_out();
 }
@@ -115,7 +115,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
 
   std::random_device random;
   std::mt19937 mt(random());
@@ -141,7 +141,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max,
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
 
   std::mt19937 mt(seed);
   std::uniform_real_distribution<> rand(min, max);
@@ -165,7 +165,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T value) {
   set_col(N);
 
   vad_create_flag = true;
-  resize(M*N);
+  resize(M * N);
 
 #pragma omp parallel for
   for (size_t i = 0; i < get_nnz(); i++) {

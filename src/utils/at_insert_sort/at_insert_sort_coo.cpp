@@ -29,7 +29,7 @@ template float COO<float>::at(const size_t i, const size_t j) const;
 template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
 
-  if(vad_create_flag){
+  if (vad_create_flag) {
     auto rownum = m;
     auto colnum = n;
     assert(rownum <= get_row());
@@ -37,15 +37,15 @@ void COO<T>::insert(const size_t m, const size_t n, const T value) {
 
     row_index.push_back(rownum);
     col_index.push_back(colnum);
-    if(vad_nnz >= alloc_nnz){
+    if (vad_nnz >= alloc_nnz) {
       size_t tmp = vad_nnz;
-      alloc_nnz = 2*alloc_nnz+1;
+      alloc_nnz = 2 * alloc_nnz + 1;
       resize(alloc_nnz);
       vad_nnz = tmp;
     }
     data()[vad_nnz] = value;
     vad_nnz++;
-  }else{
+  } else {
     throw std::runtime_error("Error, not create coo matrix cant use insert");
   }
 }

@@ -1,10 +1,10 @@
 #pragma once
 #include <exception>
+#include <memory>
 #include <omp.h>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
 #if USE_SXAT
 #undef _HAS_CPP17
@@ -47,7 +47,7 @@ private:
   /**
    * @brief # of non-zero element
    */
-  //size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -61,7 +61,8 @@ private:
 
 public:
   /**
-   * @brief CRS format value (pointer), which stores values of the non-zero elements
+   * @brief CRS format value (pointer), which stores values of the non-zero
+   * elements
    */
   std::shared_ptr<Float> vad;
 
@@ -92,9 +93,7 @@ public:
    */
   std::vector<int> row_ptr;
 
-  CRS() {
-    vad_create_flag = true;
-  }
+  CRS() { vad_create_flag = true; }
 
   /**
    * @brief declare CRS matrix
@@ -400,23 +399,23 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void resize(size_t N, Float val = 0){
+  void resize(size_t N, Float val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if(vad_create_flag){
+    if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
-      for (size_t i=0; i<copy_size; ++i){
+      for (size_t i = 0; i < copy_size; ++i) {
         tmp.get()[i] = vad.get()[i];
       }
-      for(size_t i=copy_size; i<N; ++i){
+      for (size_t i = copy_size; i < N; ++i) {
         tmp.get()[i] = val;
       }
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
-    }else{
+    } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }

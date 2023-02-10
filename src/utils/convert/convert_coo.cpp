@@ -38,7 +38,7 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
   set_col(dense.get_col());
   row_index.resize(0);
   col_index.resize(0);
-  resize(dense.get_row()*dense.get_col());
+  resize(dense.get_row() * dense.get_col());
   size_t nz = 0;
 
   for (auto i = decltype(dense.get_row()){0}; i < dense.get_row(); i++) {

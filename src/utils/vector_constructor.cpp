@@ -190,8 +190,7 @@ vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
   }
 #endif
   internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
@@ -214,8 +213,7 @@ vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
   }
 #endif
   internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);

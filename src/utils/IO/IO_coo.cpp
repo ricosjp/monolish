@@ -134,7 +134,7 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   col_index.resize(NNZ, 0.0);
   vad_create_flag = true;
   resize(NNZ, 0.0);
-  T* vald = data();
+  T *vald = data();
 
   // set values
   for (auto i = decltype(NNZ){0}; i < NNZ; i++) {

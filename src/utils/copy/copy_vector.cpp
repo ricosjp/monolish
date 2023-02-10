@@ -56,12 +56,10 @@ void vector<T>::operator=(const view1D<vector<T>, T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    false);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
   }
 
   logger.util_out();
@@ -83,12 +81,10 @@ void vector<T>::operator=(const view1D<matrix::Dense<T>, T> &vec) {
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(),
-                    false);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
   }
 
   logger.util_out();

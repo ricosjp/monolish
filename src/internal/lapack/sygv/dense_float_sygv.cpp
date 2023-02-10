@@ -84,8 +84,8 @@ int internal::lapack::sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B,
   int liwork = -1;
   std::vector<int> iwork(1);
   // workspace query; no error returned
-  ssygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size,
-          W.data(), work.data(), &lwork, iwork.data(), &liwork, &info);
+  ssygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size, W.data(),
+          work.data(), &lwork, iwork.data(), &liwork, &info);
 
   // workspace preparation
   lwork = work[0];
@@ -93,8 +93,8 @@ int internal::lapack::sygvd(matrix::Dense<float> &A, matrix::Dense<float> &B,
   liwork = iwork[0];
   iwork.resize(liwork);
   // actual calculation
-  ssygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size,
-          W.data(), work.data(), &lwork, iwork.data(), &liwork, &info);
+  ssygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size, W.data(),
+          work.data(), &lwork, iwork.data(), &liwork, &info);
 #endif
   logger.func_out();
   return info;

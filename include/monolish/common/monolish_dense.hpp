@@ -32,7 +32,7 @@ private:
   /**
    * @brief # of non-zero element (M * N)
    */
-  //size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -60,9 +60,7 @@ public:
    */
   bool vad_create_flag = false;
 
-  Dense() {
-    vad_create_flag = true;
-  }
+  Dense() { vad_create_flag = true; }
 
   /**
    * @brief Create Dense matrix from COO matrix
@@ -291,7 +289,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  //void set_nnz(const size_t NZ) { vad_nnz = NZ; };
+  // void set_nnz(const size_t NZ) { vad_nnz = NZ; };
 
   /**
    * @brief get format name "Dense"
@@ -465,27 +463,26 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void resize(size_t N, Float val = 0){
+  void resize(size_t N, Float val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if(vad_create_flag){
+    if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
-      for (size_t i=0; i<copy_size; ++i){
+      for (size_t i = 0; i < copy_size; ++i) {
         tmp.get()[i] = vad.get()[i];
       }
-      for (size_t i=copy_size; i<N; ++i){
+      for (size_t i = copy_size; i < N; ++i) {
         tmp.get()[i] = val;
       }
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
-    }else{
+    } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
-
 
   /////////////////////////////////////////////////////////////////////////////
   /**

@@ -44,7 +44,7 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
   gpu_status = false;
   row_index.resize(NNZ);
   col_index.resize(NNZ);
-  
+
   vad_create_flag = true;
   resize(NNZ);
 

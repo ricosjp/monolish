@@ -42,11 +42,12 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
   logger.util_in(monolish_func);
   set_row(B.get_col());
   set_col(B.get_row());
-  if(get_device_mem_stat()){
-    if(get_nnz() != B.get_nnz()){
-      throw std::runtime_error("Error: different nnz size GPU matrix cant use transpose");
+  if (get_device_mem_stat()) {
+    if (get_nnz() != B.get_nnz()) {
+      throw std::runtime_error(
+          "Error: different nnz size GPU matrix cant use transpose");
     }
-  }else{
+  } else {
     vad_create_flag = true;
     resize(B.get_row() * B.get_col());
   }

@@ -59,16 +59,13 @@ private:
    */
   bool vad_create_flag = false;
 
-
   /**
    * @brief true: sended, false: not send
    **/
   mutable bool gpu_status = false;
 
 public:
-  vector() {
-    vad_create_flag = true;
-  }
+  vector() { vad_create_flag = true; }
 
   // constructor ///////////////////////////////////////////////////////
   /**
@@ -286,19 +283,19 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
-    if(vad_create_flag){
+    if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
-      for (size_t i = 0; i < copy_size; i++){
+      for (size_t i = 0; i < copy_size; i++) {
         tmp.get()[i] = vad.get()[i];
       }
-      for (size_t i = copy_size; i < N; i++){
+      for (size_t i = copy_size; i < N; i++) {
         tmp.get()[i] = val;
       }
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
-    }else{
+    } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
@@ -313,16 +310,16 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use push_back");
     }
-    if(vad_create_flag){
-      if(vad_nnz >= alloc_nnz){
+    if (vad_create_flag) {
+      if (vad_nnz >= alloc_nnz) {
         size_t tmp = vad_nnz;
-        alloc_nnz = 2*alloc_nnz+1;
+        alloc_nnz = 2 * alloc_nnz + 1;
         resize(alloc_nnz);
         vad_nnz = tmp;
       }
       vad.get()[vad_nnz] = val;
       vad_nnz++;
-    }else{
+    } else {
       throw std::runtime_error("Error, not create vector cant use push_back");
     }
   }

@@ -23,8 +23,8 @@ bool test_convert(const size_t M, const size_t N) {
       result_coo.get_col() != ans_coo.get_col() ||
       result_coo.get_nnz() != ans_coo.get_nnz()) {
 
-    std::cout << "error, row, col, nnz are different(COO2" << mat.type()
-              << ")" << std::endl;
+    std::cout << "error, row, col, nnz are different(COO2" << mat.type() << ")"
+              << std::endl;
     std::cout << result_coo.get_row() << " != " << ans_coo.get_row()
               << std::endl;
     std::cout << result_coo.get_col() << " != " << ans_coo.get_col()

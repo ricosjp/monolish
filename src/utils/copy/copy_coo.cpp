@@ -31,7 +31,7 @@ void COO<T>::set_ptr(const size_t rN, const size_t cN,
   col_index = c;
   row_index = r;
   resize(v.size());
-  for(size_t i=0; i<v.size(); ++i){
+  for (size_t i = 0; i < v.size(); ++i) {
     data()[i] = v[i];
   }
 

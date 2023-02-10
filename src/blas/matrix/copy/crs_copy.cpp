@@ -14,8 +14,7 @@ void copy_core(const matrix::CRS<F> &A, matrix::CRS<F> &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vcopy(A.get_nnz(), A.data(), C.data(),
-                  A.get_device_mem_stat());
+  internal::vcopy(A.get_nnz(), A.data(), C.data(), A.get_device_mem_stat());
 
   logger.util_out();
 }

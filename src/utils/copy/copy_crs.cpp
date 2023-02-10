@@ -47,7 +47,7 @@ void CRS<T>::set_ptr(const size_t M, const size_t N,
   col_ind = colind;
   row_ptr = rowptr;
   resize(value.size());
-  for(size_t i=0; i<value.size(); ++i){
+  for (size_t i = 0; i < value.size(); ++i) {
     data()[i] = value[i];
   }
 

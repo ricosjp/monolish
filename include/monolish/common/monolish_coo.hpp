@@ -1,10 +1,10 @@
 #pragma once
 #include <exception>
+#include <memory>
 #include <omp.h>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
 #if USE_SXAT
 #undef _HAS_CPP17
@@ -56,7 +56,7 @@ private:
   /**
    * @brief # of non-zero element
    */
-  //size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -75,10 +75,10 @@ public:
    * non-zero elements (size nnz)
    */
   std::vector<int> col_index;
-  
+
   /**
-   * @brief Coodinate format value array (pointer), which stores values of the non-zero
-   * elements
+   * @brief Coodinate format value array (pointer), which stores values of the
+   * non-zero elements
    */
   std::shared_ptr<Float> vad;
 
@@ -98,9 +98,10 @@ public:
   bool vad_create_flag = false;
 
   COO()
-      : rowN(0), colN(0), gpu_status(false), row_index(), col_index(), vad_nnz(0){
-          vad_create_flag = true;
-        }
+      : rowN(0), colN(0), gpu_status(false), row_index(), col_index(),
+        vad_nnz(0) {
+    vad_create_flag = true;
+  }
 
   /**
    * @brief Initialize M x N COO matrix
@@ -112,9 +113,10 @@ public:
    * - GPU acceleration: false
    **/
   COO(const size_t M, const size_t N)
-      : rowN(M), colN(N), gpu_status(false), row_index(), col_index(), vad_nnz(0){
-          vad_create_flag = true;
-        }
+      : rowN(M), colN(N), gpu_status(false), row_index(), col_index(),
+        vad_nnz(0) {
+    vad_create_flag = true;
+  }
 
   /**
    * @brief Create COO matrix from array
@@ -324,7 +326,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  //void set_nnz(const size_t NNZ) { vad_nnz = NNZ; };
+  // void set_nnz(const size_t NNZ) { vad_nnz = NNZ; };
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -396,28 +398,26 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void resize(size_t N, Float val = 0){
+  void resize(size_t N, Float val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if(vad_create_flag){
+    if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
-      for (size_t i=0; i<copy_size; ++i){
+      for (size_t i = 0; i < copy_size; ++i) {
         tmp.get()[i] = vad.get()[i];
       }
-      for(size_t i=copy_size; i<N; ++i){
+      for (size_t i = copy_size; i < N; ++i) {
         tmp.get()[i] = val;
       }
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
-    }else{
+    } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
-
-
 
   // I/O
   // ///////////////////////////////////////////////////////////////////////////
@@ -574,7 +574,7 @@ public:
    **/
   [[nodiscard]] std::vector<Float> get_val_ptr() {
     std::vector<Float> val(vad_nnz);
-    for(size_t i=0; i<vad_nnz; ++i){
+    for (size_t i = 0; i < vad_nnz; ++i) {
       val[i] = data()[i];
     }
     return val;
@@ -614,7 +614,7 @@ public:
    **/
   [[nodiscard]] const std::vector<Float> get_val_ptr() const {
     std::vector<Float> val(vad_nnz);
-    for(size_t i=0; i<vad_nnz; ++i){
+    for (size_t i = 0; i < vad_nnz; ++i) {
       val[i] = data()[i];
     }
     return val;

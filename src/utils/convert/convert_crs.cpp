@@ -14,7 +14,7 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
   colN = coo.get_col();
 
   resize(coo.get_nnz());
-  for(size_t i=0; i<coo.get_nnz(); ++i){
+  for (size_t i = 0; i < coo.get_nnz(); ++i) {
     data()[i] = coo.data()[i];
   }
   col_ind = coo.col_index;
