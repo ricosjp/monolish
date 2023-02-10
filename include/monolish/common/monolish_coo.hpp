@@ -75,18 +75,12 @@ public:
    * non-zero elements (size nnz)
    */
   std::vector<int> col_index;
-
-  /**
-   * @brief Coodinate format value array, which stores values of the non-zero
-   * elements (size nnz)
-   */
-  //std::vector<Float> val;
   
   /**
-   * @brief Dense format value pointer
+   * @brief Coodinate format value array (pointer), which stores values of the non-zero
+   * elements
    */
-  //Float* vad = nullptr;
-  std::shared_ptr<Float[]> vad;
+  std::shared_ptr<Float> vad;
 
   /**
    * @brief # of non-zero element
@@ -407,7 +401,7 @@ public:
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
     if(vad_create_flag){
-      std::shared_ptr<Float[]> tmp(new Float[N], std::default_delete<Float[]>());
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
       for (size_t i=0; i<copy_size; ++i){
         tmp.get()[i] = vad.get()[i];
@@ -581,7 +575,7 @@ public:
   [[nodiscard]] std::vector<Float> get_val_ptr() {
     std::vector<Float> val(vad_nnz);
     for(size_t i=0; i<vad_nnz; ++i){
-      val[i] = vad[i];
+      val[i] = data()[i];
     }
     return val;
   }
@@ -621,7 +615,7 @@ public:
   [[nodiscard]] const std::vector<Float> get_val_ptr() const {
     std::vector<Float> val(vad_nnz);
     for(size_t i=0; i<vad_nnz; ++i){
-      val[i] = vad[i];
+      val[i] = data()[i];
     }
     return val;
   }

@@ -16,7 +16,7 @@ template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
   if (vad_nnz != 0) {
     for (auto k = vad_nnz; k > 0; --k) {
       if (row_index[k - 1] == (int)i && col_index[k - 1] == (int)j) {
-        return vad[k - 1];
+        return data()[k - 1];
       }
     }
   }
@@ -43,7 +43,7 @@ void COO<T>::insert(const size_t m, const size_t n, const T value) {
       resize(alloc_nnz);
       vad_nnz = tmp;
     }
-    vad[vad_nnz] = value;
+    data()[vad_nnz] = value;
     vad_nnz++;
   }else{
     throw std::runtime_error("Error, not create coo matrix cant use insert");
@@ -67,7 +67,7 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
   auto p = hi;
   auto p1 = row_index[p];
   auto p2 = col_index[p];
-  double p3 = vad[p];
+  double p3 = data()[p];
 
   do {
     while ((l < h) && ((row_index[l] != row_index[p])
@@ -89,9 +89,9 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
       col_index[l] = col_index[h];
       col_index[h] = t;
 
-      double td = vad[l];
-      vad[l] = vad[h];
-      vad[h] = td;
+      double td = data()[l];
+      data()[l] = data()[h];
+      data()[h] = td;
     }
   } while (l < h);
 
@@ -101,8 +101,8 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
   col_index[p] = col_index[l];
   col_index[l] = p2;
 
-  vad[p] = vad[l];
-  vad[l] = p3;
+  data()[p] = data()[l];
+  data()[l] = p3;
 
   /* Sort smaller array first for less stack usage */
   if (l - lo < hi - l) {
@@ -135,7 +135,7 @@ template <typename T> void COO<T>::sort(bool merge) {
         row_index[k] = row_index[i];
         col_index[k] = col_index[i];
       }
-      vad[k] = vad[i];
+      data()[k] = data()[i];
     }
     vad_nnz = k + 1;
   }

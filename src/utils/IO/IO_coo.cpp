@@ -21,7 +21,7 @@ template <typename T> void COO<T>::print_all(bool force_cpu) const {
   std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-    std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
+    std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
               << std::endl;
   }
 
@@ -38,7 +38,7 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
+    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
         << std::endl;
   }
   logger.util_out();
@@ -58,7 +58,7 @@ template <typename T> void COO<T>::output_mm(const std::string filename) const {
   out << rowN << " " << colN << " " << get_nnz() << std::endl;
 
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << vad[i]
+    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
         << std::endl;
   }
   logger.util_out();
@@ -118,8 +118,8 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   // check size
   size_t rowNN, colNN, NNZ;
 
-  std::istringstream data(buf);
-  data >> rowNN >> colNN >> NNZ;
+  std::istringstream txtdata(buf);
+  txtdata >> rowNN >> colNN >> NNZ;
 
   if (colNN <= 0 || NNZ < 0) {
     std::cerr << "Matrix.input: Matrix size should be positive" << std::endl;
@@ -134,6 +134,7 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   col_index.resize(NNZ, 0.0);
   vad_create_flag = true;
   resize(NNZ, 0.0);
+  T* vald = data();
 
   // set values
   for (auto i = decltype(NNZ){0}; i < NNZ; i++) {
@@ -146,7 +147,7 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
 
     row_index[i] = ix - 1;
     col_index[i] = jx - 1;
-    vad[i] = value;
+    vald[i] = value;
   }
   logger.util_out();
 }

@@ -40,14 +40,9 @@ namespace monolish {
 template <typename Float> class vector {
 private:
   /**
-   * @brief size N vector data
-   **/
-  //std::vector<Float> val;
-
-  /**
-   * @brief vector data pointer
+   * @brief vector data (pointer)
    */
-  std::shared_ptr<Float[]> vad;
+  std::shared_ptr<Float> vad;
 
   /**
    * @brief vector size
@@ -292,7 +287,7 @@ public:
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
     if(vad_create_flag){
-      std::shared_ptr<Float[]> tmp(new Float[N], std::default_delete<Float[]>());
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
       for (size_t i = 0; i < copy_size; i++){
         tmp.get()[i] = vad.get()[i];

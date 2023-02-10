@@ -17,7 +17,7 @@ template <typename T> void COO<T>::operator=(const matrix::COO<T> &mat) {
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
 
   // value copy
-  internal::vcopy(get_nnz(), vad, mat.vad, get_device_mem_stat());
+  internal::vcopy(get_nnz(), data(), mat.data(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -32,7 +32,7 @@ void COO<T>::set_ptr(const size_t rN, const size_t cN,
   row_index = r;
   resize(v.size());
   for(size_t i=0; i<v.size(); ++i){
-    vad[i] = v[i];
+    data()[i] = v[i];
   }
 
   rowN = rN;

@@ -35,7 +35,7 @@ template <typename T> void COO<T>::transpose(const COO &B) {
     resize(val.size());
   }
   for(size_t i=0; i<val.size(); ++i){
-    vad[i] = val[i];
+    data()[i] = val[i];
   }
   logger.util_out();
 }

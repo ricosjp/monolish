@@ -36,15 +36,15 @@ bool test_convert(const size_t M, const size_t N) {
   }
   for (size_t i = 0; i < ans_coo.get_nnz(); i++) {
 
-    if (result_coo.vad[i] != ans_coo.vad[i] ||
+    if (result_coo.data()[i] != ans_coo.data()[i] ||
         result_coo.row_index[i] != ans_coo.row_index[i] ||
         result_coo.col_index[i] != ans_coo.col_index[i]) {
 
       std::cout << i << "\t" << result_coo.row_index[i] << ","
-                << result_coo.col_index[i] << "," << result_coo.vad[i]
+                << result_coo.col_index[i] << "," << result_coo.data()[i]
                 << std::flush;
       std::cout << ", (ans: " << ans_coo.row_index[i] << ","
-                << ans_coo.col_index[i] << "," << ans_coo.vad[i] << ")"
+                << ans_coo.col_index[i] << "," << ans_coo.data()[i] << ")"
                 << std::endl;
       return false;
     }

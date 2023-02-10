@@ -61,15 +61,9 @@ private:
 
 public:
   /**
-   * @brief CRS format value, which stores values of the non-zero elements (size
-   * nnz)
+   * @brief CRS format value (pointer), which stores values of the non-zero elements
    */
-  //std::vector<Float> val;
-  
-  /**
-   * @brief CRS format value pointer
-   */
-  std::shared_ptr<Float[]> vad;
+  std::shared_ptr<Float> vad;
 
   /**
    * @brief # of non-zero element (M * N)
@@ -411,7 +405,7 @@ public:
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
     if(vad_create_flag){
-      std::shared_ptr<Float[]> tmp(new Float[N], std::default_delete<Float[]>());
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
       for (size_t i=0; i<copy_size; ++i){
         tmp.get()[i] = vad.get()[i];
