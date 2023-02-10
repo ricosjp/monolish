@@ -67,7 +67,7 @@ public:
   //std::vector<Float> val;
   
   /**
-   * @brief Dense format value pointer
+   * @brief CRS format value pointer
    */
   std::shared_ptr<Float[]> vad;
 
