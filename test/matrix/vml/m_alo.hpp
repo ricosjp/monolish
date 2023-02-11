@@ -9,10 +9,10 @@ void ans_m_alo(const monolish::matrix::Dense<T> &A, const T alpha, const T beta,
   int N = A.get_col();
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    if (A.val[i] > 0) {
-      C.val[i] = alpha * A.val[i];
+    if (A.data()[i] > 0) {
+      C.data()[i] = alpha * A.data()[i];
     } else {
-      C.val[i] = beta * A.val[i];
+      C.data()[i] = beta * A.data()[i];
     }
   }
 }
@@ -40,7 +40,7 @@ bool test_send_m_alo(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }
 
@@ -65,6 +65,6 @@ bool test_m_alo(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.val.data(), ansC.val.data(),
+  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
                       ansC.get_nnz(), tol);
 }

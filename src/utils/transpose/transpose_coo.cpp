@@ -23,10 +23,21 @@ template <typename T> void COO<T>::transpose(const COO &B) {
   logger.util_in(monolish_func);
   set_row(B.get_col());
   set_col(B.get_row());
-  set_nnz(B.get_nnz());
   row_index = B.get_col_ind();
   col_index = B.get_row_ptr();
-  val = B.get_val_ptr();
+  auto val = B.get_val_ptr();
+  if (get_device_mem_stat()) {
+    if (get_nnz() != val.size()) {
+      throw std::runtime_error(
+          "Error: different nnz size GPU matrix cant use transpose");
+    }
+  } else {
+    vad_create_flag = true;
+    resize(val.size());
+  }
+  for (size_t i = 0; i < val.size(); ++i) {
+    data()[i] = val[i];
+  }
   logger.util_out();
 }
 template void COO<double>::transpose(const COO &B);

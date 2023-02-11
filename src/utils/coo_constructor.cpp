@@ -17,15 +17,16 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = NNZ;
   gpu_status = false;
-  row_index.resize(nnz);
-  col_index.resize(nnz);
-  val.resize(nnz);
+  row_index.resize(NNZ);
+  col_index.resize(NNZ);
 
-  std::copy(row, row + nnz, row_index.begin());
-  std::copy(col, col + nnz, col_index.begin());
-  std::copy(value, value + nnz, val.begin());
+  vad_create_flag = true;
+  resize(NNZ);
+
+  std::copy(row, row + NNZ, row_index.begin());
+  std::copy(col, col + NNZ, col_index.begin());
+  std::copy(value, value + NNZ, data());
   logger.util_out();
 }
 template COO<double>::COO(const size_t M, const size_t N, const size_t NNZ,
@@ -40,18 +41,19 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = NNZ;
   gpu_status = false;
-  row_index.resize(nnz);
-  col_index.resize(nnz);
-  val.resize(nnz);
+  row_index.resize(NNZ);
+  col_index.resize(NNZ);
 
-  std::copy(row, row + nnz, row_index.begin());
-  std::copy(col, col + nnz, col_index.begin());
-  std::copy(value, value + nnz, val.begin());
+  vad_create_flag = true;
+  resize(NNZ);
+
+  std::copy(row, row + NNZ, row_index.begin());
+  std::copy(col, col + NNZ, col_index.begin());
+  std::copy(value, value + NNZ, data());
 
 #pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++) {
+  for (size_t i = 0; i < NNZ; i++) {
     row_index[i] -= origin;
     col_index[i] -= origin;
   }
@@ -70,16 +72,16 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
   logger.util_in(monolish_func);
   rowN = coo.get_row();
   colN = coo.get_col();
-  nnz = coo.get_nnz();
   gpu_status = false;
-  row_index.resize(nnz);
-  col_index.resize(nnz);
-  val.resize(nnz);
-  std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
+  row_index.resize(coo.get_nnz());
+  col_index.resize(coo.get_nnz());
+  vad_create_flag = true;
+  resize(coo.get_nnz());
+  std::copy(coo.row_index.data(), coo.row_index.data() + coo.get_nnz(),
             row_index.begin());
-  std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
+  std::copy(coo.col_index.data(), coo.col_index.data() + coo.get_nnz(),
             col_index.begin());
-  std::copy(coo.val.data(), coo.val.data() + nnz, val.begin());
+  std::copy(coo.data(), coo.data() + coo.get_nnz(), data());
   logger.util_out();
 }
 template COO<double>::COO(const matrix::COO<double> &coo);
@@ -91,19 +93,19 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo, T value) {
   logger.util_in(monolish_func);
   rowN = coo.get_row();
   colN = coo.get_col();
-  nnz = coo.get_nnz();
   gpu_status = false;
 
-  row_index.resize(nnz);
-  std::copy(coo.row_index.data(), coo.row_index.data() + nnz,
+  row_index.resize(coo.get_nnz());
+  std::copy(coo.row_index.data(), coo.row_index.data() + coo.get_nnz(),
             row_index.begin());
 
-  col_index.resize(nnz);
-  std::copy(coo.col_index.data(), coo.col_index.data() + nnz,
+  col_index.resize(coo.get_nnz());
+  std::copy(coo.col_index.data(), coo.col_index.data() + coo.get_nnz(),
             col_index.begin());
 
-  val.resize(nnz);
-  internal::vbroadcast(val.size(), value, val.data(), false);
+  vad_create_flag = true;
+  resize(coo.get_nnz());
+  internal::vbroadcast(coo.get_nnz(), value, data(), false);
 
   logger.util_out();
 }

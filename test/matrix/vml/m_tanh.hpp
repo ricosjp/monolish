@@ -4,7 +4,7 @@
 template <typename T> void ans_tanh(monolish::matrix::Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.val[i] = std::tanh(A.val[i]);
+    A.data()[i] = std::tanh(A.data()[i]);
   }
 }
 
@@ -30,7 +30,7 @@ bool test_send_mtanh(const size_t M, const size_t N, double tol) {
   A.recv();
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
                       AA.get_nnz(), tol);
 }
 
@@ -54,6 +54,6 @@ bool test_mtanh(const size_t M, const size_t N, double tol) {
   monolish::vml::tanh(A, A);
   monolish::matrix::Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.val.data(), AA.val.data(),
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
                       AA.get_nnz(), tol);
 }

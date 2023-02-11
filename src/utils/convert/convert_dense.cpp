@@ -12,16 +12,16 @@ template <typename T> void Dense<T>::convert(const COO<T> &coo) {
 
   set_row(coo.get_row());
   set_col(coo.get_col());
-  set_nnz(get_row() * get_col());
-  val.resize(get_row() * get_col());
+  vad_create_flag = true;
+  resize(get_row() * get_col());
 
 #pragma omp parallel for
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-    val[i] = 0.0;
+    data()[i] = 0.0;
   }
 
   for (auto i = decltype(coo.get_nnz()){0}; i < coo.get_nnz(); i++) {
-    insert(coo.row_index[i], coo.col_index[i], coo.val[i]);
+    insert(coo.row_index[i], coo.col_index[i], coo.data()[i]);
   }
   logger.util_out();
 }
@@ -32,11 +32,11 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
+  vad_create_flag = true;
+  resize(mat.get_nnz());
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  nnz = mat.get_nnz();
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -44,7 +44,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
         "error can not convert CRS->CRS when gpu_status == true");
   }
 #endif
-  internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+  internal::vcopy(get_nnz(), mat.data(), data(), false);
 
   logger.util_out();
 }

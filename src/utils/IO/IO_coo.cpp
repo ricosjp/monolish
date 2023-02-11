@@ -20,10 +20,11 @@ template <typename T> void COO<T>::print_all(bool force_cpu) const {
   std::cout << std::scientific;
   std::cout << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (auto i = decltype(nnz){0}; i < nnz; i++) {
-    std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
+    std::cout << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
               << std::endl;
   }
+
   logger.util_out();
 }
 template void COO<double>::print_all(bool force_cpu) const;
@@ -36,8 +37,8 @@ template <typename T> void COO<T>::print_all(std::string filename) const {
   out << std::scientific;
   out << std::setprecision(std::numeric_limits<T>::max_digits10);
 
-  for (auto i = decltype(nnz){0}; i < nnz; i++) {
-    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
+    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
         << std::endl;
   }
   logger.util_out();
@@ -54,10 +55,10 @@ template <typename T> void COO<T>::output_mm(const std::string filename) const {
 
   out << (MM_BANNER " " MM_MAT " " MM_FMT " " MM_TYPE_REAL " " MM_TYPE_GENERAL)
       << std::endl;
-  out << rowN << " " << colN << " " << nnz << std::endl;
+  out << rowN << " " << colN << " " << get_nnz() << std::endl;
 
-  for (auto i = decltype(nnz){0}; i < nnz; i++) {
-    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << val[i]
+  for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
+    out << row_index[i] + 1 << " " << col_index[i] + 1 << " " << data()[i]
         << std::endl;
   }
   logger.util_out();
@@ -117,8 +118,8 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
   // check size
   size_t rowNN, colNN, NNZ;
 
-  std::istringstream data(buf);
-  data >> rowNN >> colNN >> NNZ;
+  std::istringstream txtdata(buf);
+  txtdata >> rowNN >> colNN >> NNZ;
 
   if (colNN <= 0 || NNZ < 0) {
     std::cerr << "Matrix.input: Matrix size should be positive" << std::endl;
@@ -127,16 +128,17 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
 
   rowN = rowNN;
   colN = colNN;
-  nnz = NNZ;
 
   // allocate
-  row_index.resize(nnz, 0.0);
-  col_index.resize(nnz, 0.0);
-  val.resize(nnz, 0.0);
+  row_index.resize(NNZ, 0.0);
+  col_index.resize(NNZ, 0.0);
+  vad_create_flag = true;
+  resize(NNZ, 0.0);
+  T *vald = data();
 
   // set values
-  for (auto i = decltype(nnz){0}; i < nnz; i++) {
-    decltype(nnz) ix, jx;
+  for (auto i = decltype(NNZ){0}; i < NNZ; i++) {
+    decltype(NNZ) ix, jx;
     T value;
 
     getline(ifs, buf);
@@ -145,7 +147,7 @@ template <typename T> void COO<T>::input_mm(const std::string filename) {
 
     row_index[i] = ix - 1;
     col_index[i] = jx - 1;
-    val[i] = value;
+    vald[i] = value;
   }
   logger.util_out();
 }

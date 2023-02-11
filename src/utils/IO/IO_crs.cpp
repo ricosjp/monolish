@@ -20,7 +20,7 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const T *vald = val.data();
+    const T *vald = data();
     const auto *indexd = col_ind.data();
     const auto *ptrd = row_ptr.data();
 
@@ -37,7 +37,7 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
   } else {
     for (auto i = decltype(get_row()){0}; i < get_row(); i++) {
       for (auto j = row_ptr[i]; j < row_ptr[i + 1]; j++) {
-        std::cout << i + 1 << " " << col_ind[j] + 1 << " " << val[j]
+        std::cout << i + 1 << " " << col_ind[j] + 1 << " " << data()[j]
                   << std::endl;
       }
     }

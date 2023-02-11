@@ -32,7 +32,7 @@ private:
   /**
    * @brief # of non-zero element (M * N)
    */
-  size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -41,11 +41,26 @@ private:
 
 public:
   /**
-   * @brief Dense format value(size M x N)
+   * @brief Dense format value (pointer)
    */
-  std::vector<Float> val;
+  std::shared_ptr<Float> vad;
 
-  Dense() {}
+  /**
+   * @brief # of non-zero element (M * N)
+   */
+  size_t vad_nnz = 0;
+
+  /**
+   * @brief alloced matrix size
+   */
+  std::size_t alloc_nnz = 0;
+
+  /**
+   * @brief matrix create flag;
+   */
+  bool vad_create_flag = false;
+
+  Dense() { vad_create_flag = true; }
 
   /**
    * @brief Create Dense matrix from COO matrix
@@ -75,7 +90,10 @@ public:
    * - Multi-threading: true
    * - GPU acceleration: false
    **/
-  Dense(const COO<Float> &coo) { convert(coo); }
+  Dense(const COO<Float> &coo) {
+    vad_create_flag = true;
+    convert(coo);
+  }
 
   /**
    * @brief Create Dense matrix from Dense matrix
@@ -271,7 +289,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void set_nnz(const size_t NZ) { nnz = NZ; };
+  // void set_nnz(const size_t NZ) { vad_nnz = NZ; };
 
   /**
    * @brief get format name "Dense"
@@ -421,6 +439,51 @@ public:
     }
   }
 
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A const pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *data() const { return vad.get(); }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *data() { return vad.get(); }
+
+  /**
+   * @brief resize matrix value
+   * @param N matrix size
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void resize(size_t N, Float val = 0) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU matrix cant use resize");
+    }
+    if (vad_create_flag) {
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
+      size_t copy_size = std::min(vad_nnz, N);
+      for (size_t i = 0; i < copy_size; ++i) {
+        tmp.get()[i] = vad.get()[i];
+      }
+      for (size_t i = copy_size; i < N; ++i) {
+        tmp.get()[i] = val;
+      }
+      vad = tmp;
+      alloc_nnz = N;
+      vad_nnz = N;
+    } else {
+      throw std::runtime_error("Error, not create vector cant use resize");
+    }
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   /**
    * @brief get diag. vector
@@ -500,7 +563,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
     }
-    return val.data() + m * get_col();
+    return vad.get() + m * get_col();
   }
 
   /**

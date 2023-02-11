@@ -30,7 +30,7 @@ int equation::Cholesky<matrix::CRS<double>, double>::cusolver_Cholesky(
   int n = A.get_row();
   int nnz = A.get_nnz();
 
-  double *Dval = A.val.data();
+  double *Dval = A.data();
   int *Dptr = A.row_ptr.data();
   int *Dind = A.col_ind.data();
 
@@ -75,7 +75,7 @@ int equation::Cholesky<matrix::CRS<float>, float>::cusolver_Cholesky(
   int n = A.get_row();
   int nnz = A.get_nnz();
 
-  float *Dval = A.val.data();
+  float *Dval = A.data();
   int *Dptr = A.row_ptr.data();
   int *Dind = A.col_ind.data();
 

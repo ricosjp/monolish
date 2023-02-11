@@ -32,9 +32,9 @@ void Dense_Dense_Dmatmul_core(const double &a, const matrix::Dense<double> &A,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const auto *Ad = A.val.data();
-  const auto *Bd = B.val.data();
-  auto *Cd = C.val.data();
+  const auto *Ad = A.data();
+  const auto *Bd = B.data();
+  auto *Cd = C.data();
 
   // MN = MK * KN
   const auto m = A.get_row();
@@ -78,9 +78,9 @@ void Dense_Dense_Smatmul_core(const float &a, const matrix::Dense<float> &A,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const auto *Ad = A.val.data();
-  const auto *Bd = B.val.data();
-  auto *Cd = C.val.data();
+  const auto *Ad = A.data();
+  const auto *Bd = B.data();
+  auto *Cd = C.data();
 
   // MN = MK * KN
   const auto m = A.get_row();

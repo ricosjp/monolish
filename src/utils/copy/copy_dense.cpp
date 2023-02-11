@@ -17,9 +17,9 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
 
   // gpu copy
   if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.val.data(), val.data(), true);
+    internal::vcopy(get_nnz(), mat.data(), data(), true);
   } else {
-    internal::vcopy(get_nnz(), mat.val.data(), val.data(), false);
+    internal::vcopy(get_nnz(), mat.data(), data(), false);
   }
 
   logger.util_out();
@@ -33,11 +33,14 @@ void Dense<T>::set_ptr(const size_t M, const size_t N,
                        const std::vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  val = value;
+  vad_create_flag = true;
+  resize(M * N);
+  for (size_t i = 0; i < M * N; ++i) {
+    data()[i] = value[i];
+  }
 
   rowN = M;
   colN = N;
-  nnz = M * N;
   logger.util_out();
 }
 template void Dense<double>::set_ptr(const size_t M, const size_t N,

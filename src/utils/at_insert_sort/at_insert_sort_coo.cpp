@@ -13,10 +13,10 @@ template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
-  if (nnz != 0) {
-    for (auto k = nnz; k > 0; --k) {
+  if (vad_nnz != 0) {
+    for (auto k = vad_nnz; k > 0; --k) {
       if (row_index[k - 1] == (int)i && col_index[k - 1] == (int)j) {
-        return val[k - 1];
+        return data()[k - 1];
       }
     }
   }
@@ -28,15 +28,26 @@ template float COO<float>::at(const size_t i, const size_t j) const;
 // insert //
 template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
-  auto rownum = m;
-  auto colnum = n;
-  assert(rownum <= get_row());
-  assert(colnum <= get_col());
 
-  row_index.push_back(rownum);
-  col_index.push_back(colnum);
-  val.push_back(value);
-  ++nnz;
+  if (vad_create_flag) {
+    auto rownum = m;
+    auto colnum = n;
+    assert(rownum <= get_row());
+    assert(colnum <= get_col());
+
+    row_index.push_back(rownum);
+    col_index.push_back(colnum);
+    if (vad_nnz >= alloc_nnz) {
+      size_t tmp = vad_nnz;
+      alloc_nnz = 2 * alloc_nnz + 1;
+      resize(alloc_nnz);
+      vad_nnz = tmp;
+    }
+    data()[vad_nnz] = value;
+    vad_nnz++;
+  } else {
+    throw std::runtime_error("Error, not create coo matrix cant use insert");
+  }
 }
 template void COO<double>::insert(const size_t m, const size_t n,
                                   const double value);
@@ -56,7 +67,7 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
   auto p = hi;
   auto p1 = row_index[p];
   auto p2 = col_index[p];
-  double p3 = val[p];
+  double p3 = data()[p];
 
   do {
     while ((l < h) && ((row_index[l] != row_index[p])
@@ -78,9 +89,9 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
       col_index[l] = col_index[h];
       col_index[h] = t;
 
-      double td = val[l];
-      val[l] = val[h];
-      val[h] = td;
+      double td = data()[l];
+      data()[l] = data()[h];
+      data()[h] = td;
     }
   } while (l < h);
 
@@ -90,8 +101,8 @@ template <typename T> void COO<T>::_q_sort(int lo, int hi) {
   col_index[p] = col_index[l];
   col_index[l] = p2;
 
-  val[p] = val[l];
-  val[l] = p3;
+  data()[p] = data()[l];
+  data()[l] = p3;
 
   /* Sort smaller array first for less stack usage */
   if (l - lo < hi - l) {
@@ -113,20 +124,20 @@ template <typename T> void COO<T>::sort(bool merge) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  _q_sort(0, nnz - 1);
+  _q_sort(0, vad_nnz - 1);
 
   /*  Remove duplicates */
   if (merge) {
     size_t k = 0;
-    for (auto i = decltype(nnz){1}; i < nnz; i++) {
+    for (auto i = decltype(vad_nnz){1}; i < vad_nnz; i++) {
       if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
         k++;
         row_index[k] = row_index[i];
         col_index[k] = col_index[i];
       }
-      val[k] = val[i];
+      data()[k] = data()[i];
     }
-    nnz = k + 1;
+    vad_nnz = k + 1;
   }
 
   logger.util_out();

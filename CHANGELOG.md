@@ -26,6 +26,7 @@ Unreleased
 
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>
+- std::vector -> std::shared_ptr for data array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/491>
 
 0.17.0 - 2022/11/15
 -----------

@@ -1,5 +1,6 @@
 #pragma once
 #include <exception>
+#include <memory>
 #include <omp.h>
 #include <stdexcept>
 #include <string>
@@ -46,7 +47,7 @@ private:
   /**
    * @brief # of non-zero element
    */
-  size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -60,10 +61,25 @@ private:
 
 public:
   /**
-   * @brief CRS format value, which stores values of the non-zero elements (size
-   * nnz)
+   * @brief CRS format value (pointer), which stores values of the non-zero
+   * elements
    */
-  std::vector<Float> val;
+  std::shared_ptr<Float> vad;
+
+  /**
+   * @brief # of non-zero element (M * N)
+   */
+  size_t vad_nnz = 0;
+
+  /**
+   * @brief alloced matrix size
+   */
+  std::size_t alloc_nnz = 0;
+
+  /**
+   * @brief matrix create flag;
+   */
+  bool vad_create_flag = false;
 
   /**
    * @brief CRS format column index, which stores column numbers of the non-zero
@@ -77,7 +93,7 @@ public:
    */
   std::vector<int> row_ptr;
 
-  CRS() {}
+  CRS() { vad_create_flag = true; }
 
   /**
    * @brief declare CRS matrix
@@ -189,7 +205,10 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  CRS(COO<Float> &coo) { convert(coo); }
+  CRS(COO<Float> &coo) {
+    vad_create_flag = true;
+    convert(coo);
+  }
 
   /**
    * @brief Create CRS matrix from CRS matrix
@@ -272,7 +291,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] size_t get_nnz() const { return nnz; }
+  [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
 
   /**
    * @brief get format name "CRS"
@@ -353,6 +372,51 @@ public:
   ~CRS() {
     if (get_device_mem_stat()) {
       device_free();
+    }
+  }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A const pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *data() const { return vad.get(); }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *data() { return vad.get(); }
+
+  /**
+   * @brief resize matrix value
+   * @param N matrix size
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void resize(size_t N, Float val = 0) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU matrix cant use resize");
+    }
+    if (vad_create_flag) {
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
+      size_t copy_size = std::min(vad_nnz, N);
+      for (size_t i = 0; i < copy_size; ++i) {
+        tmp.get()[i] = vad.get()[i];
+      }
+      for (size_t i = copy_size; i < N; ++i) {
+        tmp.get()[i] = val;
+      }
+      vad = tmp;
+      alloc_nnz = N;
+      vad_nnz = N;
+    } else {
+      throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
 

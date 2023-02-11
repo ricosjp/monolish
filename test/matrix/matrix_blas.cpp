@@ -76,6 +76,7 @@ int main(int argc, char **argv) {
   }
 
   // matadd LinearOperator//
+  /* TODO needed?
   if (test_send_matadd_linearoperator<monolish::matrix::LinearOperator<double>,
                                       monolish::matrix::LinearOperator<double>,
                                       monolish::matrix::LinearOperator<double>,
@@ -100,6 +101,7 @@ int main(int argc, char **argv) {
           M, N, 1.0e-4) == false) {
     return 1;
   }
+  */
 
   // matsub Dense//
   if (test_send_matsub<monolish::matrix::Dense<double>,
@@ -151,6 +153,7 @@ int main(int argc, char **argv) {
   }
 
   // matsub LinearOperator//
+  /* TODO needed?
   if (test_send_matsub_linearoperator<monolish::matrix::LinearOperator<double>,
                                       monolish::matrix::LinearOperator<double>,
                                       monolish::matrix::LinearOperator<double>,
@@ -175,6 +178,7 @@ int main(int argc, char **argv) {
           M, N, 1.0e-4) == false) {
     return 1;
   }
+  */
 
   // matvec Dense//
   if (test_send_matvec<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==

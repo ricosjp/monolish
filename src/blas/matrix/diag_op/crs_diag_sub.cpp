@@ -8,7 +8,7 @@ template <typename T> void CRS<T>::diag_sub(const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = val.data();
+  T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -47,7 +47,7 @@ template <typename T> void CRS<T>::diag_sub(const vector<T> &vec) {
   logger.func_in(monolish_func);
 
   const T *vecd = vec.data();
-  T *vald = val.data();
+  T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -90,7 +90,7 @@ template <typename T> void CRS<T>::diag_sub(const view1D<vector<T>, T> &vec) {
   logger.func_in(monolish_func);
 
   const T *vecd = vec.data();
-  T *vald = val.data();
+  T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
@@ -135,7 +135,7 @@ void CRS<T>::diag_sub(const view1D<matrix::Dense<T>, T> &vec) {
   logger.func_in(monolish_func);
 
   const T *vecd = vec.data();
-  T *vald = val.data();
+  T *vald = data();
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
