@@ -245,8 +245,10 @@ public:
    * - GPU acceleration: true
    **/
   ~vector() {
-    if (get_device_mem_stat()) {
-      device_free();
+    if(vad_create_flag){
+      if (get_device_mem_stat()) {
+        device_free();
+      }
     }
   }
 

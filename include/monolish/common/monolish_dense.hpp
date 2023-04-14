@@ -1,5 +1,6 @@
 #pragma once
 #include "monolish_matrix.hpp"
+#include "monolish_tensor.hpp"
 
 namespace monolish {
 template <typename Float> class vector;
@@ -427,15 +428,17 @@ public:
   [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
 
   /**
-   * @brief destructor of CRS matrix, free GPU memory
+   * @brief destructor of Dense matrix, free GPU memory
    * @note
    * - Multi-threading: false
    * - GPU acceleration: true
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-    if (get_device_mem_stat()) {
-      device_free();
+    if(vad_create_flag){
+      if (get_device_mem_stat()) {
+        device_free();
+      }
     }
   }
 
@@ -483,6 +486,8 @@ public:
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
+
+  void move(const tensor::tensor_Dense<Float>& tensor_dense);
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -607,7 +612,8 @@ public:
 
   /**
    * @brief Reshape matrix
-   * @param mat Dense matrix
+   * @param row
+   * @param col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
