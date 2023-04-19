@@ -24,9 +24,11 @@ namespace monolish::blas {
 for prec in double float; do
     if [ $prec = "double" ]
     then
-        echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Dmatmul_core(A, B, C, false, false);}"
+        echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);}"
+        echo "void matmul(const $prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C){Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);}"
     else
-        echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Smatmul_core(A, B, C, false, false);}"
+        echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);}"
+        echo "void matmul(const $prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C){Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);}"
     fi
 done
 

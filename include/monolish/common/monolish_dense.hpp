@@ -435,7 +435,7 @@ public:
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-    if(vad_create_flag){
+    if (vad_create_flag) {
       if (get_device_mem_stat()) {
         device_free();
       }
@@ -487,7 +487,10 @@ public:
     }
   }
 
-  void move(const tensor::tensor_Dense<Float>& tensor_dense);
+  void move(const tensor::tensor_Dense<Float> &tensor_dense);
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, size_t rowN,
+            size_t colN);
 
   /////////////////////////////////////////////////////////////////////////////
   /**

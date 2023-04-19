@@ -75,11 +75,11 @@ bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  bool ans = false;
+  bool ans = true;
 
-  if (A.get_row() == B.get_row() || A.get_col() == B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
-    ans = true;
+    ans = false;
   }
 
   logger.util_out();

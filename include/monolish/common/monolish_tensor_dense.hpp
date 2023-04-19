@@ -1,11 +1,11 @@
 #pragma once
-#include "monolish_vector.hpp"
 #include "monolish_matrix.hpp"
 #include "monolish_tensor.hpp"
+#include "monolish_vector.hpp"
 
 namespace monolish {
-//template <typename Float> class vector;
-//template <typename TYPE, typename Float> class view1D;
+// template <typename Float> class vector;
+// template <typename TYPE, typename Float> class view1D;
 namespace tensor {
 template <typename Float> class tensor_Dense {
 private:
@@ -40,7 +40,7 @@ public:
    **/
   bool vad_create_flag = false;
 
-  tensor_Dense() {vad_create_flag = true;}
+  tensor_Dense() { vad_create_flag = true; }
 
   /**
    * @brief create Dense tensor from Dense matrix
@@ -68,7 +68,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  tensor_Dense(const std::vector<size_t>& shape);
+  tensor_Dense(const std::vector<size_t> &shape);
 
   /**
    * @brief Allocate dense tensor
@@ -78,7 +78,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  tensor_Dense(const std::vector<size_t>& shape, const Float *value);
+  tensor_Dense(const std::vector<size_t> &shape, const Float *value);
 
   /**
    * @brief get shape
@@ -97,6 +97,15 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
+
+  /**
+   * @brief Set row number
+   * @param N # of row
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_shape(const std::vector<size_t> &shape) { reshape(shape); };
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -150,8 +159,8 @@ public:
    *    - # of data transfer: 0
    * **/
   ~tensor_Dense() {
-    if(vad_create_flag){
-      if(get_device_mem_stat()){
+    if (vad_create_flag) {
+      if (get_device_mem_stat()) {
         device_free();
       }
     }
@@ -181,9 +190,12 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void resize(size_t N, Float val = 0){
+  void resize(size_t N, Float val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
+    }
+    if (N == 0) {
+      throw std::runtime_error("Error, tensor must have at least 1 element");
     }
     if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
@@ -202,12 +214,13 @@ public:
     }
   }
 
-  void resize(std::vector<size_t>& shape, Float val = 0){
+  void resize(std::vector<size_t> &shape, Float val = 0) {
     size_t N = 1;
-    for(auto n : shape){
+    for (auto n : shape) {
       N *= n;
     }
     resize(N, val);
+    this->shape = shape;
   }
 
   /**
@@ -215,15 +228,14 @@ public:
    * @param dense input Dense matrix (size M x N)
    * - # of computation: 1
    */
-  void move(const matrix::Dense<Float>& dense);
+  void move(const matrix::Dense<Float> &dense);
 
   /**
    * @brief move Dense tensor from vector
    * @param vec input vector (size M)
    * - # of computation: 1
    */
-  void move(const vector<Float>& vec);
-
+  void move(const vector<Float> &vec);
 
   /**
    * @brief Reshape tensor
@@ -233,9 +245,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void reshape(const std::vector<size_t>& shape);
-
-    
+  void reshape(const std::vector<size_t> &shape);
 };
-}
+} // namespace tensor
 } // namespace monolish

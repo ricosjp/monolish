@@ -345,5 +345,4 @@ template void tensor::tensor_Dense<double>::nonfree_recv();
 template void tensor::tensor_Dense<float>::device_free() const;
 template void tensor::tensor_Dense<double>::device_free() const;
 
-
 } // namespace monolish

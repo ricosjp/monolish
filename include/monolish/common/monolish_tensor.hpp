@@ -5,8 +5,8 @@ namespace monolish {
  * @brief Declare dense tensor class
  */
 
-namespace tensor{
-  template <typename Float> class tensor_Dense;
+namespace tensor {
+template <typename Float> class tensor_Dense;
 }
 } // namespace monolish
 

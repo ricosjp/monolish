@@ -369,7 +369,7 @@ public:
    * COO format can not use GPU function
    * **/
   ~COO() {
-    if(vad_create_flag){
+    if (vad_create_flag) {
       if (get_device_mem_stat()) {
         device_free();
       }

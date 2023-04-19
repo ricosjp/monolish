@@ -1,13 +1,14 @@
-#include "../../../include/monolish/common/monolish_tensor.hpp"
 #include "../../../include/monolish/common/monolish_dense.hpp"
 #include "../../../include/monolish/common/monolish_logger.hpp"
 #include "../../../include/monolish/common/monolish_matrix.hpp"
+#include "../../../include/monolish/common/monolish_tensor.hpp"
 #include "../../internal/monolish_internal.hpp"
 
 namespace monolish {
 namespace tensor {
 
-template <typename T> void tensor_Dense<T>::convert(const matrix::Dense<T> &mat) {
+template <typename T>
+void tensor_Dense<T>::convert(const matrix::Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -30,7 +31,6 @@ template <typename T> void tensor_Dense<T>::convert(const matrix::Dense<T> &mat)
 template void tensor_Dense<double>::convert(const matrix::Dense<double> &mat);
 template void tensor_Dense<float>::convert(const matrix::Dense<float> &mat);
 
-
 template <typename T> void tensor_Dense<T>::convert(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
@@ -52,7 +52,6 @@ template <typename T> void tensor_Dense<T>::convert(const vector<T> &vec) {
 }
 template void tensor_Dense<double>::convert(const vector<double> &vec);
 template void tensor_Dense<float>::convert(const vector<float> &vec);
-
 
 } // namespace tensor
 } // namespace monolish
