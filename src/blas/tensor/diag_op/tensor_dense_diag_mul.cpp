@@ -12,10 +12,10 @@ template <typename T> void tensor_Dense<T>::diag_mul(const T alpha) {
   size_t N = 1;
   size_t shift = 0;
   size_t Len = get_nnz();
-  for(int i=0; i<shape.size(); ++i){
+  for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
-    Len = min(Len, shape[i]);
+    Len = std::min(Len, shape[i]);
   }
 
   if (gpu_status == true) {
@@ -36,11 +36,13 @@ template <typename T> void tensor_Dense<T>::diag_mul(const T alpha) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_mul(const double alpha);
-template void monolish::matrix::Dense<float>::diag_mul(const float alpha);
+template void
+monolish::tensor::tensor_Dense<double>::diag_mul(const double alpha);
+template void
+monolish::tensor::tensor_Dense<float>::diag_mul(const float alpha);
 
 // mul vector
-template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
+template <typename T> void tensor_Dense<T>::diag_mul(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -50,10 +52,10 @@ template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   size_t N = 1;
   size_t shift = 0;
   size_t Len = get_nnz();
-  for(int i=0; i<shape.size(); ++i){
+  for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
-    Len = min(Len, shape[i]);
+    Len = std::min(Len, shape[i]);
   }
 
   assert(Len == vec.size());
@@ -77,12 +79,13 @@ template <typename T> void Dense<T>::diag_mul(const vector<T> &vec) {
   logger.func_out();
 }
 template void
-monolish::matrix::Dense<double>::diag_mul(const vector<double> &vec);
+monolish::tensor::tensor_Dense<double>::diag_mul(const vector<double> &vec);
 template void
-monolish::matrix::Dense<float>::diag_mul(const vector<float> &vec);
+monolish::tensor::tensor_Dense<float>::diag_mul(const vector<float> &vec);
 
 // mul viwe1D<vector>
-template <typename T> void Dense<T>::diag_mul(const view1D<vector<T>, T> &vec) {
+template <typename T>
+void tensor_Dense<T>::diag_mul(const view1D<vector<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -92,10 +95,10 @@ template <typename T> void Dense<T>::diag_mul(const view1D<vector<T>, T> &vec) {
   size_t N = 1;
   size_t shift = 0;
   size_t Len = get_nnz();
-  for(int i=0; i<shape.size(); ++i){
+  for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
-    Len = min(Len, shape[i]);
+    Len = std::min(Len, shape[i]);
   }
 
   assert(Len == vec.size());
@@ -118,14 +121,14 @@ template <typename T> void Dense<T>::diag_mul(const view1D<vector<T>, T> &vec) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_mul(
+template void monolish::tensor::tensor_Dense<double>::diag_mul(
     const view1D<vector<double>, double> &vec);
-template void monolish::matrix::Dense<float>::diag_mul(
+template void monolish::tensor::tensor_Dense<float>::diag_mul(
     const view1D<vector<float>, float> &vec);
 
 // mul viwe1D<Dense>
 template <typename T>
-void Dense<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
+void tensor_Dense<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -135,10 +138,10 @@ void Dense<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
   size_t N = 1;
   size_t shift = 0;
   size_t Len = get_nnz();
-  for(int i=0; i<shape.size(); ++i){
+  for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
-    Len = min(Len, shape[i]);
+    Len = std::min(Len, shape[i]);
   }
 
   assert(Len == vec.size());
@@ -161,8 +164,8 @@ void Dense<T>::diag_mul(const view1D<matrix::Dense<T>, T> &vec) {
 
   logger.func_out();
 }
-template void monolish::matrix::Dense<double>::diag_mul(
+template void monolish::tensor::tensor_Dense<double>::diag_mul(
     const view1D<matrix::Dense<double>, double> &vec);
-template void monolish::matrix::Dense<float>::diag_mul(
+template void monolish::tensor::tensor_Dense<float>::diag_mul(
     const view1D<matrix::Dense<float>, float> &vec);
-} // namespace monolish::matrix
+} // namespace monolish::tensor

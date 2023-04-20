@@ -12,15 +12,15 @@ void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (shape.size() != 2) {
+  if (tensor_dense.get_shape().size() != 2) {
     throw std::runtime_error(
         "error cannot move tensor_Dense->Dense when shape.size() != 2");
   }
 
   this->vad_create_flag = false;
 
-  set_row(shape[0]);
-  set_col(shape[1]);
+  set_row(tensor_dense.get_shape()[0]);
+  set_col(tensor_dense.get_shape()[1]);
   this->gpu_status = tensor_dense.get_device_mem_stat();
   this->vad = tensor_dense.vad;
   this->vad_nnz = tensor_dense.get_nnz();
@@ -35,8 +35,8 @@ template void
 Dense<float>::move(const tensor::tensor_Dense<float> &tensor_dense);
 
 template <typename T>
-void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int rowN,
-                    int colN) {
+void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t rowN,
+                    size_t colN) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

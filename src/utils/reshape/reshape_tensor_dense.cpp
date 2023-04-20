@@ -6,7 +6,7 @@ namespace monolish {
 namespace tensor {
 
 template <typename T>
-void tensor_Dense<T>::reshape(const std::vector<int> &shape) {
+void tensor_Dense<T>::reshape(const std::vector<size_t> &shape) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -42,8 +42,8 @@ void tensor_Dense<T>::reshape(const std::vector<int> &shape) {
 
   logger.util_out();
 }
-template void tensor_Dense<double>::reshape(const std::vector<int> &shape);
-template void tensor_Dense<float>::reshape(const std::vector<int> &shape);
+template void tensor_Dense<double>::reshape(const std::vector<size_t> &shape);
+template void tensor_Dense<float>::reshape(const std::vector<size_t> &shape);
 
 } // namespace tensor
 } // namespace monolish

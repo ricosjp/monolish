@@ -555,7 +555,7 @@ int main(int argc, char **argv) {
   }
   */
 
-  // matadd Dense//
+  // scalar_times Dense//
   if (test_send_scalar_times<monolish::matrix::Dense<double>,
                              monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-8) == false) {

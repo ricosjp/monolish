@@ -11,7 +11,7 @@ void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (shape.size() != 1) {
+  if (tensor_dense.get_shape().size() != 1) {
     throw std::runtime_error(
         "error cannot move tensor_Dense->vector when shape.size() != 2");
   }
@@ -32,7 +32,7 @@ template void
 vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense);
 
 template <typename T>
-void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int nnz) {
+void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t nnz) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -55,8 +55,8 @@ void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int nnz) {
 }
 
 template void
-vector<double>::move(const tensor::tensor_Dense<double> &tensor_dense, int nnz);
+vector<double>::move(const tensor::tensor_Dense<double> &tensor_dense, size_t nnz);
 template void
-vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense, int nnz);
+vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense, size_t nnz);
 
 } // namespace monolish

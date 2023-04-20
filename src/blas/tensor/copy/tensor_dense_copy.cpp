@@ -21,10 +21,12 @@ void copy_core(const tensor::tensor_Dense<F> &A, tensor::tensor_Dense<F> &C) {
 
 namespace blas {
 
-void copy(const tensor::tensor_Dense<double> &A, tensor::tensor_Dense<double> &C) {
+void copy(const tensor::tensor_Dense<double> &A,
+          tensor::tensor_Dense<double> &C) {
   copy_core(A, C);
 }
-void copy(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C) {
+void copy(const tensor::tensor_Dense<float> &A,
+          tensor::tensor_Dense<float> &C) {
   copy_core(A, C);
 }
 

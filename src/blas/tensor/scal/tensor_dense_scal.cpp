@@ -5,7 +5,8 @@ namespace monolish {
 
 namespace {
 
-template <typename T> void tscal_core(const T alpha, tensor::tensor_Dense<T> &A) {
+template <typename T>
+void tscal_core(const T alpha, tensor::tensor_Dense<T> &A) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -21,7 +22,9 @@ void tscal(const double alpha, tensor::tensor_Dense<double> &A) {
   tscal_core(alpha, A);
 }
 
-void tscal(const float alpha, tensor::tensor_Dense<float> &A) { tscal_core(alpha, A); }
+void tscal(const float alpha, tensor::tensor_Dense<float> &A) {
+  tscal_core(alpha, A);
+}
 } // namespace blas
 
 } // namespace monolish

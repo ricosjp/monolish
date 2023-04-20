@@ -2,7 +2,9 @@
 
 template <typename T> bool test() { return true; }
 
-template <typename T> bool default_constructor_test() {}
+template <typename T> bool default_constructor_test() { return true; }
+
+template <typename T> bool fixed_size_test() { return true; }
 
 int main(int argc, char **argv) {
   print_build_info();

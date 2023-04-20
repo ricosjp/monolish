@@ -40,6 +40,12 @@ namespace monolish {
 template <typename Float> class vector {
 private:
   /**
+   * @brief true: sended, false: not send
+   **/
+  mutable bool gpu_status = false;
+
+public:
+  /**
    * @brief vector data (pointer)
    */
   std::shared_ptr<Float> vad;
@@ -59,12 +65,6 @@ private:
    */
   bool vad_create_flag = false;
 
-  /**
-   * @brief true: sended, false: not send
-   **/
-  mutable bool gpu_status = false;
-
-public:
   vector() { vad_create_flag = true; }
 
   // constructor ///////////////////////////////////////////////////////
@@ -325,6 +325,10 @@ public:
       throw std::runtime_error("Error, not create vector cant use push_back");
     }
   }
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense);
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, size_t N);
 
   /**
    * @brief returns a begin iterator

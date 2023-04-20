@@ -9,10 +9,11 @@ FORMAT=(Dense)
 PREC=(double float)
 TEST_A=$(($RANDOM%50+50)) #50~100
 TEST_B=$(($RANDOM%50+50)) #50~100
+TEST_C=$(($RANDOM%50+50)) #50~100
 
 case $1 in
   "tensor_common" )
-    $PROFILER ./$1_$2.out $prec $format $M $N 1 || exit 1
+    $PROFILER ./$1_$2.out $prec $format $M $N $L 1 || exit 1
     ;;
 esac
 

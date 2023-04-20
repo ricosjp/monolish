@@ -7,8 +7,8 @@ namespace {
 
 // vector-tensor_row times //
 template <typename T, typename VEC>
-void times_row_core(const tensor::tensor_Dense<T> &A, const size_t num, const VEC &x,
-                    tensor::tensor_Dense<T> &C) {
+void times_row_core(const tensor::tensor_Dense<T> &A, const size_t num,
+                    const VEC &x, tensor::tensor_Dense<T> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -16,7 +16,7 @@ void times_row_core(const tensor::tensor_Dense<T> &A, const size_t num, const VE
   assert(util::is_same_device_mem_stat(A, x, C));
 
   matrix::Dense<T> Amat;
-  Amat.move(A, -1, A.shape[A.shape.size()-1]);
+  Amat.move(A, -1, A.get_shape()[A.get_shape().size() - 1]);
   assert(Amat.get_col() == x.size());
   assert(Amat.get_row() >= num);
 
@@ -49,8 +49,8 @@ void times_row_core(const tensor::tensor_Dense<T> &A, const size_t num, const VE
 
 // vector-tensor_col times //
 template <typename T, typename VEC>
-void times_col_core(const tensor::tensor_Dense<T> &A, const size_t num, const VEC &x,
-                    tensor::tensor_Dense<T> &C) {
+void times_col_core(const tensor::tensor_Dense<T> &A, const size_t num,
+                    const VEC &x, tensor::tensor_Dense<T> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -58,13 +58,13 @@ void times_col_core(const tensor::tensor_Dense<T> &A, const size_t num, const VE
   assert(util::is_same_device_mem_stat(A, x, C));
 
   matrix::Dense<T> Amat;
-  Amat.move(A, A.shape[0], -1);
+  Amat.move(A, A.get_shape()[0], -1);
   assert(Amat.get_row() == x.size());
   assert(Amat.get_col() >= num);
 
   const auto *Ad = A.data();
   const auto m = Amat.get_row();
-  const auto n = A.get_col();
+  const auto n = Amat.get_col();
   auto *Cd = C.data();
 
   const auto *xd = x.data();
@@ -113,7 +113,8 @@ void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
   times_row_core(A, num, x, C);
 }
 void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
-               const view1D<vector<float>, float> &x, tensor::tensor_Dense<float> &C) {
+               const view1D<vector<float>, float> &x,
+               tensor::tensor_Dense<float> &C) {
   times_row_core(A, num, x, C);
 }
 void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
@@ -142,7 +143,8 @@ void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
   times_col_core(A, num, x, C);
 }
 void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
-               const view1D<vector<float>, float> &x, tensor::tensor_Dense<float> &C) {
+               const view1D<vector<float>, float> &x,
+               tensor::tensor_Dense<float> &C) {
   times_col_core(A, num, x, C);
 }
 void times_col(const tensor::tensor_Dense<float> &A, const size_t num,

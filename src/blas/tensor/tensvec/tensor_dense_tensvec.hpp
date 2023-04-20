@@ -1,8 +1,9 @@
 #pragma once
+#include "../../matrix/matvec/dense_matvec.hpp"
 
 namespace monolish {
 namespace {
-std::string get_matvec_name(std::string func, bool flag) {
+std::string get_tensvec_name(std::string func, bool flag) {
   if (flag == true) {
     return func + "_T";
   } else {
@@ -11,17 +12,17 @@ std::string get_matvec_name(std::string func, bool flag) {
 }
 // double ///////////////////
 template <typename VEC1, typename VEC2>
-void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x, VEC2 &y,
-                  bool transA) {
+void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x,
+                   VEC2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
-  
+
   auto Ashape = A.get_shape();
   matrix::Dense<double> Amat;
-  if(transA){
+  if (transA) {
     Amat.move(A, Ashape[0], -1);
-  }else{
-    Amat.move(A, -1, Ashape[Ashape.size()-1]);
+  } else {
+    Amat.move(A, -1, Ashape[Ashape.size() - 1]);
   }
   Dmatvec_core(Amat, x, y, transA);
 
@@ -31,18 +32,18 @@ void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x, VEC2 &y
 // float ///////////////////
 template <typename VEC1, typename VEC2>
 void Stensvec_core(const tensor::tensor_Dense<float> &A, const VEC1 &x, VEC2 &y,
-                  bool transA) {
+                   bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
 
   auto Ashape = A.get_shape();
   matrix::Dense<float> Amat;
-  if(transA){
+  if (transA) {
     Amat.move(A, Ashape[0], -1);
-  }else{
-    Amat.move(A, -1, Ashape[Ashape.size()-1]);
+  } else {
+    Amat.move(A, -1, Ashape[Ashape.size() - 1]);
   }
-  Dmatvec_core(Amat, x, y, transA);
+  Smatvec_core(Amat, x, y, transA);
 
   logger.func_out();
 }

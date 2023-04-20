@@ -4,7 +4,7 @@
 
 namespace monolish {
 namespace {
-std::string get_matmul_name(std::string func, bool transA, bool transB) {
+std::string get_tensmul_name(std::string func, bool transA, bool transB) {
   func += "_";
   if (transA == true) {
     func += "T";
@@ -20,7 +20,7 @@ std::string get_matmul_name(std::string func, bool transA, bool transB) {
 }
 
 // double ///////////////////
-void tensor_Dense_tensor_Dense_Dmatmul_core(const double &a, const tensor::tensor_Dense<double> &A,
+void tensor_Dense_tensor_Dense_Dtensmul_core(const double &a, const tensor::tensor_Dense<double> &A,
                               const tensor::tensor_Dense<double> &B, const double &b,
                               tensor::tensor_Dense<double> &C, bool transA,
                               bool transB) {
@@ -40,7 +40,7 @@ void tensor_Dense_tensor_Dense_Dmatmul_core(const double &a, const tensor::tenso
 }
 
 // float ///////////////////
-void tensor_Dense_tensor_Dense_Smatmul_core(const float &a, const tensor::tensor_Dense<float> &A,
+void tensor_Dense_tensor_Dense_Stensmul_core(const float &a, const tensor::tensor_Dense<float> &A,
                               const tensor::tensor_Dense<float> &B, const float &b,
                               tensor::tensor_Dense<float> &C, bool transA,
                               bool transB) {

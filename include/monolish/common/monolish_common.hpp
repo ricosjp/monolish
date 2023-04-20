@@ -352,6 +352,36 @@ template <typename T>
  * @ingroup compare
  **/
 template <typename T>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_Dense<T> &A,
+                                     const tensor::tensor_Dense<T> &B);
+
+/**
+ * @brief compare structure using col_index and row_index, M, and N
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_COO<T> &A,
+                                     const tensor::tensor_COO<T> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
 [[nodiscard]] bool is_same_structure(const matrix::Dense<T> &A,
                                      const matrix::Dense<T> &B);
 
@@ -487,6 +517,36 @@ template <typename T>
                                 const matrix::LinearOperator<T> &B);
 
 /**
+ * @brief compare shape
+ * @param A Dense tensor
+ * @param B Dense tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_size(const tensor::tensor_Dense<T> &A,
+                                const tensor::tensor_Dense<T> &B);
+
+/**
+ * @brief compare shape
+ * @param A COO tensor
+ * @param B COO tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_size(const tensor::tensor_COO<T> &A,
+                                const tensor::tensor_COO<T> &B);
+
+/**
  * @brief compare matrix size
  * @ingroup compare
  **/
@@ -578,6 +638,41 @@ template <typename T>
 [[nodiscard]] matrix::COO<T> random_structure_matrix(const int M, const int N,
                                                      const int nnzrow,
                                                      const T val);
+/**
+ * @brief create random structure tensor (index is decided by random)
+ * @param M # of shape 1
+ * @param N # of shape 2
+ * @param L # of shape 3
+ * @param nnzrow non-zero elements per row
+ * @param val value of elements
+ * @note
+ * - # of computation: M*N*nnzrow
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup gendata
+ **/
+template <typename T>
+[[nodiscard]] tensor::tensor_COO<T>
+random_structure_tensor(const size_t M, const size_t N, const size_t L, const size_t nnzrow,
+                        const T val);
+
+/**
+ * @brief create random structure tensor (index is decided by random)
+ * @param M # of shape 1
+ * @param N # of shape 2
+ * @param L # of shape 3
+ * @param nnzrow non-zero elements per row
+ * @param val value of elements
+ * @note
+ * - # of computation: M*N*nnzrow
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup gendata
+ **/
+template <typename T>
+[[nodiscard]] tensor::tensor_COO<T>
+random_structure_tensor(const size_t K, const size_t M, const size_t N, const size_t L,
+                        const size_t nnzrow, const T val);
 
 /**
  * @brief create band matrix

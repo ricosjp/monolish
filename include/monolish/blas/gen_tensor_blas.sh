@@ -22,7 +22,7 @@ echo "
 ## copy tensor_Dense
 echo "
 /**
- * \defgroup mat_copy_Dense monolish::blas::copy (tensor_Dense)
+ * \defgroup tens_copy_Dense monolish::blas::copy (tensor_Dense)
  * @brief Dense tensor copy (C=A)
  * @{
  */
@@ -44,10 +44,10 @@ echo "/**@}*/"
 
 ##############################################
 
-#mscal tensor_Dense
+#tscal tensor_Dense
 echo "
 /**
- * \defgroup mscal_dense monolish::blas::mscal (tensor_Dense)
+ * \defgroup tscal_dense monolish::blas::tscal (tensor_Dense)
  * @brief Dense tensor scal: A = alpha * A
  * @{
  */
@@ -62,13 +62,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void mscal(const $prec alpha, tensor::tensor_Dense<$prec> &A);"
+  echo "void tscal(const $prec alpha, tensor::tensor_Dense<$prec> &A);"
 done
 
 echo "/**@}*/"
 
 ##############################################
-# times scalar (almost same as mscal)
+# times scalar (almost same as tscal)
 
 # times scalar tensor_Dense
 echo "
@@ -95,10 +95,10 @@ echo "/**@}*/"
 
 ##############################################
 
-#matadd tensor_Dense
+#tensadd tensor_Dense
 echo "
 /**
- * \defgroup madd_dense monolish::blas::matadd (tensor_Dense)
+ * \defgroup madd_dense monolish::blas::tensadd (tensor_Dense)
  * @brief Dense tensor addition: C = A + B
  * @{
  */
@@ -114,16 +114,16 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matadd(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+  echo "void tensadd(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
 done
 echo "/**@}*/"
 
 echo ""
 
-#matsub tensor_Dense
+#tenssub tensor_Dense
 echo "
 /**
- * \defgroup msub_dense monolish::blas::matsub (tensor_Dense)
+ * \defgroup msub_dense monolish::blas::tenssub (tensor_Dense)
  * @brief Dense tensor subtract: C = A - B
  * @{
  */
@@ -139,7 +139,7 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matsub(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+  echo "void tenssub(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
 done
 echo "/**@}*/"
 
