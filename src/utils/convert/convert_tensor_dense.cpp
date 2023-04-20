@@ -90,7 +90,7 @@ template <typename T> void tensor_Dense<T>::convert(const vector<T> &vec) {
   resize(vec.get_nnz());
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (mat.get_device_mem_stat()) {
+  if (vec.get_device_mem_stat()) {
     throw std::runtime_error(
         "error can not convert CRS->CRS when gpu_status == true");
   }
