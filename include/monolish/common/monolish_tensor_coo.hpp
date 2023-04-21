@@ -199,7 +199,7 @@ public:
   std::vector<size_t> get_index(const size_t pos) {
     std::vector<size_t> ind(this->shape.size(), 0);
     auto pos_copy = pos;
-    for (int i = this->shape.size() - 1; i >= 0; --i) {
+    for (int i = (int)this->shape.size() - 1; i >= 0; --i) {
       ind[i] = pos_copy % this->shape[i];
       pos_copy /= this->shape[i];
     }
