@@ -26,8 +26,8 @@ template <typename T> void tensor_Dense<T>::print_all(bool force_cpu) const {
 #pragma omp target
     for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       auto i_copy = i;
-      for(int j=(int)shape.size()-1; j>=0; --j){
-        printf("%lu ", i_copy%shape[j]);
+      for (int j = (int)shape.size() - 1; j >= 0; --j) {
+        printf("%lu ", i_copy % shape[j]);
         i_copy /= shape[j];
       }
       printf("%f\n", vald[i]);
