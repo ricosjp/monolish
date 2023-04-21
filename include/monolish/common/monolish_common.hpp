@@ -352,36 +352,6 @@ template <typename T>
  * @ingroup compare
  **/
 template <typename T>
-[[nodiscard]] bool is_same_structure(const tensor::tensor_Dense<T> &A,
-                                     const tensor::tensor_Dense<T> &B);
-
-/**
- * @brief compare structure using col_index and row_index, M, and N
- * @param A COO matrix
- * @param B COO matrix
- * @return true is same structure
- * @note
- * - # of computation: 2nnz
- * - Multi-threading: false
- * - GPU acceleration: false
- * @ingroup compare
- **/
-template <typename T>
-[[nodiscard]] bool is_same_structure(const tensor::tensor_COO<T> &A,
-                                     const tensor::tensor_COO<T> &B);
-
-/**
- * @brief compare structure using M and N (same as is_same_size())
- * @param A Dense matrix
- * @param B Dense matrix
- * @return true is same structure
- * @note
- * - # of computation: 1
- * - Multi-threading: false
- * - GPU acceleration: false
- * @ingroup compare
- **/
-template <typename T>
 [[nodiscard]] bool is_same_structure(const matrix::Dense<T> &A,
                                      const matrix::Dense<T> &B);
 
@@ -429,6 +399,36 @@ template <typename T>
 template <typename T>
 bool is_same_structure(const matrix::LinearOperator<T> &A,
                        const matrix::LinearOperator<T> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_Dense<T> &A,
+                                     const tensor::tensor_Dense<T> &B);
+
+/**
+ * @brief compare structure using col_index and row_index, M, and N
+ * @param A COO matrix
+ * @param B COO matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_COO<T> &A,
+                                     const tensor::tensor_COO<T> &B);
 
 /**
  * @brief compare matrix structure

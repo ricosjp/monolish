@@ -39,24 +39,28 @@ run_cpu:
 	bash ./test.sh tensor_common cpu
 	bash ./test.sh tensor_compare cpu
 	bash ./test.sh tensor_convert cpu
+	bash ./test.sh tensor_vml cpu
 	bash ./test.sh tensor_blas cpu
  
 run_gpu:
 	bash ./test.sh tensor_common gpu
 	bash ./test.sh tensor_compare gpu
 	bash ./test.sh tensor_convert gpu
+	bash ./test.sh tensor_vml gpu
 	bash ./test.sh tensor_blas gpu
 
 run_a64fx:
 	bash ./test.sh tensor_common a64fx
 	bash ./test.sh tensor_compare a64fx
 	bash ./test.sh tensor_convert a64fx
+	bash ./test.sh tensor_vml a64fx
 	bash ./test.sh tensor_blas a64fx
 
 run_sxat:
 	# bash ./test.sh tensor_common sxat
 	bash ./test.sh tensor_compare sxat
 	bash ./test.sh tensor_convert sxat
+	bash ./test.sh tensor_vml sxat
 	bash ./test.sh tensor_blas sxat
 
 clean:

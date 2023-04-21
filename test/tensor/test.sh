@@ -20,6 +20,16 @@ case $1 in
     $PROFILER ./$1_$2.out $prec $format $M $N 1 || exit 1
     ;;
 
+  "tensor_vml" ) 
+      for M in ${MAT_TEST_SIZE[@]}; do
+          for N in ${MAT_TEST_SIZE[@]}; do
+              for K in ${MAT_TEST_SIZE[@]}; do
+                  $PROFILER ./$1_$2.out $M $N $K || exit 1
+              done
+          done
+      done
+      ;;
+
   "tensor_blas" )
     for M in ${MAT_TEST_SIZE[@]}; do
       for N in ${MAT_TEST_SIZE[@]}; do

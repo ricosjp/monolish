@@ -649,23 +649,19 @@ int main(int argc, char **argv) {
   }
 
   // m_alo Dense //
-  if (test_send_m_alo<monolish::matrix::Dense<double>,
-                      monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+  if (test_send_malo<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_send_m_alo<monolish::matrix::Dense<float>,
-                      monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+  if (test_send_malo<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
-  if (test_m_alo<monolish::matrix::Dense<double>,
-                 monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+  if (test_malo<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_m_alo<monolish::matrix::Dense<float>, monolish::matrix::Dense<float>,
-                 float>(M, N, 1.0e-4) == false) {
+  if (test_malo<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -1230,22 +1226,18 @@ int main(int argc, char **argv) {
   }
 
   // m_alo CRS//
-  if (test_send_m_alo<monolish::matrix::CRS<double>,
-                      monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+  if (test_send_malo<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
       false) {
     return 1;
   }
-  if (test_send_m_alo<monolish::matrix::CRS<float>,
-                      monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+  if (test_send_malo<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
       false) {
     return 1;
   }
-  if (test_m_alo<monolish::matrix::CRS<double>, monolish::matrix::CRS<double>,
-                 double>(M, N, 1.0e-8) == false) {
+  if (test_malo<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) == false) {
     return 1;
   }
-  if (test_m_alo<monolish::matrix::CRS<float>, monolish::matrix::CRS<float>,
-                 float>(M, N, 1.0e-4) == false) {
+  if (test_malo<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 

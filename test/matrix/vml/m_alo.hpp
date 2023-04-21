@@ -1,70 +1,67 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_m_alo(const monolish::matrix::Dense<T> &A, const T alpha, const T beta,
-               monolish::matrix::Dense<T> &C) {
-
-  // MN=MN+MN
-  int M = A.get_row();
-  int N = A.get_col();
+void ans_alo(monolish::matrix::Dense<T> &A, const T alpha, const T beta) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
     if (A.data()[i] > 0) {
-      C.data()[i] = alpha * A.data()[i];
+      A.data()[i] = alpha * A.data()[i];
     } else {
-      C.data()[i] = beta * A.data()[i];
+      A.data()[i] = beta * A.data()[i];
     }
   }
 }
 
-template <typename MAT_A, typename MAT_C, typename T>
-bool test_send_m_alo(const size_t M, const size_t N, double tol) {
+template <typename MAT, typename T>
+bool test_send_malo(const size_t M, const size_t N, double tol) {
+  size_t nnzrow = 27;
+  if (nnzrow < N) {
+    nnzrow = 27;
+  } else {
+    nnzrow = N - 1;
+  }
 
-  monolish::matrix::Dense<T> seed(M, N, -1.0, 1.0);
-  monolish::matrix::COO<T> seedA(seed);
+  monolish::matrix::COO<T> seedA =
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
 
-  MAT_A A(seedA);
+  MAT A(seedA);
   T alpha = 1.5;
   T beta = 0.5;
-  MAT_C C(seedA);
 
   monolish::matrix::Dense<T> AA(seedA);
-  monolish::matrix::Dense<T> CC(seedA);
+  ans_alo(AA, alpha, beta);
 
-  ans_m_alo(AA, alpha, beta, CC);
-  monolish::matrix::COO<T> ansC(CC);
+  A.send();
+  monolish::vml::alo(A, alpha, beta, A);
+  A.recv();
+  monolish::matrix::Dense<T> resultA(A);
 
-  monolish::util::send(A, C);
-  monolish::vml::alo(A, alpha, beta, C);
-  C.recv();
-
-  monolish::matrix::COO<T> resultC(C);
-
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
-                      ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
+                      AA.get_nnz(), tol);
 }
 
-template <typename MAT_A, typename MAT_C, typename T>
-bool test_m_alo(const size_t M, const size_t N, double tol) {
+template <typename MAT, typename T>
+bool test_malo(const size_t M, const size_t N, double tol) {
+  size_t nnzrow = 27;
+  if (nnzrow < N) {
+    nnzrow = 27;
+  } else {
+    nnzrow = N - 1;
+  }
 
-  monolish::matrix::Dense<T> seed(M, N, -1.0, 1.0);
-  monolish::matrix::COO<T> seedA(seed);
+  monolish::matrix::COO<T> seedA =
+      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
 
-  MAT_A A(seedA);
+  MAT A(seedA);
   T alpha = 1.5;
   T beta = 0.5;
-  MAT_C C(seedA);
 
   monolish::matrix::Dense<T> AA(seedA);
-  monolish::matrix::Dense<T> CC(seedA);
+  ans_alo(AA, alpha, beta);
 
-  ans_m_alo(AA, alpha, beta, CC);
-  monolish::matrix::COO<T> ansC(CC);
+  monolish::vml::alo(A, alpha, beta, A);
+  monolish::matrix::Dense<T> resultA(A);
 
-  monolish::vml::alo(A, alpha, beta, C);
-
-  monolish::matrix::COO<T> resultC(C);
-
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
-                      ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
+                      AA.get_nnz(), tol);
 }
