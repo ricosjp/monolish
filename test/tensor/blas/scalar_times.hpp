@@ -14,7 +14,8 @@ void ans_scalar_times(const T alpha, const monolish::tensor::tensor_Dense<T> &A,
 }
 
 template <typename MAT_A, typename MAT_C, typename T>
-bool test_send_scalar_times(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_scalar_times(const size_t M, const size_t N, const size_t L,
+                            double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N) && (nnzrow < L)) {
@@ -47,7 +48,8 @@ bool test_send_scalar_times(const size_t M, const size_t N, const size_t L, doub
 }
 
 template <typename MAT_A, typename MAT_C, typename T>
-bool test_scalar_times(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_scalar_times(const size_t M, const size_t N, const size_t L,
+                       double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < M) && (nnzrow < N) && (nnzrow < L)) {

@@ -32,7 +32,7 @@ template void
 vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense);
 
 template <typename T>
-void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t nnz) {
+void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int nnz) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -55,8 +55,8 @@ void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t nnz) {
 }
 
 template void
-vector<double>::move(const tensor::tensor_Dense<double> &tensor_dense, size_t nnz);
+vector<double>::move(const tensor::tensor_Dense<double> &tensor_dense, int nnz);
 template void
-vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense, size_t nnz);
+vector<float>::move(const tensor::tensor_Dense<float> &tensor_dense, int nnz);
 
 } // namespace monolish

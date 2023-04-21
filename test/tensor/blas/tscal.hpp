@@ -8,7 +8,8 @@ void ans_tscal(const double alpha, monolish::tensor::tensor_Dense<T> &A) {
 }
 
 template <typename MAT, typename T>
-bool test_send_tscal(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_tscal(const size_t M, const size_t N, const size_t L,
+                     double tol) {
 
   size_t nnzrow = 27;
   if ((nnzrow < L)) {
@@ -42,7 +43,7 @@ bool test_tscal(const size_t M, const size_t N, const size_t L, double tol) {
   if ((nnzrow < L)) {
     nnzrow = 27;
   } else {
-    nnzrow = N - 1;
+    nnzrow = L - 1;
   }
   monolish::tensor::tensor_COO<T> seedA =
       monolish::util::random_structure_tensor<T>(M, N, L, nnzrow, 1.0);

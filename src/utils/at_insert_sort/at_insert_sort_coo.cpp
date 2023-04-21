@@ -35,14 +35,14 @@ void COO<T>::insert(const size_t m, const size_t n, const T value) {
     assert(rownum <= get_row());
     assert(colnum <= get_col());
 
-    row_index.push_back(rownum);
-    col_index.push_back(colnum);
     if (vad_nnz >= alloc_nnz) {
       size_t tmp = vad_nnz;
       alloc_nnz = 2 * alloc_nnz + 1;
       resize(alloc_nnz);
       vad_nnz = tmp;
     }
+    row_index[vad_nnz] = rownum;
+    col_index[vad_nnz] = colnum;
     data()[vad_nnz] = value;
     vad_nnz++;
   } else {

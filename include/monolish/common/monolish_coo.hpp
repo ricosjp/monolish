@@ -416,6 +416,9 @@ public:
       vad = tmp;
       alloc_nnz = N;
       vad_nnz = N;
+
+      row_index.resize(N);
+      col_index.resize(N);
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }

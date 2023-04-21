@@ -35,8 +35,8 @@ template void
 Dense<float>::move(const tensor::tensor_Dense<float> &tensor_dense);
 
 template <typename T>
-void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t rowN,
-                    size_t colN) {
+void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int rowN,
+                    int colN) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -45,10 +45,10 @@ void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t rowN,
         "error cannot move tensor_Dense->Dense when rowN<0 and colN<0");
   }
   if (rowN < 0) {
-    rowN = get_nnz() / colN;
+    rowN = tensor_dense.get_nnz() / colN;
   }
   if (colN < 0) {
-    colN = get_nnz() / rowN;
+    colN = tensor_dense.get_nnz() / rowN;
   }
 
   if (rowN * colN != tensor_dense.get_nnz()) {
@@ -69,11 +69,11 @@ void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, size_t rowN,
 }
 
 template void
-Dense<double>::move(const tensor::tensor_Dense<double> &tensor_dense,
-                    size_t rowN, size_t colN);
+Dense<double>::move(const tensor::tensor_Dense<double> &tensor_dense, int rowN,
+                    int colN);
 template void
-Dense<float>::move(const tensor::tensor_Dense<float> &tensor_dense, size_t rowN,
-                   size_t colN);
+Dense<float>::move(const tensor::tensor_Dense<float> &tensor_dense, int rowN,
+                   int colN);
 
 } // namespace matrix
 } // namespace monolish

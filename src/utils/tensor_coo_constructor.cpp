@@ -10,24 +10,27 @@ namespace tensor {
 
 template <typename T>
 tensor_COO<T>::tensor_COO(const std::vector<size_t> &shape,
-                              const std::vector<std::vector<size_t>>& index,
-                              const T *value) {
+                          const std::vector<std::vector<size_t>> &index,
+                          const T *value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   this->shape = shape;
   this->index = index;
 
   vad_create_flag = true;
-  resize(shape);
+  resize(index.size());
   std::copy(value, value + get_nnz(), data());
   logger.util_out();
 }
 
-template tensor_COO<double>::tensor_COO(const std::vector<size_t> &shape, const std::vector<std::vector<size_t>>& index, const double* value);
-template tensor_COO<float>::tensor_COO(const std::vector<size_t> &shape, const std::vector<std::vector<size_t>>& index, const float* value);
+template tensor_COO<double>::tensor_COO(
+    const std::vector<size_t> &shape,
+    const std::vector<std::vector<size_t>> &index, const double *value);
+template tensor_COO<float>::tensor_COO(
+    const std::vector<size_t> &shape,
+    const std::vector<std::vector<size_t>> &index, const float *value);
 
-template <typename T>
-tensor_COO<T>::tensor_COO(const tensor_COO<T>& coo){
+template <typename T> tensor_COO<T>::tensor_COO(const tensor_COO<T> &coo) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   this->shape = coo.shape;
@@ -40,11 +43,11 @@ tensor_COO<T>::tensor_COO(const tensor_COO<T>& coo){
   logger.util_out();
 }
 
-template tensor_COO<double>::tensor_COO(const tensor_COO<double>& coo);
-template tensor_COO<float>::tensor_COO(const tensor_COO<float>& coo);
+template tensor_COO<double>::tensor_COO(const tensor_COO<double> &coo);
+template tensor_COO<float>::tensor_COO(const tensor_COO<float> &coo);
 
 template <typename T>
-tensor_COO<T>::tensor_COO(const tensor_COO<T>& coo, T value){
+tensor_COO<T>::tensor_COO(const tensor_COO<T> &coo, T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   this->shape = coo.shape;
@@ -57,8 +60,10 @@ tensor_COO<T>::tensor_COO(const tensor_COO<T>& coo, T value){
   logger.util_out();
 }
 
-template tensor_COO<double>::tensor_COO(const tensor_COO<double>& coo, double value);
-template tensor_COO<float>::tensor_COO(const tensor_COO<float>& coo, float value);
+template tensor_COO<double>::tensor_COO(const tensor_COO<double> &coo,
+                                        double value);
+template tensor_COO<float>::tensor_COO(const tensor_COO<float> &coo,
+                                       float value);
 
 } // namespace tensor
 } // namespace monolish

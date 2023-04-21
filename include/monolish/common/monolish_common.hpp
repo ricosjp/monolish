@@ -653,8 +653,8 @@ template <typename T>
  **/
 template <typename T>
 [[nodiscard]] tensor::tensor_COO<T>
-random_structure_tensor(const size_t M, const size_t N, const size_t L, const size_t nnzrow,
-                        const T val);
+random_structure_tensor(const size_t M, const size_t N, const size_t L,
+                        const size_t nnzrow, const T val);
 
 /**
  * @brief create random structure tensor (index is decided by random)
@@ -671,8 +671,8 @@ random_structure_tensor(const size_t M, const size_t N, const size_t L, const si
  **/
 template <typename T>
 [[nodiscard]] tensor::tensor_COO<T>
-random_structure_tensor(const size_t K, const size_t M, const size_t N, const size_t L,
-                        const size_t nnzrow, const T val);
+random_structure_tensor(const size_t K, const size_t M, const size_t N,
+                        const size_t L, const size_t nnzrow, const T val);
 
 /**
  * @brief create band matrix

@@ -18,14 +18,15 @@ void ans_times_row_line(const monolish::tensor::tensor_Dense<T> &A, size_t num,
 }
 
 template <typename MAT, typename T>
-bool test_send_times_row_line(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_times_row_line(const size_t M, const size_t N, const size_t L,
+                              double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
   } else {
     nnzrow = L - 1;
   }
-  size_t line = M*N - 1;
+  size_t line = M * N - 1;
 
   monolish::tensor::tensor_COO<T> seedA =
       monolish::util::random_structure_tensor<T>(M, N, L, nnzrow, 1.0);
@@ -49,14 +50,15 @@ bool test_send_times_row_line(const size_t M, const size_t N, const size_t L, do
 }
 
 template <typename MAT, typename T>
-bool test_times_row_line(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_times_row_line(const size_t M, const size_t N, const size_t L,
+                         double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
   } else {
     nnzrow = L - 1;
   }
-  size_t line = M*N - 1;
+  size_t line = M * N - 1;
 
   monolish::tensor::tensor_COO<T> seedA =
       monolish::util::random_structure_tensor<T>(M, N, L, nnzrow, 1.0);

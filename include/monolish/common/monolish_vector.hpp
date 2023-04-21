@@ -328,7 +328,7 @@ public:
 
   void move(const tensor::tensor_Dense<Float> &tensor_dense);
 
-  void move(const tensor::tensor_Dense<Float> &tensor_dense, size_t N);
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, int N);
 
   /**
    * @brief returns a begin iterator

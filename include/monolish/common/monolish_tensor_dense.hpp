@@ -100,6 +100,17 @@ public:
    */
   tensor_Dense(const std::vector<size_t> &shape, const Float *value);
 
+  /**
+   * @brief Allocate dense tensor
+   * @param shape shape of tensor
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  tensor_Dense(const std::vector<size_t> &shape,
+               const std::vector<Float> &value);
+
   tensor_Dense(const std::vector<size_t> &shape, const Float min,
                const Float max);
 
@@ -157,13 +168,15 @@ public:
     return get_nnz() * sizeof(Float) / 1.0e+9;
   }
 
-  [[nodiscard]] Float at(const std::vector<size_t>& pos) const;
+  [[nodiscard]] Float at(const std::vector<size_t> &pos) const;
 
-  [[nodiscard]] Float at(const std::vector<size_t>& pos) {
+  [[nodiscard]] Float at(const std::vector<size_t> &pos) {
     return static_cast<const tensor_Dense *>(this)->at(pos);
   };
 
-  void insert(const std::vector<size_t>& pos, const Float Val);
+  void insert(const std::vector<size_t> &pos, const Float Val);
+
+  void print_all(bool force_cpu = false) const;
 
   // communication
   // ///////////////////////////////////////////////////////////////////////////
@@ -252,9 +265,6 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if (N == 0) {
-      throw std::runtime_error("Error, tensor must have at least 1 element");
-    }
     if (vad_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(vad_nnz, N);
@@ -302,16 +312,14 @@ public:
 
   [[nodiscard]] bool operator!=(const tensor_Dense<Float> &tens) const;
 
-  size_t get_index(const std::vector<size_t>& pos) const {
-    if(pos.size() != this->shape.size()){
+  size_t get_index(const std::vector<size_t> &pos) const {
+    if (pos.size() != this->shape.size()) {
       throw std::runtime_error("pos size should be same with the shape");
     }
     size_t ind = 0;
-    size_t shift = 1;
-    for(auto i=0; i<pos.size(); ++i){
-      ind *= shift;
+    for (auto i = 0; i < pos.size(); ++i) {
+      ind *= this->shape[i];
       ind += pos[i];
-      shift *= this->shape[i];
     }
     return ind;
   }
@@ -319,8 +327,8 @@ public:
   std::vector<size_t> get_index(const size_t pos) const {
     std::vector<size_t> ind(this->shape.size(), 0);
     auto pos_copy = pos;
-    for(int i=this->shape.size()-1; i>=0; --i){
-      ind[i] = pos_copy%this->shape[i];
+    for (int i = this->shape.size() - 1; i >= 0; --i) {
+      ind[i] = pos_copy % this->shape[i];
       pos_copy /= this->shape[i];
     }
     return ind;

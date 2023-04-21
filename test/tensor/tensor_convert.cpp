@@ -3,10 +3,10 @@
 template <typename MAT, typename T>
 bool test_convert(const size_t M, const size_t N, const size_t L) {
   size_t nnzrow = 27;
-  if ((nnzrow < N)) {
+  if ((nnzrow < L)) {
     nnzrow = 27;
   } else {
-    nnzrow = N - 1;
+    nnzrow = L - 1;
   }
   // ans tensor_COO (source)
   monolish::tensor::tensor_COO<T> ans_coo =
@@ -22,11 +22,13 @@ bool test_convert(const size_t M, const size_t N, const size_t L) {
   if (result_coo.get_shape() != ans_coo.get_shape() ||
       result_coo.get_nnz() != ans_coo.get_nnz()) {
 
-    std::cout << "error, shape, nnz are different(tensor_COO2" << mat.type() << ")"
-              << std::endl;
-    std::cout << result_coo.get_shape().size() << " != " << ans_coo.get_shape().size()
-              << std::endl;
-    for(auto i=0; i<std::min({result_coo.get_shape().size(), ans_coo.get_shape().size()}); i++){
+    std::cout << "error, shape, nnz are different(tensor_COO2" << mat.type()
+              << ")" << std::endl;
+    std::cout << result_coo.get_shape().size()
+              << " != " << ans_coo.get_shape().size() << std::endl;
+    for (auto i = 0; i < std::min({result_coo.get_shape().size(),
+                                   ans_coo.get_shape().size()});
+         i++) {
       std::cout << result_coo.get_shape()[i] << " != " << ans_coo.get_shape()[i]
                 << std::endl;
     }
@@ -38,20 +40,18 @@ bool test_convert(const size_t M, const size_t N, const size_t L) {
   for (size_t i = 0; i < ans_coo.get_nnz(); i++) {
 
     if (result_coo.data()[i] != ans_coo.data()[i] ||
-        result_coo.index[i] != ans_coo.index[i]){
+        result_coo.index[i] != ans_coo.index[i]) {
 
       std::cout << i << "\t";
-      for(size_t j=0; j<result_coo.index[i].size(); j++){
+      for (size_t j = 0; j < result_coo.index[i].size(); j++) {
         std::cout << result_coo.index[i][j] << ",";
       }
-      std::cout << result_coo.data()[i]
-                << std::flush;
+      std::cout << result_coo.data()[i] << std::flush;
       std::cout << ", (ans: ";
-      for(size_t j=0; j<ans_coo.index[i].size(); j++){
+      for (size_t j = 0; j < ans_coo.index[i].size(); j++) {
         std::cout << ans_coo.index[i][j] << ",";
       }
-      std::cout << ans_coo.data()[i] << ")"
-                << std::endl;
+      std::cout << ans_coo.data()[i] << ")" << std::endl;
       return false;
     }
   }
@@ -79,11 +79,13 @@ int main(int argc, char **argv) {
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");
 
-  if (test_convert<monolish::tensor::tensor_Dense<double>, double>(M, N, L) == false) {
+  if (test_convert<monolish::tensor::tensor_Dense<double>, double>(M, N, L) ==
+      false) {
     return 1;
   }
 
-  if (test_convert<monolish::tensor::tensor_Dense<float>, float>(M, N, L) == false) {
+  if (test_convert<monolish::tensor::tensor_Dense<float>, float>(M, N, L) ==
+      false) {
     return 1;
   }
 

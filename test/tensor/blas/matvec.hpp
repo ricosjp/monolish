@@ -2,7 +2,7 @@
 
 template <typename T>
 void ans_tensvec(monolish::tensor::tensor_Dense<T> &A, monolish::vector<T> &mx,
-                monolish::vector<T> &my) {
+                 monolish::vector<T> &my) {
 
   if (A.get_col() != mx.size()) {
     std::runtime_error("A.col != x.size");
@@ -27,7 +27,8 @@ void ans_tensvec(monolish::tensor::tensor_Dense<T> &A, monolish::vector<T> &mx,
 }
 
 template <typename MAT, typename T>
-bool test_send_tensvec(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_tensvec(const size_t M, const size_t N, const size_t L,
+                       double tol) {
 
   size_t nnzrow = 27;
   if (nnzrow < L) {
@@ -59,7 +60,7 @@ bool test_send_tensvec(const size_t M, const size_t N, const size_t L, double to
 
 template <typename MAT, typename T>
 bool test_send_tensvec_linearoperator(const size_t M, const size_t N,
-                                     double tol) {
+                                      double tol) {
 
   size_t nnzrow = 27;
   if (nnzrow < N) {

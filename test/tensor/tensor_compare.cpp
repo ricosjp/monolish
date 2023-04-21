@@ -6,10 +6,9 @@ template <typename T> bool test() {
   const int N = 3;
   const int NNZ = 8;
 
-  // create C-pointer tensor_COO Matrix (same as test.mtx, but pointer is 0 origin!!)
+  // create C-pointer tensor_COO Matrix (same as test.mtx, but pointer is 0
+  // origin!!)
   T *val_array = (T *)malloc(sizeof(T) * NNZ);
-  int *col_array = (int *)malloc(sizeof(int) * NNZ);
-  int *row_array = (int *)malloc(sizeof(int) * NNZ);
   std::vector<std::vector<size_t>> index_array(NNZ, std::vector<size_t>(2));
 
   // create tensor_COO type arrays
@@ -51,12 +50,14 @@ template <typename T> bool test() {
     return false;
   }
 
-  if (!(monolish::util::is_same_size(tensor_COO_A, tensor_COO_B, tensor_COO_C))) {
+  if (!(monolish::util::is_same_size(tensor_COO_A, tensor_COO_B,
+                                     tensor_COO_C))) {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(tensor_COO_A, tensor_COO_B, tensor_COO_C, tensor_COO_A, tensor_COO_B,
-                                          tensor_COO_C))) {
+  if (!(monolish::util::is_same_structure(tensor_COO_A, tensor_COO_B,
+                                          tensor_COO_C, tensor_COO_A,
+                                          tensor_COO_B, tensor_COO_C))) {
     return false;
   }
 
@@ -68,11 +69,13 @@ template <typename T> bool test() {
     return false;
   }
 
-  if (!(monolish::util::is_same_size(tensor_Dense_A, tensor_Dense_B, tensor_Dense_C))) {
+  if (!(monolish::util::is_same_size(tensor_Dense_A, tensor_Dense_B,
+                                     tensor_Dense_C))) {
     return false;
   }
 
-  if (!(monolish::util::is_same_structure(tensor_Dense_A, tensor_Dense_B, tensor_Dense_C, tensor_Dense_A,
+  if (!(monolish::util::is_same_structure(tensor_Dense_A, tensor_Dense_B,
+                                          tensor_Dense_C, tensor_Dense_A,
                                           tensor_Dense_B, tensor_Dense_C))) {
     return false;
   }
@@ -82,6 +85,8 @@ template <typename T> bool test() {
 }
 
 int main(int argc, char **argv) {
+
+  print_build_info();
 
   // monolish::util::set_log_level(3);
   // monolish::util::set_log_filename("./monolish_test_log.txt");

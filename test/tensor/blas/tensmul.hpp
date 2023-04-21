@@ -2,39 +2,38 @@
 
 template <typename T>
 void ans_tensmul(const monolish::tensor::tensor_Dense<T> &A,
-                const monolish::tensor::tensor_Dense<T> &B,
-                monolish::tensor::tensor_Dense<T> &C) {
+                 const monolish::tensor::tensor_Dense<T> &B,
+                 monolish::tensor::tensor_Dense<T> &C) {
 
   if (A.get_shape()[2] != B.get_shape()[0]) {
     std::cout << A.get_shape()[2] << B.get_shape()[0] << std::endl;
     std::runtime_error("test: A.shape[2] != B.shape[0]");
   }
-  if (A.get_shape()[0] != C.get_shape()[0] || A.get_shape()[1] != C.get_shape()[1]) {
+  if (A.get_shape()[0] != C.get_shape()[0] ||
+      A.get_shape()[1] != C.get_shape()[1]) {
     std::runtime_error("test: A.row != C.row");
   }
-  if (C.get_shape()[2] != B.get_shape()[1] || C.get_shape()[3] != B.get_shape()[2]) {
+  if (C.get_shape()[2] != B.get_shape()[1] ||
+      C.get_shape()[3] != B.get_shape()[2]) {
     std::runtime_error("test: C.col != B.col");
   }
 
   // MLJN=MLK*KJN
   int M = A.get_shape()[0];
-  int N = B.get_shape()[2];
-  int K = A.get_shape()[2];
   int L = A.get_shape()[1];
-  int J = B.get_shape()[2];
+  int K = A.get_shape()[2];
+  int J = B.get_shape()[1];
+  int N = B.get_shape()[2];
 
   for (int i = 0; i < C.get_nnz(); i++) {
     C.data()[i] = 0;
   }
 
-  for (int m = 0; m < M; m++) {
-    for (int l = 0; l < L; l++){
-      for (int j = 0; j < J; j++){
-        for (int n = 0; n < N; n++) {
-          for (int k = 0; k < K; k++) {
-            C.data()[m * L*J*N + l*J*N + j*N + n] += A.data()[m * L*K + l*K + k] * B.data()[k * J*N + j*N + n];
-          }
-        }
+  for (int ml = 0; ml < M * L; ml++) {
+    for (int jn = 0; jn < J * N; jn++) {
+      for (int k = 0; k < K; k++) {
+        C.data()[ml * J * N + jn] +=
+            A.data()[ml * K + k] * B.data()[k * J * N + jn];
       }
     }
   }
@@ -42,50 +41,50 @@ void ans_tensmul(const monolish::tensor::tensor_Dense<T> &A,
 
 template <typename T>
 void ans_tensmul(const T &a, const monolish::tensor::tensor_Dense<T> &A,
-                const monolish::tensor::tensor_Dense<T> &B, const T &b,
-                monolish::tensor::tensor_Dense<T> &C) {
+                 const monolish::tensor::tensor_Dense<T> &B, const T &b,
+                 monolish::tensor::tensor_Dense<T> &C) {
 
   if (A.get_shape()[2] != B.get_shape()[0]) {
     std::cout << A.get_shape()[2] << B.get_shape()[0] << std::endl;
     std::runtime_error("test: A.shape[2] != B.shape[0]");
   }
-  if (A.get_shape()[0] != C.get_shape()[0] || A.get_shape()[1] != C.get_shape()[1]) {
+  if (A.get_shape()[0] != C.get_shape()[0] ||
+      A.get_shape()[1] != C.get_shape()[1]) {
     std::runtime_error("test: A.row != C.row");
   }
-  if (C.get_shape()[2] != B.get_shape()[1] || C.get_shape()[3] != B.get_shape()[2]) {
+  if (C.get_shape()[2] != B.get_shape()[1] ||
+      C.get_shape()[3] != B.get_shape()[2]) {
     std::runtime_error("test: C.col != B.col");
   }
 
   // MLJN=MLK*KJN
   int M = A.get_shape()[0];
-  int N = B.get_shape()[2];
-  int K = A.get_shape()[2];
   int L = A.get_shape()[1];
-  int J = B.get_shape()[2];
+  int K = A.get_shape()[2];
+  int J = B.get_shape()[1];
+  int N = B.get_shape()[2];
 
   for (int i = 0; i < C.get_nnz(); i++) {
     C.data()[i] = b * C.data()[i];
   }
 
-  for (int m = 0; m < M; m++) {
-    for (int l = 0; l < L; l++){
-      for (int j = 0; j < J; j++){
-        for (int n = 0; n < N; n++) {
-          for (int k = 0; k < K; k++) {
-            C.data()[m * L*J*N + l*J*N + j*N + n] += a * A.data()[m * L*K + l*K + k] * B.data()[k * J*N + j*N + n];
-          }
-        }
+  for (int ml = 0; ml < M * L; ml++) {
+    for (int jn = 0; jn < J * N; jn++) {
+      for (int k = 0; k < K; k++) {
+        C.data()[ml * J * N + jn] +=
+            a * A.data()[ml * K + k] * B.data()[k * J * N + jn];
       }
     }
   }
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_tensmul(const size_t M, const size_t N, const size_t L, const size_t J, const size_t K,
-                      double tol) {
+bool test_send_tensmul(const size_t M, const size_t N, const size_t L,
+                       const size_t J, const size_t K, double tol) {
 
   size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) && (nnzrow < L)) {
+  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) &&
+      (nnzrow < L)) {
     nnzrow = 27;
   } else {
     nnzrow = std::min({M, N, L, J, K}) - 1;
@@ -120,11 +119,13 @@ bool test_send_tensmul(const size_t M, const size_t N, const size_t L, const siz
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_send_tensmul(const size_t M, const size_t N, const size_t L, const size_t J, const size_t K, const T a,
-                      const T b, double tol) {
+bool test_send_tensmul(const size_t M, const size_t N, const size_t L,
+                       const size_t J, const size_t K, const T a, const T b,
+                       double tol) {
 
   size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) && (nnzrow < L)) {
+  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) &&
+      (nnzrow < L)) {
     nnzrow = 27;
   } else {
     nnzrow = std::min({M, N, L, J, K}) - 1;
@@ -159,10 +160,12 @@ bool test_send_tensmul(const size_t M, const size_t N, const size_t L, const siz
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_tensmul(const size_t M, const size_t N, const size_t L, const size_t J, const size_t K, double tol) {
+bool test_tensmul(const size_t M, const size_t N, const size_t L,
+                  const size_t J, const size_t K, double tol) {
 
   size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) && (nnzrow < L)) {
+  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) &&
+      (nnzrow < L)) {
     nnzrow = 27;
   } else {
     nnzrow = std::min({M, N, L, J, K}) - 1;
@@ -195,11 +198,13 @@ bool test_tensmul(const size_t M, const size_t N, const size_t L, const size_t J
 }
 
 template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
-bool test_tensmul(const size_t M, const size_t N, const size_t L, const size_t J, const size_t K, const T a,
-                 const T b, double tol) {
+bool test_tensmul(const size_t M, const size_t N, const size_t L,
+                  const size_t J, const size_t K, const T a, const T b,
+                  double tol) {
 
   size_t nnzrow = 27;
-  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) && (nnzrow < L)) {
+  if ((nnzrow < M) && (nnzrow < N) && (nnzrow < K) && (nnzrow < J) &&
+      (nnzrow < L)) {
     nnzrow = 27;
   } else {
     nnzrow = std::min({M, N, L, J, K}) - 1;

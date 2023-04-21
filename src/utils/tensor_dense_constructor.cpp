@@ -40,6 +40,24 @@ template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
                                            const float *value);
 
 template <typename T>
+tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
+                              const std::vector<T> &value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  this->shape = shape;
+
+  vad_create_flag = true;
+  resize(shape);
+  std::copy(value.begin(), value.end(), data());
+  logger.util_out();
+}
+
+template tensor_Dense<double>::tensor_Dense(const std::vector<size_t> &shape,
+                                            const std::vector<double> &value);
+template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
+                                           const std::vector<float> &value);
+
+template <typename T>
 tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
                               const T max) {
   Logger &logger = Logger::get_instance();

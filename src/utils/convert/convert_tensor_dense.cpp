@@ -38,7 +38,7 @@ void tensor_Dense<T>::convert(const tensor::tensor_COO<T> &coo) {
 
   set_shape(coo.get_shape());
   vad_create_flag = true;
-  resize(coo.get_nnz());
+  resize(coo.get_shape());
 
 #pragma omp parallel for
   for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {

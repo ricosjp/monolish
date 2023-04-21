@@ -489,8 +489,8 @@ public:
 
   void move(const tensor::tensor_Dense<Float> &tensor_dense);
 
-  void move(const tensor::tensor_Dense<Float> &tensor_dense, size_t rowN,
-            size_t colN);
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, int rowN,
+            int colN);
 
   /////////////////////////////////////////////////////////////////////////////
   /**
