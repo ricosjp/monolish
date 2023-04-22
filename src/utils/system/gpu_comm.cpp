@@ -262,4 +262,87 @@ template void matrix::Dense<double>::nonfree_recv();
 
 template void matrix::Dense<float>::device_free() const;
 template void matrix::Dense<double>::device_free() const;
+
+// tensor_Dense ///////////////////////////////////
+// send
+template <typename T> void tensor::tensor_Dense<T>::send() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  const T *vald = data();
+  const auto nnz = get_nnz();
+
+  if (gpu_status == true) {
+#pragma omp target update to(vald [0:nnz])
+  } else {
+#pragma omp target enter data map(to : vald [0:nnz])
+    gpu_status = true;
+  }
+#endif
+  logger.util_out();
+}
+
+// recv
+template <typename T> void tensor::tensor_Dense<T>::recv() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (gpu_status == true) {
+    T *vald = data();
+    auto nnz = get_nnz();
+
+#pragma omp target exit data map(from : vald [0:nnz])
+    gpu_status = false;
+  }
+#endif
+  logger.util_out();
+}
+
+// nonfree_recv
+template <typename T> void tensor::tensor_Dense<T>::nonfree_recv() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (gpu_status == true) {
+    T *vald = data();
+    auto nnz = get_nnz();
+
+#pragma omp target update from(vald [0:nnz])
+  }
+#endif
+  logger.util_out();
+}
+
+// device_free
+template <typename T> void tensor::tensor_Dense<T>::device_free() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (gpu_status == true) {
+    const T *vald = data();
+    const auto nnz = get_nnz();
+
+#pragma omp target exit data map(release : vald [0:nnz])
+
+    gpu_status = false;
+  }
+#endif
+  logger.util_out();
+}
+template void tensor::tensor_Dense<float>::send() const;
+template void tensor::tensor_Dense<double>::send() const;
+
+template void tensor::tensor_Dense<float>::recv();
+template void tensor::tensor_Dense<double>::recv();
+
+template void tensor::tensor_Dense<float>::nonfree_recv();
+template void tensor::tensor_Dense<double>::nonfree_recv();
+
+template void tensor::tensor_Dense<float>::device_free() const;
+template void tensor::tensor_Dense<double>::device_free() const;
+
 } // namespace monolish

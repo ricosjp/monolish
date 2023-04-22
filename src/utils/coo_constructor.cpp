@@ -21,7 +21,7 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
   row_index.resize(NNZ);
   col_index.resize(NNZ);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(NNZ);
 
   std::copy(row, row + NNZ, row_index.begin());
@@ -45,7 +45,7 @@ COO<T>::COO(const size_t M, const size_t N, const size_t NNZ, const int *row,
   row_index.resize(NNZ);
   col_index.resize(NNZ);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(NNZ);
 
   std::copy(row, row + NNZ, row_index.begin());
@@ -75,7 +75,7 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo) {
   gpu_status = false;
   row_index.resize(coo.get_nnz());
   col_index.resize(coo.get_nnz());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(coo.get_nnz());
   std::copy(coo.row_index.data(), coo.row_index.data() + coo.get_nnz(),
             row_index.begin());
@@ -103,7 +103,7 @@ template <typename T> COO<T>::COO(const matrix::COO<T> &coo, T value) {
   std::copy(coo.col_index.data(), coo.col_index.data() + coo.get_nnz(),
             col_index.begin());
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(coo.get_nnz());
   internal::vbroadcast(coo.get_nnz(), value, data(), false);
 

@@ -11,7 +11,7 @@ template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(vec.size());
   std::copy(vec.begin(), vec.end(), data());
 

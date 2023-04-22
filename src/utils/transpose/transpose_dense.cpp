@@ -48,7 +48,7 @@ template <typename T> void Dense<T>::transpose(const Dense<T> &B) {
           "Error: different nnz size GPU matrix cant use transpose");
     }
   } else {
-    vad_create_flag = true;
+    val_create_flag = true;
     resize(B.get_row() * B.get_col());
   }
 

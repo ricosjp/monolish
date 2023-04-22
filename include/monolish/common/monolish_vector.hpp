@@ -40,14 +40,20 @@ namespace monolish {
 template <typename Float> class vector {
 private:
   /**
+   * @brief true: sended, false: not send
+   **/
+  mutable bool gpu_status = false;
+
+public:
+  /**
    * @brief vector data (pointer)
    */
-  std::shared_ptr<Float> vad;
+  std::shared_ptr<Float> val;
 
   /**
    * @brief vector size
    */
-  std::size_t vad_nnz = 0;
+  std::size_t val_nnz = 0;
 
   /**
    * @brief alloced vector size
@@ -57,15 +63,9 @@ private:
   /**
    * @brief vector create flag;
    */
-  bool vad_create_flag = false;
+  bool val_create_flag = false;
 
-  /**
-   * @brief true: sended, false: not send
-   **/
-  mutable bool gpu_status = false;
-
-public:
-  vector() { vad_create_flag = true; }
+  vector() { val_create_flag = true; }
 
   // constructor ///////////////////////////////////////////////////////
   /**
@@ -245,8 +245,10 @@ public:
    * - GPU acceleration: true
    **/
   ~vector() {
-    if (get_device_mem_stat()) {
-      device_free();
+    if (val_create_flag) {
+      if (get_device_mem_stat()) {
+        device_free();
+      }
     }
   }
 
@@ -261,7 +263,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *data() const { return vad.get(); }
+  [[nodiscard]] const Float *data() const { return val.get(); }
 
   /**
    * @brief returns a direct pointer to the vector
@@ -269,7 +271,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *data() { return vad.get(); }
+  [[nodiscard]] Float *data() { return val.get(); }
 
   /**
    * @brief resize vector (only CPU)
@@ -279,22 +281,22 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void resize(size_t N, Float val = 0) {
+  void resize(size_t N, Float Val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use resize");
     }
-    if (vad_create_flag) {
+    if (val_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
-      size_t copy_size = std::min(vad_nnz, N);
+      size_t copy_size = std::min(val_nnz, N);
       for (size_t i = 0; i < copy_size; i++) {
-        tmp.get()[i] = vad.get()[i];
+        tmp.get()[i] = data()[i];
       }
       for (size_t i = copy_size; i < N; i++) {
-        tmp.get()[i] = val;
+        tmp.get()[i] = Val;
       }
-      vad = tmp;
+      val = tmp;
       alloc_nnz = N;
-      vad_nnz = N;
+      val_nnz = N;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
@@ -306,31 +308,27 @@ public:
    * @note
    * - # of computation: 1
    **/
-  void push_back(Float val) {
+  void push_back(Float Val) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use push_back");
     }
-    if (vad_create_flag) {
-      if (vad_nnz >= alloc_nnz) {
-        size_t tmp = vad_nnz;
+    if (val_create_flag) {
+      if (val_nnz >= alloc_nnz) {
+        size_t tmp = val_nnz;
         alloc_nnz = 2 * alloc_nnz + 1;
         resize(alloc_nnz);
-        vad_nnz = tmp;
+        val_nnz = tmp;
       }
-      vad.get()[vad_nnz] = val;
-      vad_nnz++;
+      data()[val_nnz] = Val;
+      val_nnz++;
     } else {
       throw std::runtime_error("Error, not create vector cant use push_back");
     }
   }
 
-  /**
-   * @brief returns a begin iterator
-   * @return begin iterator
-   * @note
-   * - # of computation: 1
-   **/
-  [[nodiscard]] const Float *begin() const { return vad.get(); }
+  void move(const tensor::tensor_Dense<Float> &tensor_dense);
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, int N);
 
   /**
    * @brief returns a begin iterator
@@ -338,7 +336,15 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return vad.get(); }
+  [[nodiscard]] const Float *begin() const { return data(); }
+
+  /**
+   * @brief returns a begin iterator
+   * @return begin iterator
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *begin() { return data(); }
 
   /**
    * @brief returns a end iterator
@@ -346,7 +352,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return vad.get() + size(); }
+  [[nodiscard]] const Float *end() const { return data() + size(); }
 
   /**
    * @brief returns a end iterator
@@ -354,7 +360,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return vad.get() + size(); }
+  [[nodiscard]] Float *end() { return data() + size(); }
 
   /**
    * @brief get vector size
@@ -362,7 +368,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] size_t size() const { return vad_nnz; }
+  [[nodiscard]] size_t size() const { return val_nnz; }
 
   /**
    * @brief get vector size
@@ -370,7 +376,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
+  [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
    * @brief fill vector elements with a scalar value
@@ -481,7 +487,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return vad.get()[i];
+    return data()[i];
   }
 
   /**

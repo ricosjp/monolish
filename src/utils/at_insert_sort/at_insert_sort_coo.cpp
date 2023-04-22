@@ -13,8 +13,8 @@ template <typename T> T COO<T>::at(const size_t i, const size_t j) const {
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
-  if (vad_nnz != 0) {
-    for (auto k = vad_nnz; k > 0; --k) {
+  if (val_nnz != 0) {
+    for (auto k = val_nnz; k > 0; --k) {
       if (row_index[k - 1] == (int)i && col_index[k - 1] == (int)j) {
         return data()[k - 1];
       }
@@ -29,22 +29,22 @@ template float COO<float>::at(const size_t i, const size_t j) const;
 template <typename T>
 void COO<T>::insert(const size_t m, const size_t n, const T value) {
 
-  if (vad_create_flag) {
+  if (val_create_flag) {
     auto rownum = m;
     auto colnum = n;
     assert(rownum <= get_row());
     assert(colnum <= get_col());
 
-    row_index.push_back(rownum);
-    col_index.push_back(colnum);
-    if (vad_nnz >= alloc_nnz) {
-      size_t tmp = vad_nnz;
+    if (val_nnz >= alloc_nnz) {
+      size_t tmp = val_nnz;
       alloc_nnz = 2 * alloc_nnz + 1;
       resize(alloc_nnz);
-      vad_nnz = tmp;
+      val_nnz = tmp;
     }
-    data()[vad_nnz] = value;
-    vad_nnz++;
+    row_index[val_nnz] = rownum;
+    col_index[val_nnz] = colnum;
+    data()[val_nnz] = value;
+    val_nnz++;
   } else {
     throw std::runtime_error("Error, not create coo matrix cant use insert");
   }
@@ -124,12 +124,12 @@ template <typename T> void COO<T>::sort(bool merge) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  _q_sort(0, vad_nnz - 1);
+  _q_sort(0, val_nnz - 1);
 
   /*  Remove duplicates */
   if (merge) {
     size_t k = 0;
-    for (auto i = decltype(vad_nnz){1}; i < vad_nnz; i++) {
+    for (auto i = decltype(val_nnz){1}; i < val_nnz; i++) {
       if ((row_index[k] != row_index[i]) || (col_index[k] != col_index[i])) {
         k++;
         row_index[k] = row_index[i];
@@ -137,7 +137,7 @@ template <typename T> void COO<T>::sort(bool merge) {
       }
       data()[k] = data()[i];
     }
-    vad_nnz = k + 1;
+    val_nnz = k + 1;
   }
 
   logger.util_out();

@@ -1,5 +1,6 @@
 #pragma once
 #include "monolish_matrix.hpp"
+#include "monolish_tensor.hpp"
 
 namespace monolish {
 template <typename Float> class vector;
@@ -43,12 +44,12 @@ public:
   /**
    * @brief Dense format value (pointer)
    */
-  std::shared_ptr<Float> vad;
+  std::shared_ptr<Float> val;
 
   /**
    * @brief # of non-zero element (M * N)
    */
-  size_t vad_nnz = 0;
+  size_t val_nnz = 0;
 
   /**
    * @brief alloced matrix size
@@ -58,9 +59,9 @@ public:
   /**
    * @brief matrix create flag;
    */
-  bool vad_create_flag = false;
+  bool val_create_flag = false;
 
-  Dense() { vad_create_flag = true; }
+  Dense() { val_create_flag = true; }
 
   /**
    * @brief Create Dense matrix from COO matrix
@@ -91,7 +92,7 @@ public:
    * - GPU acceleration: false
    **/
   Dense(const COO<Float> &coo) {
-    vad_create_flag = true;
+    val_create_flag = true;
     convert(coo);
   }
 
@@ -102,7 +103,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M+N (onlu allocation)
+   *    - # of data transfer: M*N (only allocation)
    *        - if `dense.gpu_status == true`; coping data on CPU and GPU
    *respectively
    *        - else; coping data only on CPU
@@ -117,7 +118,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M+N (only allocation)
+   *    - # of data transfer: M*N (only allocation)
    *        - if `dense.gpu_status == true`; coping data on CPU and GPU
    *respectively
    *        - else; coping data only on CPU
@@ -289,7 +290,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  // void set_nnz(const size_t NZ) { vad_nnz = NZ; };
+  // void set_nnz(const size_t NZ) { val_nnz = NZ; };
 
   /**
    * @brief get format name "Dense"
@@ -360,11 +361,10 @@ public:
   };
 
   /**
-   * @brief get element A[i][j]
+   * @brief set element A[i][j]
    * @param i row
    * @param j col
    * @param Val scalar value
-   * @return A[i][j]
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -427,15 +427,17 @@ public:
   [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
 
   /**
-   * @brief destructor of CRS matrix, free GPU memory
+   * @brief destructor of Dense matrix, free GPU memory
    * @note
    * - Multi-threading: false
    * - GPU acceleration: true
    *    - # of data transfer: 0
    * **/
   ~Dense() {
-    if (get_device_mem_stat()) {
-      device_free();
+    if (val_create_flag) {
+      if (get_device_mem_stat()) {
+        device_free();
+      }
     }
   }
 
@@ -445,7 +447,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *data() const { return vad.get(); }
+  [[nodiscard]] const Float *data() const { return val.get(); }
 
   /**
    * @brief returns a direct pointer to the matrix
@@ -453,7 +455,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *data() { return vad.get(); }
+  [[nodiscard]] Float *data() { return val.get(); }
 
   /**
    * @brief resize matrix value
@@ -463,26 +465,31 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
-  void resize(size_t N, Float val = 0) {
+  void resize(size_t N, Float Val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if (vad_create_flag) {
+    if (val_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
-      size_t copy_size = std::min(vad_nnz, N);
+      size_t copy_size = std::min(val_nnz, N);
       for (size_t i = 0; i < copy_size; ++i) {
-        tmp.get()[i] = vad.get()[i];
+        tmp.get()[i] = data()[i];
       }
       for (size_t i = copy_size; i < N; ++i) {
-        tmp.get()[i] = val;
+        tmp.get()[i] = Val;
       }
-      vad = tmp;
+      val = tmp;
       alloc_nnz = N;
-      vad_nnz = N;
+      val_nnz = N;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense);
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, int rowN,
+            int colN);
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -563,7 +570,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
     }
-    return vad.get() + m * get_col();
+    return data() + m * get_col();
   }
 
   /**
@@ -607,7 +614,8 @@ public:
 
   /**
    * @brief Reshape matrix
-   * @param mat Dense matrix
+   * @param row
+   * @param col
    * @note
    * - # of computation: 1
    * - Multi-threading: false

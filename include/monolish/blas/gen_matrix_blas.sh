@@ -380,7 +380,7 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul($prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, $prec &b, matrix::Dense<$prec> &C);"
+  echo "void matmul(const $prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
 
@@ -454,7 +454,7 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul($prec &a, const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, $prec &b, matrix::Dense<$prec> &C);"
+  echo "void matmul(const $prec &a, const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C);"
 done
 echo "/**@}*/"
 

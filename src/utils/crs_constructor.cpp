@@ -16,7 +16,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ) {
   gpu_status = false;
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(NNZ);
   logger.util_out();
 }
@@ -33,7 +33,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   gpu_status = false;
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
   std::copy(colind, colind + NNZ, col_ind.begin());
@@ -58,7 +58,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   gpu_status = false;
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
   std::copy(colind, colind + NNZ, col_ind.begin());
@@ -89,7 +89,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   gpu_status = false;
   row_ptr.resize(M + 1);
   col_ind.resize(value.size());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
@@ -116,7 +116,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   gpu_status = false;
   row_ptr.resize(M + 1);
   col_ind.resize(value.size());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
@@ -155,7 +155,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
   col_ind.resize(mat.get_nnz());
   row_ptr.resize(mat.get_row() + 1);
@@ -191,7 +191,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
   col_ind.resize(mat.get_nnz());
   row_ptr.resize(mat.get_row() + 1);

@@ -12,7 +12,7 @@ template <typename T> void Dense<T>::convert(const COO<T> &coo) {
 
   set_row(coo.get_row());
   set_col(coo.get_col());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(get_row() * get_col());
 
 #pragma omp parallel for
@@ -32,7 +32,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
 
   rowN = mat.get_row();
@@ -41,7 +41,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     throw std::runtime_error(
-        "error can not convert CRS->CRS when gpu_status == true");
+        "error can not convert Dense->Dense when gpu_status == true");
   }
 #endif
   internal::vcopy(get_nnz(), mat.data(), data(), false);
