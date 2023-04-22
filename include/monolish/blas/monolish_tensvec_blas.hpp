@@ -128,7 +128,7 @@ void times_col(const tensor::tensor_Dense<float> &A,
  */
 /**
  * @brief Specified col of tensor_Dense tensor and vector times:
- * C[i][num] = A[i][num] * x[j]
+ * C[i][num] = A[i][num] * x[i]
  * @param A tensor_Dense tensor
  * @param num column number
  * @param x monolish vector (size M)
@@ -155,6 +155,148 @@ void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
 void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
                const view1D<tensor::tensor_Dense<float>, float> &x,
                tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Row-wise tensor_Dense tensor and vector adds:
+ * ex. C[i][j] = A[i][j] + x[j]
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_row(const tensor::tensor_Dense<double> &A, const vector<double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<float> &A, const vector<float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_row(const tensor::tensor_Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_row(const tensor::tensor_Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Specified row of tensor_Dense tensor and vector adds:
+ * ex. C[num][j] = A[num][j] + x[j]
+ * @param A tensor_Dense tensor
+ * @param num row number (size N)
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_row(const tensor::tensor_Dense<double> &A, const size_t num,
+              const vector<double> &x, tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<double> &A, const size_t num,
+              const view1D<vector<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<double> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_row(const tensor::tensor_Dense<float> &A, const size_t num,
+              const vector<float> &x, tensor::tensor_Dense<float> &C);
+void adds_row(const tensor::tensor_Dense<float> &A, const size_t num,
+              const view1D<vector<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_row(const tensor::tensor_Dense<float> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Column-wise tensor_Dense tensor and vector adds:
+ * ex. C[i][j] = A[i][j] + x[i]
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_col(const tensor::tensor_Dense<double> &A, const vector<double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<float> &A, const vector<float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_col(const tensor::tensor_Dense<float> &A,
+              const view1D<vector<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_col(const tensor::tensor_Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Specified col of tensor_Dense tensor and vector adds:
+ * C[i][num] = A[i][num] + x[i]
+ * @param A tensor_Dense tensor
+ * @param num column number
+ * @param x monolish vector (size M)
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: M
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_col(const tensor::tensor_Dense<double> &A, const size_t num,
+              const vector<double> &x, tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<double> &A, const size_t num,
+              const view1D<vector<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<double> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C);
+void adds_col(const tensor::tensor_Dense<float> &A, const size_t num,
+              const vector<float> &x, tensor::tensor_Dense<float> &C);
+void adds_col(const tensor::tensor_Dense<float> &A, const size_t num,
+              const view1D<vector<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
+void adds_col(const tensor::tensor_Dense<float> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C);
 /**@}*/
 
 /**

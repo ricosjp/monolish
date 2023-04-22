@@ -77,6 +77,28 @@ void times(const float alpha, const tensor::tensor_Dense<float> &A,
 /**@}*/
 
 /**
+ * \defgroup adds monolish::blas::adds
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief tensor_Dense tensor adds: C = alpha + A
+ * @param alpha scalar value
+ * @param A tensor_Dense tensor
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds(const double alpha, const tensor::tensor_Dense<double> &A,
+          tensor::tensor_Dense<double> &C);
+void adds(const float alpha, const tensor::tensor_Dense<float> &A,
+          tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup madd_dense monolish::blas::tensadd (tensor_Dense)
  * @brief tensor_Dense tensor addition: C = A + B
  * @{

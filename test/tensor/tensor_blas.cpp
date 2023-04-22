@@ -1,3 +1,8 @@
+#include "blas/adds_col.hpp"
+#include "blas/adds_col_line.hpp"
+#include "blas/adds_row.hpp"
+#include "blas/adds_row_line.hpp"
+#include "blas/scalar_adds.hpp"
 #include "blas/scalar_times.hpp"
 #include "blas/tensadd.hpp"
 #include "blas/tensmat.hpp"
@@ -262,6 +267,28 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // scalar_adds tensor_Dense//
+  if (test_send_scalar_adds<monolish::tensor::tensor_Dense<double>,
+                            monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_adds<monolish::tensor::tensor_Dense<float>,
+                            monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_adds<monolish::tensor::tensor_Dense<double>,
+                       monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_scalar_adds<monolish::tensor::tensor_Dense<float>,
+                       monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+
   // vector_times row tensor_Dense//
   if (test_send_times_row<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-6) == false) {
@@ -330,6 +357,78 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_times_col_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_adds row tensor_Dense//
+  if (test_send_adds_row<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_row<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_row<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_adds col tensor_Dense//
+  if (test_send_adds_col<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_col<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_col<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_adds row_line tensor_Dense//
+  if (test_send_adds_row_line<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_row_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_row_line<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_adds col_line tensor_Dense//
+  if (test_send_adds_col_line<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_col_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_col_line<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_line<monolish::tensor::tensor_Dense<float>, float>(
           M, N, L, 1.0e-3) == false) {
     return 1;
   }
