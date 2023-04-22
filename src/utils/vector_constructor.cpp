@@ -8,7 +8,7 @@ namespace monolish {
 template <typename T> vector<T>::vector(const size_t N) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(N);
   logger.util_out();
 }
@@ -18,7 +18,7 @@ template vector<float>::vector(const size_t N);
 template <typename T> vector<T>::vector(const size_t N, const T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(N);
 
 #pragma omp parallel for
@@ -56,7 +56,7 @@ template <typename T>
 vector<T>::vector(const size_t N, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(N);
 
   std::random_device random;
@@ -100,7 +100,7 @@ vector<T>::vector(const size_t N, const T min, const T max,
                   const std::uint32_t seed) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(N);
 
   std::mt19937 mt(seed);
@@ -122,7 +122,7 @@ template <typename T> vector<T>::vector(const T *start, const T *end) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   size_t size = (end - start);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(size);
   std::copy(start, end, data());
   logger.util_out();
@@ -134,7 +134,7 @@ template vector<float>::vector(const float *start, const float *end);
 template <typename T> vector<T>::vector(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(vec.size());
   std::copy(vec.begin(), vec.end(), data());
   logger.util_out();
@@ -147,7 +147,7 @@ template vector<float>::vector(const std::vector<float> &vec);
 template <typename T> vector<T>::vector(const std::initializer_list<T> &list) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(list.size());
   std::copy(list.begin(), list.end(), data());
   logger.util_out();
@@ -160,7 +160,7 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv
@@ -183,7 +183,7 @@ vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv
@@ -206,7 +206,7 @@ vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv

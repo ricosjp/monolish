@@ -12,7 +12,7 @@ template <typename T> void COO<T>::convert(const CRS<T> &crs) {
 
   set_row(crs.get_row());
   set_col(crs.get_col());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(crs.get_nnz());
 
   row_index.resize(crs.get_nnz());
@@ -37,7 +37,7 @@ template <typename T> void COO<T>::convert(const Dense<T> &dense) {
 
   set_row(dense.get_row());
   set_col(dense.get_col());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(dense.get_row() * dense.get_col());
   row_index.clear();
   col_index.clear();

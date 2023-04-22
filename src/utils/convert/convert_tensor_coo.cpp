@@ -13,7 +13,7 @@ void tensor_COO<T>::convert(const tensor::tensor_Dense<T> &dense) {
   logger.util_in(monolish_func);
 
   set_shape(dense.get_shape());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(dense.get_nnz());
   index.clear();
   size_t nz = 0;

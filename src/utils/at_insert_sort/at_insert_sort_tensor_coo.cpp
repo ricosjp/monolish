@@ -12,8 +12,8 @@ T tensor_COO<T>::at(const std::vector<size_t> &pos) const {
 
   // since last inserted element is effective elements,
   // checking from last element is necessary
-  if (vad_nnz != 0) {
-    for (auto k = vad_nnz; k > 0; --k) {
+  if (val_nnz != 0) {
+    for (auto k = val_nnz; k > 0; --k) {
       if (index[k - 1] == pos) {
         return data()[k - 1];
       }
@@ -28,16 +28,16 @@ template float tensor_COO<float>::at(const std::vector<size_t> &pos) const;
 template <typename T>
 void tensor_COO<T>::insert(const std::vector<size_t> &pos, const T value) {
 
-  if (vad_create_flag) {
-    if (vad_nnz >= alloc_nnz) {
-      size_t tmp = vad_nnz;
+  if (val_create_flag) {
+    if (val_nnz >= alloc_nnz) {
+      size_t tmp = val_nnz;
       alloc_nnz = 2 * alloc_nnz + 1;
       resize(alloc_nnz);
-      vad_nnz = tmp;
+      val_nnz = tmp;
     }
-    index[vad_nnz] = pos;
-    data()[vad_nnz] = value;
-    vad_nnz++;
+    index[val_nnz] = pos;
+    data()[val_nnz] = value;
+    val_nnz++;
   } else {
     throw std::runtime_error("Error, not create coo matrix cant use insert");
   }
@@ -112,19 +112,19 @@ template <typename T> void tensor_COO<T>::sort(bool merge) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  _q_sort(0, vad_nnz - 1);
+  _q_sort(0, val_nnz - 1);
 
   /*  Remove duplicates */
   if (merge) {
     size_t k = 0;
-    for (auto i = decltype(vad_nnz){1}; i < vad_nnz; i++) {
+    for (auto i = decltype(val_nnz){1}; i < val_nnz; i++) {
       if (index[k] != index[i]) {
         k++;
         index[k] = index[i];
       }
       data()[k] = data()[i];
     }
-    vad_nnz = k + 1;
+    val_nnz = k + 1;
   }
 
   logger.util_out();

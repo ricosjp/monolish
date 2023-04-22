@@ -68,7 +68,7 @@ template <typename T> void CRS<T>::transpose(const CRS &B) {
   // TODO size check
   row_ptr.resize(B.get_col() + 1);
   col_ind.resize(B.get_nnz());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(B.get_nnz());
 
   std::fill(row_ptr.data(), row_ptr.data() + B.get_col() + 1, 0.0);

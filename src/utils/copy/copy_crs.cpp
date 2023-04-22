@@ -46,6 +46,7 @@ void CRS<T>::set_ptr(const size_t M, const size_t N,
   logger.util_in(monolish_func);
   col_ind = colind;
   row_ptr = rowptr;
+  val_create_flag = true;
   resize(value.size());
   for (size_t i = 0; i < value.size(); ++i) {
     data()[i] = value[i];

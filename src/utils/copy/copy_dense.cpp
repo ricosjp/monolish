@@ -33,7 +33,7 @@ void Dense<T>::set_ptr(const size_t M, const size_t N,
                        const std::vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   for (size_t i = 0; i < M * N; ++i) {
     data()[i] = value[i];

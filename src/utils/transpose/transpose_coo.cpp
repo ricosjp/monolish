@@ -32,7 +32,7 @@ template <typename T> void COO<T>::transpose(const COO &B) {
           "Error: different nnz size GPU matrix cant use transpose");
     }
   } else {
-    vad_create_flag = true;
+    val_create_flag = true;
     resize(val.size());
   }
   for (size_t i = 0; i < val.size(); ++i) {

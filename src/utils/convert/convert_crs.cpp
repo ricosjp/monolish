@@ -12,7 +12,7 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 
   rowN = coo.get_row();
   colN = coo.get_col();
-  vad_create_flag = true;
+  val_create_flag = true;
 
   resize(coo.get_nnz());
   for (size_t i = 0; i < coo.get_nnz(); ++i) {
@@ -47,7 +47,7 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   resize(crs.get_nnz());
   col_ind.resize(crs.get_nnz());
   row_ptr.resize(crs.get_row() + 1);
-  vad_create_flag = true;
+  val_create_flag = true;
 
   rowN = crs.get_row();
   colN = crs.get_col();

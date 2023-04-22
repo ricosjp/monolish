@@ -13,7 +13,7 @@ void tensor_Dense<T>::convert(const tensor::tensor_Dense<T> &dense) {
   logger.util_in(monolish_func);
 
   set_shape(dense.get_shape());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(dense.get_nnz());
 
 #if MONOLISH_USE_NVIDIA_GPU
@@ -37,7 +37,7 @@ void tensor_Dense<T>::convert(const tensor::tensor_COO<T> &coo) {
   logger.util_in(monolish_func);
 
   set_shape(coo.get_shape());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(coo.get_shape());
 
 #pragma omp parallel for
@@ -61,7 +61,7 @@ void tensor_Dense<T>::convert(const matrix::Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   this->shape.resize(2);
   this->shape[0] = mat.get_row();
   this->shape[1] = mat.get_col();
@@ -84,7 +84,7 @@ template <typename T> void tensor_Dense<T>::convert(const vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   this->shape.resize(1);
   this->shape[0] = vec.get_nnz();
   resize(vec.get_nnz());

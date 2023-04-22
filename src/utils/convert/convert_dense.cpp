@@ -12,7 +12,7 @@ template <typename T> void Dense<T>::convert(const COO<T> &coo) {
 
   set_row(coo.get_row());
   set_col(coo.get_col());
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(get_row() * get_col());
 
 #pragma omp parallel for
@@ -32,7 +32,7 @@ template <typename T> void Dense<T>::convert(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
 
   rowN = mat.get_row();

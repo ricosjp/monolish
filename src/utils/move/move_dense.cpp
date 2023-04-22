@@ -17,13 +17,13 @@ void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense) {
         "error cannot move tensor_Dense->Dense when shape.size() != 2");
   }
 
-  this->vad_create_flag = false;
+  this->val_create_flag = false;
 
   set_row(tensor_dense.get_shape()[0]);
   set_col(tensor_dense.get_shape()[1]);
   this->gpu_status = tensor_dense.get_device_mem_stat();
-  this->vad = tensor_dense.vad;
-  this->vad_nnz = tensor_dense.get_nnz();
+  this->val = tensor_dense.val;
+  this->val_nnz = tensor_dense.get_nnz();
   this->alloc_nnz = tensor_dense.alloc_nnz;
 
   logger.util_out();
@@ -56,13 +56,13 @@ void Dense<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int rowN,
         "error cannot move tensor_Dense->Dense when rowN * colN != get_nnz()");
   }
 
-  this->vad_create_flag = false;
+  this->val_create_flag = false;
 
   set_row(rowN);
   set_col(colN);
   this->gpu_status = tensor_dense.get_device_mem_stat();
-  this->vad = tensor_dense.vad;
-  this->vad_nnz = tensor_dense.get_nnz();
+  this->val = tensor_dense.val;
+  this->val_nnz = tensor_dense.get_nnz();
   this->alloc_nnz = tensor_dense.alloc_nnz;
 
   logger.util_out();

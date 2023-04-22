@@ -17,7 +17,7 @@ tensor_COO<T>::tensor_COO(const std::vector<size_t> &shape,
   this->shape = shape;
   this->index = index;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(index.size());
   std::copy(value, value + get_nnz(), data());
   logger.util_out();
@@ -37,7 +37,7 @@ template <typename T> tensor_COO<T>::tensor_COO(const tensor_COO<T> &coo) {
   this->index = coo.index;
   gpu_status = false;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(coo.get_nnz());
   std::copy(coo.data(), coo.data() + coo.get_nnz(), data());
   logger.util_out();
@@ -54,7 +54,7 @@ tensor_COO<T>::tensor_COO(const tensor_COO<T> &coo, T value) {
   this->index = coo.index;
   gpu_status = false;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(coo.get_nnz());
   internal::vbroadcast(coo.get_nnz(), value, data(), false);
   logger.util_out();

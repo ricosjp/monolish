@@ -31,12 +31,12 @@ public:
    * @brief Coodinate format value array (pointer), which stores values of the
    * non-zero elements
    */
-  std::shared_ptr<Float> vad;
+  std::shared_ptr<Float> val;
 
   /**
    * @brief # of non-zero element
    */
-  size_t vad_nnz = 0;
+  size_t val_nnz = 0;
 
   /**
    * @brief alloced matrix size
@@ -46,21 +46,21 @@ public:
   /**
    * @brief matrix create flag;
    */
-  bool vad_create_flag = false;
+  bool val_create_flag = false;
 
-  tensor_COO() : shape(), gpu_status(false), index(), vad_nnz(0) {
-    vad_create_flag = true;
+  tensor_COO() : shape(), gpu_status(false), index(), val_nnz(0) {
+    val_create_flag = true;
   }
 
   tensor_COO(const std::vector<size_t> &shape_)
-      : shape(shape_), gpu_status(false), index(), vad_nnz(0) {
-    vad_create_flag = true;
+      : shape(shape_), gpu_status(false), index(), val_nnz(0) {
+    val_create_flag = true;
   }
 
   void convert(const tensor::tensor_Dense<Float> &tens);
 
   tensor_COO(const tensor::tensor_Dense<Float> &tens) {
-    vad_create_flag = true;
+    val_create_flag = true;
     convert(tens);
   }
 
@@ -123,32 +123,32 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] size_t get_nnz() const { return vad_nnz; }
+  [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   void set_shape(const std::vector<size_t> &shape) { this->shape = shape; }
 
   [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
 
-  [[nodiscard]] const Float *data() const { return vad.get(); }
+  [[nodiscard]] const Float *data() const { return val.get(); }
 
-  [[nodiscard]] Float *data() { return vad.get(); }
+  [[nodiscard]] Float *data() { return val.get(); }
 
-  void resize(const size_t N, Float val = 0) {
+  void resize(const size_t N, Float Val = 0) {
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
-    if (vad_create_flag) {
+    if (val_create_flag) {
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
-      size_t copy_size = std::min(vad_nnz, N);
+      size_t copy_size = std::min(val_nnz, N);
       for (size_t i = 0; i < copy_size; ++i) {
-        tmp.get()[i] = vad.get()[i];
+        tmp.get()[i] = data()[i];
       }
       for (size_t i = copy_size; i < N; ++i) {
-        tmp.get()[i] = val;
+        tmp.get()[i] = Val;
       }
-      vad = tmp;
+      val = tmp;
       alloc_nnz = N;
-      vad_nnz = N;
+      val_nnz = N;
 
       index.resize(N);
     } else {

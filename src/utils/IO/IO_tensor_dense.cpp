@@ -23,12 +23,19 @@ template <typename T> void tensor_Dense<T>::print_all(bool force_cpu) const {
 #if MONOLISH_USE_NVIDIA_GPU
     const T *vald = data();
     auto shape = get_shape();
+    int size = shape.size();
+    const auto *shape_ptr = shape.data();
+    auto ind = shape;
+    auto ind_ptr = ind.data();
 #pragma omp target
     for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       auto i_copy = i;
-      for (int j = (int)shape.size() - 1; j >= 0; --j) {
-        printf("%lu ", i_copy % shape[j]);
-        i_copy /= shape[j];
+      for (int j = size - 1; j >= 0; --j) {
+        ind_ptr[j] = i_copy % shape_ptr[j];
+        i_copy /= shape_ptr[j];
+      }
+      for (auto j = decltype(size){0}; j < size; j++) {
+        printf("%lu ", ind_ptr[j]);
       }
       printf("%f\n", vald[i]);
     }

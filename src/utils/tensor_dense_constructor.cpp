@@ -14,7 +14,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape) {
   logger.util_in(monolish_func);
   this->shape = shape;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(shape);
   logger.util_out();
 }
@@ -28,7 +28,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
   logger.util_in(monolish_func);
   this->shape = shape;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(shape);
   std::copy(value, value + get_nnz(), data());
   logger.util_out();
@@ -46,7 +46,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
   logger.util_in(monolish_func);
   this->shape = shape;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(shape);
   std::copy(value.begin(), value.end(), data());
   logger.util_out();
@@ -64,7 +64,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
   logger.util_in(monolish_func);
   this->shape = shape;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(shape);
 
   std::random_device random;
@@ -89,7 +89,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
   logger.util_in(monolish_func);
   this->shape = shape;
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(shape);
 
   std::mt19937 mt(seed);
@@ -113,7 +113,7 @@ tensor_Dense<T>::tensor_Dense(const tensor_Dense<T> &tens) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(tens.get_nnz());
   this->shape = tens.get_shape();
 
@@ -135,7 +135,7 @@ tensor_Dense<T>::tensor_Dense(const tensor_Dense<T> &tens, T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(tens.get_nnz());
   this->shape = tens.get_shape();
 

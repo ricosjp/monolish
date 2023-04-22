@@ -15,7 +15,7 @@ template <typename T> Dense<T>::Dense(const size_t M, const size_t N) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   logger.util_out();
 }
@@ -29,7 +29,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T *value) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   std::copy(value, value + get_nnz(), data());
   logger.util_out();
@@ -46,7 +46,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> &value) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   std::copy(value.begin(), value.end(), data());
   logger.util_out();
@@ -63,7 +63,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   std::copy(value.data(), value.data() + get_nnz(), data());
 
@@ -97,7 +97,7 @@ Dense<T>::Dense(const size_t M, const size_t N,
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
   std::copy(list.begin(), list.end(), data());
   logger.util_out();
@@ -114,7 +114,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
 
   std::random_device random;
@@ -140,7 +140,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max,
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
 
   std::mt19937 mt(seed);
@@ -164,7 +164,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T value) {
   set_row(M);
   set_col(N);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(M * N);
 
 #pragma omp parallel for
@@ -183,7 +183,7 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
 
   rowN = mat.get_row();
@@ -207,7 +207,7 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat, T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  vad_create_flag = true;
+  val_create_flag = true;
   resize(mat.get_nnz());
 
   rowN = mat.get_row();
