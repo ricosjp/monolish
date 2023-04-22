@@ -1,7 +1,8 @@
 #include "../../test_utils.hpp"
 #include "monolish_blas.hpp"
 
-template <typename T> void ans_reciprocal(monolish::tensor::tensor_Dense<T> &A) {
+template <typename T>
+void ans_reciprocal(monolish::tensor::tensor_Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
     A.data()[i] = 1 / A.data()[i];
@@ -9,7 +10,8 @@ template <typename T> void ans_reciprocal(monolish::tensor::tensor_Dense<T> &A) 
 }
 
 template <typename MAT, typename T>
-bool test_send_treciprocal(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_treciprocal(const size_t M, const size_t N, const size_t L,
+                           double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -35,7 +37,8 @@ bool test_send_treciprocal(const size_t M, const size_t N, const size_t L, doubl
 }
 
 template <typename MAT, typename T>
-bool test_treciprocal(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_treciprocal(const size_t M, const size_t N, const size_t L,
+                      double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;

@@ -6,7 +6,8 @@ template <typename T> T ans_min(monolish::tensor::tensor_Dense<T> &A) {
 }
 
 template <typename MAT, typename T>
-bool test_send_tmin(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_tmin(const size_t M, const size_t N, const size_t L,
+                    double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;

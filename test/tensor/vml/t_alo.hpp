@@ -1,7 +1,8 @@
 #include "../../test_utils.hpp"
 
 template <typename T>
-void ans_alo(monolish::tensor::tensor_Dense<T> &A, const T alpha, const T beta){
+void ans_alo(monolish::tensor::tensor_Dense<T> &A, const T alpha,
+             const T beta) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
     if (A.data()[i] > 0) {
@@ -13,7 +14,8 @@ void ans_alo(monolish::tensor::tensor_Dense<T> &A, const T alpha, const T beta){
 }
 
 template <typename MAT, typename T>
-bool test_send_talo(const size_t M, const size_t N, const size_t L, double tol) {
+bool test_send_talo(const size_t M, const size_t N, const size_t L,
+                    double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -36,8 +38,8 @@ bool test_send_talo(const size_t M, const size_t N, const size_t L, double tol) 
   A.recv();
   monolish::tensor::tensor_Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.data(), A.data(),
-                      A.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type(), resultA.data(), A.data(), A.get_nnz(),
+                      tol);
 }
 
 template <typename MAT, typename T>
