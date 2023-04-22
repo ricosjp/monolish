@@ -43,17 +43,55 @@ public:
 
   tensor_Dense() { val_create_flag = true; }
 
+  /**
+   * @brief Create tensor_Dense tensor from tensor_Dense tensor
+   * @param tens input tensor_Dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
   void convert(const tensor::tensor_Dense<Float> &tens);
 
+  /**
+   * @brief Create tensor_Dense tensor from tensor_Dense tensor
+   * @param tens tensor_Dense format tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: size (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(const tensor::tensor_Dense<Float> &tens);
+
+  /**
+   * @brief Create tensor_Dense tensor from tensor_COO tensor
+   * @param tens input tensor_Dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
   void convert(const tensor::tensor_COO<Float> &tens);
 
+  /**
+   * @brief Create tensor_Dense tensor from tensor_COO tensor
+   * @param tens input tensor_COO tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
   tensor_Dense(const tensor::tensor_COO<Float> &tens) {
     convert(tens);
     val_create_flag = true;
   }
 
   /**
-   * @brief create Dense tensor from Dense matrix
+   * @brief create tensor_Dense tensor from Dense matrix
    * @param dense input Dense matrix (size M x N)
    * - # of computation: M*N
    * - Multi-threading: true
@@ -61,13 +99,20 @@ public:
    **/
   void convert(const matrix::Dense<Float> &dense);
 
+  /**
+   * @brief Create tensor_Dense tensor from Dense matrix
+   * @param dense input Dense matrix (size M x N)
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
   tensor_Dense(const matrix::Dense<Float> &dense) {
     convert(dense);
     val_create_flag = true;
   }
 
   /**
-   * @brief create Dense tensor from vector
+   * @brief create tensor_Dense tensor from vector
    * @param vec input vector (size M)
    * - # of computation: M
    * - Multi-threading: true
@@ -75,6 +120,13 @@ public:
    **/
   void convert(const vector<Float> &vec);
 
+  /**
+   * @brief create tensor_Dense tensor from vector
+   * @param vec input vector (size M)
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
   tensor_Dense(const vector<Float> &vec) {
     convert(vec);
     val_create_flag = true;
@@ -101,24 +153,57 @@ public:
   tensor_Dense(const std::vector<size_t> &shape, const Float *value);
 
   /**
-   * @brief Allocate dense tensor
+   * @brief Allocate tensor_Dense tensor
    * @param shape shape of tensor
+   * @param value value std::vector
    * @note
-   * - # of computation: nnz
+   * - # of computation: size
    * - Multi-threading: false
    * - GPU acceleration: false
    */
   tensor_Dense(const std::vector<size_t> &shape,
                const std::vector<Float> &value);
 
+  /**
+   * @brief Allocate tensor_Dense tensor
+   * @param shape shape of tensor
+   * @param min rand min
+   * @param max rand max
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   tensor_Dense(const std::vector<size_t> &shape, const Float min,
                const Float max);
 
+  /**
+   * @brief Allocate tensor_Dense tensor
+   * @param shape shape of tensor
+   * @param min rand min
+   * @param max rand max
+   * @param seed random seed
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   tensor_Dense(const std::vector<size_t> &shape, const Float min,
                const Float max, const std::uint32_t seed);
 
-  tensor_Dense(const tensor_Dense<Float> &tens);
-
+  /**
+   * @brief Create tensor_Dense tensor of the same size as input tensor
+   * @param tens input tensor_Dense tensor
+   * @param value the value to initialize elements
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: size (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
   tensor_Dense(const tensor_Dense<Float> &tens, Float value);
 
   /**
@@ -140,8 +225,8 @@ public:
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
-   * @brief Set row number
-   * @param N # of row
+   * @brief Set shape
+   * @param shape shape of tensor
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
@@ -157,6 +242,7 @@ public:
    **/
   [[nodiscard]] std::string type() const { return "tensor_Dense"; }
 
+  // TODO
   /**
    * @brief Memory data space required by the matrix
    * @note
@@ -168,14 +254,49 @@ public:
     return get_nnz() * sizeof(Float) / 1.0e+9;
   }
 
+  /**
+   * @brief get element A[pos[0]][pos[1]]...
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
   [[nodiscard]] Float at(const std::vector<size_t> &pos) const;
 
+  /**
+   * @brief get element A[pos[0]][pos[1]]... (onlu CPU)
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
   [[nodiscard]] Float at(const std::vector<size_t> &pos) {
     return static_cast<const tensor_Dense *>(this)->at(pos);
   };
 
+  /**
+   * @brief set element A[pos[0]][pos[1]]...
+   * @param pos std::vector position
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
   void insert(const std::vector<size_t> &pos, const Float Val);
 
+  /**
+   * @brief print all elements to standard I/O
+   * @param force_cpu Ignore device status and output CPU data
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
   void print_all(bool force_cpu = false) const;
 
   // communication
@@ -185,7 +306,7 @@ public:
    * @note
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
+   *    - # of data transfer: size
    **/
   void send() const;
 
@@ -194,7 +315,7 @@ public:
    * @note
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
+   *    - # of data transfer: size
    **/
   void recv();
 
@@ -203,7 +324,7 @@ public:
    * @note
    * - Multi-threading: false
    * - GPU acceleration: true
-   *    - # of data transfer: M*N
+   *    - # of data transfer: size
    **/
   void nonfree_recv();
 
@@ -238,7 +359,7 @@ public:
   }
 
   /**
-   * @brief returns a direct pointer to the matrix
+   * @brief returns a direct pointer to the tensor
    * @return A const pointer to the first element
    * @note
    * - # of computation: 1
@@ -282,6 +403,14 @@ public:
     }
   }
 
+  /**
+   * @brief resize tensor value
+   * @param shape tensor shape
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   void resize(const std::vector<size_t> &shape, Float val = 0) {
     size_t N = 1;
     for (auto n : shape) {
@@ -292,26 +421,67 @@ public:
   }
 
   /**
-   * @brief move Dense tensor from Dense matrix
+   * @brief move tensor_Dense tensor from Dense matrix
    * @param dense input Dense matrix (size M x N)
    * - # of computation: 1
    */
   void move(const matrix::Dense<Float> &dense);
 
   /**
-   * @brief move Dense tensor from vector
+   * @brief move tensor_Dense tensor from vector
    * @param vec input vector (size M)
    * - # of computation: 1
    */
   void move(const vector<Float> &vec);
 
+  /**
+   * @brief Comparing tensors (A == tens)
+   * @param tens tensor_Dense tensor
+   * @param compare_cpu_and_device compare data on both CPU and GPU
+   * @return true or false
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
   [[nodiscard]] bool equal(const tensor_Dense<Float> &tens,
                            bool compare_cpu_and_device = false) const;
 
+  /**
+   * @brief Comparing tensors (A == tens)
+   * @param tens tensor_Dense tensor
+   * @return true or false
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
   [[nodiscard]] bool operator==(const tensor_Dense<Float> &tens) const;
 
+  /**
+   * @brief Comparing tensors (A != tens)
+   * @param tens tensor_Dense tensor
+   * @return true or false
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *   - if `gpu_status == true`; compare data on GPU
+   *   - else; compare data on CPU
+   **/
   [[nodiscard]] bool operator!=(const tensor_Dense<Float> &tens) const;
 
+  /**
+   * @brief get aligned index from vector index (A[pos] = A[ind[0]][ind[1]]...)
+   * @param pos position (std::vector)
+   * @return aligned position
+   * @note
+   * - # of computation: shape size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   size_t get_index(const std::vector<size_t> &pos) const {
     if (pos.size() != this->shape.size()) {
       throw std::runtime_error("pos size should be same with the shape");
@@ -324,6 +494,15 @@ public:
     return ind;
   }
 
+  /**
+   * @brief get vector index from aligned index (A[pos[0]][pos[1]]... = A[ind])
+   * @param pos position (scalar)
+   * @return vector position
+   * @note
+   * - # of computation: shape size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   std::vector<size_t> get_index(const size_t pos) const {
     std::vector<size_t> ind(this->shape.size(), 0);
     auto pos_copy = pos;

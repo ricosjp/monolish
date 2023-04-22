@@ -5,8 +5,8 @@
 namespace monolish {
 /**
  * @brief
- * Basic Linear Algebra Subprograms for tensor_Dense Tensor, tensor_Dense
- * Matrix, Sparse Matrix, Vector and Scalar
+ * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
+ * Scalar
  */
 namespace blas {
 
@@ -17,16 +17,17 @@ namespace blas {
 
 /**
  * \defgroup tensmat_dense monolish::blas::tensmat (tensor_Dense)
- * @brief tensor_Dense tensor and vector multiplication: y = Ax
+ * @brief tensor_Dense tensor and matrix multiplication: y = Ax
  * @{
  */
 /**
- * @brief tensor_Dense tensor and vector multiplication: y = Ax
- * @param A tensor_Dense tensor (size M x N)
- * @param x Dense matrix (size M)
- * @param y tensor_Dense tensor (size M)
+ * @brief tensor_Dense tensor and matrix multiplication: ex. y_{ijl} = A_{ijk}
+ * x_{kl}
+ * @param A tensor_Dense tensor
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: ?
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -39,16 +40,17 @@ void tensmat(const tensor::tensor_Dense<float> &A,
 
 /**
  * \defgroup tensmat_dense monolish::blas::tensmat (tensor_Dense)
- * @brief tensor_Dense tensor and vector multiplication: y = Ax
+ * @brief tensor_Dense tensor and matrix multiplication: ex. y_{ijl} = a A_{ijk}
+ * x_{kl} + b y_{ijl}
  * @{
  */
 /**
  * @brief tensor_Dense tensor and vector multiplication: y = Ax
- * @param A tensor_Dense tensor (size M x N)
- * @param x Dense matrix (size M)
- * @param y tensor_Dense tensor (size M)
+ * @param A tensor_Dense tensor
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: ?
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0

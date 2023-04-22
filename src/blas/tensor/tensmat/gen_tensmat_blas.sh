@@ -31,25 +31,4 @@ done
 
 echo ""
 
-# ## tensmat_* Dense
-# for transA in N T; do
-#     for transB in N T; do
-#         for prec in double float; do
-#             if [ $prec = "double" ]
-#             then
-#                 TA=`TRANSPOSE_BOOL $transA`
-#                 TB=`TRANSPOSE_BOOL $transB`
-#                 echo "void tensmat_$transA$transB(const tensor::tensor_Dense<$prec> &A, const matrix::Dense<$prec> &B, tensor::tensor_Dense<$prec> &C){tensor_Dense_Dense_Dtensmat_core(A, B, C, $TA, $TB);}"
-#             else
-#                 TA=`TRANSPOSE_BOOL $transA`
-#                 TB=`TRANSPOSE_BOOL $transB`
-#                 echo "void tensmat_$transA$transB(const tensor::tensor_Dense<$prec> &A, const matrix::Dense<$prec> &B, tensor::tensor_Dense<$prec> &C){tensor_Dense_Dense_Stensmat_core(A, B, C, $TA, $TB);}"
-#             fi
-#         done
-#     done
-# done
-# 
-# echo ""
-
-
 echo "}"

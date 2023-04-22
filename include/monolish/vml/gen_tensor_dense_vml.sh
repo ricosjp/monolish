@@ -30,11 +30,11 @@ echo "
  */
 /**
  * @brief element by element ${detail[$i]} tensor_Dense tensor A and tensor_Dense tensor B.
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -60,11 +60,11 @@ echo "
  */
 /**
  * @brief element by element ${detail[$i]} scalar alpha and tensor_Dense tensor A.
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -87,11 +87,11 @@ echo "
  */
 /**
  *@brief power to tensor_Dense tensor elements (C[0:N] = pow(A[0:N], B[0:N]))
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -108,11 +108,11 @@ echo "
  */
 /**
  * @brief power to tensor_Dense tensor elements by scalar value (C[0:N] = pow(A[0:N], alpha))
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -134,10 +134,10 @@ echo "
  */
 /**
  * @brief $math to tensor_Dense tensor elements (C[0:nnz] = $math(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -157,16 +157,16 @@ for i in ${!detail[@]}; do
 echo "
 /**
 * \defgroup vml_dnsdns${func[$i]} monolish::vml::${func[$i]}
- * @brief Create a new tensor_Dense tensor with ${detail[$i]} elements of two matrices (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
+ * @brief Create a new tensor_Dense tensor with ${detail[$i]} elements of two tensors (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
  * @{
  */
 /**
- * @brief Create a new tensor_Dense tensor with ${detail[$i]} elements of two matrices (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param B monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @brief Create a new tensor_Dense tensor with ${detail[$i]} elements of two tensors (C[0:nnz] = ${func[$i]}(A[0:nnz], B[0:nnz]))
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -191,11 +191,11 @@ echo "
  */
 /**
  * @brief Create a new tensor_Dense tensor with ${detail[$i]} elements of tensor_Dense tensor or scalar (C[0:nnz] = ${func[$i]}(A[0:nnz], alpha))
- * @param A monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -220,10 +220,10 @@ echo "
  */
 /**
  * @brief Finds the ${detail[$i]} element in tensor_Dense tensor (${func[$i]}(C[0:nnz]))
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @return ${detail[$i]} value
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -245,12 +245,12 @@ echo "
  */
 /**
  * @brief Asymmetric linear operation to tensor_Dense tensor elements (C[0:nnz] = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
- * @param A monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha linear coefficient in positive range
  * @param beta linear coefficient in negative range
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "
@@ -271,10 +271,10 @@ echo "
  */
 /**
  * @brief Compute reciprocal to tensor_Dense tensor elements (C[0:nnz] = 1 / A[0:nnz])
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
 */ "

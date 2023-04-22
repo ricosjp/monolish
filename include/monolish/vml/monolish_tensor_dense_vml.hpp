@@ -24,11 +24,11 @@ namespace vml {
 /**
  * @brief element by element addition tensor_Dense tensor A and tensor_Dense
  * tensor B.
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -49,11 +49,11 @@ void add(const tensor::tensor_Dense<float> &A,
 /**
  * @brief element by element subtract tensor_Dense tensor A and tensor_Dense
  * tensor B.
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -74,11 +74,11 @@ void sub(const tensor::tensor_Dense<float> &A,
 /**
  * @brief element by element multiplication tensor_Dense tensor A and
  * tensor_Dense tensor B.
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -99,11 +99,11 @@ void mul(const tensor::tensor_Dense<float> &A,
 /**
  * @brief element by element division tensor_Dense tensor A and tensor_Dense
  * tensor B.
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -122,11 +122,11 @@ void div(const tensor::tensor_Dense<float> &A,
  */
 /**
  * @brief element by element addition scalar alpha and tensor_Dense tensor A.
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -144,11 +144,11 @@ void add(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  * @brief element by element subtract scalar alpha and tensor_Dense tensor A.
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -168,11 +168,11 @@ void sub(const tensor::tensor_Dense<float> &A, const float alpha,
 /**
  * @brief element by element multiplication scalar alpha and tensor_Dense tensor
  * A.
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -190,11 +190,11 @@ void mul(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  * @brief element by element division scalar alpha and tensor_Dense tensor A.
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -212,11 +212,11 @@ void div(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  *@brief power to tensor_Dense tensor elements (C[0:N] = pow(A[0:N], B[0:N]))
- * @param A monolish tensor_Dense Matrix (size M x N)
- * @param B monolish tensor_Dense Matrix (size M x N)
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -236,11 +236,11 @@ void pow(const tensor::tensor_Dense<float> &A,
 /**
  * @brief power to tensor_Dense tensor elements by scalar value (C[0:N] =
  * pow(A[0:N], alpha))
- * @param A monolish tensor_Dense Matrix (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense Matrix (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -257,10 +257,10 @@ void pow(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  * @brief sin to tensor_Dense tensor elements (C[0:nnz] = sin(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -276,10 +276,10 @@ void sin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief sqrt to tensor_Dense tensor elements (C[0:nnz] = sqrt(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -295,10 +295,10 @@ void sqrt(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief sinh to tensor_Dense tensor elements (C[0:nnz] = sinh(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -314,10 +314,10 @@ void sinh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief asin to tensor_Dense tensor elements (C[0:nnz] = asin(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -333,10 +333,10 @@ void asin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief asinh to tensor_Dense tensor elements (C[0:nnz] = asinh(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -353,10 +353,10 @@ void asinh(const tensor::tensor_Dense<float> &A,
  */
 /**
  * @brief tan to tensor_Dense tensor elements (C[0:nnz] = tan(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -372,10 +372,10 @@ void tan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief tanh to tensor_Dense tensor elements (C[0:nnz] = tanh(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -391,10 +391,10 @@ void tanh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief atan to tensor_Dense tensor elements (C[0:nnz] = atan(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -410,10 +410,10 @@ void atan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief atanh to tensor_Dense tensor elements (C[0:nnz] = atanh(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -430,10 +430,10 @@ void atanh(const tensor::tensor_Dense<float> &A,
  */
 /**
  * @brief ceil to tensor_Dense tensor elements (C[0:nnz] = ceil(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -449,10 +449,10 @@ void ceil(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief floor to tensor_Dense tensor elements (C[0:nnz] = floor(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -469,10 +469,10 @@ void floor(const tensor::tensor_Dense<float> &A,
  */
 /**
  * @brief sign to tensor_Dense tensor elements (C[0:nnz] = sign(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -488,10 +488,10 @@ void sign(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 /**
  * @brief exp to tensor_Dense tensor elements (C[0:nnz] = exp(A[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -502,18 +502,18 @@ void exp(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
 
 /**
  * \defgroup vml_dnsdnsmax monolish::vml::max
- * @brief Create a new tensor_Dense tensor with greatest elements of two
- * matrices (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
+ * @brief Create a new tensor_Dense tensor with greatest elements of two tensors
+ * (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
  * @{
  */
 /**
- * @brief Create a new tensor_Dense tensor with greatest elements of two
- * matrices (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param B monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @brief Create a new tensor_Dense tensor with greatest elements of two tensors
+ * (C[0:nnz] = max(A[0:nnz], B[0:nnz]))
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -527,18 +527,18 @@ void max(const tensor::tensor_Dense<float> &A,
 
 /**
  * \defgroup vml_dnsdnsmin monolish::vml::min
- * @brief Create a new tensor_Dense tensor with smallest elements of two
- * matrices (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
+ * @brief Create a new tensor_Dense tensor with smallest elements of two tensors
+ * (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
  * @{
  */
 /**
- * @brief Create a new tensor_Dense tensor with smallest elements of two
- * matrices (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param B monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @brief Create a new tensor_Dense tensor with smallest elements of two tensors
+ * (C[0:nnz] = min(A[0:nnz], B[0:nnz]))
+ * @param A monolish tensor_Dense tensor
+ * @param B monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -559,11 +559,11 @@ void min(const tensor::tensor_Dense<float> &A,
 /**
  * @brief Create a new tensor_Dense tensor with greatest elements of
  * tensor_Dense tensor or scalar (C[0:nnz] = max(A[0:nnz], alpha))
- * @param A monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -583,11 +583,11 @@ void max(const tensor::tensor_Dense<float> &A, const float alpha,
 /**
  * @brief Create a new tensor_Dense tensor with smallest elements of
  * tensor_Dense tensor or scalar (C[0:nnz] = min(A[0:nnz], alpha))
- * @param A monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha scalar value
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -605,10 +605,10 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  * @brief Finds the greatest element in tensor_Dense tensor (max(C[0:nnz]))
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @return greatest value
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -623,10 +623,10 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 /**
  * @brief Finds the smallest element in tensor_Dense tensor (min(C[0:nnz]))
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @return smallest value
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -643,12 +643,12 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
 /**
  * @brief Asymmetric linear operation to tensor_Dense tensor elements (C[0:nnz]
  * = alpha max(A[0:nnz], 0) + beta min(A[0:nnz], 0))
- * @param A monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
  * @param alpha linear coefficient in positive range
  * @param beta linear coefficient in negative range
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */
@@ -667,10 +667,10 @@ void alo(const tensor::tensor_Dense<float> &A, const float alpha,
 /**
  * @brief Compute reciprocal to tensor_Dense tensor elements (C[0:nnz] = 1 /
  * A[0:nnz])
- * @param A monolish tensor_Dense tensor (size M x N)
- * @param C monolish tensor_Dense tensor (size M x N)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M*N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  */

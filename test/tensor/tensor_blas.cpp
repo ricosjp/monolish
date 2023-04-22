@@ -1,11 +1,9 @@
+#include "blas/scalar_times.hpp"
 #include "blas/tensadd.hpp"
 #include "blas/tensmat.hpp"
 #include "blas/tensmul.hpp"
 #include "blas/tenssub.hpp"
 #include "blas/tensvec.hpp"
-#include "blas/tensvec_N.hpp"
-//#include "blas/tensvec_T.hpp"
-#include "blas/scalar_times.hpp"
 #include "blas/times_col.hpp"
 #include "blas/times_col_line.hpp"
 #include "blas/times_row.hpp"
@@ -99,43 +97,6 @@ int main(int argc, char **argv) {
           M, N, K, 1.0e-3) == false) {
     return 1;
   }
-
-  // tensvec_N tensor_Dense//
-  if (test_send_tensvec_N<monolish::tensor::tensor_Dense<double>, double>(
-          M, N, K, 1.0e-6) == false) {
-    return 1;
-  }
-  if (test_send_tensvec_N<monolish::tensor::tensor_Dense<float>, float>(
-          M, N, K, 1.0e-3) == false) {
-    return 1;
-  }
-  if (test_tensvec_N<monolish::tensor::tensor_Dense<double>, double>(
-          M, N, K, 1.0e-6) == false) {
-    return 1;
-  }
-  if (test_tensvec_N<monolish::tensor::tensor_Dense<float>, float>(
-          M, N, K, 1.0e-3) == false) {
-    return 1;
-  }
-
-  // tensvec_T tensor_Dense//
-  // TODO
-  /*
-  if (test_send_tensvec_T<monolish::tensor::tensor_Dense<double>, double>(
-          M, N, K, 1.0e-6) == false) {
-    return 1;
-  }
-  if (test_send_tensvec_T<monolish::tensor::tensor_Dense<float>, float>(M,
-  N, K, 1.0e-3) == false) { return 1;
-  }
-  if (test_tensvec_T<monolish::tensor::tensor_Dense<double>, double>(M,
-  N, K, 1.0e-6) == false) { return 1;
-  }
-  if (test_tensvec_T<monolish::tensor::tensor_Dense<float>, float>(M, N,
-  K, 1.0e-3)
-  == false) { return 1;
-  }
-  */
 
   // tensmat tensor_Dense//
   if (test_send_tensmat<monolish::tensor::tensor_Dense<double>,

@@ -4,21 +4,6 @@
 
 namespace monolish {
 namespace {
-std::string get_tensmat_name(std::string func, bool transA, bool transB) {
-  func += "_";
-  if (transA == true) {
-    func += "T";
-  } else {
-    func += "N";
-  }
-  if (transB == true) {
-    func += "T";
-  } else {
-    func += "N";
-  }
-  return func;
-}
-
 // double ///////////////////
 void tensor_Dense_Dense_Dtensmat_core(const double &a,
                                       const tensor::tensor_Dense<double> &A,

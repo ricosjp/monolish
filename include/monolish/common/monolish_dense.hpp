@@ -103,7 +103,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M+N (onlu allocation)
+   *    - # of data transfer: M*N (only allocation)
    *        - if `dense.gpu_status == true`; coping data on CPU and GPU
    *respectively
    *        - else; coping data only on CPU
@@ -118,7 +118,7 @@ public:
    * - # of computation: M*N
    * - Multi-threading: true
    * - GPU acceleration: true
-   *    - # of data transfer: M+N (only allocation)
+   *    - # of data transfer: M*N (only allocation)
    *        - if `dense.gpu_status == true`; coping data on CPU and GPU
    *respectively
    *        - else; coping data only on CPU
@@ -361,11 +361,10 @@ public:
   };
 
   /**
-   * @brief get element A[i][j]
+   * @brief set element A[i][j]
    * @param i row
    * @param j col
    * @param Val scalar value
-   * @return A[i][j]
    * @note
    * - # of computation: 1
    * - Multi-threading: false

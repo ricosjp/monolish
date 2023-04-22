@@ -32,22 +32,4 @@ done
 
 echo ""
 
-## tensvec_* Dense
-for trans in N T; do
-    for prec in double float; do
-        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-            if [ $prec = "double" ]
-            then
-                T=`TRANSPOSE_BOOL $trans`
-                echo "void tensvec_$trans(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y){Dtensvec_core(A, x, y, $T);}"
-            else
-                T=`TRANSPOSE_BOOL $trans`
-                echo "void tensvec_$trans(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y){Stensvec_core(A, x, y, $T);}"
-            fi
-        done
-    done
-done
-
-echo ""
-
 echo "}"

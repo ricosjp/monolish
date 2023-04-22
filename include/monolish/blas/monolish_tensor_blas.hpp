@@ -5,8 +5,8 @@
 namespace monolish {
 /**
  * @brief
- * Basic Linear Algebra Subprograms for Dense Tensor, Dense Matrix, Sparse
- * Matrix, Vector and Scalar
+ * Basic Linear Algebra Subprograms for Dense Matrix, Sparse Matrix, Vector and
+ * Scalar
  */
 namespace blas {
 
@@ -17,15 +17,15 @@ namespace blas {
 
 /**
  * \defgroup tens_copy_Dense monolish::blas::copy (tensor_Dense)
- * @brief Dense tensor copy (C=A)
+ * @brief tensor_Dense tensor copy (C=A)
  * @{
  */
 /**
- * @brief Dense tensor copy (C=A)
- * @param A monolish Dense tensor (size M x N)
- * @param C monolish Dense tensor (size M x N)
+ * @brief tensor_Dense tensor copy (C=A)
+ * @param A monolish tensor_Dense tensor
+ * @param C monolish tensor_Dense tensor
  * @note
- * - # of computation: M x N
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -37,15 +37,15 @@ void copy(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
 
 /**
  * \defgroup tscal_dense monolish::blas::tscal (tensor_Dense)
- * @brief Dense tensor scal: A = alpha * A
+ * @brief tensor_Dense tensor scal: A = alpha * A
  * @{
  */
 /**
- * @brief Dense tensor scal: A = alpha * A
+ * @brief tensor_Dense tensor scal: A = alpha * A
  * @param alpha scalar value
- * @param A Dense tensor (size M x N)
+ * @param A Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -60,12 +60,12 @@ void tscal(const float alpha, tensor::tensor_Dense<float> &A);
  * @{
  */
 /**
- * @brief Dense tensor times: C = alpha * A
+ * @brief tensor_Dense tensor times: C = alpha * A
  * @param alpha scalar value
- * @param A Dense tensor (size M x N)
- * @param C Dense tensor (size M x N)
+ * @param A tensor_Dense tensor
+ * @param C tensor_Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -78,16 +78,16 @@ void times(const float alpha, const tensor::tensor_Dense<float> &A,
 
 /**
  * \defgroup madd_dense monolish::blas::tensadd (tensor_Dense)
- * @brief Dense tensor addition: C = A + B
+ * @brief tensor_Dense tensor addition: C = A + B
  * @{
  */
 /**
  * @brief Dense tensor addition: C = A + B
- * @param A Dense tensor (size M x N)
- * @param B Dense tensor (size M x N)
- * @param C Dense tensor (size M x N)
+ * @param A tensor_Dense tensor
+ * @param B tensor_Dense tensor
+ * @param C tensor_Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: size
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -102,16 +102,16 @@ void tensadd(const tensor::tensor_Dense<float> &A,
 
 /**
  * \defgroup msub_dense monolish::blas::tenssub (tensor_Dense)
- * @brief Dense tensor subtract: C = A - B
+ * @brief tensor_Dense tensor subtract: C = A - B
  * @{
  */
 /**
  * @brief Dense tensor subtract: C = A - B
- * @param A Dense tensor (size M x N)
- * @param B Dense tensor (size M x N)
- * @param C Dense tensor (size M x N)
+ * @param A tensor_Dense tensor
+ * @param B tensor_Dense tensor
+ * @param C tensor_Dense tensor
  * @note
- * - # of computation: MN
+ * - # of computation: ?
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -127,16 +127,16 @@ void tenssub(const tensor::tensor_Dense<float> &A,
 /**
  * \defgroup mm_dense monolish::blas::tensmul (tensor_Dense, tensor_Dense,
  * tensor_Dense)
- * @brief Dense tensor multiplication: C = AB
+ * @brief tensor_Dense tensor multiplication: C = AB
  * @{
  */
 /**
- * @brief Dense tensor multiplication: C = AB
- * @param A Dense tensor (size M x K)
- * @param B Dense tensor (size K x N)
- * @param C Dense tensor (size M x N)
+ * @brief tensor_Dense tensor multiplication: C = AB
+ * @param A tensor_Dense tensor
+ * @param B tensor_Dense tensor
+ * @param C tensor_Dense tensor
  * @note
- * - # of computation: 2MNK
+ * - # of computation: ?
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
@@ -152,18 +152,18 @@ void tensmul(const tensor::tensor_Dense<float> &A,
 /**
  * \defgroup mm_dense monolish::blas::tensmul (Float, tensor_Dense,
  * tensor_Dense, Float, tensor_Dense)
- * @brief Dense tensor multiplication: C = aAB+bC
+ * @brief tensor_Dense tensor multiplication: C = aAB+bC
  * @{
  */
 /**
- * @brief Dense tensor multiplication: C = aAB+bC
+ * @brief tensor_Dense tensor multiplication: C = aAB+bC
  * @param a Float
- * @param A Dense tensor (size M x K)
- * @param B Dense tensor (size K x N)
+ * @param A tensor_Dense tensor
+ * @param B tensor_Dense tensor
  * @param b Float
- * @param C Dense tensor (size M x N)
+ * @param C tensor_Dense tensor
  * @note
- * - # of computation: 2MNK
+ * - # of computation: ?
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0

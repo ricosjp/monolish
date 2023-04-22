@@ -3,13 +3,6 @@
 
 namespace monolish {
 namespace {
-std::string get_tensvec_name(std::string func, bool flag) {
-  if (flag == true) {
-    return func + "_T";
-  } else {
-    return func + "_N";
-  }
-}
 // double ///////////////////
 template <typename VEC1>
 void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x,

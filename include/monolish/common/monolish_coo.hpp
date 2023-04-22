@@ -210,7 +210,7 @@ public:
    *elements (size nnz)
    * @param col n-origin col index, which stores the column numbers of the
    *non-zero elements (size nnz)
-   * @param value n-origin value index, which stores the non-zero elements (size
+   * @param value n-origin value, which stores the non-zero elements (size
    *nnz)
    * @param origin n-origin
    * @note
