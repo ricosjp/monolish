@@ -174,51 +174,21 @@ void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
  *    - # of data transfer: 0
  */
 void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             vector<double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             view1D<vector<double>, double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             view1D<tensor::tensor_Dense<double>, double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<vector<double>, double> &x, vector<double> &y);
+             tensor::tensor_Dense<double> &y);
 void tensvec(const tensor::tensor_Dense<double> &A,
              const view1D<vector<double>, double> &x,
-             view1D<vector<double>, double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<vector<double>, double> &x,
-             view1D<tensor::tensor_Dense<double>, double> &y);
+             tensor::tensor_Dense<double> &y);
 void tensvec(const tensor::tensor_Dense<double> &A,
              const view1D<tensor::tensor_Dense<double>, double> &x,
-             vector<double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<tensor::tensor_Dense<double>, double> &x,
-             view1D<vector<double>, double> &y);
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<tensor::tensor_Dense<double>, double> &x,
-             view1D<tensor::tensor_Dense<double>, double> &y);
+             tensor::tensor_Dense<double> &y);
 void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             vector<float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             view1D<vector<float>, float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             view1D<tensor::tensor_Dense<float>, float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<vector<float>, float> &x, vector<float> &y);
+             tensor::tensor_Dense<float> &y);
 void tensvec(const tensor::tensor_Dense<float> &A,
              const view1D<vector<float>, float> &x,
-             view1D<vector<float>, float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<vector<float>, float> &x,
-             view1D<tensor::tensor_Dense<float>, float> &y);
+             tensor::tensor_Dense<float> &y);
 void tensvec(const tensor::tensor_Dense<float> &A,
              const view1D<tensor::tensor_Dense<float>, float> &x,
-             vector<float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<tensor::tensor_Dense<float>, float> &x,
-             view1D<vector<float>, float> &y);
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<tensor::tensor_Dense<float>, float> &x,
-             view1D<tensor::tensor_Dense<float>, float> &y);
+             tensor::tensor_Dense<float> &y);
 /**@}*/
 
 /**
@@ -238,51 +208,21 @@ void tensvec(const tensor::tensor_Dense<float> &A,
  *    - # of data transfer: 0
  */
 void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               vector<double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x, vector<double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_N(const tensor::tensor_Dense<double> &A,
                const view1D<vector<double>, double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_N(const tensor::tensor_Dense<double> &A,
                const view1D<tensor::tensor_Dense<double>, double> &x,
-               vector<double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<tensor::tensor_Dense<double>, double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<tensor::tensor_Dense<double>, double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               vector<float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x, vector<float> &y);
+               tensor::tensor_Dense<float> &y);
 void tensvec_N(const tensor::tensor_Dense<float> &A,
                const view1D<vector<float>, float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
+               tensor::tensor_Dense<float> &y);
 void tensvec_N(const tensor::tensor_Dense<float> &A,
                const view1D<tensor::tensor_Dense<float>, float> &x,
-               vector<float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<tensor::tensor_Dense<float>, float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<tensor::tensor_Dense<float>, float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
+               tensor::tensor_Dense<float> &y);
 /**@}*/
 
 /**
@@ -301,52 +241,27 @@ void tensvec_N(const tensor::tensor_Dense<float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
+
+// TODO
+/*
 void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               vector<double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x, vector<double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_T(const tensor::tensor_Dense<double> &A,
                const view1D<vector<double>, double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_T(const tensor::tensor_Dense<double> &A,
                const view1D<tensor::tensor_Dense<double>, double> &x,
-               vector<double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<tensor::tensor_Dense<double>, double> &x,
-               view1D<vector<double>, double> &y);
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<tensor::tensor_Dense<double>, double> &x,
-               view1D<tensor::tensor_Dense<double>, double> &y);
+               tensor::tensor_Dense<double> &y);
 void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               vector<float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x, vector<float> &y);
+               tensor::tensor_Dense<float> &y);
 void tensvec_T(const tensor::tensor_Dense<float> &A,
                const view1D<vector<float>, float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
+               tensor::tensor_Dense<float> &y);
 void tensvec_T(const tensor::tensor_Dense<float> &A,
                const view1D<tensor::tensor_Dense<float>, float> &x,
-               vector<float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<tensor::tensor_Dense<float>, float> &x,
-               view1D<vector<float>, float> &y);
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<tensor::tensor_Dense<float>, float> &x,
-               view1D<tensor::tensor_Dense<float>, float> &y);
+               tensor::tensor_Dense<float> &y);
+*/
+
 /**@}*/
 /**@}*/
 /**@}*/

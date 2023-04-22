@@ -13,7 +13,7 @@ void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense) {
 
   if (tensor_dense.get_shape().size() != 1) {
     throw std::runtime_error(
-        "error cannot move tensor_Dense->vector when shape.size() != 2");
+        "error cannot move tensor_Dense->vector when shape.size() != 1");
   }
 
   this->val_create_flag = false;
@@ -37,7 +37,7 @@ void vector<T>::move(const tensor::tensor_Dense<T> &tensor_dense, int nnz) {
   logger.util_in(monolish_func);
 
   if (nnz < 0) {
-    nnz = get_nnz();
+    nnz = tensor_dense.get_nnz();
   }
   if (nnz != tensor_dense.get_nnz()) {
     throw std::runtime_error(

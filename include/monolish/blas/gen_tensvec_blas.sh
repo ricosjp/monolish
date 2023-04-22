@@ -143,9 +143,7 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-      echo "void tensvec(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
-    done
+    echo "void tensvec(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y);"
   done
 done
 echo "/**@}*/"
@@ -171,9 +169,7 @@ for trans in N T; do
     */ "
     for prec in double float; do
         for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-                echo "void tensvec_$trans(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
-            done
+            echo "void tensvec_$trans(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y);"
         done
     done
 echo "/**@}*/"

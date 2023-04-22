@@ -6,247 +6,88 @@
 namespace monolish::blas {
 
 void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             vector<double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-             view1D<matrix::Dense<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<vector<double>, double> &x, vector<double> &y) {
+             tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec(const tensor::tensor_Dense<double> &A,
              const view1D<vector<double>, double> &x,
-             view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<vector<double>, double> &x,
-             view1D<matrix::Dense<double>, double> &y) {
+             tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec(const tensor::tensor_Dense<double> &A,
              const view1D<matrix::Dense<double>, double> &x,
-             vector<double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<matrix::Dense<double>, double> &x,
-             view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<double> &A,
-             const view1D<matrix::Dense<double>, double> &x,
-             view1D<matrix::Dense<double>, double> &y) {
+             tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             vector<float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-             view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<vector<float>, float> &x, vector<float> &y) {
+             tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 void tensvec(const tensor::tensor_Dense<float> &A,
              const view1D<vector<float>, float> &x,
-             view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<vector<float>, float> &x,
-             view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
+             tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 void tensvec(const tensor::tensor_Dense<float> &A,
              const view1D<matrix::Dense<float>, float> &x,
-             view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec(const tensor::tensor_Dense<float> &A,
-             const view1D<matrix::Dense<float>, float> &x,
-             view1D<matrix::Dense<float>, float> &y) {
+             tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 
 void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               vector<double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x, vector<double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec_N(const tensor::tensor_Dense<double> &A,
                const view1D<vector<double>, double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec_N(const tensor::tensor_Dense<double> &A,
                const view1D<matrix::Dense<double>, double> &x,
-               vector<double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<matrix::Dense<double>, double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<double> &A,
-               const view1D<matrix::Dense<double>, double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
 void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               vector<float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x, vector<float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 void tensvec_N(const tensor::tensor_Dense<float> &A,
                const view1D<vector<float>, float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 void tensvec_N(const tensor::tensor_Dense<float> &A,
                const view1D<matrix::Dense<float>, float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, false);
-}
-void tensvec_N(const tensor::tensor_Dense<float> &A,
-               const view1D<matrix::Dense<float>, float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }
 void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               vector<double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x, vector<double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, true);
 }
 void tensvec_T(const tensor::tensor_Dense<double> &A,
                const view1D<vector<double>, double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<vector<double>, double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, true);
 }
 void tensvec_T(const tensor::tensor_Dense<double> &A,
                const view1D<matrix::Dense<double>, double> &x,
-               vector<double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<matrix::Dense<double>, double> &x,
-               view1D<vector<double>, double> &y) {
-  Dtensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<double> &A,
-               const view1D<matrix::Dense<double>, double> &x,
-               view1D<matrix::Dense<double>, double> &y) {
+               tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, true);
 }
 void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               vector<float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A, const vector<float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x, vector<float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, true);
 }
 void tensvec_T(const tensor::tensor_Dense<float> &A,
                const view1D<vector<float>, float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<vector<float>, float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, true);
 }
 void tensvec_T(const tensor::tensor_Dense<float> &A,
                const view1D<matrix::Dense<float>, float> &x,
-               view1D<vector<float>, float> &y) {
-  Stensvec_core(A, x, y, true);
-}
-void tensvec_T(const tensor::tensor_Dense<float> &A,
-               const view1D<matrix::Dense<float>, float> &x,
-               view1D<matrix::Dense<float>, float> &y) {
+               tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, true);
 }
 

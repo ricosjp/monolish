@@ -638,6 +638,24 @@ template <typename T>
 [[nodiscard]] matrix::COO<T> random_structure_matrix(const int M, const int N,
                                                      const int nnzrow,
                                                      const T val);
+
+/**
+ * @brief create random structure tensor (index is decided by random)
+ * @param M # of shape 1
+ * @param N # of shape 2
+ * @param nnzrow non-zero elements per row
+ * @param val value of elements
+ * @note
+ * - # of computation: M*N*nnzrow
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup gendata
+ **/
+template <typename T>
+[[nodiscard]] tensor::tensor_COO<T>
+random_structure_tensor(const size_t M, const size_t N, const size_t nnzrow,
+                        const T val);
+
 /**
  * @brief create random structure tensor (index is decided by random)
  * @param M # of shape 1
