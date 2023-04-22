@@ -1,4 +1,5 @@
 #include "blas/tensadd.hpp"
+#include "blas/tensmat.hpp"
 #include "blas/tensmul.hpp"
 #include "blas/tenssub.hpp"
 #include "blas/tensvec.hpp"
@@ -135,6 +136,57 @@ int main(int argc, char **argv) {
   == false) { return 1;
   }
   */
+
+  // tensmat tensor_Dense//
+  if (test_send_tensmat<monolish::tensor::tensor_Dense<double>,
+                        monolish::matrix::Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tensmat<monolish::tensor::tensor_Dense<float>,
+                        monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_Dense<double>,
+                   monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_Dense<float>,
+                   monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tensmat<monolish::tensor::tensor_Dense<double>,
+                        monolish::matrix::Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tensmat<monolish::tensor::tensor_Dense<float>,
+                        monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_Dense<double>,
+                   monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_Dense<float>,
+                   monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
 
   // tensmul tensor_Dense//
   if (test_send_tensmul<monolish::tensor::tensor_Dense<double>,

@@ -166,7 +166,7 @@ void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
  * @brief tensor_Dense tensor and vector multiplication: y = Ax
  * @param A tensor_Dense tensor (size M x N)
  * @param x monolish vector (size M)
- * @param y monolish vector (size M)
+ * @param y tensor_Dense tensor (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -200,7 +200,7 @@ void tensvec(const tensor::tensor_Dense<float> &A,
  * @brief tensor_Dense tensor and vector multiplication: y = A^N x
  * @param A tensor_Dense tensor (size M x N)
  * @param x monolish vector (size M)
- * @param y monolish vector (size M)
+ * @param y tensor_Dense tensor (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -234,16 +234,13 @@ void tensvec_N(const tensor::tensor_Dense<float> &A,
  * @brief tensor_Dense tensor and vector multiplication: y = A^T x
  * @param A tensor_Dense tensor (size M x N)
  * @param x monolish vector (size M)
- * @param y monolish vector (size M)
+ * @param y tensor_Dense tensor (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-
-// TODO
-/*
 void tensvec_T(const tensor::tensor_Dense<double> &A, const vector<double> &x,
                tensor::tensor_Dense<double> &y);
 void tensvec_T(const tensor::tensor_Dense<double> &A,
@@ -260,8 +257,6 @@ void tensvec_T(const tensor::tensor_Dense<float> &A,
 void tensvec_T(const tensor::tensor_Dense<float> &A,
                const view1D<tensor::tensor_Dense<float>, float> &x,
                tensor::tensor_Dense<float> &y);
-*/
-
 /**@}*/
 /**@}*/
 /**@}*/

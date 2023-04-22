@@ -32,7 +32,11 @@ void tensor_Dense_Dense_Dtensmat_core(const double &a,
   auto Ashape = A.get_shape();
   auto Cshape = C.get_shape();
   matrix::Dense<double> Amat, Cmat;
-  Amat.move(A, -1, Ashape[Ashape.size() - 1]);
+  if (transA) {
+    Amat.move(A, Ashape[0], -1);
+  } else {
+    Amat.move(A, -1, Ashape[Ashape.size() - 1]);
+  }
   Cmat.move(C, Amat.get_row(), B.get_col());
   Dense_Dense_Dmatmul_core(a, Amat, B, b, Cmat, transA, transB);
 
@@ -52,7 +56,11 @@ void tensor_Dense_Dense_Stensmat_core(const float &a,
   auto Ashape = A.get_shape();
   auto Cshape = C.get_shape();
   matrix::Dense<float> Amat, Cmat;
-  Amat.move(A, -1, Ashape[Ashape.size() - 1]);
+  if (transA) {
+    Amat.move(A, Ashape[0], -1);
+  } else {
+    Amat.move(A, -1, Ashape[Ashape.size() - 1]);
+  }
   Cmat.move(C, Amat.get_row(), B.get_col());
   Dense_Dense_Smatmul_core(a, Amat, B, b, Cmat, transA, transB);
 

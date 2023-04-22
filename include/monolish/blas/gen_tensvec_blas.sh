@@ -134,7 +134,7 @@ echo "
  * @brief tensor_Dense tensor and vector multiplication: y = Ax
  * @param A tensor_Dense tensor (size M x N)
  * @param x monolish vector (size M)
- * @param y monolish vector (size M)
+ * @param y tensor_Dense tensor (size M)
  * @note
  * - # of computation: MN
  * - Multi-threading: true
@@ -160,7 +160,7 @@ for trans in N T; do
     * @brief tensor_Dense tensor and vector multiplication: y = A^$trans x
     * @param A tensor_Dense tensor (size M x N)
     * @param x monolish vector (size M)
-    * @param y monolish vector (size M)
+    * @param y tensor_Dense tensor (size M)
     * @note
     * - # of computation: MN
     * - Multi-threading: true
