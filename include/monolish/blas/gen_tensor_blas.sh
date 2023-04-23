@@ -94,6 +94,32 @@ done
 echo "/**@}*/"
 
 ##############################################
+# adds scalar
+
+# adds scalar tensor_Dense
+echo "
+/**
+ * \defgroup adds monolish::blas::adds
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief tensor_Dense tensor adds: C = alpha + A
+ * @param alpha scalar value
+ * @param A tensor_Dense tensor
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void adds(const $prec alpha, const tensor::tensor_Dense<$prec> &A, tensor::tensor_Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+##############################################
 
 #tensadd tensor_Dense
 echo "

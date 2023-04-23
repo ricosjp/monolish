@@ -190,6 +190,32 @@ done
 echo "/**@}*/"
 
 ##############################################
+# adds scalar
+
+# adds scalar Dense
+echo "
+/**
+ * \defgroup adds monolish::blas::adds
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix adds: C = alpha + A
+ * @param alpha scalar value
+ * @param A Dense matrix (size M x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void adds(const $prec alpha, const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+##############################################
 
 #matadd Dense
 echo "

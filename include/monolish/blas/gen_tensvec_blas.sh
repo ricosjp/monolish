@@ -105,7 +105,7 @@ echo "
  */
  /**
  * @brief Specified col of tensor_Dense tensor and vector times: 
- * C[i][num] = A[i][num] * x[j]
+ * C[i][num] = A[i][num] * x[i]
  * @param A tensor_Dense tensor
  * @param num column number
  * @param x monolish vector (size M)
@@ -119,6 +119,111 @@ echo "
  for prec in double float; do
      for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_col(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+
+## tensor tensor_Dense adds_row
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Row-wise tensor_Dense tensor and vector adds: 
+ * ex. C[i][j] = A[i][j] + x[j]
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Specified row of tensor_Dense tensor and vector adds: 
+ * ex. C[num][j] = A[num][j] + x[j]
+ * @param A tensor_Dense tensor
+ * @param num row number (size N)
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+## tensor tensor_Dense adds_col
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Column-wise tensor_Dense tensor and vector adds: 
+ * ex. C[i][j] = A[i][j] + x[i]
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Specified col of tensor_Dense tensor and vector adds: 
+ * C[i][num] = A[i][num] + x[i]
+ * @param A tensor_Dense tensor
+ * @param num column number
+ * @param x monolish vector (size M)
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: M
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
  echo "/**@}*/"

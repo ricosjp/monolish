@@ -161,6 +161,28 @@ void times(const float alpha, const matrix::CRS<float> &A,
 /**@}*/
 
 /**
+ * \defgroup adds monolish::blas::adds
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix adds: C = alpha + A
+ * @param alpha scalar value
+ * @param A Dense matrix (size M x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds(const double alpha, const matrix::Dense<double> &A,
+          matrix::Dense<double> &C);
+void adds(const float alpha, const matrix::Dense<float> &A,
+          matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup madd_dense monolish::blas::matadd (Dense)
  * @brief Dense matrix addition: C = A + B
  * @{

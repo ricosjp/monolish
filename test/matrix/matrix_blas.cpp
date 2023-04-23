@@ -1,3 +1,7 @@
+#include "blas/adds_col.hpp"
+#include "blas/adds_col_line.hpp"
+#include "blas/adds_row.hpp"
+#include "blas/adds_row_line.hpp"
 #include "blas/matadd.hpp"
 #include "blas/matmul.hpp"
 #include "blas/matsub.hpp"
@@ -6,6 +10,7 @@
 #include "blas/matvec_T.hpp"
 #include "blas/mm_copy.hpp"
 #include "blas/mscal.hpp"
+#include "blas/scalar_adds.hpp"
 #include "blas/scalar_times.hpp"
 #include "blas/times_col.hpp"
 #include "blas/times_col_line.hpp"
@@ -739,6 +744,100 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_times_col_line<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // scalar_adds Dense//
+  if (test_send_scalar_adds<monolish::matrix::Dense<double>,
+                            monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_adds<monolish::matrix::Dense<float>,
+                            monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_adds<monolish::matrix::Dense<double>,
+                       monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_scalar_adds<monolish::matrix::Dense<float>,
+                       monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // vector_adds row Dense//
+  if (test_send_adds_row<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_row<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_row<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_row<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_adds col Dense//
+  if (test_send_adds_col<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_col<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_adds row_line Dense//
+  if (test_send_adds_row_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_row_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_row_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_line<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // vector_adds col_line Dense//
+  if (test_send_adds_col_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_col_line<monolish::matrix::Dense<float>, float>(
+          M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_adds_col_line<monolish::matrix::Dense<double>, double>(
+          M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_line<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
       false) {
     return 1;
   }

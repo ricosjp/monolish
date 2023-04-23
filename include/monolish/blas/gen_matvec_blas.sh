@@ -161,7 +161,7 @@ echo "
  */
  /**
  * @brief Specified col of dense matrix and vector times: 
- * C[i][num] = A[i][num] * x[j]
+ * C[i][num] = A[i][num] * x[i]
  * @param A Dense matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
@@ -188,7 +188,7 @@ echo "
  */
  /**
  * @brief Column-wise CRS matrix and vector times: 
- * C[i][j] = A[i][j] * x[j]
+ * C[i][j] = A[i][j] * x[i]
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C CRS matrix (size M x N)
@@ -214,8 +214,8 @@ echo "
  * @{
  */
  /**
- * @brief Specified row of CRS matrix and vector times: 
- * C[i][num] = A[i][num] * x[j]
+ * @brief Specified col of CRS matrix and vector times: 
+ * C[i][num] = A[i][num] * x[i]
  * @param A CRS matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
@@ -231,6 +231,110 @@ echo "
  for prec in double float; do
      for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::CRS\<$prec\>,$prec\>; do
          echo "void times_col(const matrix::CRS<$prec> &A, const size_t num, const $arg1 &x, matrix::CRS<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+## matrix Dense adds_row
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Row-wise Dense matrix and vector adds: 
+ * C[i][j] = A[i][j] + x[j]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Specified row of dense matrix and vector adds: 
+ * C[num][j] = A[num][j] + x[j]
+ * @param A Dense matrix (size M x N)
+ * @param num row number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+## matrix Dense adds_col
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Row-wise Dense matrix and vector adds: 
+ * C[i][j] = A[i][j] + x[i]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+     done
+ done
+ echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+ /**
+ * @brief Specified col of dense matrix and vector adds: 
+ * C[i][num] = A[i][num] + x[i]
+ * @param A Dense matrix (size M x N)
+ * @param num col number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+ for prec in double float; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
  echo "/**@}*/"
