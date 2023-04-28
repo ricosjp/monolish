@@ -70,7 +70,7 @@ void tensor_Dense<T>::convert(const matrix::Dense<T> &mat) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     throw std::runtime_error(
-        "error can not convert CRS->CRS when gpu_status == true");
+        "error can not convert tensor_Dense->tensor_Dense when gpu_status == true");
   }
 #endif
   internal::vcopy(get_nnz(), mat.data(), data(), false);
@@ -92,7 +92,7 @@ template <typename T> void tensor_Dense<T>::convert(const vector<T> &vec) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     throw std::runtime_error(
-        "error can not convert CRS->CRS when gpu_status == true");
+        "error can not convert tensor_Dense->tensor_Dense when gpu_status == true");
   }
 #endif
   internal::vcopy(get_nnz(), vec.data(), data(), false);
