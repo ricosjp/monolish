@@ -6,10 +6,10 @@
     - 001999fb0c6f
 .amd_runner:
   tags:
-    - b42e99ecbde2
+    - 04421a0d68d7
 .gpu_runner:
   tags:
-    - c8cbb8c655d4
+    - 001999ef1c91
 
 .benchmark:
   stage: benchmark
