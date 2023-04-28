@@ -351,7 +351,7 @@ private:
   int cusparse_IC(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void *matM = 0, *matL = 0;
   void *infoM = 0, *infoL = 0, *infoLt = 0;
-  void *cusparse_handle;
+  void *cusparse_handle = nullptr;
   int bufsize;
   monolish::vector<double> buf;
   monolish::vector<Float> zbuf;
@@ -413,7 +413,7 @@ private:
   int cusparse_ILU(MATRIX &A, vector<Float> &x, vector<Float> &b);
   void *matM = 0, *matL = 0, *matU = 0;
   void *infoM = 0, *infoL = 0, *infoU = 0;
-  void *cusparse_handle;
+  void *cusparse_handle = nullptr;
   int bufsize;
   monolish::vector<double> buf;
   monolish::vector<Float> zbuf;

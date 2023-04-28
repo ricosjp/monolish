@@ -22,12 +22,12 @@ bool Dense<T>::equal(const Dense<T> &mat, bool compare_cpu_and_device) const {
   }
 
   if (get_device_mem_stat() == true) {
-    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), true))) {
+    if (!(internal::vequal(get_nnz(), data(), mat.data(), true))) {
       return false;
     }
   } else if (get_device_mem_stat() == false ||
              compare_cpu_and_device == false) {
-    if (!(internal::vequal(get_nnz(), val.data(), mat.val.data(), false))) {
+    if (!(internal::vequal(get_nnz(), data(), mat.data(), false))) {
       return false;
     }
   }
@@ -75,11 +75,11 @@ bool is_same_structure(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  bool ans = false;
+  bool ans = true;
 
-  if (A.get_row() == B.get_row() || A.get_col() == B.get_col()) {
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
     logger.util_out();
-    ans = true;
+    ans = false;
   }
 
   logger.util_out();

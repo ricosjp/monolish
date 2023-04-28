@@ -1,5 +1,6 @@
 #pragma once
 #include <exception>
+#include <memory>
 #include <omp.h>
 #include <stdexcept>
 #include <string>
@@ -46,7 +47,7 @@ private:
   /**
    * @brief # of non-zero element
    */
-  size_t nnz;
+  // size_t nnz;
 
   /**
    * @brief true: sended, false: not send
@@ -60,10 +61,25 @@ private:
 
 public:
   /**
-   * @brief CRS format value, which stores values of the non-zero elements (size
-   * nnz)
+   * @brief CRS format value (pointer), which stores values of the non-zero
+   * elements
    */
-  std::vector<Float> val;
+  std::shared_ptr<Float> val;
+
+  /**
+   * @brief # of non-zero element (M * N)
+   */
+  size_t val_nnz = 0;
+
+  /**
+   * @brief alloced matrix size
+   */
+  std::size_t alloc_nnz = 0;
+
+  /**
+   * @brief matrix create flag;
+   */
+  bool val_create_flag = false;
 
   /**
    * @brief CRS format column index, which stores column numbers of the non-zero
@@ -77,7 +93,7 @@ public:
    */
   std::vector<int> row_ptr;
 
-  CRS() {}
+  CRS() { val_create_flag = true; }
 
   /**
    * @brief declare CRS matrix
@@ -189,7 +205,10 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  CRS(COO<Float> &coo) { convert(coo); }
+  CRS(COO<Float> &coo) {
+    val_create_flag = true;
+    convert(coo);
+  }
 
   /**
    * @brief Create CRS matrix from CRS matrix
@@ -272,7 +291,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] size_t get_nnz() const { return nnz; }
+  [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
    * @brief get format name "CRS"
@@ -351,8 +370,55 @@ public:
    *    - # of data transfer: 0
    * **/
   ~CRS() {
+    if (val_create_flag) {
+      if (get_device_mem_stat()) {
+        device_free();
+      }
+    }
+  }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A const pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *data() const { return val.get(); }
+
+  /**
+   * @brief returns a direct pointer to the matrix
+   * @return A pointer to the first element
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *data() { return val.get(); }
+
+  /**
+   * @brief resize matrix value
+   * @param N matrix size
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  void resize(size_t N, Float Val = 0) {
     if (get_device_mem_stat()) {
-      device_free();
+      throw std::runtime_error("Error, GPU matrix cant use resize");
+    }
+    if (val_create_flag) {
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
+      size_t copy_size = std::min(val_nnz, N);
+      for (size_t i = 0; i < copy_size; ++i) {
+        tmp.get()[i] = data()[i];
+      }
+      for (size_t i = copy_size; i < N; ++i) {
+        tmp.get()[i] = Val;
+      }
+      val = tmp;
+      alloc_nnz = N;
+      val_nnz = N;
+    } else {
+      throw std::runtime_error("Error, not create vector cant use resize");
     }
   }
 

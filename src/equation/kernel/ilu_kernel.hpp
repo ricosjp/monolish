@@ -17,7 +17,7 @@ void cusolver_ilu_create_descr(
 
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  auto *d_csrVal = A.val.data();
+  auto *d_csrVal = A.data();
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
@@ -58,7 +58,7 @@ void cusolver_ilu_create_descr(
 
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  auto *d_csrVal = A.val.data();
+  auto *d_csrVal = A.data();
 
 #pragma omp target data use_device_ptr(d_csrVal, d_csrRowPtr, d_csrColInd)
   {
@@ -105,7 +105,7 @@ int cusolver_ilu_get_buffersize(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  auto *d_csrVal = A.val.data();
+  auto *d_csrVal = A.data();
 
   int bufsize;
   int bufsize_M;
@@ -142,7 +142,7 @@ int cusolver_ilu_get_buffersize(
   auto nnz = A.get_nnz();
   int *d_csrRowPtr = A.row_ptr.data();
   int *d_csrColInd = A.col_ind.data();
-  auto *d_csrVal = A.val.data();
+  auto *d_csrVal = A.data();
 
   int bufsize;
   int bufsize_M;

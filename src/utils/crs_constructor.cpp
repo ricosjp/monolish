@@ -13,11 +13,11 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ) {
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = NNZ;
   gpu_status = false;
   row_ptr.resize(M + 1);
-  col_ind.resize(nnz);
-  val.resize(nnz);
+  col_ind.resize(NNZ);
+  val_create_flag = true;
+  resize(NNZ);
   logger.util_out();
 }
 template CRS<double>::CRS(const size_t M, const size_t N, const size_t NNZ);
@@ -30,14 +30,14 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = NNZ;
   gpu_status = false;
   row_ptr.resize(M + 1);
-  col_ind.resize(nnz);
-  val.resize(nnz);
+  col_ind.resize(NNZ);
+  val_create_flag = true;
+  resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
-  std::copy(colind, colind + nnz, col_ind.begin());
-  std::copy(value, value + nnz, val.begin());
+  std::copy(colind, colind + NNZ, col_ind.begin());
+  std::copy(value, value + NNZ, data());
   compute_hash();
   logger.util_out();
 }
@@ -55,17 +55,17 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = NNZ;
   gpu_status = false;
   row_ptr.resize(M + 1);
-  col_ind.resize(nnz);
-  val.resize(nnz);
+  col_ind.resize(NNZ);
+  val_create_flag = true;
+  resize(NNZ);
   std::copy(rowptr, rowptr + (M + 1), row_ptr.begin());
-  std::copy(colind, colind + nnz, col_ind.begin());
-  std::copy(value, value + nnz, val.begin());
+  std::copy(colind, colind + NNZ, col_ind.begin());
+  std::copy(value, value + NNZ, data());
 
 #pragma omp parallel for
-  for (size_t i = 0; i < nnz; i++) {
+  for (size_t i = 0; i < NNZ; i++) {
     col_ind[i] -= origin;
   }
 
@@ -86,14 +86,14 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = value.size();
   gpu_status = false;
   row_ptr.resize(M + 1);
-  col_ind.resize(nnz);
-  val.resize(nnz);
+  col_ind.resize(value.size());
+  val_create_flag = true;
+  resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
-  std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
-  std::copy(value.data(), value.data() + nnz, val.begin());
+  std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
+  std::copy(value.data(), value.data() + value.size(), data());
   compute_hash();
   logger.util_out();
 }
@@ -113,20 +113,20 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   logger.util_in(monolish_func);
   rowN = M;
   colN = N;
-  nnz = value.size();
   gpu_status = false;
   row_ptr.resize(M + 1);
-  col_ind.resize(nnz);
-  val.resize(nnz);
+  col_ind.resize(value.size());
+  val_create_flag = true;
+  resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
-  std::copy(colind.data(), colind.data() + nnz, col_ind.begin());
-  std::copy(value.data(), value.data() + nnz, val.begin());
+  std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
+  std::copy(value.data(), value.data() + value.size(), data());
 
   if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
     send();
+    T *vald = data();
     const T *data = value.data();
-    T *vald = val.data();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = data[i];
@@ -155,13 +155,13 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
+  val_create_flag = true;
+  resize(mat.get_nnz());
   col_ind.resize(mat.get_nnz());
   row_ptr.resize(mat.get_row() + 1);
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  nnz = mat.get_nnz();
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -170,7 +170,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.val.size(), mat.val.data(), val.data(), true);
+    internal::vcopy(mat.get_nnz(), mat.data(), data(), true);
   }
 #endif
 
@@ -178,7 +178,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                   false);
   internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                   false);
-  internal::vcopy(mat.val.size(), mat.val.data(), val.data(), false);
+  internal::vcopy(mat.get_nnz(), mat.data(), data(), false);
 
   compute_hash();
   logger.util_out();
@@ -191,13 +191,13 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(mat.get_nnz());
+  val_create_flag = true;
+  resize(mat.get_nnz());
   col_ind.resize(mat.get_nnz());
   row_ptr.resize(mat.get_row() + 1);
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  nnz = mat.get_nnz();
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -206,7 +206,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vbroadcast(val.size(), value, val.data(), true);
+    internal::vbroadcast(mat.get_nnz(), value, data(), true);
   }
 #endif
 
@@ -214,7 +214,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat, T value) {
                   false);
   internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                   false);
-  internal::vbroadcast(val.size(), value, val.data(), false);
+  internal::vbroadcast(mat.get_nnz(), value, data(), false);
 
   compute_hash();
   logger.util_out();

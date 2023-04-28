@@ -20,11 +20,18 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+0.17.1 - 2023/04/23
+-----------
+
 ### Added
+- Add matmul for C=aAB+bC <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/490> <https://github.com/ricosjp/monolish/issues/723>
 - Add reshape for dense matrix  <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/488> <https://github.com/ricosjp/monolish/issues/720>
+- Add tensor (tensor_Dense & tensor_COO) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/492> <https://github.com/ricosjp/monolish/issues/724>
+- Add adds_row, adds_col for dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/493> <https://github.com/ricosjp/monolish/issues/725>
 
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>
+- std::vector -> std::shared_ptr for data array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/491>
 
 0.17.0 - 2022/11/15
 -----------

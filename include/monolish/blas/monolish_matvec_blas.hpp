@@ -196,7 +196,7 @@ void times_col(const matrix::Dense<float> &A,
  */
 /**
  * @brief Specified col of dense matrix and vector times:
- * C[i][num] = A[i][num] * x[j]
+ * C[i][num] = A[i][num] * x[i]
  * @param A Dense matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
@@ -231,7 +231,7 @@ void times_col(const matrix::Dense<float> &A, const size_t num,
  */
 /**
  * @brief Column-wise CRS matrix and vector times:
- * C[i][j] = A[i][j] * x[j]
+ * C[i][j] = A[i][j] * x[i]
  * @param A CRS matrix (size M x N)
  * @param x monolish vector (size M)
  * @param C CRS matrix (size M x N)
@@ -265,8 +265,8 @@ void times_col(const matrix::CRS<float> &A,
  * @{
  */
 /**
- * @brief Specified row of CRS matrix and vector times:
- * C[i][num] = A[i][num] * x[j]
+ * @brief Specified col of CRS matrix and vector times:
+ * C[i][num] = A[i][num] * x[i]
  * @param A CRS matrix (size M x N)
  * @param num column number
  * @param x monolish vector (size M)
@@ -293,6 +293,144 @@ void times_col(const matrix::CRS<float> &A, const size_t num,
 void times_col(const matrix::CRS<float> &A, const size_t num,
                const view1D<matrix::CRS<float>, float> &x,
                matrix::CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Row-wise Dense matrix and vector adds:
+ * C[i][j] = A[i][j] + x[j]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_row(const matrix::Dense<double> &A, const vector<double> &x,
+              matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<float> &A, const vector<float> &x,
+              matrix::Dense<float> &C);
+void adds_row(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void adds_row(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Specified row of dense matrix and vector adds:
+ * C[num][j] = A[num][j] + x[j]
+ * @param A Dense matrix (size M x N)
+ * @param num row number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_row(const matrix::Dense<double> &A, const size_t num,
+              const vector<double> &x, matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<double> &A, const size_t num,
+              const view1D<vector<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<double> &A, const size_t num,
+              const view1D<matrix::Dense<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_row(const matrix::Dense<float> &A, const size_t num,
+              const vector<float> &x, matrix::Dense<float> &C);
+void adds_row(const matrix::Dense<float> &A, const size_t num,
+              const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void adds_row(const matrix::Dense<float> &A, const size_t num,
+              const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Row-wise Dense matrix and vector adds:
+ * C[i][j] = A[i][j] + x[i]
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_col(const matrix::Dense<double> &A, const vector<double> &x,
+              matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<float> &A, const vector<float> &x,
+              matrix::Dense<float> &C);
+void adds_col(const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void adds_col(const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::adds
+ * @brief element by element addition
+ * @{
+ */
+/**
+ * @brief Specified col of dense matrix and vector adds:
+ * C[i][num] = A[i][num] + x[i]
+ * @param A Dense matrix (size M x N)
+ * @param num col number
+ * @param x monolish vector (size M)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: N
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds_col(const matrix::Dense<double> &A, const size_t num,
+              const vector<double> &x, matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<double> &A, const size_t num,
+              const view1D<vector<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<double> &A, const size_t num,
+              const view1D<matrix::Dense<double>, double> &x,
+              matrix::Dense<double> &C);
+void adds_col(const matrix::Dense<float> &A, const size_t num,
+              const vector<float> &x, matrix::Dense<float> &C);
+void adds_col(const matrix::Dense<float> &A, const size_t num,
+              const view1D<vector<float>, float> &x, matrix::Dense<float> &C);
+void adds_col(const matrix::Dense<float> &A, const size_t num,
+              const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C);
 /**@}*/
 
 /**

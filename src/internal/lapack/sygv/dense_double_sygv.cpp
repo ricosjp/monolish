@@ -52,8 +52,8 @@ int internal::lapack::sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B,
     throw std::runtime_error("uplo should be U or L");
   }
   monolish::util::send(A, B, W);
-  double *Avald = A.val.data();
-  double *Bvald = B.val.data();
+  double *Avald = A.data();
+  double *Bvald = B.data();
   double *Wd = W.data();
 #pragma omp target data use_device_ptr(Avald, Bvald, Wd)
   {
@@ -84,8 +84,8 @@ int internal::lapack::sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B,
   int liwork = -1;
   std::vector<int> iwork(1);
   // workspace query; no error returned
-  dsygvd_(&itype, jobz, uplo, &size, A.val.data(), &size, B.val.data(), &size,
-          W.data(), work.data(), &lwork, iwork.data(), &liwork, &info);
+  dsygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size, W.data(),
+          work.data(), &lwork, iwork.data(), &liwork, &info);
 
   // workspace preparation
   lwork = work[0];
@@ -93,8 +93,8 @@ int internal::lapack::sygvd(matrix::Dense<double> &A, matrix::Dense<double> &B,
   liwork = iwork[0];
   iwork.resize(liwork);
   // actual calculation
-  dsygvd_(&itype, jobz, uplo, &size, A.val.data(), &size, B.val.data(), &size,
-          W.data(), work.data(), &lwork, iwork.data(), &liwork, &info);
+  dsygvd_(&itype, jobz, uplo, &size, A.data(), &size, B.data(), &size, W.data(),
+          work.data(), &lwork, iwork.data(), &liwork, &info);
 #endif
   logger.func_out();
   return info;

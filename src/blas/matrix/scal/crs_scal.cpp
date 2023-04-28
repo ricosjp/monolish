@@ -8,7 +8,7 @@ template <typename T> void mscal_core(const T alpha, matrix::CRS<T> &A) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  internal::vmul(A.get_nnz(), A.val.data(), alpha, A.val.data(),
+  internal::vmul(A.get_nnz(), A.data(), alpha, A.data(),
                  A.get_device_mem_stat());
 
   logger.func_out();

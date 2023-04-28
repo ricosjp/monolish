@@ -122,5 +122,5 @@ echo ""
 done # $MAT, CRS
 
 echo "
-} // namespace blas
+} // namespace vml
 } // namespace monolish "

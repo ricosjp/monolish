@@ -161,6 +161,28 @@ void times(const float alpha, const matrix::CRS<float> &A,
 /**@}*/
 
 /**
+ * \defgroup adds monolish::blas::adds
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief Dense matrix adds: C = alpha + A
+ * @param alpha scalar value
+ * @param A Dense matrix (size M x N)
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void adds(const double alpha, const matrix::Dense<double> &A,
+          matrix::Dense<double> &C);
+void adds(const float alpha, const matrix::Dense<float> &A,
+          matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup madd_dense monolish::blas::matadd (Dense)
  * @brief Dense matrix addition: C = A + B
  * @{
@@ -322,6 +344,32 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 /**@}*/
 
 /**
+ * \defgroup mm_dense monolish::blas::matmul (Float, Dense, Dense, Float, Dense)
+ * @brief Dense matrix multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief Dense matrix multiplication: C = aAB+bC
+ * @param a Float
+ * @param A Dense matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param b Float
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2MNK
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C);
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            matrix::Dense<float> &C);
+/**@}*/
+
+/**
  * \defgroup mm_crs_dense monolish::blas::matmul (CRS, Dense, Dense)
  * @brief CRS and Dense matrix multiplication: C = AB
  * @{
@@ -340,6 +388,33 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
             matrix::Dense<double> &C);
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+            matrix::Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_crs_dense monolish::blas::matmul (Float, CRS, Dense, Float,
+ * Dense)
+ * @brief CRS and Dense matrix multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief CRS and Dense matrix multiplication: C = aAB+bC
+ * @param a Float
+ * @param A CRS matrix (size M x K)
+ * @param B Dense matrix (size K x N)
+ * @param b Float
+ * @param C Dense matrix (size M x N)
+ * @note
+ * - # of computation: 2*N*nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C);
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const matrix::Dense<float> &B, const float &b,
             matrix::Dense<float> &C);
 /**@}*/
 

@@ -14,6 +14,7 @@ template <typename T> bool test(const size_t size) {
     dp[i] = i;
   }
   monolish::vector<T> y(dp, dp + size);
+  free(dp);
 
   //(z) monolish::vector.operator[] = 0,1,2, ..., N-1
   monolish::vector<T> z(size);

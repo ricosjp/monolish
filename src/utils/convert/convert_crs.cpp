@@ -12,9 +12,12 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
 
   rowN = coo.get_row();
   colN = coo.get_col();
-  nnz = coo.get_nnz();
+  val_create_flag = true;
 
-  val = coo.val;
+  resize(coo.get_nnz());
+  for (size_t i = 0; i < coo.get_nnz(); ++i) {
+    data()[i] = coo.data()[i];
+  }
   col_ind = coo.col_index;
 
   // todo not inplace now
@@ -41,13 +44,13 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  val.resize(crs.get_nnz());
+  resize(crs.get_nnz());
   col_ind.resize(crs.get_nnz());
   row_ptr.resize(crs.get_row() + 1);
+  val_create_flag = true;
 
   rowN = crs.get_row();
   colN = crs.get_col();
-  nnz = crs.get_nnz();
   structure_hash = crs.get_hash();
 
   if (crs.get_device_mem_stat() == true) {
@@ -58,7 +61,7 @@ template <typename T> void CRS<T>::convert(CRS<T> &crs) {
                     false);
     internal::vcopy(crs.col_ind.size(), crs.col_ind.data(), col_ind.data(),
                     false);
-    internal::vcopy(crs.val.size(), crs.val.data(), val.data(), false);
+    internal::vcopy(crs.get_nnz(), crs.data(), data(), false);
   }
 
   logger.util_out();

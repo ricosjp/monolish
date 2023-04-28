@@ -8,6 +8,7 @@ namespace monolish {
 template <typename T> vector<T>::vector(const size_t N) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(N);
   logger.util_out();
 }
@@ -17,11 +18,12 @@ template vector<float>::vector(const size_t N);
 template <typename T> vector<T>::vector(const size_t N, const T value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(N);
 
 #pragma omp parallel for
-  for (size_t i = 0; i < val.size(); i++) {
-    val[i] = value;
+  for (size_t i = 0; i < N; i++) {
+    data()[i] = value;
   }
 
   logger.util_out();
@@ -54,14 +56,15 @@ template <typename T>
 vector<T>::vector(const size_t N, const T min, const T max) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(N);
 
   std::random_device random;
   std::mt19937 mt(random());
   std::uniform_real_distribution<> rand(min, max);
 
-  for (size_t i = 0; i < val.size(); i++) {
-    val[i] = rand(mt);
+  for (size_t i = 0; i < N; i++) {
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -97,13 +100,14 @@ vector<T>::vector(const size_t N, const T min, const T max,
                   const std::uint32_t seed) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(N);
 
   std::mt19937 mt(seed);
   std::uniform_real_distribution<> rand(min, max);
 
-  for (size_t i = 0; i < val.size(); i++) {
-    val[i] = rand(mt);
+  for (size_t i = 0; i < N; i++) {
+    data()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -118,8 +122,9 @@ template <typename T> vector<T>::vector(const T *start, const T *end) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   size_t size = (end - start);
+  val_create_flag = true;
   resize(size);
-  std::copy(start, end, val.begin());
+  std::copy(start, end, data());
   logger.util_out();
 }
 template vector<double>::vector(const double *start, const double *end);
@@ -129,8 +134,9 @@ template vector<float>::vector(const float *start, const float *end);
 template <typename T> vector<T>::vector(const std::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(vec.size());
-  std::copy(vec.begin(), vec.end(), val.begin());
+  std::copy(vec.begin(), vec.end(), data());
   logger.util_out();
 }
 
@@ -141,8 +147,9 @@ template vector<float>::vector(const std::vector<float> &vec);
 template <typename T> vector<T>::vector(const std::initializer_list<T> &list) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
+  val_create_flag = true;
   resize(list.size());
-  std::copy(list.begin(), list.end(), val.begin());
+  std::copy(list.begin(), list.end(), data());
   logger.util_out();
 }
 
@@ -153,16 +160,17 @@ template <typename T> vector<T>::vector(const monolish::vector<T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.val.size(), vec.val.data(), val.data(), true);
+    internal::vcopy(vec.size(), vec.data(), data(), true);
   }
 #endif
-  internal::vcopy(vec.val.size(), vec.val.data(), val.data(), false);
+  internal::vcopy(vec.size(), vec.data(), data(), false);
 
   logger.util_out();
 }
@@ -175,17 +183,17 @@ vector<T>::vector(const monolish::view1D<monolish::vector<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
   }
 #endif
-  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), false);
+  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
 
   logger.util_out();
 }
@@ -198,17 +206,17 @@ vector<T>::vector(const monolish::view1D<monolish::matrix::Dense<T>, T> &vec) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
+  val_create_flag = true;
   resize(vec.size());
 
   // gpu copy and recv
 #if MONOLISH_USE_NVIDIA_GPU
   if (vec.get_device_mem_stat()) {
     send();
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(),
-                    true);
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
   }
 #endif
-  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), val.data(), false);
+  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
 
   logger.util_out();
 }

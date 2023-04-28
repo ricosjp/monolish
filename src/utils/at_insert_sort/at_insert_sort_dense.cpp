@@ -14,7 +14,7 @@ template <typename T> T Dense<T>::at(const size_t i, const size_t j) const {
   assert(i <= get_row());
   assert(j <= get_col());
 
-  return val[get_col() * i + j];
+  return data()[get_col() * i + j];
 }
 template double Dense<double>::at(const size_t i, const size_t j) const;
 template float Dense<float>::at(const size_t i, const size_t j) const;
@@ -30,7 +30,7 @@ void Dense<T>::insert(const size_t i, const size_t j, const T Val) {
   assert(i <= get_row());
   assert(j <= get_col());
 
-  val[get_col() * i + j] = Val;
+  data()[get_col() * i + j] = Val;
 }
 template void Dense<double>::insert(const size_t i, const size_t j,
                                     const double Val);
