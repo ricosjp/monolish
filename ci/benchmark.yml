@@ -3,7 +3,7 @@
 #
 .intel_runner:
   tags:
-    - 001999fb0c6f
+    - 001999ef1c91
 .amd_runner:
   tags:
     - 04421a0d68d7
