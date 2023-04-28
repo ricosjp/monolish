@@ -9,7 +9,7 @@
     - 04421a0d68d7
 .gpu_runner:
   tags:
-    - 001999ef1c91
+    - 04421a0d68d7
 
 .benchmark:
   stage: benchmark
