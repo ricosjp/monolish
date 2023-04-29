@@ -25,19 +25,34 @@ template <typename T> void COO<T>::operator=(const matrix::COO<T> &mat) {
 template <typename T>
 void COO<T>::set_ptr(const size_t rN, const size_t cN,
                      const std::vector<int> &r, const std::vector<int> &c,
-                     const std::vector<T> &v) {
+                     const size_t vsize, const T *v) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   col_index = c;
   row_index = r;
-  resize(v.size());
-  for (size_t i = 0; i < v.size(); ++i) {
+  resize(vsize);
+  for (size_t i = 0; i < vsize; ++i) {
     data()[i] = v[i];
   }
 
   rowN = rN;
   colN = cN;
   logger.util_out();
+}
+template void COO<double>::set_ptr(const size_t rN, const size_t cN,
+                                   const std::vector<int> &r,
+                                   const std::vector<int> &c,
+                                   const size_t vsize, const double *v);
+template void COO<float>::set_ptr(const size_t rN, const size_t cN,
+                                  const std::vector<int> &r,
+                                  const std::vector<int> &c, const size_t vsize,
+                                  const float *v);
+
+template <typename T>
+void COO<T>::set_ptr(const size_t rN, const size_t cN,
+                     const std::vector<int> &r, const std::vector<int> &c,
+                     const std::vector<T> &v) {
+  set_ptr(rN, cN, r, c, v.size(), v.data());
 }
 template void COO<double>::set_ptr(const size_t rN, const size_t cN,
                                    const std::vector<int> &r,

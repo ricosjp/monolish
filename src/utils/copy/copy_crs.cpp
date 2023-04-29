@@ -40,21 +40,37 @@ template void CRS<float>::operator=(const CRS<float> &mat);
 template <typename T>
 void CRS<T>::set_ptr(const size_t M, const size_t N,
                      const std::vector<int> &rowptr,
-                     const std::vector<int> &colind,
-                     const std::vector<T> &value) {
+                     const std::vector<int> &colind, const size_t vsize,
+                     const T *value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   col_ind = colind;
   row_ptr = rowptr;
   val_create_flag = true;
-  resize(value.size());
-  for (size_t i = 0; i < value.size(); ++i) {
+  resize(vsize);
+  for (size_t i = 0; i < vsize; ++i) {
     data()[i] = value[i];
   }
 
   rowN = M;
   colN = N;
   logger.util_out();
+}
+template void CRS<double>::set_ptr(const size_t M, const size_t N,
+                                   const std::vector<int> &rowptr,
+                                   const std::vector<int> &colind,
+                                   const size_t vsize, const double *value);
+template void CRS<float>::set_ptr(const size_t M, const size_t N,
+                                  const std::vector<int> &rowptr,
+                                  const std::vector<int> &colind,
+                                  const size_t vsize, const float *value);
+
+template <typename T>
+void CRS<T>::set_ptr(const size_t M, const size_t N,
+                     const std::vector<int> &rowptr,
+                     const std::vector<int> &colind,
+                     const std::vector<T> &value) {
+  set_ptr(M, N, rowptr, colind, value.size(), value.data());
 }
 template void CRS<double>::set_ptr(const size_t M, const size_t N,
                                    const std::vector<int> &rowptr,
