@@ -181,6 +181,35 @@ public:
   };
 
   /**
+   * @brief Set tensor_COO array from std::vector
+   * @param shape shape of tensor
+   * @param indix index fo tensor
+   * @param v value
+   * @note
+   * - # of computation: 3
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape,
+               const std::vector<std::vector<size_t>> &index,
+               const std::vector<Float> &v);
+
+  /**
+   * @brief Set tensor_COO array from array
+   * @param shape shape of tensor
+   * @param indix index fo tensor
+   * @param vsize size of value
+   * @param v value
+   * @note
+   * - # of computation: 3
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape,
+               const std::vector<std::vector<size_t>> &index,
+               const size_t vsize, const Float *v);
+
+  /**
    * @brief get shape
    * @note
    * - # of computation: 1
@@ -197,6 +226,16 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
+
+  /**
+   * @brief fill tensor elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
 
   /**
    * @brief Set shape
@@ -280,6 +319,34 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+
+  /**
+   * @brief tensor copy
+   * @param tens COO tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   * @warning
+   * src. and dst. must be same non-zero structure (dont check in this function)
+   **/
+  void operator=(const tensor_COO<Float> &tens);
+
+  /**
+   * @brief reference to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float &operator[](size_t i) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
+    }
+    return data()[i];
+  }
 
   /**
    * @brief Comparing tensors (A == tens)

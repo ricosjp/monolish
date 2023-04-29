@@ -207,6 +207,29 @@ public:
   tensor_Dense(const tensor_Dense<Float> &tens, Float value);
 
   /**
+   * @brief Set tensor_Dense array from std::vector
+   * @param shape shape of tensor
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape,
+               const std::vector<Float> &value);
+
+  /**
+   * @brief Set tensor_Dense array from array
+   * @param shape shape of tensor
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape, const Float *value);
+
+  /**
    * @brief get shape
    * @note
    * - # of computation: 1
@@ -433,6 +456,46 @@ public:
    * - # of computation: 1
    */
   void move(const vector<Float> &vec);
+
+  /**
+   * @brief fill tensor elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const tensor_Dense<Float> &tens);
+
+  /**
+   * @brief reference to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float &operator[](size_t i) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
+    }
+    return data()[i];
+  }
 
   /**
    * @brief Comparing tensors (A == tens)

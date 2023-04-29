@@ -29,8 +29,7 @@ template void Dense<double>::operator=(const Dense<double> &mat);
 template void Dense<float>::operator=(const Dense<float> &mat);
 
 template <typename T>
-void Dense<T>::set_ptr(const size_t M, const size_t N,
-                       const std::vector<T> &value) {
+void Dense<T>::set_ptr(const size_t M, const size_t N, const T *value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   val_create_flag = true;
@@ -42,6 +41,16 @@ void Dense<T>::set_ptr(const size_t M, const size_t N,
   rowN = M;
   colN = N;
   logger.util_out();
+}
+template void Dense<double>::set_ptr(const size_t M, const size_t N,
+                                     const double *value);
+template void Dense<float>::set_ptr(const size_t M, const size_t N,
+                                    const float *value);
+
+template <typename T>
+void Dense<T>::set_ptr(const size_t M, const size_t N,
+                       const std::vector<T> &value) {
+  set_ptr(M, N, value.data());
 }
 template void Dense<double>::set_ptr(const size_t M, const size_t N,
                                      const std::vector<double> &value);
