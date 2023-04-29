@@ -2,6 +2,7 @@
 #include "blas/adds_col_line.hpp"
 #include "blas/adds_row.hpp"
 #include "blas/adds_row_line.hpp"
+#include "blas/mattens.hpp"
 #include "blas/scalar_adds.hpp"
 #include "blas/scalar_times.hpp"
 #include "blas/tensadd.hpp"
@@ -149,6 +150,111 @@ int main(int argc, char **argv) {
   }
   if (test_tensmat<monolish::tensor::tensor_Dense<float>,
                    monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mattens Dense tensor_Dense//
+  if (test_send_mattens<
+
+          monolish::matrix::Dense<double>,
+          monolish::tensor::tensor_Dense<double>,
+          monolish::tensor::tensor_Dense<double>, double>(M, N, K, L, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mattens<monolish::matrix::Dense<double>,
+                        monolish::tensor::tensor_Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mattens CRS tensor_Dense//
+  if (test_send_mattens<
+
+          monolish::matrix::CRS<double>, monolish::tensor::tensor_Dense<double>,
+          monolish::tensor::tensor_Dense<double>, double>(M, N, K, L, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::CRS<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mattens<monolish::matrix::CRS<double>,
+                        monolish::tensor::tensor_Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::CRS<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<float>,
+                   monolish::tensor::tensor_Dense<float>,
                    monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, L, 3, 2, 1.0e-4) == false) {
     return 1;

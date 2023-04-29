@@ -1,12 +1,13 @@
+#pragma once
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../internal/monolish_internal.hpp"
 
 namespace monolish {
-
+namespace {
 // double ///////////////////
-void blas::matmul(const double &a, const matrix::CRS<double> &A,
-                  const matrix::Dense<double> &B, const double &b,
-                  matrix::Dense<double> &C) {
+void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
+                            const matrix::Dense<double> &B, const double &b,
+                            matrix::Dense<double> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -147,15 +148,10 @@ void blas::matmul(const double &a, const matrix::CRS<double> &A,
   logger.func_out();
 }
 
-void blas::matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
-                  matrix::Dense<double> &C) {
-  return matmul(1.0, A, B, 0.0, C);
-}
-
 // float ///////////////////
-void blas::matmul(const float &a, const matrix::CRS<float> &A,
-                  const matrix::Dense<float> &B, const float &b,
-                  matrix::Dense<float> &C) {
+void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
+                            const matrix::Dense<float> &B, const float &b,
+                            matrix::Dense<float> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -326,9 +322,5 @@ void blas::matmul(const float &a, const matrix::CRS<float> &A,
   logger.func_out();
 }
 
-void blas::matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
-                  matrix::Dense<float> &C) {
-  return matmul(1.0, A, B, 0.0, C);
-}
-
+} // namespace
 } // namespace monolish
