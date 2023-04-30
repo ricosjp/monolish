@@ -32,8 +32,10 @@ template void view1D<vector<double>, double>::fill(double value);
 template void view1D<matrix::Dense<double>, double>::fill(double value);
 template void
 view1D<matrix::LinearOperator<double>, double>::fill(double value);
+template void view1D<tensor::tensor_Dense<double>, double>::fill(double value);
 template void view1D<vector<float>, float>::fill(float value);
 template void view1D<matrix::Dense<float>, float>::fill(float value);
 template void view1D<matrix::LinearOperator<float>, float>::fill(float value);
+template void view1D<tensor::tensor_Dense<float>, float>::fill(float value);
 
 } // namespace monolish

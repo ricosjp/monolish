@@ -1,171 +1,59 @@
 #include "../../../../include/monolish_blas.hpp"
 #include "../../../internal/monolish_internal.hpp"
+#include "tensor_dense_diag_op.hpp"
 
 namespace monolish::tensor {
 
-// add scalar
-template <typename T> void tensor_Dense<T>::diag_add(const T alpha) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+template <>
+void monolish::tensor::tensor_Dense<double>::diag_add(const double alpha) {
+  tensor_Dense_diag_add_core(*this, alpha);
+};
+template <>
+void monolish::tensor::tensor_Dense<float>::diag_add(const float alpha) {
+  tensor_Dense_diag_add_core(*this, alpha);
+};
 
-  T *vald = data();
-  size_t N = 1;
-  size_t shift = 0;
-  size_t Len = get_nnz();
-  for (int i = 0; i < shape.size(); ++i) {
-    shift = shift + N;
-    N *= shape[i];
-    Len = std::min(Len, shape[i]);
-  }
+template <>
+void monolish::tensor::tensor_Dense<double>::diag_add(
+    const vector<double> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
+template <>
+void monolish::tensor::tensor_Dense<float>::diag_add(const vector<float> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
 
-  if (gpu_status == true) {
-#if MONOLISH_USE_NVIDIA_GPU // gpu
-#pragma omp target teams distribute parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += alpha;
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += alpha;
-    }
-  }
+template <>
+void monolish::tensor::tensor_Dense<double>::diag_add(
+    const view1D<vector<double>, double> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
+template <>
+void monolish::tensor::tensor_Dense<float>::diag_add(
+    const view1D<vector<float>, float> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
 
-  logger.func_out();
-}
-template void
-monolish::tensor::tensor_Dense<double>::diag_add(const double alpha);
-template void
-monolish::tensor::tensor_Dense<float>::diag_add(const float alpha);
+template <>
+void monolish::tensor::tensor_Dense<double>::diag_add(
+    const view1D<matrix::Dense<double>, double> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
+template <>
+void monolish::tensor::tensor_Dense<float>::diag_add(
+    const view1D<matrix::Dense<float>, float> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
 
-// add vector
-template <typename T> void tensor_Dense<T>::diag_add(const vector<T> &vec) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
+template <>
+void monolish::tensor::tensor_Dense<double>::diag_add(
+    const view1D<tensor::tensor_Dense<double>, double> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
+template <>
+void monolish::tensor::tensor_Dense<float>::diag_add(
+    const view1D<tensor::tensor_Dense<float>, float> &vec) {
+  tensor_Dense_diag_add_core(*this, vec.size(), vec.data());
+};
 
-  const T *vecd = vec.data();
-
-  T *vald = data();
-  size_t N = 1;
-  size_t shift = 0;
-  size_t Len = get_nnz();
-  for (int i = 0; i < shape.size(); ++i) {
-    shift = shift + N;
-    N *= shape[i];
-    Len = std::min(Len, shape[i]);
-  }
-
-  assert(Len == vec.size());
-
-  if (gpu_status == true) {
-#if MONOLISH_USE_NVIDIA_GPU // gpu
-#pragma omp target teams distribute parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-  }
-
-  logger.func_out();
-}
-template void
-monolish::tensor::tensor_Dense<double>::diag_add(const vector<double> &vec);
-template void
-monolish::tensor::tensor_Dense<float>::diag_add(const vector<float> &vec);
-
-// add viwe1D<vector>
-template <typename T>
-void tensor_Dense<T>::diag_add(const view1D<vector<T>, T> &vec) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  const T *vecd = vec.data();
-
-  T *vald = data();
-  size_t N = 1;
-  size_t shift = 0;
-  size_t Len = get_nnz();
-  for (int i = 0; i < shape.size(); ++i) {
-    shift = shift + N;
-    N *= shape[i];
-    Len = std::min(Len, shape[i]);
-  }
-
-  assert(Len == vec.size());
-
-  if (gpu_status == true) {
-#if MONOLISH_USE_NVIDIA_GPU // gpu
-#pragma omp target teams distribute parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-  }
-
-  logger.func_out();
-}
-template void monolish::tensor::tensor_Dense<double>::diag_add(
-    const view1D<vector<double>, double> &vec);
-template void monolish::tensor::tensor_Dense<float>::diag_add(
-    const view1D<vector<float>, float> &vec);
-
-// add viwe1D<Dense>
-template <typename T>
-void tensor_Dense<T>::diag_add(const view1D<matrix::Dense<T>, T> &vec) {
-  Logger &logger = Logger::get_instance();
-  logger.func_in(monolish_func);
-
-  const T *vecd = vec.data();
-
-  T *vald = data();
-  size_t N = 1;
-  size_t shift = 0;
-  size_t Len = get_nnz();
-  for (int i = 0; i < shape.size(); ++i) {
-    shift = shift + N;
-    N *= shape[i];
-    Len = std::min(Len, shape[i]);
-  }
-
-  assert(Len == vec.size());
-
-  if (gpu_status == true) {
-#if MONOLISH_USE_NVIDIA_GPU // gpu
-#pragma omp target teams distribute parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-#else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
-#endif
-  } else {
-#pragma omp parallel for
-    for (auto i = decltype(Len){0}; i < Len; i++) {
-      vald[shift * i] += vecd[i];
-    }
-  }
-
-  logger.func_out();
-}
-template void monolish::tensor::tensor_Dense<double>::diag_add(
-    const view1D<matrix::Dense<double>, double> &vec);
-template void monolish::tensor::tensor_Dense<float>::diag_add(
-    const view1D<matrix::Dense<float>, float> &vec);
 } // namespace monolish::tensor

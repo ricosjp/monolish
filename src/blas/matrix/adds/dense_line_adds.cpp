@@ -102,6 +102,11 @@ void adds_row(const matrix::Dense<double> &A, const size_t num,
               matrix::Dense<double> &C) {
   adds_row_core(A, num, x, C);
 }
+void adds_row(const matrix::Dense<double> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              matrix::Dense<double> &C) {
+  adds_row_core(A, num, x, C);
+}
 void adds_row(const matrix::Dense<float> &A, const size_t num,
               const vector<float> &x, matrix::Dense<float> &C) {
   adds_row_core(A, num, x, C);
@@ -112,6 +117,11 @@ void adds_row(const matrix::Dense<float> &A, const size_t num,
 }
 void adds_row(const matrix::Dense<float> &A, const size_t num,
               const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C) {
+  adds_row_core(A, num, x, C);
+}
+void adds_row(const matrix::Dense<float> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
               matrix::Dense<float> &C) {
   adds_row_core(A, num, x, C);
 }
@@ -131,6 +141,11 @@ void adds_col(const matrix::Dense<double> &A, const size_t num,
               matrix::Dense<double> &C) {
   adds_col_core(A, num, x, C);
 }
+void adds_col(const matrix::Dense<double> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              matrix::Dense<double> &C) {
+  adds_col_core(A, num, x, C);
+}
 void adds_col(const matrix::Dense<float> &A, const size_t num,
               const vector<float> &x, matrix::Dense<float> &C) {
   adds_col_core(A, num, x, C);
@@ -141,6 +156,11 @@ void adds_col(const matrix::Dense<float> &A, const size_t num,
 }
 void adds_col(const matrix::Dense<float> &A, const size_t num,
               const view1D<matrix::Dense<float>, float> &x,
+              matrix::Dense<float> &C) {
+  adds_col_core(A, num, x, C);
+}
+void adds_col(const matrix::Dense<float> &A, const size_t num,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
               matrix::Dense<float> &C) {
   adds_col_core(A, num, x, C);
 }

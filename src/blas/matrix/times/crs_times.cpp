@@ -128,7 +128,12 @@ void times_row(const matrix::CRS<double> &A,
   times_row_core(A, x, C);
 }
 void times_row(const matrix::CRS<double> &A,
-               const view1D<matrix::CRS<double>, double> &x,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<double> &A,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
                matrix::CRS<double> &C) {
   times_row_core(A, x, C);
 }
@@ -141,7 +146,12 @@ void times_row(const matrix::CRS<float> &A,
   times_row_core(A, x, C);
 }
 void times_row(const matrix::CRS<float> &A,
-               const view1D<matrix::CRS<float>, float> &x,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_row_core(A, x, C);
+}
+void times_row(const matrix::CRS<float> &A,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                matrix::CRS<float> &C) {
   times_row_core(A, x, C);
 }
@@ -157,7 +167,12 @@ void times_col(const matrix::CRS<double> &A,
   times_col_core(A, x, C);
 }
 void times_col(const matrix::CRS<double> &A,
-               const view1D<matrix::CRS<double>, double> &x,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<double> &A,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
                matrix::CRS<double> &C) {
   times_col_core(A, x, C);
 }
@@ -170,7 +185,12 @@ void times_col(const matrix::CRS<float> &A,
   times_col_core(A, x, C);
 }
 void times_col(const matrix::CRS<float> &A,
-               const view1D<matrix::CRS<float>, float> &x,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_col_core(A, x, C);
+}
+void times_col(const matrix::CRS<float> &A,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                matrix::CRS<float> &C) {
   times_col_core(A, x, C);
 }

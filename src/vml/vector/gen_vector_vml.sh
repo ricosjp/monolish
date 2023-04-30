@@ -32,9 +32,9 @@ namespace vml {
 funcs=(add sub mul div)
 for func in ${funcs[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-        for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
           echo "void $func(const $arg1 &a, const $arg2 &b, $arg3 &y){vv${func}_core(a, b, y);}"
         done
       done
@@ -47,8 +47,8 @@ echo ""
 ## scalar-vector arithmetic
 for func in ${funcs[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void $func(const $arg1 &a, const $prec alpha, $arg2 &y){sv${func}_core(a, alpha, y);}"
       done
     done
@@ -60,9 +60,9 @@ echo ""
 
 ## vector-vector pow
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void pow(const $arg1 &a, const $arg2 &b, $arg3 &y){vvpow_core(a, b, y);}"
       done
     done
@@ -73,8 +73,8 @@ echo ""
 
 ## scalar-vector pow
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void pow(const $arg1 &a, const $prec alpha, $arg2 &y){svpow_core(a, alpha, y);}"
     done
   done
@@ -87,8 +87,8 @@ echo ""
 math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign reciprocal exp)
 for math in ${math[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void $math(const $arg1 &a, $arg2 &y){v${math}_core(a, y);}"
       done
     done
@@ -102,9 +102,9 @@ echo ""
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-        for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
           echo "void ${func[$i]}(const $arg1 &a, const $arg2 &b, $arg3 &y){vv${func}_core(a, b, y);}"
         done
       done
@@ -118,8 +118,8 @@ echo ""
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void ${func[$i]}(const $arg1 &a, const $prec alpha, $arg2 &y){sv${func}_core(a, alpha, y);}"
       done
     done
@@ -132,7 +132,7 @@ echo ""
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "$prec ${func[$i]}(const $arg1 &y){return v${func}_core<$arg1,$prec>(y);}"
     done
   done
@@ -143,8 +143,8 @@ echo ""
 
 ## scalar-vector alo 
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void alo(const $arg1 &a, const $prec alpha, const $prec beta, $arg2 &y){vecalo_core(a, alpha, beta, y);}"
     done
   done

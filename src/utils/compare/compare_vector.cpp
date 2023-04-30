@@ -68,6 +68,18 @@ template bool
 vector<float>::equal(const view1D<matrix::Dense<float>, float> &vec,
                      bool compare_cpu_and_device) const;
 
+template <typename T>
+bool vector<T>::equal(const view1D<tensor::tensor_Dense<T>, T> &vec,
+                      bool compare_cpu_and_device) const {
+  return equal_core(*this, vec, compare_cpu_and_device);
+}
+template bool
+vector<double>::equal(const view1D<tensor::tensor_Dense<double>, double> &vec,
+                      bool compare_cpu_and_device) const;
+template bool
+vector<float>::equal(const view1D<tensor::tensor_Dense<float>, float> &vec,
+                     bool compare_cpu_and_device) const;
+
 template <typename T> bool vector<T>::operator==(const vector<T> &vec) const {
   return equal_core(*this, vec, false);
 }
@@ -92,6 +104,16 @@ template bool vector<double>::operator==(
 template bool
 vector<float>::operator==(const view1D<matrix::Dense<float>, float> &vec) const;
 
+template <typename T>
+bool vector<T>::operator==(
+    const view1D<tensor::tensor_Dense<T>, T> &vec) const {
+  return equal_core(*this, vec, false);
+}
+template bool vector<double>::operator==(
+    const view1D<tensor::tensor_Dense<double>, double> &vec) const;
+template bool vector<float>::operator==(
+    const view1D<tensor::tensor_Dense<float>, float> &vec) const;
+
 template <typename T> bool vector<T>::operator!=(const vector<T> &vec) const {
   return !equal_core(*this, vec, false);
 }
@@ -115,5 +137,15 @@ template bool vector<double>::operator!=(
     const view1D<matrix::Dense<double>, double> &vec) const;
 template bool
 vector<float>::operator!=(const view1D<matrix::Dense<float>, float> &vec) const;
+
+template <typename T>
+bool vector<T>::operator!=(
+    const view1D<tensor::tensor_Dense<T>, T> &vec) const {
+  return !equal_core(*this, vec, false);
+}
+template bool vector<double>::operator!=(
+    const view1D<tensor::tensor_Dense<double>, double> &vec) const;
+template bool vector<float>::operator!=(
+    const view1D<tensor::tensor_Dense<float>, float> &vec) const;
 
 } // namespace monolish

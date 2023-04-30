@@ -225,4 +225,30 @@ template vector<double>::vector(
     const view1D<matrix::Dense<double>, double> &vec);
 template vector<float>::vector(const view1D<matrix::Dense<float>, float> &vec);
 
+template <typename T>
+vector<T>::vector(
+    const monolish::view1D<monolish::tensor::tensor_Dense<T>, T> &vec) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(vec.size());
+
+  // gpu copy and recv
+#if MONOLISH_USE_NVIDIA_GPU
+  if (vec.get_device_mem_stat()) {
+    send();
+    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
+  }
+#endif
+  internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
+
+  logger.util_out();
+}
+
+template vector<double>::vector(
+    const view1D<tensor::tensor_Dense<double>, double> &vec);
+template vector<float>::vector(
+    const view1D<tensor::tensor_Dense<float>, float> &vec);
+
 } // namespace monolish
