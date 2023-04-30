@@ -20,7 +20,7 @@ namespace monolish::blas {
 
 ## tensvec Dense
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     if [ $prec = "double" ]
     then
       echo "void tensvec(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y){Dtensvec_core(A, x, y, false);}"

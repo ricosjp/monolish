@@ -107,7 +107,12 @@ void times_row(const matrix::CRS<double> &A, const size_t num,
   times_row_core(A, num, x, C);
 }
 void times_row(const matrix::CRS<double> &A, const size_t num,
-               const view1D<matrix::CRS<double>, double> &x,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_row_core(A, num, x, C);
+}
+void times_row(const matrix::CRS<double> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
                matrix::CRS<double> &C) {
   times_row_core(A, num, x, C);
 }
@@ -120,7 +125,12 @@ void times_row(const matrix::CRS<float> &A, const size_t num,
   times_row_core(A, num, x, C);
 }
 void times_row(const matrix::CRS<float> &A, const size_t num,
-               const view1D<matrix::CRS<float>, float> &x,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_row_core(A, num, x, C);
+}
+void times_row(const matrix::CRS<float> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                matrix::CRS<float> &C) {
   times_row_core(A, num, x, C);
 }
@@ -136,7 +146,12 @@ void times_col(const matrix::CRS<double> &A, const size_t num,
   times_col_core(A, num, x, C);
 }
 void times_col(const matrix::CRS<double> &A, const size_t num,
-               const view1D<matrix::CRS<double>, double> &x,
+               const view1D<matrix::Dense<double>, double> &x,
+               matrix::CRS<double> &C) {
+  times_col_core(A, num, x, C);
+}
+void times_col(const matrix::CRS<double> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
                matrix::CRS<double> &C) {
   times_col_core(A, num, x, C);
 }
@@ -149,7 +164,12 @@ void times_col(const matrix::CRS<float> &A, const size_t num,
   times_col_core(A, num, x, C);
 }
 void times_col(const matrix::CRS<float> &A, const size_t num,
-               const view1D<matrix::CRS<float>, float> &x,
+               const view1D<matrix::Dense<float>, float> &x,
+               matrix::CRS<float> &C) {
+  times_col_core(A, num, x, C);
+}
+void times_col(const matrix::CRS<float> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                matrix::CRS<float> &C) {
   times_col_core(A, num, x, C);
 }

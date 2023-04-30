@@ -125,6 +125,25 @@ public:
   }
 
   /**
+   * @brief create view1D(start:end) from monolish::matrix::Dense
+   * @param x view1D create from monolish::matrix::Dense
+   * @param start start position (x.first + start)
+   * @param end end position (x.last + end)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  view1D(view1D<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
+         const size_t end)
+      : target(x) {
+    first = x.get_first() + start;
+    last = x.get_last() + end;
+    range = last - first;
+    target_data = x.data();
+  }
+
+  /**
    * @brief get view1D size (end-start)
    * @return view1D size
    * @note

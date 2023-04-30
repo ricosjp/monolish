@@ -17,6 +17,10 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+namespace tensor {
+template <typename Float> class tensor_Dense;
+template <typename Float> class tensor_COO;
+} // namespace tensor
 namespace matrix {
 template <typename Float> class Dense;
 template <typename Float> class COO;
@@ -452,6 +456,7 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+  void diag(view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get row vector
@@ -465,6 +470,8 @@ public:
   void row(const size_t r, vector<Float> &vec) const;
   void row(const size_t r, view1D<vector<Float>, Float> &vec) const;
   void row(const size_t r, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void row(const size_t r,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get column vector
@@ -478,6 +485,8 @@ public:
   void col(const size_t c, vector<Float> &vec) const;
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void col(const size_t c,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -551,6 +560,7 @@ public:
   void diag_add(const vector<Float> &vec);
   void diag_add(const view1D<vector<Float>, Float> &vec);
   void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_add(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix sub
@@ -567,6 +577,7 @@ public:
   void diag_sub(const vector<Float> &vec);
   void diag_sub(const view1D<vector<Float>, Float> &vec);
   void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_sub(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix mul
@@ -583,6 +594,7 @@ public:
   void diag_mul(const vector<Float> &vec);
   void diag_mul(const view1D<vector<Float>, Float> &vec);
   void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_mul(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix div
@@ -599,6 +611,7 @@ public:
   void diag_div(const vector<Float> &vec);
   void diag_div(const view1D<vector<Float>, Float> &vec);
   void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_div(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /////////////////////////////////////////////////////////////////////////////
   /**

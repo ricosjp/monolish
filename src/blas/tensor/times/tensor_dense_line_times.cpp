@@ -65,6 +65,11 @@ void times_row(const tensor::tensor_Dense<double> &A, const size_t num,
                tensor::tensor_Dense<double> &C) {
   times_row_core(A, num, x, C);
 }
+void times_row(const tensor::tensor_Dense<double> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
+               tensor::tensor_Dense<double> &C) {
+  times_row_core(A, num, x, C);
+}
 void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
                const vector<float> &x, tensor::tensor_Dense<float> &C) {
   times_row_core(A, num, x, C);
@@ -76,6 +81,11 @@ void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
 }
 void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
                const view1D<matrix::Dense<float>, float> &x,
+               tensor::tensor_Dense<float> &C) {
+  times_row_core(A, num, x, C);
+}
+void times_row(const tensor::tensor_Dense<float> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                tensor::tensor_Dense<float> &C) {
   times_row_core(A, num, x, C);
 }
@@ -95,6 +105,11 @@ void times_col(const tensor::tensor_Dense<double> &A, const size_t num,
                tensor::tensor_Dense<double> &C) {
   times_col_core(A, num, x, C);
 }
+void times_col(const tensor::tensor_Dense<double> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
+               tensor::tensor_Dense<double> &C) {
+  times_col_core(A, num, x, C);
+}
 void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
                const vector<float> &x, tensor::tensor_Dense<float> &C) {
   times_col_core(A, num, x, C);
@@ -106,6 +121,11 @@ void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
 }
 void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
                const view1D<matrix::Dense<float>, float> &x,
+               tensor::tensor_Dense<float> &C) {
+  times_col_core(A, num, x, C);
+}
+void times_col(const tensor::tensor_Dense<float> &A, const size_t num,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
                tensor::tensor_Dense<float> &C) {
   times_col_core(A, num, x, C);
 }

@@ -411,6 +411,7 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+  void diag(view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief operator copy

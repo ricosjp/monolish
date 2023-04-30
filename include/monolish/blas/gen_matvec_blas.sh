@@ -39,7 +39,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_row(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -65,7 +65,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_row(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -147,7 +147,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -173,7 +173,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_col(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -255,7 +255,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_row(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -281,7 +281,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_row(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -307,7 +307,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -333,7 +333,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_col(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
      done
  done
@@ -358,8 +358,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void matvec(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
@@ -386,8 +386,8 @@ for trans in N T; do
     *    - # of data transfer: 0
     */ "
     for prec in double float; do
-        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
                 echo "void matvec_$trans(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
             done
         done
@@ -414,8 +414,8 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
@@ -442,8 +442,8 @@ for trans in N T; do
     *    - # of data transfer: 0
     */ "
     for prec in double float; do
-        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
                 echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
             done
         done
@@ -470,8 +470,8 @@ echo "
  * - GPU acceleration: depends on matvec function
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void matvec(const matrix::LinearOperator<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
@@ -497,8 +497,8 @@ echo "
  * - GPU acceleration: depends on matvec function
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void rmatvec(const matrix::LinearOperator<$prec> &A, const $arg1 &x, $arg2 &y);"
     done
   done
