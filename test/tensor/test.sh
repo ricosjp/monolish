@@ -7,8 +7,8 @@ fi
 
 FORMAT=(Dense)
 PREC=(double float)
-TEST_A=$(($RANDOM%8+8)) #8~16
-TEST_B=$(($RANDOM%8+8)) #8~16
+TEST_A=$(($RANDOM%10+5)) #5~15
+TEST_B=$(($RANDOM%10+5)) #5~15
 MAT_TEST_SIZE=($TEST_A $TEST_B)
 
 case $1 in
