@@ -9,7 +9,7 @@
     - 04421a0d68d7
 .gpu_runner:
   tags:
-    - 04421a0d68db
+    - 04421a0d68d7
 
 .benchmark:
   stage: benchmark
@@ -22,6 +22,7 @@
     - tags
     - 722-benchmark-tag
   before_script:
+    - apt update
     - apt install -y ./$(find . -name "*.deb")
 
 gpu_avx_mkl_benchmark:
