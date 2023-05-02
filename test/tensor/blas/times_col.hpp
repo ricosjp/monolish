@@ -1,8 +1,7 @@
 #include "../../test_utils.hpp"
 
 template <typename T, typename VEC>
-void ans_times_col(const monolish::tensor::tensor_Dense<T> &A,
-                   const VEC &mx,
+void ans_times_col(const monolish::tensor::tensor_Dense<T> &A, const VEC &mx,
                    monolish::tensor::tensor_Dense<T> &C) {
   if (A.get_shape()[0] != mx.size()) {
     std::runtime_error("A.row != y.size");
@@ -20,8 +19,8 @@ void ans_times_col(const monolish::tensor::tensor_Dense<T> &A,
 }
 
 template <typename MAT, typename VEC, typename T>
-bool test_send_times_col_core(const size_t M, const size_t N, const size_t L, VEC& x,
-                         double tol) {
+bool test_send_times_col_core(const size_t M, const size_t N, const size_t L,
+                              VEC &x, double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -50,14 +49,16 @@ bool test_send_times_col_core(const size_t M, const size_t N, const size_t L, VE
 }
 
 template <typename MAT, typename T>
-bool test_send_times_col(const size_t M, const size_t N, const size_t L, double tol){
+bool test_send_times_col(const size_t M, const size_t N, const size_t L,
+                         double tol) {
   monolish::vector<T> vec(M, 0.0, 1.0, test_random_engine());
-  return test_send_times_col_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
+  return test_send_times_col_core<MAT, monolish::vector<T>, T>(M, N, L, vec,
+                                                               tol);
 }
 
 template <typename MAT, typename VEC, typename T>
-bool test_times_col_core(const size_t M, const size_t N, const size_t L, VEC& x,
-                    double tol) {
+bool test_times_col_core(const size_t M, const size_t N, const size_t L, VEC &x,
+                         double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -84,51 +85,69 @@ bool test_times_col_core(const size_t M, const size_t N, const size_t L, VEC& x,
 }
 
 template <typename MAT, typename T>
-bool test_times_col(const size_t M, const size_t N, const size_t L, double tol){
+bool test_times_col(const size_t M, const size_t N, const size_t L,
+                    double tol) {
   monolish::vector<T> vec(M, 0.0, 1.0, test_random_engine());
   return test_times_col_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
 }
 
 // TODO send/recv view vector
 /*
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::vector<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x(M, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_times_col_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x(M, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
-  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x(M, 1, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_times_col_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x(M, 1, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
-  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x({M, 1, 1}, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_times_col_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x({M, 1, 1}, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
-  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 */
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::vector<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+                                  std::nullptr_t>::type = nullptr>
+bool test_times_col_view(const size_t M, const size_t N, const size_t L,
+                         double tol) {
   U x(M, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
   return test_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
+template <
+    typename MAT, typename T, typename U,
+    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+                            std::nullptr_t>::type = nullptr>
+bool test_times_col_view(const size_t M, const size_t N, const size_t L,
+                         double tol) {
   U x(M, 1, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
   return test_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_times_col_view(const size_t M, const size_t N, const size_t L, double tol){
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<
+              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+              std::nullptr_t>::type = nullptr>
+bool test_times_col_view(const size_t M, const size_t N, const size_t L,
+                         double tol) {
   U x({M, 1, 1}, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, M);
   return test_times_col_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);

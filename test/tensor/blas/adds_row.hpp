@@ -1,8 +1,7 @@
 #include "../../test_utils.hpp"
 
 template <typename T, typename VEC>
-void ans_adds_row(const monolish::tensor::tensor_Dense<T> &A,
-                  const VEC &mx,
+void ans_adds_row(const monolish::tensor::tensor_Dense<T> &A, const VEC &mx,
                   monolish::tensor::tensor_Dense<T> &C) {
   if (A.get_shape()[2] != mx.size()) {
     std::runtime_error("A.col != y.size");
@@ -20,8 +19,8 @@ void ans_adds_row(const monolish::tensor::tensor_Dense<T> &A,
 }
 
 template <typename MAT, typename VEC, typename T>
-bool test_send_adds_row_core(const size_t M, const size_t N, const size_t L, VEC& x,
-                        double tol) {
+bool test_send_adds_row_core(const size_t M, const size_t N, const size_t L,
+                             VEC &x, double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -53,11 +52,13 @@ template <typename MAT, typename T>
 bool test_send_adds_row(const size_t M, const size_t N, const size_t L,
                         double tol) {
   monolish::vector<T> vec(L, 0.0, 1.0, test_random_engine());
-  return test_send_adds_row_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
+  return test_send_adds_row_core<MAT, monolish::vector<T>, T>(M, N, L, vec,
+                                                              tol);
 }
 
 template <typename MAT, typename VEC, typename T>
-bool test_adds_row_core(const size_t M, const size_t N, const size_t L, VEC& x, double tol) {
+bool test_adds_row_core(const size_t M, const size_t N, const size_t L, VEC &x,
+                        double tol) {
   size_t nnzrow = 27;
   if (nnzrow < L) {
     nnzrow = 27;
@@ -84,52 +85,68 @@ bool test_adds_row_core(const size_t M, const size_t N, const size_t L, VEC& x, 
 }
 
 template <typename MAT, typename T>
-bool test_adds_row(const size_t M, const size_t N, const size_t L,
-                        double tol) {
+bool test_adds_row(const size_t M, const size_t N, const size_t L, double tol) {
   monolish::vector<T> vec(L, 0.0, 1.0, test_random_engine());
   return test_adds_row_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
 }
 
 // TODO send/recv view vector
 /*
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::vector<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x(L, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_adds_row_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x(L, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
-  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x(L, 1, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_adds_row_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x(L, 1, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
-  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_send_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
-  U x({L, 1, 1}, 0.0, 1.0);
+template <typename MAT, typename T, typename U, typename
+std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+std::nullptr_t>::type = nullptr> bool test_send_adds_row_view(const size_t M,
+const size_t N, const size_t L, double tol){ U x({L, 1, 1}, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
-  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
+  return test_send_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
+tol);
 }
 */
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::vector<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+                                  std::nullptr_t>::type = nullptr>
+bool test_adds_row_view(const size_t M, const size_t N, const size_t L,
+                        double tol) {
   U x(L, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
   return test_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
+template <
+    typename MAT, typename T, typename U,
+    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+                            std::nullptr_t>::type = nullptr>
+bool test_adds_row_view(const size_t M, const size_t N, const size_t L,
+                        double tol) {
   U x(L, 1, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
   return test_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value, std::nullptr_t>::type = nullptr>
-bool test_adds_row_view(const size_t M, const size_t N, const size_t L, double tol){
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<
+              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+              std::nullptr_t>::type = nullptr>
+bool test_adds_row_view(const size_t M, const size_t N, const size_t L,
+                        double tol) {
   U x({L, 1, 1}, 0.0, 1.0);
   monolish::view1D<U, T> vec(x, 0, L);
   return test_adds_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
