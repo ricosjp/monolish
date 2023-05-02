@@ -42,7 +42,6 @@ gpu_avx_mkl_build:
   extends:
   - .mkl_image
   - .gpu_avx
-  - .gpu_runner
   - .build
 gpu_avx_oss_build:
   extends:
