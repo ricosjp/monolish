@@ -672,8 +672,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template <typename... Args>
-  void reshape(const int dim, const Args... args) {
+  template <typename... Args> void reshape(const int dim, const Args... args) {
     std::vector<int> shape(1);
     shape[0] = dim;
     reshape(shape, args...);
