@@ -34,6 +34,7 @@ gpu_avx_mkl_benchmark:
   needs:
     - "gpu_avx_mkl_build"
   script:
+    - bash package/link_monolish_gpu.sh
     - cd benchmark
     - make get_spec_nvidia
     - make nvidia

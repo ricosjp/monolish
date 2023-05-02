@@ -9,6 +9,8 @@
     expire_in: 360min
     when: always
   retry: 2
+  except:
+    - 722-benchmark-tag
 
 .test_cpu:
   extends:
