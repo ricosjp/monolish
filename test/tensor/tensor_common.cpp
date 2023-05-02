@@ -300,6 +300,26 @@ template <typename T> bool fixed_size_test() {
   return true;
 }
 
+template <typename T> bool reshape_test() {
+  monolish::tensor::tensor_Dense<T> tensor_dense(
+      {2, 6}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+
+  T val_orig = tensor_dense.at(1, 2);
+  if(val_orig != 9){
+    std::cout << "original value failed" << std::endl;
+    return false;
+  }
+
+  tensor_dense.reshape(3, 4);
+  T val_new = tensor_dense.at(2, 0);
+  if(val_new != val_orig){
+    std::cout << "reshaped value failed" << std::endl;
+    return false;
+  }
+
+  return true;
+}
+
 int main(int argc, char **argv) {
 
   print_build_info();
@@ -323,6 +343,13 @@ int main(int argc, char **argv) {
   }
   if (!fixed_size_test<float>()) {
     return 3;
+  }
+
+  if (!reshape_test<double>()) {
+    return 4;
+  }
+  if (!reshape_test<float>()) {
+    return 4;
   }
 
   return 0;
