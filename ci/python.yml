@@ -4,6 +4,8 @@
 .python:
   stage: python
   image: registry.ritc.jp/ricos/allgebra/cuda11_7-clang14-oss:22.06.0
+  except:
+    - 722-benchmark-tag
 
 .logging_artifact:
   artifacts:
