@@ -21,9 +21,9 @@ namespace monolish::blas {
 
 ## vecadd
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void vecadd(const $arg1 &a, const $arg2 &b, $arg3 &y){vecadd_core(a, b, y);}"
       done
     done
@@ -34,9 +34,9 @@ echo "//////////////////////////////////"
 
 ## vecsub
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void vecsub(const $arg1 &a, const $arg2 &b, $arg3 &y){vecsub_core(a, b, y);}"
       done
     done
@@ -47,8 +47,8 @@ echo "//////////////////////////////////"
 
 ## times scalar
 for prec in double float; do
-    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-        for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
             echo "void times(const $prec alpha, const $arg1 &a, $arg2 &y){times_scalar_core(alpha, a, y);}"
         done
     done
@@ -58,9 +58,9 @@ echo "//////////////////////////////////"
 
 ## times vector
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void times(const $arg1 &a, const $arg2 &b, $arg3 &y){times_vector_core(a, b, y);}"
       done
     done
@@ -71,8 +71,8 @@ echo "//////////////////////////////////"
 
 ## copy
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void copy(const $arg1 &x, $arg2 &y){copy_core(x, y);}"
     done
   done
@@ -82,7 +82,7 @@ echo "//////////////////////////////////"
 
 ## asum
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     if [ $prec = "double" ]
     then
       echo "$prec asum(const $arg1 &x){ return Dasum_core(x); }"
@@ -95,7 +95,7 @@ done
 echo "//////////////////////////////////"
 
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void asum(const $arg1 &x, $prec &ans){ ans = asum(x); }"
   done
 done
@@ -104,7 +104,7 @@ echo "//////////////////////////////////"
 
 ## sum
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     if [ $prec = "double" ]
     then
       echo "$prec sum(const $arg1 &x){ return Dsum_core(x); }"
@@ -117,7 +117,7 @@ done
 echo "//////////////////////////////////"
 
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void sum(const $arg1 &x, $prec &ans){ ans = sum(x); }"
   done
 done
@@ -126,8 +126,8 @@ echo "//////////////////////////////////"
 
 ## axpy
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "void axpy(const $prec alpha, const $arg1 &x, $arg2 &y) {Daxpy_core(alpha, x, y);}"
@@ -142,9 +142,9 @@ echo "//////////////////////////////////"
 
 ## axpyz
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "void axpyz(const $prec alpha, const $arg1 &x, const $arg2 &y, $arg3 &z){Daxpyz_core(alpha, x, y, z);}"
@@ -160,8 +160,8 @@ echo "//////////////////////////////////"
 
 # ## dot
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "$prec dot(const $arg1 &x, const $arg2 &y){return Ddot_core(x, y);}"
@@ -176,8 +176,8 @@ echo "//////////////////////////////////"
 
 # ## dot
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void dot(const $arg1 &x, const $arg2 &y, $prec &ans){ ans = dot(x, y); }"
     done
   done
@@ -187,7 +187,7 @@ echo "//////////////////////////////////"
 
 ## nrm1
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "$prec nrm1(const $arg1 &x){ return Dnrm1_core(x); }"
@@ -201,7 +201,7 @@ echo "//////////////////////////////////"
 
 ## nrm1
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void nrm1(const $arg1 &x, $prec &ans){ ans = nrm1(x); }"
   done
 done
@@ -210,7 +210,7 @@ echo "//////////////////////////////////"
 
 ## nrm2
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "$prec nrm2(const $arg1 &x){ return Dnrm2_core(x); }"
@@ -224,7 +224,7 @@ echo "//////////////////////////////////"
 
 ## nrm2
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void nrm2(const $arg1 &x, $prec &ans){ ans = nrm2(x); }"
   done
 done
@@ -233,7 +233,7 @@ echo "//////////////////////////////////"
 
 ## scal
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "void scal(const $prec alpha, $arg1 &x){ Dscal_core(alpha, x); }"
@@ -247,8 +247,8 @@ echo "//////////////////////////////////"
 
 ## xpay
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
-    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
         echo "void xpay(const $prec alpha, const $arg1 &x, $arg2 &y) {Dxpay_core(alpha, x, y);}"

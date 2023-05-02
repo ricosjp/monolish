@@ -25,6 +25,9 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+namespace tensor {
+template <typename Float> class tensor_Dense;
+}
 namespace matrix {
 template <typename Float> class Dense;
 template <typename Float> class CRS;
@@ -513,6 +516,21 @@ public:
                const std::vector<int> &c, const std::vector<Float> &v);
 
   /**
+   * @brief Set COO array from std::vector
+   * @param rN # of row
+   * @param cN # of column
+   * @param r row_index
+   * @param c col_index
+   * @param v value
+   * @note
+   * - # of computation: 3
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r,
+               const std::vector<int> &c, const size_t vsize, const Float *v);
+
+  /**
    * @brief get # of row
    * @note
    * - # of computation: 1
@@ -679,6 +697,7 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+  void diag(view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get row vector
@@ -692,6 +711,8 @@ public:
   void row(const size_t r, vector<Float> &vec) const;
   void row(const size_t r, view1D<vector<Float>, Float> &vec) const;
   void row(const size_t r, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void row(const size_t r,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get column vector
@@ -705,6 +726,8 @@ public:
   void col(const size_t c, vector<Float> &vec) const;
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void col(const size_t c,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -719,6 +742,22 @@ public:
    * src. and dst. must be same non-zero structure (dont check in this function)
    **/
   void operator=(const COO<Float> &mat);
+
+  /**
+   * @brief reference to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float &operator[](size_t i) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
+    }
+    return data()[i];
+  }
 
   /**
    * @brief Comparing matrices (A == mat)

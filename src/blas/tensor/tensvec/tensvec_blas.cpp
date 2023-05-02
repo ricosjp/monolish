@@ -19,6 +19,11 @@ void tensvec(const tensor::tensor_Dense<double> &A,
              tensor::tensor_Dense<double> &y) {
   Dtensvec_core(A, x, y, false);
 }
+void tensvec(const tensor::tensor_Dense<double> &A,
+             const view1D<tensor::tensor_Dense<double>, double> &x,
+             tensor::tensor_Dense<double> &y) {
+  Dtensvec_core(A, x, y, false);
+}
 void tensvec(const tensor::tensor_Dense<float> &A, const vector<float> &x,
              tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
@@ -30,6 +35,11 @@ void tensvec(const tensor::tensor_Dense<float> &A,
 }
 void tensvec(const tensor::tensor_Dense<float> &A,
              const view1D<matrix::Dense<float>, float> &x,
+             tensor::tensor_Dense<float> &y) {
+  Stensvec_core(A, x, y, false);
+}
+void tensvec(const tensor::tensor_Dense<float> &A,
+             const view1D<tensor::tensor_Dense<float>, float> &x,
              tensor::tensor_Dense<float> &y) {
   Stensvec_core(A, x, y, false);
 }

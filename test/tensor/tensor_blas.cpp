@@ -2,6 +2,7 @@
 #include "blas/adds_col_line.hpp"
 #include "blas/adds_row.hpp"
 #include "blas/adds_row_line.hpp"
+#include "blas/mattens.hpp"
 #include "blas/scalar_adds.hpp"
 #include "blas/scalar_times.hpp"
 #include "blas/tensadd.hpp"
@@ -103,6 +104,63 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO send/recv view vector
+  /*
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::vector<double>>( M, N, K, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, K, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+                        monolish::vector<double>>(M, N, K, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+                        monolish::vector<float>>(M, N, K, 1.0e-3) == false) {
+    return 1;
+  }
+
+  /*
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::matrix::Dense<double>>( M, N, K, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, K, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+                        monolish::matrix::Dense<double>>(M, N, K, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+                        monolish::matrix::Dense<float>>(M, N, K, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  /*
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::tensor::tensor_Dense<double>>( M, N, K, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, K, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<double>, double,
+                        monolish::tensor::tensor_Dense<double>>(
+          M, N, K, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_tensvec_view<monolish::tensor::tensor_Dense<float>, float,
+                        monolish::tensor::tensor_Dense<float>>(
+          M, N, K, 1.0e-3) == false) {
+    return 1;
+  }
+
   // tensmat tensor_Dense//
   if (test_send_tensmat<monolish::tensor::tensor_Dense<double>,
                         monolish::matrix::Dense<double>,
@@ -149,6 +207,111 @@ int main(int argc, char **argv) {
   }
   if (test_tensmat<monolish::tensor::tensor_Dense<float>,
                    monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mattens Dense tensor_Dense//
+  if (test_send_mattens<
+
+          monolish::matrix::Dense<double>,
+          monolish::tensor::tensor_Dense<double>,
+          monolish::tensor::tensor_Dense<double>, double>(M, N, K, L, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mattens<monolish::matrix::Dense<double>,
+                        monolish::tensor::tensor_Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mattens CRS tensor_Dense//
+  if (test_send_mattens<
+
+          monolish::matrix::CRS<double>, monolish::tensor::tensor_Dense<double>,
+          monolish::tensor::tensor_Dense<double>, double>(M, N, K, L, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::CRS<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mattens<monolish::matrix::CRS<double>,
+                        monolish::tensor::tensor_Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mattens<monolish::matrix::CRS<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 3, 2, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 3, 2, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mattens<monolish::matrix::CRS<float>,
+                   monolish::tensor::tensor_Dense<float>,
                    monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, L, 3, 2, 1.0e-4) == false) {
     return 1;
@@ -307,6 +470,65 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::vector<double>>(M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::vector<float>>(M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::matrix::Dense<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::matrix::Dense<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_row_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::tensor::tensor_Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
   // vector_times col tensor_Dense//
   if (test_send_times_col<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-6) == false) {
@@ -321,6 +543,65 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_times_col<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::vector<double>>(M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::vector<float>>(M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::matrix::Dense<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::matrix::Dense<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_col_view<monolish::tensor::tensor_Dense<double>, double,
+                          monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_view<monolish::tensor::tensor_Dense<float>, float,
+                          monolish::tensor::tensor_Dense<float>>(
           M, N, L, 1.0e-3) == false) {
     return 1;
   }
@@ -343,6 +624,69 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::vector<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::vector<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::matrix::Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::matrix::Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  */
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::tensor::tensor_Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
   // vector_times col_line tensor_Dense//
   if (test_send_times_col_line<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-6) == false) {
@@ -357,6 +701,69 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_times_col_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::vector<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::vector<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::matrix::Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::matrix::Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_col_line_view<monolish::tensor::tensor_Dense<float>,
+  float, monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  */
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                               monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                               monolish::tensor::tensor_Dense<float>>(
           M, N, L, 1.0e-3) == false) {
     return 1;
   }
@@ -379,6 +786,65 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::vector<double>>(M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::vector<float>>(M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::matrix::Dense<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::matrix::Dense<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::tensor::tensor_Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
   // vector_adds col tensor_Dense//
   if (test_send_adds_col<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-6) == false) {
@@ -393,6 +859,65 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_adds_col<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::vector<double>>(M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::vector<float>>(M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::matrix::Dense<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::matrix::Dense<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+  monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<double>, double,
+                         monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_view<monolish::tensor::tensor_Dense<float>, float,
+                         monolish::tensor::tensor_Dense<float>>(
           M, N, L, 1.0e-3) == false) {
     return 1;
   }
@@ -415,6 +940,68 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::vector<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::vector<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::matrix::Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::matrix::Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_row_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::tensor::tensor_Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
   // vector_adds col_line tensor_Dense//
   if (test_send_adds_col_line<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-6) == false) {
@@ -429,6 +1016,68 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_adds_col_line<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::vector<double>>( M, N, L, 1.0e-6) == false) { return 1;
+  }
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::vector<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::vector<double>>(M, N, L, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::vector<float>>(M, N, L, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  // TODO send/recv view vector
+  /*
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::matrix::Dense<double>>( M, N, L, 1.0e-6) == false) { return
+  1;
+  }
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::matrix::Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::matrix::Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::matrix::Dense<float>>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // TODO send/recv view tensor::tensor_Dense
+  /*
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<double>,
+  double, monolish::tensor::tensor_Dense<double>>( M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+  monolish::tensor::tensor_Dense<float>>( M, N, L, 1.0e-3) == false) { return 1;
+  }
+  */
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<double>, double,
+                              monolish::tensor::tensor_Dense<double>>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_adds_col_line_view<monolish::tensor::tensor_Dense<float>, float,
+                              monolish::tensor::tensor_Dense<float>>(
           M, N, L, 1.0e-3) == false) {
     return 1;
   }

@@ -39,7 +39,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_row(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -65,7 +65,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_row(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -91,7 +91,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_col(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -117,7 +117,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void times_col(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -144,7 +144,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_row(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -170,7 +170,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_row(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -196,7 +196,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_col(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -222,7 +222,7 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
          echo "void adds_col(const tensor::tensor_Dense<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_Dense<$prec> &C);"
      done
  done
@@ -247,7 +247,7 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void tensvec(const tensor::tensor_Dense<$prec> &A, const $arg1 &x, tensor::tensor_Dense<$prec> &y);"
   done
 done

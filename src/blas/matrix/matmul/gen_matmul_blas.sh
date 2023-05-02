@@ -34,6 +34,20 @@ done
 
 echo ""
 
+## matmul CRS-Dense
+for prec in double float; do
+    if [ $prec = "double" ]
+    then
+        echo "void matmul(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);}"
+        echo "void matmul(const $prec &a, const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C){CRS_Dense_Dmatmul_core(a, A, B, b, C);}"
+    else
+        echo "void matmul(const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C){CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);}"
+        echo "void matmul(const $prec &a, const matrix::CRS<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C){CRS_Dense_Smatmul_core(a, A, B, b, C);}"
+    fi
+done
+
+echo ""
+
 # ## matmul_* Dense
 # for transA in N T; do
 #     for transB in N T; do

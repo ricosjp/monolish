@@ -90,6 +90,11 @@ void adds_row(const tensor::tensor_Dense<double> &A,
               tensor::tensor_Dense<double> &C) {
   adds_row_core(A, x, C);
 }
+void adds_row(const tensor::tensor_Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C) {
+  adds_row_core(A, x, C);
+}
 void adds_row(const tensor::tensor_Dense<float> &A, const vector<float> &x,
               tensor::tensor_Dense<float> &C) {
   adds_row_core(A, x, C);
@@ -101,6 +106,11 @@ void adds_row(const tensor::tensor_Dense<float> &A,
 }
 void adds_row(const tensor::tensor_Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C) {
+  adds_row_core(A, x, C);
+}
+void adds_row(const tensor::tensor_Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
               tensor::tensor_Dense<float> &C) {
   adds_row_core(A, x, C);
 }
@@ -120,6 +130,11 @@ void adds_col(const tensor::tensor_Dense<double> &A,
               tensor::tensor_Dense<double> &C) {
   adds_col_core(A, x, C);
 }
+void adds_col(const tensor::tensor_Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              tensor::tensor_Dense<double> &C) {
+  adds_col_core(A, x, C);
+}
 void adds_col(const tensor::tensor_Dense<float> &A, const vector<float> &x,
               tensor::tensor_Dense<float> &C) {
   adds_col_core(A, x, C);
@@ -131,6 +146,11 @@ void adds_col(const tensor::tensor_Dense<float> &A,
 }
 void adds_col(const tensor::tensor_Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
+              tensor::tensor_Dense<float> &C) {
+  adds_col_core(A, x, C);
+}
+void adds_col(const tensor::tensor_Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
               tensor::tensor_Dense<float> &C) {
   adds_col_core(A, x, C);
 }

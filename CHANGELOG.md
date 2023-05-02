@@ -20,6 +20,15 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Added
+- Add mattens functions as blas-like operation <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/495> <https://github.com/ricosjp/monolish/issues/727>
+- Add view1D of tensor_Dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/496> <https://github.com/ricosjp/monolish/issues/728>
+- Add times/adds/axpy tests for view1D of matrix/tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/498> <https://github.com/ricosjp/monolish/issues/729>
+
+### Changed
+- Change operator[] as val.get()[] of value array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/494> <https://github.com/ricosjp/monolish/issues/726>
+
+
 0.17.1 - 2023/04/23
 -----------
 

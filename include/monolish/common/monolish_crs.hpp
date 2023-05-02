@@ -17,6 +17,10 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+namespace tensor {
+template <typename Float> class tensor_Dense;
+template <typename Float> class tensor_COO;
+} // namespace tensor
 namespace matrix {
 template <typename Float> class Dense;
 template <typename Float> class COO;
@@ -257,6 +261,24 @@ public:
                const std::vector<int> &colind, const std::vector<Float> &value);
 
   /**
+   * @brief Set CRS array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const std::vector<int> &rowptr,
+               const std::vector<int> &colind, const size_t vsize,
+               const Float *value);
+
+  /**
    * @brief print all elements to standard I/O
    * @param force_cpu Ignore device status and output CPU data
    * @note
@@ -434,6 +456,7 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+  void diag(view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get row vector
@@ -447,6 +470,8 @@ public:
   void row(const size_t r, vector<Float> &vec) const;
   void row(const size_t r, view1D<vector<Float>, Float> &vec) const;
   void row(const size_t r, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void row(const size_t r,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get column vector
@@ -460,6 +485,8 @@ public:
   void col(const size_t c, vector<Float> &vec) const;
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void col(const size_t c,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -533,6 +560,7 @@ public:
   void diag_add(const vector<Float> &vec);
   void diag_add(const view1D<vector<Float>, Float> &vec);
   void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_add(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix sub
@@ -549,6 +577,7 @@ public:
   void diag_sub(const vector<Float> &vec);
   void diag_sub(const view1D<vector<Float>, Float> &vec);
   void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_sub(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix mul
@@ -565,6 +594,7 @@ public:
   void diag_mul(const vector<Float> &vec);
   void diag_mul(const view1D<vector<Float>, Float> &vec);
   void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_mul(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of CRS format matrix div
@@ -581,6 +611,7 @@ public:
   void diag_div(const vector<Float> &vec);
   void diag_div(const view1D<vector<Float>, Float> &vec);
   void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_div(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -638,6 +669,22 @@ public:
    *        - else; coping data on CPU
    **/
   void operator=(const CRS<Float> &mat);
+
+  /**
+   * @brief reference to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float &operator[](size_t i) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
+    }
+    return data()[i];
+  }
 
   /**
    * @brief Comparing matrices (A == mat)

@@ -88,6 +88,24 @@ public:
   }
 
   /**
+   * @brief create view1D(start:end) from Dense tensor
+   * @param A Dense matrix
+   * @param start start position
+   * @param end end position
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  view1D(tensor::tensor_Dense<Float> &A, const size_t start, const size_t end)
+      : target(A) {
+    first = start;
+    last = end;
+    range = last - first;
+    target_data = A.data();
+  }
+
+  /**
    * @brief create view1D(start:end) from monolish::vector
    * @param x view1D create from monolish::vector
    * @param start start position (x.first + start)
@@ -116,6 +134,25 @@ public:
    * - GPU acceleration: false
    **/
   view1D(view1D<matrix::Dense<Float>, Float> &x, const size_t start,
+         const size_t end)
+      : target(x) {
+    first = x.get_first() + start;
+    last = x.get_last() + end;
+    range = last - first;
+    target_data = x.data();
+  }
+
+  /**
+   * @brief create view1D(start:end) from monolish::tensor::tensor_Dense
+   * @param x view1D create from monolish::tensor::tensor_Dense
+   * @param start start position (x.first + start)
+   * @param end end position (x.last + end)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  view1D(view1D<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
          const size_t end)
       : target(x) {
     first = x.get_first() + start;

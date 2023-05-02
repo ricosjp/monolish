@@ -149,7 +149,7 @@ template <typename T> bool test() {
   }
   monolish::matrix::Dense<T> expanded_Dense(expanded_COO);
   expanded_COO.insert(3, 3, 1.0);
-  expanded_Dense[3][3] = 1.0;
+  expanded_Dense.insert(3, 3, 1.0);
   if (expanded_COO.get_nnz() != 9) {
     std::cout << "nnz size mismatch" << std::endl;
     return false;

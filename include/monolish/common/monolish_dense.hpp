@@ -239,6 +239,18 @@ public:
   void set_ptr(const size_t M, const size_t N, const std::vector<Float> &value);
 
   /**
+   * @brief Set Dense array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const Float *value);
+
+  /**
    * @brief get # of row
    * @note
    * - # of computation: 1
@@ -503,6 +515,7 @@ public:
   void diag(vector<Float> &vec) const;
   void diag(view1D<vector<Float>, Float> &vec) const;
   void diag(view1D<matrix::Dense<Float>, Float> &vec) const;
+  void diag(view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get row vector
@@ -516,6 +529,8 @@ public:
   void row(const size_t r, vector<Float> &vec) const;
   void row(const size_t r, view1D<vector<Float>, Float> &vec) const;
   void row(const size_t r, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void row(const size_t r,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /**
    * @brief get column vector
@@ -529,6 +544,8 @@ public:
   void col(const size_t c, vector<Float> &vec) const;
   void col(const size_t c, view1D<vector<Float>, Float> &vec) const;
   void col(const size_t c, view1D<matrix::Dense<Float>, Float> &vec) const;
+  void col(const size_t c,
+           view1D<tensor::tensor_Dense<Float>, Float> &vec) const;
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -544,6 +561,7 @@ public:
 
   /**
    * @brief matrix copy
+   * @param mat Dense matrix
    * @return copied dense matrix
    * @note
    * - # of computation: M*N
@@ -556,21 +574,19 @@ public:
   void operator=(const Dense<Float> &mat);
 
   /**
-   * @brief reference to the pointer of the begining of the m-th row
-   * @param m Position of an pointer in the matrix
-   * @return pointer at the begining of m-th row
+   * @brief reference to the element at position (v[i])
+   * @param i Position of an element in the vector
+   * @return vector element (v[i])
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
-   * @warning
-   * This function is only available for Dense.
    **/
-  [[nodiscard]] Float *operator[](size_t m) {
+  [[nodiscard]] Float &operator[](size_t i) {
     if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU matrix dense cant use operator[]");
+      throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return data() + m * get_col();
+    return data()[i];
   }
 
   /**
@@ -676,6 +692,7 @@ public:
   void diag_add(const vector<Float> &vec);
   void diag_add(const view1D<vector<Float>, Float> &vec);
   void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_add(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of Dense format matrix sub
@@ -688,6 +705,7 @@ public:
   void diag_sub(const vector<Float> &vec);
   void diag_sub(const view1D<vector<Float>, Float> &vec);
   void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_sub(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of Dense format matrix mul
@@ -700,6 +718,7 @@ public:
   void diag_mul(const vector<Float> &vec);
   void diag_mul(const view1D<vector<Float>, Float> &vec);
   void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_mul(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 
   /**
    * @brief Vector and diag. vector of Dense format matrix div
@@ -712,6 +731,7 @@ public:
   void diag_div(const vector<Float> &vec);
   void diag_div(const view1D<vector<Float>, Float> &vec);
   void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_div(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 };
 /**@}*/
 
