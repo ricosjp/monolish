@@ -297,8 +297,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
-  [[nodiscard]] Float at(const std::vector<size_t> &pos, const size_t dim, const Args... args) const{
+  template <typename... Args>
+  [[nodiscard]] Float at(const std::vector<size_t> &pos, const size_t dim,
+                         const Args... args) const {
     std::vector<size_t> pos_copy = pos;
     pos_copy.push_back(dim);
     return this->at(pos_copy, args...);
@@ -313,8 +314,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
-  [[nodiscard]] Float at(const size_t dim, const Args... args) const{
+  template <typename... Args>
+  [[nodiscard]] Float at(const size_t dim, const Args... args) const {
     std::vector<size_t> pos(1);
     pos[0] = dim;
     return this->at(pos, args...);
@@ -342,7 +343,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
+  template <typename... Args>
   [[nodiscard]] Float at(const std::vector<size_t> &pos, const Args... args) {
     return static_cast<const tensor_Dense *>(this)->at(pos, args...);
   };
@@ -356,7 +357,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
+  template <typename... Args>
   [[nodiscard]] Float at(const size_t dim, const Args... args) {
     return static_cast<const tensor_Dense *>(this)->at(dim, args...);
   };
@@ -644,7 +645,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void reshape(const std::vector<size_t> &shape);
+  void reshape(const std::vector<int> &shape);
 
   /**
    * @brief Reshape tensor
@@ -654,9 +655,10 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
-  void reshape(const std::vector<size_t> &shape, const size_t dim, const Args... args){
-    std::vector<size_t> shape_copy = shape;
+  template <typename... Args>
+  void reshape(const std::vector<int> &shape, const size_t dim,
+               const Args... args) {
+    std::vector<int> shape_copy = shape;
     shape_copy.push_back(dim);
     reshape(shape_copy, args...);
     return;
@@ -670,9 +672,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  template<typename... Args>
-  void reshape(const size_t dim, const Args... args){
-    std::vector<size_t> shape(1);
+  template <typename... Args>
+  void reshape(const int dim, const Args... args) {
+    std::vector<int> shape(1);
     shape[0] = dim;
     reshape(shape, args...);
     return;
