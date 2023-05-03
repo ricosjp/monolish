@@ -289,6 +289,39 @@ public:
   [[nodiscard]] Float at(const std::vector<size_t> &pos) const;
 
   /**
+   * @brief get element A[pos[0]][pos[1]]...
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args>
+  [[nodiscard]] Float at(const std::vector<size_t> &pos, const size_t dim,
+                         const Args... args) const {
+    std::vector<size_t> pos_copy = pos;
+    pos_copy.push_back(dim);
+    return this->at(pos_copy, args...);
+  };
+
+  /**
+   * @brief get element A[pos[0]][pos[1]]...
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args>
+  [[nodiscard]] Float at(const size_t dim, const Args... args) const {
+    std::vector<size_t> pos(1);
+    pos[0] = dim;
+    return this->at(pos, args...);
+  };
+
+  /**
    * @brief get element A[pos[0]][pos[1]]... (onlu CPU)
    * @param pos std::vector position
    * @return A[pos[0]][pos[1]]...
@@ -299,6 +332,34 @@ public:
    **/
   [[nodiscard]] Float at(const std::vector<size_t> &pos) {
     return static_cast<const tensor_Dense *>(this)->at(pos);
+  };
+
+  /**
+   * @brief get element A[pos[0]][pos[1]]... (onlu CPU)
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args>
+  [[nodiscard]] Float at(const std::vector<size_t> &pos, const Args... args) {
+    return static_cast<const tensor_Dense *>(this)->at(pos, args...);
+  };
+
+  /**
+   * @brief get element A[pos[0]][pos[1]]... (onlu CPU)
+   * @param pos std::vector position
+   * @return A[pos[0]][pos[1]]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args>
+  [[nodiscard]] Float at(const size_t dim, const Args... args) {
+    return static_cast<const tensor_Dense *>(this)->at(dim, args...);
   };
 
   /**
@@ -584,7 +645,39 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void reshape(const std::vector<size_t> &shape);
+  void reshape(const std::vector<int> &shape);
+
+  /**
+   * @brief Reshape tensor
+   * @param shape
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args>
+  void reshape(const std::vector<int> &shape, const size_t dim,
+               const Args... args) {
+    std::vector<int> shape_copy = shape;
+    shape_copy.push_back(dim);
+    reshape(shape_copy, args...);
+    return;
+  }
+
+  /**
+   * @brief Reshape tensor
+   * @param shape
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  template <typename... Args> void reshape(const int dim, const Args... args) {
+    std::vector<int> shape(1);
+    shape[0] = dim;
+    reshape(shape, args...);
+    return;
+  }
 
   /////////////////////////////////////////////
 
