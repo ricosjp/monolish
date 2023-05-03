@@ -1,16 +1,3 @@
-#
-# benchmark
-#
-.intel_runner:
-  tags:
-    - 008cfa52494d
-.amd_runner:
-  tags:
-    - b42e99ecbde2
-.gpu_runner:
-  tags:
-    - c8cbb8c6304d
-
 .benchmark:
   stage: benchmark
   artifacts:
@@ -21,6 +8,7 @@
     - schedules
     - tags
   before_script:
+    - apt update
     - apt install -y ./$(find . -name "*.deb")
 
 gpu_avx_mkl_benchmark:
