@@ -15,7 +15,7 @@ clone_result:
 ifeq ($(CI_BUILD_TOKEN),)
 	git clone git@gitlab.ritc.jp:ricos/$(BENCHMARK_DIR).git
 else
-	git clone https://oath2:${MONOLISH_BENCHMARK_RESULT_TOKEN}@gitlab.ritc.jp/ricos/$(BENCHMARK_DIR).git
+	git clone https://oath2:${MONOLISH_BENCHMARK_RESULT_TOKEN2}@gitlab.ritc.jp/ricos/$(BENCHMARK_DIR).git
 endif
 
 move_result: clone_result
