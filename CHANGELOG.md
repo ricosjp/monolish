@@ -20,18 +20,8 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
-### Added
-- Add mattens functions as blas-like operation <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/495> <https://github.com/ricosjp/monolish/issues/727>
-- Add view1D of tensor_Dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/496> <https://github.com/ricosjp/monolish/issues/728>
-- Add times/adds/axpy tests for view1D of matrix/tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/498> <https://github.com/ricosjp/monolish/issues/729>
-- Add variadic templates for reshape tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/499> <https://github.com/ricosjp/monolish/issues/730>
 
-### Changed
-- Change operator[] as val.get()[] of value array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/494> <https://github.com/ricosjp/monolish/issues/726>
-- Change benchmark runner <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/489> <https://github.com/ricosjp/monolish/issues/722>
-
-
-0.17.1 - 2023/04/23
+0.17.1 - 2023/05/03
 -----------
 
 ### Added
@@ -39,10 +29,16 @@ Unreleased
 - Add reshape for dense matrix  <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/488> <https://github.com/ricosjp/monolish/issues/720>
 - Add tensor (tensor_Dense & tensor_COO) <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/492> <https://github.com/ricosjp/monolish/issues/724>
 - Add adds_row, adds_col for dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/493> <https://github.com/ricosjp/monolish/issues/725>
+- Add mattens functions as blas-like operation <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/495> <https://github.com/ricosjp/monolish/issues/727>
+- Add view1D of tensor_Dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/496> <https://github.com/ricosjp/monolish/issues/728>
+- Add times/adds/axpy tests for view1D of matrix/tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/498> <https://github.com/ricosjp/monolish/issues/729>
+- Add variadic templates for reshape tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/499> <https://github.com/ricosjp/monolish/issues/730>
 
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>
 - std::vector -> std::shared_ptr for data array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/491>
+- Change operator[] as val.get()[] of value array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/494> <https://github.com/ricosjp/monolish/issues/726>
+- Change benchmark runner <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/489> <https://github.com/ricosjp/monolish/issues/722>
 
 0.17.0 - 2022/11/15
 -----------
