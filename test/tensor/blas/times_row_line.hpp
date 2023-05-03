@@ -38,7 +38,7 @@ bool test_send_times_row_line_core(const size_t M, const size_t N,
   ans_times_row_line(AA, line, x, CC);
   monolish::tensor::tensor_COO<T> ansC(CC);
 
-  monolish::util::send(A, x, C);
+  monolish::util::send(A, C);
   monolish::blas::times_row(A, line, x, C);
   C.recv();
   monolish::tensor::tensor_COO<T> resultC(C);
@@ -51,6 +51,7 @@ template <typename MAT, typename T>
 bool test_send_times_row_line(const size_t M, const size_t N, const size_t L,
                               double tol) {
   monolish::vector<T> vec(L, 0.0, 1.0, test_random_engine());
+  vec.send();
   return test_send_times_row_line_core<MAT, monolish::vector<T>, T>(M, N, L,
                                                                     vec, tol);
 }
@@ -92,12 +93,11 @@ bool test_times_row_line(const size_t M, const size_t N, const size_t L,
                                                                tol);
 }
 
-// TODO send/recv view vector
-/*
 template <typename MAT, typename T, typename U, typename
 std::enable_if<std::is_same<U, monolish::vector<T>>::value,
 std::nullptr_t>::type = nullptr> bool test_send_times_row_line_view(const size_t
 M, const size_t N, const size_t L, double tol){ U x(L, 0.0, 1.0);
+  x.send();
   monolish::view1D<U, T> vec(x, 0, L);
   return test_send_times_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, L,
 vec, tol);
@@ -107,6 +107,7 @@ template <typename MAT, typename T, typename U, typename
 std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
 std::nullptr_t>::type = nullptr> bool test_send_times_row_line_view(const size_t
 M, const size_t N, const size_t L, double tol){ U x(L, 1, 0.0, 1.0);
+  x.send();
   monolish::view1D<U, T> vec(x, 0, L);
   return test_send_times_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, L,
 vec, tol);
@@ -116,11 +117,11 @@ template <typename MAT, typename T, typename U, typename
 std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
 std::nullptr_t>::type = nullptr> bool test_send_times_row_line_view(const size_t
 M, const size_t N, const size_t L, double tol){ U x({L, 1, 1}, 0.0, 1.0);
+  x.send();
   monolish::view1D<U, T> vec(x, 0, L);
   return test_send_times_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, L,
 vec, tol);
 }
-*/
 
 template <typename MAT, typename T, typename U,
           typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
