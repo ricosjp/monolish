@@ -28,6 +28,7 @@ Unreleased
 
 ### Changed
 - Change operator[] as val.get()[] of value array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/494> <https://github.com/ricosjp/monolish/issues/726>
+- Change benchmark runner <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/489> <https://github.com/ricosjp/monolish/issues/722>
 
 
 0.17.1 - 2023/04/23
