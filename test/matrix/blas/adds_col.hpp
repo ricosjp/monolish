@@ -51,6 +51,7 @@ bool test_send_adds_col_core(const size_t M, const size_t N, VEC &x,
 template <typename MAT, typename T>
 bool test_send_adds_col(const size_t M, const size_t N, double tol) {
   monolish::vector<T> vec(M, 0.0, 1.0, test_random_engine());
+  vec.send();
   return test_send_adds_col_core<MAT, monolish::vector<T>, T>(M, N, vec, tol);
 }
 
@@ -84,7 +85,6 @@ bool test_adds_col_core(const size_t M, const size_t N, VEC &x, double tol) {
 template <typename MAT, typename T>
 bool test_adds_col(const size_t M, const size_t N, double tol) {
   monolish::vector<T> vec(M, 0.0, 1.0, test_random_engine());
-  vec.send();
   return test_adds_col_core<MAT, monolish::vector<T>, T>(M, N, vec, tol);
 }
 
