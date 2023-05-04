@@ -21,10 +21,7 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    {
-      internal::check_CUDA(
-          cublasDdot(h, size, xd, 1, yd, 1, &ans));
-    }
+    { internal::check_CUDA(cublasDdot(h, size, xd, 1, yd, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(
@@ -61,10 +58,7 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
     cublasHandle_t h;
     internal::check_CUDA(cublasCreate(&h));
 #pragma omp target data use_device_ptr(xd, yd)
-    {
-      internal::check_CUDA(
-          cublasSdot(h, size, xd, 1, yd, 1, &ans));
-    }
+    { internal::check_CUDA(cublasSdot(h, size, xd, 1, yd, 1, &ans)); }
     cublasDestroy(h);
 #else
     throw std::runtime_error(

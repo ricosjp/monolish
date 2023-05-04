@@ -38,8 +38,8 @@ bool test_send_talo(const size_t M, const size_t N, const size_t L,
   A.recv();
   monolish::tensor::tensor_Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.begin(), A.begin(), A.get_nnz(),
-                      tol);
+  return ans_check<T>(__func__, A.type(), resultA.begin(), A.begin(),
+                      A.get_nnz(), tol);
 }
 
 template <typename MAT, typename T>

@@ -109,31 +109,44 @@ bool test_tensvec(const size_t M, const size_t N, const size_t L, double tol) {
   return test_tensvec_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::vector<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_tensvec_view(const size_t M,
-const size_t N, const size_t L, double tol){ monolish::vector<T> x(L, 0.0, 1.0); x.send();
-  monolish::view1D<monolish::vector<T>, T> vec(x, 0, L);
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+                                  std::nullptr_t>::type = nullptr>
+bool test_send_tensvec_view(const size_t M, const size_t N, const size_t L,
+                            double tol) {
+  monolish::vector<T> x(2 * L, 0.0, 1.0);
+  x.send();
+  monolish::view1D<monolish::vector<T>, T> vec(x, L / 2, L);
   return test_send_tensvec_core<MAT, monolish::view1D<monolish::vector<T>, T>,
-T>(M, N, L, vec, tol);
+                                T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_tensvec_view(const size_t M,
-const size_t N, const size_t L, double tol){ monolish::matrix::Dense<T> x(L, 1,
-0.0, 1.0); x.send(); monolish::view1D<monolish::matrix::Dense<T>, T> vec(x, 0, L); return
-test_send_tensvec_core<MAT, monolish::view1D<monolish::matrix::Dense<T>, T>,
-T>(M, N, L, vec, tol);
+template <
+    typename MAT, typename T, typename U,
+    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+                            std::nullptr_t>::type = nullptr>
+bool test_send_tensvec_view(const size_t M, const size_t N, const size_t L,
+                            double tol) {
+  monolish::matrix::Dense<T> x(2 * L, 1, 0.0, 1.0);
+  x.send();
+  monolish::view1D<monolish::matrix::Dense<T>, T> vec(x, L / 2, L);
+  return test_send_tensvec_core<
+      MAT, monolish::view1D<monolish::matrix::Dense<T>, T>, T>(M, N, L, vec,
+                                                               tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_tensvec_view(const size_t M,
-const size_t N, const size_t L, double tol){ monolish::tensor::tensor_Dense<T>
-x({L, 1, 1}, 0.0, 1.0); x.send(); monolish::view1D<monolish::tensor::tensor_Dense<T>, T>
-vec(x, 0, L); return test_send_tensvec_core<MAT,
-monolish::view1D<monolish::tensor::tensor_Dense<T>, T>, T>(M, N, L, vec, tol);
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<
+              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+              std::nullptr_t>::type = nullptr>
+bool test_send_tensvec_view(const size_t M, const size_t N, const size_t L,
+                            double tol) {
+  monolish::tensor::tensor_Dense<T> x({2 * L, 1, 1}, 0.0, 1.0);
+  x.send();
+  monolish::view1D<monolish::tensor::tensor_Dense<T>, T> vec(x, L / 2, L);
+  return test_send_tensvec_core<
+      MAT, monolish::view1D<monolish::tensor::tensor_Dense<T>, T>, T>(M, N, L,
+                                                                      vec, tol);
 }
 
 template <typename MAT, typename T, typename U,
@@ -141,8 +154,8 @@ template <typename MAT, typename T, typename U,
                                   std::nullptr_t>::type = nullptr>
 bool test_tensvec_view(const size_t M, const size_t N, const size_t L,
                        double tol) {
-  U x(L, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x(2 * L, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_tensvec_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
@@ -152,8 +165,8 @@ template <
                             std::nullptr_t>::type = nullptr>
 bool test_tensvec_view(const size_t M, const size_t N, const size_t L,
                        double tol) {
-  U x(L, 1, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x(2 * L, 1, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_tensvec_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
@@ -163,7 +176,7 @@ template <typename MAT, typename T, typename U,
               std::nullptr_t>::type = nullptr>
 bool test_tensvec_view(const size_t M, const size_t N, const size_t L,
                        double tol) {
-  U x({L, 1, 1}, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x({2 * L, 1, 1}, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_tensvec_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }

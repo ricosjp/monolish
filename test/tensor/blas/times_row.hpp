@@ -92,34 +92,42 @@ bool test_times_row(const size_t M, const size_t N, const size_t L,
   return test_times_row_core<MAT, monolish::vector<T>, T>(M, N, L, vec, tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::vector<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_times_row_view(const size_t M,
-const size_t N, const size_t L, double tol){ U x(2*L, 0.0, 1.0);
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
+                                  std::nullptr_t>::type = nullptr>
+bool test_send_times_row_view(const size_t M, const size_t N, const size_t L,
+                              double tol) {
+  U x(2 * L, 0.0, 1.0);
   x.send();
-  monolish::view1D<U, T> vec(x, 0, L);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_send_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
-tol);
+                                                                  tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_times_row_view(const size_t M,
-const size_t N, const size_t L, double tol){ U x(2*L, 1, 0.0, 1.0);
+template <
+    typename MAT, typename T, typename U,
+    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
+                            std::nullptr_t>::type = nullptr>
+bool test_send_times_row_view(const size_t M, const size_t N, const size_t L,
+                              double tol) {
+  U x(2 * L, 1, 0.0, 1.0);
   x.send();
-  monolish::view1D<U, T> vec(x, 0, L);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_send_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
-tol);
+                                                                  tol);
 }
 
-template <typename MAT, typename T, typename U, typename
-std::enable_if<std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
-std::nullptr_t>::type = nullptr> bool test_send_times_row_view(const size_t M,
-const size_t N, const size_t L, double tol){ U x({2*L, 1, 1}, 0.0, 1.0);
+template <typename MAT, typename T, typename U,
+          typename std::enable_if<
+              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
+              std::nullptr_t>::type = nullptr>
+bool test_send_times_row_view(const size_t M, const size_t N, const size_t L,
+                              double tol) {
+  U x({2 * L, 1, 1}, 0.0, 1.0);
   x.send();
-  monolish::view1D<U, T> vec(x, 0, L);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_send_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec,
-tol);
+                                                                  tol);
 }
 
 template <typename MAT, typename T, typename U,
@@ -127,8 +135,8 @@ template <typename MAT, typename T, typename U,
                                   std::nullptr_t>::type = nullptr>
 bool test_times_row_view(const size_t M, const size_t N, const size_t L,
                          double tol) {
-  U x(L, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x(2 * L, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
@@ -138,8 +146,8 @@ template <
                             std::nullptr_t>::type = nullptr>
 bool test_times_row_view(const size_t M, const size_t N, const size_t L,
                          double tol) {
-  U x(L, 1, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x(2 * L, 1, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }
 
@@ -149,7 +157,7 @@ template <typename MAT, typename T, typename U,
               std::nullptr_t>::type = nullptr>
 bool test_times_row_view(const size_t M, const size_t N, const size_t L,
                          double tol) {
-  U x({L, 1, 1}, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, 0, L);
+  U x({2 * L, 1, 1}, 0.0, 1.0);
+  monolish::view1D<U, T> vec(x, L / 2, L);
   return test_times_row_core<MAT, monolish::view1D<U, T>, T>(M, N, L, vec, tol);
 }

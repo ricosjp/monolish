@@ -11,8 +11,8 @@ void vecsub_core(const F1 &a, const F2 &b, F3 &y) {
   assert(util::is_same_size(a, b, y));
   assert(util::is_same_device_mem_stat(a, b, y));
 
-  internal::vsub(y.size(), a.begin(), b.begin(),
-                 y.begin(), y.get_device_mem_stat());
+  internal::vsub(y.size(), a.begin(), b.begin(), y.begin(),
+                 y.get_device_mem_stat());
 
   logger.func_out();
 }

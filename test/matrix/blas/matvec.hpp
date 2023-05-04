@@ -54,7 +54,8 @@ bool test_send_matvec(const size_t M, const size_t N, double tol) {
   monolish::blas::matvec(A, x, y);
   y.recv();
 
-  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(), tol);
+  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(),
+                      tol);
 }
 
 template <typename MAT, typename T>
@@ -117,5 +118,6 @@ bool test_matvec(const size_t M, const size_t N, double tol) {
 
   monolish::blas::matvec(A, x, y);
 
-  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(), tol);
+  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(),
+                      tol);
 }

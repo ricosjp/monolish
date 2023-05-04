@@ -21,13 +21,11 @@ void matvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
     if (y.get_device_mem_stat())
       y_tmp.send();
 
-    internal::vcopy(x.size(), x.begin(), x_tmp.data(),
-                    x.get_device_mem_stat());
+    internal::vcopy(x.size(), x.begin(), x_tmp.data(), x.get_device_mem_stat());
 
     y_tmp = A.get_matvec()(x_tmp);
 
-    internal::vcopy(y.size(), y_tmp.data(), y.begin(),
-                    y.get_device_mem_stat());
+    internal::vcopy(y.size(), y_tmp.data(), y.begin(), y.get_device_mem_stat());
   } else {
     throw std::runtime_error("error matvec is not initialized");
   }
@@ -53,13 +51,11 @@ void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
     if (y.get_device_mem_stat())
       y_tmp.send();
 
-    internal::vcopy(x.size(), x.begin(), x_tmp.data(),
-                    x.get_device_mem_stat());
+    internal::vcopy(x.size(), x.begin(), x_tmp.data(), x.get_device_mem_stat());
 
     y_tmp = A.get_rmatvec()(x_tmp);
 
-    internal::vcopy(y.size(), y_tmp.data(), y.begin(),
-                    y.get_device_mem_stat());
+    internal::vcopy(y.size(), y_tmp.data(), y.begin(), y.get_device_mem_stat());
   } else {
     throw std::runtime_error("error rmatmul is not initialized");
   }

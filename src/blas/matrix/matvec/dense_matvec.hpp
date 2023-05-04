@@ -42,8 +42,8 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
     {
       // cublas is col major
       internal::check_CUDA(cublasDgemv(h, internal::get_cublas_trans(!transA),
-                                       n, m, &alpha, vald, n, xd, 1,
-                                       &beta, yd, 1));
+                                       n, m, &alpha, vald, n, xd, 1, &beta, yd,
+                                       1));
     }
     cublasDestroy(h);
 #else
@@ -90,8 +90,8 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
     {
       // cublas is col major
       internal::check_CUDA(cublasSgemv(h, internal::get_cublas_trans(!transA),
-                                       m, n, &alpha, vald, m, xd, 1,
-                                       &beta, yd, 1));
+                                       m, n, &alpha, vald, m, xd, 1, &beta, yd,
+                                       1));
     }
     cublasDestroy(h);
 #else

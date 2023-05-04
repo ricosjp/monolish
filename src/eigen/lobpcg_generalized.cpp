@@ -79,32 +79,22 @@ int generalized_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   for (auto i = decltype(m){0}; i < m; ++i) {
     w.push_back(view1D<matrix::Dense<T>, T>(wxp, i * n, n));
     x.push_back(view1D<matrix::Dense<T>, T>(wxp, (m + i) * n, n));
-    p.push_back(
-        view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, n));
+    p.push_back(view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, n));
     W.push_back(view1D<matrix::Dense<T>, T>(WXP, i * n, n));
     X.push_back(view1D<matrix::Dense<T>, T>(WXP, (m + i) * n, n));
-    P.push_back(
-        view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, n));
+    P.push_back(view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, n));
     BW.push_back(view1D<matrix::Dense<T>, T>(BWXP, i * n, n));
-    BX.push_back(
-        view1D<matrix::Dense<T>, T>(BWXP, (m + i) * n, n));
-    BP.push_back(view1D<matrix::Dense<T>, T>(BWXP, (2 * m + i) * n,
-                                             n));
+    BX.push_back(view1D<matrix::Dense<T>, T>(BWXP, (m + i) * n, n));
+    BP.push_back(view1D<matrix::Dense<T>, T>(BWXP, (2 * m + i) * n, n));
     wp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, i * n, n));
-    xp.push_back(
-        view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, n));
-    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n,
-                                             n));
+    xp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, n));
+    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n, n));
     Wp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, i * n, n));
-    Xp.push_back(
-        view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, n));
-    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n,
-                                             n));
+    Xp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, n));
+    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n, n));
     BWp.push_back(view1D<matrix::Dense<T>, T>(BWXP_p, i * n, n));
-    BXp.push_back(
-        view1D<matrix::Dense<T>, T>(BWXP_p, (m + i) * n, n));
-    BPp.push_back(view1D<matrix::Dense<T>, T>(BWXP_p, (2 * m + i) * n,
-                                              n));
+    BXp.push_back(view1D<matrix::Dense<T>, T>(BWXP_p, (m + i) * n, n));
+    BPp.push_back(view1D<matrix::Dense<T>, T>(BWXP_p, (2 * m + i) * n, n));
   }
 
   if (this->get_initvec_scheme() == monolish::solver::initvec_scheme::RANDOM) {

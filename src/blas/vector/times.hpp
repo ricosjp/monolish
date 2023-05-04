@@ -27,8 +27,8 @@ void times_vector_core(const F1 &a, const F2 &b, F3 &y) {
   assert(util::is_same_size(a, y));
   assert(util::is_same_device_mem_stat(a, y));
 
-  internal::vmul(y.size(), a.begin(), b.begin(),
-                 y.begin(), y.get_device_mem_stat());
+  internal::vmul(y.size(), a.begin(), b.begin(), y.begin(),
+                 y.get_device_mem_stat());
 
   logger.func_out();
 }
