@@ -24,7 +24,7 @@ bool test_send_scalar_times(const size_t size, double tol) {
   monolish::blas::times(alpha, x, y);
   y.recv();
 
-  return ans_check<T>(__func__, y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, y.begin(), ansy.begin(), y.size(), tol);
 }
 
 template <typename T> bool test_scalar_times(const size_t size, double tol) {
@@ -38,5 +38,5 @@ template <typename T> bool test_scalar_times(const size_t size, double tol) {
 
   monolish::blas::times(alpha, x, y);
 
-  return ans_check<T>(__func__, y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, y.begin(), ansy.begin(), y.size(), tol);
 }

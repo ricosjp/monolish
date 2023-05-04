@@ -12,11 +12,9 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
   assert(util::is_same_device_mem_stat(x, y));
 
   double ans = 0;
-  const double *xd = x.data();
-  const double *yd = y.data();
+  const double *xd = x.begin();
+  const double *yd = y.begin();
   const auto size = x.size();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -25,7 +23,7 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
 #pragma omp target data use_device_ptr(xd, yd)
     {
       internal::check_CUDA(
-          cublasDdot(h, size, xd + xoffset, 1, yd + yoffset, 1, &ans));
+          cublasDdot(h, size, xd, 1, yd, 1, &ans));
     }
     cublasDestroy(h);
 #else
@@ -33,7 +31,7 @@ template <typename F1, typename F2> double Ddot_core(const F1 &x, const F2 &y) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_ddot(size, xd + xoffset, 1, yd + yoffset, 1);
+    ans = cblas_ddot(size, xd, 1, yd, 1);
   }
 
 #if MONOLISH_USE_MPI
@@ -54,11 +52,9 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
   assert(util::is_same_device_mem_stat(x, y));
 
   float ans = 0;
-  const float *xd = x.data();
-  const float *yd = y.data();
+  const float *xd = x.begin();
+  const float *yd = y.begin();
   const auto size = x.size();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -67,7 +63,7 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
 #pragma omp target data use_device_ptr(xd, yd)
     {
       internal::check_CUDA(
-          cublasSdot(h, size, xd + xoffset, 1, yd + yoffset, 1, &ans));
+          cublasSdot(h, size, xd, 1, yd, 1, &ans));
     }
     cublasDestroy(h);
 #else
@@ -75,7 +71,7 @@ template <typename F1, typename F2> float Sdot_core(const F1 &x, const F2 &y) {
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
-    ans = cblas_sdot(size, xd + xoffset, 1, yd + yoffset, 1);
+    ans = cblas_sdot(size, xd, 1, yd, 1);
   }
 
 #if MONOLISH_USE_MPI

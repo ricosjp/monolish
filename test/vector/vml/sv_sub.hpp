@@ -24,7 +24,7 @@ template <typename T> bool test_send_svsub(const size_t size, double tol) {
   monolish::vml::sub(x, value, ans);
   ans.recv();
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), x.size(), tol);
 }
 
 template <typename T> bool test_svsub(const size_t size, double tol) {
@@ -38,5 +38,5 @@ template <typename T> bool test_svsub(const size_t size, double tol) {
 
   monolish::vml::sub(x, value, ans);
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), x.size(), tol);
 }

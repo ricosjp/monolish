@@ -12,19 +12,16 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   assert(util::is_same_size(x, y, z));
   assert(util::is_same_device_mem_stat(x, y, z));
 
-  const double *xd = x.data();
-  const double *yd = y.data();
-  double *zd = z.data();
+  const double *xd = x.begin();
+  const double *yd = y.begin();
+  double *zd = z.begin();
   auto size = x.size();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
-  const auto zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(size){0}; i < size; i++) {
-      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
+      zd[i] = alpha * xd[i] + yd[i];
     }
 #else
     throw std::runtime_error(
@@ -33,7 +30,7 @@ void Daxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   } else {
 #pragma omp parallel for
     for (auto i = decltype(size){0}; i < size; i++) {
-      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
+      zd[i] = alpha * xd[i] + yd[i];
     }
   }
   logger.func_out();
@@ -48,19 +45,16 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   assert(util::is_same_size(x, y, z));
   assert(util::is_same_device_mem_stat(x, y, z));
 
-  const float *xd = x.data();
-  const float *yd = y.data();
-  float *zd = z.data();
+  const float *xd = x.begin();
+  const float *yd = y.begin();
+  float *zd = z.begin();
   auto size = x.size();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
-  const auto zoffset = z.get_offset();
 
   if (x.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(size){0}; i < size; i++) {
-      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
+      zd[i] = alpha * xd[i] + yd[i];
     }
 #else
     throw std::runtime_error(
@@ -69,7 +63,7 @@ void Saxpyz_core(const F1 alpha, const F2 &x, const F3 &y, F4 &z) {
   } else {
 #pragma omp parallel for
     for (auto i = decltype(size){0}; i < size; i++) {
-      zd[i + zoffset] = alpha * xd[i + xoffset] + yd[i + yoffset];
+      zd[i] = alpha * xd[i] + yd[i];
     }
   }
   logger.func_out();

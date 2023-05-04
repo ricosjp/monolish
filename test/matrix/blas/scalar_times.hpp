@@ -12,7 +12,7 @@ void ans_scalar_times(const T alpha, const monolish::matrix::Dense<T> &A,
   }
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.data()[i] = alpha * A.data()[i];
+    C.begin()[i] = alpha * A.begin()[i];
   }
 }
 
@@ -45,7 +45,7 @@ bool test_send_scalar_times(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -76,6 +76,6 @@ bool test_scalar_times(const size_t M, const size_t N, double tol) {
 
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }

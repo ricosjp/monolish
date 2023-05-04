@@ -17,7 +17,7 @@ template <typename T> bool test_send_vatan(const size_t size, double tol) {
   monolish::vml::atan(ans, ans);
   ans.recv();
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), ans.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), ans.size(), tol);
 }
 
 template <typename T> bool test_vatan(const size_t size, double tol) {
@@ -29,5 +29,5 @@ template <typename T> bool test_vatan(const size_t size, double tol) {
 
   monolish::vml::atan(ans, ans);
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), ans.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), ans.size(), tol);
 }

@@ -26,13 +26,11 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
   }
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const auto *xd = x.data();
-  auto *yd = y.data();
+  const auto *xd = x.begin();
+  auto *yd = y.begin();
   const auto *vald = A.data();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
   const double alpha = 1.0;
   const double beta = 0.0;
 
@@ -44,8 +42,8 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
     {
       // cublas is col major
       internal::check_CUDA(cublasDgemv(h, internal::get_cublas_trans(!transA),
-                                       n, m, &alpha, vald, n, xd + xoffset, 1,
-                                       &beta, yd + yoffset, 1));
+                                       n, m, &alpha, vald, n, xd, 1,
+                                       &beta, yd, 1));
     }
     cublasDestroy(h);
 #else
@@ -53,7 +51,7 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
 #endif
   } else {
     cblas_dgemv(CblasRowMajor, internal::get_cblas_trans(transA), m, n, alpha,
-                vald, n, xd + xoffset, 1, beta, yd + yoffset, 1);
+                vald, n, xd, 1, beta, yd, 1);
   }
 
   logger.func_out();
@@ -76,13 +74,11 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
   }
   assert(util::is_same_device_mem_stat(A, x, y));
 
-  const auto *xd = x.data();
-  auto *yd = y.data();
+  const auto *xd = x.begin();
+  auto *yd = y.begin();
   const auto *vald = A.data();
   const auto n = A.get_row();
   const auto m = A.get_col();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
   const float alpha = 1.0;
   const float beta = 0.0;
 
@@ -94,8 +90,8 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
     {
       // cublas is col major
       internal::check_CUDA(cublasSgemv(h, internal::get_cublas_trans(!transA),
-                                       m, n, &alpha, vald, m, xd + xoffset, 1,
-                                       &beta, yd + yoffset, 1));
+                                       m, n, &alpha, vald, m, xd, 1,
+                                       &beta, yd, 1));
     }
     cublasDestroy(h);
 #else
@@ -103,7 +99,7 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
 #endif
   } else {
     cblas_sgemv(CblasRowMajor, internal::get_cblas_trans(transA), n, m, alpha,
-                vald, m, xd + xoffset, 1, beta, yd + yoffset, 1);
+                vald, m, xd, 1, beta, yd, 1);
   }
 
   logger.func_out();

@@ -7,12 +7,12 @@ void ans_times_row_line(const monolish::matrix::Dense<T> &A, size_t num,
     std::runtime_error("A.row != y.size");
   }
 
-  const T *x = mx.data();
+  const T *x = mx.begin();
   int M = A.get_row();
   int N = A.get_col();
 
   for (int j = 0; j < N; j++) {
-    C.data()[num * N + j] = A.data()[num * N + j] * x[j];
+    C.begin()[num * N + j] = A.begin()[num * N + j] * x[j];
   }
 }
 
@@ -43,7 +43,7 @@ bool test_send_times_row_line_core(const size_t M, const size_t N, VEC &x,
   C.recv();
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -79,7 +79,7 @@ bool test_times_row_line_core(const size_t M, const size_t N, VEC &x,
   monolish::blas::times_row(A, line, x, C);
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 

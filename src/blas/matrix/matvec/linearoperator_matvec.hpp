@@ -14,9 +14,6 @@ void matvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
   assert(util::is_same_device_mem_stat(A, x, y));
   if (A.get_matvec_init_flag()) {
 
-    const auto xoffset = x.get_offset();
-    const auto yoffset = y.get_offset();
-
     vector<T> x_tmp(x.size(), 0);
     if (x.get_device_mem_stat())
       x_tmp.send();
@@ -24,12 +21,12 @@ void matvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
     if (y.get_device_mem_stat())
       y_tmp.send();
 
-    internal::vcopy(x.size(), x.data() + xoffset, x_tmp.data(),
+    internal::vcopy(x.size(), x.begin(), x_tmp.data(),
                     x.get_device_mem_stat());
 
     y_tmp = A.get_matvec()(x_tmp);
 
-    internal::vcopy(y.size(), y_tmp.data(), y.data() + yoffset,
+    internal::vcopy(y.size(), y_tmp.data(), y.begin(),
                     y.get_device_mem_stat());
   } else {
     throw std::runtime_error("error matvec is not initialized");
@@ -48,8 +45,6 @@ void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
   assert(A.get_col() == y.size());
   assert(util::is_same_device_mem_stat(A, x, y));
   if (A.get_rmatvec_init_flag()) {
-    const auto xoffset = x.get_offset();
-    const auto yoffset = y.get_offset();
 
     vector<T> x_tmp(x.size(), 0);
     if (x.get_device_mem_stat())
@@ -58,12 +53,12 @@ void rmatvec_core(const matrix::LinearOperator<T> &A, const VEC1 &x, VEC2 &y) {
     if (y.get_device_mem_stat())
       y_tmp.send();
 
-    internal::vcopy(x.size(), x.data() + xoffset, x_tmp.data(),
+    internal::vcopy(x.size(), x.begin(), x_tmp.data(),
                     x.get_device_mem_stat());
 
     y_tmp = A.get_rmatvec()(x_tmp);
 
-    internal::vcopy(y.size(), y_tmp.data(), y.data() + yoffset,
+    internal::vcopy(y.size(), y_tmp.data(), y.begin(),
                     y.get_device_mem_stat());
   } else {
     throw std::runtime_error("error rmatmul is not initialized");

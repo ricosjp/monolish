@@ -5,7 +5,7 @@ void ans_st_add(const monolish::tensor::tensor_Dense<T> &A, const T alpha,
                 monolish::tensor::tensor_Dense<T> &C) {
 
   for (int i = 0; i < A.get_nnz(); i++) {
-    C.data()[i] = A.data()[i] + alpha;
+    C.begin()[i] = A.begin()[i] + alpha;
   }
 }
 
@@ -38,7 +38,7 @@ bool test_send_st_add(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -68,6 +68,6 @@ bool test_st_add(const size_t M, const size_t N, const size_t L, double tol) {
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }

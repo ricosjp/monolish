@@ -26,14 +26,14 @@ void ans_tensmul(const monolish::tensor::tensor_Dense<T> &A,
   int N = B.get_shape()[2];
 
   for (int i = 0; i < C.get_nnz(); i++) {
-    C.data()[i] = 0;
+    C.begin()[i] = 0;
   }
 
   for (int ml = 0; ml < M * L; ml++) {
     for (int jn = 0; jn < J * N; jn++) {
       for (int k = 0; k < K; k++) {
-        C.data()[ml * J * N + jn] +=
-            A.data()[ml * K + k] * B.data()[k * J * N + jn];
+        C.begin()[ml * J * N + jn] +=
+            A.begin()[ml * K + k] * B.begin()[k * J * N + jn];
       }
     }
   }
@@ -65,14 +65,14 @@ void ans_tensmul(const T &a, const monolish::tensor::tensor_Dense<T> &A,
   int N = B.get_shape()[2];
 
   for (int i = 0; i < C.get_nnz(); i++) {
-    C.data()[i] = b * C.data()[i];
+    C.begin()[i] = b * C.begin()[i];
   }
 
   for (int ml = 0; ml < M * L; ml++) {
     for (int jn = 0; jn < J * N; jn++) {
       for (int k = 0; k < K; k++) {
-        C.data()[ml * J * N + jn] +=
-            a * A.data()[ml * K + k] * B.data()[k * J * N + jn];
+        C.begin()[ml * J * N + jn] +=
+            a * A.begin()[ml * K + k] * B.begin()[k * J * N + jn];
       }
     }
   }
@@ -114,7 +114,7 @@ bool test_send_tensmul(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -155,7 +155,7 @@ bool test_send_tensmul(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -193,7 +193,7 @@ bool test_tensmul(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -232,6 +232,6 @@ bool test_tensmul(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }

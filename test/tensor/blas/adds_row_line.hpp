@@ -7,12 +7,12 @@ void ans_adds_row_line(const monolish::tensor::tensor_Dense<T> &A, size_t num,
     std::runtime_error("A.col != y.size");
   }
 
-  const T *x = mx.data();
+  const T *x = mx.begin();
   int M = A.get_shape()[0] * A.get_shape()[1];
   int N = A.get_shape()[2];
 
   for (int j = 0; j < N; j++) {
-    C.data()[num * N + j] = A.data()[num * N + j] + x[j];
+    C.begin()[num * N + j] = A.begin()[num * N + j] + x[j];
   }
 }
 
@@ -43,7 +43,7 @@ bool test_send_adds_row_line_core(const size_t M, const size_t N,
   C.recv();
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -81,7 +81,7 @@ bool test_adds_row_line_core(const size_t M, const size_t N, const size_t L,
   monolish::blas::adds_row(A, line, x, C);
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 

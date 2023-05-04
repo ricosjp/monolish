@@ -26,7 +26,7 @@ template <typename T> bool test_send_axpyz(const size_t size, double tol) {
   monolish::blas::axpyz(alpha, x, y, z);
   z.recv();
 
-  return ans_check<T>(__func__, z.data(), ansz.data(), z.size(), tol);
+  return ans_check<T>(__func__, z.begin(), ansz.begin(), z.size(), tol);
 }
 
 template <typename T> bool test_axpyz(const size_t size, double tol) {
@@ -41,5 +41,5 @@ template <typename T> bool test_axpyz(const size_t size, double tol) {
 
   monolish::blas::axpyz(alpha, x, y, z);
 
-  return ans_check<T>(__func__, z.data(), ansz.data(), z.size(), tol);
+  return ans_check<T>(__func__, z.begin(), ansz.begin(), z.size(), tol);
 }

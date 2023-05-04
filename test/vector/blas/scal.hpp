@@ -19,7 +19,7 @@ template <typename T> bool test_send_scal(const size_t size, double tol) {
   monolish::blas::scal(alpha, x);
   x.recv();
 
-  return ans_check<T>(__func__, x.data(), ansx.data(), x.size(), tol);
+  return ans_check<T>(__func__, x.begin(), ansx.begin(), x.size(), tol);
 }
 
 template <typename T> bool test_scal(const size_t size, double tol) {
@@ -32,5 +32,5 @@ template <typename T> bool test_scal(const size_t size, double tol) {
 
   monolish::blas::scal(alpha, x);
 
-  return ans_check<T>(__func__, x.data(), ansx.data(), x.size(), tol);
+  return ans_check<T>(__func__, x.begin(), ansx.begin(), x.size(), tol);
 }

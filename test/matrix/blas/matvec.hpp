@@ -11,8 +11,8 @@ void ans_matvec(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
     std::runtime_error("A.row != y.size");
   }
 
-  T *x = mx.data();
-  T *y = my.data();
+  T *x = mx.begin();
+  T *y = my.begin();
   int M = A.get_row();
   int N = A.get_col();
 
@@ -21,7 +21,7 @@ void ans_matvec(monolish::matrix::Dense<T> &A, monolish::vector<T> &mx,
 
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
-      y[i] += A.data()[N * i + j] * x[j];
+      y[i] += A.begin()[N * i + j] * x[j];
     }
   }
 }
@@ -54,7 +54,7 @@ bool test_send_matvec(const size_t M, const size_t N, double tol) {
   monolish::blas::matvec(A, x, y);
   y.recv();
 
-  return ans_check<T>(__func__, A.type(), y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(), tol);
 }
 
 template <typename MAT, typename T>
@@ -87,7 +87,7 @@ bool test_send_matvec_linearoperator(const size_t M, const size_t N,
   monolish::blas::matvec(A2, x, y);
   y.recv();
 
-  return ans_check<T>(__func__, A2.type(), y.data(), ansy.data(), y.size(),
+  return ans_check<T>(__func__, A2.type(), y.begin(), ansy.begin(), y.size(),
                       tol);
 }
 
@@ -117,5 +117,5 @@ bool test_matvec(const size_t M, const size_t N, double tol) {
 
   monolish::blas::matvec(A, x, y);
 
-  return ans_check<T>(__func__, A.type(), y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, A.type(), y.begin(), ansy.begin(), y.size(), tol);
 }

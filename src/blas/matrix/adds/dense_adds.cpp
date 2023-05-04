@@ -36,15 +36,14 @@ void adds_row_core(const matrix::Dense<T> &A, const VEC &x,
   const auto n = A.get_col();
   auto *Cd = C.data();
 
-  const auto *xd = x.data();
-  const auto xoffset = x.get_offset();
+  const auto *xd = x.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(m){0}; i < m; i++) {
       for (auto j = decltype(n){0}; j < n; j++) {
-        Cd[i * n + j] = Ad[i * n + j] + xd[j + xoffset];
+        Cd[i * n + j] = Ad[i * n + j] + xd[j];
       }
     }
 #else
@@ -55,7 +54,7 @@ void adds_row_core(const matrix::Dense<T> &A, const VEC &x,
 #pragma omp parallel for
     for (auto i = decltype(m){0}; i < m; i++) {
       for (auto j = decltype(n){0}; j < n; j++) {
-        Cd[i * n + j] = Ad[i * n + j] + xd[j + xoffset];
+        Cd[i * n + j] = Ad[i * n + j] + xd[j];
       }
     }
   }
@@ -79,15 +78,14 @@ void adds_col_core(const matrix::Dense<T> &A, const VEC &x,
   const auto n = A.get_col();
   auto *Cd = C.data();
 
-  const auto *xd = x.data();
-  const auto xoffset = x.get_offset();
+  const auto *xd = x.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(m){0}; i < m; i++) {
       for (auto j = decltype(n){0}; j < n; j++) {
-        Cd[i * n + j] = Ad[i * n + j] + xd[i + xoffset];
+        Cd[i * n + j] = Ad[i * n + j] + xd[i];
       }
     }
 #else
@@ -98,7 +96,7 @@ void adds_col_core(const matrix::Dense<T> &A, const VEC &x,
 #pragma omp parallel for
     for (auto i = decltype(m){0}; i < m; i++) {
       for (auto j = decltype(n){0}; j < n; j++) {
-        Cd[i * n + j] = Ad[i * n + j] + xd[i + xoffset];
+        Cd[i * n + j] = Ad[i * n + j] + xd[i];
       }
     }
   }
