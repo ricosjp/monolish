@@ -7,7 +7,6 @@
   only:
     - schedules
     - tags
-    - 733-job-failed-227486
   before_script:
     - apt update
     - apt install -y ./$(find . -name "*.deb")
@@ -84,4 +83,3 @@ benchmark_result:
   only:
     - schedules
     - tags
-    - 733-job-failed-227486
