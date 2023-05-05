@@ -62,10 +62,10 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(vector<Float> &x, const size_t start, const size_t end) : target(x) {
+  view1D(vector<Float> &x, const size_t start, const size_t size) : target(x) {
     first = start;
-    last = end;
-    range = last - first;
+    last = start + size;
+    range = size;
     target_data = x.data();
   }
 
@@ -79,11 +79,11 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(matrix::Dense<Float> &A, const size_t start, const size_t end)
+  view1D(matrix::Dense<Float> &A, const size_t start, const size_t size)
       : target(A) {
     first = start;
-    last = end;
-    range = last - first;
+    last = start + size;
+    range = size;
     target_data = A.data();
   }
 
@@ -97,11 +97,11 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(tensor::tensor_Dense<Float> &A, const size_t start, const size_t end)
+  view1D(tensor::tensor_Dense<Float> &A, const size_t start, const size_t size)
       : target(A) {
     first = start;
-    last = end;
-    range = last - first;
+    last = start + size;
+    range = size;
     target_data = A.data();
   }
 
@@ -115,11 +115,11 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(view1D<vector<Float>, Float> &x, const size_t start, const size_t end)
+  view1D(view1D<vector<Float>, Float> &x, const size_t start, const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = x.get_last() + end;
-    range = last - first;
+    last = first + size;
+    range = size;
     target_data = x.data();
   }
 
@@ -134,11 +134,11 @@ public:
    * - GPU acceleration: false
    **/
   view1D(view1D<matrix::Dense<Float>, Float> &x, const size_t start,
-         const size_t end)
+         const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = x.get_last() + end;
-    range = last - first;
+    last = first + size;
+    range = size;
     target_data = x.data();
   }
 
@@ -153,11 +153,11 @@ public:
    * - GPU acceleration: false
    **/
   view1D(view1D<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
-         const size_t end)
+         const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = x.get_last() + end;
-    range = last - first;
+    last = first + size;
+    range = size;
     target_data = x.data();
   }
 

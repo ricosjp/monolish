@@ -37,15 +37,14 @@ void times_row_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   const auto *cold = A.col_ind.data();
   const auto n = A.get_row();
 
-  const auto *xd = x.data();
-  const auto xoffset = x.get_offset();
+  const auto *xd = x.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        Cd[j] = Ad[j] * xd[cold[j] + xoffset];
+        Cd[j] = Ad[j] * xd[cold[j]];
       }
     }
 #else
@@ -56,7 +55,7 @@ void times_row_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
 #pragma omp parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        Cd[j] = Ad[j] * xd[cold[j] + xoffset];
+        Cd[j] = Ad[j] * xd[cold[j]];
       }
     }
   }
@@ -79,15 +78,14 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
   const auto *rowd = A.row_ptr.data();
   const auto n = A.get_row();
 
-  const auto *xd = x.data();
-  const auto xoffset = x.get_offset();
+  const auto *xd = x.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        Cd[j] = Ad[j] * xd[i + xoffset];
+        Cd[j] = Ad[j] * xd[i];
       }
     }
 #else
@@ -98,7 +96,7 @@ void times_col_core(const matrix::CRS<T> &A, const VEC &x, matrix::CRS<T> &C) {
 #pragma omp parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
       for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-        Cd[j] = Ad[j] * xd[i + xoffset];
+        Cd[j] = Ad[j] * xd[i];
       }
     }
   }

@@ -24,7 +24,7 @@ template <typename T> bool test_send_copy(const size_t size, double tol) {
   monolish::blas::copy(x, y);
   y.recv();
 
-  return ans_check<T>(__func__, y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, y.begin(), ansy.begin(), y.size(), tol);
 }
 
 template <typename T> bool test_copy(const size_t size, double tol) {
@@ -37,5 +37,5 @@ template <typename T> bool test_copy(const size_t size, double tol) {
 
   monolish::blas::copy(x, y);
 
-  return ans_check<T>(__func__, y.data(), ansy.data(), y.size(), tol);
+  return ans_check<T>(__func__, y.begin(), ansy.begin(), y.size(), tol);
 }

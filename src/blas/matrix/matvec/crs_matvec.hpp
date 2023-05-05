@@ -21,12 +21,10 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const double *vald = A.data();
-  const double *xd = x.data();
+  const double *xd = x.begin();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
-  double *yd = y.data();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
+  double *yd = y.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
@@ -50,8 +48,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F);
-      cusparseCreateDnVec(&vecX, xn, (void *)(xd + xoffset), CUDA_R_64F);
-      cusparseCreateDnVec(&vecY, yn, (void *)(yd + yoffset), CUDA_R_64F);
+      cusparseCreateDnVec(&vecX, xn, (void *)(xd), CUDA_R_64F);
+      cusparseCreateDnVec(&vecY, yn, (void *)(yd), CUDA_R_64F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
@@ -87,19 +85,19 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
     // mkl_sparse_set_mv_hint (mklA, SPARSE_OPERATION_NON_TRANSPOSE, descrA,
     // 100); // We haven't seen any performance improvement by using hint.
     mkl_sparse_d_mv(internal::get_sparseblas_trans(transA), alpha, mklA, descrA,
-                    xd + xoffset, beta, yd + yoffset);
+                    xd, beta, yd);
 
     // OSS
 #else
     if (transA == true) {
 #pragma omp parallel for
       for (auto i = decltype(y.size()){0}; i < y.size(); i++) {
-        (yd + yoffset)[i] = 0.0;
+        yd[i] = 0.0;
       }
 
       for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
         for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-          (yd + yoffset)[cold[j]] += vald[j] * (xd + xoffset)[i];
+          yd[cold[j]] += vald[j] * xd[i];
         }
       }
 
@@ -108,9 +106,9 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
       for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
         double ytmp = 0.0;
         for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-          ytmp += vald[j] * (xd + xoffset)[cold[j]];
+          ytmp += vald[j] * xd[cold[j]];
         }
-        yd[i + yoffset] = ytmp;
+        yd[i] = ytmp;
       }
     }
 #endif
@@ -137,12 +135,10 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
   assert(util::is_same_device_mem_stat(A, x, y));
 
   const float *vald = A.data();
-  const float *xd = x.data();
+  const float *xd = x.begin();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
-  float *yd = y.data();
-  const auto xoffset = x.get_offset();
-  const auto yoffset = y.get_offset();
+  float *yd = y.begin();
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
@@ -166,8 +162,8 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
       cusparseCreateCsr(&matA, m, n, nnz, (void *)rowd, (void *)cold,
                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
-      cusparseCreateDnVec(&vecX, xn, (void *)(xd + xoffset), CUDA_R_32F);
-      cusparseCreateDnVec(&vecY, yn, (void *)(yd + yoffset), CUDA_R_32F);
+      cusparseCreateDnVec(&vecX, xn, (void *)(xd), CUDA_R_32F);
+      cusparseCreateDnVec(&vecY, yn, (void *)(yd), CUDA_R_32F);
 
       void *buffer = NULL;
       size_t buffersize = 0;
@@ -203,19 +199,19 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
     // mkl_sparse_set_mv_hint (mklA, SPARSE_OPERATION_NON_TRANSPOSE, descrA,
     // 100); // We haven't seen any performance improvement by using hint.
     mkl_sparse_s_mv(internal::get_sparseblas_trans(transA), alpha, mklA, descrA,
-                    xd + xoffset, beta, yd + yoffset);
+                    xd, beta, yd);
 
     // OSS
 #else
     if (transA == true) {
 #pragma omp parallel for
       for (auto i = decltype(y.size()){0}; i < y.size(); i++) {
-        (yd + yoffset)[i] = 0.0;
+        yd[i] = 0.0;
       }
 
       for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
         for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-          (yd + yoffset)[cold[j]] += vald[j] * (xd + xoffset)[i];
+          yd[cold[j]] += vald[j] * xd[i];
         }
       }
     } else {
@@ -223,9 +219,9 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
       for (auto i = decltype(A.get_row()){0}; i < A.get_row(); i++) {
         float ytmp = 0.0;
         for (auto j = rowd[i]; j < rowd[i + 1]; j++) {
-          ytmp += vald[j] * (xd + xoffset)[cold[j]];
+          ytmp += vald[j] * xd[cold[j]];
         }
-        yd[i + yoffset] = ytmp;
+        yd[i] = ytmp;
       }
     }
 #endif

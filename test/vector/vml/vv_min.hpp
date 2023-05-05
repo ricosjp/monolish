@@ -24,7 +24,7 @@ template <typename T> bool test_send_vvmin(const size_t size, double tol) {
   monolish::vml::min(x, y, ans);
   monolish::util::recv(ans);
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), x.size(), tol);
 }
 
 template <typename T> bool test_vvmin(const size_t size, double tol) {
@@ -38,5 +38,5 @@ template <typename T> bool test_vvmin(const size_t size, double tol) {
 
   monolish::vml::min(x, y, ans);
 
-  return ans_check<T>(__func__, ans.data(), ans_tmp.data(), x.size(), tol);
+  return ans_check<T>(__func__, ans.begin(), ans_tmp.begin(), x.size(), tol);
 }

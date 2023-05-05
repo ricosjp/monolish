@@ -16,7 +16,7 @@ void ans_mattens(monolish::matrix::Dense<T> &A,
     std::runtime_error("B.col != C.col");
   }
 
-  T *y = C.data();
+  T *y = C.begin();
   int M = A.get_row();
   int N = B.get_shape()[1] * B.get_shape()[2];
   int K = A.get_col();
@@ -27,7 +27,7 @@ void ans_mattens(monolish::matrix::Dense<T> &A,
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
       for (int k = 0; k < K; k++) {
-        y[i * N + j] += A.data()[i * K + k] * B.data()[k * N + j];
+        y[i * N + j] += A.begin()[i * K + k] * B.begin()[k * N + j];
       }
     }
   }
@@ -49,7 +49,7 @@ void ans_mattens(const T &a, monolish::matrix::Dense<T> &A,
     std::runtime_error("B.col != C.col");
   }
 
-  T *y = C.data();
+  T *y = C.begin();
   int M = A.get_row();
   int N = B.get_shape()[1] * B.get_shape()[2];
   int K = A.get_col();
@@ -60,7 +60,7 @@ void ans_mattens(const T &a, monolish::matrix::Dense<T> &A,
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
       for (int k = 0; k < K; k++) {
-        y[i * N + j] += a * A.data()[i * K + k] * B.data()[k * N + j];
+        y[i * N + j] += a * A.begin()[i * K + k] * B.begin()[k * N + j];
       }
     }
   }
@@ -101,7 +101,7 @@ bool test_send_mattens(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -140,7 +140,7 @@ bool test_send_mattens(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -177,7 +177,7 @@ bool test_mattens(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }
 
@@ -214,6 +214,6 @@ bool test_mattens(const size_t M, const size_t N, const size_t L,
 
   monolish::tensor::tensor_COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.data(), ansC.data(),
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
                       ansC.get_nnz(), tol);
 }

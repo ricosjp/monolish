@@ -28,8 +28,8 @@ bool test_diag(const size_t M, const size_t N, double tol) {
   A.diag_div(2.0);
   A.diag(vec);
 
-  return ans_check<T>(__func__, A.type(), ansvec.data(), vec.data(), vec.size(),
-                      tol);
+  return ans_check<T>(__func__, A.type(), ansvec.begin(), vec.begin(),
+                      vec.size(), tol);
 }
 
 int main(int argc, char **argv) {

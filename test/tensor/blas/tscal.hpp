@@ -4,7 +4,7 @@ template <typename T>
 void ans_tscal(const double alpha, monolish::tensor::tensor_Dense<T> &A) {
 
   for (int i = 0; i < A.get_nnz(); i++)
-    A.data()[i] = alpha * A.data()[i];
+    A.begin()[i] = alpha * A.begin()[i];
 }
 
 template <typename MAT, typename T>
@@ -32,7 +32,7 @@ bool test_send_tscal(const size_t M, const size_t N, const size_t L,
   A.recv();
   monolish::tensor::tensor_COO<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.data(), ansA.data(),
+  return ans_check<T>(__func__, A.type(), resultA.begin(), ansA.begin(),
                       ansA.get_nnz(), tol);
 }
 
@@ -58,6 +58,6 @@ bool test_tscal(const size_t M, const size_t N, const size_t L, double tol) {
   monolish::blas::tscal(alpha, A);
   monolish::tensor::tensor_COO<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.data(), ansA.data(),
+  return ans_check<T>(__func__, A.type(), resultA.begin(), ansA.begin(),
                       ansA.get_nnz(), tol);
 }

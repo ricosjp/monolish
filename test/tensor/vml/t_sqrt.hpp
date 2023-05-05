@@ -4,7 +4,7 @@
 template <typename T> void ans_sqrt(monolish::tensor::tensor_Dense<T> &A) {
 
   for (size_t i = 0; i < A.get_nnz(); i++) {
-    A.data()[i] = std::sqrt(A.data()[i]);
+    A.begin()[i] = std::sqrt(A.begin()[i]);
   }
 }
 
@@ -31,7 +31,7 @@ bool test_send_tsqrt(const size_t M, const size_t N, const size_t L,
   A.recv();
   monolish::tensor::tensor_Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
+  return ans_check<T>(__func__, A.type(), resultA.begin(), AA.begin(),
                       AA.get_nnz(), tol);
 }
 
@@ -55,6 +55,6 @@ bool test_tsqrt(const size_t M, const size_t N, const size_t L, double tol) {
   monolish::vml::sqrt(A, A);
   monolish::tensor::tensor_Dense<T> resultA(A);
 
-  return ans_check<T>(__func__, A.type(), resultA.data(), AA.data(),
+  return ans_check<T>(__func__, A.type(), resultA.begin(), AA.begin(),
                       AA.get_nnz(), tol);
 }

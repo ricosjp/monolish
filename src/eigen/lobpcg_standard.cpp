@@ -64,24 +64,18 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   std::vector<view1D<matrix::Dense<T>, T>> Xp;
   std::vector<view1D<matrix::Dense<T>, T>> Pp;
   for (auto i = decltype(m){0}; i < m; ++i) {
-    w.push_back(view1D<matrix::Dense<T>, T>(wxp, i * n, (i + 1) * n));
-    x.push_back(view1D<matrix::Dense<T>, T>(wxp, (m + i) * n, (m + i + 1) * n));
-    p.push_back(
-        view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, (2 * m + i + 1) * n));
-    W.push_back(view1D<matrix::Dense<T>, T>(WXP, i * n, (i + 1) * n));
-    X.push_back(view1D<matrix::Dense<T>, T>(WXP, (m + i) * n, (m + i + 1) * n));
-    P.push_back(
-        view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, (2 * m + i + 1) * n));
-    wp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, i * n, (i + 1) * n));
-    xp.push_back(
-        view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, (m + i + 1) * n));
-    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n,
-                                             (2 * m + i + 1) * n));
-    Wp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, i * n, (i + 1) * n));
-    Xp.push_back(
-        view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, (m + i + 1) * n));
-    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n,
-                                             (2 * m + i + 1) * n));
+    w.push_back(view1D<matrix::Dense<T>, T>(wxp, i * n, n));
+    x.push_back(view1D<matrix::Dense<T>, T>(wxp, (m + i) * n, n));
+    p.push_back(view1D<matrix::Dense<T>, T>(wxp, (2 * m + i) * n, n));
+    W.push_back(view1D<matrix::Dense<T>, T>(WXP, i * n, n));
+    X.push_back(view1D<matrix::Dense<T>, T>(WXP, (m + i) * n, n));
+    P.push_back(view1D<matrix::Dense<T>, T>(WXP, (2 * m + i) * n, n));
+    wp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, i * n, n));
+    xp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (m + i) * n, n));
+    pp.push_back(view1D<matrix::Dense<T>, T>(wxp_p, (2 * m + i) * n, n));
+    Wp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, i * n, n));
+    Xp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (m + i) * n, n));
+    Pp.push_back(view1D<matrix::Dense<T>, T>(WXP_p, (2 * m + i) * n, n));
   }
 
   if (this->get_initvec_scheme() == monolish::solver::initvec_scheme::RANDOM) {
@@ -98,7 +92,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
   } else { // initvec_scheme::USER
     // Copy User-supplied xinout to x
     for (auto i = decltype(m){0}; i < m; ++i) {
-      view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
+      view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, n);
       blas::copy(xinout_i, x[i]);
     }
   }
@@ -268,7 +262,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
       }
       if (std::isnan(residual[i])) {
         for (auto j = decltype(m){0}; j < m; ++j) {
-          view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, (j + 1) * n);
+          view1D<matrix::Dense<T>, T> xinout_j(xinout, j * n, n);
           blas::copy(x[j], xinout_j);
         }
         this->final_iter = iter + 1;
@@ -286,7 +280,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     // early return when residual is small enough
     if (resid < this->get_tol() && this->get_miniter() < iter + 1) {
       for (auto i = decltype(m){0}; i < m; ++i) {
-        view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
+        view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, n);
         blas::copy(x[i], xinout_i);
       }
       this->final_iter = iter + 1;
@@ -310,7 +304,7 @@ int standard_eigen::LOBPCG<MATRIX, T>::monolish_LOBPCG(
     }
   }
   for (auto i = decltype(m){0}; i < m; ++i) {
-    view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, (i + 1) * n);
+    view1D<matrix::Dense<T>, T> xinout_i(xinout, i * n, n);
     blas::copy(x[i], xinout_i);
   }
   this->final_iter = this->maxiter;

@@ -23,6 +23,9 @@ Unreleased
 ### Fixed
 - Fix benchmark result token <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/502> <https://github.com/ricosjp/monolish/issues/733>
 
+### Changed
+- Change view1d constructor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/501> <https://github.com/ricosjp/monolish/issues/732>
+
 
 0.17.1 - 2023/05/03
 -----------

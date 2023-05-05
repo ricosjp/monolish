@@ -309,6 +309,38 @@ public:
   [[nodiscard]] std::string type() const { return "tensor_COO"; }
 
   /**
+   * @brief returns a begin iterator
+   * @return begin iterator
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *begin() const { return data(); }
+
+  /**
+   * @brief returns a begin iterator
+   * @return begin iterator
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *begin() { return data(); }
+
+  /**
+   * @brief returns a end iterator
+   * @return end iterator
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] const Float *end() const { return data() + get_nnz(); }
+
+  /**
+   * @brief returns a end iterator
+   * @return end iterator
+   * @note
+   * - # of computation: 1
+   **/
+  [[nodiscard]] Float *end() { return data() + get_nnz(); }
+
+  /**
    * @brief get diag. vector
    * @param vec diag. vector
    * @note

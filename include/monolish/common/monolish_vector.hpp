@@ -366,7 +366,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return data() + size(); }
+  [[nodiscard]] const Float *end() const { return data() + get_nnz(); }
 
   /**
    * @brief returns a end iterator
@@ -374,7 +374,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return data() + size(); }
+  [[nodiscard]] Float *end() { return data() + get_nnz(); }
 
   /**
    * @brief get vector size
