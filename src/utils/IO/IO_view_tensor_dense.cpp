@@ -53,11 +53,11 @@ template <typename U, typename T> void view_tensor_Dense<U, T>::print_all(bool f
 }
 template void view_tensor_Dense<vector<double>, double>::print_all(bool force_cpu) const;
 template void view_tensor_Dense<matrix::Dense<double>, double>::print_all(bool force_cpu) const;
-template void view_tensor_Dense<matrix::LinearOperator<double>, double>::print_all(bool force_cpu) const;
+//template void view_tensor_Dense<matrix::LinearOperator<double>, double>::print_all(bool force_cpu) const;
 template void view_tensor_Dense<tensor::tensor_Dense<double>, double>::print_all(bool force_cpu) const;
 template void view_tensor_Dense<vector<float>, float>::print_all(bool force_cpu) const;
 template void view_tensor_Dense<matrix::Dense<float>, float>::print_all(bool force_cpu) const;
-template void view_tensor_Dense<matrix::LinearOperator<float>, float>::print_all(bool force_cpu) const;
+//template void view_tensor_Dense<matrix::LinearOperator<float>, float>::print_all(bool force_cpu) const;
 template void view_tensor_Dense<tensor::tensor_Dense<float>, float>::print_all(bool force_cpu) const;
 
 
