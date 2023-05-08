@@ -37,17 +37,17 @@ template <typename Float> class tensor_Dense;
 } // namespace tensor
 
 /**
- * @addtogroup View1D_class
+ * @addtogroup View_Dense_class
  * @{
  */
 
 /**
- * @brief 1D view class
+ * @brief Dense view class
  * @note
  * - Multi-threading: true
  * - GPU acceleration: true
  */
-template <typename TYPE, typename Float> class view1D {
+template <typename TYPE, typename Float> class view_Dense {
 private:
   TYPE &target;
   Float *target_data;
@@ -55,127 +55,166 @@ private:
   size_t last;
   size_t range;
 
+  size_t rowN;
+  size_t colN;
+
 public:
   /**
-   * @brief create view1D(start:start+range) from vector
+   * @brief create view_Dense from vector(start:start+range)
    * @param x vector
    * @param start start position
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(vector<Float> &x, const size_t start, const size_t size) : target(x) {
+  view_Dense(vector<Float> &x, const size_t start, const size_t row, const size_t col) : target(x) {
     first = start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = start + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:start+range) from Dense matrix
+   * @brief create view_Dense from Dense matrix(start:start+range)
    * @param A Dense matrix
    * @param start start position
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(matrix::Dense<Float> &A, const size_t start, const size_t size)
+  view_Dense(matrix::Dense<Float> &A, const size_t start, const size_t row, const size_t col)
       : target(A) {
     first = start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = start + range;
     target_data = A.data();
   }
 
   /**
-   * @brief create view1D(start:start+range) from Dense tensor
+   * @brief create view_Dense from Dense tensor(start:start+range)
    * @param A Dense matrix
    * @param start start position
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(tensor::tensor_Dense<Float> &A, const size_t start, const size_t size)
+  view_Dense(tensor::tensor_Dense<Float> &A, const size_t start, const size_t row, const size_t col)
       : target(A) {
     first = start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = start + range;
     target_data = A.data();
   }
 
   /**
-   * @brief create view1D(start:start+range) from monolish::vector
-   * @param x view1D create from monolish::vector
+   * @brief create view_Dense from monolish::vector(start:start+range)
+   * @param x view_Dense create from monolish::vector
    * @param start start position (x.first + start)
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(view1D<vector<Float>, Float> &x, const size_t start, const size_t size)
+  view_Dense(view_Dense<vector<Float>, Float> &x, const size_t start, const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:start+range) from monolish::matrix::Dense
-   * @param x view1D create from monolish::matrix::Dense
+   * @brief create view_Dense from monolish::matrix::Dense(start:start+range)
+   * @param x view_Dense create from monolish::matrix::Dense
    * @param start start position (x.first + start)
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(view1D<matrix::Dense<Float>, Float> &x, const size_t start,
-         const size_t size)
+  view_Dense(view_Dense<matrix::Dense<Float>, Float> &x, const size_t start,
+         const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:start+range) from monolish::tensor::tensor_Dense
-   * @param x view1D create from monolish::tensor::tensor_Dense
+   * @brief create view_Dense from monolish::tensor::tensor_Dense(start:start+range)
+   * @param x view_Dense create from monolish::tensor::tensor_Dense
    * @param start start position (x.first + start)
-   * @param size size
+   * @param row # of row
+   * @param col # of col
    * @note
    * - # of computation: 1
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view1D(view1D<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
-         const size_t size)
+  view_Dense(view_Dense<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
+         const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
-    range = size;
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief get view1D size (range)
-   * @return view1D size
+   * @brief get # of row
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_row() const { return rowN; }
+
+  /**
+   * @brief get # of col
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_col() const { return colN; }
+
+  /**
+   * @brief get view_Dense size (range)
+   * @return view_Dense size
    * @note
    * - # of computation: 1
    **/
   [[nodiscard]] size_t size() const { return range; }
 
   /**
-   * @brief get view1D size (same as size())
-   * @return view1D size
+   * @brief get view_Dense size (same as size())
+   * @return view_Dense size
    * @note
    * - # of computation: 1
    **/
@@ -221,6 +260,89 @@ public:
     assert(first + i <= target.get_nnz());
     last = i;
   }
+
+  /**
+   * @brief get element A[i/col][j%col]
+   * @param i index
+   * @return A[i/col][j%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) const{
+    return target.at(first + i);
+  }
+
+  /**
+   * @brief get element A[i][j]
+   * @param i row
+   * @param j col
+   * @return A[i][j]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i, const size_t j) const {
+    return target.at(first + i*get_col() + j);
+  }
+
+  /**
+   * @brief get element A[i/col][i%col] (only CPU)
+   * @param i index
+   * @return A[i/col][i%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) {
+    return static_cast<const view_Dense<TYPE, Float> *>(this)->at(i);
+  };
+
+  /**
+   * @brief get element A[i][j] (only CPU)
+   * @param i row
+   * @param j col
+   * @return A[i][j]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i, const size_t j) {
+    return static_cast<const view_Dense<TYPE, Float> *>(this)->at(i, j);
+  };
+
+  /**
+   * @brief set element A[i/col][j%col]
+   * @param i index
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t i, const Float Val){
+    target.insert(first + i, Val);
+    return;
+  };
+
+  /**
+   * @brief set element A[i][j]
+   * @param i row
+   * @param j col
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t i, const size_t j, const Float Val){
+    target.insert(first + i*get_col() + j, Val);
+    return;
+  };
 
   /**
    * @brief true: sended, false: not send
@@ -303,9 +425,11 @@ public:
    * @warning
    * Cannot be resized beyond the range of the referenced vector
    **/
-  void resize(size_t N) {
-    assert(first + N <= target.get_nnz());
-    range = N;
+  void resize(size_t row, size_t col) {
+    assert(first + row*col <= target.get_nnz());
+    rowN = row;
+    colN = col;
+    range = rowN*colN;
     last = first + range;
   }
 

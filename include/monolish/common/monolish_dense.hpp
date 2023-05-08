@@ -347,6 +347,17 @@ public:
   }
 
   /**
+   * @brief get element A[i/col][j%col]
+   * @param i index
+   * @return A[i/col][j%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) const;
+
+  /**
    * @brief get element A[i][j]
    * @param i row
    * @param j col
@@ -357,6 +368,19 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] Float at(const size_t i, const size_t j) const;
+
+  /**
+   * @brief get element A[i/col][i%col] (only CPU)
+   * @param i index
+   * @return A[i/col][i%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) {
+    return static_cast<const Dense *>(this)->at(i);
+  };
 
   /**
    * @brief get element A[i][j] (only CPU)
@@ -371,6 +395,17 @@ public:
   [[nodiscard]] Float at(const size_t i, const size_t j) {
     return static_cast<const Dense *>(this)->at(i, j);
   };
+
+  /**
+   * @brief set element A[i/col][j%col]
+   * @param i index
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t i, const Float Val);
 
   /**
    * @brief set element A[i][j]
