@@ -278,6 +278,17 @@ public:
   }
 
   /**
+   * @brief get element A[index]...
+   * @param pos aligned position index
+   * @return A[index]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t pos) const;
+
+  /**
    * @brief get element A[pos[0]][pos[1]]...
    * @param pos std::vector position
    * @return A[pos[0]][pos[1]]...
@@ -322,6 +333,19 @@ public:
   };
 
   /**
+   * @brief get element A[index]... (onlu CPU)
+   * @param pos aligned position index
+   * @return A[index]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t pos) {
+    return static_cast<const tensor_Dense *>(this)->at(pos);
+  };
+
+  /**
    * @brief get element A[pos[0]][pos[1]]... (onlu CPU)
    * @param pos std::vector position
    * @return A[pos[0]][pos[1]]...
@@ -361,6 +385,17 @@ public:
   [[nodiscard]] Float at(const size_t dim, const Args... args) {
     return static_cast<const tensor_Dense *>(this)->at(dim, args...);
   };
+
+  /**
+   * @brief set element A[index]...
+   * @param pos aligned position index
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t pos, const Float Val);
 
   /**
    * @brief set element A[pos[0]][pos[1]]...

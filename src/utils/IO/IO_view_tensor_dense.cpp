@@ -1,10 +1,7 @@
-#include "../../../include/monolish/common/monolish_dense.hpp"
-#include "../../../include/monolish/common/monolish_logger.hpp"
-#include "../../../include/monolish/common/monolish_matrix.hpp"
-#include "../../../include/monolish/common/monolish_tensor.hpp"
+#include "../../../include/monolish_blas.hpp"
+#include "../../../include/monolish_vml.hpp"
 #include "../../internal/monolish_internal.hpp"
 
-#include <cassert>
 #include <fstream>
 #include <iomanip>
 #include <limits>
@@ -13,15 +10,14 @@
 #include <string>
 
 namespace monolish {
-namespace tensor {
 
-template <typename T> void tensor_Dense<T>::print_all(bool force_cpu) const {
+template <typename U, typename T> void view_tensor_Dense<U, T>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const T *vald = data();
+    const T *vald = target.data();
     auto shape = get_shape();
     int size = shape.size();
     const auto *shape_ptr = shape.data();
@@ -37,26 +33,32 @@ template <typename T> void tensor_Dense<T>::print_all(bool force_cpu) const {
       for (auto j = decltype(size){0}; j < size; j++) {
         printf("%lu ", ind_ptr[j]+1);
       }
-      printf("%f\n", vald[i]);
+      printf("%f\n", vald[first + i]);
     }
 #else
     throw std::runtime_error(
         "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
-  } else {
+  }else{
     for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       auto ind = get_index(i);
       for (auto j = decltype(ind.size()){0}; j < ind.size(); j++) {
         std::cout << ind[j] + 1 << " ";
       }
-      std::cout << data()[i] << std::endl;
+      std::cout << data()[first + i] << std::endl;
     }
   }
 
   logger.util_out();
 }
-template void tensor_Dense<double>::print_all(bool force_cpu) const;
-template void tensor_Dense<float>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<vector<double>, double>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<matrix::Dense<double>, double>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<matrix::LinearOperator<double>, double>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<tensor::tensor_Dense<double>, double>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<vector<float>, float>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<matrix::Dense<float>, float>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<matrix::LinearOperator<float>, float>::print_all(bool force_cpu) const;
+template void view_tensor_Dense<tensor::tensor_Dense<float>, float>::print_all(bool force_cpu) const;
 
-} // namespace tensor
+
 } // namespace monolish

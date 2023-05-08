@@ -9,6 +9,7 @@
 #include "monolish_vector.hpp"
 #include "monolish_view1D.hpp"
 #include "monolish_view_dense.hpp"
+#include "monolish_view_tensor_dense.hpp"
 #include <initializer_list>
 
 // error code
