@@ -91,6 +91,141 @@ template bool is_same_structure(const matrix::Dense<double> &A,
 template bool is_same_structure(const matrix::Dense<float> &A,
                                 const matrix::Dense<float> &B);
 
+template <typename T, typename U>
+bool is_same_structure(const view_Dense<T, U> &A, const matrix::Dense<U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_structure(const view_Dense<vector<double>, double> &A,
+                                const matrix::Dense<double> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<double>, double> &A,
+                  const matrix::Dense<double> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+                  const matrix::Dense<double> &B);
+template bool is_same_structure(const view_Dense<vector<float>, float> &A,
+                                const matrix::Dense<float> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<float>, float> &A,
+                  const matrix::Dense<float> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+                  const matrix::Dense<float> &B);
+
+template <typename T, typename U>
+bool is_same_structure(const matrix::Dense<U> &A, const view_Dense<T, U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_structure(const matrix::Dense<double> &A,
+                                const view_Dense<vector<double>, double> &B);
+template bool
+is_same_structure(const matrix::Dense<double> &A,
+                  const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_structure(const matrix::Dense<double> &A,
+                  const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool is_same_structure(const matrix::Dense<float> &A,
+                                const view_Dense<vector<float>, float> &B);
+template bool
+is_same_structure(const matrix::Dense<float> &A,
+                  const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_structure(const matrix::Dense<float> &A,
+                  const view_Dense<tensor::tensor_Dense<float>, float> &B);
+
+template <typename T, typename U>
+bool is_same_structure(const view_Dense<T, U> &A, const view_Dense<T, U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_structure(const view_Dense<vector<double>, double> &A,
+                                const view_Dense<vector<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<vector<double>, double> &A,
+                  const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<vector<double>, double> &A,
+                  const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<double>, double> &A,
+                  const view_Dense<vector<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<double>, double> &A,
+                  const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<double>, double> &A,
+                  const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+                  const view_Dense<vector<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+                  const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+                  const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool is_same_structure(const view_Dense<vector<float>, float> &A,
+                                const view_Dense<vector<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<vector<float>, float> &A,
+                  const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<vector<float>, float> &A,
+                  const view_Dense<tensor::tensor_Dense<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<float>, float> &A,
+                  const view_Dense<vector<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<float>, float> &A,
+                  const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<matrix::Dense<float>, float> &A,
+                  const view_Dense<tensor::tensor_Dense<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+                  const view_Dense<vector<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+                  const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_structure(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+                  const view_Dense<tensor::tensor_Dense<float>, float> &B);
+
 template <typename T>
 bool is_same_size(const matrix::Dense<T> &A, const matrix::Dense<T> &B) {
   Logger &logger = Logger::get_instance();
@@ -111,6 +246,131 @@ template bool is_same_size(const matrix::Dense<double> &A,
                            const matrix::Dense<double> &B);
 template bool is_same_size(const matrix::Dense<float> &A,
                            const matrix::Dense<float> &B);
+
+template <typename T, typename U>
+bool is_same_size(const view_Dense<T, U> &A, const matrix::Dense<U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_size(const view_Dense<vector<double>, double> &A,
+                           const matrix::Dense<double> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<double>, double> &A,
+                           const matrix::Dense<double> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+             const matrix::Dense<double> &B);
+template bool is_same_size(const view_Dense<vector<float>, float> &A,
+                           const matrix::Dense<float> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<float>, float> &A,
+                           const matrix::Dense<float> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+             const matrix::Dense<float> &B);
+
+template <typename T, typename U>
+bool is_same_size(const matrix::Dense<U> &A, const view_Dense<T, U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_size(const matrix::Dense<double> &A,
+                           const view_Dense<vector<double>, double> &B);
+template bool is_same_size(const matrix::Dense<double> &A,
+                           const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_size(const matrix::Dense<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool is_same_size(const matrix::Dense<float> &A,
+                           const view_Dense<vector<float>, float> &B);
+template bool is_same_size(const matrix::Dense<float> &A,
+                           const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_size(const matrix::Dense<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &B);
+
+template <typename T, typename U>
+bool is_same_size(const view_Dense<T, U> &A, const view_Dense<T, U> &B) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  bool ans = true;
+
+  if (A.get_row() != B.get_row() || A.get_col() != B.get_col()) {
+    logger.util_out();
+    ans = false;
+  }
+
+  logger.util_out();
+  return ans;
+}
+
+template bool is_same_size(const view_Dense<vector<double>, double> &A,
+                           const view_Dense<vector<double>, double> &B);
+template bool is_same_size(const view_Dense<vector<double>, double> &A,
+                           const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_size(const view_Dense<vector<double>, double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<double>, double> &A,
+                           const view_Dense<vector<double>, double> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<double>, double> &A,
+                           const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_size(const view_Dense<matrix::Dense<double>, double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+             const view_Dense<vector<double>, double> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+             const view_Dense<matrix::Dense<double>, double> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &B);
+template bool is_same_size(const view_Dense<vector<float>, float> &A,
+                           const view_Dense<vector<float>, float> &B);
+template bool is_same_size(const view_Dense<vector<float>, float> &A,
+                           const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_size(const view_Dense<vector<float>, float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<float>, float> &A,
+                           const view_Dense<vector<float>, float> &B);
+template bool is_same_size(const view_Dense<matrix::Dense<float>, float> &A,
+                           const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_size(const view_Dense<matrix::Dense<float>, float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+             const view_Dense<vector<float>, float> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+             const view_Dense<matrix::Dense<float>, float> &B);
+template bool
+is_same_size(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &B);
 
 } // namespace util
 } // namespace monolish
