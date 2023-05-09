@@ -8,7 +8,7 @@ namespace monolish {
 namespace tensor {
 
 template <typename T> T tensor_Dense<T>::at(const size_t pos) const {
-  if(get_device_mem_stat()) {
+  if (get_device_mem_stat()) {
     throw std::runtime_error("at() Error, GPU vector cant use operator[]");
   }
 
@@ -39,7 +39,7 @@ void tensor_Dense<T>::insert(const size_t pos, const T Val) {
   }
 
   assert(pos < get_nnz());
-  
+
   data()[pos] = Val;
 }
 template void tensor_Dense<double>::insert(const size_t pos, const double Val);

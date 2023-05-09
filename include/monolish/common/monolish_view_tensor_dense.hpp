@@ -68,7 +68,9 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(vector<Float> &x, const size_t start, const std::vector<size_t>& shape_) : target(x) {
+  view_tensor_Dense(vector<Float> &x, const size_t start,
+                    const std::vector<size_t> &shape_)
+      : target(x) {
     first = start;
     shape = shape_;
     range = calc_range();
@@ -86,7 +88,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(matrix::Dense<Float> &A, const size_t start, const std::vector<size_t>& shape_)
+  view_tensor_Dense(matrix::Dense<Float> &A, const size_t start,
+                    const std::vector<size_t> &shape_)
       : target(A) {
     first = start;
     shape = shape_;
@@ -105,7 +108,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(tensor::tensor_Dense<Float> &A, const size_t start, const std::vector<size_t>& shape_)
+  view_tensor_Dense(tensor::tensor_Dense<Float> &A, const size_t start,
+                    const std::vector<size_t> &shape_)
       : target(A) {
     first = start;
     shape = shape_;
@@ -124,7 +128,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(view_tensor_Dense<vector<Float>, Float> &x, const size_t start, const std::vector<size_t>& shape_)
+  view_tensor_Dense(view_tensor_Dense<vector<Float>, Float> &x,
+                    const size_t start, const std::vector<size_t> &shape_)
       : target(x) {
     first = x.get_first() + start;
     shape = shape_;
@@ -134,7 +139,8 @@ public:
   }
 
   /**
-   * @brief create view_tensor_Dense from monolish::matrix::Dense(start:start+range)
+   * @brief create view_tensor_Dense from
+   *monolish::matrix::Dense(start:start+range)
    * @param x view_tensor_Dense create from monolish::matrix::Dense
    * @param start start position (x.first + start)
    * @param shape_ shape of tensor
@@ -143,8 +149,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(view_tensor_Dense<matrix::Dense<Float>, Float> &x, const size_t start,
-         const std::vector<size_t>& shape_)
+  view_tensor_Dense(view_tensor_Dense<matrix::Dense<Float>, Float> &x,
+                    const size_t start, const std::vector<size_t> &shape_)
       : target(x) {
     first = x.get_first() + start;
     shape = shape_;
@@ -154,7 +160,8 @@ public:
   }
 
   /**
-   * @brief create view_tensor_Dense from monolish::tensor::tensor_Dense(start:start+range)
+   * @brief create view_tensor_Dense from
+   *monolish::tensor::tensor_Dense(start:start+range)
    * @param x view_tensor_Dense create from monolish::tensor::tensor_Dense
    * @param start start position (x.first + start)
    * @param shape_ shape of tensor
@@ -163,8 +170,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_tensor_Dense(view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
-         const std::vector<size_t>& shape_)
+  view_tensor_Dense(view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &x,
+                    const size_t start, const std::vector<size_t> &shape_)
       : target(x) {
     first = x.get_first() + start;
     shape = shape_;
@@ -181,7 +188,7 @@ public:
    */
   [[nodiscard]] size_t calc_range() const {
     size_t N = 1;
-    for(auto n : shape){
+    for (auto n : shape) {
       N *= n;
     }
     return N;
@@ -262,7 +269,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] Float at(const size_t pos) const{
+  [[nodiscard]] Float at(const size_t pos) const {
     return target.at(first + pos);
   }
 
@@ -334,7 +341,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] Float at(const std::vector<size_t>& pos) {
+  [[nodiscard]] Float at(const std::vector<size_t> &pos) {
     return static_cast<const view_tensor_Dense<TYPE, Float> *>(this)->at(pos);
   };
 
@@ -375,7 +382,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void insert(const size_t i, const Float Val){
+  void insert(const size_t i, const Float Val) {
     target.insert(first + i, Val);
     return;
   };
@@ -389,7 +396,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void insert(const std::vector<size_t> &pos, const Float Val){
+  void insert(const std::vector<size_t> &pos, const Float Val) {
     target.insert(first + get_index(pos), Val);
     return;
   };
@@ -475,7 +482,7 @@ public:
    * @warning
    * Cannot be resized beyond the range of the referenced vector
    **/
-  void resize(std::vector<size_t>& shape_) {
+  void resize(std::vector<size_t> &shape_) {
     shape = shape_;
     range = calc_range();
     assert(first + range <= target.get_nnz());
@@ -537,7 +544,6 @@ public:
     }
     return ind;
   }
-
 
   /**
    * @brief fill vector elements with a scalar value

@@ -32,8 +32,7 @@ template double Dense<double>::at(const size_t i, const size_t j) const;
 template float Dense<float>::at(const size_t i, const size_t j) const;
 
 // insert //
-template <typename T>
-void Dense<T>::insert(const size_t i, const T Val) {
+template <typename T> void Dense<T>::insert(const size_t i, const T Val) {
   if (get_device_mem_stat()) {
     throw std::runtime_error("insert() Error, GPU vector cant use operator[]");
   }

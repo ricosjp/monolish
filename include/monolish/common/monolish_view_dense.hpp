@@ -70,11 +70,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_Dense(vector<Float> &x, const size_t start, const size_t row, const size_t col) : target(x) {
+  view_Dense(vector<Float> &x, const size_t start, const size_t row,
+             const size_t col)
+      : target(x) {
     first = start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = start + range;
     target_data = x.data();
   }
@@ -90,12 +92,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_Dense(matrix::Dense<Float> &A, const size_t start, const size_t row, const size_t col)
+  view_Dense(matrix::Dense<Float> &A, const size_t start, const size_t row,
+             const size_t col)
       : target(A) {
     first = start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = start + range;
     target_data = A.data();
   }
@@ -111,12 +114,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_Dense(tensor::tensor_Dense<Float> &A, const size_t start, const size_t row, const size_t col)
+  view_Dense(tensor::tensor_Dense<Float> &A, const size_t start,
+             const size_t row, const size_t col)
       : target(A) {
     first = start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = start + range;
     target_data = A.data();
   }
@@ -132,12 +136,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_Dense(view_Dense<vector<Float>, Float> &x, const size_t start, const size_t row, const size_t col)
+  view_Dense(view_Dense<vector<Float>, Float> &x, const size_t start,
+             const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = first + range;
     target_data = x.data();
   }
@@ -154,18 +159,19 @@ public:
    * - GPU acceleration: false
    **/
   view_Dense(view_Dense<matrix::Dense<Float>, Float> &x, const size_t start,
-         const size_t row, const size_t col)
+             const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view_Dense from monolish::tensor::tensor_Dense(start:start+range)
+   * @brief create view_Dense from
+   *monolish::tensor::tensor_Dense(start:start+range)
    * @param x view_Dense create from monolish::tensor::tensor_Dense
    * @param start start position (x.first + start)
    * @param row # of row
@@ -175,13 +181,13 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  view_Dense(view_Dense<tensor::tensor_Dense<Float>, Float> &x, const size_t start,
-         const size_t row, const size_t col)
+  view_Dense(view_Dense<tensor::tensor_Dense<Float>, Float> &x,
+             const size_t start, const size_t row, const size_t col)
       : target(x) {
     first = x.get_first() + start;
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = first + range;
     target_data = x.data();
   }
@@ -270,9 +276,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] Float at(const size_t i) const{
-    return target.at(first + i);
-  }
+  [[nodiscard]] Float at(const size_t i) const { return target.at(first + i); }
 
   /**
    * @brief get element A[i][j]
@@ -285,7 +289,7 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] Float at(const size_t i, const size_t j) const {
-    return target.at(first + i*get_col() + j);
+    return target.at(first + i * get_col() + j);
   }
 
   /**
@@ -324,7 +328,7 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void insert(const size_t i, const Float Val){
+  void insert(const size_t i, const Float Val) {
     target.insert(first + i, Val);
     return;
   };
@@ -339,8 +343,8 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  void insert(const size_t i, const size_t j, const Float Val){
-    target.insert(first + i*get_col() + j, Val);
+  void insert(const size_t i, const size_t j, const Float Val) {
+    target.insert(first + i * get_col() + j, Val);
     return;
   };
 
@@ -426,10 +430,10 @@ public:
    * Cannot be resized beyond the range of the referenced vector
    **/
   void resize(size_t row, size_t col) {
-    assert(first + row*col <= target.get_nnz());
+    assert(first + row * col <= target.get_nnz());
     rowN = row;
     colN = col;
-    range = rowN*colN;
+    range = rowN * colN;
     last = first + range;
   }
 

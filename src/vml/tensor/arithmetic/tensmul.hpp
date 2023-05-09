@@ -12,7 +12,7 @@ void stmul_core(const F1 &A, const F2 alpha, F3 &C) {
   assert(util::is_same_size(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vmul(A.get_nnz(), A.data(), alpha, C.data(),
+  internal::vmul(A.get_nnz(), A.begin(), alpha, C.begin(),
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -28,7 +28,7 @@ void ttmul_core(const F1 &A, const F2 &B, F3 &C) {
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vmul(A.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vmul(A.get_nnz(), A.begin(), B.begin(), C.begin(),
                  C.get_device_mem_stat());
 
   logger.func_out();

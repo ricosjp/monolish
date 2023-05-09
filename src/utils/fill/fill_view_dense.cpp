@@ -30,12 +30,14 @@ template <typename T, typename U> void view_Dense<T, U>::fill(U value) {
 }
 template void view_Dense<vector<double>, double>::fill(double value);
 template void view_Dense<matrix::Dense<double>, double>::fill(double value);
+// template void view_Dense<matrix::LinearOperator<double>, double>::fill(double
+// value);
 template void
-view_Dense<matrix::LinearOperator<double>, double>::fill(double value);
-template void view_Dense<tensor::tensor_Dense<double>, double>::fill(double value);
+view_Dense<tensor::tensor_Dense<double>, double>::fill(double value);
 template void view_Dense<vector<float>, float>::fill(float value);
 template void view_Dense<matrix::Dense<float>, float>::fill(float value);
-template void view_Dense<matrix::LinearOperator<float>, float>::fill(float value);
+// template void view_Dense<matrix::LinearOperator<float>, float>::fill(float
+// value);
 template void view_Dense<tensor::tensor_Dense<float>, float>::fill(float value);
 
 } // namespace monolish

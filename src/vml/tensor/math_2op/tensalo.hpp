@@ -12,7 +12,7 @@ void talo_core(const F1 &A, F2 alpha, F3 beta, F4 &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::valo(A.get_nnz(), A.data(), alpha, beta, C.data(),
+  internal::valo(A.get_nnz(), A.begin(), alpha, beta, C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();

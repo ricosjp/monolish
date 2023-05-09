@@ -327,7 +327,8 @@ public:
    **/
   template <typename... Args>
 #if !defined(__clang__) && defined(__GNUC__)
-  [[nodiscard]] Float at(const size_t dim, const size_t dim2, const Args... args) const {
+  [[nodiscard]] Float at(const size_t dim, const size_t dim2,
+                         const Args... args) const {
     std::vector<size_t> pos(1);
     pos[0] = dim;
     return this->at(pos, dim2, args...);
