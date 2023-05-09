@@ -326,11 +326,19 @@ public:
    * - GPU acceleration: false
    **/
   template <typename... Args>
+#if !defined(__clang__) && defined(__GNUC__)
+  [[nodiscard]] Float at(const size_t dim, const size_t dim2, const Args... args) const {
+    std::vector<size_t> pos(1);
+    pos[0] = dim;
+    return this->at(pos, dim2, args...);
+  };
+#else
   [[nodiscard]] Float at(const size_t dim, const Args... args) const {
     std::vector<size_t> pos(1);
     pos[0] = dim;
     return this->at(pos, args...);
   };
+#endif
 
   /**
    * @brief get element A[index]... (onlu CPU)
