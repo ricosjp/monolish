@@ -2,16 +2,7 @@
 
 template <typename MAT, typename T>
 bool test_send_transpose(const size_t M, const size_t N, double tol) {
-
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
-
+  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   if (A.type() != "COO")
@@ -45,16 +36,7 @@ bool test_send_transpose(const size_t M, const size_t N, double tol) {
 
 template <typename MAT, typename T>
 bool test_transpose(const size_t M, const size_t N, double tol) {
-
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
-
+  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> ansA(A);
@@ -82,15 +64,7 @@ bool test_transpose(const size_t M, const size_t N, double tol) {
 
 template <typename MAT, typename T>
 bool test_transpose_elements(const size_t M, const size_t N, double tol) {
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
-
+  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   MAT B; // N*M matrix

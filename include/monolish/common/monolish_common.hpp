@@ -466,9 +466,9 @@ template <typename T, typename U>
  * - GPU acceleration: false
  * @ingroup compare
  **/
-template <typename T, typename U>
-[[nodiscard]] bool is_same_structure(const view1D<T, U> &x,
-                                     const view1D<T, U> &y) {
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view1D<T, V> &x,
+                                     const view1D<U, V> &y) {
   return x.size() == y.size();
 }
 
@@ -573,9 +573,9 @@ template <typename T, typename U>
  * - GPU acceleration: false
  * @ingroup compare
  **/
-template <typename T, typename U>
-[[nodiscard]] bool is_same_structure(const view_Dense<T, U> &A,
-                                     const view_Dense<T, U> &B);
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view_Dense<T, V> &A,
+                                     const view_Dense<U, V> &B);
 
 /**
  * @brief compare structure using M and N (same as is_same_size())
@@ -648,9 +648,9 @@ template <typename T, typename U>
  * - GPU acceleration: false
  * @ingroup compare
  **/
-template <typename T, typename U>
-[[nodiscard]] bool is_same_structure(const view_tensor_Dense<T, U> &A,
-                                     const view_tensor_Dense<T, U> &B);
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view_tensor_Dense<T, V> &A,
+                                     const view_tensor_Dense<U, V> &B);
 
 /**
  * @brief compare matrix structure
@@ -777,9 +777,9 @@ template <typename T, typename U>
  * - GPU acceleration: false
  * @ingroup compare
  **/
-template <typename T, typename U>
-[[nodiscard]] bool is_same_size(const view_Dense<T, U> &A,
-                                const view_Dense<T, U> &B);
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_size(const view_Dense<T, V> &A,
+                                const view_Dense<U, V> &B);
 
 /**
  * @brief compare shape
@@ -850,9 +850,9 @@ template <typename T, typename U>
  * - GPU acceleration: false
  * @ingroup compare
  **/
-template <typename T, typename U>
-[[nodiscard]] bool is_same_size(const view_tensor_Dense<T, U> &A,
-                                const view_tensor_Dense<T, U> &B);
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_size(const view_tensor_Dense<T, V> &A,
+                                const view_tensor_Dense<U, V> &B);
 
 /**
  * @brief compare matrix size

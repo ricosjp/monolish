@@ -166,6 +166,37 @@ public:
   }
 
   /**
+   * @brief get format name "view1D"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string type() const {
+    return "view1D(" + target.type() + ")";
+  }
+
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void send() const { target.send(); };
+
+  /**
+   * @brief recv data from GPU, and free data on GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void recv() { target.recv(); };
+
+  /**
    * @brief get view1D size (range)
    * @return view1D size
    * @note
@@ -284,6 +315,16 @@ public:
   [[nodiscard]] Float *end() { return target_data + range; }
 
   /**
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
    * @brief print all elements to standart I/O
    * @param force_cpu Ignore device status and output CPU data
    * @note
@@ -309,6 +350,76 @@ public:
     last = first + range;
   }
 
+  // operator
+  // ///////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const vector<Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<vector<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::matrix::Dense
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::tensor::tensor_Dense
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector from std::vector
+   * @param vec source std::vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  void operator=(const std::vector<Float> &vec);
+
   /**
    * @brief reference to the element at position
    * @param i Position of an element in the vector
@@ -324,16 +435,6 @@ public:
     }
     return target_data[i + first];
   }
-
-  /**
-   * @brief fill vector elements with a scalar value
-   * @param value scalar value
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void fill(Float value);
 };
 /**@}*/
 

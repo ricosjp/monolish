@@ -10,7 +10,7 @@ template <typename T> void vector<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *d = data();
+  const T *d = begin();
   const auto N = size();
 
   if (gpu_status == true) {
@@ -30,7 +30,7 @@ template <typename T> void vector<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *d = data();
+    T *d = begin();
     const auto N = size();
 
 #pragma omp target exit data map(from : d [0:N])
@@ -48,7 +48,7 @@ template <typename T> void vector<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *d = data();
+    T *d = begin();
     const auto N = size();
 #pragma omp target update from(d [0:N])
   }
@@ -63,7 +63,7 @@ template <typename T> void vector<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *d = data();
+    const T *d = begin();
     const auto N = size();
 #pragma omp target exit data map(release : d [0:N])
     gpu_status = false;
@@ -91,7 +91,7 @@ template <typename T> void matrix::CRS<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *vald = data();
+  const T *vald = begin();
   const auto *cold = col_ind.data();
   const auto *rowd = row_ptr.data();
   const auto N = get_row();
@@ -116,7 +116,7 @@ template <typename T> void matrix::CRS<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
     auto N = get_row();
@@ -137,7 +137,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
     auto N = get_row();
@@ -156,7 +156,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *vald = data();
+    const T *vald = begin();
     const auto *cold = col_ind.data();
     const auto *rowd = row_ptr.data();
     const auto N = get_row();
@@ -188,7 +188,7 @@ template <typename T> void matrix::Dense<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *vald = data();
+  const T *vald = begin();
   const auto nnz = get_nnz();
 
   if (gpu_status == true) {
@@ -208,7 +208,7 @@ template <typename T> void matrix::Dense<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
@@ -225,7 +225,7 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target update from(vald [0:nnz])
@@ -241,7 +241,7 @@ template <typename T> void matrix::Dense<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *vald = data();
+    const T *vald = begin();
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])
@@ -270,7 +270,7 @@ template <typename T> void tensor::tensor_Dense<T>::send() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  const T *vald = data();
+  const T *vald = begin();
   const auto nnz = get_nnz();
 
   if (gpu_status == true) {
@@ -290,7 +290,7 @@ template <typename T> void tensor::tensor_Dense<T>::recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
@@ -307,7 +307,7 @@ template <typename T> void tensor::tensor_Dense<T>::nonfree_recv() {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    T *vald = data();
+    T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target update from(vald [0:nnz])
@@ -323,7 +323,7 @@ template <typename T> void tensor::tensor_Dense<T>::device_free() const {
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (gpu_status == true) {
-    const T *vald = data();
+    const T *vald = begin();
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])

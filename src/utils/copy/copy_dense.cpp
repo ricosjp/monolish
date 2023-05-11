@@ -17,9 +17,9 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
 
   // gpu copy
   if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.data(), data(), true);
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
   } else {
-    internal::vcopy(get_nnz(), mat.data(), data(), false);
+    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
   }
 
   logger.util_out();
@@ -29,13 +29,85 @@ template void Dense<double>::operator=(const Dense<double> &mat);
 template void Dense<float>::operator=(const Dense<float> &mat);
 
 template <typename T>
+void Dense<T>::operator=(const view_Dense<vector<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_size(*this, mat));
+  assert(monolish::util::is_same_device_mem_stat(*this, mat));
+
+  // gpu copy
+  if (mat.get_device_mem_stat()) {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  } else {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+  }
+
+  logger.util_out();
+}
+
+template void
+Dense<double>::operator=(const view_Dense<vector<double>, double> &mat);
+template void
+Dense<float>::operator=(const view_Dense<vector<float>, float> &mat);
+
+template <typename T>
+void Dense<T>::operator=(const view_Dense<matrix::Dense<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_size(*this, mat));
+  assert(monolish::util::is_same_device_mem_stat(*this, mat));
+
+  // gpu copy
+  if (mat.get_device_mem_stat()) {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  } else {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+  }
+
+  logger.util_out();
+}
+
+template void
+Dense<double>::operator=(const view_Dense<matrix::Dense<double>, double> &mat);
+template void
+Dense<float>::operator=(const view_Dense<matrix::Dense<float>, float> &mat);
+
+template <typename T>
+void Dense<T>::operator=(const view_Dense<tensor::tensor_Dense<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  // err
+  assert(monolish::util::is_same_size(*this, mat));
+  assert(monolish::util::is_same_device_mem_stat(*this, mat));
+
+  // gpu copy
+  if (mat.get_device_mem_stat()) {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  } else {
+    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+  }
+
+  logger.util_out();
+}
+
+template void Dense<double>::operator=(
+    const view_Dense<tensor::tensor_Dense<double>, double> &mat);
+template void Dense<float>::operator=(
+    const view_Dense<tensor::tensor_Dense<float>, float> &mat);
+
+template <typename T>
 void Dense<T>::set_ptr(const size_t M, const size_t N, const T *value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
   val_create_flag = true;
   resize(M * N);
   for (size_t i = 0; i < M * N; ++i) {
-    data()[i] = value[i];
+    begin()[i] = value[i];
   }
 
   rowN = M;

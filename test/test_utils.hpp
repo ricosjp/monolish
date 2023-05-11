@@ -195,3 +195,14 @@ void print_build_info() {
     std::cout << "monolish: enable LAPACK" << std::endl;
   }
 }
+
+template <typename T>
+monolish::matrix::COO<T> get_seed_matrix(const size_t M, const size_t N) {
+  size_t nnzrow = 27;
+  if (nnzrow < N) {
+    nnzrow = 27;
+  } else {
+    nnzrow = N - 1;
+  }
+  return monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+}

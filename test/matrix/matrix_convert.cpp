@@ -2,15 +2,8 @@
 
 template <typename MAT, typename T>
 bool test_convert(const size_t M, const size_t N) {
-  size_t nnzrow = 27;
-  if ((nnzrow < N)) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
   // ans COO (source)
-  monolish::matrix::COO<T> ans_coo =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> ans_coo = get_seed_matrix<T>(M, N);
 
   // convert COO -> MAT
   MAT mat(ans_coo);

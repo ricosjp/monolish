@@ -73,6 +73,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_add_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_add_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_add_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_add_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mm_sub Dense//
   if (test_send_mm_sub<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>,
@@ -96,6 +109,19 @@ int main(int argc, char **argv) {
                   monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_mm_sub_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_sub_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_sub_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_sub_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -125,6 +151,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_mul_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_mul_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_mul_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_mul_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mm_div Dense//
   if (test_send_mm_div<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>,
@@ -151,6 +190,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_div_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_div_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_div_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_div_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // sm_add Dense//
   if (test_send_sm_add<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
@@ -170,6 +222,19 @@ int main(int argc, char **argv) {
   if (test_sm_add<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_sm_add_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_add_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_add_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_add_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -195,6 +260,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_sm_sub_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_sub_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_sub_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_sub_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // sm_mul Dense//
   if (test_send_sm_mul<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
@@ -214,6 +292,19 @@ int main(int argc, char **argv) {
   if (test_sm_mul<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_sm_mul_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_mul_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_mul_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_mul_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -239,6 +330,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_sm_div_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_div_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_div_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_div_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // sm_pow Dense//
   if (test_send_sm_pow<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
@@ -258,6 +362,19 @@ int main(int argc, char **argv) {
   if (test_sm_pow<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_sm_pow_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_pow_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_pow_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_pow_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -287,6 +404,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_pow_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_pow_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_pow_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_pow_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // msqrt Dense //
   if (test_send_msqrt<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -305,6 +435,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_msqrt_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_msqrt_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_msqrt_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_msqrt_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // msin Dense //
   if (test_send_msin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -319,6 +462,19 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_msin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_msin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_msin_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_msin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_msin_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -340,6 +496,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_msinh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_msinh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_msinh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_msinh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // masin Dense //
   if (test_send_masin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -355,6 +524,19 @@ int main(int argc, char **argv) {
   }
   if (test_masin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_masin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_masin_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_masin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_masin_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -376,6 +558,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_masinh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_masinh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_masinh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_masinh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mtan Dense //
   if (test_send_mtan<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -390,6 +585,19 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_mtan<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mtan_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mtan_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mtan_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mtan_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -411,6 +619,50 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matan_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matan_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_matan_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_matan_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mtanh Dense //
+  if (test_send_mtanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mtanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mtanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mtanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  if (test_send_mtanh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mtanh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mtanh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mtanh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // matanh Dense //
   if (test_send_matanh<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -426,6 +678,19 @@ int main(int argc, char **argv) {
   }
   if (test_matanh<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_matanh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matanh_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_matanh_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_matanh_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -447,6 +712,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mceil_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mceil_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mceil_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mceil_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mfloor Dense //
   if (test_send_mfloor<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -462,6 +740,19 @@ int main(int argc, char **argv) {
   }
   if (test_mfloor<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_mfloor_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mfloor_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mfloor_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mfloor_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -483,6 +774,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_msign_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_msign_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_msign_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_msign_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mreciprocal Dense //
   if (test_send_mreciprocal<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-8) == false) {
@@ -498,6 +802,19 @@ int main(int argc, char **argv) {
   }
   if (test_mreciprocal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_mreciprocal_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mreciprocal_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mreciprocal_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mreciprocal_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -518,6 +835,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mexp_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mexp_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mexp_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mexp_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mmax Dense //
   if (test_send_mmax<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -535,6 +865,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mmax_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mmax_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mmax_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mmax_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mmin Dense //
   if (test_send_mmin<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -549,6 +892,19 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_mmin<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_mmin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mmin_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mmin_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mmin_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -578,6 +934,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_max_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_max_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_max_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_max_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mm_min Dense//
   if (test_send_mm_min<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>,
@@ -604,6 +973,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_min_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_min_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_min_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_min_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // sm_max Dense//
   if (test_send_sm_max<monolish::matrix::Dense<double>,
                        monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
@@ -623,6 +1005,19 @@ int main(int argc, char **argv) {
   if (test_sm_max<monolish::matrix::Dense<float>,
                   monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_sm_max_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_max_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_max_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_max_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -648,6 +1043,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_sm_min_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_sm_min_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_sm_min_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_sm_min_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // m_alo Dense //
   if (test_send_malo<monolish::matrix::Dense<double>, double>(M, N, 1.0e-8) ==
       false) {
@@ -662,6 +1070,19 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_malo<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_malo_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_malo_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_malo_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_malo_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -1000,6 +1421,23 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_matan<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // mtanh CRS //
+  if (test_send_mtanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_mtanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  if (test_mtanh<monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_mtanh<monolish::matrix::CRS<float>, float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 

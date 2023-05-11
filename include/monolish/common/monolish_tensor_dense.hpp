@@ -6,6 +6,8 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+template <typename TYPE, typename Float> class view_Dense;
+template <typename TYPE, typename Float> class view_tensor_Dense;
 namespace tensor {
 template <typename Float> class tensor_COO;
 template <typename Float> class tensor_Dense {
@@ -617,6 +619,49 @@ public:
    *        - else; coping data on CPU
    **/
   void operator=(const tensor_Dense<Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<vector<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<matrix::Dense<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void
+  operator=(const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tens);
 
   /**
    * @brief reference to the element at position (v[i])

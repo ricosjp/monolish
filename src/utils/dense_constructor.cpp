@@ -31,7 +31,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T *value) {
 
   val_create_flag = true;
   resize(M * N);
-  std::copy(value, value + get_nnz(), data());
+  std::copy(value, value + get_nnz(), begin());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -48,7 +48,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const std::vector<T> &value) {
 
   val_create_flag = true;
   resize(M * N);
-  std::copy(value.begin(), value.end(), data());
+  std::copy(value.begin(), value.end(), begin());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -65,13 +65,13 @@ Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
 
   val_create_flag = true;
   resize(M * N);
-  std::copy(value.data(), value.data() + get_nnz(), data());
+  std::copy(value.begin(), value.begin() + get_nnz(), begin());
 
   if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
     send();
-    T *vald = data();
-    const T *data = value.data();
+    T *vald = begin();
+    const T *data = value.begin();
 #pragma omp target teams distribute parallel for
     for (size_t i = 0; i < get_nnz(); i++) {
       vald[i] = data[i];
@@ -99,7 +99,7 @@ Dense<T>::Dense(const size_t M, const size_t N,
 
   val_create_flag = true;
   resize(M * N);
-  std::copy(list.begin(), list.end(), data());
+  std::copy(list.begin(), list.end(), begin());
   logger.util_out();
 }
 template Dense<double>::Dense(const size_t M, const size_t N,
@@ -122,7 +122,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max) {
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    data()[i] = rand(mt);
+    begin()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -147,7 +147,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T min, const T max,
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    data()[i] = rand(mt);
+    begin()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -169,7 +169,7 @@ Dense<T>::Dense(const size_t M, const size_t N, const T value) {
 
 #pragma omp parallel for
   for (size_t i = 0; i < get_nnz(); i++) {
-    data()[i] = value;
+    begin()[i] = value;
   }
 
   logger.util_out();
@@ -192,10 +192,10 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     send();
-    internal::vcopy(get_nnz(), mat.data(), data(), true);
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
   }
 #endif
-  internal::vcopy(get_nnz(), mat.data(), data(), false);
+  internal::vcopy(get_nnz(), mat.begin(), begin(), false);
 
   logger.util_out();
 }
@@ -216,15 +216,91 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat, T value) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
     send();
-    internal::vbroadcast(get_nnz(), value, data(), true);
+    internal::vbroadcast(get_nnz(), value, begin(), true);
   }
 #endif
-  internal::vbroadcast(get_nnz(), value, data(), false);
+  internal::vbroadcast(get_nnz(), value, begin(), false);
 
   logger.util_out();
 }
 template Dense<double>::Dense(const Dense<double> &mat, double value);
 template Dense<float>::Dense(const Dense<float> &mat, float value);
+
+// copy constructor///////////////////////////////
+template <typename T> Dense<T>::Dense(const view_Dense<vector<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(mat.get_nnz());
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+
+  logger.util_out();
+}
+template Dense<double>::Dense(const view_Dense<vector<double>, double> &mat);
+template Dense<float>::Dense(const view_Dense<vector<float>, float> &mat);
+
+template <typename T>
+Dense<T>::Dense(const view_Dense<matrix::Dense<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(mat.get_nnz());
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+
+  logger.util_out();
+}
+template Dense<double>::Dense(
+    const view_Dense<matrix::Dense<double>, double> &mat);
+template Dense<float>::Dense(
+    const view_Dense<matrix::Dense<float>, float> &mat);
+
+template <typename T>
+Dense<T>::Dense(const view_Dense<tensor::tensor_Dense<T>, T> &mat) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(mat.get_nnz());
+
+  rowN = mat.get_row();
+  colN = mat.get_col();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (mat.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), mat.begin(), begin(), false);
+
+  logger.util_out();
+}
+template Dense<double>::Dense(
+    const view_Dense<tensor::tensor_Dense<double>, double> &mat);
+template Dense<float>::Dense(
+    const view_Dense<tensor::tensor_Dense<float>, float> &mat);
 
 } // namespace matrix
 } // namespace monolish

@@ -43,8 +43,8 @@ bool test_send_adds_row_line_core(const size_t M, const size_t N, VEC &x,
   C.recv();
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
-                      ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type() + "+" + x.type(), resultC.begin(),
+                      ansC.begin(), ansC.get_nnz(), tol);
 }
 
 template <typename MAT, typename T>
@@ -80,8 +80,8 @@ bool test_adds_row_line_core(const size_t M, const size_t N, VEC &x,
   monolish::blas::adds_row(A, line, x, C);
   monolish::matrix::COO<T> resultC(C);
 
-  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
-                      ansC.get_nnz(), tol);
+  return ans_check<T>(__func__, A.type() + "+" + x.type(), resultC.begin(),
+                      ansC.begin(), ansC.get_nnz(), tol);
 }
 
 template <typename MAT, typename T>
@@ -90,69 +90,62 @@ bool test_adds_row_line(const size_t M, const size_t N, double tol) {
   return test_adds_row_line_core<MAT, monolish::vector<T>, T>(M, N, vec, tol);
 }
 
-template <typename MAT, typename T, typename U,
-          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
-                                  std::nullptr_t>::type = nullptr>
-bool test_send_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x(2 * N, 0.0, 1.0);
+template <typename MAT, typename T>
+bool test_send_adds_row_line_view_core(const size_t M, const size_t N,
+                                       double tol) {
+  return true;
+}
+
+template <typename MAT, typename T, typename U, typename... ARGS>
+bool test_send_adds_row_line_view_core(const size_t M, const size_t N,
+                                       double tol, U x, ARGS... args) {
   x.send();
   monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_send_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                      tol);
+  if (!test_send_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
+                                                                    tol)) {
+    return false;
+  }
+  return test_send_adds_row_line_view_core<MAT, T, ARGS...>(M, N, tol, args...);
 }
 
-template <
-    typename MAT, typename T, typename U,
-    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
-                            std::nullptr_t>::type = nullptr>
+template <typename MAT, typename T>
 bool test_send_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x(2 * N, 1, 0.0, 1.0);
-  x.send();
-  monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_send_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                      tol);
+  using T1 = monolish::vector<T>;
+  using T2 = monolish::matrix::Dense<T>;
+  using T3 = monolish::tensor::tensor_Dense<T>;
+  T1 x1(2 * N, 0.0, 1.0);
+  T2 x2(2 * N, 1, 0.0, 1.0);
+  T3 x3({2 * N, 1, 1}, 0.0, 1.0);
+
+  return test_send_adds_row_line_view_core<MAT, T, T1, T2, T3>(M, N, tol, x1,
+                                                               x2, x3);
 }
 
-template <typename MAT, typename T, typename U,
-          typename std::enable_if<
-              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
-              std::nullptr_t>::type = nullptr>
-bool test_send_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x({2 * N, 1, 1}, 0.0, 1.0);
-  x.send();
-  monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_send_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                      tol);
+template <typename MAT, typename T>
+bool test_adds_row_line_view_core(const size_t M, const size_t N, double tol) {
+  return true;
 }
 
-template <typename MAT, typename T, typename U,
-          typename std::enable_if<std::is_same<U, monolish::vector<T>>::value,
-                                  std::nullptr_t>::type = nullptr>
+template <typename MAT, typename T, typename U, typename... ARGS>
+bool test_adds_row_line_view_core(const size_t M, const size_t N, double tol,
+                                  U x, ARGS... args) {
+  monolish::view1D<U, T> vec(x, N / 2, N);
+  if (!test_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
+                                                               tol)) {
+    return false;
+  }
+  return test_adds_row_line_view_core<MAT, T, ARGS...>(M, N, tol, args...);
+}
+
+template <typename MAT, typename T>
 bool test_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x(2 * N, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                 tol);
-}
+  using T1 = monolish::vector<T>;
+  using T2 = monolish::matrix::Dense<T>;
+  using T3 = monolish::tensor::tensor_Dense<T>;
+  T1 x1(2 * N, 0.0, 1.0);
+  T2 x2(2 * N, 1, 0.0, 1.0);
+  T3 x3({2 * N, 1, 1}, 0.0, 1.0);
 
-template <
-    typename MAT, typename T, typename U,
-    typename std::enable_if<std::is_same<U, monolish::matrix::Dense<T>>::value,
-                            std::nullptr_t>::type = nullptr>
-bool test_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x(2 * N, 1, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                 tol);
-}
-
-template <typename MAT, typename T, typename U,
-          typename std::enable_if<
-              std::is_same<U, monolish::tensor::tensor_Dense<T>>::value,
-              std::nullptr_t>::type = nullptr>
-bool test_adds_row_line_view(const size_t M, const size_t N, double tol) {
-  U x({2 * N, 1, 1}, 0.0, 1.0);
-  monolish::view1D<U, T> vec(x, N / 2, N);
-  return test_adds_row_line_core<MAT, monolish::view1D<U, T>, T>(M, N, vec,
-                                                                 tol);
+  return test_adds_row_line_view_core<MAT, T, T1, T2, T3>(M, N, tol, x1, x2,
+                                                          x3);
 }

@@ -181,6 +181,37 @@ public:
   }
 
   /**
+   * @brief get format name "view_tensor_Dense"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string type() const {
+    return "view_tensor_Dense(" + target.type() + ")";
+  }
+
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void send() const { target.send(); };
+
+  /**
+   * @brief recv data from GPU, and free data on GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void recv() { target.recv(); };
+
+  /**
    * @brief calculate view_tensor_Dense size from shape
    * @return view_tensor_Dense size
    * @note
@@ -490,6 +521,73 @@ public:
   }
 
   /**
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const tensor::tensor_Dense<Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<vector<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<matrix::Dense<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void
+  operator=(const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tens);
+
+  /**
    * @brief reference to the element at position
    * @param i Position of an element in the vector
    * @return vector element (v[i])
@@ -544,16 +642,6 @@ public:
     }
     return ind;
   }
-
-  /**
-   * @brief fill vector elements with a scalar value
-   * @param value scalar value
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void fill(Float value);
 };
 /**@}*/
 

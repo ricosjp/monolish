@@ -203,6 +203,15 @@ public:
   vector(const size_t N, const Float min, const Float max,
          const std::uint32_t seed);
 
+  /**
+   * @brief get format name "vector"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string type() const { return "vector"; }
+
   // communication
   // ///////////////////////////////////////////////////////////////////////////
   /**
@@ -288,63 +297,6 @@ public:
   [[nodiscard]] Float *data() { return val.get(); }
 
   /**
-   * @brief resize vector (only CPU)
-   * @param N vector length
-   * @note
-   * - # of computation: N
-   * - Multi-threading: false
-   * - GPU acceleration: false
-   **/
-  void resize(size_t N, Float Val = 0) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use resize");
-    }
-    if (val_create_flag) {
-      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
-      size_t copy_size = std::min(val_nnz, N);
-      for (size_t i = 0; i < copy_size; i++) {
-        tmp.get()[i] = data()[i];
-      }
-      for (size_t i = copy_size; i < N; i++) {
-        tmp.get()[i] = Val;
-      }
-      val = tmp;
-      alloc_nnz = N;
-      val_nnz = N;
-    } else {
-      throw std::runtime_error("Error, not create vector cant use resize");
-    }
-  }
-
-  /**
-   * @brief Add a new element at the end of the vector (only CPU)
-   * @param val new element
-   * @note
-   * - # of computation: 1
-   **/
-  void push_back(Float Val) {
-    if (get_device_mem_stat()) {
-      throw std::runtime_error("Error, GPU vector cant use push_back");
-    }
-    if (val_create_flag) {
-      if (val_nnz >= alloc_nnz) {
-        size_t tmp = val_nnz;
-        alloc_nnz = 2 * alloc_nnz + 1;
-        resize(alloc_nnz);
-        val_nnz = tmp;
-      }
-      data()[val_nnz] = Val;
-      val_nnz++;
-    } else {
-      throw std::runtime_error("Error, not create vector cant use push_back");
-    }
-  }
-
-  void move(const tensor::tensor_Dense<Float> &tensor_dense);
-
-  void move(const tensor::tensor_Dense<Float> &tensor_dense, int N);
-
-  /**
    * @brief returns a begin iterator
    * @return begin iterator
    * @note
@@ -421,6 +373,63 @@ public:
    * - GPU acceleration: false
    **/
   void print_all(std::string filename) const;
+
+  /**
+   * @brief resize vector (only CPU)
+   * @param N vector length
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void resize(size_t N, Float Val = 0) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use resize");
+    }
+    if (val_create_flag) {
+      std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
+      size_t copy_size = std::min(val_nnz, N);
+      for (size_t i = 0; i < copy_size; i++) {
+        tmp.get()[i] = data()[i];
+      }
+      for (size_t i = copy_size; i < N; i++) {
+        tmp.get()[i] = Val;
+      }
+      val = tmp;
+      alloc_nnz = N;
+      val_nnz = N;
+    } else {
+      throw std::runtime_error("Error, not create vector cant use resize");
+    }
+  }
+
+  /**
+   * @brief Add a new element at the end of the vector (only CPU)
+   * @param val new element
+   * @note
+   * - # of computation: 1
+   **/
+  void push_back(Float Val) {
+    if (get_device_mem_stat()) {
+      throw std::runtime_error("Error, GPU vector cant use push_back");
+    }
+    if (val_create_flag) {
+      if (val_nnz >= alloc_nnz) {
+        size_t tmp = val_nnz;
+        alloc_nnz = 2 * alloc_nnz + 1;
+        resize(alloc_nnz);
+        val_nnz = tmp;
+      }
+      data()[val_nnz] = Val;
+      val_nnz++;
+    } else {
+      throw std::runtime_error("Error, not create vector cant use push_back");
+    }
+  }
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense);
+
+  void move(const tensor::tensor_Dense<Float> &tensor_dense, int N);
 
   // operator
   // ///////////////////////////////////////////////////////////////////////////

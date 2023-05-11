@@ -173,9 +173,9 @@ template bool is_same_structure(
     const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
     const tensor::tensor_Dense<float> &B);
 
-template <typename T, typename U>
-bool is_same_structure(const view_tensor_Dense<T, U> &A,
-                       const view_tensor_Dense<T, U> &B) {
+template <typename T, typename U, typename V>
+bool is_same_structure(const view_tensor_Dense<T, V> &A,
+                       const view_tensor_Dense<U, V> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -335,9 +335,9 @@ template bool
 is_same_size(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
              const tensor::tensor_Dense<float> &B);
 
-template <typename T, typename U>
-bool is_same_size(const view_tensor_Dense<T, U> &A,
-                  const view_tensor_Dense<T, U> &B) {
+template <typename T, typename U, typename V>
+bool is_same_size(const view_tensor_Dense<T, V> &A,
+                  const view_tensor_Dense<U, V> &B) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 

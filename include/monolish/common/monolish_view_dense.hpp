@@ -192,6 +192,26 @@ public:
     target_data = x.data();
   }
 
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void send() const { target.send(); };
+
+  /**
+   * @brief recv data from GPU, and free data on GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void recv() { target.recv(); };
+
   /**
    * @brief get # of row
    * @note
@@ -265,6 +285,17 @@ public:
   void set_last(size_t i) {
     assert(first + i <= target.get_nnz());
     last = i;
+  }
+
+  /**
+   * @brief get format name "view_Dense"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string type() const {
+    return "view_Dense(" + target.type() + ")";
   }
 
   /**
@@ -438,6 +469,72 @@ public:
   }
 
   /**
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const matrix::Dense<Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<vector<Float>, Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<matrix::Dense<Float>, Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<tensor::tensor_Dense<Float>, Float> &mat);
+
+  /**
    * @brief reference to the element at position
    * @param i Position of an element in the vector
    * @return vector element (v[i])
@@ -452,16 +549,6 @@ public:
     }
     return target_data[i + first];
   }
-
-  /**
-   * @brief fill vector elements with a scalar value
-   * @param value scalar value
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void fill(Float value);
 };
 /**@}*/
 
