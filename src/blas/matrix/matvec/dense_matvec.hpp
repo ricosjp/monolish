@@ -28,7 +28,7 @@ void Dmatvec_core(const matrix::Dense<double> &A, const VEC1 &x, VEC2 &y,
 
   const auto *xd = x.begin();
   auto *yd = y.begin();
-  const auto *vald = A.data();
+  const auto *vald = A.begin();
   const auto m = A.get_row();
   const auto n = A.get_col();
   const double alpha = 1.0;
@@ -76,7 +76,7 @@ void Smatvec_core(const matrix::Dense<float> &A, const VEC1 &x, VEC2 &y,
 
   const auto *xd = x.begin();
   auto *yd = y.begin();
-  const auto *vald = A.data();
+  const auto *vald = A.begin();
   const auto n = A.get_row();
   const auto m = A.get_col();
   const float alpha = 1.0;

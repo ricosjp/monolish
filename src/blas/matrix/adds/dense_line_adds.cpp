@@ -17,9 +17,9 @@ void adds_row_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
   assert(A.get_col() == x.size());
   assert(A.get_row() >= num);
 
-  const auto *Ad = A.data();
+  const auto *Ad = A.begin();
   const auto n = A.get_col();
-  auto *Cd = C.data();
+  auto *Cd = C.begin();
 
   const auto *xd = x.begin();
 
@@ -55,10 +55,10 @@ void adds_col_core(const matrix::Dense<T> &A, const size_t num, const VEC &x,
   assert(A.get_row() == x.size());
   assert(A.get_col() >= num);
 
-  const auto *Ad = A.data();
+  const auto *Ad = A.begin();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.data();
+  auto *Cd = C.begin();
 
   const auto *xd = x.begin();
 

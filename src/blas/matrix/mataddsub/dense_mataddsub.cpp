@@ -15,7 +15,7 @@ void matadd_core(const matrix::Dense<F> &A, const matrix::Dense<F> &B,
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vadd(A.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vadd(A.get_nnz(), A.begin(), B.begin(), C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -31,7 +31,7 @@ void matsub_core(const matrix::Dense<F> &A, const matrix::Dense<F> &B,
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vsub(A.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vsub(A.get_nnz(), A.begin(), B.begin(), C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();

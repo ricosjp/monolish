@@ -13,7 +13,7 @@ void copy_core(const matrix::Dense<F> &A, matrix::Dense<F> &C) {
   assert(util::is_same_size(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vcopy(A.get_nnz(), A.data(), C.data(), A.get_device_mem_stat());
+  internal::vcopy(A.get_nnz(), A.begin(), C.begin(), A.get_device_mem_stat());
 
   logger.util_out();
 }

@@ -17,12 +17,12 @@ void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const double *vald = A.data();
+  const double *vald = A.begin();
   const auto rowd = A.row_ptr.data();
   const auto cold = A.col_ind.data();
 
-  const double *Bd = B.data();
-  double *Cd = C.data();
+  const double *Bd = B.begin();
+  double *Cd = C.begin();
 
   // MN = MK * KN
   const int M = (int)A.get_row();
@@ -161,12 +161,12 @@ void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
   assert(B.get_col() == C.get_col());
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  const float *vald = A.data();
+  const float *vald = A.begin();
   const auto *rowd = A.row_ptr.data();
   const auto *cold = A.col_ind.data();
 
-  const float *Bd = B.data();
-  float *Cd = C.data();
+  const float *Bd = B.begin();
+  float *Cd = C.begin();
 
   // MN = MK * KN
   const int M = A.get_row();

@@ -9,7 +9,7 @@ template <typename T> void mscal_core(const T alpha, matrix::Dense<T> &A) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  internal::vmul(A.get_nnz(), A.data(), alpha, A.data(),
+  internal::vmul(A.get_nnz(), A.begin(), alpha, A.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();

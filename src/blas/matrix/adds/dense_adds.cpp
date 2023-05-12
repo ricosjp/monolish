@@ -14,7 +14,7 @@ void adds_core(const T alpha, const matrix::Dense<T> &A, matrix::Dense<T> &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vadd(A.get_nnz(), A.data(), alpha, C.data(),
+  internal::vadd(A.get_nnz(), A.begin(), alpha, C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -31,10 +31,10 @@ void adds_row_core(const matrix::Dense<T> &A, const VEC &x,
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_col() == x.size());
 
-  const auto *Ad = A.data();
+  const auto *Ad = A.begin();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.data();
+  auto *Cd = C.begin();
 
   const auto *xd = x.begin();
 
@@ -73,10 +73,10 @@ void adds_col_core(const matrix::Dense<T> &A, const VEC &x,
   assert(util::is_same_device_mem_stat(A, x, C));
   assert(A.get_row() == x.size());
 
-  const auto *Ad = A.data();
+  const auto *Ad = A.begin();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  auto *Cd = C.data();
+  auto *Cd = C.begin();
 
   const auto *xd = x.begin();
 
