@@ -73,6 +73,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_add_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_add_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_add_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_add_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tt_sub tensor_Dense//
   if (test_send_tt_sub<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>,
@@ -96,6 +109,19 @@ int main(int argc, char **argv) {
                   monolish::tensor::tensor_Dense<float>,
                   monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tt_sub_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_sub_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_sub_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_sub_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -125,6 +151,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_mul_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_mul_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_mul_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_mul_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tt_div tensor_Dense//
   if (test_send_tt_div<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>,
@@ -151,6 +190,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_div_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_div_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_div_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_div_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // st_add tensor_Dense//
   if (test_send_st_add<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>, double>(
@@ -170,6 +222,19 @@ int main(int argc, char **argv) {
   if (test_st_add<monolish::tensor::tensor_Dense<float>,
                   monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_st_add_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_add_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_add_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_add_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -195,6 +260,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_st_sub_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_sub_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_sub_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_sub_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // st_mul tensor_Dense//
   if (test_send_st_mul<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>, double>(
@@ -214,6 +292,19 @@ int main(int argc, char **argv) {
   if (test_st_mul<monolish::tensor::tensor_Dense<float>,
                   monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_st_mul_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_mul_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_mul_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_mul_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -239,6 +330,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_st_div_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_div_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_div_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_div_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // st_pow tensor_Dense//
   if (test_send_st_pow<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>, double>(
@@ -258,6 +362,19 @@ int main(int argc, char **argv) {
   if (test_st_pow<monolish::tensor::tensor_Dense<float>,
                   monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_st_pow_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_pow_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_pow_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_pow_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -287,6 +404,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_pow_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_pow_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_pow_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_pow_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tsqrt tensor_Dense //
   if (test_send_tsqrt<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -302,6 +432,19 @@ int main(int argc, char **argv) {
   }
   if (test_tsqrt<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tsqrt_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsqrt_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsqrt_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsqrt_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -323,6 +466,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tsin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsin_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsin_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tsinh tensor_Dense //
   if (test_send_tsinh<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -338,6 +494,19 @@ int main(int argc, char **argv) {
   }
   if (test_tsinh<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tsinh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsinh_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsinh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsinh_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -359,6 +528,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tasin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tasin_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tasin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tasin_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tasinh tensor_Dense //
   if (test_send_tasinh<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -374,6 +556,19 @@ int main(int argc, char **argv) {
   }
   if (test_tasinh<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tasinh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tasinh_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tasinh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tasinh_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -395,6 +590,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_ttan_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_ttan_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_ttan_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_ttan_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tatan tensor_Dense //
   if (test_send_tatan<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -410,6 +618,50 @@ int main(int argc, char **argv) {
   }
   if (test_tatan<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tatan_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tatan_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tatan_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tatan_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // ttanh tensor_Dense //
+  if (test_send_ttanh<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_ttanh<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_ttanh<monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_ttanh<monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_ttanh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_ttanh_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_ttanh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_ttanh_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -431,6 +683,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tatanh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tatanh_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tatanh_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tatanh_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tceil tensor_Dense //
   if (test_send_tceil<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -446,6 +711,19 @@ int main(int argc, char **argv) {
   }
   if (test_tceil<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tceil_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tceil_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tceil_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tceil_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -467,6 +745,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tfloor_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tfloor_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tfloor_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tfloor_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tsign tensor_Dense //
   if (test_send_tsign<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -482,6 +773,19 @@ int main(int argc, char **argv) {
   }
   if (test_tsign<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tsign_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsign_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsign_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsign_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -503,6 +807,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_treciprocal_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_treciprocal_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_treciprocal_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_treciprocal_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // texp tensor_Dense //
   if (test_send_texp<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -518,6 +835,19 @@ int main(int argc, char **argv) {
   }
   if (test_texp<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_texp_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_texp_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_texp_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_texp_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -539,6 +869,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tmax_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tmax_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tmax_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tmax_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tmin tensor_Dense //
   if (test_send_tmin<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
@@ -554,6 +897,19 @@ int main(int argc, char **argv) {
   }
   if (test_tmin<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_tmin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tmin_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tmin_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tmin_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -583,6 +939,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_max_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_max_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_max_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_max_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tt_min tensor_Dense//
   if (test_send_tt_min<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>,
@@ -609,6 +978,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_tt_min_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_min_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_min_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_min_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // st_max tensor_Dense//
   if (test_send_st_max<monolish::tensor::tensor_Dense<double>,
                        monolish::tensor::tensor_Dense<double>, double>(
@@ -628,6 +1010,19 @@ int main(int argc, char **argv) {
   if (test_st_max<monolish::tensor::tensor_Dense<float>,
                   monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_st_max_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_max_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_max_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_max_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 
@@ -653,7 +1048,20 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  // t_alo tensor_Dense //
+  if (test_send_st_min_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_min_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_min_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_min_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // talo tensor_Dense //
   if (test_send_talo<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-8) == false) {
     return 1;
@@ -668,6 +1076,19 @@ int main(int argc, char **argv) {
   }
   if (test_talo<monolish::tensor::tensor_Dense<float>, float>(
           M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  if (test_send_talo_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_talo_view<float>(M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_talo_view<double>(M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_talo_view<float>(M, N, K, 1.0e-4) == false) {
     return 1;
   }
 

@@ -197,7 +197,8 @@ void print_build_info() {
 }
 
 template <typename T>
-monolish::matrix::COO<T> get_seed_matrix(const size_t M, const size_t N) {
+monolish::matrix::COO<T> get_random_structure_matrix(const size_t M,
+                                                     const size_t N) {
   size_t nnzrow = 27;
   if (nnzrow < N) {
     nnzrow = 27;
@@ -205,4 +206,30 @@ monolish::matrix::COO<T> get_seed_matrix(const size_t M, const size_t N) {
     nnzrow = N - 1;
   }
   return monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+}
+
+template <typename T>
+monolish::tensor::tensor_COO<T> get_random_structure_tensor(const size_t M,
+                                                            const size_t N) {
+  size_t nnzrow = 27;
+  if (nnzrow < N) {
+    nnzrow = 27;
+  } else {
+    nnzrow = N - 1;
+  }
+
+  return monolish::util::random_structure_tensor<T>(M, N, nnzrow, 1.0);
+}
+
+template <typename T>
+monolish::tensor::tensor_COO<T>
+get_random_structure_tensor(const size_t M, const size_t N, const size_t L) {
+  size_t nnzrow = 27;
+  if (nnzrow < L) {
+    nnzrow = 27;
+  } else {
+    nnzrow = L - 1;
+  }
+
+  return monolish::util::random_structure_tensor<T>(M, N, L, nnzrow, 1.0);
 }

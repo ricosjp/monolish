@@ -12,14 +12,13 @@ bool test_send_mmax_core(const size_t M, const size_t N, double tol,
 
   monolish::util::send(A);
   T result = monolish::vml::max(A);
-  monolish::matrix::Dense<T> resultA(A);
 
   return ans_check<T>(__func__, result, ans, tol);
 }
 
 template <typename MAT, typename T>
 bool test_send_mmax(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -50,7 +49,7 @@ template <typename T, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_send_mmax_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;
@@ -86,7 +85,7 @@ bool test_mmax_core(const size_t M, const size_t N, double tol,
 
 template <typename MAT, typename T>
 bool test_mmax(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -116,7 +115,7 @@ template <typename T, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_mmax_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;

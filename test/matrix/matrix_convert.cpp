@@ -3,7 +3,7 @@
 template <typename MAT, typename T>
 bool test_convert(const size_t M, const size_t N) {
   // ans COO (source)
-  monolish::matrix::COO<T> ans_coo = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> ans_coo = get_random_structure_matrix<T>(M, N);
 
   // convert COO -> MAT
   MAT mat(ans_coo);

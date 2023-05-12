@@ -18,9 +18,9 @@ void view_tensor_Dense<T, U>::operator=(const tensor::tensor_Dense<U> &tens) {
 
   // gpu copy
   if (tens.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
   } else {
-    internal::vcopy(get_nnz(), tens.data(), data(), false);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), false);
   }
 
   logger.util_out();
@@ -52,9 +52,9 @@ void view_tensor_Dense<T, U>::operator=(
 
   // gpu copy
   if (tens.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
   } else {
-    internal::vcopy(get_nnz(), tens.data(), data(), false);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), false);
   }
 
   logger.util_out();
@@ -86,9 +86,9 @@ void view_tensor_Dense<T, U>::operator=(
 
   // gpu copy
   if (tens.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
   } else {
-    internal::vcopy(get_nnz(), tens.data(), data(), false);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), false);
   }
 
   logger.util_out();
@@ -120,9 +120,9 @@ void view_tensor_Dense<T, U>::operator=(
 
   // gpu copy
   if (tens.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
   } else {
-    internal::vcopy(get_nnz(), tens.data(), data(), false);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), false);
   }
 
   logger.util_out();

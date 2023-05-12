@@ -22,6 +22,21 @@ template tensor_Dense<double>::tensor_Dense(const std::vector<size_t> &shape);
 template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape);
 
 template <typename T>
+tensor_Dense<T>::tensor_Dense(const std::initializer_list<size_t> &shape_) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  this->shape = shape_;
+
+  val_create_flag = true;
+  resize(this->shape);
+  logger.util_out();
+}
+template tensor_Dense<double>::tensor_Dense(
+    const std::initializer_list<size_t> &shape_);
+template tensor_Dense<float>::tensor_Dense(
+    const std::initializer_list<size_t> &shape_);
+
+template <typename T>
 tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
                               const T *value) {
   Logger &logger = Logger::get_instance();
@@ -149,6 +164,85 @@ tensor_Dense<T>::tensor_Dense(const tensor_Dense<T> &tens, T value) {
 
   logger.util_out();
 }
+template tensor_Dense<double>::tensor_Dense(const tensor_Dense<double> &tens,
+                                            double value);
+template tensor_Dense<float>::tensor_Dense(const tensor_Dense<float> &tens,
+                                           float value);
+
+// copy constructor///////////////////////////////
+template <typename T>
+tensor_Dense<T>::tensor_Dense(const view_tensor_Dense<vector<T>, T> &tens) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(tens.get_nnz());
+  this->shape = tens.get_shape();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (tens.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), tens.begin(), begin(), false);
+
+  logger.util_out();
+}
+template tensor_Dense<double>::tensor_Dense(
+    const view_tensor_Dense<vector<double>, double> &tens);
+template tensor_Dense<float>::tensor_Dense(
+    const view_tensor_Dense<vector<float>, float> &tens);
+
+template <typename T>
+tensor_Dense<T>::tensor_Dense(
+    const view_tensor_Dense<matrix::Dense<T>, T> &tens) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(tens.get_nnz());
+  this->shape = tens.get_shape();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (tens.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), tens.begin(), begin(), false);
+
+  logger.util_out();
+}
+template tensor_Dense<double>::tensor_Dense(
+    const view_tensor_Dense<matrix::Dense<double>, double> &tens);
+template tensor_Dense<float>::tensor_Dense(
+    const view_tensor_Dense<matrix::Dense<float>, float> &tens);
+
+template <typename T>
+tensor_Dense<T>::tensor_Dense(
+    const view_tensor_Dense<tensor::tensor_Dense<T>, T> &tens) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  val_create_flag = true;
+  resize(tens.get_nnz());
+  this->shape = tens.get_shape();
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (tens.get_device_mem_stat()) {
+    send();
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
+  }
+#endif
+  internal::vcopy(get_nnz(), tens.begin(), begin(), false);
+
+  logger.util_out();
+}
+template tensor_Dense<double>::tensor_Dense(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double> &tens);
+template tensor_Dense<float>::tensor_Dense(
+    const view_tensor_Dense<tensor::tensor_Dense<float>, float> &tens);
 
 } // namespace tensor
 } // namespace monolish

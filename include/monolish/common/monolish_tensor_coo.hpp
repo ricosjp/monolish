@@ -66,6 +66,19 @@ public:
   }
 
   /**
+   * @brief Initialize tensor_COO tensor
+   * @param shape shape of tensor
+   * @note
+   * - # of computation: 0
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  tensor_COO(const std::initializer_list<size_t> &shape_)
+      : shape(shape_), gpu_status(false), index(), val_nnz(0) {
+    val_create_flag = true;
+  }
+
+  /**
    * @brief Create tensor_COO tensor from tensor_Dense tensor
    * @param tens input tensor_Dense tensor
    * @note

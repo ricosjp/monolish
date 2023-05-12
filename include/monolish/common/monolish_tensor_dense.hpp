@@ -152,6 +152,16 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
+  tensor_Dense(const std::initializer_list<size_t> &shape);
+
+  /**
+   * @brief Allocate dense tensor
+   * @param shape shape of tensor
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   tensor_Dense(const std::vector<size_t> &shape, const Float *value);
 
   /**
@@ -207,6 +217,49 @@ public:
    *        - else; coping data only on CPU
    **/
   tensor_Dense(const tensor_Dense<Float> &tens, Float value);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(const view_tensor_Dense<vector<Float>, Float> &tens);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(const view_tensor_Dense<matrix::Dense<Float>, Float> &tens);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(
+      const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tens);
 
   /**
    * @brief Set tensor_Dense array from std::vector

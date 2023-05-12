@@ -24,7 +24,7 @@ bool test_send_msign_core(const size_t M, const size_t N, double tol,
 
 template <typename MAT, typename T>
 bool test_send_msign(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -78,7 +78,7 @@ template <typename T, typename MATS2, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_send_msign_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;
@@ -117,7 +117,7 @@ bool test_msign_core(const size_t M, const size_t N, double tol,
 
 template <typename MAT, typename T>
 bool test_msign(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -169,7 +169,7 @@ template <typename T, typename MATS2, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_msign_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;

@@ -2,7 +2,7 @@
 
 template <typename MAT, typename T>
 bool test_send_reshape(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA);
 
   monolish::util::send(A);
@@ -21,7 +21,7 @@ bool test_send_reshape(const size_t M, const size_t N, double tol) {
 
 template <typename MAT, typename T>
 bool test_reshape(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA);
 
   A.reshape(N, M);

@@ -23,7 +23,7 @@ bool test_send_msin_core(const size_t M, const size_t N, double tol,
 
 template <typename MAT, typename T>
 bool test_send_msin(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -76,7 +76,7 @@ template <typename T, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_send_msin_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;
@@ -113,7 +113,7 @@ bool test_msin_core(const size_t M, const size_t N, double tol,
 
 template <typename MAT, typename T>
 bool test_msin(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   MAT A(seedA); // M*N matrix
 
   monolish::matrix::Dense<T> AA(seedA);
@@ -166,7 +166,7 @@ template <typename T, std::size_t I = 0, typename... Tp>
 
 template <typename T>
 bool test_msin_view(const size_t M, const size_t N, double tol) {
-  monolish::matrix::COO<T> seedA = get_seed_matrix<T>(M, N);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
   monolish::matrix::Dense<T> AA(seedA);
 
   using T1 = monolish::matrix::Dense<T>;
