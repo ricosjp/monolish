@@ -19,16 +19,8 @@ void ans_adds_col_line(const monolish::matrix::Dense<T> &A, size_t num,
 template <typename MAT, typename VEC, typename T>
 bool test_send_adds_col_line_core(const size_t M, const size_t N, VEC &x,
                                   double tol) {
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
   size_t line = N - 1;
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
 
   MAT A(seedA); // M*N matrix
   MAT C(seedA); // M*N matrix
@@ -58,16 +50,8 @@ bool test_send_adds_col_line(const size_t M, const size_t N, double tol) {
 template <typename MAT, typename VEC, typename T>
 bool test_adds_col_line_core(const size_t M, const size_t N, VEC &x,
                              double tol) {
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
   size_t line = N - 1;
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
 
   MAT A(seedA); // M*N matrix
   MAT C(seedA); // M*N matrix
@@ -113,9 +97,9 @@ bool test_send_adds_col_line_view(const size_t M, const size_t N, double tol) {
   using T1 = monolish::vector<T>;
   using T2 = monolish::matrix::Dense<T>;
   using T3 = monolish::tensor::tensor_Dense<T>;
-  T1 x1(2 * N, 0.0, 1.0);
-  T2 x2(2 * N, 1, 0.0, 1.0);
-  T3 x3({2 * N, 1, 1}, 0.0, 1.0);
+  T1 x1(2 * M, 0.0, 1.0);
+  T2 x2(2 * M, 1, 0.0, 1.0);
+  T3 x3({2 * M, 1, 1}, 0.0, 1.0);
 
   return test_send_adds_col_line_view_core<MAT, T, T1, T2, T3>(M, N, tol, x1,
                                                                x2, x3);
@@ -142,9 +126,9 @@ bool test_adds_col_line_view(const size_t M, const size_t N, double tol) {
   using T1 = monolish::vector<T>;
   using T2 = monolish::matrix::Dense<T>;
   using T3 = monolish::tensor::tensor_Dense<T>;
-  T1 x1(2 * N, 0.0, 1.0);
-  T2 x2(2 * N, 1, 0.0, 1.0);
-  T3 x3({2 * N, 1, 1}, 0.0, 1.0);
+  T1 x1(2 * M, 0.0, 1.0);
+  T2 x2(2 * M, 1, 0.0, 1.0);
+  T3 x3({2 * M, 1, 1}, 0.0, 1.0);
 
   return test_adds_col_line_view_core<MAT, T, T1, T2, T3>(M, N, tol, x1, x2,
                                                           x3);

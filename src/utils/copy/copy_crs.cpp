@@ -15,6 +15,7 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   assert(monolish::util::is_same_size(*this, mat));
   assert(monolish::util::is_same_structure(*this, mat));
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
+  vad_create_flag = true;
 
   if (mat.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -22,14 +23,14 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.get_nnz(), mat.data(), data(), true);
+    internal::vcopy(mat.get_nnz(), mat.begin(), begin(), true);
 #endif
   } else {
     internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
                     false);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     false);
-    internal::vcopy(mat.get_nnz(), mat.data(), data(), false);
+    internal::vcopy(mat.get_nnz(), mat.begin(), begin(), false);
   }
 
   logger.util_out();

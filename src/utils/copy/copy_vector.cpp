@@ -28,6 +28,7 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
@@ -52,6 +53,7 @@ void vector<T>::operator=(const view1D<vector<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
@@ -76,6 +78,7 @@ void vector<T>::operator=(const view1D<matrix::Dense<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
@@ -101,6 +104,7 @@ void vector<T>::operator=(const view1D<tensor::tensor_Dense<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {

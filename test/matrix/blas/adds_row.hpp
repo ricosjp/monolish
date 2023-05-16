@@ -21,15 +21,7 @@ void ans_adds_row(const monolish::matrix::Dense<T> &A, const VEC &mx,
 template <typename MAT, typename VEC, typename T>
 bool test_send_adds_row_core(const size_t M, const size_t N, VEC &x,
                              double tol) {
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
 
   MAT A(seedA); // M*N matrix
   MAT C(seedA); // M*N matrix
@@ -57,15 +49,7 @@ bool test_send_adds_row(const size_t M, const size_t N, double tol) {
 
 template <typename MAT, typename VEC, typename T>
 bool test_adds_row_core(const size_t M, const size_t N, VEC &x, double tol) {
-  size_t nnzrow = 27;
-  if (nnzrow < N) {
-    nnzrow = 27;
-  } else {
-    nnzrow = N - 1;
-  }
-
-  monolish::matrix::COO<T> seedA =
-      monolish::util::random_structure_matrix<T>(M, N, nnzrow, 1.0);
+  monolish::matrix::COO<T> seedA = get_random_structure_matrix<T>(M, N);
 
   MAT A(seedA); // M*N matrix
   MAT C(seedA); // M*N matrix

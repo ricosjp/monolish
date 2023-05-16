@@ -203,6 +203,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matvec_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_view_dense<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_view_dense<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
   // matvec_N Dense//
   if (test_send_matvec_N<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-6) == false) {
@@ -256,6 +269,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matvec_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_view_crs<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_view_crs<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
   // matvec_T CRS//
   if (test_send_matvec_T<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
       false) {
@@ -283,12 +309,12 @@ int main(int argc, char **argv) {
                                       float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_matvec<monolish::matrix::LinearOperator<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_matvec_linearoperator<monolish::matrix::LinearOperator<double>,
+                                 double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_matvec<monolish::matrix::LinearOperator<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_matvec_linearoperator<monolish::matrix::LinearOperator<float>,
+                                 float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -342,6 +368,17 @@ int main(int argc, char **argv) {
                                                          1.0e-4) == false) {
     return 1;
   }
+
+  /* TODO
+  if (test_send_matmul_view_dense<double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matmul_view_dense<float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  */
 
   // matmul CRS//
   if (test_send_matmul<monolish::matrix::CRS<double>,
