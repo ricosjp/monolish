@@ -549,6 +549,98 @@ public:
     }
     return target_data[i + first];
   }
+
+  /**
+   * @brief Scalar and diag. vector of Dense format matrix add
+   * @param alpha scalar
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_add(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of Dense format matrix sub
+   * @param alpha scalar
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_sub(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of Dense format matrix mul
+   * @param alpha scalar
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_mul(const Float alpha);
+
+  /**
+   * @brief Scalar and diag. vector of Dense format matrix div
+   * @param alpha scalar
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_div(const Float alpha);
+
+  /**
+   * @brief Vector and diag. vector of Dense format matrix add
+   * @param vec vector
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_add(const vector<Float> &vec);
+  void diag_add(const view1D<vector<Float>, Float> &vec);
+  void diag_add(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_add(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of Dense format matrix sub
+   * @param vec vector
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_sub(const vector<Float> &vec);
+  void diag_sub(const view1D<vector<Float>, Float> &vec);
+  void diag_sub(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_sub(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of Dense format matrix mul
+   * @param vec vector
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_mul(const vector<Float> &vec);
+  void diag_mul(const view1D<vector<Float>, Float> &vec);
+  void diag_mul(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_mul(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
+
+  /**
+   * @brief Vector and diag. vector of Dense format matrix div
+   * @param vec vector
+   * @note
+   * - # of computation: M
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void diag_div(const vector<Float> &vec);
+  void diag_div(const view1D<vector<Float>, Float> &vec);
+  void diag_div(const view1D<matrix::Dense<Float>, Float> &vec);
+  void diag_div(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
 };
 /**@}*/
 

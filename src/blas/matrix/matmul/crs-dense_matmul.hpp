@@ -5,9 +5,9 @@
 namespace monolish {
 namespace {
 // double ///////////////////
+template <typename MAT1, typename MAT2>
 void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
-                            const matrix::Dense<double> &B, const double &b,
-                            matrix::Dense<double> &C) {
+                            const MAT1 &B, const double &b, MAT2 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -149,9 +149,9 @@ void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
 }
 
 // float ///////////////////
+template <typename MAT1, typename MAT2>
 void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
-                            const matrix::Dense<float> &B, const float &b,
-                            matrix::Dense<float> &C) {
+                            const MAT1 &B, const float &b, MAT2 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

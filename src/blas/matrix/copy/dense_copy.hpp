@@ -4,8 +4,7 @@
 namespace monolish {
 
 namespace {
-template <typename F>
-void copy_core(const matrix::Dense<F> &A, matrix::Dense<F> &C) {
+template <typename MAT1, typename MAT2> void copy_core(const MAT1 &A, MAT2 &C) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -18,15 +17,4 @@ void copy_core(const matrix::Dense<F> &A, matrix::Dense<F> &C) {
   logger.util_out();
 }
 } // namespace
-
-namespace blas {
-
-void copy(const matrix::Dense<double> &A, matrix::Dense<double> &C) {
-  copy_core(A, C);
-}
-void copy(const matrix::Dense<float> &A, matrix::Dense<float> &C) {
-  copy_core(A, C);
-}
-
-} // namespace blas
 } // namespace monolish

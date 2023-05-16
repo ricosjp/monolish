@@ -103,28 +103,4 @@ void matsub_core(const matrix::LinearOperator<F> &A,
   logger.func_out();
 }
 } // namespace
-
-namespace blas {
-void matadd(const matrix::LinearOperator<double> &A,
-            const matrix::LinearOperator<double> &B,
-            matrix::LinearOperator<double> &C) {
-  matadd_core(A, B, C);
-}
-void matsub(const matrix::LinearOperator<double> &A,
-            const matrix::LinearOperator<double> &B,
-            matrix::LinearOperator<double> &C) {
-  matsub_core(A, B, C);
-}
-void matadd(const matrix::LinearOperator<float> &A,
-            const matrix::LinearOperator<float> &B,
-            matrix::LinearOperator<float> &C) {
-  matadd_core(A, B, C);
-}
-void matsub(const matrix::LinearOperator<float> &A,
-            const matrix::LinearOperator<float> &B,
-            matrix::LinearOperator<float> &C) {
-  matsub_core(A, B, C);
-}
-
-} // namespace blas
 } // namespace monolish

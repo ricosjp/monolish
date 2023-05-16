@@ -19,9 +19,9 @@ std::string get_matmul_name(std::string func, bool transA, bool transB) {
 }
 
 // double ///////////////////
-void Dense_Dense_Dmatmul_core(const double &a, const matrix::Dense<double> &A,
-                              const matrix::Dense<double> &B, const double &b,
-                              matrix::Dense<double> &C, bool transA,
+template <typename MAT1, typename MAT2, typename MAT3>
+void Dense_Dense_Dmatmul_core(const double &a, const MAT1 &A, const MAT2 &B,
+                              const double &b, MAT3 &C, bool transA,
                               bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));
@@ -65,9 +65,9 @@ void Dense_Dense_Dmatmul_core(const double &a, const matrix::Dense<double> &A,
 }
 
 // float ///////////////////
-void Dense_Dense_Smatmul_core(const float &a, const matrix::Dense<float> &A,
-                              const matrix::Dense<float> &B, const float &b,
-                              matrix::Dense<float> &C, bool transA,
+template <typename MAT1, typename MAT2, typename MAT3>
+void Dense_Dense_Smatmul_core(const float &a, const MAT1 &A, const MAT2 &B,
+                              const float &b, MAT3 &C, bool transA,
                               bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));

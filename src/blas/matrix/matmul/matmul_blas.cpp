@@ -17,6 +17,650 @@ void matmul(const double &a, const matrix::Dense<double> &A,
             matrix::Dense<double> &C) {
   Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
 }
+void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A, const matrix::Dense<double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const matrix::Dense<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<vector<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, matrix::Dense<double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<vector<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<matrix::Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  Dense_Dense_Dmatmul_core(a, A, B, b, C, false, false);
+}
 void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C) {
   Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
@@ -24,6 +668,646 @@ void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
 void matmul(const float &a, const matrix::Dense<float> &A,
             const matrix::Dense<float> &B, const float &b,
             matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A, const matrix::Dense<float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const matrix::Dense<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<vector<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, matrix::Dense<float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<vector<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<matrix::Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
+}
+void matmul(const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  Dense_Dense_Smatmul_core(1.0, A, B, 0.0, C, false, false);
+}
+void matmul(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<tensor::tensor_Dense<float>, float> &C) {
   Dense_Dense_Smatmul_core(a, A, B, b, C, false, false);
 }
 
@@ -36,6 +1320,154 @@ void matmul(const double &a, const matrix::CRS<double> &A,
             matrix::Dense<double> &C) {
   CRS_Dense_Dmatmul_core(a, A, B, b, C);
 }
+void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A, const matrix::Dense<double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const matrix::Dense<double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<vector<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<matrix::Dense<double>, double> &B, const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, matrix::Dense<double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<vector<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b, view_Dense<matrix::Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const double &a, const matrix::CRS<double> &A,
+            const view_Dense<tensor::tensor_Dense<double>, double> &B,
+            const double &b,
+            view_Dense<tensor::tensor_Dense<double>, double> &C) {
+  CRS_Dense_Dmatmul_core(a, A, B, b, C);
+}
 void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
             matrix::Dense<float> &C) {
   CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
@@ -43,6 +1475,153 @@ void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
 void matmul(const float &a, const matrix::CRS<float> &A,
             const matrix::Dense<float> &B, const float &b,
             matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A, const matrix::Dense<float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const matrix::Dense<float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<vector<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<matrix::Dense<float>, float> &B, const float &b,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, matrix::Dense<float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<vector<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<matrix::Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(a, A, B, b, C);
+}
+void matmul(const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            view_Dense<tensor::tensor_Dense<float>, float> &C) {
+  CRS_Dense_Smatmul_core(1.0, A, B, 0.0, C);
+}
+void matmul(const float &a, const matrix::CRS<float> &A,
+            const view_Dense<tensor::tensor_Dense<float>, float> &B,
+            const float &b, view_Dense<tensor::tensor_Dense<float>, float> &C) {
   CRS_Dense_Smatmul_core(a, A, B, b, C);
 }
 

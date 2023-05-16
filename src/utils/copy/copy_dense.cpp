@@ -14,7 +14,7 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   // err
   assert(monolish::util::is_same_size(*this, mat));
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
-  vad_create_flag = true;
+  val_create_flag = true;
 
   // gpu copy
   if (mat.get_device_mem_stat()) {
@@ -37,7 +37,7 @@ void Dense<T>::operator=(const view_Dense<vector<T>, T> &mat) {
   // err
   assert(monolish::util::is_same_size(*this, mat));
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
-  vad_create_flag = true;
+  val_create_flag = true;
 
   // gpu copy
   if (mat.get_device_mem_stat()) {
@@ -62,7 +62,7 @@ void Dense<T>::operator=(const view_Dense<matrix::Dense<T>, T> &mat) {
   // err
   assert(monolish::util::is_same_size(*this, mat));
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
-  vad_create_flag = true;
+  val_create_flag = true;
 
   // gpu copy
   if (mat.get_device_mem_stat()) {
@@ -87,7 +87,7 @@ void Dense<T>::operator=(const view_Dense<tensor::tensor_Dense<T>, T> &mat) {
   // err
   assert(monolish::util::is_same_size(*this, mat));
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
-  vad_create_flag = true;
+  val_create_flag = true;
 
   // gpu copy
   if (mat.get_device_mem_stat()) {

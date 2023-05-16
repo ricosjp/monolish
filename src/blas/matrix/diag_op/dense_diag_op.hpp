@@ -5,8 +5,8 @@ namespace monolish {
 namespace {
 
 // add scalar
-template <typename T>
-void Dense_diag_add_core(matrix::Dense<T> &MAT, const T alpha) {
+template <typename T, typename MAT1>
+void Dense_diag_add_core(MAT1 &MAT, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -35,9 +35,8 @@ void Dense_diag_add_core(matrix::Dense<T> &MAT, const T alpha) {
 }
 
 // add vector
-template <typename T>
-void Dense_diag_add_core(matrix::Dense<T> &MAT, const size_t size,
-                         const T *vecd) {
+template <typename T, typename MAT1>
+void Dense_diag_add_core(MAT1 &MAT, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -68,8 +67,8 @@ void Dense_diag_add_core(matrix::Dense<T> &MAT, const size_t size,
 }
 
 // sub scalar
-template <typename T>
-void Dense_diag_sub_core(matrix::Dense<T> &MAT, const T alpha) {
+template <typename T, typename MAT1>
+void Dense_diag_sub_core(MAT1 &MAT, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -98,9 +97,8 @@ void Dense_diag_sub_core(matrix::Dense<T> &MAT, const T alpha) {
 }
 
 // sub vector
-template <typename T>
-void Dense_diag_sub_core(matrix::Dense<T> &MAT, const size_t size,
-                         const T *vecd) {
+template <typename T, typename MAT1>
+void Dense_diag_sub_core(MAT1 &MAT, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -131,8 +129,8 @@ void Dense_diag_sub_core(matrix::Dense<T> &MAT, const size_t size,
 }
 
 // mul scalar
-template <typename T>
-void Dense_diag_mul_core(matrix::Dense<T> &MAT, const T alpha) {
+template <typename T, typename MAT1>
+void Dense_diag_mul_core(MAT1 &MAT, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -161,9 +159,8 @@ void Dense_diag_mul_core(matrix::Dense<T> &MAT, const T alpha) {
 }
 
 // mul vector
-template <typename T>
-void Dense_diag_mul_core(matrix::Dense<T> &MAT, const size_t size,
-                         const T *vecd) {
+template <typename T, typename MAT1>
+void Dense_diag_mul_core(MAT1 &MAT, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -194,8 +191,8 @@ void Dense_diag_mul_core(matrix::Dense<T> &MAT, const size_t size,
 }
 
 // div scalar
-template <typename T>
-void Dense_diag_div_core(matrix::Dense<T> &MAT, const T alpha) {
+template <typename T, typename MAT1>
+void Dense_diag_div_core(MAT1 &MAT, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -224,9 +221,8 @@ void Dense_diag_div_core(matrix::Dense<T> &MAT, const T alpha) {
 }
 
 // div vector
-template <typename T>
-void Dense_diag_div_core(matrix::Dense<T> &MAT, const size_t size,
-                         const T *vecd) {
+template <typename T, typename MAT1>
+void Dense_diag_div_core(MAT1 &MAT, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

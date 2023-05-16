@@ -14,10 +14,4 @@ template <typename T> void mscal_core(const T alpha, matrix::CRS<T> &A) {
   logger.func_out();
 }
 } // namespace
-
-namespace blas {
-void mscal(const double alpha, matrix::CRS<double> &A) { mscal_core(alpha, A); }
-
-void mscal(const float alpha, matrix::CRS<float> &A) { mscal_core(alpha, A); }
-} // namespace blas
 } // namespace monolish

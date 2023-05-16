@@ -24,17 +24,4 @@ void copy_core(const matrix::LinearOperator<F> &A,
   logger.util_out();
 }
 } // namespace
-
-namespace blas {
-
-void copy(const matrix::LinearOperator<double> &A,
-          matrix::LinearOperator<double> &C) {
-  copy_core(A, C);
-}
-void copy(const matrix::LinearOperator<float> &A,
-          matrix::LinearOperator<float> &C) {
-  copy_core(A, C);
-}
-
-} // namespace blas
 } // namespace monolish

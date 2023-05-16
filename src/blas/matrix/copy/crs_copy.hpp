@@ -19,15 +19,4 @@ void copy_core(const matrix::CRS<F> &A, matrix::CRS<F> &C) {
   logger.util_out();
 }
 } // namespace
-
-namespace blas {
-
-void copy(const matrix::CRS<double> &A, matrix::CRS<double> &C) {
-  copy_core(A, C);
-}
-void copy(const matrix::CRS<float> &A, matrix::CRS<float> &C) {
-  copy_core(A, C);
-}
-
-} // namespace blas
 } // namespace monolish

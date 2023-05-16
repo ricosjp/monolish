@@ -5,7 +5,7 @@ namespace monolish {
 
 namespace {
 
-template <typename T> void mscal_core(const T alpha, matrix::Dense<T> &A) {
+template <typename T, typename MAT> void mscal_core(const T alpha, MAT &A) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -15,13 +15,4 @@ template <typename T> void mscal_core(const T alpha, matrix::Dense<T> &A) {
   logger.func_out();
 }
 } // namespace
-
-namespace blas {
-void mscal(const double alpha, matrix::Dense<double> &A) {
-  mscal_core(alpha, A);
-}
-
-void mscal(const float alpha, matrix::Dense<float> &A) { mscal_core(alpha, A); }
-} // namespace blas
-
 } // namespace monolish

@@ -39,25 +39,4 @@ void matsub_core(const matrix::CRS<F> &A, const matrix::CRS<F> &B,
   logger.func_out();
 }
 } // namespace
-
-namespace blas {
-
-void matadd(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
-            matrix::CRS<double> &C) {
-  matadd_core(A, B, C);
-}
-void matsub(const matrix::CRS<double> &A, const matrix::CRS<double> &B,
-            matrix::CRS<double> &C) {
-  matsub_core(A, B, C);
-}
-void matadd(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
-            matrix::CRS<float> &C) {
-  matadd_core(A, B, C);
-}
-void matsub(const matrix::CRS<float> &A, const matrix::CRS<float> &B,
-            matrix::CRS<float> &C) {
-  matsub_core(A, B, C);
-}
-
-} // namespace blas
 } // namespace monolish
