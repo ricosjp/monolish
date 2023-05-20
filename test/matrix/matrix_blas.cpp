@@ -57,6 +57,23 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matadd_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_matadd_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  /* TODO
+  if (test_send_matadd_view<double>(M, N, 1.0e-8) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matadd_view<float>(M, N, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+  */
+
   // matadd CRS//
   if (test_send_matadd<monolish::matrix::CRS<double>,
                        monolish::matrix::CRS<double>,
@@ -234,6 +251,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_matvec_N_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_N_view_dense<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_N_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_N_view_dense<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
   // matvec_T Dense//
   if (test_send_matvec_T<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-6) == false) {
@@ -249,6 +279,19 @@ int main(int argc, char **argv) {
   }
   if (test_matvec_T<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_matvec_T_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_T_view_dense<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_T_view_dense<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_T_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -282,6 +325,37 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // matvec_N CRS//
+  if (test_send_matvec_N<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_send_matvec_N<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_N<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
+      false) {
+    return 1;
+  }
+  if (test_matvec_N<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
+      false) {
+    return 1;
+  }
+
+  if (test_send_matvec_N_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_N_view_crs<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_N_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_N_view_crs<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+
   // matvec_T CRS//
   if (test_send_matvec_T<monolish::matrix::CRS<double>, double>(M, N, 1.0e-6) ==
       false) {
@@ -297,6 +371,19 @@ int main(int argc, char **argv) {
   }
   if (test_matvec_T<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_matvec_T_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_matvec_T_view_crs<float>(M, N, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_matvec_T_view_crs<double>(M, N, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_matvec_T_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -503,6 +590,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_mm_copy_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mm_copy_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mm_copy_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mm_copy_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // mm_copy CRS//
   if (test_send_mm_copy<monolish::matrix::CRS<double>,
                         monolish::matrix::CRS<double>, double>(M, N, 1.0e-8) ==
@@ -560,6 +660,19 @@ int main(int argc, char **argv) {
   }
   if (test_mscal<monolish::matrix::Dense<float>, float>(M, N, 1.0e-4) ==
       false) {
+    return 1;
+  }
+
+  if (test_send_mscal_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_mscal_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_mscal_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_mscal_view<float>(M, N, 1.0e-4) == false) {
     return 1;
   }
 
@@ -659,21 +772,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_row_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_row_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_row_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_row_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_times_row_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_row_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_row_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_row_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -695,21 +804,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_row_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_row_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_row_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_row_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_times_row_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_row_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_row_view<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
-      false) {
+  if (test_times_row_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -731,20 +836,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_col_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_col_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_col_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_col_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_col_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_col_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_col_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_col_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -766,20 +867,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_col_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_col_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_col_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_col_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_col_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_col_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_col_view<monolish::matrix::CRS<float>, float>(M, N, 1.0e-3) ==
-      false) {
+  if (test_times_col_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -801,20 +898,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_row_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_row_line_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_row_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_row_line_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_row_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_row_line_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_row_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_row_line_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -836,20 +929,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_row_line_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_row_line_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_row_line_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_row_line_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_row_line_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_row_line_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_row_line_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_row_line_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -871,20 +960,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_col_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_col_line_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_col_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_col_line_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_col_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_col_line_view_dense<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_col_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_col_line_view_dense<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -906,20 +991,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_times_col_line_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_times_col_line_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_times_col_line_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_times_col_line_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
-  if (test_times_col_line_view<monolish::matrix::CRS<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_times_col_line_view_crs<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_times_col_line_view<monolish::matrix::CRS<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_times_col_line_view_crs<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -945,6 +1026,19 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  if (test_send_scalar_adds_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_adds_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_adds_view<double>(M, N, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_scalar_adds_view<float>(M, N, 1.0e-4) == false) {
+    return 1;
+  }
+
   // vector_adds row Dense//
   if (test_send_adds_row<monolish::matrix::Dense<double>, double>(
           M, N, 1.0e-6) == false) {
@@ -963,21 +1057,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_adds_row_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_adds_row_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_adds_row_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_adds_row_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_adds_row_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_adds_row_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_adds_row_view<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
+  if (test_adds_row_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -999,39 +1089,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  // vector_adds col Dense//
-  if (test_send_adds_col<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_adds_col_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_adds_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
-    return 1;
-  }
-  if (test_adds_col<monolish::matrix::Dense<double>, double>(M, N, 1.0e-6) ==
-      false) {
-    return 1;
-  }
-  if (test_adds_col<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
+  if (test_send_adds_col_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_send_adds_col_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_adds_col_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_adds_col_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
-    return 1;
-  }
-
-  if (test_adds_col_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
-    return 1;
-  }
-  if (test_adds_col_view<monolish::matrix::Dense<float>, float>(M, N, 1.0e-3) ==
-      false) {
+  if (test_adds_col_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -1053,21 +1121,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_adds_row_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_adds_row_line_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_adds_row_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_adds_row_line_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_adds_row_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_adds_row_line_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_adds_row_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_adds_row_line_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
@@ -1089,21 +1153,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  if (test_send_adds_col_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_send_adds_col_line_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_send_adds_col_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_send_adds_col_line_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
-  if (test_adds_col_line_view<monolish::matrix::Dense<double>, double>(
-          M, N, 1.0e-6) == false) {
+  if (test_adds_col_line_view<double>(M, N, 1.0e-6) == false) {
     return 1;
   }
-  if (test_adds_col_line_view<monolish::matrix::Dense<float>, float>(
-          M, N, 1.0e-3) == false) {
+  if (test_adds_col_line_view<float>(M, N, 1.0e-3) == false) {
     return 1;
   }
 
