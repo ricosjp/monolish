@@ -4,8 +4,8 @@
 namespace monolish {
 
 namespace {
-template <typename F>
-void copy_core(const tensor::tensor_Dense<F> &A, tensor::tensor_Dense<F> &C) {
+template <typename TENS1, typename TENS2>
+void copy_core(const TENS1 &A, TENS2 &C) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -18,17 +18,4 @@ void copy_core(const tensor::tensor_Dense<F> &A, tensor::tensor_Dense<F> &C) {
   logger.util_out();
 }
 } // namespace
-
-namespace blas {
-
-void copy(const tensor::tensor_Dense<double> &A,
-          tensor::tensor_Dense<double> &C) {
-  copy_core(A, C);
-}
-void copy(const tensor::tensor_Dense<float> &A,
-          tensor::tensor_Dense<float> &C) {
-  copy_core(A, C);
-}
-
-} // namespace blas
 } // namespace monolish

@@ -37,7 +37,11 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  echo "void copy(const tensor::tensor_Dense<$prec> &A, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void copy(const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 
 echo "/**@}*/"
@@ -62,7 +66,9 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void tscal(const $prec alpha, tensor::tensor_Dense<$prec> &A);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    echo "void tscal(const $prec alpha, $arg1 &A);"
+  done
 done
 
 echo "/**@}*/"
@@ -89,7 +95,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void times(const $prec alpha, const tensor::tensor_Dense<$prec> &A, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void times(const $prec alpha, const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -115,7 +125,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void adds(const $prec alpha, const tensor::tensor_Dense<$prec> &A, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void adds(const $prec alpha, const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -140,7 +154,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void tensadd(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tensadd(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -165,7 +185,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void tenssub(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tenssub(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -191,7 +217,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void tensmul(const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tensmul(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -215,7 +247,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void tensmul(const $prec &a, const tensor::tensor_Dense<$prec> &A, const tensor::tensor_Dense<$prec> &B, const $prec &b, tensor::tensor_Dense<$prec> &C);"
+  for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tensmul(const $prec &a, const $arg1 &A, const $arg2 &B, const $prec &b, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 

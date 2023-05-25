@@ -5,10 +5,11 @@
 namespace monolish {
 namespace {
 // double ///////////////////
-void tensor_Dense_tensor_Dense_Dtensmul_core(
-    const double &a, const tensor::tensor_Dense<double> &A,
-    const tensor::tensor_Dense<double> &B, const double &b,
-    tensor::tensor_Dense<double> &C, bool transA, bool transB) {
+template <typename TENS1, typename TENS2, typename TENS3>
+void tensor_Dense_tensor_Dense_Dtensmul_core(const double &a, const TENS1 &A,
+                                             const TENS2 &B, const double &b,
+                                             TENS3 &C, bool transA,
+                                             bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));
 
@@ -25,10 +26,11 @@ void tensor_Dense_tensor_Dense_Dtensmul_core(
 }
 
 // float ///////////////////
-void tensor_Dense_tensor_Dense_Stensmul_core(
-    const float &a, const tensor::tensor_Dense<float> &A,
-    const tensor::tensor_Dense<float> &B, const float &b,
-    tensor::tensor_Dense<float> &C, bool transA, bool transB) {
+template <typename TENS1, typename TENS2, typename TENS3>
+void tensor_Dense_tensor_Dense_Stensmul_core(const float &a, const TENS1 &A,
+                                             const TENS2 &B, const float &b,
+                                             TENS3 &C, bool transA,
+                                             bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));
 

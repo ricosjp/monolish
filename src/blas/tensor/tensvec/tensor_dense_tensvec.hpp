@@ -4,9 +4,8 @@
 namespace monolish {
 namespace {
 // double ///////////////////
-template <typename VEC1>
-void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x,
-                   tensor::tensor_Dense<double> &y, bool transA) {
+template <typename TENS1, typename VEC1, typename TENS2>
+void Dtensvec_core(const TENS1 &A, const VEC1 &x, TENS2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
 
@@ -25,9 +24,8 @@ void Dtensvec_core(const tensor::tensor_Dense<double> &A, const VEC1 &x,
 }
 
 // float ///////////////////
-template <typename VEC1>
-void Stensvec_core(const tensor::tensor_Dense<float> &A, const VEC1 &x,
-                   tensor::tensor_Dense<float> &y, bool transA) {
+template <typename TENS1, typename VEC1, typename TENS2>
+void Stensvec_core(const TENS1 &A, const VEC1 &x, TENS2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
 

@@ -5,23 +5,23 @@ namespace monolish {
 namespace {
 
 // add scalar
-template <typename T>
-void tensor_Dense_diag_add_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_add_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
     Len = std::min(Len, shape[i]);
   }
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -41,17 +41,16 @@ void tensor_Dense_diag_add_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
 }
 
 // add vector
-template <typename T>
-void tensor_Dense_diag_add_core(tensor::tensor_Dense<T> &TENS,
-                                const size_t size, const T *vecd) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_add_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
@@ -60,7 +59,7 @@ void tensor_Dense_diag_add_core(tensor::tensor_Dense<T> &TENS,
 
   assert(Len == size);
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -80,23 +79,23 @@ void tensor_Dense_diag_add_core(tensor::tensor_Dense<T> &TENS,
 }
 
 // sub scalar
-template <typename T>
-void tensor_Dense_diag_sub_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_sub_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
     Len = std::min(Len, shape[i]);
   }
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -116,17 +115,16 @@ void tensor_Dense_diag_sub_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
 }
 
 // sub vector
-template <typename T>
-void tensor_Dense_diag_sub_core(tensor::tensor_Dense<T> &TENS,
-                                const size_t size, const T *vecd) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_sub_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
@@ -135,7 +133,7 @@ void tensor_Dense_diag_sub_core(tensor::tensor_Dense<T> &TENS,
 
   assert(Len == size);
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -155,23 +153,23 @@ void tensor_Dense_diag_sub_core(tensor::tensor_Dense<T> &TENS,
 }
 
 // mul scalar
-template <typename T>
-void tensor_Dense_diag_mul_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_mul_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
     Len = std::min(Len, shape[i]);
   }
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -191,17 +189,16 @@ void tensor_Dense_diag_mul_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
 }
 
 // mul vector
-template <typename T>
-void tensor_Dense_diag_mul_core(tensor::tensor_Dense<T> &TENS,
-                                const size_t size, const T *vecd) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_mul_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
@@ -210,7 +207,7 @@ void tensor_Dense_diag_mul_core(tensor::tensor_Dense<T> &TENS,
 
   assert(Len == size);
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -230,23 +227,23 @@ void tensor_Dense_diag_mul_core(tensor::tensor_Dense<T> &TENS,
 }
 
 // div scalar
-template <typename T>
-void tensor_Dense_diag_div_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_div_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
     Len = std::min(Len, shape[i]);
   }
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
@@ -266,17 +263,16 @@ void tensor_Dense_diag_div_core(tensor::tensor_Dense<T> &TENS, const T alpha) {
 }
 
 // div vector
-template <typename T>
-void tensor_Dense_diag_div_core(tensor::tensor_Dense<T> &TENS,
-                                const size_t size, const T *vecd) {
+template <typename T, typename TENS>
+void tensor_Dense_diag_div_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = TENS.data();
+  T *vald = tens.data();
   size_t N = 1;
   size_t shift = 0;
-  size_t Len = TENS.get_nnz();
-  auto shape = TENS.get_shape();
+  size_t Len = tens.get_nnz();
+  auto shape = tens.get_shape();
   for (int i = 0; i < shape.size(); ++i) {
     shift = shift + N;
     N *= shape[i];
@@ -285,7 +281,7 @@ void tensor_Dense_diag_div_core(tensor::tensor_Dense<T> &TENS,
 
   assert(Len == size);
 
-  if (TENS.get_device_mem_stat() == true) {
+  if (tens.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {

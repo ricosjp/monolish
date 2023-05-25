@@ -5,11 +5,10 @@
 namespace monolish {
 namespace {
 // double ///////////////////
+template <typename TENS1, typename TENS2>
 void CRS_tensor_Dense_Dmattens_core(const double &a,
                                     const matrix::CRS<double> &A,
-                                    const tensor::tensor_Dense<double> &B,
-                                    const double &b,
-                                    tensor::tensor_Dense<double> &C) {
+                                    const TENS1 &B, const double &b, TENS2 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -24,10 +23,9 @@ void CRS_tensor_Dense_Dmattens_core(const double &a,
 }
 
 // float ///////////////////
+template <typename TENS1, typename TENS2>
 void CRS_tensor_Dense_Smattens_core(const float &a, const matrix::CRS<float> &A,
-                                    const tensor::tensor_Dense<float> &B,
-                                    const float &b,
-                                    tensor::tensor_Dense<float> &C) {
+                                    const TENS1 &B, const float &b, TENS2 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
