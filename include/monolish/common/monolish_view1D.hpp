@@ -32,6 +32,10 @@ template <typename Float> class CRS;
 template <typename Float> class LinearOperator;
 } // namespace matrix
 
+namespace tensor {
+template <typename Float> class tensor_Dense;
+} // namespace tensor
+
 /**
  * @addtogroup View1D_class
  * @{
@@ -53,10 +57,10 @@ private:
 
 public:
   /**
-   * @brief create view1D(start:end) from vector
+   * @brief create view1D(start:start+range) from vector
    * @param x vector
    * @param start start position
-   * @param end end position
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -64,16 +68,16 @@ public:
    **/
   view1D(vector<Float> &x, const size_t start, const size_t size) : target(x) {
     first = start;
-    last = start + size;
     range = size;
+    last = start + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:end) from Dense matrix
+   * @brief create view1D(start:start+range) from Dense matrix
    * @param A Dense matrix
    * @param start start position
-   * @param end end position
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -82,16 +86,16 @@ public:
   view1D(matrix::Dense<Float> &A, const size_t start, const size_t size)
       : target(A) {
     first = start;
-    last = start + size;
     range = size;
+    last = start + range;
     target_data = A.data();
   }
 
   /**
-   * @brief create view1D(start:end) from Dense tensor
+   * @brief create view1D(start:start+range) from Dense tensor
    * @param A Dense matrix
    * @param start start position
-   * @param end end position
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -100,16 +104,16 @@ public:
   view1D(tensor::tensor_Dense<Float> &A, const size_t start, const size_t size)
       : target(A) {
     first = start;
-    last = start + size;
     range = size;
+    last = start + range;
     target_data = A.data();
   }
 
   /**
-   * @brief create view1D(start:end) from monolish::vector
+   * @brief create view1D(start:start+range) from monolish::vector
    * @param x view1D create from monolish::vector
    * @param start start position (x.first + start)
-   * @param end end position (x.last + end)
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -118,16 +122,16 @@ public:
   view1D(view1D<vector<Float>, Float> &x, const size_t start, const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = first + size;
     range = size;
+    last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:end) from monolish::matrix::Dense
+   * @brief create view1D(start:start+range) from monolish::matrix::Dense
    * @param x view1D create from monolish::matrix::Dense
    * @param start start position (x.first + start)
-   * @param end end position (x.last + end)
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -137,16 +141,16 @@ public:
          const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = first + size;
     range = size;
+    last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief create view1D(start:end) from monolish::tensor::tensor_Dense
+   * @brief create view1D(start:start+range) from monolish::tensor::tensor_Dense
    * @param x view1D create from monolish::tensor::tensor_Dense
    * @param start start position (x.first + start)
-   * @param end end position (x.last + end)
+   * @param size size
    * @note
    * - # of computation: 1
    * - Multi-threading: false
@@ -156,13 +160,44 @@ public:
          const size_t size)
       : target(x) {
     first = x.get_first() + start;
-    last = first + size;
     range = size;
+    last = first + range;
     target_data = x.data();
   }
 
   /**
-   * @brief get view1D size (end-start)
+   * @brief get format name "view1D"
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::string type() const {
+    return "view1D(" + target.type() + ")";
+  }
+
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void send() const { target.send(); };
+
+  /**
+   * @brief recv data from GPU, and free data on GPU
+   * @note
+   * - # of data transfer: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   **/
+  void recv() { target.recv(); };
+
+  /**
+   * @brief get view1D size (range)
    * @return view1D size
    * @note
    * - # of computation: 1
@@ -280,6 +315,16 @@ public:
   [[nodiscard]] Float *end() { return target_data + range; }
 
   /**
+   * @brief fill vector elements with a scalar value
+   * @param value scalar value
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   **/
+  void fill(Float value);
+
+  /**
    * @brief print all elements to standart I/O
    * @param force_cpu Ignore device status and output CPU data
    * @note
@@ -301,8 +346,79 @@ public:
    **/
   void resize(size_t N) {
     assert(first + N <= target.get_nnz());
-    last = first + N;
+    range = N;
+    last = first + range;
   }
+
+  // operator
+  // ///////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const vector<Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<vector<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::matrix::Dense
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<matrix::Dense<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector, It is same as copy ( Copy the memory on CPU and GPU )
+   * @param vec source view1D from monolish::tensor::tensor_Dense
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on GPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view1D<tensor::tensor_Dense<Float>, Float> &vec);
+
+  /**
+   * @brief copy vector from std::vector
+   * @param vec source std::vector
+   * @return output vector
+   * @note
+   * - # of computation: N
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  void operator=(const std::vector<Float> &vec);
 
   /**
    * @brief reference to the element at position
@@ -319,16 +435,6 @@ public:
     }
     return target_data[i + first];
   }
-
-  /**
-   * @brief fill vector elements with a scalar value
-   * @param value scalar value
-   * @note
-   * - # of computation: N
-   * - Multi-threading: true
-   * - GPU acceleration: true
-   **/
-  void fill(Float value);
 };
 /**@}*/
 

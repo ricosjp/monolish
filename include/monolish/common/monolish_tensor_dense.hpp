@@ -6,6 +6,8 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+template <typename TYPE, typename Float> class view_Dense;
+template <typename TYPE, typename Float> class view_tensor_Dense;
 namespace tensor {
 template <typename Float> class tensor_COO;
 template <typename Float> class tensor_Dense {
@@ -150,6 +152,16 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    */
+  tensor_Dense(const std::initializer_list<size_t> &shape);
+
+  /**
+   * @brief Allocate dense tensor
+   * @param shape shape of tensor
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
   tensor_Dense(const std::vector<size_t> &shape, const Float *value);
 
   /**
@@ -205,6 +217,49 @@ public:
    *        - else; coping data only on CPU
    **/
   tensor_Dense(const tensor_Dense<Float> &tens, Float value);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(const view_tensor_Dense<vector<Float>, Float> &tens);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(const view_tensor_Dense<matrix::Dense<Float>, Float> &tens);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  tensor_Dense(
+      const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tens);
 
   /**
    * @brief Set tensor_Dense array from std::vector
@@ -278,6 +333,17 @@ public:
   }
 
   /**
+   * @brief get element A[index]...
+   * @param pos aligned position index
+   * @return A[index]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t pos) const;
+
+  /**
    * @brief get element A[pos[0]][pos[1]]...
    * @param pos std::vector position
    * @return A[pos[0]][pos[1]]...
@@ -315,10 +381,32 @@ public:
    * - GPU acceleration: false
    **/
   template <typename... Args>
+#if !defined(__clang__) && defined(__GNUC__)
+  [[nodiscard]] Float at(const size_t dim, const size_t dim2,
+                         const Args... args) const {
+    std::vector<size_t> pos(1);
+    pos[0] = dim;
+    return this->at(pos, dim2, args...);
+  };
+#else
   [[nodiscard]] Float at(const size_t dim, const Args... args) const {
     std::vector<size_t> pos(1);
     pos[0] = dim;
     return this->at(pos, args...);
+  };
+#endif
+
+  /**
+   * @brief get element A[index]... (onlu CPU)
+   * @param pos aligned position index
+   * @return A[index]...
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t pos) {
+    return static_cast<const tensor_Dense *>(this)->at(pos);
   };
 
   /**
@@ -361,6 +449,17 @@ public:
   [[nodiscard]] Float at(const size_t dim, const Args... args) {
     return static_cast<const tensor_Dense *>(this)->at(dim, args...);
   };
+
+  /**
+   * @brief set element A[index]...
+   * @param pos aligned position index
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t pos, const Float Val);
 
   /**
    * @brief set element A[pos[0]][pos[1]]...
@@ -573,6 +672,49 @@ public:
    *        - else; coping data on CPU
    **/
   void operator=(const tensor_Dense<Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<vector<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_tensor_Dense<matrix::Dense<Float>, Float> &tens);
+
+  /**
+   * @brief tensor copy
+   * @param tens Dense tensor
+   * @return copied dense tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void
+  operator=(const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tens);
 
   /**
    * @brief reference to the element at position (v[i])

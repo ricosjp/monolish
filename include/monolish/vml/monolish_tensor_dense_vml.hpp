@@ -36,8 +36,383 @@ namespace vml {
 void add(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void add(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -61,8 +436,383 @@ void add(const tensor::tensor_Dense<float> &A,
 void sub(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sub(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -86,8 +836,383 @@ void sub(const tensor::tensor_Dense<float> &A,
 void mul(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void mul(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -111,8 +1236,383 @@ void mul(const tensor::tensor_Dense<float> &A,
 void div(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void div(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -133,8 +1633,74 @@ void div(const tensor::tensor_Dense<float> &A,
  */
 void add(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void add(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void add(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void add(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -155,8 +1721,74 @@ void add(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void sub(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void sub(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sub(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void sub(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -179,8 +1811,74 @@ void sub(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void mul(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void mul(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void mul(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void mul(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -201,8 +1899,74 @@ void mul(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void div(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void div(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void div(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void div(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -223,8 +1987,383 @@ void div(const tensor::tensor_Dense<float> &A, const float alpha,
 void pow(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void pow(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -246,8 +2385,74 @@ void pow(const tensor::tensor_Dense<float> &A,
  */
 void pow(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void pow(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void pow(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void pow(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -266,7 +2471,67 @@ void pow(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void sin(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C);
+void sin(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void sin(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sin(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sin(const view_tensor_Dense<vector<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void sin(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void sin(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sin(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void sin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void sin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void sin(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void sin(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sin(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sin(const view_tensor_Dense<vector<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void sin(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void sin(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sin(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void sin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void sin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -285,7 +2550,67 @@ void sin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void sqrt(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void sqrt(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sqrt(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sqrt(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sqrt(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sqrt(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sqrt(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void sqrt(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sqrt(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sqrt(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sqrt(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sqrt(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sqrt(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -304,7 +2629,67 @@ void sqrt(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void sinh(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void sinh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sinh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sinh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sinh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sinh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sinh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void sinh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sinh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sinh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sinh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sinh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -323,7 +2708,67 @@ void sinh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void asin(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void asin(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void asin(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asin(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asin(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void asin(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void asin(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asin(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void asin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void asin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asin(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void asin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void asin(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void asin(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asin(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asin(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void asin(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void asin(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asin(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void asin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void asin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asin(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -342,8 +2787,68 @@ void asin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void asinh(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C);
+void asinh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void asinh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asinh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<vector<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void asinh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void asinh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void asinh(const tensor::tensor_Dense<float> &A,
            tensor::tensor_Dense<float> &C);
+void asinh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void asinh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asinh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<vector<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void asinh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void asinh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void asinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -362,7 +2867,67 @@ void asinh(const tensor::tensor_Dense<float> &A,
  */
 void tan(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C);
+void tan(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void tan(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tan(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tan(const view_tensor_Dense<vector<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void tan(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void tan(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tan(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void tan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void tan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void tan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void tan(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void tan(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tan(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tan(const view_tensor_Dense<vector<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void tan(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void tan(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tan(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void tan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void tan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -381,7 +2946,67 @@ void tan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void tanh(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void tanh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void tanh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tanh(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void tanh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void tanh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void tanh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void tanh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void tanh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tanh(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void tanh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void tanh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void tanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -400,7 +3025,67 @@ void tanh(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void atan(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void atan(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void atan(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atan(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atan(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void atan(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void atan(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atan(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void atan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void atan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atan(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void atan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void atan(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void atan(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atan(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atan(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void atan(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void atan(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atan(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void atan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void atan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atan(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -419,8 +3104,68 @@ void atan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void atanh(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C);
+void atanh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void atanh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atanh(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<vector<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void atanh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void atanh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void atanh(const tensor::tensor_Dense<float> &A,
            tensor::tensor_Dense<float> &C);
+void atanh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void atanh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atanh(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<vector<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void atanh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void atanh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void atanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -439,7 +3184,67 @@ void atanh(const tensor::tensor_Dense<float> &A,
  */
 void ceil(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void ceil(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void ceil(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void ceil(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void ceil(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void ceil(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void ceil(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void ceil(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void ceil(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void ceil(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void ceil(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void ceil(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void ceil(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -458,8 +3263,68 @@ void ceil(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void floor(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C);
+void floor(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void floor(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void floor(const tensor::tensor_Dense<double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void floor(const view_tensor_Dense<vector<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void floor(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void floor(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void floor(const view_tensor_Dense<vector<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void floor(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void floor(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void floor(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void floor(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           tensor::tensor_Dense<double> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<vector<double>, double> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<matrix::Dense<double>, double> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void floor(const tensor::tensor_Dense<float> &A,
            tensor::tensor_Dense<float> &C);
+void floor(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void floor(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void floor(const tensor::tensor_Dense<float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void floor(const view_tensor_Dense<vector<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void floor(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void floor(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void floor(const view_tensor_Dense<vector<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void floor(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void floor(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void floor(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void floor(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           tensor::tensor_Dense<float> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<vector<float>, float> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<matrix::Dense<float>, float> &C);
+void floor(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -478,7 +3343,67 @@ void floor(const tensor::tensor_Dense<float> &A,
  */
 void sign(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C);
+void sign(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sign(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sign(const tensor::tensor_Dense<double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sign(const view_tensor_Dense<vector<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sign(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sign(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sign(const view_tensor_Dense<vector<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sign(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sign(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sign(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sign(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          tensor::tensor_Dense<double> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<vector<double>, double> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<matrix::Dense<double>, double> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void sign(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void sign(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sign(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sign(const tensor::tensor_Dense<float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sign(const view_tensor_Dense<vector<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sign(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sign(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sign(const view_tensor_Dense<vector<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sign(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sign(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sign(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sign(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          tensor::tensor_Dense<float> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<vector<float>, float> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<matrix::Dense<float>, float> &C);
+void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -497,7 +3422,67 @@ void sign(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
  */
 void exp(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C);
+void exp(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void exp(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void exp(const tensor::tensor_Dense<double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void exp(const view_tensor_Dense<vector<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void exp(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void exp(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void exp(const view_tensor_Dense<vector<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void exp(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void exp(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void exp(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void exp(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         tensor::tensor_Dense<double> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<vector<double>, double> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void exp(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
+void exp(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void exp(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void exp(const tensor::tensor_Dense<float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void exp(const view_tensor_Dense<vector<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void exp(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void exp(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void exp(const view_tensor_Dense<vector<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void exp(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void exp(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void exp(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void exp(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         tensor::tensor_Dense<float> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<vector<float>, float> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void exp(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -521,8 +3506,383 @@ void exp(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C);
 void max(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void max(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -546,8 +3906,383 @@ void max(const tensor::tensor_Dense<float> &A,
 void min(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const tensor::tensor_Dense<double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<vector<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<matrix::Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void min(const tensor::tensor_Dense<float> &A,
          const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B, tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const tensor::tensor_Dense<float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<vector<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<matrix::Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -570,8 +4305,74 @@ void min(const tensor::tensor_Dense<float> &A,
  */
 void max(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void max(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void max(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void max(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -594,8 +4395,74 @@ void max(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void min(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C);
+void min(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const tensor::tensor_Dense<double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, tensor::tensor_Dense<double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, view_tensor_Dense<vector<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void min(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C);
+void min(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const tensor::tensor_Dense<float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, tensor::tensor_Dense<float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<vector<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -613,7 +4480,17 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
  * - GPU acceleration: true
  */
 [[nodiscard]] double max(const tensor::tensor_Dense<double> &C);
+[[nodiscard]] double max(const view_tensor_Dense<vector<double>, double> &C);
+[[nodiscard]] double
+max(const view_tensor_Dense<matrix::Dense<double>, double> &C);
+[[nodiscard]] double
+max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 [[nodiscard]] float max(const tensor::tensor_Dense<float> &C);
+[[nodiscard]] float max(const view_tensor_Dense<vector<float>, float> &C);
+[[nodiscard]] float
+max(const view_tensor_Dense<matrix::Dense<float>, float> &C);
+[[nodiscard]] float
+max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -631,7 +4508,17 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
  * - GPU acceleration: true
  */
 [[nodiscard]] double min(const tensor::tensor_Dense<double> &C);
+[[nodiscard]] double min(const view_tensor_Dense<vector<double>, double> &C);
+[[nodiscard]] double
+min(const view_tensor_Dense<matrix::Dense<double>, double> &C);
+[[nodiscard]] double
+min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 [[nodiscard]] float min(const tensor::tensor_Dense<float> &C);
+[[nodiscard]] float min(const view_tensor_Dense<vector<float>, float> &C);
+[[nodiscard]] float
+min(const view_tensor_Dense<matrix::Dense<float>, float> &C);
+[[nodiscard]] float
+min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -654,8 +4541,88 @@ void min(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void alo(const tensor::tensor_Dense<double> &A, const double alpha,
          const double beta, tensor::tensor_Dense<double> &C);
+void alo(const tensor::tensor_Dense<double> &A, const double alpha,
+         const double beta, view_tensor_Dense<vector<double>, double> &C);
+void alo(const tensor::tensor_Dense<double> &A, const double alpha,
+         const double beta,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void alo(const tensor::tensor_Dense<double> &A, const double alpha,
+         const double beta,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void alo(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         const double beta, tensor::tensor_Dense<double> &C);
+void alo(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         const double beta, view_tensor_Dense<vector<double>, double> &C);
+void alo(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         const double beta,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void alo(const view_tensor_Dense<vector<double>, double> &A, const double alpha,
+         const double beta,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void alo(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, const double beta,
+         tensor::tensor_Dense<double> &C);
+void alo(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<vector<double>, double> &C);
+void alo(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void alo(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, const double beta,
+         tensor::tensor_Dense<double> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<vector<double>, double> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<matrix::Dense<double>, double> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+         const double alpha, const double beta,
+         view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void alo(const tensor::tensor_Dense<float> &A, const float alpha,
          const float beta, tensor::tensor_Dense<float> &C);
+void alo(const tensor::tensor_Dense<float> &A, const float alpha,
+         const float beta, view_tensor_Dense<vector<float>, float> &C);
+void alo(const tensor::tensor_Dense<float> &A, const float alpha,
+         const float beta, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void alo(const tensor::tensor_Dense<float> &A, const float alpha,
+         const float beta,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void alo(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         const float beta, tensor::tensor_Dense<float> &C);
+void alo(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         const float beta, view_tensor_Dense<vector<float>, float> &C);
+void alo(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         const float beta, view_tensor_Dense<matrix::Dense<float>, float> &C);
+void alo(const view_tensor_Dense<vector<float>, float> &A, const float alpha,
+         const float beta,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void alo(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, const float beta, tensor::tensor_Dense<float> &C);
+void alo(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<vector<float>, float> &C);
+void alo(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void alo(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, const float beta, tensor::tensor_Dense<float> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<vector<float>, float> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<matrix::Dense<float>, float> &C);
+void alo(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+         const float alpha, const float beta,
+         view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 
 /**
@@ -676,8 +4643,72 @@ void alo(const tensor::tensor_Dense<float> &A, const float alpha,
  */
 void reciprocal(const tensor::tensor_Dense<double> &A,
                 tensor::tensor_Dense<double> &C);
+void reciprocal(const tensor::tensor_Dense<double> &A,
+                view_tensor_Dense<vector<double>, double> &C);
+void reciprocal(const tensor::tensor_Dense<double> &A,
+                view_tensor_Dense<matrix::Dense<double>, double> &C);
+void reciprocal(const tensor::tensor_Dense<double> &A,
+                view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void reciprocal(const view_tensor_Dense<vector<double>, double> &A,
+                tensor::tensor_Dense<double> &C);
+void reciprocal(const view_tensor_Dense<vector<double>, double> &A,
+                view_tensor_Dense<vector<double>, double> &C);
+void reciprocal(const view_tensor_Dense<vector<double>, double> &A,
+                view_tensor_Dense<matrix::Dense<double>, double> &C);
+void reciprocal(const view_tensor_Dense<vector<double>, double> &A,
+                view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+                tensor::tensor_Dense<double> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+                view_tensor_Dense<vector<double>, double> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+                view_tensor_Dense<matrix::Dense<double>, double> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<double>, double> &A,
+                view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
+void reciprocal(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+    tensor::tensor_Dense<double> &C);
+void reciprocal(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+    view_tensor_Dense<vector<double>, double> &C);
+void reciprocal(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+    view_tensor_Dense<matrix::Dense<double>, double> &C);
+void reciprocal(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
+    view_tensor_Dense<tensor::tensor_Dense<double>, double> &C);
 void reciprocal(const tensor::tensor_Dense<float> &A,
                 tensor::tensor_Dense<float> &C);
+void reciprocal(const tensor::tensor_Dense<float> &A,
+                view_tensor_Dense<vector<float>, float> &C);
+void reciprocal(const tensor::tensor_Dense<float> &A,
+                view_tensor_Dense<matrix::Dense<float>, float> &C);
+void reciprocal(const tensor::tensor_Dense<float> &A,
+                view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<vector<float>, float> &A,
+                tensor::tensor_Dense<float> &C);
+void reciprocal(const view_tensor_Dense<vector<float>, float> &A,
+                view_tensor_Dense<vector<float>, float> &C);
+void reciprocal(const view_tensor_Dense<vector<float>, float> &A,
+                view_tensor_Dense<matrix::Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<vector<float>, float> &A,
+                view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+                tensor::tensor_Dense<float> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+                view_tensor_Dense<vector<float>, float> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+                view_tensor_Dense<matrix::Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<matrix::Dense<float>, float> &A,
+                view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+                tensor::tensor_Dense<float> &C);
+void reciprocal(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+                view_tensor_Dense<vector<float>, float> &C);
+void reciprocal(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+                view_tensor_Dense<matrix::Dense<float>, float> &C);
+void reciprocal(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+                view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
 /**@}*/
 /**@}*/
 } // namespace vml

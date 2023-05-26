@@ -157,8 +157,8 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
 
   val_create_flag = true;
   resize(mat.get_nnz());
-  col_ind.resize(mat.get_nnz());
-  row_ptr.resize(mat.get_row() + 1);
+  col_ind.resize(mat.col_ind.size());
+  row_ptr.resize(mat.row_ptr.size());
 
   rowN = mat.get_row();
   colN = mat.get_col();
@@ -170,7 +170,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                     true);
     internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                     true);
-    internal::vcopy(mat.get_nnz(), mat.data(), data(), true);
+    internal::vcopy(mat.get_nnz(), mat.begin(), begin(), true);
   }
 #endif
 
@@ -178,7 +178,7 @@ template <typename T> CRS<T>::CRS(const CRS<T> &mat) {
                   false);
   internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
                   false);
-  internal::vcopy(mat.get_nnz(), mat.data(), data(), false);
+  internal::vcopy(mat.get_nnz(), mat.begin(), begin(), false);
 
   compute_hash();
   logger.util_out();

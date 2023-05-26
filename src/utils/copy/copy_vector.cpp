@@ -13,7 +13,7 @@ template <typename T> void vector<T>::operator=(const std::vector<T> &vec) {
 
   val_create_flag = true;
   resize(vec.size());
-  std::copy(vec.begin(), vec.end(), data());
+  std::copy(vec.begin(), vec.end(), begin());
 
   logger.util_out();
 }
@@ -28,14 +28,15 @@ template <typename T> void vector<T>::operator=(const vector<T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data(), data(), true);
+    internal::vcopy(vec.size(), vec.begin(), begin(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data(), data(), false);
+    internal::vcopy(vec.size(), vec.begin(), begin(), false);
   }
 
   logger.util_out();
@@ -52,19 +53,19 @@ void vector<T>::operator=(const view1D<vector<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), false);
   }
 
   logger.util_out();
 }
-
 template void
 vector<double>::operator=(const view1D<vector<double>, double> &vec);
 template void vector<float>::operator=(const view1D<vector<float>, float> &vec);
@@ -77,19 +78,19 @@ void vector<T>::operator=(const view1D<matrix::Dense<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), false);
   }
 
   logger.util_out();
 }
-
 template void
 vector<double>::operator=(const view1D<matrix::Dense<double>, double> &vec);
 template void
@@ -103,19 +104,19 @@ void vector<T>::operator=(const view1D<tensor::tensor_Dense<T>, T> &vec) {
   // err
   assert(monolish::util::is_same_size(*this, vec));
   assert(monolish::util::is_same_device_mem_stat(*this, vec));
+  val_create_flag = true;
 
   // gpu copy and recv
   if (vec.get_device_mem_stat()) {
 #if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), true);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), true);
 #endif
   } else {
-    internal::vcopy(vec.size(), vec.data() + vec.get_offset(), data(), false);
+    internal::vcopy(vec.size(), vec.begin() + vec.get_offset(), begin(), false);
   }
 
   logger.util_out();
 }
-
 template void vector<double>::operator=(
     const view1D<tensor::tensor_Dense<double>, double> &vec);
 template void

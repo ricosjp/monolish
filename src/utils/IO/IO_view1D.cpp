@@ -61,6 +61,31 @@ void view1D<monolish::matrix::Dense<double>, double>::print_all(
 }
 
 template <>
+void view1D<monolish::tensor::tensor_Dense<double>, double>::print_all(
+    bool force_cpu) const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+  double *val = target.data();
+  if (get_device_mem_stat() == true && force_cpu == false) {
+#if MONOLISH_USE_NVIDIA_GPU
+#pragma omp target
+    for (auto i = first; i < last; i++) {
+      printf("%f\n", val[i]);
+    }
+#else
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
+#endif
+  } else {
+    for (auto i = first; i < last; i++) {
+      printf("%f\n", val[i]);
+    }
+  }
+  logger.util_out();
+}
+
+template <>
 void view1D<monolish::vector<float>, float>::print_all(bool force_cpu) const {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);

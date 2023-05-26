@@ -17,43 +17,43 @@ template <> void monolish::matrix::CRS<float>::diag_add(const float alpha) {
 
 template <>
 void monolish::matrix::CRS<double>::diag_add(const vector<double> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 template <>
 void monolish::matrix::CRS<float>::diag_add(const vector<float> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 
 template <>
 void monolish::matrix::CRS<double>::diag_add(
     const view1D<vector<double>, double> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 template <>
 void monolish::matrix::CRS<float>::diag_add(
     const view1D<vector<float>, float> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 
 template <>
 void monolish::matrix::CRS<double>::diag_add(
     const view1D<matrix::Dense<double>, double> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 template <>
 void monolish::matrix::CRS<float>::diag_add(
     const view1D<matrix::Dense<float>, float> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 
 template <>
 void monolish::matrix::CRS<double>::diag_add(
     const view1D<tensor::tensor_Dense<double>, double> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 template <>
 void monolish::matrix::CRS<float>::diag_add(
     const view1D<tensor::tensor_Dense<float>, float> &vec) {
-  CRS_diag_add_core(*this, vec.size(), vec.data());
+  CRS_diag_add_core(*this, vec.size(), vec.begin());
 };
 } // namespace monolish::matrix

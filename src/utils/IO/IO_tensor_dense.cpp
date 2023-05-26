@@ -35,7 +35,7 @@ template <typename T> void tensor_Dense<T>::print_all(bool force_cpu) const {
         i_copy /= shape_ptr[j];
       }
       for (auto j = decltype(size){0}; j < size; j++) {
-        printf("%lu ", ind_ptr[j]);
+        printf("%lu ", ind_ptr[j] + 1);
       }
       printf("%f\n", vald[i]);
     }

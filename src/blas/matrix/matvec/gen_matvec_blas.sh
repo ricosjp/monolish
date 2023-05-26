@@ -24,12 +24,14 @@ namespace monolish::blas {
 for prec in double float; do
   for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-      if [ $prec = "double" ]
-      then
-        echo "void matvec(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, false);}"
-      else
-        echo "void matvec(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, false);}"
-      fi
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        if [ $prec = "double" ]
+        then
+          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, false);}"
+        else
+          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, false);}"
+        fi
+      done
     done
   done
 done
@@ -38,20 +40,22 @@ echo ""
 
 ## matvec_* Dense
 for trans in N T; do
-    for prec in double float; do
-        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-                if [ $prec = "double" ]
-                then
-                    T=`TRANSPOSE_BOOL $trans`
-                    echo "void matvec_$trans(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, $T);}"
-                else
-                    T=`TRANSPOSE_BOOL $trans`
-                    echo "void matvec_$trans(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, $T);}"
-                fi
-            done
+  for prec in double float; do
+    for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+          if [ $prec = "double" ]
+          then
+            T=`TRANSPOSE_BOOL $trans`
+            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, $T);}"
+          else
+            T=`TRANSPOSE_BOOL $trans`
+            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, $T);}"
+          fi
         done
+      done
     done
+  done
 done
 
 echo ""

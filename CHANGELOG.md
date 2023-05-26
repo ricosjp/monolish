@@ -20,6 +20,9 @@ https://keepachangelog.com/ja/1.0.0/ に基づいて記述していく
 Unreleased
 -----------
 
+### Added
+- Add new types: view_matrix / view_tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/504> <https://github.com/ricosjp/monolish/issues/731>
+
 ### Fixed
 - Fix benchmark result token <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/502> <https://github.com/ricosjp/monolish/issues/733>
 

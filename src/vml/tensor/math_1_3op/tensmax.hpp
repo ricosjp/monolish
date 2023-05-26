@@ -12,7 +12,7 @@ void ttmax_core(const F1 &A, const F2 &B, F3 &C) {
   assert(util::is_same_structure(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vmax(C.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vmax(C.get_nnz(), A.begin(), B.begin(), C.begin(),
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -28,7 +28,7 @@ void stmax_core(const F1 &A, const F2 alpha, F3 &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vmax(C.get_nnz(), A.data(), alpha, C.data(),
+  internal::vmax(C.get_nnz(), A.begin(), alpha, C.begin(),
                  C.get_device_mem_stat());
 
   logger.func_out();
@@ -38,7 +38,7 @@ template <typename F1, typename F2> F2 tmax_core(const F1 &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  F2 max = internal::vmax(C.get_nnz(), C.data(), C.get_device_mem_stat());
+  F2 max = internal::vmax(C.get_nnz(), C.begin(), C.get_device_mem_stat());
 
   logger.func_out();
   if (typeid(F1) == typeid(tensor::tensor_Dense<F2>)) {

@@ -40,7 +40,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void ${func[$i]}(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 done
@@ -70,7 +76,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const $prec alpha, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void ${func[$i]}(const $arg1 &A, const $prec alpha, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 done
@@ -96,7 +106,13 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void pow(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void pow(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
  
@@ -117,7 +133,11 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void pow(const matrix::Dense<$prec> &A, const $prec alpha, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void pow(const $arg1 &A, const $prec alpha, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -142,7 +162,11 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void $math(const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void $math(const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 done
@@ -172,7 +196,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void ${func[$i]}(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 done
@@ -201,7 +231,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void ${func[$i]}(const matrix::Dense<$prec> &A, const $prec alpha, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void ${func[$i]}(const $arg1 &A, const $prec alpha, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 done
@@ -228,7 +262,9 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-    echo "[[nodiscard]] $prec ${func[$i]}(const matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    echo "[[nodiscard]] $prec ${func[$i]}(const $arg1 &C);"
+  done
 done
 echo "/**@}*/"
 done
@@ -255,7 +291,11 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void alo(const matrix::Dense<$prec> &A, const $prec alpha, const $prec beta, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void alo(const $arg1 &A, const $prec alpha, const $prec beta, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -279,7 +319,11 @@ echo "
  * - GPU acceleration: true
 */ "
 for prec in double float; do
-  echo "void reciprocal(const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void reciprocal(const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 
 echo "/**@}*/"

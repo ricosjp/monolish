@@ -39,9 +39,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void times_row(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void times_row(const $arg1 &A, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -65,9 +69,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void times_row(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void times_row(const $arg1 &A, const size_t num, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -147,9 +155,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void times_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void times_col(const $arg1 &A, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -173,9 +185,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void times_col(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void times_col(const $arg1 &A, const size_t num, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -255,9 +271,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void adds_row(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const $arg1 &A, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -281,9 +301,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void adds_row(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_row(const $arg1 &A, const size_t num, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -307,9 +331,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void adds_col(const matrix::Dense<$prec> &A, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const $arg1 &A, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 
@@ -333,9 +361,13 @@ echo "
  *    - # of data transfer: 0
  */ "
  for prec in double float; do
-     for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
-         echo "void adds_col(const matrix::Dense<$prec> &A, const size_t num, const $arg1 &x, matrix::Dense<$prec> &C);"
+   for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+         echo "void adds_col(const $arg1 &A, const size_t num, const $arg2 &x, $arg3 &C);"
+       done
      done
+   done
  done
  echo "/**@}*/"
 

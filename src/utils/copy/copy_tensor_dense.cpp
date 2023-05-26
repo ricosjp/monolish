@@ -16,6 +16,7 @@ void tensor_Dense<T>::operator=(const tensor_Dense<T> &tens) {
   // err
   assert(monolish::util::is_same_size(*this, tens));
   assert(monolish::util::is_same_device_mem_stat(*this, tens));
+  val_create_flag = true;
 
   // gpu copy
   if (tens.get_device_mem_stat()) {

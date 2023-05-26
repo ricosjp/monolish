@@ -5,11 +5,9 @@
 namespace monolish {
 namespace {
 // double ///////////////////
-void Dense_tensor_Dense_Dmattens_core(const double &a,
-                                      const matrix::Dense<double> &A,
-                                      const tensor::tensor_Dense<double> &B,
-                                      const double &b,
-                                      tensor::tensor_Dense<double> &C,
+template <typename MAT, typename TENS1, typename TENS2>
+void Dense_tensor_Dense_Dmattens_core(const double &a, const MAT &A,
+                                      const TENS1 &B, const double &b, TENS2 &C,
                                       bool transA, bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));
@@ -29,11 +27,9 @@ void Dense_tensor_Dense_Dmattens_core(const double &a,
 }
 
 // float ///////////////////
-void Dense_tensor_Dense_Smattens_core(const float &a,
-                                      const matrix::Dense<float> &A,
-                                      const tensor::tensor_Dense<float> &B,
-                                      const float &b,
-                                      tensor::tensor_Dense<float> &C,
+template <typename MAT, typename TENS1, typename TENS2>
+void Dense_tensor_Dense_Smattens_core(const float &a, const MAT &A,
+                                      const TENS1 &B, const float &b, TENS2 &C,
                                       bool transA, bool transB) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matmul_name(monolish_func, transA, transB));

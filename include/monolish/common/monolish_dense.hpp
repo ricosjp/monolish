@@ -5,6 +5,13 @@
 namespace monolish {
 template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
+template <typename TYPE, typename Float> class view_Dense;
+template <typename TYPE, typename Float> class view_tensor_Dense;
+
+namespace tensor {
+template <typename Float> class tensor_Dense;
+}
+
 namespace matrix {
 
 /**
@@ -124,6 +131,48 @@ public:
    *        - else; coping data only on CPU
    **/
   Dense(const Dense<Float> &dense, Float value);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  Dense(const view_Dense<vector<Float>, Float> &dense);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  Dense(const view_Dense<matrix::Dense<Float>, Float> &dense);
+
+  /**
+   * @brief Create Dense matrix from view Dense matrix
+   * @param dense Dense format matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: M*N (only allocation)
+   *        - if `dense.gpu_status == true`; coping data on CPU and GPU
+   *respectively
+   *        - else; coping data only on CPU
+   **/
+  Dense(const view_Dense<tensor::tensor_Dense<Float>, Float> &dense);
 
   /**
    * @brief Allocate dense matrix
@@ -347,6 +396,17 @@ public:
   }
 
   /**
+   * @brief get element A[i/col][j%col]
+   * @param i index
+   * @return A[i/col][j%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) const;
+
+  /**
    * @brief get element A[i][j]
    * @param i row
    * @param j col
@@ -357,6 +417,19 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] Float at(const size_t i, const size_t j) const;
+
+  /**
+   * @brief get element A[i/col][i%col] (only CPU)
+   * @param i index
+   * @return A[i/col][i%col]
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] Float at(const size_t i) {
+    return static_cast<const Dense *>(this)->at(i);
+  };
 
   /**
    * @brief get element A[i][j] (only CPU)
@@ -371,6 +444,17 @@ public:
   [[nodiscard]] Float at(const size_t i, const size_t j) {
     return static_cast<const Dense *>(this)->at(i, j);
   };
+
+  /**
+   * @brief set element A[i/col][j%col]
+   * @param i index
+   * @param Val scalar value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void insert(const size_t i, const Float Val);
 
   /**
    * @brief set element A[i][j]
@@ -604,6 +688,48 @@ public:
    *        - else; coping data on CPU
    **/
   void operator=(const Dense<Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<vector<Float>, Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<matrix::Dense<Float>, Float> &mat);
+
+  /**
+   * @brief matrix copy
+   * @param mat Dense matrix
+   * @return copied dense matrix
+   * @note
+   * - # of computation: M*N
+   * - Multi-threading: true
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   *        - if `gpu_statius == true`; coping data on CPU
+   *        - else; coping data on CPU
+   **/
+  void operator=(const view_Dense<tensor::tensor_Dense<Float>, Float> &mat);
 
   /**
    * @brief reference to the element at position (v[i])

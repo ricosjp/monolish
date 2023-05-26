@@ -37,7 +37,11 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  echo "void copy(const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void copy(const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 
 echo "/**@}*/"
@@ -110,7 +114,9 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void mscal(const $prec alpha, matrix::Dense<$prec> &A);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    echo "void mscal(const $prec alpha, $arg1 &A);"
+  done
 done
 
 echo "/**@}*/"
@@ -160,7 +166,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void times(const $prec alpha, const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void times(const $prec alpha, const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -211,7 +221,11 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void adds(const $prec alpha, const matrix::Dense<$prec> &A, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void adds(const $prec alpha, const $arg1 &A, $arg2 &C);"
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -236,7 +250,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matadd(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void matadd(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -308,7 +328,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matsub(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void matsub(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -382,7 +408,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul(const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void matmul(const $arg1 &A, const $arg2 &B, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 
@@ -406,7 +438,13 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matmul(const $prec &a, const matrix::Dense<$prec> &A, const matrix::Dense<$prec> &B, const $prec &b, matrix::Dense<$prec> &C);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void matmul(const $prec &a, const $arg1 &A, const $arg2 &B, const $prec &b, $arg3 &C);"
+      done
+    done
+  done
 done
 echo "/**@}*/"
 

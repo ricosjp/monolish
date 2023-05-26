@@ -8,6 +8,8 @@
 #include "monolish_tensor.hpp"
 #include "monolish_vector.hpp"
 #include "monolish_view1D.hpp"
+#include "monolish_view_dense.hpp"
+#include "monolish_view_tensor_dense.hpp"
 #include <initializer_list>
 
 // error code
@@ -420,6 +422,57 @@ template <typename T>
 }
 
 /**
+ * @brief compare structure of vector (same as is_same_size())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const view1D<T, U> &x,
+                                     const vector<U> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare structure of vector (same as is_same_size())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const vector<U> &x,
+                                     const view1D<T, U> &y) {
+  return x.size() == y.size();
+}
+
+/**
+ * @brief compare structure of vector (same as is_same_size())
+ * @param x monolish vector
+ * @param y monolish vector
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view1D<T, V> &x,
+                                     const view1D<U, V> &y) {
+  return x.size() == y.size();
+}
+
+/**
  * @brief compare structure using M and N (same as is_same_size())
  * @param A Dense matrix
  * @param B Dense matrix
@@ -476,8 +529,53 @@ template <typename T>
  * @ingroup compare
  **/
 template <typename T>
-bool is_same_structure(const matrix::LinearOperator<T> &A,
-                       const matrix::LinearOperator<T> &B);
+[[nodiscard]] bool is_same_structure(const matrix::LinearOperator<T> &A,
+                                     const matrix::LinearOperator<T> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const view_Dense<T, U> &A,
+                                     const matrix::Dense<U> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const matrix::Dense<U> &A,
+                                     const view_Dense<T, U> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view_Dense<T, V> &A,
+                                     const view_Dense<U, V> &B);
 
 /**
  * @brief compare structure using M and N (same as is_same_size())
@@ -510,13 +608,58 @@ template <typename T>
                                      const tensor::tensor_COO<T> &B);
 
 /**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const view_tensor_Dense<T, U> &A,
+                                     const tensor::tensor_Dense<U> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_Dense<U> &A,
+                                     const view_tensor_Dense<T, U> &B);
+
+/**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_structure(const view_tensor_Dense<T, V> &A,
+                                     const view_tensor_Dense<U, V> &B);
+
+/**
  * @brief compare matrix structure
  * @ingroup compare
  **/
-template <typename T, typename... types>
-[[nodiscard]] bool is_same_structure(const T &A, const T &B,
+template <typename T, typename U, typename V, typename... types>
+[[nodiscard]] bool is_same_structure(const T &A, const U &B, const V &C,
                                      const types &...args) {
-  return is_same_structure(A, B) && is_same_structure(A, args...);
+  return is_same_structure(A, B) && is_same_structure(A, C, args...);
 }
 
 /**
@@ -596,6 +739,49 @@ template <typename T>
                                 const matrix::LinearOperator<T> &B);
 
 /**
+ * @brief compare row and col size
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_size(const view_Dense<T, U> &A,
+                                const matrix::Dense<U> &B);
+/**
+ * @brief compare row and col size
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_size(const matrix::Dense<U> &A,
+                                const view_Dense<T, U> &B);
+/**
+ * @brief compare row and col size
+ * @param A Dense matrix
+ * @param B Dense matrix
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_size(const view_Dense<T, V> &A,
+                                const view_Dense<U, V> &B);
+
+/**
  * @brief compare shape
  * @param A Dense tensor
  * @param B Dense tensor
@@ -626,13 +812,56 @@ template <typename T>
                                 const tensor::tensor_COO<T> &B);
 
 /**
+ * @brief compare shape
+ * @param A Dense tensor
+ * @param B Dense tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_size(const view_tensor_Dense<T, U> &A,
+                                const tensor::tensor_Dense<U> &B);
+/**
+ * @brief compare shape
+ * @param A Dense tensor
+ * @param B Dense tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U>
+[[nodiscard]] bool is_same_size(const tensor::tensor_Dense<U> &A,
+                                const view_tensor_Dense<T, U> &B);
+/**
+ * @brief compare shape
+ * @param A Dense tensor
+ * @param B Dense tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T, typename U, typename V>
+[[nodiscard]] bool is_same_size(const view_tensor_Dense<T, V> &A,
+                                const view_tensor_Dense<U, V> &B);
+
+/**
  * @brief compare matrix size
  * @ingroup compare
  **/
-template <typename T, typename U, typename... types>
-[[nodiscard]] bool is_same_size(const T &arg1, const U &arg2,
+template <typename T, typename U, typename V, typename... types>
+[[nodiscard]] bool is_same_size(const T &arg1, const U &arg2, const V &arg3,
                                 const types &...args) {
-  return is_same_size(arg1, arg2) && is_same_size(arg1, args...);
+  return is_same_size(arg1, arg2) && is_same_size(arg1, arg3, args...);
 }
 
 /**

@@ -13,3 +13,11 @@ cat ./t_tanh.hpp | sed -e 's/tanh/exp/g' > t_exp.hpp
 cat ./t_max.hpp  | sed -e 's/max/min/g' > t_min.hpp
 cat ./tt_max.hpp | sed -e 's/max/min/g' > tt_min.hpp
 cat ./st_max.hpp | sed -e 's/max/min/g' > st_min.hpp
+#cat ./tt_add.hpp | sed -e 's/add/sub/g' > tt_sub.hpp
+#cat ./tt_add.hpp | sed -e 's/add/mul/g' > tt_mul.hpp
+#cat ./tt_add.hpp | sed -e 's/add/div/g' > tt_div.hpp
+#cat ./tt_add.hpp | sed -e 's/add/pow/g' > tt_pow.hpp
+#cat ./st_add.hpp | sed -e 's/add/sub/g' > st_sub.hpp
+#cat ./st_add.hpp | sed -e 's/add/mul/g' > st_mul.hpp
+#cat ./st_add.hpp | sed -e 's/add/div/g' > st_div.hpp
+#cat ./st_add.hpp | sed -e 's/add/pow/g' > st_pow.hpp
