@@ -25,6 +25,13 @@
 #endif
 
 namespace monolish {
+template <typename TYPE, typename Float> class view1D;
+template <typename TYPE, typename Float> class view_Dense;
+template <typename TYPE, typename Float> class view_tensor_Dense;
+
+namespace tensor {
+template <typename Float> class tensor_Dense;
+}
 
 /**
  * @addtogroup Vector_class
@@ -42,7 +49,12 @@ private:
   /**
    * @brief true: sended, false: not send
    **/
-  mutable bool gpu_status = false;
+  mutable std::shared_ptr<bool> gpu_status = std::make_shared<bool>(false);
+
+  /**
+   * @brief first position of data array
+   */
+  size_t first = 0;
 
 public:
   /**
@@ -258,7 +270,15 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: true
    **/
-  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return *gpu_status; }
+
+  /**
+   * @brief gpu status shared pointer
+   * @return gpu status shared pointer
+   */
+  [[nodiscard]] std::shared_ptr<bool> get_gpu_status() const {
+    return gpu_status;
+  }
 
   /**
    * @brief destructor of vector, free GPU memory
@@ -274,8 +294,6 @@ public:
       }
     }
   }
-
-  [[nodiscard]] size_t get_offset() const { return 0; }
 
   // util
   // ///////////////////////////////////////////////////////////////////////////
@@ -302,7 +320,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *begin() const { return data(); }
+  [[nodiscard]] const Float *begin() const { return data() + get_offset(); }
 
   /**
    * @brief returns a begin iterator
@@ -310,7 +328,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return data(); }
+  [[nodiscard]] Float *begin() { return data() + get_offset(); }
 
   /**
    * @brief returns a end iterator
@@ -318,7 +336,9 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return data() + get_nnz(); }
+  [[nodiscard]] const Float *end() const {
+    return data() + get_offset() + get_nnz();
+  }
 
   /**
    * @brief returns a end iterator
@@ -326,7 +346,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return data() + get_nnz(); }
+  [[nodiscard]] Float *end() { return data() + get_offset() + get_nnz(); }
 
   /**
    * @brief get vector size
@@ -343,6 +363,29 @@ public:
    * - # of computation: 1
    **/
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
+
+  /**
+   * @brief get first position
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_first() const { return first; }
+
+  /**
+   * @brief get first position (same as get_first())
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_offset() const { return get_first(); }
+
+  /**
+   * @brief change first position
+   * @note
+   * - # of computation: 1
+   */
+  void set_first(size_t i) { first = i; }
 
   /**
    * @brief fill vector elements with a scalar value
@@ -430,6 +473,22 @@ public:
   void move(const tensor::tensor_Dense<Float> &tensor_dense);
 
   void move(const tensor::tensor_Dense<Float> &tensor_dense, int N);
+
+  void move(const view_tensor_Dense<vector<Float>, Float> &tensor_dense);
+
+  void move(const view_tensor_Dense<matrix::Dense<Float>, Float> &tensor_dense);
+
+  void move(const view_tensor_Dense<tensor::tensor_Dense<Float>, Float>
+                &tensor_dense);
+
+  void move(const view_tensor_Dense<vector<Float>, Float> &tensor_dense, int N);
+
+  void move(const view_tensor_Dense<matrix::Dense<Float>, Float> &tensor_dense,
+            int N);
+
+  void move(
+      const view_tensor_Dense<tensor::tensor_Dense<Float>, Float> &tensor_dense,
+      int N);
 
   // operator
   // ///////////////////////////////////////////////////////////////////////////
@@ -524,7 +583,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return data()[i];
+    return data()[first + i];
   }
 
   /**

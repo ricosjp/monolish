@@ -14,7 +14,7 @@ void adds_core(const T alpha, const TENS1 &A, TENS2 &C) {
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, C));
 
-  internal::vadd(A.get_nnz(), A.data(), alpha, C.data(),
+  internal::vadd(A.get_nnz(), A.begin(), alpha, C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();

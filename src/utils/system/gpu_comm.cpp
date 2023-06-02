@@ -13,11 +13,11 @@ template <typename T> void vector<T>::send() const {
   const T *d = begin();
   const auto N = size();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #pragma omp target update to(d [0:N])
   } else {
 #pragma omp target enter data map(to : d [0:N])
-    gpu_status = true;
+    *gpu_status = true;
   }
 #endif
   logger.util_out();
@@ -29,13 +29,13 @@ template <typename T> void vector<T>::recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *d = begin();
     const auto N = size();
 
 #pragma omp target exit data map(from : d [0:N])
 
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -47,7 +47,7 @@ template <typename T> void vector<T>::nonfree_recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *d = begin();
     const auto N = size();
 #pragma omp target update from(d [0:N])
@@ -62,11 +62,11 @@ template <typename T> void vector<T>::device_free() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     const T *d = begin();
     const auto N = size();
 #pragma omp target exit data map(release : d [0:N])
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -97,13 +97,13 @@ template <typename T> void matrix::CRS<T>::send() const {
   const auto N = get_row();
   const auto nnz = get_nnz();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #pragma omp target update to(vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
   } else {
 #pragma omp target enter data map(to                                           \
                                   :                                            \
                                   vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
-    gpu_status = true;
+    *gpu_status = true;
   }
 #endif
   logger.util_out();
@@ -115,7 +115,7 @@ template <typename T> void matrix::CRS<T>::recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
@@ -124,7 +124,7 @@ template <typename T> void matrix::CRS<T>::recv() {
 
 #pragma omp target exit data map(from                                          \
                                  : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -136,7 +136,7 @@ template <typename T> void matrix::CRS<T>::nonfree_recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto *cold = col_ind.data();
     auto *rowd = row_ptr.data();
@@ -155,7 +155,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     const T *vald = begin();
     const auto *cold = col_ind.data();
     const auto *rowd = row_ptr.data();
@@ -165,7 +165,7 @@ template <typename T> void matrix::CRS<T>::device_free() const {
 #pragma omp target exit data map(release                                       \
                                  : vald [0:nnz], cold [0:nnz], rowd [0:N + 1])
 
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -191,11 +191,11 @@ template <typename T> void matrix::Dense<T>::send() const {
   const T *vald = begin();
   const auto nnz = get_nnz();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #pragma omp target update to(vald [0:nnz])
   } else {
 #pragma omp target enter data map(to : vald [0:nnz])
-    gpu_status = true;
+    *gpu_status = true;
   }
 #endif
   logger.util_out();
@@ -207,12 +207,12 @@ template <typename T> void matrix::Dense<T>::recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -224,7 +224,7 @@ template <typename T> void matrix::Dense<T>::nonfree_recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto nnz = get_nnz();
 
@@ -240,13 +240,13 @@ template <typename T> void matrix::Dense<T>::device_free() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     const T *vald = begin();
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])
 
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -273,11 +273,11 @@ template <typename T> void tensor::tensor_Dense<T>::send() const {
   const T *vald = begin();
   const auto nnz = get_nnz();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #pragma omp target update to(vald [0:nnz])
   } else {
 #pragma omp target enter data map(to : vald [0:nnz])
-    gpu_status = true;
+    *gpu_status = true;
   }
 #endif
   logger.util_out();
@@ -289,12 +289,12 @@ template <typename T> void tensor::tensor_Dense<T>::recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();
@@ -306,7 +306,7 @@ template <typename T> void tensor::tensor_Dense<T>::nonfree_recv() {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     T *vald = begin();
     auto nnz = get_nnz();
 
@@ -322,13 +322,13 @@ template <typename T> void tensor::tensor_Dense<T>::device_free() const {
   logger.util_in(monolish_func);
 
 #if MONOLISH_USE_NVIDIA_GPU
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     const T *vald = begin();
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])
 
-    gpu_status = false;
+    *gpu_status = false;
   }
 #endif
   logger.util_out();

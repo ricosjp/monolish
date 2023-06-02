@@ -21,6 +21,10 @@ bool Dense<T>::equal(const Dense<T> &mat, bool compare_cpu_and_device) const {
     return false;
   }
 
+  if (get_first() != mat.get_first()) {
+    return false;
+  }
+
   if (get_device_mem_stat() == true) {
     if (!(internal::vequal(get_nnz(), data(), mat.data(), true))) {
       return false;

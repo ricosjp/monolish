@@ -270,6 +270,10 @@ public:
    **/
   [[nodiscard]] size_t get_offset() const { return first; }
 
+  [[nodiscard]] std::shared_ptr<Float> get_val() const { return target.val; }
+
+  [[nodiscard]] size_t get_alloc_nnz() const { return target.alloc_nnz; }
+
   /**
    * @brief change first position
    * @note
@@ -409,6 +413,22 @@ public:
   [[nodiscard]] Float *data() { return target_data; }
 
   /**
+   * @brief returns a reference of the target
+   * @return target
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] TYPE &get_target() const { return target; }
+
+  /**
+   * @brief returns a reference of the target
+   * @return target
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] TYPE &get_target() { return target; }
+
+  /**
    * @brief returns begin iterator (include offset)
    * @return A pointer to the first element
    * @note
@@ -467,6 +487,11 @@ public:
     range = rowN * colN;
     last = first + range;
   }
+
+  void move(const view_tensor_Dense<TYPE, Float> &view_tensor_dense);
+
+  void move(const view_tensor_Dense<TYPE, Float> &view_tensor_dense, int rowN,
+            int colN);
 
   /**
    * @brief fill vector elements with a scalar value

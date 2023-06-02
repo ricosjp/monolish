@@ -19,7 +19,7 @@ template <typename T> void CRS<T>::diag(vector<T> &vec) const {
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -70,7 +70,7 @@ template <typename T> void CRS<T>::diag(view1D<vector<T>, T> &vec) const {
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -124,7 +124,7 @@ void CRS<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -178,7 +178,7 @@ void CRS<T>::diag(view1D<tensor::tensor_Dense<T>, T> &vec) const {
   const auto *rowd = row_ptr.data();
   const auto *cold = col_ind.data();
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -231,7 +231,7 @@ template <typename T> void CRS<T>::row(const size_t r, vector<T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
     const auto *indexd = col_ind.data();
 
@@ -278,7 +278,7 @@ void CRS<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
     const auto *indexd = col_ind.data();
 
@@ -327,7 +327,7 @@ void CRS<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
     const auto *indexd = col_ind.data();
 
@@ -375,7 +375,7 @@ void CRS<T>::row(const size_t r,
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
     const auto *indexd = col_ind.data();
 
@@ -423,7 +423,7 @@ template <typename T> void CRS<T>::col(const size_t c, vector<T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -477,7 +477,7 @@ void CRS<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -533,7 +533,7 @@ void CRS<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {
@@ -588,7 +588,7 @@ void CRS<T>::col(const size_t c,
   assert(n == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(n){0}; i < n; i++) {

@@ -19,10 +19,11 @@ void tensor_Dense<T>::move(const matrix::Dense<T> &dense) {
 
   this->val_create_flag = false;
 
-  this->gpu_status = dense.get_device_mem_stat();
+  this->gpu_status = dense.get_gpu_status();
   this->val = dense.val;
   this->val_nnz = dense.get_nnz();
   this->alloc_nnz = dense.alloc_nnz;
+  set_first(dense.get_first());
 
   logger.util_out();
 }
@@ -39,10 +40,11 @@ template <typename T> void tensor_Dense<T>::move(const vector<T> &vec) {
 
   this->val_create_flag = false;
 
-  this->gpu_status = vec.get_device_mem_stat();
+  this->gpu_status = vec.get_gpu_status();
   this->val = vec.val;
   this->val_nnz = vec.get_nnz();
   this->alloc_nnz = vec.alloc_nnz;
+  set_first(vec.get_first());
 
   logger.util_out();
 }

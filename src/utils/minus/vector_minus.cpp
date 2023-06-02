@@ -11,11 +11,11 @@ template <typename T> vector<T> vector<T>::operator-() {
   logger.func_in(monolish_func);
 
   vector<T> ans(size());
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
     ans.send();
   }
 
-  internal::vmul(size(), data(), -1, ans.data(), gpu_status);
+  internal::vmul(size(), begin(), -1, ans.begin(), get_device_mem_stat());
   logger.func_out();
   return ans;
 }

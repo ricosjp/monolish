@@ -20,7 +20,12 @@ private:
   /**
    * @brief true: sended, false: not send
    **/
-  mutable bool gpu_status = false;
+  mutable std::shared_ptr<bool> gpu_status = std::make_shared<bool>(false);
+
+  /**
+   * @brief first position of data array
+   */
+  size_t first = 0;
 
 public:
   /**
@@ -303,6 +308,22 @@ public:
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
+   * @brief get first position
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_first() const { return first; }
+
+  /**
+   * @brief get first position (same as get_first())
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_offset() const { return get_first(); }
+
+  /**
    * @brief Set shape
    * @param shape shape of tensor
    * - # of computation: 1
@@ -310,6 +331,22 @@ public:
    * - GPU acceleration: false
    **/
   void set_shape(const std::vector<size_t> &shape) { this->shape = shape; };
+
+  /**
+   * @brief Set # of non-zero elements
+   * @param NZ # of non-zero elements
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  // void set_nnz(const size_t NZ) { val_nnz = NZ; };
+
+  /**
+   * @brief change first position
+   * @note
+   * - # of computation: 1
+   */
+  void set_first(size_t i) { first = i; }
 
   /**
    * @brief get format name "tensor_Dense"
@@ -524,7 +561,15 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return *gpu_status; }
+
+  /**
+   * @brief gpu status shared pointer
+   * @return gpu status shared pointer
+   */
+  [[nodiscard]] std::shared_ptr<bool> get_gpu_status() const {
+    return gpu_status;
+  }
 
   /**
    * @brief destructor of dense tensor, free GPU memory
@@ -623,7 +668,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *begin() const { return data(); }
+  [[nodiscard]] const Float *begin() const { return data() + get_offset(); }
 
   /**
    * @brief returns a begin iterator
@@ -631,7 +676,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return data(); }
+  [[nodiscard]] Float *begin() { return data() + get_offset(); }
 
   /**
    * @brief returns a end iterator
@@ -639,7 +684,9 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return data() + get_nnz(); }
+  [[nodiscard]] const Float *end() const {
+    return data() + get_offset() + get_nnz();
+  }
 
   /**
    * @brief returns a end iterator
@@ -647,7 +694,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return data() + get_nnz(); }
+  [[nodiscard]] Float *end() { return data() + get_offset() + get_nnz(); }
 
   /**
    * @brief fill tensor elements with a scalar value
@@ -729,7 +776,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return data()[i];
+    return data()[first + i];
   }
 
   /**

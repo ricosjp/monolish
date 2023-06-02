@@ -274,6 +274,10 @@ public:
    **/
   [[nodiscard]] size_t get_offset() const { return first; }
 
+  [[nodiscard]] std::shared_ptr<Float> get_val() const { return target.val; }
+
+  [[nodiscard]] size_t get_alloc_nnz() const { return target.alloc_nnz; }
+
   /**
    * @brief change first position
    * @note
@@ -445,6 +449,14 @@ public:
   }
 
   /**
+   * @brief gpu status shared pointer
+   * @return gpu status shared pointer
+   */
+  [[nodiscard]] std::shared_ptr<bool> get_gpu_status() const {
+    return target.get_gpu_status();
+  }
+
+  /**
    * @brief returns a direct pointer to the original vector (dont include
    *offset)
    * @return A pointer to the first element
@@ -460,6 +472,22 @@ public:
    * - # of computation: 1
    **/
   [[nodiscard]] Float *data() { return target_data; }
+
+  /**
+   * @brief returns a reference of the target
+   * @return target
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] TYPE &get_target() const { return target; }
+
+  /**
+   * @brief returns a reference of the target
+   * @return target
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] TYPE &get_target() { return target; }
 
   /**
    * @brief returns begin iterator (include offset)

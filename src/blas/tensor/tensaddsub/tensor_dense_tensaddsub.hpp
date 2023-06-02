@@ -14,7 +14,7 @@ void tensadd_core(const TENS1 &A, const TENS2 &B, TENS3 &C) {
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vadd(A.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vadd(A.get_nnz(), A.begin(), B.begin(), C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();
@@ -29,7 +29,7 @@ void tenssub_core(const TENS1 &A, const TENS2 &B, TENS3 &C) {
   assert(util::is_same_size(A, B, C));
   assert(util::is_same_device_mem_stat(A, B, C));
 
-  internal::vsub(A.get_nnz(), A.data(), B.data(), C.data(),
+  internal::vsub(A.get_nnz(), A.begin(), B.begin(), C.begin(),
                  A.get_device_mem_stat());
 
   logger.func_out();
