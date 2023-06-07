@@ -38,8 +38,12 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in matrix::Dense\<$prec\>; do
-    echo "void mattens(const $arg1 &A, const tensor::tensor_Dense<$prec> &x, tensor::tensor_Dense<$prec> &y);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void mattens(const $arg1 &A, const $arg2 &x, $arg3 &y);"
+      done
+    done
   done
 done
 echo "/**@}*/"
@@ -62,8 +66,12 @@ echo "
  *    - # of data transfer: 0
  */ "
 for prec in double float; do
-  for arg1 in matrix::Dense\<$prec\>; do
-    echo "void mattens(const $prec &a, const $arg1 &A, const tensor::tensor_Dense<$prec> &x, const $prec &b, tensor::tensor_Dense<$prec> &y);"
+  for arg1 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void mattens(const $prec &a, const $arg1 &A, const $arg2 &x, const $prec &b, $arg3 &y);"
+      done
+    done
   done
 done
 echo "/**@}*/"
@@ -87,7 +95,11 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in matrix::CRS\<$prec\>; do
-    echo "void mattens(const $arg1 &A, const tensor::tensor_Dense<$prec> &x, tensor::tensor_Dense<$prec> &y);"
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void mattens(const $arg1 &A, const $arg2 &x, $arg3 &y);"
+      done
+    done
   done
 done
 echo "/**@}*/"
@@ -111,7 +123,11 @@ echo "
  */ "
 for prec in double float; do
   for arg1 in matrix::CRS\<$prec\>; do
-    echo "void mattens(const $prec &a, const $arg1 &A, const tensor::tensor_Dense<$prec> &x, const $prec &b, tensor::tensor_Dense<$prec> &y);"
+    for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void mattens(const $prec &a, const $arg1 &A, const $arg2 &x, const $prec &b, $arg3 &y);"
+      done
+    done
   done
 done
 echo "/**@}*/"

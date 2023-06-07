@@ -233,3 +233,17 @@ get_random_structure_tensor(const size_t M, const size_t N, const size_t L) {
 
   return monolish::util::random_structure_tensor<T>(M, N, L, nnzrow, 1.0);
 }
+
+template <typename T>
+monolish::tensor::tensor_COO<T>
+get_random_structure_tensor(const size_t M, const size_t N, const size_t L,
+                            const size_t K) {
+  size_t nnzrow = 27;
+  if (nnzrow < K) {
+    nnzrow = 27;
+  } else {
+    nnzrow = K - 1;
+  }
+
+  return monolish::util::random_structure_tensor<T>(M, N, L, K, nnzrow, 1.0);
+}

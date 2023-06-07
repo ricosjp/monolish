@@ -56,12 +56,17 @@ private:
   /**
    * @brief true: sended, false: not send
    */
-  mutable bool gpu_status = false;
+  mutable std::shared_ptr<bool> gpu_status = std::make_shared<bool>(false);
 
   /**
    * @brief hash, created from row_ptr and col_ind
    */
   size_t structure_hash;
+
+  /**
+   * @brief first position of data array
+   */
+  size_t first = 0;
 
 public:
   /**
@@ -78,7 +83,7 @@ public:
   /**
    * @brief alloced matrix size
    */
-  std::size_t alloc_nnz = 0;
+  size_t alloc_nnz = 0;
 
   /**
    * @brief matrix create flag;
@@ -316,6 +321,49 @@ public:
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
+   * @brief get # of alloced non-zeros
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_alloc_nnz() const { return alloc_nnz; }
+
+  /**
+   * @brief get first position
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_first() const { return first; }
+
+  /**
+   * @brief get first position (same as get_first())
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_offset() const { return get_first(); }
+
+  /**
+   * @brief Set row number
+   * @param N # of row
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_row(const size_t N) { rowN = N; };
+
+  /**
+   * @brief Set column number
+   * @param M # of col
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_col(const size_t M) { colN = M; };
+
+  /**
    * @brief get format name "CRS"
    * @note
    * - # of computation: 1
@@ -382,7 +430,15 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return *gpu_status; }
+
+  /**
+   * @brief gpu status shared pointer
+   * @return gpu status shared pointer
+   */
+  [[nodiscard]] std::shared_ptr<bool> get_gpu_status() const {
+    return gpu_status;
+  }
 
   /**
    * @brief destructor of CRS matrix, free GPU memory

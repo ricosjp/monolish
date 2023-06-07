@@ -11,7 +11,7 @@ template <typename T> void Dense<T>::fill(T value) {
   logger.util_in(monolish_func);
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
-    T *vald = data();
+    T *vald = begin();
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
       vald[i] = value;
@@ -23,7 +23,7 @@ template <typename T> void Dense<T>::fill(T value) {
   } else {
 #pragma omp parallel for
     for (auto i = decltype(get_nnz()){0}; i < get_nnz(); i++) {
-      data()[i] = value;
+      begin()[i] = value;
     }
   }
   logger.util_out();

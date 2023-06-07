@@ -11,9 +11,9 @@ template <typename T>
 CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  rowN = M;
-  colN = N;
-  gpu_status = false;
+  set_row(M);
+  set_col(N);
+
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
   val_create_flag = true;
@@ -28,9 +28,9 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
             const int *colind, const T *value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  rowN = M;
-  colN = N;
-  gpu_status = false;
+  set_row(M);
+  set_col(N);
+
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
   val_create_flag = true;
@@ -53,9 +53,9 @@ CRS<T>::CRS(const size_t M, const size_t N, const size_t NNZ, const int *rowptr,
             const int *colind, const T *value, const size_t origin) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  rowN = M;
-  colN = N;
-  gpu_status = false;
+  set_row(M);
+  set_col(N);
+
   row_ptr.resize(M + 1);
   col_ind.resize(NNZ);
   val_create_flag = true;
@@ -84,9 +84,9 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
             const std::vector<int> &colind, const std::vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  rowN = M;
-  colN = N;
-  gpu_status = false;
+  set_row(M);
+  set_col(N);
+
   row_ptr.resize(M + 1);
   col_ind.resize(value.size());
   val_create_flag = true;
@@ -111,9 +111,9 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
             const std::vector<int> &colind, const vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
-  rowN = M;
-  colN = N;
-  gpu_status = false;
+  set_row(M);
+  set_col(N);
+
   row_ptr.resize(M + 1);
   col_ind.resize(value.size());
   val_create_flag = true;

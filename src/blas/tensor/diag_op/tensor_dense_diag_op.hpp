@@ -10,7 +10,7 @@ void tensor_Dense_diag_add_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -46,7 +46,7 @@ void tensor_Dense_diag_add_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -84,7 +84,7 @@ void tensor_Dense_diag_sub_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -120,7 +120,7 @@ void tensor_Dense_diag_sub_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -158,7 +158,7 @@ void tensor_Dense_diag_mul_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -194,7 +194,7 @@ void tensor_Dense_diag_mul_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -232,7 +232,7 @@ void tensor_Dense_diag_div_core(TENS &tens, const T alpha) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();
@@ -268,7 +268,7 @@ void tensor_Dense_diag_div_core(TENS &tens, const size_t size, const T *vecd) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
-  T *vald = tens.data();
+  T *vald = tens.begin();
   size_t N = 1;
   size_t shift = 0;
   size_t Len = tens.get_nnz();

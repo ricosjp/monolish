@@ -18,14 +18,15 @@ template <typename T> void Dense<T>::diag(vector<T> &vec) const {
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -52,14 +53,15 @@ template <typename T> void Dense<T>::diag(view1D<vector<T>, T> &vec) const {
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -89,14 +91,15 @@ void Dense<T>::diag(view1D<matrix::Dense<T>, T> &vec) const {
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -126,14 +129,15 @@ void Dense<T>::diag(view1D<tensor::tensor_Dense<T>, T> &vec) const {
   assert(Len == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(Len){0}; i < Len; i++) {
       vecd[i] = vald[N * i + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -162,14 +166,15 @@ template <typename T> void Dense<T>::row(const size_t r, vector<T> &vec) const {
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -198,14 +203,15 @@ void Dense<T>::row(const size_t r, view1D<vector<T>, T> &vec) const {
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -236,14 +242,15 @@ void Dense<T>::row(const size_t r, view1D<matrix::Dense<T>, T> &vec) const {
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -273,14 +280,15 @@ void Dense<T>::row(const size_t r,
   assert(N == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(N){0}; i < N; i++) {
       vecd[i] = vald[r * N + i];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -310,14 +318,15 @@ template <typename T> void Dense<T>::col(const size_t c, vector<T> &vec) const {
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -347,14 +356,15 @@ void Dense<T>::col(const size_t c, view1D<vector<T>, T> &vec) const {
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -386,14 +396,15 @@ void Dense<T>::col(const size_t c, view1D<matrix::Dense<T>, T> &vec) const {
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for
@@ -424,14 +435,15 @@ void Dense<T>::col(const size_t c,
   assert(M == vec.size());
   assert(get_device_mem_stat() == vec.get_device_mem_stat());
 
-  if (gpu_status == true) {
+  if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // gpu
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(M){0}; i < M; i++) {
       vecd[i] = vald[i * N + c];
     }
 #else
-    throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
+    throw std::runtime_error(
+        "error USE_GPU is false, but get_device_mem_stat() == true");
 #endif
   } else {
 #pragma omp parallel for

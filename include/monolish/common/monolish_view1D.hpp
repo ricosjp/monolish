@@ -236,6 +236,10 @@ public:
    **/
   [[nodiscard]] size_t get_offset() const { return first; }
 
+  [[nodiscard]] std::shared_ptr<Float> get_val() const { return target.val; }
+
+  [[nodiscard]] size_t get_alloc_nnz() const { return target.alloc_nnz; }
+
   /**
    * @brief change first position
    * @note

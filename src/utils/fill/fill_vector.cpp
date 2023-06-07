@@ -11,7 +11,7 @@ template <typename T> void vector<T>::fill(T value) {
   logger.util_in(monolish_func);
   if (get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
-    T *vald = data();
+    T *vald = begin();
     auto N = size();
 #pragma omp target teams distribute parallel for
     for (auto i = decltype(N){0}; i < get_nnz(); i++) {
@@ -24,7 +24,7 @@ template <typename T> void vector<T>::fill(T value) {
   } else {
 #pragma omp parallel for
     for (auto i = decltype(size()){0}; i < get_nnz(); i++) {
-      data()[i] = value;
+      begin()[i] = value;
     }
   }
   logger.util_out();
