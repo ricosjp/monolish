@@ -247,6 +247,15 @@ public:
   [[nodiscard]] size_t get_nnz() const { return range; }
 
   /**
+   * @brief get # of alloced non-zeros
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_alloc_nnz() const { return target.get_alloc_nnz(); }
+
+  /**
    * @brief get first position
    * @return first position
    * @note
@@ -271,8 +280,6 @@ public:
   [[nodiscard]] size_t get_offset() const { return first; }
 
   [[nodiscard]] std::shared_ptr<Float> get_val() const { return target.val; }
-
-  [[nodiscard]] size_t get_alloc_nnz() const { return target.alloc_nnz; }
 
   /**
    * @brief change first position

@@ -68,7 +68,7 @@ public:
   /**
    * @brief alloced matrix size
    */
-  std::size_t alloc_nnz = 0;
+  size_t alloc_nnz = 0;
 
   /**
    * @brief matrix create flag;
@@ -331,7 +331,16 @@ public:
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
-  [[nodiscard]] size_t get_nnz() const { return get_row() * get_col(); }
+  [[nodiscard]] size_t get_nnz() const { return val_nnz; }
+
+  /**
+   * @brief get # of alloced non-zeros
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_alloc_nnz() const { return alloc_nnz; }
 
   /**
    * @brief get first position

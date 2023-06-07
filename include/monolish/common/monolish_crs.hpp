@@ -63,6 +63,11 @@ private:
    */
   size_t structure_hash;
 
+  /**
+   * @brief first position of data array
+   */
+  size_t first = 0;
+
 public:
   /**
    * @brief CRS format value (pointer), which stores values of the non-zero
@@ -78,7 +83,7 @@ public:
   /**
    * @brief alloced matrix size
    */
-  std::size_t alloc_nnz = 0;
+  size_t alloc_nnz = 0;
 
   /**
    * @brief matrix create flag;
@@ -314,6 +319,31 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
+
+  /**
+   * @brief get # of alloced non-zeros
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_alloc_nnz() const { return alloc_nnz; }
+
+  /**
+   * @brief get first position
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_first() const { return first; }
+
+  /**
+   * @brief get first position (same as get_first())
+   * @return first position
+   * @note
+   * - # of computation: 1
+   */
+  [[nodiscard]] size_t get_offset() const { return get_first(); }
 
   /**
    * @brief Set row number

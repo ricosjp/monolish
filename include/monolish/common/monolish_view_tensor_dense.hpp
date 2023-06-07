@@ -276,7 +276,7 @@ public:
 
   [[nodiscard]] std::shared_ptr<Float> get_val() const { return target.val; }
 
-  [[nodiscard]] size_t get_alloc_nnz() const { return target.alloc_nnz; }
+  [[nodiscard]] size_t get_alloc_nnz() const { return target.get_alloc_nnz(); }
 
   /**
    * @brief change first position

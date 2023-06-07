@@ -17,12 +17,9 @@ bool test_send_tt_copy_core(const size_t M, const size_t N, const size_t L,
   ans_tt_copy(AA, CC);
   monolish::tensor::tensor_COO<T> ansC(CC);
 
-  A.print_all();
-  C.print_all();
   monolish::util::send(A, C);
   monolish::blas::copy(A, C);
   monolish::util::recv(A, C);
-  C.print_all();
 
   monolish::tensor::tensor_COO<T> resultC(C);
 

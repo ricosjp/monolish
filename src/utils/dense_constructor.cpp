@@ -188,7 +188,7 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat) {
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  first = mat.get_first();
+  first = 0;
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -213,7 +213,7 @@ template <typename T> Dense<T>::Dense(const Dense<T> &mat, T value) {
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  first = mat.get_first();
+  first = 0;
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -238,7 +238,7 @@ template <typename T> Dense<T>::Dense(const view_Dense<vector<T>, T> &mat) {
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  first = mat.get_first();
+  first = 0;
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -263,7 +263,7 @@ Dense<T>::Dense(const view_Dense<matrix::Dense<T>, T> &mat) {
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  first = mat.get_first();
+  first = 0;
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {
@@ -290,7 +290,7 @@ Dense<T>::Dense(const view_Dense<tensor::tensor_Dense<T>, T> &mat) {
 
   rowN = mat.get_row();
   colN = mat.get_col();
-  first = mat.get_first();
+  first = 0;
 
 #if MONOLISH_USE_NVIDIA_GPU
   if (mat.get_device_mem_stat()) {

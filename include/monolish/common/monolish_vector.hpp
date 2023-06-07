@@ -365,6 +365,15 @@ public:
   [[nodiscard]] size_t get_nnz() const { return val_nnz; }
 
   /**
+   * @brief get # of alloced non-zeros
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] size_t get_alloc_nnz() const { return alloc_nnz; }
+
+  /**
    * @brief get first position
    * @return first position
    * @note
