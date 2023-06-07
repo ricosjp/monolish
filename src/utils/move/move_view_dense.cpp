@@ -7,7 +7,8 @@
 namespace monolish {
 
 template <typename TYPE, typename T>
-void view_Dense<TYPE, T>::move(const view_tensor_Dense<TYPE, T> &view_tensor_dense) {
+void view_Dense<TYPE, T>::move(
+    const view_tensor_Dense<TYPE, T> &view_tensor_dense) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -27,22 +28,24 @@ void view_Dense<TYPE, T>::move(const view_tensor_Dense<TYPE, T> &view_tensor_den
   logger.util_out();
 }
 
-template void
-view_Dense<vector<double>, double>::move(const view_tensor_Dense<vector<double>, double> &view_tensor_dense);
-template void
-view_Dense<matrix::Dense<double>, double>::move(const view_tensor_Dense<matrix::Dense<double>, double> &view_tensor_dense);
-template void
-view_Dense<tensor::tensor_Dense<double>, double>::move(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &view_tensor_dense);
-template void
-view_Dense<vector<float>, float>::move(const view_tensor_Dense<vector<float>, float> &view_tensor_dense);
-template void
-view_Dense<matrix::Dense<float>, float>::move(const view_tensor_Dense<matrix::Dense<float>, float> &view_tensor_dense);
-template void
-view_Dense<tensor::tensor_Dense<float>, float>::move(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &view_tensor_dense);
+template void view_Dense<vector<double>, double>::move(
+    const view_tensor_Dense<vector<double>, double> &view_tensor_dense);
+template void view_Dense<matrix::Dense<double>, double>::move(
+    const view_tensor_Dense<matrix::Dense<double>, double> &view_tensor_dense);
+template void view_Dense<tensor::tensor_Dense<double>, double>::move(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double>
+        &view_tensor_dense);
+template void view_Dense<vector<float>, float>::move(
+    const view_tensor_Dense<vector<float>, float> &view_tensor_dense);
+template void view_Dense<matrix::Dense<float>, float>::move(
+    const view_tensor_Dense<matrix::Dense<float>, float> &view_tensor_dense);
+template void view_Dense<tensor::tensor_Dense<float>, float>::move(
+    const view_tensor_Dense<tensor::tensor_Dense<float>, float>
+        &view_tensor_dense);
 
 template <typename TYPE, typename T>
-void view_Dense<TYPE, T>::move(const view_tensor_Dense<TYPE, T> &view_tensor_dense, int rowN,
-                    int colN) {
+void view_Dense<TYPE, T>::move(
+    const view_tensor_Dense<TYPE, T> &view_tensor_dense, int rowN, int colN) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
@@ -70,16 +73,28 @@ void view_Dense<TYPE, T>::move(const view_tensor_Dense<TYPE, T> &view_tensor_den
   this->target = view_tensor_dense.get_target();
   this->target_data = view_tensor_dense.data();
 
-
-
   logger.util_out();
 }
 
-template void view_Dense<vector<double>, double>::move(const view_tensor_Dense<vector<double>, double> &view_tensor_dense, int rowN, int colN);
-template void view_Dense<matrix::Dense<double>, double>::move(const view_tensor_Dense<matrix::Dense<double>, double> &view_tensor_dense, int rowN, int colN);
-template void view_Dense<tensor::tensor_Dense<double>, double>::move(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &view_tensor_dense, int rowN, int colN);
-template void view_Dense<vector<float>, float>::move(const view_tensor_Dense<vector<float>, float> &view_tensor_dense, int rowN, int colN);
-template void view_Dense<matrix::Dense<float>, float>::move(const view_tensor_Dense<matrix::Dense<float>, float> &view_tensor_dense, int rowN, int colN);
-template void view_Dense<tensor::tensor_Dense<float>, float>::move(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &view_tensor_dense, int rowN, int colN);
+template void view_Dense<vector<double>, double>::move(
+    const view_tensor_Dense<vector<double>, double> &view_tensor_dense,
+    int rowN, int colN);
+template void view_Dense<matrix::Dense<double>, double>::move(
+    const view_tensor_Dense<matrix::Dense<double>, double> &view_tensor_dense,
+    int rowN, int colN);
+template void view_Dense<tensor::tensor_Dense<double>, double>::move(
+    const view_tensor_Dense<tensor::tensor_Dense<double>, double>
+        &view_tensor_dense,
+    int rowN, int colN);
+template void view_Dense<vector<float>, float>::move(
+    const view_tensor_Dense<vector<float>, float> &view_tensor_dense, int rowN,
+    int colN);
+template void view_Dense<matrix::Dense<float>, float>::move(
+    const view_tensor_Dense<matrix::Dense<float>, float> &view_tensor_dense,
+    int rowN, int colN);
+template void view_Dense<tensor::tensor_Dense<float>, float>::move(
+    const view_tensor_Dense<tensor::tensor_Dense<float>, float>
+        &view_tensor_dense,
+    int rowN, int colN);
 
 } // namespace monolish
