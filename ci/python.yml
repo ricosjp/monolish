@@ -3,7 +3,7 @@
 #
 .python:
   stage: python
-  image: registry.ritc.jp/ricos/allgebra/cuda11_8-clang14-oss:23.09.0
+  image: registry.ritc.jp/ricos/allgebra/cuda11_8-clang14-oss:23.09.1
 
 .logging_artifact:
   artifacts:

@@ -18,8 +18,8 @@ void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   const double *vald = A.begin();
-  const int* rowd = A.row_ptr.data();
-  const int* cold = A.col_ind.data();
+  const int *rowd = A.row_ptr.data();
+  const int *cold = A.col_ind.data();
 
   const double *Bd = B.begin();
   double *Cd = C.begin();
@@ -175,19 +175,19 @@ void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
-// CUDA11.4 SpMM has bug ?
-// #if MONOLISH_USE_OLD_CUDA // cuda10.x or cuda 11.4
-// #pragma omp target teams distribute parallel for
-//     for (auto j = decltype(N){0}; j < N; j++) {
-//       for (auto i = decltype(M){0}; i < M; i++) {
-//         float tmp = 0;
-//         for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
-//           tmp += vald[k] * Bd[N * cold[k] + j];
-//         }
-//         Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
-//       }
-//     }
-// #else
+    // CUDA11.4 SpMM has bug ?
+    // #if MONOLISH_USE_OLD_CUDA // cuda10.x or cuda 11.4
+    // #pragma omp target teams distribute parallel for
+    //     for (auto j = decltype(N){0}; j < N; j++) {
+    //       for (auto i = decltype(M){0}; i < M; i++) {
+    //         float tmp = 0;
+    //         for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
+    //           tmp += vald[k] * Bd[N * cold[k] + j];
+    //         }
+    //         Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
+    //       }
+    //     }
+    // #else
 
     int nnz = A.get_nnz();
     const float alpha = a;

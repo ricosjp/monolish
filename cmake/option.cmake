@@ -40,7 +40,7 @@ option_string(
 )
 option_string(
   MONOLISH_CONTAINER_BASE_TAG
-  "23.09.0"
+  "23.09.1"
   "Tag of MONOLISH_CONTAINER_BASE_IMAGE"
 )
 
