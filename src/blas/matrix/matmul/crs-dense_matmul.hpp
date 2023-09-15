@@ -18,8 +18,8 @@ void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   const double *vald = A.begin();
-  const auto rowd = A.row_ptr.data();
-  const auto cold = A.col_ind.data();
+  const int* rowd = A.row_ptr.data();
+  const int* cold = A.col_ind.data();
 
   const double *Bd = B.begin();
   double *Cd = C.begin();
@@ -31,9 +31,9 @@ void CRS_Dense_Dmatmul_core(const double &a, const matrix::CRS<double> &A,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU // CUDA11 will support SpMM
-    auto nnz = A.get_nnz();
-    auto alpha = a;
-    auto beta = b;
+    int nnz = A.get_nnz();
+    double alpha = a;
+    double beta = b;
 
 #pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
     {
@@ -162,8 +162,8 @@ void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
   assert(util::is_same_device_mem_stat(A, B, C));
 
   const float *vald = A.begin();
-  const auto *rowd = A.row_ptr.data();
-  const auto *cold = A.col_ind.data();
+  const int *rowd = A.row_ptr.data();
+  const int *cold = A.col_ind.data();
 
   const float *Bd = B.begin();
   float *Cd = C.begin();
@@ -175,58 +175,58 @@ void CRS_Dense_Smatmul_core(const float &a, const matrix::CRS<float> &A,
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
-// CUDA11.4 SpMM has bug
-//#if MONOLISH_USE_OLD_CUDA // cuda10.x
-#pragma omp target teams distribute parallel for
-    for (auto j = decltype(N){0}; j < N; j++) {
-      for (auto i = decltype(M){0}; i < M; i++) {
-        float tmp = 0;
-        for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
-          tmp += vald[k] * Bd[N * cold[k] + j];
-        }
-        Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
-      }
-    }
-// #else
-//
-//     size_t nnz = A.get_nnz();
-//     const double alpha = 1.0;
-//     const double beta = 0.0;
-//
-// #pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
-//     {
-//       cusparseHandle_t sp_handle;
-//       cusparseCreate(&sp_handle);
-//       cudaDeviceSynchronize();
-//       const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
-//
-//       cusparseSpMatDescr_t matA;
-//       cusparseDnMatDescr_t matB, matC;
-//       void *dBuffer = NULL;
-//       size_t buffersize = 0;
-//
-//       cusparseCreateCsr(&matA, M, K, nnz, (void *)rowd, (void *)cold,
-//                         (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-//                         CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
-//       cusparseCreateDnMat(&matB, K, N, N, (void *)Bd, CUDA_R_32F,
-//                           CUSPARSE_ORDER_ROW);
-//       cusparseCreateDnMat(&matC, M, N, N, (void *)Cd, CUDA_R_32F,
-//                           CUSPARSE_ORDER_ROW);
-//
-//       cusparseSpMM_bufferSize(sp_handle, trans, trans, &alpha, matA, matB,
-//                               &beta, matC, CUDA_R_32F,
-//                               CUSPARSE_SPMM_ALG_DEFAULT, &buffersize);
-//
-//       cudaMalloc(&dBuffer, buffersize);
-//
-//       cusparseSpMM(sp_handle, trans, trans, &alpha, matA, matB, &beta, matC,
-//                    CUDA_R_32F, CUSPARSE_SPMM_ALG_DEFAULT, dBuffer);
-//
-//       cusparseDestroySpMat(matA);
-//       cusparseDestroyDnMat(matB);
-//       cusparseDestroyDnMat(matC);
-//       cudaFree(dBuffer);
+// CUDA11.4 SpMM has bug ?
+// #if MONOLISH_USE_OLD_CUDA // cuda10.x or cuda 11.4
+// #pragma omp target teams distribute parallel for
+//     for (auto j = decltype(N){0}; j < N; j++) {
+//       for (auto i = decltype(M){0}; i < M; i++) {
+//         float tmp = 0;
+//         for (auto k = rowd[i]; k < rowd[i + 1]; k++) {
+//           tmp += vald[k] * Bd[N * cold[k] + j];
+//         }
+//         Cd[i * N + j] = a * tmp + b * Cd[i * N + j];
+//       }
 //     }
+// #else
+
+    int nnz = A.get_nnz();
+    const float alpha = a;
+    const float beta = b;
+
+#pragma omp target data use_device_ptr(Bd, Cd, vald, rowd, cold)
+    {
+      cusparseHandle_t sp_handle;
+      cusparseCreate(&sp_handle);
+      cudaDeviceSynchronize();
+      const cusparseOperation_t trans = CUSPARSE_OPERATION_NON_TRANSPOSE;
+
+      cusparseSpMatDescr_t matA;
+      cusparseDnMatDescr_t matB, matC;
+      void *dBuffer = NULL;
+      size_t buffersize = 0;
+
+      cusparseCreateCsr(&matA, M, K, nnz, (void *)rowd, (void *)cold,
+                        (void *)vald, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
+                        CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F);
+      cusparseCreateDnMat(&matB, K, N, N, (void *)Bd, CUDA_R_32F,
+                          CUSPARSE_ORDER_ROW);
+      cusparseCreateDnMat(&matC, M, N, N, (void *)Cd, CUDA_R_32F,
+                          CUSPARSE_ORDER_ROW);
+
+      cusparseSpMM_bufferSize(sp_handle, trans, trans, &alpha, matA, matB,
+                              &beta, matC, CUDA_R_32F,
+                              CUSPARSE_SPMM_ALG_DEFAULT, &buffersize);
+
+      cudaMalloc(&dBuffer, buffersize);
+
+      cusparseSpMM(sp_handle, trans, trans, &alpha, matA, matB, &beta, matC,
+                   CUDA_R_32F, CUSPARSE_SPMM_ALG_DEFAULT, dBuffer);
+
+      cusparseDestroySpMat(matA);
+      cusparseDestroyDnMat(matB);
+      cusparseDestroyDnMat(matC);
+      cudaFree(dBuffer);
+    }
 // #endif
 #else
     throw std::runtime_error("error USE_GPU is false, but gpu_status == true");
