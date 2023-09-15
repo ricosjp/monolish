@@ -41,7 +41,7 @@ cpu_deb_test:
     - avx
 
 gpu_deb_test:
-  image: nvidia/cuda:11.7.0-devel-ubuntu22.04
+  image: nvidia/cuda:11.8.0-devel-ubuntu22.04
   extends:
     - .gpu_avx
     - .test
@@ -56,7 +56,7 @@ gpu_deb_test:
     - nvidia0-sm_86
 
 both_deb_test:
-  image: nvidia/cuda:11.7.0-devel-ubuntu22.04
+  image: nvidia/cuda:11.8.0-devel-ubuntu22.04
   extends:
     - .test
   script:
