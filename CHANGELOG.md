@@ -29,6 +29,7 @@ Unreleased
 - Fix benchmark result token <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/502> <https://github.com/ricosjp/monolish/issues/733>
 
 ### Changed
+- Update cuda version of allgebra <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/506> <https://github.com/ricosjp/monolish/issues/739>
 - Change view1d constructor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/501> <https://github.com/ricosjp/monolish/issues/732>
 
 
