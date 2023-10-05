@@ -17,21 +17,8 @@ template <typename T> void CRS<T>::operator=(const CRS<T> &mat) {
   assert(monolish::util::is_same_device_mem_stat(*this, mat));
   val_create_flag = true;
 
-  if (mat.get_device_mem_stat() == true) {
-#if MONOLISH_USE_NVIDIA_GPU
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
-                    true);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
-                    true);
-    internal::vcopy(mat.get_nnz(), mat.begin(), begin(), true);
-#endif
-  } else {
-    internal::vcopy(mat.row_ptr.size(), mat.row_ptr.data(), row_ptr.data(),
-                    false);
-    internal::vcopy(mat.col_ind.size(), mat.col_ind.data(), col_ind.data(),
-                    false);
-    internal::vcopy(mat.get_nnz(), mat.begin(), begin(), false);
-  }
+  // value copy
+  internal::vcopy(get_nnz(), mat.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -49,12 +36,13 @@ void CRS<T>::set_ptr(const size_t M, const size_t N,
   row_ptr = rowptr;
   val_create_flag = true;
   resize(vsize);
-  for (size_t i = 0; i < vsize; ++i) {
-    data()[i] = value[i];
-  }
+
+  internal::vcopy(get_nnz(), value, begin(), false);
 
   rowN = M;
   colN = N;
+
+  compute_hash();
   logger.util_out();
 }
 template void CRS<double>::set_ptr(const size_t M, const size_t N,
@@ -65,6 +53,35 @@ template void CRS<float>::set_ptr(const size_t M, const size_t N,
                                   const std::vector<int> &rowptr,
                                   const std::vector<int> &colind,
                                   const size_t vsize, const float *value);
+
+template <typename T>
+void CRS<T>::set_ptr(const size_t M, const size_t N,
+                     const std::vector<int> &rowptr,
+                     const std::vector<int> &colind, const size_t vsize,
+                     const T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  col_ind = colind;
+  row_ptr = rowptr;
+  val_create_flag = true;
+  resize(vsize);
+
+  internal::vbroadcast(get_nnz(), value, begin(), false);
+
+  rowN = M;
+  colN = N;
+
+  compute_hash();
+  logger.util_out();
+}
+template void CRS<double>::set_ptr(const size_t M, const size_t N,
+                                   const std::vector<int> &rowptr,
+                                   const std::vector<int> &colind,
+                                   const size_t vsize, const double value);
+template void CRS<float>::set_ptr(const size_t M, const size_t N,
+                                  const std::vector<int> &rowptr,
+                                  const std::vector<int> &colind,
+                                  const size_t vsize, const float value);
 
 template <typename T>
 void CRS<T>::set_ptr(const size_t M, const size_t N,

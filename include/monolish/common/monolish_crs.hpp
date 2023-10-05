@@ -258,7 +258,7 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -275,13 +275,31 @@ public:
    *elements (size nnz)
    * @param value value index, which stores the non-zero elements (size nnz)
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void set_ptr(const size_t M, const size_t N, const std::vector<int> &rowptr,
                const std::vector<int> &colind, const size_t vsize,
                const Float *value);
+
+  /**
+   * @brief Set CRS array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param rowptr row_ptr, which stores the starting points of the rows of the
+   *arrays value and col_ind (size M+1)
+   * @param colind col_ind, which stores the column numbers of the non-zero
+   *elements (size nnz)
+   * @param value value index, which stores the non-zero elements (size nnz)
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const std::vector<int> &rowptr,
+               const std::vector<int> &colind, const size_t vsize,
+               const Float value);
 
   /**
    * @brief print all elements to standard I/O

@@ -508,7 +508,7 @@ public:
    * @param c col_index
    * @param v value
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -523,12 +523,27 @@ public:
    * @param c col_index
    * @param v value
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r,
                const std::vector<int> &c, const size_t vsize, const Float *v);
+
+  /**
+   * @brief Set COO array from std::vector
+   * @param rN # of row
+   * @param cN # of column
+   * @param r row_index
+   * @param c col_index
+   * @param v value
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t rN, const size_t cN, const std::vector<int> &r,
+               const std::vector<int> &c, const size_t vsize, const Float v);
 
   /**
    * @brief get # of row

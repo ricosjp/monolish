@@ -17,11 +17,7 @@ template <typename T> void Dense<T>::operator=(const Dense<T> &mat) {
   val_create_flag = true;
 
   // gpu copy
-  if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
-  } else {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
-  }
+  internal::vcopy(get_nnz(), mat.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -40,11 +36,7 @@ void Dense<T>::operator=(const view_Dense<vector<T>, T> &mat) {
   val_create_flag = true;
 
   // gpu copy
-  if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
-  } else {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
-  }
+  internal::vcopy(get_nnz(), mat.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -65,11 +57,7 @@ void Dense<T>::operator=(const view_Dense<matrix::Dense<T>, T> &mat) {
   val_create_flag = true;
 
   // gpu copy
-  if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
-  } else {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
-  }
+  internal::vcopy(get_nnz(), mat.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -90,11 +78,7 @@ void Dense<T>::operator=(const view_Dense<tensor::tensor_Dense<T>, T> &mat) {
   val_create_flag = true;
 
   // gpu copy
-  if (mat.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), true);
-  } else {
-    internal::vcopy(get_nnz(), mat.begin(), begin(), false);
-  }
+  internal::vcopy(get_nnz(), mat.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -110,9 +94,8 @@ void Dense<T>::set_ptr(const size_t M, const size_t N, const T *value) {
   logger.util_in(monolish_func);
   val_create_flag = true;
   resize(M * N);
-  for (size_t i = 0; i < M * N; ++i) {
-    begin()[i] = value[i];
-  }
+
+  internal::vcopy(get_nnz(), value, begin(), false);
 
   rowN = M;
   colN = N;
@@ -122,6 +105,24 @@ template void Dense<double>::set_ptr(const size_t M, const size_t N,
                                      const double *value);
 template void Dense<float>::set_ptr(const size_t M, const size_t N,
                                     const float *value);
+
+template <typename T>
+void Dense<T>::set_ptr(const size_t M, const size_t N, const T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  val_create_flag = true;
+  resize(M * N);
+
+  internal::vbroadcast(get_nnz(), value, begin(), false);
+
+  rowN = M;
+  colN = N;
+  logger.util_out();
+}
+template void Dense<double>::set_ptr(const size_t M, const size_t N,
+                                     const double value);
+template void Dense<float>::set_ptr(const size_t M, const size_t N,
+                                    const float value);
 
 template <typename T>
 void Dense<T>::set_ptr(const size_t M, const size_t N,

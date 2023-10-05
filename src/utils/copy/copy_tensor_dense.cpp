@@ -19,11 +19,7 @@ void tensor_Dense<T>::operator=(const tensor_Dense<T> &tens) {
   val_create_flag = true;
 
   // gpu copy
-  if (tens.get_device_mem_stat()) {
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
-  } else {
-    internal::vcopy(get_nnz(), tens.data(), data(), false);
-  }
+  internal::vcopy(get_nnz(), tens.begin(), begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -38,9 +34,8 @@ void tensor_Dense<T>::set_ptr(const std::vector<size_t> &shape,
   logger.util_in(monolish_func);
   val_create_flag = true;
   resize(shape);
-  for (size_t i = 0; i < get_nnz(); ++i) {
-    data()[i] = value[i];
-  }
+
+  internal::vcopy(get_nnz(), value, begin(), false);
 
   logger.util_out();
 }
@@ -48,6 +43,22 @@ template void tensor_Dense<double>::set_ptr(const std::vector<size_t> &shape,
                                             const double *value);
 template void tensor_Dense<float>::set_ptr(const std::vector<size_t> &shape,
                                            const float *value);
+
+template <typename T>
+void tensor_Dense<T>::set_ptr(const std::vector<size_t> &shape, const T value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  val_create_flag = true;
+  resize(shape);
+
+  internal::vbroadcast(get_nnz(), value, begin(), false);
+
+  logger.util_out();
+}
+template void tensor_Dense<double>::set_ptr(const std::vector<size_t> &shape,
+                                            const double value);
+template void tensor_Dense<float>::set_ptr(const std::vector<size_t> &shape,
+                                           const float value);
 
 template <typename T>
 void tensor_Dense<T>::set_ptr(const std::vector<size_t> &shape,
