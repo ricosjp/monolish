@@ -271,7 +271,7 @@ public:
    * @param shape shape of tensor
    * @param value value (size nnz)
    * @note
-   * - # of computation: 1
+   * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -283,11 +283,22 @@ public:
    * @param shape shape of tensor
    * @param value value (size nnz)
    * @note
-   * - # of computation: 1
+   * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void set_ptr(const std::vector<size_t> &shape, const Float *value);
+
+  /**
+   * @brief Set tensor_Dense array from array
+   * @param shape shape of tensor
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape, const Float value);
 
   /**
    * @brief get shape

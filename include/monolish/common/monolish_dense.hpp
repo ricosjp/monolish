@@ -288,7 +288,7 @@ public:
    * @param N # of col
    * @param value value (size nnz)
    * @note
-   * - # of computation: 1
+   * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -300,11 +300,23 @@ public:
    * @param N # of col
    * @param value value (size nnz)
    * @note
-   * - # of computation: 1
+   * - # of computation: nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void set_ptr(const size_t M, const size_t N, const Float *value);
+
+  /**
+   * @brief Set Dense array from std::vector
+   * @param M # of row
+   * @param N # of col
+   * @param value value (size nnz)
+   * @note
+   * - # of computation: nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const size_t M, const size_t N, const Float value);
 
   /**
    * @brief get # of row
@@ -609,6 +621,13 @@ public:
    * - GPU acceleration: false
    */
   void resize(size_t N, Float Val = 0) {
+    if (first + N < alloc_nnz) {
+      for (size_t i = val_nnz; i < N; ++i) {
+        begin()[i] = Val;
+      }
+      val_nnz = N;
+      return;
+    }
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }

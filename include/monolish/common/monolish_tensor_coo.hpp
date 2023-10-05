@@ -199,7 +199,7 @@ public:
    * @param indix index fo tensor
    * @param v value
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
@@ -214,13 +214,28 @@ public:
    * @param vsize size of value
    * @param v value
    * @note
-   * - # of computation: 3
+   * - # of computation: 3nnz
    * - Multi-threading: false
    * - GPU acceleration: false
    **/
   void set_ptr(const std::vector<size_t> &shape,
                const std::vector<std::vector<size_t>> &index,
                const size_t vsize, const Float *v);
+
+  /**
+   * @brief Set tensor_COO array from array
+   * @param shape shape of tensor
+   * @param indix index fo tensor
+   * @param vsize size of value
+   * @param v value
+   * @note
+   * - # of computation: 3nnz
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void set_ptr(const std::vector<size_t> &shape,
+               const std::vector<std::vector<size_t>> &index,
+               const size_t vsize, const Float v);
 
   /**
    * @brief get shape

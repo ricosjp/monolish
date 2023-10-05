@@ -19,7 +19,7 @@ void tensor_COO<T>::operator=(const tensor::tensor_COO<T> &tens) {
   assert(monolish::util::is_same_device_mem_stat(*this, tens));
 
   // value copy
-  internal::vcopy(get_nnz(), data(), tens.data(), get_device_mem_stat());
+  internal::vcopy(get_nnz(), begin(), tens.begin(), get_device_mem_stat());
 
   logger.util_out();
 }
@@ -34,9 +34,8 @@ void tensor_COO<T>::set_ptr(const std::vector<size_t> &shape,
   this->shape = shape;
   this->index = index;
   resize(vsize);
-  for (size_t i = 0; i < vsize; ++i) {
-    data()[i] = v[i];
-  }
+
+  internal::vcopy(get_nnz(), v, begin(), false);
 
   logger.util_out();
 }
@@ -48,6 +47,30 @@ template void
 tensor_COO<float>::set_ptr(const std::vector<size_t> &shape,
                            const std::vector<std::vector<size_t>> &index,
                            const size_t vsize, const float *v);
+
+template <typename T>
+void tensor_COO<T>::set_ptr(const std::vector<size_t> &shape,
+                            const std::vector<std::vector<size_t>> &index,
+                            const size_t vsize, const T v) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  val_create_flag = true;
+  this->shape = shape;
+  this->index = index;
+  resize(vsize);
+
+  internal::vbroadcast(get_nnz(), v, begin(), false);
+
+  logger.util_out();
+}
+template void
+tensor_COO<double>::set_ptr(const std::vector<size_t> &shape,
+                            const std::vector<std::vector<size_t>> &index,
+                            const size_t vsize, const double v);
+template void
+tensor_COO<float>::set_ptr(const std::vector<size_t> &shape,
+                           const std::vector<std::vector<size_t>> &index,
+                           const size_t vsize, const float v);
 
 template <typename T>
 void tensor_COO<T>::set_ptr(const std::vector<size_t> &shape,
