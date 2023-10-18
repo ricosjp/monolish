@@ -1,0 +1,6 @@
+<map id="monolish::blas::nrm2" name="monolish::blas::nrm2">
+<area shape="rect" id="node1" title="nrm2: ||x||_2" alt="" coords="236,78,395,105"/>
+<area shape="rect" id="node2" href="$db/dac/classmonolish_1_1solver_1_1solver.html#a9e4d0cdda4ff1f28731e52ff8d1a0469" title=" " alt="" coords="7,5,186,47"/>
+<area shape="rect" id="node3" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="5,71,188,112"/>
+<area shape="rect" id="node4" href="$d5/d40/namespacemonolish_1_1blas.html#a05d319370505739a85caa67cac755815" title=" " alt="" coords="17,137,176,163"/>
+</map>

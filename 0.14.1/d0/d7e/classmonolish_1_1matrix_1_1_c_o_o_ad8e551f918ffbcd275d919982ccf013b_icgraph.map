@@ -1,0 +1,6 @@
+<map id="monolish::matrix::COO::get_col" name="monolish::matrix::COO::get_col">
+<area shape="rect" id="node1" title="get # of col" alt="" coords="224,71,395,112"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a0cab4a40770e7c86116af19e63c2d87f" title="Comparing matricies (A == mat)" alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#af68a5a738771967007aba3204179d7f0" title="compare row and col size" alt="" coords="25,71,156,112"/>
+<area shape="rect" id="node4" href="$d0/d47/namespacemonolish_1_1util.html#ad4dfeabe0301ee1a2c270bd5f7239273" title="compare structure using col_index and row_index, M, and N" alt="" coords="25,136,156,177"/>
+</map>

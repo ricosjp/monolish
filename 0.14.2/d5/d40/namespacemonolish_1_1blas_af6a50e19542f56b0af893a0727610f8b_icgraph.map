@@ -1,0 +1,13 @@
+<map id="monolish::blas::matvec" name="monolish::blas::matvec">
+<area shape="rect" id="node1" title="Dense matrix and vector multiplication: y = Ax." alt="" coords="481,235,656,262"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#acdba2584824afcc2080d013f510188b5" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="20,6,167,33"/>
+<area shape="rect" id="node3" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a868ef0578885785ca65fba9f757645f7" title=" " alt="" coords="229,312,433,353"/>
+<area shape="rect" id="node4" href="$d8/d91/namespacemonolish_1_1vml.html#af2c8f133f5fcdf25ab4efede669667f4" title="element by element division LinearOperator matrix A and LinearOperator matrix B." alt="" coords="22,86,165,113"/>
+<area shape="rect" id="node5" href="$d5/d40/namespacemonolish_1_1blas.html#ac6a8622c6698b596db0660589f4bcb94" title="LinearOperator multiplication: C = AB." alt="" coords="5,138,181,165"/>
+<area shape="rect" id="node6" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="250,378,413,434"/>
+<area shape="rect" id="node7" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#acf6f67d48e90f2e49c7570a1fb371fc9" title=" " alt="" coords="258,459,405,500"/>
+<area shape="rect" id="node8" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="240,524,423,565"/>
+<area shape="rect" id="node9" href="$d8/d91/namespacemonolish_1_1vml.html#aa5ff602c4c40d044f43676d9b4f30729" title="element by element multiplication LinearOperator matrix A and LinearOperator matrix B." alt="" coords="19,190,167,217"/>
+<area shape="rect" id="node10" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ad836b65e804fbc5d5e66ba3f963600fb" title="set multiplication function of matrix and vector" alt="" coords="241,93,422,135"/>
+<area shape="rect" id="node11" href="$d8/d91/namespacemonolish_1_1vml.html#a61ff4611c135abb6241ed97f96ef207a" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="20,245,167,271"/>
+</map>

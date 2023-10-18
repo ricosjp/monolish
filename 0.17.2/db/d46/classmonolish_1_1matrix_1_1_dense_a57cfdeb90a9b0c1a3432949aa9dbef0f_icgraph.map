@@ -1,0 +1,10 @@
+<map id="monolish::matrix::Dense::data" name="monolish::matrix::Dense::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the matrix" alt="" coords="499,173,681,215"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8b2f57ae6a64a28ffc55f75efb49731d" title="returns a begin iterator" alt="" coords="252,5,435,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8a518129bd545c41c2ae260ee4b91047" title="resize matrix value" alt="" coords="5,35,188,76"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a1fb437d05a9558a48563125099ca3f6d" title="returns a end iterator" alt="" coords="236,122,451,149"/>
+<area shape="rect" id="node5" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#ab84218b806efe52ae82ed9dfc7d00d57" title="reference to the element at position (v[i])" alt="" coords="252,173,435,215"/>
+<area shape="rect" id="node6" href="$d2/d67/classmonolish_1_1view1_d.html#a8ed42b8aeff6982015ae76ff4e03530e" title="create view1D(start:start+range) from Dense matrix" alt="" coords="245,239,441,266"/>
+<area shape="rect" id="node7" href="$d1/d6f/classmonolish_1_1view___dense.html#ab092415b9fd46a62cedb3087990cb690" title="create view_Dense from Dense matrix(start:start+range)" alt="" coords="259,291,428,332"/>
+<area shape="rect" id="node8" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#a56ad4cdba56c167e3d7581ed0e02d139" title="create view_tensor_Dense from Dense matrix(start:start+range)" alt="" coords="241,356,446,397"/>
+</map>

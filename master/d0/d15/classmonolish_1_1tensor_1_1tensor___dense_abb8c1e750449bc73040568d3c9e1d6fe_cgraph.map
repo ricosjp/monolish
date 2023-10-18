@@ -1,0 +1,5 @@
+<map id="monolish::tensor::tensor_Dense::operator[]" name="monolish::tensor::tensor_Dense::operator[]">
+<area shape="rect" id="node1" title="reference to the element at position (v[i])" alt="" coords="5,39,185,80"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a9f9b7aa813d00e37d231aa4a4c2dec9b" title="returns a direct pointer to the tensor" alt="" coords="255,5,435,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#af33424c03942ee3b351e2a958359333b" title="true: sended, false: not send" alt="" coords="233,71,456,112"/>
+</map>

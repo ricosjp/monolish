@@ -1,0 +1,6 @@
+<map id="monolish::matrix::COO::get_device_mem_stat" name="monolish::matrix::COO::get_device_mem_stat">
+<area shape="rect" id="node1" title="false; // true: sended, false: not send" alt="" coords="224,71,399,112"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab0432d4d4e4ab55547a4054180ee103f" title="reference to the element at position (v[i])" alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab747bc2e837c199ab4f20222a6d151e6" title="resize matrix value" alt="" coords="5,71,176,112"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a583cd1adc1dd3574b46577637c84d3d8" title="; free gpu mem." alt="" coords="5,136,176,177"/>
+</map>

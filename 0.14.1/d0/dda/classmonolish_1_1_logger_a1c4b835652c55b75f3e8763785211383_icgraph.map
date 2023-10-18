@@ -1,0 +1,14 @@
+<map id="monolish::Logger::solver_in" name="monolish::Logger::solver_in">
+<area shape="rect" id="node1" title=" " alt="" coords="236,355,437,382"/>
+<area shape="rect" id="node2" href="$d0/ddf/classmonolish_1_1equation_1_1none.html#a92f66b1c2ee03f46f5bea85aad75a0f7" title=" " alt="" coords="14,5,179,47"/>
+<area shape="rect" id="node3" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a655d77f2677bfd736625f1b6386e017c" title=" " alt="" coords="11,71,183,112"/>
+<area shape="rect" id="node4" href="$d0/ddf/classmonolish_1_1equation_1_1none.html#a2f4541bb89600f3e6f18beca5da083b4" title=" " alt="" coords="11,136,182,177"/>
+<area shape="rect" id="node5" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a340b090043c53dd870e6068d9dc3acb1" title=" " alt="" coords="8,201,185,243"/>
+<area shape="rect" id="node6" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="15,267,178,323"/>
+<area shape="rect" id="node7" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#acf6f67d48e90f2e49c7570a1fb371fc9" title=" " alt="" coords="23,348,170,389"/>
+<area shape="rect" id="node8" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="5,413,188,455"/>
+<area shape="rect" id="node9" href="$d0/ddf/classmonolish_1_1equation_1_1none.html#ac46591ab4e02ddbd1e5ca019dee0aba5" title=" " alt="" coords="23,479,170,520"/>
+<area shape="rect" id="node10" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#a328573e52b9ae6d80bc4edb43bb3aabf" title="solve Ax = b by BiCGSTAB method(lib=0: monolish)" alt="" coords="23,544,170,585"/>
+<area shape="rect" id="node11" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#ac5027ab9a816b3cd4eb0f2371af06225" title="solve Ax = b by BiCGSTAB method (lib=0: monolish)" alt="" coords="23,609,170,651"/>
+<area shape="rect" id="node12" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a63f3a4727329cab487224d11a4856517" title="solve Ax = b by jacobi method(lib=0: monolish)" alt="" coords="23,675,170,716"/>
+</map>

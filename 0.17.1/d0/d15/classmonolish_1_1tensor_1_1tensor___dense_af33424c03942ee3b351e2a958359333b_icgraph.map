@@ -1,0 +1,7 @@
+<map id="monolish::tensor::tensor_Dense::get_device_mem_stat" name="monolish::tensor::tensor_Dense::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="461,71,684,112"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#abb8c1e750449bc73040568d3c9e1d6fe" title="reference to the element at position (v[i])" alt="" coords="233,5,413,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ae7f5b80673693d5d6a94564d8714052c" title="resize tensor value" alt="" coords="233,71,413,112"/>
+<area shape="rect" id="node5" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#aea6d47a25b2591d49e737afb85a1357c" title="destructor of dense tensor, free GPU memory" alt="" coords="233,136,413,177"/>
+<area shape="rect" id="node4" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a61b7e0773c96b8b6a45842e37ec62dfb" title="resize tensor value" alt="" coords="5,71,185,112"/>
+</map>

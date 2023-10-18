@@ -1,0 +1,9 @@
+<map id="monolish::matrix::COO::insert" name="monolish::matrix::COO::insert">
+<area shape="rect" id="node1" title="insert element to (m, n)" alt="" coords="243,156,413,197"/>
+<area shape="rect" id="node2" href="$d0/d47/namespacemonolish_1_1util.html#a99fd7213c777627ef7722bfac37ee4fd" title="create band matrix" alt="" coords="25,5,175,47"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#a0c1e6c53a0f4cb7923e3861182734846" title="create band matrix" alt="" coords="29,71,171,98"/>
+<area shape="rect" id="node4" href="$d0/d47/namespacemonolish_1_1util.html#a60d78bd7fb4e9378cfcb6206dfa8609e" title="create Frank matrix" alt="" coords="23,123,177,164"/>
+<area shape="rect" id="node5" href="$d0/d47/namespacemonolish_1_1util.html#a14af26986a81b5c5a6c0540fd24a9c37" title="create random structure matrix (column number is decided by random)" alt="" coords="15,188,185,229"/>
+<area shape="rect" id="node6" href="$d0/d47/namespacemonolish_1_1util.html#ae8802e3dc6723d957195844adad8cf14" title="create Toeplitz&#45;plus&#45;Hankel matrix" alt="" coords="16,253,184,295"/>
+<area shape="rect" id="node7" href="$d0/d47/namespacemonolish_1_1util.html#af62d6a13794dccfbbda039a8fe1d82b9" title="create tridiagonal Toeplitz matrix" alt="" coords="5,319,195,360"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="monolish::tensor::tensor_Dense::get_nnz" name="monolish::tensor::tensor_Dense::get_nnz">
+<area shape="rect" id="node1" title="get # of non&#45;zeros" alt="" coords="233,5,413,47"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ae4144d002bba3ae6d4555579ba0ac97d" title="Memory data space required by the matrix." alt="" coords="5,5,185,47"/>
+</map>

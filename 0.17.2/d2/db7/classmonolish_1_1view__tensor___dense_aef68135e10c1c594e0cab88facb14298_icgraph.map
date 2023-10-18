@@ -1,0 +1,5 @@
+<map id="monolish::view_tensor_Dense::calc_range" name="monolish::view_tensor_Dense::calc_range">
+<area shape="rect" id="node1" title="calculate view_tensor_Dense size from shape" alt="" coords="259,39,428,80"/>
+<area shape="rect" id="node2" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#a7795dedee96ed314ec1b19dc9b838e29" title="change last postion" alt="" coords="23,5,193,47"/>
+<area shape="rect" id="node3" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#a8f42e6ee591eb50fefeef6f7fac80564" title="create view_tensor_Dense from vector(start:start+range)" alt="" coords="5,71,211,112"/>
+</map>

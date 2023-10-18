@@ -1,0 +1,8 @@
+<map id="monolish::vector::data" name="monolish::vector::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the vector" alt="" coords="260,144,428,171"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a66a917b2c818620371cf62b17f90a15d" title="Create COO matrix from monolish::vector." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node3" href="$d6/d4a/classmonolish_1_1equation_1_1_cholesky.html#a07b6f8fc0e447abfe1bc0823d9b94eb3" title=" " alt="" coords="33,56,184,112"/>
+<area shape="rect" id="node4" href="$de/d01/classmonolish_1_1equation_1_1_q_r.html#a1c10910960b0e62b94ebd09ca4e04726" title=" " alt="" coords="35,137,182,178"/>
+<area shape="rect" id="node5" href="$d7/d15/classmonolish_1_1vector.html#a5dfe5b7072628e42d6562de63256795d" title="Sign inversion." alt="" coords="9,203,208,229"/>
+<area shape="rect" id="node6" href="$d2/d67/classmonolish_1_1view1_d.html#acdcb9edd885115699af581a124077175" title="create view1D(start:end) from vector" alt="" coords="11,253,207,280"/>
+</map>

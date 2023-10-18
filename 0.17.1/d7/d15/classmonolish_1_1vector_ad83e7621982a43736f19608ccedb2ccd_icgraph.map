@@ -1,0 +1,8 @@
+<map id="monolish::vector::get_device_mem_stat" name="monolish::vector::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="516,99,676,141"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a66a917b2c818620371cf62b17f90a15d" title="Create COO matrix from monolish::vector." alt="" coords="261,5,468,32"/>
+<area shape="rect" id="node3" href="$d7/d15/classmonolish_1_1vector.html#a0a6c023b59e2592f47dc06ce6a64021e" title="reference to the element at position (v[i])" alt="" coords="263,56,467,83"/>
+<area shape="rect" id="node4" href="$d7/d15/classmonolish_1_1vector.html#ab3364b4c81489354c9d95aa400171f8d" title="Add a new element at the end of the vector (only CPU)" alt="" coords="5,132,213,159"/>
+<area shape="rect" id="node5" href="$d7/d15/classmonolish_1_1vector.html#a1aa0ec3bbd6a52a1c3546c3f06dae352" title="resize vector (only CPU)" alt="" coords="275,157,454,184"/>
+<area shape="rect" id="node6" href="$d7/d15/classmonolish_1_1vector.html#ab8ffc2070f54ff3dae4dd4e0ac781ca0" title="destructor of vector, free GPU memory" alt="" coords="295,209,434,250"/>
+</map>

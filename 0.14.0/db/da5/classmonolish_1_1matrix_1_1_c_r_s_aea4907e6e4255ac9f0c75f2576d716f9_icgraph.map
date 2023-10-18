@@ -1,0 +1,7 @@
+<map id="monolish::matrix::CRS::get_device_mem_stat" name="monolish::matrix::CRS::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="229,93,404,135"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a0db5a5fe6890a06e4ff57e55d9473faa" title="Comparing matricies (A == mat)" alt="" coords="10,5,177,47"/>
+<area shape="rect" id="node3" href="$d5/d40/namespacemonolish_1_1blas.html#a44a05a49ede633ae28044aafbf9f1c1d" title="CRS and Dense matrix multiplication: C = AB." alt="" coords="5,71,181,98"/>
+<area shape="rect" id="node4" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a608859b959a905d5c83d91184d71ffaf" title="matrix copy" alt="" coords="10,123,177,164"/>
+<area shape="rect" id="node5" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#aafaf7b5912b24494142db745d7a44a8b" title="destructor of CRS matrix, free GPU memory" alt="" coords="10,188,177,229"/>
+</map>
