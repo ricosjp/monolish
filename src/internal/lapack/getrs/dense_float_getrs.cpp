@@ -26,7 +26,7 @@ int internal::lapack::getrs(const matrix::Dense<float> &A, vector<float> &B,
   const float *Ad = A.data();
   float *Bd = B.data();
   const int *ipivd = ipiv.data();
-  const char trans = 'N';
+  const char trans = 'T';
 
   if (A.get_device_mem_stat() == true && B.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
