@@ -30,7 +30,7 @@ doxygen:
 markdown-link-check:
   extends:
     - .develop
-  image: node:16
+  image: node:22
   script:
     - npm install -g markdown-link-check
     - markdown-link-check README.md
