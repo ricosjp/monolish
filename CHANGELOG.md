@@ -37,6 +37,7 @@ Unreleased
 - Change view1d constructor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/501> <https://github.com/ricosjp/monolish/issues/732>
 - Change pyyaml version 5.4.1->5.3.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/507> <https://github.com/ricosjp/monolish/issues/740>
 - Update node version 16->22 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/511> <https://github.com/ricosjp/monolish/issues/751>
+- Update docker login variables <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/512> <https://github.com/ricosjp/monolish/issues/752>
 
 
 0.17.1 - 2023/05/03
