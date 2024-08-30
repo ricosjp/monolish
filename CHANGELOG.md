@@ -31,6 +31,7 @@ Unreleased
 ### Fixed
 - Fix benchmark result token <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/502> <https://github.com/ricosjp/monolish/issues/733>
 - Fix set_ptr bug <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/508> <https://github.com/ricosjp/monolish/issues/741>
+- Fix linear solver bug for non-symmetric matrix <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/510> <https://github.com/ricosjp/monolish/issues/750>
 
 ### Changed
 - Update cuda version of allgebra <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/506> <https://github.com/ricosjp/monolish/issues/739>
