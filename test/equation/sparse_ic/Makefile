@@ -16,15 +16,19 @@ sxat:
 
 run_cpu:
 	./$(FUNC)_cpu.out ../../test.mtx 1
+	./$(FUNC)_cpu.out ../../test2.mtx 1
 
 run_gpu:
 	$(PROFILER)./$(FUNC)_gpu.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_gpu.out ../../test2.mtx 1
 
 run_a64fx:
 	$(PROFILER)./$(FUNC)_a64fx.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_a64fx.out ../../test2.mtx 1
 	
 run_sxat:
 	$(PROFILER)./$(FUNC)_sxat.out ../../test.mtx 1
+	$(PROFILER)./$(FUNC)_sxat.out ../../test2.mtx 1
 	
 clean:
 	- rm *.out

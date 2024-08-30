@@ -31,8 +31,8 @@ bool ans_check(const std::string &func, double result, double ans, double tol) {
   }
 
   if (err < tol) {
-    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
-    std::cout << ": pass" << std::endl;
+    // std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    // std::cout << ": pass" << std::endl;
     return true;
   } else {
     std::cout << "Error!!" << std::endl;
@@ -104,8 +104,8 @@ bool ans_check(const std::string &func, const T *result, const T *ans, int size,
   }
 
   if (check) {
-    std::cout << func << "(" << get_type<T>() << ")" << std::flush;
-    std::cout << ": pass" << std::endl;
+    // std::cout << func << "(" << get_type<T>() << ")" << std::flush;
+    // std::cout << ": pass" << std::endl;
     return check;
   } else {
     std::cout << "Error!!" << std::endl;
@@ -144,9 +144,9 @@ bool ans_check(const std::string &func, const std::string &type,
   }
 
   if (check) {
-    std::cout << func << "(" << get_type<T>() << "," << type << ")"
-              << std::flush;
-    std::cout << ": pass" << std::endl;
+    // std::cout << func << "(" << get_type<T>() << "," << type << ")"
+    //           << std::flush;
+    // std::cout << ": pass" << std::endl;
     return check;
   } else {
     std::cout << "Error!!" << std::endl;
