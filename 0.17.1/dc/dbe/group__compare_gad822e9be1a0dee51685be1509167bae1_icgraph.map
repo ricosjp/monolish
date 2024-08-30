@@ -1,0 +1,4 @@
+<map id="monolish::util::is_same_size" name="monolish::util::is_same_size">
+<area shape="rect" id="node1" title="compare size of vector or 1Dview (same as is_same_structure())" alt="" coords="184,5,315,47"/>
+<area shape="rect" id="node2" href="$dc/dbe/group__compare.html#ga823660c2035d9b422934af52dbb9f625" title="compare matrix size" alt="" coords="5,5,136,47"/>
+</map>

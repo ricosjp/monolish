@@ -1,0 +1,4 @@
+<map id="monolish::matrix::Dense::recv" name="monolish::matrix::Dense::recv">
+<area shape="rect" id="node1" title="recv. data to GPU, and free data on GPU" alt="" coords="200,5,383,47"/>
+<area shape="rect" id="node2" href="$d6/d4a/classmonolish_1_1equation_1_1_cholesky.html#a679ab6de5ea6f8f14fe8cc7ec3d097ef" title=" " alt="" coords="5,5,152,47"/>
+</map>

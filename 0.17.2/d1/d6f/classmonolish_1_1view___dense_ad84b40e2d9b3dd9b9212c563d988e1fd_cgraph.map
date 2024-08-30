@@ -1,0 +1,4 @@
+<map id="monolish::view_Dense::view_Dense" name="monolish::view_Dense::view_Dense">
+<area shape="rect" id="node1" title="create view_Dense from Dense tensor(start:start+range)" alt="" coords="5,5,175,47"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a9f9b7aa813d00e37d231aa4a4c2dec9b" title="returns a direct pointer to the tensor" alt="" coords="223,5,403,47"/>
+</map>

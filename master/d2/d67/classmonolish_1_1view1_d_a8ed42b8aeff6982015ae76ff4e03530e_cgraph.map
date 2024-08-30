@@ -1,0 +1,5 @@
+<map id="monolish::view1D::view1D" name="monolish::view1D::view1D">
+<area shape="rect" id="node1" title="create view1D(start:start+range) from Dense matrix" alt="" coords="5,42,201,69"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="249,5,432,47"/>
+<area shape="rect" id="node3" href="$d2/d67/classmonolish_1_1view1_d.html#abd353d2390caed198915ddc049020e3d" title="get view1D size (range)" alt="" coords="254,71,427,98"/>
+</map>

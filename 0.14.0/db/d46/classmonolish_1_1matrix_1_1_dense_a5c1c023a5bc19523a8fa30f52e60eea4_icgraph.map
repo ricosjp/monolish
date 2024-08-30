@@ -1,0 +1,12 @@
+<map id="monolish::matrix::Dense::get_col" name="monolish::matrix::Dense::get_col">
+<area shape="rect" id="node1" title="get # of col" alt="" coords="467,231,649,272"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a76c22ac3b447fc92c41040bda280b569" title="Comparing matricies (A == mat)" alt="" coords="236,5,419,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a9f453522189f158c8e48b0f3a26f18e0" title="get # of non&#45;zeros" alt="" coords="236,71,419,112"/>
+<area shape="rect" id="node5" href="$d0/d47/namespacemonolish_1_1util.html#aeb59ad2382acead12bdd31280724892a" title="compare row and col size" alt="" coords="262,136,393,177"/>
+<area shape="rect" id="node6" href="$d0/d47/namespacemonolish_1_1util.html#a1f7206e3000e0bb27e30e24c1ab2840c" title="compare structure using M and N (same as is_same_size())" alt="" coords="262,201,393,243"/>
+<area shape="rect" id="node7" href="$d5/d40/namespacemonolish_1_1blas.html#a44a05a49ede633ae28044aafbf9f1c1d" title="CRS and Dense matrix multiplication: C = AB." alt="" coords="239,267,415,294"/>
+<area shape="rect" id="node8" href="$da/da4/classmonolish_1_1equation_1_1_l_u.html#aee8cceb56aa18de646f4ed617d536a8b" title=" " alt="" coords="254,319,401,360"/>
+<area shape="rect" id="node9" href="$d6/d4a/classmonolish_1_1equation_1_1_cholesky.html#a679ab6de5ea6f8f14fe8cc7ec3d097ef" title=" " alt="" coords="254,384,401,425"/>
+<area shape="rect" id="node10" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#aed3e145e5d770df5c001adabbe54ecbe" title="get transposed matrix (A^T)" alt="" coords="236,449,419,491"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a9c107206b30d5a01be3bbf33294d3f02" title="Memory data space required by the matrix." alt="" coords="5,71,188,112"/>
+</map>

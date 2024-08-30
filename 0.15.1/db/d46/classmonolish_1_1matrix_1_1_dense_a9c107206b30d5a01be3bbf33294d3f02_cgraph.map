@@ -1,0 +1,6 @@
+<map id="monolish::matrix::Dense::get_data_size" name="monolish::matrix::Dense::get_data_size">
+<area shape="rect" id="node1" title="Memory data space required by the matrix." alt="" coords="5,39,188,80"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a9f453522189f158c8e48b0f3a26f18e0" title="get # of non&#45;zeros" alt="" coords="236,39,419,80"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a5c1c023a5bc19523a8fa30f52e60eea4" title="get # of col" alt="" coords="467,5,649,47"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a846aea2488ce2147c0ff0ab795ce2dcd" title="get # of row" alt="" coords="467,71,649,112"/>
+</map>

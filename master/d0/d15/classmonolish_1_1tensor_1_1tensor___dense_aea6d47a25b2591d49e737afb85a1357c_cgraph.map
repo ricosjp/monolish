@@ -1,0 +1,5 @@
+<map id="monolish::tensor::tensor_Dense::~tensor_Dense" name="monolish::tensor::tensor_Dense::~tensor_Dense">
+<area shape="rect" id="node1" title="destructor of dense tensor, free GPU memory" alt="" coords="5,39,185,80"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ad38518ba5389cbcb245872b0e0f55db4" title="free data on GPU" alt="" coords="255,5,435,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#af33424c03942ee3b351e2a958359333b" title="true: sended, false: not send" alt="" coords="233,71,456,112"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="monolish::view1D::view1D" name="monolish::view1D::view1D">
+<area shape="rect" id="node1" title="create view1D(start:end) from Dense tensor" alt="" coords="5,42,201,69"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a9f9b7aa813d00e37d231aa4a4c2dec9b" title="returns a direct pointer to the tensor" alt="" coords="249,5,429,47"/>
+<area shape="rect" id="node3" href="$d2/d67/classmonolish_1_1view1_d.html#a354c4e91e019823fa294b4b481fb8c84" title="returns a end iterator" alt="" coords="254,71,425,98"/>
+</map>

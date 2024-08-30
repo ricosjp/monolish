@@ -1,0 +1,4 @@
+<map id="monolish::matrix::LinearOperator::get_rmatmul_dense" name="monolish::matrix::LinearOperator::get_rmatmul_dense">
+<area shape="rect" id="node1" title="get multiplication function of (Hermitian) transposed matrix and matrix dense;" alt="" coords="235,5,452,47"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#ac817494970899fc6f56d5753e96fd53b" title="LinearOperator multiplication: C = A^t B." alt="" coords="5,13,187,39"/>
+</map>

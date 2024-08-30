@@ -1,0 +1,4 @@
+<map id="monolish::matrix::LinearOperator::set_rmatvec" name="monolish::matrix::LinearOperator::set_rmatvec">
+<area shape="rect" id="node1" title="set multiplication function of (Hermitian) transposed matrix and vector" alt="" coords="5,5,187,47"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#abbaf3ff3490732d66a7991d086eb349f" title="matrix (LinearOperator) and vector multiplication: y = Ax" alt="" coords="235,13,413,39"/>
+</map>

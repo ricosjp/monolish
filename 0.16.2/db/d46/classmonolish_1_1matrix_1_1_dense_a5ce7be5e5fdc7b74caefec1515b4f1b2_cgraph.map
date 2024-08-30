@@ -1,0 +1,5 @@
+<map id="monolish::matrix::Dense::~Dense" name="monolish::matrix::Dense::~Dense">
+<area shape="rect" id="node1" title="destructor of CRS matrix, free GPU memory" alt="" coords="5,39,188,80"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#aa55f5fd2b32be9cea8e282924ad543e9" title="free data on GPU" alt="" coords="236,5,419,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a1c4b3d97a2db5c1bd12662fa2f391f4e" title="true: sended, false: not send" alt="" coords="236,71,419,112"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="monolish::blas::rmatmul" name="monolish::blas::rmatmul">
+<area shape="rect" id="node1" title="LinearOperator multiplication: C = A^t B." alt="" coords="5,279,187,305"/>
+<area shape="rect" id="node2" href="$d0/dda/classmonolish_1_1_logger.html#aa107a265a4cc5837a50d70d9728524f2" title=" " alt="" coords="249,5,438,32"/>
+<area shape="rect" id="node3" href="$d0/dda/classmonolish_1_1_logger.html#a8160d177efc08a4fd3aefe7d0ed57c2f" title=" " alt="" coords="244,56,443,83"/>
+<area shape="rect" id="node4" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#abe4ae3660bb4cb693e9ae5e37e10cdf9" title="get # of col" alt="" coords="253,107,434,149"/>
+<area shape="rect" id="node5" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a5c1c023a5bc19523a8fa30f52e60eea4" title="get # of col" alt="" coords="252,173,435,214"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="262,238,425,279"/>
+<area shape="rect" id="node7" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a7c0ef8dbab6f6ee3c58ded7f9f92340c" title="get multiplication function of (Hermitian) transposed matrix and matrix dense;" alt="" coords="235,303,452,345"/>
+<area shape="rect" id="node8" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a31b68c273062a2e6d2acbf4be200b7fd" title="get flag that shows rmatmul_dense is defined or not" alt="" coords="253,369,434,425"/>
+<area shape="rect" id="node9" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ac028d6dd72f05d0c38f3a883b35c2537" title="get # of row" alt="" coords="253,450,434,491"/>
+<area shape="rect" id="node10" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a846aea2488ce2147c0ff0ab795ce2dcd" title="get # of row" alt="" coords="252,515,435,557"/>
+<area shape="rect" id="node11" href="$d0/d47/namespacemonolish_1_1util.html#af4e06d09382ca39b9e8e11c477bd9c24" title="compare same device memory status" alt="" coords="249,581,437,622"/>
+</map>

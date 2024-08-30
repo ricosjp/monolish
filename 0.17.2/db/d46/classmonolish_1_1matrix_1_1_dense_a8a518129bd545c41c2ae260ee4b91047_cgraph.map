@@ -1,0 +1,9 @@
+<map id="monolish::matrix::Dense::resize" name="monolish::matrix::Dense::resize">
+<area shape="rect" id="node1" title="resize matrix value" alt="" coords="5,97,188,139"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8b2f57ae6a64a28ffc55f75efb49731d" title="returns a begin iterator" alt="" coords="236,64,419,105"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="467,5,649,47"/>
+<area shape="rect" id="node6" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a1c4b3d97a2db5c1bd12662fa2f391f4e" title="true: sended, false: not send" alt="" coords="236,129,419,171"/>
+<area shape="rect" id="node7" href="$d7/d62/group__vml__crscrsmin.html#ga1e97a78b4c9fc5dfbeff1e9d6fcf96b3" title="Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz],..." alt="" coords="253,195,401,222"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#acc252fec23b3ca6677a5526559f32903" title="get first position (same as get_first())" alt="" coords="467,71,649,112"/>
+<area shape="rect" id="node5" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a60454a87dd33187d3bf9070b7e87c2e9" title="get first position" alt="" coords="697,71,880,112"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="monolish::matrix::COO::equal" name="monolish::matrix::COO::equal">
+<area shape="rect" id="node1" title="Comparing matricies (A == mat)" alt="" coords="5,169,176,211"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ad8e551f918ffbcd275d919982ccf013b" title="get # of col" alt="" coords="234,5,405,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab99ab183a4f6f1ad32ad6be3191e891f" title="false; // true: sended, false: not send" alt="" coords="232,71,407,112"/>
+<area shape="rect" id="node4" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="238,136,401,177"/>
+<area shape="rect" id="node5" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#af27892f2720971d28d81967261d252d2" title="get # of row" alt="" coords="234,201,405,243"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="228,267,411,294"/>
+<area shape="rect" id="node7" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="224,318,415,345"/>
+</map>
