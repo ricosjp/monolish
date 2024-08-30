@@ -42,7 +42,11 @@ int internal::lapack::getrs(const matrix::Dense<float> &A, vector<float> &B,
 
 #pragma omp target data use_device_ptr(Ad, ipivd, Bd, devinfod)
     {
-      internal::check_CUDA(cusolverDnSgetrs(h, CUBLAS_OP_N, M, K, Ad, N, ipivd,
+      auto cublas_trans = CUBLAS_OP_N;
+      if(trans=='T'){
+        cublas_trans = CUBLAS_OP_T;
+      }
+      internal::check_CUDA(cusolverDnSgetrs(h, cublas_trans, M, K, Ad, N, ipivd,
                                             Bd, M, devinfod));
     }
 
