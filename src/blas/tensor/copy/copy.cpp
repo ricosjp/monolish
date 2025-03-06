@@ -131,4 +131,11 @@ void copy(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   copy_core(A, C);
 }
+
+void copy(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  copy_core(A, C);
+}
+void copy(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
+  copy_core(A, C);
+}
 } // namespace monolish::blas

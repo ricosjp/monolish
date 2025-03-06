@@ -30,14 +30,15 @@ void times_row_core(const tensor::tensor_CRS<T> &A, const VEC &x,
 
   assert(util::is_same_structure(A, C));
   assert(util::is_same_device_mem_stat(A, x, C));
-  assert(A.shape[A.shape.size() - 1] == x.size());
+  std::vector<size_t> Ashape = A.get_shape();
+  assert(Ashape[Ashape.size() - 1] == x.size());
 
   const auto *Ad = A.begin();
   auto *Cd = C.begin();
 
-  const auto nsum = 0;
+  auto nsum = 0;
 
-  for (size_t d = 0; d < A.row_ptr.size(); ++d) {
+  for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
     const auto *rowd = A.row_ptrs[d].data();
     const auto *cold = A.col_inds[d].data();
     const auto n = A.row_ptrs[d].size();

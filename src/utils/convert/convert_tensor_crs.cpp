@@ -15,9 +15,9 @@ void tensor_CRS<T>::convert(const tensor::tensor_COO<T> &coo) {
   set_shape(coo.get_shape());
   val_create_flag = true;
   resize(coo.get_nnz());
-  size_t dim = coo.get_shape().size();
+  int dim = coo.get_shape().size();
   size_t upper_d = 1;
-  for (std::size_t i = 0; i < dim - 2; ++i) {
+  for (int i = 0; i < dim - 2; ++i) {
     upper_d *= coo.get_shape()[i];
   }
   row_ptrs.resize(upper_d);

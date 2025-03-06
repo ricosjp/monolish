@@ -46,7 +46,7 @@ tensor_CRS<T>::tensor_CRS(const tensor_CRS<T> &crs, T value) {
   this->shape = crs.shape;
   this->row_ptrs = crs.row_ptrs;
   this->col_inds = crs.col_inds;
-  gpu_status = false;
+  *gpu_status = false;
 
   val_create_flag = true;
   resize(crs.get_nnz());

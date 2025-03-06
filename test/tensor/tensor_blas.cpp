@@ -319,6 +319,28 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // tt_copy tensor_CRS//
+  if (test_send_tt_copy<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_copy<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_copy<monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_copy<monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tscal tensor_Dense//
   if (test_send_tscal<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-8) == false) {

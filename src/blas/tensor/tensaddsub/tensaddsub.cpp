@@ -644,6 +644,16 @@ void tensadd(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   tensadd_core(A, B, C);
 }
 
+void tensadd(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_CRS<double> &B,
+             tensor::tensor_CRS<double> &C) {
+  tensadd_core(A, B, C);
+}
+void tensadd(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C) {
+  tensadd_core(A, B, C);
+}
+
 void tenssub(const tensor::tensor_Dense<double> &A,
              const tensor::tensor_Dense<double> &B,
              tensor::tensor_Dense<double> &C) {
@@ -1282,6 +1292,16 @@ void tenssub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
 void tenssub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
              const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
              view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
+  tenssub_core(A, B, C);
+}
+
+void tenssub(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_CRS<double> &B,
+             tensor::tensor_CRS<double> &C) {
+  tenssub_core(A, B, C);
+}
+void tenssub(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C) {
   tenssub_core(A, B, C);
 }
 

@@ -20,7 +20,7 @@ echo ""
 
 # tensadd crs
 for prec in double float; do
-  echo "void tensadd(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C) { matadd_core(A, B, C); }"
+  echo "void tensadd(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C) { tensadd_core(A, B, C); }"
 done
 
 echo ""
@@ -40,7 +40,7 @@ echo ""
 
 # tenssub crs
 for prec in double float; do
-  echo "void tenssub(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C) { matsub_core(A, B, C); }"
+  echo "void tenssub(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C) { tenssub_core(A, B, C); }"
 done
 
 echo ""

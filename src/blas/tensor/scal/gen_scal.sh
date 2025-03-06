@@ -16,7 +16,7 @@ echo ""
 
 # scal crs
 for prec in double float; do
-  echo "void mscal(const $prec alpha, tensor::tensor_CRS<$prec>& A) { mscal_core(alpha, A); }"
+  echo "void tscal(const $prec alpha, tensor::tensor_CRS<$prec>& A) { tscal_core(alpha, A); }"
 done
 
 echo "}"
