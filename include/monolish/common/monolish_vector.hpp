@@ -357,6 +357,15 @@ public:
   [[nodiscard]] size_t size() const { return val_nnz; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
+
+  /**
    * @brief get vector size
    * @return vector size
    * @note

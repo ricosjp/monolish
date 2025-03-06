@@ -836,6 +836,47 @@ void times_row(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
  * @{
  */
 /**
+ * @brief Row-wise tensor_Dense tensor and vector times:
+ * ex. C[i][j] = A[i][j] * x[j]
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times_row(const tensor::tensor_CRS<double> &A, const vector<double> &x,
+               tensor::tensor_CRS<double> &C);
+void times_row(const tensor::tensor_CRS<double> &A,
+               const view1D<vector<double>, double> &x,
+               tensor::tensor_CRS<double> &C);
+void times_row(const tensor::tensor_CRS<double> &A,
+               const view1D<matrix::Dense<double>, double> &x,
+               tensor::tensor_CRS<double> &C);
+void times_row(const tensor::tensor_CRS<double> &A,
+               const view1D<tensor::tensor_Dense<double>, double> &x,
+               tensor::tensor_CRS<double> &C);
+void times_row(const tensor::tensor_CRS<float> &A, const vector<float> &x,
+               tensor::tensor_CRS<float> &C);
+void times_row(const tensor::tensor_CRS<float> &A,
+               const view1D<vector<float>, float> &x,
+               tensor::tensor_CRS<float> &C);
+void times_row(const tensor::tensor_CRS<float> &A,
+               const view1D<matrix::Dense<float>, float> &x,
+               tensor::tensor_CRS<float> &C);
+void times_row(const tensor::tensor_CRS<float> &A,
+               const view1D<tensor::tensor_Dense<float>, float> &x,
+               tensor::tensor_CRS<float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
  * @brief Column-wise tensor_Dense tensor and vector times:
  * ex. C[i][j] = A[i][j] * x[i]
  * @param A tensor_Dense tensor
@@ -3660,6 +3701,113 @@ void tensvec(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
              const view1D<tensor::tensor_Dense<float>, float> &x,
              view_tensor_Dense<matrix::Dense<float>, float> &y);
 void tensvec(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
+             const view1D<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+/**@}*/
+
+/**
+ * \defgroup tensvec_dense monolish::blas::tensvec (tensor_CRS)
+ * @brief tensor_Dense tensor and vector multiplication: y = Ax
+ * @{
+ */
+/**
+ * @brief tensor_Dense tensor and vector multiplication: ex. y_{ij} = A_{ijk}
+ * x_{k}
+ * @param A tensor_Dense tensor
+ * @param x monolish vector
+ * @param y tensor_Dense tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensvec(const tensor::tensor_CRS<double> &A, const vector<double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A, const vector<double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A, const vector<double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A, const vector<double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<vector<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<vector<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<vector<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<vector<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<matrix::Dense<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<tensor::tensor_Dense<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<double> &A,
+             const view1D<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensvec(const tensor::tensor_CRS<float> &A, const vector<float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A, const vector<float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A, const vector<float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A, const vector<float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<vector<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<vector<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<vector<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<vector<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<matrix::Dense<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<tensor::tensor_Dense<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
+             const view1D<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensvec(const tensor::tensor_CRS<float> &A,
              const view1D<tensor::tensor_Dense<float>, float> &x,
              view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
 /**@}*/

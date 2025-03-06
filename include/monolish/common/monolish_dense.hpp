@@ -229,6 +229,18 @@ public:
   Dense(const size_t M, const size_t N, const vector<Float> &value);
 
   /**
+   * @brief Create construct dense matrix
+   * @param M # of row
+   * @param N # of col
+   * @param value value
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: true
+   * - GPU acceleration: false
+   **/
+  Dense(const size_t M, const size_t N, const std::shared_ptr<Float> &value);
+
+  /**
    * @brief Create dense matrix from std::initializer_list
    * @param M # of row
    * @param N # of col
@@ -335,6 +347,15 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] size_t get_col() const { return colN; }
+
+  /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
 
   /**
    * @brief get # of non-zeros
@@ -643,6 +664,7 @@ public:
       val = tmp;
       alloc_nnz = N;
       val_nnz = N;
+      first = 0;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }

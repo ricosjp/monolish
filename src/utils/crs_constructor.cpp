@@ -108,6 +108,32 @@ template CRS<float>::CRS(const size_t M, const size_t N,
 
 template <typename T>
 CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
+            const std::vector<int> &colind, const std::shared_ptr<T> &value_) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  set_row(M);
+  set_col(N);
+
+  row_ptr.resize(M + 1);
+  col_ind.resize(col_ind.size());
+  val_create_flag = false;
+  this->val = value_;
+  std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
+  std::copy(colind.data(), colind.data() + col_ind.size(), col_ind.begin());
+  compute_hash();
+  logger.util_out();
+}
+template CRS<double>::CRS(const size_t M, const size_t N,
+                          const std::vector<int> &rowptr,
+                          const std::vector<int> &colind,
+                          const std::shared_ptr<double> &value_);
+template CRS<float>::CRS(const size_t M, const size_t N,
+                         const std::vector<int> &rowptr,
+                         const std::vector<int> &colind,
+                         const std::shared_ptr<float> &value_);
+
+template <typename T>
+CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
             const std::vector<int> &colind, const vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);

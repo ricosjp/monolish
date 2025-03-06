@@ -27,9 +27,11 @@ for prec in double float; do
       for arg3 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         if [ $prec = "double" ]
         then
-          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, false);}"
+          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(1.0, A, x, 0.0, y, false);}"
+          echo "void matvec(const $prec &a, const $arg3 &A, const $arg1 &x, const $prec &b, $arg2 &y){Dmatvec_core(a, A, x, b, y, false);}"
         else
-          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, false);}"
+          echo "void matvec(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(1.0, A, x, 0.0, y, false);}"
+          echo "void matvec(const $prec &a, const $arg3 &A, const $arg1 &x, const $prec &b, $arg2 &y){Smatvec_core(a, A, x, b, y, false);}"
         fi
       done
     done
@@ -47,10 +49,12 @@ for trans in N T; do
           if [ $prec = "double" ]
           then
             T=`TRANSPOSE_BOOL $trans`
-            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, $T);}"
+            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Dmatvec_core(1.0, A, x, 0.0, y, $T);}"
+            echo "void matvec_$trans(const $prec &a, const $arg3 &A, const $arg1 &x, const $prec &b, $arg2 &y){Dmatvec_core(a, A, x, b, y, $T);}"
           else
             T=`TRANSPOSE_BOOL $trans`
-            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, $T);}"
+            echo "void matvec_$trans(const $arg3 &A, const $arg1 &x, $arg2 &y){Smatvec_core(1.0, A, x, 0.0, y, $T);}"
+            echo "void matvec_$trans(const $prec &a, const $arg3 &A, const $arg1 &x, const $prec &b, $arg2 &y){Smatvec_core(a, A, x, b, y, $T);}"
           fi
         done
       done
@@ -66,9 +70,11 @@ for prec in double float; do
     for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       if [ $prec = "double" ]
       then
-        echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, false);}"
+        echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(1.0, A, x, 0.0, y, false);}"
+        echo "void matvec(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y){Dmatvec_core(a, A, x, b, y, false);}"
       else
-        echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, false);}"
+        echo "void matvec(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(1.0, A, x, 0.0, y, false);}"
+        echo "void matvec(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y){Smatvec_core(a, A, x, b, y, false);}"
       fi
     done
   done
@@ -84,10 +90,12 @@ for trans in N T; do
                 if [ $prec = "double" ]
                 then
                     T=`TRANSPOSE_BOOL $trans`
-                    echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(A, x, y, $T);}"
+                    echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Dmatvec_core(1.0, A, x, 0.0, y, $T);}"
+                    echo "void matvec_$trans(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y){Dmatvec_core(a, A, x, b, y, $T);}"
                 else
                     T=`TRANSPOSE_BOOL $trans`
-                    echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(A, x, y, $T);}"
+                    echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y){Smatvec_core(1.0, A, x, 0.0, y, $T);}"
+                    echo "void matvec_$trans(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y){Smatvec_core(a, A, x, b, y, $T);}"
                 fi
             done
         done

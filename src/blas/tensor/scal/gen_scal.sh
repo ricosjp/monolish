@@ -12,4 +12,11 @@ for prec in double float; do
   done
 done
 
+echo ""
+
+# scal crs
+for prec in double float; do
+  echo "void mscal(const $prec alpha, tensor::tensor_CRS<$prec>& A) { mscal_core(alpha, A); }"
+done
+
 echo "}"

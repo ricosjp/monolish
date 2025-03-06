@@ -813,6 +813,21 @@ template <typename T>
 
 /**
  * @brief compare shape
+ * @param A COO tensor
+ * @param B COO tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_size(const tensor::tensor_CRS<T> &A,
+                                const tensor::tensor_CRS<T> &B);
+
+/**
+ * @brief compare shape
  * @param A Dense tensor
  * @param B Dense tensor
  * @return true is same size

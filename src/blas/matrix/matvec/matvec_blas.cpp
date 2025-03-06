@@ -9,2254 +9,4759 @@ namespace monolish::blas {
 
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const vector<double> &x, view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const vector<double> &x, view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const vector<double> &x, view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A, const vector<double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const vector<double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const vector<double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const vector<double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const vector<double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<vector<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<matrix::Dense<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::Dense<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<vector<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const view_Dense<matrix::Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<double>, double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a,
+            const view_Dense<tensor::tensor_Dense<double>, double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A, const vector<float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const vector<float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A, const vector<float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const vector<float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A, const vector<float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A, const vector<float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const vector<float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A, const vector<float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const vector<float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const vector<float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const vector<float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<vector<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<vector<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::Dense<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::Dense<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<vector<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<vector<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<matrix::Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const view_Dense<tensor::tensor_Dense<float>, float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a,
+            const view_Dense<tensor::tensor_Dense<float>, float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 
 void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x, view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A, const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::Dense<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const view_Dense<vector<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<matrix::Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<double>, double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a,
+              const view_Dense<tensor::tensor_Dense<double>, double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x, view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::Dense<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::Dense<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<vector<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<vector<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<matrix::Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const view_Dense<matrix::Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const view_Dense<tensor::tensor_Dense<float>, float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a,
+              const view_Dense<tensor::tensor_Dense<float>, float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A, const vector<double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const vector<double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<vector<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<vector<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<matrix::Dense<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<matrix::Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<matrix::Dense<double>, double> &x, const double &b,
+            view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<double> &A,
             const view1D<tensor::tensor_Dense<double>, double> &x,
             view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const double &a, const matrix::CRS<double> &A,
+            const view1D<tensor::tensor_Dense<double>, double> &x,
+            const double &b, view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A, const vector<float> &x,
+            const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A, const vector<float> &x,
+            const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A, const vector<float> &x,
+            const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const vector<float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A, const vector<float> &x,
+            const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A, const view1D<vector<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<vector<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<matrix::Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<matrix::Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec(const matrix::CRS<float> &A,
             const view1D<tensor::tensor_Dense<float>, float> &x,
             view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec(const float &a, const matrix::CRS<float> &A,
+            const view1D<tensor::tensor_Dense<float>, float> &x, const float &b,
+            view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 
 void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, false);
+  Dmatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_N(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, false);
+  Smatvec_core(1.0, A, x, 0.0, y, false);
+}
+void matvec_N(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, false);
 }
 void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A, const vector<double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const vector<double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x, vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<vector<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<vector<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<matrix::Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<matrix::Dense<double>, double> &x, const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               vector<double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, vector<double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<vector<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<vector<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<matrix::Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b, view1D<matrix::Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<double> &A,
               const view1D<tensor::tensor_Dense<double>, double> &x,
               view1D<tensor::tensor_Dense<double>, double> &y) {
-  Dmatvec_core(A, x, y, true);
+  Dmatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const double &a, const matrix::CRS<double> &A,
+              const view1D<tensor::tensor_Dense<double>, double> &x,
+              const double &b,
+              view1D<tensor::tensor_Dense<double>, double> &y) {
+  Dmatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A, const vector<float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const vector<float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<vector<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<vector<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x, vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<matrix::Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<matrix::Dense<float>, float> &x, const float &b,
+              view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               vector<float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, vector<float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<vector<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<vector<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<matrix::Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<matrix::Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 void matvec_T(const matrix::CRS<float> &A,
               const view1D<tensor::tensor_Dense<float>, float> &x,
               view1D<tensor::tensor_Dense<float>, float> &y) {
-  Smatvec_core(A, x, y, true);
+  Smatvec_core(1.0, A, x, 0.0, y, true);
+}
+void matvec_T(const float &a, const matrix::CRS<float> &A,
+              const view1D<tensor::tensor_Dense<float>, float> &x,
+              const float &b, view1D<tensor::tensor_Dense<float>, float> &y) {
+  Smatvec_core(a, A, x, b, y, true);
 }
 
 void matvec(const matrix::LinearOperator<double> &A, const vector<double> &x,

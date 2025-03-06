@@ -197,6 +197,15 @@ public:
   void recv() { target.recv(); };
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return target.get_val(); }
+
+  /**
    * @brief get view1D size (range)
    * @return view1D size
    * @note

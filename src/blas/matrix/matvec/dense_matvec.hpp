@@ -11,7 +11,8 @@ std::string get_matvec_name(std::string func, bool flag) {
 }
 // double ///////////////////
 template <typename MAT1, typename VEC1, typename VEC2>
-void Dmatvec_core(const MAT1 &A, const VEC1 &x, VEC2 &y, bool transA) {
+void Dmatvec_core(const double alpha, const MAT1 &A, const VEC1 &x,
+                  const double beta, VEC2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
 
@@ -30,8 +31,6 @@ void Dmatvec_core(const MAT1 &A, const VEC1 &x, VEC2 &y, bool transA) {
   const auto *vald = A.begin();
   const auto m = A.get_row();
   const auto n = A.get_col();
-  const double alpha = 1.0;
-  const double beta = 0.0;
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU
@@ -58,7 +57,8 @@ void Dmatvec_core(const MAT1 &A, const VEC1 &x, VEC2 &y, bool transA) {
 
 // float ///////////////////
 template <typename MAT1, typename VEC1, typename VEC2>
-void Smatvec_core(const MAT1 &A, const VEC1 &x, VEC2 &y, bool transA) {
+void Smatvec_core(const float alpha, const MAT1 &A, const VEC1 &x,
+                  const float beta, VEC2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(get_matvec_name(monolish_func, transA));
 
@@ -77,8 +77,6 @@ void Smatvec_core(const MAT1 &A, const VEC1 &x, VEC2 &y, bool transA) {
   const auto *vald = A.begin();
   const auto n = A.get_row();
   const auto m = A.get_col();
-  const float alpha = 1.0;
-  const float beta = 0.0;
 
   if (A.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

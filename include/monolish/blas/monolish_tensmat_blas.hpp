@@ -912,6 +912,236 @@ void tensmat(const float &a,
              const float &b,
              view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
 /**@}*/
+
+/**
+ * \defgroup tensmat_dense monolish::blas::tensmat (tensor_CRS)
+ * @brief tensor_CRS tensor and matrix multiplication: y = Ax
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor and matrix multiplication: ex. y_{ijl} = A_{ijk}
+ * x_{kl}
+ * @param A tensor_CRS tensor
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x, tensor::tensor_Dense<double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             tensor::tensor_Dense<double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const tensor::tensor_CRS<float> &A, const matrix::Dense<float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A, const matrix::Dense<float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A, const matrix::Dense<float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A, const matrix::Dense<float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+/**@}*/
+
+/**
+ * \defgroup tensmat_dense monolish::blas::tensmat (tensor_CRS)
+ * @brief tensor_CRS tensor and matrix multiplication: ex. y_{ijl} = a A_{ijk}
+ * x_{kl} + b y_{ijl}
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor and vector multiplication: y = Ax
+ * @param A tensor_CRS tensor
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x, const double &b,
+             tensor::tensor_Dense<double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x, const double &b,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x, const double &b,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const matrix::Dense<double> &x, const double &b,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x, const double &b,
+             tensor::tensor_Dense<double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x, const double &b,
+             view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x, const double &b,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<vector<double>, double> &x, const double &b,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             const double &b, tensor::tensor_Dense<double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             const double &b, view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             const double &b,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<matrix::Dense<double>, double> &x,
+             const double &b,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             const double &b, tensor::tensor_Dense<double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             const double &b, view_tensor_Dense<vector<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             const double &b,
+             view_tensor_Dense<matrix::Dense<double>, double> &y);
+void tensmat(const double &a, const tensor::tensor_CRS<double> &A,
+             const view_Dense<tensor::tensor_Dense<double>, double> &x,
+             const double &b,
+             view_tensor_Dense<tensor::tensor_Dense<double>, double> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const matrix::Dense<float> &x, const float &b,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const matrix::Dense<float> &x, const float &b,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const matrix::Dense<float> &x, const float &b,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const matrix::Dense<float> &x, const float &b,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x, const float &b,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x, const float &b,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x, const float &b,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<vector<float>, float> &x, const float &b,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x, const float &b,
+             tensor::tensor_Dense<float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x, const float &b,
+             view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x, const float &b,
+             view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<matrix::Dense<float>, float> &x, const float &b,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             const float &b, tensor::tensor_Dense<float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             const float &b, view_tensor_Dense<vector<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             const float &b, view_tensor_Dense<matrix::Dense<float>, float> &y);
+void tensmat(const float &a, const tensor::tensor_CRS<float> &A,
+             const view_Dense<tensor::tensor_Dense<float>, float> &x,
+             const float &b,
+             view_tensor_Dense<tensor::tensor_Dense<float>, float> &y);
+/**@}*/
 /**@}*/
 /**@}*/
 } // namespace blas

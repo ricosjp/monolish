@@ -33,6 +33,9 @@ namespace vml {
 funcs=(add sub mul div)
 for func in ${funcs[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "void ${func}(const $arg1 &A, const $arg1 &B, $arg1 &C){tt${func}_core(A, B, C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
@@ -50,6 +53,9 @@ echo ""
 funcs=(add sub mul div)
 for func in ${funcs[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "void ${func}(const $arg1 &A, const $prec alpha, $arg1 &C){st${func}_core(A, alpha, C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void ${func}(const $arg1 &A, const $prec alpha, $arg2 &C){st${func}_core(A, alpha, C);}"
@@ -63,6 +69,9 @@ echo ""
 
 ## tensor-tensor pow
 for prec in double float; do
+  for arg1 in tensor::tensor_CRS\<$prec\>; do
+    echo "void pow(const $arg1 &A, const $arg1 &B, $arg1 &C){ttpow_core(A, B, C);}"
+  done
   for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
@@ -74,6 +83,9 @@ done
 
 ## tensor-scalar pow
 for prec in double float; do
+  for arg1 in tensor::tensor_CRS\<$prec\>; do
+    echo "void pow(const $arg1 &A, const $prec alpha, $arg1 &C){stpow_core(A, alpha, C);}"
+  done
   for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void pow(const $arg1 &A, const $prec alpha, $arg2 &C){stpow_core(A, alpha, C);}"
@@ -86,6 +98,9 @@ echo ""
 
 ## tensor alo
 for prec in double float; do
+  for arg1 in tensor::tensor_CRS\<$prec\>; do
+    echo "void alo(const $arg1 &A, const $prec alpha, const $prec beta, $arg1 &C){talo_core(A, alpha, beta, C);}"
+  done
   for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "void alo(const $arg1 &A, const $prec alpha, const $prec beta, $arg2 &C){talo_core(A, alpha, beta, C);}"
@@ -99,6 +114,9 @@ echo ""
 math=(sin sqrt sinh asin asinh tan tanh atan atanh ceil floor sign reciprocal exp)
 for math in ${math[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "void $math(const $arg1 &A, $arg1 &C){t${math}_core(A, C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void $math(const $arg1 &A, $arg2 &C){t${math}_core(A, C);}"
@@ -115,6 +133,9 @@ detail=(greatest smallest)
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "void ${func}(const $arg1 &A, const $arg1 &B, $arg1 &C){tt${func}_core(A, B, C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
@@ -132,6 +153,9 @@ detail=(greatest smallest)
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "void ${func}(const $arg1 &A, const $prec alpha, $arg1 &C){st${func}_core(A, alpha, C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       for arg2 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
         echo "void ${func}(const $arg1 &A, const $prec alpha, $arg2 &C){st${func}_core(A, alpha, C);}"
@@ -147,6 +171,9 @@ detail=(greatest smallest)
 funcs=(max min)
 for func in ${funcs[@]}; do
   for prec in double float; do
+    for arg1 in tensor::tensor_CRS\<$prec\>; do
+      echo "$prec ${func}(const $arg1 &C){return t${func}_core<$arg1,$prec>(C);}"
+    done
     for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
       echo "$prec ${func}(const $arg1 &C){return t${func}_core<$arg1,$prec>(C);}"
     done

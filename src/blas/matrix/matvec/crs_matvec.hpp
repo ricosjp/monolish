@@ -5,8 +5,8 @@ namespace monolish {
 namespace {
 // double ///////////////////
 template <typename VEC1, typename VEC2>
-void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
-                  bool transA) {
+void Dmatvec_core(const double alpha, const matrix::CRS<double> &A,
+                  const VEC1 &x, const double beta, VEC2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -32,8 +32,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
     auto n = A.get_col();
     auto xn = x.size();
     auto yn = y.size();
-    const double alpha = 1.0;
-    const double beta = 0.0;
     const auto nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
@@ -73,8 +71,6 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
 #if MONOLISH_USE_MKL
     auto m = A.get_row();
     auto n = A.get_col();
-    const double alpha = 1.0;
-    const double beta = 0.0;
 
     sparse_matrix_t mklA;
     struct matrix_descr descrA;
@@ -119,8 +115,8 @@ void Dmatvec_core(const matrix::CRS<double> &A, const VEC1 &x, VEC2 &y,
 
 // float ///////////////////
 template <typename VEC1, typename VEC2>
-void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
-                  bool transA) {
+void Smatvec_core(const float alpha, const matrix::CRS<float> &A, const VEC1 &x,
+                  const float beta, VEC2 &y, bool transA) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -146,8 +142,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
     const auto n = A.get_col();
     auto xn = x.size();
     auto yn = y.size();
-    const float alpha = 1.0;
-    const float beta = 0.0;
     const auto nnz = A.get_nnz();
 
 #pragma omp target data use_device_ptr(xd, yd, vald, rowd, cold)
@@ -187,8 +181,6 @@ void Smatvec_core(const matrix::CRS<float> &A, const VEC1 &x, VEC2 &y,
 #if MONOLISH_USE_MKL
     const auto m = A.get_row();
     const auto n = A.get_col();
-    const float alpha = 1.0;
-    const float beta = 0.0;
 
     sparse_matrix_t mklA;
     struct matrix_descr descrA;

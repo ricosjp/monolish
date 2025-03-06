@@ -13,6 +13,7 @@ for prec in double float; do
       echo "void times(const $prec alpha, const $arg1 &A, $arg2 &C){ times_core<$prec>(alpha, A, C);}"
     done
   done
+  echo "void times(const $prec alpha, const tensor::tensor_CRS<$prec> &A, tensor::tensor_CRS<$prec> &C){ times_core<$prec>(alpha, A, C);}"
 done
 
 echo ""
@@ -25,6 +26,9 @@ for prec in double float; do
         echo "void times_row(const $arg1 &A, const $arg2 &x, $arg3 &C){ times_row_core<$prec>(A, x, C);}"
       done
     done
+  done
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    echo "void times_row(const tensor::tensor_CRS<$prec> &A, const $arg1 &x, tensor::tensor_CRS<$prec> &C){ times_row_core<$prec>(A, x, C);}"
   done
 done
 
@@ -51,6 +55,9 @@ for prec in double float; do
         echo "void times_row(const $arg1 &A, const size_t num, const $arg2 &x, $arg3 &C){ times_row_core<$prec>(A, num, x, C);}"
       done
     done
+  done
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    echo "void times_row(const tensor::tensor_CRS<$prec> &A, const size_t num, const $arg1 &x, tensor::tensor_CRS<$prec> &C){ times_row_core<$prec>(A, num, x, C);}"
   done
 done
 

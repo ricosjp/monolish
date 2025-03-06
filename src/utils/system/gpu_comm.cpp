@@ -345,4 +345,86 @@ template void tensor::tensor_Dense<double>::nonfree_recv();
 template void tensor::tensor_Dense<float>::device_free() const;
 template void tensor::tensor_Dense<double>::device_free() const;
 
+// tensor_CRS ///////////////////////////////////
+// send
+template <typename T> void tensor::tensor_CRS<T>::send() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  const T *vald = begin();
+  const auto nnz = get_nnz();
+
+  if (get_device_mem_stat() == true) {
+#pragma omp target update to(vald [0:nnz])
+  } else {
+#pragma omp target enter data map(to : vald [0:nnz])
+    *gpu_status = true;
+  }
+#endif
+  logger.util_out();
+}
+
+// recv
+template <typename T> void tensor::tensor_CRS<T>::recv() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (get_device_mem_stat() == true) {
+    T *vald = begin();
+    auto nnz = get_nnz();
+
+#pragma omp target exit data map(from : vald [0:nnz])
+    *gpu_status = false;
+  }
+#endif
+  logger.util_out();
+}
+
+// nonfree_recv
+template <typename T> void tensor::tensor_CRS<T>::nonfree_recv() {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (get_device_mem_stat() == true) {
+    T *vald = begin();
+    auto nnz = get_nnz();
+
+#pragma omp target update from(vald [0:nnz])
+  }
+#endif
+  logger.util_out();
+}
+
+// device_free
+template <typename T> void tensor::tensor_CRS<T>::device_free() const {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+
+#if MONOLISH_USE_NVIDIA_GPU
+  if (get_device_mem_stat() == true) {
+    const T *vald = begin();
+    const auto nnz = get_nnz();
+
+#pragma omp target exit data map(release : vald [0:nnz])
+
+    *gpu_status = false;
+  }
+#endif
+  logger.util_out();
+}
+template void tensor::tensor_CRS<float>::send() const;
+template void tensor::tensor_CRS<double>::send() const;
+
+template void tensor::tensor_CRS<float>::recv();
+template void tensor::tensor_CRS<double>::recv();
+
+template void tensor::tensor_CRS<float>::nonfree_recv();
+template void tensor::tensor_CRS<double>::nonfree_recv();
+
+template void tensor::tensor_CRS<float>::device_free() const;
+template void tensor::tensor_CRS<double>::device_free() const;
+
 } // namespace monolish

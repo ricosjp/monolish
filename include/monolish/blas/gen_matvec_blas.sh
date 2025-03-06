@@ -398,6 +398,32 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
+echo "
+/**
+ * \defgroup matvec_dense monolish::blas::matvec (Dense)
+ * @brief Dense matrix and vector multiplication: y = aAx + by
+ * @{
+ */
+/**
+ * @brief Dense matrix and vector multiplication: y = aAx + by
+ * @param A Dense matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: MN
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void matvec(const $prec &a, const matrix::Dense<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y);"
+    done
+  done
+done
+echo "/**@}*/"
+
 ## matvec_* Dense
 for trans in N T; do
     echo "
@@ -421,6 +447,34 @@ for trans in N T; do
         for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
             for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
                 echo "void matvec_$trans(const matrix::Dense<$prec> &A, const $arg1 &x, $arg2 &y);"
+            done
+        done
+    done
+echo "/**@}*/"
+done
+
+for trans in N T; do
+    echo "
+    /**
+    * \defgroup matvec_dense_$trans monolish::blas::matvec_$trans (Dense)
+    * @brief Dense matrix and vector multiplication: y = aA^$trans x + by
+    * @{
+    */
+    /**
+    * @brief Dense matrix and vector multiplication: y = aA^$trans x + by
+    * @param A Dense matrix (size M x N)
+    * @param x monolish vector (size M)
+    * @param y monolish vector (size M)
+    * @note
+    * - # of computation: MN
+    * - Multi-threading: true
+    * - GPU acceleration: true
+    *    - # of data transfer: 0
+    */ "
+    for prec in double float; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+                echo "void matvec_$trans(const $prec &a, const matrix::Dense<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y);"
             done
         done
     done
@@ -454,6 +508,32 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
+echo "
+/**
+ * \defgroup matvec_crs monolish::blas::matvec (CRS)
+ * @brief CRS format sparse matrix and vector multiplication: y = aAx + by
+ * @{
+ */
+/**
+ * @brief CRS format sparse matrix and vector multiplication: y = aAx + by
+ * @param A CRS matrix (size M x N)
+ * @param x monolish vector (size M)
+ * @param y monolish vector (size M)
+ * @note
+ * - # of computation: 2nnz
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+    for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      echo "void matvec(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y);"
+    done
+  done
+done
+echo "/**@}*/"
+
 ## matvec_* CRS
 for trans in N T; do
     echo "
@@ -477,6 +557,34 @@ for trans in N T; do
         for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
             for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
                 echo "void matvec_$trans(const matrix::CRS<$prec> &A, const $arg1 &x, $arg2 &y);"
+            done
+        done
+    done
+echo "/**@}*/"
+done
+
+for trans in N T; do
+    echo "
+    /**
+    * \defgroup matvec_crs_$trans monolish::blas::matvec_$trans (CRS)
+    * @brief CRS format sparse matrix and vector multiplication: y = aA^$trans x + by
+    * @{
+    */
+    /**
+    * @brief CRS format sparse matrix and vector multiplication: y = aA^$trans x + by
+    * @param A CRS matrix (size M x N)
+    * @param x monolish vector (size M)
+    * @param y monolish vector (size M)
+    * @note
+    * - # of computation: 2nnz
+    * - Multi-threading: true
+    * - GPU acceleration: true
+    *    - # of data transfer: 0
+    */ "
+    for prec in double float; do
+        for arg1 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+            for arg2 in vector\<$prec\> view1D\<vector\<$prec\>,$prec\> view1D\<matrix::Dense\<$prec\>,$prec\> view1D\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+                echo "void matvec_$trans(const $prec &a, const matrix::CRS<$prec> &A, const $arg1 &x, const $prec &b, $arg2 &y);"
             done
         done
     done

@@ -206,6 +206,29 @@ template <typename T> bool test() {
     return false;
   }
 
+  monolish::tensor::tensor_CRS<T> addr_CRS(addr_COO);
+
+  monolish::vector<T> x(N, 10);
+
+  monolish::tensor::tensor_Dense<T> addry({N});
+
+  monolish::util::send(x, addry, addr_CRS);
+
+  monolish::blas::tensvec(addr_CRS, x, addry);
+
+  if (addry[0] != 60) {
+    addry.print_all();
+    return false;
+  }
+  if (addry[1] != 90) {
+    addry.print_all();
+    return false;
+  }
+  if (addry[2] != 210) {
+    addry.print_all();
+    return false;
+  }
+
   return true;
 }
 

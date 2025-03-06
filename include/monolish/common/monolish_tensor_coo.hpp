@@ -41,7 +41,7 @@ public:
   /**
    * @brief alloced matrix size
    */
-  std::size_t alloc_nnz = 0;
+  size_t alloc_nnz = 0;
 
   /**
    * @brief matrix create flag;
@@ -157,6 +157,44 @@ public:
    **/
   void print_all(const std::string filename) const;
 
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void send() const;
+
+  /**
+   * @brief recv. data to GPU, and free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void recv();
+
+  /**
+   * @brief recv. data to GPU (w/o free)
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void nonfree_recv();
+
+  /**
+   * @brief free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   **/
+  void device_free() const;
+
   // TODO
   /**
    * @brief Memory data space required by the matrix
@@ -245,6 +283,15 @@ public:
    * - GPU acceleration: false
    **/
   [[nodiscard]] std::vector<size_t> get_shape() const { return shape; }
+
+  /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
 
   /**
    * @brief get # of non-zeros
