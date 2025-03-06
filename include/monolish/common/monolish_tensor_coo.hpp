@@ -8,6 +8,7 @@ template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
 namespace tensor {
 template <typename Float> class tensor_Dense;
+template <typename Float> class tensor_CRS;
 template <typename Float> class tensor_COO {
 private:
   /**
@@ -97,6 +98,29 @@ public:
    * - GPU acceleration: false
    **/
   tensor_COO(const tensor::tensor_Dense<Float> &tens) {
+    val_create_flag = true;
+    convert(tens);
+  }
+
+  /**
+   * @brief Create tensor_COO tensor from tensor_CRS tensor
+   * @param tens input tensor_CRS tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void convert(const tensor::tensor_CRS<Float> &tens);
+
+  /**
+   * @brief Create tensor_COO tensor from tensor_CRS tensor
+   * @param tens input tensor_CRS tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  tensor_COO(const tensor::tensor_CRS<Float> &tens) {
     val_create_flag = true;
     convert(tens);
   }

@@ -1,8 +1,7 @@
 #include "../../test_utils.hpp"
 #include "monolish_blas.hpp"
 
-template <typename T> void ans_tanh(monolish::tensor::tensor_Dense<T> &A) {
-
+template <typename TENS> void ans_tanh(TENS &A) {
   for (size_t i = 0; i < A.get_nnz(); i++) {
     A.begin()[i] = std::tanh(A.begin()[i]);
   }

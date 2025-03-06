@@ -13,7 +13,7 @@ template <typename Float> class tensor_CRS {
 private:
   std::vector<size_t> shape;
 
-  mutable bool gpu_status = false;
+  mutable std::shared_ptr<bool> gpu_status = std::make_shared<bool>(false);
 
   size_t structure_hash;
 
@@ -32,18 +32,17 @@ public:
 
   std::vector<std::vector<int>> col_inds;
 
-  tensor_CRS()
-      : shape(), gpu_status(false), row_ptrs(), col_inds(), val_nnz(0) {
+  tensor_CRS() : shape(), row_ptrs(), col_inds(), val_nnz(0) {
     val_create_flag = true;
   }
 
   tensor_CRS(const std::vector<size_t> &shape_)
-      : shape(shape_), gpu_status(false), row_ptrs(), col_inds(), val_nnz(0) {
+      : shape(shape_), row_ptrs(), col_inds(), val_nnz(0) {
     val_create_flag = true;
   }
 
   tensor_CRS(const std::initializer_list<size_t> &shape_)
-      : shape(shape_), gpu_status(false), row_ptrs(), col_inds(), val_nnz(0) {
+      : shape(shape_), row_ptrs(), col_inds(), val_nnz(0) {
     val_create_flag = true;
   }
 
@@ -214,7 +213,15 @@ public:
    * @brief true: sended, false: not send
    * @return gpu status
    * **/
-  [[nodiscard]] bool get_device_mem_stat() const { return gpu_status; }
+  [[nodiscard]] bool get_device_mem_stat() const { return *gpu_status; }
+
+  /**
+   * @brief gpu status shared pointer
+   * @return gpu status shared pointer
+   */
+  [[nodiscard]] std::shared_ptr<bool> get_gpu_status() const {
+    return gpu_status;
+  }
 
   ~tensor_CRS() {
     if (val_create_flag) {
