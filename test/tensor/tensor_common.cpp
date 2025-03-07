@@ -371,6 +371,15 @@ template <typename T> bool reshape_test() {
   return true;
 }
 
+template <typename T> bool convert_test() {
+  monolish::tensor::tensor_COO<T> seedA =
+      get_random_structure_tensor<T>(3, 3, 3);
+  monolish::tensor::tensor_CRS<T> A(seedA);
+  monolish::tensor::tensor_COO<T> AA(A);
+
+  return seedA == AA;
+}
+
 int main(int argc, char **argv) {
 
   print_build_info();
@@ -401,6 +410,13 @@ int main(int argc, char **argv) {
   }
   if (!reshape_test<float>()) {
     return 4;
+  }
+
+  if (!convert_test<double>()) {
+    return 5;
+  }
+  if (!convert_test<float>()) {
+    return 5;
   }
 
   return 0;

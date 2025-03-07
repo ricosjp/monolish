@@ -1233,10 +1233,11 @@ void tenssub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
  * - GPU acceleration: true
  *    - # of data transfer: 0
  */
-void matsub(const tensor::tensor_CRS<double> &A,
-            const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C);
-void matsub(const tensor::tensor_CRS<float> &A,
-            const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C);
+void tenssub(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_CRS<double> &B,
+             tensor::tensor_CRS<double> &C);
+void tenssub(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C);
 /**@}*/
 
 /**

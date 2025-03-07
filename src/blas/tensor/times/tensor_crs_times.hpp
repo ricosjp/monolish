@@ -41,7 +41,7 @@ void times_row_core(const tensor::tensor_CRS<T> &A, const VEC &x,
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
     const auto *rowd = A.row_ptrs[d].data();
     const auto *cold = A.col_inds[d].data();
-    const auto n = A.row_ptrs[d].size();
+    const int n = (int)A.row_ptrs[d].size() - 1;
 
     const auto *xd = x.begin();
 
@@ -65,7 +65,7 @@ void times_row_core(const tensor::tensor_CRS<T> &A, const VEC &x,
         }
       }
     }
-    nsum += n;
+    nsum += A.col_inds[d].size();
   }
 
   logger.func_out();

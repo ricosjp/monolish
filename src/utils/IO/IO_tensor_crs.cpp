@@ -34,7 +34,7 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
       const auto *indexd = col_inds[d].data();
       const auto *ptrd = row_ptrs[d].data();
 #pragma omp target
-      for (size_t i = 0; i < row_ptrs[d].size(); i++) {
+      for (size_t i = 0; i + 1 < row_ptrs[d].size(); i++) {
         for (size_t j = ptrd[i]; j < ptrd[i + 1]; j++) {
           for (size_t k = 0; k < pos_2.size(); ++k) {
             printf("%lu ", pos_2[k] + 1);
@@ -57,7 +57,7 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
         pos_2[k] = d_copy % shape[k];
         d_copy /= shape[k];
       }
-      for (size_t i = 0; i < row_ptrs[d].size(); i++) {
+      for (size_t i = 0; i + 1 < row_ptrs[d].size(); i++) {
         for (auto j = row_ptrs[d][i]; j < row_ptrs[d][i + 1]; j++) {
           for (size_t k = 0; k < pos_2.size(); ++k) {
             std::cout << pos_2[k] + 1 << " ";

@@ -45,7 +45,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
 
   val_create_flag = true;
   resize(shape);
-  std::copy(value, value + get_nnz(), data());
+  std::copy(value, value + get_nnz(), begin());
   logger.util_out();
 }
 
@@ -63,7 +63,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
 
   val_create_flag = true;
   resize(shape);
-  std::copy(value.begin(), value.end(), data());
+  std::copy(value.begin(), value.end(), begin());
   logger.util_out();
 }
 
@@ -71,6 +71,28 @@ template tensor_Dense<double>::tensor_Dense(const std::vector<size_t> &shape,
                                             const std::vector<double> &value);
 template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
                                            const std::vector<float> &value);
+
+template <typename T>
+tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
+                              const std::shared_ptr<T> &value) {
+  Logger &logger = Logger::get_instance();
+  logger.util_in(monolish_func);
+  this->shape = shape;
+
+  val_create_flag = false;
+  this->val = value;
+  size_t N = 1;
+  for (auto n : shape) {
+    N *= n;
+  }
+  this->val_nnz = N;
+  logger.util_out();
+}
+
+template tensor_Dense<double>::tensor_Dense(
+    const std::vector<size_t> &shape, const std::shared_ptr<double> &value);
+template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
+                                           const std::shared_ptr<float> &value);
 
 template <typename T>
 tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
@@ -87,7 +109,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    data()[i] = rand(mt);
+    begin()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -111,7 +133,7 @@ tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
   std::uniform_real_distribution<> rand(min, max);
 
   for (size_t i = 0; i < get_nnz(); i++) {
-    data()[i] = rand(mt);
+    begin()[i] = rand(mt);
   }
 
   logger.util_out();
@@ -135,10 +157,10 @@ tensor_Dense<T>::tensor_Dense(const tensor_Dense<T> &tens) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (tens.get_device_mem_stat()) {
     send();
-    internal::vcopy(get_nnz(), tens.data(), data(), true);
+    internal::vcopy(get_nnz(), tens.begin(), begin(), true);
   }
 #endif
-  internal::vcopy(get_nnz(), tens.data(), data(), false);
+  internal::vcopy(get_nnz(), tens.begin(), begin(), false);
 
   logger.util_out();
 }
@@ -157,10 +179,10 @@ tensor_Dense<T>::tensor_Dense(const tensor_Dense<T> &tens, T value) {
 #if MONOLISH_USE_NVIDIA_GPU
   if (tens.get_device_mem_stat()) {
     send();
-    internal::vbroadcast(get_nnz(), value, data(), true);
+    internal::vbroadcast(get_nnz(), value, begin(), true);
   }
 #endif
-  internal::vbroadcast(get_nnz(), value, data(), false);
+  internal::vbroadcast(get_nnz(), value, begin(), false);
 
   logger.util_out();
 }

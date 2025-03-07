@@ -160,6 +160,15 @@ public:
   [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] const std::shared_ptr<Float> get_val() const { return val; }
+
+  /**
    * @brief get # of non-zeros
    * @note
    * - # of computation: 1

@@ -184,6 +184,18 @@ public:
   /**
    * @brief Allocate tensor_Dense tensor
    * @param shape shape of tensor
+   * @param value value std::vector
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   */
+  tensor_Dense(const std::vector<size_t> &shape,
+               const std::shared_ptr<Float> &value);
+
+  /**
+   * @brief Allocate tensor_Dense tensor
+   * @param shape shape of tensor
    * @param min rand min
    * @param max rand max
    * @note

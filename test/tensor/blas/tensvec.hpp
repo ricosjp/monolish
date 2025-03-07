@@ -65,6 +65,25 @@ bool test_send_tensvec(const size_t M, const size_t N, const size_t L,
   return test_send_tensvec_core(M, N, L, tol, AA, vec, CC, A, vec, C);
 }
 
+template <typename MAT, typename T>
+bool test_send_tensvec_crs(const size_t M, const size_t N, const size_t L,
+                           double tol) {
+
+  monolish::tensor::tensor_COO<T> seedA =
+      get_random_structure_tensor<T>(M, N, L);
+  monolish::tensor::tensor_COO<T> seedC = get_random_structure_tensor<T>(M, N);
+
+  MAT A(seedA);                               // M*N tensor
+  monolish::tensor::tensor_Dense<T> C(seedC); // M*N tensor
+
+  monolish::tensor::tensor_Dense<T> AA(seedA);
+  monolish::tensor::tensor_Dense<T> CC(seedC);
+
+  monolish::vector<T> vec(L, 0.0, 1.0, test_random_engine());
+
+  return test_send_tensvec_core(M, N, L, tol, AA, vec, CC, A, vec, C);
+}
+
 template <typename T, typename TENS_A, typename VEC, std::size_t K = 0,
           typename... Tp>
 inline typename std::enable_if<K == sizeof...(Tp), bool>::type
@@ -228,6 +247,25 @@ bool test_tensvec(const size_t M, const size_t N, const size_t L, double tol) {
 
   MAT A(seedA); // M*N tensor
   MAT C(seedC); // M*N tensor
+
+  monolish::tensor::tensor_Dense<T> AA(seedA);
+  monolish::tensor::tensor_Dense<T> CC(seedC);
+
+  monolish::vector<T> vec(L, 0.0, 1.0, test_random_engine());
+
+  return test_tensvec_core(M, N, L, tol, AA, vec, CC, A, vec, C);
+}
+
+template <typename MAT, typename T>
+bool test_tensvec_crs(const size_t M, const size_t N, const size_t L,
+                      double tol) {
+
+  monolish::tensor::tensor_COO<T> seedA =
+      get_random_structure_tensor<T>(M, N, L);
+  monolish::tensor::tensor_COO<T> seedC = get_random_structure_tensor<T>(M, N);
+
+  MAT A(seedA);                               // M*N tensor
+  monolish::tensor::tensor_Dense<T> C(seedC); // M*N tensor
 
   monolish::tensor::tensor_Dense<T> AA(seedA);
   monolish::tensor::tensor_Dense<T> CC(seedC);

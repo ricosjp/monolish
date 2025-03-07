@@ -12,9 +12,10 @@ bool tensor_COO<T>::equal(const tensor_COO<T> &tens,
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);
 
-  if (shape.size() != tens.shape.size())
+  if (shape.size() != tens.shape.size()) {
     logger.util_out();
-  { return false; }
+    return false;
+  }
   for (size_t i = 0; i < shape.size(); ++i) {
     if (shape[i] != tens.shape[i]) {
       logger.util_out();

@@ -32,8 +32,9 @@ template <typename T> void tensor_CRS<T>::compute_hash() {
   structure_hash = 0;
 
   for (size_t d = 0; d < row_ptrs.size(); ++d) {
-    structure_hash = internal::vhash(row_ptrs[d].size(), row_ptrs[d].data(),
-                                     shape[0] | structure_hash, get_device_mem_stat());
+    structure_hash =
+        internal::vhash(row_ptrs[d].size(), row_ptrs[d].data(),
+                        shape[0] | structure_hash, get_device_mem_stat());
     structure_hash = internal::vhash(col_inds[d].size(), col_inds[d].data(),
                                      structure_hash, get_device_mem_stat());
   }

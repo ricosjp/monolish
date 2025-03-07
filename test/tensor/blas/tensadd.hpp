@@ -38,15 +38,13 @@ bool test_send_tensadd(const size_t M, const size_t N, const size_t L,
                        double tol) {
   monolish::tensor::tensor_COO<T> seedA =
       get_random_structure_tensor<T>(M, N, L);
-  monolish::tensor::tensor_COO<T> seedB =
-      get_random_structure_tensor<T>(M, N, L);
 
   MAT_A A(seedA);
-  MAT_B B(seedB);
+  MAT_B B(seedA);
   MAT_C C(seedA);
 
   monolish::tensor::tensor_Dense<T> AA(seedA);
-  monolish::tensor::tensor_Dense<T> BB(seedB);
+  monolish::tensor::tensor_Dense<T> BB(seedA);
   monolish::tensor::tensor_Dense<T> CC(seedA);
 
   return test_send_tensadd_core(M, N, L, tol, AA, BB, CC, A, B, C);
@@ -205,15 +203,13 @@ template <typename MAT_A, typename MAT_B, typename MAT_C, typename T>
 bool test_tensadd(const size_t M, const size_t N, const size_t L, double tol) {
   monolish::tensor::tensor_COO<T> seedA =
       get_random_structure_tensor<T>(M, N, L);
-  monolish::tensor::tensor_COO<T> seedB =
-      get_random_structure_tensor<T>(M, N, L);
 
   MAT_A A(seedA);
-  MAT_B B(seedB);
+  MAT_B B(seedA);
   MAT_C C(seedA);
 
   monolish::tensor::tensor_Dense<T> AA(seedA);
-  monolish::tensor::tensor_Dense<T> BB(seedB);
+  monolish::tensor::tensor_Dense<T> BB(seedA);
   monolish::tensor::tensor_Dense<T> CC(seedA);
 
   return test_tensadd_core(M, N, L, tol, AA, BB, CC, A, B, C);

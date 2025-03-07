@@ -307,7 +307,7 @@ echo "
  *    - # of data transfer: 0
 */ "
 for prec in double float; do
-  echo "void matsub(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C);"
+  echo "void tenssub(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C);"
 done
 echo "/**@}*/"
 

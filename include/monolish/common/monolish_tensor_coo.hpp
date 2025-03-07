@@ -383,7 +383,7 @@ public:
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(val_nnz, N);
       for (size_t i = 0; i < copy_size; ++i) {
-        tmp.get()[i] = data()[i];
+        tmp.get()[i] = begin()[i];
       }
       for (size_t i = copy_size; i < N; ++i) {
         tmp.get()[i] = Val;

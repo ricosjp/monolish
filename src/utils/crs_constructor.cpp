@@ -115,7 +115,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   set_col(N);
 
   row_ptr.resize(M + 1);
-  col_ind.resize(col_ind.size());
+  col_ind.resize(colind.size());
   val_create_flag = false;
   this->val = value_;
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());

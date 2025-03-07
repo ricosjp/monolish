@@ -25,10 +25,15 @@ void tensor_CRS_Dense_Dtensmat_core(const double &a,
   Ashape[Ashape.size() - 1] = col;
   assert(util::is_same_device_mem_stat(A, B, C));
 
+  size_t nsum = 0;
+
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d], A.val);
-    matrix::Dense<double> Cmat(row, col, C.get_val());
-    Cmat.set_first(C.get_offset() + d * row * col);
+    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d],
+                             A.get_val());
+    Amat.set_first(A.get_offset() + nsum);
+    nsum += A.col_inds[d].size();
+    matrix::Dense<double> Cmat(row, B.get_col(), C.get_val());
+    Cmat.set_first(C.get_offset() + d * row * B.get_col());
     CRS_Dense_Dmatmul_core(a, Amat, B, b, Cmat);
   }
 
@@ -55,10 +60,15 @@ void tensor_CRS_Dense_Stensmat_core(const float &a,
   Ashape[Ashape.size() - 1] = col;
   assert(util::is_same_device_mem_stat(A, B, C));
 
+  size_t nsum = 0;
+
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d], A.val);
-    matrix::Dense<float> Cmat(row, col, C.get_val());
-    Cmat.set_first(C.get_offset() + d * row * col);
+    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d],
+                            A.get_val());
+    Amat.set_first(A.get_offset() + nsum);
+    nsum += A.col_inds[d].size();
+    matrix::Dense<float> Cmat(row, B.get_col(), C.get_val());
+    Cmat.set_first(C.get_offset() + d * row * B.get_col());
     CRS_Dense_Smatmul_core(a, Amat, B, b, Cmat);
   }
 

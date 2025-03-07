@@ -25,7 +25,7 @@ template <typename T> void tensor_COO<T>::print_all(bool force_cpu) const {
     for (auto j = decltype(index[i].size()){0}; j < index[i].size(); j++) {
       std::cout << index[i][j] + 1 << " ";
     }
-    std::cout << data()[i] << std::endl;
+    std::cout << begin()[i] << std::endl;
   }
 
   logger.util_out();
@@ -45,7 +45,7 @@ void tensor_COO<T>::print_all(std::string filename) const {
     for (auto j = decltype(index[i].size()){0}; j < index[i].size(); j++) {
       out << index[i][j] + 1 << " ";
     }
-    out << data()[i] << std::endl;
+    out << begin()[i] << std::endl;
   }
   logger.util_out();
 }
