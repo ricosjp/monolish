@@ -146,7 +146,7 @@ CRS<T>::CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
   resize(value.size());
   std::copy(rowptr.data(), rowptr.data() + (M + 1), row_ptr.begin());
   std::copy(colind.data(), colind.data() + value.size(), col_ind.begin());
-  std::copy(value.data(), value.data() + value.size(), data());
+  std::copy(value.data(), value.data() + value.size(), begin());
 
   if (value.get_device_mem_stat() == true) {
 #if MONOLISH_USE_NVIDIA_GPU

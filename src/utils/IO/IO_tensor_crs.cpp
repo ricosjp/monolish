@@ -21,9 +21,10 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const T *vald = data();
+    const T *vald = begin();
 
     std::vector<int> pos_2(shape.size() - 2);
+    int nz = 0;
     for (size_t d = 0; d < row_ptrs.size(); ++d) {
       size_t d_copy = d;
       for (int k = (int)shape.size() - 3; k >= 0; --k) {
@@ -36,9 +37,10 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
       for (size_t i = 0; i < row_ptrs[d].size(); i++) {
         for (size_t j = ptrd[i]; j < ptrd[i + 1]; j++) {
           for (size_t k = 0; k < pos_2.size(); ++k) {
-            printf("%lu ", pos_2[k]);
+            printf("%lu ", pos_2[k] + 1);
           }
-          printf("%lu %d %f\n", i + 1, indexd[j] + 1, vald[j]);
+          printf("%lu %d %f\n", i + 1, indexd[j] + 1, vald[nz]);
+          nz++;
         }
       }
     }
@@ -48,6 +50,7 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
 #endif
   } else {
     std::vector<int> pos_2(shape.size() - 2);
+    int nz = 0;
     for (size_t d = 0; d < row_ptrs.size(); ++d) {
       size_t d_copy = d;
       for (int k = (int)shape.size() - 3; k >= 0; --k) {
@@ -57,10 +60,11 @@ template <typename T> void tensor_CRS<T>::print_all(bool force_cpu) const {
       for (size_t i = 0; i < row_ptrs[d].size(); i++) {
         for (auto j = row_ptrs[d][i]; j < row_ptrs[d][i + 1]; j++) {
           for (size_t k = 0; k < pos_2.size(); ++k) {
-            std::cout << pos_2[k] << " ";
+            std::cout << pos_2[k] + 1 << " ";
           }
-          std::cout << i + 1 << " " << col_inds[d][j] + 1 << " " << data()[j]
+          std::cout << i + 1 << " " << col_inds[d][j] + 1 << " " << begin()[nz]
                     << std::endl;
+          nz++;
         }
       }
     }

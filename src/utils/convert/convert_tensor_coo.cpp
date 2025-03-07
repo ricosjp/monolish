@@ -15,25 +15,25 @@ void tensor_COO<T>::convert(const tensor::tensor_CRS<T> &crs) {
   set_shape(crs.get_shape());
   val_create_flag = true;
   resize(crs.get_nnz());
-  index.resize(crs.get_nnz());
+  index.clear();
 
   std::vector<size_t> shape = crs.get_shape();
   int dim = shape.size();
   std::vector<size_t> pos(dim);
   size_t nz = 0;
 
-  for (auto d = 0; d < crs.col_inds.size(); ++d) {
+  for (size_t d = 0; d < crs.col_inds.size(); ++d) {
     int d_copy = d;
     for (int k = dim - 3; k >= 0; --k) {
       pos[k] = d_copy % shape[k];
       d_copy /= shape[k];
     }
-    for (auto i = 0; i < crs.row_ptrs[d].size(); ++i) {
+    for (int i = 0; i < crs.row_ptrs[d].size() - 1; ++i) {
       for (size_t j = crs.row_ptrs[d][i]; j < crs.row_ptrs[d][i + 1]; ++j) {
         pos[dim - 2] = i;
         pos[dim - 1] = crs.col_inds[d][j];
         index.push_back(pos);
-        data()[nz] = crs.begin()[nz];
+        begin()[nz] = crs.begin()[nz];
         nz++;
       }
     }

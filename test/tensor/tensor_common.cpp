@@ -216,6 +216,8 @@ template <typename T> bool test() {
 
   monolish::blas::tensvec(addr_CRS, x, addry);
 
+  monolish::util::recv(addry);
+
   if (addry[0] != 60) {
     addry.print_all();
     return false;

@@ -23,11 +23,11 @@ void tensor_CRS<T>::convert(const tensor::tensor_COO<T> &coo) {
   row_ptrs.resize(upper_d);
   col_inds.resize(upper_d);
   for (size_t i = 0; i < coo.get_nnz(); ++i) {
-    data()[i] = coo.data()[i];
+    begin()[i] = coo.begin()[i];
   }
 
   for (size_t ud = 0; ud < upper_d; ++ud) {
-    row_ptrs[ud].resize(shape[dim - 2]);
+    row_ptrs[ud].resize(shape[dim - 2] + 1);
   }
 
   std::vector<size_t> c_rows(upper_d);
@@ -74,7 +74,7 @@ void tensor_CRS<T>::convert(const tensor::tensor_CRS<T> &tensor_crs) {
   row_ptrs.resize(tensor_crs.row_ptrs.size());
   for (std::size_t i = 0; i < tensor_crs.col_inds.size(); ++i) {
     col_inds[i].resize(tensor_crs.col_inds[i].size());
-    row_ptrs[i].resize(tensor_crs.row_ptrs[i].size());
+    row_ptrs[i].resize(tensor_crs.row_ptrs[i].size() + 1);
   }
   val_create_flag = true;
 
