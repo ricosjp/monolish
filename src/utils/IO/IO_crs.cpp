@@ -20,7 +20,7 @@ template <typename T> void CRS<T>::print_all(bool force_cpu) const {
 
   if (get_device_mem_stat() == true && force_cpu == false) {
 #if MONOLISH_USE_NVIDIA_GPU
-    const T *vald = data();
+    const T *vald = begin();
     const auto *indexd = col_ind.data();
     const auto *ptrd = row_ptr.data();
 

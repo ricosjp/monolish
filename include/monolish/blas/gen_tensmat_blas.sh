@@ -76,6 +76,64 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
+
+## tensmat tensor_CRS
+echo "
+/**
+ * \defgroup tensmat_dense monolish::blas::tensmat (tensor_CRS)
+ * @brief tensor_CRS tensor and matrix multiplication: y = Ax
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor and matrix multiplication: ex. y_{ijl} = A_{ijk} x_{kl}
+ * @param A tensor_CRS tensor
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in tensor::tensor_CRS\<$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tensmat(const $arg1 &A, const $arg2 &x, $arg3 &y);"
+      done
+    done
+  done
+done
+echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup tensmat_dense monolish::blas::tensmat (tensor_CRS)
+ * @brief tensor_CRS tensor and matrix multiplication: ex. y_{ijl} = a A_{ijk} x_{kl} + b y_{ijl}
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor and vector multiplication: y = Ax
+ * @param A tensor_CRS tensor 
+ * @param x Dense matrix
+ * @param y tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */ "
+for prec in double float; do
+  for arg1 in tensor::tensor_CRS\<$prec\>; do
+    for arg2 in matrix::Dense\<$prec\> view_Dense\<vector\<$prec\>,$prec\> view_Dense\<matrix::Dense\<$prec\>,$prec\> view_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+      for arg3 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
+        echo "void tensmat(const $prec &a, const $arg1 &A, const $arg2 &x, const $prec &b, $arg3 &y);"
+      done
+    done
+  done
+done
+echo "/**@}*/"
+
 echo "/**@}*/"
 echo "/**@}*/"
 echo "}"

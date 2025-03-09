@@ -78,6 +78,30 @@ void ans_tensmul(const T &a, const monolish::tensor::tensor_Dense<T> &A,
   }
 }
 
+template <typename T, typename TENS_B, typename TENS_C>
+bool test_send_tensmul1_core(const size_t M, const size_t N, const size_t L,
+                             const size_t J, const size_t K, double tol,
+                             monolish::tensor::tensor_Dense<T> &AA,
+                             monolish::tensor::tensor_Dense<T> &BB,
+                             monolish::tensor::tensor_Dense<T> &CC,
+                             monolish::tensor::tensor_CRS<T> &A, TENS_B &B,
+                             TENS_C &C) {
+  B = BB;
+  C = CC;
+
+  ans_tensmul(AA, BB, CC);
+  monolish::tensor::tensor_COO<T> ansC(CC);
+
+  monolish::util::send(A, B, C);
+  monolish::blas::tensmul(A, B, C);
+  monolish::util::recv(A, B, C);
+
+  monolish::tensor::tensor_COO<T> resultC(C);
+
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
+                      ansC.get_nnz(), tol);
+}
+
 template <typename T, typename TENS_A, typename TENS_B, typename TENS_C>
 bool test_send_tensmul1_core(const size_t M, const size_t N, const size_t L,
                              const size_t J, const size_t K, double tol,
@@ -94,6 +118,31 @@ bool test_send_tensmul1_core(const size_t M, const size_t N, const size_t L,
 
   monolish::util::send(A, B, C);
   monolish::blas::tensmul(A, B, C);
+  monolish::util::recv(A, B, C);
+
+  monolish::tensor::tensor_COO<T> resultC(C);
+
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
+                      ansC.get_nnz(), tol);
+}
+
+template <typename T, typename TENS_B, typename TENS_C>
+bool test_send_tensmul2_core(const size_t M, const size_t N, const size_t L,
+                             const size_t J, const size_t K, const T a,
+                             const T b, double tol,
+                             monolish::tensor::tensor_Dense<T> &AA,
+                             monolish::tensor::tensor_Dense<T> &BB,
+                             monolish::tensor::tensor_Dense<T> &CC,
+                             monolish::tensor::tensor_CRS<T> &A, TENS_B &B,
+                             TENS_C &C) {
+  B = BB;
+  C = CC;
+
+  ans_tensmul(a, AA, BB, b, CC);
+  monolish::tensor::tensor_COO<T> ansC(CC);
+
+  monolish::util::send(A, B, C);
+  monolish::blas::tensmul(a, A, B, b, C);
   monolish::util::recv(A, B, C);
 
   monolish::tensor::tensor_COO<T> resultC(C);
@@ -308,6 +357,28 @@ bool test_send_tensmul_view(const size_t M, const size_t N, const size_t L,
                                       Cs);
 }
 
+template <typename T, typename TENS_B, typename TENS_C>
+bool test_tensmul1_core(const size_t M, const size_t N, const size_t L,
+                        const size_t J, const size_t K, double tol,
+                        monolish::tensor::tensor_Dense<T> &AA,
+                        monolish::tensor::tensor_Dense<T> &BB,
+                        monolish::tensor::tensor_Dense<T> &CC,
+                        monolish::tensor::tensor_CRS<T> &A, TENS_B &B,
+                        TENS_C &C) {
+  B = BB;
+  C = CC;
+
+  ans_tensmul(AA, BB, CC);
+  monolish::tensor::tensor_COO<T> ansC(CC);
+
+  monolish::blas::tensmul(A, B, C);
+
+  monolish::tensor::tensor_COO<T> resultC(C);
+
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
+                      ansC.get_nnz(), tol);
+}
+
 template <typename T, typename TENS_A, typename TENS_B, typename TENS_C>
 bool test_tensmul1_core(const size_t M, const size_t N, const size_t L,
                         const size_t J, const size_t K, double tol,
@@ -323,6 +394,30 @@ bool test_tensmul1_core(const size_t M, const size_t N, const size_t L,
   monolish::tensor::tensor_COO<T> ansC(CC);
 
   monolish::blas::tensmul(A, B, C);
+
+  monolish::tensor::tensor_COO<T> resultC(C);
+
+  return ans_check<T>(__func__, A.type(), resultC.begin(), ansC.begin(),
+                      ansC.get_nnz(), tol);
+}
+
+template <typename T, typename TENS_B, typename TENS_C>
+bool test_tensmul2_core(const size_t M, const size_t N, const size_t L,
+                        const size_t J, const size_t K, const T a, const T b,
+                        double tol, monolish::tensor::tensor_Dense<T> &AA,
+                        monolish::tensor::tensor_Dense<T> &BB,
+                        monolish::tensor::tensor_Dense<T> &CC,
+                        monolish::tensor::tensor_CRS<T> &A, TENS_B &B,
+                        TENS_C &C) {
+  B = BB;
+  C = CC;
+
+  ans_tensmul(a, AA, BB, b, CC);
+  monolish::tensor::tensor_COO<T> ansC(CC);
+
+  monolish::util::send(A, B, C);
+  monolish::blas::tensmul(a, A, B, b, C);
+  monolish::util::recv(A, B, C);
 
   monolish::tensor::tensor_COO<T> resultC(C);
 

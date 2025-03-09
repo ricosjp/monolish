@@ -1,8 +1,7 @@
 #include "../../test_utils.hpp"
 #include "monolish_blas.hpp"
 
-template <typename T> void ans_sqrt(monolish::tensor::tensor_Dense<T> &A) {
-
+template <typename TENS> void ans_sqrt(TENS &A) {
   for (size_t i = 0; i < A.get_nnz(); i++) {
     A.begin()[i] = std::sqrt(A.begin()[i]);
   }

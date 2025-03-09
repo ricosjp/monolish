@@ -27,6 +27,10 @@
 namespace monolish {
 namespace vml {
 
+void add(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttadd_core(A, B, C);
+}
 void add(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -345,6 +349,10 @@ void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttadd_core(A, B, C);
+}
+void add(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttadd_core(A, B, C);
 }
 void add(const tensor::tensor_Dense<float> &A,
@@ -663,6 +671,10 @@ void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttadd_core(A, B, C);
 }
+void sub(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttsub_core(A, B, C);
+}
 void sub(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -981,6 +993,10 @@ void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttsub_core(A, B, C);
+}
+void sub(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttsub_core(A, B, C);
 }
 void sub(const tensor::tensor_Dense<float> &A,
@@ -1299,6 +1315,10 @@ void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttsub_core(A, B, C);
 }
+void mul(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttmul_core(A, B, C);
+}
 void mul(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -1617,6 +1637,10 @@ void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttmul_core(A, B, C);
+}
+void mul(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttmul_core(A, B, C);
 }
 void mul(const tensor::tensor_Dense<float> &A,
@@ -1935,6 +1959,10 @@ void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttmul_core(A, B, C);
 }
+void div(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttdiv_core(A, B, C);
+}
 void div(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -2253,6 +2281,10 @@ void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttdiv_core(A, B, C);
+}
+void div(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttdiv_core(A, B, C);
 }
 void div(const tensor::tensor_Dense<float> &A,
@@ -2572,6 +2604,10 @@ void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   ttdiv_core(A, B, C);
 }
 
+void add(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stadd_core(A, alpha, C);
+}
 void add(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
   stadd_core(A, alpha, C);
@@ -2640,6 +2676,10 @@ void add(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   stadd_core(A, alpha, C);
 }
+void add(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
+  stadd_core(A, alpha, C);
+}
 void add(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C) {
   stadd_core(A, alpha, C);
@@ -2705,6 +2745,10 @@ void add(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          const float alpha,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   stadd_core(A, alpha, C);
+}
+void sub(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stsub_core(A, alpha, C);
 }
 void sub(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
@@ -2774,6 +2818,10 @@ void sub(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   stsub_core(A, alpha, C);
 }
+void sub(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
+  stsub_core(A, alpha, C);
+}
 void sub(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C) {
   stsub_core(A, alpha, C);
@@ -2839,6 +2887,10 @@ void sub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          const float alpha,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   stsub_core(A, alpha, C);
+}
+void mul(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stmul_core(A, alpha, C);
 }
 void mul(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
@@ -2908,6 +2960,10 @@ void mul(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   stmul_core(A, alpha, C);
 }
+void mul(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
+  stmul_core(A, alpha, C);
+}
 void mul(const tensor::tensor_Dense<float> &A, const float alpha,
          tensor::tensor_Dense<float> &C) {
   stmul_core(A, alpha, C);
@@ -2973,6 +3029,10 @@ void mul(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          const float alpha,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   stmul_core(A, alpha, C);
+}
+void div(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stdiv_core(A, alpha, C);
 }
 void div(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
@@ -3040,6 +3100,10 @@ void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void div(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const double alpha,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  stdiv_core(A, alpha, C);
+}
+void div(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
   stdiv_core(A, alpha, C);
 }
 void div(const tensor::tensor_Dense<float> &A, const float alpha,
@@ -3109,6 +3173,10 @@ void div(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   stdiv_core(A, alpha, C);
 }
 
+void pow(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttpow_core(A, B, C);
+}
 void pow(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -3427,6 +3495,10 @@ void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttpow_core(A, B, C);
+}
+void pow(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttpow_core(A, B, C);
 }
 void pow(const tensor::tensor_Dense<float> &A,
@@ -3744,6 +3816,10 @@ void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttpow_core(A, B, C);
+}
+void pow(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stpow_core(A, alpha, C);
 }
 void pow(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
@@ -3811,6 +3887,10 @@ void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void pow(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const double alpha,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  stpow_core(A, alpha, C);
+}
+void pow(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
   stpow_core(A, alpha, C);
 }
 void pow(const tensor::tensor_Dense<float> &A, const float alpha,
@@ -3880,6 +3960,10 @@ void pow(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   stpow_core(A, alpha, C);
 }
 
+void alo(const tensor::tensor_CRS<double> &A, const double alpha,
+         const double beta, tensor::tensor_CRS<double> &C) {
+  talo_core(A, alpha, beta, C);
+}
 void alo(const tensor::tensor_Dense<double> &A, const double alpha,
          const double beta, tensor::tensor_Dense<double> &C) {
   talo_core(A, alpha, beta, C);
@@ -3956,6 +4040,10 @@ void alo(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   talo_core(A, alpha, beta, C);
 }
+void alo(const tensor::tensor_CRS<float> &A, const float alpha,
+         const float beta, tensor::tensor_CRS<float> &C) {
+  talo_core(A, alpha, beta, C);
+}
 void alo(const tensor::tensor_Dense<float> &A, const float alpha,
          const float beta, tensor::tensor_Dense<float> &C) {
   talo_core(A, alpha, beta, C);
@@ -4029,6 +4117,9 @@ void alo(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   talo_core(A, alpha, beta, C);
 }
 
+void sin(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tsin_core(A, C);
+}
 void sin(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C) {
   tsin_core(A, C);
@@ -4091,6 +4182,9 @@ void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void sin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tsin_core(A, C);
+}
+void sin(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tsin_core(A, C);
 }
 void sin(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C) {
@@ -4156,6 +4250,9 @@ void sin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tsin_core(A, C);
 }
+void sqrt(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tsqrt_core(A, C);
+}
 void sqrt(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tsqrt_core(A, C);
@@ -4218,6 +4315,9 @@ void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void sqrt(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tsqrt_core(A, C);
+}
+void sqrt(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tsqrt_core(A, C);
 }
 void sqrt(const tensor::tensor_Dense<float> &A,
@@ -4284,6 +4384,9 @@ void sqrt(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tsqrt_core(A, C);
 }
+void sinh(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tsinh_core(A, C);
+}
 void sinh(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tsinh_core(A, C);
@@ -4346,6 +4449,9 @@ void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void sinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tsinh_core(A, C);
+}
+void sinh(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tsinh_core(A, C);
 }
 void sinh(const tensor::tensor_Dense<float> &A,
@@ -4412,6 +4518,9 @@ void sinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tsinh_core(A, C);
 }
+void asin(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tasin_core(A, C);
+}
 void asin(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tasin_core(A, C);
@@ -4474,6 +4583,9 @@ void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void asin(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tasin_core(A, C);
+}
+void asin(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tasin_core(A, C);
 }
 void asin(const tensor::tensor_Dense<float> &A,
@@ -4540,6 +4652,9 @@ void asin(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tasin_core(A, C);
 }
+void asinh(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tasinh_core(A, C);
+}
 void asinh(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C) {
   tasinh_core(A, C);
@@ -4602,6 +4717,9 @@ void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void asinh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
            view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tasinh_core(A, C);
+}
+void asinh(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tasinh_core(A, C);
 }
 void asinh(const tensor::tensor_Dense<float> &A,
@@ -4668,6 +4786,9 @@ void asinh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tasinh_core(A, C);
 }
+void tan(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  ttan_core(A, C);
+}
 void tan(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C) {
   ttan_core(A, C);
@@ -4730,6 +4851,9 @@ void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void tan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttan_core(A, C);
+}
+void tan(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   ttan_core(A, C);
 }
 void tan(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C) {
@@ -4795,6 +4919,9 @@ void tan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttan_core(A, C);
 }
+void tanh(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  ttanh_core(A, C);
+}
 void tanh(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   ttanh_core(A, C);
@@ -4857,6 +4984,9 @@ void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void tanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttanh_core(A, C);
+}
+void tanh(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   ttanh_core(A, C);
 }
 void tanh(const tensor::tensor_Dense<float> &A,
@@ -4923,6 +5053,9 @@ void tanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttanh_core(A, C);
 }
+void atan(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tatan_core(A, C);
+}
 void atan(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tatan_core(A, C);
@@ -4985,6 +5118,9 @@ void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void atan(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tatan_core(A, C);
+}
+void atan(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tatan_core(A, C);
 }
 void atan(const tensor::tensor_Dense<float> &A,
@@ -5051,6 +5187,9 @@ void atan(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tatan_core(A, C);
 }
+void atanh(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tatanh_core(A, C);
+}
 void atanh(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C) {
   tatanh_core(A, C);
@@ -5113,6 +5252,9 @@ void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void atanh(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
            view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tatanh_core(A, C);
+}
+void atanh(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tatanh_core(A, C);
 }
 void atanh(const tensor::tensor_Dense<float> &A,
@@ -5179,6 +5321,9 @@ void atanh(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tatanh_core(A, C);
 }
+void ceil(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tceil_core(A, C);
+}
 void ceil(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tceil_core(A, C);
@@ -5241,6 +5386,9 @@ void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void ceil(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tceil_core(A, C);
+}
+void ceil(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tceil_core(A, C);
 }
 void ceil(const tensor::tensor_Dense<float> &A,
@@ -5307,6 +5455,9 @@ void ceil(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tceil_core(A, C);
 }
+void floor(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tfloor_core(A, C);
+}
 void floor(const tensor::tensor_Dense<double> &A,
            tensor::tensor_Dense<double> &C) {
   tfloor_core(A, C);
@@ -5369,6 +5520,9 @@ void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void floor(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
            view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tfloor_core(A, C);
+}
+void floor(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tfloor_core(A, C);
 }
 void floor(const tensor::tensor_Dense<float> &A,
@@ -5435,6 +5589,9 @@ void floor(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tfloor_core(A, C);
 }
+void sign(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  tsign_core(A, C);
+}
 void sign(const tensor::tensor_Dense<double> &A,
           tensor::tensor_Dense<double> &C) {
   tsign_core(A, C);
@@ -5497,6 +5654,9 @@ void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void sign(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
           view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  tsign_core(A, C);
+}
+void sign(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   tsign_core(A, C);
 }
 void sign(const tensor::tensor_Dense<float> &A,
@@ -5562,6 +5722,10 @@ void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
 void sign(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
           view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   tsign_core(A, C);
+}
+void reciprocal(const tensor::tensor_CRS<double> &A,
+                tensor::tensor_CRS<double> &C) {
+  treciprocal_core(A, C);
 }
 void reciprocal(const tensor::tensor_Dense<double> &A,
                 tensor::tensor_Dense<double> &C) {
@@ -5631,6 +5795,10 @@ void reciprocal(
     view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   treciprocal_core(A, C);
 }
+void reciprocal(const tensor::tensor_CRS<float> &A,
+                tensor::tensor_CRS<float> &C) {
+  treciprocal_core(A, C);
+}
 void reciprocal(const tensor::tensor_Dense<float> &A,
                 tensor::tensor_Dense<float> &C) {
   treciprocal_core(A, C);
@@ -5695,6 +5863,9 @@ void reciprocal(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
                 view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   treciprocal_core(A, C);
 }
+void exp(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C) {
+  texp_core(A, C);
+}
 void exp(const tensor::tensor_Dense<double> &A,
          tensor::tensor_Dense<double> &C) {
   texp_core(A, C);
@@ -5757,6 +5928,9 @@ void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 }
 void exp(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  texp_core(A, C);
+}
+void exp(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C) {
   texp_core(A, C);
 }
 void exp(const tensor::tensor_Dense<float> &A, tensor::tensor_Dense<float> &C) {
@@ -5823,6 +5997,10 @@ void exp(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   texp_core(A, C);
 }
 
+void max(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttmax_core(A, B, C);
+}
 void max(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -6141,6 +6319,10 @@ void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttmax_core(A, B, C);
+}
+void max(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttmax_core(A, B, C);
 }
 void max(const tensor::tensor_Dense<float> &A,
@@ -6459,6 +6641,10 @@ void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   ttmax_core(A, B, C);
 }
+void min(const tensor::tensor_CRS<double> &A,
+         const tensor::tensor_CRS<double> &B, tensor::tensor_CRS<double> &C) {
+  ttmin_core(A, B, C);
+}
 void min(const tensor::tensor_Dense<double> &A,
          const tensor::tensor_Dense<double> &B,
          tensor::tensor_Dense<double> &C) {
@@ -6777,6 +6963,10 @@ void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const view_tensor_Dense<tensor::tensor_Dense<double>, double> &B,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  ttmin_core(A, B, C);
+}
+void min(const tensor::tensor_CRS<float> &A, const tensor::tensor_CRS<float> &B,
+         tensor::tensor_CRS<float> &C) {
   ttmin_core(A, B, C);
 }
 void min(const tensor::tensor_Dense<float> &A,
@@ -7096,6 +7286,10 @@ void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   ttmin_core(A, B, C);
 }
 
+void max(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stmax_core(A, alpha, C);
+}
 void max(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
   stmax_core(A, alpha, C);
@@ -7162,6 +7356,10 @@ void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const double alpha,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  stmax_core(A, alpha, C);
+}
+void max(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
   stmax_core(A, alpha, C);
 }
 void max(const tensor::tensor_Dense<float> &A, const float alpha,
@@ -7230,6 +7428,10 @@ void max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
          view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   stmax_core(A, alpha, C);
 }
+void min(const tensor::tensor_CRS<double> &A, const double alpha,
+         tensor::tensor_CRS<double> &C) {
+  stmin_core(A, alpha, C);
+}
 void min(const tensor::tensor_Dense<double> &A, const double alpha,
          tensor::tensor_Dense<double> &C) {
   stmin_core(A, alpha, C);
@@ -7296,6 +7498,10 @@ void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
 void min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &A,
          const double alpha,
          view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
+  stmin_core(A, alpha, C);
+}
+void min(const tensor::tensor_CRS<float> &A, const float alpha,
+         tensor::tensor_CRS<float> &C) {
   stmin_core(A, alpha, C);
 }
 void min(const tensor::tensor_Dense<float> &A, const float alpha,
@@ -7365,6 +7571,9 @@ void min(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
   stmin_core(A, alpha, C);
 }
 
+double max(const tensor::tensor_CRS<double> &C) {
+  return tmax_core<tensor::tensor_CRS<double>, double>(C);
+}
 double max(const tensor::tensor_Dense<double> &C) {
   return tmax_core<tensor::tensor_Dense<double>, double>(C);
 }
@@ -7377,6 +7586,9 @@ double max(const view_tensor_Dense<matrix::Dense<double>, double> &C) {
 double max(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   return tmax_core<view_tensor_Dense<tensor::tensor_Dense<double>, double>,
                    double>(C);
+}
+float max(const tensor::tensor_CRS<float> &C) {
+  return tmax_core<tensor::tensor_CRS<float>, float>(C);
 }
 float max(const tensor::tensor_Dense<float> &C) {
   return tmax_core<tensor::tensor_Dense<float>, float>(C);
@@ -7391,6 +7603,9 @@ float max(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &C) {
   return tmax_core<view_tensor_Dense<tensor::tensor_Dense<float>, float>,
                    float>(C);
 }
+double min(const tensor::tensor_CRS<double> &C) {
+  return tmin_core<tensor::tensor_CRS<double>, double>(C);
+}
 double min(const tensor::tensor_Dense<double> &C) {
   return tmin_core<tensor::tensor_Dense<double>, double>(C);
 }
@@ -7403,6 +7618,9 @@ double min(const view_tensor_Dense<matrix::Dense<double>, double> &C) {
 double min(const view_tensor_Dense<tensor::tensor_Dense<double>, double> &C) {
   return tmin_core<view_tensor_Dense<tensor::tensor_Dense<double>, double>,
                    double>(C);
+}
+float min(const tensor::tensor_CRS<float> &C) {
+  return tmin_core<tensor::tensor_CRS<float>, float>(C);
 }
 float min(const tensor::tensor_Dense<float> &C) {
   return tmin_core<tensor::tensor_Dense<float>, float>(C);

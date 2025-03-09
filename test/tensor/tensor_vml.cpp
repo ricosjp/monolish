@@ -1092,5 +1092,655 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  // CRS
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+
+  // tt_add tensor_CRS//
+  if (test_send_tt_add<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_add<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_add<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_add<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tt_sub tensor_CRS//
+  if (test_send_tt_sub<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_sub<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_sub<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_sub<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tt_mul tensor_CRS//
+  if (test_send_tt_mul<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_mul<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_mul<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_mul<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tt_div tensor_CRS//
+  if (test_send_tt_div<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_div<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_div<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_div<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_add tensor_CRS//
+  if (test_send_st_add<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_add<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_add<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_add<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_sub tensor_CRS//
+  if (test_send_st_sub<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_sub<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_sub<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_sub<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_mul tensor_CRS//
+  if (test_send_st_mul<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_mul<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_mul<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_mul<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_div tensor_CRS//
+  if (test_send_st_div<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_div<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_div<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_div<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_pow tensor_CRS//
+  if (test_send_st_pow<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_pow<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_pow<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_pow<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tt_pow tensor_CRS//
+  if (test_send_tt_pow<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_pow<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_pow<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_pow<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tsqrt tensor_CRS //
+  if (test_send_tsqrt<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsqrt<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsqrt<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsqrt<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tsin tensor_CRS //
+  if (test_send_tsin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsin<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsin<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tsinh tensor_CRS //
+  if (test_send_tsinh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsinh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsinh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsinh<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tasin tensor_CRS //
+  if (test_send_tasin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tasin<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tasin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tasin<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tasinh tensor_CRS //
+  if (test_send_tasinh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tasinh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tasinh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tasinh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // ttan tensor_CRS //
+  if (test_send_ttan<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_ttan<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_ttan<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_ttan<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tatan tensor_CRS //
+  if (test_send_tatan<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tatan<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tatan<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tatan<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // ttanh tensor_CRS //
+  if (test_send_ttanh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_ttanh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_ttanh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_ttanh<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tatanh tensor_CRS //
+  if (test_send_tatanh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tatanh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tatanh<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tatanh<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tceil tensor_CRS //
+  if (test_send_tceil<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tceil<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tceil<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tceil<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tfloor tensor_CRS //
+  if (test_send_tfloor<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tfloor<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tfloor<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tfloor<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tsign tensor_CRS //
+  if (test_send_tsign<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tsign<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tsign<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tsign<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // treciprocal tensor_CRS //
+  if (test_send_treciprocal<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_treciprocal<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_treciprocal<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_treciprocal<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // texp tensor_CRS //
+  /*
+  if (test_send_texp<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_texp<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_texp<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_texp<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  */
+
+  // tmax tensor_CRS //
+  if (test_send_tmax<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tmax<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tmax<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tmax<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tmin tensor_CRS //
+  if (test_send_tmin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tmin<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tmin<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tmin<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
+  // tt_max tensor_CRS//
+  if (test_send_tt_max<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_max<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_max<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_max<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tt_min tensor_CRS//
+  if (test_send_tt_min<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_min<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_min<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_min<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_max tensor_CRS//
+  if (test_send_st_max<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_max<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_max<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_max<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // st_min tensor_CRS//
+  if (test_send_st_min<monolish::tensor::tensor_CRS<double>,
+                       monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_st_min<monolish::tensor::tensor_CRS<float>,
+                       monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_st_min<monolish::tensor::tensor_CRS<double>,
+                  monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_st_min<monolish::tensor::tensor_CRS<float>,
+                  monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // talo tensor_CRS //
+  if (test_send_talo<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_talo<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_talo<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_talo<monolish::tensor::tensor_CRS<float>, float>(M, N, K, 1.0e-4) ==
+      false) {
+    return 1;
+  }
+
   return 0;
 }

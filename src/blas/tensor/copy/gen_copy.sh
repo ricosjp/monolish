@@ -14,4 +14,11 @@ for prec in double float; do
   done
 done
 
+echo ""
+
+# copy crs
+for prec in double float; do
+  echo "void copy(const tensor::tensor_CRS<$prec> &A, tensor::tensor_CRS<$prec> &C){ copy_core(A, C); }"
+done
+
 echo "}"

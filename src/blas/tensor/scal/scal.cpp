@@ -31,4 +31,11 @@ void tscal(const float alpha,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &A) {
   tscal_core(alpha, A);
 }
+
+void tscal(const double alpha, tensor::tensor_CRS<double> &A) {
+  tscal_core(alpha, A);
+}
+void tscal(const float alpha, tensor::tensor_CRS<float> &A) {
+  tscal_core(alpha, A);
+}
 } // namespace monolish::blas

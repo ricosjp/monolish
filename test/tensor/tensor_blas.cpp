@@ -72,6 +72,32 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // tensadd tensor_CRS//
+  if (test_send_tensadd<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tensadd<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tensadd<monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tensadd<monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tenssub tensor_Dense//
   if (test_send_tenssub<monolish::tensor::tensor_Dense<double>,
                         monolish::tensor::tensor_Dense<double>,
@@ -110,6 +136,32 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // tenssub tensor_CRS//
+  if (test_send_tenssub<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tenssub<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tenssub<monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tenssub<monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tensvec tensor_Dense//
   if (test_send_tensvec<monolish::tensor::tensor_Dense<double>, double>(
           M, N, K, 1.0e-6) == false) {
@@ -137,6 +189,24 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_tensvec_view<float>(M, N, K, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // tensvec tensor_CRS//
+  if (test_send_tensvec_crs<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_tensvec_crs<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_tensvec_crs<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, K, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_tensvec_crs<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, K, 1.0e-3) == false) {
     return 1;
   }
 
@@ -175,6 +245,32 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_tensmat_view<float>(M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tensmat tensor_CRS//
+  if (test_send_tensmat<monolish::tensor::tensor_CRS<double>,
+                        monolish::matrix::Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tensmat<monolish::tensor::tensor_CRS<float>,
+                        monolish::matrix::Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_CRS<double>,
+                   monolish::matrix::Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tensmat<monolish::tensor::tensor_CRS<float>,
+                   monolish::matrix::Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, 1.0e-4) == false) {
     return 1;
   }
 
@@ -284,6 +380,32 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // tensmul tensor_CRS//
+  if (test_send_tensmul<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_Dense<double>,
+                        monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, J, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tensmul<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_Dense<float>,
+                        monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, J, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tensmul<monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_Dense<double>,
+                   monolish::tensor::tensor_Dense<double>, double>(
+          M, N, K, L, J, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tensmul<monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_Dense<float>,
+                   monolish::tensor::tensor_Dense<float>, float>(
+          M, N, K, L, J, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tt_copy tensor_Dense//
   if (test_send_tt_copy<monolish::tensor::tensor_Dense<double>,
                         monolish::tensor::tensor_Dense<double>, double>(
@@ -319,6 +441,28 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // tt_copy tensor_CRS//
+  if (test_send_tt_copy<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tt_copy<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tt_copy<monolish::tensor::tensor_CRS<double>,
+                   monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tt_copy<monolish::tensor::tensor_CRS<float>,
+                   monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+
   // tscal tensor_Dense//
   if (test_send_tscal<monolish::tensor::tensor_Dense<double>, double>(
           M, N, L, 1.0e-8) == false) {
@@ -347,6 +491,24 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_tscal_view<float>(M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // tscal tensor_CRS//
+  if (test_send_tscal<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_tscal<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_tscal<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_tscal<monolish::tensor::tensor_CRS<float>, float>(M, N, L, 1.0e-4) ==
+      false) {
     return 1;
   }
 
@@ -381,6 +543,28 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_scalar_times_view<float>(M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+
+  // scalar_times tensor_CRS//
+  if (test_send_scalar_times<monolish::tensor::tensor_CRS<double>,
+                             monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_send_scalar_times<monolish::tensor::tensor_CRS<float>,
+                             monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::tensor::tensor_CRS<double>,
+                        monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-8) == false) {
+    return 1;
+  }
+  if (test_scalar_times<monolish::tensor::tensor_CRS<float>,
+                        monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-4) == false) {
     return 1;
   }
 
@@ -446,6 +630,24 @@ int main(int argc, char **argv) {
     return 1;
   }
   if (test_times_row_view<float>(M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+
+  // vector_times row tensor_CRS//
+  if (test_send_times_row<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_send_times_row<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-3) == false) {
+    return 1;
+  }
+  if (test_times_row<monolish::tensor::tensor_CRS<double>, double>(
+          M, N, L, 1.0e-6) == false) {
+    return 1;
+  }
+  if (test_times_row<monolish::tensor::tensor_CRS<float>, float>(
+          M, N, L, 1.0e-3) == false) {
     return 1;
   }
 

@@ -330,6 +330,15 @@ public:
   [[nodiscard]] size_t get_col() const { return colN; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
+
+  /**
    * @brief get # of non-zeros
    * @note
    * - # of computation: 1
@@ -380,6 +389,13 @@ public:
    * - GPU acceleration: false
    **/
   void set_col(const size_t M) { colN = M; };
+
+  /**
+   * @brief change first position
+   * @note
+   * - # of computation: 1
+   */
+  void set_first(size_t i) { first = i; }
 
   /**
    * @brief get format name "CRS"
@@ -498,6 +514,13 @@ public:
    * - GPU acceleration: false
    */
   void resize(size_t N, Float Val = 0) {
+    if (first + N < alloc_nnz) {
+      for (size_t i = val_nnz; i < N; ++i) {
+        begin()[i] = Val;
+      }
+      val_nnz = N;
+      return;
+    }
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
@@ -513,6 +536,7 @@ public:
       val = tmp;
       alloc_nnz = N;
       val_nnz = N;
+      first = 0;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }
@@ -524,7 +548,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *begin() const { return data(); }
+  [[nodiscard]] const Float *begin() const { return data() + get_offset(); }
 
   /**
    * @brief returns a begin iterator
@@ -532,7 +556,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *begin() { return data(); }
+  [[nodiscard]] Float *begin() { return data() + get_offset(); }
 
   /**
    * @brief returns a end iterator
@@ -540,7 +564,9 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] const Float *end() const { return data() + get_nnz(); }
+  [[nodiscard]] const Float *end() const {
+    return data() + get_offset() + get_nnz();
+  }
 
   /**
    * @brief returns a end iterator
@@ -548,7 +574,7 @@ public:
    * @note
    * - # of computation: 1
    **/
-  [[nodiscard]] Float *end() { return data() + get_nnz(); }
+  [[nodiscard]] Float *end() { return data() + get_offset() + get_nnz(); }
 
   /////////////////////////////////////////////////////////////////////////////
   /**
@@ -789,7 +815,7 @@ public:
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU vector cant use operator[]");
     }
-    return data()[i];
+    return data()[first + i];
   }
 
   /**

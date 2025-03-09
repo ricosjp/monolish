@@ -206,6 +206,31 @@ template <typename T> bool test() {
     return false;
   }
 
+  monolish::tensor::tensor_CRS<T> addr_CRS(addr_COO);
+
+  monolish::vector<T> x(N, 10);
+
+  monolish::tensor::tensor_Dense<T> addry({N});
+
+  monolish::util::send(x, addry, addr_CRS);
+
+  monolish::blas::tensvec(addr_CRS, x, addry);
+
+  monolish::util::recv(addry);
+
+  if (addry[0] != 60) {
+    addry.print_all();
+    return false;
+  }
+  if (addry[1] != 90) {
+    addry.print_all();
+    return false;
+  }
+  if (addry[2] != 210) {
+    addry.print_all();
+    return false;
+  }
+
   return true;
 }
 
@@ -346,6 +371,15 @@ template <typename T> bool reshape_test() {
   return true;
 }
 
+template <typename T> bool convert_test() {
+  monolish::tensor::tensor_COO<T> seedA =
+      get_random_structure_tensor<T>(3, 3, 3);
+  monolish::tensor::tensor_CRS<T> A(seedA);
+  monolish::tensor::tensor_COO<T> AA(A);
+
+  return seedA == AA;
+}
+
 int main(int argc, char **argv) {
 
   print_build_info();
@@ -376,6 +410,13 @@ int main(int argc, char **argv) {
   }
   if (!reshape_test<float>()) {
     return 4;
+  }
+
+  if (!convert_test<double>()) {
+    return 5;
+  }
+  if (!convert_test<float>()) {
+    return 5;
   }
 
   return 0;

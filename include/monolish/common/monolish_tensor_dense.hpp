@@ -310,6 +310,15 @@ public:
   [[nodiscard]] std::vector<size_t> get_shape() const { return shape; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
+
+  /**
    * @brief get # of non-zeros
    * @note
    * - # of computation: 1
@@ -631,6 +640,13 @@ public:
    * - GPU acceleration: false
    */
   void resize(const size_t N, Float Val = 0) {
+    if (first + N < alloc_nnz) {
+      for (size_t i = val_nnz; i < N; ++i) {
+        begin()[i] = Val;
+      }
+      val_nnz = N;
+      return;
+    }
     if (get_device_mem_stat()) {
       throw std::runtime_error("Error, GPU matrix cant use resize");
     }
@@ -646,6 +662,7 @@ public:
       val = tmp;
       alloc_nnz = N;
       val_nnz = N;
+      first = 0;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }

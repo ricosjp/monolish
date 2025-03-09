@@ -337,6 +337,15 @@ public:
   [[nodiscard]] size_t get_col() const { return colN; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
+
+  /**
    * @brief get # of non-zeros
    * @note
    * - # of computation: 1
@@ -643,6 +652,7 @@ public:
       val = tmp;
       alloc_nnz = N;
       val_nnz = N;
+      first = 0;
     } else {
       throw std::runtime_error("Error, not create vector cant use resize");
     }

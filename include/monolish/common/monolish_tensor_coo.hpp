@@ -8,6 +8,7 @@ template <typename Float> class vector;
 template <typename TYPE, typename Float> class view1D;
 namespace tensor {
 template <typename Float> class tensor_Dense;
+template <typename Float> class tensor_CRS;
 template <typename Float> class tensor_COO {
 private:
   /**
@@ -41,7 +42,7 @@ public:
   /**
    * @brief alloced matrix size
    */
-  std::size_t alloc_nnz = 0;
+  size_t alloc_nnz = 0;
 
   /**
    * @brief matrix create flag;
@@ -102,6 +103,29 @@ public:
   }
 
   /**
+   * @brief Create tensor_COO tensor from tensor_CRS tensor
+   * @param tens input tensor_CRS tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  void convert(const tensor::tensor_CRS<Float> &tens);
+
+  /**
+   * @brief Create tensor_COO tensor from tensor_CRS tensor
+   * @param tens input tensor_CRS tensor
+   * @note
+   * - # of computation: size
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  tensor_COO(const tensor::tensor_CRS<Float> &tens) {
+    val_create_flag = true;
+    convert(tens);
+  }
+
+  /**
    * @brief Create tensor_COO tensor from n-origin array
    * @param shape_ shape of tensor
    * @param index_ n-origin index, which stores the numbers of the non-zero
@@ -156,6 +180,44 @@ public:
    * - GPU acceleration: false
    **/
   void print_all(const std::string filename) const;
+
+  // communication
+  // ///////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief send data to GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void send() const;
+
+  /**
+   * @brief recv. data to GPU, and free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void recv();
+
+  /**
+   * @brief recv. data to GPU (w/o free)
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: size
+   **/
+  void nonfree_recv();
+
+  /**
+   * @brief free data on GPU
+   * @note
+   * - Multi-threading: false
+   * - GPU acceleration: true
+   *    - # of data transfer: 0
+   **/
+  void device_free() const;
 
   // TODO
   /**
@@ -247,6 +309,15 @@ public:
   [[nodiscard]] std::vector<size_t> get_shape() const { return shape; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return val; }
+
+  /**
    * @brief get # of non-zeros
    * @note
    * - # of computation: 1
@@ -312,7 +383,7 @@ public:
       std::shared_ptr<Float> tmp(new Float[N], std::default_delete<Float[]>());
       size_t copy_size = std::min(val_nnz, N);
       for (size_t i = 0; i < copy_size; ++i) {
-        tmp.get()[i] = data()[i];
+        tmp.get()[i] = begin()[i];
       }
       for (size_t i = copy_size; i < N; ++i) {
         tmp.get()[i] = Val;

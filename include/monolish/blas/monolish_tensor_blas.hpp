@@ -96,6 +96,27 @@ void copy(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
 /**@}*/
 
 /**
+ * \defgroup tens_copy_CRS monolish::blas::copy (tensor_CRS)
+ * @brief tensor_CRS tensor copy (C=A)
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor copy (C=A)
+ * @param A monolish tensor_CRS tensor
+ * @param C monolish tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */
+void copy(const tensor::tensor_CRS<double> &A, tensor::tensor_CRS<double> &C);
+void copy(const tensor::tensor_CRS<float> &A, tensor::tensor_CRS<float> &C);
+/**@}*/
+
+/**
  * \defgroup tscal_dense monolish::blas::tscal (tensor_Dense)
  * @brief tensor_Dense tensor scal: A = alpha * A
  * @{
@@ -122,6 +143,25 @@ void tscal(const float alpha,
            view_tensor_Dense<matrix::Dense<float>, float> &A);
 void tscal(const float alpha,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &A);
+/**@}*/
+
+/**
+ * \defgroup tscal_dense monolish::blas::tscal (tensor_CRS)
+ * @brief tensor_CRS tensor scal: A = alpha * A
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor scal: A = alpha * A
+ * @param alpha scalar value
+ * @param A CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tscal(const double alpha, tensor::tensor_CRS<double> &A);
+void tscal(const float alpha, tensor::tensor_CRS<float> &A);
 /**@}*/
 
 /**
@@ -224,6 +264,28 @@ void times(const float alpha,
 void times(const float alpha,
            const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
            view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+/**@}*/
+
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor times: C = alpha * A
+ * @param alpha scalar value
+ * @param A tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void times(const double alpha, const tensor::tensor_CRS<double> &A,
+           tensor::tensor_CRS<double> &C);
+void times(const float alpha, const tensor::tensor_CRS<float> &A,
+           tensor::tensor_CRS<float> &C);
 /**@}*/
 
 /**
@@ -731,6 +793,29 @@ void tensadd(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
 /**@}*/
 
 /**
+ * \defgroup madd_dense monolish::blas::tensadd (tensor_CRS)
+ * @brief tensor_CRS tensor addition: C = A + B
+ * @{
+ */
+/**
+ * @brief CRS tensor addition: C = A + B
+ * @param A tensor_CRS tensor
+ * @param B tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensadd(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_CRS<double> &B,
+             tensor::tensor_CRS<double> &C);
+void tensadd(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C);
+/**@}*/
+
+/**
  * \defgroup msub_dense monolish::blas::tenssub (tensor_Dense)
  * @brief tensor_Dense tensor subtract: C = A - B
  * @{
@@ -1130,6 +1215,29 @@ void tenssub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
 void tenssub(const view_tensor_Dense<tensor::tensor_Dense<float>, float> &A,
              const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
              view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+/**@}*/
+
+/**
+ * \defgroup msub_dense monolish::blas::tenssub (tensor_CRS)
+ * @brief tensor_CRS tensor subtract: C = A - B
+ * @{
+ */
+/**
+ * @brief CRS tensor subtract: C = A - B
+ * @param A tensor_CRS tensor
+ * @param B tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tenssub(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_CRS<double> &B,
+             tensor::tensor_CRS<double> &C);
+void tenssub(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_CRS<float> &B, tensor::tensor_CRS<float> &C);
 /**@}*/
 
 /**
@@ -2050,6 +2158,58 @@ void tensmul(const float &a,
              const view_tensor_Dense<tensor::tensor_Dense<float>, float> &B,
              const float &b,
              view_tensor_Dense<tensor::tensor_Dense<float>, float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense monolish::blas::tensmul (tensor_CRS, tensor_Dense,
+ * tensor_Dense)
+ * @brief tensor_CRS tensor multiplication: C = AB
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor multiplication: C = AB
+ * @param A tensor_CRS tensor
+ * @param B tensor_Dense tensor
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensmul(const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_Dense<double> &B,
+             tensor::tensor_Dense<double> &C);
+void tensmul(const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_Dense<float> &B,
+             tensor::tensor_Dense<float> &C);
+/**@}*/
+
+/**
+ * \defgroup mm_dense monolish::blas::tensmul (Float, tensor_CRS, tensor_Dense,
+ * Float, tensor_Dense)
+ * @brief tensor_CRS tensor multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor multiplication: C = aAB+bC
+ * @param a Float
+ * @param A tensor_CRS tensor
+ * @param B tensor_Dense tensor
+ * @param b Float
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ */
+void tensmul(const double &a, const tensor::tensor_CRS<double> &A,
+             const tensor::tensor_Dense<double> &B, const double &b,
+             tensor::tensor_Dense<double> &C);
+void tensmul(const float &a, const tensor::tensor_CRS<float> &A,
+             const tensor::tensor_Dense<float> &B, const float &b,
+             tensor::tensor_Dense<float> &C);
 /**@}*/
 } // namespace blas
 } // namespace monolish

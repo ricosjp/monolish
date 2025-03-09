@@ -653,6 +653,21 @@ template <typename T, typename U, typename V>
                                      const view_tensor_Dense<U, V> &B);
 
 /**
+ * @brief compare structure using M and N (same as is_same_size())
+ * @param A CRS matrix
+ * @param B CRS matrix
+ * @return true is same structure
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_structure(const tensor::tensor_CRS<T> &A,
+                                     const tensor::tensor_CRS<T> &B);
+
+/**
  * @brief compare matrix structure
  * @ingroup compare
  **/
@@ -810,6 +825,21 @@ template <typename T>
 template <typename T>
 [[nodiscard]] bool is_same_size(const tensor::tensor_COO<T> &A,
                                 const tensor::tensor_COO<T> &B);
+
+/**
+ * @brief compare shape
+ * @param A COO tensor
+ * @param B COO tensor
+ * @return true is same size
+ * @note
+ * - # of computation: 1
+ * - Multi-threading: false
+ * - GPU acceleration: false
+ * @ingroup compare
+ **/
+template <typename T>
+[[nodiscard]] bool is_same_size(const tensor::tensor_CRS<T> &A,
+                                const tensor::tensor_CRS<T> &B);
 
 /**
  * @brief compare shape

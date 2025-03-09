@@ -46,6 +46,31 @@ done
 
 echo "/**@}*/"
 
+## copy tensor_CRS
+echo "
+/**
+ * \defgroup tens_copy_CRS monolish::blas::copy (tensor_CRS)
+ * @brief tensor_CRS tensor copy (C=A)
+ * @{
+ */
+ /**
+ * @brief tensor_CRS tensor copy (C=A)
+ * @param A monolish tensor_CRS tensor
+ * @param C monolish tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+ * @warning
+ * A and C must be same non-zero structure
+ */ "
+for prec in double float; do
+  echo "void copy(const tensor::tensor_CRS<$prec> &A, tensor::tensor_CRS<$prec> &C);"
+done
+
+echo "/**@}*/"
+
 ##############################################
 
 #tscal tensor_Dense
@@ -69,6 +94,28 @@ for prec in double float; do
   for arg1 in tensor::tensor_Dense\<$prec\> view_tensor_Dense\<vector\<$prec\>,$prec\> view_tensor_Dense\<matrix::Dense\<$prec\>,$prec\> view_tensor_Dense\<tensor::tensor_Dense\<$prec\>,$prec\>; do
     echo "void tscal(const $prec alpha, $arg1 &A);"
   done
+done
+
+echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup tscal_dense monolish::blas::tscal (tensor_CRS)
+ * @brief tensor_CRS tensor scal: A = alpha * A
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor scal: A = alpha * A
+ * @param alpha scalar value
+ * @param A CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void tscal(const $prec alpha, tensor::tensor_CRS<$prec> &A);"
 done
 
 echo "/**@}*/"
@@ -100,6 +147,29 @@ for prec in double float; do
       echo "void times(const $prec alpha, const $arg1 &A, $arg2 &C);"
     done
   done
+done
+echo "/**@}*/"
+
+# times scalar tensor_CRS
+echo "
+/**
+ * \defgroup times monolish::blas::times
+ * @brief element by element multiplication
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor times: C = alpha * A
+ * @param alpha scalar value
+ * @param A tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void times(const $prec alpha, const tensor::tensor_CRS<$prec> &A, tensor::tensor_CRS<$prec> &C);"
 done
 echo "/**@}*/"
 
@@ -164,6 +234,29 @@ for prec in double float; do
 done
 echo "/**@}*/"
 
+#tensadd tensor_CRS
+echo "
+/**
+ * \defgroup madd_dense monolish::blas::tensadd (tensor_CRS)
+ * @brief tensor_CRS tensor addition: C = A + B
+ * @{
+ */
+/**
+ * @brief CRS tensor addition: C = A + B
+ * @param A tensor_CRS tensor
+ * @param B tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: size
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void tensadd(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C);"
+done
+echo "/**@}*/"
+
 echo ""
 
 #tenssub tensor_Dense
@@ -192,6 +285,29 @@ for prec in double float; do
       done
     done
   done
+done
+echo "/**@}*/"
+
+#tenssub tensor_CRS
+echo "
+/**
+ * \defgroup msub_dense monolish::blas::tenssub (tensor_CRS)
+ * @brief tensor_CRS tensor subtract: C = A - B
+ * @{
+ */
+/**
+ * @brief CRS tensor subtract: C = A - B
+ * @param A tensor_CRS tensor
+ * @param B tensor_CRS tensor
+ * @param C tensor_CRS tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void tenssub(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_CRS<$prec> &B, tensor::tensor_CRS<$prec> &C);"
 done
 echo "/**@}*/"
 
@@ -254,6 +370,53 @@ for prec in double float; do
       done
     done
   done
+done
+echo "/**@}*/"
+
+#tensmul tensor_CRS
+echo "
+/**
+ * \defgroup mm_dense monolish::blas::tensmul (tensor_CRS, tensor_Dense, tensor_Dense)
+ * @brief tensor_CRS tensor multiplication: C = AB
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor multiplication: C = AB
+ * @param A tensor_CRS tensor
+ * @param B tensor_Dense tensor
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void tensmul(const tensor::tensor_CRS<$prec> &A, const tensor::tensor_Dense<$prec> &B, tensor::tensor_Dense<$prec> &C);"
+done
+echo "/**@}*/"
+
+echo "
+/**
+ * \defgroup mm_dense monolish::blas::tensmul (Float, tensor_CRS, tensor_Dense, Float, tensor_Dense)
+ * @brief tensor_CRS tensor multiplication: C = aAB+bC
+ * @{
+ */
+/**
+ * @brief tensor_CRS tensor multiplication: C = aAB+bC
+ * @param a Float
+ * @param A tensor_CRS tensor
+ * @param B tensor_Dense tensor
+ * @param b Float
+ * @param C tensor_Dense tensor
+ * @note
+ * - # of computation: ?
+ * - Multi-threading: true
+ * - GPU acceleration: true
+ *    - # of data transfer: 0
+*/ "
+for prec in double float; do
+  echo "void tensmul(const $prec &a, const tensor::tensor_CRS<$prec> &A, const tensor::tensor_Dense<$prec> &B, const $prec &b, tensor::tensor_Dense<$prec> &C);"
 done
 echo "/**@}*/"
 

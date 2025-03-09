@@ -235,6 +235,15 @@ public:
   [[nodiscard]] std::vector<size_t> get_shape() const { return shape; }
 
   /**
+   * @brief get shared_ptr of val
+   * @note
+   * - # of computation: 1
+   * - Multi-threading: false
+   * - GPU acceleration: false
+   **/
+  [[nodiscard]] std::shared_ptr<Float> get_val() { return target.get_val(); }
+
+  /**
    * @brief get view_tensor_Dense size (range)
    * @return view_tensor_Dense size
    * @note
