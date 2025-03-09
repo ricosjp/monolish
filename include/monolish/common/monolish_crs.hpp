@@ -189,23 +189,6 @@ public:
       const std::vector<int> &colind, const vector<Float> &value);
 
   /**
-   * @brief Create CRS matrix from shared_ptr
-   * @param M # of row
-   * @param N # of col
-   * @param rowptr row_ptr, which stores the starting points of the rows of the
-   *arrays value and col_ind (size M+1)
-   * @param colind col_ind, which stores the column numbers of the non-zero
-   *elements (size nnz)
-   * @param value value index, which stores the non-zero elements (size nnz)
-   * @note
-   * - # of computation: (M+1)+nnz + (M+1)+nnz (compute hash)
-   * - Multi-threading: false
-   * - GPU acceleration: true
-   **/
-  CRS(const size_t M, const size_t N, const std::vector<int> &rowptr,
-      const std::vector<int> &colind, const std::shared_ptr<Float> &value);
-
-  /**
    * @brief Convert CRS matrix from COO matrix, also compute the hash
    * @param coo COO format matrix
    * @note

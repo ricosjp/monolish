@@ -53,6 +53,7 @@ Unreleased
 - Add view1D of tensor_Dense <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/496> <https://github.com/ricosjp/monolish/issues/728>
 - Add times/adds/axpy tests for view1D of matrix/tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/498> <https://github.com/ricosjp/monolish/issues/729>
 - Add variadic templates for reshape tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/499> <https://github.com/ricosjp/monolish/issues/730>
+- Add tensor_CRS <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/514> <https://github.com/ricosjp/monolish/issues/753>
 
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>

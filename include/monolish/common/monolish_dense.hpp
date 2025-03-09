@@ -229,18 +229,6 @@ public:
   Dense(const size_t M, const size_t N, const vector<Float> &value);
 
   /**
-   * @brief Create construct dense matrix
-   * @param M # of row
-   * @param N # of col
-   * @param value value
-   * @note
-   * - # of computation: 1
-   * - Multi-threading: true
-   * - GPU acceleration: false
-   **/
-  Dense(const size_t M, const size_t N, const std::shared_ptr<Float> &value);
-
-  /**
    * @brief Create dense matrix from std::initializer_list
    * @param M # of row
    * @param N # of col

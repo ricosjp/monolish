@@ -57,23 +57,6 @@ template Dense<float>::Dense(const size_t M, const size_t N,
                              const std::vector<float> &value);
 
 template <typename T>
-Dense<T>::Dense(const size_t M, const size_t N,
-                const std::shared_ptr<T> &value) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  set_row(M);
-  set_col(N);
-
-  val_create_flag = true;
-  this->val = value;
-  logger.util_out();
-}
-template Dense<double>::Dense(const size_t M, const size_t N,
-                              const std::shared_ptr<double> &value);
-template Dense<float>::Dense(const size_t M, const size_t N,
-                             const std::shared_ptr<float> &value);
-
-template <typename T>
 Dense<T>::Dense(const size_t M, const size_t N, const vector<T> &value) {
   Logger &logger = Logger::get_instance();
   logger.util_in(monolish_func);

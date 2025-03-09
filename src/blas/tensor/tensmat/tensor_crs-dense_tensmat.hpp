@@ -28,13 +28,26 @@ void tensor_CRS_Dense_Dtensmat_core(const double &a,
   size_t nsum = 0;
 
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d],
-                             A.get_val());
-    Amat.set_first(A.get_offset() + nsum);
-    nsum += A.col_inds[d].size();
-    matrix::Dense<double> Cmat(row, B.get_col(), C.get_val());
-    Cmat.set_first(C.get_offset() + d * row * B.get_col());
+    std::vector<double> Aval(A.col_inds[d].size());
+    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d], Aval);
+    std::vector<double> Cval(row * B.get_col());
+    matrix::Dense<double> Cmat(row, B.get_col(), Cval);
+    if (A.get_device_mem_stat()) {
+      Amat.send();
+      Cmat.send();
+    }
+    internal::vcopy(Aval.size(), A.begin() + nsum, Amat.begin(),
+                    A.get_device_mem_stat());
+    internal::vcopy(Cval.size(), C.begin() + d * row * B.get_col(),
+                    Cmat.begin(), A.get_device_mem_stat());
     CRS_Dense_Dmatmul_core(a, Amat, B, b, Cmat);
+    internal::vcopy(Cval.size(), Cmat.begin(),
+                    C.begin() + d * row * B.get_col(), A.get_device_mem_stat());
+    if (A.get_device_mem_stat()) {
+      Amat.recv();
+      Cmat.recv();
+    }
+    nsum += A.col_inds[d].size();
   }
 
   logger.func_out();
@@ -63,13 +76,26 @@ void tensor_CRS_Dense_Stensmat_core(const float &a,
   size_t nsum = 0;
 
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d],
-                            A.get_val());
-    Amat.set_first(A.get_offset() + nsum);
-    nsum += A.col_inds[d].size();
-    matrix::Dense<float> Cmat(row, B.get_col(), C.get_val());
-    Cmat.set_first(C.get_offset() + d * row * B.get_col());
+    std::vector<float> Aval(A.col_inds[d].size());
+    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d], Aval);
+    std::vector<float> Cval(row * B.get_col());
+    matrix::Dense<float> Cmat(row, B.get_col(), Cval);
+    if (A.get_device_mem_stat()) {
+      Amat.send();
+      Cmat.send();
+    }
+    internal::vcopy(Aval.size(), A.begin() + nsum, Amat.begin(),
+                    A.get_device_mem_stat());
+    internal::vcopy(Cval.size(), C.begin() + d * row * B.get_col(),
+                    Cmat.begin(), A.get_device_mem_stat());
     CRS_Dense_Smatmul_core(a, Amat, B, b, Cmat);
+    internal::vcopy(Cval.size(), Cmat.begin(),
+                    C.begin() + d * row * B.get_col(), A.get_device_mem_stat());
+    if (A.get_device_mem_stat()) {
+      Amat.recv();
+      Cmat.recv();
+    }
+    nsum += A.col_inds[d].size();
   }
 
   logger.func_out();

@@ -73,28 +73,6 @@ template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
                                            const std::vector<float> &value);
 
 template <typename T>
-tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape,
-                              const std::shared_ptr<T> &value) {
-  Logger &logger = Logger::get_instance();
-  logger.util_in(monolish_func);
-  this->shape = shape;
-
-  val_create_flag = false;
-  this->val = value;
-  size_t N = 1;
-  for (auto n : shape) {
-    N *= n;
-  }
-  this->val_nnz = N;
-  logger.util_out();
-}
-
-template tensor_Dense<double>::tensor_Dense(
-    const std::vector<size_t> &shape, const std::shared_ptr<double> &value);
-template tensor_Dense<float>::tensor_Dense(const std::vector<size_t> &shape,
-                                           const std::shared_ptr<float> &value);
-
-template <typename T>
 tensor_Dense<T>::tensor_Dense(const std::vector<size_t> &shape, const T min,
                               const T max) {
   Logger &logger = Logger::get_instance();

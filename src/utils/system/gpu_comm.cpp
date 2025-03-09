@@ -359,8 +359,25 @@ template <typename T> void tensor::tensor_CRS<T>::send() const {
 #pragma omp target update to(vald [0:nnz])
   } else {
 #pragma omp target enter data map(to : vald [0:nnz])
+  }
+
+  for (size_t d = 0; d < row_ptrs.size(); ++d) {
+    const auto *rowd = row_ptrs[d].data();
+    const auto *cold = col_inds[d].data();
+    const auto N = row_ptrs[d].size();
+    const auto M = col_inds[d].size();
+    if (get_device_mem_stat() == true) {
+#pragma omp target update to(rowd [0:N], cold [0:M])
+    } else {
+#pragma omp target enter data map(to : rowd [0:N], cold [0:M])
+    }
+  }
+
+  if (get_device_mem_stat() == true) {
+  } else {
     *gpu_status = true;
   }
+
 #endif
   logger.util_out();
 }
@@ -376,6 +393,15 @@ template <typename T> void tensor::tensor_CRS<T>::recv() {
     auto nnz = get_nnz();
 
 #pragma omp target exit data map(from : vald [0:nnz])
+
+    for (size_t d = 0; d < row_ptrs.size(); ++d) {
+      auto *rowd = row_ptrs[d].data();
+      auto *cold = col_inds[d].data();
+      auto N = row_ptrs[d].size();
+      auto M = col_inds[d].size();
+#pragma omp target exit data map(from : rowd [0:N], cold [0:M])
+    }
+
     *gpu_status = false;
   }
 #endif
@@ -393,6 +419,14 @@ template <typename T> void tensor::tensor_CRS<T>::nonfree_recv() {
     auto nnz = get_nnz();
 
 #pragma omp target update from(vald [0:nnz])
+
+    for (size_t d = 0; d < row_ptrs.size(); ++d) {
+      auto *rowd = row_ptrs[d].data();
+      auto *cold = col_inds[d].data();
+      auto N = row_ptrs[d].size();
+      auto M = col_inds[d].size();
+#pragma omp target update from(rowd [0:N], cold [0:M])
+    }
   }
 #endif
   logger.util_out();
@@ -409,6 +443,14 @@ template <typename T> void tensor::tensor_CRS<T>::device_free() const {
     const auto nnz = get_nnz();
 
 #pragma omp target exit data map(release : vald [0:nnz])
+
+    for (size_t d = 0; d < row_ptrs.size(); ++d) {
+      auto *rowd = row_ptrs[d].data();
+      auto *cold = col_inds[d].data();
+      auto N = row_ptrs[d].size();
+      auto M = col_inds[d].size();
+#pragma omp target exit data map(release : rowd [0:N], cold [0:M])
+    }
 
     *gpu_status = false;
   }

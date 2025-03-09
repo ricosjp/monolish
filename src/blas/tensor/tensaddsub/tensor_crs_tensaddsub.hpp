@@ -5,8 +5,9 @@ namespace monolish {
 
 namespace {
 
-template<typename F>
-void tensadd_core(const tensor::tensor_CRS<F> &A, const tensor::tensor_CRS<F> &B, tensor::tensor_CRS<F> &C) {
+template <typename F>
+void tensadd_core(const tensor::tensor_CRS<F> &A,
+                  const tensor::tensor_CRS<F> &B, tensor::tensor_CRS<F> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 
@@ -21,8 +22,9 @@ void tensadd_core(const tensor::tensor_CRS<F> &A, const tensor::tensor_CRS<F> &B
   logger.func_out();
 }
 
-template<typename F>
-void tenssub_core(const tensor::tensor_CRS<F> &A, const tensor::tensor_CRS<F> &B, tensor::tensor_CRS<F> &C) {
+template <typename F>
+void tenssub_core(const tensor::tensor_CRS<F> &A,
+                  const tensor::tensor_CRS<F> &B, tensor::tensor_CRS<F> &C) {
   Logger &logger = Logger::get_instance();
   logger.func_in(monolish_func);
 

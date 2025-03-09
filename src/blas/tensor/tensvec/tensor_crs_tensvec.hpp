@@ -1,4 +1,5 @@
 #pragma once
+#include "../../../internal/monolish_internal.hpp"
 #include "../../matrix/matvec/crs_matvec.hpp"
 #include "../../matrix/matvec/dense_matvec.hpp"
 
@@ -23,20 +24,26 @@ void Dtensvec_core(const double &a, const tensor::tensor_CRS<double> &A,
 
   int nsum = 0;
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    std::vector<double> tmp(A.col_inds[d].size() + 1);
-    for (size_t i = 0; i < A.col_inds[d].size(); ++i) {
-      tmp[i] = A.begin()[i + nsum];
+    std::vector<double> Aval(A.col_inds[d].size());
+    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d], Aval);
+    std::vector<double> Cval(row);
+    monolish::vector<double> Cvec(Cval);
+    if (A.get_device_mem_stat()) {
+      Amat.send();
+      Cvec.send();
     }
-    matrix::CRS<double> Amat(row, col, A.row_ptrs[d], A.col_inds[d], tmp);
-    monolish::vector<double> Cvec(row);
-    for (size_t i = 0; i < row; ++i) {
-      Cvec.begin()[i] = C.begin()[d * row + i];
-    }
+    internal::vcopy(Aval.size(), A.begin() + nsum, Amat.begin(),
+                    A.get_device_mem_stat());
+    internal::vcopy(Cval.size(), C.begin() + d * row, Cvec.begin(),
+                    A.get_device_mem_stat());
     Dmatvec_core(a, Amat, x, b, Cvec, transA);
-    for (size_t i = 0; i < row; ++i) {
-      C.begin()[d * row + i] = Cvec.begin()[i];
-    }
     nsum += A.col_inds[d].size();
+    internal::vcopy(Cval.size(), Cvec.begin(), C.begin() + d * row,
+                    A.get_device_mem_stat());
+    if (A.get_device_mem_stat()) {
+      Amat.recv();
+      Cvec.recv();
+    }
   }
 
   logger.func_out();
@@ -61,20 +68,26 @@ void Stensvec_core(const float &a, const tensor::tensor_CRS<float> &A,
 
   int nsum = 0;
   for (size_t d = 0; d < A.row_ptrs.size(); ++d) {
-    std::vector<float> tmp(A.col_inds[d].size() + 1);
-    for (size_t i = 0; i < A.col_inds[d].size(); ++i) {
-      tmp[i] = A.begin()[i + nsum];
+    std::vector<float> Aval(A.col_inds[d].size());
+    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d], Aval);
+    std::vector<float> Cval(row);
+    monolish::vector<float> Cvec(Cval);
+    if (A.get_device_mem_stat()) {
+      Amat.send();
+      Cvec.send();
     }
-    matrix::CRS<float> Amat(row, col, A.row_ptrs[d], A.col_inds[d], tmp);
-    vector<float> Cvec(row);
-    for (size_t i = 0; i < row; ++i) {
-      Cvec.begin()[i] = C.begin()[d * row + i];
-    }
+    internal::vcopy(Aval.size(), A.begin() + nsum, Amat.begin(),
+                    A.get_device_mem_stat());
+    internal::vcopy(Cval.size(), C.begin() + d * row, Cvec.begin(),
+                    A.get_device_mem_stat());
     Smatvec_core(a, Amat, x, b, Cvec, transA);
-    for (size_t i = 0; i < row; ++i) {
-      C.begin()[d * row + i] = Cvec.begin()[i];
-    }
     nsum += A.col_inds[d].size();
+    internal::vcopy(Cval.size(), Cvec.begin(), C.begin() + d * row,
+                    A.get_device_mem_stat());
+    if (A.get_device_mem_stat()) {
+      Amat.recv();
+      Cvec.recv();
+    }
   }
 
   logger.func_out();
