@@ -1,0 +1,9 @@
+<map id="monolish::matrix::Dense::transpose" name="monolish::matrix::Dense::transpose">
+<area shape="rect" id="node1" title="get transposed matrix (A^T)" alt="" coords="5,155,188,197"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#ab92f9d83f7cd1f7818e8688a0d76b2c5" title="Dense matrix copy (C=A)" alt="" coords="253,5,409,32"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a5c1c023a5bc19523a8fa30f52e60eea4" title="get # of col" alt="" coords="240,57,423,98"/>
+<area shape="rect" id="node4" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="250,122,413,163"/>
+<area shape="rect" id="node5" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a846aea2488ce2147c0ff0ab795ce2dcd" title="get # of row" alt="" coords="240,187,423,229"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="240,253,423,280"/>
+<area shape="rect" id="node7" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="236,304,427,331"/>
+</map>

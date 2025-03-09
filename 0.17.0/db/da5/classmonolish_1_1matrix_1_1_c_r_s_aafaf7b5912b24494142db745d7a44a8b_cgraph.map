@@ -1,0 +1,5 @@
+<map id="monolish::matrix::CRS::~CRS" name="monolish::matrix::CRS::~CRS">
+<area shape="rect" id="node1" title="destructor of CRS matrix, free GPU memory" alt="" coords="5,39,172,80"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#ac1285c70f9537a7b652fce52450e5d39" title="free data on GPU" alt="" coords="224,5,391,47"/>
+<area shape="rect" id="node3" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#aea4907e6e4255ac9f0c75f2576d716f9" title="true: sended, false: not send" alt="" coords="220,71,395,112"/>
+</map>

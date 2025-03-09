@@ -1,0 +1,9 @@
+<map id="monolish::blas::rmatvec" name="monolish::blas::rmatvec">
+<area shape="rect" id="node1" title="matrix (LinearOperator) and vector multiplication: y = Ax" alt="" coords="459,129,637,156"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#acdba2584824afcc2080d013f510188b5" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="20,5,167,32"/>
+<area shape="rect" id="node3" href="$d8/d91/namespacemonolish_1_1vml.html#af2c8f133f5fcdf25ab4efede669667f4" title="element by element division LinearOperator matrix A and LinearOperator matrix B." alt="" coords="22,85,165,112"/>
+<area shape="rect" id="node4" href="$d5/d40/namespacemonolish_1_1blas.html#ac6a8622c6698b596db0660589f4bcb94" title="LinearOperator multiplication: C = AB." alt="" coords="5,137,181,164"/>
+<area shape="rect" id="node5" href="$d8/d91/namespacemonolish_1_1vml.html#aa5ff602c4c40d044f43676d9b4f30729" title="element by element multiplication LinearOperator matrix A and LinearOperator matrix B." alt="" coords="19,189,167,216"/>
+<area shape="rect" id="node6" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a4d2a671eb57675fed76eaae9843d6f6a" title="set multiplication function of (Hermitian) transposed matrix and vector" alt="" coords="229,93,411,134"/>
+<area shape="rect" id="node7" href="$d8/d91/namespacemonolish_1_1vml.html#a61ff4611c135abb6241ed97f96ef207a" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="20,244,167,271"/>
+</map>

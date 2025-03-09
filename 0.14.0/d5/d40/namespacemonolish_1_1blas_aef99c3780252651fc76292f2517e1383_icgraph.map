@@ -1,0 +1,7 @@
+<map id="monolish::blas::axpy" name="monolish::blas::axpy">
+<area shape="rect" id="node1" title="axpy: y = ax + y" alt="" coords="216,108,373,135"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#acdba2584824afcc2080d013f510188b5" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="13,5,160,32"/>
+<area shape="rect" id="node3" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="5,56,168,112"/>
+<area shape="rect" id="node4" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#acf6f67d48e90f2e49c7570a1fb371fc9" title=" " alt="" coords="13,137,160,178"/>
+<area shape="rect" id="node5" href="$d8/d91/namespacemonolish_1_1vml.html#a61ff4611c135abb6241ed97f96ef207a" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="13,203,160,229"/>
+</map>

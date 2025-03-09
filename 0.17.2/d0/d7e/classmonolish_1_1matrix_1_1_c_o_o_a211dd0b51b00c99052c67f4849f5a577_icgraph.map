@@ -1,0 +1,8 @@
+<map id="monolish::matrix::COO::data" name="monolish::matrix::COO::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the vector" alt="" coords="256,123,427,164"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a3c02c06772617883262204326d1bc368" title="returns a begin iterator" alt="" coords="21,5,192,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#af13262fe005ea84d3c3c542ba760c163" title="returns a end iterator" alt="" coords="5,71,208,98"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ac4651626852eef3a6af1edc30f6215a6" title="get value" alt="" coords="21,123,192,164"/>
+<area shape="rect" id="node5" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab0432d4d4e4ab55547a4054180ee103f" title="reference to the element at position (v[i])" alt="" coords="21,188,192,229"/>
+<area shape="rect" id="node6" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab747bc2e837c199ab4f20222a6d151e6" title="resize matrix value" alt="" coords="21,253,192,295"/>
+</map>

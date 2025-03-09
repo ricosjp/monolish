@@ -1,0 +1,12 @@
+<map id="monolish::matrix::LinearOperator::operator=" name="monolish::matrix::LinearOperator::operator=">
+<area shape="rect" id="node1" title="operator copy" alt="" coords="5,267,187,308"/>
+<area shape="rect" id="node2" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#abe4ae3660bb4cb693e9ae5e37e10cdf9" title="get # of col" alt="" coords="255,5,437,47"/>
+<area shape="rect" id="node3" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="265,71,427,112"/>
+<area shape="rect" id="node4" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ad60dc7589b26d8ba9baaca2bddb55302" title="get multiplication function of matrix and vector" alt="" coords="255,136,437,177"/>
+<area shape="rect" id="node5" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ac1e056db763f530045d436d04d9ea770" title="get flag that shows matvec is defined or not" alt="" coords="235,201,457,243"/>
+<area shape="rect" id="node6" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a972bdb423e5bf1b413d4d2a0e353495c" title="get multiplication function of (Hermitian) transposed matrix and vector C = A;" alt="" coords="255,267,437,308"/>
+<area shape="rect" id="node7" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a3fb7f904f293b16faae6db7e398e7be8" title="get flag that shows rmatvec is defined or not" alt="" coords="255,333,437,389"/>
+<area shape="rect" id="node8" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#ac028d6dd72f05d0c38f3a883b35c2537" title="get # of row" alt="" coords="255,413,437,455"/>
+<area shape="rect" id="node9" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="255,479,437,506"/>
+<area shape="rect" id="node10" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="251,530,441,557"/>
+</map>

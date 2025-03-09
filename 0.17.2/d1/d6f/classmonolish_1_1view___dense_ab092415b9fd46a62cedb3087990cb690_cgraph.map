@@ -1,0 +1,4 @@
+<map id="monolish::view_Dense::view_Dense" name="monolish::view_Dense::view_Dense">
+<area shape="rect" id="node1" title="create view_Dense from Dense matrix(start:start+range)" alt="" coords="5,5,175,47"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="223,5,405,47"/>
+</map>

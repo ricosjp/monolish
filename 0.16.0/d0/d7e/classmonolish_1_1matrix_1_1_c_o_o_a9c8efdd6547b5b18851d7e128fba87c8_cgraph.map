@@ -1,0 +1,6 @@
+<map id="monolish::matrix::COO::COO" name="monolish::matrix::COO::COO">
+<area shape="rect" id="node1" title="Create COO matrix from std::vector." alt="" coords="5,56,212,83"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a4bc5c049dd756b29a0bcbbdc45f471ad" title="get column vector" alt="" coords="265,5,462,32"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a5d9f525a6276b7cb423799f99de198b4" title=" " alt="" coords="260,56,467,83"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#af4e0337eb46a5b0cbbcb9514f3ceb09c" title="get row vector" alt="" coords="262,107,465,133"/>
+</map>

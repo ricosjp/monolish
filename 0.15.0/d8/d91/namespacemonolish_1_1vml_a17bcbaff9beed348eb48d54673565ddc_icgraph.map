@@ -1,0 +1,4 @@
+<map id="monolish::vml::max" name="monolish::vml::max">
+<area shape="rect" id="node1" title="Create a new CRS matrix with greatest elements of two matrices (C[0:nnz] = max(A[0:nnz],..." alt="" coords="232,13,384,39"/>
+<area shape="rect" id="node2" href="$db/dac/classmonolish_1_1solver_1_1solver.html#a7d7786e1a01ad8d5992e7a41a6ba6039" title="set max iter. (default = SIZE_MAX)" alt="" coords="5,5,184,47"/>
+</map>

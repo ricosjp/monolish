@@ -1,0 +1,7 @@
+<map id="monolish::tensor::tensor_Dense::data" name="monolish::tensor::tensor_Dense::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the tensor" alt="" coords="477,71,657,112"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#abb8c1e750449bc73040568d3c9e1d6fe" title="reference to the element at position (v[i])" alt="" coords="241,5,421,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ae7f5b80673693d5d6a94564d8714052c" title="resize tensor value" alt="" coords="241,71,421,112"/>
+<area shape="rect" id="node5" href="$d2/d67/classmonolish_1_1view1_d.html#a5c5af3026e329ee3a5c69506f8636201" title="create view1D(start:end) from Dense tensor" alt="" coords="233,137,429,163"/>
+<area shape="rect" id="node4" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a61b7e0773c96b8b6a45842e37ec62dfb" title="resize tensor value" alt="" coords="5,71,185,112"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="monolish::matrix::COO::set_row" name="monolish::matrix::COO::set_row">
+<area shape="rect" id="node1" title="Set row number." alt="" coords="224,5,395,47"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a71365ab803e071e70e5dae25ba1a392b" title="create transposed matrix from COO matrix (A = B^T)" alt="" coords="5,5,176,47"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="monolish::vector::push_back" name="monolish::vector::push_back">
+<area shape="rect" id="node1" title="Add a new element at the end of the vector (only CPU)" alt="" coords="5,56,213,83"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#a43f461dc7f57aae4ce40a79c4f426ba9" title="returns a direct pointer to the vector" alt="" coords="488,5,656,32"/>
+<area shape="rect" id="node3" href="$d7/d15/classmonolish_1_1vector.html#ad83e7621982a43736f19608ccedb2ccd" title="true: sended, false: not send" alt="" coords="492,107,652,149"/>
+<area shape="rect" id="node4" href="$d7/d15/classmonolish_1_1vector.html#a1aa0ec3bbd6a52a1c3546c3f06dae352" title="resize vector (only CPU)" alt="" coords="261,56,440,83"/>
+<area shape="rect" id="node5" href="$d7/d62/group__vml__crscrsmin.html#ga1e97a78b4c9fc5dfbeff1e9d6fcf96b3" title="Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz],..." alt="" coords="498,56,646,83"/>
+</map>

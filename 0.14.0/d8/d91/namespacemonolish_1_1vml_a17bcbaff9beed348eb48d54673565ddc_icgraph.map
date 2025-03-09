@@ -1,0 +1,6 @@
+<map id="monolish::vml::max" name="monolish::vml::max">
+<area shape="rect" id="node1" title="Create a new CRS matrix with greatest elements of two matrices (C[0:nnz] = max(A[0:nnz],..." alt="" coords="232,78,384,105"/>
+<area shape="rect" id="node2" href="$d0/d47/namespacemonolish_1_1util.html#a60d78bd7fb4e9378cfcb6206dfa8609e" title="create Frank matrix" alt="" coords="18,5,171,47"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#a1eee8c67e624a62a391b31644179d6df" title="create random vector" alt="" coords="10,71,179,112"/>
+<area shape="rect" id="node4" href="$db/dac/classmonolish_1_1solver_1_1solver.html#a7d7786e1a01ad8d5992e7a41a6ba6039" title="set max iter. (default = SIZE_MAX)" alt="" coords="5,136,184,177"/>
+</map>

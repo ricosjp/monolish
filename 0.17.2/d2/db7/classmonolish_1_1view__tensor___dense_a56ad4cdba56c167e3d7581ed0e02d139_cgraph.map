@@ -1,0 +1,5 @@
+<map id="monolish::view_tensor_Dense::view_tensor_Dense" name="monolish::view_tensor_Dense::view_tensor_Dense">
+<area shape="rect" id="node1" title="create view_tensor_Dense from Dense matrix(start:start+range)" alt="" coords="5,39,211,80"/>
+<area shape="rect" id="node2" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#aef68135e10c1c594e0cab88facb14298" title="calculate view_tensor_Dense size from shape" alt="" coords="265,5,435,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="259,71,441,112"/>
+</map>

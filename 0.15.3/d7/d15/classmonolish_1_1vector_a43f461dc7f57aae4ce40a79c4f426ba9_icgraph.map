@@ -1,0 +1,5 @@
+<map id="monolish::vector::data" name="monolish::vector::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the vector" alt="" coords="260,31,428,57"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a66a917b2c818620371cf62b17f90a15d" title="Create COO matrix from monolish::vector." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node3" href="$d2/d67/classmonolish_1_1view1_d.html#acdcb9edd885115699af581a124077175" title="create view1D(start:end) from vector" alt="" coords="11,56,207,83"/>
+</map>

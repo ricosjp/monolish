@@ -1,0 +1,5 @@
+<map id="monolish::matrix::COO::get_nnz" name="monolish::matrix::COO::get_nnz">
+<area shape="rect" id="node1" title="get # of non&#45;zeros" alt="" coords="224,39,395,80"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#af8aeb26a1191e38d5ec1df8e9f9def2b" title="Memory data space required by the matrix." alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node3" href="$d0/d47/namespacemonolish_1_1util.html#ad4dfeabe0301ee1a2c270bd5f7239273" title="compare structure using col_index and row_index, M, and N" alt="" coords="25,71,156,112"/>
+</map>

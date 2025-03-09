@@ -1,0 +1,4 @@
+<map id="monolish::view1D::get_offset" name="monolish::view1D::get_offset">
+<area shape="rect" id="node1" title="get first position (same as get_first())" alt="" coords="236,5,404,47"/>
+<area shape="rect" id="node2" href="$d2/d67/classmonolish_1_1view1_d.html#acfd86f33972f54007b4cbe19dea4dcb6" title="returns begin iterator (include offset)" alt="" coords="5,13,188,39"/>
+</map>

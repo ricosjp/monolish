@@ -1,0 +1,11 @@
+<map id="monolish::tensor::tensor_Dense::data" name="monolish::tensor::tensor_Dense::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the tensor" alt="" coords="715,188,895,229"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#aba0d80d7a617cdb26e293d40010a9504" title="returns a begin iterator" alt="" coords="474,5,654,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ae7f5b80673693d5d6a94564d8714052c" title="resize tensor value" alt="" coords="233,35,413,76"/>
+<area shape="rect" id="node5" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#aa636db63e9bd020df902cc946ebe0fab" title="returns a end iterator" alt="" coords="474,123,654,164"/>
+<area shape="rect" id="node6" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#abb8c1e750449bc73040568d3c9e1d6fe" title="reference to the element at position (v[i])" alt="" coords="474,188,654,229"/>
+<area shape="rect" id="node7" href="$d2/d67/classmonolish_1_1view1_d.html#a02cf8648fedb49b9c03b111095cb89cd" title="create view1D(start:start+range) from Dense tensor" alt="" coords="466,254,662,281"/>
+<area shape="rect" id="node8" href="$d1/d6f/classmonolish_1_1view___dense.html#ad84b40e2d9b3dd9b9212c563d988e1fd" title="create view_Dense from Dense tensor(start:start+range)" alt="" coords="479,305,649,347"/>
+<area shape="rect" id="node9" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#a3a91f33cf73101d743b9a25cd8cde398" title="create view_tensor_Dense from Dense tensor(start:start+range)" alt="" coords="461,371,667,412"/>
+<area shape="rect" id="node4" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a61b7e0773c96b8b6a45842e37ec62dfb" title="resize tensor value" alt="" coords="5,35,185,76"/>
+</map>

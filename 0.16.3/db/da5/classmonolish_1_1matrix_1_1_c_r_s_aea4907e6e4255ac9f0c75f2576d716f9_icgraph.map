@@ -1,0 +1,4 @@
+<map id="monolish::matrix::CRS::get_device_mem_stat" name="monolish::matrix::CRS::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="220,5,395,47"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#aafaf7b5912b24494142db745d7a44a8b" title="destructor of CRS matrix, free GPU memory" alt="" coords="5,5,172,47"/>
+</map>

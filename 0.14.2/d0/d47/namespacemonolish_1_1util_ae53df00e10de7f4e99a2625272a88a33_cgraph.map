@@ -1,0 +1,7 @@
+<map id="monolish::util::laplacian_matrix_2D_5p" name="monolish::util::laplacian_matrix_2D_5p">
+<area shape="rect" id="node1" title="create two dimensional Laplacian matrix using the five point central difference scheme" alt="" coords="5,100,184,141"/>
+<area shape="rect" id="node2" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="246,5,409,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#adbaf0d3634e9d2d215de2230bb3575ab" title="insert element to (m, n)" alt="" coords="242,71,413,112"/>
+<area shape="rect" id="node4" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="236,137,419,163"/>
+<area shape="rect" id="node5" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="232,187,423,214"/>
+</map>

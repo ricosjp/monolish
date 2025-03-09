@@ -1,0 +1,10 @@
+<map id="monolish::vector::data" name="monolish::vector::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the vector" alt="" coords="516,157,684,184"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#ad07f80a88e2877681be8a26c059746df" title="returns a begin iterator" alt="" coords="277,5,452,32"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a66a917b2c818620371cf62b17f90a15d" title="Create COO matrix from monolish::vector." alt="" coords="261,56,468,83"/>
+<area shape="rect" id="node4" href="$d7/d15/classmonolish_1_1vector.html#a594beaad6dfc6f6ba8429b21f875431c" title="returns a end iterator" alt="" coords="283,107,446,133"/>
+<area shape="rect" id="node5" href="$d7/d15/classmonolish_1_1vector.html#a0a6c023b59e2592f47dc06ce6a64021e" title="reference to the element at position (v[i])" alt="" coords="263,157,467,184"/>
+<area shape="rect" id="node6" href="$d7/d15/classmonolish_1_1vector.html#ab3364b4c81489354c9d95aa400171f8d" title="Add a new element at the end of the vector (only CPU)" alt="" coords="5,233,213,260"/>
+<area shape="rect" id="node7" href="$d7/d15/classmonolish_1_1vector.html#a1aa0ec3bbd6a52a1c3546c3f06dae352" title="resize vector (only CPU)" alt="" coords="275,259,454,285"/>
+<area shape="rect" id="node8" href="$d2/d67/classmonolish_1_1view1_d.html#acdcb9edd885115699af581a124077175" title="create view1D(start:end) from vector" alt="" coords="267,309,463,336"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="monolish::vector::get_first" name="monolish::vector::get_first">
+<area shape="rect" id="node1" title="get first position" alt="" coords="436,23,596,65"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#a84433bc6e8c39e20cd8eda36297c0e88" title="get first position (same as get_first())" alt="" coords="228,23,388,65"/>
+<area shape="rect" id="node3" href="$d7/d15/classmonolish_1_1vector.html#ad07f80a88e2877681be8a26c059746df" title="returns a begin iterator" alt="" coords="5,5,180,32"/>
+<area shape="rect" id="node4" href="$d7/d15/classmonolish_1_1vector.html#a594beaad6dfc6f6ba8429b21f875431c" title="returns a end iterator" alt="" coords="11,56,174,83"/>
+</map>

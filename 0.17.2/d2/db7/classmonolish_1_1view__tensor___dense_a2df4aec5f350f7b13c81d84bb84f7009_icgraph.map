@@ -1,0 +1,4 @@
+<map id="monolish::view_tensor_Dense::get_offset" name="monolish::view_tensor_Dense::get_offset">
+<area shape="rect" id="node1" title="get first position (same as get_first())" alt="" coords="223,5,392,47"/>
+<area shape="rect" id="node2" href="$d2/db7/classmonolish_1_1view__tensor___dense.html#a4b6b7f5d64592230fc336451314fd484" title="returns begin iterator (include offset)" alt="" coords="5,5,175,47"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="monolish::mpi::comm::Isend" name="monolish::mpi::comm::Isend">
+<area shape="rect" id="node1" title="MPI_Isend for std::vector. Performs a nonblocking send. Requests are stored internally...." alt="" coords="5,5,169,47"/>
+<area shape="rect" id="node2" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#aafe15be48e2a7f51e4949fa1945a406d" title="get communicator" alt="" coords="217,5,381,47"/>
+</map>

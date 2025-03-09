@@ -1,0 +1,6 @@
+<map id="monolish::matrix::Dense::data" name="monolish::matrix::Dense::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the matrix" alt="" coords="249,71,432,112"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#ab84218b806efe52ae82ed9dfc7d00d57" title="reference to the element at position (v[i])" alt="" coords="12,5,195,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8a518129bd545c41c2ae260ee4b91047" title="resize matrix value" alt="" coords="12,71,195,112"/>
+<area shape="rect" id="node4" href="$d2/d67/classmonolish_1_1view1_d.html#a66d4a11c43c18a5e342cd5861ce2afde" title="create view1D(start:end) from Dense matrix" alt="" coords="5,137,201,163"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="monolish::vml::min" name="monolish::vml::min">
+<area shape="rect" id="node1" title="Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz],..." alt="" coords="232,111,380,138"/>
+<area shape="rect" id="node2" href="$d0/d47/namespacemonolish_1_1util.html#a1eee8c67e624a62a391b31644179d6df" title="create random vector" alt="" coords="10,5,179,47"/>
+<area shape="rect" id="node3" href="$db/dac/classmonolish_1_1solver_1_1solver.html#a12b2457e1d07949596b3b325f8c88c34" title="set min iter. (default = 0)" alt="" coords="5,71,184,112"/>
+<area shape="rect" id="node4" href="$da/da4/classmonolish_1_1equation_1_1_l_u.html#aee8cceb56aa18de646f4ed617d536a8b" title=" " alt="" coords="21,136,168,177"/>
+<area shape="rect" id="node5" href="$d6/d4a/classmonolish_1_1equation_1_1_cholesky.html#a679ab6de5ea6f8f14fe8cc7ec3d097ef" title=" " alt="" coords="21,201,168,243"/>
+</map>

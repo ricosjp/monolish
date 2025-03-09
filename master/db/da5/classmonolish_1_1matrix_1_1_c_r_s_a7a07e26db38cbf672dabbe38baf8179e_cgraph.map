@@ -1,0 +1,9 @@
+<map id="monolish::matrix::CRS::resize" name="monolish::matrix::CRS::resize">
+<area shape="rect" id="node1" title="resize matrix value" alt="" coords="5,97,172,139"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#ab05d64906f318d934b5d6ad22f0b26d2" title="returns a begin iterator" alt="" coords="224,64,391,105"/>
+<area shape="rect" id="node3" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a25eccc14a38af44d3a035fe857e24354" title="returns a direct pointer to the matrix" alt="" coords="443,5,609,47"/>
+<area shape="rect" id="node6" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#aea4907e6e4255ac9f0c75f2576d716f9" title="true: sended, false: not send" alt="" coords="220,129,395,171"/>
+<area shape="rect" id="node7" href="$d7/d62/group__vml__crscrsmin.html#ga1e97a78b4c9fc5dfbeff1e9d6fcf96b3" title="Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz],..." alt="" coords="233,195,381,222"/>
+<area shape="rect" id="node4" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a8c2618f20b65a509605a8d90a5ab48bd" title="get first position (same as get_first())" alt="" coords="443,71,609,112"/>
+<area shape="rect" id="node5" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a6b0972dadaf8fc33bbdfa248d09c429d" title="get first position" alt="" coords="657,71,824,112"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="monolish::tensor::tensor_Dense::get_first" name="monolish::tensor::tensor_Dense::get_first">
+<area shape="rect" id="node1" title="get first position" alt="" coords="917,39,1097,80"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#af49e88e776eaeac6ffc3c2b8ccffb316" title="get first position (same as get_first())" alt="" coords="689,39,869,80"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#aba0d80d7a617cdb26e293d40010a9504" title="returns a begin iterator" alt="" coords="461,5,641,47"/>
+<area shape="rect" id="node6" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#aa636db63e9bd020df902cc946ebe0fab" title="returns a end iterator" alt="" coords="461,71,641,112"/>
+<area shape="rect" id="node4" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ae7f5b80673693d5d6a94564d8714052c" title="resize tensor value" alt="" coords="233,5,413,47"/>
+<area shape="rect" id="node5" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a61b7e0773c96b8b6a45842e37ec62dfb" title="resize tensor value" alt="" coords="5,5,185,47"/>
+</map>

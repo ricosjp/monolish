@@ -1,0 +1,4 @@
+<map id="monolish::matrix::COO::get_val_ptr" name="monolish::matrix::COO::get_val_ptr">
+<area shape="rect" id="node1" title="get value" alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a211dd0b51b00c99052c67f4849f5a577" title="returns a direct pointer to the vector" alt="" coords="224,5,395,47"/>
+</map>

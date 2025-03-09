@@ -1,0 +1,4 @@
+<map id="monolish::matrix::Dense::at" name="monolish::matrix::Dense::at">
+<area shape="rect" id="node1" title="get element A[i][j]" alt="" coords="256,5,459,32"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a05137f7ae5577a299e9603ff428060ff" title="get element A[i][j] (only CPU)" alt="" coords="5,5,208,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="monolish::tensor::tensor_COO::get_device_mem_stat" name="monolish::tensor::tensor_COO::get_device_mem_stat">
+<area shape="rect" id="node1" title="true: sended, false: not send" alt="" coords="233,39,444,80"/>
+<area shape="rect" id="node2" href="$d5/d9e/classmonolish_1_1tensor_1_1tensor___c_o_o.html#a9d89784b6172467f2f8110010cae4655" title="reference to the element at position (v[i])" alt="" coords="5,5,185,47"/>
+<area shape="rect" id="node3" href="$d5/d9e/classmonolish_1_1tensor_1_1tensor___c_o_o.html#a1eeea8022f64e1c5b0570cd7db6b3483" title="resize tensor value" alt="" coords="5,71,185,112"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="monolish::util::is_same_device_mem_stat" name="monolish::util::is_same_device_mem_stat">
+<area shape="rect" id="node1" title="compare same device memory status" alt="" coords="241,217,429,258"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#acdba2584824afcc2080d013f510188b5" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="26,5,173,32"/>
+<area shape="rect" id="node3" href="$d8/d91/namespacemonolish_1_1vml.html#af2c8f133f5fcdf25ab4efede669667f4" title="element by element division LinearOperator matrix A and LinearOperator matrix B." alt="" coords="28,56,171,83"/>
+<area shape="rect" id="node4" href="$d0/d47/namespacemonolish_1_1util.html#a7a2c27583a10b48cae654e46dbdc5949" title="compare same device memory status" alt="" coords="5,107,193,149"/>
+<area shape="rect" id="node5" href="$d5/d40/namespacemonolish_1_1blas.html#a44a05a49ede633ae28044aafbf9f1c1d" title="CRS and Dense matrix multiplication: C = AB." alt="" coords="11,173,187,200"/>
+<area shape="rect" id="node6" href="$d8/d91/namespacemonolish_1_1vml.html#aa5ff602c4c40d044f43676d9b4f30729" title="element by element multiplication LinearOperator matrix A and LinearOperator matrix B." alt="" coords="25,224,173,251"/>
+<area shape="rect" id="node7" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a608859b959a905d5c83d91184d71ffaf" title="matrix copy" alt="" coords="16,275,183,317"/>
+<area shape="rect" id="node8" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a6c1478d893c960b67387c184f6a3bcf9" title="matrix copy" alt="" coords="8,341,191,382"/>
+<area shape="rect" id="node9" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ab801be1308ea93531ab8038cd70b99cc" title="matrix copy" alt="" coords="14,406,185,447"/>
+<area shape="rect" id="node10" href="$d8/d91/namespacemonolish_1_1vml.html#a61ff4611c135abb6241ed97f96ef207a" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="26,472,173,499"/>
+</map>

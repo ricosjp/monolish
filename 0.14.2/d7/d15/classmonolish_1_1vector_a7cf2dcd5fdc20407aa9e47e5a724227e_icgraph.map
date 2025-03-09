@@ -1,0 +1,4 @@
+<map id="monolish::vector::device_free" name="monolish::vector::device_free">
+<area shape="rect" id="node1" title="free data on GPU" alt="" coords="192,13,407,39"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#ab8ffc2070f54ff3dae4dd4e0ac781ca0" title="destructor of vector, free GPU memory" alt="" coords="5,5,144,47"/>
+</map>

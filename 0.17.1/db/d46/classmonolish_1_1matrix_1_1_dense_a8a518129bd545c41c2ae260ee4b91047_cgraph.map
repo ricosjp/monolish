@@ -1,0 +1,6 @@
+<map id="monolish::matrix::Dense::resize" name="monolish::matrix::Dense::resize">
+<area shape="rect" id="node1" title="resize matrix value" alt="" coords="5,71,188,112"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="236,5,419,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a1c4b3d97a2db5c1bd12662fa2f391f4e" title="true: sended, false: not send" alt="" coords="236,71,419,112"/>
+<area shape="rect" id="node4" href="$d7/d62/group__vml__crscrsmin.html#ga1e97a78b4c9fc5dfbeff1e9d6fcf96b3" title="Create a new CRS matrix with smallest elements of two matrices (C[0:nnz] = min(A[0:nnz],..." alt="" coords="253,137,401,163"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="monolish::matrix::Dense::end" name="monolish::matrix::Dense::end">
+<area shape="rect" id="node1" title="returns a end iterator" alt="" coords="5,78,220,105"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a57cfdeb90a9b0c1a3432949aa9dbef0f" title="returns a direct pointer to the matrix" alt="" coords="268,5,451,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a9f453522189f158c8e48b0f3a26f18e0" title="get # of non&#45;zeros" alt="" coords="268,71,451,112"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#acc252fec23b3ca6677a5526559f32903" title="get first position (same as get_first())" alt="" coords="268,136,451,177"/>
+<area shape="rect" id="node5" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a60454a87dd33187d3bf9070b7e87c2e9" title="get first position" alt="" coords="499,136,681,177"/>
+</map>

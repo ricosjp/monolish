@@ -1,0 +1,7 @@
+<map id="monolish::tensor::tensor_Dense::end" name="monolish::tensor::tensor_Dense::end">
+<area shape="rect" id="node1" title="returns a end iterator" alt="" coords="5,71,185,112"/>
+<area shape="rect" id="node2" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a9f9b7aa813d00e37d231aa4a4c2dec9b" title="returns a direct pointer to the tensor" alt="" coords="233,5,413,47"/>
+<area shape="rect" id="node3" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#ab09f585dba340fa460028c2f14893f79" title="get # of non&#45;zeros" alt="" coords="233,71,413,112"/>
+<area shape="rect" id="node4" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#af49e88e776eaeac6ffc3c2b8ccffb316" title="get first position (same as get_first())" alt="" coords="233,136,413,177"/>
+<area shape="rect" id="node5" href="$d0/d15/classmonolish_1_1tensor_1_1tensor___dense.html#a1628a4125ed064e40b1897f07a08e907" title="get first position" alt="" coords="461,136,641,177"/>
+</map>

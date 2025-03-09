@@ -1,0 +1,9 @@
+<map id="monolish::matrix::COO::transpose" name="monolish::matrix::COO::transpose">
+<area shape="rect" id="node1" title="create transposed matrix from COO matrix (A = B^T)" alt="" coords="5,169,176,211"/>
+<area shape="rect" id="node2" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="238,5,401,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a4ac9a82421c0003853da901df6e0fd8a" title="Set col number." alt="" coords="234,71,405,112"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#a9cf3c0d39e7ca3ab5758f8b2a40b876e" title="Set # of non&#45;zero elements." alt="" coords="234,136,405,177"/>
+<area shape="rect" id="node5" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#afe63f41739c103205c3e7060db7e9224" title="Set row number." alt="" coords="234,201,405,243"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="228,267,411,294"/>
+<area shape="rect" id="node7" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="224,318,415,345"/>
+</map>

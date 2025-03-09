@@ -1,0 +1,7 @@
+<map id="monolish::mpi::comm::Barrier" name="monolish::mpi::comm::Barrier">
+<area shape="rect" id="node1" title="Blocks until all processes in the communicator have reached this routine." alt="" coords="5,100,169,141"/>
+<area shape="rect" id="node2" href="$d5/d92/classmonolish_1_1mpi_1_1comm.html#aafe15be48e2a7f51e4949fa1945a406d" title="get communicator" alt="" coords="231,5,395,47"/>
+<area shape="rect" id="node3" href="$d0/dda/classmonolish_1_1_logger.html#a695fdd10db424e3c9040acc654c488b2" title=" " alt="" coords="231,71,394,112"/>
+<area shape="rect" id="node4" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="221,137,404,163"/>
+<area shape="rect" id="node5" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="217,187,408,214"/>
+</map>

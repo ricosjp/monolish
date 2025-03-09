@@ -1,0 +1,7 @@
+<map id="monolish::matrix::CRS::data" name="monolish::matrix::CRS::data">
+<area shape="rect" id="node1" title="returns a direct pointer to the matrix" alt="" coords="252,93,419,135"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#ab05d64906f318d934b5d6ad22f0b26d2" title="returns a begin iterator" alt="" coords="21,5,188,47"/>
+<area shape="rect" id="node3" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a931ce3f956d6529b9d38901960421fd2" title="returns a end iterator" alt="" coords="5,71,204,98"/>
+<area shape="rect" id="node4" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#acfb4c0312a8ecc709fe97a4309a93a58" title="reference to the element at position (v[i])" alt="" coords="21,123,188,164"/>
+<area shape="rect" id="node5" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a7a07e26db38cbf672dabbe38baf8179e" title="resize matrix value" alt="" coords="21,188,188,229"/>
+</map>

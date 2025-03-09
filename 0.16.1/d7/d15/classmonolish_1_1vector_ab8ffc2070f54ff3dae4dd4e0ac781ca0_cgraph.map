@@ -1,0 +1,5 @@
+<map id="monolish::vector::~vector" name="monolish::vector::~vector">
+<area shape="rect" id="node1" title="destructor of vector, free GPU memory" alt="" coords="5,27,144,69"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#af3b0bc470aef7f901cb118d88b1ef679" title="free data on GPU" alt="" coords="192,5,407,32"/>
+<area shape="rect" id="node3" href="$d7/d15/classmonolish_1_1vector.html#ad83e7621982a43736f19608ccedb2ccd" title="true: sended, false: not send" alt="" coords="219,57,379,98"/>
+</map>

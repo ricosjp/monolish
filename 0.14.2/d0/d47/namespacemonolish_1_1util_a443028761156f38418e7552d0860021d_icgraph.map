@@ -1,0 +1,13 @@
+<map id="monolish::util::send" name="monolish::util::send">
+<area shape="rect" id="node1" title="send data to GPU" alt="" coords="257,276,408,303"/>
+<area shape="rect" id="node2" href="$d8/d91/namespacemonolish_1_1vml.html#acdba2584824afcc2080d013f510188b5" title="element by element addition LinearOperator matrix A and LinearOperator matrix B." alt="" coords="34,5,181,32"/>
+<area shape="rect" id="node3" href="$dd/dfb/classmonolish_1_1matrix_1_1_linear_operator.html#a868ef0578885785ca65fba9f757645f7" title=" " alt="" coords="5,57,209,98"/>
+<area shape="rect" id="node4" href="$d8/d91/namespacemonolish_1_1vml.html#af2c8f133f5fcdf25ab4efede669667f4" title="element by element division LinearOperator matrix A and LinearOperator matrix B." alt="" coords="36,123,179,149"/>
+<area shape="rect" id="node5" href="$d5/d40/namespacemonolish_1_1blas.html#ac6a8622c6698b596db0660589f4bcb94" title="LinearOperator multiplication: C = AB." alt="" coords="19,173,195,200"/>
+<area shape="rect" id="node6" href="$d1/dde/classmonolish_1_1equation_1_1_bi_c_g_s_t_a_b.html#a0fe2811e639ca71d27381a9c1bed9398" title=" " alt="" coords="26,224,189,280"/>
+<area shape="rect" id="node7" href="$d0/dec/classmonolish_1_1equation_1_1_c_g.html#acf6f67d48e90f2e49c7570a1fb371fc9" title=" " alt="" coords="34,305,181,346"/>
+<area shape="rect" id="node8" href="$df/d69/classmonolish_1_1equation_1_1_jacobi.html#a531a438e8dd13ac37e127ecc298c44f9" title=" " alt="" coords="16,370,199,411"/>
+<area shape="rect" id="node9" href="$d8/d91/namespacemonolish_1_1vml.html#aa5ff602c4c40d044f43676d9b4f30729" title="element by element multiplication LinearOperator matrix A and LinearOperator matrix B." alt="" coords="33,436,181,463"/>
+<area shape="rect" id="node10" href="$d0/d47/namespacemonolish_1_1util.html#a00b70c7ee7c055d0c96c39e6607194a3" title="send datas to GPU" alt="" coords="32,487,183,513"/>
+<area shape="rect" id="node11" href="$d8/d91/namespacemonolish_1_1vml.html#a61ff4611c135abb6241ed97f96ef207a" title="element by element subtract LinearOperator matrix A and LinearOperator matrix B." alt="" coords="34,537,181,564"/>
+</map>

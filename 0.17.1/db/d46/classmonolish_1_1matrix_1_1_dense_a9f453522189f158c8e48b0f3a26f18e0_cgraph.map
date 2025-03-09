@@ -1,0 +1,5 @@
+<map id="monolish::matrix::Dense::get_nnz" name="monolish::matrix::Dense::get_nnz">
+<area shape="rect" id="node1" title="get # of non&#45;zeros" alt="" coords="5,39,188,80"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a5c1c023a5bc19523a8fa30f52e60eea4" title="get # of col" alt="" coords="236,5,419,47"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a846aea2488ce2147c0ff0ab795ce2dcd" title="get # of row" alt="" coords="236,71,419,112"/>
+</map>

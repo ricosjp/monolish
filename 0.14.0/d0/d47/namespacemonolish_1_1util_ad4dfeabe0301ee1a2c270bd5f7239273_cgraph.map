@@ -1,0 +1,8 @@
+<map id="monolish::util::is_same_structure" name="monolish::util::is_same_structure">
+<area shape="rect" id="node1" title="compare structure using col_index and row_index, M, and N" alt="" coords="5,136,136,177"/>
+<area shape="rect" id="node2" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ad8e551f918ffbcd275d919982ccf013b" title="get # of col" alt="" coords="194,5,365,47"/>
+<area shape="rect" id="node3" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#ac55f5f5dc8f3d3d76f75e5a801d6ca7a" title="get # of non&#45;zeros" alt="" coords="194,71,365,112"/>
+<area shape="rect" id="node4" href="$d0/d7e/classmonolish_1_1matrix_1_1_c_o_o.html#af27892f2720971d28d81967261d252d2" title="get # of row" alt="" coords="194,136,365,177"/>
+<area shape="rect" id="node5" href="$d0/dda/classmonolish_1_1_logger.html#a0d1e5348ac7d410ebcec20bbe780ab2e" title=" " alt="" coords="188,202,371,229"/>
+<area shape="rect" id="node6" href="$d0/dda/classmonolish_1_1_logger.html#a07488fb4f4f25adc6140566f616a4de3" title=" " alt="" coords="184,253,375,279"/>
+</map>

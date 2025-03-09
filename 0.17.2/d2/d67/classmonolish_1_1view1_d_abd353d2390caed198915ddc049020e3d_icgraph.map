@@ -1,0 +1,5 @@
+<map id="monolish::view1D::size" name="monolish::view1D::size">
+<area shape="rect" id="node1" title="get view1D size (range)" alt="" coords="249,42,423,69"/>
+<area shape="rect" id="node2" href="$dc/dbe/group__compare.html#gadab68c0b165f3b311d87132e69bf5bd8" title="compare structure of vector (same as is_same_size())" alt="" coords="38,5,169,47"/>
+<area shape="rect" id="node3" href="$d2/d67/classmonolish_1_1view1_d.html#a0b14f3b753ece10f7927923d92081595" title="create view1D(start:start+range) from vector" alt="" coords="5,71,201,98"/>
+</map>

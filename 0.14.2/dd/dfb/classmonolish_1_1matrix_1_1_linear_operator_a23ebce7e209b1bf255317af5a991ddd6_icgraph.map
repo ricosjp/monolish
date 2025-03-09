@@ -1,0 +1,4 @@
+<map id="monolish::matrix::LinearOperator::get_matmul_dense_init_flag" name="monolish::matrix::LinearOperator::get_matmul_dense_init_flag">
+<area shape="rect" id="node1" title="get flag that shows matmul_dense is defined or not" alt="" coords="229,5,441,61"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#acee8e44a8298a5646772ea5bf7cdf667" title="LinearOperator multiplication: C = AB." alt="" coords="5,20,181,47"/>
+</map>

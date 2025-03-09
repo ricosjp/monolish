@@ -1,0 +1,6 @@
+<map id="monolish::matrix::Dense::get_offset" name="monolish::matrix::Dense::get_offset">
+<area shape="rect" id="node1" title="get first position (same as get_first())" alt="" coords="499,35,681,76"/>
+<area shape="rect" id="node2" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8b2f57ae6a64a28ffc55f75efb49731d" title="returns a begin iterator" alt="" coords="252,5,435,47"/>
+<area shape="rect" id="node4" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a1fb437d05a9558a48563125099ca3f6d" title="returns a end iterator" alt="" coords="236,71,451,98"/>
+<area shape="rect" id="node3" href="$db/d46/classmonolish_1_1matrix_1_1_dense.html#a8a518129bd545c41c2ae260ee4b91047" title="resize matrix value" alt="" coords="5,5,188,47"/>
+</map>

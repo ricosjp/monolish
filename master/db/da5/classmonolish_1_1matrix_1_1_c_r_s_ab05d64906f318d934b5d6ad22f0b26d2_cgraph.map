@@ -1,0 +1,6 @@
+<map id="monolish::matrix::CRS::begin" name="monolish::matrix::CRS::begin">
+<area shape="rect" id="node1" title="returns a begin iterator" alt="" coords="5,39,172,80"/>
+<area shape="rect" id="node2" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a25eccc14a38af44d3a035fe857e24354" title="returns a direct pointer to the matrix" alt="" coords="220,5,387,47"/>
+<area shape="rect" id="node3" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a8c2618f20b65a509605a8d90a5ab48bd" title="get first position (same as get_first())" alt="" coords="220,71,387,112"/>
+<area shape="rect" id="node4" href="$db/da5/classmonolish_1_1matrix_1_1_c_r_s.html#a6b0972dadaf8fc33bbdfa248d09c429d" title="get first position" alt="" coords="435,71,601,112"/>
+</map>

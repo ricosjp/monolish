@@ -1,0 +1,5 @@
+<map id="monolish::view1D::view1D" name="monolish::view1D::view1D">
+<area shape="rect" id="node1" title="create view1D(start:end) from vector" alt="" coords="5,31,201,57"/>
+<area shape="rect" id="node2" href="$d7/d15/classmonolish_1_1vector.html#a43f461dc7f57aae4ce40a79c4f426ba9" title="returns a direct pointer to the vector" alt="" coords="251,5,419,32"/>
+<area shape="rect" id="node3" href="$d2/d67/classmonolish_1_1view1_d.html#a354c4e91e019823fa294b4b481fb8c84" title="returns a end iterator" alt="" coords="249,56,420,83"/>
+</map>

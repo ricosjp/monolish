@@ -1,0 +1,4 @@
+<map id="monolish::matrix::LinearOperator::get_matmul_dense" name="monolish::matrix::LinearOperator::get_matmul_dense">
+<area shape="rect" id="node1" title="get multiplication function of matrix and matrix dense" alt="" coords="229,5,441,47"/>
+<area shape="rect" id="node2" href="$d5/d40/namespacemonolish_1_1blas.html#acee8e44a8298a5646772ea5bf7cdf667" title="LinearOperator multiplication: C = AB." alt="" coords="5,13,181,39"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="monolish::view_Dense::at" name="monolish::view_Dense::at">
+<area shape="rect" id="node1" title="get element A[i][j] (only CPU)" alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$d1/d6f/classmonolish_1_1view___dense.html#af2e67f0a2c7bd9db2467a23c276c87dc" title="get element A[i/col][jcol]" alt="" coords="244,5,435,32"/>
+</map>
