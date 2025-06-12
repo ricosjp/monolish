@@ -55,7 +55,7 @@ bool test_convert2(const size_t M, const size_t N) {
   // ans COO (source)
 
   std::vector<int> row = {0, 0, 9, 9}, col = {0, 9, 0, 9};
-  std::vector<T> value = {1.0, 2.0, 3.0 ,4.0};
+  std::vector<T> value = {1.0, 2.0, 3.0, 4.0};
   monolish::matrix::COO<T> ans_coo(10, 10, 4, row, col, value);
 
   // convert COO -> MAT
