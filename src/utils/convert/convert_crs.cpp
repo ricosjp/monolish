@@ -30,7 +30,11 @@ template <typename T> void CRS<T>::convert(COO<T> &coo) {
     if ((int)c_row == coo.row_index[i]) {
       row_ptr[c_row + 1] = i + 1;
     } else {
-      c_row = c_row + 1;
+      // c_row = c_row + 1;
+      for (auto j = c_row + 1; j < coo.row_index[i]; j++) {
+        row_ptr[j + 1] = i;
+      }
+      c_row = coo.row_index[i];
       row_ptr[c_row + 1] = i + 1;
     }
   }
