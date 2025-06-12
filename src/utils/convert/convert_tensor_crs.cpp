@@ -48,7 +48,11 @@ void tensor_CRS<T>::convert(const tensor::tensor_COO<T> &coo) {
     if ((int)c_rows[upper_d_tmp] == coo.index[i][dim - 2]) {
       row_ptrs[upper_d_tmp][c_rows[upper_d_tmp] + 1] = new_i + 1;
     } else {
-      c_rows[upper_d_tmp] = c_rows[upper_d_tmp] + 1;
+      // c_rows[upper_d_tmp] = c_rows[upper_d_tmp] + 1;
+      for (auto j = c_rows[upper_d_tmp] + 1; j < coo.index[i][dim - 2]; j++) {
+        row_ptrs[upper_d_tmp][j + 1] = new_i;
+      }
+      c_rows[upper_d_tmp] = coo.index[i][dim - 2];
       row_ptrs[upper_d_tmp][c_rows[upper_d_tmp] + 1] = new_i + 1;
     }
     col_inds[upper_d_tmp].push_back(coo.index[i][dim - 1]);

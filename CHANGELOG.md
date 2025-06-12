@@ -55,6 +55,9 @@ Unreleased
 - Add variadic templates for reshape tensor <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/499> <https://github.com/ricosjp/monolish/issues/730>
 - Add tensor_CRS <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/514> <https://github.com/ricosjp/monolish/issues/753>
 
+### Fixed
+- Fix convert (tensor-)coo to (tensor-)crs <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/516> <https://github.com/ricosjp/monolish/issues/755>
+
 ### Changed
 - Start developing 0.17.1 <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/487>
 - std::vector -> std::shared_ptr for data array <https://gitlab.ritc.jp/ricos/monolish/-/merge_requests/491>
